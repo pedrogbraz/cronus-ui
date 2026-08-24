@@ -38,10 +38,17 @@ function toneForRatio(ratio: number): Exclude<UsageMeterTone, "auto"> {
   return "primary";
 }
 
+// Pinned to en-US on purpose. A bare `toLocaleString()` reads the ambient
+// locale, which differs between the server (Node) and the browser (the
+// visitor's), so the same meter renders two different strings and React
+// reports a hydration mismatch. A published component must be deterministic;
+// apps that want localized digits pass `formatValue`.
+const VALUE_FORMATTER = new Intl.NumberFormat("en-US");
+
 function defaultFormatValue(value: number, max: number): string {
   const safeValue = Number.isFinite(value) ? value : 0;
   const safeMax = Number.isFinite(max) ? max : 0;
-  return `${safeValue.toLocaleString()} / ${safeMax.toLocaleString()}`;
+  return `${VALUE_FORMATTER.format(safeValue)} / ${VALUE_FORMATTER.format(safeMax)}`;
 }
 
 export interface UsageMeterProps extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {

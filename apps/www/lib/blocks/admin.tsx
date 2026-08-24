@@ -835,7 +835,7 @@ export function AnalyticsOverviewBlock() {
                 width={96}
                 height={40}
                 className="h-10 w-24 shrink-0"
-                aria-label={kpi.label + " trend over the last 10 weeks"}
+                aria-label={`${kpi.label} trend over the last 10 weeks`}
               />
             </CardContent>
           </Card>
@@ -898,7 +898,7 @@ export function AnalyticsOverviewBlock() {
                   </div>
                   <Progress
                     value={row.share}
-                    aria-label={row.label + " share of traffic"}
+                    aria-label={`${row.label} share of traffic`}
                     className="h-1.5"
                   />
                 </div>
@@ -1160,7 +1160,7 @@ const heatLevels = [
 ];
 
 function heatCellClass(level: number) {
-  return "h-7 rounded-sm " + (heatLevels[level] ?? "bg-surface-inset");
+  return `h-7 rounded-sm ${heatLevels[level] ?? "bg-surface-inset"}`;
 }
 
 const cohortGridClass = "grid grid-cols-[5rem_repeat(8,minmax(0,1fr))_4rem] items-center gap-1.5";
@@ -1188,7 +1188,7 @@ export function AnalyticsEngagementBlock() {
                 width={96}
                 height={40}
                 className="h-10 w-24 shrink-0"
-                aria-label={stat.label + " trend over the last 8 weeks"}
+                aria-label={`${stat.label} trend over the last 8 weeks`}
               />
             </CardContent>
           </Card>
@@ -1216,7 +1216,7 @@ export function AnalyticsEngagementBlock() {
         </CardHeader>
         <CardContent className="overflow-x-auto pt-5">
           <div className="flex min-w-[34rem] flex-col gap-1.5">
-            <div className={cohortGridClass + " pb-1"}>
+            <div className={`${cohortGridClass} pb-1`}>
               <span className="text-xs font-medium text-fg-tertiary">Cohort</span>
               {cohortWeeks.map((week) => (
                 <span key={week} className="text-center text-xs font-medium text-fg-tertiary">
@@ -1233,8 +1233,8 @@ export function AnalyticsEngagementBlock() {
                 </div>
                 {cohort.cells.map((level, week) => (
                   <div
-                    // biome-ignore lint/suspicious/noArrayIndexKey: static, never-reordered week buckets
-                    key={cohort.id + "-w" + (week + 1)}
+                    // biome-ignore lint/suspicious/noArrayIndexKey: fixed-length, never-reordered week buckets; the cohort id keeps the key unique across rows
+                    key={`${cohort.id}-w${week + 1}`}
                     className={heatCellClass(level)}
                     aria-hidden="true"
                   />
@@ -1634,7 +1634,7 @@ export function KanbanBoardBlock() {
                     </div>
                     <div className="flex -space-x-2">
                       <span className="sr-only">
-                        {"Assigned to " + card.assignees.map((person) => person.name).join(", ")}
+                        {`Assigned to ${card.assignees.map((person) => person.name).join(", ")}`}
                       </span>
                       {card.assignees.map((assignee) => (
                         <Avatar

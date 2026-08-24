@@ -534,11 +534,14 @@
 }
 
 @utility bg-gradient-aurora {
+  /* Every stop derives from the active theme. The third stop used to be a
+     hardcoded `oklch(0.8 0.1 350)`, which painted a pink wash over achromatic
+     themes (neutral/midnight) and broke the "re-themes live" contract. */
   background-image: linear-gradient(
     135deg,
     var(--cooud-primary),
     var(--cooud-accent),
-    oklch(0.8 0.1 350)
+    color-mix(in oklch, var(--cooud-accent) 65%, var(--cooud-primary))
   );
 }
 

@@ -40,6 +40,8 @@ jobs:
         run: bun run build
       - name: Lint
         run: bun run lint
+      - name: Contract check
+        run: bun run contract:check
       - name: Typecheck
         run: bun run typecheck
       - name: Unit tests

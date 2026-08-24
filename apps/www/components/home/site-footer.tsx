@@ -49,7 +49,7 @@ export function SiteFooter() {
           <div className="max-w-sm">
             <div className="flex items-center gap-2">
               <CooudMark className="h-4 w-8 text-fg" />
-              <span className="font-display text-lg font-semibold tracking-tight">Cooud UI</span>
+              <span className="font-display text-lg font-semibold text-fg">Cooud UI</span>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-fg-secondary">
               The Cooud design system — {COMPONENT_COUNT} themeable, accessible React components, as
@@ -77,7 +77,7 @@ export function SiteFooter() {
                   <a
                     key={link.label}
                     href={link.href}
-                    className="w-fit rounded-md text-sm text-fg-secondary outline-none transition-colors hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
+                    className="w-fit rounded-md text-sm text-fg-secondary outline-none transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     {link.label}
                   </a>
@@ -91,7 +91,7 @@ export function SiteFooter() {
           <span>© {new Date().getFullYear()} Cooud UI — built with itself.</span>
           <a
             href="https://github.com/pedrogbraz/cooud-ui"
-            className="inline-flex items-center gap-1.5 rounded-md text-fg-secondary outline-none transition-colors hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
+            className="inline-flex items-center gap-1.5 rounded-md text-fg-secondary outline-none transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
           >
             <Github className="size-4" aria-hidden="true" /> pedrogbraz/cooud-ui
             <ArrowUpRight className="size-3.5" aria-hidden="true" />

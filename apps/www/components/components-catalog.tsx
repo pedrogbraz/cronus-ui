@@ -58,12 +58,10 @@ export function ComponentsCatalog() {
 
   return (
     <div className="py-10">
-      <header className="border-b border-border/60 pb-8">
+      <header className="border-b border-border-soft pb-8">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <h1 className="font-display text-4xl font-semibold tracking-tight text-fg">
-              All Components
-            </h1>
+            <h1 className="font-display text-4xl tracking-[-0.025em] text-fg">All Components</h1>
             <p className="mt-3 max-w-2xl text-lg text-fg-secondary">
               Explore the full library — {TOTAL} themeable, accessible components. Click any one to
               see variants, states and copy-paste code.
@@ -78,7 +76,7 @@ export function ComponentsCatalog() {
 
       {/* Sticky filter toolbar: search + category chips, in reach while scrolling
           the long catalog. Sits just under the 4rem site nav. */}
-      <div className="sticky top-16 z-10 border-b border-border/60 bg-surface-base/85 py-4 backdrop-blur supports-[backdrop-filter]:bg-surface-base/70">
+      <div className="sticky top-16 z-10 border-b border-border-soft bg-surface-base/85 py-4 backdrop-blur supports-[backdrop-filter]:bg-surface-base/70">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-4">
           <label className="relative block w-full lg:max-w-xs">
             <span className="sr-only">Search components</span>
@@ -90,7 +88,7 @@ export function ComponentsCatalog() {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search components..."
-              className="h-10 w-full rounded-xl border border-border bg-surface-inset pl-9 pr-3 text-sm text-fg outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-fg-tertiary focus:border-border-strong focus:ring-2 focus:ring-ring motion-reduce:transition-none"
+              className="h-10 w-full rounded-xl border border-border bg-surface-inset pl-9 pr-3 text-sm text-fg outline-none transition-[border-color,box-shadow] duration-200 ease-[cubic-bezier(.22,1,.36,1)] placeholder:text-fg-tertiary focus:border-border-strong focus:ring-2 focus:ring-ring motion-reduce:transition-none"
             />
           </label>
 
@@ -99,9 +97,10 @@ export function ComponentsCatalog() {
               const active = category === filter.slug;
 
               return (
-                // Mirrors the Stack Builder pill treatment: selected reads through
-                // a primary border + overlay surface; hover firms the border and
-                // lifts the surface a step. Color-only tweens — no layout shift.
+                // Selected reads achromatically — a firmed border on a raised
+                // surface — so the filter row carries no decorative hue. Hover
+                // firms the border and the label only: color-only tweens, no
+                // layout shift.
                 <button
                   key={filter.slug}
                   type="button"
@@ -109,17 +108,17 @@ export function ComponentsCatalog() {
                   onClick={() => setCategory(filter.slug)}
                   className={cn(
                     "inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm outline-none",
-                    "transition-colors duration-150 ease-[var(--ease-out-quart)] motion-reduce:transition-none",
+                    "transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
                     "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base",
                     active
-                      ? "border-primary bg-surface-overlay text-fg shadow-xs"
-                      : "border-border bg-surface-inset text-fg-secondary hover:border-border-strong hover:bg-surface-overlay hover:text-fg",
+                      ? "border-border-strong bg-surface-raised text-fg shadow-xs"
+                      : "border-border bg-surface-inset text-fg-secondary hover:border-border-strong hover:text-fg",
                   )}
                 >
                   <span>{filter.name}</span>
                   <span
                     className={cn(
-                      "text-xs tabular-nums transition-colors duration-150 motion-reduce:transition-none",
+                      "text-xs tabular-nums transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
                       active ? "text-fg-secondary" : "text-fg-tertiary",
                     )}
                   >
@@ -157,7 +156,7 @@ export function ComponentsCatalog() {
           <div className="mt-6 flex flex-col gap-12">
             {CATEGORIES.map((cat) => (
               <section key={cat.slug} id={cat.slug} className="scroll-mt-36">
-                <h2 className="font-display text-2xl font-semibold tracking-tight text-fg">
+                <h2 className="font-display text-2xl font-medium tracking-[-0.02em] text-fg">
                   {cat.name}
                 </h2>
                 <div className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
@@ -217,30 +216,28 @@ function ComponentCard({
     // up from the `starting:` state (CSS @starting-style) as they mount; the
     // stagger is capped so deep grids never feel slow. Reduced-motion safe.
     <div
-      className="transition-[opacity,transform] duration-300 ease-[var(--ease-out-quart)] starting:translate-y-2 starting:opacity-0 motion-reduce:transition-none motion-reduce:starting:translate-y-0 motion-reduce:starting:opacity-100"
+      className="transition-[opacity,transform] duration-300 ease-[cubic-bezier(.22,1,.36,1)] starting:translate-y-2 starting:opacity-0 motion-reduce:transition-none motion-reduce:starting:translate-y-0 motion-reduce:starting:opacity-100"
       style={{ transitionDelay: `${Math.min(index, 8) * 40}ms` }}
     >
-      <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface-raised transition-[border-color,box-shadow] duration-200 hover:border-border-strong hover:shadow-sm focus-within:border-border-strong focus-within:ring-2 focus-within:ring-ring motion-reduce:transition-none">
+      <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface-raised transition-[border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-1 hover:border-border-strong hover:shadow-sm focus-within:border-border-strong focus-within:ring-2 focus-within:ring-ring motion-reduce:transition-none motion-reduce:hover:translate-y-0">
         {/* Lightweight thumbnail — a dotted-grid card with the component name. No
             live preview here (that lives on the /components/[slug] route). */}
-        <div className="relative flex h-40 items-center justify-center overflow-hidden border-b border-border/60 bg-surface-inset/50">
+        <div className="relative flex h-40 items-center justify-center overflow-hidden border-b border-border-soft bg-surface-inset">
           {/* The preview content (grid + name) lifts a hair on hover — a GPU
               transform inside the overflow-hidden frame, so no layout shift. */}
-          <div className="absolute inset-0 flex items-center justify-center p-6 transition-transform duration-200 ease-[var(--ease-out-quart)] group-hover:scale-[1.01] motion-reduce:transition-none motion-reduce:group-hover:scale-100">
+          <div className="absolute inset-0 flex items-center justify-center p-6 transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.01] motion-reduce:transition-none motion-reduce:group-hover:scale-100">
             <div
               aria-hidden="true"
               className="absolute inset-0 bg-[radial-gradient(var(--cooud-border)_1px,transparent_1px)] opacity-50 [background-size:16px_16px]"
             />
-            <span className="relative px-4 text-center font-display text-lg text-fg-tertiary transition-colors duration-200 group-hover:text-fg motion-reduce:transition-none">
+            <span className="relative px-4 text-center font-display text-lg text-fg-tertiary transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] group-hover:text-fg motion-reduce:transition-none">
               {displayName}
             </span>
           </div>
         </div>
         <div className="flex flex-col gap-1 px-5 py-4">
           <div className="flex items-center justify-between gap-2">
-            <span className="font-medium text-fg transition-colors duration-200 group-hover:text-primary motion-reduce:transition-none">
-              {displayName}
-            </span>
+            <span className="font-medium text-fg">{displayName}</span>
             {showTag ? (
               <span className="shrink-0 rounded-full border border-border bg-surface-inset px-2 py-0.5 text-xs font-medium text-fg-tertiary">
                 {category}

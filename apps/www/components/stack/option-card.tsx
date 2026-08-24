@@ -84,7 +84,7 @@ export function OptionCard({ resolved, kind, tabIndex, onSelect, onKeyNav }: Opt
         // surface shift only; the restraint is the point. Transitions stay to
         // color so there is never a layout shift inside the grid.
         "group/option relative flex h-full w-full flex-col items-start gap-2.5 rounded-xl border bg-surface-raised p-3.5 text-left outline-none",
-        "transition-[border-color,background-color] duration-150 ease-[var(--ease-out-quart)] motion-reduce:transition-none",
+        "transition-[border-color,background-color] duration-150 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
         "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base",
         disabled
           ? // Dimmed so it recedes; the color transition keeps the availability
@@ -94,11 +94,11 @@ export function OptionCard({ resolved, kind, tabIndex, onSelect, onKeyNav }: Opt
         // Hover firms the border and warms the surface a barely-there half step;
         // pressing deepens it toward the full selected surface, so the click
         // feels acknowledged before the border flips. Selected cards keep their
-        // steady style — no hover restyle (it would downgrade the primary border).
+        // steady style — no hover restyle (it would downgrade the selected border).
         !disabled &&
           !selected &&
           "hover:border-border-strong hover:bg-surface-overlay/60 active:bg-surface-overlay",
-        selected ? "border-primary bg-surface-overlay" : "border-border",
+        selected ? "border-border-strong bg-surface-overlay shadow-xs" : "border-border",
       )}
     >
       <div className="flex w-full items-start justify-between gap-2">
@@ -126,8 +126,8 @@ export function OptionCard({ resolved, kind, tabIndex, onSelect, onKeyNav }: Opt
         data-slot="option-card-check"
         aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute right-3 bottom-3 text-primary",
-          "transition-[opacity,scale] duration-200 ease-[var(--ease-out-quart)] motion-reduce:transition-none",
+          "pointer-events-none absolute right-3 bottom-3 text-fg",
+          "transition-[opacity,scale] duration-200 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
           selected ? "scale-100 opacity-100" : "scale-75 opacity-0",
         )}
       >
@@ -139,7 +139,7 @@ export function OptionCard({ resolved, kind, tabIndex, onSelect, onKeyNav }: Opt
         <span className="text-sm font-medium text-fg">{option.name}</span>
         <span
           className={cn(
-            "text-xs leading-snug transition-colors duration-200 ease-[var(--ease-out-quart)] motion-reduce:transition-none",
+            "text-xs leading-snug transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
             "text-fg-secondary group-hover/option:text-fg",
           )}
         >

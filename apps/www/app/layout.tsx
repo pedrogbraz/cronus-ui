@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      data-cooud-theme="aurora"
+      data-cooud-theme="neutral"
       data-cooud-mode="dark"
       data-force-motion
       className="dark"
@@ -26,8 +26,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     >
       <head>
         <CooudThemeScript
-          storageKey="cooud-ui-theme"
-          defaultThemeName="aurora"
+          storageKey="cooud-ui-theme-v2"
+          defaultThemeName="neutral"
           defaultModeName="dark"
         />
       </head>
@@ -40,9 +40,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </a>
         <CooudUIProvider
           asRoot
-          defaultThemeName="aurora"
+          defaultThemeName="neutral"
           defaultModeName="dark"
-          storageKey="cooud-ui-theme"
+          storageKey="cooud-ui-theme-v2"
         >
           {children}
         </CooudUIProvider>

@@ -69,7 +69,7 @@ function SmoothHeight({ className, children }: { className?: string; children: R
       ref={outerRef}
       data-slot="smooth-height"
       className={cn(
-        "overflow-hidden transition-[height] duration-300 ease-[var(--ease-out-quart)] motion-reduce:transition-none",
+        "overflow-hidden transition-[height] duration-300 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
         className,
       )}
     >
@@ -148,7 +148,7 @@ export function SelectedSummary({
             </span>
             <h2
               id="selected-summary-heading"
-              className="text-xs font-semibold uppercase tracking-widest text-fg-secondary"
+              className="text-xs font-medium uppercase tracking-wider text-fg-secondary"
             >
               Selected stack
             </h2>
@@ -171,7 +171,7 @@ export function SelectedSummary({
             <div className="flex flex-col gap-4">
               {grouped.map(({ group, rows }) => (
                 <div key={group} className="flex flex-col gap-2">
-                  <p className="text-[10px] font-semibold uppercase tracking-wider text-fg-tertiary">
+                  <p className="text-[10px] font-medium uppercase tracking-wider text-fg-tertiary">
                     {group}
                   </p>
                   <dl className="flex flex-col gap-2">
@@ -219,7 +219,7 @@ export function SelectedSummary({
           >
             <Shuffle
               aria-hidden="true"
-              className="transition-transform duration-300 ease-[var(--ease-spring)] group-hover/randomize:rotate-180 motion-reduce:transition-none motion-reduce:group-hover/randomize:rotate-0"
+              className="transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] group-hover/randomize:rotate-180 motion-reduce:transition-none motion-reduce:group-hover/randomize:rotate-0"
             />
             Randomize
           </Button>
@@ -232,7 +232,7 @@ export function SelectedSummary({
           >
             <RotateCcw
               aria-hidden="true"
-              className="transition-transform duration-300 ease-[var(--ease-out-quart)] group-hover/reset:-rotate-90 motion-reduce:transition-none motion-reduce:group-hover/reset:rotate-0"
+              className="transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] group-hover/reset:-rotate-90 motion-reduce:transition-none motion-reduce:group-hover/reset:rotate-0"
             />
             Reset
           </Button>

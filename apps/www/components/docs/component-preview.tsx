@@ -8,7 +8,9 @@ import { CodeBlock } from "./code-block";
 export function ExampleBlock({ example }: { example: Example }) {
   return (
     <section id={example.id} className="scroll-mt-24">
-      <h2 className="font-display text-xl font-semibold tracking-tight text-fg">{example.title}</h2>
+      <h2 className="font-display text-xl font-medium tracking-[-0.02em] text-fg">
+        {example.title}
+      </h2>
       {example.description && (
         <p className="mt-1.5 max-w-2xl text-sm text-fg-secondary">{example.description}</p>
       )}
@@ -36,12 +38,12 @@ function ExampleInstallation({ install }: { install: InstallMetadata }) {
   return (
     <section
       aria-labelledby={`${install.registryItem}-installation`}
-      className="rounded-xl border border-border bg-surface-inset/45 p-4"
+      className="border-t border-border pt-5"
     >
       <div className="flex flex-col gap-1">
         <h3
           id={`${install.registryItem}-installation`}
-          className="font-display text-lg font-semibold tracking-tight text-fg"
+          className="font-display text-lg font-medium text-fg"
         >
           Installation
         </h3>

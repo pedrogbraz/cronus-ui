@@ -258,7 +258,7 @@ export function ComponentExamples({ slug, displayName }: { slug: string; display
 
   if (!FamilyView) {
     return (
-      <p className="rounded-xl border border-dashed border-border bg-surface-inset/40 px-6 py-10 text-center text-sm text-fg-tertiary">
+      <p className="rounded-xl border border-dashed border-border bg-surface-inset px-6 py-10 text-center text-sm text-fg-tertiary">
         Interactive examples for {displayName} are coming soon.
       </p>
     );
@@ -267,7 +267,7 @@ export function ComponentExamples({ slug, displayName }: { slug: string; display
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <h2 className="font-display text-xl font-semibold tracking-tight text-fg">Examples</h2>
+        <h2 className="font-display text-xl font-medium tracking-[-0.02em] text-fg">Examples</h2>
         <div
           role="tablist"
           aria-label="Example layout"
@@ -283,10 +283,8 @@ export function ComponentExamples({ slug, displayName }: { slug: string; display
                 aria-selected={active}
                 onClick={() => setView(option.value)}
                 className={cn(
-                  "rounded-lg px-3 py-1.5 text-sm font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
-                  active
-                    ? "bg-surface-floating text-fg shadow-xs"
-                    : "text-fg-tertiary hover:text-fg",
+                  "rounded-lg px-3 py-1.5 text-sm font-medium outline-none transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] focus-visible:ring-2 focus-visible:ring-ring",
+                  active ? "bg-surface-raised text-fg" : "text-fg-tertiary hover:text-fg",
                 )}
               >
                 {option.label}

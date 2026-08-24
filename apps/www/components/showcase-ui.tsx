@@ -37,13 +37,12 @@ export function SectionGlow({ className }: { className?: string }) {
       aria-hidden="true"
       className={cn("pointer-events-none absolute inset-x-0 top-0", className)}
     >
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
-      <div className="absolute inset-x-0 top-0 -z-10 h-72 bg-gradient-aurora opacity-[0.10] blur-3xl" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border-strong to-transparent" />
     </div>
   );
 }
 
-/** A small uppercase label preceded by a gradient dot. */
+/** A small uppercase label preceded by a neutral dot. */
 export function Eyebrow({ children, className }: EyebrowProps) {
   return (
     <span
@@ -52,7 +51,7 @@ export function Eyebrow({ children, className }: EyebrowProps) {
         className,
       )}
     >
-      <span aria-hidden="true" className="size-1.5 rounded-full bg-gradient-primary shadow-glow" />
+      <span aria-hidden="true" className="size-1.5 rounded-full bg-fg-tertiary" />
       {children}
     </span>
   );
@@ -83,7 +82,7 @@ export function Section({ title, description, children, id }: SectionProps) {
         <Eyebrow>{title}</Eyebrow>
         <h3
           id={`${resolvedId}-title`}
-          className="font-display text-2xl font-semibold tracking-tight text-fg sm:text-3xl"
+          className="font-display text-2xl font-medium tracking-[-0.025em] text-fg sm:text-3xl"
         >
           {title}
         </h3>

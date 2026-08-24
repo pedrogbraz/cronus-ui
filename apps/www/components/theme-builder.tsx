@@ -13,7 +13,14 @@ function parseRadius(radius: string | undefined): number {
   return Number.isNaN(n) ? 14 : n;
 }
 
-/** A normalized #rrggbb value for the color inputs (they reject non-hex). */
+/**
+ * A normalized #rrggbb value for the color inputs (they reject non-hex).
+ *
+ * The hex literals passed in as fallbacks below are theme DATA — the value the
+ * `<input type="color">` round-trips — not chrome styling. ADR 0001's "no raw
+ * hex" rule targets surfaces that must re-theme themselves; this builder's job
+ * is to author those colors, so its swatches and hex strings stay literal.
+ */
 function asHex(value: string | undefined, fallback: string): string {
   if (value && /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(value)) return value;
   return fallback;
@@ -57,10 +64,10 @@ export function ThemeBuilder() {
       aria-label="Theme builder"
     >
       <header className="flex flex-col gap-1">
-        <span className="text-xs font-medium uppercase tracking-widest text-fg-tertiary">
+        <span className="text-xs font-medium uppercase tracking-wider text-fg-tertiary">
           Live preview
         </span>
-        <h2 className="font-display text-lg font-semibold text-fg">Theme Builder</h2>
+        <h2 className="font-display text-lg font-medium text-fg">Theme Builder</h2>
         <p className="text-sm text-fg-secondary">
           Tweak tokens and watch the whole page re-theme instantly.
         </p>
@@ -74,16 +81,20 @@ export function ThemeBuilder() {
           {themeNames.map((name) => {
             const active = theme === name;
             return (
+              // Selected reads achromatically — a firmed border on a floating
+              // surface — so the chrome carries no decorative hue; the colors
+              // the user is authoring live in the swatches below instead.
               <button
                 key={name}
                 type="button"
                 aria-pressed={active}
                 onClick={() => setTheme(name)}
                 className={cn(
-                  "rounded-lg border px-3 py-2 text-sm font-medium transition-colors duration-150 outline-none",
+                  "rounded-lg border px-3 py-2 text-sm font-medium outline-none",
+                  "transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
                   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-raised",
                   active
-                    ? "border-transparent bg-primary text-primary-foreground shadow-xs"
+                    ? "border-border-strong bg-surface-floating text-fg shadow-xs"
                     : "border-border bg-surface-inset text-fg-secondary hover:border-border-strong hover:text-fg",
                 )}
               >
@@ -110,7 +121,8 @@ export function ThemeBuilder() {
                 aria-pressed={active}
                 onClick={() => setMode(m)}
                 className={cn(
-                  "inline-flex items-center justify-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium capitalize transition-colors duration-150 outline-none",
+                  "inline-flex items-center justify-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium capitalize outline-none",
+                  "transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
                   "focus-visible:ring-2 focus-visible:ring-ring",
                   active
                     ? "bg-surface-floating text-fg shadow-xs"
@@ -141,12 +153,13 @@ export function ThemeBuilder() {
           step={1}
           value={radius}
           onChange={(e) => patch({ radius: `${e.target.value}px` })}
-          className="h-2 w-full cursor-pointer appearance-none rounded-full bg-surface-overlay accent-[var(--cooud-primary)] outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="h-2 w-full cursor-pointer appearance-none rounded-full bg-surface-overlay accent-fg outline-none focus-visible:ring-2 focus-visible:ring-ring"
           aria-label="Corner radius in pixels"
         />
       </Row>
 
-      {/* Primary color */}
+      {/* Primary color — the hex fallback is the field's data value, not
+          decoration: it is what the color input shows before an override. */}
       <Row label="Primary" htmlFor="tb-primary">
         <ColorField
           id="tb-primary"
@@ -156,7 +169,7 @@ export function ThemeBuilder() {
         />
       </Row>
 
-      {/* Border color */}
+      {/* Border color — same: the hex is the edited value, kept literal. */}
       <Row label="Border" htmlFor="tb-border">
         <ColorField
           id="tb-border"
@@ -188,7 +201,9 @@ export function ThemeBuilder() {
       {/* Code block */}
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between">
-          <Label className="text-xs uppercase tracking-wider text-fg-tertiary">CSS overrides</Label>
+          <Label className="text-xs font-medium uppercase tracking-wider text-fg-tertiary">
+            CSS overrides
+          </Label>
           <Button
             variant="outline"
             size="icon-sm"
@@ -239,12 +254,17 @@ interface ColorFieldProps {
 
 function ColorField({ id, value, hint, onChange }: ColorFieldProps) {
   return (
+    // Flattened: this used to be a bordered card nested inside the builder
+    // card. It is now a ruled row — one hairline above it, hover on the row
+    // background only.
     <label
       htmlFor={id}
-      className="flex cursor-pointer items-center gap-3 rounded-lg border border-border bg-surface-inset p-2 transition-colors hover:border-border-strong"
+      className="flex cursor-pointer items-center gap-3 border-t border-border px-1 py-2.5 transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] hover:bg-surface-inset motion-reduce:transition-none"
     >
+      {/* The swatch IS the output: it paints the exact value the user picked,
+          so its inline color stays literal (see the note on `asHex`). */}
       <span
-        className="size-9 shrink-0 rounded-md border border-border-soft shadow-xs"
+        className="size-9 shrink-0 rounded-md border border-border-soft"
         style={{ backgroundColor: value }}
         aria-hidden="true"
       />

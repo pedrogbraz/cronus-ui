@@ -38,6 +38,9 @@ const CATEGORY_FILTERS = [
   })),
 ];
 
+/** Single motion curve for the whole surface — short, calm, non-bouncy. */
+const EASE = "ease-[cubic-bezier(.22,1,.36,1)]";
+
 export function BlocksCatalog() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
@@ -62,7 +65,7 @@ export function BlocksCatalog() {
           <Eyebrow>Blocks</Eyebrow>
           <div className="mt-3 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <h1 className="font-display text-4xl font-semibold tracking-tight text-fg sm:text-5xl">
+              <h1 className="font-display text-4xl font-normal tracking-[-0.025em] text-fg sm:text-5xl sm:tracking-[-0.03em]">
                 Ready-made sections
               </h1>
               <p className="mt-4 max-w-2xl text-lg text-fg-secondary">
@@ -70,10 +73,11 @@ export function BlocksCatalog() {
                 then launch the live preview and source.
               </p>
             </div>
-            <div className="flex flex-wrap gap-2">
-              <StatPill label="Families" value={BLOCK_CATEGORIES.length} />
-              <StatPill label="Blocks" value={BLOCK_COUNT} />
-              <StatPill label="Variations" value={BLOCK_VARIANT_COUNT} />
+            {/* Stats read as a divided row, not as three nested pills. */}
+            <div className="flex flex-wrap items-center divide-x divide-border">
+              <Stat label="Families" value={BLOCK_CATEGORIES.length} />
+              <Stat label="Blocks" value={BLOCK_COUNT} />
+              <Stat label="Variations" value={BLOCK_VARIANT_COUNT} />
             </div>
           </div>
         </div>
@@ -93,7 +97,12 @@ export function BlocksCatalog() {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search blocks..."
-              className="h-10 w-full rounded-xl border border-border bg-surface-inset pl-9 pr-3 text-sm text-fg outline-none placeholder:text-fg-tertiary focus:border-border-strong focus:ring-2 focus:ring-ring"
+              className={cn(
+                "h-10 w-full rounded-xl border border-border bg-surface-inset pl-9 pr-3 text-sm text-fg outline-none placeholder:text-fg-tertiary",
+                "transition-colors duration-150",
+                EASE,
+                "focus:border-border-strong focus:ring-2 focus:ring-ring",
+              )}
             />
           </label>
 
@@ -108,7 +117,10 @@ export function BlocksCatalog() {
                   aria-pressed={active}
                   onClick={() => setCategory(filter.slug)}
                   className={cn(
-                    "inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
+                    "inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm outline-none",
+                    "transition-colors duration-150",
+                    EASE,
+                    "focus-visible:ring-2 focus-visible:ring-ring",
                     active
                       ? "border-border-strong bg-surface-raised text-fg"
                       : "border-border bg-surface-inset text-fg-secondary hover:border-border-strong hover:text-fg",
@@ -137,7 +149,12 @@ export function BlocksCatalog() {
             {filtered.map((block) => (
               <article
                 key={block.slug}
-                className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface-raised transition-colors hover:border-border-strong focus-within:ring-2 focus-within:ring-ring"
+                className={cn(
+                  "group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface-raised",
+                  "transition-colors duration-200",
+                  EASE,
+                  "hover:border-border-strong focus-within:ring-2 focus-within:ring-ring",
+                )}
               >
                 {/* Lightweight thumbnail — dotted-grid surface + the block name.
                     No live preview here (that lives on the gallery route). */}
@@ -146,17 +163,21 @@ export function BlocksCatalog() {
                     aria-hidden="true"
                     className="absolute inset-0 bg-[radial-gradient(var(--cooud-border)_1px,transparent_1px)] opacity-40 [background-size:16px_16px]"
                   />
-                  <span className="relative px-4 text-center font-display text-xl font-semibold tracking-tight text-fg-tertiary transition-colors group-hover:text-fg">
+                  <span
+                    className={cn(
+                      "relative px-4 text-center font-display text-xl font-normal tracking-[-0.02em] text-fg-tertiary",
+                      "transition-colors duration-200",
+                      EASE,
+                      "group-hover:text-fg",
+                    )}
+                  >
                     {block.name}
                   </span>
-                  <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-surface-raised to-transparent" />
                 </div>
 
                 <div className="flex flex-1 flex-col gap-2 p-5">
                   <div className="flex items-start justify-between gap-2">
-                    <span className="font-medium text-fg transition-colors group-hover:text-primary">
-                      {block.name}
-                    </span>
+                    <span className="font-medium text-fg">{block.name}</span>
                     <span className="shrink-0 rounded-full border border-border bg-surface-inset px-2 py-0.5 text-xs font-medium text-fg-tertiary">
                       {block.category}
                     </span>
@@ -169,7 +190,12 @@ export function BlocksCatalog() {
                       {block.variations} {block.variations === 1 ? "variation" : "variations"}
                     </span>
                     <ArrowRight
-                      className="size-4 shrink-0 text-fg-tertiary transition-transform group-hover:translate-x-0.5 group-hover:text-fg"
+                      className={cn(
+                        "size-4 shrink-0 text-fg-tertiary",
+                        "transition-[transform,color] duration-200",
+                        EASE,
+                        "group-hover:translate-x-0.5 group-hover:text-fg",
+                      )}
                       aria-hidden="true"
                     />
                   </div>
@@ -194,7 +220,12 @@ export function BlocksCatalog() {
                 setQuery("");
                 setCategory("all");
               }}
-              className="mt-3 text-sm font-medium text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring"
+              className={cn(
+                "mt-3 text-sm font-medium text-primary underline-offset-4 outline-none",
+                "transition-colors duration-150",
+                EASE,
+                "hover:underline focus-visible:ring-2 focus-visible:ring-ring",
+              )}
             >
               Clear filters
             </button>
@@ -205,10 +236,10 @@ export function BlocksCatalog() {
   );
 }
 
-function StatPill({ label, value }: { label: string; value: number }) {
+function Stat({ label, value }: { label: string; value: number }) {
   return (
-    <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-raised px-3 py-1.5 text-sm">
-      <span className="font-semibold text-fg">{value}</span>
+    <div className="flex items-baseline gap-1.5 px-4 text-sm first:pl-0 last:pr-0">
+      <span className="font-medium text-fg">{value}</span>
       <span className="text-fg-tertiary">{label}</span>
     </div>
   );

@@ -118,7 +118,7 @@ const usdCents = new Intl.NumberFormat("en-US", {
  * ────────────────────────────────────────────────────────────────────────── */
 
 const surfaceCard =
-  "rounded-2xl border-border-soft bg-surface-raised shadow-sm transition-[background-color,border-color,color,box-shadow] duration-[350ms] ease-[var(--ease-out-quart)] hover:border-border hover:shadow-lg motion-reduce:transition-none";
+  "rounded-2xl border-border-soft bg-surface-raised shadow-sm transition-[background-color,border-color,color,box-shadow] duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:border-border hover:shadow-lg motion-reduce:transition-none";
 
 /**
  * The studio re-themes the live tokens on every control change; preview
@@ -126,7 +126,7 @@ const surfaceCard =
  * instead of snapping. Colors only — hover lift/shadow keep their own motion.
  */
 const liquid =
-  "transition-colors duration-300 ease-[var(--ease-out-quart)] motion-reduce:transition-none";
+  "transition-colors duration-300 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none";
 
 /* ──────────────────────────────────────────────────────────────────────────
  * 0. Brand spotlight — a large, brand-filled hero so swapping the brand color
@@ -136,7 +136,7 @@ const liquid =
 
 function SpotlightCard() {
   return (
-    <div className="relative isolate overflow-hidden rounded-2xl bg-gradient-primary-strong text-white shadow-glow">
+    <div className="relative isolate overflow-hidden rounded-2xl bg-gradient-primary-strong text-white">
       <div
         className="pointer-events-none absolute -top-20 -right-16 -z-10 size-56 rounded-full bg-white/20 blur-3xl"
         aria-hidden="true"
@@ -156,7 +156,7 @@ function SpotlightCard() {
               <Sparkles className="size-3" aria-hidden="true" />
               Cooud balance
             </span>
-            <span className="font-display text-4xl font-semibold leading-none tracking-tight tabular-nums sm:text-5xl">
+            <span className="font-display text-4xl font-medium leading-none tracking-[-0.025em] tabular-nums sm:text-5xl sm:tracking-[-0.03em]">
               {usd.format(128450)}
             </span>
             <span className="text-sm text-white/70">Available across 3 accounts</span>
@@ -168,14 +168,14 @@ function SpotlightCard() {
         <div className="flex flex-wrap items-center gap-2.5">
           <button
             type="button"
-            className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-[color-mix(in_oklch,var(--cooud-primary),black_35%)] shadow-sm transition-[transform,opacity] duration-200 ease-[var(--ease-out-quart)] hover:opacity-90 active:scale-[0.98]"
+            className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-[color-mix(in_oklch,var(--cooud-primary),black_35%)] shadow-sm transition-[transform,opacity] duration-200 ease-[cubic-bezier(.22,1,.36,1)] hover:opacity-90 active:scale-[0.98]"
           >
             <Send className="size-4" aria-hidden="true" />
             Send payout
           </button>
           <button
             type="button"
-            className="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-white/10 px-4 py-2.5 text-sm font-medium text-white backdrop-blur-sm transition-[background-color,transform] duration-200 ease-[var(--ease-out-quart)] hover:bg-white/20 active:scale-[0.98]"
+            className="inline-flex items-center gap-2 rounded-xl border border-white/30 bg-white/10 px-4 py-2.5 text-sm font-medium text-white backdrop-blur-sm transition-[background-color,transform] duration-200 ease-[cubic-bezier(.22,1,.36,1)] hover:bg-white/20 active:scale-[0.98]"
           >
             <Plus className="size-4" aria-hidden="true" />
             Add funds
@@ -225,15 +225,13 @@ function PayoutCard() {
             </Select>
           </div>
 
-          {/* `group/payout`: while the slider is engaged (drag focuses the
-              thumb; keyboard focus too) the live value tints brand-primary as
-              direct feedback, then settles back. Color tween only — no layout
-              shift, reduced-motion safe. */}
-          <div className="group/payout flex flex-col gap-3">
+          {/* The slider itself carries the feedback while it is engaged, so the
+              live value stays achromatic — no decorative tint on the amount. */}
+          <div className="flex flex-col gap-3">
             <div className="flex items-end justify-between">
               <Label htmlFor="payout-amount">Trigger at</Label>
               <Metric className="items-end gap-0">
-                <MetricValue className="text-2xl transition-colors duration-200 ease-[var(--ease-out-quart)] group-focus-within/payout:text-primary motion-reduce:transition-none">
+                <MetricValue className="text-2xl tracking-[-0.02em]">
                   {usd.format(amount)}
                 </MetricValue>
               </Metric>
@@ -311,7 +309,7 @@ function SavingsCard() {
             return (
               <div
                 key={goal.id}
-                className={`flex flex-col gap-3 rounded-xl border border-border-soft bg-surface-inset/50 p-3.5 ${liquid}`}
+                className={`flex flex-col gap-3 border-t border-border pt-5 ${liquid}`}
               >
                 <div className="flex items-center gap-3">
                   <span className="inline-flex size-9 items-center justify-center rounded-xl bg-surface-overlay text-fg-secondary ring-1 ring-inset ring-border-soft">
@@ -322,7 +320,9 @@ function SavingsCard() {
                     <span className="text-xs text-fg-tertiary">of {usd.format(goal.target)}</span>
                   </div>
                   <Metric className="items-end gap-0">
-                    <MetricValue className="text-xl">{usd.format(goal.saved)}</MetricValue>
+                    <MetricValue className="text-xl tracking-[-0.02em]">
+                      {usd.format(goal.saved)}
+                    </MetricValue>
                   </Metric>
                 </div>
                 <Progress value={pct} aria-label={`${goal.label} progress`} />
@@ -409,7 +409,7 @@ function InvestCard() {
           </p>
 
           <div
-            className={`flex items-center justify-between rounded-xl border border-border-soft bg-surface-inset/50 px-3.5 py-3 ${liquid}`}
+            className={`flex items-center justify-between border-t border-border pt-4 ${liquid}`}
           >
             <span className="text-sm text-fg-secondary">Estimated shares</span>
             <span className="font-display text-sm font-semibold text-fg tabular-nums">
@@ -504,7 +504,7 @@ function TransactionsCard() {
             return (
               <li
                 key={tx.id}
-                className="flex items-center gap-3.5 rounded-xl px-4 py-3 transition-colors duration-200 ease-[var(--ease-out-quart)] hover:bg-surface-inset/60"
+                className="flex items-center gap-3.5 rounded-xl px-4 py-3 transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] hover:bg-surface-inset/60"
               >
                 <span
                   className={`inline-flex size-9 shrink-0 items-center justify-center rounded-full ${
@@ -578,7 +578,7 @@ function StatRow() {
           <Card className={`group h-full gap-0 py-0 ${surfaceCard}`}>
             <CardContent className="flex flex-col gap-4 p-5">
               <div className="flex items-center justify-between gap-2">
-                <span className="inline-flex size-9 items-center justify-center rounded-xl bg-surface-overlay text-fg-secondary ring-1 ring-inset ring-border-soft transition-colors duration-300 ease-[var(--ease-out-quart)] group-hover:text-primary">
+                <span className="inline-flex size-9 items-center justify-center rounded-xl bg-surface-overlay text-fg-secondary ring-1 ring-inset ring-border-soft transition-colors duration-300 ease-[cubic-bezier(.22,1,.36,1)] group-hover:text-fg">
                   <Icon className="size-4" aria-hidden="true" />
                 </span>
                 <span
@@ -600,7 +600,7 @@ function StatRow() {
                 <MetricLabel className="normal-case tracking-normal text-fg-tertiary">
                   {label}
                 </MetricLabel>
-                <MetricValue className="text-[1.75rem] leading-none tracking-tight">
+                <MetricValue className="text-[1.75rem] leading-none tracking-[-0.025em]">
                   {value}
                 </MetricValue>
               </Metric>
@@ -683,7 +683,7 @@ function TeamCard() {
           {members.map((member) => (
             <li
               key={member.id}
-              className="flex items-center gap-3.5 rounded-xl px-4 py-3 transition-colors duration-200 ease-[var(--ease-out-quart)] hover:bg-surface-inset/60"
+              className="flex items-center gap-3.5 rounded-xl px-4 py-3 transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] hover:bg-surface-inset/60"
             >
               <Avatar className="size-9 ring-1 ring-inset ring-border-soft">
                 {member.avatar ? <AvatarImage src={member.avatar} alt={member.name} /> : null}

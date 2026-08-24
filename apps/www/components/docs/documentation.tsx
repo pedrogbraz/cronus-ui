@@ -17,11 +17,11 @@ export function DocsHeader({
   return (
     <header className="border-b border-border/60 pb-10">
       {eyebrow ? (
-        <p className="mb-3 text-xs font-medium uppercase tracking-widest text-primary-strong">
+        <p className="mb-3 text-xs font-medium uppercase tracking-widest text-fg-tertiary">
           {eyebrow}
         </p>
       ) : null}
-      <h1 className="max-w-4xl font-display text-4xl font-semibold tracking-tight text-fg sm:text-5xl">
+      <h1 className="max-w-4xl font-display text-4xl font-medium tracking-[-0.025em] text-fg sm:text-5xl sm:tracking-[-0.03em]">
         {title}
       </h1>
       <p className="mt-4 max-w-3xl text-lg leading-8 text-fg-secondary">{description}</p>
@@ -44,7 +44,7 @@ export function DocsSection({
   return (
     <section id={id} className="scroll-mt-24 py-10">
       <div className="max-w-3xl">
-        <h2 className="font-display text-2xl font-semibold tracking-tight text-fg">{title}</h2>
+        <h2 className="font-display text-2xl font-medium tracking-[-0.02em] text-fg">{title}</h2>
         {description ? (
           <p className="mt-3 text-base leading-7 text-fg-secondary">{description}</p>
         ) : null}
@@ -72,8 +72,10 @@ export function DocsCard({
   const body = (
     <div
       className={cn(
-        "group flex h-full flex-col rounded-xl border border-border bg-surface-raised p-5 transition-colors",
-        href ? "hover:border-border-strong focus-within:ring-2 focus-within:ring-ring" : "",
+        "group flex h-full flex-col rounded-xl border border-border bg-surface-raised p-5 transition-[transform,border-color] duration-[400ms] ease-[cubic-bezier(.22,1,.36,1)]",
+        href
+          ? "hover:-translate-y-1 hover:border-border-strong focus-within:ring-2 focus-within:ring-ring"
+          : "",
       )}
     >
       <div className="flex items-start justify-between gap-4">
@@ -87,9 +89,9 @@ export function DocsCard({
       <p className="mt-3 text-sm leading-6 text-fg-secondary">{description}</p>
       {children ? <div className="mt-5">{children}</div> : null}
       {href && action ? (
-        <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-medium text-primary-strong">
+        <span className="mt-auto inline-flex items-center gap-1 pt-6 text-sm font-medium text-fg">
           {action}
-          <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+          <ArrowRight className="size-3.5 transition-transform duration-[400ms] ease-[cubic-bezier(.22,1,.36,1)] group-hover:translate-x-0.5" />
         </span>
       ) : null}
     </div>
@@ -134,13 +136,13 @@ export function DocCallout({
         "flex gap-3 rounded-xl border p-4 text-sm leading-6",
         tone === "success"
           ? "border-success/30 bg-success/10 text-fg-secondary"
-          : "border-primary/30 bg-primary/10 text-fg-secondary",
+          : "border-info/30 bg-info/10 text-fg-secondary",
       )}
     >
       <Icon
         className={cn(
           "mt-0.5 size-4 shrink-0",
-          tone === "success" ? "text-success" : "text-primary",
+          tone === "success" ? "text-success-strong" : "text-info-strong",
         )}
       />
       <div>
@@ -164,7 +166,7 @@ export function Checklist({ items }: { items: readonly string[] }) {
     <ul className="space-y-2 text-sm text-fg-secondary">
       {items.map((item) => (
         <li key={item} className="flex gap-2">
-          <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-success" aria-hidden="true" />
+          <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-fg-tertiary" aria-hidden="true" />
           <span>{item}</span>
         </li>
       ))}

@@ -27,12 +27,12 @@ function PropRow({
   defaultValue?: string;
 }) {
   return (
-    <tr className="border-b border-border/60 align-top last:border-b-0">
+    <tr className="border-b border-border-soft align-top last:border-b-0">
       <td className="py-3 pr-4">
         <div className="flex items-center gap-1.5">
           <Code>{name}</Code>
           {required ? (
-            <span className="font-mono text-xs text-primary-strong" title="Required">
+            <span className="font-mono text-xs text-fg-tertiary" title="Required">
               *
             </span>
           ) : null}
@@ -79,7 +79,7 @@ function PropsInterfaceTable({ doc }: { doc: PropsDoc }) {
             </a>
             <table className="w-full min-w-[40rem] border-collapse text-left text-sm">
               <thead>
-                <tr className="border-b border-border bg-surface-inset/60 text-xs uppercase tracking-wider text-fg-tertiary">
+                <tr className="border-b border-border text-xs uppercase tracking-wider text-fg-tertiary">
                   <th className="px-4 py-2.5 font-medium">Prop</th>
                   <th className="px-4 py-2.5 font-medium">Type</th>
                   <th className="px-4 py-2.5 font-medium">Default</th>

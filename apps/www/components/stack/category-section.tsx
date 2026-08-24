@@ -138,12 +138,16 @@ export function CategorySection({
       <section data-slot="category-section" aria-labelledby={headingId} className="scroll-mt-24">
         <div
           className={cn(
-            "flex items-center justify-between gap-4 rounded-xl border bg-surface-raised p-4 transition-colors duration-200 ease-[var(--ease-out-quart)] motion-reduce:transition-none",
-            on ? "border-primary/40 bg-primary/5" : "border-border hover:border-border-strong",
+            "flex items-center justify-between gap-4 rounded-xl border p-4 transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
+            // Selected reads achromatically — a firmed border on a raised
+            // surface — the same signal the converted filter chips use.
+            on
+              ? "border-border-strong bg-surface-raised shadow-xs"
+              : "border-border bg-surface-inset hover:border-border-strong",
           )}
         >
           <div className="flex flex-col gap-0.5">
-            <Label id={headingId} htmlFor={switchId} className="text-sm font-semibold text-fg">
+            <Label id={headingId} htmlFor={switchId} className="text-sm font-medium text-fg">
               {category.title}
             </Label>
             {category.description ? (
@@ -172,7 +176,7 @@ export function CategorySection({
     return (
       <section data-slot="category-section" aria-labelledby={headingId} className="scroll-mt-24">
         <header className="mb-2.5 flex min-w-0 flex-col gap-0.5">
-          <h3 id={headingId} className="text-sm font-semibold tracking-tight text-fg">
+          <h3 id={headingId} className="text-sm font-medium text-fg">
             {category.title}
           </h3>
           {category.description ? (
@@ -196,7 +200,7 @@ export function CategorySection({
             <span
               aria-hidden="true"
               data-slot="segmented-thumb"
-              className="pointer-events-none absolute top-0 left-0 rounded-lg bg-surface-overlay shadow-xs transition-[translate,width,height] duration-300 ease-[var(--ease-out-quart)] motion-reduce:transition-none"
+              className="pointer-events-none absolute top-0 left-0 rounded-lg bg-surface-overlay shadow-xs transition-[translate,width,height] duration-300 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none"
               style={{
                 translate: "var(--seg-x) var(--seg-y)",
                 width: "var(--seg-w)",
@@ -222,7 +226,7 @@ export function CategorySection({
                 handleRadioKeyNav(index, event);
               }}
               className={cn(
-                "relative inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-xs font-medium outline-none transition-colors duration-200 ease-[var(--ease-out-quart)] motion-reduce:transition-none",
+                "relative inline-flex items-center justify-center rounded-lg px-3 py-1.5 text-xs font-medium outline-none transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
                 "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-raised",
                 opt.selected
                   ? // Until the thumb has measured itself, the pill carries the
@@ -242,7 +246,7 @@ export function CategorySection({
           // animating layout.
           <p
             key={selectedOpt.option.id}
-            className="mt-2 text-xs text-fg-tertiary transition-opacity duration-300 ease-[var(--ease-out-quart)] starting:opacity-0 motion-reduce:transition-none motion-reduce:starting:opacity-100"
+            className="mt-2 text-xs text-fg-tertiary transition-opacity duration-300 ease-[cubic-bezier(.22,1,.36,1)] starting:opacity-0 motion-reduce:transition-none motion-reduce:starting:opacity-100"
           >
             {selectedOpt.option.description}
           </p>
@@ -256,7 +260,7 @@ export function CategorySection({
     <section data-slot="category-section" aria-labelledby={headingId} className="scroll-mt-24">
       <header className="mb-3.5 flex items-start justify-between gap-4">
         <div className="flex min-w-0 flex-col gap-0.5">
-          <h3 id={headingId} className="text-sm font-semibold tracking-tight text-fg">
+          <h3 id={headingId} className="text-sm font-medium text-fg">
             {category.title}
           </h3>
           {category.description ? (

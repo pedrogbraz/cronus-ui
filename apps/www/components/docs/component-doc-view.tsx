@@ -36,7 +36,7 @@ export function ComponentDocView({ slug }: { slug: string }) {
       <article className="min-w-0 py-10">
         <Eyebrow>{meta.category}</Eyebrow>
         <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
-          <h1 className="font-display text-4xl font-semibold tracking-tight text-fg">
+          <h1 className="font-display text-4xl font-normal tracking-[-0.025em] text-fg">
             {displayName}
           </h1>
           {meta.rsc ? (
@@ -52,7 +52,7 @@ export function ComponentDocView({ slug }: { slug: string }) {
         <p className="mt-3 max-w-2xl text-lg text-fg-secondary">{meta.description}</p>
 
         <section id="import" className="mt-10 scroll-mt-24">
-          <h2 className="font-display text-xl font-semibold tracking-tight text-fg">Import</h2>
+          <h2 className="font-display text-xl font-medium tracking-[-0.02em] text-fg">Import</h2>
           <div className="mt-4 flex flex-col gap-3">
             <CodeBlock code={`import { ${meta.importName ?? meta.name} } from "@cooud-ui/ui";`} />
             <CodeBlock code={`npx cooud-ui add ${slug}`} language="bash" />
@@ -65,7 +65,7 @@ export function ComponentDocView({ slug }: { slug: string }) {
 
         {hasProps && propsDocs ? (
           <section id="props" className="mt-16 scroll-mt-24">
-            <h2 className="font-display text-xl font-semibold tracking-tight text-fg">
+            <h2 className="font-display text-xl font-medium tracking-[-0.02em] text-fg">
               API Reference
             </h2>
             <p className="mt-2 max-w-2xl text-sm text-fg-tertiary">

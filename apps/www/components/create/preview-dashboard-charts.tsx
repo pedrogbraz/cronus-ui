@@ -51,7 +51,7 @@ const usd = new Intl.NumberFormat("en-US", {
  * a `motion/react` spring on the {@link LiftCard} wrapper so it glides and
  * settles cleanly; only the border + shadow change stays CSS (`hover:`). */
 const surfaceCard =
-  "rounded-2xl border-border-soft bg-surface-raised shadow-sm transition-[border-color,box-shadow] duration-300 ease-[var(--ease-out-quart)] hover:border-border hover:shadow-md";
+  "rounded-2xl border-border-soft bg-surface-raised shadow-sm transition-[border-color,box-shadow] duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:border-border hover:shadow-md";
 
 /* 1. Contribution / activity chart */
 
@@ -218,7 +218,7 @@ export function SpendingCard() {
             {spendData.map((entry) => (
               <li
                 key={entry.category}
-                className="flex items-center gap-2.5 rounded-lg px-2 py-1.5 text-sm transition-colors duration-200 ease-[var(--ease-out-quart)] hover:bg-surface-inset/60"
+                className="flex items-center gap-2.5 rounded-lg px-2 py-1.5 text-sm transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] hover:bg-surface-inset/60"
               >
                 <span
                   className="size-2.5 shrink-0 rounded-[3px]"

@@ -51,7 +51,7 @@ function ModeIcon({ isDark }: { isDark: boolean }) {
     <span className="relative block size-[18px]" aria-hidden="true">
       <Sun
         className={cn(
-          "absolute inset-0 size-[18px] transition-all duration-300 ease-out motion-reduce:transition-none",
+          "absolute inset-0 size-[18px] transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
           isDark
             ? "opacity-0 motion-safe:-rotate-90 motion-safe:scale-0"
             : "rotate-0 scale-100 opacity-100",
@@ -59,7 +59,7 @@ function ModeIcon({ isDark }: { isDark: boolean }) {
       />
       <Moon
         className={cn(
-          "absolute inset-0 size-[18px] transition-all duration-300 ease-out motion-reduce:transition-none",
+          "absolute inset-0 size-[18px] transition-all duration-300 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
           isDark
             ? "rotate-0 scale-100 opacity-100"
             : "opacity-0 motion-safe:rotate-90 motion-safe:scale-0",
@@ -177,11 +177,7 @@ export function SiteNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/70 bg-surface-base/70 backdrop-blur-xl">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute inset-x-0 inset-y-0 bg-gradient-aurora opacity-[0.08] blur-2xl" />
-        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-      </div>
+    <header className="sticky top-0 z-50 border-b border-border bg-surface-base/70 backdrop-blur-xl">
       <nav
         className="relative z-10 mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8"
         aria-label="Primary"
@@ -193,9 +189,7 @@ export function SiteNav() {
         >
           <CooudMark className="h-5 w-10 text-fg transition-opacity group-hover:opacity-90" />
           <span className="flex items-center gap-2">
-            <span className="font-display text-base font-semibold tracking-tight text-fg">
-              Cooud UI
-            </span>
+            <span className="font-display text-base font-semibold text-fg">Cooud UI</span>
             <Badge variant="secondary" className="hidden px-1.5 py-0 text-[10px] sm:inline-flex">
               v0.2.0
             </Badge>
@@ -264,7 +258,7 @@ export function SiteNav() {
                     <Link
                       href={link.href}
                       onClick={() => setMobileOpen(false)}
-                      className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-fg-secondary outline-none transition-colors hover:bg-surface-overlay hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
+                      className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm text-fg-secondary outline-none transition-colors hover:bg-surface-overlay hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
                     >
                       {link.label}
                     </Link>

@@ -70,7 +70,7 @@ export function BlockPreview({ children }: { children: ReactNode }) {
         className={cn(
           "flex-1 overflow-x-auto overflow-y-auto bg-surface-base px-4 py-14 sm:px-6 lg:px-8",
           // Smoothly cross-fade the brand colors when a preset is chosen.
-          "transition-[--cooud-primary,--cooud-accent,--cooud-ring] duration-500 ease-[var(--ease-out-quart)] motion-reduce:transition-none",
+          "transition-[--cooud-primary,--cooud-accent,--cooud-ring] duration-300 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
           mode === "dark" ? "dark" : "",
         )}
       >

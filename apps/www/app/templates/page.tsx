@@ -77,10 +77,10 @@ const TEMPLATES: TemplateEntry[] = [
   },
 ];
 
-/** The exact command, in a copyable terminal chip. */
+/** The exact command, as a flat divided row with a copy action. */
 function CommandChip({ command }: { command: string }) {
   return (
-    <div className="flex items-center gap-2 rounded-xl border border-border bg-surface-inset px-3 py-2">
+    <div className="flex items-center gap-2 border-t border-border pt-4">
       <code className="min-w-0 flex-1 truncate font-mono text-xs text-fg-secondary">
         <span className="select-none text-fg-tertiary">$ </span>
         {command}
@@ -88,7 +88,7 @@ function CommandChip({ command }: { command: string }) {
       <CopyButton
         value={command}
         size="icon-sm"
-        className="shrink-0 text-fg-tertiary hover:text-fg"
+        className="shrink-0 text-fg-tertiary transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] hover:text-fg"
         copyLabel="Copy scaffold command"
       />
     </div>
@@ -106,7 +106,7 @@ export default function TemplatesPage() {
           <Eyebrow>Templates</Eyebrow>
           <div className="mt-3 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <h1 className="font-display text-4xl font-semibold tracking-tight text-fg sm:text-5xl">
+              <h1 className="font-display text-4xl font-normal tracking-[-0.025em] text-fg sm:text-5xl sm:tracking-[-0.03em]">
                 Start from a real app
               </h1>
               <p className="mt-4 max-w-2xl text-lg text-fg-secondary">
@@ -134,7 +134,7 @@ export default function TemplatesPage() {
           {TEMPLATES.map((template) => (
             <article
               key={template.slug}
-              className="flex flex-col rounded-2xl border border-border bg-surface-raised transition-colors hover:border-border-strong"
+              className="flex flex-col rounded-2xl border border-border bg-surface-raised transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] hover:border-border-strong"
             >
               {/* Thumbnail strip */}
               <div className="relative flex h-28 items-center justify-center overflow-hidden rounded-t-2xl border-b border-border/60 bg-surface-inset">
@@ -142,15 +142,13 @@ export default function TemplatesPage() {
                   aria-hidden="true"
                   className="absolute inset-0 bg-[radial-gradient(var(--cooud-border)_1px,transparent_1px)] opacity-40 [background-size:16px_16px]"
                 />
-                <span className="relative grid size-12 place-items-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
-                  <template.icon className="size-6" aria-hidden="true" />
-                </span>
+                <template.icon className="relative size-7 text-fg-tertiary" aria-hidden="true" />
               </div>
 
               <div className="flex flex-1 flex-col gap-4 p-6">
                 <div>
                   <div className="flex items-center justify-between gap-2">
-                    <h2 className="font-display text-xl font-semibold tracking-tight text-fg">
+                    <h2 className="font-display text-xl font-normal tracking-[-0.02em] text-fg">
                       {template.name}
                     </h2>
                     <span className="shrink-0 rounded-full border border-border bg-surface-inset px-2.5 py-0.5 text-xs font-medium text-fg-tertiary">
@@ -167,7 +165,10 @@ export default function TemplatesPage() {
                   <ul className="mt-3 flex flex-col gap-2">
                     {template.inside.map((item) => (
                       <li key={item} className="flex gap-2 text-sm text-fg-secondary">
-                        <Check className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
+                        <Check
+                          className="mt-0.5 size-4 shrink-0 text-fg-tertiary"
+                          aria-hidden="true"
+                        />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -197,7 +198,7 @@ export default function TemplatesPage() {
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <Eyebrow>Keep building</Eyebrow>
-              <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-fg">
+              <h2 className="mt-3 font-display text-2xl font-normal tracking-[-0.02em] text-fg">
                 Grow the app after you scaffold
               </h2>
               <p className="mt-2 max-w-xl text-sm leading-6 text-fg-secondary">
@@ -208,14 +209,14 @@ export default function TemplatesPage() {
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/components"
-                className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-surface-inset px-4 py-2.5 text-sm font-medium text-fg outline-none transition-colors hover:border-border-strong focus-visible:ring-2 focus-visible:ring-ring"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-surface-inset px-4 py-2.5 text-sm font-medium text-fg outline-none transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] hover:border-border-strong focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <Sparkles className="size-4 text-primary" aria-hidden="true" />
+                <Sparkles className="size-4 text-fg-tertiary" aria-hidden="true" />
                 Browse components
               </Link>
               <Link
                 href="/blocks"
-                className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-surface-inset px-4 py-2.5 text-sm font-medium text-fg outline-none transition-colors hover:border-border-strong focus-visible:ring-2 focus-visible:ring-ring"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-surface-inset px-4 py-2.5 text-sm font-medium text-fg outline-none transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] hover:border-border-strong focus-visible:ring-2 focus-visible:ring-ring"
               >
                 Browse blocks
                 <ArrowRight className="size-4" aria-hidden="true" />

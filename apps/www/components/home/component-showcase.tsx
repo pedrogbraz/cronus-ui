@@ -51,7 +51,7 @@ export function ComponentShowcase() {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
         <div className="flex flex-col gap-3">
           <Eyebrow>Component library</Eyebrow>
-          <h2 className="max-w-2xl font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h2 className="max-w-2xl font-display text-3xl tracking-[-0.025em] sm:text-4xl">
             {COMPONENT_COUNT} components, fully documented
           </h2>
           <p className="max-w-2xl text-fg-secondary">
@@ -122,7 +122,7 @@ export function ComponentShowcase() {
                     </AvatarFallback>
                   </Avatar>
                 ))}
-                <span className="grid size-9 place-items-center rounded-full border-2 border-surface-inset bg-primary text-xs font-medium text-primary-foreground">
+                <span className="grid size-9 place-items-center rounded-full border-2 border-surface-inset bg-surface-overlay text-xs font-medium text-fg-secondary">
                   +9k
                 </span>
               </div>
@@ -131,7 +131,7 @@ export function ComponentShowcase() {
 
           {/* 5 · Card */}
           <Tile caption="Card">
-            <Card className="w-full border-border bg-surface-raised/80 shadow-lg">
+            <Card className="w-full border-border bg-surface-raised shadow-xs">
               <CardHeader>
                 <CardTitle>Upgrade to Pro</CardTitle>
                 <CardDescription>Everything to ship a themeable product.</CardDescription>
@@ -149,7 +149,7 @@ export function ComponentShowcase() {
           <Tile caption="Theming">
             <div className="flex w-full flex-col gap-4">
               <div className="flex flex-wrap items-center justify-center gap-2">
-                <Swatch className="bg-gradient-primary shadow-glow" label="Aurora gradient" />
+                <Swatch className="bg-gradient-primary" label="Aurora gradient" />
                 <Swatch className="bg-primary" label="Primary" />
                 <Swatch className="bg-success" label="Success" />
                 <Swatch className="bg-warning" label="Warning" />
@@ -172,7 +172,7 @@ export function ComponentShowcase() {
             <Link
               key={category.slug}
               href={`/components#${category.slug}`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-raised px-3.5 py-1.5 text-sm text-fg-secondary outline-none transition-colors hover:border-border-strong hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-raised px-3.5 py-1.5 text-sm text-fg-secondary outline-none transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] hover:border-border-strong hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
             >
               {category.name}
               <span className="text-fg-tertiary">{category.items.length}</span>
