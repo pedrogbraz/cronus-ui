@@ -14,6 +14,7 @@
     "dev": "turbo run dev",
     "typecheck": "turbo run typecheck",
     "lint": "biome check .",
+    "contract:check": "node scripts/contract-check.mjs",
     "format": "biome format --write .",
     "www": "turbo run dev --filter=@cooud-ui/www",
     "test": "vitest run",
