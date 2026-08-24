@@ -61,6 +61,6 @@
     "prepublishOnly": "bun run scripts/build-tokens.ts --check && tsc -p tsconfig.json"
   },
   "devDependencies": {
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   }
 }

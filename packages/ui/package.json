@@ -652,7 +652,7 @@
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.54.2",
     "recharts": "^3.9.2",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "vitest": "^4.1.9",
     "zod": "^4.4.3"
   }
