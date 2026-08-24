@@ -47,10 +47,28 @@ const bold = (s) => `\x1b[1m${s}\x1b[0m`;
    ajustado para dizer isso.
    ────────────────────────────────────────────────────────────── */
 const PALETTE = [
-  "slate", "gray", "zinc", "neutral", "stone",
-  "red", "orange", "amber", "yellow", "lime", "green", "emerald",
-  "teal", "cyan", "sky", "blue", "indigo", "violet", "purple",
-  "fuchsia", "pink", "rose",
+  "slate",
+  "gray",
+  "zinc",
+  "neutral",
+  "stone",
+  "red",
+  "orange",
+  "amber",
+  "yellow",
+  "lime",
+  "green",
+  "emerald",
+  "teal",
+  "cyan",
+  "sky",
+  "blue",
+  "indigo",
+  "violet",
+  "purple",
+  "fuchsia",
+  "pink",
+  "rose",
 ];
 const PALETTE_RE = new RegExp(
   String.raw`\b(?:bg|text|border|ring|fill|stroke|from|via|to|decoration|outline|shadow|accent|caret|divide|placeholder)-(?:${PALETTE.join("|")})-(?:50|\d00|950)\b`,
@@ -93,7 +111,9 @@ const rules = [
       // Componentes que só reexportam ou envolvem lib externa não têm raiz própria
       if (!/return\s*\(|=>\s*\(|<[A-Z]/.test(src)) return [];
       if (src.includes("data-slot")) return [];
-      return [{ line: 1, found: basename(file), hint: 'Adicione data-slot="<nome>" no elemento raiz' }];
+      return [
+        { line: 1, found: basename(file), hint: 'Adicione data-slot="<nome>" no elemento raiz' },
+      ];
     },
   },
   {
