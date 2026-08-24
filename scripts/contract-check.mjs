@@ -93,15 +93,26 @@ const PALETTE_RE = new RegExp(
 const HEX_RE = /#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})\b(?![0-9a-fA-F])/g;
 
 /* ── Regra 7 — Focus ring ───────────────────────────────────────────────
-   O contrato define o padrão inteiro. Meia aplicação é pior que nenhuma:
-   um anel sem offset some contra a própria superfície.                  */
-const RING_PARTS = [
+   O CONTRACT.md escreve o padrão como uma string exata terminando em
+   `focus-visible:ring-offset-surface-base`. A letra está errada: o offset
+   precisa casar com a superfície que está ATRÁS do elemento, e um item
+   dentro de um painel flutuante usa `-surface-floating` corretamente.
+   `ring-inset` também é válido onde não há espaço para anel externo.
+
+   O que a regra protege de verdade é: o anel precisa se separar do fundo.
+   Anel sem separação nenhuma encosta na própria superfície e some — esse
+   é o bug. Por isso o gate exige outline-none + ring-2 + ring-ring +
+   (offset com superfície OU inset), e não a string literal.
+
+   Verificado por string de classe, não por arquivo: um componente pode
+   ter um anel certo e outro errado no mesmo arquivo.                    */
+const CLASS_STRING_RE = /(["'`])((?:(?!\1)[\s\S])*?)\1/g;
+const RING_REQUIRED = [
   ["outline-none", /\boutline-none\b/],
-  ["focus-visible:ring-2", /focus-visible:ring-2\b/],
   ["focus-visible:ring-ring", /focus-visible:ring-ring\b/],
-  ["focus-visible:ring-offset-2", /focus-visible:ring-offset-2\b/],
-  ["focus-visible:ring-offset-surface-base", /focus-visible:ring-offset-surface-base\b/],
 ];
+const RING_SEPARATION =
+  /focus-visible:ring-inset\b|focus-visible:ring-offset-\d[\s\S]*?focus-visible:ring-offset-surface-\w+/;
 
 /* ── Regra 9 — "use client" desnecessário ───────────────────────────────
    Um leaf marcado como client tira do consumidor a chance de renderizar no
@@ -168,20 +179,21 @@ const rules = [
     id: "7",
     name: "Padrão completo de focus ring",
     appliesTo: (f) => f.endsWith(".tsx") && !f.includes(".test."),
-    hint: "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base",
+    hint: "outline-none + focus-visible:ring-2 + focus-visible:ring-ring + separação do fundo (ring-offset-N com ring-offset-surface-*, ou ring-inset)",
     check: (src) => {
-      // Só cobra de quem já tentou fazer um anel. Componente sem foco próprio
-      // (um Card, um Skeleton) não precisa de nenhum.
-      if (!/focus-visible:ring-2\b/.test(src)) return [];
-      if (EXEMPT.test(src)) return [];
-      const missing = RING_PARTS.filter(([, re]) => !re.test(src)).map(([n]) => n);
-      if (missing.length === 0) return [];
-      return [
-        {
-          line: lineOf(src, src.search(/focus-visible:ring-2/)),
-          found: `falta ${missing.join(" ")}`,
-        },
-      ];
+      const out = [];
+      for (const m of src.matchAll(CLASS_STRING_RE)) {
+        const cls = m[2];
+        // Só cobra de quem já tentou fazer um anel. Componente sem foco
+        // próprio (um Card, um Skeleton) não precisa de nenhum.
+        if (!/focus-visible:ring-2\b/.test(cls)) continue;
+        if (EXEMPT.test(lineAt(src, m.index))) continue;
+        const missing = RING_REQUIRED.filter(([, re]) => !re.test(cls)).map(([n]) => n);
+        if (!RING_SEPARATION.test(cls)) missing.push("separação do fundo");
+        if (missing.length)
+          out.push({ line: lineOf(src, m.index), found: `falta ${missing.join(" + ")}` });
+      }
+      return out;
     },
   },
   {

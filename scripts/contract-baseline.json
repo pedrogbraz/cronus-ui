@@ -1,7 +1,7 @@
 {
   "$comment": "Dívida conhecida do CONTRACT.md. O gate barra qualquer violação acima destes números; quando cair, rode `bun run contract:check --baseline` para travar o ganho. Nunca suba um número à mão.",
   "generated": "2026-08-24",
-  "total": 175,
+  "total": 180,
   "accepted": {
     "accordion.tsx": {
       "7": 1,
@@ -30,6 +30,7 @@
       "9": 1
     },
     "carousel.tsx": {
+      "7": 2,
       "10": 6
     },
     "chart.tsx": {
@@ -38,12 +39,13 @@
     "checkbox.tsx": {
       "9": 1
     },
+    "chip.tsx": {
+      "7": 1
+    },
     "code-block.tsx": {
-      "7": 1,
       "10": 3
     },
     "code-tabs.tsx": {
-      "7": 1,
       "10": 4
     },
     "collapsible.tsx": {
@@ -114,10 +116,11 @@
       "9": 1
     },
     "morphing-popover.tsx": {
-      "7": 1,
+      "7": 3,
       "10": 1
     },
     "multi-select.tsx": {
+      "7": 2,
       "10": 1
     },
     "navigation-menu.tsx": {
@@ -172,7 +175,7 @@
       "10": 6
     },
     "sidebar.tsx": {
-      "7": 1,
+      "7": 3,
       "10": 10
     },
     "signature-pad.tsx": {
@@ -189,6 +192,7 @@
       "10": 5
     },
     "stepper.tsx": {
+      "7": 1,
       "10": 1
     },
     "switch.tsx": {
@@ -209,15 +213,10 @@
       "10": 1
     },
     "terminal.tsx": {
-      "7": 1,
       "10": 2
     },
     "time-picker.tsx": {
-      "7": 1,
       "1b": 2
-    },
-    "toolbar.tsx": {
-      "7": 1
     },
     "tree-view.tsx": {
       "7": 1,
