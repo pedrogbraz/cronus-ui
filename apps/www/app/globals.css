@@ -103,3 +103,47 @@ body {
   background-color: var(--cooud-fg-muted);
   background-clip: content-box;
 }
+
+/* ─────────────────────────────────────────────────────────────────────
+   Convenções tipográficas da casa — alinhadas ao cooud-status.
+   Estas NÃO são tokens: são as regras que dão a sensação de "software
+   para adultos" em vez de landing de SaaS. Ver docs/adr/0002.
+   ───────────────────────────────────────────────────────────────────── */
+@layer base {
+  /* Títulos não são negrito. A hierarquia vem de tamanho, tracking e
+     espaço — não de peso. É a assinatura visual mais forte do sistema.
+     Utilitários explícitos (font-semibold) continuam vencendo. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 400;
+  }
+  strong,
+  b {
+    font-weight: 500;
+  }
+
+  body {
+    /* Variantes de caractere do Inter: 1 sem serifa, a minúscula de cauda
+       reta, l com cauda. Deixa o texto menos geométrico e mais legível. */
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    /* Números alinham em coluna em tabelas, métricas e changelog. */
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Cursor de seta em toda a interface. Mão apontando é convenção de
+     hipertexto de 1995 e destoa de produto. Links dentro de PROSA mantêm
+     o pointer — ali a affordance ainda ajuda. */
+  button,
+  [role="button"],
+  [type="button"],
+  [type="submit"],
+  [type="reset"],
+  select,
+  summary {
+    cursor: default;
+  }
+}

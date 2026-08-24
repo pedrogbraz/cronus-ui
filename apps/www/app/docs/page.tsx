@@ -76,13 +76,17 @@ export default function DocsOverviewPage() {
       </DocsSection>
 
       <DocsSection title="Current release">
-        <div className="rounded-xl border border-border bg-surface-raised p-6">
+        {/* Flat ledger row rather than a card: the hairline carries the break,
+            matching the changelog timeline. */}
+        <div className="border-t border-border pt-6">
           <div className="flex flex-wrap items-center gap-3">
             <Badge>{latest.version}</Badge>
             <Badge variant="secondary">{latest.status}</Badge>
-            <span className="text-sm text-fg-tertiary">{latest.date}</span>
+            <span className="text-sm tabular-nums text-fg-tertiary">{latest.date}</span>
           </div>
-          <h3 className="mt-4 font-display text-2xl font-semibold text-fg">{latest.title}</h3>
+          <h3 className="mt-4 font-display text-2xl font-medium tracking-[-0.02em] text-fg">
+            {latest.title}
+          </h3>
           <p className="mt-3 max-w-3xl text-sm leading-6 text-fg-secondary">{latest.summary}</p>
         </div>
       </DocsSection>

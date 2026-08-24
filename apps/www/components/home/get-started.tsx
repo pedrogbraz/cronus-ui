@@ -21,7 +21,7 @@ function CommandBlock({ command }: { command: string }) {
   }
 
   return (
-    <div className="relative flex w-full min-w-0 max-w-full items-center gap-2 overflow-hidden rounded-xl border border-border bg-surface-inset px-4 py-3 pr-12 font-mono text-sm">
+    <div className="flex w-full min-w-0 max-w-full items-center gap-2 border-t border-border pt-4 font-mono text-sm">
       <span aria-hidden="true" className="select-none text-fg-tertiary">
         $
       </span>
@@ -30,7 +30,7 @@ function CommandBlock({ command }: { command: string }) {
         type="button"
         onClick={copy}
         aria-label={copied ? "Copied to clipboard" : `Copy "${command}"`}
-        className="absolute right-2 top-1/2 inline-flex size-8 -translate-y-1/2 items-center justify-center rounded-lg border border-border bg-surface-raised text-fg-tertiary outline-none transition-colors hover:border-border-strong hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
+        className="inline-flex size-8 shrink-0 items-center justify-center rounded-lg text-fg-tertiary outline-none transition-colors hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
       >
         {copied ? (
           <Check className="size-4 text-fg" aria-hidden="true" />
@@ -56,12 +56,12 @@ function PathCard({ icon, title, description, command }: PathCardProps) {
       <div className="flex min-w-0 items-start gap-4">
         <span
           aria-hidden="true"
-          className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl border border-border bg-surface-inset text-fg"
+          className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl border border-border bg-surface-inset text-fg-tertiary"
         >
           {icon}
         </span>
         <div className="flex min-w-0 flex-col gap-1.5">
-          <h3 className="font-display text-lg font-semibold tracking-tight text-fg">{title}</h3>
+          <h3 className="font-display text-lg font-semibold text-fg">{title}</h3>
           <p className="text-sm text-fg-secondary">{description}</p>
         </div>
       </div>
@@ -81,7 +81,7 @@ export function GetStarted() {
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
           <div className="flex flex-col gap-3">
             <Eyebrow>Get started</Eyebrow>
-            <h2 className="max-w-2xl font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h2 className="max-w-2xl font-display text-3xl tracking-[-0.025em] sm:text-4xl">
               Three ways in — all take a minute
             </h2>
             <p className="max-w-2xl text-fg-secondary">
@@ -127,11 +127,11 @@ export function GetStarted() {
             />
 
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-overlay/60 px-3 py-1 text-xs font-medium text-fg-secondary backdrop-blur">
-              <Sparkles className="size-3.5 text-fg" aria-hidden="true" />
+              <Sparkles className="size-3.5 text-fg-tertiary" aria-hidden="true" />
               Aurora, by default
             </span>
 
-            <h2 className="mt-5 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h2 className="mt-5 font-display text-3xl tracking-[-0.025em] sm:text-4xl">
               Create a design system in minutes
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-fg-secondary">

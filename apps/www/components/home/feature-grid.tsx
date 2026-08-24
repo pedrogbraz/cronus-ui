@@ -82,7 +82,7 @@ export function FeatureGrid() {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
         <div className="flex flex-col gap-3">
           <Eyebrow>Why Cooud UI</Eyebrow>
-          <h2 className="max-w-2xl font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h2 className="max-w-2xl font-display text-3xl tracking-[-0.025em] sm:text-4xl">
             Everything you need to ship a themeable product
           </h2>
           <p className="max-w-2xl text-fg-secondary">
@@ -103,12 +103,8 @@ export function FeatureGrid() {
 
 function FeatureCard({ icon: Icon, title, body }: Feature) {
   return (
-    <div className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-border bg-surface-raised p-6 shadow-xs transition-colors duration-200 hover:border-border-strong hover:bg-surface-overlay">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-16 -top-16 size-40 rounded-full bg-gradient-aurora opacity-0 blur-3xl transition-opacity duration-300 group-hover:opacity-20"
-      />
-      <div className="relative grid size-10 place-items-center rounded-xl border border-border bg-surface-inset text-fg transition-colors duration-200 group-hover:text-primary">
+    <div className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-border bg-surface-raised p-6 shadow-xs transition-[transform,background-color,border-color] duration-[400ms] ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-1 hover:border-border-strong hover:bg-surface-overlay">
+      <div className="relative grid size-10 place-items-center rounded-xl border border-border bg-surface-inset text-fg-tertiary transition-colors duration-[400ms] ease-[cubic-bezier(.22,1,.36,1)] group-hover:text-fg">
         <Icon aria-hidden="true" className="size-5" />
       </div>
       <h3 className="relative text-base font-medium text-fg">{title}</h3>

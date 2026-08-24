@@ -26,7 +26,7 @@ export function DocumentationNavList({ onNavigate }: { onNavigate?: () => void }
     <>
       {DOC_NAV_SECTIONS.map((section) => (
         <div key={section.heading} className="first:mt-0 mt-6">
-          <p className="px-3 pb-2 text-xs font-medium uppercase tracking-widest text-fg-tertiary">
+          <p className="px-3 pb-2 text-xs font-medium uppercase tracking-wider text-fg-tertiary">
             {section.heading}
           </p>
           <ul>
@@ -64,7 +64,7 @@ export function MobileDocumentationNav() {
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
+                  "inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-sm outline-none transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] focus-visible:ring-2 focus-visible:ring-ring",
                   active
                     ? "border-border-strong bg-surface-overlay text-fg"
                     : "border-border bg-surface-raised text-fg-secondary hover:text-fg",
@@ -72,7 +72,7 @@ export function MobileDocumentationNav() {
               >
                 {item.label}
                 {item.indicator ? (
-                  <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" />
+                  <span className="size-1.5 rounded-full bg-fg-tertiary" aria-hidden="true" />
                 ) : null}
               </Link>
             </li>
@@ -102,14 +102,16 @@ function DocumentationSidebarLink({
       onClick={onNavigate}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "flex items-center justify-between gap-2 rounded-lg px-3 py-1.5 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
+        "flex items-center justify-between gap-2 rounded-lg px-3 py-1.5 outline-none transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] focus-visible:ring-2 focus-visible:ring-ring",
         active
           ? "bg-surface-overlay font-medium text-fg"
           : "text-fg-secondary hover:bg-surface-overlay/60 hover:text-fg",
       )}
     >
       <span>{children}</span>
-      {indicator ? <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" /> : null}
+      {indicator ? (
+        <span className="size-1.5 rounded-full bg-fg-tertiary" aria-hidden="true" />
+      ) : null}
     </Link>
   );
 }

@@ -5,16 +5,18 @@ export const alt = "Cooud UI block";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// Aurora dark tokens, hardcoded — Satori cannot resolve the `--cooud-*` CSS
-// variables. Source of truth: packages/tokens/src/tokens.ts (auroraDark).
-const aurora = {
-  surfaceBase: "#09090b",
-  primary: "#0ea5e9",
-  accent: "#06b6d4",
-  fg: "#fafaf9",
-  fgSecondary: "#a1a1aa",
-  border: "rgba(255,255,255,0.10)",
-  chipBg: "rgba(255,255,255,0.06)",
+// Neutral dark tokens, hardcoded as sRGB — ImageResponse renders through Satori,
+// which resolves neither the `--cooud-*` CSS variables nor `oklch()`.
+// Source of truth: packages/tokens/src/tokens.ts (neutralDark); the hex below is
+// the exact sRGB conversion of each oklch value, noted per line.
+const neutral = {
+  surfaceBase: "#040404", // oklch(0.11 0 0)
+  primary: "#e8e8e8", // oklch(0.93 0 0)
+  accent: "#262626", // oklch(0.27 0 0)
+  fg: "#e8e8e8", // oklch(0.93 0 0)
+  fgSecondary: "#9e9e9e", // oklch(0.7 0 0)
+  border: "rgba(255,255,255,0.10)", // oklch(1 0 0 / 0.1)
+  chipBg: "rgba(255,255,255,0.06)", // oklch(1 0 0 / 0.06)
 };
 
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
@@ -32,12 +34,12 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        backgroundColor: aurora.surfaceBase,
+        backgroundColor: neutral.surfaceBase,
         position: "relative",
         padding: 72,
       }}
     >
-      {/* Aurora glows */}
+      {/* Ambient wash — achromatic, so the card matches the neutral theme. */}
       <div
         style={{
           position: "absolute",
@@ -46,7 +48,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           width: 780,
           height: 640,
           display: "flex",
-          backgroundImage: "radial-gradient(circle, rgba(14,165,233,0.26), transparent 65%)",
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06), transparent 65%)",
         }}
       />
       <div
@@ -57,7 +59,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           width: 720,
           height: 600,
           display: "flex",
-          backgroundImage: "radial-gradient(circle, rgba(6,182,212,0.20), transparent 65%)",
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.04), transparent 65%)",
         }}
       />
 
@@ -68,10 +70,10 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             height: 44,
             borderRadius: 13,
             display: "flex",
-            backgroundImage: `linear-gradient(135deg, ${aurora.primary}, ${aurora.accent})`,
+            backgroundImage: `linear-gradient(135deg, ${neutral.primary}, ${neutral.accent})`,
           }}
         />
-        <div style={{ display: "flex", fontSize: 34, fontWeight: 700, color: aurora.fg }}>
+        <div style={{ display: "flex", fontSize: 34, fontWeight: 400, color: neutral.fg }}>
           Cooud UI
         </div>
       </div>
@@ -81,7 +83,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           style={{
             display: "flex",
             fontSize: 24,
-            color: aurora.accent,
+            color: neutral.accent,
             textTransform: "uppercase",
             letterSpacing: 4,
           }}
@@ -93,8 +95,8 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             display: "flex",
             marginTop: 14,
             fontSize: 88,
-            fontWeight: 700,
-            color: aurora.fg,
+            fontWeight: 400,
+            color: neutral.fg,
             letterSpacing: -3,
           }}
         >
@@ -106,7 +108,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             marginTop: 18,
             fontSize: 32,
             lineHeight: 1.4,
-            color: aurora.fgSecondary,
+            color: neutral.fgSecondary,
           }}
         >
           {description.length > 140 ? `${description.slice(0, 137)}…` : description}
@@ -119,10 +121,10 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             display: "flex",
             padding: "14px 26px",
             borderRadius: 14,
-            border: `1px solid ${aurora.border}`,
-            backgroundColor: aurora.chipBg,
+            border: `1px solid ${neutral.border}`,
+            backgroundColor: neutral.chipBg,
             fontSize: 28,
-            color: aurora.fg,
+            color: neutral.fg,
           }}
         >
           {`npx cooud-ui add ${slug}`}

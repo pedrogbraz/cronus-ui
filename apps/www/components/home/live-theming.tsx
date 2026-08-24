@@ -54,7 +54,7 @@ export function LiveTheming() {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
         <div className="flex flex-col gap-3">
           <Eyebrow>Live theming</Eyebrow>
-          <h2 className="max-w-2xl font-display text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h2 className="max-w-2xl font-display text-3xl tracking-[-0.025em] sm:text-4xl">
             One palette. Everything follows.
           </h2>
           <p className="max-w-2xl text-fg-secondary">
@@ -75,22 +75,22 @@ export function LiveTheming() {
                   onClick={() => setTheme(t.name)}
                   aria-pressed={active}
                   className={cn(
-                    "group inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-medium outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-ring",
+                    "group inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm font-medium outline-none transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] focus-visible:ring-2 focus-visible:ring-ring",
                     active
-                      ? "border-primary bg-surface-overlay text-fg"
+                      ? "border-border-strong bg-surface-overlay text-fg shadow-xs"
                       : "border-border bg-surface-raised text-fg-secondary hover:border-border-strong hover:text-fg",
                   )}
                 >
                   <span
                     aria-hidden="true"
                     className={cn(
-                      "size-4 rounded-full ring-1 ring-inset ring-white/10 transition-transform",
+                      "size-4 rounded-full ring-1 ring-inset ring-border transition-transform duration-200 ease-[cubic-bezier(.22,1,.36,1)]",
                       active ? "scale-100" : "scale-90 group-hover:scale-100",
                     )}
                     style={{ background: t.swatch }}
                   />
                   {t.label}
-                  {active ? <Check className="size-3.5 text-primary" aria-hidden="true" /> : null}
+                  {active ? <Check className="size-3.5 text-fg" aria-hidden="true" /> : null}
                 </button>
               );
             })}
@@ -101,7 +101,7 @@ export function LiveTheming() {
           <button
             type="button"
             onClick={() => setMode(isDark ? "light" : "dark")}
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-raised px-3 py-1.5 text-sm font-medium text-fg-secondary outline-none transition-colors hover:border-border-strong hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-raised px-3 py-1.5 text-sm font-medium text-fg-secondary outline-none transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] hover:border-border-strong hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
             aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
           >
             {isDark ? (
@@ -133,9 +133,9 @@ export function LiveTheming() {
           {/* window chrome */}
           <div className="flex items-center gap-2 border-b border-border/70 bg-surface-raised/60 px-4 py-3">
             <span className="flex gap-1.5" aria-hidden="true">
-              <span className="size-2.5 rounded-full bg-error/70" />
-              <span className="size-2.5 rounded-full bg-warning/70" />
-              <span className="size-2.5 rounded-full bg-success/70" />
+              <span className="size-2.5 rounded-full bg-border-strong" />
+              <span className="size-2.5 rounded-full bg-border-strong" />
+              <span className="size-2.5 rounded-full bg-border-strong" />
             </span>
             <span className="ml-2 font-mono text-xs text-fg-tertiary">app.cooud.dev</span>
             <Badge variant="outline" className="ml-auto capitalize">
@@ -143,9 +143,9 @@ export function LiveTheming() {
             </Badge>
           </div>
 
-          <div className="grid gap-4 p-4 sm:p-6 lg:grid-cols-3">
+          <div className="grid gap-x-6 gap-y-5 px-4 pb-5 sm:px-6 sm:pb-6 lg:grid-cols-3">
             {/* Revenue metric + bar chart */}
-            <div className="flex flex-col gap-4 rounded-2xl border border-border bg-surface-raised p-5 shadow-xs lg:col-span-2">
+            <div className="flex flex-col gap-4 pt-5 lg:col-span-2">
               <div className="flex items-start justify-between gap-4">
                 <Metric>
                   <MetricLabel>Monthly revenue</MetricLabel>
@@ -162,8 +162,8 @@ export function LiveTheming() {
                   <div
                     key={h}
                     className={cn(
-                      "flex-1 rounded-t-md transition-[height] duration-500",
-                      i === BARS.length - 1 ? "bg-gradient-primary" : "bg-primary/25",
+                      "flex-1 rounded-t-md transition-[height] duration-300 ease-[cubic-bezier(.22,1,.36,1)]",
+                      i === BARS.length - 1 ? "bg-primary" : "bg-primary/25",
                     )}
                     style={{ height: `${h}%` }}
                   />
@@ -172,18 +172,18 @@ export function LiveTheming() {
             </div>
 
             {/* Team + actions */}
-            <div className="flex flex-col gap-4 rounded-2xl border border-border bg-surface-raised p-5 shadow-xs">
+            <div className="flex flex-col gap-4 border-t border-border pt-5 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-5">
               <div>
                 <p className="text-sm font-medium text-fg">Your team</p>
                 <div className="mt-3 flex -space-x-2">
                   {["AK", "MR", "JD", "SL"].map((initials) => (
-                    <Avatar key={initials} className="size-8 border-2 border-surface-raised">
+                    <Avatar key={initials} className="size-8 border-2 border-surface-inset">
                       <AvatarFallback className="bg-surface-overlay text-[11px] text-fg-secondary">
                         {initials}
                       </AvatarFallback>
                     </Avatar>
                   ))}
-                  <span className="grid size-8 place-items-center rounded-full border-2 border-surface-raised bg-primary text-[11px] font-medium text-primary-foreground">
+                  <span className="grid size-8 place-items-center rounded-full border-2 border-surface-inset bg-surface-overlay text-[11px] font-medium text-fg-secondary">
                     +9k
                   </span>
                 </div>
@@ -204,7 +204,7 @@ export function LiveTheming() {
             </div>
 
             {/* A small form row */}
-            <div className="flex flex-col gap-4 rounded-2xl border border-border bg-surface-raised p-5 shadow-xs lg:col-span-3">
+            <div className="flex flex-col gap-4 border-t border-border pt-5 lg:col-span-3">
               <div className="grid gap-4 sm:grid-cols-[1fr_auto_auto] sm:items-end">
                 <div className="flex flex-col gap-1.5">
                   <Label htmlFor="theming-email">Work email</Label>

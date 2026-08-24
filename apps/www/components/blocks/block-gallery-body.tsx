@@ -18,6 +18,9 @@ type AppearanceFilter = "all" | BlockVariantAppearance;
  */
 const PREVIEW_WIDTH_PX = 64 * 16;
 
+/** Single motion curve for the whole surface — short, calm, non-bouncy. */
+const EASE = "ease-[cubic-bezier(.22,1,.36,1)]";
+
 /** `useLayoutEffect` on the client, `useEffect` on the server (SSG-safe). */
 const useIsoLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
 
@@ -136,7 +139,12 @@ export function BlockGalleryBody({
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-fg-tertiary">
             <Link
               href="/blocks"
-              className="rounded outline-none hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
+              className={cn(
+                "rounded outline-none",
+                "transition-colors duration-150",
+                EASE,
+                "hover:text-fg focus-visible:ring-2 focus-visible:ring-ring",
+              )}
             >
               Blocks
             </Link>
@@ -147,14 +155,15 @@ export function BlockGalleryBody({
           <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <Eyebrow>{meta.category}</Eyebrow>
-              <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-fg sm:text-5xl">
+              <h1 className="mt-3 font-display text-4xl font-normal tracking-[-0.025em] text-fg sm:text-5xl sm:tracking-[-0.03em]">
                 {meta.name} variations
               </h1>
               <p className="mt-4 max-w-2xl text-lg text-fg-secondary">{meta.description}</p>
             </div>
 
-            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-surface-raised px-3 py-1.5 text-sm text-fg-secondary">
-              <Grid2X2 className="size-4 text-primary" aria-hidden="true" />
+            {/* Plain count line — no pill, no accent icon. */}
+            <div className="flex w-fit items-center gap-2 text-sm text-fg-tertiary">
+              <Grid2X2 className="size-4" aria-hidden="true" />
               {variants.length} {variants.length === 1 ? "variation" : "variations"}
             </div>
           </div>
@@ -183,7 +192,10 @@ export function BlockGalleryBody({
                     aria-pressed={active}
                     onClick={() => setAppearanceFilter(filter.value)}
                     className={cn(
-                      "flex h-10 w-full items-center justify-between rounded-xl border px-3 text-left text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
+                      "flex h-10 w-full items-center justify-between rounded-xl border px-3 text-left text-sm outline-none",
+                      "transition-colors duration-150",
+                      EASE,
+                      "focus-visible:ring-2 focus-visible:ring-ring",
                       active
                         ? "border-border-strong bg-surface-raised text-fg"
                         : "border-border bg-surface-inset text-fg-secondary hover:border-border-strong hover:text-fg",
@@ -212,7 +224,12 @@ export function BlockGalleryBody({
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Search variations..."
-                className="h-10 w-full rounded-xl border border-border bg-surface-inset pl-9 pr-3 text-sm text-fg outline-none placeholder:text-fg-tertiary focus:border-border-strong focus:ring-2 focus:ring-ring"
+                className={cn(
+                  "h-10 w-full rounded-xl border border-border bg-surface-inset pl-9 pr-3 text-sm text-fg outline-none placeholder:text-fg-tertiary",
+                  "transition-colors duration-150",
+                  EASE,
+                  "focus:border-border-strong focus:ring-2 focus:ring-ring",
+                )}
               />
             </label>
             <span className="text-sm text-fg-tertiary">
@@ -228,7 +245,12 @@ export function BlockGalleryBody({
                 return (
                   <article
                     key={variant.id}
-                    className="group relative overflow-hidden rounded-2xl border border-border bg-surface-raised transition-colors hover:border-border-strong focus-within:ring-2 focus-within:ring-ring"
+                    className={cn(
+                      "group relative overflow-hidden rounded-2xl border border-border bg-surface-raised",
+                      "transition-colors duration-200",
+                      EASE,
+                      "hover:border-border-strong focus-within:ring-2 focus-within:ring-ring",
+                    )}
                   >
                     <div
                       data-cooud-theme="aurora"
@@ -245,13 +267,12 @@ export function BlockGalleryBody({
                       <div className="pointer-events-none absolute inset-0">
                         <ScaledPreview>{variant.preview}</ScaledPreview>
                       </div>
-                      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-surface-raised via-surface-raised/80 to-transparent" />
                     </div>
 
                     <div className="flex items-end justify-between gap-5 p-5">
                       <div className="min-w-0">
                         <div className="flex flex-wrap items-center gap-2">
-                          <h2 className="font-display text-xl font-semibold tracking-tight text-fg">
+                          <h2 className="font-display text-xl font-medium tracking-[-0.02em] text-fg">
                             {variant.name}
                           </h2>
                           <span className="rounded-full border border-border bg-surface-inset px-2 py-0.5 text-xs font-medium capitalize text-fg-tertiary">
@@ -263,7 +284,12 @@ export function BlockGalleryBody({
                         </p>
                       </div>
                       <ArrowRight
-                        className="size-5 shrink-0 text-fg-tertiary transition-transform group-hover:translate-x-0.5 group-hover:text-fg"
+                        className={cn(
+                          "size-5 shrink-0 text-fg-tertiary",
+                          "transition-[transform,color] duration-200",
+                          EASE,
+                          "group-hover:translate-x-0.5 group-hover:text-fg",
+                        )}
                         aria-hidden="true"
                       />
                     </div>

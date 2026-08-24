@@ -73,17 +73,13 @@ export function Hero() {
       <div className="mx-auto flex max-w-7xl flex-col items-center text-center">
         {/* Eyebrow pill */}
         <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-raised/60 px-3 py-1 text-xs text-fg-secondary backdrop-blur">
-          <span
-            aria-hidden="true"
-            className="size-2 rounded-full bg-gradient-primary shadow-glow"
-          />
+          <span aria-hidden="true" className="size-2 rounded-full bg-fg-tertiary" />
           {COMPONENT_COUNT} components · 5 crafted themes
         </div>
 
         {/* Headline */}
-        <h1 className="mt-6 max-w-4xl text-balance font-display text-5xl font-semibold leading-[1.04] tracking-tight text-fg sm:text-7xl">
-          The design system that{" "}
-          <span className="bg-gradient-primary bg-clip-text text-transparent">themes itself</span>
+        <h1 className="mt-6 max-w-4xl text-balance font-display text-5xl leading-[1.04] tracking-[-0.03em] text-fg sm:text-7xl">
+          The design system that <span className="text-fg-secondary">themes itself</span>
         </h1>
 
         {/* Subtitle */}
@@ -153,9 +149,7 @@ export function Hero() {
                   <CardDescription>Everything to ship a themeable product.</CardDescription>
                 </CardHeader>
                 <CardContent className="flex items-baseline gap-1">
-                  <span className="font-display text-4xl font-semibold tracking-tight text-fg">
-                    $0
-                  </span>
+                  <span className="font-display text-4xl tracking-[-0.025em] text-fg">$0</span>
                   <span className="text-sm text-fg-tertiary">/ forever</span>
                 </CardContent>
                 <CardFooter>
@@ -169,7 +163,7 @@ export function Hero() {
 
             {/* Center stack — controls & buttons */}
             <div className="flex flex-col gap-6 md:col-span-4">
-              <div className="rounded-2xl border border-border bg-surface-raised/80 p-4 shadow-glow backdrop-blur">
+              <div className="rounded-2xl border border-border bg-surface-raised/80 p-4 shadow-xs backdrop-blur">
                 <div className="flex flex-wrap items-center gap-2">
                   <Button size="sm" variant="gradient">
                     Gradient
@@ -229,13 +223,13 @@ export function Hero() {
                       </AvatarFallback>
                     </Avatar>
                   ))}
-                  <span className="grid size-9 place-items-center rounded-full border-2 border-surface-raised bg-primary text-xs font-medium text-primary-foreground">
+                  <span className="grid size-9 place-items-center rounded-full border-2 border-surface-raised bg-surface-overlay text-xs font-medium text-fg-secondary">
                     +9k
                   </span>
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-border bg-surface-raised/80 p-4 shadow-glow backdrop-blur">
+              <div className="rounded-2xl border border-border bg-surface-raised/80 p-4 shadow-xs backdrop-blur">
                 <Metric>
                   <MetricLabel>Themes shipped</MetricLabel>
                   <MetricValue>12,480</MetricValue>

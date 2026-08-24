@@ -21,7 +21,7 @@ export function ComponentVariantsGallery({
 }) {
   if (examples.length === 0) {
     return (
-      <p className="rounded-xl border border-dashed border-border bg-surface-inset/40 px-6 py-10 text-center text-sm text-fg-tertiary">
+      <p className="rounded-xl border border-dashed border-border bg-surface-inset px-6 py-10 text-center text-sm text-fg-tertiary">
         No gallery states for {displayName} yet.
       </p>
     );
@@ -32,7 +32,7 @@ export function ComponentVariantsGallery({
       {examples.map((example) => (
         <figure
           key={example.id}
-          className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface-raised transition-colors hover:border-border-strong"
+          className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface-raised transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] hover:border-border-strong"
         >
           <div className="relative flex min-h-[15rem] flex-1 items-center justify-center overflow-auto border-b border-border/60 bg-surface-inset p-8">
             <div
@@ -44,9 +44,7 @@ export function ComponentVariantsGallery({
             </div>
           </div>
           <figcaption className="p-5">
-            <h3 className="font-display text-base font-semibold tracking-tight text-fg">
-              {example.title}
-            </h3>
+            <h3 className="font-display text-base font-medium text-fg">{example.title}</h3>
             {example.description ? (
               <p className="mt-1 line-clamp-2 text-sm text-fg-tertiary">{example.description}</p>
             ) : null}

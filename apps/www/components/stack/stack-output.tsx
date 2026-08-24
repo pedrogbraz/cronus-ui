@@ -55,7 +55,7 @@ type TabValue = (typeof TABS)[number]["value"];
  * Reduced motion pins both starting values for an instant swap.
  */
 const TAB_PANEL_ENTER =
-  "transition-[opacity,translate] duration-300 ease-[var(--ease-out-quart)] starting:opacity-0 starting:translate-y-1 motion-reduce:transition-none motion-reduce:starting:opacity-100 motion-reduce:starting:translate-y-0";
+  "transition-[opacity,translate] duration-300 ease-[cubic-bezier(.22,1,.36,1)] starting:opacity-0 starting:translate-y-1 motion-reduce:transition-none motion-reduce:starting:opacity-100 motion-reduce:starting:translate-y-0";
 
 /** Shared chrome for a secondary tab: a description row + a copy action. */
 function CopyRow({
@@ -68,7 +68,7 @@ function CopyRow({
   copyLabel: string;
 }) {
   return (
-    <div className="flex items-center justify-between gap-3 rounded-lg border border-border bg-surface-raised px-3 py-2">
+    <div className="flex items-center justify-between gap-3 border-t border-border pt-3">
       <p className="min-w-0 text-sm text-fg-secondary">{description}</p>
       <CopyButton
         value={value}
@@ -120,13 +120,10 @@ export function StackOutput({
   };
 
   return (
-    // A single restrained accent border marks the finished artifact as the payoff
-    // — a quiet primary tint, no gradient and no glow, so it stays clean and modern.
+    // The finished artifact is framed by the same hairline every other surface
+    // uses — the payoff reads through hierarchy and weight, not through a tint.
     <div
-      className={cn(
-        "overflow-hidden rounded-2xl border border-primary/25 bg-surface-base",
-        className,
-      )}
+      className={cn("overflow-hidden rounded-2xl border border-border bg-surface-base", className)}
       data-slot="stack-output-frame"
     >
       <section
@@ -137,14 +134,15 @@ export function StackOutput({
       >
         <header className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2.5">
-            {/* A soft "ready" status dot — a calm accent, not a spinner. */}
+            {/* A quiet "ready" tile — the same hairline chip the summary rail
+                uses for its heading, so the two panels read as one pair. */}
             <span
               aria-hidden="true"
-              className="grid size-7 place-items-center rounded-lg bg-primary/10 text-primary ring-1 ring-inset ring-primary/20"
+              className="grid size-7 place-items-center rounded-lg border border-border bg-surface-overlay text-fg-secondary"
             >
               <Check className="size-4" />
             </span>
-            <h2 id={titleId} className="text-base font-semibold text-fg">
+            <h2 id={titleId} className="text-base font-medium text-fg">
               Your stack is ready
             </h2>
           </div>
@@ -156,17 +154,16 @@ export function StackOutput({
                 (flex-1), so the thumb's position is a pure transform of the
                 active index — one trigger width (its own 100%) + the 0.25rem
                 list gap per step. Width = (100% − 0.5rem padding − 0.5rem gaps)
-                ÷ 3. Transform-only, so switching tabs never shifts layout; the
-                thumb also warms to the primary wash on the signature Kickoff
-                tab. Decorative — Radix keeps the real active state on the
-                triggers, which paint above it (they are positioned). */}
+                ÷ 3. Transform-only, so switching tabs never shifts layout, and
+                the thumb carries one neutral surface for every tab. Decorative —
+                Radix keeps the real active state on the triggers, which paint
+                above it (they are positioned). */}
             <span
               aria-hidden="true"
               data-slot="tabs-thumb"
               className={cn(
-                "pointer-events-none absolute inset-y-1 left-1 w-[calc((100%-1rem)/3)] rounded-md shadow-xs",
-                "transition-[transform,background-color] duration-300 ease-[var(--ease-out-quart)] motion-reduce:transition-none",
-                tab === "kickoff" ? "bg-primary/10" : "bg-surface-floating",
+                "pointer-events-none absolute inset-y-1 left-1 w-[calc((100%-1rem)/3)] rounded-md bg-surface-floating shadow-xs",
+                "transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
               )}
               style={{ transform: `translateX(calc(${activeIndex} * (100% + 0.25rem)))` }}
             />
@@ -174,16 +171,10 @@ export function StackOutput({
               <TabsTrigger
                 key={value}
                 value={value}
-                className={cn(
-                  // The thumb below carries the active surface, so the trigger
-                  // itself stays transparent (relative → it paints above the
-                  // thumb) and only its text color changes.
-                  "relative min-w-0 flex-1 data-[state=active]:bg-transparent data-[state=active]:shadow-none",
-                  // The Kickoff Prompt is the signature artifact: when it is the
-                  // active tab its label takes the primary accent (AA-tuned
-                  // `-strong` so it clears contrast on the primary/10 tab thumb).
-                  value === "kickoff" && "data-[state=active]:text-primary-strong",
-                )}
+                // The thumb below carries the active surface, so the trigger
+                // itself stays transparent (relative → it paints above the
+                // thumb) and only its text color changes.
+                className="relative min-w-0 flex-1 data-[state=active]:bg-transparent data-[state=active]:shadow-none"
               >
                 <Icon aria-hidden="true" className="shrink-0" />
                 <span className="truncate">{label}</span>
@@ -211,16 +202,12 @@ export function StackOutput({
             className={cn("flex min-w-0 flex-col gap-3 outline-none", TAB_PANEL_ENTER)}
             data-slot="stack-output-kickoff"
           >
-            {/* The hero call-to-action: a primary-tinted banner with the Sparkles
-                lifted into its own tile so the signature artifact reads loudest. */}
-            <div className="flex items-center justify-between gap-3 rounded-xl border border-primary/30 bg-primary/10 px-3 py-2.5">
+            {/* The call-to-action for the signature artifact: the same ruled row
+                the other two tabs use, so the panels stay flat — emphasis comes
+                from the lead sentence, not from a tint. */}
+            <div className="flex items-center justify-between gap-3 border-t border-border pt-3">
               <div className="flex min-w-0 items-center gap-2.5">
-                <span
-                  aria-hidden="true"
-                  className="grid size-8 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary ring-1 ring-inset ring-primary/25"
-                >
-                  <Sparkles className="size-4" />
-                </span>
+                <Sparkles className="size-4 shrink-0 text-fg-tertiary" aria-hidden="true" />
                 <p className="min-w-0 text-sm text-fg">
                   <span className="font-medium text-fg">Hand this to your coding agent.</span>{" "}
                   <span className="text-fg-secondary">
@@ -228,11 +215,11 @@ export function StackOutput({
                   </span>
                 </p>
               </div>
-              {/* `outline` keeps the copy action AA-legible on the tinted banner
-                  (never `primary`, which would fail contrast on this surface). */}
+              {/* Matches the copy action on the other two tabs — one control
+                  treatment across the whole output panel. */}
               <CopyButton
                 value={kickoff}
-                variant="outline"
+                variant="secondary"
                 size="icon-sm"
                 className="shrink-0"
                 copyLabel="Copy Kickoff prompt"

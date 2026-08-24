@@ -22,17 +22,15 @@ export function FrameworkGrid() {
             key={framework.slug}
             className="rounded-xl border border-border bg-surface-raised p-6"
           >
-            <div className="flex items-start gap-4">
-              <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-surface-overlay text-fg">
-                <Icon className="size-5" aria-hidden="true" />
-              </span>
+            <div className="flex items-start gap-3">
+              <Icon className="mt-1 size-5 shrink-0 text-fg-tertiary" aria-hidden="true" />
               <div>
-                <h3 className="font-display text-lg font-semibold text-fg">{framework.name}</h3>
+                <h3 className="font-display text-lg font-medium text-fg">{framework.name}</h3>
                 <p className="mt-2 text-sm leading-6 text-fg-secondary">{framework.description}</p>
               </div>
             </div>
 
-            <div className="mt-5 rounded-lg border border-border bg-surface-inset px-3 py-2">
+            <div className="mt-5">
               <InlineCode>{framework.command}</InlineCode>
             </div>
 

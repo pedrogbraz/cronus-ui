@@ -139,7 +139,7 @@ export interface OptionIconProps {
 /**
  * The rounded icon tile shown at the top-left of an {@link OptionCard}. The tile
  * itself stays a single consistent neutral surface in every state — only the icon
- * colour shifts (to `primary` when selected, warming on hover otherwise), so the
+ * colour shifts (to full `fg` when selected, warming on hover otherwise), so the
  * grid reads calm and uniform. Purely presentational; size/colour live here so
  * every card's tile is identical.
  *
@@ -153,8 +153,8 @@ export function OptionIcon({ name, selected }: OptionIconProps) {
       data-slot="option-icon"
       data-selected={selected || undefined}
       className={cn(
-        "grid size-9 shrink-0 place-items-center rounded-lg border border-border bg-surface-overlay transition-colors duration-150 ease-[var(--ease-out-quart)] [&_svg]:size-4.5 motion-reduce:transition-none",
-        selected ? "text-primary" : "text-fg-secondary group-hover/option:text-fg",
+        "grid size-9 shrink-0 place-items-center rounded-lg border border-border bg-surface-overlay transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] [&_svg]:size-4.5 motion-reduce:transition-none",
+        selected ? "text-fg" : "text-fg-secondary group-hover/option:text-fg",
       )}
     >
       <Icon aria-hidden="true" />

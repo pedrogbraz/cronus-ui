@@ -113,12 +113,10 @@ function ThemeCardView({ card }: { card: ThemeCard }) {
   const studioPath = `/create?c=${token}`;
 
   return (
-    <article className="flex flex-col gap-5 rounded-2xl border border-border bg-surface-raised p-6 shadow-xs">
+    <article className="flex flex-col gap-5 rounded-2xl border border-border bg-surface-raised p-6">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h3 className="font-display text-lg font-semibold tracking-tight text-fg">
-            {card.label}
-          </h3>
+          <h3 className="font-display text-lg font-medium text-fg">{card.label}</h3>
           <p className="mt-1 text-sm text-fg-secondary">{card.tagline}</p>
         </div>
         <span
@@ -166,7 +164,7 @@ function ThemeCardView({ card }: { card: ThemeCard }) {
         <CopyCommand command={`npx cooud-ui theme add "${absoluteUrl(studioPath)}"`} />
         <Link
           href={studioPath}
-          className="inline-flex w-fit items-center gap-1.5 rounded-md text-sm font-medium text-primary-strong outline-none transition-colors hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
+          className="inline-flex w-fit items-center gap-1.5 rounded-md text-sm font-medium text-primary-strong outline-none transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
         >
           Open in Create Studio
           <ArrowUpRight className="size-3.5" aria-hidden="true" />
@@ -202,7 +200,7 @@ export default function ThemesPage() {
         <SectionGlow />
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
           <Eyebrow>Themes</Eyebrow>
-          <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-fg sm:text-5xl">
+          <h1 className="mt-3 font-display text-4xl font-normal tracking-[-0.025em] text-fg sm:text-5xl sm:tracking-[-0.03em]">
             Every look, one command away
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-fg-secondary">
@@ -222,7 +220,7 @@ export default function ThemesPage() {
       >
         <h2
           id="built-in-themes"
-          className="font-display text-2xl font-semibold tracking-tight text-fg"
+          className="font-display text-2xl font-normal tracking-[-0.02em] text-fg"
         >
           The built-in presets
         </h2>
@@ -245,7 +243,7 @@ export default function ThemesPage() {
           <Eyebrow>Custom themes</Eyebrow>
           <h2
             id="custom-themes"
-            className="mt-3 font-display text-3xl font-semibold tracking-tight text-fg"
+            className="mt-3 font-display text-3xl font-normal tracking-[-0.025em] text-fg"
           >
             The Studio is the registry
           </h2>
@@ -259,17 +257,12 @@ export default function ThemesPage() {
             {SHARE_STEPS.map((step, index) => (
               <li
                 key={step.title}
-                className="flex flex-col gap-3 rounded-2xl border border-border bg-surface-raised p-6 shadow-xs"
+                className="flex flex-col gap-3 rounded-2xl border border-border bg-surface-raised p-6"
               >
-                <span
-                  aria-hidden="true"
-                  className="inline-flex size-8 items-center justify-center rounded-lg border border-border bg-surface-inset font-mono text-sm text-fg-secondary"
-                >
+                <span aria-hidden="true" className="font-mono text-sm text-fg-tertiary">
                   {index + 1}
                 </span>
-                <h3 className="font-display text-base font-semibold tracking-tight text-fg">
-                  {step.title}
-                </h3>
+                <h3 className="font-display text-base font-medium text-fg">{step.title}</h3>
                 <p className="text-sm leading-relaxed text-fg-secondary">{step.body}</p>
               </li>
             ))}
@@ -288,7 +281,7 @@ export default function ThemesPage() {
             </p>
             <Link
               href="/create"
-              className="inline-flex w-fit items-center gap-1.5 rounded-md text-sm font-medium text-primary-strong outline-none transition-colors hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex w-fit items-center gap-1.5 rounded-md text-sm font-medium text-primary-strong outline-none transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
             >
               Build your own in the Create Studio
               <ArrowUpRight className="size-3.5" aria-hidden="true" />

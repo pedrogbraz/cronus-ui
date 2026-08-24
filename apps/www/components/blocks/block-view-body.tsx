@@ -53,7 +53,7 @@ export function BlockViewBody({
           </nav>
 
           <Eyebrow className="mt-8">{meta.category}</Eyebrow>
-          <h1 className="mt-3 font-display text-5xl font-semibold tracking-tight text-fg">
+          <h1 className="mt-3 font-display text-5xl font-normal tracking-[-0.03em] text-fg">
             {selectedVariant.name}
           </h1>
           <p className="mt-4 text-lg text-fg-secondary">{selectedVariant.description}</p>
@@ -69,7 +69,7 @@ export function BlockViewBody({
 
         <div className="mx-auto max-w-3xl 2xl:max-w-xl">
           <section className="mt-14">
-            <h2 className="font-display text-xl font-semibold tracking-tight text-fg">
+            <h2 className="font-display text-xl font-medium tracking-[-0.02em] text-fg">
               Installation
             </h2>
             <p className="mt-2 text-sm text-fg-secondary">
@@ -77,7 +77,7 @@ export function BlockViewBody({
             </p>
 
             <div className="mt-6">
-              <h3 className="font-display text-base font-semibold tracking-tight text-fg">CLI</h3>
+              <h3 className="font-display text-base font-medium text-fg">CLI</h3>
               <p className="mt-1.5 text-sm text-fg-secondary">
                 Add <span className="font-medium text-fg">{meta.name}</span> to your app with its
                 source-owned dependencies.
@@ -88,9 +88,7 @@ export function BlockViewBody({
             </div>
 
             <div className="mt-8">
-              <h3 className="font-display text-base font-semibold tracking-tight text-fg">
-                Manual
-              </h3>
+              <h3 className="font-display text-base font-medium text-fg">Manual</h3>
               <p className="mt-1.5 text-sm text-fg-secondary">
                 Install the Cooud UI packages, then paste the block below.
               </p>
@@ -101,7 +99,7 @@ export function BlockViewBody({
           </section>
 
           <section className="mt-12 pb-8">
-            <h2 className="font-display text-xl font-semibold tracking-tight text-fg">Usage</h2>
+            <h2 className="font-display text-xl font-medium tracking-[-0.02em] text-fg">Usage</h2>
             <p className="mt-2 text-sm text-fg-secondary">
               Copy the source for{" "}
               <span className="font-medium text-fg">{selectedVariant.name}</span>. Every class is a
@@ -137,7 +135,7 @@ function CopyMarkdownButton({ markdown }: { markdown: string }) {
     <button
       type="button"
       onClick={copy}
-      className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface-raised px-3.5 py-2 text-sm text-fg-secondary outline-none transition-colors hover:border-border-strong hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
+      className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface-raised px-3.5 py-2 text-sm text-fg-secondary outline-none transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] hover:border-border-strong hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
     >
       {copied ? <Check className="size-4 text-success" /> : <Copy className="size-4" />}
       {copied ? "Copied" : "Copy as Markdown"}

@@ -60,7 +60,7 @@ export function CodeBlock({ code, language = "tsx", expandable = false }: CodeBl
 
   return (
     <div className="group relative overflow-hidden rounded-xl border border-border bg-surface-inset/80">
-      <div className="flex items-center justify-between border-b border-border/60 px-4 py-2">
+      <div className="flex items-center justify-between border-b border-border-soft px-4 py-2">
         <span className="font-mono text-[0.7rem] uppercase tracking-wider text-fg-tertiary">
           {language}
         </span>
@@ -68,7 +68,7 @@ export function CodeBlock({ code, language = "tsx", expandable = false }: CodeBl
           type="button"
           onClick={copy}
           aria-label="Copy code"
-          className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs text-fg-tertiary outline-none transition-colors hover:bg-surface-overlay hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
+          className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs text-fg-tertiary outline-none transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] hover:bg-surface-overlay hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
         >
           {copied ? <Check className="size-3.5 text-success" /> : <Copy className="size-3.5" />}
           {copied ? "Copied" : "Copy"}
@@ -113,7 +113,7 @@ export function CodeBlock({ code, language = "tsx", expandable = false }: CodeBl
             <button
               type="button"
               onClick={() => setExpanded(true)}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface-raised px-3 py-1.5 text-xs font-medium text-fg shadow-sm outline-none hover:border-border-strong focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface-raised px-3 py-1.5 text-xs font-medium text-fg shadow-sm outline-none transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] hover:border-border-strong focus-visible:ring-2 focus-visible:ring-ring"
             >
               Expand code <ChevronDown className="size-3.5" />
             </button>

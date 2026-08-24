@@ -100,34 +100,34 @@ export default function ThemingPage() {
         <PrimaryLink href="/create">Build a preset</PrimaryLink>
       </DocsHeader>
 
-      {/* Live Create Studio callout — a quick path to the interactive preset builder. */}
-      <div className="relative mt-8 overflow-hidden rounded-xl border border-border bg-surface-raised p-5 shadow-xs sm:p-6">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent"
-        />
-        <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-start gap-4">
-            <span className="flex size-11 shrink-0 items-center justify-center rounded-lg border border-primary/30 bg-primary/10 text-primary">
-              <Palette className="size-5" aria-hidden="true" />
-            </span>
-            <div>
-              <h2 className="font-display text-lg font-semibold text-fg">
-                Prefer to play? Try Create Studio
-              </h2>
-              <p className="mt-1 max-w-xl text-sm leading-6 text-fg-secondary">
-                Pick a preset, tune colors and type, and watch the preview re-theme in real time —
-                then copy the CSS overrides.
-              </p>
-            </div>
+      {/* Live Create Studio callout — a quick path to the interactive preset builder.
+          Flattened out of its tinted card: the header rule above already separates
+          it, so the row needs no box and no decorative gradient. The button is a
+          genuine primary action, which is where colour still earns its keep. */}
+      <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-start gap-4">
+          <span
+            aria-hidden="true"
+            className="flex size-11 shrink-0 items-center justify-center rounded-xl border border-border bg-surface-inset text-fg-tertiary"
+          >
+            <Palette className="size-5" aria-hidden="true" />
+          </span>
+          <div>
+            <h2 className="font-display text-lg font-medium text-fg">
+              Prefer to play? Try Create Studio
+            </h2>
+            <p className="mt-1 max-w-xl text-sm leading-6 text-fg-secondary">
+              Pick a preset, tune colors and type, and watch the preview re-theme in real time —
+              then copy the CSS overrides.
+            </p>
           </div>
-          <Button asChild className="shrink-0">
-            <Link href="/create">
-              Open Create Studio
-              <ArrowRight aria-hidden="true" />
-            </Link>
-          </Button>
         </div>
+        <Button asChild className="shrink-0">
+          <Link href="/create">
+            Open Create Studio
+            <ArrowRight aria-hidden="true" />
+          </Link>
+        </Button>
       </div>
 
       <DocsSection title="Theme layers">

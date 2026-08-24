@@ -26,7 +26,7 @@ const REVEAL_STAGGER = 0.05;
  * transition (never `transform`). Reduced motion pins both starting values.
  */
 const MOBILE_SWAP_ENTER =
-  "transition-[opacity,translate] duration-300 ease-[var(--ease-out-quart)] starting:opacity-0 starting:translate-y-1 motion-reduce:transition-none motion-reduce:starting:opacity-100 motion-reduce:starting:translate-y-0";
+  "transition-[opacity,translate] duration-300 ease-[cubic-bezier(.22,1,.36,1)] starting:opacity-0 starting:translate-y-1 motion-reduce:transition-none motion-reduce:starting:opacity-100 motion-reduce:starting:translate-y-0";
 
 /**
  * The Cooud Stack Builder — a Better-T-Stack-class configurator.
@@ -113,7 +113,7 @@ export function StackBuilder() {
         />
         <Reveal className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
           <div className="flex max-w-3xl flex-col gap-5">
-            <h1 className="text-balance font-display text-4xl font-semibold leading-[1.05] tracking-tight text-fg sm:text-5xl">
+            <h1 className="text-balance font-display text-4xl leading-[1.05] tracking-[-0.03em] text-fg sm:text-5xl">
               Stack Builder
             </h1>
 
@@ -152,7 +152,7 @@ export function StackBuilder() {
             {/* Sliding thumb */}
             <span
               aria-hidden="true"
-              className="pointer-events-none absolute inset-y-1 left-1 w-[calc(50%-0.25rem)] rounded-lg border border-border bg-surface-overlay shadow-xs transition-transform duration-300 ease-[var(--ease-out-quart)] motion-reduce:transition-none"
+              className="pointer-events-none absolute inset-y-1 left-1 w-[calc(50%-0.25rem)] rounded-lg border border-border bg-surface-overlay shadow-xs transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none"
               style={{
                 transform: mobileView === "output" ? "translateX(100%)" : "translateX(0)",
               }}
@@ -162,7 +162,7 @@ export function StackBuilder() {
               aria-pressed={mobileView === "configure"}
               onClick={() => setMobileView("configure")}
               className={cn(
-                "relative z-10 inline-flex h-9 items-center justify-center gap-2 rounded-lg text-sm font-medium outline-none transition-colors duration-200",
+                "relative z-10 inline-flex h-9 items-center justify-center gap-2 rounded-lg text-sm font-medium outline-none transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
                 "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-raised",
                 mobileView === "configure" ? "text-fg" : "text-fg-tertiary hover:text-fg-secondary",
               )}
@@ -175,7 +175,7 @@ export function StackBuilder() {
               aria-pressed={mobileView === "output"}
               onClick={() => setMobileView("output")}
               className={cn(
-                "relative z-10 inline-flex h-9 items-center justify-center gap-2 rounded-lg text-sm font-medium outline-none transition-colors duration-200",
+                "relative z-10 inline-flex h-9 items-center justify-center gap-2 rounded-lg text-sm font-medium outline-none transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
                 "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-raised",
                 mobileView === "output" ? "text-fg" : "text-fg-tertiary hover:text-fg-secondary",
               )}
@@ -232,7 +232,7 @@ export function StackBuilder() {
                   <section aria-label={group} className="flex flex-col gap-5">
                     {/* Section header — a quiet uppercase label + a hairline. */}
                     <div className="flex items-center gap-3">
-                      <h2 className="text-xs font-semibold uppercase tracking-wider text-fg-tertiary">
+                      <h2 className="text-xs font-medium uppercase tracking-wider text-fg-tertiary">
                         {group}
                       </h2>
                       <span aria-hidden="true" className="h-px flex-1 bg-border/60" />
@@ -310,7 +310,7 @@ export function StackBuilder() {
               data-slot="rail-scroll-shadow"
               className={cn(
                 "pointer-events-none absolute inset-x-0 top-0 z-10 hidden h-10 bg-gradient-to-b from-surface-base to-transparent lg:block",
-                "opacity-0 transition-opacity duration-200 peer-data-[scrolled]/rail:opacity-100 motion-reduce:transition-none",
+                "opacity-0 transition-opacity duration-200 ease-[cubic-bezier(.22,1,.36,1)] peer-data-[scrolled]/rail:opacity-100 motion-reduce:transition-none",
               )}
             />
           </aside>

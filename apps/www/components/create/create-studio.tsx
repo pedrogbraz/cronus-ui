@@ -155,7 +155,7 @@ const defaultLocks: Record<LockKey, boolean> = {
  * and the transition is disabled.
  */
 const ENTER =
-  "transition-[opacity,translate] duration-500 ease-[var(--ease-out-quart)] starting:translate-y-2 starting:opacity-0 motion-reduce:transition-none motion-reduce:starting:translate-y-0 motion-reduce:starting:opacity-100";
+  "transition-[opacity,translate] duration-300 ease-[cubic-bezier(.22,1,.36,1)] starting:translate-y-2 starting:opacity-0 motion-reduce:transition-none motion-reduce:starting:translate-y-0 motion-reduce:starting:opacity-100";
 
 /**
  * The studio re-themes the live tokens on every control change; the chrome
@@ -163,7 +163,7 @@ const ENTER =
  * of snapping. Colors only — hover lifts/shadows keep their own transitions.
  */
 const LIQUID =
-  "transition-colors duration-300 ease-[var(--ease-out-quart)] motion-reduce:transition-none";
+  "transition-colors duration-300 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none";
 
 /**
  * Stable positional keys for the 5-step chart ramps so a palette change
@@ -179,7 +179,7 @@ const RAMP_STEPS = ["ramp-1", "ramp-2", "ramp-3", "ramp-4", "ramp-5"] as const;
  * Reduced-motion safe (starting state collapses, transition disabled).
  */
 const SWATCH_POP =
-  "transition-[opacity,scale] duration-200 ease-[var(--ease-out-quart)] starting:scale-50 starting:opacity-0 motion-reduce:transition-none motion-reduce:starting:scale-100 motion-reduce:starting:opacity-100";
+  "transition-[opacity,scale] duration-200 ease-[cubic-bezier(.22,1,.36,1)] starting:scale-50 starting:opacity-0 motion-reduce:transition-none motion-reduce:starting:scale-100 motion-reduce:starting:opacity-100";
 
 export function CreateStudio() {
   const { mode: ambientMode, overrides: ambientOverrides, setMode, setOverrides } = useTheme();
@@ -425,25 +425,19 @@ export function CreateStudio() {
             <div className="mx-auto flex max-w-[100rem] flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
               <div className="flex min-w-0 items-center gap-3">
                 <span
-                  className="grid size-9 shrink-0 place-items-center rounded-xl ring-1 ring-inset ring-border-soft transition-[background-color,box-shadow] duration-300 ease-[var(--ease-out-quart)]"
-                  style={{
-                    backgroundColor: selectedBrand.swatch,
-                    boxShadow: `0 0 0 4px color-mix(in oklch, ${selectedBrand.swatch} 16%, transparent)`,
-                  }}
+                  className="grid size-9 shrink-0 place-items-center rounded-xl ring-1 ring-inset ring-border-soft transition-[background-color] duration-300 ease-[cubic-bezier(.22,1,.36,1)]"
+                  style={{ backgroundColor: selectedBrand.swatch }}
                   aria-hidden="true"
                 />
                 <div className="min-w-0">
                   {/* Rail-scale echo of the site-wide Eyebrow, completing the
                       eyebrow → title → lede rhythm the rest of the site uses. */}
                   <p className="mb-0.5 hidden items-center gap-2 text-[0.6875rem] font-medium uppercase tracking-widest text-fg-tertiary sm:flex">
-                    <span
-                      aria-hidden="true"
-                      className="size-1.5 rounded-full bg-gradient-primary shadow-glow"
-                    />
+                    <span aria-hidden="true" className="size-1.5 rounded-full bg-fg-tertiary" />
                     Create studio
                   </p>
                   <div className="flex flex-wrap items-center gap-2">
-                    <h1 className="truncate font-display text-xl font-semibold tracking-tight text-fg sm:text-2xl">
+                    <h1 className="truncate font-display text-xl font-medium tracking-[-0.02em] text-fg sm:text-2xl">
                       Create a design system
                     </h1>
                     <Badge variant="secondary">{config.style}</Badge>
@@ -654,28 +648,23 @@ function CreateControls({
       <div
         className={cn(
           "relative isolate overflow-hidden rounded-2xl border border-border-soft bg-surface-raised px-3.5 py-3 shadow-sm",
-          "transition-[border-color,box-shadow] duration-300 ease-[var(--ease-out-quart)]",
+          "transition-[border-color,box-shadow] duration-300 ease-[cubic-bezier(.22,1,.36,1)]",
         )}
       >
         <span
-          className="pointer-events-none absolute -right-10 -top-12 -z-10 size-32 rounded-full opacity-25 blur-2xl transition-[opacity,background-color] duration-500 ease-[var(--ease-out-quart)] motion-reduce:transition-none"
+          className="pointer-events-none absolute -right-10 -top-12 -z-10 size-32 rounded-full opacity-25 blur-2xl transition-[opacity,background-color] duration-300 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none"
           style={{ backgroundColor: selectedBrand.swatch }}
           aria-hidden="true"
         />
         <div className="flex items-center justify-between gap-3">
           <div className="flex min-w-0 items-center gap-3">
             <span
-              className="grid size-10 shrink-0 place-items-center rounded-xl ring-1 ring-inset ring-border-soft transition-[box-shadow,background-color] duration-300 ease-[var(--ease-out-quart)]"
-              style={{
-                backgroundColor: selectedBrand.swatch,
-                boxShadow: `0 0 0 4px color-mix(in oklch, ${selectedBrand.swatch} 18%, transparent)`,
-              }}
+              className="grid size-10 shrink-0 place-items-center rounded-xl ring-1 ring-inset ring-border-soft transition-[background-color] duration-300 ease-[cubic-bezier(.22,1,.36,1)]"
+              style={{ backgroundColor: selectedBrand.swatch }}
               aria-hidden="true"
             />
             <div className="min-w-0">
-              <p className="truncate font-display text-sm font-semibold tracking-tight text-fg">
-                {config.style}
-              </p>
+              <p className="truncate font-display text-sm font-semibold text-fg">{config.style}</p>
               <p className="truncate text-xs text-fg-tertiary">
                 <span className="capitalize">{baseName}</span> · design system
               </p>
@@ -996,7 +985,7 @@ function IconAction({
           onClick={onClick}
           aria-label={label}
           aria-pressed={active}
-          className={active ? "bg-primary/12 text-primary hover:bg-primary/15" : undefined}
+          className={active ? "bg-surface-overlay text-fg hover:bg-surface-overlay" : undefined}
         >
           <Icon aria-hidden="true" />
         </Button>
@@ -1008,12 +997,12 @@ function IconAction({
 
 /** A thin section caption — hushed and uppercase — used to give the control
  *  stack rhythm (Color / Typography / Icons / Shape) without cards. Mirrors
- *  the site-wide `Eyebrow` (gradient dot + widest tracking) at rail scale so
+ *  the site-wide `Eyebrow` (hushed dot + widest tracking) at rail scale so
  *  the studio reads in the same eyebrow → title → lede register as the home. */
 function SectionLabel({ children }: { children: ReactNode }) {
   return (
     <p className="flex items-center gap-2 px-0.5 text-[0.6875rem] font-medium uppercase tracking-widest text-fg-tertiary">
-      <span aria-hidden="true" className="size-1.5 rounded-full bg-gradient-primary shadow-glow" />
+      <span aria-hidden="true" className="size-1.5 rounded-full bg-fg-tertiary" />
       {children}
     </p>
   );
@@ -1054,7 +1043,7 @@ function ControlRow({
             {title}
           </Label>
           {hint ? (
-            <span className="hidden min-w-0 truncate text-xs text-fg-secondary opacity-0 transition-opacity duration-200 ease-[var(--ease-out-quart)] group-focus-within/row:opacity-100 group-hover/row:opacity-100 sm:block">
+            <span className="hidden min-w-0 truncate text-xs text-fg-secondary opacity-0 transition-opacity duration-200 ease-[cubic-bezier(.22,1,.36,1)] group-focus-within/row:opacity-100 group-hover/row:opacity-100 sm:block">
               {hint}
             </span>
           ) : null}
@@ -1084,15 +1073,15 @@ function LockToggle({
       onClick={onClick}
       className={cn(
         "grid size-7 place-items-center rounded-md outline-none",
-        "transition-[color,background-color,opacity,scale] duration-200 ease-[var(--ease-out-quart)] active:scale-90 motion-reduce:active:scale-100",
+        "transition-[color,background-color,opacity,scale] duration-200 ease-[cubic-bezier(.22,1,.36,1)] active:scale-90 motion-reduce:active:scale-100",
         "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-inset",
         active
-          ? "bg-primary/12 text-primary"
+          ? "bg-surface-overlay text-fg"
           : "text-fg-secondary hover:bg-surface-overlay hover:text-fg",
       )}
     >
       <Icon
-        className="size-3.5 transition-transform duration-200 ease-[var(--ease-out-quart)]"
+        className="size-3.5 transition-transform duration-200 ease-[cubic-bezier(.22,1,.36,1)]"
         aria-hidden="true"
       />
     </button>
@@ -1291,19 +1280,13 @@ function ComponentSampler({ config }: { config: DesignConfig }) {
             <Input id="sampler-name" defaultValue="Cooud Growth" />
           </div>
           <div
-            className={cn(
-              "flex items-center justify-between rounded-lg border border-border bg-surface-inset px-3 py-2.5",
-              LIQUID,
-            )}
+            className={cn("flex items-center justify-between border-t border-border pt-3", LIQUID)}
           >
             <Label htmlFor="sampler-switch">Auto-save</Label>
             <Switch id="sampler-switch" defaultChecked />
           </div>
           <div
-            className={cn(
-              "flex items-center gap-2 rounded-lg border border-border bg-surface-inset px-3 py-2.5 text-sm",
-              LIQUID,
-            )}
+            className={cn("flex items-center gap-2 border-t border-border pt-3 text-sm", LIQUID)}
           >
             <Checkbox id="sampler-emails" defaultChecked />
             <Label htmlFor="sampler-emails" className="text-sm">
@@ -1390,19 +1373,13 @@ function ComponentSampler({ config }: { config: DesignConfig }) {
               <TabsTrigger value="preview">Preview</TabsTrigger>
               <TabsTrigger value="tokens">Tokens</TabsTrigger>
             </TabsList>
-            <TabsContent
-              value="preview"
-              className={cn("rounded-lg border border-border bg-surface-inset p-3", LIQUID)}
-            >
-              <p className="font-display text-2xl font-semibold text-fg">Aa</p>
+            <TabsContent value="preview" className={cn("border-t border-border pt-3", LIQUID)}>
+              <p className="font-display text-2xl font-medium tracking-[-0.02em] text-fg">Aa</p>
               <p className="text-sm text-fg-secondary">
                 {findFontChoice(config.headingFont).name} with {config.radius}px corners.
               </p>
             </TabsContent>
-            <TabsContent
-              value="tokens"
-              className={cn("rounded-lg border border-border bg-surface-inset p-3", LIQUID)}
-            >
+            <TabsContent value="tokens" className={cn("border-t border-border pt-3", LIQUID)}>
               <div className="flex gap-2">
                 {RAMP_STEPS.slice(0, findChartPalette(config.chart).colors.length).map(
                   (step, index) => (
@@ -1439,7 +1416,7 @@ function RailCard({ className, children }: { className?: string; children: React
     <section
       className={cn(
         "rounded-2xl border border-border-soft bg-surface-raised p-4 shadow-sm",
-        "transition-[background-color,border-color,color,box-shadow] duration-300 ease-[var(--ease-out-quart)] motion-reduce:transition-none",
+        "transition-[background-color,border-color,color,box-shadow] duration-300 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
         className,
       )}
     >
@@ -1460,7 +1437,7 @@ function RailCardHeader({
   return (
     <div className="flex items-start justify-between gap-3">
       <div className="min-w-0">
-        <h2 className="font-display text-sm font-semibold tracking-tight text-fg">{title}</h2>
+        <h2 className="font-display text-sm font-semibold text-fg">{title}</h2>
         <p className="mt-0.5 truncate text-xs text-fg-tertiary">{description}</p>
       </div>
       {action ? <div className="shrink-0">{action}</div> : null}
@@ -1484,8 +1461,8 @@ function IconLibraryShowcase({ iconLibrary }: { iconLibrary: IconLibraryId }) {
             title={name}
             className={cn(
               "grid aspect-square place-items-center rounded-xl border border-border-soft bg-surface-inset text-fg-secondary",
-              "transition-[color,border-color,background-color,box-shadow] duration-[250ms] ease-[var(--ease-out-quart)]",
-              "hover:border-border hover:bg-surface-overlay hover:text-primary hover:shadow-sm",
+              "transition-[color,border-color,background-color,box-shadow] duration-[250ms] ease-[cubic-bezier(.22,1,.36,1)]",
+              "hover:border-border hover:bg-surface-overlay hover:text-fg hover:shadow-sm",
             )}
           >
             <LibraryIcon library={iconLibrary} name={name} className="size-5" />
@@ -1516,17 +1493,14 @@ function TokenSummary({ config }: { config: DesignConfig }) {
         description="Saved as one reusable preset."
         action={<Badge variant="primary">{config.mode}</Badge>}
       />
-      <dl className="mt-4 divide-y divide-border-soft overflow-hidden rounded-xl border border-border-soft">
+      <dl className="mt-4 divide-y divide-border border-t border-border">
         {summaryRows.map((row) => (
           <SummaryRow key={row.label} label={row.label} value={row.value} />
         ))}
       </dl>
       <div className="mt-3 flex items-center justify-between gap-2">
         <p className="flex items-center gap-2 text-[0.6875rem] font-medium uppercase tracking-widest text-fg-tertiary">
-          <span
-            aria-hidden="true"
-            className="size-1.5 rounded-full bg-gradient-primary shadow-glow"
-          />
+          <span aria-hidden="true" className="size-1.5 rounded-full bg-fg-tertiary" />
           Chart ramp
         </p>
         <Badge variant="outline">{findChartPalette(config.chart).name}</Badge>
@@ -1547,12 +1521,7 @@ function TokenSummary({ config }: { config: DesignConfig }) {
 
 function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
-    <div
-      className={cn(
-        "flex items-center justify-between gap-3 bg-surface-inset/40 px-3 py-2.5 text-sm",
-        LIQUID,
-      )}
-    >
+    <div className={cn("flex items-center justify-between gap-3 py-2.5 text-sm", LIQUID)}>
       <dt className="text-fg-tertiary">{label}</dt>
       <dd className="truncate font-medium capitalize text-fg">{value}</dd>
     </div>
@@ -1630,7 +1599,7 @@ function CodeDialog({
       <DialogContent className="max-h-[88vh] max-w-4xl overflow-hidden p-0">
         <DialogHeader className="border-border border-b p-6 pr-12">
           <DialogTitle className="flex items-center gap-2">
-            <Code2 className="size-5 text-primary" aria-hidden="true" />
+            <Code2 className="size-5 text-fg-tertiary" aria-hidden="true" />
             Get code
           </DialogTitle>
           <DialogDescription>
@@ -1668,7 +1637,7 @@ function CodeDialog({
                     <TabsTrigger
                       key={pm}
                       value={pm}
-                      className="rounded-lg border border-transparent px-3 py-1.5 text-sm font-medium ring-offset-surface-base data-[state=active]:border-primary data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                      className="rounded-lg border border-transparent px-3 py-1.5 text-sm font-medium ring-offset-surface-base data-[state=active]:border-border-strong data-[state=active]:bg-surface-raised data-[state=active]:text-fg"
                     >
                       {pm}
                     </TabsTrigger>
