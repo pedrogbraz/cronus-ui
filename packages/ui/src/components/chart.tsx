@@ -23,6 +23,10 @@ type ChartContextProps = {
 
 const ChartContext = createContext<ChartContextProps | null>(null);
 
+// Pinned locale: a bare `toLocaleString()` would format by ambient locale and
+// render differently on the server than in the browser.
+const TOOLTIP_NUMBER = new Intl.NumberFormat("en-US");
+
 function useChart() {
   const context = useContext(ChartContext);
   if (!context) {
@@ -253,7 +257,9 @@ const ChartTooltipContent = forwardRef<HTMLDivElement, ChartTooltipContentProps>
                   </div>
                   {item.value != null && (
                     <span className="font-mono font-medium tabular-nums text-fg">
-                      {typeof item.value === "number" ? item.value.toLocaleString() : item.value}
+                      {typeof item.value === "number"
+                        ? TOOLTIP_NUMBER.format(item.value)
+                        : item.value}
                     </span>
                   )}
                 </div>
