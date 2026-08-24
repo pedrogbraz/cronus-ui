@@ -117,7 +117,7 @@ export const Lightbox = forwardRef<HTMLDivElement, LightboxProps>(
               <DialogClose
                 data-slot="lightbox-close"
                 aria-label="Close"
-                className="rounded-md p-1.5 text-white/70 outline-none transition-colors hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-ring"
+                className="rounded-md p-1.5 text-white/70 outline-none transition-colors hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
               >
                 <X className="size-5" />
               </DialogClose>
@@ -129,7 +129,7 @@ export const Lightbox = forwardRef<HTMLDivElement, LightboxProps>(
                 aria-label="Previous image"
                 onClick={goPrev}
                 disabled={atStart}
-                className="absolute left-2 z-10 rounded-full bg-black/40 p-2 text-white/80 outline-none transition-colors hover:bg-black/60 hover:text-white focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-40"
+                className="absolute left-2 z-10 rounded-full bg-black/40 p-2 text-white/80 outline-none transition-colors hover:bg-black/60 hover:text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset disabled:pointer-events-none disabled:opacity-40"
               >
                 <ChevronLeft className="size-6" />
               </button>
@@ -148,7 +148,7 @@ export const Lightbox = forwardRef<HTMLDivElement, LightboxProps>(
                 aria-label="Next image"
                 onClick={goNext}
                 disabled={atEnd}
-                className="absolute right-2 z-10 rounded-full bg-black/40 p-2 text-white/80 outline-none transition-colors hover:bg-black/60 hover:text-white focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-40"
+                className="absolute right-2 z-10 rounded-full bg-black/40 p-2 text-white/80 outline-none transition-colors hover:bg-black/60 hover:text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset disabled:pointer-events-none disabled:opacity-40"
               >
                 <ChevronRight className="size-6" />
               </button>
@@ -177,7 +177,15 @@ export const Lightbox = forwardRef<HTMLDivElement, LightboxProps>(
                     aria-current={i === clampedIndex}
                     onClick={() => setIndex(i)}
                     className={cn(
-                      "size-14 shrink-0 overflow-hidden rounded-md outline-none transition-opacity focus-visible:ring-2 focus-visible:ring-ring",
+                      // contract-ok: anel externo com literal, não ring-inset nem
+                      // ring-offset-surface-*. O inset é um box-shadow interno e
+                      // a <img> abaixo o cobre por inteiro — o foco sumiria. E o
+                      // fundo aqui é o scrim bg-black/95 que este componente
+                      // define, não um token de superfície, então branco sobre
+                      // preto é o par correto (ver docs/adr/0001). O offset
+                      // separa o anel da miniatura; a seleção usa anel rente,
+                      // então os dois estados continuam distinguíveis.
+                      "size-14 shrink-0 overflow-hidden rounded-md outline-none transition-opacity focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black",
                       i === clampedIndex ? "ring-2 ring-white" : "opacity-60 hover:opacity-100",
                     )}
                   >

@@ -423,7 +423,7 @@ function JsonBranch({
             className={cn(
               "mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-md text-fg-tertiary outline-none",
               "transition-[background,color] duration-150 ease-[var(--ease-out-quart)] motion-reduce:transition-none",
-              "hover:bg-surface-overlay hover:text-fg focus-visible:ring-2 focus-visible:ring-ring",
+              "hover:bg-surface-overlay hover:text-fg focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
             )}
           >
             <ChevronRight

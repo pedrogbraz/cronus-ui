@@ -330,7 +330,7 @@ export const Chip = forwardRef<HTMLElement, ChipProps>(
               disabled={disabled}
               className={cn(
                 REMOVE_AFFORDANCE_CLASSES,
-                "outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
               )}
               onClick={handleRemoveClick}
             >

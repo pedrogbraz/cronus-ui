@@ -241,7 +241,7 @@ export const MultiSelect = forwardRef<HTMLDivElement, MultiSelectProps>(
                   type="button"
                   aria-label="Clear all"
                   data-slot="multi-select-clear"
-                  className="flex size-5 items-center justify-center rounded-sm text-fg-tertiary outline-none transition-colors hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
+                  className="flex size-5 items-center justify-center rounded-sm text-fg-tertiary outline-none transition-colors hover:text-fg focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
                   onPointerDown={(event) => {
                     // Prevent the popover trigger from toggling on click.
                     event.preventDefault();
@@ -332,7 +332,7 @@ function Chip({ label, disabled, onRemove }: ChipProps) {
           type="button"
           aria-label={`Remove ${typeof label === "string" ? label : "item"}`}
           data-slot="multi-select-chip-remove"
-          className="flex size-3.5 items-center justify-center rounded-sm text-fg-tertiary outline-none transition-colors hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
+          className="flex size-3.5 items-center justify-center rounded-sm text-fg-tertiary outline-none transition-colors hover:text-fg focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
           onPointerDown={(event) => {
             // Stop the trigger from opening the popover.
             event.preventDefault();

@@ -185,7 +185,7 @@ export const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
                 tabIndex={-1}
                 aria-label={`Remove ${tag}`}
                 data-slot="tags-input-remove"
-                className="flex size-3.5 items-center justify-center rounded-sm text-fg-tertiary outline-none transition-colors hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
+                className="flex size-3.5 items-center justify-center rounded-sm text-fg-tertiary outline-none transition-colors hover:text-fg focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
                 onClick={() => removeTag(index)}
               >
                 <X className="size-3" aria-hidden="true" />

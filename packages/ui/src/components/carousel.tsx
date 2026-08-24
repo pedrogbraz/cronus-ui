@@ -395,7 +395,7 @@ export const CarouselContent = forwardRef<HTMLDivElement, CarouselContentProps>(
         // biome-ignore lint/a11y/noNoninteractiveTabindex: the slides viewport is intentionally focusable so keyboard users can scroll/arrow through the slides.
         tabIndex={0}
         className={cn(
-          "-ml-4 flex overflow-x-auto scroll-smooth snap-x snap-mandatory outline-none focus-visible:ring-2 focus-visible:ring-ring",
+          "-ml-4 flex overflow-x-auto scroll-smooth snap-x snap-mandatory outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base",
           // Hide the scrollbar across engines; drag + touch still work.
           "[scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
           className,
@@ -536,8 +536,8 @@ export const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
               aria-current={active || undefined}
               onClick={() => scrollTo(index)}
               className={cn(
-                "size-2 rounded-full outline-none transition-colors",
-                "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base",
+                "size-2 rounded-full transition-colors",
+                "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base",
                 active ? "bg-fg" : "bg-border hover:bg-fg-muted",
               )}
             />

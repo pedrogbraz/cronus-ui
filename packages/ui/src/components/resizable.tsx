@@ -61,13 +61,13 @@ export function ResizableHandle({ withHandle = false, className, ...props }: Res
       data-slot="resizable-handle"
       className={cn(
         // Base divider: a 1px line that owns a small hit area via flex centering.
-        "relative flex w-px items-center justify-center bg-border outline-none",
+        "relative flex w-px items-center justify-center bg-border",
         "transition-colors duration-150 ease-[var(--ease-out-quart)]",
         // The actual interactive band straddles the line so it is easy to grab.
         "after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2",
         // Highlight on hover + keyboard focus with the focus-ring colour.
         "hover:bg-ring focus-visible:bg-ring",
-        "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-surface-base",
+        "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
         "data-[resize-handle-state=drag]:bg-ring",
         // Vertical groups: rotate the geometry (full width, 1px tall, grip turned).
         "data-[panel-group-direction=vertical]:h-px data-[panel-group-direction=vertical]:w-full",

@@ -32,7 +32,7 @@ export const AccordionTrigger = forwardRef<
         ref={ref}
         data-slot="accordion-trigger"
         className={cn(
-          "flex flex-1 items-center justify-between gap-4 py-4 text-sm font-medium text-fg outline-none transition-all hover:underline focus-visible:ring-2 focus-visible:ring-ring rounded-md disabled:opacity-50 [&[data-state=open]>svg]:rotate-180",
+          "flex flex-1 items-center justify-between gap-4 py-4 text-sm font-medium text-fg outline-none transition-all hover:underline focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset rounded-md disabled:opacity-50 [&[data-state=open]>svg]:rotate-180",
           className,
         )}
         {...props}

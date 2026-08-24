@@ -260,7 +260,7 @@ export const Scheduler = forwardRef<HTMLDivElement, SchedulerProps>(
                               onEventClick?.(event);
                             }}
                             className={cn(
-                              "truncate rounded px-1.5 py-0.5 text-left text-xs font-medium outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring",
+                              "truncate rounded px-1.5 py-0.5 text-left text-xs font-medium outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
                               EVENT_CHIP_CLASSES[event.color ?? "primary"],
                             )}
                           >

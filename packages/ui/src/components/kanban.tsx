@@ -181,8 +181,8 @@ function KanbanCard({ item, render }: KanbanCardProps) {
         type="button"
         data-slot="kanban-drag-handle"
         className={cn(
-          "mt-0.5 shrink-0 cursor-grab touch-none rounded-md p-0.5 text-fg-muted outline-none",
-          "hover:text-fg focus-visible:ring-2 focus-visible:ring-ring active:cursor-grabbing [&_svg]:size-4",
+          "mt-0.5 shrink-0 cursor-grab touch-none rounded-md p-0.5 text-fg-muted",
+          "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-raised active:cursor-grabbing hover:text-fg [&_svg]:size-4",
         )}
         aria-label="Reordenar cartão"
         {...attributes}

@@ -201,8 +201,8 @@ export const MorphingPopoverTrigger = forwardRef<HTMLButtonElement, MorphingPopo
           open();
         }}
         className={cn(
-          "inline-flex h-9 items-center justify-center gap-2 rounded-lg border border-border bg-surface-floating px-3 text-sm font-medium text-fg shadow-sm outline-none transition-colors",
-          "hover:bg-surface-overlay focus-visible:ring-2 focus-visible:ring-ring",
+          "inline-flex h-9 items-center justify-center gap-2 rounded-lg border border-border bg-surface-floating px-3 text-sm font-medium text-fg shadow-sm transition-colors",
+          "hover:bg-surface-overlay outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base",
           isOpen && "pointer-events-none",
           className,
         )}
@@ -364,8 +364,8 @@ export const MorphingPopoverClose = forwardRef<HTMLButtonElement, MorphingPopove
           close();
         }}
         className={cn(
-          "inline-flex size-7 items-center justify-center rounded-md text-fg-tertiary outline-none transition-colors",
-          "hover:bg-surface-overlay hover:text-fg focus-visible:ring-2 focus-visible:ring-ring",
+          "inline-flex size-7 items-center justify-center rounded-md text-fg-tertiary transition-colors",
+          "hover:bg-surface-overlay hover:text-fg outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-floating",
           className,
         )}
         {...props}
@@ -442,8 +442,8 @@ export const MorphingPopoverButton = forwardRef<HTMLButtonElement, MorphingPopov
       type={type ?? "button"}
       data-slot="morphing-popover-button"
       className={cn(
-        "flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-fg outline-none transition-colors",
-        "hover:bg-surface-overlay focus-visible:bg-surface-overlay focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4",
+        "flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-fg transition-colors",
+        "hover:bg-surface-overlay outline-none focus-visible:bg-surface-overlay focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-floating disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4",
         className,
       )}
       {...props}

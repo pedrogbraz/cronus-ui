@@ -72,7 +72,7 @@ export const NotificationRow = forwardRef<HTMLButtonElement, NotificationRowProp
         data-unread={read ? undefined : ""}
         onClick={() => onSelect?.(id)}
         className={cn(
-          "flex w-full items-start gap-3 rounded-md px-2 py-2.5 text-left outline-none transition-colors hover:bg-surface-overlay focus-visible:bg-surface-overlay focus-visible:ring-2 focus-visible:ring-ring",
+          "flex w-full items-start gap-3 rounded-md px-2 py-2.5 text-left outline-none transition-colors hover:bg-surface-overlay focus-visible:bg-surface-overlay focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
           !read && "bg-surface-overlay/40",
           className,
         )}

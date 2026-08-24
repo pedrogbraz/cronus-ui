@@ -73,7 +73,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
             aria-pressed={visible}
             className={cn(
               "absolute inset-y-0 right-0 flex w-10 items-center justify-center rounded-r-lg text-fg-tertiary",
-              "transition-colors hover:text-fg outline-none focus-visible:ring-2 focus-visible:ring-ring",
+              "transition-colors hover:text-fg outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
               "disabled:opacity-50 disabled:pointer-events-none [&_svg]:size-4",
             )}
             disabled={props.disabled}

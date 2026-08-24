@@ -376,9 +376,9 @@ export const SegmentedControlItem = forwardRef<HTMLButtonElement, SegmentedContr
         }}
         onKeyDown={handleKeyDown}
         className={cn(
-          "relative inline-flex select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-md font-medium outline-none transition-colors",
+          "relative inline-flex select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-md font-medium transition-colors",
           "text-fg-secondary hover:text-fg",
-          "focus-visible:ring-2 focus-visible:ring-ring",
+          "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
           "disabled:pointer-events-none disabled:opacity-50",
           isActive && "text-fg",
           SIZE_CLASSES[size],

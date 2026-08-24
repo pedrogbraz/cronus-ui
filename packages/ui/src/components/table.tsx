@@ -17,7 +17,7 @@ export const Table = forwardRef<HTMLTableElement, HTMLAttributes<HTMLTableElemen
         // biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable region is intentionally focusable so keyboard users can scroll it.
         tabIndex={0}
         aria-label="Table"
-        className="relative w-full overflow-x-auto outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="relative w-full overflow-x-auto outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
       >
         <table
           ref={ref}

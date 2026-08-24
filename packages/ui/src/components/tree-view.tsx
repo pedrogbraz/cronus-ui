@@ -356,10 +356,10 @@ function TreeViewItem({ node, level, parentId }: TreeViewItemProps) {
         // row width while the content still reads as nested.
         style={{ paddingInlineStart: `${(level - 1) * 1 + 0.5}rem` }}
         className={cn(
-          "flex h-8 cursor-pointer items-center gap-1.5 rounded-md pr-2 outline-none",
+          "flex h-8 cursor-pointer items-center gap-1.5 rounded-md pr-2",
           "transition-[background,color] duration-150 ease-[var(--ease-out-quart)] motion-reduce:transition-none",
           "text-fg-secondary hover:bg-surface-overlay hover:text-fg",
-          "focus-visible:ring-2 focus-visible:ring-ring",
+          "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
           isSelected && "bg-surface-overlay font-medium text-fg",
           isDisabled && "pointer-events-none opacity-50",
         )}

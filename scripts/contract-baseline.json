@@ -1,10 +1,9 @@
 {
   "$comment": "Dívida conhecida do CONTRACT.md. O gate barra qualquer violação acima destes números; quando cair, rode `bun run contract:check --baseline` para travar o ganho. Nunca suba um número à mão.",
   "generated": "2026-08-24",
-  "total": 180,
+  "total": 154,
   "accepted": {
     "accordion.tsx": {
-      "7": 1,
       "9": 1
     },
     "alert-dialog.tsx": {
@@ -30,7 +29,6 @@
       "9": 1
     },
     "carousel.tsx": {
-      "7": 2,
       "10": 6
     },
     "chart.tsx": {
@@ -38,9 +36,6 @@
     },
     "checkbox.tsx": {
       "9": 1
-    },
-    "chip.tsx": {
-      "7": 1
     },
     "code-block.tsx": {
       "10": 3
@@ -50,9 +45,6 @@
     },
     "collapsible.tsx": {
       "9": 1
-    },
-    "color-picker.tsx": {
-      "7": 1
     },
     "combobox.tsx": {
       "10": 1
@@ -99,14 +91,9 @@
       "10": 4
     },
     "json-viewer.tsx": {
-      "7": 1,
       "10": 3
     },
-    "kanban.tsx": {
-      "7": 1
-    },
     "lightbox.tsx": {
-      "7": 1,
       "10": 2
     },
     "marquee.tsx": {
@@ -116,11 +103,9 @@
       "9": 1
     },
     "morphing-popover.tsx": {
-      "7": 3,
       "10": 1
     },
     "multi-select.tsx": {
-      "7": 2,
       "10": 1
     },
     "navigation-menu.tsx": {
@@ -128,7 +113,6 @@
       "10": 4
     },
     "notification-center.tsx": {
-      "7": 1,
       "9": 1,
       "10": 1
     },
@@ -136,7 +120,6 @@
       "10": 2
     },
     "password-input.tsx": {
-      "7": 1,
       "10": 3
     },
     "phone-input.tsx": {
@@ -149,7 +132,6 @@
       "9": 1
     },
     "resizable.tsx": {
-      "7": 1,
       "9": 1,
       "10": 2
     },
@@ -157,15 +139,11 @@
       "10": 5
     },
     "scheduler.tsx": {
-      "7": 1,
       "10": 3
     },
     "scroll-area.tsx": {
       "9": 1,
       "10": 2
-    },
-    "segmented-control.tsx": {
-      "7": 1
     },
     "select.tsx": {
       "9": 1
@@ -175,7 +153,6 @@
       "10": 6
     },
     "sidebar.tsx": {
-      "7": 3,
       "10": 10
     },
     "signature-pad.tsx": {
@@ -192,24 +169,18 @@
       "10": 5
     },
     "stepper.tsx": {
-      "7": 1,
       "10": 1
     },
     "switch.tsx": {
       "9": 1
     },
-    "table-of-contents.tsx": {
-      "7": 1
-    },
     "table.tsx": {
-      "7": 1,
       "10": 1
     },
     "tabs.tsx": {
       "9": 1
     },
     "tags-input.tsx": {
-      "7": 1,
       "10": 1
     },
     "terminal.tsx": {
@@ -219,7 +190,6 @@
       "1b": 2
     },
     "tree-view.tsx": {
-      "7": 1,
       "10": 1
     }
   }

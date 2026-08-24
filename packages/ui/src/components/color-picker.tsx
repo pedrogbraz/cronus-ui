@@ -575,8 +575,8 @@ export const ColorPicker = forwardRef<HTMLButtonElement, ColorPickerProps>(
                     data-slot="color-picker-swatch-button"
                     onClick={() => commit(swatch)}
                     className={cn(
-                      "size-6 rounded-md border border-border outline-none transition-transform",
-                      "hover:scale-110 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-floating",
+                      "size-6 rounded-md border border-border transition-transform",
+                      "outline-none hover:scale-110 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-floating",
                       "disabled:pointer-events-none disabled:opacity-50",
                       isActive && "ring-2 ring-ring ring-offset-2 ring-offset-surface-floating",
                     )}

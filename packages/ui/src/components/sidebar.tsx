@@ -417,7 +417,7 @@ export const SidebarRail = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HT
         className={cn(
           "absolute inset-y-0 z-20 hidden w-3 -translate-x-1/2 cursor-col-resize transition-colors sm:flex",
           "after:absolute after:inset-y-0 after:left-1/2 after:w-px after:bg-transparent hover:after:bg-border",
-          "outline-none focus-visible:ring-2 focus-visible:ring-ring",
+          "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
           "group-data-[side=left]/sidebar:right-0 group-data-[side=right]/sidebar:left-0",
           className,
         )}
@@ -624,10 +624,10 @@ SidebarMenuItem.displayName = "SidebarMenuItem";
 
 const sidebarMenuButtonVariants = cva(
   cn(
-    "group/menu-button peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md text-left text-sm outline-none",
+    "group/menu-button peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md text-left text-sm",
     "transition-[background,color,box-shadow] duration-150 ease-[var(--ease-out-quart)] motion-reduce:transition-none",
     "text-fg-secondary hover:bg-surface-inset hover:text-fg",
-    "focus-visible:ring-2 focus-visible:ring-ring",
+    "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base",
     "disabled:opacity-50 disabled:pointer-events-none",
     "aria-disabled:opacity-50 aria-disabled:pointer-events-none",
     "data-[active=true]:bg-surface-inset data-[active=true]:font-medium data-[active=true]:text-fg",
@@ -756,9 +756,9 @@ export const SidebarMenuSubButton = forwardRef<HTMLButtonElement, SidebarMenuSub
         data-active={isActive}
         aria-current={isActive ? "page" : undefined}
         className={cn(
-          "flex min-w-0 items-center gap-2 overflow-hidden rounded-md px-2 text-fg-tertiary outline-none",
+          "flex min-w-0 items-center gap-2 overflow-hidden rounded-md px-2 text-fg-tertiary",
           "transition-[background,color,box-shadow] duration-150 ease-[var(--ease-out-quart)] motion-reduce:transition-none",
-          "hover:bg-surface-inset hover:text-fg focus-visible:ring-2 focus-visible:ring-ring",
+          "hover:bg-surface-inset hover:text-fg outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base",
           "disabled:opacity-50 disabled:pointer-events-none",
           "aria-disabled:opacity-50 aria-disabled:pointer-events-none",
           "data-[active=true]:text-fg data-[active=true]:font-medium",
