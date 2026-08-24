@@ -41,11 +41,11 @@ import {
 function appsTemplatesDir(): string {
   const here = dirname(fileURLToPath(import.meta.url));
   // compiled: dist/commands/compose.js → dist/../templates ; source: src/commands → ../../templates
-  const candidates = [
-    join(here, "..", "..", "templates", "apps"),
-    join(here, "..", "templates", "apps"),
-  ];
-  return candidates.find((p) => existsSync(p)) ?? candidates[0]!;
+  const compiled = join(here, "..", "..", "templates", "apps");
+  const fromSource = join(here, "..", "templates", "apps");
+  // Named consts instead of indexing: the fallback is a value we hold, not an
+  // element the compiler has to be told exists.
+  return [compiled, fromSource].find((p) => existsSync(p)) ?? compiled;
 }
 
 /** List the bundled template names (basename without .json), sorted. */
@@ -518,7 +518,8 @@ function reportError(err: unknown): void {
 
 /** TTY-prompt for a template name; `--yes`/non-TTY picks the first available. */
 async function promptTemplate(available: string[], yes: boolean): Promise<string> {
-  const first = available[0]!;
+  const first = available[0];
+  if (first === undefined) throw new Error("no app templates are bundled with this CLI");
   if (yes || !process.stdin.isTTY) return first;
   const { createInterface } = await import("node:readline/promises");
   const rl = createInterface({ input: process.stdin, output: process.stdout });
@@ -530,8 +531,9 @@ async function promptTemplate(available: string[], yes: boolean): Promise<string
     const answer = (await rl.question(`(1-${available.length} or name, default ${first}) `)).trim();
     if (answer.length === 0) return first;
     const asNum = Number.parseInt(answer, 10);
-    if (Number.isInteger(asNum) && asNum >= 1 && asNum <= available.length) {
-      return available[asNum - 1]!;
+    if (Number.isInteger(asNum)) {
+      const picked = available[asNum - 1];
+      if (picked !== undefined) return picked;
     }
     return available.includes(answer) ? answer : first;
   } finally {
