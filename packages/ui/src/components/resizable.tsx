@@ -14,7 +14,7 @@ import { cn } from "../lib/cn.js";
  * [`react-resizable-panels`](https://github.com/bvaughn/react-resizable-panels).
  *
  * The API mirrors shadcn's `resizable` so existing muscle memory carries over,
- * but every surface wears Cooud design tokens and a `data-slot` hook. Compose
+ * but every surface wears Kronus design tokens and a `data-slot` hook. Compose
  * {@link ResizablePanelGroup} → {@link ResizablePanel} → {@link ResizableHandle}.
  * The group `direction` drives both axes (`"horizontal"` / `"vertical"`); the
  * handle reads it back off `[data-panel-group-direction]` to orient itself.

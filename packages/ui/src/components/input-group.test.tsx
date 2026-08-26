@@ -10,11 +10,11 @@ describe("InputGroup", () => {
       <InputGroup>
         <InputGroupAddon>https://</InputGroupAddon>
         <Input aria-label="Subdomain" placeholder="my-site" />
-        <InputGroupAddon align="end">.cooud.app</InputGroupAddon>
+        <InputGroupAddon align="end">.kronus.app</InputGroupAddon>
       </InputGroup>,
     );
     expect(screen.getByText("https://")).toBeInTheDocument();
-    expect(screen.getByText(".cooud.app")).toBeInTheDocument();
+    expect(screen.getByText(".kronus.app")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("my-site")).toBeInTheDocument();
   });
 
@@ -33,7 +33,7 @@ describe("InputGroup", () => {
     const { container } = render(
       <InputGroup>
         <Input aria-label="Site" />
-        <InputGroupAddon align="end">.cooud.app</InputGroupAddon>
+        <InputGroupAddon align="end">.kronus.app</InputGroupAddon>
       </InputGroup>,
     );
     const children = Array.from(
@@ -52,7 +52,7 @@ describe("InputGroup", () => {
       <InputGroup>
         <InputGroupAddon>https://</InputGroupAddon>
         <Input aria-label="Workspace URL" placeholder="my-site" />
-        <InputGroupAddon align="end">.cooud.app</InputGroupAddon>
+        <InputGroupAddon align="end">.kronus.app</InputGroupAddon>
       </InputGroup>,
     );
     expect(await axe(container)).toHaveNoViolations();

@@ -23,6 +23,9 @@ export {
 export type { AnimatedButtonProps } from "./components/animated-button.js";
 // ── Wave 4 — premium & brand ───────────────────────────────────────
 export { AnimatedButton } from "./components/animated-button.js";
+// ── Wave 6 — motion harvest ────────────────────────────────────────
+export type { AnimatedListProps } from "./components/animated-list.js";
+export { AnimatedList } from "./components/animated-list.js";
 export type { AnimatedNumberProps, AnimatedNumberSpring } from "./components/animated-number.js";
 export { AnimatedNumber } from "./components/animated-number.js";
 export type { AppShellProps } from "./components/app-shell.js";
@@ -73,6 +76,8 @@ export {
   CardHeader,
   CardTitle,
 } from "./components/card.js";
+export type { CardStackItem, CardStackProps } from "./components/card-stack.js";
+export { CardStack } from "./components/card-stack.js";
 export type {
   CarouselAlign,
   CarouselContentProps,
@@ -104,6 +109,8 @@ export {
 export { Checkbox } from "./components/checkbox.js";
 export type { ChipGroupProps, ChipLabels, ChipProps } from "./components/chip.js";
 export { Chip, ChipGroup, chipVariants } from "./components/chip.js";
+export type { ClickSparkProps } from "./components/click-spark.js";
+export { ClickSpark } from "./components/click-spark.js";
 export type { CodeBlockProps } from "./components/code-block.js";
 export { CodeBlock } from "./components/code-block.js";
 export type { CodeTabsItem, CodeTabsProps } from "./components/code-tabs.js";
@@ -131,6 +138,8 @@ export {
 } from "./components/command.js";
 export type { ComparisonSliderProps } from "./components/comparison-slider.js";
 export { ComparisonSlider } from "./components/comparison-slider.js";
+export type { ConfettiProps } from "./components/confetti.js";
+export { Confetti } from "./components/confetti.js";
 export type { ConfirmationDialogProps } from "./components/confirmation-dialog.js";
 export { ConfirmationDialog } from "./components/confirmation-dialog.js";
 export {
@@ -214,6 +223,8 @@ export {
 } from "./components/dialog.js";
 export type { DockItem, DockProps } from "./components/dock.js";
 export { Dock } from "./components/dock.js";
+export type { DotPatternProps } from "./components/dot-pattern.js";
+export { DotPattern } from "./components/dot-pattern.js";
 export {
   Drawer,
   DrawerClose,
@@ -243,6 +254,8 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "./components/dropdown-menu.js";
+export type { DynamicIslandProps, DynamicIslandView } from "./components/dynamic-island.js";
+export { DynamicIsland } from "./components/dynamic-island.js";
 export {
   Empty,
   EmptyContent,
@@ -250,11 +263,15 @@ export {
   EmptyIcon,
   EmptyTitle,
 } from "./components/empty.js";
+export type { ExpandableTab, ExpandableTabsProps } from "./components/expandable-tabs.js";
+export { ExpandableTabs } from "./components/expandable-tabs.js";
 export type { FabAction, FabProps } from "./components/fab.js";
 export { Fab } from "./components/fab.js";
 export { Field, FieldDescription, FieldError, FieldLabel } from "./components/field.js";
 export type { FileDropzoneProps } from "./components/file-dropzone.js";
 export { FileDropzone } from "./components/file-dropzone.js";
+export type { FlickeringGridProps } from "./components/flickering-grid.js";
+export { FlickeringGrid } from "./components/flickering-grid.js";
 export type { FlipCardAxis, FlipCardProps, FlipCardTrigger } from "./components/flip-card.js";
 export { FlipCard, FlipCardBack, FlipCardFront } from "./components/flip-card.js";
 export type { FloatingLabelInputProps } from "./components/floating-label-input.js";
@@ -272,13 +289,19 @@ export {
 } from "./components/form.js";
 export type { FrameProps } from "./components/frame.js";
 export { Frame } from "./components/frame.js";
+export type { GlareHoverProps } from "./components/glare-hover.js";
+export { GlareHover } from "./components/glare-hover.js";
 export { GlassCard } from "./components/glass-card.js";
 export type { GradientBorderProps } from "./components/gradient-border.js";
 export { GradientBorder } from "./components/gradient-border.js";
 export type { GradientTextProps } from "./components/gradient-text.js";
 export { GradientText } from "./components/gradient-text.js";
+export type { GridPatternProps } from "./components/grid-pattern.js";
+export { GridPattern } from "./components/grid-pattern.js";
 export type { HeatmapDay, HeatmapProps } from "./components/heatmap.js";
 export { getHeatmapLevel, Heatmap } from "./components/heatmap.js";
+export type { HighlighterProps } from "./components/highlighter.js";
+export { Highlighter } from "./components/highlighter.js";
 export { HoverCard, HoverCardContent, HoverCardTrigger } from "./components/hover-card.js";
 export type { ImageZoomLabels, ImageZoomProps } from "./components/image-zoom.js";
 export { ImageZoom, imageZoomVariants } from "./components/image-zoom.js";
@@ -298,6 +321,8 @@ export type { KanbanColumn, KanbanItem, KanbanProps } from "./components/kanban.
 export { Kanban } from "./components/kanban.js";
 export { Kbd } from "./components/kbd.js";
 export { Label } from "./components/label.js";
+export type { LightRaysProps } from "./components/light-rays.js";
+export { LightRays } from "./components/light-rays.js";
 export type { LightboxImage, LightboxProps } from "./components/lightbox.js";
 export { Lightbox } from "./components/lightbox.js";
 export type {
@@ -331,6 +356,8 @@ export {
   MenubarSubTrigger,
   MenubarTrigger,
 } from "./components/menubar.js";
+export type { MeteorsProps } from "./components/meteors.js";
+export { Meteors } from "./components/meteors.js";
 export type { MetricDeltaProps } from "./components/metric.js";
 export { Metric, MetricDelta, MetricLabel, MetricValue } from "./components/metric.js";
 export type { ModeToggleMode, ModeToggleProps, ModeToggleSize } from "./components/mode-toggle.js";
@@ -377,6 +404,8 @@ export {
   NavigationMenuViewport,
   navigationMenuTriggerStyle,
 } from "./components/navigation-menu.js";
+export type { NoiseProps } from "./components/noise.js";
+export { Noise } from "./components/noise.js";
 export type {
   NotificationCenterProps,
   NotificationItem,
@@ -402,12 +431,18 @@ export {
   PaginationNext,
   PaginationPrevious,
 } from "./components/pagination.js";
+export type { ParticlesProps } from "./components/particles.js";
+export { Particles } from "./components/particles.js";
 export type { PasswordInputProps } from "./components/password-input.js";
 export { getPasswordStrength, PasswordInput } from "./components/password-input.js";
 export type { PhoneCountry, PhoneInputProps } from "./components/phone-input.js";
 export { DEFAULT_PHONE_COUNTRIES, PhoneInput } from "./components/phone-input.js";
+export type { PillNavItem, PillNavProps } from "./components/pill-nav.js";
+export { PillNav } from "./components/pill-nav.js";
 export { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from "./components/popover.js";
 export { Progress } from "./components/progress.js";
+export type { ProgressiveBlurProps } from "./components/progressive-blur.js";
+export { ProgressiveBlur, progressiveBlurVariants } from "./components/progressive-blur.js";
 export { RadioGroup, RadioGroupItem } from "./components/radio-group.js";
 export type { RatingProps } from "./components/rating.js";
 export { Rating } from "./components/rating.js";
@@ -417,16 +452,25 @@ export {
   ResizablePanel,
   ResizablePanelGroup,
 } from "./components/resizable.js";
+export type { RetroGridProps } from "./components/retro-grid.js";
+export { RetroGrid } from "./components/retro-grid.js";
 export type { RevealProps } from "./components/reveal.js";
 export { Reveal } from "./components/reveal.js";
 export type { RichTextEditorProps } from "./components/rich-text-editor.js";
 export { RichTextEditor } from "./components/rich-text-editor.js";
+export type { RippleProps } from "./components/ripple.js";
+export { Ripple } from "./components/ripple.js";
 export type {
   SchedulerEvent,
   SchedulerEventColor,
   SchedulerProps,
 } from "./components/scheduler.js";
 export { Scheduler } from "./components/scheduler.js";
+export type {
+  ScrambleTextMotionPreference,
+  ScrambleTextProps,
+} from "./components/scramble-text.js";
+export { ScrambleText } from "./components/scramble-text.js";
 export { ScrollArea, ScrollBar } from "./components/scroll-area.js";
 export type { ScrollProgressProps } from "./components/scroll-progress.js";
 export { ScrollProgress } from "./components/scroll-progress.js";
@@ -461,6 +505,8 @@ export {
   sheetVariants,
 } from "./components/sheet.js";
 export { Shimmer } from "./components/shimmer.js";
+export type { ShinyTextProps } from "./components/shiny-text.js";
+export { ShinyText } from "./components/shiny-text.js";
 export type {
   SidebarContextValue,
   SidebarGroupLabelProps,
@@ -498,13 +544,19 @@ export { Skeleton } from "./components/skeleton.js";
 export { Slider } from "./components/slider.js";
 export type { ToasterProps } from "./components/sonner.js";
 export { Toaster, toast } from "./components/sonner.js";
+export type { SparklesTextProps } from "./components/sparkles-text.js";
+export { SparklesText } from "./components/sparkles-text.js";
 export type { SparklineProps } from "./components/sparkline.js";
 export { Sparkline } from "./components/sparkline.js";
 export type { SpinnerProps } from "./components/spinner.js";
 export { Spinner } from "./components/spinner.js";
+export type { SpinningTextProps } from "./components/spinning-text.js";
+export { SpinningText } from "./components/spinning-text.js";
 export type { SplitButtonItem, SplitButtonProps } from "./components/split-button.js";
 export { SplitButton } from "./components/split-button.js";
 export { SpotlightCard } from "./components/spotlight-card.js";
+export type { StarBorderProps } from "./components/star-border.js";
+export { StarBorder } from "./components/star-border.js";
 export type { StatusDotProps } from "./components/status-dot.js";
 export { StatusDot, statusDotVariants } from "./components/status-dot.js";
 export type {
@@ -588,8 +640,12 @@ export {
 } from "./components/tooltip.js";
 export type { TreeNode, TreeViewProps } from "./components/tree-view.js";
 export { TreeView } from "./components/tree-view.js";
+export type { TypingTextMotionPreference, TypingTextProps } from "./components/typing-text.js";
+export { TypingText } from "./components/typing-text.js";
 export type { UsageMeterProps } from "./components/usage-meter.js";
 export { UsageMeter, UsageMeterCircular, UsageMeterLinear } from "./components/usage-meter.js";
 export type { VideoPlayerLabels, VideoPlayerProps } from "./components/video-player.js";
 export { VideoPlayer, videoPlayerVariants } from "./components/video-player.js";
+export type { WordRotateProps } from "./components/word-rotate.js";
+export { WordRotate } from "./components/word-rotate.js";
 export { cn } from "./lib/cn.js";

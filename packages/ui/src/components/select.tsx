@@ -77,7 +77,7 @@ export const SelectContent = forwardRef<
         data-slot="select-content"
         position={position}
         className={cn(
-          "relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-lg border border-border bg-surface-floating text-fg shadow-lg data-[state=open]:animate-[cooud-pop-in_180ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[cooud-pop-out_140ms_var(--ease-out-quart)_both]",
+          "relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-lg border border-border bg-surface-floating text-fg shadow-lg data-[state=open]:animate-[kronus-pop-in_180ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[kronus-pop-out_140ms_var(--ease-out-quart)_both]",
           // Intentionally physical: Radix's data-side is a physical side, and
           // the nudge moves the popper away from the trigger on that side.
           position === "popper" &&

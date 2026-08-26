@@ -84,7 +84,7 @@ describe("JsonViewer", () => {
         data={{
           created: new Date("2026-07-09T12:00:00.000Z"),
           pattern: /ab+c/gi,
-          site: new URL("https://cooud.com/docs"),
+          site: new URL("https://kronus.com/docs"),
           failure: new Error("boom"),
         }}
         defaultExpandedDepth={Number.POSITIVE_INFINITY}
@@ -93,7 +93,7 @@ describe("JsonViewer", () => {
 
     expect(screen.getByText("2026-07-09T12:00:00.000Z")).toHaveClass("text-info-strong");
     expect(screen.getByText("/ab+c/gi")).toHaveClass("text-success-strong");
-    expect(screen.getByText('"https://cooud.com/docs"')).toHaveClass("text-success-strong");
+    expect(screen.getByText('"https://kronus.com/docs"')).toHaveClass("text-success-strong");
     expect(screen.getByText("Error: boom")).toHaveClass("text-error-strong");
     // Dim type hints where the text alone is ambiguous.
     expect(screen.getByText("Date")).toHaveClass("text-fg-muted");

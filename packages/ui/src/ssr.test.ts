@@ -64,7 +64,7 @@ import { Textarea } from "./components/textarea.js";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./components/tooltip.js";
 
 /**
- * Server-rendering smoke gate for the @cooud-ui/ui public surface.
+ * Server-rendering smoke gate for the @kronus-ui/ui public surface.
  *
  * This runs in the Node ("ui") vitest project — a real server-side environment
  * (no DOM) — so `renderToString` here mirrors what Next.js / RSC consumers do
@@ -327,12 +327,12 @@ describe("SSR smoke (renderToString) — public components render on the server"
   it("TextEffect exposes the full string to assistive tech in its SSR output", () => {
     const html = renderCase(
       "TextEffect label",
-      h(TextEffect, { trigger: "mount" }, "Cooud ships fast"),
+      h(TextEffect, { trigger: "mount" }, "Kronus ships fast"),
     );
     // The split (animated) units are aria-hidden; the whole string is exposed
     // once via a visually-hidden sr-only span, so AT reads clean text on the
     // server-rendered DOM (no per-word chatter, no missing label).
-    expect(html).toContain('class="sr-only">Cooud ships fast<');
+    expect(html).toContain('class="sr-only">Kronus ships fast<');
     expect(html).toContain('aria-hidden="true"');
   });
 });

@@ -13,7 +13,7 @@ import {
   DialogTrigger,
 } from "../components/dialog.js";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/tooltip.js";
-import { expectNoA11yViolations, findDialog, findTooltip, renderWithCooud } from "./index.js";
+import { expectNoA11yViolations, findDialog, findTooltip, renderWithKronus } from "./index.js";
 
 function BasicDialog() {
   return (
@@ -34,68 +34,68 @@ function BasicDialog() {
 
 /** The wrapper div the scoped (non-asRoot) provider renders around the UI. */
 function themedScopeOf(element: HTMLElement): HTMLElement | null {
-  return element.closest("[data-cooud-theme]");
+  return element.closest("[data-kronus-theme]");
 }
 
-describe("renderWithCooud", () => {
+describe("renderWithKronus", () => {
   it("mounts the UI inside a scoped aurora/dark provider by default", () => {
-    renderWithCooud(<Button>Save</Button>);
+    renderWithKronus(<Button>Save</Button>);
 
     const scope = themedScopeOf(screen.getByRole("button", { name: "Save" }));
     expect(scope).not.toBeNull();
-    expect(scope).toHaveAttribute("data-cooud-theme", "aurora");
-    expect(scope).toHaveAttribute("data-cooud-mode", "dark");
+    expect(scope).toHaveAttribute("data-kronus-theme", "aurora");
+    expect(scope).toHaveAttribute("data-kronus-mode", "dark");
     // Scoped provider (non-asRoot): the document root stays untouched.
-    expect(document.documentElement).not.toHaveAttribute("data-cooud-theme");
+    expect(document.documentElement).not.toHaveAttribute("data-kronus-theme");
   });
 
   it("honors the theme/mode options", () => {
-    renderWithCooud(<Button>Save</Button>, { theme: "neutral", mode: "light" });
+    renderWithKronus(<Button>Save</Button>, { theme: "neutral", mode: "light" });
 
     const scope = themedScopeOf(screen.getByRole("button", { name: "Save" }));
-    expect(scope).toHaveAttribute("data-cooud-theme", "neutral");
-    expect(scope).toHaveAttribute("data-cooud-mode", "light");
+    expect(scope).toHaveAttribute("data-kronus-theme", "neutral");
+    expect(scope).toHaveAttribute("data-kronus-mode", "light");
     expect(scope).not.toHaveClass("dark");
   });
 
   it("rerenderWithTheme flips the themed scope", () => {
-    const { rerenderWithTheme } = renderWithCooud(<Button>Save</Button>);
+    const { rerenderWithTheme } = renderWithKronus(<Button>Save</Button>);
     expect(themedScopeOf(screen.getByRole("button", { name: "Save" }))).toHaveAttribute(
-      "data-cooud-theme",
+      "data-kronus-theme",
       "aurora",
     );
 
     rerenderWithTheme("midnight", "light");
 
     const scope = themedScopeOf(screen.getByRole("button", { name: "Save" }));
-    expect(scope).toHaveAttribute("data-cooud-theme", "midnight");
-    expect(scope).toHaveAttribute("data-cooud-mode", "light");
+    expect(scope).toHaveAttribute("data-kronus-theme", "midnight");
+    expect(scope).toHaveAttribute("data-kronus-mode", "light");
   });
 
   it("rerenderWithTheme without a mode keeps the current mode", () => {
-    const { rerenderWithTheme } = renderWithCooud(<Button>Save</Button>, { mode: "light" });
+    const { rerenderWithTheme } = renderWithKronus(<Button>Save</Button>, { mode: "light" });
 
     rerenderWithTheme("sunset");
 
     const scope = themedScopeOf(screen.getByRole("button", { name: "Save" }));
-    expect(scope).toHaveAttribute("data-cooud-theme", "sunset");
-    expect(scope).toHaveAttribute("data-cooud-mode", "light");
+    expect(scope).toHaveAttribute("data-kronus-theme", "sunset");
+    expect(scope).toHaveAttribute("data-kronus-mode", "light");
   });
 
   it("rerender keeps the new UI inside the themed scope", () => {
-    const { rerender } = renderWithCooud(<Button>Before</Button>, { theme: "neutral" });
+    const { rerender } = renderWithKronus(<Button>Before</Button>, { theme: "neutral" });
 
     rerender(<Button>After</Button>);
 
     const scope = themedScopeOf(screen.getByRole("button", { name: "After" }));
-    expect(scope).toHaveAttribute("data-cooud-theme", "neutral");
+    expect(scope).toHaveAttribute("data-kronus-theme", "neutral");
   });
 });
 
 describe("findDialog", () => {
   it("finds the open portaled dialog by accessible name", async () => {
     const user = userEvent.setup();
-    renderWithCooud(<BasicDialog />);
+    renderWithKronus(<BasicDialog />);
     await user.click(screen.getByRole("button", { name: "Open dialog" }));
 
     const dialog = await findDialog("Delete project");
@@ -105,7 +105,7 @@ describe("findDialog", () => {
 
   it("finds the open dialog without a name filter", async () => {
     const user = userEvent.setup();
-    renderWithCooud(<BasicDialog />);
+    renderWithKronus(<BasicDialog />);
     await user.click(screen.getByRole("button", { name: "Open dialog" }));
 
     expect(await findDialog()).toBeInTheDocument();
@@ -115,7 +115,7 @@ describe("findDialog", () => {
 describe("findTooltip", () => {
   it("finds the open portaled tooltip by its text", async () => {
     const user = userEvent.setup();
-    renderWithCooud(
+    renderWithKronus(
       <Tooltip delayDuration={0}>
         <TooltipTrigger>More info</TooltipTrigger>
         <TooltipContent>Helpful hint</TooltipContent>
@@ -132,7 +132,7 @@ describe("findTooltip", () => {
 describe("expectNoA11yViolations", () => {
   it("passes on an open, accessible dialog via baseElement", async () => {
     const user = userEvent.setup();
-    const { baseElement } = renderWithCooud(<BasicDialog />);
+    const { baseElement } = renderWithKronus(<BasicDialog />);
     await user.click(screen.getByRole("button", { name: "Open dialog" }));
     await findDialog("Delete project");
 

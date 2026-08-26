@@ -9,11 +9,11 @@ describe("CopyButton", () => {
     const writeText = vi.fn().mockResolvedValue(undefined);
     Object.assign(navigator, { clipboard: { writeText } });
 
-    render(<CopyButton value="npm i @cooud-ui/ui" />);
+    render(<CopyButton value="npm i @kronus-ui/ui" />);
     const button = screen.getByRole("button", { name: "Copy" });
     await userEvent.click(button);
 
-    expect(writeText).toHaveBeenCalledWith("npm i @cooud-ui/ui");
+    expect(writeText).toHaveBeenCalledWith("npm i @kronus-ui/ui");
     // Success is announced once via the polite live region.
     expect(await screen.findByText("Copied")).toBeInTheDocument();
     expect(button).toHaveAttribute("data-copied", "true");

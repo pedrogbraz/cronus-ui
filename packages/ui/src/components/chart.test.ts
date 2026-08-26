@@ -22,7 +22,7 @@ describe("isSafeChartColor (chart CSS-injection allowlist)", () => {
   });
 
   it("accepts var(--token) references, including chained fallbacks", () => {
-    expect(isSafeChartColor("var(--cooud-primary)")).toBe(true);
+    expect(isSafeChartColor("var(--kronus-primary)")).toBe(true);
     expect(isSafeChartColor("var(--a, var(--b))")).toBe(true);
     expect(isSafeChartColor("var(--chart-1, #fff)")).toBe(true);
   });

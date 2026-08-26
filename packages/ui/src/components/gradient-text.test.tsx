@@ -5,8 +5,8 @@ import { GradientText } from "./gradient-text.js";
 
 describe("GradientText", () => {
   it("renders its text content", () => {
-    render(<GradientText>Cooud</GradientText>);
-    const el = screen.getByText("Cooud");
+    render(<GradientText>Kronus</GradientText>);
+    const el = screen.getByText("Kronus");
     expect(el).toHaveAttribute("data-slot", "gradient-text");
   });
 

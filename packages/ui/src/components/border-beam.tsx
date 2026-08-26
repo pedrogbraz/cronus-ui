@@ -26,9 +26,9 @@ export interface BorderBeamProps extends HTMLAttributes<HTMLDivElement> {
    * loop instead of moving in lockstep. Defaults to `0`.
    */
   delay?: number;
-  /** Colour of the leading edge of the beam. Defaults to the theme primary (`var(--cooud-primary)`). */
+  /** Colour of the leading edge of the beam. Defaults to the theme primary (`var(--kronus-primary)`). */
   colorFrom?: string;
-  /** Colour the trail fades through before it dissolves. Defaults to the theme accent (`var(--cooud-accent)`). */
+  /** Colour the trail fades through before it dissolves. Defaults to the theme accent (`var(--kronus-accent)`). */
   colorTo?: string;
   /** Thickness of the border band the beam rides in, in pixels. Defaults to `1.5`. */
   borderWidth?: number;
@@ -67,8 +67,8 @@ export const BorderBeam = forwardRef<HTMLDivElement, BorderBeamProps>(
       size = 60,
       duration = 8,
       delay = 0,
-      colorFrom = "var(--cooud-primary)",
-      colorTo = "var(--cooud-accent)",
+      colorFrom = "var(--kronus-primary)",
+      colorTo = "var(--kronus-accent)",
       borderWidth = 1.5,
       reverse = false,
       style,
@@ -110,13 +110,13 @@ export const BorderBeam = forwardRef<HTMLDivElement, BorderBeamProps>(
               browser dedupes by name); all timing/appearance rides CSS variables,
               so no per-instance keyframe name is needed. */}
           <style>
-            {"@keyframes cooud-border-beam{from{offset-distance:0%}to{offset-distance:100%}}"}
+            {"@keyframes kronus-border-beam{from{offset-distance:0%}to{offset-distance:100%}}"}
           </style>
           <div
             className={cn(
               "absolute aspect-square w-[var(--beam-size)]",
               "[offset-path:rect(0_auto_auto_0_round_var(--beam-size))]",
-              "[animation-name:cooud-border-beam] [animation-duration:var(--beam-duration)]",
+              "[animation-name:kronus-border-beam] [animation-duration:var(--beam-duration)]",
               "[animation-timing-function:linear] [animation-iteration-count:infinite]",
               "[animation-delay:var(--beam-delay)] [will-change:offset-distance]",
               reverse && "[animation-direction:reverse]",

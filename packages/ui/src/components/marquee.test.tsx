@@ -123,10 +123,10 @@ describe("Marquee", () => {
     );
     const root = container.querySelector('[data-slot="marquee"]') as HTMLElement;
     const styleTag = root.querySelector("style");
-    expect(styleTag?.textContent).toMatch(/@keyframes cooud-marquee-[\w-]+/);
+    expect(styleTag?.textContent).toMatch(/@keyframes kronus-marquee-[\w-]+/);
     const [first] = groups(container);
     expect((first as HTMLElement).style.getPropertyValue("--marquee-animation")).toMatch(
-      /cooud-marquee-[\w-]+ var\(--marquee-duration\) linear infinite/,
+      /kronus-marquee-[\w-]+ var\(--marquee-duration\) linear infinite/,
     );
   });
 

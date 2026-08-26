@@ -11,10 +11,10 @@ export const Toaster = ({ theme = "dark", ...props }: ToasterProps) => {
       className="toaster group"
       style={
         {
-          "--normal-bg": "var(--cooud-surface-floating)",
-          "--normal-text": "var(--cooud-fg)",
-          "--normal-border": "var(--cooud-border)",
-          "--border-radius": "var(--cooud-radius)",
+          "--normal-bg": "var(--kronus-surface-floating)",
+          "--normal-text": "var(--kronus-fg)",
+          "--normal-border": "var(--kronus-border)",
+          "--border-radius": "var(--kronus-radius)",
         } as React.CSSProperties
       }
       {...props}

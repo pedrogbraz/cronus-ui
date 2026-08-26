@@ -132,7 +132,7 @@ export const Marquee = forwardRef<HTMLDivElement, MarqueeProps>(
     // never collide on a shared `@keyframes`. `useId` is SSR-stable; sanitise it
     // since CSS identifiers cannot contain the `:` React emits.
     const rawId = useId();
-    const animationName = `cooud-marquee-${rawId.replace(/[^a-zA-Z0-9_-]/g, "")}`;
+    const animationName = `kronus-marquee-${rawId.replace(/[^a-zA-Z0-9_-]/g, "")}`;
 
     const safeSpeed = Math.max(finiteOr(speed, DEFAULT_SPEED), 1);
     const copies = Math.max(Math.round(finiteOr(repeat, DEFAULT_REPEAT)), MIN_REPEAT);

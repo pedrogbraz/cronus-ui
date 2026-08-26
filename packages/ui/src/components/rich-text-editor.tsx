@@ -207,7 +207,7 @@ function Toolbar({ editor }: { editor: Editor | null }) {
 }
 
 /**
- * A Tiptap-based WYSIWYG editor with a Cooud-styled formatting toolbar.
+ * A Tiptap-based WYSIWYG editor with a Kronus-styled formatting toolbar.
  *
  * SSR: `immediatelyRender: false` keeps Tiptap from rendering on the server, so
  * Next.js (and other SSR setups) hydrate without a mismatch. Until the editor

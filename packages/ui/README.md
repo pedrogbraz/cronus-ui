@@ -1,39 +1,39 @@
-# @cooud-ui/ui
+# @kronus-ui/ui
 
-The Cooud UI component library — a themeable, accessible, shadcn-class set of
+The Kronus UI component library — a themeable, accessible, shadcn-class set of
 React components built on Radix UI, [CVA](https://cva.style/), and Tailwind v4.
 
 Components are unstyled at the structural level and rendered against semantic
-[`@cooud-ui/tokens`](../tokens) (`bg-primary`, `text-fg-secondary`, `rounded-lg`,
+[`@kronus-ui/tokens`](../tokens) (`bg-primary`, `text-fg-secondary`, `rounded-lg`,
 `shadow-glow`, …), so the entire library re-themes from one token change — and can
-be re-themed live by [`@cooud-ui/theme`](../theme). Every component uses `forwardRef`,
+be re-themed live by [`@kronus-ui/theme`](../theme). Every component uses `forwardRef`,
 carries `data-slot` hooks, and ships visible `focus-visible` rings.
 
-Reach for this package when you want production-ready Cooud components as a managed
+Reach for this package when you want production-ready Kronus components as a managed
 dependency. Prefer to own the source instead? Copy components into your project
-with `npx cooud-ui add` (see [Copy-in option](#copy-in-option-cli)).
+with `npx kronus-ui add` (see [Copy-in option](#copy-in-option-cli)).
 
 ## Install
 
-> Published on npm under the `@cooud-ui` scope.
+> Published on npm under the `@kronus-ui` scope.
 > Install all three packages:
 
 ```sh
 # npm
-npm i @cooud-ui/ui @cooud-ui/tokens @cooud-ui/theme
+npm i @kronus-ui/ui @kronus-ui/tokens @kronus-ui/theme
 # pnpm
-pnpm add @cooud-ui/ui @cooud-ui/tokens @cooud-ui/theme
+pnpm add @kronus-ui/ui @kronus-ui/tokens @kronus-ui/theme
 # bun
-bun add @cooud-ui/ui @cooud-ui/tokens @cooud-ui/theme
+bun add @kronus-ui/ui @kronus-ui/tokens @kronus-ui/theme
 ```
 
-`@cooud-ui/ui` renders against the token bridge and runtime provider, so install
-[`@cooud-ui/tokens`](../tokens) and [`@cooud-ui/theme`](../theme) alongside it.
+`@kronus-ui/ui` renders against the token bridge and runtime provider, so install
+[`@kronus-ui/tokens`](../tokens) and [`@kronus-ui/theme`](../theme) alongside it.
 
 ### Prerequisites
 
 - **React 19** (also works with React 18.3+) — `react` and `react-dom` are peers.
-- **Tailwind v4** (or v3) configured with the `@cooud-ui/tokens` bridge or preset.
+- **Tailwind v4** (or v3) configured with the `@kronus-ui/tokens` bridge or preset.
 - A few heavy, component-specific packages are **optional** peers — install them
   only for the components you use. See
   [Optional peer dependencies](#optional-peer-dependencies).
@@ -43,7 +43,7 @@ bun add @cooud-ui/ui @cooud-ui/tokens @cooud-ui/theme
 Most components work out of the box. A handful sit on top of a heavy
 third-party library that is only needed by that component, so those libraries
 are declared as **optional peer dependencies** and are *not* installed with
-`@cooud-ui/ui`. Install the matching package(s) only when you import the
+`@kronus-ui/ui`. Install the matching package(s) only when you import the
 component:
 
 | Component(s)                     | Package(s)                                              | Install                                                 |
@@ -61,7 +61,7 @@ Importing one of these components without its peer installed fails at
 build/bundle time with a module-not-found error for the missing package —
 installing the package(s) from the table fixes it.
 
-> Using the CLI instead (`npx cooud-ui add <slug>`)? Nothing changes for you:
+> Using the CLI instead (`npx kronus-ui add <slug>`)? Nothing changes for you:
 > the registry tracks each component's real imports and `add` installs them.
 
 ### Wire up styling
@@ -74,28 +74,28 @@ the markup is correct but **no CSS is generated**.
 
 ```css
 @import "tailwindcss";
-@import "@cooud-ui/tokens/styles.css";
+@import "@kronus-ui/tokens/styles.css";
 
 /* REQUIRED: emit the utilities used inside the shipped components. */
-@source "../node_modules/@cooud-ui/ui/dist/**/*.js";
+@source "../node_modules/@kronus-ui/ui/dist/**/*.js";
 ```
 
 **Tailwind v3** — in `tailwind.config.js`:
 
 ```js
-import cooudPreset from "@cooud-ui/tokens/preset";
+import kronusPreset from "@kronus-ui/tokens/preset";
 
 export default {
-  presets: [cooudPreset],
+  presets: [kronusPreset],
   content: [
     "./src/**/*.{ts,tsx}",
     // REQUIRED: keep the utilities used inside the shipped components.
-    "./node_modules/@cooud-ui/ui/dist/**/*.js",
+    "./node_modules/@kronus-ui/ui/dist/**/*.js",
   ],
 };
 ```
 
-See [`@cooud-ui/tokens`](../tokens) for the full Tailwind v3/v4 setup details.
+See [`@kronus-ui/tokens`](../tokens) for the full Tailwind v3/v4 setup details.
 
 ## Usage
 
@@ -103,16 +103,16 @@ Wrap the app in the provider once, then import components anywhere.
 
 ```tsx
 // app/layout.tsx — or your root
-import "@cooud-ui/tokens/styles.css";
-import { CooudUIProvider } from "@cooud-ui/theme";
+import "@kronus-ui/tokens/styles.css";
+import { KronusUIProvider } from "@kronus-ui/theme";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <CooudUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">
+        <KronusUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">
           {children}
-        </CooudUIProvider>
+        </KronusUIProvider>
       </body>
     </html>
   );
@@ -121,7 +121,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 ```tsx
 // any component
-import { Button, Card, CardHeader, CardTitle, CardContent, Badge } from "@cooud-ui/ui";
+import { Button, Card, CardHeader, CardTitle, CardContent, Badge } from "@kronus-ui/ui";
 
 export function Example() {
   return (
@@ -131,7 +131,7 @@ export function Example() {
         <Badge>New</Badge>
       </CardHeader>
       <CardContent>
-        <Button variant="gradient">Get started</Button>
+        <Button variant="primary">Get started</Button>
       </CardContent>
     </Card>
   );
@@ -141,8 +141,8 @@ export function Example() {
 ### Subpath imports
 
 Every component is also exposed as its own entry point for finer-grained imports,
-e.g. `import { Button } from "@cooud-ui/ui/button"`. The `cn` class-merge helper used
-by every component is available at `import { cn } from "@cooud-ui/ui/cn"`.
+e.g. `import { Button } from "@kronus-ui/ui/button"`. The `cn` class-merge helper used
+by every component is available at `import { cn } from "@kronus-ui/ui/cn"`.
 
 ## Components
 
@@ -171,7 +171,7 @@ Browse them all, with live previews and props, on the [docs site](../../apps/www
 
 Components consume semantic tokens only — never raw colors — so they re-theme
 with the active theme/mode and with any runtime override. Switch theme or override
-tokens through [`@cooud-ui/theme`](../theme):
+tokens through [`@kronus-ui/theme`](../theme):
 
 ```tsx
 const { setTheme, setMode, setOverrides } = useTheme();
@@ -179,12 +179,12 @@ setOverrides({ radius: "20px", primary: "#7c3aed" }); // re-themes the subtree, 
 ```
 
 The OKLCH token scale and the two built-in themes (Aurora, Neutral) live in
-[`@cooud-ui/tokens`](../tokens).
+[`@kronus-ui/tokens`](../tokens).
 
 ## Testing
 
-`@cooud-ui/ui/testing` ships first-class helpers for testing apps built on
-Cooud UI with [Testing Library](https://testing-library.com/) under jsdom
+`@kronus-ui/ui/testing` ships first-class helpers for testing apps built on
+Kronus UI with [Testing Library](https://testing-library.com/) under jsdom
 (Vitest or Jest). The subpath is not part of the main barrel, so test helpers
 can never leak into an app bundle.
 
@@ -192,19 +192,19 @@ can never leak into an app bundle.
 npm i -D @testing-library/react vitest-axe
 ```
 
-Both are **optional peer dependencies** — only `@cooud-ui/ui/testing` uses
+Both are **optional peer dependencies** — only `@kronus-ui/ui/testing` uses
 them, never the runtime components, and `vitest-axe` is only required if you
 call `expectNoA11yViolations`.
 
 ```tsx
-import { expectNoA11yViolations, findDialog, renderWithCooud } from "@cooud-ui/ui/testing";
+import { expectNoA11yViolations, findDialog, renderWithKronus } from "@kronus-ui/ui/testing";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { expect, it } from "vitest";
 
 it("invite dialog works and stays accessible in every theme", async () => {
   const user = userEvent.setup();
-  const { baseElement, rerenderWithTheme } = renderWithCooud(<InvitePanel />, {
+  const { baseElement, rerenderWithTheme } = renderWithKronus(<InvitePanel />, {
     theme: "aurora",
     mode: "dark",
   });
@@ -218,9 +218,9 @@ it("invite dialog works and stays accessible in every theme", async () => {
 });
 ```
 
-- `renderWithCooud(ui, { theme?, mode?, ...rtlOptions })` — Testing Library's
-  `render` with the UI wrapped in a scoped `CooudUIProvider`. The theme lands
-  on a wrapper `<div data-cooud-theme data-cooud-mode>` (never on `<html>`), so
+- `renderWithKronus(ui, { theme?, mode?, ...rtlOptions })` — Testing Library's
+  `render` with the UI wrapped in a scoped `KronusUIProvider`. The theme lands
+  on a wrapper `<div data-kronus-theme data-kronus-mode>` (never on `<html>`), so
   tests can't bleed theme state into each other. Returns the usual render
   result plus `rerenderWithTheme(theme, mode?)`, which remounts the scope under
   another theme/mode.
@@ -238,13 +238,13 @@ it("invite dialog works and stays accessible in every theme", async () => {
 
 ## Copy-in option (CLI)
 
-Prefer to own the component source, shadcn-style? The `cooud-ui` CLI copies the
+Prefer to own the component source, shadcn-style? The `kronus-ui` CLI copies the
 real component sources into your project and rewrites imports to your aliases:
 
 ```sh
-npx cooud-ui init                     # write cooud-ui.json + the cn() helper
-npx cooud-ui add button card dialog   # copy components in (resolves dependencies)
-npx cooud-ui add dashboard            # also pulls full-page blocks
+npx kronus-ui init                     # write kronus-ui.json + the cn() helper
+npx kronus-ui add button card dialog   # copy components in (resolves dependencies)
+npx kronus-ui add dashboard            # also pulls full-page blocks
 ```
 
 Both distribution modes share one source of truth. See the
@@ -252,9 +252,9 @@ Both distribution modes share one source of truth. See the
 
 ## Related packages
 
-- [`@cooud-ui/tokens`](../tokens) — the OKLCH design tokens these components render against.
-- [`@cooud-ui/theme`](../theme) — the runtime provider + `useTheme` hook.
-- [`cooud-ui`](../cli) — the CLI for copying components into your project.
+- [`@kronus-ui/tokens`](../tokens) — the OKLCH design tokens these components render against.
+- [`@kronus-ui/theme`](../theme) — the runtime provider + `useTheme` hook.
+- [`kronus-ui`](../cli) — the CLI for copying components into your project.
 
 ## License
 

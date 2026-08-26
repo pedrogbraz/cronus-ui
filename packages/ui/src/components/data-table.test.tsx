@@ -19,9 +19,9 @@ interface Person {
 }
 
 const DATA: Person[] = [
-  { id: 1, name: "Charlie", email: "charlie@cooud.com", amount: 30 },
-  { id: 2, name: "Alice", email: "alice@cooud.com", amount: 10 },
-  { id: 3, name: "Bob", email: "bob@cooud.com", amount: 20 },
+  { id: 1, name: "Charlie", email: "charlie@kronus.com", amount: 30 },
+  { id: 2, name: "Alice", email: "alice@kronus.com", amount: 10 },
+  { id: 3, name: "Bob", email: "bob@kronus.com", amount: 20 },
 ];
 
 const columns: ColumnDef<Person>[] = [
@@ -54,7 +54,7 @@ describe("DataTable — rendering", () => {
     render(<DataTable columns={columns} data={DATA} />);
     // 1 header row + 3 data rows.
     expect(screen.getAllByRole("row")).toHaveLength(4);
-    expect(screen.getByRole("cell", { name: "alice@cooud.com" })).toBeInTheDocument();
+    expect(screen.getByRole("cell", { name: "alice@kronus.com" })).toBeInTheDocument();
   });
 
   it("shows the empty state when there is no data", () => {
@@ -196,7 +196,7 @@ describe("DataTable — pagination", () => {
   const many: Person[] = Array.from({ length: 12 }, (_, i) => ({
     id: i + 1,
     name: `Person ${String.fromCharCode(65 + i)}`,
-    email: `p${i}@cooud.com`,
+    email: `p${i}@kronus.com`,
     amount: i,
   }));
 
@@ -313,7 +313,7 @@ describe("DataTable — labels", () => {
 
 describe("DataTable — helpers", () => {
   it("fuzzyTextFilter matches case-insensitively", () => {
-    const row = { getValue: () => "Cooud Checkout" } as never;
+    const row = { getValue: () => "Kronus Checkout" } as never;
     expect(fuzzyTextFilter(row, "name", "checkout", () => {})).toBe(true);
     expect(fuzzyTextFilter(row, "name", "stripe", () => {})).toBe(false);
   });

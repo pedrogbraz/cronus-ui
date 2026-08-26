@@ -1,10 +1,10 @@
 /**
- * Test utilities for apps built on Cooud UI — imported from
- * `@cooud-ui/ui/testing` (deliberately not part of the main barrel, so test
+ * Test utilities for apps built on Kronus UI — imported from
+ * `@kronus-ui/ui/testing` (deliberately not part of the main barrel, so test
  * helpers can never leak into an app bundle).
  *
- * - `renderWithCooud` — Testing Library `render` wrapped in a scoped
- *   `CooudUIProvider`, plus `rerenderWithTheme` to flip theme/mode mid-test.
+ * - `renderWithKronus` — Testing Library `render` wrapped in a scoped
+ *   `KronusUIProvider`, plus `rerenderWithTheme` to flip theme/mode mid-test.
  * - `findDialog` / `findTooltip` — document.body-scoped async queries for
  *   Radix surfaces that render through portals (outside the render container).
  * - `expectNoA11yViolations` — the house axe gate: run axe-core over an
@@ -15,7 +15,7 @@
  * (`expectNoA11yViolations` only) are optional peer dependencies — install
  * them with your dev dependencies. Runs under jsdom with Vitest or Jest.
  */
-import { CooudUIProvider, type CooudUIProviderProps } from "@cooud-ui/theme";
+import { KronusUIProvider, type KronusUIProviderProps } from "@kronus-ui/theme";
 import {
   type RenderOptions,
   type RenderResult,
@@ -25,43 +25,43 @@ import {
 } from "@testing-library/react";
 import type { ReactElement, ReactNode } from "react";
 
-/** Theme preset accepted by {@link renderWithCooud} (e.g. "aurora", "neutral"). */
-export type CooudTheme = NonNullable<CooudUIProviderProps["defaultThemeName"]>;
-/** Mode accepted by {@link renderWithCooud} ("dark" | "light"). */
-export type CooudMode = NonNullable<CooudUIProviderProps["defaultModeName"]>;
+/** Theme preset accepted by {@link renderWithKronus} (e.g. "aurora", "neutral"). */
+export type KronusTheme = NonNullable<KronusUIProviderProps["defaultThemeName"]>;
+/** Mode accepted by {@link renderWithKronus} ("dark" | "light"). */
+export type KronusMode = NonNullable<KronusUIProviderProps["defaultModeName"]>;
 
-export interface RenderWithCooudOptions extends Omit<RenderOptions, "queries"> {
+export interface RenderWithKronusOptions extends Omit<RenderOptions, "queries"> {
   /** Theme preset to mount the UI under. @default "aurora" */
-  theme?: CooudTheme;
+  theme?: KronusTheme;
   /** Color mode to mount the UI under. @default "dark" */
-  mode?: CooudMode;
+  mode?: KronusMode;
 }
 
-export interface RenderWithCooudResult extends RenderResult {
+export interface RenderWithKronusResult extends RenderResult {
   /**
    * Remount the themed scope under a different theme/mode (the provider seeds
    * its state from the mount-time defaults, so switching requires a remount —
    * component state inside the tree is reset, exactly like a fresh render).
    */
-  rerenderWithTheme: (theme: CooudTheme, mode?: CooudMode) => void;
+  rerenderWithTheme: (theme: KronusTheme, mode?: KronusMode) => void;
 }
 
 /**
- * Testing Library `render` with the UI wrapped in a scoped `CooudUIProvider`
+ * Testing Library `render` with the UI wrapped in a scoped `KronusUIProvider`
  * (non-`asRoot`): the theme attributes land on a wrapper `<div
- * data-cooud-theme data-cooud-mode>`, never on `<html>`, so parallel tests
+ * data-kronus-theme data-kronus-mode>`, never on `<html>`, so parallel tests
  * cannot bleed theme state into each other through the document.
  *
  * Returns the usual render result — `rerender` keeps re-wrapping in the same
- * provider — plus {@link RenderWithCooudResult.rerenderWithTheme}.
+ * provider — plus {@link RenderWithKronusResult.rerenderWithTheme}.
  *
  * Note: Radix overlays portal to `document.body`, outside the themed wrapper.
  * Use `baseElement` (not `container`) for assertions that must see them.
  */
-export function renderWithCooud(
+export function renderWithKronus(
   ui: ReactElement,
-  options: RenderWithCooudOptions = {},
-): RenderWithCooudResult {
+  options: RenderWithKronusOptions = {},
+): RenderWithKronusResult {
   const { theme = "aurora", mode = "dark", ...rtlOptions } = options;
   const current = { theme, mode };
   let lastUi: ReactNode = ui;
@@ -69,13 +69,13 @@ export function renderWithCooud(
   // The provider seeds theme/mode state from its `default*` props, so a theme
   // change must remount it — the key encodes the active pair to force that.
   const wrap = (el: ReactNode) => (
-    <CooudUIProvider
+    <KronusUIProvider
       key={`${current.theme}:${current.mode}`}
       defaultThemeName={current.theme}
       defaultModeName={current.mode}
     >
       {el}
-    </CooudUIProvider>
+    </KronusUIProvider>
   );
 
   const result = render(wrap(ui), rtlOptions);
@@ -86,7 +86,7 @@ export function renderWithCooud(
       lastUi = next;
       result.rerender(wrap(next));
     },
-    rerenderWithTheme: (nextTheme: CooudTheme, nextMode?: CooudMode) => {
+    rerenderWithTheme: (nextTheme: KronusTheme, nextMode?: KronusMode) => {
       current.theme = nextTheme;
       current.mode = nextMode ?? current.mode;
       result.rerender(wrap(lastUi));
@@ -133,7 +133,7 @@ async function loadVitestAxe(): Promise<VitestAxe> {
     return await import("vitest-axe");
   } catch {
     throw new Error(
-      '@cooud-ui/ui/testing: expectNoA11yViolations needs the optional peer dependency "vitest-axe". ' +
+      '@kronus-ui/ui/testing: expectNoA11yViolations needs the optional peer dependency "vitest-axe". ' +
         "Install it with your dev dependencies (e.g. `npm i -D vitest-axe`) and re-run the tests.",
     );
   }
@@ -141,7 +141,7 @@ async function loadVitestAxe(): Promise<VitestAxe> {
 
 /**
  * Run axe-core over an element and fail with the formatted violations if any
- * are found — the same gate the Cooud UI component suite runs on every
+ * are found — the same gate the Kronus UI component suite runs on every
  * surface. Overlays portal to `document.body`, so pass Testing Library's
  * `baseElement` (rather than `container`) to include them in the scan.
  *

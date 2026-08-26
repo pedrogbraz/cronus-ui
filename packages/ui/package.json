@@ -1,7 +1,7 @@
 {
-  "name": "@cooud-ui/ui",
+  "name": "@kronus-ui/ui",
   "version": "0.5.0",
-  "description": "Cooud UI — themeable, accessible React components (Radix + CVA + Tailwind v4).",
+  "description": "Kronus UI — themeable, accessible React components (Radix + CVA + Tailwind v4).",
   "type": "module",
   "exports": {
     ".": {
@@ -492,24 +492,128 @@
       "types": "./dist/components/video-player.d.ts",
       "import": "./dist/components/video-player.js"
     },
+    "./animated-list": {
+      "types": "./dist/components/animated-list.d.ts",
+      "import": "./dist/components/animated-list.js"
+    },
+    "./card-stack": {
+      "types": "./dist/components/card-stack.d.ts",
+      "import": "./dist/components/card-stack.js"
+    },
+    "./click-spark": {
+      "types": "./dist/components/click-spark.d.ts",
+      "import": "./dist/components/click-spark.js"
+    },
+    "./confetti": {
+      "types": "./dist/components/confetti.d.ts",
+      "import": "./dist/components/confetti.js"
+    },
+    "./dot-pattern": {
+      "types": "./dist/components/dot-pattern.d.ts",
+      "import": "./dist/components/dot-pattern.js"
+    },
+    "./dynamic-island": {
+      "types": "./dist/components/dynamic-island.d.ts",
+      "import": "./dist/components/dynamic-island.js"
+    },
+    "./expandable-tabs": {
+      "types": "./dist/components/expandable-tabs.d.ts",
+      "import": "./dist/components/expandable-tabs.js"
+    },
+    "./flickering-grid": {
+      "types": "./dist/components/flickering-grid.d.ts",
+      "import": "./dist/components/flickering-grid.js"
+    },
+    "./glare-hover": {
+      "types": "./dist/components/glare-hover.d.ts",
+      "import": "./dist/components/glare-hover.js"
+    },
+    "./grid-pattern": {
+      "types": "./dist/components/grid-pattern.d.ts",
+      "import": "./dist/components/grid-pattern.js"
+    },
+    "./highlighter": {
+      "types": "./dist/components/highlighter.d.ts",
+      "import": "./dist/components/highlighter.js"
+    },
+    "./light-rays": {
+      "types": "./dist/components/light-rays.d.ts",
+      "import": "./dist/components/light-rays.js"
+    },
+    "./meteors": {
+      "types": "./dist/components/meteors.d.ts",
+      "import": "./dist/components/meteors.js"
+    },
+    "./noise": {
+      "types": "./dist/components/noise.d.ts",
+      "import": "./dist/components/noise.js"
+    },
+    "./particles": {
+      "types": "./dist/components/particles.d.ts",
+      "import": "./dist/components/particles.js"
+    },
+    "./pill-nav": {
+      "types": "./dist/components/pill-nav.d.ts",
+      "import": "./dist/components/pill-nav.js"
+    },
+    "./progressive-blur": {
+      "types": "./dist/components/progressive-blur.d.ts",
+      "import": "./dist/components/progressive-blur.js"
+    },
+    "./retro-grid": {
+      "types": "./dist/components/retro-grid.d.ts",
+      "import": "./dist/components/retro-grid.js"
+    },
+    "./ripple": {
+      "types": "./dist/components/ripple.d.ts",
+      "import": "./dist/components/ripple.js"
+    },
+    "./scramble-text": {
+      "types": "./dist/components/scramble-text.d.ts",
+      "import": "./dist/components/scramble-text.js"
+    },
+    "./shiny-text": {
+      "types": "./dist/components/shiny-text.d.ts",
+      "import": "./dist/components/shiny-text.js"
+    },
+    "./sparkles-text": {
+      "types": "./dist/components/sparkles-text.d.ts",
+      "import": "./dist/components/sparkles-text.js"
+    },
+    "./spinning-text": {
+      "types": "./dist/components/spinning-text.d.ts",
+      "import": "./dist/components/spinning-text.js"
+    },
+    "./star-border": {
+      "types": "./dist/components/star-border.d.ts",
+      "import": "./dist/components/star-border.js"
+    },
+    "./typing-text": {
+      "types": "./dist/components/typing-text.d.ts",
+      "import": "./dist/components/typing-text.js"
+    },
+    "./word-rotate": {
+      "types": "./dist/components/word-rotate.d.ts",
+      "import": "./dist/components/word-rotate.js"
+    },
     "./package.json": "./package.json"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "sideEffects": false,
   "license": "MIT",
-  "author": "Cooud",
+  "author": "Kronus",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pedrogbraz/cooud-ui.git",
+    "url": "git+https://github.com/pedrogbraz/kronus-ui.git",
     "directory": "packages/ui"
   },
-  "homepage": "https://github.com/pedrogbraz/cooud-ui#readme",
+  "homepage": "https://github.com/pedrogbraz/kronus-ui#readme",
   "bugs": {
-    "url": "https://github.com/pedrogbraz/cooud-ui/issues"
+    "url": "https://github.com/pedrogbraz/kronus-ui/issues"
   },
   "keywords": [
-    "cooud",
+    "kronus",
     "design-system",
     "react",
     "tailwind",
@@ -571,7 +675,7 @@
     "vaul": "^1.1.2"
   },
   "peerDependencies": {
-    "@cooud-ui/theme": "workspace:*",
+    "@kronus-ui/theme": "workspace:*",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
@@ -635,7 +739,7 @@
     }
   },
   "devDependencies": {
-    "@cooud-ui/theme": "workspace:*",
+    "@kronus-ui/theme": "workspace:*",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",

@@ -54,7 +54,7 @@ export const AccordionContent = forwardRef<
       ref={ref}
       data-slot="accordion-content"
       className={cn(
-        "overflow-hidden text-sm text-fg-secondary data-[state=open]:animate-[cooud-accordion-down_220ms_var(--ease-out-quart)] data-[state=closed]:animate-[cooud-accordion-up_180ms_var(--ease-out-quart)]",
+        "overflow-hidden text-sm text-fg-secondary data-[state=open]:animate-[kronus-accordion-down_220ms_var(--ease-out-quart)] data-[state=closed]:animate-[kronus-accordion-up_180ms_var(--ease-out-quart)]",
         className,
       )}
       {...props}

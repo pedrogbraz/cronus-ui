@@ -95,7 +95,7 @@ describe("Form", () => {
     await userEvent.click(screen.getByRole("button", { name: "Submit" }));
     expect(await screen.findByRole("alert")).toBeInTheDocument();
 
-    await userEvent.type(screen.getByRole("textbox", { name: "Email" }), "ada@cooud.com");
+    await userEvent.type(screen.getByRole("textbox", { name: "Email" }), "ada@kronus.com");
     await userEvent.click(screen.getByRole("button", { name: "Submit" }));
 
     await waitFor(() => expect(screen.queryByRole("alert")).not.toBeInTheDocument());

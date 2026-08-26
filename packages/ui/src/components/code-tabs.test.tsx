@@ -5,9 +5,9 @@ import { axe } from "vitest-axe";
 import { CodeTabs, type CodeTabsItem } from "./code-tabs.js";
 
 const items: CodeTabsItem[] = [
-  { label: "bun", code: "bun add @cooud-ui/ui", language: "bash" },
-  { label: "npm", code: "npm install @cooud-ui/ui", language: "bash" },
-  { label: "pnpm", code: "pnpm add @cooud-ui/ui", language: "bash" },
+  { label: "bun", code: "bun add @kronus-ui/ui", language: "bash" },
+  { label: "npm", code: "npm install @kronus-ui/ui", language: "bash" },
+  { label: "pnpm", code: "pnpm add @kronus-ui/ui", language: "bash" },
 ];
 
 function selectedTab() {
@@ -26,14 +26,14 @@ describe("CodeTabs", () => {
     expect(screen.getByRole("tablist")).toBeInTheDocument();
     expect(screen.getAllByRole("tab")).toHaveLength(3);
     expect(screen.getByRole("tab", { name: "bun" })).toHaveAttribute("aria-selected", "true");
-    expect(screen.getByText("bun add @cooud-ui/ui")).toBeVisible();
+    expect(screen.getByText("bun add @kronus-ui/ui")).toBeVisible();
     // Inactive panels are unmounted by Radix.
-    expect(screen.queryByText("npm install @cooud-ui/ui")).not.toBeInTheDocument();
+    expect(screen.queryByText("npm install @kronus-ui/ui")).not.toBeInTheDocument();
   });
 
   it("renders the code in a monospace element inside the tabpanel", () => {
     render(<CodeTabs items={items} />);
-    const code = screen.getByText("bun add @cooud-ui/ui");
+    const code = screen.getByText("bun add @kronus-ui/ui");
     expect(code).toHaveClass("font-mono");
     expect(code.closest('[role="tabpanel"]')).toBeInTheDocument();
   });
@@ -41,7 +41,7 @@ describe("CodeTabs", () => {
   it("starts on defaultLabel when it matches an item", () => {
     render(<CodeTabs items={items} defaultLabel="pnpm" />);
     expect(screen.getByRole("tab", { name: "pnpm" })).toHaveAttribute("aria-selected", "true");
-    expect(screen.getByText("pnpm add @cooud-ui/ui")).toBeVisible();
+    expect(screen.getByText("pnpm add @kronus-ui/ui")).toBeVisible();
   });
 
   it("falls back to the first item when defaultLabel is unknown", () => {
@@ -55,8 +55,8 @@ describe("CodeTabs", () => {
     await userEvent.click(screen.getByRole("tab", { name: "npm" }));
     expect(onLabelChange).toHaveBeenCalledWith("npm");
     expect(screen.getByRole("tab", { name: "npm" })).toHaveAttribute("aria-selected", "true");
-    expect(screen.getByText("npm install @cooud-ui/ui")).toBeVisible();
-    expect(screen.queryByText("bun add @cooud-ui/ui")).not.toBeInTheDocument();
+    expect(screen.getByText("npm install @kronus-ui/ui")).toBeVisible();
+    expect(screen.queryByText("bun add @kronus-ui/ui")).not.toBeInTheDocument();
   });
 
   it("moves selection with the arrow keys (roving focus)", async () => {
@@ -99,7 +99,7 @@ describe("CodeTabs", () => {
     window.localStorage.setItem("pm", "npm");
     render(<CodeTabs items={items} storageKey="pm" />);
     expect(screen.getByRole("tab", { name: "npm" })).toHaveAttribute("aria-selected", "true");
-    expect(screen.getByText("npm install @cooud-ui/ui")).toBeVisible();
+    expect(screen.getByText("npm install @kronus-ui/ui")).toBeVisible();
   });
 
   it("ignores a stored label that matches no item", () => {

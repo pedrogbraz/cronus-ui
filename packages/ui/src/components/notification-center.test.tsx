@@ -34,7 +34,7 @@ const notifications: NotificationItem[] = [
   },
   {
     id: "n3",
-    title: "Welcome to Cooud",
+    title: "Welcome to Kronus",
     description: "Finish setting up your store",
     timestamp: "yesterday",
     read: true,
@@ -80,7 +80,7 @@ describe("NotificationCenter", () => {
     expect(within(panel).getByText("New comment")).toBeInTheDocument();
     expect(within(panel).getByText("Ana replied to your invoice")).toBeInTheDocument();
     expect(within(panel).getByText("Payout sent")).toBeInTheDocument();
-    expect(within(panel).getByRole("button", { name: /Welcome to Cooud/ })).toBeInTheDocument();
+    expect(within(panel).getByRole("button", { name: /Welcome to Kronus/ })).toBeInTheDocument();
   });
 
   it("fires onNotificationClick with the row id", async () => {

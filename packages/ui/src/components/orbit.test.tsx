@@ -35,7 +35,7 @@ describe("Orbit", () => {
     expect(screen.getByText("Nucleus")).toBeInTheDocument();
     const styles = Array.from(stage.querySelectorAll("style"));
     expect(styles).toHaveLength(1);
-    expect(styles[0]?.textContent).toContain("@keyframes cooud-orbit-spin");
+    expect(styles[0]?.textContent).toContain("@keyframes kronus-orbit-spin");
   });
 
   it("sizes the ring circle from the radius and draws the faint guide by default", () => {
@@ -118,10 +118,10 @@ describe("Orbit", () => {
     expect(circle.style.getPropertyValue("--orbit-spin-direction")).toBe("normal");
     expect(circle.style.getPropertyValue("--orbit-counter-direction")).toBe("reverse");
     const [positioner] = positioners(container);
-    expect(positioner?.className).toContain("[animation-name:cooud-orbit-spin]");
+    expect(positioner?.className).toContain("[animation-name:kronus-orbit-spin]");
     expect(positioner?.className).toContain("[animation-direction:var(--orbit-spin-direction)]");
     const item = container.querySelector('[data-slot="orbit-item"]') as HTMLElement;
-    expect(item.className).toContain("[animation-name:cooud-orbit-spin]");
+    expect(item.className).toContain("[animation-name:kronus-orbit-spin]");
     expect(item.className).toContain(
       "[animation-direction:var(--orbit-counter-direction,reverse)]",
     );
@@ -186,8 +186,8 @@ describe("Orbit", () => {
 
   it("has no axe violations", async () => {
     const { container } = render(
-      <Orbit aria-label="Tools orbiting the Cooud core">
-        <span className="font-display text-sm">Cooud</span>
+      <Orbit aria-label="Tools orbiting the Kronus core">
+        <span className="font-display text-sm">Kronus</span>
         <OrbitRing radius={80} duration={20}>
           {items}
         </OrbitRing>

@@ -83,7 +83,7 @@ export interface SegmentedControlProps
   onValueChange?: (value: string) => void;
   /** Density of the items. Defaults to `"md"`. */
   size?: SegmentedControlSize;
-  /** Override the thumb spring (advanced — defaults to the Cooud thumb spring). */
+  /** Override the thumb spring (advanced — defaults to the Kronus thumb spring). */
   transition?: Transition;
   /**
    * How `prefers-reduced-motion` is honoured. Defaults to `"user"` (snap the

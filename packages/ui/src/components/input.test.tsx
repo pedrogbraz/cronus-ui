@@ -15,8 +15,8 @@ describe("Input", () => {
   it("updates its value as the user types (uncontrolled)", async () => {
     render(<Input aria-label="Email" />);
     const input = screen.getByRole("textbox", { name: "Email" });
-    await userEvent.type(input, "ada@cooud.com");
-    expect(input).toHaveValue("ada@cooud.com");
+    await userEvent.type(input, "ada@kronus.com");
+    expect(input).toHaveValue("ada@kronus.com");
   });
 
   it("does not accept typing while disabled", async () => {
