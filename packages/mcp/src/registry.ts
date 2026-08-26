@@ -3,16 +3,16 @@ import { isAbsolute, join, resolve } from "node:path";
 import { SERVER_VERSION } from "./version.js";
 
 /**
- * The default public registry base. Mirrors the `cooud-ui` CLI's
+ * The default public registry base. Mirrors the `kronus-ui` CLI's
  * `DEFAULT_REGISTRY` so the MCP server and the CLI resolve the same items.
- * Overridable at runtime via the `COOUD_UI_REGISTRY` env var (http(s) base
+ * Overridable at runtime via the `KRONUS_UI_REGISTRY` env var (http(s) base
  * URL or a local directory path).
  */
-export const DEFAULT_REGISTRY = `https://raw.githubusercontent.com/pedrogbraz/cooud-ui/v${SERVER_VERSION}/registry`;
+export const DEFAULT_REGISTRY = `https://raw.githubusercontent.com/pedrogbraz/kronus-ui/v${SERVER_VERSION}/registry`;
 
 /** Resolve the active registry source, honouring the env override. */
 export function resolveRegistrySource(env: NodeJS.ProcessEnv = process.env): string {
-  const override = env.COOUD_UI_REGISTRY?.trim();
+  const override = env.KRONUS_UI_REGISTRY?.trim();
   return override && override.length > 0 ? override : DEFAULT_REGISTRY;
 }
 

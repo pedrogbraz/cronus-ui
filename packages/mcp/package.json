@@ -1,21 +1,21 @@
 {
-  "name": "cooud-ui-mcp",
+  "name": "kronus-ui-mcp",
   "version": "0.5.0",
-  "description": "Model Context Protocol server for Cooud UI — lets MCP-compatible AI agents discover and fetch Cooud UI components and blocks from the registry.",
+  "description": "Model Context Protocol server for Kronus UI — lets MCP-compatible AI agents discover and fetch Kronus UI components and blocks from the registry.",
   "type": "module",
   "license": "MIT",
-  "author": "Cooud",
+  "author": "Kronus",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pedrogbraz/cooud-ui.git",
+    "url": "git+https://github.com/pedrogbraz/kronus-ui.git",
     "directory": "packages/mcp"
   },
-  "homepage": "https://github.com/pedrogbraz/cooud-ui#readme",
+  "homepage": "https://github.com/pedrogbraz/kronus-ui#readme",
   "bugs": {
-    "url": "https://github.com/pedrogbraz/cooud-ui/issues"
+    "url": "https://github.com/pedrogbraz/kronus-ui/issues"
   },
   "keywords": [
-    "cooud",
+    "kronus",
     "components",
     "design-system",
     "registry",
@@ -26,7 +26,7 @@
     "ui"
   ],
   "bin": {
-    "cooud-ui-mcp": "./dist/index.js"
+    "kronus-ui-mcp": "./dist/index.js"
   },
   "files": [
     "dist",

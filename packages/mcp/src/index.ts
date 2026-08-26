@@ -5,20 +5,20 @@ import { RegistryClient, resolveRegistrySource, SourceRegistryLoader } from "./r
 import { createServer } from "./server.js";
 import { SERVER_VERSION } from "./version.js";
 
-const HELP = `cooud-ui-mcp — expose the Cooud UI registry through MCP.
+const HELP = `kronus-ui-mcp — expose the Kronus UI registry through MCP.
 
 Usage
-  cooud-ui-mcp [options]
+  kronus-ui-mcp [options]
 
 Options
   -h, --help     Show this help
   -v, --version  Show the version
 
 Environment
-  COOUD_UI_REGISTRY         Override the registry source
-  COOUD_MCP_CLI_CMD         Override the CLI launcher used by the write tools
+  KRONUS_UI_REGISTRY         Override the registry source
+  KRONUS_MCP_CLI_CMD         Override the CLI launcher used by the write tools
                             (default: bunx --bun ${PINNED_CLI}, then npx)
-  COOUD_MCP_CLI_TIMEOUT_MS  Per-run CLI timeout for the write tools (default: 120000)
+  KRONUS_MCP_CLI_TIMEOUT_MS  Per-run CLI timeout for the write tools (default: 120000)
 `;
 
 async function main(): Promise<void> {
@@ -40,11 +40,11 @@ async function main(): Promise<void> {
   await server.connect(transport);
 
   // stdout is reserved for the MCP protocol — diagnostics go to stderr only.
-  process.stderr.write(`cooud-ui-mcp ${SERVER_VERSION} ready (registry: ${source})\n`);
+  process.stderr.write(`kronus-ui-mcp ${SERVER_VERSION} ready (registry: ${source})\n`);
 }
 
 main().catch((error: unknown) => {
   const message = error instanceof Error ? (error.stack ?? error.message) : String(error);
-  process.stderr.write(`cooud-ui-mcp failed to start: ${message}\n`);
+  process.stderr.write(`kronus-ui-mcp failed to start: ${message}\n`);
   process.exitCode = 1;
 });

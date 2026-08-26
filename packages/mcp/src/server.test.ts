@@ -18,7 +18,7 @@ const INDEX: RegistryIndex = [
   {
     name: "pricing",
     type: "registry:block",
-    dependencies: ["@cooud-ui/ui@0.2.0"],
+    dependencies: ["@kronus-ui/ui@0.2.0"],
     registryDependencies: [],
   },
 ];
@@ -32,12 +32,22 @@ function fixtureLoader(): RegistryLoader {
   };
 }
 
-/** Same fake CLI as cli.test.ts: echoes argv/cwd, then prints add/theme lines. */
+/** Same fake CLI as cli.test.ts: echoes argv/cwd, then prints add/theme/compose/upgrade lines. */
 const ECHO_CLI = `
 const args = process.argv.slice(2);
 console.log(JSON.stringify({ argv: args, cwd: process.cwd() }));
-if (args[0] === "theme") {
-  console.log("\\u203a Would write this block to app/globals.css (replacing any previous one):");
+if (args[0] === "compose") {
+  console.log("\\u2714 Generated app/(site)/page.tsx");
+} else if (args[0] === "add-page") {
+  console.log("\\u2714 Wrote app/(site)/pricing/page.tsx");
+} else if (args[0] === "upgrade") {
+  console.log("\\u2714 Upgraded button");
+} else if (args[0] === "theme") {
+  if (args[1] === "set") {
+    console.log("\\u2714 Set theme");
+  } else {
+    console.log("\\u203a Would write this block to app/globals.css (replacing any previous one):");
+  }
 } else {
   console.log("\\u2714 Added components/ui/button.tsx");
   console.log("\\u2714 Installed dependencies");
@@ -57,7 +67,7 @@ function body(result: Awaited<ReturnType<Client["callTool"]>>): Record<string, u
 }
 
 beforeAll(async () => {
-  scratch = mkdtempSync(join(tmpdir(), "cooud-ui-mcp-server-"));
+  scratch = mkdtempSync(join(tmpdir(), "kronus-ui-mcp-server-"));
   writeFileSync(join(scratch, "echo-cli.mjs"), ECHO_CLI);
   project = join(scratch, "project");
   mkdirSync(project);
@@ -79,16 +89,20 @@ afterAll(async () => {
 });
 
 describe("MCP server over an in-memory transport", () => {
-  it("exposes the five read tools and the two write tools", async () => {
+  it("exposes the five read tools and the six write tools", async () => {
     const { tools } = await client.listTools();
     expect(tools.map((t) => t.name).sort()).toEqual([
+      "add_page",
       "apply_theme",
+      "compose_app",
       "get_component",
       "get_install_command",
       "install_component",
       "list_blocks",
       "list_components",
       "search_registry",
+      "set_theme",
+      "upgrade_components",
     ]);
   });
 
@@ -108,7 +122,14 @@ describe("MCP server over an in-memory transport", () => {
         openWorldHint: false,
       });
     }
-    for (const name of ["install_component", "apply_theme"]) {
+    for (const name of [
+      "install_component",
+      "upgrade_components",
+      "apply_theme",
+      "compose_app",
+      "add_page",
+      "set_theme",
+    ]) {
       expect(byName.get(name)?.annotations, name).toMatchObject({
         readOnlyHint: false,
         destructiveHint: true,
@@ -151,7 +172,7 @@ describe("MCP server over an in-memory transport", () => {
   it("runs apply_theme with dryRun through the CLI seam", async () => {
     const result = await client.callTool({
       name: "apply_theme",
-      arguments: { source: "https://cooud-ui.dev/studio?c=abc", dryRun: true },
+      arguments: { source: "https://kronus-ui.dev/studio?c=abc", dryRun: true },
     });
     expect(result.isError).toBeFalsy();
     const outcome = body(result) as {
@@ -166,7 +187,114 @@ describe("MCP server over an in-memory transport", () => {
       "Would write this block to app/globals.css (replacing any previous one):",
     ]);
     const echo = JSON.parse(outcome.stdout.split("\n")[0] ?? "") as { argv: string[] };
-    expect(echo.argv).toEqual(["theme", "add", "https://cooud-ui.dev/studio?c=abc", "--dry-run"]);
+    expect(echo.argv).toEqual(["theme", "add", "https://kronus-ui.dev/studio?c=abc", "--dry-run"]);
+  });
+
+  it("runs compose_app through the CLI seam with -y by default", async () => {
+    const result = await client.callTool({
+      name: "compose_app",
+      arguments: { template: "saas", brand: "Acme" },
+    });
+    expect(result.isError).toBeFalsy();
+    const outcome = body(result) as { status: string; stdout: string; notes: string[] };
+    expect(outcome.status).toBe("success");
+    expect(outcome.notes).toEqual(["✔ Generated app/(site)/page.tsx"]);
+    const echo = JSON.parse(outcome.stdout.split("\n")[0] ?? "") as { argv: string[] };
+    expect(echo.argv).toEqual(["compose", "saas", "-y", "--brand", "Acme"]);
+  });
+
+  it("runs add_page through the CLI seam", async () => {
+    const result = await client.callTool({
+      name: "add_page",
+      arguments: { route: "/pricing", blocks: "pricing,cta", nav: "Pricing" },
+    });
+    expect(result.isError).toBeFalsy();
+    const outcome = body(result) as { status: string; stdout: string };
+    expect(outcome.status).toBe("success");
+    const echo = JSON.parse(outcome.stdout.split("\n")[0] ?? "") as { argv: string[] };
+    expect(echo.argv).toEqual([
+      "add-page",
+      "--route",
+      "/pricing",
+      "--blocks",
+      "pricing,cta",
+      "--nav",
+      "Pricing",
+    ]);
+  });
+
+  it("forwards add_page app as --app", async () => {
+    const result = await client.callTool({
+      name: "add_page",
+      arguments: { route: "/faq", blocks: "faq", app: "store" },
+    });
+    expect(result.isError).toBeFalsy();
+    const outcome = body(result) as { status: string; stdout: string };
+    expect(outcome.status).toBe("success");
+    const echo = JSON.parse(outcome.stdout.split("\n")[0] ?? "") as { argv: string[] };
+    expect(echo.argv).toEqual(["add-page", "--route", "/faq", "--blocks", "faq", "--app", "store"]);
+  });
+
+  it("forwards add_page manifest as --manifest", async () => {
+    const result = await client.callTool({
+      name: "add_page",
+      arguments: {
+        route: "/pricing",
+        blocks: "pricing,cta",
+        manifest: "./my-store.json",
+      },
+    });
+    expect(result.isError).toBeFalsy();
+    const outcome = body(result) as { status: string; stdout: string };
+    expect(outcome.status).toBe("success");
+    const echo = JSON.parse(outcome.stdout.split("\n")[0] ?? "") as { argv: string[] };
+    expect(echo.argv).toEqual([
+      "add-page",
+      "--route",
+      "/pricing",
+      "--blocks",
+      "pricing,cta",
+      "--manifest",
+      "./my-store.json",
+    ]);
+  });
+
+  it("runs upgrade_components through the CLI seam with --all --dry-run", async () => {
+    const result = await client.callTool({
+      name: "upgrade_components",
+      arguments: { dryRun: true },
+    });
+    expect(result.isError).toBeFalsy();
+    const outcome = body(result) as { status: string; notes: string[]; stdout: string };
+    expect(outcome.status).toBe("success");
+    expect(outcome.notes).toEqual(["✔ Upgraded button"]);
+    const echo = JSON.parse(outcome.stdout.split("\n")[0] ?? "") as { argv: string[] };
+    expect(echo.argv).toEqual(["upgrade", "--all", "--dry-run"]);
+  });
+
+  it("forwards upgrade_components manifest as --manifest", async () => {
+    const result = await client.callTool({
+      name: "upgrade_components",
+      arguments: { dryRun: true, manifest: "tiny.json" },
+    });
+    expect(result.isError).toBeFalsy();
+    const outcome = body(result) as { status: string; stdout: string };
+    expect(outcome.status).toBe("success");
+    const echo = JSON.parse(outcome.stdout.split("\n")[0] ?? "") as { argv: string[] };
+    expect(echo.argv).toEqual(["upgrade", "--all", "--dry-run", "--manifest", "tiny.json"]);
+  });
+
+  it("runs set_theme through the CLI seam", async () => {
+    const result = await client.callTool({
+      name: "set_theme",
+      arguments: { name: "sunset", mode: "dark" },
+    });
+    expect(result.isError).toBeFalsy();
+    const outcome = body(result) as { status: string; changes: string[]; stdout: string };
+    expect(outcome.status).toBe("success");
+    expect(outcome.changes).toEqual(["Set theme"]);
+    const echo = JSON.parse(outcome.stdout.split("\n")[0] ?? "") as { argv: string[] };
+    expect(echo.argv).toEqual(["theme", "set", "sunset", "--mode", "dark"]);
   });
 
   it("returns an in-band error for an invalid item name", async () => {
@@ -187,5 +315,23 @@ describe("MCP server over an in-memory transport", () => {
     expect(result.isError).toBe(true);
     const content = result.content as { text: string }[];
     expect(content[0]?.text).toMatch(/Input validation error/);
+  });
+
+  it("rejects a schema-invalid compose template and an invalid add_page route in-band", async () => {
+    const badTemplate = await client.callTool({
+      name: "compose_app",
+      arguments: { template: "dashboard" },
+    });
+    expect(badTemplate.isError).toBe(true);
+    const templateText = (badTemplate.content as { text: string }[])[0]?.text ?? "";
+    expect(templateText).toMatch(/Input validation error/);
+
+    const badRoute = await client.callTool({
+      name: "add_page",
+      arguments: { route: "pricing", blocks: "pricing" },
+    });
+    expect(badRoute.isError).toBe(true);
+    const routeText = (badRoute.content as { text: string }[])[0]?.text ?? "";
+    expect(routeText).toMatch(/Invalid route/);
   });
 });
