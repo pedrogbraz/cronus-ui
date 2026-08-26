@@ -1,9 +1,9 @@
 {
   "mcpServers": {
-    "cooud-ui": {
+    "kronus-ui": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "cooud-ui-mcp"]
+      "args": ["-y", "kronus-ui-mcp"]
     }
   }
 }

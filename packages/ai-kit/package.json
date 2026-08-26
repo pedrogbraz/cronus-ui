@@ -1,21 +1,21 @@
 {
-  "name": "@cooud-ui/ai-kit",
+  "name": "@kronus-ui/ai-kit",
   "version": "0.5.0",
-  "description": "The Cooud UI AI Kit — an engineering doctrine, skills, and per-assistant config, scaffolded into your project.",
+  "description": "The Kronus UI AI Kit — an engineering doctrine, skills, and per-assistant config, scaffolded into your project.",
   "type": "module",
   "license": "MIT",
-  "author": "Cooud",
+  "author": "Kronus",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pedrogbraz/cooud-ui.git",
+    "url": "git+https://github.com/pedrogbraz/kronus-ui.git",
     "directory": "packages/ai-kit"
   },
-  "homepage": "https://github.com/pedrogbraz/cooud-ui#readme",
+  "homepage": "https://github.com/pedrogbraz/kronus-ui#readme",
   "bugs": {
-    "url": "https://github.com/pedrogbraz/cooud-ui/issues"
+    "url": "https://github.com/pedrogbraz/kronus-ui/issues"
   },
   "keywords": [
-    "cooud",
+    "kronus",
     "ai",
     "agents",
     "claude-code",

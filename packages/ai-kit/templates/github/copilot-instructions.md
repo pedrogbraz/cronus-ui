@@ -15,4 +15,13 @@ These are the core rules for suggesting code in this repository. The full engine
 
 ## UI work
 
-Follow the UI library selected in `KICKOFF.md` / `stack.json`. If Cooud UI is selected, use `@cooud-ui/ui` components, theme through `@cooud-ui/tokens` / `useTheme`, and prefer `npx cooud-ui add <slug>` over hand-rolling a component. If another UI library or no UI library is selected, do not import Cooud UI packages unless the project explicitly adds them. Never inline raw colors and respect `prefers-reduced-motion`.
+Follow the UI library selected in `KICKOFF.md` / `stack.json`. If Kronus UI is selected:
+
+- New app: `npx create-kronus-app <name> --template saas`. Never omit `--template` (CLI default is an empty starter). Other composed templates: `store`, `landing`.
+- New route: `npx kronus-ui add-page` or MCP `add_page`. Pages are installed blocks stacked in `<main>` — do not hand-write a page of Cards.
+- One primitive: `npx kronus-ui add <slug>` (MCP `install_component`).
+- Theme: `npx kronus-ui theme set` / `useTheme`. Never `bg-zinc-*` or palette utilities.
+- Upgrade: `npx kronus-ui upgrade --all --dry-run`, then `--all`. Refreshes installed items and composed pages. MCP `upgrade_components`.
+- Never run shadcn init or write a shadcn `components.json`.
+
+If another UI library or no UI library is selected, do not import Kronus UI packages unless the project explicitly adds them. Never inline raw colors and respect `prefers-reduced-motion`.

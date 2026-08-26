@@ -22,10 +22,17 @@ export type DoctrinePreset = (typeof DOCTRINE_PRESETS)[number];
 export const DEFAULT_PRESET: DoctrinePreset = "standard";
 
 /** The curated Claude Code skills that ship with the kit. */
-export const SKILLS = ["ui-add", "theme", "code-review", "ship-pr", "evidence-check"] as const;
+export const SKILLS = [
+  "ui-add",
+  "theme",
+  "compose",
+  "code-review",
+  "ship-pr",
+  "evidence-check",
+] as const;
 export type Skill = (typeof SKILLS)[number];
 export const DEFAULT_SKILLS: readonly Skill[] = SKILLS;
-const COOUD_UI_SKILLS: ReadonlySet<Skill> = new Set(["ui-add", "theme"]);
+const KRONUS_UI_SKILLS: ReadonlySet<Skill> = new Set(["ui-add", "theme", "compose"]);
 
 export interface AiKitOptions {
   /** Absolute path of the (already scaffolded) project. */
@@ -38,13 +45,13 @@ export interface AiKitOptions {
   preset?: DoctrinePreset;
   /** Which Claude Code skills to include. @default all */
   skills?: readonly Skill[];
-  /** Whether to emit Cooud UI-specific rules/skills. @default true */
-  includeCooudUi?: boolean;
+  /** Whether to emit Kronus UI-specific rules/skills. @default true */
+  includeKronusUi?: boolean;
   /**
-   * Whether to emit the cooud-ui MCP config. Defaults to the legacy Claude
+   * Whether to emit the kronus-ui MCP config. Defaults to the legacy Claude
    * behavior unless explicitly selected by a stack scaffold.
    */
-  cooudUiMcp?: boolean;
+  kronusUiMcp?: boolean;
 }
 
 export interface AiKitResult {
@@ -65,7 +72,7 @@ function templatesRoot(): string {
   const found = candidates.find((p) => existsSync(join(p, "AGENTS.base.md")));
   if (!found) {
     throw new Error(
-      `Could not locate @cooud-ui/ai-kit templates (looked in: ${candidates.join(", ")}).`,
+      `Could not locate @kronus-ui/ai-kit templates (looked in: ${candidates.join(", ")}).`,
     );
   }
   return found;
@@ -81,8 +88,8 @@ function templatesRoot(): string {
  * artifacts that reference it — `CLAUDE.md`, the doctrine Cursor rule, the
  * Copilot digest — are skipped too; only assistant-local tooling ships.
  *
- * When `includeCooudUi` is false, the generic doctrine/tooling remains, but
- * Cooud UI-specific rules and skills are not emitted.
+ * When `includeKronusUi` is false, the generic doctrine/tooling remains, but
+ * Kronus UI-specific rules and skills are not emitted.
  */
 export function writeAiKit(options: AiKitOptions): AiKitResult {
   const {
@@ -91,7 +98,7 @@ export function writeAiKit(options: AiKitOptions): AiKitResult {
     assistants = DEFAULT_ASSISTANTS,
     preset = DEFAULT_PRESET,
     skills = DEFAULT_SKILLS,
-    includeCooudUi = true,
+    includeKronusUi = true,
   } = options;
   const root = templatesRoot();
   const written: string[] = [];
@@ -99,10 +106,10 @@ export function writeAiKit(options: AiKitOptions): AiKitResult {
 
   const withDoctrine = preset !== "none";
   const wants = (a: Assistant) => assistants.includes(a);
-  const wantsCooudUiMcp = options.cooudUiMcp ?? (includeCooudUi && wants("claude"));
-  const enabledSkills = includeCooudUi
+  const wantsKronusUiMcp = options.kronusUiMcp ?? (includeKronusUi && wants("claude"));
+  const enabledSkills = includeKronusUi
     ? skills
-    : skills.filter((skill) => !COOUD_UI_SKILLS.has(skill));
+    : skills.filter((skill) => !KRONUS_UI_SKILLS.has(skill));
 
   /** Write `content` to `rel` unless it already exists. Tokens are substituted. */
   const emit = (rel: string, content: string): void => {
@@ -131,7 +138,7 @@ export function writeAiKit(options: AiKitOptions): AiKitResult {
     emit("AGENTS.md", doctrine);
   }
 
-  if (wantsCooudUiMcp) {
+  if (wantsKronusUiMcp) {
     emitTemplate("mcp.json", ".mcp.json");
   }
 
@@ -146,11 +153,11 @@ export function writeAiKit(options: AiKitOptions): AiKitResult {
     }
   }
 
-  // Cursor — the design-system rule applies only to Cooud UI stacks; doctrine is generic.
+  // Cursor — the design-system rule applies only to Kronus UI stacks; doctrine is generic.
   if (wants("cursor")) {
     if (withDoctrine) emitTemplate("cursor/rules/00-doctrine.mdc", ".cursor/rules/00-doctrine.mdc");
-    if (includeCooudUi)
-      emitTemplate("cursor/rules/10-cooud-ui.mdc", ".cursor/rules/10-cooud-ui.mdc");
+    if (includeKronusUi)
+      emitTemplate("cursor/rules/10-kronus-ui.mdc", ".cursor/rules/10-kronus-ui.mdc");
   }
 
   // GitHub Copilot — a digest of the doctrine.
