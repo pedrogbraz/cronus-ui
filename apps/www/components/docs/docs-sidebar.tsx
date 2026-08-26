@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@cooud-ui/ui";
+import { cn } from "@kronus-ui/ui";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
@@ -8,7 +8,7 @@ import { CATEGORIES, getComponentDisplayName } from "../../lib/components-index"
 
 export function DocsSidebar() {
   return (
-    <aside className="hidden lg:block">
+    <aside className="hidden pt-10 lg:block">
       <nav
         aria-label="Components"
         className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pb-12 pr-4 text-sm"

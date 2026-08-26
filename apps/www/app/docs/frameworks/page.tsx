@@ -9,21 +9,21 @@ import { FrameworkGrid } from "../../../components/docs/framework-grid";
 
 const adapterContract = `// 1. Import tokens in the framework global CSS entry.
 @import "tailwindcss";
-@import "@cooud-ui/tokens/styles.css";
+@import "@kronus-ui/tokens/styles.css";
 
-// 2. Wrap the root UI tree in CooudUIProvider.
-<CooudUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">
+// 2. Wrap the root UI tree in KronusUIProvider.
+<KronusUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">
   {children}
-</CooudUIProvider>
+</KronusUIProvider>
 
 // 3. Add components through the registry.
-pnpm dlx cooud-ui@latest add button card dialog form`;
+pnpm dlx kronus-ui@latest add button card dialog form`;
 
 const rscUsage = `// app/activity/page.tsx — a Server Component, no "use client" anywhere.
-import { Badge } from "@cooud-ui/ui/badge";
-import { Timeline, TimelineContent, TimelineItem, TimelineTitle } from "@cooud-ui/ui/timeline";
+import { Badge } from "@kronus-ui/ui/badge";
+import { Timeline, TimelineContent, TimelineItem, TimelineTitle } from "@kronus-ui/ui/timeline";
 // Client components nest inside server markup and hydrate as islands:
-import { CopyButton } from "@cooud-ui/ui/copy-button";
+import { CopyButton } from "@kronus-ui/ui/copy-button";
 
 export default function ActivityPage() {
   return (
@@ -45,7 +45,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   experimental: {
-    optimizePackageImports: ["@cooud-ui/ui"],
+    optimizePackageImports: ["@kronus-ui/ui"],
   },
 };
 
@@ -62,7 +62,7 @@ export default function FrameworksPage() {
 
       <DocsSection
         title="Choose your framework"
-        description="Create the app with the framework's official tool, then run cooud-ui init inside it. The init command is framework-agnostic and acts on the current directory."
+        description="Create the app with the framework's official tool, then run kronus-ui init inside it. The init command is framework-agnostic and acts on the current directory."
       >
         <FrameworkGrid />
       </DocsSection>
@@ -80,7 +80,7 @@ export default function FrameworksPage() {
       >
         <p className="text-sm leading-6 text-fg-secondary">
           In server files, prefer per-entry imports such as{" "}
-          <InlineCode>@cooud-ui/ui/timeline</InlineCode> so only the rendered module is loaded.
+          <InlineCode>@kronus-ui/ui/timeline</InlineCode> so only the rendered module is loaded.
           Interactive components are already marked <InlineCode>&quot;use client&quot;</InlineCode>{" "}
           internally, so you can nest them inside server markup freely — they hydrate as client
           islands while the rest of the page stays server-rendered.
@@ -89,7 +89,7 @@ export default function FrameworksPage() {
           <CodeBlock code={rscUsage} language="tsx" expandable />
         </div>
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
-          If you keep the barrel import (<InlineCode>@cooud-ui/ui</InlineCode>), add the package to
+          If you keep the barrel import (<InlineCode>@kronus-ui/ui</InlineCode>), add the package to
           Next.js <InlineCode>optimizePackageImports</InlineCode> so server bundles stay
           tree-shaken:
         </p>
@@ -106,12 +106,12 @@ export default function FrameworksPage() {
 
       <DocsSection
         title="Laravel note"
-        description="For Laravel, create the app first with the Laravel installer, then run Cooud UI inside the Vite/Inertia or Blade frontend workspace."
+        description="For Laravel, create the app first with the Laravel installer, then run Kronus UI inside the Vite/Inertia or Blade frontend workspace."
       >
         <p className="text-sm leading-6 text-fg-secondary">
           Start with <InlineCode>laravel new app</InlineCode>, choose the frontend stack, then run{" "}
-          <InlineCode>cooud-ui init</InlineCode> inside the project. Server validation errors should
-          map into <InlineCode>FieldError</InlineCode> or equivalent visible form feedback.
+          <InlineCode>kronus-ui init</InlineCode> inside the project. Server validation errors
+          should map into <InlineCode>FieldError</InlineCode> or equivalent visible form feedback.
         </p>
       </DocsSection>
     </div>

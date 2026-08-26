@@ -12,9 +12,9 @@ import {
 } from "../../../../components/docs/documentation";
 
 export const metadata = {
-  title: "Accessibility conformance — Cooud UI",
+  title: "Accessibility conformance — Kronus UI",
   description:
-    "An honest accessibility conformance statement for Cooud UI: the target standard, how it is enforced, and what is not yet covered.",
+    "An honest accessibility conformance statement for Kronus UI: the target standard, how it is enforced, and what is not yet covered.",
 };
 
 // Kept deliberately factual — every enforcement layer here maps to a real
@@ -34,12 +34,17 @@ const enforcementLayers = [
   {
     title: "Unit axe layer",
     description:
-      "Component tests assert zero axe violations with vitest-axe through @cooud-ui/ui/testing, so regressions are caught before a route exists.",
+      "Component tests assert zero axe violations with vitest-axe through @kronus-ui/ui/testing, so regressions are caught before a route exists.",
   },
   {
     title: "Reduced motion & RTL",
     description:
       "Animated primitives honour prefers-reduced-motion by default, and layout uses logical properties so components mirror correctly under dir=rtl.",
+  },
+  {
+    title: "Contrast gate",
+    description:
+      "bun run test:contrast (e2e/a11y/contrast-themes.spec.ts) runs a contrast-only axe scan over representative routes across all 10 theme × mode combinations.",
   },
 ] as const;
 
@@ -55,7 +60,7 @@ const supportedCriteria = [
 const knownLimitations = [
   "Only serious and critical axe findings block; moderate and minor findings are reported, triaged, and fixed but do not fail the build.",
   "Automated scans cover the automatable subset of WCAG. jsdom cannot compute rendered contrast, so contrast is validated by the browser-based axe project and by authoring token pairs — not by the unit layer.",
-  "The full-route axe gate scans every component and block page in the default theme (aurora, dark), where zero serious/critical violations is enforced route-by-route. A comprehensive per-theme and light-mode contrast pass is in progress and not yet fully gated — the docs code viewer already ships a mode-aware syntax palette, but some chrome and the neutral light preset still have contrast to tighten.",
+  "The broad axe gate (bun run test:a11y) scans every component and block page in aurora/dark. bun run test:contrast sweeps representative routes across all 10 theme × mode combinations — a contrast-only axe scan, not every route × every combo.",
   "WCAG 2.2 adds success criteria (for example target size and focus-not-obscured) that have little automated coverage; those are addressed through the component patterns and manual review rather than a passing rule.",
   "Components that wrap third-party libraries (charts, some date primitives) inherit their upstream accessibility; we add names and text alternatives around them but do not rewrite their internals.",
   "No formal third-party accessibility audit has been performed yet, and no VPAT has been issued.",
@@ -76,14 +81,14 @@ const blocking = results.violations.filter(
 expect(blocking).toEqual([]);`;
 
 const adopterTestExample = `// your-component.test.tsx — the same axe gate we run, in your app.
-import { expectNoA11yViolations, renderWithCooud } from "@cooud-ui/ui/testing";
+import { expectNoA11yViolations, renderWithKronus } from "@kronus-ui/ui/testing";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { it } from "vitest";
 
 it("stays accessible after interaction", async () => {
   const user = userEvent.setup();
-  const { baseElement } = renderWithCooud(<YourComponent />);
+  const { baseElement } = renderWithKronus(<YourComponent />);
 
   await user.click(screen.getByRole("button", { name: "Open" }));
   await expectNoA11yViolations(baseElement); // fails with the violations
@@ -95,12 +100,12 @@ export default function AccessibilityConformancePage() {
       <DocsHeader
         eyebrow="Accessibility"
         title="Accessibility conformance statement"
-        description="An honest account of what Cooud UI targets, how that target is enforced, and where the gaps are. It is a self-assessment (ACR-style), not a certification."
+        description="An honest account of what Kronus UI targets, how that target is enforced, and where the gaps are. It is a self-assessment (ACR-style), not a certification."
       />
 
       <DocsSection
         title="Target standard"
-        description="Cooud UI is built to meet WCAG 2.2 Level AA."
+        description="Kronus UI is built to meet WCAG 2.2 Level AA."
       >
         <p className="text-fg-secondary">
           The design goal for every component is{" "}
@@ -109,7 +114,7 @@ export default function AccessibilityConformancePage() {
           </strong>
           . This statement describes our conformance <em>effort</em> and the checks behind it. It is
           a self-assessment produced by the maintainers — not a formal audit, and not a
-          certification. Cooud UI is a component library, so the final accessibility of a shipped
+          certification. Kronus UI is a component library, so the final accessibility of a shipped
           product also depends on how you compose these components, your content, and your app.
         </p>
         <DocCallout title="Self-assessment, not a certificate">
@@ -129,11 +134,13 @@ export default function AccessibilityConformancePage() {
           ))}
         </DocsGrid>
         <p className="mt-6 text-fg-secondary">
-          The automated gate scans every <InlineCode>/components/*</InlineCode> and{" "}
-          <InlineCode>/blocks/*</InlineCode> route with axe-core and fails the build on any{" "}
-          <InlineCode>serious</InlineCode> or <InlineCode>critical</InlineCode> violation. It runs
-          the WCAG 2.0 and 2.1 Level A/AA rule sets — the subset that can be checked automatically —
-          so it does not, on its own, prove every WCAG 2.2 criterion.
+          The broad gate (<InlineCode>bun run test:a11y</InlineCode>) scans every{" "}
+          <InlineCode>/components/*</InlineCode> and <InlineCode>/blocks/*</InlineCode> route with
+          axe-core in aurora/dark and fails the build on any <InlineCode>serious</InlineCode> or{" "}
+          <InlineCode>critical</InlineCode> violation. It runs the WCAG 2.0 and 2.1 Level A/AA rule
+          sets — the subset that can be checked automatically — so it does not, on its own, prove
+          every WCAG 2.2 criterion. <InlineCode>bun run test:contrast</InlineCode> then runs a
+          contrast-only axe scan over representative routes in all 10 theme × mode combinations.
         </p>
         <CodeBlock code={axeTagsExample} language="tsx" />
         <p className="mt-4 text-fg-secondary">
@@ -165,14 +172,15 @@ export default function AccessibilityConformancePage() {
       </DocsSection>
 
       <DocsSection
-        title="For teams adopting Cooud UI"
+        title="For teams adopting Kronus UI"
         description="The accessibility you get depends on how you use the components — here is how to keep it."
       >
         <p className="text-fg-secondary">
           Whether you install through the registry or copy the source, you get the{" "}
           <strong className="font-medium text-fg">same</strong> component behavior — the
           accessibility work travels with the code, not a runtime service. To keep it as you compose
-          and extend, run the same axe gate we do with <InlineCode>@cooud-ui/ui/testing</InlineCode>
+          and extend, run the same axe gate we do with{" "}
+          <InlineCode>@kronus-ui/ui/testing</InlineCode>
           &rsquo;s <InlineCode>expectNoA11yViolations</InlineCode>, and pair it with a keyboard and
           screen-reader pass on your own flows:
         </p>

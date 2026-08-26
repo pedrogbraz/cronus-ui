@@ -6,8 +6,8 @@ import {
   DocsGrid,
   DocsHeader,
   DocsSection,
+  DocsTextLink,
   InlineCode,
-  PrimaryLink,
 } from "../../../components/docs/documentation";
 import { ACCESSIBILITY_CHECKS } from "../../../lib/docs";
 
@@ -27,8 +27,8 @@ const skipLinkExample = `// app/layout.tsx — one skip link, then exactly one <
 {/* ...elsewhere in the route... */}
 <main id="main-content">{children}</main>`;
 
-const iconButtonExample = `import { Button } from "@cooud-ui/ui";
-import { Label } from "@cooud-ui/ui";
+const iconButtonExample = `import { Button } from "@kronus-ui/ui";
+import { Label } from "@kronus-ui/ui";
 import { X } from "lucide-react";
 
 // Form controls get a real label tied to the input.
@@ -40,7 +40,7 @@ import { X } from "lucide-react";
   <X />
 </Button>`;
 
-const dialogExample = `import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@cooud-ui/ui";
+const dialogExample = `import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@kronus-ui/ui";
 
 <Dialog>
   <DialogContent>
@@ -51,7 +51,7 @@ const dialogExample = `import { Dialog, DialogContent, DialogDescription, Dialog
   </DialogContent>
 </Dialog>`;
 
-const reducedMotionExample = `import { Marquee } from "@cooud-ui/ui";
+const reducedMotionExample = `import { Marquee } from "@kronus-ui/ui";
 
 // Default motionPreference="respect" — scrolls for everyone except
 // visitors with prefers-reduced-motion, who get a static row.
@@ -75,16 +75,16 @@ const complexWidgetExample = `// Charts can't be made node-accessible, so descri
 
 const testingInstallExample = `npm i -D @testing-library/react vitest-axe`;
 
-const testingHelpersExample = `// invite-panel.test.tsx — Vitest + jsdom, using @cooud-ui/ui/testing.
-import { expectNoA11yViolations, findDialog, renderWithCooud } from "@cooud-ui/ui/testing";
+const testingHelpersExample = `// invite-panel.test.tsx — Vitest + jsdom, using @kronus-ui/ui/testing.
+import { expectNoA11yViolations, findDialog, renderWithKronus } from "@kronus-ui/ui/testing";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { it } from "vitest";
 
 it("invite dialog stays accessible", async () => {
   const user = userEvent.setup();
-  // render() wrapped in a scoped CooudUIProvider (a wrapper div, not <html>).
-  const { baseElement, rerenderWithTheme } = renderWithCooud(<InvitePanel />, {
+  // render() wrapped in a scoped KronusUIProvider (a wrapper div, not <html>).
+  const { baseElement, rerenderWithTheme } = renderWithKronus(<InvitePanel />, {
     theme: "aurora",
     mode: "dark",
   });
@@ -114,7 +114,7 @@ export default function AccessibilityPage() {
       <DocsHeader
         eyebrow="Accessibility"
         title="Accessibility is part of the component contract"
-        description="Cooud UI components ship with keyboard behavior, visible focus, semantic structure, and framework integration notes so teams do not rediscover the same edge cases."
+        description="Kronus UI components ship with keyboard behavior, visible focus, semantic structure, and framework integration notes so teams do not rediscover the same edge cases."
       />
 
       <DocsSection title="Quality bars">
@@ -170,7 +170,7 @@ export default function AccessibilityPage() {
           contrast is preserved across modes.
         </p>
         <p className="text-fg-secondary">
-          See <PrimaryLink href="/docs/theming">Theming</PrimaryLink> for how the token pairs are
+          See <DocsTextLink href="/docs/theming">Theming</DocsTextLink> for how the token pairs are
           structured and overridden.
         </p>
       </DocsSection>
@@ -222,10 +222,10 @@ export default function AccessibilityPage() {
         <CodeBlock code={axeExample} language="tsx" />
         <p className="text-fg-secondary">
           Run the same axe gate on your own components with{" "}
-          <InlineCode>@cooud-ui/ui/testing</InlineCode> — Testing Library helpers that render under
-          a scoped <InlineCode>CooudUIProvider</InlineCode>, find Radix surfaces through their
+          <InlineCode>@kronus-ui/ui/testing</InlineCode> — Testing Library helpers that render under
+          a scoped <InlineCode>KronusUIProvider</InlineCode>, find Radix surfaces through their
           portals, and assert zero axe violations. Both testing packages are optional peer
-          dependencies of <InlineCode>@cooud-ui/ui</InlineCode>, so they never touch your app
+          dependencies of <InlineCode>@kronus-ui/ui</InlineCode>, so they never touch your app
           bundle:
         </p>
         <CodeBlock code={testingInstallExample} language="bash" />
@@ -242,9 +242,9 @@ export default function AccessibilityPage() {
       >
         <p className="text-fg-secondary">
           The{" "}
-          <PrimaryLink href="/docs/accessibility/conformance">
+          <DocsTextLink href="/docs/accessibility/conformance">
             accessibility conformance statement
-          </PrimaryLink>{" "}
+          </DocsTextLink>{" "}
           is a self-assessment against WCAG 2.2 Level AA — it lays out the enforcement layers, what
           is supported, and the known limitations, without overclaiming.
         </p>

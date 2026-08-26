@@ -13,7 +13,7 @@ import { INSTALL_OPTIONS } from "../../../lib/docs";
 
 /**
  * Heavy, component-specific libraries that ship as OPTIONAL peer dependencies
- * of the @cooud-ui/ui npm package — installed only by consumers who import the
+ * of the @kronus-ui/ui npm package — installed only by consumers who import the
  * matching component. CLI installs are unaffected (add installs per-item deps).
  */
 const OPTIONAL_PEERS = [
@@ -32,16 +32,24 @@ export default function InstallationPage() {
     <div className="py-10">
       <DocsHeader
         eyebrow="Installation"
-        title="Install Cooud UI in the path that matches your project"
-        description="Use Create for visual preset work, then run the CLI inside any project — new or existing — to wire tokens, providers, and config."
+        title="Install Kronus UI in the path that matches your project"
+        description="New product: scaffold a composed SaaS. Existing app: run the CLI. Create Studio is for designing a visual preset first."
       />
 
       <div className="mt-8">
-        <DocCallout title="Recommended for new projects">
-          Use <InlineCode>/create</InlineCode> to build a preset visually, then copy the setup
-          command generated for your framework and package manager.
+        <DocCallout title="Recommended for a new product">
+          Scaffold with <InlineCode>npx create-kronus-app@latest my-app --template saas</InlineCode>
+          . Use Create Studio when you want to design a visual preset before you generate setup
+          snippets.
         </DocCallout>
       </div>
+
+      <DocsSection
+        title="Scaffold a SaaS app"
+        description="create-kronus-app composes a Next.js app from validated blocks (auth, dashboard shell, billing), wires the theme, and ships the AI Kit."
+      >
+        <PackageManagerTabs command="create" description="Scaffold a SaaS app" />
+      </DocsSection>
 
       <DocsSection title="Starting point">
         <DocsGrid>
@@ -86,7 +94,7 @@ export default function InstallationPage() {
 
       <DocsSection
         title="Optional peer dependencies (npm package)"
-        description="Using @cooud-ui/ui as a managed npm dependency instead of the CLI? A few heavy, component-specific libraries are optional peers and are not installed automatically — add them only when you import the component. CLI users skip this: add installs each item's dependencies."
+        description="Using @kronus-ui/ui as a managed npm dependency instead of the CLI? A few heavy, component-specific libraries are optional peers and are not installed automatically — add them only when you import the component. CLI users skip this: add installs each item's dependencies."
       >
         <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full min-w-[32rem] border-collapse text-left text-sm">

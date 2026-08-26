@@ -3,11 +3,12 @@ import {
   DocCallout,
   DocsHeader,
   DocsSection,
+  DocsTextLink,
   InlineCode,
   PrimaryLink,
 } from "../../../components/docs/documentation";
 
-const classNameCode = `import { Button } from "@cooud-ui/ui";
+const classNameCode = `import { Button } from "@kronus-ui/ui";
 
 export function CheckoutButton() {
   // className is merged last, so these win without !important.
@@ -19,7 +20,7 @@ export function CheckoutButton() {
   );
 }`;
 
-const variantsCode = `import { buttonVariants } from "@cooud-ui/ui";
+const variantsCode = `import { buttonVariants } from "@kronus-ui/ui";
 import Link from "next/link";
 
 // Reuse a component's variants on an element that isn't that component.
@@ -31,7 +32,7 @@ export function DocsLink() {
   );
 }`;
 
-const dataSlotCode = `import { Card, CardContent, CardHeader, CardTitle } from "@cooud-ui/ui";
+const dataSlotCode = `import { Card, CardContent, CardHeader, CardTitle } from "@kronus-ui/ui";
 
 // Reach into a composed component's internals from the parent
 // by targeting its data-slot with an arbitrary variant.
@@ -46,20 +47,20 @@ export function HighlightCard() {
   );
 }`;
 
-const asChildCode = `import { Button } from "@cooud-ui/ui";
+const asChildCode = `import { Button } from "@kronus-ui/ui";
 import Link from "next/link";
 
 // asChild renders YOUR element with the Button's behavior and styles —
 // here a real <a> from Next's <Link>, not a <button>.
 export function UpgradeCta() {
   return (
-    <Button asChild variant="gradient" size="lg">
+    <Button asChild variant="primary" size="lg">
       <Link href="/pricing">Upgrade now</Link>
     </Button>
   );
 }`;
 
-const tokensCode = `import { Button } from "@cooud-ui/ui";
+const tokensCode = `import { Button } from "@kronus-ui/ui";
 
 // Prefer semantic tokens over raw colors so overrides re-theme with the app.
 export function CalloutButton() {
@@ -73,7 +74,7 @@ export function CalloutButton() {
   );
 }`;
 
-const cnCode = `import { cn } from "@cooud-ui/ui";
+const cnCode = `import { cn } from "@kronus-ui/ui";
 
 // Use cn in your own components so consumer className stays merge-safe.
 export function Panel({ className, ...props }: React.ComponentProps<"div">) {
@@ -158,14 +159,14 @@ export default function StylingPage() {
         <CodeBlock code={tokensCode} language="tsx" expandable />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
           The same tokens power every component, so token-based overrides stay correct across themes
-          and presets. See <PrimaryLink href="/docs/theming">Theming</PrimaryLink> for how those
+          and presets. See <DocsTextLink href="/docs/theming">Theming</DocsTextLink> for how those
           tokens are defined and swapped.
         </p>
       </DocsSection>
 
       <DocsSection
         title="Stay merge-safe in your own components"
-        description="When you wrap or build on Cooud UI, run your classes through cn too. That keeps consumer className overrides predictable — the same last-wins behavior every Cooud UI component relies on."
+        description="When you wrap or build on Kronus UI, run your classes through cn too. That keeps consumer className overrides predictable — the same last-wins behavior every Kronus UI component relies on."
       >
         <CodeBlock code={cnCode} language="tsx" expandable />
         <DocCallout title="Keep overrides token-based" tone="success">

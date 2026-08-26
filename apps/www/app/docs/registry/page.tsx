@@ -12,7 +12,7 @@ const registryFlow = [
   {
     title: "Generate",
     description:
-      "The registry is generated from real @cooud-ui/ui component sources, keeping docs, packages, and copy-paste output aligned.",
+      "The registry is generated from real @kronus-ui/ui component sources, keeping docs, packages, and copy-paste output aligned.",
   },
   {
     title: "Resolve",
@@ -30,9 +30,9 @@ const registryFlow = [
   },
 ] as const;
 
-const buildCommand = `bun run -F cooud-ui registry
-pnpm dlx cooud-ui@latest list --registry ./registry
-pnpm dlx cooud-ui@latest add button card --registry ./registry`;
+const buildCommand = `bun run -F kronus-ui registry
+pnpm dlx kronus-ui@latest list --registry ./registry
+pnpm dlx kronus-ui@latest add button card --registry ./registry`;
 
 const shadcnAddCommand = `npx shadcn@latest add ${absoluteUrl("/r/button.json")}`;
 
@@ -70,7 +70,7 @@ export default function RegistryPage() {
 
       <DocsSection
         title="Use with the shadcn CLI"
-        description="The registry also speaks the shadcn registry spec, so any shadcn-compatible tool can install Cooud UI without the cooud-ui CLI."
+        description="The registry also speaks the shadcn registry spec, so any shadcn-compatible tool can install Kronus UI without the kronus-ui CLI."
       >
         <CodeBlock code={shadcnAddCommand} language="bash" />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
@@ -87,7 +87,7 @@ export default function RegistryPage() {
       >
         <CodeBlock code={registryItem} language="json" />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
-          The CLI reads <InlineCode>cooud-ui.json</InlineCode> before writing files, so copied
+          The CLI reads <InlineCode>kronus-ui.json</InlineCode> before writing files, so copied
           components follow the receiving app's folder structure.
         </p>
       </DocsSection>

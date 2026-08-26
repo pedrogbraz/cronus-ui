@@ -3,18 +3,19 @@ import {
   DocCallout,
   DocsHeader,
   DocsSection,
+  DocsTextLink,
   InlineCode,
   PrimaryLink,
 } from "../../../components/docs/documentation";
 
-const primitivesCode = `import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@cooud-ui/ui";
+const primitivesCode = `import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@kronus-ui/ui";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 // The config maps each series key to a label and a theme token. The token is
 // exposed to recharts children as a \`var(--color-<key>)\` custom property.
 const chartConfig = {
-  revenue: { label: "Revenue", color: "var(--cooud-primary)" },
-  profit: { label: "Profit", color: "var(--cooud-info)" },
+  revenue: { label: "Revenue", color: "var(--kronus-primary)" },
+  profit: { label: "Profit", color: "var(--kronus-info)" },
 } satisfies ChartConfig;
 
 export function Chart() {
@@ -29,8 +30,8 @@ export function Chart() {
 }`;
 
 const barChartCode = `const chartConfig = {
-  revenue: { label: "Revenue", color: "var(--cooud-primary)" },
-  profit: { label: "Profit", color: "var(--cooud-info)" },
+  revenue: { label: "Revenue", color: "var(--kronus-primary)" },
+  profit: { label: "Profit", color: "var(--kronus-info)" },
 } satisfies ChartConfig;
 
 const chartData = [
@@ -48,7 +49,7 @@ return (
       <CartesianGrid vertical={false} />
       <XAxis dataKey="month" tickLine={false} tickMargin={10} axisLine={false} />
       <ChartTooltip
-        cursor={{ fill: "var(--cooud-fg)", fillOpacity: 0.05, radius: 8 }}
+        cursor={{ fill: "var(--kronus-fg)", fillOpacity: 0.05, radius: 8 }}
         content={<ChartTooltipContent />}
       />
       <Bar dataKey="revenue" fill="var(--color-revenue)" radius={4} />
@@ -59,11 +60,11 @@ return (
 
 const donutChartCode = `const chartConfig = {
   visitors: { label: "Visitors" },
-  direct: { label: "Direct", color: "var(--cooud-chart-1)" },
-  organic: { label: "Organic", color: "var(--cooud-chart-2)" },
-  referral: { label: "Referral", color: "var(--cooud-chart-3)" },
-  social: { label: "Social", color: "var(--cooud-chart-4)" },
-  email: { label: "Email", color: "var(--cooud-chart-5)" },
+  direct: { label: "Direct", color: "var(--kronus-chart-1)" },
+  organic: { label: "Organic", color: "var(--kronus-chart-2)" },
+  referral: { label: "Referral", color: "var(--kronus-chart-3)" },
+  social: { label: "Social", color: "var(--kronus-chart-4)" },
+  email: { label: "Email", color: "var(--kronus-chart-5)" },
 } satisfies ChartConfig;
 
 const chartData = [
@@ -125,8 +126,8 @@ return (
 );`;
 
 const radarChartCode = `const chartConfig = {
-  current: { label: "Current", color: "var(--cooud-primary)" },
-  target: { label: "Target", color: "var(--cooud-info)" },
+  current: { label: "Current", color: "var(--kronus-primary)" },
+  target: { label: "Target", color: "var(--kronus-info)" },
 } satisfies ChartConfig;
 
 const chartData = [
@@ -161,10 +162,10 @@ return (
 
 const radialChartCode = `const chartConfig = {
   visitors: { label: "Visitors" },
-  desktop: { label: "Desktop", color: "var(--cooud-chart-1)" },
-  mobile: { label: "Mobile", color: "var(--cooud-chart-2)" },
-  tablet: { label: "Tablet", color: "var(--cooud-chart-3)" },
-  other: { label: "Other", color: "var(--cooud-chart-4)" },
+  desktop: { label: "Desktop", color: "var(--kronus-chart-1)" },
+  mobile: { label: "Mobile", color: "var(--kronus-chart-2)" },
+  tablet: { label: "Tablet", color: "var(--kronus-chart-3)" },
+  other: { label: "Other", color: "var(--kronus-chart-4)" },
 } satisfies ChartConfig;
 
 const chartData = [
@@ -237,23 +238,23 @@ export default function ChartsPage() {
       <DocsHeader
         eyebrow="Documentation"
         title="Charts"
-        description="Compose accessible, theme-aware charts by wiring recharts into ChartContainer with a typed ChartConfig that maps each series to a Cooud token."
+        description="Compose accessible, theme-aware charts by wiring recharts into ChartContainer with a typed ChartConfig that maps each series to a Kronus token."
       >
         <PrimaryLink href="/components/chart">Chart component</PrimaryLink>
       </DocsHeader>
 
       <DocsSection
         title="The chart primitives"
-        description="A chart is a recharts graph composed inside ChartContainer. You give the container a ChartConfig — a map from each series key to a label and a color, usually a var(--cooud-*) token. The container exposes those colors to its recharts children as var(--color-<key>) custom properties, so series, tooltips, and legends all recolor together when the theme changes."
+        description="A chart is a recharts graph composed inside ChartContainer. You give the container a ChartConfig — a map from each series key to a label and a color, usually a var(--kronus-*) token. The container exposes those colors to its recharts children as var(--color-<key>) custom properties, so series, tooltips, and legends all recolor together when the theme changes."
       >
         <CodeBlock code={primitivesCode} language="tsx" expandable />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
           recharts is a peer dependency, imported directly alongside{" "}
-          <InlineCode>@cooud-ui/ui</InlineCode>. The container ships{" "}
+          <InlineCode>@kronus-ui/ui</InlineCode>. The container ships{" "}
           <InlineCode>ChartTooltip</InlineCode>, <InlineCode>ChartTooltipContent</InlineCode>,{" "}
           <InlineCode>ChartLegend</InlineCode>, and <InlineCode>ChartLegendContent</InlineCode>{" "}
-          alongside it. See the <PrimaryLink href="/components/chart">Chart component</PrimaryLink>{" "}
-          for the full API.
+          alongside it. See the{" "}
+          <DocsTextLink href="/components/chart">Chart component</DocsTextLink> for the full API.
         </p>
       </DocsSection>
 
@@ -278,7 +279,7 @@ export default function ChartsPage() {
 
       <DocsSection
         title="Tooltip & legend"
-        description="ChartTooltip and ChartLegend are recharts' Tooltip and Legend with Cooud-styled content. Pass the provided content components and they read each series' label and color indicator straight from the ChartConfig, so you never duplicate the series metadata."
+        description="ChartTooltip and ChartLegend are recharts' Tooltip and Legend with Kronus-styled content. Pass the provided content components and they read each series' label and color indicator straight from the ChartConfig, so you never duplicate the series metadata."
       >
         <CodeBlock code={tooltipLegendCode} language="tsx" expandable />
         <DocCallout title="The config is the single source of truth">

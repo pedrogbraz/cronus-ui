@@ -18,7 +18,7 @@ import {
 const outputCards = [
   {
     title: "Generator command",
-    description: "A deterministic create-cooud-stack command generated from the resolved stack.",
+    description: "A deterministic create-kronus-stack command generated from the resolved stack.",
   },
   {
     title: "KICKOFF.md",
@@ -67,7 +67,7 @@ export default function StackBuilderDocsPage() {
 
       <DocsSection
         title="Generator truth"
-        description="The builder emits commands for the generator package that lives in this monorepo and is released with the rest of Cooud UI."
+        description="The builder emits commands for the generator package that lives in this monorepo and is released with the rest of Kronus UI."
       >
         <div className="rounded-xl border border-border bg-surface-raised p-5 text-sm leading-6 text-fg-secondary">
           <p>

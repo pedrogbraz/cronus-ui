@@ -10,9 +10,9 @@ import {
 
 const rtlSetup = `<html lang="ar" dir="rtl">
   <body>
-    <CooudUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">
+    <KronusUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">
       {children}
-    </CooudUIProvider>
+    </KronusUIProvider>
   </body>
 </html>`;
 

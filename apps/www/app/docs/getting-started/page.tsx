@@ -5,28 +5,77 @@ import {
   DocsGrid,
   DocsHeader,
   DocsSection,
+  DocsTextLink,
   InlineCode,
   PrimaryLink,
 } from "../../../components/docs/documentation";
 
-const initCode = `npx cooud-ui@latest init`;
+const createAppCode = `npx create-kronus-app my-app --template saas`;
 
-const providerCode = `import "@cooud-ui/tokens/styles.css";
-import { CooudUIProvider } from "@cooud-ui/theme";
+const scaffoldProviderCode = `import { KronusThemeScript, KronusUIProvider } from "@kronus-ui/theme";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <KronusThemeScript
+          storageKey="theme"
+          defaultThemeName="aurora"
+          defaultModeName="dark"
+        />
+      </head>
       <body>
-        <CooudUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">
+        <KronusUIProvider
+          asRoot
+          defaultThemeName="aurora"
+          defaultModeName="dark"
+          storageKey="theme"
+        >
           {children}
-        </CooudUIProvider>
+        </KronusUIProvider>
       </body>
     </html>
   );
 }`;
 
-const addButtonCode = `npx cooud-ui add button`;
+const existingProviderCode = `import "@kronus-ui/tokens/styles.css";
+import { KronusThemeScript, KronusUIProvider } from "@kronus-ui/theme";
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <KronusThemeScript
+          storageKey="theme"
+          defaultThemeName="aurora"
+          defaultModeName="dark"
+        />
+      </head>
+      <body>
+        <KronusUIProvider
+          asRoot
+          defaultThemeName="aurora"
+          defaultModeName="dark"
+          storageKey="theme"
+        >
+          {children}
+        </KronusUIProvider>
+      </body>
+    </html>
+  );
+}`;
+
+const themeSetCode = `npx kronus-ui theme set aurora
+npx kronus-ui theme set midnight --mode light`;
+
+const addPageCode = `npx kronus-ui add-page --route /faq --blocks faq,cta --nav FAQ`;
+
+const upgradeCode = `npx kronus-ui upgrade --all --dry-run
+npx kronus-ui upgrade --all`;
+
+const initCode = `npx kronus-ui@latest init`;
+
+const addButtonCode = `npx kronus-ui add button`;
 
 const useButtonCode = `import { Button } from "@/components/ui/button";
 
@@ -38,29 +87,7 @@ export default function Page() {
   );
 }`;
 
-const themeToggleCode = `"use client";
-
-import { Button } from "@cooud-ui/ui";
-import { useTheme } from "@cooud-ui/theme";
-import { Moon, Sun } from "lucide-react";
-
-export function ModeToggle() {
-  const { mode, toggleMode } = useTheme();
-  const isDark = mode === "dark";
-
-  return (
-    <Button
-      variant="outline"
-      size="icon"
-      onClick={toggleMode}
-      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-    >
-      {isDark ? <Sun aria-hidden="true" /> : <Moon aria-hidden="true" />}
-    </Button>
-  );
-}`;
-
-const addBlockCode = `npx cooud-ui add login`;
+const addBlockCode = `npx kronus-ui add login`;
 
 const useBlockCode = `import { LoginBlock } from "@/components/blocks/login";
 
@@ -75,16 +102,17 @@ export default function SignInPage() {
 
 const nextSteps = [
   {
-    title: "Components",
-    description: "Browse the full catalog of primitives, with live previews and props.",
-    href: "/components",
-    action: "Browse components",
+    title: "Compare",
+    description:
+      "Kronus UI next to shadcn/ui, HeroUI, and Aceternity — distribution, theming, compose, a11y.",
+    href: "/docs/compare",
+    action: "Read the comparison",
   },
   {
-    title: "Blocks",
-    description: "Composed sections — auth, dashboards, pricing — ready to drop into a page.",
-    href: "/docs/blocks",
-    action: "Read about blocks",
+    title: "CLI",
+    description: "init, add, compose, add-page, list, diff, upgrade, theme, and ai.",
+    href: "/docs/cli",
+    action: "Read CLI docs",
   },
   {
     title: "Theming",
@@ -93,16 +121,16 @@ const nextSteps = [
     action: "Theme the system",
   },
   {
-    title: "Recipes",
-    description: "Copy-paste patterns: validated forms, toasts, confirmations, and more.",
-    href: "/docs/recipes",
-    action: "Read recipes",
+    title: "Blocks",
+    description: "Composed sections — auth, dashboards, pricing — ready to drop into a page.",
+    href: "/docs/blocks",
+    action: "Read about blocks",
   },
   {
-    title: "CLI",
-    description: "init, add, list, and diff — the full registry command surface.",
-    href: "/docs/cli",
-    action: "Read CLI docs",
+    title: "Components",
+    description: "Browse the full catalog of primitives, with live previews and props.",
+    href: "/components",
+    action: "Browse components",
   },
 ] as const;
 
@@ -112,72 +140,105 @@ export default function GettingStartedPage() {
       <DocsHeader
         eyebrow="Documentation"
         title="Getting started"
-        description="From an empty project to a themed UI in five steps: install, wrap your app, add a component, theme it, and drop in a block."
+        description="From an empty folder to a composed SaaS: scaffold the product, keep the provider, switch theme, grow it with add-page, then pull updates without losing edits. Already have an app? init and add."
       >
-        <PrimaryLink href="/components">Browse components</PrimaryLink>
+        <PrimaryLink href="/docs/cli">Read the CLI</PrimaryLink>
       </DocsHeader>
 
       <DocsSection
-        title="1. Install"
-        description="Run init inside your project. The CLI is framework-agnostic and acts on the current directory — it writes cooud-ui.json, installs base dependencies, imports the tokens stylesheet, and wires the provider and config for you."
+        title="1. Scaffold a SaaS app"
+        description="One command generates a Next.js app composed from validated blocks — auth, an app-shell dashboard, billing, settings — plus the theme runtime and AI Kit. Generated pages are block imports plus a main landmark that stacks them."
+      >
+        <CodeBlock code={createAppCode} language="bash" expandable />
+        <p className="mt-4 text-sm leading-6 text-fg-secondary">
+          Prefer another package manager? Use{" "}
+          <InlineCode>pnpm dlx create-kronus-app@latest my-app --template saas</InlineCode>,{" "}
+          <InlineCode>yarn dlx create-kronus-app@latest my-app --template saas</InlineCode>, or{" "}
+          <InlineCode>bunx create-kronus-app@latest my-app --template saas</InlineCode>. Templates{" "}
+          <InlineCode>store</InlineCode> and <InlineCode>landing</InlineCode> compose the same way.
+          See <DocsTextLink href="/docs/installation">Installation</DocsTextLink> for Create Studio
+          and existing apps.
+        </p>
+      </DocsSection>
+
+      <DocsSection
+        title="2. The provider is already in the scaffold"
+        description="The generated app already imports the tokens stylesheet and wraps the tree in KronusUIProvider. You only add this yourself when wiring an existing app."
+      >
+        <CodeBlock code={scaffoldProviderCode} language="tsx" expandable />
+        <p className="mt-4 text-sm leading-6 text-fg-secondary">
+          Tokens are imported in <InlineCode>globals.css</InlineCode> via{" "}
+          <InlineCode>@import "@kronus-ui/tokens/styles.css"</InlineCode>.{" "}
+          <InlineCode>KronusThemeScript</InlineCode> in the document head applies the saved mode
+          before paint. See <DocsTextLink href="/docs/theming">Theming</DocsTextLink> for the full
+          no-FOUC setup.
+        </p>
+      </DocsSection>
+
+      <DocsSection
+        title="3. Switch the theme"
+        description="Aurora is the default on generated products. theme set rewrites the layout attributes and kronus-ui.json. Presets: aurora, neutral, midnight, sunset, emerald."
+      >
+        <CodeBlock code={themeSetCode} language="bash" expandable />
+        <p className="mt-4 text-sm leading-6 text-fg-secondary">
+          Override individual tokens at runtime, or build a look visually in Create and apply it
+          with <InlineCode>npx kronus-ui theme add</InlineCode>. See{" "}
+          <DocsTextLink href="/docs/theming">Theming</DocsTextLink> and{" "}
+          <DocsTextLink href="/docs/styling">Styling</DocsTextLink> for the full API.
+        </p>
+      </DocsSection>
+
+      <DocsSection
+        title="4. Add a page"
+        description="add-page grows an already-composed app by one route: installs new blocks, updates chrome nav, and records the page in kronus-ui.json."
+      >
+        <CodeBlock code={addPageCode} language="bash" expandable />
+        <p className="mt-4 text-sm leading-6 text-fg-secondary">
+          <InlineCode>--route</InlineCode> and <InlineCode>--blocks</InlineCode> are required. Add{" "}
+          <InlineCode>--nav</InlineCode> to list the page in the shell,{" "}
+          <InlineCode>--dry-run</InlineCode> to preview. Full flags live on{" "}
+          <DocsTextLink href="/docs/cli">CLI</DocsTextLink>.
+        </p>
+      </DocsSection>
+
+      <DocsSection
+        title="5. Pull updates without losing edits"
+        description="upgrade 3-way-merges installed source and generated pages/layouts against .kronus-ui/base. add-page routes are kept. Never use compose --overwrite to pull updates."
+      >
+        <CodeBlock code={upgradeCode} language="bash" expandable />
+        <p className="mt-4 text-sm leading-6 text-fg-secondary">
+          Dry-run first, then apply. If the app was composed from a custom manifest, pass{" "}
+          <InlineCode>--manifest</InlineCode>. Do not run{" "}
+          <InlineCode>compose --overwrite</InlineCode> to upgrade — that wipes page edits. Full
+          flags live on <DocsTextLink href="/docs/cli">CLI</DocsTextLink>.
+        </p>
+      </DocsSection>
+
+      <DocsSection
+        title="6. Already have an app?"
+        description="Run init inside the project, wrap the root with the provider, then add a component or a block. The CLI is framework-agnostic and acts on the current directory."
       >
         <CodeBlock code={initCode} language="bash" expandable />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
-          Prefer another package manager? Use <InlineCode>pnpm dlx cooud-ui@latest init</InlineCode>
-          , <InlineCode>yarn dlx cooud-ui@latest init</InlineCode>, or{" "}
-          <InlineCode>bunx cooud-ui@latest init</InlineCode>. Adding Cooud UI to an app you already
-          have? See <PrimaryLink href="/docs/installation">Installation</PrimaryLink>.
+          init writes <InlineCode>kronus-ui.json</InlineCode>, installs base dependencies, and wires{" "}
+          <InlineCode>cn()</InlineCode>. Import tokens and wrap the tree yourself:
         </p>
-      </DocsSection>
-
-      <DocsSection
-        title="2. Wrap your app with the provider"
-        description="Import the tokens stylesheet once, then wrap the app in CooudUIProvider at the framework root so every component shares the same theme."
-      >
-        <CodeBlock code={providerCode} language="tsx" expandable />
+        <CodeBlock code={existingProviderCode} language="tsx" expandable />
         <DocCallout title="Put it at the root">
           The provider belongs at the very top of your tree — the layout in Next.js, the root route
-          in TanStack Start or React Router, or wherever your app mounts. To avoid a flash of the
-          wrong theme on returning visitors, also render <InlineCode>CooudThemeScript</InlineCode>{" "}
-          in the document head so the saved mode applies before paint. See{" "}
-          <PrimaryLink href="/docs/theming">Theming</PrimaryLink> for the full no-FOUC setup.
+          in TanStack Start or React Router, or wherever your app mounts.
         </DocCallout>
-      </DocsSection>
-
-      <DocsSection
-        title="3. Add your first component"
-        description="Copy a component into your app with add. The CLI writes the source and rewrites its imports to your local aliases, so you import it from your own components folder."
-      >
+        <p className="mt-4 text-sm leading-6 text-fg-secondary">Then copy source with add:</p>
         <CodeBlock code={addButtonCode} language="bash" expandable />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
-          This writes <InlineCode>components/ui/button.tsx</InlineCode>. Import it and render it —
-          it&apos;s already styled by the tokens the provider supplies.
+          This writes <InlineCode>components/ui/button.tsx</InlineCode>. Import it from your aliases
+          — it is already styled by the tokens the provider supplies.
         </p>
         <CodeBlock code={useButtonCode} language="tsx" expandable />
-      </DocsSection>
-
-      <DocsSection
-        title="4. Theme it"
-        description="Theme is a design-system object — colors, brand accents, fonts, and radius move together. Flip light and dark at runtime with the useTheme hook, which reads and persists the active mode through the provider."
-      >
-        <CodeBlock code={themeToggleCode} language="tsx" expandable />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
-          Swap whole presets, override individual tokens at runtime, or build a look visually in
-          Create. See <PrimaryLink href="/docs/theming">Theming</PrimaryLink> and{" "}
-          <PrimaryLink href="/docs/styling">Styling</PrimaryLink> for the full API.
+          A block is a whole section composed from primitives. Same command, different folder:
         </p>
-      </DocsSection>
-
-      <DocsSection
-        title="5. Drop in a block"
-        description="A component is a single primitive; a block is a whole section composed from primitives — a login screen, a pricing grid, a dashboard. Add one with the same command, then render it."
-      >
         <CodeBlock code={addBlockCode} language="bash" expandable />
-        <p className="mt-4 text-sm leading-6 text-fg-secondary">
-          This writes <InlineCode>components/blocks/login.tsx</InlineCode> and installs the
-          block&apos;s dependencies. The file is yours — edit the copy, swap the data, restyle with
-          tokens.
-        </p>
         <CodeBlock code={useBlockCode} language="tsx" expandable />
         <div className="mt-4">
           <PrimaryLink href="/blocks">Browse blocks</PrimaryLink>
@@ -186,7 +247,7 @@ export default function GettingStartedPage() {
 
       <DocsSection
         title="Where to go next"
-        description="You have a themed app with a component and a block. Here is where to deepen each part."
+        description="You have a composed product, or a themed app with a component and a block. Deepen each part."
       >
         <DocsGrid columns={2}>
           {nextSteps.map((step) => (

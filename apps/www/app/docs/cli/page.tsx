@@ -12,40 +12,102 @@ const cliCommands = [
   {
     title: "init",
     description:
-      "Creates cooud-ui.json, installs base dependencies, writes lib/cn, and imports tokens.",
+      "Writes kronus-ui.json, the cn() helper, and base dependencies. Flags: --cwd, --registry, --yes, --skip-install.",
     badge: "setup",
   },
   {
     title: "add",
     description:
-      "Copies components into your app, resolves registry dependencies, and rewrites imports.",
+      "Copies components or blocks, resolves registry + npm deps, rewrites imports. Flags: --overwrite, --skip-install, --cwd, --registry.",
     badge: "daily",
   },
   {
+    title: "compose",
+    description:
+      "Generates a full app from a template (store, landing, saas). Pages are block imports plus a main landmark. Flags: --manifest, --pages, --variant, --brand, --seed, --overwrite, --skip-install, --dry-run, --yes.",
+    badge: "product",
+  },
+  {
+    title: "add-page",
+    description:
+      "Adds one route to a composed app: installs new blocks, updates nav, refreshes the base snapshot. Required: --route, --blocks. Also: --chrome, --title, --nav, --app, --manifest, --overwrite, --dry-run.",
+    badge: "product",
+  },
+  {
     title: "list",
-    description: "Prints registry items and lets teams audit what exists before adding code.",
+    description: "Prints registry items (alias ls). Flags: --cwd, --registry.",
     badge: "inspect",
   },
   {
     title: "diff",
-    description: "Compares local copied components against the registry version to expose drift.",
+    description:
+      "Shows which installed files drifted from the registry. Run upgrade to merge. Flags: --cwd, --registry.",
     badge: "audit",
+  },
+  {
+    title: "upgrade",
+    description:
+      "3-way merge with git merge-file --diff3 of installed components and of generated pages/layouts from compose (.kronus-ui/base vs local vs new render). Clean merges write; conflicts write markers if you confirm. Unresolved files get a prompt in KRONUS-UPGRADE.md. Flags: --all, --dry-run, --yes, --overwrite, --manifest.",
+    badge: "maintain",
+  },
+  {
+    title: "theme set",
+    description:
+      "Switch the preset (aurora, neutral, midnight, sunset, emerald) and optionally --mode dark|light.",
+    badge: "theme",
+  },
+  {
+    title: "theme add",
+    description:
+      "Apply a Create Studio permalink, a bare c= payload, or an exported theme JSON. Flags: --css, --dry-run.",
+    badge: "theme",
+  },
+  {
+    title: "ai",
+    description:
+      "Writes the AI Kit: AGENTS.md doctrine plus Claude / Cursor / Copilot / Windsurf / Gemini config. Flags: --assistants, --preset, --skills.",
+    badge: "agents",
   },
 ] as const;
 
-const inspectCommands = `npx cooud-ui@latest list
-npx cooud-ui@latest diff button`;
+const inspectCommands = `npx kronus-ui@latest list
+npx kronus-ui@latest diff button`;
+
+const addPageExample = `npx kronus-ui@latest add-page --route /faq --blocks faq,cta --nav FAQ
+npx kronus-ui@latest add-page --route /faq --blocks faq,cta --dry-run`;
+
+const upgradeExample = `npx kronus-ui@latest upgrade --all --dry-run
+npx kronus-ui@latest upgrade button card
+npx kronus-ui@latest upgrade --all --yes`;
+
+const themeExample = `npx kronus-ui@latest theme set aurora
+npx kronus-ui@latest theme set midnight --mode light
+npx kronus-ui@latest theme add ./my-theme.json`;
+
+const aiExample = `npx kronus-ui@latest ai
+npx kronus-ui@latest ai --assistants claude,cursor --preset saas --skills all`;
+
+const composeDryRun = `npx kronus-ui@latest compose saas --dry-run
+npx kronus-ui@latest compose store --variant login=split --brand Acme`;
 
 const config = `{
   "aliases": {
     "ui": "@/components/ui",
-    "lib": "@/lib"
+    "lib": "@/lib",
+    "blocks": "@/components/blocks"
   },
   "paths": {
     "ui": "components/ui",
-    "lib": "lib"
+    "lib": "lib",
+    "blocks": "components/blocks"
   },
-  "registry": "https://raw.githubusercontent.com/pedrogbraz/cooud-ui/main/registry"
+  "registry": "https://raw.githubusercontent.com/pedrogbraz/kronus-ui/v0.5.0/registry",
+  "theme": {
+    "name": "aurora",
+    "mode": "dark"
+  },
+  "installed": {},
+  "composed": {}
 }`;
 
 export default function CliPage() {
@@ -53,8 +115,8 @@ export default function CliPage() {
     <div className="py-10">
       <DocsHeader
         eyebrow="CLI"
-        title="Use the registry from any package manager"
-        description="The CLI is the shadcn-style distribution path for apps that should own their component source while still following Cooud UI conventions."
+        title="Install, compose, theme, and upgrade from the terminal"
+        description="The kronus-ui CLI is the shadcn-style path for apps that own their source. New product? Scaffold with create-kronus-app, then use these commands inside the repo."
       />
 
       <DocsSection title="Initialize a project">
@@ -66,15 +128,56 @@ export default function CliPage() {
       </DocsSection>
 
       <DocsSection
+        title="Compose an app"
+        description="compose generates pages and chrome from a bundled template (store, landing, saas) or --manifest. Each page is imports of installed blocks plus a main landmark that stacks them."
+      >
+        <PackageManagerTabs command="compose" description="Compose a template" />
+        <p className="mt-4 text-sm leading-6 text-fg-secondary">
+          <InlineCode>--dry-run</InlineCode> prints the plan and per-file preview without writing.{" "}
+          <InlineCode>--variant login=split</InlineCode> selects a block variant.{" "}
+          <InlineCode>--brand</InlineCode> bakes a wordmark into chrome.
+        </p>
+        <CodeBlock code={composeDryRun} language="bash" />
+      </DocsSection>
+
+      <DocsSection
+        title="Add a page"
+        description="Grows an already-composed app. Required: --route and --blocks. Updates chrome nav when you pass --nav."
+      >
+        <CodeBlock code={addPageExample} language="bash" />
+      </DocsSection>
+
+      <DocsSection
+        title="Theme"
+        description="theme set switches a shipped preset. theme add applies a Create Studio export."
+      >
+        <CodeBlock code={themeExample} language="bash" />
+      </DocsSection>
+
+      <DocsSection
+        title="Upgrade without losing edits"
+        description="Each add records the release in kronus-ui.json installed. upgrade 3-way-merges that base, your file, and upstream with git merge-file --diff3. Composed pages and layouts use the same merge against .kronus-ui/base (snapshot vs local vs new render); add-page routes are kept and user files are never deleted. Custom compose apps take --manifest. Clean merges write; conflicts write markers only if you confirm (or --yes). Unresolved files get a ready-to-paste agent prompt in KRONUS-UPGRADE.md."
+      >
+        <CodeBlock code={upgradeExample} language="bash" />
+      </DocsSection>
+
+      <DocsSection
         title="Inspect the registry"
-        description="List available registry items, or diff a copied component against the registry version to spot local drift."
+        description="List available items, or diff a copied component against the registry version to spot local drift."
       >
         <CodeBlock code={inspectCommands} language="bash" />
       </DocsSection>
 
       <DocsSection
+        title="AI Kit"
+        description="Writes AGENTS.md doctrine and per-assistant config. Presets: standard, fintech, saas, oss, agency, or none. Assistants: claude, cursor, copilot, windsurf, gemini (or all / none)."
+      >
+        <CodeBlock code={aiExample} language="bash" />
+      </DocsSection>
+
+      <DocsSection
         title="Command surface"
-        description="These commands are designed for app teams that want source ownership and repeatable upgrades."
+        description="The commands exported by kronus-ui. Flags match --help — nothing extra."
       >
         <DocsGrid columns={2}>
           {cliCommands.map((command) => (
@@ -90,11 +193,15 @@ export default function CliPage() {
 
       <DocsSection
         title="Config"
-        description="The config keeps local aliases explicit, so generated code lands in the right folders for each app."
+        description="kronus-ui.json keeps aliases explicit and pins the registry to a release tag — never main/registry. add fills installed; compose fills composed."
       >
         <CodeBlock code={config} language="json" />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
-          Use <InlineCode>--registry ./registry</InlineCode> for offline testing against a local
+          <InlineCode>installed</InlineCode> records each item&apos;s version and files so upgrade
+          has a merge base. <InlineCode>composed</InlineCode> records each generated app (plan
+          version, choices, files) so add-page can extend it and upgrade can 3-way-merge pages
+          against <InlineCode>.kronus-ui/base</InlineCode>. Use{" "}
+          <InlineCode>--registry ./registry</InlineCode> for offline testing against a local
           registry build.
         </p>
       </DocsSection>

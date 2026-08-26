@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@cooud-ui/ui";
+import { cn } from "@kronus-ui/ui";
 import { useEffect, useState } from "react";
 
 export interface TocItem {
@@ -82,7 +82,7 @@ export function Toc({ items }: { items: TocItem[] }) {
   if (items.length === 0) return null;
 
   return (
-    <div className="hidden xl:block">
+    <div className="hidden pt-10 xl:block">
       <div className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pb-12 text-sm">
         <p className="flex items-center gap-2 pb-3 text-xs font-medium uppercase tracking-widest text-fg-tertiary">
           On this page

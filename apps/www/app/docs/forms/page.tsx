@@ -9,7 +9,7 @@ import {
 } from "../../../components/docs/documentation";
 
 const formPattern = `import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Field, FieldDescription, FieldError, FieldLabel, Input } from "@cooud-ui/ui";
+import { Button, Field, FieldDescription, FieldError, FieldLabel, Input } from "@kronus-ui/ui";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 

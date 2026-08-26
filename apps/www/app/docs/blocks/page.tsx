@@ -5,6 +5,7 @@ import {
   DocsGrid,
   DocsHeader,
   DocsSection,
+  DocsTextLink,
   InlineCode,
   PrimaryLink,
 } from "../../../components/docs/documentation";
@@ -78,10 +79,10 @@ const families = [
   },
 ] as const;
 
-const installCode = `npx cooud-ui add login`;
+const installCode = `npx kronus-ui add login`;
 
 const installManyCode = `# Add several blocks in one run
-npx cooud-ui add login signup pricing dashboard`;
+npx kronus-ui add login signup pricing dashboard`;
 
 const composeCode = `import { LoginBlock } from "@/components/blocks/login";
 
@@ -100,14 +101,14 @@ export default function BlocksPage() {
       <DocsHeader
         eyebrow="Documentation"
         title="Blocks"
-        description="Larger, composed UI sections — auth cards, dashboards, pricing tables, and more — built from Cooud UI primitives and ready to drop into a page."
+        description="Larger, composed UI sections — auth cards, dashboards, pricing tables, and more — built from Kronus UI primitives and ready to drop into a page."
       >
         <PrimaryLink href="/blocks">Browse blocks</PrimaryLink>
       </DocsHeader>
 
       <DocsSection
         title="What blocks are"
-        description="A component is a single primitive — a Button, an Input, a Card. A block is a larger, opinionated section composed from those primitives: a centered login card, a KPI dashboard, a three-tier pricing grid. Blocks import the @cooud-ui/ui package directly, so you get a working section in one command instead of wiring primitives together by hand."
+        description="A component is a single primitive — a Button, an Input, a Card. A block is a larger, opinionated section composed from those primitives: a centered login card, a KPI dashboard, a three-tier pricing grid. Blocks import the @kronus-ui/ui package directly, so you get a working section in one command instead of wiring primitives together by hand."
       >
         <p className="text-sm leading-6 text-fg-secondary">
           There are 13 families covering roughly 48 blocks today, from auth and marketing to
@@ -142,9 +143,9 @@ export default function BlocksPage() {
         <CodeBlock code={installCode} language="bash" expandable />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
           This writes <InlineCode>components/blocks/login.tsx</InlineCode> and installs the
-          block&apos;s dependencies (<InlineCode>@cooud-ui/ui</InlineCode> plus any extras like{" "}
+          block&apos;s dependencies (<InlineCode>@kronus-ui/ui</InlineCode> plus any extras like{" "}
           <InlineCode>lucide-react</InlineCode>). Unlike components, a block imports{" "}
-          <InlineCode>@cooud-ui/ui</InlineCode> rather than vendoring each primitive — so adding a
+          <InlineCode>@kronus-ui/ui</InlineCode> rather than vendoring each primitive — so adding a
           block never floods your tree with copied component files. The written file is yours to
           edit.
         </p>
@@ -158,8 +159,8 @@ export default function BlocksPage() {
         <CodeBlock code={composeCode} language="tsx" expandable />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
           Restyling rarely means touching the block — change a token through your theme and the
-          block follows. See <PrimaryLink href="/docs/theming">Theming</PrimaryLink> for how tokens
-          and presets work.
+          block follows. See <DocsTextLink href="/docs/theming">Theming</DocsTextLink> for how
+          tokens and presets work.
         </p>
       </DocsSection>
 

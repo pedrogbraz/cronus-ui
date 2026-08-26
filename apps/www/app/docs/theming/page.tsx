@@ -1,4 +1,4 @@
-import { Button } from "@cooud-ui/ui";
+import { Button } from "@kronus-ui/ui";
 import { ArrowRight, Palette } from "lucide-react";
 import Link from "next/link";
 import { CodeBlock } from "../../../components/docs/code-block";
@@ -13,44 +13,44 @@ import {
 } from "../../../components/docs/documentation";
 import { STYLE_PRESETS } from "../../../lib/create/presets";
 
-const providerCode = `import "@cooud-ui/tokens/styles.css";
-import { CooudUIProvider } from "@cooud-ui/theme";
+const providerCode = `import "@kronus-ui/tokens/styles.css";
+import { KronusUIProvider } from "@kronus-ui/theme";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <CooudUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">
+        <KronusUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">
           {children}
-        </CooudUIProvider>
+        </KronusUIProvider>
       </body>
     </html>
   );
 }`;
 
-const themeScriptCode = `import { CooudThemeScript, CooudUIProvider } from "@cooud-ui/theme";
+const themeScriptCode = `import { KronusThemeScript, KronusUIProvider } from "@kronus-ui/theme";
 
 export default function RootLayout({ children }) {
   return (
     // suppressHydrationWarning: the script mutates <html> before hydration.
     <html lang="en" suppressHydrationWarning>
       <head>
-        <CooudThemeScript
-          storageKey="cooud-ui-theme"
+        <KronusThemeScript
+          storageKey="kronus-ui-theme"
           defaultThemeName="aurora"
           defaultModeName="dark"
         />
       </head>
       <body>
-        <CooudUIProvider asRoot storageKey="cooud-ui-theme">
+        <KronusUIProvider asRoot storageKey="kronus-ui-theme">
           {children}
-        </CooudUIProvider>
+        </KronusUIProvider>
       </body>
     </html>
   );
 }`;
 
-const overridesCode = `import { useTheme } from "@cooud-ui/theme";
+const overridesCode = `import { useTheme } from "@kronus-ui/theme";
 
 export function BrandThemeControls() {
   const { setOverrides } = useTheme();
@@ -72,6 +72,10 @@ export function BrandThemeControls() {
   );
 }`;
 
+const lookCode = `<div data-kronus-look="glass" data-kronus-theme="midnight">
+  {/* radius, blur, and surfaces follow. Palette is still midnight. */}
+</div>`;
+
 const layers = [
   {
     title: "Semantic tokens",
@@ -81,6 +85,11 @@ const layers = [
     title: "Preset bundles",
     description:
       "A preset combines mode, base color, brand color, chart palette, fonts, and radius.",
+  },
+  {
+    title: "Looks",
+    description:
+      "Material language — default, brutalist, glass, mauve — via data-kronus-look. Orthogonal to palette. Docs chrome stays default.",
   },
   {
     title: "Runtime overrides",
@@ -95,7 +104,7 @@ export default function ThemingPage() {
       <DocsHeader
         eyebrow="Theming"
         title="Theme the whole system through tokens"
-        description="Cooud UI treats theme as a design-system object: color ramps, brand accents, chart colors, typography, and radius move together."
+        description="Kronus UI treats theme as a design-system object: color ramps, brand accents, chart colors, typography, and radius move together."
       >
         <PrimaryLink href="/create">Build a preset</PrimaryLink>
       </DocsHeader>
@@ -139,6 +148,17 @@ export default function ThemingPage() {
       </DocsSection>
 
       <DocsSection
+        title="Looks"
+        description="Material language on top of the palette. Default, brutalist, glass, and mauve share the same components. The docs chrome stays default — set the attribute on the product subtree."
+      >
+        <CodeBlock code={lookCode} language="tsx" />
+        <p className="mt-4 text-sm leading-6 text-fg-secondary">
+          Try the live stage on the homepage. Theme and look compose: glass + midnight is valid,
+          brutalist + sunset is valid.
+        </p>
+      </DocsSection>
+
+      <DocsSection
         title="Provider"
         description="Import tokens once, then wrap the app in the provider at the framework root."
       >
@@ -147,15 +167,15 @@ export default function ThemingPage() {
 
       <DocsSection
         title="Avoiding a flash of the wrong theme"
-        description="The provider restores a saved theme from localStorage after first paint, so a returning visitor can briefly see the default theme. Render CooudThemeScript in the document head to apply the saved theme before paint."
+        description="The provider restores a saved theme from localStorage after first paint, so a returning visitor can briefly see the default theme. Render KronusThemeScript in the document head to apply the saved theme before paint."
       >
         <CodeBlock code={themeScriptCode} language="tsx" expandable />
         <DocCallout title="Pass the same storageKey to both">
-          The script and <InlineCode>CooudUIProvider</InlineCode> must share the same{" "}
+          The script and <InlineCode>KronusUIProvider</InlineCode> must share the same{" "}
           <InlineCode>storageKey</InlineCode>. Add <InlineCode>suppressHydrationWarning</InlineCode>{" "}
           to <InlineCode>&lt;html&gt;</InlineCode> because the script changes its attributes before
           hydration. Under a strict CSP, forward a <InlineCode>nonce</InlineCode> to{" "}
-          <InlineCode>CooudThemeScript</InlineCode>.
+          <InlineCode>KronusThemeScript</InlineCode>.
         </DocCallout>
       </DocsSection>
 
@@ -194,25 +214,25 @@ export default function ThemingPage() {
 
       <DocsSection
         title="Design tool handoff"
-        description="The token source also compiles to design-tool formats — generated and drift-checked alongside tokens.json, and shipped with @cooud-ui/tokens."
+        description="The token source also compiles to design-tool formats — generated and drift-checked alongside tokens.json, and shipped with @kronus-ui/tokens."
       >
         <DocsGrid columns={2}>
           <DocsCard
             title="W3C DTCG tokens"
-            description="Every theme and mode in the Design Tokens Community Group format, grouped cooud.{theme}.{mode}.{token}, for pipelines like Style Dictionary or Tokens Studio. Colors stay as the source oklch() strings; shadows are structured shadow objects; font stacks are family arrays."
+            description="Every theme and mode in the Design Tokens Community Group format, grouped kronus.{theme}.{mode}.{token}, for pipelines like Style Dictionary or Tokens Studio. Colors stay as the source oklch() strings; shadows are structured shadow objects; font stacks are family arrays."
             badge="tokens.dtcg.json"
           >
             <p className="text-xs text-fg-tertiary">
-              <InlineCode>@cooud-ui/tokens/tokens.dtcg.json</InlineCode>
+              <InlineCode>@kronus-ui/tokens/tokens.dtcg.json</InlineCode>
             </p>
           </DocsCard>
           <DocsCard
             title="Figma Variables"
-            description="One Cooud UI collection with ten {theme}-{mode} modes for Figma Variables plugins or the REST API. Colors are converted to sRGB hex (gamut-clamped, self-checked at build time); radius is a px FLOAT; fonts and shadows are STRING values."
+            description="One Kronus UI collection with ten {theme}-{mode} modes for Figma Variables plugins or the REST API. Colors are converted to sRGB hex (gamut-clamped, self-checked at build time); radius is a px FLOAT; fonts and shadows are STRING values."
             badge="figma-variables.json"
           >
             <p className="text-xs text-fg-tertiary">
-              <InlineCode>@cooud-ui/tokens/figma-variables.json</InlineCode>
+              <InlineCode>@kronus-ui/tokens/figma-variables.json</InlineCode>
             </p>
           </DocsCard>
         </DocsGrid>
