@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 /**
  * Minimal Next.js config for the external-consumer smoke fixture.
  *
- * @cooud-ui/ui ships ESM with `"use client"` boundaries already in place, so no
+ * @kronus-ui/ui ships ESM with `"use client"` boundaries already in place, so no
  * `transpilePackages` is needed when the package is installed (not symlinked
  * from the workspace) — which is exactly how the smoke runner installs it
  * (via a packed tarball into node_modules).

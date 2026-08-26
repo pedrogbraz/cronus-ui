@@ -1,4 +1,4 @@
-import { CooudUIProvider } from "@cooud-ui/theme";
+import { KronusUIProvider } from "@kronus-ui/theme";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
@@ -9,8 +9,8 @@ if (!rootEl) throw new Error("Missing #root element in index.html");
 
 createRoot(rootEl).render(
   <StrictMode>
-    <CooudUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">
+    <KronusUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">
       <App />
-    </CooudUIProvider>
+    </KronusUIProvider>
   </StrictMode>,
 );

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "External-consumer smoke fixture: Vite + React + Tailwind v4 consuming the published @cooud-ui/ui tarball.",
+  "description": "External-consumer smoke fixture: Vite + React + Tailwind v4 consuming the published @kronus-ui/ui tarball.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

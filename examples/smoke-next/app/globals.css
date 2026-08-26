@@ -1,16 +1,16 @@
 @import "tailwindcss";
-@import "@cooud-ui/tokens/styles.css";
+@import "@kronus-ui/tokens/styles.css";
 
 /*
  * REQUIRED for an external consumer on Tailwind v4.
  *
- * Tailwind v4 does not scan node_modules by default, and @cooud-ui/ui ships its
+ * Tailwind v4 does not scan node_modules by default, and @kronus-ui/ui ships its
  * Tailwind class strings baked into pre-compiled JS under dist. Without the
  * @source below, none of the component utility classes (bg-primary, rounded-lg,
  * bg-surface-raised, …) would be emitted and the components would render
  * unstyled. This is the line we assert against in scripts/package-smoke.mjs.
  */
-@source "../node_modules/@cooud-ui/ui/dist/**/*.js";
+@source "../node_modules/@kronus-ui/ui/dist/**/*.js";
 
 /* Scan this fixture's own source too. */
 @source "./**/*.{ts,tsx}";

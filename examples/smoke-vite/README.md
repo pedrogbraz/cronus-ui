@@ -1,11 +1,11 @@
 # smoke-vite
 
 A minimal **external-consumer** fixture: a Vite + React app that imports
-`@cooud-ui/ui` + `@cooud-ui/tokens` + `@cooud-ui/theme` exactly as a real consumer would,
+`@kronus-ui/ui` + `@kronus-ui/tokens` + `@kronus-ui/theme` exactly as a real consumer would,
 and proves the published components render **styled** on Tailwind v4 (via the
 first-party `@tailwindcss/vite` plugin).
 
-This is not a workspace package — `@cooud-ui/*` are intentionally **absent** from
+This is not a workspace package — `@kronus-ui/*` are intentionally **absent** from
 `dependencies`. The smoke runner injects them as locally-packed tarballs so the
 test exercises the *published* artifact, never the workspace source.
 
@@ -14,13 +14,13 @@ test exercises the *published* artifact, never the workspace source.
 - `src/index.css` wires Tailwind v4 the way an external app must:
   ```css
   @import "tailwindcss";
-  @import "@cooud-ui/tokens/styles.css";
-  @source "../node_modules/@cooud-ui/ui/dist/**/*.js"; /* REQUIRED */
+  @import "@kronus-ui/tokens/styles.css";
+  @source "../node_modules/@kronus-ui/ui/dist/**/*.js"; /* REQUIRED */
   ```
   The `@source` line is what makes Tailwind scan the shipped components (it skips
   `node_modules` by default), so their utility classes are emitted.
-- `src/main.tsx` mounts `<CooudUIProvider>` (Aurora / dark).
-- `src/App.tsx` renders `<Button>` + `<Card>` from `@cooud-ui/ui`.
+- `src/main.tsx` mounts `<KronusUIProvider>` (Aurora / dark).
+- `src/App.tsx` renders `<Button>` + `<Card>` from `@kronus-ui/ui`.
 
 ## Run it via the smoke runner (recommended)
 
@@ -37,8 +37,8 @@ compiled CSS contains the component utility classes.
 
 ```sh
 # from the repo root, after `bun run build`:
-npm pack ./packages/ui ./packages/tokens ./packages/theme --pack-destination /tmp/cooud
+npm pack ./packages/ui ./packages/tokens ./packages/theme --pack-destination /tmp/kronus
 cd examples/smoke-vite
-npm install /tmp/cooud/cooud-ui-*.tgz /tmp/cooud/cooud-tokens-*.tgz /tmp/cooud/cooud-theme-*.tgz
+npm install /tmp/kronus/kronus-ui-*.tgz /tmp/kronus/kronus-tokens-*.tgz /tmp/kronus/kronus-theme-*.tgz
 npm run build   # or: npm run dev
 ```
