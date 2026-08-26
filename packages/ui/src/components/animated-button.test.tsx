@@ -20,7 +20,7 @@ describe("AnimatedButton", () => {
   });
 
   it("has no axe violations", async () => {
-    const { container } = render(<AnimatedButton variant="gradient">Action</AnimatedButton>);
+    const { container } = render(<AnimatedButton variant="primary">Action</AnimatedButton>);
     expect(await axe(container)).toHaveNoViolations();
   });
 });

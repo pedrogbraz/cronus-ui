@@ -8,19 +8,16 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary:
-          "bg-[color-mix(in_oklch,var(--cooud-primary),black_30%)] text-white hover:opacity-90 shadow-xs",
-        gradient:
-          "bg-gradient-primary-strong text-white hover:shadow-glow hover:opacity-95 shadow-xs",
+        primary: "bg-primary text-primary-foreground shadow-xs hover:opacity-90",
         secondary: "bg-surface-overlay text-fg border border-border hover:border-border-strong",
-        outline: "border border-border text-fg hover:bg-surface-overlay",
+        outline: "border border-border bg-transparent text-fg shadow-xs hover:bg-surface-overlay",
         ghost: "text-fg-secondary hover:bg-surface-overlay hover:text-fg",
         // `text-white` on the raw `error` token fails AA (≥4.5:1) in every dark
         // theme (error is a light rose ~3.7:1). Darkening the surface toward
-        // black — the same technique the primary variant uses — lifts every
-        // theme/mode above 4.5:1 (min 6.63:1) while staying theme-relative.
+        // black lifts every theme/mode above 4.5:1 (min 6.63:1) while staying
+        // theme-relative.
         destructive:
-          "bg-[color-mix(in_oklch,var(--cooud-error),black_30%)] text-white hover:opacity-90 shadow-xs",
+          "bg-[color-mix(in_oklch,var(--kronus-error),black_30%)] text-white hover:opacity-90 shadow-xs",
         // `text-primary-strong` (not `text-primary`): a link is small body text,
         // and the raw brand primary reads <4.5:1 on surface-base in the bright
         // light themes; the -strong variant is the AA-tuned same-hue text color.
