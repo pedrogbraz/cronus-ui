@@ -87,7 +87,7 @@ for (const route of ALL_ROUTES) {
   test(`a11y: ${route.label} (${route.path}) has no serious/critical violations`, async ({
     page,
   }) => {
-    await page.goto(route.path, { waitUntil: "networkidle" });
+    await page.goto(route.path, { waitUntil: "load" });
     // Wait for the route's main landmark so we scan settled, hydrated DOM.
     await expect(page.locator("main#main-content, main").first()).toBeVisible();
     if (route.settle) await route.settle(page);

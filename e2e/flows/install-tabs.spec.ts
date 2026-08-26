@@ -14,7 +14,7 @@ import { expect, test } from "@playwright/test";
  */
 test.describe("install tabs (package manager)", () => {
   test("exposes tablist/tab roles and is keyboard navigable", async ({ page }) => {
-    await page.goto("/docs/installation", { waitUntil: "networkidle" });
+    await page.goto("/docs/installation", { waitUntil: "load" });
 
     // There can be multiple PackageManagerTabs on the page; scope to the first
     // tablist and its tabs.

@@ -25,7 +25,7 @@ test.describe("command palette", () => {
   test("opens via Ctrl/Meta+K, finds the 'pricing' block, and navigates to it", async ({
     page,
   }) => {
-    await page.goto("/", { waitUntil: "networkidle" });
+    await page.goto("/", { waitUntil: "load" });
 
     // Open via shortcut — this triggers the dynamic import of the cmdk dialog.
     await page.keyboard.press(OPEN_PALETTE);
@@ -52,7 +52,7 @@ test.describe("command palette", () => {
   });
 
   test("alias search: typing 'login' surfaces the auth block and navigates", async ({ page }) => {
-    await page.goto("/", { waitUntil: "networkidle" });
+    await page.goto("/", { waitUntil: "load" });
 
     await page.keyboard.press(OPEN_PALETTE);
     const dialog = page.getByRole("dialog", { name: "Search documentation" });
@@ -69,7 +69,7 @@ test.describe("command palette", () => {
   });
 
   test("Escape closes the palette", async ({ page }) => {
-    await page.goto("/", { waitUntil: "networkidle" });
+    await page.goto("/", { waitUntil: "load" });
 
     await page.keyboard.press(OPEN_PALETTE);
     const dialog = page.getByRole("dialog", { name: "Search documentation" });

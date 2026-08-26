@@ -90,7 +90,7 @@ for (const route of CORE_ROUTES) {
       }
     });
 
-    await page.goto(route.path, { waitUntil: "networkidle" });
+    await page.goto(route.path, { waitUntil: "load" });
     // Wait for the hydrated main landmark so we observe a settled client tree —
     // hydration warnings are emitted during/just after this point.
     await expect(page.locator("main#main-content")).toBeVisible();

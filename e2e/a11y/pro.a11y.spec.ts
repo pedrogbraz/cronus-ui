@@ -6,7 +6,7 @@ const BLOCKING_IMPACTS = new Set(["serious", "critical"]);
 const WCAG_TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"];
 
 test("a11y: Cronus Pro origin has no serious/critical violations", async ({ page }) => {
-  await page.goto(PRO_ORIGIN, { waitUntil: "networkidle" });
+  await page.goto(PRO_ORIGIN, { waitUntil: "load" });
   await expect(page.locator("main#main-content")).toBeVisible();
 
   const results = await new AxeBuilder({ page })

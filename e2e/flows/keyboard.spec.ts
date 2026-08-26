@@ -27,7 +27,7 @@ import { expect, type Locator, type Page, test } from "@playwright/test";
 
 /** Wait for the hydrated main landmark so the client tree has taken over. */
 async function gotoDemo(page: Page, path: string): Promise<void> {
-  await page.goto(path, { waitUntil: "networkidle" });
+  await page.goto(path, { waitUntil: "load" });
   await expect(page.locator("main#main-content")).toBeVisible();
 }
 

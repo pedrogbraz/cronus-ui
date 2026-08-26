@@ -14,7 +14,7 @@ test.describe("skip link", () => {
   test("first Tab reveals 'Skip to content' and activating it focuses #main-content", async ({
     page,
   }) => {
-    await page.goto("/", { waitUntil: "networkidle" });
+    await page.goto("/", { waitUntil: "load" });
 
     // Ensure focus starts at the document root (no element focused), so the
     // first Tab lands on the very first focusable element — the skip link.

@@ -104,7 +104,9 @@ for (const theme of THEMES) {
           [STORAGE_KEY, theme, mode] as const,
         );
 
-        await page.goto(path, { waitUntil: "networkidle" });
+        // `load` not `networkidle`: /templates (and Pro thumbs) keep iframe
+        // preview requests open, so networkidle never settles in CI.
+        await page.goto(path, { waitUntil: "load" });
         // Scan settled, hydrated DOM.
         await expect(page.locator("main#main-content, main").first()).toBeVisible();
         // Scroll the whole page so below-fold lazy/reveal sections mount before
