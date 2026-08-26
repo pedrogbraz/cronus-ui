@@ -14,8 +14,13 @@ next-env.d.ts
 test-results
 playwright-report
 .playwright
+.playwright-mcp
 blob-report
 .cache/ms-playwright
+
+# Local scratch screenshots at the repo root
+/*.png
+/*.jpg
 
 # Scratch PR bodies + local release pipeline output
 *.pr-body.md
