@@ -2,15 +2,15 @@
 
 // @ts-check
 /**
- * bundle-check.mjs — JS size budget gate for the Cooud UI build output.
+ * bundle-check.mjs — JS size budget gate for the Kronus UI build output.
  *
  * Two gates run from one invocation:
  *
- *  1. @cooud-ui/www first-load JS — reads the Next.js build diagnostics emitted by
+ *  1. @kronus-ui/www first-load JS — reads the Next.js build diagnostics emitted by
  *     `next build` (apps/www/.next/diagnostics/route-bundle-stats.json) and
  *     fails if the first-load JS of any tracked key route exceeds its budget.
  *
- *  2. @cooud-ui/ui published-package entries — gzip-compresses each tracked entry
+ *  2. @kronus-ui/ui published-package entries — gzip-compresses each tracked entry
  *     in the built `packages/ui/dist` (the barrel `index.js` plus a set of
  *     heavy subpath entries) and fails if any exceeds its per-entry GZIPPED
  *     budget. This is what adopters actually download, so a transitive-dep or
@@ -125,7 +125,7 @@ const SHARED_CHUNK_BUDGETS = /** @type {SharedChunkBudgets} */ ({
 });
 
 /**
- * Per-entry GZIPPED size budgets (bytes) for the BUILT @cooud-ui/ui package, keyed
+ * Per-entry GZIPPED size budgets (bytes) for the BUILT @kronus-ui/ui package, keyed
  * by the file's path relative to packages/ui/dist. We track the barrel
  * (`index.js`) plus the heaviest subpath entries — the ones most likely to grow
  * unnoticed.
@@ -381,7 +381,7 @@ function compareGzipBudget(label, actual, budget) {
 }
 
 /**
- * Measure the BUILT @cooud-ui/ui package entries against their gzipped budgets.
+ * Measure the BUILT @kronus-ui/ui package entries against their gzipped budgets.
  *
  * @returns {{ ok: string[], failures: string[], missing: string[] }}
  */
@@ -403,7 +403,7 @@ function measurePackageEntries() {
       continue;
     }
     const gzipBytes = gzipSync(bytes).byteLength;
-    const result = compareGzipBudget(`@cooud-ui/ui ${entry}`, gzipBytes, withSlack(budget));
+    const result = compareGzipBudget(`@kronus-ui/ui ${entry}`, gzipBytes, withSlack(budget));
     (result.ok ? ok : failures).push(result.message);
   }
 
@@ -468,9 +468,9 @@ function main() {
     }
   }
 
-  // ── @cooud-ui/ui published-package entry budgets (gzipped) ──────────────
+  // ── @kronus-ui/ui published-package entry budgets (gzipped) ──────────────
   const pkg = measurePackageEntries();
-  console.log(`\nbundle-check: @cooud-ui/ui package entry budgets (gzipped)`);
+  console.log(`\nbundle-check: @kronus-ui/ui package entry budgets (gzipped)`);
   console.log(`  dist: ${uiDistDir}`);
   for (const line of pkg.ok) console.log(line);
   for (const line of pkg.failures) failures.push(line);
@@ -480,7 +480,7 @@ function main() {
     if (strict) {
       failures.push(msg);
     } else {
-      console.warn(`${msg} (non-strict: ignored — did you build @cooud-ui/ui?)`);
+      console.warn(`${msg} (non-strict: ignored — did you build @kronus-ui/ui?)`);
     }
   }
 
@@ -494,7 +494,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log("\nbundle-check: OK — all tracked routes and @cooud-ui/ui entries within budget.");
+  console.log("\nbundle-check: OK — all tracked routes and @kronus-ui/ui entries within budget.");
 }
 
 main();

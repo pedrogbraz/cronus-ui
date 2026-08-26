@@ -21,19 +21,27 @@ const stackSubpath = (name: string) => src(`./packages/stack/src/${name}.ts`);
 export default defineConfig({
   resolve: {
     alias: {
-      "@cooud-ui/ai-kit": aiKitSrc,
-      "@cooud-ui/stack": stackSrc,
-      "@cooud-ui/stack/catalog": stackSubpath("catalog"),
-      "@cooud-ui/stack/cli": stackSubpath("cli"),
-      "@cooud-ui/stack/constants": stackSubpath("constants"),
-      "@cooud-ui/stack/engine": stackSubpath("engine"),
-      "@cooud-ui/stack/kickoff": stackSubpath("kickoff"),
-      "@cooud-ui/stack/schema": stackSubpath("schema"),
-      "@cooud-ui/stack/types": stackSubpath("types"),
+      "@kronus-ui/ai-kit": aiKitSrc,
+      "@kronus-ui/stack": stackSrc,
+      "@kronus-ui/stack/catalog": stackSubpath("catalog"),
+      "@kronus-ui/stack/cli": stackSubpath("cli"),
+      "@kronus-ui/stack/constants": stackSubpath("constants"),
+      "@kronus-ui/stack/engine": stackSubpath("engine"),
+      "@kronus-ui/stack/kickoff": stackSubpath("kickoff"),
+      "@kronus-ui/stack/schema": stackSubpath("schema"),
+      "@kronus-ui/stack/types": stackSubpath("types"),
     },
   },
   test: {
     projects: [
+      {
+        test: {
+          name: "tokens",
+          root: "./packages/tokens",
+          environment: "node",
+          include: ["src/**/*.test.ts"],
+        },
+      },
       {
         test: {
           name: "cli",
@@ -44,8 +52,8 @@ export default defineConfig({
       },
       {
         test: {
-          name: "create-cooud-app",
-          root: "./packages/create-cooud-app",
+          name: "create-kronus-app",
+          root: "./packages/create-kronus-app",
           environment: "node",
           include: ["src/**/*.test.ts"],
         },
@@ -60,8 +68,8 @@ export default defineConfig({
       },
       {
         test: {
-          name: "create-cooud-stack",
-          root: "./packages/create-cooud-stack",
+          name: "create-kronus-stack",
+          root: "./packages/create-kronus-stack",
           environment: "node",
           include: ["src/**/*.test.ts"],
         },

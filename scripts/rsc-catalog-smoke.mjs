@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * rsc-catalog-smoke.mjs — RSC-safety gate for the whole Cooud UI block catalog.
+ * rsc-catalog-smoke.mjs — RSC-safety gate for the whole Kronus UI block catalog.
  *
  * Goal: prove that EVERY block in the registry is safe to import into a React
- * Server Component page. The Cooud Compose app generator emits RSC pages that
+ * Server Component page. The Kronus Compose app generator emits RSC pages that
  * import blocks directly (the golden rule: a page is just imports + a single
  * <main> that stacks blocks). A block that uses hooks / event handlers / other
  * client-only features WITHOUT a "use client" directive at the top of its file
@@ -16,16 +16,16 @@
  * LIGHT-default / opt-in-FULL split so the default run stays fast + offline and
  * CI can gate the slow `next build` behind a flag).
  *
- * Approach: import the BUILT dist of create-cooud-app's `scaffold()` (the exact
+ * Approach: import the BUILT dist of create-kronus-app's `scaffold()` (the exact
  * same way compose-smoke does) to lay down the `default` base, then install
- * every block with the SAME machinery the `cooud-ui add` command uses — the
+ * every block with the SAME machinery the `kronus-ui add` command uses — the
  * workspace `Registry` (pointed at the local `registry/`) + `writeItemFiles`
  * from the built CLI dist. That is load-bearing: it exercises the real install
  * path (alias rewrites, block→components/blocks placement) rather than copying
  * files by hand, so what we build is byte-identical to what a user's `add` run
  * would produce. Importing the dist directly (rather than spawning the bins from
  * a bare temp dir) sidesteps the chicken-and-egg that a fresh temp project has
- * no node_modules to resolve `cooud-ui` from, and lets us point the registry at
+ * no node_modules to resolve `kronus-ui` from, and lets us point the registry at
  * the workspace `registry/` (which ships meta.json today; the release remote
  * only will from v0.4.0+).
  *
@@ -140,11 +140,11 @@ function run(cmd, args, opts = {}) {
  * dist entry points (built by `bun run build` before this runs)
  * ------------------------------------------------------------------ *
  * scaffold() lays down the `default` base; the CLI Registry + writeItemFiles are
- * the EXACT machinery `cooud-ui add` uses to install a block — reused here so the
+ * the EXACT machinery `kronus-ui add` uses to install a block — reused here so the
  * installed files are byte-identical to a real `add` run.
  */
 const DIST = {
-  scaffold: join(ROOT, "packages/create-cooud-app/dist/scaffold.js"),
+  scaffold: join(ROOT, "packages/create-kronus-app/dist/scaffold.js"),
   registry: join(ROOT, "packages/cli/dist/registry.js"),
   utils: join(ROOT, "packages/cli/dist/utils.js"),
   config: join(ROOT, "packages/cli/dist/config.js"),
@@ -162,7 +162,7 @@ function ensureBuilt() {
   for (const f of ["index.json", "meta.json"]) {
     if (!existsSync(join(WORKSPACE_REGISTRY, f))) {
       fatal(
-        `registry/${f} is missing — the RSC smoke needs it. Run \`bun run -F cooud-ui registry\` first.`,
+        `registry/${f} is missing — the RSC smoke needs it. Run \`bun run -F kronus-ui registry\` first.`,
       );
     }
   }
@@ -225,14 +225,14 @@ function readCatalog() {
  * The npm deps every block needs at build time, resolved transitively from the
  * registry (a block's registryDependencies may add e.g. recharts). In LIGHT mode
  * we skip install, so FULL mode adds these to the scaffolded package.json before
- * `npm install`. The published @cooud-ui/* deps are dropped — the base
+ * `npm install`. The published @kronus-ui/* deps are dropped — the base
  * package.json already pins them and a bare spec here would fight that pin.
  */
 function catalogNpmDeps(Registry, collectDependencies, blocks) {
   return (async () => {
     const registry = new Registry(WORKSPACE_REGISTRY);
     const items = await registry.resolve(blocks.map((b) => b.slug));
-    const deps = collectDependencies(items).filter((d) => !d.startsWith("@cooud-ui/"));
+    const deps = collectDependencies(items).filter((d) => !d.startsWith("@kronus-ui/"));
     return deps.sort();
   })();
 }
@@ -294,12 +294,12 @@ async function buildCatalogApp(dist) {
   // 1) Scaffold the default base (the same base composed templates copy). It
   //    ships app/layout.tsx (theme provider) + app/page.tsx (route "/").
   scaffold({ targetDir: target, name: "catalog", template: "default" });
-  check(existsSync(join(target, "cooud-ui.json")), "scaffolded default base (cooud-ui.json)");
+  check(existsSync(join(target, "kronus-ui.json")), "scaffolded default base (kronus-ui.json)");
   check(existsSync(join(target, "app/layout.tsx")), "base ships app/layout.tsx (RSC root)");
 
   // 2) Install EVERY block with the real CLI machinery: resolve the transitive
   //    closure from the workspace registry, then writeItemFiles into the base
-  //    using the default config (its paths match the scaffolded cooud-ui.json).
+  //    using the default config (its paths match the scaffolded kronus-ui.json).
   const blocks = readCatalog();
   check(blocks.length > 0, `catalog has blocks (${blocks.length})`);
 
@@ -310,7 +310,7 @@ async function buildCatalogApp(dist) {
   }
 
   // Every block's own source file must be on disk (blocks land in
-  // components/blocks/<file>.tsx; they import @cooud-ui/ui + lucide-react, not
+  // components/blocks/<file>.tsx; they import @kronus-ui/ui + lucide-react, not
   // copied component source, so only the block file itself is asserted here).
   // Variant items install to a single-dash `<file>.tsx`, not the double-dash item
   // name — so this keys off `file`, not `slug`.
@@ -408,7 +408,7 @@ async function fullBuildCatalog(dist, composed) {
   info(`added block deps: ${deps.join(", ") || "(none)"}`);
 
   try {
-    info("npm install (pulls published @cooud-ui/* + block deps)");
+    info("npm install (pulls published @kronus-ui/* + block deps)");
     run("npm", ["install", "--no-audit", "--no-fund", "--install-strategy=hoisted"], {
       cwd: target,
       inherit: true,
@@ -518,7 +518,7 @@ function extractBuildError(output) {
  * main
  * ------------------------------------------------------------------ */
 async function main() {
-  log(c.bold("\nCooud UI — RSC catalog smoke runner"));
+  log(c.bold("\nKronus UI — RSC catalog smoke runner"));
   log(
     c.dim(
       `mode: ${

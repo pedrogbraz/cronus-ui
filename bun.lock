@@ -19,17 +19,38 @@
         "vitest-axe": "^0.1.0",
       },
     },
-    "apps/www": {
-      "name": "@cooud-ui/www",
+    "apps/pro": {
+      "name": "@kronus-ui/pro",
       "version": "0.2.0",
       "dependencies": {
-        "@cooud-ui/stack": "workspace:*",
-        "@cooud-ui/theme": "workspace:*",
-        "@cooud-ui/tokens": "workspace:*",
-        "@cooud-ui/ui": "workspace:*",
+        "@kronus-ui/theme": "workspace:*",
+        "@kronus-ui/tokens": "workspace:*",
+        "@kronus-ui/ui": "workspace:*",
+        "lucide-react": "^0.577.0",
+        "next": "16.2.10",
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0",
+      },
+      "devDependencies": {
+        "@tailwindcss/postcss": "^4.3.0",
+        "@types/node": "^22.10.0",
+        "@types/react": "^19.0.0",
+        "@types/react-dom": "^19.0.0",
+        "tailwindcss": "^4.3.0",
+        "typescript": "^6.0.3",
+      },
+    },
+    "apps/www": {
+      "name": "@kronus-ui/www",
+      "version": "0.2.0",
+      "dependencies": {
         "@hookform/resolvers": "^5.4.0",
         "@hugeicons/core-free-icons": "^4.2.1",
         "@hugeicons/react": "^1.1.7",
+        "@kronus-ui/stack": "workspace:*",
+        "@kronus-ui/theme": "workspace:*",
+        "@kronus-ui/tokens": "workspace:*",
+        "@kronus-ui/ui": "workspace:*",
         "@phosphor-icons/react": "^2.1.10",
         "@remixicon/react": "^4.9.0",
         "@tabler/icons-react": "^3.44.0",
@@ -54,7 +75,7 @@
       },
     },
     "packages/ai-kit": {
-      "name": "@cooud-ui/ai-kit",
+      "name": "@kronus-ui/ai-kit",
       "version": "0.5.0",
       "devDependencies": {
         "@types/node": "^22.10.0",
@@ -62,13 +83,13 @@
       },
     },
     "packages/cli": {
-      "name": "cooud-ui",
+      "name": "kronus-ui",
       "version": "0.5.0",
       "bin": {
-        "cooud-ui": "./dist/index.js",
+        "kronus-ui": "./dist/index.js",
       },
       "dependencies": {
-        "@cooud-ui/ai-kit": "workspace:*",
+        "@kronus-ui/ai-kit": "workspace:*",
         "commander": "^15.0.0",
         "picocolors": "^1.1.1",
       },
@@ -77,31 +98,31 @@
         "typescript": "^6.0.3",
       },
     },
-    "packages/create-cooud-app": {
-      "name": "create-cooud-app",
+    "packages/create-kronus-app": {
+      "name": "create-kronus-app",
       "version": "0.5.0",
       "bin": {
-        "create-cooud-app": "./dist/index.js",
+        "create-kronus-app": "./dist/index.js",
       },
       "dependencies": {
-        "@cooud-ui/ai-kit": "workspace:*",
-        "cooud-ui": "workspace:*",
+        "@kronus-ui/ai-kit": "workspace:*",
+        "kronus-ui": "workspace:*",
       },
       "devDependencies": {
         "@types/node": "^22.10.0",
         "typescript": "^6.0.3",
       },
     },
-    "packages/create-cooud-stack": {
-      "name": "create-cooud-stack",
+    "packages/create-kronus-stack": {
+      "name": "create-kronus-stack",
       "version": "0.5.0",
       "bin": {
-        "create-cooud-stack": "./dist/index.js",
-        "cooud-stack": "./dist/index.js",
+        "create-kronus-stack": "./dist/index.js",
+        "kronus-stack": "./dist/index.js",
       },
       "dependencies": {
-        "@cooud-ui/ai-kit": "workspace:*",
-        "@cooud-ui/stack": "workspace:*",
+        "@kronus-ui/ai-kit": "workspace:*",
+        "@kronus-ui/stack": "workspace:*",
       },
       "devDependencies": {
         "@types/node": "^22.10.0",
@@ -110,10 +131,10 @@
       },
     },
     "packages/mcp": {
-      "name": "cooud-ui-mcp",
+      "name": "kronus-ui-mcp",
       "version": "0.5.0",
       "bin": {
-        "cooud-ui-mcp": "./dist/index.js",
+        "kronus-ui-mcp": "./dist/index.js",
       },
       "dependencies": {
         "@modelcontextprotocol/sdk": "^1.29.0",
@@ -126,7 +147,7 @@
       },
     },
     "packages/stack": {
-      "name": "@cooud-ui/stack",
+      "name": "@kronus-ui/stack",
       "version": "0.5.0",
       "devDependencies": {
         "typescript": "^6.0.3",
@@ -134,10 +155,10 @@
       },
     },
     "packages/theme": {
-      "name": "@cooud-ui/theme",
+      "name": "@kronus-ui/theme",
       "version": "0.5.0",
       "dependencies": {
-        "@cooud-ui/tokens": "workspace:*",
+        "@kronus-ui/tokens": "workspace:*",
       },
       "devDependencies": {
         "@types/react": "^19.0.0",
@@ -153,14 +174,14 @@
       },
     },
     "packages/tokens": {
-      "name": "@cooud-ui/tokens",
+      "name": "@kronus-ui/tokens",
       "version": "0.5.0",
       "devDependencies": {
         "typescript": "^6.0.3",
       },
     },
     "packages/ui": {
-      "name": "@cooud-ui/ui",
+      "name": "@kronus-ui/ui",
       "version": "0.5.0",
       "dependencies": {
         "@radix-ui/react-accordion": "^1.2.11",
@@ -201,11 +222,11 @@
         "vaul": "^1.1.2",
       },
       "devDependencies": {
-        "@cooud-ui/theme": "workspace:*",
         "@dnd-kit/core": "^6.3.1",
         "@dnd-kit/sortable": "^10.0.0",
         "@dnd-kit/utilities": "^3.2.2",
         "@hookform/resolvers": "^5.4.0",
+        "@kronus-ui/theme": "workspace:*",
         "@tanstack/react-table": "^8.21.3",
         "@tiptap/pm": "^3.27.1",
         "@tiptap/react": "^3.27.1",
@@ -223,11 +244,11 @@
         "zod": "^4.4.3",
       },
       "peerDependencies": {
-        "@cooud-ui/theme": "workspace:*",
         "@dnd-kit/core": "^6.3.1",
         "@dnd-kit/sortable": "^10.0.0",
         "@dnd-kit/utilities": "^3.2.2",
         "@hookform/resolvers": "^3.10.0 || ^4.0.0 || ^5.0.0",
+        "@kronus-ui/theme": "workspace:*",
         "@tanstack/react-table": "^8.21.3",
         "@testing-library/react": "^16.3.2",
         "@tiptap/pm": "^3.27.1",
@@ -313,18 +334,6 @@
     "@biomejs/cli-win32-x64": ["@biomejs/cli-win32-x64@2.5.0", "", { "os": "win32", "cpu": "x64" }, "sha512-VT/lF+GId+67j8aDfLkxdxNoVApsPSTbyAtB3jJq0IWTrY77WXfbPfpngxq0bA6JCEv/7k8C9qWjDRKRznDlyw=="],
 
     "@bramus/specificity": ["@bramus/specificity@2.4.2", "", { "dependencies": { "css-tree": "^3.0.0" }, "bin": { "specificity": "bin/cli.js" } }, "sha512-ctxtJ/eA+t+6q2++vj5j7FYX3nRu311q1wfYH3xjlLOsczhlhxAg2FWNUXhpGvAw3BWo1xBcvOV6/YLc2r5FJw=="],
-
-    "@cooud-ui/ai-kit": ["@cooud-ui/ai-kit@workspace:packages/ai-kit"],
-
-    "@cooud-ui/stack": ["@cooud-ui/stack@workspace:packages/stack"],
-
-    "@cooud-ui/theme": ["@cooud-ui/theme@workspace:packages/theme"],
-
-    "@cooud-ui/tokens": ["@cooud-ui/tokens@workspace:packages/tokens"],
-
-    "@cooud-ui/ui": ["@cooud-ui/ui@workspace:packages/ui"],
-
-    "@cooud-ui/www": ["@cooud-ui/www@workspace:apps/www"],
 
     "@csstools/color-helpers": ["@csstools/color-helpers@6.0.2", "", {}, "sha512-LMGQLS9EuADloEFkcTBR3BwV/CGHV7zyDxVRtVDTwdI2Ca4it0CCVTT9wCkxSgokjE5Ho41hEPgb8OEUwoXr6Q=="],
 
@@ -431,6 +440,20 @@
     "@jridgewell/sourcemap-codec": ["@jridgewell/sourcemap-codec@1.5.5", "", {}, "sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og=="],
 
     "@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.31", "", { "dependencies": { "@jridgewell/resolve-uri": "^3.1.0", "@jridgewell/sourcemap-codec": "^1.4.14" } }, "sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw=="],
+
+    "@kronus-ui/ai-kit": ["@kronus-ui/ai-kit@workspace:packages/ai-kit"],
+
+    "@kronus-ui/pro": ["@kronus-ui/pro@workspace:apps/pro"],
+
+    "@kronus-ui/stack": ["@kronus-ui/stack@workspace:packages/stack"],
+
+    "@kronus-ui/theme": ["@kronus-ui/theme@workspace:packages/theme"],
+
+    "@kronus-ui/tokens": ["@kronus-ui/tokens@workspace:packages/tokens"],
+
+    "@kronus-ui/ui": ["@kronus-ui/ui@workspace:packages/ui"],
+
+    "@kronus-ui/www": ["@kronus-ui/www@workspace:apps/www"],
 
     "@modelcontextprotocol/sdk": ["@modelcontextprotocol/sdk@1.29.0", "", { "dependencies": { "@hono/node-server": "^1.19.9", "ajv": "^8.17.1", "ajv-formats": "^3.0.1", "content-type": "^1.0.5", "cors": "^2.8.5", "cross-spawn": "^7.0.5", "eventsource": "^3.0.2", "eventsource-parser": "^3.0.0", "express": "^5.2.1", "express-rate-limit": "^8.2.1", "hono": "^4.11.4", "jose": "^6.1.3", "json-schema-typed": "^8.0.2", "pkce-challenge": "^5.0.0", "raw-body": "^3.0.0", "zod": "^3.25 || ^4.0", "zod-to-json-schema": "^3.25.1" }, "peerDependencies": { "@cfworker/json-schema": "^4.1.1" }, "optionalPeers": ["@cfworker/json-schema"] }, "sha512-zo37mZA9hJWpULgkRpowewez1y6ML5GsXJPY8FI0tBBCd77HEvza4jDqRKOXgHNn867PVGCyTdzqpz0izu5ZjQ=="],
 
@@ -834,15 +857,11 @@
 
     "cookie-signature": ["cookie-signature@1.2.2", "", {}, "sha512-D76uU73ulSXrD1UXF4KE2TMxVVwhsnCgfAyTg9k8P6KGZjlXKrOLe4dJQKI3Bxi5wjesZoFXJWElNWBjPZMbhg=="],
 
-    "cooud-ui": ["cooud-ui@workspace:packages/cli"],
-
-    "cooud-ui-mcp": ["cooud-ui-mcp@workspace:packages/mcp"],
-
     "cors": ["cors@2.8.6", "", { "dependencies": { "object-assign": "^4", "vary": "^1" } }, "sha512-tJtZBBHA6vjIAaF6EnIaq6laBBP9aq/Y3ouVJjEfoHbRBcHBAHYcMh/w8LDrk2PvIMMq8gmopa5D4V8RmbrxGw=="],
 
-    "create-cooud-app": ["create-cooud-app@workspace:packages/create-cooud-app"],
+    "create-kronus-app": ["create-kronus-app@workspace:packages/create-kronus-app"],
 
-    "create-cooud-stack": ["create-cooud-stack@workspace:packages/create-cooud-stack"],
+    "create-kronus-stack": ["create-kronus-stack@workspace:packages/create-kronus-stack"],
 
     "cross-spawn": ["cross-spawn@7.0.6", "", { "dependencies": { "path-key": "^3.1.0", "shebang-command": "^2.0.0", "which": "^2.0.1" } }, "sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA=="],
 
@@ -1015,6 +1034,10 @@
     "json-schema-traverse": ["json-schema-traverse@1.0.0", "", {}, "sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug=="],
 
     "json-schema-typed": ["json-schema-typed@8.0.2", "", {}, "sha512-fQhoXdcvc3V28x7C7BMs4P5+kNlgUURe2jmUT1T//oBRMDrqy1QPelJimwZGo7Hg9VPV3EQV5Bnq4hbFy2vetA=="],
+
+    "kronus-ui": ["kronus-ui@workspace:packages/cli"],
+
+    "kronus-ui-mcp": ["kronus-ui-mcp@workspace:packages/mcp"],
 
     "lightningcss": ["lightningcss@1.32.0", "", { "dependencies": { "detect-libc": "^2.0.3" }, "optionalDependencies": { "lightningcss-android-arm64": "1.32.0", "lightningcss-darwin-arm64": "1.32.0", "lightningcss-darwin-x64": "1.32.0", "lightningcss-freebsd-x64": "1.32.0", "lightningcss-linux-arm-gnueabihf": "1.32.0", "lightningcss-linux-arm64-gnu": "1.32.0", "lightningcss-linux-arm64-musl": "1.32.0", "lightningcss-linux-x64-gnu": "1.32.0", "lightningcss-linux-x64-musl": "1.32.0", "lightningcss-win32-arm64-msvc": "1.32.0", "lightningcss-win32-x64-msvc": "1.32.0" } }, "sha512-NXYBzinNrblfraPGyrbPoD19C1h9lfI/1mzgWYvXUTe414Gz/X1FD2XBZSZM7rRTrMA8JL3OtAaGifrIKhQ5yQ=="],
 

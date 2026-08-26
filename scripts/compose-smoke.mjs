@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * compose-smoke.mjs — smoke runner for the Cooud Compose app generator (F1).
+ * compose-smoke.mjs — smoke runner for the Kronus Compose app generator (F1).
  *
  * Goal: prove that the *built* composer turns a bundled app template into a real,
  * navigable Next.js app whose pages are ONLY imports of installed registry blocks
@@ -12,19 +12,19 @@
  * can gate the slow `next build` behind a nightly flag).
  *
  * Approach (the brief's second option — "invoking composeApp against a
- * default-scaffold"): import the BUILT dist of create-cooud-app's `scaffold()` and
+ * default-scaffold"): import the BUILT dist of create-kronus-app's `scaffold()` and
  * `composeTemplate()` and drive them the SAME way the wired
- * `create-cooud-app --template store` path does (scaffold the `default` base — which
- * ships `app/page.tsx` — then compose on top via the create-cooud-app adapter, NOT
+ * `create-kronus-app --template store` path does (scaffold the `default` base — which
+ * ships `app/page.tsx` — then compose on top via the create-kronus-app adapter, NOT
  * raw `composeApp`). Going through `composeTemplate` is load-bearing: it is the
  * layer that removes the base template's `app/page.tsx` so it doesn't collide with
  * the generated `app/(site)/page.tsx` at route "/". Calling `composeApp` directly
  * would silently skip that step and let the FULL `next build` ship the wrong home
- * page. Importing the dist directly (rather than spawning the create-cooud-app bin
+ * page. Importing the dist directly (rather than spawning the create-kronus-app bin
  * from a temp dir) sidesteps the F1 chicken-and-egg cleanly:
  *   - the composer's `registry` override points at the local workspace `registry/`
  *     (which ships meta.json today; the release remote only will from v0.4.0+), and
- *   - `cooud-ui/compose` resolves from the workspace, not a bare temp dir that has
+ *   - `kronus-ui/compose` resolves from the workspace, not a bare temp dir that has
  *     no node_modules.
  *
  * Two modes:
@@ -38,16 +38,16 @@
  *       - the base app/page.tsx was removed and NO two pages resolve to the same
  *         URL after stripping (group) segments (the parallel-pages guard),
  *       - the brand string was baked into the installed chrome copy,
- *       - the base snapshot bytes (.cooud-ui/base/<app>/…) are byte-identical to
+ *       - the base snapshot bytes (.kronus-ui/base/<app>/…) are byte-identical to
  *         the emitted page (the F4 merge base), and
- *       - cooud-ui.json recorded composed{<template>} + installed{}.
+ *       - kronus-ui.json recorded composed{<template>} + installed{}.
  *     No install, no network — safe for a fast gate.
  *
  *   FULL  (`SMOKE_FULL=1 node scripts/compose-smoke.mjs`)
  *     Additionally, for the `store` AND `saas` templates composed above (via the
- *     real create-cooud-app scaffold+composeTemplate path, so the base app/page.tsx
+ *     real create-kronus-app scaffold+composeTemplate path, so the base app/page.tsx
  *     is already superseded): add the blocks' npm deps to the scaffolded
- *     package.json, `npm install` (pulls the published @cooud-ui/* + lucide-react +
+ *     package.json, `npm install` (pulls the published @kronus-ui/* + lucide-react +
  *     recharts), run `next build`, and assert it exits 0 and produced `.next` — the
  *     end-to-end proof that the exact wired flows build clean. `saas` is the one that
  *     exercises the Phase-2 machinery (the "use client" app-shell-chrome block
@@ -117,11 +117,11 @@ function run(cmd, args, opts = {}) {
  * dist entry points (built by `bun run build` before this runs)
  * ------------------------------------------------------------------ */
 const DIST = {
-  scaffold: join(ROOT, "packages/create-cooud-app/dist/scaffold.js"),
-  // The real create-cooud-app adapter (removes the base app/page.tsx after
+  scaffold: join(ROOT, "packages/create-kronus-app/dist/scaffold.js"),
+  // The real create-kronus-app adapter (removes the base app/page.tsx after
   // compose) — the EXACT path the wired `--template store` flow runs, not raw
   // `composeApp`.
-  composeTemplate: join(ROOT, "packages/create-cooud-app/dist/compose.js"),
+  composeTemplate: join(ROOT, "packages/create-kronus-app/dist/compose.js"),
 };
 const WORKSPACE_REGISTRY = join(ROOT, "registry");
 
@@ -135,7 +135,7 @@ function ensureBuilt() {
   }
   if (!existsSync(join(WORKSPACE_REGISTRY, "meta.json"))) {
     fatal(
-      "registry/meta.json is missing — compose needs it. Run `bun run -F cooud-ui registry` first.",
+      "registry/meta.json is missing — compose needs it. Run `bun run -F kronus-ui registry` first.",
     );
   }
 }
@@ -190,9 +190,9 @@ function blockNpmDeps(manifest) {
   for (const name of wanted) {
     const item = byName.get(name);
     for (const d of item?.dependencies || []) {
-      // Keep the published @cooud-ui/* deps out — the base package.json already
+      // Keep the published @kronus-ui/* deps out — the base package.json already
       // pins them; adding a bare-version spec here would fight that pin.
-      if (d.startsWith("@cooud-ui/")) continue;
+      if (d.startsWith("@kronus-ui/")) continue;
       deps.add(d);
     }
   }
@@ -214,15 +214,15 @@ async function lightComposeTemplate({ scaffold, composeTemplate }, template) {
   try {
     // 1) Scaffold the default base (composed templates copy `default`). This ships
     //    the base app/page.tsx that would collide with the generated "/" page —
-    //    exactly what the wired `create-cooud-app --template store` flow does.
+    //    exactly what the wired `create-kronus-app --template store` flow does.
     scaffold({ targetDir: target, name: appName, template });
-    check(existsSync(join(target, "cooud-ui.json")), `${template}: scaffolded cooud-ui.json`);
+    check(existsSync(join(target, "kronus-ui.json")), `${template}: scaffolded kronus-ui.json`);
     check(
       existsSync(join(target, "app/page.tsx")),
       `${template}: base scaffold shipped app/page.tsx (the "/" collision source)`,
     );
 
-    // 2) Compose on top via the REAL create-cooud-app adapter (removes the base
+    // 2) Compose on top via the REAL create-kronus-app adapter (removes the base
     //    app/page.tsx), against the local workspace registry (has meta.json).
     const result = await composeTemplate({
       targetDir: target,
@@ -299,22 +299,22 @@ async function lightComposeTemplate({ scaffold, composeTemplate }, template) {
 
     // 6) Base snapshot bytes are byte-identical to the emitted page (F4 merge base).
     const firstPage = expected[0];
-    const snap = join(target, ".cooud-ui/base", appName, firstPage);
+    const snap = join(target, ".kronus-ui/base", appName, firstPage);
     check(existsSync(snap), `${template}: base snapshot written for ${firstPage}`);
     if (existsSync(snap)) {
       const same = readFileSync(snap, "utf8") === readFileSync(join(target, firstPage), "utf8");
       check(same, `${template}: base snapshot is byte-identical to the generated page`);
     }
 
-    // 7) composed{} + installed{} recorded in cooud-ui.json.
-    const config = JSON.parse(readFileSync(join(target, "cooud-ui.json"), "utf8"));
+    // 7) composed{} + installed{} recorded in kronus-ui.json.
+    const config = JSON.parse(readFileSync(join(target, "kronus-ui.json"), "utf8"));
     check(
       config.composed?.[template]?.files?.length > 0,
-      `${template}: cooud-ui.json records composed[${template}] with files`,
+      `${template}: kronus-ui.json records composed[${template}] with files`,
     );
     check(
       Object.keys(config.installed || {}).length > 0,
-      `${template}: cooud-ui.json records installed{} blocks`,
+      `${template}: kronus-ui.json records installed{} blocks`,
     );
 
     return { tmp, target, manifest };
@@ -403,7 +403,7 @@ function fullBuild(template, composed) {
   info(`added block deps: ${deps.join(", ") || "(none)"}`);
 
   try {
-    info("npm install (pulls published @cooud-ui/* + block deps)");
+    info("npm install (pulls published @kronus-ui/* + block deps)");
     run("npm", ["install", "--no-audit", "--no-fund", "--install-strategy=hoisted"], {
       cwd: target,
       inherit: true,
@@ -426,7 +426,7 @@ function fullBuild(template, composed) {
  * main
  * ------------------------------------------------------------------ */
 async function main() {
-  log(c.bold("\nCooud Compose — app-generator smoke runner"));
+  log(c.bold("\nKronus Compose — app-generator smoke runner"));
   log(
     c.dim(
       `mode: ${FULL ? "FULL (scaffold + compose + install + next build)" : "LIGHT (scaffold + compose + structure, offline)"}`,

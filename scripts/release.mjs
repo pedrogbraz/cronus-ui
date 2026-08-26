@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * release.mjs — LOCAL release pipeline for the Cooud UI monorepo.
+ * release.mjs — LOCAL release pipeline for the Kronus UI monorepo.
  *
  * GitHub Actions was removed (account billing), so releases are cut from a
  * developer machine. This script is the single local entry point for the public
@@ -17,7 +17,7 @@
  *                     publishing packages that point at that raw GitHub tag;
  *   (e) publish     — for each package in dependency order
  *                     tokens → theme → ui → stack → ai-kit → cli →
- *                     create-cooud-app → create-cooud-stack → mcp:
+ *                     create-kronus-app → create-kronus-stack → mcp:
  *                       1. `bun pm pack` the package (rewrites `workspace:*`
  *                          ranges to the concrete version and embeds each
  *                          package's own `publishConfig`),
@@ -93,24 +93,24 @@ function run(cmd, args, opts = {}) {
 
 /* ------------------------------------------------------------------ *
  * package matrix — dependency order:
- * tokens → theme → ui → stack → ai-kit → cli → create-cooud-app →
- * create-cooud-stack → mcp
+ * tokens → theme → ui → stack → ai-kit → cli → create-kronus-app →
+ * create-kronus-stack → mcp
  * ------------------------------------------------------------------ */
 const PACKAGES = [
-  { dir: "packages/tokens", name: "@cooud-ui/tokens" },
-  { dir: "packages/theme", name: "@cooud-ui/theme" },
-  { dir: "packages/ui", name: "@cooud-ui/ui" },
-  { dir: "packages/stack", name: "@cooud-ui/stack" },
-  { dir: "packages/ai-kit", name: "@cooud-ui/ai-kit" },
-  { dir: "packages/cli", name: "cooud-ui" },
-  { dir: "packages/create-cooud-app", name: "create-cooud-app" },
-  { dir: "packages/create-cooud-stack", name: "create-cooud-stack" },
-  { dir: "packages/mcp", name: "cooud-ui-mcp" },
+  { dir: "packages/tokens", name: "@kronus-ui/tokens" },
+  { dir: "packages/theme", name: "@kronus-ui/theme" },
+  { dir: "packages/ui", name: "@kronus-ui/ui" },
+  { dir: "packages/stack", name: "@kronus-ui/stack" },
+  { dir: "packages/ai-kit", name: "@kronus-ui/ai-kit" },
+  { dir: "packages/cli", name: "kronus-ui" },
+  { dir: "packages/create-kronus-app", name: "create-kronus-app" },
+  { dir: "packages/create-kronus-stack", name: "create-kronus-stack" },
+  { dir: "packages/mcp", name: "kronus-ui-mcp" },
 ];
 const PACKAGE_ORDER_LABEL = PACKAGES.map((pkg) => pkg.name).join(" → ");
 const PUBLISHABLE_PACKAGE_NAMES = new Set(PACKAGES.map((pkg) => pkg.name));
 const NPM_REGISTRY = "https://registry.npmjs.org/";
-const GITHUB_REPO = "pedrogbraz/cooud-ui";
+const GITHUB_REPO = "pedrogbraz/kronus-ui";
 
 /* ------------------------------------------------------------------ *
  * (a) preflight — clean tree + lockstep versions
@@ -178,7 +178,7 @@ const url = \`https://api.github.com/repos/\${repo}\`;
 const res = await fetch(url, {
   headers: {
     "accept": "application/vnd.github+json",
-    "user-agent": "cooud-ui-release-preflight",
+    "user-agent": "kronus-ui-release-preflight",
   },
 });
 if (!res.ok) {
@@ -325,9 +325,9 @@ function smoke() {
  * exact packed bytes to public npm while preserving each package's embedded
  * `access: public`.
  *
- * Tarball-naming footgun: `@cooud-ui/ui` and the CLI `cooud-ui` BOTH pack to
- * `cooud-ui-<version>.tgz`. We pack each package into its OWN subdir so the CLI
- * tarball can't overwrite (and be confused with) the @cooud-ui/ui one.
+ * Tarball-naming footgun: `@kronus-ui/ui` and the CLI `kronus-ui` BOTH pack to
+ * `kronus-ui-<version>.tgz`. We pack each package into its OWN subdir so the CLI
+ * tarball can't overwrite (and be confused with) the @kronus-ui/ui one.
  */
 function packTarball(absDir, destDir) {
   run("mkdir", ["-p", destDir]);
@@ -360,7 +360,7 @@ function validatePackedInternalDeps(tarball, pkgName, version) {
 
   if (problems.length > 0) {
     fatal(
-      `${pkgName} tarball has internal Cooud deps outside lockstep ${version}: ${problems.join(", ")}`,
+      `${pkgName} tarball has internal Kronus deps outside lockstep ${version}: ${problems.join(", ")}`,
     );
   }
   ok(`${pkgName} tarball internal deps are pinned to ${version}`);
@@ -381,7 +381,7 @@ function publishAll(version) {
       const absDir = join(ROOT, pkg.dir);
       const registry = NPM_REGISTRY;
 
-      // Per-package subdir: @cooud-ui/ui and the CLI cooud-ui share a tarball name,
+      // Per-package subdir: @kronus-ui/ui and the CLI kronus-ui share a tarball name,
       // so isolate each so one can't clobber the other.
       const pkgDest = join(destDir, pkg.dir.replace(/^packages\//, ""));
       let tarball;
@@ -473,7 +473,7 @@ function summary({ version, tag, published }) {
   );
   log(
     `    ${c.dim("·")} (raw.githubusercontent.com/${GITHUB_REPO}/${tag}/registry) resolves for` +
-      ` \`npx cooud-ui add\`.`,
+      ` \`npx kronus-ui add\`.`,
   );
 
   log(`\n${c.bold("Post-publish steps this script did NOT do:")}`);
@@ -493,7 +493,7 @@ function summary({ version, tag, published }) {
  * main
  * ------------------------------------------------------------------ */
 function main() {
-  log(c.bold("\nCooud UI — local release pipeline"));
+  log(c.bold("\nKronus UI — local release pipeline"));
   log(
     c.dim(
       `mode: ${PUBLISH ? "PUBLISH (will push tag + publish tarballs)" : "DRY-RUN (default; prints the plan only)"}`,
