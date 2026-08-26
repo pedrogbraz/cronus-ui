@@ -50,7 +50,7 @@ export const ContextMenuSubContent = forwardRef<
       ref={ref}
       data-slot="context-menu-sub-content"
       className={cn(
-        "z-50 min-w-[8rem] overflow-hidden rounded-lg border border-border bg-surface-floating p-1 text-fg shadow-lg data-[state=open]:animate-[kronus-pop-in_180ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[kronus-pop-out_140ms_var(--ease-out-quart)_both]",
+        "z-50 min-w-[8rem] overflow-hidden rounded-lg border border-border bg-surface-floating p-1 text-fg shadow-lg data-[state=open]:animate-[cronus-pop-in_180ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[cronus-pop-out_140ms_var(--ease-out-quart)_both]",
         className,
       )}
       {...props}
@@ -69,7 +69,7 @@ export const ContextMenuContent = forwardRef<
         ref={ref}
         data-slot="context-menu-content"
         className={cn(
-          "z-50 min-w-[8rem] overflow-hidden rounded-lg border border-border bg-surface-floating p-1 text-fg shadow-lg data-[state=open]:animate-[kronus-pop-in_180ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[kronus-pop-out_140ms_var(--ease-out-quart)_both]",
+          "z-50 min-w-[8rem] overflow-hidden rounded-lg border border-border bg-surface-floating p-1 text-fg shadow-lg data-[state=open]:animate-[cronus-pop-in_180ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[cronus-pop-out_140ms_var(--ease-out-quart)_both]",
           className,
         )}
         {...props}

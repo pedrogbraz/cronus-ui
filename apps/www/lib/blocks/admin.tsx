@@ -43,8 +43,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@kronus-ui/ui";
-import { KPIS } from "@kronus-ui/ui/demo-saas";
+} from "@cronus-ui/ui";
+import { KPIS } from "@cronus-ui/ui/demo-saas";
 import {
   CalendarDays,
   ChevronRight,
@@ -318,7 +318,7 @@ const userManagementTableCode = `import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { MoreHorizontal, Search, UserPlus } from "lucide-react";
 
 interface TeamMember {
@@ -617,7 +617,7 @@ const userManagementCardsCode = `import {
   DropdownMenuTrigger,
   Input,
   Separator,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { MoreHorizontal, Search, UserPlus } from "lucide-react";
 
 interface TeamMember {
@@ -895,7 +895,7 @@ const analyticsOverviewCode = `import {
   SelectTrigger,
   SelectValue,
   Sparkline,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { KPIS } from "../lib/demo-saas.js";
 
 interface BreakdownRow {
@@ -1242,7 +1242,7 @@ const analyticsEngagementCode = `import {
   SelectTrigger,
   SelectValue,
   Sparkline,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 
 interface RetentionStat {
   label: string;
@@ -1617,7 +1617,7 @@ export function KanbanBoardBlock() {
   );
 }
 
-const kanbanBoardCode = `import { Avatar, AvatarFallback, Badge, Button } from "@kronus-ui/ui";
+const kanbanBoardCode = `import { Avatar, AvatarFallback, Badge, Button } from "@cronus-ui/ui";
 import { CalendarDays, MessageSquare, Plus } from "lucide-react";
 
 interface BoardLabel {
@@ -1934,7 +1934,7 @@ export function KanbanBoardCompactBlock() {
   );
 }
 
-const kanbanBoardCompactCode = `import { Avatar, AvatarFallback, Badge, Button } from "@kronus-ui/ui";
+const kanbanBoardCompactCode = `import { Avatar, AvatarFallback, Badge, Button } from "@cronus-ui/ui";
 import { Plus } from "lucide-react";
 
 interface CompactTask {
@@ -2248,7 +2248,7 @@ const auditLogTimelineCode = `import {
   CardHeader,
   CardTitle,
   Separator,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Download } from "lucide-react";
 
 interface AuditEvent {
@@ -2598,7 +2598,7 @@ const auditLogTableCode = `import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ChevronRight, Download, Search } from "lucide-react";
 
 interface AuditRow {

@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs.js";
  * the native `storage` event only fires in *other* documents. Cross-tab sync
  * still rides the native event; this one covers siblings in the same page.
  */
-const SYNC_EVENT = "kronus-ui:code-tabs";
+const SYNC_EVENT = "cronus-ui:code-tabs";
 
 /** Separator used to derive a stable dependency key from the item labels. */
 const LABEL_SEPARATOR = "\u0000";

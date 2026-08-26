@@ -9,7 +9,7 @@
   "files": [
     {
       "path": "cn.ts",
-      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\n/**\n * Merge conditional class names and de-duplicate conflicting Tailwind\n * utilities (the last one wins). Used by every Kronus UI component.\n */\nexport function cn(...inputs: ClassValue[]): string {\n  return twMerge(clsx(inputs));\n}\n",
+      "content": "import { type ClassValue, clsx } from \"clsx\";\nimport { twMerge } from \"tailwind-merge\";\n\n/**\n * Merge conditional class names and de-duplicate conflicting Tailwind\n * utilities (the last one wins). Used by every Cronus UI component.\n */\nexport function cn(...inputs: ClassValue[]): string {\n  return twMerge(clsx(inputs));\n}\n",
       "target": "lib"
     }
   ]

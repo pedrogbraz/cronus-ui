@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Button, Card } from "@kronus-ui/ui";
+import { Badge, Button, Card } from "@cronus-ui/ui";
 import { Check, Minus, Sparkles } from "lucide-react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
 import { BlockViewBody } from "../../components/blocks/block-view-body";
@@ -295,7 +295,7 @@ export function FeatureMatrixBlock() {
   );
 }
 
-const featureMatrixCode = `import { Badge, Button, Card } from "@kronus-ui/ui";
+const featureMatrixCode = `import { Badge, Button, Card } from "@cronus-ui/ui";
 import { Check, Minus, Sparkles } from "lucide-react";
 
 /** true = included, false = not included, string = a literal limit. */

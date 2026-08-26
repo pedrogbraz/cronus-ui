@@ -167,7 +167,7 @@ export const TiltCard = forwardRef<HTMLDivElement, TiltCardProps>(
             className="pointer-events-none absolute inset-0 z-10 overflow-hidden rounded-[inherit] opacity-0 transition-opacity duration-300 group-data-[tilting]:opacity-100 motion-reduce:hidden motion-reduce:transition-none"
             style={{
               background:
-                "radial-gradient(600px circle at var(--tilt-gx, 50%) var(--tilt-gy, 50%), color-mix(in oklch, var(--kronus-fg) 16%, transparent), transparent 60%)",
+                "radial-gradient(600px circle at var(--tilt-gx, 50%) var(--tilt-gy, 50%), color-mix(in oklch, var(--cronus-fg) 16%, transparent), transparent 60%)",
             }}
           />
         ) : null}

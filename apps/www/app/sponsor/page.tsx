@@ -5,9 +5,9 @@ import { SponsorCard } from "../../components/sponsor/sponsor-card";
 import { GITHUB_SPONSORS_URL, SPONSOR_URL } from "../../lib/sponsor";
 
 export const metadata: Metadata = {
-  title: "Sponsor — Kronus UI",
+  title: "Sponsor — Cronus UI",
   description:
-    "Kronus OSS is free. If the engine helped you ship, you can leave a coffee — any amount, one-time.",
+    "Cronus OSS is free. If the engine helped you ship, you can leave a coffee — any amount, one-time.",
 };
 
 export default function SponsorPage() {
@@ -22,7 +22,7 @@ export default function SponsorPage() {
             The engine is free.
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-fg-secondary">
-            Tokens, looks, SaaS, compose, and upgrade stay MIT. If Kronus helped you ship and you
+            Tokens, looks, SaaS, compose, and upgrade stay MIT. If Cronus helped you ship and you
             want to leave a coffee, pick an amount — or type your own.
           </p>
         </div>
@@ -55,14 +55,14 @@ export default function SponsorPage() {
           Prefer to contribute code?{" "}
           <Link
             href="/docs/getting-started"
-            className="text-fg-secondary underline-offset-4 outline-none hover:text-fg hover:underline focus-visible:ring-2 focus-visible:ring-ring"
+            className="text-fg-secondary underline underline-offset-4 outline-none hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
           >
             Start with OSS
           </Link>{" "}
           or open an issue on{" "}
           <a
-            href="https://github.com/pedrogbraz/kronus-ui"
-            className="text-fg-secondary underline-offset-4 outline-none hover:text-fg hover:underline focus-visible:ring-2 focus-visible:ring-ring"
+            href="https://github.com/pedrogbraz/cronus-ui"
+            className="text-fg-secondary underline underline-offset-4 outline-none hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
           >
             GitHub
           </a>

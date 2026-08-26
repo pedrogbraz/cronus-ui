@@ -1,25 +1,25 @@
 /**
- * Bridge between the committed Kronus registry (`registry/<name>.json` at the
+ * Bridge between the committed Cronus registry (`registry/<name>.json` at the
  * repo root) and the shadcn registry spec, served under `/r/*`. This is what
- * lets the wider shadcn ecosystem (CLI, v0, MCP clients) install Kronus UI
+ * lets the wider shadcn ecosystem (CLI, v0, MCP clients) install Cronus UI
  * straight from the showcase:
  *
- *   npx shadcn@latest add https://ui.testkronus.cloud/r/button.json
+ *   npx shadcn@latest add https://ui.testcronus.cloud/r/button.json
  *
  * Mapping rules (schemas: https://ui.shadcn.com/schema/registry.json and
  * https://ui.shadcn.com/schema/registry-item.json):
  *
- * - Kronus item types are already shadcn-valid (`registry:ui|lib|block`) and
+ * - Cronus item types are already shadcn-valid (`registry:ui|lib|block`) and
  *   pass through unchanged.
  * - `registryDependencies` become absolute `/r/<name>.json` URLs — a bare name
  *   like "button" would resolve against shadcn's own registry, not ours.
  * - ui/lib sources are rewritten from the canonical in-package specifiers
  *   ("../lib/cn.js", "./button.js") to the `@/registry/<style>/…` convention
  *   the shadcn CLI transforms into the consumer's components.json aliases
- *   (mirrors what packages/cli rewriteImports does against kronus-ui.json).
- * - Block sources import the `@kronus-ui/ui` npm package (declared in
+ *   (mirrors what packages/cli rewriteImports does against cronus-ui.json).
+ * - Block sources import the `@cronus-ui/ui` npm package (declared in
  *   `dependencies`), so they need no rewriting; an explicit `target` mirrors
- *   the kronus-ui CLI's `components/blocks/` default.
+ *   the cronus-ui CLI's `components/blocks/` default.
  *
  * Everything here runs at BUILD time — the /r routes are force-static.
  */
@@ -29,7 +29,7 @@ import { getBlockMeta } from "./blocks-index";
 import { getComponentDisplayName, getComponentMeta } from "./components-index";
 import { absoluteUrl, SITE_URL } from "./site-url";
 
-const REGISTRY_NAME = "kronus-ui";
+const REGISTRY_NAME = "cronus-ui";
 const REGISTRY_SCHEMA = "https://ui.shadcn.com/schema/registry.json";
 const REGISTRY_ITEM_SCHEMA = "https://ui.shadcn.com/schema/registry-item.json";
 
@@ -38,30 +38,30 @@ const REGISTRY_ITEM_SCHEMA = "https://ui.shadcn.com/schema/registry-item.json";
  * transformer only rewrites specifiers shaped `@/registry/<style>/{ui,lib,…}`,
  * so every served path and rewritten import carries this segment.
  */
-const REGISTRY_STYLE = "kronus";
+const REGISTRY_STYLE = "cronus";
 
 /* -------------------------------------------------------------------------- */
-/*  Kronus registry (committed JSON) readers                                   */
+/*  Cronus registry (committed JSON) readers                                   */
 /* -------------------------------------------------------------------------- */
 
-type KronusItemType = "registry:ui" | "registry:lib" | "registry:block";
+type CronusItemType = "registry:ui" | "registry:lib" | "registry:block";
 
-interface KronusRegistryFile {
+interface CronusRegistryFile {
   /** Path relative to the item kind, e.g. "button.tsx" or "cn.ts". */
   path: string;
   content: string;
   target: "ui" | "lib" | "block";
 }
 
-interface KronusRegistryItem {
+interface CronusRegistryItem {
   name: string;
-  type: KronusItemType;
+  type: CronusItemType;
   dependencies: string[];
   registryDependencies: string[];
-  files: KronusRegistryFile[];
+  files: CronusRegistryFile[];
 }
 
-type KronusRegistryIndexEntry = Omit<KronusRegistryItem, "files">;
+type CronusRegistryIndexEntry = Omit<CronusRegistryItem, "files">;
 
 /**
  * `next build` runs with cwd = apps/www under turbo, but tolerate a repo-root
@@ -75,13 +75,13 @@ function registryRoot(): string {
   throw new Error(`shadcn-registry: could not locate registry/ from ${cwd}`);
 }
 
-let indexCache: KronusRegistryIndexEntry[] | undefined;
+let indexCache: CronusRegistryIndexEntry[] | undefined;
 
-function readKronusIndex(): KronusRegistryIndexEntry[] {
+function readCronusIndex(): CronusRegistryIndexEntry[] {
   if (!indexCache) {
     indexCache = JSON.parse(
       readFileSync(join(registryRoot(), "index.json"), "utf8"),
-    ) as KronusRegistryIndexEntry[];
+    ) as CronusRegistryIndexEntry[];
   }
   return indexCache;
 }
@@ -89,15 +89,15 @@ function readKronusIndex(): KronusRegistryIndexEntry[] {
 /** Registry names are plain slugs; this also keeps URL params inside registry/. */
 const SLUG_RE = /^[a-z0-9-]+$/;
 
-const itemCache = new Map<string, KronusRegistryItem | undefined>();
+const itemCache = new Map<string, CronusRegistryItem | undefined>();
 
-function readKronusItem(name: string): KronusRegistryItem | undefined {
+function readCronusItem(name: string): CronusRegistryItem | undefined {
   if (!itemCache.has(name)) {
     const file = SLUG_RE.test(name) ? join(registryRoot(), `${name}.json`) : undefined;
     itemCache.set(
       name,
       file && existsSync(file)
-        ? (JSON.parse(readFileSync(file, "utf8")) as KronusRegistryItem)
+        ? (JSON.parse(readFileSync(file, "utf8")) as CronusRegistryItem)
         : undefined,
     );
   }
@@ -139,7 +139,7 @@ function itemMeta(name: string): { title: string; description?: string } {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Kronus item → shadcn registry-item                                         */
+/*  Cronus item → shadcn registry-item                                         */
 /* -------------------------------------------------------------------------- */
 
 export interface ShadcnRegistryFile {
@@ -152,7 +152,7 @@ export interface ShadcnRegistryFile {
 export interface ShadcnRegistryItem {
   $schema: string;
   name: string;
-  type: KronusItemType;
+  type: CronusItemType;
   title: string;
   description?: string;
   dependencies: string[];
@@ -163,8 +163,8 @@ export interface ShadcnRegistryItem {
 /**
  * Rewrite the canonical in-package specifiers to the `@/registry/<style>/…`
  * form the shadcn CLI transforms into the consumer's aliases:
- *   "../lib/cn.js" → "@/registry/kronus/lib/cn"    (→ e.g. "@/lib/cn")
- *   "./button.js"  → "@/registry/kronus/ui/button" (→ e.g. "@/components/ui/button")
+ *   "../lib/cn.js" → "@/registry/cronus/lib/cn"    (→ e.g. "@/lib/cn")
+ *   "./button.js"  → "@/registry/cronus/ui/button" (→ e.g. "@/components/ui/button")
  * npm specifiers are left untouched.
  */
 function rewriteForShadcn(content: string): string {
@@ -173,7 +173,7 @@ function rewriteForShadcn(content: string): string {
     .replace(/(["'])\.\/([\w-]+)\.js\1/g, `"@/registry/${REGISTRY_STYLE}/ui/$2"`);
 }
 
-function toShadcnFile(file: KronusRegistryFile, withContent: boolean): ShadcnRegistryFile {
+function toShadcnFile(file: CronusRegistryFile, withContent: boolean): ShadcnRegistryFile {
   switch (file.target) {
     case "ui":
       return {
@@ -188,9 +188,9 @@ function toShadcnFile(file: KronusRegistryFile, withContent: boolean): ShadcnReg
         ...(withContent ? { content: rewriteForShadcn(file.content) } : {}),
       };
     default:
-      // Block sources import the @kronus-ui/ui npm package, so the content is
+      // Block sources import the @cronus-ui/ui npm package, so the content is
       // already consumer-ready; the explicit target keeps placement in lockstep
-      // with the kronus-ui CLI (components/blocks/), src-dir aware via the CLI.
+      // with the cronus-ui CLI (components/blocks/), src-dir aware via the CLI.
       return {
         path: `registry/${REGISTRY_STYLE}/blocks/${file.path}`,
         type: "registry:component",
@@ -201,7 +201,7 @@ function toShadcnFile(file: KronusRegistryFile, withContent: boolean): ShadcnReg
 }
 
 function toShadcnItem(name: string, withContent: boolean): ShadcnRegistryItem | undefined {
-  const item = readKronusItem(name);
+  const item = readCronusItem(name);
   if (!item) return undefined;
   const meta = itemMeta(name);
   return {
@@ -234,7 +234,7 @@ export interface ShadcnRegistry {
 
 /** The whole registry in shadcn `registry.json` shape (file lists, no content). */
 export function buildShadcnRegistry(): ShadcnRegistry {
-  const items = readKronusIndex().map((entry) => {
+  const items = readCronusIndex().map((entry) => {
     const item = toShadcnItem(entry.name, false);
     if (!item) {
       throw new Error(`shadcn-registry: index references missing item "${entry.name}"`);
@@ -247,5 +247,5 @@ export function buildShadcnRegistry(): ShadcnRegistry {
 
 /** Static params for /r/[name] — every registry item, `.json`-suffixed. */
 export function shadcnItemParams(): { name: string }[] {
-  return readKronusIndex().map((entry) => ({ name: `${entry.name}.json` }));
+  return readCronusIndex().map((entry) => ({ name: `${entry.name}.json` }));
 }

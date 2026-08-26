@@ -64,7 +64,7 @@ describe("template catalog", () => {
     expect(blockHref({ block: "hero", variant: "atmosphere" })).toBe("/blocks/hero/atmosphere");
     expect(appearanceLabel(getTemplate("landing-studio")!)).toBe("Midnight · dark");
     expect(scaffoldCommands("saas").map((item) => item.id)).toEqual(["bun", "pnpm", "npm", "yarn"]);
-    expect(scaffoldCommands("default")[0]?.command).toBe("bunx create-kronus-app my-app");
+    expect(scaffoldCommands("default")[0]?.command).toBe("bunx create-cronus-app my-app");
   });
 
   it("keeps saas/store/landing OSS and lists mail/chat/finance as additive Pro", () => {

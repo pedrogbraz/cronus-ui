@@ -32,7 +32,7 @@ export const SKILLS = [
 ] as const;
 export type Skill = (typeof SKILLS)[number];
 export const DEFAULT_SKILLS: readonly Skill[] = SKILLS;
-const KRONUS_UI_SKILLS: ReadonlySet<Skill> = new Set(["ui-add", "theme", "compose"]);
+const CRONUS_UI_SKILLS: ReadonlySet<Skill> = new Set(["ui-add", "theme", "compose"]);
 
 export interface AiKitOptions {
   /** Absolute path of the (already scaffolded) project. */
@@ -45,13 +45,13 @@ export interface AiKitOptions {
   preset?: DoctrinePreset;
   /** Which Claude Code skills to include. @default all */
   skills?: readonly Skill[];
-  /** Whether to emit Kronus UI-specific rules/skills. @default true */
-  includeKronusUi?: boolean;
+  /** Whether to emit Cronus UI-specific rules/skills. @default true */
+  includeCronusUi?: boolean;
   /**
-   * Whether to emit the kronus-ui MCP config. Defaults to the legacy Claude
+   * Whether to emit the cronus-ui MCP config. Defaults to the legacy Claude
    * behavior unless explicitly selected by a stack scaffold.
    */
-  kronusUiMcp?: boolean;
+  cronusUiMcp?: boolean;
 }
 
 export interface AiKitResult {
@@ -72,7 +72,7 @@ function templatesRoot(): string {
   const found = candidates.find((p) => existsSync(join(p, "AGENTS.base.md")));
   if (!found) {
     throw new Error(
-      `Could not locate @kronus-ui/ai-kit templates (looked in: ${candidates.join(", ")}).`,
+      `Could not locate @cronus-ui/ai-kit templates (looked in: ${candidates.join(", ")}).`,
     );
   }
   return found;
@@ -88,8 +88,8 @@ function templatesRoot(): string {
  * artifacts that reference it — `CLAUDE.md`, the doctrine Cursor rule, the
  * Copilot digest — are skipped too; only assistant-local tooling ships.
  *
- * When `includeKronusUi` is false, the generic doctrine/tooling remains, but
- * Kronus UI-specific rules and skills are not emitted.
+ * When `includeCronusUi` is false, the generic doctrine/tooling remains, but
+ * Cronus UI-specific rules and skills are not emitted.
  */
 export function writeAiKit(options: AiKitOptions): AiKitResult {
   const {
@@ -98,7 +98,7 @@ export function writeAiKit(options: AiKitOptions): AiKitResult {
     assistants = DEFAULT_ASSISTANTS,
     preset = DEFAULT_PRESET,
     skills = DEFAULT_SKILLS,
-    includeKronusUi = true,
+    includeCronusUi = true,
   } = options;
   const root = templatesRoot();
   const written: string[] = [];
@@ -106,10 +106,10 @@ export function writeAiKit(options: AiKitOptions): AiKitResult {
 
   const withDoctrine = preset !== "none";
   const wants = (a: Assistant) => assistants.includes(a);
-  const wantsKronusUiMcp = options.kronusUiMcp ?? (includeKronusUi && wants("claude"));
-  const enabledSkills = includeKronusUi
+  const wantsCronusUiMcp = options.cronusUiMcp ?? (includeCronusUi && wants("claude"));
+  const enabledSkills = includeCronusUi
     ? skills
-    : skills.filter((skill) => !KRONUS_UI_SKILLS.has(skill));
+    : skills.filter((skill) => !CRONUS_UI_SKILLS.has(skill));
 
   /** Write `content` to `rel` unless it already exists. Tokens are substituted. */
   const emit = (rel: string, content: string): void => {
@@ -138,7 +138,7 @@ export function writeAiKit(options: AiKitOptions): AiKitResult {
     emit("AGENTS.md", doctrine);
   }
 
-  if (wantsKronusUiMcp) {
+  if (wantsCronusUiMcp) {
     emitTemplate("mcp.json", ".mcp.json");
   }
 
@@ -153,11 +153,11 @@ export function writeAiKit(options: AiKitOptions): AiKitResult {
     }
   }
 
-  // Cursor — the design-system rule applies only to Kronus UI stacks; doctrine is generic.
+  // Cursor — the design-system rule applies only to Cronus UI stacks; doctrine is generic.
   if (wants("cursor")) {
     if (withDoctrine) emitTemplate("cursor/rules/00-doctrine.mdc", ".cursor/rules/00-doctrine.mdc");
-    if (includeKronusUi)
-      emitTemplate("cursor/rules/10-kronus-ui.mdc", ".cursor/rules/10-kronus-ui.mdc");
+    if (includeCronusUi)
+      emitTemplate("cursor/rules/10-cronus-ui.mdc", ".cursor/rules/10-cronus-ui.mdc");
   }
 
   // GitHub Copilot — a digest of the doctrine.

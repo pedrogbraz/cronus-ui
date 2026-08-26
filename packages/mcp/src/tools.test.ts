@@ -34,7 +34,7 @@ const INDEX: RegistryIndex = [
   {
     name: "pricing",
     type: "registry:block",
-    dependencies: ["@kronus-ui/ui@0.2.0", "lucide-react@^0.577.0"],
+    dependencies: ["@cronus-ui/ui@0.2.0", "lucide-react@^0.577.0"],
     registryDependencies: [],
   },
 ];
@@ -88,7 +88,7 @@ describe("MCP server release version", () => {
 
   it("pins the default registry to the runtime version tag", () => {
     expect(DEFAULT_REGISTRY).toBe(
-      `https://raw.githubusercontent.com/pedrogbraz/kronus-ui/v${pkg.version}/registry`,
+      `https://raw.githubusercontent.com/pedrogbraz/cronus-ui/v${pkg.version}/registry`,
     );
   });
 });
@@ -133,16 +133,16 @@ describe("humanizeName", () => {
 });
 
 describe("buildInstallCommand", () => {
-  it("builds the npx kronus-ui add command", () => {
-    expect(buildInstallCommand(["button"])).toBe("npx kronus-ui add button");
+  it("builds the npx cronus-ui add command", () => {
+    expect(buildInstallCommand(["button"])).toBe("npx cronus-ui add button");
     expect(buildInstallCommand(["button", "card", "dialog"])).toBe(
-      "npx kronus-ui add button card dialog",
+      "npx cronus-ui add button card dialog",
     );
   });
 
   it("de-duplicates and trims names while preserving order", () => {
     expect(buildInstallCommand([" button ", "card", "button"])).toBe(
-      "npx kronus-ui add button card",
+      "npx cronus-ui add button card",
     );
   });
 
@@ -171,7 +171,7 @@ describe("listComponents", () => {
       description: "Clickable action with variants, sizes and asChild.",
       category: "buttons",
       registryDependencies: ["cn"],
-      install: "npx kronus-ui add button",
+      install: "npx cronus-ui add button",
     });
     expect(button?.dependencies).toContain("class-variance-authority@^0.7.1");
   });
@@ -195,7 +195,7 @@ describe("listBlocks", () => {
       title: "Pricing",
       description: "A three-tier pricing grid with a highlighted plan.",
       category: "marketing",
-      install: "npx kronus-ui add pricing",
+      install: "npx cronus-ui add pricing",
     });
   });
 
@@ -260,7 +260,7 @@ describe("getComponent", () => {
       description: "Clickable action with variants, sizes and asChild.",
       category: "buttons",
       registryDependencies: ["cn"],
-      install: "npx kronus-ui add button",
+      install: "npx cronus-ui add button",
     });
     expect(detail.files).toHaveLength(1);
     expect(detail.files[0]?.path).toBe("button.tsx");
@@ -325,7 +325,7 @@ describe("getInstallCommand", () => {
   it("returns the names and the composed command", () => {
     expect(getInstallCommand(["button", "card"])).toEqual({
       names: ["button", "card"],
-      command: "npx kronus-ui add button card",
+      command: "npx cronus-ui add button card",
     });
   });
 });

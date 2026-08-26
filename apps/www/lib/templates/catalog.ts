@@ -34,8 +34,8 @@ export interface TemplateCatalogEntry {
 
 function cmd(slug: string): string {
   return slug === "default"
-    ? "bunx create-kronus-app my-app"
-    : `bunx create-kronus-app my-app --template ${slug}`;
+    ? "bunx create-cronus-app my-app"
+    : `bunx create-cronus-app my-app --template ${slug}`;
 }
 
 const siteChrome = { navbar: "navbar", footer: "footer" } as const;
@@ -58,7 +58,7 @@ export const TEMPLATE_CATALOG: readonly TemplateCatalogEntry[] = [
       "Split login/signup plus an (app) shell with sidebar nav",
       "Dashboard, analytics, team, billing, and settings routes",
       "Aurora theme by default — `theme set` re-skins the tree",
-      "Grow with `kronus-ui add-page`; upgrade keeps local edits",
+      "Grow with `cronus-ui add-page`; upgrade keeps local edits",
     ],
   },
   {
@@ -97,7 +97,7 @@ export const TEMPLATE_CATALOG: readonly TemplateCatalogEntry[] = [
     inside: [
       "Hero, feature grid, pricing, testimonials, FAQ, CTA",
       "Navbar and footer chrome from the registry",
-      "Same token system as the rest of Kronus UI",
+      "Same token system as the rest of Cronus UI",
       "Swap block variants with `--variant` on compose",
     ],
   },
@@ -428,9 +428,9 @@ export const TEMPLATE_CATALOG: readonly TemplateCatalogEntry[] = [
     blocks: [],
     inside: [
       "One page: metric cards, orders table, invite card",
-      "KronusUIProvider + anti-flash KronusThemeScript",
+      "CronusUIProvider + anti-flash CronusThemeScript",
       "Tailwind v4 + token CSS pre-wired",
-      "kronus-ui.json so `npx kronus-ui add` just works",
+      "cronus-ui.json so `npx cronus-ui add` just works",
     ],
   },
   {
@@ -543,9 +543,9 @@ export interface ScaffoldCommand {
 export function scaffoldCommands(slug: string): ScaffoldCommand[] {
   const flag = slug === "default" ? "" : ` --template ${slug}`;
   return [
-    { id: "bun", label: "bun", command: `bunx create-kronus-app my-app${flag}` },
-    { id: "pnpm", label: "pnpm", command: `pnpm dlx create-kronus-app my-app${flag}` },
-    { id: "npm", label: "npm", command: `npx create-kronus-app my-app${flag}` },
-    { id: "yarn", label: "yarn", command: `yarn dlx create-kronus-app my-app${flag}` },
+    { id: "bun", label: "bun", command: `bunx create-cronus-app my-app${flag}` },
+    { id: "pnpm", label: "pnpm", command: `pnpm dlx create-cronus-app my-app${flag}` },
+    { id: "npm", label: "npm", command: `npx create-cronus-app my-app${flag}` },
+    { id: "yarn", label: "yarn", command: `yarn dlx create-cronus-app my-app${flag}` },
   ];
 }

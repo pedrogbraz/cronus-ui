@@ -1,4 +1,4 @@
-import { CopyButton } from "@kronus-ui/ui";
+import { CopyButton } from "@cronus-ui/ui";
 
 /** The exact scaffold command as a flat divided row with a copy action. */
 export function CommandChip({ command }: { command: string }) {

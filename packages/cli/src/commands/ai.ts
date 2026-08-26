@@ -9,7 +9,7 @@ import {
   SKILLS,
   type Skill,
   writeAiKit,
-} from "@kronus-ui/ai-kit";
+} from "@cronus-ui/ai-kit";
 import { log } from "../utils.js";
 
 interface AiOptions {
@@ -32,7 +32,7 @@ async function projectName(cwd: string): Promise<string> {
 }
 
 /**
- * Scaffold the Kronus UI AI Kit (AGENTS.md doctrine + Claude Code / Cursor /
+ * Scaffold the Cronus UI AI Kit (AGENTS.md doctrine + Claude Code / Cursor /
  * Copilot config) into the project. Writes are idempotent: existing files are
  * left untouched, so re-running only fills in what is missing.
  */
@@ -59,7 +59,7 @@ export async function aiAdd(options: AiOptions): Promise<void> {
 
   const name = await projectName(cwd);
 
-  log.title(`Adding the Kronus UI AI Kit to ${name}`);
+  log.title(`Adding the Cronus UI AI Kit to ${name}`);
   log.step(`Assistants: ${assistants.join(", ")} · doctrine: ${preset}`);
 
   const { written, skipped } = writeAiKit({ targetDir: cwd, name, assistants, preset, skills });

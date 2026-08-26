@@ -11,7 +11,7 @@ import {
   CardHeader,
   Separator,
   Textarea,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Bookmark, Heart, MessageCircle, MoreHorizontal, Repeat2, Share } from "lucide-react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
 import { BlockViewBody } from "../../components/blocks/block-view-body";
@@ -88,7 +88,7 @@ const postCardCode = `import {
   Card,
   CardContent,
   CardHeader,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Bookmark, Heart, MessageCircle, MoreHorizontal, Repeat2, Share } from "lucide-react";
 
 export function PostCardBlock() {
@@ -293,7 +293,7 @@ const commentThreadCode = `import {
   CardContent,
   Separator,
   Textarea,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Heart } from "lucide-react";
 
 export function CommentThreadBlock() {
@@ -460,7 +460,7 @@ export function ProfileCardBlock() {
             <span className="font-display text-lg font-semibold text-fg">Mara Castillo</span>
             <span className="text-sm text-fg-tertiary">@maracastillo</span>
             <p className="mt-1 text-sm leading-6 text-fg-secondary">
-              Design systems lead at Kronus. Building accessible, themeable interfaces.
+              Design systems lead at Cronus. Building accessible, themeable interfaces.
             </p>
           </div>
 
@@ -501,7 +501,7 @@ const profileCardCode = `import {
   Button,
   Card,
   CardContent,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 
 const FOLLOWED_BY_AVATARS = [
   { src: "https://i.pravatar.cc/80?img=32", alt: "Diego Lima", fallback: "DL" },
@@ -531,7 +531,7 @@ export function ProfileCardBlock() {
             <span className="font-display text-lg font-semibold text-fg">Mara Castillo</span>
             <span className="text-sm text-fg-tertiary">@maracastillo</span>
             <p className="mt-1 text-sm leading-6 text-fg-secondary">
-              Design systems lead at Kronus. Building accessible, themeable interfaces.
+              Design systems lead at Cronus. Building accessible, themeable interfaces.
             </p>
           </div>
 

@@ -4,7 +4,7 @@ import { isAbsolute, join } from "node:path";
 import { CONFIG_FILE, hasConfig, readConfig, writeConfig } from "../config.js";
 import { log, writeFileEnsured } from "../utils.js";
 
-/** The theme presets shipped by @kronus-ui/theme. */
+/** The theme presets shipped by @cronus-ui/theme. */
 export const THEME_PRESETS = ["aurora", "neutral", "midnight", "sunset", "emerald"] as const;
 
 /** The two color modes a preset can be pinned to. */
@@ -23,7 +23,7 @@ const LAYOUT_CANDIDATES = [
  * rewriting attributes there would be pointless (and risk touching an unrelated
  * `layout.tsx`). Either the anti-flash script tag or the provider qualifies.
  */
-const THEME_MARKERS = ["KronusThemeScript", "KronusUIProvider"];
+const THEME_MARKERS = ["CronusThemeScript", "CronusUIProvider"];
 
 interface ThemeSetOptions {
   name: string;
@@ -51,7 +51,7 @@ function rewriteAttr(
   return { content, changed };
 }
 
-/** First existing candidate layout that mounts the Kronus theme runtime. */
+/** First existing candidate layout that mounts the Cronus theme runtime. */
 async function findLayout(
   cwd: string,
 ): Promise<{ path: string; rel: string; content: string } | undefined> {
@@ -98,7 +98,7 @@ export async function themeSet(options: ThemeSetOptions): Promise<void> {
     log.ok(`Updated ${layout.rel} (${changed} attribute(s) changed)`);
   } else {
     log.warn(
-      "No app layout mounting <KronusThemeScript>/<KronusUIProvider> found — updating config only.",
+      "No app layout mounting <CronusThemeScript>/<CronusUIProvider> found — updating config only.",
     );
   }
 
@@ -124,12 +124,12 @@ export async function themeSet(options: ThemeSetOptions): Promise<void> {
  * `?c=` permalink token or an exported JSON config. This section is a
  * dependency-free port of the Studio codec + token pipeline
  * (apps/www/lib/create/presets.ts) and of `serializeOverrides` from
- * @kronus-ui/tokens, so the published CLI can decode a link fully offline
+ * @cronus-ui/tokens, so the published CLI can decode a link fully offline
  * and materialize the theme in a consumer project:
  *
  *   1. pin the layout to the "neutral" base preset + the theme's mode
  *      (exactly what the Studio's own provider export does), and
- *   2. write the computed `--kronus-*` overrides into the consumer's
+ *   2. write the computed `--cronus-*` overrides into the consumer's
  *      globals CSS inside BEGIN/END markers (re-runs replace the block).
  * ------------------------------------------------------------------ */
 
@@ -461,39 +461,39 @@ const STUDIO_DEFAULTS: Omit<StudioConfig, "style" | "primaryColor" | "accentColo
 };
 
 /**
- * Ported subset of the @kronus-ui/tokens `cssVarMap` — exactly the tokens a
+ * Ported subset of the @cronus-ui/tokens `cssVarMap` — exactly the tokens a
  * Studio theme overrides. Key order here IS the emitted CSS order.
  */
 const STUDIO_CSS_VARS = {
-  primary: "--kronus-primary",
-  primaryForeground: "--kronus-primary-foreground",
-  accent: "--kronus-accent",
-  accentForeground: "--kronus-accent-foreground",
-  surfaceBase: "--kronus-surface-base",
-  surfaceInset: "--kronus-surface-inset",
-  surfaceRaised: "--kronus-surface-raised",
-  surfaceOverlay: "--kronus-surface-overlay",
-  surfaceElevated: "--kronus-surface-elevated",
-  surfaceFloating: "--kronus-surface-floating",
-  fg: "--kronus-fg",
-  fgSecondary: "--kronus-fg-secondary",
-  fgTertiary: "--kronus-fg-tertiary",
-  fgMuted: "--kronus-fg-muted",
-  border: "--kronus-border",
-  borderStrong: "--kronus-border-strong",
-  borderSoft: "--kronus-border-soft",
-  ring: "--kronus-ring",
-  info: "--kronus-info",
-  radius: "--kronus-radius",
-  fontDisplay: "--kronus-font-display",
-  fontSans: "--kronus-font-sans",
-  fontMono: "--kronus-font-mono",
-  chart1: "--kronus-chart-1",
-  chart2: "--kronus-chart-2",
-  chart3: "--kronus-chart-3",
-  chart4: "--kronus-chart-4",
-  chart5: "--kronus-chart-5",
-  shadowGlow: "--kronus-shadow-glow",
+  primary: "--cronus-primary",
+  primaryForeground: "--cronus-primary-foreground",
+  accent: "--cronus-accent",
+  accentForeground: "--cronus-accent-foreground",
+  surfaceBase: "--cronus-surface-base",
+  surfaceInset: "--cronus-surface-inset",
+  surfaceRaised: "--cronus-surface-raised",
+  surfaceOverlay: "--cronus-surface-overlay",
+  surfaceElevated: "--cronus-surface-elevated",
+  surfaceFloating: "--cronus-surface-floating",
+  fg: "--cronus-fg",
+  fgSecondary: "--cronus-fg-secondary",
+  fgTertiary: "--cronus-fg-tertiary",
+  fgMuted: "--cronus-fg-muted",
+  border: "--cronus-border",
+  borderStrong: "--cronus-border-strong",
+  borderSoft: "--cronus-border-soft",
+  ring: "--cronus-ring",
+  info: "--cronus-info",
+  radius: "--cronus-radius",
+  fontDisplay: "--cronus-font-display",
+  fontSans: "--cronus-font-sans",
+  fontMono: "--cronus-font-mono",
+  chart1: "--cronus-chart-1",
+  chart2: "--cronus-chart-2",
+  chart3: "--cronus-chart-3",
+  chart4: "--cronus-chart-4",
+  chart5: "--cronus-chart-5",
+  shadowGlow: "--cronus-shadow-glow",
 } as const;
 
 type StudioTokenKey = keyof typeof STUDIO_CSS_VARS;
@@ -504,16 +504,16 @@ const STUDIO_BASE_THEME = "neutral";
 
 /**
  * Selector for the generated block. The tokens stylesheet sets theme values on
- * `[data-kronus-theme]` and mode values on `[data-kronus-theme][data-kronus-mode]`
+ * `[data-cronus-theme]` and mode values on `[data-cronus-theme][data-cronus-mode]`
  * (specificity 0,2,0), so a bare `:root` block would lose to the mode block.
- * `:root[data-kronus-theme]` ties that specificity and wins by source order —
+ * `:root[data-cronus-theme]` ties that specificity and wins by source order —
  * the consumer's globals rules always follow their `@import`s.
  */
-const OVERRIDES_SELECTOR = ":root[data-kronus-theme]";
+const OVERRIDES_SELECTOR = ":root[data-cronus-theme]";
 
 export const OVERRIDES_BEGIN =
-  "/* kronus-ui theme overrides — BEGIN (generated by `kronus-ui theme add`; re-runs replace this block) */";
-export const OVERRIDES_END = "/* kronus-ui theme overrides — END */";
+  "/* cronus-ui theme overrides — BEGIN (generated by `cronus-ui theme add`; re-runs replace this block) */";
+export const OVERRIDES_END = "/* cronus-ui theme overrides — END */";
 
 /** Globals-CSS locations probed (relative to cwd) when `--css` is not given. */
 const CSS_CANDIDATES = [
@@ -759,7 +759,7 @@ function computeStudioOverrides(config: StudioConfig): StudioOverrides {
   };
 }
 
-/** Port of `serializeOverrides` from @kronus-ui/tokens, framed by the markers. */
+/** Port of `serializeOverrides` from @cronus-ui/tokens, framed by the markers. */
 function serializeStudioOverrides(overrides: StudioOverrides): string {
   const lines = (Object.keys(STUDIO_CSS_VARS) as StudioTokenKey[]).map(
     (key) => `  ${STUDIO_CSS_VARS[key]}: ${overrides[key]};`,
@@ -841,7 +841,7 @@ export async function themeAdd(options: ThemeAddOptions): Promise<void> {
     }
   } else {
     log.warn(
-      "No app layout mounting <KronusThemeScript>/<KronusUIProvider> found — skipped the theme/mode attributes.",
+      "No app layout mounting <CronusThemeScript>/<CronusUIProvider> found — skipped the theme/mode attributes.",
     );
   }
 
@@ -867,7 +867,7 @@ export async function themeAdd(options: ThemeAddOptions): Promise<void> {
     );
   }
 
-  // 3. kronus-ui.json — the same record `theme set` keeps.
+  // 3. cronus-ui.json — the same record `theme set` keeps.
   if (hasConfig(cwd)) {
     if (dryRun) {
       log.step(

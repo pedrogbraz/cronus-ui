@@ -1,12 +1,12 @@
 import { ImageResponse } from "next/og";
 import { getBlockMeta } from "../../../lib/blocks-index";
 
-export const alt = "Kronus UI block";
+export const alt = "Cronus UI block";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 // Neutral dark tokens, hardcoded as sRGB — ImageResponse renders through Satori,
-// which resolves neither the `--kronus-*` CSS variables nor `oklch()`.
+// which resolves neither the `--cronus-*` CSS variables nor `oklch()`.
 // Source of truth: packages/tokens/src/tokens.ts (neutralDark); the hex below is
 // the exact sRGB conversion of each oklch value, noted per line.
 const neutral = {
@@ -22,7 +22,7 @@ const neutral = {
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const meta = getBlockMeta(slug);
-  const name = meta?.name ?? "Kronus UI";
+  const name = meta?.name ?? "Cronus UI";
   const description = meta?.description ?? "The product UI system that themes itself";
   const kicker = meta ? `Block · ${meta.category}` : "Block";
 
@@ -74,7 +74,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           }}
         />
         <div style={{ display: "flex", fontSize: 34, fontWeight: 400, color: neutral.fg }}>
-          Kronus UI
+          Cronus UI
         </div>
       </div>
 
@@ -127,7 +127,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             color: neutral.fg,
           }}
         >
-          {`npx kronus-ui add ${slug}`}
+          {`npx cronus-ui add ${slug}`}
         </div>
       </div>
     </div>,

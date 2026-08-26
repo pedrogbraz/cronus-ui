@@ -104,7 +104,7 @@ export function GlareHover({
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-data-[glare-hovered]/glare:opacity-100 motion-reduce:hidden motion-reduce:transition-none"
         style={{
           background:
-            "linear-gradient(115deg, transparent 32%, color-mix(in oklch, var(--kronus-fg) 18%, transparent) 50%, transparent 68%)",
+            "linear-gradient(115deg, transparent 32%, color-mix(in oklch, var(--cronus-fg) 18%, transparent) 50%, transparent 68%)",
           backgroundSize: "220% 220%",
           backgroundPosition: "var(--glare-x, 50%) var(--glare-y, 50%)",
         }}

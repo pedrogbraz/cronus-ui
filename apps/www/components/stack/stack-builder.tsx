@@ -1,6 +1,6 @@
 "use client";
 
-import { cn, Input, Label, Reveal } from "@kronus-ui/ui";
+import { cn, Input, Label, Reveal } from "@cronus-ui/ui";
 import { ListChecks, SlidersHorizontal, Terminal } from "lucide-react";
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { catalog, GROUP_ORDER } from "@/lib/stack/catalog";
@@ -29,7 +29,7 @@ const MOBILE_SWAP_ENTER =
   "transition-[opacity,translate] duration-300 ease-[cubic-bezier(.22,1,.36,1)] starting:opacity-0 starting:translate-y-1 motion-reduce:transition-none motion-reduce:starting:opacity-100 motion-reduce:starting:translate-y-0";
 
 /**
- * The Kronus Stack Builder — a Better-T-Stack-class configurator.
+ * The Cronus Stack Builder — a Better-T-Stack-class configurator.
  *
  * Owns the raw {@link Selection} and runs every mutation through the pure engine
  * (`select` / `toggleMulti` / `randomize`), then re-resolves on render so the UI
@@ -40,7 +40,7 @@ const MOBILE_SWAP_ENTER =
  */
 export function StackBuilder() {
   const [selection, setSelection] = useState<Selection>(() => defaultSelection(catalog));
-  const [projectName, setProjectName] = useState("my-kronus-app");
+  const [projectName, setProjectName] = useState("my-cronus-app");
   const [mobileView, setMobileView] = useState<MobileView>("configure");
   // A roll counter (not render state) so repeated Randomize presses vary, while
   // each individual roll stays deterministic for its derived seed.
@@ -106,7 +106,7 @@ export function StackBuilder() {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top_left,black,transparent_65%)]"
           style={{
-            backgroundImage: "radial-gradient(circle, var(--kronus-border) 1px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle, var(--cronus-border) 1px, transparent 1px)",
             backgroundSize: "28px 28px",
             opacity: 0.35,
           }}
@@ -209,7 +209,7 @@ export function StackBuilder() {
                 id={projectNameId}
                 value={projectName}
                 onChange={(e) => setProjectName(e.target.value)}
-                placeholder="my-kronus-app"
+                placeholder="my-cronus-app"
                 spellCheck={false}
                 autoComplete="off"
                 aria-describedby={`${projectNameId}-hint`}

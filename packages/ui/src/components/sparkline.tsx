@@ -5,7 +5,7 @@ type SparklineTone = "primary" | "success" | "warning" | "error" | "info" | "fg"
 type SparklineType = "line" | "bar";
 
 // Token-driven tone classes. Each sets `currentColor` via a Tailwind `text-*`
-// utility (mapped to a `--kronus-*` var), so the SVG strokes/fills inherit the
+// utility (mapped to a `--cronus-*` var), so the SVG strokes/fills inherit the
 // themed color through `stroke="currentColor"` / `fill="currentColor"`.
 const toneStyles: Record<SparklineTone, string> = {
   primary: "text-primary",

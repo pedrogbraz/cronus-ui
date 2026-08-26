@@ -31,7 +31,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import {
   Check,
   Download,
@@ -249,7 +249,7 @@ const accountSecurityTwoFactorCode = `import {
   CopyButton,
   Separator,
   Switch,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Download, RefreshCw, ShieldCheck } from "lucide-react";
 
 const qrModules = [
@@ -534,7 +534,7 @@ const accountSecurityPasswordCode = `import {
   Input,
   Label,
   Progress,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { MailCheck, Trash2 } from "lucide-react";
 
 export function AccountSecurityPasswordBlock() {
@@ -657,7 +657,7 @@ const deviceSessions: DeviceSession[] = [
   {
     id: "ses-02",
     device: "iPhone 15 Pro",
-    client: "Kronus iOS 2.4.1",
+    client: "Cronus iOS 2.4.1",
     location: "San Francisco, US",
     lastActive: "25 minutes ago",
     icon: Smartphone,
@@ -747,7 +747,7 @@ const sessionsListCode = `import {
   CardHeader,
   CardTitle,
   Separator,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Laptop, LogOut, type LucideIcon, Monitor, Smartphone, Tablet } from "lucide-react";
 
 interface DeviceSession {
@@ -773,7 +773,7 @@ const deviceSessions: DeviceSession[] = [
   {
     id: "ses-02",
     device: "iPhone 15 Pro",
-    client: "Kronus iOS 2.4.1",
+    client: "Cronus iOS 2.4.1",
     location: "San Francisco, US",
     lastActive: "25 minutes ago",
     icon: Smartphone,
@@ -876,7 +876,7 @@ const sessions: UserSession[] = [
   {
     id: "ses-02",
     device: "iPhone 15 Pro",
-    client: "Kronus iOS 2.4.1",
+    client: "Cronus iOS 2.4.1",
     location: "San Francisco, US",
     lastActive: "25 minutes ago",
     icon: Smartphone,
@@ -1005,7 +1005,7 @@ const sessionsTableCode = `import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Laptop, LogOut, type LucideIcon, Monitor, Smartphone, Tablet } from "lucide-react";
 
 interface UserSession {
@@ -1032,7 +1032,7 @@ const sessions: UserSession[] = [
   {
     id: "ses-02",
     device: "iPhone 15 Pro",
-    client: "Kronus iOS 2.4.1",
+    client: "Cronus iOS 2.4.1",
     location: "San Francisco, US",
     lastActive: "25 minutes ago",
     icon: Smartphone,
@@ -1193,7 +1193,7 @@ export function ApiKeysListBlock() {
     <Card className="mx-auto w-full max-w-2xl gap-0 pb-0 shadow-md">
       <CardHeader>
         <CardTitle className="font-display text-lg">API keys</CardTitle>
-        <CardDescription>Programmatic access to your Kronus workspace.</CardDescription>
+        <CardDescription>Programmatic access to your Cronus workspace.</CardDescription>
         <CardAction>
           <Button variant="primary" size="sm">
             <Plus className="size-3.5" aria-hidden="true" />
@@ -1261,7 +1261,7 @@ const apiKeysListCode = `import {
   CardTitle,
   CopyButton,
   Separator,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Eye, Plus } from "lucide-react";
 
 interface ApiKey {
@@ -1310,7 +1310,7 @@ export function ApiKeysListBlock() {
     <Card className="mx-auto w-full max-w-2xl gap-0 pb-0 shadow-md">
       <CardHeader>
         <CardTitle className="font-display text-lg">API keys</CardTitle>
-        <CardDescription>Programmatic access to your Kronus workspace.</CardDescription>
+        <CardDescription>Programmatic access to your Cronus workspace.</CardDescription>
         <CardAction>
           <Button variant="primary" size="sm">
             <Plus className="size-3.5" aria-hidden="true" />
@@ -1522,7 +1522,7 @@ const apiKeysCreateCode = `import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Check, KeyRound, TriangleAlert } from "lucide-react";
 
 interface KeyScope {
@@ -1822,7 +1822,7 @@ const notificationPreferencesMatrixCode = `import {
   CardTitle,
   Separator,
   Switch,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 
 interface NotificationRule {
   id: string;
@@ -2022,7 +2022,7 @@ const preferenceSections: PreferenceSection[] = [
       {
         id: "pref-product-news",
         label: "Product updates",
-        description: "New Kronus features and improvements.",
+        description: "New Cronus features and improvements.",
         enabled: true,
       },
       {
@@ -2085,7 +2085,7 @@ const notificationPreferencesSimpleCode = `import {
   Label,
   Separator,
   Switch,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 
 interface PreferenceToggle {
   id: string;
@@ -2138,7 +2138,7 @@ const preferenceSections: PreferenceSection[] = [
       {
         id: "pref-product-news",
         label: "Product updates",
-        description: "New Kronus features and improvements.",
+        description: "New Cronus features and improvements.",
         enabled: true,
       },
       {

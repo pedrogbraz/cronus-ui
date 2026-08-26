@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@kronus-ui/ui";
+import { cn } from "@cronus-ui/ui";
 import { useEffect, useState } from "react";
 
 export interface TocItem {

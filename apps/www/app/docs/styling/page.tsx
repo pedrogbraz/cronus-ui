@@ -8,7 +8,7 @@ import {
   PrimaryLink,
 } from "../../../components/docs/documentation";
 
-const classNameCode = `import { Button } from "@kronus-ui/ui";
+const classNameCode = `import { Button } from "@cronus-ui/ui";
 
 export function CheckoutButton() {
   // className is merged last, so these win without !important.
@@ -20,7 +20,7 @@ export function CheckoutButton() {
   );
 }`;
 
-const variantsCode = `import { buttonVariants } from "@kronus-ui/ui";
+const variantsCode = `import { buttonVariants } from "@cronus-ui/ui";
 import Link from "next/link";
 
 // Reuse a component's variants on an element that isn't that component.
@@ -32,7 +32,7 @@ export function DocsLink() {
   );
 }`;
 
-const dataSlotCode = `import { Card, CardContent, CardHeader, CardTitle } from "@kronus-ui/ui";
+const dataSlotCode = `import { Card, CardContent, CardHeader, CardTitle } from "@cronus-ui/ui";
 
 // Reach into a composed component's internals from the parent
 // by targeting its data-slot with an arbitrary variant.
@@ -47,7 +47,7 @@ export function HighlightCard() {
   );
 }`;
 
-const asChildCode = `import { Button } from "@kronus-ui/ui";
+const asChildCode = `import { Button } from "@cronus-ui/ui";
 import Link from "next/link";
 
 // asChild renders YOUR element with the Button's behavior and styles —
@@ -60,7 +60,7 @@ export function UpgradeCta() {
   );
 }`;
 
-const tokensCode = `import { Button } from "@kronus-ui/ui";
+const tokensCode = `import { Button } from "@cronus-ui/ui";
 
 // Prefer semantic tokens over raw colors so overrides re-theme with the app.
 export function CalloutButton() {
@@ -74,7 +74,7 @@ export function CalloutButton() {
   );
 }`;
 
-const cnCode = `import { cn } from "@kronus-ui/ui";
+const cnCode = `import { cn } from "@cronus-ui/ui";
 
 // Use cn in your own components so consumer className stays merge-safe.
 export function Panel({ className, ...props }: React.ComponentProps<"div">) {
@@ -166,7 +166,7 @@ export default function StylingPage() {
 
       <DocsSection
         title="Stay merge-safe in your own components"
-        description="When you wrap or build on Kronus UI, run your classes through cn too. That keeps consumer className overrides predictable — the same last-wins behavior every Kronus UI component relies on."
+        description="When you wrap or build on Cronus UI, run your classes through cn too. That keeps consumer className overrides predictable — the same last-wins behavior every Cronus UI component relies on."
       >
         <CodeBlock code={cnCode} language="tsx" expandable />
         <DocCallout title="Keep overrides token-based" tone="success">

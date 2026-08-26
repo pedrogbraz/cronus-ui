@@ -1565,7 +1565,7 @@
     "name": "hero",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1574,7 +1574,7 @@
     "name": "hero--split",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1583,7 +1583,7 @@
     "name": "hero--compact",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1592,7 +1592,7 @@
     "name": "hero--atmosphere",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1601,7 +1601,7 @@
     "name": "pricing",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1610,7 +1610,7 @@
     "name": "pricing--toggle",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1619,7 +1619,7 @@
     "name": "pricing--usage",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1628,7 +1628,7 @@
     "name": "feature-grid",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1637,7 +1637,7 @@
     "name": "feature-grid--bento",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1646,7 +1646,7 @@
     "name": "cta",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1655,7 +1655,7 @@
     "name": "cta--banner",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1664,7 +1664,7 @@
     "name": "cta--split-visual",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1673,7 +1673,7 @@
     "name": "testimonials",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1682,7 +1682,7 @@
     "name": "testimonials--grid",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1691,7 +1691,7 @@
     "name": "faq",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -1699,7 +1699,7 @@
     "name": "faq--split",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -1707,7 +1707,7 @@
     "name": "footer",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1716,7 +1716,7 @@
     "name": "footer--mega",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1725,7 +1725,7 @@
     "name": "footer--minimal",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1734,7 +1734,7 @@
     "name": "navbar",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1743,7 +1743,7 @@
     "name": "navbar--centered",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1752,7 +1752,7 @@
     "name": "navbar--with-announcement",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1761,7 +1761,7 @@
     "name": "login",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1770,7 +1770,7 @@
     "name": "login--split",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1779,7 +1779,7 @@
     "name": "login--social-first",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1788,7 +1788,7 @@
     "name": "login--minimal",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1797,7 +1797,7 @@
     "name": "signup",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -1808,7 +1808,7 @@
     "name": "signup--split-proof",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": [
       "demo-saas"
@@ -1818,7 +1818,7 @@
     "name": "signup--with-plan",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -1829,7 +1829,7 @@
     "name": "forgot-password",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1838,7 +1838,7 @@
     "name": "forgot-password--sent",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1847,7 +1847,7 @@
     "name": "otp",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1856,7 +1856,7 @@
     "name": "magic-link",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1865,7 +1865,7 @@
     "name": "magic-link--sent",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1874,7 +1874,7 @@
     "name": "stats",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -1885,7 +1885,7 @@
     "name": "stats--compact-summary",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -1893,7 +1893,7 @@
     "name": "stats--pipeline-funnel",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1902,7 +1902,7 @@
     "name": "settings",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": [
       "demo-saas"
@@ -1912,7 +1912,7 @@
     "name": "team",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -1923,7 +1923,7 @@
     "name": "welcome",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1932,7 +1932,7 @@
     "name": "setup-wizard",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -1940,7 +1940,7 @@
     "name": "setup-checklist",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -1949,7 +1949,7 @@
     "name": "dashboard",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0",
       "recharts@^3.9.2"
     ],
@@ -1961,7 +1961,7 @@
     "name": "dashboard--admin-overview",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0",
       "recharts@^3.9.2"
     ],
@@ -1973,7 +1973,7 @@
     "name": "billing",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -1984,7 +1984,7 @@
     "name": "billing--plans",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -1995,7 +1995,7 @@
     "name": "manage-subscription",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2004,7 +2004,7 @@
     "name": "payment-method",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2013,7 +2013,7 @@
     "name": "payment-method--add-card",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -2021,7 +2021,7 @@
     "name": "usage-dashboard",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": [
       "demo-saas"
@@ -2031,7 +2031,7 @@
     "name": "cancel-flow",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2040,7 +2040,7 @@
     "name": "checkout",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -2051,7 +2051,7 @@
     "name": "checkout--one-page",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2060,7 +2060,7 @@
     "name": "checkout--multi-step",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2069,7 +2069,7 @@
     "name": "payouts",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2078,7 +2078,7 @@
     "name": "product-grid",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -2089,7 +2089,7 @@
     "name": "product-grid--with-filters",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -2100,7 +2100,7 @@
     "name": "product-grid--showcase",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -2111,7 +2111,7 @@
     "name": "invoice",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -2122,7 +2122,7 @@
     "name": "invoice--receipt",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -2130,7 +2130,7 @@
     "name": "page-header",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2139,7 +2139,7 @@
     "name": "page-header--with-tabs",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -2147,7 +2147,7 @@
     "name": "filter-bar",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2156,7 +2156,7 @@
     "name": "empty-state",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2165,7 +2165,7 @@
     "name": "empty-state--error",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2174,7 +2174,7 @@
     "name": "status-page",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2183,7 +2183,7 @@
     "name": "chat-thread",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2192,7 +2192,7 @@
     "name": "prompt-box",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2201,7 +2201,7 @@
     "name": "ai-response",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2210,7 +2210,7 @@
     "name": "not-found",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2219,7 +2219,7 @@
     "name": "error-state",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2228,7 +2228,7 @@
     "name": "success-state",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2237,7 +2237,7 @@
     "name": "maintenance",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2246,7 +2246,7 @@
     "name": "email-welcome",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -2254,7 +2254,7 @@
     "name": "email-receipt",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -2262,7 +2262,7 @@
     "name": "email-verify",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -2270,7 +2270,7 @@
     "name": "notification-panel",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -2278,7 +2278,7 @@
     "name": "activity-feed",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2287,7 +2287,7 @@
     "name": "toast-stack",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2296,7 +2296,7 @@
     "name": "nps-survey",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -2304,7 +2304,7 @@
     "name": "feedback-form",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -2312,7 +2312,7 @@
     "name": "contact-form",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2321,7 +2321,7 @@
     "name": "post-card",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2330,7 +2330,7 @@
     "name": "comment-thread",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2339,7 +2339,7 @@
     "name": "profile-card",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -2347,7 +2347,7 @@
     "name": "changelog",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -2355,7 +2355,7 @@
     "name": "integrations",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2364,7 +2364,7 @@
     "name": "waitlist",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2373,7 +2373,7 @@
     "name": "feature-matrix",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2382,7 +2382,7 @@
     "name": "product-detail",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -2393,7 +2393,7 @@
     "name": "product-detail--gallery",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -2404,7 +2404,7 @@
     "name": "product-detail--minimal",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -2415,7 +2415,7 @@
     "name": "cart",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -2426,7 +2426,7 @@
     "name": "cart--drawer",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -2437,7 +2437,7 @@
     "name": "order-tracking",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -2448,7 +2448,7 @@
     "name": "order-tracking--delivered",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -2459,7 +2459,7 @@
     "name": "order-tracking--delayed",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2468,7 +2468,7 @@
     "name": "order-history",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -2479,7 +2479,7 @@
     "name": "order-history--cards",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2488,7 +2488,7 @@
     "name": "reviews",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
@@ -2499,7 +2499,7 @@
     "name": "reviews--compact",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2508,7 +2508,7 @@
     "name": "account-security",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2517,7 +2517,7 @@
     "name": "account-security--password",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2526,7 +2526,7 @@
     "name": "sessions",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2535,7 +2535,7 @@
     "name": "sessions--table",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2544,7 +2544,7 @@
     "name": "api-keys",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2553,7 +2553,7 @@
     "name": "api-keys--create",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2562,7 +2562,7 @@
     "name": "notification-preferences",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -2570,7 +2570,7 @@
     "name": "notification-preferences--simple",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -2578,7 +2578,7 @@
     "name": "user-management",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2587,7 +2587,7 @@
     "name": "user-management--cards",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2596,7 +2596,7 @@
     "name": "analytics",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": [
       "demo-saas"
@@ -2606,7 +2606,7 @@
     "name": "analytics--engagement",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -2614,7 +2614,7 @@
     "name": "kanban-board",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2623,7 +2623,7 @@
     "name": "kanban-board--compact",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2632,7 +2632,7 @@
     "name": "audit-log",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2641,7 +2641,7 @@
     "name": "audit-log--table",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2650,7 +2650,7 @@
     "name": "blog",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2659,7 +2659,7 @@
     "name": "blog--list",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2668,7 +2668,7 @@
     "name": "blog-post",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2677,7 +2677,7 @@
     "name": "blog-post--with-sidebar",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0"
+      "@cronus-ui/ui@0.5.0"
     ],
     "registryDependencies": []
   },
@@ -2685,7 +2685,7 @@
     "name": "logo-cloud",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2694,7 +2694,7 @@
     "name": "logo-cloud--marquee",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2703,7 +2703,7 @@
     "name": "about",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2712,7 +2712,7 @@
     "name": "about--values",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": []
@@ -2721,7 +2721,7 @@
     "name": "app-shell-chrome",
     "type": "registry:block",
     "dependencies": [
-      "@kronus-ui/ui@0.5.0",
+      "@cronus-ui/ui@0.5.0",
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [

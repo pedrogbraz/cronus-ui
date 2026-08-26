@@ -1,21 +1,21 @@
-# kronus-ui (CLI)
+# cronus-ui (CLI)
 
-Add Kronus UI to a project: copy components in, compose an app from validated
+Add Cronus UI to a project: copy components in, compose an app from validated
 blocks, switch theme, and upgrade without losing local edits.
 
 ```sh
-npx kronus-ui init
-npx kronus-ui add button card
-npx kronus-ui compose saas --brand Acme
-npx kronus-ui add-page --route /faq --blocks faq,cta --nav FAQ
-npx kronus-ui theme set aurora --mode dark
-npx kronus-ui upgrade --all --dry-run
-npx kronus-ui list
-npx kronus-ui diff
-npx kronus-ui ai
+npx cronus-ui init
+npx cronus-ui add button card
+npx cronus-ui compose saas --brand Acme
+npx cronus-ui add-page --route /faq --blocks faq,cta --nav FAQ
+npx cronus-ui theme set aurora --mode dark
+npx cronus-ui upgrade --all --dry-run
+npx cronus-ui list
+npx cronus-ui diff
+npx cronus-ui ai
 ```
 
-The canonical product start is `npx create-kronus-app my-app --template saas`,
+The canonical product start is `npx create-cronus-app my-app --template saas`,
 which scaffolds and then composes. This CLI is what that path calls, and what
 you keep using after.
 
@@ -40,12 +40,12 @@ Notes that match the commander surface:
 - `add-page` grows an already-composed app. `--blocks` is comma-separated (`faq,cta` or `login=split`). `--app` is required when the project has more than one composed app.
 - `theme set <name>` — `aurora`, `neutral`, `midnight`, `sunset`, `emerald`. `--mode` is `dark` or `light`.
 - `theme add <source>` — a Create Studio permalink, a bare `c=` payload, or a path to an exported theme JSON file.
-- `upgrade` 3-way merges each installed file against the release recorded in `kronus-ui.json`. `-a, --all` upgrades every recorded component and 3-way-merges composed pages/layouts against `.kronus-ui/base`. `-o, --overwrite` replaces files installed before the manifest existed. Unresolved files get a prompt in `KRONUS-UPGRADE.md`.
+- `upgrade` 3-way merges each installed file against the release recorded in `cronus-ui.json`. `-a, --all` upgrades every recorded component and 3-way-merges composed pages/layouts against `.cronus-ui/base`. `-o, --overwrite` replaces files installed before the manifest existed. Unresolved files get a prompt in `CRONUS-UPGRADE.md`.
 - `ai --assistants` is comma-separated `claude`, `cursor`, `copilot`, `windsurf`, `gemini` (or `all` / `none`). `--preset` is `standard` (default), `fintech`, `saas`, `oss`, `agency`, or `none`. `--skills` is comma-separated Claude Code skills (or `all` / `none`).
 
 ## How it works
 
-- The registry (`registry/*.json`) is generated from the real `@kronus-ui/ui` sources by
+- The registry (`registry/*.json`) is generated from the real `@cronus-ui/ui` sources by
   `packages/cli/scripts/build-registry.ts` — each item carries its source, its npm
   `dependencies`, and its `registryDependencies` (other components it imports),
   derived by parsing imports.
@@ -55,7 +55,7 @@ Notes that match the commander surface:
   a release tag exists.
 - `init` installs only the base copy dependencies used by generated components
   (`clsx`, `tailwind-merge`, `class-variance-authority`, and Radix Slot). It does
-  not install the public Kronus token and theme packages unless you add them
+  not install the public Cronus token and theme packages unless you add them
   separately for runtime theming.
 - `add` resolves the transitive closure of `registryDependencies`, writes the files
   into your project, and **rewrites imports to your aliases**:
@@ -66,7 +66,7 @@ Notes that match the commander surface:
   `<main>` that stacks them. Visible UI comes from registry items, not from
   composer-emitted JSX.
 
-## Config (`kronus-ui.json`)
+## Config (`cronus-ui.json`)
 
 ```json
 {
@@ -80,11 +80,11 @@ Notes that match the commander surface:
     "lib": "lib",
     "blocks": "components/blocks"
   },
-  "registry": "https://raw.githubusercontent.com/pedrogbraz/kronus-ui/v0.5.0/registry"
+  "registry": "https://raw.githubusercontent.com/pedrogbraz/cronus-ui/v0.5.0/registry"
 }
 ```
 
 Point `-r, --registry <path-or-url>` at a local `registry/` directory for offline use
 or testing. Regenerate the registry after changing components:
-`bun run -F kronus-ui registry`. Verify it is in sync locally with
-`bun run -F kronus-ui registry:check`.
+`bun run -F cronus-ui registry`. Verify it is in sync locally with
+`bun run -F cronus-ui registry:check`.

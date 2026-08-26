@@ -25,7 +25,7 @@ import {
   RetroGrid,
   Separator,
   TypingText,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import {
   ArrowRight,
   BarChart3,
@@ -110,7 +110,7 @@ const heroCode = `import {
   AvatarFallback,
   Badge,
   Button,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 export function HeroBlock() {
@@ -218,7 +218,7 @@ function SplitHeroBlock() {
   );
 }
 
-const splitHeroCode = `import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from "@kronus-ui/ui";
+const splitHeroCode = `import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from "@cronus-ui/ui";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 export function SplitHeroBlock() {
@@ -340,7 +340,7 @@ const atmosphereHeroCode = `import {
   Meteors,
   RetroGrid,
   TypingText,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 export function AtmosphereHeroBlock() {
@@ -374,7 +374,7 @@ export function AtmosphereHeroBlock() {
   );
 }`;
 
-const compactHeroCode = `import { Badge, Button } from "@kronus-ui/ui";
+const compactHeroCode = `import { Badge, Button } from "@cronus-ui/ui";
 import { ArrowRight, Check } from "lucide-react";
 
 export function CompactHeroBlock() {
@@ -522,7 +522,7 @@ const pricingCode = `import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Check, Sparkles } from "lucide-react";
 
 const PRICING_TIERS = [
@@ -704,7 +704,7 @@ const pricingToggleCode = `import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Check } from "lucide-react";
 
 export function PricingToggleBlock() {
@@ -839,7 +839,7 @@ const usagePricingCode = `import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Check } from "lucide-react";
 
 export function UsagePricingBlock() {
@@ -969,7 +969,7 @@ const featureGridCode = `import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import {
   BarChart3,
   Layers,
@@ -1084,7 +1084,7 @@ function BentoFeatureBlock() {
   );
 }
 
-const bentoFeatureCode = `import { Badge, Card, CardDescription, CardHeader, CardTitle } from "@kronus-ui/ui";
+const bentoFeatureCode = `import { Badge, Card, CardDescription, CardHeader, CardTitle } from "@cronus-ui/ui";
 import { BarChart3, Layers, Lock, Palette, Workflow, Zap } from "lucide-react";
 
 const FEATURES = [
@@ -1221,7 +1221,7 @@ function CtaBlock() {
 
 const ctaCode = `"use client";
 
-import { Button, Input, Label } from "@kronus-ui/ui";
+import { Button, Input, Label } from "@cronus-ui/ui";
 import { Send } from "lucide-react";
 
 export function CtaBlock() {
@@ -1292,7 +1292,7 @@ function CtaBannerBlock() {
       <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-8 text-center lg:flex-row lg:justify-between lg:text-start">
         <div className="max-w-2xl">
           <h2 className="text-balance font-display text-3xl font-semibold tracking-tight text-primary-foreground sm:text-4xl">
-            Ship your next launch on Kronus.
+            Ship your next launch on Cronus.
           </h2>
           <p className="mt-3 text-balance text-lg text-primary-foreground/80">
             Every block, theme, and primitive wired together — production-ready from day one.
@@ -1316,7 +1316,7 @@ function CtaBannerBlock() {
   );
 }
 
-const ctaBannerCode = `import { Button } from "@kronus-ui/ui";
+const ctaBannerCode = `import { Button } from "@cronus-ui/ui";
 import { ArrowRight } from "lucide-react";
 
 export function CtaBannerBlock() {
@@ -1333,7 +1333,7 @@ export function CtaBannerBlock() {
       <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-8 text-center lg:flex-row lg:justify-between lg:text-start">
         <div className="max-w-2xl">
           <h2 className="text-balance font-display text-3xl font-semibold tracking-tight text-primary-foreground sm:text-4xl">
-            Ship your next launch on Kronus.
+            Ship your next launch on Cronus.
           </h2>
           <p className="mt-3 text-balance text-lg text-primary-foreground/80">
             Every block, theme, and primitive wired together — production-ready from day one.
@@ -1405,7 +1405,7 @@ function CtaSplitVisualBlock() {
               <span aria-hidden="true" className="size-2.5 rounded-full bg-error/60" />
               <span aria-hidden="true" className="size-2.5 rounded-full bg-warning/60" />
               <span aria-hidden="true" className="size-2.5 rounded-full bg-success/60" />
-              <span className="ms-3 text-xs text-fg-tertiary">app.kronus.com/overview</span>
+              <span className="ms-3 text-xs text-fg-tertiary">app.cronus.com/overview</span>
             </div>
             <div className="flex flex-col gap-5 p-5">
               <div className="flex items-center justify-between gap-4">
@@ -1442,7 +1442,7 @@ function CtaSplitVisualBlock() {
   );
 }
 
-const ctaSplitVisualCode = `import { Badge, Button } from "@kronus-ui/ui";
+const ctaSplitVisualCode = `import { Badge, Button } from "@cronus-ui/ui";
 import { ArrowRight, Check } from "lucide-react";
 
 export function CtaSplitVisualBlock() {
@@ -1493,7 +1493,7 @@ export function CtaSplitVisualBlock() {
               <span aria-hidden="true" className="size-2.5 rounded-full bg-error/60" />
               <span aria-hidden="true" className="size-2.5 rounded-full bg-warning/60" />
               <span aria-hidden="true" className="size-2.5 rounded-full bg-success/60" />
-              <span className="ms-3 text-xs text-fg-tertiary">app.kronus.com/overview</span>
+              <span className="ms-3 text-xs text-fg-tertiary">app.cronus.com/overview</span>
             </div>
             <div className="flex flex-col gap-5 p-5">
               <div className="flex items-center justify-between gap-4">
@@ -1537,7 +1537,7 @@ export function CtaSplitVisualBlock() {
 const TESTIMONIALS = [
   {
     quote:
-      "Kronus let us replace a tangle of one-off components with one themeable system. Our redesign shipped weeks early.",
+      "Cronus let us replace a tangle of one-off components with one themeable system. Our redesign shipped weeks early.",
     name: "Amara Okafor",
     role: "VP Design, Northwind",
     initials: "AO",
@@ -1577,7 +1577,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "Kronus is the first design system our designers and engineers actually agree on. That alone paid for itself.",
+      "Cronus is the first design system our designers and engineers actually agree on. That alone paid for itself.",
     name: "David Chen",
     role: "CTO, Parallel",
     initials: "DC",
@@ -1608,9 +1608,9 @@ function TestimonialsHeader() {
         accessible, themeable, and consistent.
       </p>
       <div className="mt-7 flex items-center gap-3">
-        <AvatarGroup avatars={TESTIMONIAL_AVATARS} aria-label="Teams using Kronus" />
+        <AvatarGroup avatars={TESTIMONIAL_AVATARS} aria-label="Teams using Cronus" />
         <p className="text-sm text-fg-tertiary">
-          Join <span className="font-medium text-fg">4,000+</span> teams shipping with Kronus
+          Join <span className="font-medium text-fg">4,000+</span> teams shipping with Cronus
         </p>
       </div>
     </div>
@@ -1663,13 +1663,13 @@ const testimonialsCode = `import {
   Card,
   CardContent,
   Marquee,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Sparkles } from "lucide-react";
 
 const TESTIMONIALS = [
   {
     quote:
-      "Kronus let us replace a tangle of one-off components with one themeable system. Our redesign shipped weeks early.",
+      "Cronus let us replace a tangle of one-off components with one themeable system. Our redesign shipped weeks early.",
     name: "Amara Okafor",
     role: "VP Design, Northwind",
     initials: "AO",
@@ -1709,7 +1709,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "Kronus is the first design system our designers and engineers actually agree on. That alone paid for itself.",
+      "Cronus is the first design system our designers and engineers actually agree on. That alone paid for itself.",
     name: "David Chen",
     role: "CTO, Parallel",
     initials: "DC",
@@ -1763,9 +1763,9 @@ export function TestimonialsBlock() {
           accessible, themeable, and consistent.
         </p>
         <div className="mt-7 flex items-center gap-3">
-          <AvatarGroup avatars={TESTIMONIAL_AVATARS} aria-label="Teams using Kronus" />
+          <AvatarGroup avatars={TESTIMONIAL_AVATARS} aria-label="Teams using Cronus" />
           <p className="text-sm text-fg-tertiary">
-            Join <span className="font-medium text-fg">4,000+</span> teams shipping with Kronus
+            Join <span className="font-medium text-fg">4,000+</span> teams shipping with Cronus
           </p>
         </div>
       </div>
@@ -1817,13 +1817,13 @@ const testimonialsGridCode = `import {
   Badge,
   Card,
   CardContent,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Sparkles } from "lucide-react";
 
 const TESTIMONIALS = [
   {
     quote:
-      "Kronus let us replace a tangle of one-off components with one themeable system. Our redesign shipped weeks early.",
+      "Cronus let us replace a tangle of one-off components with one themeable system. Our redesign shipped weeks early.",
     name: "Amara Okafor",
     role: "VP Design, Northwind",
     initials: "AO",
@@ -1863,7 +1863,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "Kronus is the first design system our designers and engineers actually agree on. That alone paid for itself.",
+      "Cronus is the first design system our designers and engineers actually agree on. That alone paid for itself.",
     name: "David Chen",
     role: "CTO, Parallel",
     initials: "DC",
@@ -1895,9 +1895,9 @@ export function TestimonialsGridBlock() {
           accessible, themeable, and consistent.
         </p>
         <div className="mt-7 flex items-center gap-3">
-          <AvatarGroup avatars={TESTIMONIAL_AVATARS} aria-label="Teams using Kronus" />
+          <AvatarGroup avatars={TESTIMONIAL_AVATARS} aria-label="Teams using Cronus" />
           <p className="text-sm text-fg-tertiary">
-            Join <span className="font-medium text-fg">4,000+</span> teams shipping with Kronus
+            Join <span className="font-medium text-fg">4,000+</span> teams shipping with Cronus
           </p>
         </div>
       </div>
@@ -1932,7 +1932,7 @@ export function TestimonialsGridBlock() {
 
 const FAQ_ITEMS = [
   {
-    question: "What exactly do I get with Kronus?",
+    question: "What exactly do I get with Cronus?",
     answer:
       "A themeable component library plus a registry of copy-paste product sections. Add what you need with the CLI and everything inherits your tokens, radius, and color scale automatically.",
   },
@@ -1990,11 +1990,11 @@ const faqCode = `import {
   AccordionItem,
   AccordionTrigger,
   Badge,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 
 const FAQ_ITEMS = [
   {
-    question: "What exactly do I get with Kronus?",
+    question: "What exactly do I get with Cronus?",
     answer:
       "A themeable component library plus a registry of copy-paste product sections. Add what you need with the CLI and everything inherits your tokens, radius, and color scale automatically.",
   },
@@ -2090,11 +2090,11 @@ const faqSplitCode = `import {
   AccordionTrigger,
   Badge,
   Button,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 
 const FAQ_ITEMS = [
   {
-    question: "What exactly do I get with Kronus?",
+    question: "What exactly do I get with Cronus?",
     answer:
       "A themeable component library plus a registry of copy-paste product sections. Add what you need with the CLI and everything inherits your tokens, radius, and color scale automatically.",
   },
@@ -2161,7 +2161,7 @@ export function FaqSplitBlock() {
    7. FOOTER
    ────────────────────────────────────────────────────────────────── */
 
-/* @kronus:data footer-links */
+/* @cronus:data footer-links */
 const FOOTER_COLUMNS = [
   {
     heading: "Product",
@@ -2194,7 +2194,7 @@ const FOOTER_COLUMNS = [
     ],
   },
 ] as const;
-/* @kronus:data-end */
+/* @cronus:data-end */
 
 function FooterBlock() {
   return (
@@ -2206,7 +2206,7 @@ function FooterBlock() {
               <span className="grid size-9 place-items-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
                 <Hexagon aria-hidden="true" className="size-5" />
               </span>
-              <span className="font-display text-lg font-semibold text-fg">Kronus</span>
+              <span className="font-display text-lg font-semibold text-fg">Cronus</span>
             </div>
             <p className="mt-4 text-sm leading-6 text-fg-secondary">
               The themeable component library and block registry for teams who ship polished
@@ -2277,7 +2277,7 @@ function FooterBlock() {
         <Separator className="my-8" />
 
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="text-sm text-fg-tertiary">© 2026 Kronus. All rights reserved.</p>
+          <p className="text-sm text-fg-tertiary">© 2026 Cronus. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <a
               href="#privacy"
@@ -2300,10 +2300,10 @@ function FooterBlock() {
 
 const footerCode = `"use client";
 
-import { Button, Input, Label, Separator } from "@kronus-ui/ui";
+import { Button, Input, Label, Separator } from "@cronus-ui/ui";
 import { Github, Hexagon, Linkedin, Send, Twitter } from "lucide-react";
 
-/* @kronus:data footer-links */
+/* @cronus:data footer-links */
 const FOOTER_COLUMNS = [
   {
     heading: "Product",
@@ -2336,7 +2336,7 @@ const FOOTER_COLUMNS = [
     ],
   },
 ];
-/* @kronus:data-end */
+/* @cronus:data-end */
 
 export function FooterBlock() {
   return (
@@ -2348,7 +2348,7 @@ export function FooterBlock() {
               <span className="grid size-9 place-items-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
                 <Hexagon aria-hidden="true" className="size-5" />
               </span>
-              <span className="font-display text-lg font-semibold text-fg">Kronus</span>
+              <span className="font-display text-lg font-semibold text-fg">Cronus</span>
             </div>
             <p className="mt-4 text-sm leading-6 text-fg-secondary">
               The themeable component library and block registry for teams who ship polished
@@ -2419,7 +2419,7 @@ export function FooterBlock() {
         <Separator className="my-8" />
 
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="text-sm text-fg-tertiary">© 2026 Kronus. All rights reserved.</p>
+          <p className="text-sm text-fg-tertiary">© 2026 Cronus. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <a
               href="#privacy"
@@ -2499,7 +2499,7 @@ function FooterMegaBlock() {
               <span className="grid size-9 place-items-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
                 <Hexagon aria-hidden="true" className="size-5" />
               </span>
-              <span className="font-display text-lg font-semibold text-fg">Kronus</span>
+              <span className="font-display text-lg font-semibold text-fg">Cronus</span>
             </div>
             <p className="mt-4 text-sm leading-6 text-fg-secondary">
               Product updates, new blocks, and launch guides — a few times a month.
@@ -2551,7 +2551,7 @@ function FooterMegaBlock() {
         <Separator className="my-10" />
 
         <div className="flex flex-col-reverse items-center justify-between gap-6 lg:flex-row">
-          <p className="text-sm text-fg-tertiary">© 2026 Kronus Labs, Inc. All rights reserved.</p>
+          <p className="text-sm text-fg-tertiary">© 2026 Cronus Labs, Inc. All rights reserved.</p>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
             <a
               href="#status"
@@ -2580,7 +2580,7 @@ function FooterMegaBlock() {
 
 const footerMegaCode = `"use client";
 
-import { Button, Input, Label, Separator } from "@kronus-ui/ui";
+import { Button, Input, Label, Separator } from "@cronus-ui/ui";
 import { Github, Hexagon, Linkedin, Send, Twitter } from "lucide-react";
 
 const FOOTER_MEGA_COLUMNS = [
@@ -2642,7 +2642,7 @@ export function FooterMegaBlock() {
               <span className="grid size-9 place-items-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
                 <Hexagon aria-hidden="true" className="size-5" />
               </span>
-              <span className="font-display text-lg font-semibold text-fg">Kronus</span>
+              <span className="font-display text-lg font-semibold text-fg">Cronus</span>
             </div>
             <p className="mt-4 text-sm leading-6 text-fg-secondary">
               Product updates, new blocks, and launch guides — a few times a month.
@@ -2694,7 +2694,7 @@ export function FooterMegaBlock() {
         <Separator className="my-10" />
 
         <div className="flex flex-col-reverse items-center justify-between gap-6 lg:flex-row">
-          <p className="text-sm text-fg-tertiary">© 2026 Kronus Labs, Inc. All rights reserved.</p>
+          <p className="text-sm text-fg-tertiary">© 2026 Cronus Labs, Inc. All rights reserved.</p>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
             <a
               href="#status"
@@ -2735,7 +2735,7 @@ function FooterMinimalBlock() {
           <span className="grid size-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
             <Hexagon aria-hidden="true" className="size-4" />
           </span>
-          <span className="font-display text-base font-semibold text-fg">Kronus</span>
+          <span className="font-display text-base font-semibold text-fg">Cronus</span>
         </div>
 
         <div className="flex items-center gap-6">
@@ -2750,7 +2750,7 @@ function FooterMinimalBlock() {
           ))}
         </div>
 
-        <p className="text-sm text-fg-tertiary">© 2026 Kronus. All rights reserved.</p>
+        <p className="text-sm text-fg-tertiary">© 2026 Cronus. All rights reserved.</p>
       </div>
     </footer>
   );
@@ -2772,7 +2772,7 @@ export function FooterMinimalBlock() {
           <span className="grid size-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
             <Hexagon aria-hidden="true" className="size-4" />
           </span>
-          <span className="font-display text-base font-semibold text-fg">Kronus</span>
+          <span className="font-display text-base font-semibold text-fg">Cronus</span>
         </div>
 
         <div className="flex items-center gap-6">
@@ -2787,7 +2787,7 @@ export function FooterMinimalBlock() {
           ))}
         </div>
 
-        <p className="text-sm text-fg-tertiary">© 2026 Kronus. All rights reserved.</p>
+        <p className="text-sm text-fg-tertiary">© 2026 Cronus. All rights reserved.</p>
       </div>
     </footer>
   );
@@ -2797,14 +2797,14 @@ export function FooterMinimalBlock() {
    8. NAVBAR
    ────────────────────────────────────────────────────────────────── */
 
-/* @kronus:data navbar-links */
+/* @cronus:data navbar-links */
 const NAVBAR_LINKS = [
   { label: "Features", href: "#features" },
   { label: "Pricing", href: "#pricing" },
   { label: "Docs", href: "#docs" },
   { label: "Changelog", href: "#changelog" },
 ] as const;
-/* @kronus:data-end */
+/* @cronus:data-end */
 
 function NavbarBlock() {
   return (
@@ -2814,7 +2814,7 @@ function NavbarBlock() {
           <span className="grid size-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
             <Hexagon aria-hidden="true" className="size-4" />
           </span>
-          <span className="font-display text-base font-semibold text-fg">Kronus</span>
+          <span className="font-display text-base font-semibold text-fg">Cronus</span>
           <Badge variant="secondary" className="ml-0.5">
             Beta
           </Badge>
@@ -2848,17 +2848,17 @@ function NavbarBlock() {
   );
 }
 
-const navbarCode = `import { Badge, Button } from "@kronus-ui/ui";
+const navbarCode = `import { Badge, Button } from "@cronus-ui/ui";
 import { Hexagon, Menu } from "lucide-react";
 
-/* @kronus:data navbar-links */
+/* @cronus:data navbar-links */
 const NAVBAR_LINKS = [
   { label: "Features", href: "#features" },
   { label: "Pricing", href: "#pricing" },
   { label: "Docs", href: "#docs" },
   { label: "Changelog", href: "#changelog" },
 ];
-/* @kronus:data-end */
+/* @cronus:data-end */
 
 export function NavbarBlock() {
   return (
@@ -2868,7 +2868,7 @@ export function NavbarBlock() {
           <span className="grid size-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
             <Hexagon aria-hidden="true" className="size-4" />
           </span>
-          <span className="font-display text-base font-semibold text-fg">Kronus</span>
+          <span className="font-display text-base font-semibold text-fg">Cronus</span>
           <Badge variant="secondary" className="ml-0.5">
             Beta
           </Badge>
@@ -2910,7 +2910,7 @@ function NavbarCenteredBlock() {
           <span className="grid size-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
             <Hexagon aria-hidden="true" className="size-4" />
           </span>
-          <span className="font-display text-base font-semibold text-fg">Kronus</span>
+          <span className="font-display text-base font-semibold text-fg">Cronus</span>
         </div>
 
         <div className="hidden items-center gap-6 md:flex">
@@ -2938,7 +2938,7 @@ function NavbarCenteredBlock() {
   );
 }
 
-const navbarCenteredCode = `import { Button } from "@kronus-ui/ui";
+const navbarCenteredCode = `import { Button } from "@cronus-ui/ui";
 import { Hexagon, Menu } from "lucide-react";
 
 const NAVBAR_LINKS = [
@@ -2956,7 +2956,7 @@ export function NavbarCenteredBlock() {
           <span className="grid size-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
             <Hexagon aria-hidden="true" className="size-4" />
           </span>
-          <span className="font-display text-base font-semibold text-fg">Kronus</span>
+          <span className="font-display text-base font-semibold text-fg">Cronus</span>
         </div>
 
         <div className="hidden items-center gap-6 md:flex">
@@ -2994,7 +2994,7 @@ function NavbarAnnouncementBlock() {
             New
           </Badge>
           <p className="truncate text-sm text-fg-secondary">
-            Kronus 2.0 is live — 40 new blocks and a refreshed theme engine.
+            Cronus 2.0 is live — 40 new blocks and a refreshed theme engine.
           </p>
           <a
             href="#changelog"
@@ -3010,7 +3010,7 @@ function NavbarAnnouncementBlock() {
             <span className="grid size-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
               <Hexagon aria-hidden="true" className="size-4" />
             </span>
-            <span className="font-display text-base font-semibold text-fg">Kronus</span>
+            <span className="font-display text-base font-semibold text-fg">Cronus</span>
           </div>
 
           <div className="hidden items-center gap-6 md:flex">
@@ -3042,7 +3042,7 @@ function NavbarAnnouncementBlock() {
   );
 }
 
-const navbarAnnouncementCode = `import { Badge, Button } from "@kronus-ui/ui";
+const navbarAnnouncementCode = `import { Badge, Button } from "@cronus-ui/ui";
 import { ArrowRight, Hexagon, Menu, Sparkles } from "lucide-react";
 
 const NAVBAR_LINKS = [
@@ -3062,7 +3062,7 @@ export function NavbarAnnouncementBlock() {
             New
           </Badge>
           <p className="truncate text-sm text-fg-secondary">
-            Kronus 2.0 is live — 40 new blocks and a refreshed theme engine.
+            Cronus 2.0 is live — 40 new blocks and a refreshed theme engine.
           </p>
           <a
             href="#changelog"
@@ -3078,7 +3078,7 @@ export function NavbarAnnouncementBlock() {
             <span className="grid size-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
               <Hexagon aria-hidden="true" className="size-4" />
             </span>
-            <span className="font-display text-base font-semibold text-fg">Kronus</span>
+            <span className="font-display text-base font-semibold text-fg">Cronus</span>
           </div>
 
           <div className="hidden items-center gap-6 md:flex">

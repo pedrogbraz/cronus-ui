@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Card } from "@kronus-ui/ui";
+import { Button, Card } from "@cronus-ui/ui";
 import { ArrowRight } from "lucide-react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
 import { BlockViewBody } from "../../components/blocks/block-view-body";
@@ -131,7 +131,7 @@ export function StatusPageBlock() {
   );
 }
 
-export const statusPageCode = `import { Button, Card } from "@kronus-ui/ui";
+export const statusPageCode = `import { Button, Card } from "@cronus-ui/ui";
 import { ArrowRight } from "lucide-react";
 
 type SegmentTone = "operational" | "degraded" | "outage";

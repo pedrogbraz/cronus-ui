@@ -17,7 +17,7 @@ export interface ShinyTextProps extends HTMLAttributes<HTMLSpanElement> {
 }
 
 const SHINY_KEYFRAMES =
-  "@keyframes kronus-shiny-text{0%{background-position:100% 0}100%{background-position:-100% 0}}";
+  "@keyframes cronus-shiny-text{0%{background-position:100% 0}100%{background-position:-100% 0}}";
 
 function finiteOr(value: number, fallback: number) {
   return Number.isFinite(value) ? value : fallback;
@@ -47,13 +47,13 @@ export function ShinyText({
       <Comp
         ref={ref}
         className={cn(
-          "inline bg-[length:200%_100%] bg-clip-text text-transparent [animation-duration:var(--shiny-duration)] [animation-iteration-count:infinite] [animation-name:kronus-shiny-text] [animation-timing-function:linear] motion-reduce:[animation-name:none]",
+          "inline bg-[length:200%_100%] bg-clip-text text-transparent [animation-duration:var(--shiny-duration)] [animation-iteration-count:infinite] [animation-name:cronus-shiny-text] [animation-timing-function:linear] motion-reduce:[animation-name:none]",
           className,
         )}
         style={{
           ...shinyStyle,
           backgroundImage:
-            "linear-gradient(90deg, var(--kronus-fg-tertiary) 0%, var(--kronus-fg-tertiary) 40%, var(--kronus-fg) 50%, var(--kronus-fg-tertiary) 60%, var(--kronus-fg-tertiary) 100%)",
+            "linear-gradient(90deg, var(--cronus-fg-tertiary) 0%, var(--cronus-fg-tertiary) 40%, var(--cronus-fg) 50%, var(--cronus-fg-tertiary) 60%, var(--cronus-fg-tertiary) 100%)",
           ...style,
         }}
         {...props}

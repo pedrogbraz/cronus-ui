@@ -8,7 +8,7 @@ import { expect, test } from "@playwright/test";
  *   - default selected tab is pnpm (aria-selected=true)
  *   - ArrowRight moves the active tab via Radix's roving tabindex, updating
  *     aria-selected and the rendered command (role="tabpanel")
- *   - first tablist is the create-kronus-app scaffold (init tabs remain below)
+ *   - first tablist is the create-cronus-app scaffold (init tabs remain below)
  *
  * This proves the Radix wiring used everywhere install/CLI commands appear.
  */
@@ -32,17 +32,17 @@ test.describe("install tabs (package manager)", () => {
     await expect(pnpmTab).toHaveAttribute("aria-selected", "true");
     await expect(npmTab).toHaveAttribute("aria-selected", "false");
 
-    // The first tablist is the recommended create-kronus-app path. Its selected
+    // The first tablist is the recommended create-cronus-app path. Its selected
     // panel shows the pnpm scaffold command.
     const panel = page
       .getByRole("tabpanel")
-      .filter({ hasText: /pnpm dlx create-kronus-app/ })
+      .filter({ hasText: /pnpm dlx create-cronus-app/ })
       .first();
     await expect(panel).toBeVisible();
 
     // init tabs remain on the page (existing-app path).
     await expect(
-      page.getByRole("tabpanel").filter({ hasText: /pnpm dlx kronus-ui@latest init/ }),
+      page.getByRole("tabpanel").filter({ hasText: /pnpm dlx cronus-ui@latest init/ }),
     ).toBeVisible();
 
     // Keyboard: focus the active tab, ArrowRight activates the next tab (npm).
@@ -59,7 +59,7 @@ test.describe("install tabs (package manager)", () => {
     // The first tablist's visible command should now be the npm scaffold.
     const npmPanel = page
       .getByRole("tabpanel")
-      .filter({ hasText: /npx create-kronus-app/ })
+      .filter({ hasText: /npx create-cronus-app/ })
       .first();
     await expect(npmPanel).toBeVisible();
   });

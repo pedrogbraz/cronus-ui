@@ -92,7 +92,7 @@ export const SpotlightCard = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEl
           className="pointer-events-none absolute -inset-px opacity-0 transition-opacity duration-300 group-data-[spotlight-hovered]:opacity-100 motion-reduce:hidden motion-reduce:transition-none"
           style={{
             background:
-              "radial-gradient(320px circle at var(--spot-x, 50%) var(--spot-y, 50%), color-mix(in oklch, var(--kronus-primary) 14%, transparent), transparent 72%)",
+              "radial-gradient(320px circle at var(--spot-x, 50%) var(--spot-y, 50%), color-mix(in oklch, var(--cronus-primary) 14%, transparent), transparent 72%)",
           }}
         />
         <div className="relative">{children}</div>

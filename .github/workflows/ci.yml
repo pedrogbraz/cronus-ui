@@ -1,4 +1,4 @@
-# Kronus UI CI — every gate the release script runs locally, on every PR.
+# Cronus UI CI — every gate the release script runs locally, on every PR.
 #
 # Three parallel jobs:
 #   gates   — build + lint + typecheck + unit tests + the drift gates
@@ -96,7 +96,7 @@ jobs:
       - name: Install
         run: bun install --frozen-lockfile
       - name: Build showcase
-        run: bunx turbo build --filter=@kronus-ui/www --filter=@kronus-ui/pro
+        run: bunx turbo build --filter=@cronus-ui/www --filter=@cronus-ui/pro
       - name: Install Playwright Chromium
         run: bunx playwright install --with-deps chromium
       # Compare when linux baselines are committed; otherwise BOOTSTRAP —

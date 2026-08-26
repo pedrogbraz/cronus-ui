@@ -2,7 +2,7 @@
  * demo-store — the single source of truth for the storefront demo dataset.
  *
  * PURE TS DATA (zero React / hooks / DOM), so it is safe to import from a React
- * Server Component and ships as a `registry:lib` item (`kronus-ui add demo-store`
+ * Server Component and ships as a `registry:lib` item (`cronus-ui add demo-store`
  * writes `lib/demo-store.ts`). Every storefront block (product grid, cart,
  * checkout, invoice, order history, reviews) is meant to read from HERE, so the
  * same product ("Aurora Wireless Headphones", $349) appears in the grid, the
@@ -14,7 +14,7 @@
  * import of the SAME data), so visual snapshots stay byte-identical.
  *
  * Brand: {@link BRAND} is the standalone demo store name ("Aurora Audio"), used
- * when this dataset is consumed on its own. It is a demo default — `kronus-ui
+ * when this dataset is consumed on its own. It is a demo default — `cronus-ui
  * compose` does NOT override it (the composed app's brand reaches its VISIBLE
  * chrome via the separate brandTokens literal-replacement path, not this lib).
  */

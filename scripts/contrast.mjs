@@ -2,7 +2,7 @@
 // @ts-check
 /**
  * contrast.mjs — a self-contained WCAG 2.x contrast-ratio calculator for the
- * Kronus design tokens.
+ * Cronus design tokens.
  *
  * Colors in `src/tokens.ts` are authored in OKLCH (with some `oklch(... / a)`
  * alpha channels). To reason about WCAG contrast we need each color as an sRGB

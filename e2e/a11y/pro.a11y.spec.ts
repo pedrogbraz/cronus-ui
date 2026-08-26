@@ -5,7 +5,7 @@ const PRO_ORIGIN = process.env.PLAYWRIGHT_PRO_URL ?? "http://localhost:4748";
 const BLOCKING_IMPACTS = new Set(["serious", "critical"]);
 const WCAG_TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"];
 
-test("a11y: Kronus Pro origin has no serious/critical violations", async ({ page }) => {
+test("a11y: Cronus Pro origin has no serious/critical violations", async ({ page }) => {
   await page.goto(PRO_ORIGIN, { waitUntil: "networkidle" });
   await expect(page.locator("main#main-content")).toBeVisible();
 
@@ -35,7 +35,7 @@ test("a11y: Kronus Pro origin has no serious/critical violations", async ({ page
   expect(
     blocking,
     blocking.length > 0
-      ? `axe found ${blocking.length} serious/critical violation(s) on Kronus Pro:\n${summary}`
+      ? `axe found ${blocking.length} serious/critical violation(s) on Cronus Pro:\n${summary}`
       : undefined,
   ).toEqual([]);
 });

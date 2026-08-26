@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Button, cn, GlassCard, ScrollArea } from "@kronus-ui/ui";
+import { Badge, Button, cn, GlassCard, ScrollArea } from "@cronus-ui/ui";
 import { Layers, RotateCcw, Shuffle } from "lucide-react";
 import { type ReactNode, useEffect, useMemo, useRef } from "react";
 import { GROUP_ORDER } from "@/lib/stack/catalog";

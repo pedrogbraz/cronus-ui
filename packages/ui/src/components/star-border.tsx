@@ -15,7 +15,7 @@ export interface StarBorderProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const STAR_KEYFRAMES =
-  "@keyframes kronus-star-border{from{offset-distance:0%}to{offset-distance:100%}}";
+  "@keyframes cronus-star-border{from{offset-distance:0%}to{offset-distance:100%}}";
 
 function finiteOr(value: number, fallback: number) {
   return Number.isFinite(value) ? value : fallback;
@@ -53,7 +53,7 @@ export function StarBorder({
         {[0, 50].map((phase) => (
           <span
             key={phase}
-            className="absolute size-1.5 rounded-full bg-primary shadow-glow [animation-duration:var(--star-duration)] [animation-iteration-count:infinite] [animation-name:kronus-star-border] [animation-timing-function:linear] [offset-path:rect(0_auto_auto_0_round_12px)]"
+            className="absolute size-1.5 rounded-full bg-primary shadow-glow [animation-duration:var(--star-duration)] [animation-iteration-count:infinite] [animation-name:cronus-star-border] [animation-timing-function:linear] [offset-path:rect(0_auto_auto_0_round_12px)]"
             style={{ animationDelay: `-${(phase / 100) * cycle}s` }}
           />
         ))}

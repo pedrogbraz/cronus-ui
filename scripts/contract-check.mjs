@@ -158,7 +158,7 @@ const rules = [
     id: "1b",
     name: "Sem hex cru em componente",
     appliesTo: (f) => f.endsWith(".tsx") && !f.includes(".test."),
-    hint: "Defina um token em packages/tokens e use var(--kronus-*)",
+    hint: "Defina um token em packages/tokens e use var(--cronus-*)",
     check: (src) =>
       [...src.matchAll(HEX_RE)]
         .filter((m) => !EXEMPT.test(lineAt(src, m.index)))

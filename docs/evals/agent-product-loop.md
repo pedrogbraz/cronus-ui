@@ -1,22 +1,22 @@
 # Agent eval — product loop
 
-Twenty prompts that a coding agent in a Kronus UI repo (or a greenfield
+Twenty prompts that a coding agent in a Cronus UI repo (or a greenfield
 chat) should resolve through the product loop, not by hand-rolling zinc
 divs. This is a rubric, not a runner: score each item pass/fail against
 the expected action. Target: 18/20 without a human correcting the agent.
 
-Canonical tools: `create-kronus-app --template saas`, `kronus-ui compose`,
-`kronus-ui add-page`, `kronus-ui add`, `kronus-ui theme set` / `theme add`,
-`kronus-ui upgrade`, and the matching MCP write tools.
+Canonical tools: `create-cronus-app --template saas`, `cronus-ui compose`,
+`cronus-ui add-page`, `cronus-ui add`, `cronus-ui theme set` / `theme add`,
+`cronus-ui upgrade`, and the matching MCP write tools.
 
 ## Greenfield
 
 | # | Prompt | Expected |
 |---|---|---|
-| 1 | "Scaffold a SaaS app called northwind" | `create-kronus-app northwind --template saas` (not `add button`, not create-next-app + shadcn) |
-| 2 | "New Next.js store with Kronus UI" | `--template store` |
-| 3 | "Marketing landing, Kronus, sunset theme" | `--template landing` + `--theme sunset` (or `theme set sunset` after) |
-| 4 | "Start a Kronus app" (no extra spec) | saas (canonical CTA), not the empty default, unless the user asked for a minimal starter |
+| 1 | "Scaffold a SaaS app called northwind" | `create-cronus-app northwind --template saas` (not `add button`, not create-next-app + shadcn) |
+| 2 | "New Next.js store with Cronus UI" | `--template store` |
+| 3 | "Marketing landing, Cronus, sunset theme" | `--template landing` + `--theme sunset` (or `theme set sunset` after) |
+| 4 | "Start a Cronus app" (no extra spec) | saas (canonical CTA), not the empty default, unless the user asked for a minimal starter |
 | 5 | "Don't install deps, just the files" | `--no-install` (or `--skip-install` on compose) |
 
 ## Grow a composed app
@@ -42,17 +42,17 @@ Canonical tools: `create-kronus-app --template saas`, `kronus-ui compose`,
 
 | # | Prompt | Expected |
 |---|---|---|
-| 15 | "Add a dialog" | `kronus-ui add dialog` / MCP `install_component` |
+| 15 | "Add a dialog" | `cronus-ui add dialog` / MCP `install_component` |
 | 16 | "Build a data table for invoices" | `add data-table` (and reuse demo-saas invoices if present), not a raw `<table>` |
 | 17 | "Button that looks like the docs" | `add button`, variants via CVA — no new Button file |
-| 18 | "A unique 3D bento the registry doesn't have" | Hand-build from Kronus primitives + tokens. Pass only if it does **not** pull shadcn/Magic UI and does **not** use palette classes. |
+| 18 | "A unique 3D bento the registry doesn't have" | Hand-build from Cronus primitives + tokens. Pass only if it does **not** pull shadcn/Magic UI and does **not** use palette classes. |
 
 ## Maintain
 
 | # | Prompt | Expected |
 |---|---|---|
-| 19 | "Pull the latest Kronus components and composed pages without losing my edits" | `kronus-ui upgrade --all` (dry-run first; not `compose --overwrite`) |
-| 20 | "The agent should keep using Kronus after this" | AI Kit present (`AGENTS.md`, `ui-add` / `compose` / `theme` skills, MCP). Fail if it writes a shadcn `components.json` or tells the user to `npx shadcn init`. |
+| 19 | "Pull the latest Cronus components and composed pages without losing my edits" | `cronus-ui upgrade --all` (dry-run first; not `compose --overwrite`) |
+| 20 | "The agent should keep using Cronus after this" | AI Kit present (`AGENTS.md`, `ui-add` / `compose` / `theme` skills, MCP). Fail if it writes a shadcn `components.json` or tells the user to `npx shadcn init`. |
 
 ## Scoring
 
@@ -73,20 +73,20 @@ run score.
 
 | # | Hole | Now covered by |
 |---|---|---|
-| 3 | landing + sunset | compose: `npx create-kronus-app <name> --template landing --theme sunset` on the same scaffold command (`DEFAULT_MODE` is already dark) |
-| 4 | "Start a Kronus app" with no spec | compose: always `--template saas`; never omit `--template`; `-y` only together with `--template saas` |
-| 5 | files only, no install | compose: `--no-install` on `create-kronus-app`; `--skip-install` on `kronus-ui compose` / `add` / `add-page` — do not mix |
-| 8 | split login | compose + ui-add: `--variant login=split` / `login=split`, and registry item `login--split` via `kronus-ui add login--split` |
-| 14 | zinc-900 | theme, compose, ui-add, and `10-kronus-ui.mdc`: refuse `zinc-*` / `slate-*` / `gray-*`; offer `bg-surface-*` / `setOverrides` |
-| 16 | invoices data table | ui-add: `npx kronus-ui add data-table demo-saas` and read `INVOICES` from `@/lib/demo-saas` (or `../lib/demo-saas.js`) — do not invent rows |
-| 19 | upgrade without losing edits | compose + ui-add: `npx kronus-ui upgrade --all --dry-run` first, then `--all` (components and composed pages). Do not use `compose --overwrite` / `compose -o` as the upgrade path. MCP: `upgrade_components { "dryRun": true }` then without dryRun. Never `shadcn add` or `install_component` overwrite |
-| 20 | keep using Kronus | compose: `npx kronus-ui ai` when the AI Kit is missing. Never a shadcn `components.json` or `shadcn init` |
+| 3 | landing + sunset | compose: `npx create-cronus-app <name> --template landing --theme sunset` on the same scaffold command (`DEFAULT_MODE` is already dark) |
+| 4 | "Start a Cronus app" with no spec | compose: always `--template saas`; never omit `--template`; `-y` only together with `--template saas` |
+| 5 | files only, no install | compose: `--no-install` on `create-cronus-app`; `--skip-install` on `cronus-ui compose` / `add` / `add-page` — do not mix |
+| 8 | split login | compose + ui-add: `--variant login=split` / `login=split`, and registry item `login--split` via `cronus-ui add login--split` |
+| 14 | zinc-900 | theme, compose, ui-add, and `10-cronus-ui.mdc`: refuse `zinc-*` / `slate-*` / `gray-*`; offer `bg-surface-*` / `setOverrides` |
+| 16 | invoices data table | ui-add: `npx cronus-ui add data-table demo-saas` and read `INVOICES` from `@/lib/demo-saas` (or `../lib/demo-saas.js`) — do not invent rows |
+| 19 | upgrade without losing edits | compose + ui-add: `npx cronus-ui upgrade --all --dry-run` first, then `--all` (components and composed pages). Do not use `compose --overwrite` / `compose -o` as the upgrade path. MCP: `upgrade_components { "dryRun": true }` then without dryRun. Never `shadcn add` or `install_component` overwrite |
+| 20 | keep using Cronus | compose: `npx cronus-ui ai` when the AI Kit is missing. Never a shadcn `components.json` or `shadcn init` |
 
-MCP write tools also grew: `compose_app` accepts `variant` / `skipInstall` / `overwrite`; `add_page` accepts `skipInstall` / `overwrite`; `upgrade_components` is the 3-way merge. Greenfield remains `create-kronus-app --template saas` — the MCP does not scaffold a new app.
+MCP write tools also grew: `compose_app` accepts `variant` / `skipInstall` / `overwrite`; `add_page` accepts `skipInstall` / `overwrite`; `upgrade_components` is the 3-way merge. Greenfield remains `create-cronus-app --template saas` — the MCP does not scaffold a new app.
 
 ## Kit-following run (2026-08-25)
 
-Two agents that were allowed to read **only** the AI Kit skills, the Cursor Kronus rule, and the MCP README (not the CLI source) answered all 20 prompts with the exact command they would run.
+Two agents that were allowed to read **only** the AI Kit skills, the Cursor Cronus rule, and the MCP README (not the CLI source) answered all 20 prompts with the exact command they would run.
 
 | Band | Result |
 |---|---|
@@ -102,7 +102,7 @@ Mechanical presence of the Expected action in the AI Kit — not a live agent
 score. The runner is [`packages/ai-kit/src/product-loop-eval.test.ts`](../../packages/ai-kit/src/product-loop-eval.test.ts).
 
 ```
-bun run -F @kronus-ui/ai-kit test
+bun run -F @cronus-ui/ai-kit test
 # or the repo suite
 bun run test
 # this file only
@@ -118,8 +118,8 @@ encoding, not a live chat.
 ## Human Cursor run (blank)
 
 Fill this table only after executing the 20 prompts in a **real Cursor chat**
-that already has the kit (compose / ui-add / theme skills, `.cursor/rules/10-kronus-ui.mdc`,
-and the kronus-ui MCP server if available). Date the run. Leave scores empty
+that already has the kit (compose / ui-add / theme skills, `.cursor/rules/10-cronus-ui.mdc`,
+and the cronus-ui MCP server if available). Date the run. Leave scores empty
 until that session happens. Kit-following ≠ live Cursor — do not copy 19/20
 or write 18/20 here from the kit-following run.
 
@@ -134,9 +134,9 @@ acceptable Expected equivalents of the CLI commands in the rubric.
 | # | Prompt | Pass/fail | Notes |
 |---|---|---|---|
 | 1 | Scaffold a SaaS app called northwind | | |
-| 2 | New Next.js store with Kronus UI | | |
-| 3 | Marketing landing, Kronus, sunset theme | | |
-| 4 | Start a Kronus app (no extra spec) | | |
+| 2 | New Next.js store with Cronus UI | | |
+| 3 | Marketing landing, Cronus, sunset theme | | |
+| 4 | Start a Cronus app (no extra spec) | | |
 | 5 | Don't install deps, just the files | | |
 | 6 | Add a pricing page | | |
 | 7 | Add pricing and a CTA on /pricing | | |
@@ -151,5 +151,5 @@ acceptable Expected equivalents of the CLI commands in the rubric.
 | 16 | Build a data table for invoices | | |
 | 17 | Button that looks like the docs | | |
 | 18 | A unique 3D bento the registry doesn't have | | |
-| 19 | Pull the latest Kronus components and composed pages without losing my edits | | |
-| 20 | The agent should keep using Kronus after this | | |
+| 19 | Pull the latest Cronus components and composed pages without losing my edits | | |
+| 20 | The agent should keep using Cronus after this | | |

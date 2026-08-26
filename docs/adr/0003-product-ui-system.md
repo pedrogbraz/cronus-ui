@@ -7,7 +7,7 @@
 
 ## Contexto
 
-Este repositório joga três jogos ao mesmo tempo: a linguagem visual da Kronus,
+Este repositório joga três jogos ao mesmo tempo: a linguagem visual da Cronus,
 um clone de protocolo shadcn, e um gerador de stack. Os três são reais, e
 nenhum deles é a categoria pública.
 
@@ -30,11 +30,11 @@ produto, não um catálogo.
    do zero e continua editável”.
 3. **Aurora** é o tema-bandeira do produto gerado. **Neutral** é o chrome das
    docs. Os dois convivem; não se misturam no discurso.
-4. **CTA canônico:** `npx create-kronus-app my-app --template saas`. O default
-   da CLI `create-kronus-app` pode permanecer `default` (não-breaking). Marketing
+4. **CTA canônico:** `npx create-cronus-app my-app --template saas`. O default
+   da CLI `create-cronus-app` pode permanecer `default` (não-breaking). Marketing
    e docs usam `saas`.
-5. **Dual distribution permanece:** npm (`@kronus-ui/ui` + tokens + theme) e
-   copy-in (`kronus-ui add` / `compose`). Uma fonte, dois modos de posse.
+5. **Dual distribution permanece:** npm (`@cronus-ui/ui` + tokens + theme) e
+   copy-in (`cronus-ui add` / `compose`). Uma fonte, dois modos de posse.
 6. **A golden rule do compose é doutrina de produto**, não detalhe de
    implementação: uma página gerada é só imports de blocks instalados + um
    `<main>` que os empilha. Nenhum JSX de UI além desse wrapper. Todo pixel
@@ -44,7 +44,7 @@ produto, não um catálogo.
 
 ## Alternativas consideradas
 
-- **Ser “o shadcn da Kronus”** — descartada. shadcn já ganhou o protocolo.
+- **Ser “o shadcn da Cronus”** — descartada. shadcn já ganhou o protocolo.
   Copiar o posicionamento é entrar numa partida encerrada, com a desvantagem
   de ser o segundo.
 - **Inflar o catálogo** — descartada. Block libraries já competem em volume.
@@ -64,7 +64,7 @@ discurso: um é o produto gerado, o outro é o chrome das docs.
 respondemos com orgulho. Quem chega procurando um clone de shadcn ou uma
 lib tipo MUI vai achar o CTA estranho. Aceitamos.
 
-**Aceitamos:** o default da CLI `create-kronus-app` permanece `default` até um
+**Aceitamos:** o default da CLI `create-cronus-app` permanece `default` até um
 breaking change deliberado. Docs e marketing não precisam esperar.
 
 ## Revisitar quando

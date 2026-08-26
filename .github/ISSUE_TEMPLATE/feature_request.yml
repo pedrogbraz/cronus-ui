@@ -1,12 +1,12 @@
 name: Feature request
-description: Propose a new component, block, or capability for Kronus UI.
+description: Propose a new component, block, or capability for Cronus UI.
 title: "[feature]: "
 labels: ["enhancement"]
 body:
   - type: markdown
     attributes:
       value: |
-        Check the [components catalog](https://ui.testkronus.cloud/components) and existing issues first — it may already exist or be planned.
+        Check the [components catalog](https://ui.testcronus.cloud/components) and existing issues first — it may already exist or be planned.
   - type: dropdown
     id: area
     attributes:

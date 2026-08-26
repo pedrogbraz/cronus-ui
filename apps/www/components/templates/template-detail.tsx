@@ -1,6 +1,6 @@
 "use client";
 
-import { cn, Tabs, TabsContent, TabsList, TabsTrigger } from "@kronus-ui/ui";
+import { cn, Tabs, TabsContent, TabsList, TabsTrigger } from "@cronus-ui/ui";
 import { ExternalLink, Monitor, Smartphone, Tablet } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -152,7 +152,7 @@ export function TemplateDetail({ entry }: { entry: TemplateCatalogEntry }) {
             </ul>
             <div className="mt-6">
               <CodeBlock
-                code={`npx kronus-ui add ${stack.map(blockLabel).join(" ")}`}
+                code={`npx cronus-ui add ${stack.map(blockLabel).join(" ")}`}
                 language="bash"
               />
             </div>

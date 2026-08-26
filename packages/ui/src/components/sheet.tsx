@@ -24,7 +24,7 @@ const SheetOverlay = forwardRef<
       ref={ref}
       data-slot="sheet-overlay"
       className={cn(
-        "fixed inset-0 z-50 bg-black/50 backdrop-blur-sm data-[state=open]:animate-[kronus-overlay-in_300ms_var(--ease-out-quart)] data-[state=closed]:animate-[kronus-overlay-out_240ms_var(--ease-out-quart)]",
+        "fixed inset-0 z-50 bg-black/50 backdrop-blur-sm data-[state=open]:animate-[cronus-overlay-in_300ms_var(--ease-out-quart)] data-[state=closed]:animate-[cronus-overlay-out_240ms_var(--ease-out-quart)]",
         className,
       )}
       {...props}
@@ -38,12 +38,12 @@ const sheetVariants = cva(
   {
     variants: {
       side: {
-        top: "inset-x-0 top-0 border-b w-full data-[state=open]:animate-[kronus-slide-in-top_320ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[kronus-slide-out-top_260ms_var(--ease-out-quart)_both]",
+        top: "inset-x-0 top-0 border-b w-full data-[state=open]:animate-[cronus-slide-in-top_320ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[cronus-slide-out-top_260ms_var(--ease-out-quart)_both]",
         bottom:
-          "inset-x-0 bottom-0 border-t w-full data-[state=open]:animate-[kronus-slide-in-bottom_320ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[kronus-slide-out-bottom_260ms_var(--ease-out-quart)_both]",
-        left: "inset-y-0 left-0 border-r h-full w-3/4 max-w-sm data-[state=open]:animate-[kronus-slide-in-left_320ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[kronus-slide-out-left_260ms_var(--ease-out-quart)_both]",
+          "inset-x-0 bottom-0 border-t w-full data-[state=open]:animate-[cronus-slide-in-bottom_320ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[cronus-slide-out-bottom_260ms_var(--ease-out-quart)_both]",
+        left: "inset-y-0 left-0 border-r h-full w-3/4 max-w-sm data-[state=open]:animate-[cronus-slide-in-left_320ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[cronus-slide-out-left_260ms_var(--ease-out-quart)_both]",
         right:
-          "inset-y-0 right-0 border-l h-full w-3/4 max-w-sm data-[state=open]:animate-[kronus-slide-in-right_320ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[kronus-slide-out-right_260ms_var(--ease-out-quart)_both]",
+          "inset-y-0 right-0 border-l h-full w-3/4 max-w-sm data-[state=open]:animate-[cronus-slide-in-right_320ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[cronus-slide-out-right_260ms_var(--ease-out-quart)_both]",
       },
     },
     defaultVariants: { side: "right" },

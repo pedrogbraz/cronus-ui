@@ -1,7 +1,7 @@
 "use client";
 
-import { type LookName, lookLabels, lookNames } from "@kronus-ui/tokens";
-import { Badge, Button, cn, Input, Label } from "@kronus-ui/ui";
+import { type LookName, lookLabels, lookNames } from "@cronus-ui/tokens";
+import { Badge, Button, cn, Input, Label } from "@cronus-ui/ui";
 import { useState } from "react";
 import { Eyebrow } from "../showcase-ui";
 
@@ -54,7 +54,7 @@ export function LooksStage() {
           })}
         </fieldset>
 
-        <div data-slot="look-stage" data-kronus-look={look} className="mt-6">
+        <div data-slot="look-stage" data-cronus-look={look} className="mt-6">
           <div className="overflow-hidden rounded-2xl border border-border bg-surface-raised p-6 sm:p-8">
             <div className="flex flex-wrap items-center gap-2">
               <Badge variant="outline">{lookLabels[look]}</Badge>
@@ -74,7 +74,7 @@ export function LooksStage() {
             <div className="mt-8 grid gap-3 border-t border-border pt-6 sm:grid-cols-[1fr_auto] sm:items-end">
               <div className="flex flex-col gap-1.5">
                 <Label htmlFor="looks-email">Work email</Label>
-                <Input id="looks-email" placeholder="you@kronus.dev" />
+                <Input id="looks-email" placeholder="you@cronus.dev" />
               </div>
               <Button variant="outline">Subscribe</Button>
             </div>
@@ -82,7 +82,7 @@ export function LooksStage() {
         </div>
 
         <p className="mt-4 text-sm text-fg-tertiary">
-          Apply with <code className="text-fg-secondary">data-kronus-look=&quot;{look}&quot;</code>{" "}
+          Apply with <code className="text-fg-secondary">data-cronus-look=&quot;{look}&quot;</code>{" "}
           on any subtree — the docs chrome stays Default.
         </p>
       </div>

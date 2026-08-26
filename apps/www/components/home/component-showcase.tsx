@@ -1,15 +1,15 @@
 "use client";
 
-import { Avatar, AvatarFallback } from "@kronus-ui/ui/avatar";
-import { Badge } from "@kronus-ui/ui/badge";
-import { Button } from "@kronus-ui/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@kronus-ui/ui/card";
-import { Input } from "@kronus-ui/ui/input";
-import { Label } from "@kronus-ui/ui/label";
-import { Metric, MetricDelta, MetricLabel, MetricValue } from "@kronus-ui/ui/metric";
-import { Separator } from "@kronus-ui/ui/separator";
-import { Slider } from "@kronus-ui/ui/slider";
-import { Switch } from "@kronus-ui/ui/switch";
+import { Avatar, AvatarFallback } from "@cronus-ui/ui/avatar";
+import { Badge } from "@cronus-ui/ui/badge";
+import { Button } from "@cronus-ui/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@cronus-ui/ui/card";
+import { Input } from "@cronus-ui/ui/input";
+import { Label } from "@cronus-ui/ui/label";
+import { Metric, MetricDelta, MetricLabel, MetricValue } from "@cronus-ui/ui/metric";
+import { Separator } from "@cronus-ui/ui/separator";
+import { Slider } from "@cronus-ui/ui/slider";
+import { Switch } from "@cronus-ui/ui/switch";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -18,7 +18,7 @@ import { Eyebrow, PreviewFrame, SectionGlow } from "../showcase-ui";
 
 /**
  * A single collage tile: a tiny uppercase caption above a dotted-grid
- * `PreviewFrame` that renders a live cluster of real Kronus UI components.
+ * `PreviewFrame` that renders a live cluster of real Cronus UI components.
  * `h-full` + `flex-1` keep every tile flush to its grid row height.
  */
 function Tile({ caption, children }: { caption: string; children: ReactNode }) {
@@ -95,7 +95,7 @@ export function ComponentShowcase() {
             <div className="flex w-full flex-col gap-4">
               <div className="flex flex-col gap-2">
                 <Label htmlFor="showcase-email">Email</Label>
-                <Input id="showcase-email" type="email" placeholder="you@kronus.com" />
+                <Input id="showcase-email" type="email" placeholder="you@cronus.com" />
               </div>
               <div className="flex items-center justify-between">
                 <Label htmlFor="showcase-notify">Notifications</Label>

@@ -94,32 +94,32 @@ export function GetStarted() {
               icon={<PackagePlus className="size-5" aria-hidden="true" />}
               title="Start a SaaS"
               description="A Next.js app composed from validated blocks — auth, dashboard shell, billing — plus theme and AI Kit."
-              command="npx create-kronus-app my-app --template saas"
+              command="npx create-cronus-app my-app --template saas"
             />
             <PathCard
               icon={<FilePlus className="size-5" aria-hidden="true" />}
               title="Grow a page"
               description="Install blocks, write the route, and update chrome nav — a composed page, not a hand-rolled layout."
-              command="npx kronus-ui add-page --route /faq --blocks faq,cta --nav FAQ"
+              command="npx cronus-ui add-page --route /faq --blocks faq,cta --nav FAQ"
             />
             <PathCard
               icon={<RefreshCw className="size-5" aria-hidden="true" />}
               title="Keep it"
               description="Dry-run first. Upgrade 3-way-merges primitives and composed pages without wiping local edits."
-              command="npx kronus-ui upgrade --all --dry-run"
+              command="npx cronus-ui upgrade --all --dry-run"
             />
           </div>
 
           <p className="mt-6 max-w-3xl text-sm text-fg-tertiary">
             Already have a repo?{" "}
-            <code className="font-mono text-[0.85em] text-fg-secondary">npx kronus-ui init</code>{" "}
+            <code className="font-mono text-[0.85em] text-fg-secondary">npx cronus-ui init</code>{" "}
             then add. Prefer a stack?{" "}
-            <Link href="/stack" className="text-fg-secondary underline-offset-4 hover:underline">
+            <Link href="/stack" className="text-fg-secondary underline underline-offset-4">
               Stack Builder
             </Link>{" "}
             or{" "}
             <code className="font-mono text-[0.85em] text-fg-secondary">
-              bun create kronus-stack@latest
+              bun create cronus-stack@latest
             </code>
             .
           </p>

@@ -1,4 +1,4 @@
-import { KronusUIProvider } from "@kronus-ui/theme";
+import { CronusUIProvider } from "@cronus-ui/theme";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
@@ -9,8 +9,8 @@ if (!rootEl) throw new Error("Missing #root element in index.html");
 
 createRoot(rootEl).render(
   <StrictMode>
-    <KronusUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">
+    <CronusUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">
       <App />
-    </KronusUIProvider>
+    </CronusUIProvider>
   </StrictMode>,
 );

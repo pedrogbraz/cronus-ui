@@ -1,7 +1,7 @@
 "use client";
 
-import { cn } from "@kronus-ui/ui/cn";
-import { Input } from "@kronus-ui/ui/input";
+import { cn } from "@cronus-ui/ui/cn";
+import { Input } from "@cronus-ui/ui/input";
 import { ArrowUpRight } from "lucide-react";
 import { useMemo, useState } from "react";
 import {

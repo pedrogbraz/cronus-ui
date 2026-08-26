@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@kronus-ui/ui";
+import { cn } from "@cronus-ui/ui";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";

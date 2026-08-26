@@ -70,7 +70,7 @@ export function CompareSection() {
           The engine lives on the{" "}
           <a
             href={OSS_URL}
-            className="text-fg-secondary underline-offset-4 outline-none hover:text-fg hover:underline focus-visible:ring-2 focus-visible:ring-ring"
+            className="text-fg-secondary underline underline-offset-4 outline-none hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
           >
             open-source site
           </a>

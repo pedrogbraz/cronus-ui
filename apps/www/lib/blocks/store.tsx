@@ -41,7 +41,7 @@ import {
   TimelineTitle,
   ToggleGroup,
   ToggleGroupItem,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import {
   CART,
   ORDERS,
@@ -49,7 +49,7 @@ import {
   RATING_DISTRIBUTION,
   RATING_SUMMARY,
   REVIEWS,
-} from "@kronus-ui/ui/demo-store";
+} from "@cronus-ui/ui/demo-store";
 import {
   Check,
   Clock,
@@ -234,7 +234,7 @@ const productDetailCode = `import {
   Button,
   ToggleGroup,
   ToggleGroupItem,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import {
   Headphones,
   Heart,
@@ -514,7 +514,7 @@ export function ProductDetailGalleryBlock() {
   );
 }
 
-const productDetailGalleryCode = `import { Badge, Button, ToggleGroup, ToggleGroupItem } from "@kronus-ui/ui";
+const productDetailGalleryCode = `import { Badge, Button, ToggleGroup, ToggleGroupItem } from "@cronus-ui/ui";
 import { productById, RATING_SUMMARY } from "../lib/demo-store.js";
 import { Headphones, Heart, ShoppingCart, Star, StarHalf, Truck } from "lucide-react";
 
@@ -713,7 +713,7 @@ export function ProductDetailMinimalBlock() {
   );
 }
 
-const productDetailMinimalCode = `import { Badge, Button } from "@kronus-ui/ui";
+const productDetailMinimalCode = `import { Badge, Button } from "@cronus-ui/ui";
 import { productById, RATING_SUMMARY } from "../lib/demo-store.js";
 import { Headphones, Minus, Plus, ShieldCheck, ShoppingCart, Star, StarHalf } from "lucide-react";
 
@@ -929,7 +929,7 @@ const cartPageCode = `import {
   Input,
   Label,
   Separator,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Minus, Package, Plus, ShieldCheck, Trash2 } from "lucide-react";
 import { CART, productById } from "../lib/demo-store.js";
 
@@ -1127,7 +1127,7 @@ export function CartDrawerBlock() {
   );
 }
 
-const cartDrawerCode = `import { Badge, Button, Progress } from "@kronus-ui/ui";
+const cartDrawerCode = `import { Badge, Button, Progress } from "@cronus-ui/ui";
 import { Package, ShoppingBag, X } from "lucide-react";
 import { CART, productById } from "../lib/demo-store.js";
 
@@ -1336,7 +1336,7 @@ const orderTrackingCode = `import {
   TimelineItem,
   TimelineTime,
   TimelineTitle,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ORDERS } from "../lib/demo-store.js";
 import { Check, MapPin, Package, Truck } from "lucide-react";
 
@@ -1537,7 +1537,7 @@ const orderDeliveredCode = `import {
   TimelineItem,
   TimelineTime,
   TimelineTitle,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ORDERS } from "../lib/demo-store.js";
 import { Check, Package, PackageCheck, Star, Truck } from "lucide-react";
 
@@ -1745,7 +1745,7 @@ const orderDelayedCode = `import {
   TimelineItem,
   TimelineTime,
   TimelineTitle,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Check, Clock, MapPin, MessageCircle, Package, TriangleAlert } from "lucide-react";
 
 export function OrderDelayedBlock() {
@@ -1962,7 +1962,7 @@ const orderHistoryTableCode = `import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Download, MoreHorizontal } from "lucide-react";
 import { ORDERS } from "../lib/demo-store.js";
 
@@ -2171,7 +2171,7 @@ const orderHistoryCardsCode = `import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Package, RotateCcw } from "lucide-react";
 
 type OrderStatus = "Delivered" | "In transit" | "Processing" | "Refunded";
@@ -2386,7 +2386,7 @@ const reviewsSummaryCode = `import {
   CardHeader,
   CardTitle,
   Progress,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Star, StarHalf } from "lucide-react";
 import { RATING_DISTRIBUTION, REVIEWS } from "../lib/demo-store.js";
 
@@ -2587,7 +2587,7 @@ export function ReviewsCompactBlock() {
   );
 }
 
-const reviewsCompactCode = `import { Avatar, AvatarFallback, Badge, Button, Card, CardContent } from "@kronus-ui/ui";
+const reviewsCompactCode = `import { Avatar, AvatarFallback, Badge, Button, Card, CardContent } from "@cronus-ui/ui";
 import { Star, StarHalf } from "lucide-react";
 
 function ReviewStars({ rating, label }: { rating: number; label: string }) {

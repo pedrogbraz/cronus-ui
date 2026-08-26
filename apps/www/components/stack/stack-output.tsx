@@ -9,7 +9,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Check, FileCode2, Sparkles, Terminal } from "lucide-react";
 import { type HTMLAttributes, useId, useMemo, useState } from "react";
 import { generateCommand, generateKickoff, generateStackJson } from "@/lib/stack/kickoff";
@@ -29,7 +29,7 @@ export interface StackOutputProps extends Omit<HTMLAttributes<HTMLDivElement>, "
   config: StackConfig;
   /**
    * The user-supplied project name. Sanitized to a safe slug inside the
-   * generators, so it is fine to pass raw input. Defaults to "my-kronus-app".
+   * generators, so it is fine to pass raw input. Defaults to "my-cronus-app".
    */
   projectName?: string;
   /**
@@ -84,14 +84,14 @@ function CopyRow({
 
 /**
  * The builder's output panel. Renders the three artifacts a user leaves the
- * Kronus Stack Builder with — the scaffolding command, the KICKOFF.md prompt,
+ * Cronus Stack Builder with — the scaffolding command, the KICKOFF.md prompt,
  * and the machine-readable stack snapshot — each in its own accessible tab with
  * a one-click copy. The Kickoff Prompt is the signature artifact and is the
  * default, highlighted tab.
  */
 export function StackOutput({
   config,
-  projectName = "my-kronus-app",
+  projectName = "my-cronus-app",
   catalog,
   className,
   ...props

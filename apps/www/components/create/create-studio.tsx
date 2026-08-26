@@ -1,7 +1,7 @@
 "use client";
 
-import { useTheme } from "@kronus-ui/theme";
-import type { ThemeOverrides } from "@kronus-ui/tokens";
+import { useTheme } from "@cronus-ui/theme";
+import type { ThemeOverrides } from "@cronus-ui/tokens";
 import {
   Accordion,
   AccordionContent,
@@ -53,7 +53,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import {
   Check,
   Code2,
@@ -115,7 +115,7 @@ import { SectionGlow } from "../showcase-ui";
 import { LiftTile } from "./lift-card";
 import { PreviewDashboard } from "./preview-dashboard";
 
-const STORAGE_KEY = "kronus-ui-create-presets-v1";
+const STORAGE_KEY = "cronus-ui-create-presets-v1";
 type CodeTab = "install" | "provider" | "css" | "json";
 type PackageManager = "bun" | "pnpm" | "npm" | "yarn";
 type LockKey = "mode" | "base" | "brand" | "chart" | "heading" | "body" | "icon" | "radius";
@@ -128,10 +128,10 @@ const codeTabs: { id: CodeTab; label: string }[] = [
 ];
 
 const installCommands: Record<PackageManager, string> = {
-  bun: "bun add @kronus-ui/ui @kronus-ui/theme @kronus-ui/tokens",
-  pnpm: "pnpm add @kronus-ui/ui @kronus-ui/theme @kronus-ui/tokens",
-  npm: "npm install @kronus-ui/ui @kronus-ui/theme @kronus-ui/tokens",
-  yarn: "yarn add @kronus-ui/ui @kronus-ui/theme @kronus-ui/tokens",
+  bun: "bun add @cronus-ui/ui @cronus-ui/theme @cronus-ui/tokens",
+  pnpm: "pnpm add @cronus-ui/ui @cronus-ui/theme @cronus-ui/tokens",
+  npm: "npm install @cronus-ui/ui @cronus-ui/theme @cronus-ui/tokens",
+  yarn: "yarn add @cronus-ui/ui @cronus-ui/theme @cronus-ui/tokens",
 };
 
 const defaultLocks: Record<LockKey, boolean> = {
@@ -1277,7 +1277,7 @@ function ComponentSampler({ config }: { config: DesignConfig }) {
         <CardContent className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="sampler-name">Workspace</Label>
-            <Input id="sampler-name" defaultValue="Kronus Growth" />
+            <Input id="sampler-name" defaultValue="Cronus Growth" />
           </div>
           <div
             className={cn("flex items-center justify-between border-t border-border pt-3", LIQUID)}
@@ -1556,7 +1556,7 @@ function PresetExchange({
         <Textarea
           value={presetCode}
           onChange={(event) => onPresetCodeChange(event.target.value)}
-          placeholder="Paste kronus: preset code or JSON"
+          placeholder="Paste cronus: preset code or JSON"
           rows={4}
           className="resize-none font-mono text-xs"
           aria-label="Preset import code"
@@ -1603,7 +1603,7 @@ function CodeDialog({
             Get code
           </DialogTitle>
           <DialogDescription>
-            Install Kronus UI, wire the provider, or copy the exact CSS variables for this preset.
+            Install Cronus UI, wire the provider, or copy the exact CSS variables for this preset.
           </DialogDescription>
         </DialogHeader>
 

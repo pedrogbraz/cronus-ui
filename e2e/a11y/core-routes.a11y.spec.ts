@@ -3,7 +3,7 @@ import { expect, type Page, test } from "@playwright/test";
 import routes from "./routes.generated.json" with { type: "json" };
 
 /**
- * Accessibility coverage (axe-core) for EVERY Kronus UI route.
+ * Accessibility coverage (axe-core) for EVERY Cronus UI route.
  *
  * For each route we run the full axe-core rule set, scoped to WCAG 2.0/2.1
  * A & AA tags, and assert ZERO violations at impact level `serious` or

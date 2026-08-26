@@ -10,54 +10,54 @@ import type { ComposeMeta } from "./plan.js";
 
 /** Chrome sources with the exact marker + brand anchors the composer rewrites. */
 export const NAVBAR_SOURCE = [
-  'import { Badge } from "@kronus-ui/ui";',
+  'import { Badge } from "@cronus-ui/ui";',
   "",
-  "/* @kronus:data navbar-links */",
+  "/* @cronus:data navbar-links */",
   "const NAVBAR_LINKS = [",
   '  { label: "Features", href: "#features" },',
   "];",
-  "/* @kronus:data-end */",
+  "/* @cronus:data-end */",
   "",
   "export function NavbarBlock() {",
-  "  return <span>Kronus</span>;",
+  "  return <span>Cronus</span>;",
   "}",
   "",
 ].join("\n");
 
 export const FOOTER_SOURCE = [
-  'import { Separator } from "@kronus-ui/ui";',
+  'import { Separator } from "@cronus-ui/ui";',
   "",
-  "/* @kronus:data footer-links */",
+  "/* @cronus:data footer-links */",
   "const FOOTER_COLUMNS = [",
   '  { heading: "Product", links: [] },',
   "];",
-  "/* @kronus:data-end */",
+  "/* @cronus:data-end */",
   "",
   "export function FooterBlock() {",
-  "  return <footer>Kronus — © 2026 Kronus.</footer>;",
+  "  return <footer>Cronus — © 2026 Cronus.</footer>;",
   "}",
   "",
 ].join("\n");
 
 /**
  * App-shell chrome source: a client-boundary block that composes {children}
- * beside a sidebar nav (an `@kronus:data app-nav` const the composer rewrites)
+ * beside a sidebar nav (an `@cronus:data app-nav` const the composer rewrites)
  * and a brand wordmark. Mirrors the real `app-shell-chrome` block's anchors.
  */
 export const APP_SHELL_SOURCE = [
   '"use client";',
   "",
-  'import { AppShell, Sidebar } from "@kronus-ui/ui";',
+  'import { AppShell, Sidebar } from "@cronus-ui/ui";',
   'import type { ReactNode } from "react";',
   "",
-  "/* @kronus:data app-nav */",
+  "/* @cronus:data app-nav */",
   "const APP_NAV = [",
   '  { label: "Home", href: "/dashboard" },',
   "];",
-  "/* @kronus:data-end */",
+  "/* @cronus:data-end */",
   "",
   "export function AppShellChromeBlock({ children }: { children: ReactNode }) {",
-  "  return <AppShell sidebar={<Sidebar>Kronus</Sidebar>}><div>{children}</div></AppShell>;",
+  "  return <AppShell sidebar={<Sidebar>Cronus</Sidebar>}><div>{children}</div></AppShell>;",
   "}",
   "",
 ].join("\n");
@@ -104,7 +104,7 @@ export const FIXTURE_BLOCKS: Record<
  * resolve/install can find what a variant plan installs).
  */
 export function fixtureIndex(): RegistryIndex {
-  const dependencies = ["@kronus-ui/ui@0.5.0", "lucide-react@^0.400.0"];
+  const dependencies = ["@cronus-ui/ui@0.5.0", "lucide-react@^0.400.0"];
   const entries: RegistryIndex = [];
   for (const [slug, info] of Object.entries(FIXTURE_BLOCKS)) {
     entries.push({ name: slug, type: "registry:block", dependencies, registryDependencies: [] });
@@ -152,7 +152,7 @@ export function fixtureMeta(): ComposeMeta {
       exportName: info.exportName,
       kind: info.kind as ComposeMeta["blocks"][string]["kind"],
       dataSlots,
-      brandTokens: isChrome ? [{ token: "brand", literal: "Kronus" }] : [],
+      brandTokens: isChrome ? [{ token: "brand", literal: "Cronus" }] : [],
       ...(variants !== undefined ? { variants } : {}),
     };
   }

@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "@kronus-ui/tokens/styles.css";
+@import "@cronus-ui/tokens/styles.css";
 
 /* Scan the UI package source + this app so utilities used in components emit. */
 @source "../../../packages/ui/src/**/*.{ts,tsx}";
@@ -12,22 +12,22 @@
    stays AA-legible in every theme. Dark values are the originals; light values are
    lowered in lightness to clear 4.5:1 on the light inset. */
 :root {
-  --kronus-syntax-keyword: oklch(0.5 0.17 262);
-  --kronus-syntax-fn: oklch(0.5 0.11 215);
-  --kronus-syntax-string: oklch(0.47 0.13 150);
-  --kronus-syntax-attr: oklch(0.5 0.11 70);
-  --kronus-syntax-number: oklch(0.51 0.16 38);
+  --cronus-syntax-keyword: oklch(0.5 0.17 262);
+  --cronus-syntax-fn: oklch(0.5 0.11 215);
+  --cronus-syntax-string: oklch(0.47 0.13 150);
+  --cronus-syntax-attr: oklch(0.5 0.11 70);
+  --cronus-syntax-number: oklch(0.51 0.16 38);
 }
 .dark {
-  --kronus-syntax-keyword: oklch(0.72 0.15 235);
-  --kronus-syntax-fn: oklch(0.78 0.13 200);
-  --kronus-syntax-string: oklch(0.78 0.14 150);
-  --kronus-syntax-attr: oklch(0.8 0.12 90);
-  --kronus-syntax-number: oklch(0.8 0.13 50);
+  --cronus-syntax-keyword: oklch(0.72 0.15 235);
+  --cronus-syntax-fn: oklch(0.78 0.13 200);
+  --cronus-syntax-string: oklch(0.78 0.14 150);
+  --cronus-syntax-attr: oklch(0.8 0.12 90);
+  --cronus-syntax-number: oklch(0.8 0.13 50);
 }
 
-/* The typed `@property --kronus-*` registrations that make token overrides
-   cross-fade now ship in @kronus-ui/tokens (imported above), so every adopter — not
+/* The typed `@property --cronus-*` registrations that make token overrides
+   cross-fade now ship in @cronus-ui/tokens (imported above), so every adopter — not
    just this app — gets smooth token transitions. */
 
 html,
@@ -45,13 +45,13 @@ html {
 
 /* Embed thumbs (`/preview/t/[slug]?embed=1`) hide the root skip link so the
    scaled iframe is only the composed stage. */
-html[data-kronus-preview-embed] > body > a[href="#main-content"] {
+html[data-cronus-preview-embed] > body > a[href="#main-content"] {
   display: none !important;
 }
 
 body {
-  background-color: var(--kronus-surface-base);
-  color: var(--kronus-fg);
+  background-color: var(--cronus-surface-base);
+  color: var(--cronus-fg);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -62,13 +62,13 @@ body {
    solid-primary fallback for engines without color-mix; modern engines get the
    low-alpha tint and keep the element's own text color. */
 ::selection {
-  background-color: var(--kronus-primary);
-  color: var(--kronus-primary-foreground);
+  background-color: var(--cronus-primary);
+  color: var(--cronus-primary-foreground);
 }
 
 @supports (background-color: color-mix(in oklab, red 24%, transparent)) {
   ::selection {
-    background-color: color-mix(in oklab, var(--kronus-primary) 24%, transparent);
+    background-color: color-mix(in oklab, var(--cronus-primary) 24%, transparent);
     color: currentcolor;
   }
 }
@@ -90,7 +90,7 @@ body {
   }
 
   :focus-visible {
-    outline: 2px solid var(--kronus-ring);
+    outline: 2px solid var(--cronus-ring);
     outline-offset: 2px;
   }
 }
@@ -98,7 +98,7 @@ body {
 /* Thin, subtle gray scrollbars (HeroUI-style) across the app. */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--kronus-border-strong) transparent;
+  scrollbar-color: var(--cronus-border-strong) transparent;
 }
 
 *::-webkit-scrollbar {
@@ -111,19 +111,19 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: var(--kronus-border-strong);
+  background-color: var(--cronus-border-strong);
   border-radius: 9999px;
   border: 2px solid transparent;
   background-clip: content-box;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background-color: var(--kronus-fg-muted);
+  background-color: var(--cronus-fg-muted);
   background-clip: content-box;
 }
 
 /* Homepage product-stage float — one curve, paused under reduced motion. */
-@keyframes kronus-float {
+@keyframes cronus-float {
   0%,
   100% {
     transform: translateY(0);
@@ -134,25 +134,25 @@ body {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .kronus-float {
-    animation: kronus-float 6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  .cronus-float {
+    animation: cronus-float 6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
   }
-  .kronus-float-delay {
+  .cronus-float-delay {
     animation-delay: -3s;
   }
 
-  .kronus-rise {
-    animation: kronus-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  .cronus-rise {
+    animation: cronus-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
-  .kronus-rise-2 {
+  .cronus-rise-2 {
     animation-delay: 90ms;
   }
-  .kronus-rise-3 {
+  .cronus-rise-3 {
     animation-delay: 160ms;
   }
 }
 
-@keyframes kronus-rise {
+@keyframes cronus-rise {
   from {
     opacity: 0;
     transform: translateY(14px);
@@ -165,7 +165,7 @@ body {
 
 /* Stats section — a comet of token hues traveling the grid (x.ai-style). Linear
    on purpose: a beam crossing space is constant velocity, not a UI ease. */
-@keyframes kronus-travel {
+@keyframes cronus-travel {
   from {
     transform: translateX(-100%);
   }
@@ -175,14 +175,14 @@ body {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .kronus-travel {
-    animation: kronus-travel 3.2s linear infinite;
+  .cronus-travel {
+    animation: cronus-travel 3.2s linear infinite;
   }
 }
 
 /* Hero rotator — faint hairline with a tight rainbow band sweeping across
    (x.ai `hero-shimmer`: rest is nearly invisible, color is the visible stroke). */
-@keyframes kronus-word-underline {
+@keyframes cronus-word-underline {
   0% {
     background-position: 150% center;
   }
@@ -191,25 +191,25 @@ body {
   }
 }
 
-.kronus-word-underline {
+.cronus-word-underline {
   background-image: linear-gradient(
     90deg,
-    var(--kronus-border-strong) 0%,
-    var(--kronus-border-strong) 35%,
-    var(--kronus-chart-1) 40%,
-    var(--kronus-chart-3) 45%,
-    var(--kronus-warning) 52%,
-    var(--kronus-chart-5) 58%,
-    var(--kronus-border-strong) 65%,
-    var(--kronus-border-strong) 100%
+    var(--cronus-border-strong) 0%,
+    var(--cronus-border-strong) 35%,
+    var(--cronus-chart-1) 40%,
+    var(--cronus-chart-3) 45%,
+    var(--cronus-warning) 52%,
+    var(--cronus-chart-5) 58%,
+    var(--cronus-border-strong) 65%,
+    var(--cronus-border-strong) 100%
   );
   background-size: 400% 100%;
   background-position: 150% center;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .kronus-word-underline {
-    animation: kronus-word-underline 3s linear infinite;
+  .cronus-word-underline {
+    animation: cronus-word-underline 3s linear infinite;
   }
 }
 

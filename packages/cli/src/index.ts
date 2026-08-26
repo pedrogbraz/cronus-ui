@@ -14,16 +14,16 @@ import { CLI_VERSION } from "./config.js";
 const program = new Command();
 
 program
-  .name("kronus-ui")
-  .description("Add Kronus UI components to your project, shadcn-style.")
+  .name("cronus-ui")
+  .description("Add Cronus UI components to your project, shadcn-style.")
   .version(CLI_VERSION);
 
 program
   .command("init")
-  .description("Set up kronus-ui.json, the cn() helper, and base dependencies.")
+  .description("Set up cronus-ui.json, the cn() helper, and base dependencies.")
   .option("-c, --cwd <dir>", "working directory", process.cwd())
   .option("-r, --registry <source>", "registry URL or local directory")
-  .option("-y, --yes", "overwrite an existing kronus-ui.json")
+  .option("-y, --yes", "overwrite an existing cronus-ui.json")
   .option("--skip-install", "do not install base dependencies")
   .action((opts) =>
     init({
@@ -132,7 +132,7 @@ program
 program
   .command("diff")
   .description(
-    "Show which installed components have drifted from the registry (run `kronus-ui upgrade` to merge updates without losing local edits).",
+    "Show which installed components have drifted from the registry (run `cronus-ui upgrade` to merge updates without losing local edits).",
   )
   .argument("[components...]", "component names (default: all)")
   .option("-c, --cwd <dir>", "working directory", process.cwd())
@@ -147,7 +147,7 @@ program
   .argument("[components...]", "component names (or use --all)")
   .option("-c, --cwd <dir>", "working directory", process.cwd())
   .option("-r, --registry <source>", "registry URL or local directory")
-  .option("-a, --all", "upgrade every component recorded in kronus-ui.json")
+  .option("-a, --all", "upgrade every component recorded in cronus-ui.json")
   .option("--dry-run", "print the per-file plan (fast-forward / merge / conflict), write nothing")
   .option("-y, --yes", "assume yes: write conflict markers and confirmed overwrites without asking")
   .option(
@@ -162,22 +162,22 @@ program
     "after",
     `
 How it works:
-  Each component's installed release is recorded in kronus-ui.json ("installed").
+  Each component's installed release is recorded in cronus-ui.json ("installed").
   upgrade 3-way merges base (that release), local (your file) and upstream (the
   current release) with \`git merge-file --diff3\`, so upstream fixes land WITHOUT
   losing your edits. Clean merges are written; conflicts are written with markers
   only if you confirm (or --yes). Unresolved files get a ready-to-paste coding
-  agent prompt in KRONUS-UPGRADE.md.
+  agent prompt in CRONUS-UPGRADE.md.
 
   \`upgrade --all\` also 3-way-merges composed pages and layouts against their
-  \`.kronus-ui/base/<template>/\` snapshot (same decision matrix). Named
+  \`.cronus-ui/base/<template>/\` snapshot (same decision matrix). Named
   \`upgrade button\` does not touch composed pages. Custom --manifest apps must
   re-supply --manifest.
 
 Examples:
-  kronus-ui upgrade --all --dry-run    preview the plan for everything installed
-  kronus-ui upgrade button card        upgrade two components
-  kronus-ui upgrade --all --yes        upgrade all, accept conflict markers`,
+  cronus-ui upgrade --all --dry-run    preview the plan for everything installed
+  cronus-ui upgrade button card        upgrade two components
+  cronus-ui upgrade --all --yes        upgrade all, accept conflict markers`,
   )
   .action((components, opts) =>
     upgrade(components, {
@@ -191,7 +191,7 @@ Examples:
     }),
   );
 
-const theme = program.command("theme").description("Manage the app's Kronus UI theme preset.");
+const theme = program.command("theme").description("Manage the app's Cronus UI theme preset.");
 theme
   .command("set")
   .description("Switch the theme preset (and optionally the color mode).")

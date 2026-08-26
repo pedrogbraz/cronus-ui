@@ -1,9 +1,9 @@
 /**
- * Kronus design tokens — single source of truth.
+ * Cronus design tokens — single source of truth.
  *
  * These TS objects mirror the CSS variables defined in `styles/tokens.css`.
  * They are consumed by the ThemeBuilder (to generate override snippets) and by
- * `@kronus-ui/theme` (to apply runtime overrides). Components NEVER read these
+ * `@cronus-ui/theme` (to apply runtime overrides). Components NEVER read these
  * directly — they use semantic Tailwind utilities that resolve to the CSS vars.
  *
  * Values are cherry-picked from the premium Aurora language (cooud-workforce /
@@ -455,7 +455,7 @@ export const defaultMode: Mode = "dark";
 
 /**
  * Material language — orthogonal to {@link ThemeName} (palette) and {@link Mode}.
- * Applied via `data-kronus-look` on any subtree. Docs chrome stays `default`.
+ * Applied via `data-cronus-look` on any subtree. Docs chrome stays `default`.
  */
 export type LookName = "default" | "brutalist" | "glass" | "mauve";
 export const lookNames: LookName[] = ["default", "brutalist", "glass", "mauve"];
@@ -469,51 +469,51 @@ export const lookLabels: Record<LookName, string> = {
 
 /** Maps a ThemeTokens key to its runtime CSS custom property name. */
 export const cssVarMap: Record<keyof ThemeTokens, string> = {
-  primary: "--kronus-primary",
-  primaryForeground: "--kronus-primary-foreground",
-  primaryText: "--kronus-primary-text",
-  accent: "--kronus-accent",
-  accentForeground: "--kronus-accent-foreground",
-  surfaceBase: "--kronus-surface-base",
-  surfaceInset: "--kronus-surface-inset",
-  surfaceRaised: "--kronus-surface-raised",
-  surfaceOverlay: "--kronus-surface-overlay",
-  surfaceElevated: "--kronus-surface-elevated",
-  surfaceFloating: "--kronus-surface-floating",
-  fg: "--kronus-fg",
-  fgSecondary: "--kronus-fg-secondary",
-  fgTertiary: "--kronus-fg-tertiary",
-  fgMuted: "--kronus-fg-muted",
-  fgInverse: "--kronus-fg-inverse",
-  border: "--kronus-border",
-  borderStrong: "--kronus-border-strong",
-  borderSoft: "--kronus-border-soft",
-  ring: "--kronus-ring",
-  success: "--kronus-success",
-  successText: "--kronus-success-text",
-  warning: "--kronus-warning",
-  warningText: "--kronus-warning-text",
-  error: "--kronus-error",
-  errorText: "--kronus-error-text",
-  info: "--kronus-info",
-  infoText: "--kronus-info-text",
-  radius: "--kronus-radius",
-  fontSans: "--kronus-font-sans",
-  fontDisplay: "--kronus-font-display",
-  fontMono: "--kronus-font-mono",
-  chart1: "--kronus-chart-1",
-  chart2: "--kronus-chart-2",
-  chart3: "--kronus-chart-3",
-  chart4: "--kronus-chart-4",
-  chart5: "--kronus-chart-5",
-  shadowXs: "--kronus-shadow-xs",
-  shadowSm: "--kronus-shadow-sm",
-  shadowMd: "--kronus-shadow-md",
-  shadowLg: "--kronus-shadow-lg",
-  shadowGlow: "--kronus-shadow-glow",
+  primary: "--cronus-primary",
+  primaryForeground: "--cronus-primary-foreground",
+  primaryText: "--cronus-primary-text",
+  accent: "--cronus-accent",
+  accentForeground: "--cronus-accent-foreground",
+  surfaceBase: "--cronus-surface-base",
+  surfaceInset: "--cronus-surface-inset",
+  surfaceRaised: "--cronus-surface-raised",
+  surfaceOverlay: "--cronus-surface-overlay",
+  surfaceElevated: "--cronus-surface-elevated",
+  surfaceFloating: "--cronus-surface-floating",
+  fg: "--cronus-fg",
+  fgSecondary: "--cronus-fg-secondary",
+  fgTertiary: "--cronus-fg-tertiary",
+  fgMuted: "--cronus-fg-muted",
+  fgInverse: "--cronus-fg-inverse",
+  border: "--cronus-border",
+  borderStrong: "--cronus-border-strong",
+  borderSoft: "--cronus-border-soft",
+  ring: "--cronus-ring",
+  success: "--cronus-success",
+  successText: "--cronus-success-text",
+  warning: "--cronus-warning",
+  warningText: "--cronus-warning-text",
+  error: "--cronus-error",
+  errorText: "--cronus-error-text",
+  info: "--cronus-info",
+  infoText: "--cronus-info-text",
+  radius: "--cronus-radius",
+  fontSans: "--cronus-font-sans",
+  fontDisplay: "--cronus-font-display",
+  fontMono: "--cronus-font-mono",
+  chart1: "--cronus-chart-1",
+  chart2: "--cronus-chart-2",
+  chart3: "--cronus-chart-3",
+  chart4: "--cronus-chart-4",
+  chart5: "--cronus-chart-5",
+  shadowXs: "--cronus-shadow-xs",
+  shadowSm: "--cronus-shadow-sm",
+  shadowMd: "--cronus-shadow-md",
+  shadowLg: "--cronus-shadow-lg",
+  shadowGlow: "--cronus-shadow-glow",
 };
 
-/** Convert a (partial) token set into a `{ "--kronus-*": value }` style object. */
+/** Convert a (partial) token set into a `{ "--cronus-*": value }` style object. */
 export function tokensToCssVars(tokens: ThemeOverrides): Record<string, string> {
   const out: Record<string, string> = {};
   for (const key of Object.keys(tokens) as (keyof ThemeTokens)[]) {

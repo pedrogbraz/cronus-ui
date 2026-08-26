@@ -1,10 +1,10 @@
 import type { RegistryClient, RegistryIndexEntry, RegistryItem, RegistryMeta } from "./registry.js";
 
 /** The CLI invoked to install registry items into a consumer project. */
-export const ADD_COMMAND = "npx kronus-ui add";
+export const ADD_COMMAND = "npx cronus-ui add";
 
 /**
- * Build the `npx kronus-ui add <names...>` command for one or more items.
+ * Build the `npx cronus-ui add <names...>` command for one or more items.
  * Names are emitted in the given order, de-duplicated, preserving the first
  * occurrence. Throws on an empty list so callers surface a clear error.
  */

@@ -1,11 +1,11 @@
 "use client";
 
-import { type ThemeName, themeNames } from "@kronus-ui/tokens";
-import { Badge } from "@kronus-ui/ui/badge";
-import { Button } from "@kronus-ui/ui/button";
-import { cn } from "@kronus-ui/ui/cn";
-import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@kronus-ui/ui/input-otp";
-import { Switch } from "@kronus-ui/ui/switch";
+import { type ThemeName, themeNames } from "@cronus-ui/tokens";
+import { Badge } from "@cronus-ui/ui/badge";
+import { Button } from "@cronus-ui/ui/button";
+import { cn } from "@cronus-ui/ui/cn";
+import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@cronus-ui/ui/input-otp";
+import { Switch } from "@cronus-ui/ui/switch";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { type ReactNode, useState } from "react";
@@ -48,10 +48,10 @@ function ComposeCard() {
   return (
     <CardFrame label="Compose" href="/templates/saas">
       <div className="flex h-full flex-col justify-center gap-3 font-mono text-[13px] leading-6">
-        <p className="text-fg-tertiary">$ bunx create-kronus-app my-app --template saas</p>
+        <p className="text-fg-tertiary">$ bunx create-cronus-app my-app --template saas</p>
         <p className="text-success-strong">✓ blocks · dashboard, billing, team</p>
         <p className="text-success-strong">✓ theme · aurora · dark</p>
-        <p className="text-fg-secondary">✓ kronus-ui.json · upgrade path on</p>
+        <p className="text-fg-secondary">✓ cronus-ui.json · upgrade path on</p>
       </div>
     </CardFrame>
   );
@@ -63,8 +63,8 @@ function ThemeCard() {
   return (
     <CardFrame label="Theme" href="/themes">
       <div
-        data-kronus-theme={theme}
-        data-kronus-mode="dark"
+        data-cronus-theme={theme}
+        data-cronus-mode="dark"
         className="dark flex h-full flex-col justify-between gap-4"
       >
         <div className="flex flex-wrap gap-2">
@@ -144,7 +144,7 @@ function CatalogCard() {
 /** Three product surfaces under the hero — compose, theme, catalog. */
 export function HeroProducts() {
   return (
-    <div className="kronus-rise kronus-rise-3 mx-auto grid max-w-7xl gap-4 px-4 pb-16 sm:px-6 lg:grid-cols-3 lg:px-8 lg:pb-24">
+    <div className="cronus-rise cronus-rise-3 mx-auto grid max-w-7xl gap-4 px-4 pb-16 sm:px-6 lg:grid-cols-3 lg:px-8 lg:pb-24">
       <ComposeCard />
       <ThemeCard />
       <CatalogCard />

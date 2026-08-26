@@ -17,7 +17,7 @@ function templatesRoot(): string {
   const found = candidates.find((p) => existsSync(join(p, "AGENTS.base.md")));
   if (!found) {
     throw new Error(
-      `Could not locate @kronus-ui/ai-kit templates (looked in: ${candidates.join(", ")}).`,
+      `Could not locate @cronus-ui/ai-kit templates (looked in: ${candidates.join(", ")}).`,
     );
   }
   return found;
@@ -37,7 +37,7 @@ function mcpReadme(): string {
   return readFileSync(found, "utf8");
 }
 
-// Digest across Copilot / Gemini / Windsurf / CLAUDE.md / 10-kronus-ui.mdc
+// Digest across Copilot / Gemini / Windsurf / CLAUDE.md / 10-cronus-ui.mdc
 // (`--template saas`, `add-page`, `upgrade --all`, never `npx shadcn init`)
 // lives in ai-kit.test.ts — this file maps prompts 1–20 onto the skills.
 describe("product-loop kit coverage (not a live agent score)", () => {
@@ -45,12 +45,12 @@ describe("product-loop kit coverage (not a live agent score)", () => {
   const compose = readFileSync(join(root, "claude", "skills", "compose", "SKILL.md"), "utf8");
   const uiAdd = readFileSync(join(root, "claude", "skills", "ui-add", "SKILL.md"), "utf8");
   const theme = readFileSync(join(root, "claude", "skills", "theme", "SKILL.md"), "utf8");
-  const cursor = readFileSync(join(root, "cursor", "rules", "10-kronus-ui.mdc"), "utf8");
+  const cursor = readFileSync(join(root, "cursor", "rules", "10-cronus-ui.mdc"), "utf8");
   const mcp = mcpReadme();
 
   describe("claude/skills/compose/SKILL.md", () => {
-    it("#1 scaffold SaaS: create-kronus-app + --template saas", () => {
-      expect(compose).toContain("create-kronus-app <name> --template saas");
+    it("#1 scaffold SaaS: create-cronus-app + --template saas", () => {
+      expect(compose).toContain("create-cronus-app <name> --template saas");
     });
 
     it("#2 store template: --template store", () => {
@@ -65,13 +65,13 @@ describe("product-loop kit coverage (not a live agent score)", () => {
       expect(compose).toContain("pass `--template saas`");
       expect(compose).toContain("without `--template`");
       expect(compose).toContain("`-y` must go **together** with `--template saas`");
-      expect(compose).toContain("create-kronus-app <name> --template saas -y");
+      expect(compose).toContain("create-cronus-app <name> --template saas -y");
     });
 
-    it("#5 --no-install on create-kronus-app; --skip-install on compose/add-page; do not mix", () => {
-      expect(compose).toContain("create-kronus-app <name> --template saas --no-install");
-      expect(compose).toContain("`--no-install` is a **create-kronus-app** flag");
-      expect(compose).toContain("`kronus-ui compose` / `add` / `add-page` use `--skip-install`");
+    it("#5 --no-install on create-cronus-app; --skip-install on compose/add-page; do not mix", () => {
+      expect(compose).toContain("create-cronus-app <name> --template saas --no-install");
+      expect(compose).toContain("`--no-install` is a **create-cronus-app** flag");
+      expect(compose).toContain("`cronus-ui compose` / `add` / `add-page` use `--skip-install`");
       expect(compose).toContain("Do not mix them.");
     });
 
@@ -102,14 +102,14 @@ describe("product-loop kit coverage (not a live agent score)", () => {
       expect(compose).toContain("bg-surface-*");
     });
 
-    it("#15/#17 single primitive (dialog, button) defers to ui-add / kronus-ui add", () => {
+    it("#15/#17 single primitive (dialog, button) defers to ui-add / cronus-ui add", () => {
       expect(compose).toContain("`button`");
       expect(compose).toContain("`dialog`");
       expect(compose).toContain("ui-add");
-      expect(compose).toContain("npx kronus-ui add <slug>");
+      expect(compose).toContain("npx cronus-ui add <slug>");
     });
 
-    it("#18 hand-roll from Kronus primitives only if the registry has no match; no palette", () => {
+    it("#18 hand-roll from Cronus primitives only if the registry has no match; no palette", () => {
       expect(compose).toContain("Hand-roll");
       expect(compose).toContain("no matching component or block");
       expect(compose).toContain("semantic tokens");
@@ -123,8 +123,8 @@ describe("product-loop kit coverage (not a live agent score)", () => {
       expect(compose).toContain('to "upgrade" an existing app');
     });
 
-    it("#20 kronus-ui ai; never shadcn components.json / shadcn init", () => {
-      expect(compose.includes("npx kronus-ui ai") || compose.includes("kronus-ui ai")).toBe(true);
+    it("#20 cronus-ui ai; never shadcn components.json / shadcn init", () => {
+      expect(compose.includes("npx cronus-ui ai") || compose.includes("cronus-ui ai")).toBe(true);
       expect(compose).toContain("Never write a shadcn `components.json` or run `shadcn init`");
     });
   });
@@ -150,8 +150,8 @@ describe("product-loop kit coverage (not a live agent score)", () => {
       expect(uiAdd).toContain("setOverrides");
     });
 
-    it("#15 add dialog via kronus-ui add / install_component", () => {
-      expect(uiAdd).toContain("npx kronus-ui add");
+    it("#15 add dialog via cronus-ui add / install_component", () => {
+      expect(uiAdd).toContain("npx cronus-ui add");
       expect(uiAdd).toContain("`dialog`");
       expect(uiAdd).toContain("install_component");
     });
@@ -160,16 +160,16 @@ describe("product-loop kit coverage (not a live agent score)", () => {
       expect(uiAdd).toContain("data-table");
       expect(uiAdd).toContain("demo-saas");
       expect(uiAdd).toContain("INVOICES");
-      expect(uiAdd).toContain("npx kronus-ui add data-table demo-saas");
+      expect(uiAdd).toContain("npx cronus-ui add data-table demo-saas");
     });
 
     it("#17 add button (ui-add covers primitives)", () => {
       expect(uiAdd).toContain("`button`");
-      expect(uiAdd).toContain("npx kronus-ui add <slug>");
+      expect(uiAdd).toContain("npx cronus-ui add <slug>");
     });
 
-    it("#18 hand-roll from Kronus primitives + tokens; never a parallel kit", () => {
-      expect(uiAdd).toContain("Kronus UI primitives");
+    it("#18 hand-roll from Cronus primitives + tokens; never a parallel kit", () => {
+      expect(uiAdd).toContain("Cronus UI primitives");
       expect(uiAdd).toContain("same tokens");
       expect(uiAdd).toContain("shadcn add");
     });
@@ -207,7 +207,7 @@ describe("product-loop kit coverage (not a live agent score)", () => {
     });
   });
 
-  describe("cursor/rules/10-kronus-ui.mdc", () => {
+  describe("cursor/rules/10-cronus-ui.mdc", () => {
     it("#14 refuse zinc-*; offer bg-surface-* / setOverrides", () => {
       expect(cursor).toContain("zinc-*");
       expect(cursor).toContain("bg-surface-*");
@@ -216,8 +216,8 @@ describe("product-loop kit coverage (not a live agent score)", () => {
   });
 
   describe("packages/mcp/README.md write tools", () => {
-    it("#1 greenfield remains create-kronus-app --template saas (MCP does not scaffold)", () => {
-      expect(mcp).toContain("create-kronus-app");
+    it("#1 greenfield remains create-cronus-app --template saas (MCP does not scaffold)", () => {
+      expect(mcp).toContain("create-cronus-app");
       expect(mcp).toContain("--template saas");
       expect(mcp).toMatch(/does \*\*not\*\* scaffold a new app/);
     });

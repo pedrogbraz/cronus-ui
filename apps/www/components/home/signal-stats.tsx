@@ -39,7 +39,7 @@ export function SignalStats({ displayClassName }: { displayClassName?: string })
           className="absolute inset-0 opacity-[0.28]"
           style={{
             backgroundImage:
-              "linear-gradient(var(--kronus-border) 1px, transparent 1px), linear-gradient(90deg, var(--kronus-border) 1px, transparent 1px)",
+              "linear-gradient(var(--cronus-border) 1px, transparent 1px), linear-gradient(90deg, var(--cronus-border) 1px, transparent 1px)",
             backgroundSize: "5.5rem 5.5rem",
           }}
         />
@@ -51,13 +51,13 @@ export function SignalStats({ displayClassName }: { displayClassName?: string })
             style={{ top: beam.top, height: 1 }}
           >
             <div
-              className="kronus-travel h-full w-2/5"
+              className="cronus-travel h-full w-2/5"
               style={{
                 animationDelay: beam.delay,
                 animationDuration: beam.duration,
                 background:
-                  "linear-gradient(90deg, transparent 0%, var(--kronus-chart-1) 18%, var(--kronus-warning) 50%, var(--kronus-chart-3) 82%, transparent 100%)",
-                boxShadow: "0 0 12px var(--kronus-chart-1)",
+                  "linear-gradient(90deg, transparent 0%, var(--cronus-chart-1) 18%, var(--cronus-warning) 50%, var(--cronus-chart-3) 82%, transparent 100%)",
+                boxShadow: "0 0 12px var(--cronus-chart-1)",
               }}
             />
           </div>

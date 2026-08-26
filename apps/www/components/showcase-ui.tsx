@@ -1,8 +1,8 @@
-import { cn } from "@kronus-ui/ui";
+import { cn } from "@cronus-ui/ui";
 import type { ReactNode } from "react";
 
 /**
- * Shared showcase primitives for the Kronus UI component galleries.
+ * Shared showcase primitives for the Cronus UI component galleries.
  *
  * These mirror the heroui.com component-docs aesthetic: refined section
  * headers with an eyebrow line, generous vertical rhythm, and clean preview
@@ -115,7 +115,7 @@ export function PreviewFrame({ label, children, className }: PreviewFrameProps) 
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-0 bg-[radial-gradient(var(--kronus-border)_1px,transparent_1px)] opacity-50 [background-size:16px_16px]"
+        className="absolute inset-0 -z-0 bg-[radial-gradient(var(--cronus-border)_1px,transparent_1px)] opacity-50 [background-size:16px_16px]"
       />
       {label ? (
         <span className="absolute left-3 top-3 rounded-md bg-surface-raised/80 px-2 py-0.5 text-[0.65rem] font-medium uppercase tracking-wider text-fg-tertiary backdrop-blur">

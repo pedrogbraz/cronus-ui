@@ -18,7 +18,7 @@ const INDEX: RegistryIndex = [
   {
     name: "pricing",
     type: "registry:block",
-    dependencies: ["@kronus-ui/ui@0.2.0"],
+    dependencies: ["@cronus-ui/ui@0.2.0"],
     registryDependencies: [],
   },
 ];
@@ -67,7 +67,7 @@ function body(result: Awaited<ReturnType<Client["callTool"]>>): Record<string, u
 }
 
 beforeAll(async () => {
-  scratch = mkdtempSync(join(tmpdir(), "kronus-ui-mcp-server-"));
+  scratch = mkdtempSync(join(tmpdir(), "cronus-ui-mcp-server-"));
   writeFileSync(join(scratch, "echo-cli.mjs"), ECHO_CLI);
   project = join(scratch, "project");
   mkdirSync(project);
@@ -172,7 +172,7 @@ describe("MCP server over an in-memory transport", () => {
   it("runs apply_theme with dryRun through the CLI seam", async () => {
     const result = await client.callTool({
       name: "apply_theme",
-      arguments: { source: "https://kronus-ui.dev/studio?c=abc", dryRun: true },
+      arguments: { source: "https://cronus-ui.dev/studio?c=abc", dryRun: true },
     });
     expect(result.isError).toBeFalsy();
     const outcome = body(result) as {
@@ -187,7 +187,7 @@ describe("MCP server over an in-memory transport", () => {
       "Would write this block to app/globals.css (replacing any previous one):",
     ]);
     const echo = JSON.parse(outcome.stdout.split("\n")[0] ?? "") as { argv: string[] };
-    expect(echo.argv).toEqual(["theme", "add", "https://kronus-ui.dev/studio?c=abc", "--dry-run"]);
+    expect(echo.argv).toEqual(["theme", "add", "https://cronus-ui.dev/studio?c=abc", "--dry-run"]);
   });
 
   it("runs compose_app through the CLI seam with -y by default", async () => {

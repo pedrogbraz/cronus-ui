@@ -12,9 +12,9 @@ import {
 } from "../../../../components/docs/documentation";
 
 export const metadata = {
-  title: "Accessibility conformance — Kronus UI",
+  title: "Accessibility conformance — Cronus UI",
   description:
-    "An honest accessibility conformance statement for Kronus UI: the target standard, how it is enforced, and what is not yet covered.",
+    "An honest accessibility conformance statement for Cronus UI: the target standard, how it is enforced, and what is not yet covered.",
 };
 
 // Kept deliberately factual — every enforcement layer here maps to a real
@@ -34,7 +34,7 @@ const enforcementLayers = [
   {
     title: "Unit axe layer",
     description:
-      "Component tests assert zero axe violations with vitest-axe through @kronus-ui/ui/testing, so regressions are caught before a route exists.",
+      "Component tests assert zero axe violations with vitest-axe through @cronus-ui/ui/testing, so regressions are caught before a route exists.",
   },
   {
     title: "Reduced motion & RTL",
@@ -81,14 +81,14 @@ const blocking = results.violations.filter(
 expect(blocking).toEqual([]);`;
 
 const adopterTestExample = `// your-component.test.tsx — the same axe gate we run, in your app.
-import { expectNoA11yViolations, renderWithKronus } from "@kronus-ui/ui/testing";
+import { expectNoA11yViolations, renderWithCronus } from "@cronus-ui/ui/testing";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { it } from "vitest";
 
 it("stays accessible after interaction", async () => {
   const user = userEvent.setup();
-  const { baseElement } = renderWithKronus(<YourComponent />);
+  const { baseElement } = renderWithCronus(<YourComponent />);
 
   await user.click(screen.getByRole("button", { name: "Open" }));
   await expectNoA11yViolations(baseElement); // fails with the violations
@@ -100,12 +100,12 @@ export default function AccessibilityConformancePage() {
       <DocsHeader
         eyebrow="Accessibility"
         title="Accessibility conformance statement"
-        description="An honest account of what Kronus UI targets, how that target is enforced, and where the gaps are. It is a self-assessment (ACR-style), not a certification."
+        description="An honest account of what Cronus UI targets, how that target is enforced, and where the gaps are. It is a self-assessment (ACR-style), not a certification."
       />
 
       <DocsSection
         title="Target standard"
-        description="Kronus UI is built to meet WCAG 2.2 Level AA."
+        description="Cronus UI is built to meet WCAG 2.2 Level AA."
       >
         <p className="text-fg-secondary">
           The design goal for every component is{" "}
@@ -114,7 +114,7 @@ export default function AccessibilityConformancePage() {
           </strong>
           . This statement describes our conformance <em>effort</em> and the checks behind it. It is
           a self-assessment produced by the maintainers — not a formal audit, and not a
-          certification. Kronus UI is a component library, so the final accessibility of a shipped
+          certification. Cronus UI is a component library, so the final accessibility of a shipped
           product also depends on how you compose these components, your content, and your app.
         </p>
         <DocCallout title="Self-assessment, not a certificate">
@@ -172,7 +172,7 @@ export default function AccessibilityConformancePage() {
       </DocsSection>
 
       <DocsSection
-        title="For teams adopting Kronus UI"
+        title="For teams adopting Cronus UI"
         description="The accessibility you get depends on how you use the components — here is how to keep it."
       >
         <p className="text-fg-secondary">
@@ -180,7 +180,7 @@ export default function AccessibilityConformancePage() {
           <strong className="font-medium text-fg">same</strong> component behavior — the
           accessibility work travels with the code, not a runtime service. To keep it as you compose
           and extend, run the same axe gate we do with{" "}
-          <InlineCode>@kronus-ui/ui/testing</InlineCode>
+          <InlineCode>@cronus-ui/ui/testing</InlineCode>
           &rsquo;s <InlineCode>expectNoA11yViolations</InlineCode>, and pair it with a keyboard and
           screen-reader pass on your own flows:
         </p>

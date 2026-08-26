@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * package-smoke.mjs — publish-time smoke runner for the Kronus UI monorepo.
+ * package-smoke.mjs — publish-time smoke runner for the Cronus UI monorepo.
  *
  * Goal: prove that the *published* artifacts (not the workspace symlinks) are
  * structurally sound and that an external consumer who installs only the tarballs
@@ -9,16 +9,16 @@
  * Two modes:
  *
  *   LIGHT (default) — `node scripts/package-smoke.mjs`
- *     For every publishable package (@kronus-ui/tokens, @kronus-ui/theme,
- *     @kronus-ui/ui, @kronus-ui/stack, @kronus-ui/ai-kit, kronus-ui,
- *     create-kronus-app, create-kronus-stack, kronus-ui-mcp) run
+ *     For every publishable package (@cronus-ui/tokens, @cronus-ui/theme,
+ *     @cronus-ui/ui, @cronus-ui/stack, @cronus-ui/ai-kit, cronus-ui,
+ *     create-cronus-app, create-cronus-stack, cronus-ui-mcp) run
  *     `npm pack --dry-run --json` and validate the tarball:
  *       - it contains every file referenced by package.json `main`/`types`/`bin`
  *         and each `exports` target,
  *       - it ships the expected top-level dirs (dist, styles, preset, …),
  *       - it does NOT leak junk (node_modules, src maps where unwanted, tsbuildinfo).
  *     It also packs each package with the real release packer (`bun pm pack`) and
- *     asserts any internal Kronus dependencies are pinned to the package version.
+ *     asserts any internal Cronus dependencies are pinned to the package version.
  *     Then, for every package, it dynamically `import()`s the built JS entry
  *     (the `exports["."]` / `main` JS file) in a short, offline Node subprocess
  *     and fails if the module THROWS on load — catching a `dist/index.js` whose
@@ -33,8 +33,8 @@
  *     the compiled CSS contains the component utility classes (bg-primary,
  *     rounded-lg, bg-surface-raised, …). It also installs all publishable
  *     tarballs into a clean temp project and runs the CLI/generator/MCP bins,
- *     including the default Kronus UI scaffold and a non-Kronus UI neutral
- *     scaffold so unsupported UI choices cannot silently import missing Kronus
+ *     including the default Cronus UI scaffold and a non-Cronus UI neutral
+ *     scaffold so unsupported UI choices cannot silently import missing Cronus
  *     packages.
  *     This is the real proof-of-style and proof-of-bin-execution.
  *     Heavier and needs the npm registry reachable for peer deps, so it's behind
@@ -127,17 +127,17 @@ function run(cmd, args, opts = {}) {
  * package matrix
  * ------------------------------------------------------------------ */
 const PACKAGES = [
-  { dir: "packages/tokens", name: "@kronus-ui/tokens" },
-  { dir: "packages/theme", name: "@kronus-ui/theme" },
-  { dir: "packages/ui", name: "@kronus-ui/ui" },
-  { dir: "packages/stack", name: "@kronus-ui/stack" },
-  { dir: "packages/ai-kit", name: "@kronus-ui/ai-kit" },
-  { dir: "packages/cli", name: "kronus-ui" },
-  { dir: "packages/create-kronus-app", name: "create-kronus-app" },
-  { dir: "packages/create-kronus-stack", name: "create-kronus-stack" },
-  { dir: "packages/mcp", name: "kronus-ui-mcp" },
+  { dir: "packages/tokens", name: "@cronus-ui/tokens" },
+  { dir: "packages/theme", name: "@cronus-ui/theme" },
+  { dir: "packages/ui", name: "@cronus-ui/ui" },
+  { dir: "packages/stack", name: "@cronus-ui/stack" },
+  { dir: "packages/ai-kit", name: "@cronus-ui/ai-kit" },
+  { dir: "packages/cli", name: "cronus-ui" },
+  { dir: "packages/create-cronus-app", name: "create-cronus-app" },
+  { dir: "packages/create-cronus-stack", name: "create-cronus-stack" },
+  { dir: "packages/mcp", name: "cronus-ui-mcp" },
 ];
-const FIXTURE_PACKAGE_NAMES = ["@kronus-ui/ui", "@kronus-ui/tokens", "@kronus-ui/theme"];
+const FIXTURE_PACKAGE_NAMES = ["@cronus-ui/ui", "@cronus-ui/tokens", "@cronus-ui/theme"];
 const PUBLISHABLE_PACKAGE_NAMES = new Set(PACKAGES.map((pkg) => pkg.name));
 
 // Utility classes that MUST appear in a consumer's compiled CSS once the
@@ -354,7 +354,7 @@ function importCheckPackage(pkg) {
   // and non-zero (printing the error) if it throws/rejects while loading.
   //
   // `process.argv` is reset to a benign `[node, entry, --help]` so a CLI bin that
-  // parses argv at the top of its module (kronus-ui calls `program.parseAsync`)
+  // parses argv at the top of its module (cronus-ui calls `program.parseAsync`)
   // never reads the smoke runner's own args. `--help` is deliberate: with no args
   // commander treats "no command" as an error and `process.exit(1)`s (a false
   // import failure), whereas `--help` makes it print usage and exit 0 — which also
@@ -416,7 +416,7 @@ function realPack(absDir, destDir) {
 function packedDependencyCheckPackage(pkg) {
   const absDir = join(ROOT, pkg.dir);
   group(`bun pm pack deps · ${pkg.name}`);
-  const tmp = mkdtempSync(join(tmpdir(), "kronus-pack-"));
+  const tmp = mkdtempSync(join(tmpdir(), "cronus-pack-"));
 
   try {
     const pkgTmp = join(tmp, pkg.dir.replace(/^packages\//, ""));
@@ -546,7 +546,7 @@ function fullSmokeFixture({ name, dir, tarballs, buildOutDirs, restoreFiles = []
 
   try {
     // Install the local tarballs alongside the fixture's declared deps. Passing
-    // the tarball paths explicitly makes the @kronus-ui/* packages resolve to the
+    // the tarball paths explicitly makes the @cronus-ui/* packages resolve to the
     // PUBLISHED artifact (not a workspace symlink). We let npm save (so the
     // dependency graph is deterministic) and restore package.json below.
     const installArgs = [
@@ -563,8 +563,8 @@ function fullSmokeFixture({ name, dir, tarballs, buildOutDirs, restoreFiles = []
       throw new Error(`[${name}] npm install failed: ${err.message}`);
     }
 
-    // Verify the @kronus-ui/* packages were materialized into node_modules.
-    for (const scoped of ["@kronus-ui/ui", "@kronus-ui/tokens", "@kronus-ui/theme"]) {
+    // Verify the @cronus-ui/* packages were materialized into node_modules.
+    for (const scoped of ["@cronus-ui/ui", "@cronus-ui/tokens", "@cronus-ui/theme"]) {
       check(
         existsSync(join(fixtureAbs, "node_modules", scoped, "package.json")),
         `[${name}] installed ${scoped} from tarball`,
@@ -594,13 +594,13 @@ function fullSmokeFixture({ name, dir, tarballs, buildOutDirs, restoreFiles = []
 
 function fullSmokeBins(tarballsByName) {
   group("full smoke · installed bins");
-  const fixtureAbs = mkdtempSync(join(tmpdir(), "kronus-bin-smoke-"));
+  const fixtureAbs = mkdtempSync(join(tmpdir(), "cronus-bin-smoke-"));
   const allTarballs = PACKAGES.map((pkg) => tarballsByName[pkg.name]);
 
   try {
     writeFileSync(
       join(fixtureAbs, "package.json"),
-      `${JSON.stringify({ name: "kronus-bin-smoke", private: true, type: "module" }, null, 2)}\n`,
+      `${JSON.stringify({ name: "cronus-bin-smoke", private: true, type: "module" }, null, 2)}\n`,
     );
     info(`npm install (tarballs: ${allTarballs.map((t) => t.replace(/^.*\//, "")).join(", ")})`);
     run(
@@ -610,10 +610,10 @@ function fullSmokeBins(tarballsByName) {
     );
 
     const binChecks = [
-      { bin: "kronus-ui", args: ["--help"], contains: "Usage:" },
-      { bin: "create-kronus-app", args: ["--help"], contains: "create-kronus-app" },
-      { bin: "create-kronus-stack", args: ["--help"], contains: "create-kronus-stack" },
-      { bin: "kronus-ui-mcp", args: ["--help"], contains: "kronus-ui-mcp" },
+      { bin: "cronus-ui", args: ["--help"], contains: "Usage:" },
+      { bin: "create-cronus-app", args: ["--help"], contains: "create-cronus-app" },
+      { bin: "create-cronus-stack", args: ["--help"], contains: "create-cronus-stack" },
+      { bin: "cronus-ui-mcp", args: ["--help"], contains: "cronus-ui-mcp" },
     ];
 
     for (const checkSpec of binChecks) {
@@ -626,36 +626,36 @@ function fullSmokeBins(tarballsByName) {
       );
     }
 
-    const version = readTarballManifest(tarballsByName["@kronus-ui/stack"]).version;
-    for (const bin of ["create-kronus-app", "create-kronus-stack", "kronus-ui-mcp"]) {
+    const version = readTarballManifest(tarballsByName["@cronus-ui/stack"]).version;
+    for (const bin of ["create-cronus-app", "create-cronus-stack", "cronus-ui-mcp"]) {
       const out = run("npx", ["--no-install", bin, "--version"], { cwd: fixtureAbs });
       check(out.trim() === version, `${bin} --version reports ${version}`);
     }
 
     run(
       "npx",
-      ["--no-install", "create-kronus-stack", "smoke-stack", "--yes", "--no-install", "--no-git"],
+      ["--no-install", "create-cronus-stack", "smoke-stack", "--yes", "--no-install", "--no-git"],
       { cwd: fixtureAbs, inherit: true },
     );
     check(
       existsSync(join(fixtureAbs, "smoke-stack", "src", "app", "page.tsx")),
-      "create-kronus-stack scaffold writes src/app/page.tsx",
+      "create-cronus-stack scaffold writes src/app/page.tsx",
     );
-    const kronusUi = JSON.parse(
-      readFileSync(join(fixtureAbs, "smoke-stack", "kronus-ui.json"), "utf8"),
+    const cronusUi = JSON.parse(
+      readFileSync(join(fixtureAbs, "smoke-stack", "cronus-ui.json"), "utf8"),
     );
     check(
-      kronusUi.paths?.ui === "src/components/ui" &&
-        kronusUi.paths?.lib === "src/lib" &&
-        kronusUi.paths?.blocks === "src/components/blocks",
-      "create-kronus-stack scaffold aligns kronus-ui.json paths with src alias",
+      cronusUi.paths?.ui === "src/components/ui" &&
+        cronusUi.paths?.lib === "src/lib" &&
+        cronusUi.paths?.blocks === "src/components/blocks",
+      "create-cronus-stack scaffold aligns cronus-ui.json paths with src alias",
     );
 
     run(
       "npx",
       [
         "--no-install",
-        "create-kronus-stack",
+        "create-cronus-stack",
         "smoke-neutral",
         "--yes",
         "--ui",
@@ -668,11 +668,11 @@ function fullSmokeBins(tarballsByName) {
     const neutralDir = join(fixtureAbs, "smoke-neutral");
     check(
       existsSync(join(neutralDir, "src", "app", "page.tsx")),
-      "create-kronus-stack non-Kronus UI scaffold writes src/app/page.tsx",
+      "create-cronus-stack non-Cronus UI scaffold writes src/app/page.tsx",
     );
     check(
-      !existsSync(join(neutralDir, "kronus-ui.json")),
-      "create-kronus-stack non-Kronus UI scaffold does not write kronus-ui.json",
+      !existsSync(join(neutralDir, "cronus-ui.json")),
+      "create-cronus-stack non-Cronus UI scaffold does not write cronus-ui.json",
     );
     const neutralSources = [
       "package.json",
@@ -681,8 +681,8 @@ function fullSmokeBins(tarballsByName) {
       "src/app/globals.css",
     ].map((rel) => readFileSync(join(neutralDir, rel), "utf8"));
     check(
-      neutralSources.every((content) => !content.includes("@kronus-ui")),
-      "create-kronus-stack non-Kronus UI scaffold has no @kronus-ui imports or deps",
+      neutralSources.every((content) => !content.includes("@cronus-ui")),
+      "create-cronus-stack non-Cronus UI scaffold has no @cronus-ui imports or deps",
     );
     info("[smoke-neutral] npm install");
     run("npm", ["install", "--no-audit", "--no-fund", "--install-strategy=hoisted"], {
@@ -691,16 +691,16 @@ function fullSmokeBins(tarballsByName) {
     });
     info("[smoke-neutral] npm run build");
     run("npm", ["run", "build"], { cwd: neutralDir, inherit: true });
-    ok("create-kronus-stack non-Kronus UI scaffold builds");
+    ok("create-cronus-stack non-Cronus UI scaffold builds");
 
     run(
       "npx",
-      ["--no-install", "create-kronus-app", "smoke-app", "--yes", "--no-install", "--no-ai"],
+      ["--no-install", "create-cronus-app", "smoke-app", "--yes", "--no-install", "--no-ai"],
       { cwd: fixtureAbs, inherit: true },
     );
     check(
       existsSync(join(fixtureAbs, "smoke-app", "app", "page.tsx")),
-      "create-kronus-app scaffold writes app/page.tsx",
+      "create-cronus-app scaffold writes app/page.tsx",
     );
   } finally {
     rmSync(fixtureAbs, { recursive: true, force: true });
@@ -731,7 +731,7 @@ function ensureBuilt() {
 }
 
 function main() {
-  log(c.bold("\nKronus UI — package smoke runner"));
+  log(c.bold("\nCronus UI — package smoke runner"));
   log(
     c.dim(
       `mode: ${FULL ? "FULL (pack + install + build + style-assert + bins)" : "LIGHT (pack --dry-run + structure + deps)"}`,
@@ -754,7 +754,7 @@ function main() {
   if (FULL) {
     let tmp;
     try {
-      tmp = mkdtempSync(join(tmpdir(), "kronus-smoke-"));
+      tmp = mkdtempSync(join(tmpdir(), "cronus-smoke-"));
       group("packing real tarballs");
       const tarballs = {};
       for (const pkg of PACKAGES) {

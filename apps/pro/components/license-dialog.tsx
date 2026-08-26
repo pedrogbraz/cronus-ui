@@ -9,7 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@kronus-ui/ui/dialog";
+} from "@cronus-ui/ui/dialog";
 import type { ReactNode } from "react";
 import { GITHUB_URL } from "../lib/origins";
 

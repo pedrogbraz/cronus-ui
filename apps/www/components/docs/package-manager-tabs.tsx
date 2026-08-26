@@ -1,6 +1,6 @@
 "use client";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@kronus-ui/ui";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@cronus-ui/ui";
 import { PACKAGE_MANAGERS, type PackageManagerCommand } from "../../lib/docs";
 import { CodeBlock } from "./code-block";
 

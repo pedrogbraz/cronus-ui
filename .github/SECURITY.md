@@ -2,11 +2,11 @@
 
 ## Supported versions
 
-Kronus UI is pre-1.0 and follows a rolling release model. Only the latest
+Cronus UI is pre-1.0 and follows a rolling release model. Only the latest
 published `0.x` release of each package receives security fixes:
-`@kronus-ui/tokens`, `@kronus-ui/theme`, `@kronus-ui/ui`, `@kronus-ui/stack`,
-`@kronus-ui/ai-kit`, `kronus-ui`, `create-kronus-app`, `create-kronus-stack`, and
-`kronus-ui-mcp`. Please upgrade to the latest version before reporting an issue.
+`@cronus-ui/tokens`, `@cronus-ui/theme`, `@cronus-ui/ui`, `@cronus-ui/stack`,
+`@cronus-ui/ai-kit`, `cronus-ui`, `create-cronus-app`, `create-cronus-stack`, and
+`cronus-ui-mcp`. Please upgrade to the latest version before reporting an issue.
 
 | Version | Supported |
 | ------- | --------- |
@@ -20,7 +20,7 @@ issue, pull request, or discussion for them.
 
 - Preferred: open a private report via GitHub Security Advisories
   ("Report a vulnerability" under the repository's **Security** tab).
-- Alternatively, email **security@kronus.com** with a description, affected
+- Alternatively, email **security@cronus.com** with a description, affected
   package and version, and reproduction steps or a proof of concept.
 
 ## What to expect

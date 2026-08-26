@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Button } from "@kronus-ui/ui";
+import { Badge, Button } from "@cronus-ui/ui";
 import {
   Check,
   CreditCard,
@@ -134,7 +134,7 @@ export function IntegrationsGridBlock() {
   );
 }
 
-const integrationsCode = `import { Badge, Button } from "@kronus-ui/ui";
+const integrationsCode = `import { Badge, Button } from "@cronus-ui/ui";
 import {
   Check,
   CreditCard,

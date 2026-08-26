@@ -1,21 +1,21 @@
 {
-  "name": "@kronus-ui/ai-kit",
+  "name": "@cronus-ui/ai-kit",
   "version": "0.5.0",
-  "description": "The Kronus UI AI Kit — an engineering doctrine, skills, and per-assistant config, scaffolded into your project.",
+  "description": "The Cronus UI AI Kit — an engineering doctrine, skills, and per-assistant config, scaffolded into your project.",
   "type": "module",
   "license": "MIT",
-  "author": "Kronus",
+  "author": "Cronus",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pedrogbraz/kronus-ui.git",
+    "url": "git+https://github.com/pedrogbraz/cronus-ui.git",
     "directory": "packages/ai-kit"
   },
-  "homepage": "https://github.com/pedrogbraz/kronus-ui#readme",
+  "homepage": "https://github.com/pedrogbraz/cronus-ui#readme",
   "bugs": {
-    "url": "https://github.com/pedrogbraz/kronus-ui/issues"
+    "url": "https://github.com/pedrogbraz/cronus-ui/issues"
   },
   "keywords": [
-    "kronus",
+    "cronus",
     "ai",
     "agents",
     "claude-code",

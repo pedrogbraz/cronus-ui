@@ -18,8 +18,8 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
   SidebarTrigger,
-} from "@kronus-ui/ui";
-import { TEAM, USER } from "@kronus-ui/ui/demo-saas";
+} from "@cronus-ui/ui";
+import { TEAM, USER } from "@cronus-ui/ui/demo-saas";
 import { Bell, Hexagon } from "lucide-react";
 import type { ReactNode } from "react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
@@ -35,8 +35,8 @@ import type { BlockContentMap } from "./types";
  * header.
  *
  * The composer treats this like navbar/footer: the sidebar links live inside a
- * `@kronus:data app-nav` data-slot const it rewrites from the (app) group's nav
- * pages, and the brand wordmark ("Kronus") is a brand token it replaces with the
+ * `@cronus:data app-nav` data-slot const it rewrites from the (app) group's nav
+ * pages, and the brand wordmark ("Cronus") is a brand token it replaces with the
  * app brand. The shipped code literal below MUST start with "use client"
  * because AppShell/Sidebar use React context + hooks — a generated RSC layout
  * imports it as a client boundary (like SiteNav wraps the client navbar).
@@ -59,7 +59,7 @@ const SHELL_HOST_CLASS =
   "[&_[data-slot=app-shell-content]]:!min-h-0 [&_[data-slot=app-shell-content]]:h-full " +
   "[&_[data-slot=app-shell-content]>*]:!min-h-0";
 
-/* @kronus:data app-nav */
+/* @cronus:data app-nav */
 const APP_NAV = [
   { label: "Dashboard", href: "/dashboard" },
   { label: "Analytics", href: "/analytics" },
@@ -67,7 +67,7 @@ const APP_NAV = [
   { label: "Billing", href: "/billing" },
   { label: "Settings", href: "/settings" },
 ] as const;
-/* @kronus:data-end */
+/* @cronus:data-end */
 
 const OWNER = TEAM.find((m) => m.email === USER.email);
 
@@ -79,7 +79,7 @@ function AppShellChrome({ children }: { children: ReactNode }) {
           <span className="inline-flex size-8 items-center justify-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
             <Hexagon className="size-4" aria-hidden="true" />
           </span>
-          <span className="truncate font-display text-sm font-semibold text-fg">Kronus</span>
+          <span className="truncate font-display text-sm font-semibold text-fg">Cronus</span>
         </div>
       </SidebarHeader>
 
@@ -122,7 +122,7 @@ function AppShellChrome({ children }: { children: ReactNode }) {
   const header = (
     <div className="flex w-full items-center gap-3">
       <SidebarTrigger className="md:hidden" />
-      <span className="font-display text-sm font-semibold text-fg">Kronus</span>
+      <span className="font-display text-sm font-semibold text-fg">Cronus</span>
       <div className="ml-auto flex items-center gap-2">
         <Button variant="ghost" size="icon-sm" aria-label="Notifications">
           <Bell className="size-4" aria-hidden="true" />
@@ -177,12 +177,12 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
   SidebarTrigger,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { TEAM, USER } from "../lib/demo-saas.js";
 import { Bell, Hexagon } from "lucide-react";
 import type { ReactNode } from "react";
 
-/* @kronus:data app-nav */
+/* @cronus:data app-nav */
 const APP_NAV = [
   { label: "Dashboard", href: "/dashboard" },
   { label: "Analytics", href: "/analytics" },
@@ -190,7 +190,7 @@ const APP_NAV = [
   { label: "Billing", href: "/billing" },
   { label: "Settings", href: "/settings" },
 ];
-/* @kronus:data-end */
+/* @cronus:data-end */
 
 const OWNER = TEAM.find((m) => m.email === USER.email);
 
@@ -202,7 +202,7 @@ export function AppShellChromeBlock({ children }: { children: ReactNode }) {
           <span className="inline-flex size-8 items-center justify-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
             <Hexagon className="size-4" aria-hidden="true" />
           </span>
-          <span className="truncate font-display text-sm font-semibold text-fg">Kronus</span>
+          <span className="truncate font-display text-sm font-semibold text-fg">Cronus</span>
         </div>
       </SidebarHeader>
 
@@ -245,7 +245,7 @@ export function AppShellChromeBlock({ children }: { children: ReactNode }) {
   const header = (
     <div className="flex w-full items-center gap-3">
       <SidebarTrigger className="md:hidden" />
-      <span className="font-display text-sm font-semibold text-fg">Kronus</span>
+      <span className="font-display text-sm font-semibold text-fg">Cronus</span>
       <div className="ml-auto flex items-center gap-2">
         <Button variant="ghost" size="icon-sm" aria-label="Notifications">
           <Bell className="size-4" aria-hidden="true" />

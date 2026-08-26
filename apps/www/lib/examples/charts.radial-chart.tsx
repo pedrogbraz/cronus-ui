@@ -7,7 +7,7 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { PolarGrid, RadialBar, RadialBarChart } from "recharts";
 
 /**
@@ -19,10 +19,10 @@ import { PolarGrid, RadialBar, RadialBarChart } from "recharts";
 
 const chartConfig = {
   visitors: { label: "Visitors" },
-  desktop: { label: "Desktop", color: "var(--kronus-chart-1)" },
-  mobile: { label: "Mobile", color: "var(--kronus-chart-2)" },
-  tablet: { label: "Tablet", color: "var(--kronus-chart-3)" },
-  other: { label: "Other", color: "var(--kronus-chart-4)" },
+  desktop: { label: "Desktop", color: "var(--cronus-chart-1)" },
+  mobile: { label: "Mobile", color: "var(--cronus-chart-2)" },
+  tablet: { label: "Tablet", color: "var(--cronus-chart-3)" },
+  other: { label: "Other", color: "var(--cronus-chart-4)" },
 } satisfies ChartConfig;
 
 const chartData = [

@@ -1,4 +1,4 @@
-# AGENTS.md — kronus-ui
+# AGENTS.md — cronus-ui
 
 Contrato para humanos e agentes de IA. Leia isto antes da primeira linha.
 
@@ -42,7 +42,7 @@ Tailwind v4 · Biome 2.5 · Vitest · Playwright
 | `bun install` | instala |
 | `bun run dev` | tudo em watch (turbo) |
 | `bun run www` | site de documentação (OSS, :4747) |
-| `bun run pro` | Kronus Pro (origem própria, :4748) |
+| `bun run pro` | Cronus Pro (origem própria, :4748) |
 | `bun run lint` | `biome check .` |
 | `bun run format` | `biome format --write .` |
 | `bun run typecheck` | tipos, via turbo |
@@ -78,13 +78,13 @@ packages/
 ├─ ui/        os componentes                    → theme
 ├─ stack/     catálogo e engine de stack        (folha)
 ├─ ai-kit/    geração de AGENTS/skills          (folha)
-├─ cli/       `kronus-ui` — instala componentes  → ai-kit
+├─ cli/       `cronus-ui` — instala componentes  → ai-kit
 ├─ mcp/       servidor MCP do registry          (folha)
-├─ create-kronus-app/    scaffold de app         → ai-kit, cli
-└─ create-kronus-stack/  scaffold de stack       → ai-kit, stack
+├─ create-cronus-app/    scaffold de app         → ai-kit, cli
+└─ create-cronus-stack/  scaffold de stack       → ai-kit, stack
 
 apps/www/     documentação e showcase (OSS, :4747)  → tokens, theme, ui, stack
-apps/pro/     Kronus Pro (origem própria, :4748)     → tokens, theme, ui
+apps/pro/     Cronus Pro (origem própria, :4748)     → tokens, theme, ui
 registry/     GERADO. não edite à mão
 e2e/          Playwright: a11y, contraste, fluxos
 ```

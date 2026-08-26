@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Site chrome.** Primary nav is Docs, Components, Blocks, Templates, Create.
   Themes, Stack, Changelog, and Pro moved out of the bar — Pro is an
   announcement strip plus a dismissible corner card, not a tenth link. See Pro
-  leaves this origin for Kronus Pro (`apps/pro`, :4748 / kronusui.pro).
+  leaves this origin for Cronus Pro (`apps/pro`, :4748 / cronusui.pro).
 
 ### Added
 
@@ -27,29 +27,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   GitHub Sponsors (one-time, any amount) unless `NEXT_PUBLIC_SPONSOR_URL` points
   at another rail. OSS stays free — this is not a paywall. Homepage band +
   footer + command palette.
-- **Kronus Pro origin.** `apps/pro` is a second Next app (port 4748) with its
+- **Cronus Pro origin.** `apps/pro` is a second Next app (port 4748) with its
   own Aurora chrome — not `/pro` on the docs nav. Maker $199 / Studio $299
   perpetual (not billed yet). OSS CTAs and `/pro` redirect to
   `NEXT_PUBLIC_PRO_URL`.
-- **Kronus Pro pack (additive).** Mail, chat, and finance compose apps — extra
+- **Cronus Pro pack (additive).** Mail, chat, and finance compose apps — extra
   products, not a paywall on the engine. Looks, SaaS, store, landing, and
   upgrade stay OSS. License is not billed yet.
 - **Looks (Default, Brutalist, Glass, Mauve).** A material axis orthogonal to
-  theme and mode: `data-kronus-look` restyles radius, border, shadow, and
+  theme and mode: `data-cronus-look` restyles radius, border, shadow, and
   glass surfaces from existing tokens — no forked components. Homepage
   stage at `#looks`. Docs chrome stays Default.
 - **Live template previews.** `/templates` cards render the composed site
-  (themed Kronus blocks, not screenshots). Click through for Preview / Code
+  (themed Cronus blocks, not screenshots). Click through for Preview / Code
   plus device frames; **Open Preview** is the full page at `/preview/t/[slug]`.
 - **Named landing pages as compose apps.** Twelve `landing-*` templates
   (`studio`, `ops`, `secure`, `care`, `shop`, `docs`, `premium`, `agents`,
   `coverage`, `broadcast`, `agency`, `glass`) sit next to `landing` in
-  `create-kronus-app` and `kronus-ui compose`. Each is a distinctive stack of
-  existing blocks + variants and a baked theme/mode — original Kronus pages,
-  not copies of third-party registries. `npx create-kronus-app my-app
+  `create-cronus-app` and `cronus-ui compose`. Each is a distinctive stack of
+  existing blocks + variants and a baked theme/mode — original Cronus pages,
+  not copies of third-party registries. `npx create-cronus-app my-app
   --template landing-studio`.
 - **Motion harvest (originals, no new deps).** 26 premium primitives
-  ported as Kronus implementations — CSS/canvas/`motion` only, semantic
+  ported as Cronus implementations — CSS/canvas/`motion` only, semantic
   tokens, reduced-motion, `data-slot`. Surfaces: Ripple, Meteors,
   DotPattern, GridPattern, RetroGrid, Noise, LightRays, ProgressiveBlur,
   FlickeringGrid, StarBorder, ShinyText, Highlighter, SpinningText,
@@ -65,12 +65,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   (`checkout--one-page` / `--multi-step`, `invoice--receipt`,
   `order-tracking--delayed`) stay local.
 - **Composed-page 3-way upgrade on `upgrade --all`.** Generated pages and
-  layouts merge against `.kronus-ui/base` (base snapshot vs local vs new
+  layouts merge against `.cronus-ui/base` (base snapshot vs local vs new
   render). Blocks the re-plan newly requires are installed (no overwrite).
   `add-page` routes are kept. Never deletes user files. Pass `--manifest`
   for custom compose apps. Snapshot dir is the `composed{}` key.
 - **Public compare includes Aceternity.** `/docs/compare` is four-way
-  (Kronus, shadcn/ui, HeroUI, Aceternity) on the product-loop axis, not
+  (Cronus, shadcn/ui, HeroUI, Aceternity) on the product-loop axis, not
   component count. Homepage and getting-started teach compose → add-page →
   upgrade; the catalog is no longer the first CTA.
 - **MCP `upgrade_components` / `add_page` take `manifest`.** Custom compose
@@ -82,7 +82,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   than one composed app.
 - **Agent-facing loop on `/llms.txt`.** The summary and command fences include
   add-page and `upgrade --all`; they no longer lead with component counts.
-  Homepage catalog H2 dropped the count. Stack Builder’s Kronus option is
+  Homepage catalog H2 dropped the count. Stack Builder’s Cronus option is
   “product UI system”, not “shadcn-class design system”.
 
 ## [0.5.0] — 2026-07-13
@@ -95,15 +95,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `--variant <slug>=<v>` flag composes the same app with a different look;
   unknown / ineffective / chrome-slot overrides fail loud.
 - **App-generator: the SaaS template.** A new `app-shell` chrome block (sidebar +
-  header) drives an `(app)` route group; `create-kronus-app --template saas` opens
+  header) drives an `(app)` route group; `create-cronus-app --template saas` opens
   straight on a composed dashboard behind the shell (analytics, team, billing,
   settings, split-variant login).
-- **App-generator: `add-page`.** `kronus-ui add-page` grows a composed app by one
+- **App-generator: `add-page`.** `cronus-ui add-page` grows a composed app by one
   page (installs new blocks incl. a new chrome group's chrome, updates nav,
   refreshes the base snapshot, provenance-checked manifest reload, `--dry-run`).
 - **App-generator: shared demo-data libs.** Blocks can depend on a `registry:lib`
-  (`demo-store` / `demo-saas`, exported via the `@kronus-ui/ui` subpath) — pure-TS
-  single sources of truth with tested dataset invariants. `kronus-ui add`/compose
+  (`demo-store` / `demo-saas`, exported via the `@cronus-ui/ui` subpath) — pure-TS
+  single sources of truth with tested dataset invariants. `cronus-ui add`/compose
   installs the lib transitively; 8 coherent blocks (cart, order-history, reviews,
   product-grid, billing, …) now read their data from it. An anti-inline-mock
   gate (deriving the forbidden set from the lib) keeps migrated blocks honest.
@@ -121,15 +121,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Kronus Compose — the app generator (Phase 1).** `kronus-ui compose <template>`
-  and `npx create-kronus-app --template store|landing` build a full multi-page
+- **Cronus Compose — the app generator (Phase 1).** `cronus-ui compose <template>`
+  and `npx create-cronus-app --template store|landing` build a full multi-page
   Next.js app by composing validated registry blocks. The generator is data,
   not codegen: every generated page is only imports of installed blocks plus a
   `<main>` that stacks them (the golden rule), so many similar apps generate
   without drift. It reuses the validated CLI core (`Registry.resolve`,
   `writeItemFiles`, the install manifest) verbatim and adds a pure, deterministic
   planner/renderer. Ships `store` (9-page storefront) and `landing` bundled
-  manifests, `--dry-run` sitemap preview, and a `.kronus-ui/` base snapshot for
+  manifests, `--dry-run` sitemap preview, and a `.cronus-ui/` base snapshot for
   future 3-way page upgrades. **No new package.**
 - **`registry/meta.json` sidecar.** A deterministic (timestamp-free, key-sorted)
   metadata index generated alongside the registry: per block the
@@ -151,7 +151,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Breaking
 
-- **`@kronus-ui/ui`: heavy leaf-only libraries are now optional peer dependencies.**
+- **`@cronus-ui/ui`: heavy leaf-only libraries are now optional peer dependencies.**
   `recharts` (`Chart`), `@tiptap/react` / `@tiptap/pm` / `@tiptap/starter-kit`
   (`RichTextEditor`), `@dnd-kit/core` / `@dnd-kit/sortable` / `@dnd-kit/utilities`
   (`Kanban`), `@tanstack/react-table` (`DataTable`), `react-day-picker`
@@ -160,8 +160,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `peerDependencies`, so they are no longer installed automatically with the
   package. **npm-package consumers** importing those components must now install
   the matching peer(s) themselves (see "Optional peer dependencies" in the
-  `@kronus-ui/ui` README for the component → package table). All other components
-  are unaffected. **CLI/registry users are unaffected** — `npx kronus-ui add <slug>`
+  `@cronus-ui/ui` README for the component → package table). All other components
+  are unaffected. **CLI/registry users are unaffected** — `npx cronus-ui add <slug>`
   derives each item's npm dependencies from its real imports and installs them.
 
 ### Added
@@ -212,14 +212,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **9 new components** — `Marquee`, `AvatarGroup`, `Banner`, `TagsInput`, `Sparkline`,
   `InputGroup`, `PasswordInput`, `ButtonGroup`, and `Masonry` (each CLI-installable
-  via `npx kronus-ui add <slug>`).
+  via `npx cronus-ui add <slug>`).
 - **10 new premium components** — three payments-grade inputs `CurrencyInput`
   (currency selector + live minor-unit formatting), `PhoneInput` (country selector,
   emits E.164) and `CreditCardInput` (brand detection + Luhn, display-only/PCI-safe);
   `TimePicker` (12h/24h popover), `FloatingLabelInput`; and premium motion showpieces
   `BorderBeam` (animated perimeter light), `FlipCard` (3D front/back), `TiltCard`
   (pointer-driven 3D tilt), `SplitButton`, and `ConfirmationDialog`. All tokenized,
-  reduced-motion-safe, axe-tested, and CLI-installable via `npx kronus-ui add <slug>`.
+  reduced-motion-safe, axe-tested, and CLI-installable via `npx cronus-ui add <slug>`.
 - **Chart breadth** — donut, radar, and radial-bar-gauge examples on the `Chart`
   page (recharts composed inside `ChartContainer`, tokenized, code-split).
 - **Blocks: 8 new families / many new blocks.** A dedicated **Auth** family
@@ -252,13 +252,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.0] — 2026-06-23
 
-The first public release of **Kronus UI** — a themeable, accessible, shadcn-class
-React component library that is the Kronus design language. Distributed two ways:
+The first public release of **Cronus UI** — a themeable, accessible, shadcn-class
+React component library that is the Cronus design language. Distributed two ways:
 as installable packages and as copy-paste registry items you own.
 
 ### Added
 
-- **`@kronus-ui/ui` component library** — a catalog of themeable, accessible React
+- **`@cronus-ui/ui` component library** — a catalog of themeable, accessible React
   components built on Radix primitives, `class-variance-authority` variants, and
   Tailwind utility classes, each exposed as its own subpath export for granular
   imports. Covers the full surface a product app needs, grouped into:
@@ -281,31 +281,31 @@ as installable packages and as copy-paste registry items you own.
   - **Premium & brand** — GlassCard, GradientBorder, GradientText, SpotlightCard,
     AuroraBackground, LogoCarousel, Reveal, TextEffect, and motion presets — the
     Aurora layer of glass, gradients, springs, and scroll reveals.
-- **`@kronus-ui/tokens` design tokens** — the source-of-truth design tokens in
+- **`@cronus-ui/tokens` design tokens** — the source-of-truth design tokens in
   TypeScript, an OKLCH-based color system with light/dark modes, and a CSS
-  variable bridge that exposes every token as a runtime `--kronus-*` variable.
+  variable bridge that exposes every token as a runtime `--cronus-*` variable.
   Ships a Tailwind v4 `@theme` stylesheet plus a Tailwind v3 preset, so utilities
   like `bg-primary`, `rounded-lg`, `text-fg-secondary`, and `shadow-glow` resolve
   to the live tokens on either Tailwind version.
-- **`@kronus-ui/theme` runtime theming** — `<KronusUIProvider>` and the `useTheme`
+- **`@cronus-ui/theme` runtime theming** — `<CronusUIProvider>` and the `useTheme`
   hook for runtime theming. Switch themes and light/dark modes, or override
   individual tokens (radius, primary, border, …) and re-theme an entire subtree
   by writing CSS variables — no React re-render.
-- **`kronus-ui` CLI with a registry installer** — copy-paste components into your
-  own codebase, shadcn-style, and own the source. `npx kronus-ui init` scaffolds
-  the config and `cn()` helper; `npx kronus-ui add <component>` resolves
+- **`cronus-ui` CLI with a registry installer** — copy-paste components into your
+  own codebase, shadcn-style, and own the source. `npx cronus-ui init` scaffolds
+  the config and `cn()` helper; `npx cronus-ui add <component>` resolves
   dependencies and rewrites imports to your path aliases; `list` and `diff` round
   out the workflow. The registry is generated from the real component sources, so
   the package and copy-paste distribution modes share one source of truth.
 - **Installable blocks** — 13 ready-made, composed UI sections shipped as
-  `registry:block` items and installable the same way via `npx kronus-ui add
+  `registry:block` items and installable the same way via `npx cronus-ui add
   <slug>`: `hero`, `pricing`, `feature-grid`, `cta`, `stats`, `login`,
   `settings`, `team`, `dashboard`, `billing`, `page-header`, `filter-bar`, and
   `empty-state`. The CLI scaffolds a dedicated blocks directory and routes block
   files to it.
 - **Documentation & showcase site** — a HeroUI-style showcase (`apps/www`) that
   documents every component and block with live, themeable previews and surfaces
-  the matching `kronus-ui add` command on each page.
+  the matching `cronus-ui add` command on each page.
 
 ### Changed
 
@@ -347,12 +347,12 @@ as installable packages and as copy-paste registry items you own.
   open-state overlay behavior (focus, escape) — plus automated accessibility
   assertions (axe), an SSR smoke test across components, and a coverage gate.
 - Added an end-to-end check that fails on console errors and hydration warnings.
-- Added per-entry gzipped bundle budgets for the published `@kronus-ui/ui` so a
+- Added per-entry gzipped bundle budgets for the published `@cronus-ui/ui` so a
   dependency or code-size regression is caught at build time.
 
-[Unreleased]: https://github.com/pedrogbraz/kronus-ui/compare/v0.5.0...main
-[0.5.0]: https://github.com/pedrogbraz/kronus-ui/compare/v0.4.0...v0.5.0
-[0.4.0]: https://github.com/pedrogbraz/kronus-ui/compare/v0.3.0...v0.4.0
-[0.3.0]: https://github.com/pedrogbraz/kronus-ui/compare/v0.2.0...v0.3.0
-[0.2.0]: https://github.com/pedrogbraz/kronus-ui/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/pedrogbraz/kronus-ui/releases/tag/v0.1.0
+[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.5.0...main
+[0.5.0]: https://github.com/pedrogbraz/cronus-ui/compare/v0.4.0...v0.5.0
+[0.4.0]: https://github.com/pedrogbraz/cronus-ui/compare/v0.3.0...v0.4.0
+[0.3.0]: https://github.com/pedrogbraz/cronus-ui/compare/v0.2.0...v0.3.0
+[0.2.0]: https://github.com/pedrogbraz/cronus-ui/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/pedrogbraz/cronus-ui/releases/tag/v0.1.0

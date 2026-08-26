@@ -1,5 +1,5 @@
-import { cn } from "@kronus-ui/ui/cn";
-import { StarBorder } from "@kronus-ui/ui/star-border";
+import { cn } from "@cronus-ui/ui/cn";
+import { StarBorder } from "@cronus-ui/ui/star-border";
 import { Check } from "lucide-react";
 import { INCLUDED, PLANS } from "../lib/catalog";
 import { LicenseDialog } from "./license-dialog";

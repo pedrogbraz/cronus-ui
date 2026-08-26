@@ -32,8 +32,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@kronus-ui/ui";
-import { ORDERS, PRODUCTS, productById } from "@kronus-ui/ui/demo-store";
+} from "@cronus-ui/ui";
+import { ORDERS, PRODUCTS, productById } from "@cronus-ui/ui/demo-store";
 import {
   ArrowLeft,
   ArrowRight,
@@ -85,7 +85,7 @@ export function CheckoutBlock() {
         <CardHeader>
           <CardTitle className="font-display text-lg">Order summary</CardTitle>
           <p className="col-span-full text-sm text-fg-secondary">
-            Kronus Studio · digital products
+            Cronus Studio · digital products
           </p>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
@@ -206,7 +206,7 @@ const checkoutCode = `import {
   Input,
   Label,
   Separator,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ORDERS, productById } from "../lib/demo-store.js";
 import { CreditCard, Lock, ShieldCheck } from "lucide-react";
 
@@ -236,7 +236,7 @@ export function CheckoutBlock() {
       <Card className="h-fit gap-0 pb-0 shadow-md lg:order-2">
         <CardHeader>
           <CardTitle className="font-display text-lg">Order summary</CardTitle>
-          <p className="col-span-full text-sm text-fg-secondary">Kronus Studio · digital products</p>
+          <p className="col-span-full text-sm text-fg-secondary">Cronus Studio · digital products</p>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
           {orderLines.map((line) => (
@@ -605,7 +605,7 @@ const checkoutOnePageCode = `import {
   SelectTrigger,
   SelectValue,
   Separator,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { CreditCard, Lock, ShieldCheck } from "lucide-react";
 
 interface CartItem {
@@ -1003,7 +1003,7 @@ const checkoutMultiStepCode = `import {
   StepperList,
   StepperSeparator,
   StepperTitle,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ArrowLeft, ArrowRight, CreditCard, Lock } from "lucide-react";
 
 export function CheckoutMultiStepBlock() {
@@ -1268,7 +1268,7 @@ const payoutsCode = `import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Wallet } from "lucide-react";
 
 interface Payout {
@@ -1449,7 +1449,7 @@ const productGridCode = `import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { PRODUCTS } from "../lib/demo-store.js";
 import { ArrowUpRight } from "lucide-react";
 
@@ -1705,7 +1705,7 @@ const productGridWithFiltersCode = `import {
   SelectValue,
   Separator,
   Slider,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { PRODUCTS } from "../lib/demo-store.js";
 import { ArrowUpRight, SlidersHorizontal } from "lucide-react";
 
@@ -2022,7 +2022,7 @@ export function ProductGridShowcaseBlock() {
   );
 }
 
-const productGridShowcaseCode = `import { Badge, Button, cn } from "@kronus-ui/ui";
+const productGridShowcaseCode = `import { Badge, Button, cn } from "@cronus-ui/ui";
 import { productById } from "../lib/demo-store.js";
 import { ArrowUpRight } from "lucide-react";
 
@@ -2202,8 +2202,8 @@ export function InvoiceBlock() {
       <CardContent className="grid grid-cols-2 gap-4 pb-2">
         <div className="flex flex-col gap-1">
           <span className="text-xs font-medium uppercase tracking-wide text-fg-tertiary">From</span>
-          <span className="text-sm font-medium text-fg">Kronus Studio</span>
-          <span className="text-sm text-fg-secondary">billing@kronus.studio</span>
+          <span className="text-sm font-medium text-fg">Cronus Studio</span>
+          <span className="text-sm text-fg-secondary">billing@cronus.studio</span>
         </div>
         <div className="flex flex-col gap-1">
           <span className="text-xs font-medium uppercase tracking-wide text-fg-tertiary">
@@ -2289,7 +2289,7 @@ const invoiceCode = `import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ORDERS, productById } from "../lib/demo-store.js";
 import { Download } from "lucide-react";
 
@@ -2328,8 +2328,8 @@ export function InvoiceBlock() {
       <CardContent className="grid grid-cols-2 gap-4 pb-2">
         <div className="flex flex-col gap-1">
           <span className="text-xs font-medium uppercase tracking-wide text-fg-tertiary">From</span>
-          <span className="text-sm font-medium text-fg">Kronus Studio</span>
-          <span className="text-sm text-fg-secondary">billing@kronus.studio</span>
+          <span className="text-sm font-medium text-fg">Cronus Studio</span>
+          <span className="text-sm text-fg-secondary">billing@cronus.studio</span>
         </div>
         <div className="flex flex-col gap-1">
           <span className="text-xs font-medium uppercase tracking-wide text-fg-tertiary">
@@ -2419,7 +2419,7 @@ export function InvoiceReceiptBlock() {
   return (
     <Card role="group" aria-label="Receipt" className="mx-auto w-full max-w-xs gap-0 shadow-md">
       <CardHeader className="flex flex-col items-center gap-1 text-center">
-        <CardTitle className="font-display text-lg">Kronus Studio</CardTitle>
+        <CardTitle className="font-display text-lg">Cronus Studio</CardTitle>
         <p className="text-xs text-fg-secondary">548 Market St · San Francisco, CA</p>
         <p className="font-mono text-xs text-fg-tertiary">INV-2026-0188 · Jun 18, 2026 · 14:32</p>
       </CardHeader>
@@ -2480,7 +2480,7 @@ const invoiceReceiptCode = `import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 
 interface ReceiptLine {
   id: string;
@@ -2499,7 +2499,7 @@ export function InvoiceReceiptBlock() {
   return (
     <Card role="group" aria-label="Receipt" className="mx-auto w-full max-w-xs gap-0 shadow-md">
       <CardHeader className="flex flex-col items-center gap-1 text-center">
-        <CardTitle className="font-display text-lg">Kronus Studio</CardTitle>
+        <CardTitle className="font-display text-lg">Cronus Studio</CardTitle>
         <p className="text-xs text-fg-secondary">548 Market St · San Francisco, CA</p>
         <p className="font-mono text-xs text-fg-tertiary">INV-2026-0188 · Jun 18, 2026 · 14:32</p>
       </CardHeader>

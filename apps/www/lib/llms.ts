@@ -7,7 +7,7 @@
  * code is lifted from `lib/examples/<family>.tsx` with the TypeScript compiler
  * API — never importing/executing those client modules (same technique as
  * scripts/build-props.ts) — and block sources come from the committed registry
- * items, i.e. exactly what `npx kronus-ui add <slug>` installs.
+ * items, i.e. exactly what `npx cronus-ui add <slug>` installs.
  */
 import { existsSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
@@ -237,8 +237,8 @@ const PACKAGE_DIRS = [
   "stack",
   "ai-kit",
   "cli",
-  "create-kronus-app",
-  "create-kronus-stack",
+  "create-cronus-app",
+  "create-cronus-stack",
   "mcp",
 ] as const;
 
@@ -334,8 +334,8 @@ export function componentMarkdown(slug: string): string | undefined {
     "",
     "## Install",
     "",
-    ...fencedCode(`npx kronus-ui add ${slug}`, "bash"),
-    ...fencedCode(`import { ${meta.importName ?? meta.name} } from "@kronus-ui/ui";`, "tsx"),
+    ...fencedCode(`npx cronus-ui add ${slug}`, "bash"),
+    ...fencedCode(`import { ${meta.importName ?? meta.name} } from "@cronus-ui/ui";`, "tsx"),
     ...dependencyLines(readRegistryItem(slug)),
   ];
 
@@ -345,7 +345,7 @@ export function componentMarkdown(slug: string): string | undefined {
       lines.push(`### ${example.title}`, "");
       if (example.description) lines.push(example.description, "");
       if (example.registryItem && example.registryItem !== slug) {
-        lines.push(...fencedCode(`npx kronus-ui add ${example.registryItem}`, "bash"));
+        lines.push(...fencedCode(`npx cronus-ui add ${example.registryItem}`, "bash"));
       }
       lines.push(...fencedCode(example.code, "tsx"));
     }
@@ -377,7 +377,7 @@ export function blockMarkdown(slug: string, includeSource = true): string | unde
     "",
     "## Install",
     "",
-    ...fencedCode(`npx kronus-ui add ${slug}`, "bash"),
+    ...fencedCode(`npx cronus-ui add ${slug}`, "bash"),
     ...dependencyLines(item),
   ];
 
@@ -437,7 +437,7 @@ function guideExtras(slug: string): string[] {
   switch (slug) {
     case "index": {
       const lines = [
-        "Kronus UI is distributed two ways: as npm packages (`@kronus-ui/ui` + `@kronus-ui/tokens` + `@kronus-ui/theme`) or as source copied into your project through the shadcn-style registry (`npx kronus-ui add <slug>`).",
+        "Cronus UI is distributed two ways: as npm packages (`@cronus-ui/ui` + `@cronus-ui/tokens` + `@cronus-ui/theme`) or as source copied into your project through the shadcn-style registry (`npx cronus-ui add <slug>`).",
         "",
         "## Packages",
         "",
@@ -529,7 +529,7 @@ export function guideMarkdown(slug: string): string | undefined {
   if (!page) return undefined;
 
   const lines: string[] = [
-    `# ${page.label} — Kronus UI`,
+    `# ${page.label} — Cronus UI`,
     "",
     page.description,
     "",
@@ -546,13 +546,13 @@ export function guideMarkdown(slug: string): string | undefined {
 /* -------------------------------------------------------------------------- */
 
 function summaryBlockquote(): string {
-  return `> Kronus UI is a product UI system: themeable, accessible React components, design tokens, a runtime theming engine (Radix + CVA + Tailwind v4), and a compose path that turns validated blocks into apps — grow with add-page, then \`upgrade --all\`. Install from npm (\`@kronus-ui/ui\`) or copy source with \`npx kronus-ui add <slug>\`. Canonical start: \`npx create-kronus-app my-app --template saas\`.`;
+  return `> Cronus UI is a product UI system: themeable, accessible React components, design tokens, a runtime theming engine (Radix + CVA + Tailwind v4), and a compose path that turns validated blocks into apps — grow with add-page, then \`upgrade --all\`. Install from npm (\`@cronus-ui/ui\`) or copy source with \`npx cronus-ui add <slug>\`. Canonical start: \`npx create-cronus-app my-app --template saas\`.`;
 }
 
 /** The /llms.txt index, in the llms.txt spec format. */
 export function buildLlmsTxt(): string {
   const lines: string[] = [
-    "# Kronus UI",
+    "# Cronus UI",
     "",
     summaryBlockquote(),
     "",
@@ -606,7 +606,7 @@ export function buildLlmsTxt(): string {
  */
 export function buildLlmsFullTxt(): string {
   const parts: string[] = [
-    `# Kronus UI — full documentation\n\n${summaryBlockquote()}\n\nThis file inlines every guide and component doc. Block docs are inlined without their full sources — each links its own markdown mirror.\n`,
+    `# Cronus UI — full documentation\n\n${summaryBlockquote()}\n\nThis file inlines every guide and component doc. Block docs are inlined without their full sources — each links its own markdown mirror.\n`,
   ];
 
   for (const page of getGuidePages()) {

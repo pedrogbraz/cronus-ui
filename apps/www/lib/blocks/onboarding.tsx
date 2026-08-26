@@ -18,7 +18,7 @@ import {
   StepperList,
   StepperSeparator,
   StepperTitle,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ArrowRight, Check, Database, FolderPlus, Rocket, Users } from "lucide-react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
 import { BlockViewBody } from "../../components/blocks/block-view-body";
@@ -39,7 +39,7 @@ export function WelcomeBlock() {
             <Rocket className="size-5" aria-hidden="true" />
           </span>
           <div className="flex flex-col gap-1">
-            <CardTitle className="font-display text-2xl">Welcome to Kronus, Mara</CardTitle>
+            <CardTitle className="font-display text-2xl">Welcome to Cronus, Mara</CardTitle>
             <p className="text-sm text-fg-secondary">
               Let&apos;s get your workspace ready — here&apos;s where to start.
             </p>
@@ -121,7 +121,7 @@ const welcomeCode = `import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ArrowRight, Database, FolderPlus, Rocket, Users } from "lucide-react";
 
 export function WelcomeBlock() {
@@ -133,7 +133,7 @@ export function WelcomeBlock() {
             <Rocket className="size-5" aria-hidden="true" />
           </span>
           <div className="flex flex-col gap-1">
-            <CardTitle className="font-display text-2xl">Welcome to Kronus, Mara</CardTitle>
+            <CardTitle className="font-display text-2xl">Welcome to Cronus, Mara</CardTitle>
             <p className="text-sm text-fg-secondary">
               Let&apos;s get your workspace ready — here&apos;s where to start.
             </p>
@@ -258,7 +258,7 @@ export function SetupWizardBlock() {
           <div className="flex flex-col gap-2">
             <Label htmlFor="wizard-workspace-url">Workspace URL</Label>
             <div className="flex items-center rounded-lg border border-input bg-surface-base focus-within:ring-2 focus-within:ring-ring">
-              <span className="pl-3 text-sm text-fg-tertiary">kronus.app/</span>
+              <span className="pl-3 text-sm text-fg-tertiary">cronus.app/</span>
               <Input
                 id="wizard-workspace-url"
                 placeholder="acme"
@@ -296,7 +296,7 @@ const setupWizardCode = `import {
   StepperList,
   StepperSeparator,
   StepperTitle,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 
 export function SetupWizardBlock() {
   return (
@@ -344,7 +344,7 @@ export function SetupWizardBlock() {
           <div className="flex flex-col gap-2">
             <Label htmlFor="wizard-workspace-url">Workspace URL</Label>
             <div className="flex items-center rounded-lg border border-input bg-surface-base focus-within:ring-2 focus-within:ring-ring">
-              <span className="pl-3 text-sm text-fg-tertiary">kronus.app/</span>
+              <span className="pl-3 text-sm text-fg-tertiary">cronus.app/</span>
               <Input
                 id="wizard-workspace-url"
                 placeholder="acme"
@@ -379,7 +379,7 @@ export function SetupChecklistBlock() {
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Finish setting up</CardTitle>
             <p className="text-sm text-fg-secondary">
-              Complete these steps to get the most out of Kronus.
+              Complete these steps to get the most out of Cronus.
             </p>
           </div>
           <Badge variant="secondary">2 of 5</Badge>
@@ -473,7 +473,7 @@ const setupChecklistCode = `import {
   CardTitle,
   Checkbox,
   Progress,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Check } from "lucide-react";
 
 export function SetupChecklistBlock() {
@@ -484,7 +484,7 @@ export function SetupChecklistBlock() {
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Finish setting up</CardTitle>
             <p className="text-sm text-fg-secondary">
-              Complete these steps to get the most out of Kronus.
+              Complete these steps to get the most out of Cronus.
             </p>
           </div>
           <Badge variant="secondary">2 of 5</Badge>

@@ -39,7 +39,7 @@ export const DOC_NAV_SECTIONS: { heading: string; items: DocNavItem[] }[] = [
         label: "Compare",
         href: "/docs/compare",
         description:
-          "Kronus UI next to shadcn/ui, HeroUI, and Aceternity — distribution, theming, compose, and a11y gates.",
+          "Cronus UI next to shadcn/ui, HeroUI, and Aceternity — distribution, theming, compose, and a11y gates.",
         status: "new",
       },
       {
@@ -128,42 +128,42 @@ export const PACKAGE_MANAGERS: PackageManagerCommand[] = [
   {
     id: "pnpm",
     label: "pnpm",
-    init: "pnpm dlx kronus-ui@latest init",
-    add: "pnpm dlx kronus-ui@latest add button card dialog",
-    create: "pnpm dlx create-kronus-app@latest my-app --template saas",
-    compose: "pnpm dlx kronus-ui@latest compose saas",
-    addPage: "pnpm dlx kronus-ui@latest add-page --route /faq --blocks faq,cta --nav FAQ",
-    upgrade: "pnpm dlx kronus-ui@latest upgrade --all --dry-run",
+    init: "pnpm dlx cronus-ui@latest init",
+    add: "pnpm dlx cronus-ui@latest add button card dialog",
+    create: "pnpm dlx create-cronus-app@latest my-app --template saas",
+    compose: "pnpm dlx cronus-ui@latest compose saas",
+    addPage: "pnpm dlx cronus-ui@latest add-page --route /faq --blocks faq,cta --nav FAQ",
+    upgrade: "pnpm dlx cronus-ui@latest upgrade --all --dry-run",
   },
   {
     id: "npm",
     label: "npm",
-    init: "npx kronus-ui@latest init",
-    add: "npx kronus-ui@latest add button card dialog",
-    create: "npx create-kronus-app@latest my-app --template saas",
-    compose: "npx kronus-ui@latest compose saas",
-    addPage: "npx kronus-ui@latest add-page --route /faq --blocks faq,cta --nav FAQ",
-    upgrade: "npx kronus-ui@latest upgrade --all --dry-run",
+    init: "npx cronus-ui@latest init",
+    add: "npx cronus-ui@latest add button card dialog",
+    create: "npx create-cronus-app@latest my-app --template saas",
+    compose: "npx cronus-ui@latest compose saas",
+    addPage: "npx cronus-ui@latest add-page --route /faq --blocks faq,cta --nav FAQ",
+    upgrade: "npx cronus-ui@latest upgrade --all --dry-run",
   },
   {
     id: "yarn",
     label: "yarn",
-    init: "yarn dlx kronus-ui@latest init",
-    add: "yarn dlx kronus-ui@latest add button card dialog",
-    create: "yarn dlx create-kronus-app@latest my-app --template saas",
-    compose: "yarn dlx kronus-ui@latest compose saas",
-    addPage: "yarn dlx kronus-ui@latest add-page --route /faq --blocks faq,cta --nav FAQ",
-    upgrade: "yarn dlx kronus-ui@latest upgrade --all --dry-run",
+    init: "yarn dlx cronus-ui@latest init",
+    add: "yarn dlx cronus-ui@latest add button card dialog",
+    create: "yarn dlx create-cronus-app@latest my-app --template saas",
+    compose: "yarn dlx cronus-ui@latest compose saas",
+    addPage: "yarn dlx cronus-ui@latest add-page --route /faq --blocks faq,cta --nav FAQ",
+    upgrade: "yarn dlx cronus-ui@latest upgrade --all --dry-run",
   },
   {
     id: "bun",
     label: "bun",
-    init: "bunx kronus-ui@latest init",
-    add: "bunx kronus-ui@latest add button card dialog",
-    create: "bunx create-kronus-app@latest my-app --template saas",
-    compose: "bunx kronus-ui@latest compose saas",
-    addPage: "bunx kronus-ui@latest add-page --route /faq --blocks faq,cta --nav FAQ",
-    upgrade: "bunx kronus-ui@latest upgrade --all --dry-run",
+    init: "bunx cronus-ui@latest init",
+    add: "bunx cronus-ui@latest add button card dialog",
+    create: "bunx create-cronus-app@latest my-app --template saas",
+    compose: "bunx cronus-ui@latest compose saas",
+    addPage: "bunx cronus-ui@latest add-page --route /faq --blocks faq,cta --nav FAQ",
+    upgrade: "bunx cronus-ui@latest upgrade --all --dry-run",
   },
 ];
 
@@ -171,12 +171,12 @@ export const INSTALL_OPTIONS = [
   {
     title: "Scaffold a SaaS app",
     description:
-      "npx create-kronus-app my-app --template saas — a Next.js product composed from validated blocks, with theme and AI Kit.",
+      "npx create-cronus-app my-app --template saas — a Next.js product composed from validated blocks, with theme and AI Kit.",
     href: "/docs/getting-started",
     action: "Get started",
   },
   {
-    title: "Use Kronus Create",
+    title: "Use Cronus Create",
     description:
       "Build a preset visually, save it, and generate the setup snippets for your stack.",
     href: "/create",
@@ -207,7 +207,7 @@ export const FRAMEWORKS = [
   {
     slug: "next",
     name: "Next.js",
-    command: "npx create-next-app@latest app && cd app && npx kronus-ui@latest init",
+    command: "npx create-next-app@latest app && cd app && npx cronus-ui@latest init",
     description: "App Router, RSC-safe provider placement, metadata, and route-level themes.",
     checks: [
       "Provider in app/layout.tsx",
@@ -218,14 +218,14 @@ export const FRAMEWORKS = [
   {
     slug: "vite",
     name: "Vite",
-    command: "npm create vite@latest app && cd app && npx kronus-ui@latest init",
+    command: "npm create vite@latest app && cd app && npx cronus-ui@latest init",
     description: "SPA setup with a root provider, CSS token import, and fast registry adds.",
     checks: ["Provider wraps <App />", "semantic tokens in src/index.css", "keyboard traps tested"],
   },
   {
     slug: "tanstack-start",
     name: "TanStack Start",
-    command: "npm create @tanstack/start@latest app && cd app && npx kronus-ui@latest init",
+    command: "npm create @tanstack/start@latest app && cd app && npx cronus-ui@latest init",
     description:
       "File routes, server functions, and persistent theme state across route transitions.",
     checks: [
@@ -237,14 +237,14 @@ export const FRAMEWORKS = [
   {
     slug: "react-router",
     name: "React Router",
-    command: "npx create-react-router@latest app && cd app && npx kronus-ui@latest init",
+    command: "npx create-react-router@latest app && cd app && npx cronus-ui@latest init",
     description: "Framework mode with route modules, loader-friendly forms, and progressive UX.",
     checks: ["Root.tsx owns provider", "forms expose field errors", "links keep visible focus"],
   },
   {
     slug: "astro",
     name: "Astro",
-    command: "npm create astro@latest app && cd app && npx kronus-ui@latest init",
+    command: "npm create astro@latest app && cd app && npx cronus-ui@latest init",
     description: "Island components with shared CSS tokens and isolated interactive surfaces.",
     checks: [
       "client islands import UI only where needed",
@@ -255,7 +255,7 @@ export const FRAMEWORKS = [
   {
     slug: "laravel",
     name: "Laravel",
-    command: "laravel new app && cd app && npx kronus-ui@latest init",
+    command: "laravel new app && cd app && npx cronus-ui@latest init",
     description: "Blade or Inertia setup with Vite, shared token CSS, and server-rendered forms.",
     checks: [
       "Vite entry imports tokens",
@@ -298,8 +298,8 @@ export const CHANGELOG_ENTRIES = [
       "Block variants, a SaaS template, add-page, and shared demo-store / demo-saas libs — compose a product, then grow it one route at a time.",
     items: [
       "Installable block variants and a repeatable --variant flag on compose",
-      "create-kronus-app --template saas: app-shell chrome, dashboard, team, billing, settings, split login",
-      "kronus-ui add-page grows a composed app (blocks, nav, base snapshot, --dry-run)",
+      "create-cronus-app --template saas: app-shell chrome, dashboard, team, billing, settings, split login",
+      "cronus-ui add-page grows a composed app (blocks, nav, base snapshot, --dry-run)",
       "Shared demo-store / demo-saas libs as registry:lib, installed transitively with add/compose",
     ],
   },
@@ -307,12 +307,12 @@ export const CHANGELOG_ENTRIES = [
     date: "2026-07-13",
     version: "v0.4.0",
     status: "Released",
-    title: "Kronus Compose",
+    title: "Cronus Compose",
     summary:
       "Generate a multi-page Next.js app from validated registry blocks. Every page is imports plus a <main> that stacks them.",
     items: [
-      "kronus-ui compose <template> and create-kronus-app --template store|landing",
-      "Bundled store and landing manifests, --dry-run sitemap preview, .kronus-ui/ base snapshot",
+      "cronus-ui compose <template> and create-cronus-app --template store|landing",
+      "Bundled store and landing manifests, --dry-run sitemap preview, .cronus-ui/ base snapshot",
       "registry/meta.json sidecar and MCP search/list/get enriched from it",
     ],
   },
@@ -322,7 +322,7 @@ export const CHANGELOG_ENTRIES = [
     status: "Released",
     title: "Optional peers, 17 blocks, 5 components",
     summary:
-      "Heavy leaf libraries moved to optional peerDependencies of @kronus-ui/ui. CLI add still installs per-item deps. Catalog grew.",
+      "Heavy leaf libraries moved to optional peerDependencies of @cronus-ui/ui. CLI add still installs per-item deps. Catalog grew.",
     items: [
       "recharts, tiptap, dnd-kit, tanstack-table, react-day-picker, and date-fns are optional peers",
       "17 new blocks across store, account, admin, and content families (56 → 73)",
@@ -337,8 +337,8 @@ export const CHANGELOG_ENTRIES = [
     summary:
       "Promoted Stack Builder into the publishable package set, added app and stack generators, refreshed the homepage, and hardened the local v0.2 release path.",
     items: [
-      "Nine publishables in lockstep: tokens, theme, UI, stack, AI Kit, CLI, create-kronus-app, create-kronus-stack, and MCP",
-      "Stack Builder docs, schema metadata, KICKOFF.md, stack.json, and create-kronus-stack scaffold output",
+      "Nine publishables in lockstep: tokens, theme, UI, stack, AI Kit, CLI, create-cronus-app, create-cronus-stack, and MCP",
+      "Stack Builder docs, schema metadata, KICKOFF.md, stack.json, and create-cronus-stack scaffold output",
       "Full package smoke coverage for runtime installs, installed bins, scaffold checks, and tarball dependency pins",
     ],
   },

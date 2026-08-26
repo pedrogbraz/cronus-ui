@@ -1,6 +1,6 @@
-import { KronusUIProvider } from "@kronus-ui/theme";
-import { type ThemeName, themes } from "@kronus-ui/tokens";
-import { Badge, Button, Input } from "@kronus-ui/ui";
+import { CronusUIProvider } from "@cronus-ui/theme";
+import { type ThemeName, themes } from "@cronus-ui/tokens";
+import { Badge, Button, Input } from "@cronus-ui/ui";
 import { ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -11,9 +11,9 @@ import { absoluteUrl } from "../../lib/site-url";
 import { CopyCommand } from "./copy-command";
 
 export const metadata: Metadata = {
-  title: "Themes — Kronus UI",
+  title: "Themes — Cronus UI",
   description:
-    "The five built-in Kronus UI looks, plus shareable custom themes: design one in the Create Studio, share the permalink, and anyone applies it with `npx kronus-ui theme add`.",
+    "The five built-in Cronus UI looks, plus shareable custom themes: design one in the Create Studio, share the permalink, and anyone applies it with `npx cronus-ui theme add`.",
 };
 
 /** `{ ...DEFAULT_CONFIG }` with a per-theme patch — the Studio config each card encodes. */
@@ -104,8 +104,8 @@ function paletteOf(name: ThemeName): { label: string; value: string }[] {
 
 /**
  * One built-in theme card: palette strip, a live component strip rendered
- * inside a scoped (non-asRoot) <KronusUIProvider> — the provider wraps its
- * subtree in a `data-kronus-theme` div, so each card is themed independently of
+ * inside a scoped (non-asRoot) <CronusUIProvider> — the provider wraps its
+ * subtree in a `data-cronus-theme` div, so each card is themed independently of
  * the ambient site theme — plus the two distribution actions.
  */
 function ThemeCardView({ card }: { card: ThemeCard }) {
@@ -141,7 +141,7 @@ function ThemeCardView({ card }: { card: ThemeCard }) {
         ))}
       </ul>
 
-      <KronusUIProvider
+      <CronusUIProvider
         defaultThemeName={card.name}
         defaultModeName="dark"
         className="overflow-hidden rounded-xl border border-border"
@@ -153,15 +153,15 @@ function ThemeCardView({ card }: { card: ThemeCard }) {
           </Button>
           <Badge variant="success">Live</Badge>
           <Input
-            placeholder="you@kronus.dev"
+            placeholder="you@cronus.dev"
             aria-label={`Input preview in the ${card.label} theme`}
             className="h-8 w-full min-w-0 flex-1 sm:w-36"
           />
         </div>
-      </KronusUIProvider>
+      </CronusUIProvider>
 
       <div className="mt-auto flex flex-col gap-3">
-        <CopyCommand command={`npx kronus-ui theme add "${absoluteUrl(studioPath)}"`} />
+        <CopyCommand command={`npx cronus-ui theme add "${absoluteUrl(studioPath)}"`} />
         <Link
           href={studioPath}
           className="inline-flex w-fit items-center gap-1.5 rounded-md text-sm font-medium text-primary-strong outline-none transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
@@ -190,7 +190,7 @@ const SHARE_STEPS = [
 ];
 
 export default function ThemesPage() {
-  const exampleCommand = `npx kronus-ui theme add "${absoluteUrl(
+  const exampleCommand = `npx cronus-ui theme add "${absoluteUrl(
     `/create?c=${encodeConfigParam(EXAMPLE_STUDIO_CONFIG)}`,
   )}"`;
 
@@ -207,7 +207,7 @@ export default function ThemesPage() {
             Five built-in presets ship with every install — and any theme you build in the Create
             Studio travels as a plain permalink. Paste it into{" "}
             <code className="rounded-md border border-border bg-surface-inset px-1.5 py-0.5 font-mono text-[0.85em] text-fg">
-              kronus-ui theme add
+              cronus-ui theme add
             </code>{" "}
             and the CLI materializes it in your app.
           </p>
@@ -226,7 +226,7 @@ export default function ThemesPage() {
         </h2>
         <p className="mt-2 max-w-2xl text-fg-secondary">
           Switch between them any time with{" "}
-          <code className="font-mono text-sm text-fg">npx kronus-ui theme set &lt;name&gt;</code>.
+          <code className="font-mono text-sm text-fg">npx cronus-ui theme set &lt;name&gt;</code>.
           Each card also carries its closest Create Studio recipe — copy the command to apply that
           remix, or open it in the Studio and make it yours.
         </p>
@@ -276,7 +276,7 @@ export default function ThemesPage() {
             <p className="text-sm text-fg-secondary">
               Exported a JSON config instead? The same command takes a file path:{" "}
               <code className="font-mono text-sm text-fg">
-                npx kronus-ui theme add ./my-theme.json
+                npx cronus-ui theme add ./my-theme.json
               </code>
             </p>
             <Link

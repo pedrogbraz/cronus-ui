@@ -2,9 +2,9 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Kronus Tailwind preset. Maps semantic utilities (bg-primary, rounded-lg,
- * shadow-glow, text-fg-secondary, …) to the runtime `--kronus-*` variables
- * defined in `@kronus-ui/tokens/styles.css`, so they re-theme live.
+ * Cronus Tailwind preset. Maps semantic utilities (bg-primary, rounded-lg,
+ * shadow-glow, text-fg-secondary, …) to the runtime `--cronus-*` variables
+ * defined in `@cronus-ui/tokens/styles.css`, so they re-theme live.
  */
 declare const preset: Config;
 export default preset;

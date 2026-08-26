@@ -1,6 +1,6 @@
 /**
- * @kronus-ui/ai-kit — the AI Kit generator + templates, shared by
- * `create-kronus-app` (scaffold time) and the `kronus-ui` CLI (`kronus-ui ai`).
+ * @cronus-ui/ai-kit — the AI Kit generator + templates, shared by
+ * `create-cronus-app` (scaffold time) and the `cronus-ui` CLI (`cronus-ui ai`).
  * One source of truth for the doctrine, skills, and per-assistant config.
  */
 export type {

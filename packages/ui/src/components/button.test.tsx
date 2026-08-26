@@ -43,7 +43,7 @@ describe("Button", () => {
     render(<Button variant="destructive">Delete</Button>);
     const button = screen.getByRole("button", { name: "Delete" });
     expect(button).toHaveClass("text-white");
-    expect(button.className).toContain("color-mix(in_oklch,var(--kronus-error),black_30%)");
+    expect(button.className).toContain("color-mix(in_oklch,var(--cronus-error),black_30%)");
     expect(button.className).not.toContain("bg-error");
   });
 

@@ -10,7 +10,7 @@ import {
 
 const validatedFormCode = `"use client";
 
-import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Input } from "@kronus-ui/ui";
+import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Input } from "@cronus-ui/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -43,7 +43,7 @@ export function SignInForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="you@kronus.dev" {...field} />
+                <Input type="email" placeholder="you@cronus.dev" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -70,8 +70,8 @@ export function SignInForm() {
 
 const darkModeToggleCode = `"use client";
 
-import { Button } from "@kronus-ui/ui";
-import { useTheme } from "@kronus-ui/theme";
+import { Button } from "@cronus-ui/ui";
+import { useTheme } from "@cronus-ui/theme";
 import { Moon, Sun } from "lucide-react";
 
 export function ModeToggle() {
@@ -90,7 +90,7 @@ export function ModeToggle() {
   );
 }`;
 
-const setModeCode = `import { useTheme } from "@kronus-ui/theme";
+const setModeCode = `import { useTheme } from "@cronus-ui/theme";
 
 function ModePicker() {
   const { mode, setMode } = useTheme();
@@ -114,7 +114,7 @@ function ModePicker() {
 
 const toastCode = `"use client";
 
-import { Button, Toaster, toast } from "@kronus-ui/ui";
+import { Button, Toaster, toast } from "@cronus-ui/ui";
 
 export function SaveBar() {
   return (
@@ -148,7 +148,7 @@ const confirmCode = `import {
   AlertDialogTitle,
   AlertDialogTrigger,
   Button,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Trash2 } from "lucide-react";
 
 export function DeleteProjectButton({ onConfirm }: { onConfirm: () => void }) {
@@ -189,7 +189,7 @@ import {
   CommandSeparator,
   CommandShortcut,
   Kbd,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { CalendarDays, Settings, User } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -254,7 +254,7 @@ export default function RecipesPage() {
       <DocsHeader
         eyebrow="Documentation"
         title="Recipes"
-        description="Copy-paste solutions for the patterns teams build most often with Kronus UI: validated forms, theme toggles, toasts, confirmations, and a command palette."
+        description="Copy-paste solutions for the patterns teams build most often with Cronus UI: validated forms, theme toggles, toasts, confirmations, and a command palette."
       >
         <PrimaryLink href="/components">Browse components</PrimaryLink>
       </DocsHeader>
@@ -274,7 +274,7 @@ export default function RecipesPage() {
 
       <DocsSection
         title="A dark-mode toggle"
-        description="Flip between light and dark with the useTheme hook. It must be called inside a KronusUIProvider; toggleMode swaps the active mode and persists it through the provider's storageKey. Use this for the mode switch in a header or settings menu."
+        description="Flip between light and dark with the useTheme hook. It must be called inside a CronusUIProvider; toggleMode swaps the active mode and persists it through the provider's storageKey. Use this for the mode switch in a header or settings menu."
       >
         <CodeBlock code={darkModeToggleCode} language="tsx" expandable />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
@@ -283,7 +283,7 @@ export default function RecipesPage() {
         </p>
         <CodeBlock code={setModeCode} language="tsx" expandable />
         <DocCallout title="Avoid a flash of the wrong mode">
-          Render <InlineCode>KronusThemeScript</InlineCode> in the document head so the saved mode
+          Render <InlineCode>CronusThemeScript</InlineCode> in the document head so the saved mode
           applies before paint. See <DocsTextLink href="/docs/theming">Theming</DocsTextLink> for
           the full setup.
         </DocCallout>

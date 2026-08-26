@@ -1,8 +1,8 @@
-import { defaultMode, defaultTheme, type Mode, type ThemeName } from "@kronus-ui/tokens";
+import { defaultMode, defaultTheme, type Mode, type ThemeName } from "@cronus-ui/tokens";
 
-export interface KronusThemeScriptProps {
+export interface CronusThemeScriptProps {
   /**
-   * The same `storageKey` passed to `<KronusUIProvider>`. The script reads the
+   * The same `storageKey` passed to `<CronusUIProvider>`. The script reads the
    * persisted `{ theme, mode }` from `localStorage[storageKey]`.
    */
   storageKey: string;
@@ -16,7 +16,7 @@ export interface KronusThemeScriptProps {
 
 /**
  * Builds the dependency-free IIFE source. The body mirrors the provider's
- * `applyRootAttributes` byte-for-byte (dataset.kronusTheme / dataset.kronusMode /
+ * `applyRootAttributes` byte-for-byte (dataset.cronusTheme / dataset.cronusMode /
  * classList.toggle("dark", …)) so the pre-paint state matches what React would
  * compute on hydration. All interpolated values are `JSON.stringify`-encoded so
  * a storage key or default containing quotes can't break out of the script.
@@ -33,13 +33,13 @@ function buildScript(
     defaultThemeName,
   )},m=${JSON.stringify(defaultModeName)};try{var s=localStorage.getItem(${JSON.stringify(
     storageKey,
-  )});if(s){var p=JSON.parse(s);if(p&&p.theme)t=p.theme;if(p&&p.mode)m=p.mode;}}catch(e){}d.dataset.kronusTheme=t;d.dataset.kronusMode=m;d.classList.toggle("dark",m==="dark");})();`;
+  )});if(s){var p=JSON.parse(s);if(p&&p.theme)t=p.theme;if(p&&p.mode)m=p.mode;}}catch(e){}d.dataset.cronusTheme=t;d.dataset.cronusMode=m;d.classList.toggle("dark",m==="dark");})();`;
 }
 
 /**
  * Inline head script that applies the persisted theme/mode to `<html>` BEFORE
  * first paint, eliminating the flash of the default theme that otherwise occurs
- * while `<KronusUIProvider asRoot storageKey>` hydrates from `localStorage` in a
+ * while `<CronusUIProvider asRoot storageKey>` hydrates from `localStorage` in a
  * post-paint effect.
  *
  * Place it inside `<head>` (above the app) and add `suppressHydrationWarning` to
@@ -48,18 +48,18 @@ function buildScript(
  * ```tsx
  * <html lang="en" suppressHydrationWarning>
  *   <head>
- *     <KronusThemeScript storageKey="kronus-ui-theme" defaultThemeName="aurora" defaultModeName="dark" />
+ *     <CronusThemeScript storageKey="cronus-ui-theme" defaultThemeName="aurora" defaultModeName="dark" />
  *   </head>
  *   ...
  * </html>
  * ```
  */
-export function KronusThemeScript({
+export function CronusThemeScript({
   storageKey,
   defaultThemeName = defaultTheme,
   defaultModeName = defaultMode,
   nonce,
-}: KronusThemeScriptProps) {
+}: CronusThemeScriptProps) {
   return (
     <script
       // biome-ignore lint/security/noDangerouslySetInnerHtml: required to inline a pre-paint anti-FOUC script; all interpolated values are JSON.stringify-encoded.

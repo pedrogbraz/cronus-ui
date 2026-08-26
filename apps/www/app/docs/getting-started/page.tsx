@@ -10,72 +10,72 @@ import {
   PrimaryLink,
 } from "../../../components/docs/documentation";
 
-const createAppCode = `npx create-kronus-app my-app --template saas`;
+const createAppCode = `npx create-cronus-app my-app --template saas`;
 
-const scaffoldProviderCode = `import { KronusThemeScript, KronusUIProvider } from "@kronus-ui/theme";
+const scaffoldProviderCode = `import { CronusThemeScript, CronusUIProvider } from "@cronus-ui/theme";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <KronusThemeScript
+        <CronusThemeScript
           storageKey="theme"
           defaultThemeName="aurora"
           defaultModeName="dark"
         />
       </head>
       <body>
-        <KronusUIProvider
+        <CronusUIProvider
           asRoot
           defaultThemeName="aurora"
           defaultModeName="dark"
           storageKey="theme"
         >
           {children}
-        </KronusUIProvider>
+        </CronusUIProvider>
       </body>
     </html>
   );
 }`;
 
-const existingProviderCode = `import "@kronus-ui/tokens/styles.css";
-import { KronusThemeScript, KronusUIProvider } from "@kronus-ui/theme";
+const existingProviderCode = `import "@cronus-ui/tokens/styles.css";
+import { CronusThemeScript, CronusUIProvider } from "@cronus-ui/theme";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <KronusThemeScript
+        <CronusThemeScript
           storageKey="theme"
           defaultThemeName="aurora"
           defaultModeName="dark"
         />
       </head>
       <body>
-        <KronusUIProvider
+        <CronusUIProvider
           asRoot
           defaultThemeName="aurora"
           defaultModeName="dark"
           storageKey="theme"
         >
           {children}
-        </KronusUIProvider>
+        </CronusUIProvider>
       </body>
     </html>
   );
 }`;
 
-const themeSetCode = `npx kronus-ui theme set aurora
-npx kronus-ui theme set midnight --mode light`;
+const themeSetCode = `npx cronus-ui theme set aurora
+npx cronus-ui theme set midnight --mode light`;
 
-const addPageCode = `npx kronus-ui add-page --route /faq --blocks faq,cta --nav FAQ`;
+const addPageCode = `npx cronus-ui add-page --route /faq --blocks faq,cta --nav FAQ`;
 
-const upgradeCode = `npx kronus-ui upgrade --all --dry-run
-npx kronus-ui upgrade --all`;
+const upgradeCode = `npx cronus-ui upgrade --all --dry-run
+npx cronus-ui upgrade --all`;
 
-const initCode = `npx kronus-ui@latest init`;
+const initCode = `npx cronus-ui@latest init`;
 
-const addButtonCode = `npx kronus-ui add button`;
+const addButtonCode = `npx cronus-ui add button`;
 
 const useButtonCode = `import { Button } from "@/components/ui/button";
 
@@ -87,7 +87,7 @@ export default function Page() {
   );
 }`;
 
-const addBlockCode = `npx kronus-ui add login`;
+const addBlockCode = `npx cronus-ui add login`;
 
 const useBlockCode = `import { LoginBlock } from "@/components/blocks/login";
 
@@ -104,7 +104,7 @@ const nextSteps = [
   {
     title: "Compare",
     description:
-      "Kronus UI next to shadcn/ui, HeroUI, and Aceternity — distribution, theming, compose, a11y.",
+      "Cronus UI next to shadcn/ui, HeroUI, and Aceternity — distribution, theming, compose, a11y.",
     href: "/docs/compare",
     action: "Read the comparison",
   },
@@ -152,9 +152,9 @@ export default function GettingStartedPage() {
         <CodeBlock code={createAppCode} language="bash" expandable />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
           Prefer another package manager? Use{" "}
-          <InlineCode>pnpm dlx create-kronus-app@latest my-app --template saas</InlineCode>,{" "}
-          <InlineCode>yarn dlx create-kronus-app@latest my-app --template saas</InlineCode>, or{" "}
-          <InlineCode>bunx create-kronus-app@latest my-app --template saas</InlineCode>. Templates{" "}
+          <InlineCode>pnpm dlx create-cronus-app@latest my-app --template saas</InlineCode>,{" "}
+          <InlineCode>yarn dlx create-cronus-app@latest my-app --template saas</InlineCode>, or{" "}
+          <InlineCode>bunx create-cronus-app@latest my-app --template saas</InlineCode>. Templates{" "}
           <InlineCode>store</InlineCode> and <InlineCode>landing</InlineCode> compose the same way.
           See <DocsTextLink href="/docs/installation">Installation</DocsTextLink> for Create Studio
           and existing apps.
@@ -163,13 +163,13 @@ export default function GettingStartedPage() {
 
       <DocsSection
         title="2. The provider is already in the scaffold"
-        description="The generated app already imports the tokens stylesheet and wraps the tree in KronusUIProvider. You only add this yourself when wiring an existing app."
+        description="The generated app already imports the tokens stylesheet and wraps the tree in CronusUIProvider. You only add this yourself when wiring an existing app."
       >
         <CodeBlock code={scaffoldProviderCode} language="tsx" expandable />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
           Tokens are imported in <InlineCode>globals.css</InlineCode> via{" "}
-          <InlineCode>@import "@kronus-ui/tokens/styles.css"</InlineCode>.{" "}
-          <InlineCode>KronusThemeScript</InlineCode> in the document head applies the saved mode
+          <InlineCode>@import "@cronus-ui/tokens/styles.css"</InlineCode>.{" "}
+          <InlineCode>CronusThemeScript</InlineCode> in the document head applies the saved mode
           before paint. See <DocsTextLink href="/docs/theming">Theming</DocsTextLink> for the full
           no-FOUC setup.
         </p>
@@ -177,12 +177,12 @@ export default function GettingStartedPage() {
 
       <DocsSection
         title="3. Switch the theme"
-        description="Aurora is the default on generated products. theme set rewrites the layout attributes and kronus-ui.json. Presets: aurora, neutral, midnight, sunset, emerald."
+        description="Aurora is the default on generated products. theme set rewrites the layout attributes and cronus-ui.json. Presets: aurora, neutral, midnight, sunset, emerald."
       >
         <CodeBlock code={themeSetCode} language="bash" expandable />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
           Override individual tokens at runtime, or build a look visually in Create and apply it
-          with <InlineCode>npx kronus-ui theme add</InlineCode>. See{" "}
+          with <InlineCode>npx cronus-ui theme add</InlineCode>. See{" "}
           <DocsTextLink href="/docs/theming">Theming</DocsTextLink> and{" "}
           <DocsTextLink href="/docs/styling">Styling</DocsTextLink> for the full API.
         </p>
@@ -190,7 +190,7 @@ export default function GettingStartedPage() {
 
       <DocsSection
         title="4. Add a page"
-        description="add-page grows an already-composed app by one route: installs new blocks, updates chrome nav, and records the page in kronus-ui.json."
+        description="add-page grows an already-composed app by one route: installs new blocks, updates chrome nav, and records the page in cronus-ui.json."
       >
         <CodeBlock code={addPageCode} language="bash" expandable />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
@@ -203,7 +203,7 @@ export default function GettingStartedPage() {
 
       <DocsSection
         title="5. Pull updates without losing edits"
-        description="upgrade 3-way-merges installed source and generated pages/layouts against .kronus-ui/base. add-page routes are kept. Never use compose --overwrite to pull updates."
+        description="upgrade 3-way-merges installed source and generated pages/layouts against .cronus-ui/base. add-page routes are kept. Never use compose --overwrite to pull updates."
       >
         <CodeBlock code={upgradeCode} language="bash" expandable />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
@@ -220,7 +220,7 @@ export default function GettingStartedPage() {
       >
         <CodeBlock code={initCode} language="bash" expandable />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
-          init writes <InlineCode>kronus-ui.json</InlineCode>, installs base dependencies, and wires{" "}
+          init writes <InlineCode>cronus-ui.json</InlineCode>, installs base dependencies, and wires{" "}
           <InlineCode>cn()</InlineCode>. Import tokens and wrap the tree yourself:
         </p>
         <CodeBlock code={existingProviderCode} language="tsx" expandable />

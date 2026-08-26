@@ -20,8 +20,8 @@ import {
   Label,
   Rating,
   Separator,
-} from "@kronus-ui/ui";
-import { USER } from "@kronus-ui/ui/demo-saas";
+} from "@cronus-ui/ui";
+import { USER } from "@cronus-ui/ui/demo-saas";
 import {
   Apple,
   ArrowLeft,
@@ -55,7 +55,7 @@ export function LoginBlock() {
           </span>
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Welcome back</CardTitle>
-            <p className="text-sm text-fg-secondary">Sign in to your Kronus workspace</p>
+            <p className="text-sm text-fg-secondary">Sign in to your Cronus workspace</p>
           </div>
         </CardHeader>
 
@@ -145,7 +145,7 @@ const loginCode = `import {
   Input,
   Label,
   Separator,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ChartColumnIncreasing, Chrome, Github } from "lucide-react";
 
 export function LoginBlock() {
@@ -158,7 +158,7 @@ export function LoginBlock() {
           </span>
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Welcome back</CardTitle>
-            <p className="text-sm text-fg-secondary">Sign in to your Kronus workspace</p>
+            <p className="text-sm text-fg-secondary">Sign in to your Cronus workspace</p>
           </div>
         </CardHeader>
 
@@ -241,7 +241,7 @@ export function LoginSplitBlock() {
         <div className="flex flex-col justify-center gap-6 p-8 sm:p-10 lg:order-2">
           <div className="flex flex-col gap-1">
             <h2 className="font-display text-xl font-semibold text-fg">Welcome back</h2>
-            <p className="text-sm text-fg-secondary">Sign in to your Kronus workspace.</p>
+            <p className="text-sm text-fg-secondary">Sign in to your Cronus workspace.</p>
           </div>
 
           <div className="flex flex-col gap-4">
@@ -301,14 +301,14 @@ export function LoginSplitBlock() {
                 <ChartColumnIncreasing className="size-4" aria-hidden="true" />
               </span>
               <span className="font-display text-lg font-semibold text-primary-foreground">
-                Kronus
+                Cronus
               </span>
             </div>
 
             <figure className="flex flex-col gap-5">
               <Quote className="size-7 text-primary-foreground/50" aria-hidden="true" />
               <blockquote className="font-display text-xl font-medium leading-snug text-primary-foreground">
-                “Kronus replaced four tools on day one — and our checkout conversion is up 23%.”
+                “Cronus replaced four tools on day one — and our checkout conversion is up 23%.”
               </blockquote>
               <figcaption className="flex items-center gap-3">
                 <Avatar>
@@ -329,7 +329,7 @@ export function LoginSplitBlock() {
   );
 }
 
-const loginSplitCode = `import { Avatar, AvatarFallback, Button, Input, Label } from "@kronus-ui/ui";
+const loginSplitCode = `import { Avatar, AvatarFallback, Button, Input, Label } from "@cronus-ui/ui";
 import { ChartColumnIncreasing, Quote } from "lucide-react";
 
 export function LoginSplitBlock() {
@@ -340,7 +340,7 @@ export function LoginSplitBlock() {
         <div className="flex flex-col justify-center gap-6 p-8 sm:p-10 lg:order-2">
           <div className="flex flex-col gap-1">
             <h2 className="font-display text-xl font-semibold text-fg">Welcome back</h2>
-            <p className="text-sm text-fg-secondary">Sign in to your Kronus workspace.</p>
+            <p className="text-sm text-fg-secondary">Sign in to your Cronus workspace.</p>
           </div>
 
           <div className="flex flex-col gap-4">
@@ -400,14 +400,14 @@ export function LoginSplitBlock() {
                 <ChartColumnIncreasing className="size-4" aria-hidden="true" />
               </span>
               <span className="font-display text-lg font-semibold text-primary-foreground">
-                Kronus
+                Cronus
               </span>
             </div>
 
             <figure className="flex flex-col gap-5">
               <Quote className="size-7 text-primary-foreground/50" aria-hidden="true" />
               <blockquote className="font-display text-xl font-medium leading-snug text-primary-foreground">
-                “Kronus replaced four tools on day one — and our checkout conversion is up 23%.”
+                “Cronus replaced four tools on day one — and our checkout conversion is up 23%.”
               </blockquote>
               <figcaption className="flex items-center gap-3">
                 <Avatar>
@@ -441,7 +441,7 @@ export function LoginSocialFirstBlock() {
             <ChartColumnIncreasing className="size-5" aria-hidden="true" />
           </span>
           <div className="flex flex-col gap-1">
-            <CardTitle className="font-display text-xl">Sign in to Kronus</CardTitle>
+            <CardTitle className="font-display text-xl">Sign in to Cronus</CardTitle>
             <p className="text-sm text-fg-secondary">Pick up right where you left off.</p>
           </div>
         </CardHeader>
@@ -503,7 +503,7 @@ export function LoginSocialFirstBlock() {
 
         <CardFooter className="justify-center">
           <p className="text-sm text-fg-secondary">
-            New to Kronus?{" "}
+            New to Cronus?{" "}
             <a
               href="#signup"
               className="font-medium text-primary-strong underline-offset-4 hover:underline"
@@ -527,7 +527,7 @@ const loginSocialFirstCode = `import {
   Input,
   Label,
   Separator,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Apple, ChartColumnIncreasing, Chrome, Github } from "lucide-react";
 
 export function LoginSocialFirstBlock() {
@@ -539,7 +539,7 @@ export function LoginSocialFirstBlock() {
             <ChartColumnIncreasing className="size-5" aria-hidden="true" />
           </span>
           <div className="flex flex-col gap-1">
-            <CardTitle className="font-display text-xl">Sign in to Kronus</CardTitle>
+            <CardTitle className="font-display text-xl">Sign in to Cronus</CardTitle>
             <p className="text-sm text-fg-secondary">Pick up right where you left off.</p>
           </div>
         </CardHeader>
@@ -601,7 +601,7 @@ export function LoginSocialFirstBlock() {
 
         <CardFooter className="justify-center">
           <p className="text-sm text-fg-secondary">
-            New to Kronus?{" "}
+            New to Cronus?{" "}
             <a
               href="#signup"
               className="font-medium text-primary-strong underline-offset-4 hover:underline"
@@ -628,7 +628,7 @@ export function LoginMinimalBlock() {
         </span>
 
         <div className="flex flex-col gap-1.5">
-          <h2 className="font-display text-2xl font-semibold text-fg">Sign in to Kronus</h2>
+          <h2 className="font-display text-2xl font-semibold text-fg">Sign in to Cronus</h2>
           <p className="text-sm text-fg-secondary">Use your work email to continue.</p>
         </div>
 
@@ -672,7 +672,7 @@ export function LoginMinimalBlock() {
   );
 }
 
-const loginMinimalCode = `import { Button, Input, Label, Separator } from "@kronus-ui/ui";
+const loginMinimalCode = `import { Button, Input, Label, Separator } from "@cronus-ui/ui";
 import { ChartColumnIncreasing } from "lucide-react";
 
 export function LoginMinimalBlock() {
@@ -684,7 +684,7 @@ export function LoginMinimalBlock() {
         </span>
 
         <div className="flex flex-col gap-1.5">
-          <h2 className="font-display text-2xl font-semibold text-fg">Sign in to Kronus</h2>
+          <h2 className="font-display text-2xl font-semibold text-fg">Sign in to Cronus</h2>
           <p className="text-sm text-fg-secondary">Use your work email to continue.</p>
         </div>
 
@@ -742,7 +742,7 @@ export function SignupBlock() {
           </span>
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Create your account</CardTitle>
-            <p className="text-sm text-fg-secondary">Start building with Kronus in minutes.</p>
+            <p className="text-sm text-fg-secondary">Start building with Cronus in minutes.</p>
           </div>
         </CardHeader>
 
@@ -829,7 +829,7 @@ const signupCode = `import {
   Input,
   Label,
   Separator,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { USER } from "../lib/demo-saas.js";
 import { ChartColumnIncreasing, Chrome, Github } from "lucide-react";
 
@@ -843,7 +843,7 @@ export function SignupBlock() {
           </span>
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Create your account</CardTitle>
-            <p className="text-sm text-fg-secondary">Start building with Kronus in minutes.</p>
+            <p className="text-sm text-fg-secondary">Start building with Cronus in minutes.</p>
           </div>
         </CardHeader>
 
@@ -1006,7 +1006,7 @@ export function SignupSplitProofBlock() {
         <div className="flex flex-col justify-center gap-8 border-t border-border bg-surface-inset p-8 sm:p-10 lg:order-1 lg:border-t-0 lg:border-e">
           <div className="flex flex-col gap-2">
             <h2 className="font-display text-2xl font-semibold text-fg">
-              Join 12,000+ creators selling with Kronus
+              Join 12,000+ creators selling with Cronus
             </h2>
             <p className="text-sm text-fg-secondary">
               Courses, communities, and digital products — one storefront.
@@ -1061,7 +1061,7 @@ const signupSplitProofCode = `import {
   Input,
   Label,
   Rating,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { USER } from "../lib/demo-saas.js";
 
 const proofBrands = ["Northwind", "Framelane", "Luma Labs", "Postbox"];
@@ -1152,7 +1152,7 @@ export function SignupSplitProofBlock() {
         <div className="flex flex-col justify-center gap-8 border-t border-border bg-surface-inset p-8 sm:p-10 lg:order-1 lg:border-t-0 lg:border-e">
           <div className="flex flex-col gap-2">
             <h2 className="font-display text-2xl font-semibold text-fg">
-              Join 12,000+ creators selling with Kronus
+              Join 12,000+ creators selling with Cronus
             </h2>
             <p className="text-sm text-fg-secondary">
               Courses, communities, and digital products — one storefront.
@@ -1351,7 +1351,7 @@ const signupWithPlanCode = `import {
   Input,
   Label,
   Separator,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { USER } from "../lib/demo-saas.js";
 import { Check } from "lucide-react";
 
@@ -1548,7 +1548,7 @@ const forgotPasswordCode = `import {
   CardTitle,
   Input,
   Label,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ArrowLeft, KeyRound } from "lucide-react";
 
 export function ForgotPasswordBlock() {
@@ -1603,7 +1603,7 @@ export function ForgotPasswordSentBlock() {
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Check your inbox</CardTitle>
             <p className="text-sm text-fg-secondary">
-              We sent a password reset link to mara@kronus.io.
+              We sent a password reset link to mara@cronus.io.
             </p>
           </div>
         </CardHeader>
@@ -1639,7 +1639,7 @@ const forgotPasswordSentCode = `import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ArrowLeft, MailCheck } from "lucide-react";
 
 export function ForgotPasswordSentBlock() {
@@ -1653,7 +1653,7 @@ export function ForgotPasswordSentBlock() {
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Check your inbox</CardTitle>
             <p className="text-sm text-fg-secondary">
-              We sent a password reset link to mara@kronus.io.
+              We sent a password reset link to mara@cronus.io.
             </p>
           </div>
         </CardHeader>
@@ -1755,7 +1755,7 @@ const otpCode = `import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ArrowLeft, ShieldCheck } from "lucide-react";
 
 export function OtpBlock() {
@@ -1896,7 +1896,7 @@ const magicLinkCode = `import {
   Input,
   Label,
   Separator,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Chrome, Github, Sparkles } from "lucide-react";
 
 export function MagicLinkBlock() {
@@ -1970,7 +1970,7 @@ export function MagicLinkSentBlock() {
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Check your email</CardTitle>
             <p className="text-sm text-fg-secondary">
-              We emailed a magic link to mara@kronus.io. Click it to sign in.
+              We emailed a magic link to mara@cronus.io. Click it to sign in.
             </p>
           </div>
         </CardHeader>
@@ -2004,7 +2004,7 @@ const magicLinkSentCode = `import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ArrowLeft, MailCheck } from "lucide-react";
 
 export function MagicLinkSentBlock() {
@@ -2018,7 +2018,7 @@ export function MagicLinkSentBlock() {
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Check your email</CardTitle>
             <p className="text-sm text-fg-secondary">
-              We emailed a magic link to mara@kronus.io. Click it to sign in.
+              We emailed a magic link to mara@cronus.io. Click it to sign in.
             </p>
           </div>
         </CardHeader>

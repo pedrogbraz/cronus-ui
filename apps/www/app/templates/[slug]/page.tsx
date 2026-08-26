@@ -27,7 +27,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const entry = getTemplate(slug);
   return {
-    title: entry ? `${entry.name} — Kronus UI Templates` : "Templates — Kronus UI",
+    title: entry ? `${entry.name} — Cronus UI Templates` : "Templates — Cronus UI",
     description: entry?.description,
   };
 }
@@ -84,7 +84,7 @@ export default async function TemplateDetailPage({
                   Additive to OSS.{" "}
                   <a
                     href={PRO_URL}
-                    className="text-fg-secondary underline-offset-4 hover:text-fg hover:underline"
+                    className="text-fg-secondary underline underline-offset-4 hover:text-fg"
                   >
                     See what Pro adds
                   </a>

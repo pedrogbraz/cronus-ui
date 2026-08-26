@@ -1,4 +1,4 @@
-# `@kronus-ui/ui` component authoring contract
+# `@cronus-ui/ui` component authoring contract
 
 Every component MUST follow this contract so the library stays consistent,
 themeable, and tree-shakeable. Read this fully before writing a component.
@@ -51,7 +51,7 @@ themeable, and tree-shakeable. Read this fully before writing a component.
     Locale-sensitive formatting goes through `Intl` or an injected locale
     (e.g. a `date-fns` `locale` prop), never a baked-in format.
 
-## Token utility reference (resolve to `--kronus-*`, re-theme live)
+## Token utility reference (resolve to `--cronus-*`, re-theme live)
 Colors (use as `bg-*`, `text-*`, `border-*`, `ring-*`):
 - `primary`, `primary-foreground`, `accent`, `accent-foreground`
 - `surface-base`, `surface-inset`, `surface-raised`, `surface-overlay`,
@@ -86,7 +86,7 @@ Colors (use as `bg-*`, `text-*`, `border-*`, `ring-*`):
   `*-strong` token on its `/15` tint across all 10 theme/modes.)
 
 Radius: `rounded-sm | rounded-md | rounded-lg | rounded-xl | rounded-2xl |
-rounded-3xl` (all derived from `--kronus-radius`; default control surface =
+rounded-3xl` (all derived from `--cronus-radius`; default control surface =
 `rounded-lg`).
 
 Shadow: `shadow-xs | shadow-sm | shadow-md | shadow-lg | shadow-glow`.
@@ -158,7 +158,7 @@ end to avoid races. Just write correct, idiomatic source files.
 
 # Compose metadata contract (`registry/meta.json`, data-slots, brand tokens)
 
-The app generator ("Kronus Compose") reads a generated, committed metadata sidecar
+The app generator ("Cronus Compose") reads a generated, committed metadata sidecar
 `registry/meta.json` next to `index.json`. It is produced by
 `packages/cli/scripts/build-registry.ts` and gated by
 `packages/cli/scripts/check-registry.ts` (the `registry:check` script). Everything
@@ -177,8 +177,8 @@ would break the byte-compare in `registry:check`.
       "category": "marketing",           // the block category slug
       "exportName": "NavbarBlock",       // parsed from the SHIPPED source (see below)
       "kind": "chrome",                  // page | section | chrome | email
-      "dataSlots": ["navbar-links"],     // @kronus:data slot names the block carries
-      "brandTokens": [{ "token": "brand", "literal": "Kronus" }],
+      "dataSlots": ["navbar-links"],     // @cronus:data slot names the block carries
+      "brandTokens": [{ "token": "brand", "literal": "Cronus" }],
       "variants": [{ "id": "classic", "name": "…", "description": "…" }]
     }
   },
@@ -197,7 +197,7 @@ key order never depends on index authoring order or `readdir` order.
 
 ## `exportName` rule (what a generated page imports)
 `exportName` is extracted from the **shipped block source** (the extracted
-no-substitution template-literal text — i.e. the exact bytes `kronus-ui add` writes),
+no-substitution template-literal text — i.e. the exact bytes `cronus-ui add` writes),
 via `/export function (\w+)/`. This is deterministic and matches what actually lands
 in the consumer project, so a generated page can `import { <exportName> } from …`.
 - A generated page imports this name — so it must be **unique across all blocks**.
@@ -215,28 +215,28 @@ in the consumer project, so a generated page can `import { <exportName> } from �
 (`BLOCK_KIND`) wins, then a category default (`CATEGORY_KIND`, e.g. the whole `email`
 category → `email`), then `section`. Change the kind of a block by editing that table.
 
-## Data-slot contract (`@kronus:data`)
+## Data-slot contract (`@cronus:data`)
 A data-slot is a **marker-delimited data const** (never JSX) that the composer may
 replace wholesale. Both the preview component **and** its code template literal in the
 block family file (`apps/www/lib/blocks/*.tsx`) MUST carry the markers **identically**
 (lockstep) — the literal must stay a `NoSubstitutionTemplateLiteral` or `build-registry`
 breaks:
 ```ts
-/* @kronus:data navbar-links */
+/* @cronus:data navbar-links */
 const NAVBAR_LINKS = [{ label: "Features", href: "#features" }];
-/* @kronus:data-end */
+/* @cronus:data-end */
 ```
 - The set of slots each block must carry is the explicit `BLOCK_DATA_SLOTS` table in
   `build-registry.ts` (Phase 1: `navbar → navbar-links`, `footer → footer-links`).
 - **Build gate:** if a block declares a data-slot, its shipped source MUST contain
-  both `/* @kronus:data <name> */` and `/* @kronus:data-end */`, or `registry:check` fails.
+  both `/* @cronus:data <name> */` and `/* @cronus:data-end */`, or `registry:check` fails.
 - Only the body **between** the markers is ever rewritten; the markers stay put.
 - The composer replaces the delimited const only — it never edits JSX. This is what
   keeps "generated pages = imports of blocks + `<main>` stacking them" true.
 
 ## Brand-token contract (`brandTokens`)
 A brand token declares `{ token, literal }` where `literal` is a **plain string that
-occurs verbatim in the shipped block source** (e.g. the `Kronus` wordmark in navbar/footer).
+occurs verbatim in the shipped block source** (e.g. the `Cronus` wordmark in navbar/footer).
 - The set is the explicit `BLOCK_BRAND_TOKENS` table in `build-registry.ts`.
 - **Build gate:** the `literal` MUST be present verbatim in the shipped source, or
   `registry:check` fails. This proves the anchor exists before the composer replaces it.
@@ -260,7 +260,7 @@ Rules:
 - **Single source of truth.** The block preview and its code literal both read the
   SAME data. In the family file:
   - the **preview** imports from the package export
-    `import { PRODUCTS } from "@kronus-ui/ui/demo-store";` (see below), and
+    `import { PRODUCTS } from "@cronus-ui/ui/demo-store";` (see below), and
   - the **code literal** carries `import { PRODUCTS } from "../lib/demo-store.js";`
     (kept a `NoSubstitutionTemplateLiteral`). `build-registry` records `demo-store` as
     a `registryDependency` (resolved transitively at `add`/`compose`); `rewriteImports`
@@ -270,7 +270,7 @@ Rules:
   preview↔literal byte-equality must stay green).
 
 ### Import paths (memorize)
-- **Preview (showcase-relative):** `@kronus-ui/ui/demo-store` / `@kronus-ui/ui/demo-saas`
+- **Preview (showcase-relative):** `@cronus-ui/ui/demo-store` / `@cronus-ui/ui/demo-saas`
   (package subpath exports; resolves to `packages/ui/src/lib/*` — the single source).
 - **Code literal (shipped block source):** `../lib/demo-store.js` / `../lib/demo-saas.js`
   (`build-registry` extracts only the literal; `rewriteImports` rewrites it).
@@ -278,17 +278,17 @@ Rules:
 ### Brand
 The app brand reaches every **visible** surface through the **brandTokens literal-
 replacement** path: at compose time `rewriteChromeBlock` runs `replaceBrandLiteral` over
-the installed chrome copies (navbar/footer/hero), swapping the shipped `"Kronus"` literal
+the installed chrome copies (navbar/footer/hero), swapping the shipped `"Cronus"` literal
 for the app's `--brand`. There is **no generated `lib/brand.ts`** — compose does not
 override the demo datasets' brand.
 
 The demo libs (`demo-store`/`demo-saas`) export their own **standalone `BRAND` default**
 (`"Aurora Audio"` / `"Northwind"`) — the demo store/app **name** used when the dataset is
-consumed on its own (`kronus-ui add demo-store`). It is a demo default, not a compose
+consumed on its own (`cronus-ui add demo-store`). It is a demo default, not a compose
 override; compose leaves it untouched.
 
 ## Editing a block family file
 Any edit to `apps/www/lib/blocks/*.tsx` that touches a block with markers/brand tokens
 must change the **preview component AND its code template literal identically**, and
-keep the code literal a `NoSubstitutionTemplateLiteral`. Run `bun run -F kronus-ui registry`
+keep the code literal a `NoSubstitutionTemplateLiteral`. Run `bun run -F cronus-ui registry`
 and commit `registry/` (including `meta.json`), then `bun run registry:check` must pass.

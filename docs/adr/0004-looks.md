@@ -11,9 +11,9 @@ Tema (Aurora / Neutral / Midnight / Sunset / Emerald) é paleta. Mode é
 claro/escuro. O mercado (HeroUI Pro) vende um terceiro eixo — Brutalism, Glass,
 Mauve — como “premium themes”, um catálogo à parte.
 
-Kronus já re-tema via tokens. Copiar o paywall de looks é a partida errada:
+Cronus já re-tema via tokens. Copiar o paywall de looks é a partida errada:
 o motor já existe. O que faltava era nomear o eixo e aplicá-lo com
-`data-kronus-look`, sem forkar CVA nem um segundo registry.
+`data-cronus-look`, sem forkar CVA nem um segundo registry.
 
 ## Decisão
 
@@ -21,7 +21,7 @@ o motor já existe. O que faltava era nomear o eixo e aplicá-lo com
    Radius, borda, sombra, blur, transform de label. A paleta continua no tema.
 2. **Orthogonal.** Qualquer look × qualquer tema × qualquer mode. Glass +
    Midnight e Brutalist + Sunset são válidos.
-3. **Aplicação via atributo.** `data-kronus-look` num subtree. O chrome das
+3. **Aplicação via atributo.** `data-cronus-look` num subtree. O chrome das
    docs permanece `default` (Neutral). Apps gerados opt-in no `<html>`.
 4. **Sem fork de componente.** Looks restilizam `data-slot` + tokens existentes.
    Não há `ButtonBrutalist`.
@@ -40,7 +40,7 @@ o motor já existe. O que faltava era nomear o eixo e aplicá-lo com
 ## Consequências
 
 **Boas:** a homepage demonstra o motor; um adopter escreve
-`data-kronus-look="glass"` e o app segue. Contraste e reduced-transparency
+`data-cronus-look="glass"` e o app segue. Contraste e reduced-transparency
 continuam no CSS do look.
 
 **Ruins:** Glass translúcido em cima de paleta clara precisa de cuidado AA;

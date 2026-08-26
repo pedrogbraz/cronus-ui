@@ -2,15 +2,15 @@
 
 // @ts-check
 /**
- * bundle-check.mjs — JS size budget gate for the Kronus UI build output.
+ * bundle-check.mjs — JS size budget gate for the Cronus UI build output.
  *
  * Two gates run from one invocation:
  *
- *  1. @kronus-ui/www first-load JS — reads the Next.js build diagnostics emitted by
+ *  1. @cronus-ui/www first-load JS — reads the Next.js build diagnostics emitted by
  *     `next build` (apps/www/.next/diagnostics/route-bundle-stats.json) and
  *     fails if the first-load JS of any tracked key route exceeds its budget.
  *
- *  2. @kronus-ui/ui published-package entries — gzip-compresses each tracked entry
+ *  2. @cronus-ui/ui published-package entries — gzip-compresses each tracked entry
  *     in the built `packages/ui/dist` (the barrel `index.js` plus a set of
  *     heavy subpath entries) and fails if any exceeds its per-entry GZIPPED
  *     budget. This is what adopters actually download, so a transitive-dep or
@@ -66,12 +66,14 @@ const strict = process.env.BUNDLE_CHECK_STRICT === "1";
  * Budgets in bytes, keyed by Next route id.
  *
  * Baseline measured 2026-06-22 (Next 16.2.6, Turbopack) after the apps/www
- * split work. Budgets sit roughly 10-15% above current first-load sizes so the
- * gate has useful sensitivity while leaving room for normal compiler drift.
- * Run strict (BUNDLE_CHECK_STRICT=1) in CI so a missing route also fails.
+ * split work, then rebased 2026-08-26 for the editorial landing (hero products,
+ * CLI island, looks, live theming). Budgets sit roughly 10-15% above current
+ * first-load sizes so the gate has useful sensitivity while leaving room for
+ * normal compiler drift. Run strict (BUNDLE_CHECK_STRICT=1) in CI so a missing
+ * route also fails.
  */
 const ROUTE_BUDGETS = /** @type {Record<string, RouteBudget>} */ ({
-  "/": { firstLoadUncompressedJsBytes: 735_000, firstLoadGzipJsBytes: 220_000 },
+  "/": { firstLoadUncompressedJsBytes: 1_070_000, firstLoadGzipJsBytes: 325_000 },
   "/stack": { firstLoadUncompressedJsBytes: 970_000, firstLoadGzipJsBytes: 300_000 },
   "/docs": { firstLoadUncompressedJsBytes: 680_000, firstLoadGzipJsBytes: 205_000 },
   "/docs/installation": {
@@ -125,7 +127,7 @@ const SHARED_CHUNK_BUDGETS = /** @type {SharedChunkBudgets} */ ({
 });
 
 /**
- * Per-entry GZIPPED size budgets (bytes) for the BUILT @kronus-ui/ui package, keyed
+ * Per-entry GZIPPED size budgets (bytes) for the BUILT @cronus-ui/ui package, keyed
  * by the file's path relative to packages/ui/dist. We track the barrel
  * (`index.js`) plus the heaviest subpath entries — the ones most likely to grow
  * unnoticed.
@@ -381,7 +383,7 @@ function compareGzipBudget(label, actual, budget) {
 }
 
 /**
- * Measure the BUILT @kronus-ui/ui package entries against their gzipped budgets.
+ * Measure the BUILT @cronus-ui/ui package entries against their gzipped budgets.
  *
  * @returns {{ ok: string[], failures: string[], missing: string[] }}
  */
@@ -403,7 +405,7 @@ function measurePackageEntries() {
       continue;
     }
     const gzipBytes = gzipSync(bytes).byteLength;
-    const result = compareGzipBudget(`@kronus-ui/ui ${entry}`, gzipBytes, withSlack(budget));
+    const result = compareGzipBudget(`@cronus-ui/ui ${entry}`, gzipBytes, withSlack(budget));
     (result.ok ? ok : failures).push(result.message);
   }
 
@@ -468,9 +470,9 @@ function main() {
     }
   }
 
-  // ── @kronus-ui/ui published-package entry budgets (gzipped) ──────────────
+  // ── @cronus-ui/ui published-package entry budgets (gzipped) ──────────────
   const pkg = measurePackageEntries();
-  console.log(`\nbundle-check: @kronus-ui/ui package entry budgets (gzipped)`);
+  console.log(`\nbundle-check: @cronus-ui/ui package entry budgets (gzipped)`);
   console.log(`  dist: ${uiDistDir}`);
   for (const line of pkg.ok) console.log(line);
   for (const line of pkg.failures) failures.push(line);
@@ -480,7 +482,7 @@ function main() {
     if (strict) {
       failures.push(msg);
     } else {
-      console.warn(`${msg} (non-strict: ignored — did you build @kronus-ui/ui?)`);
+      console.warn(`${msg} (non-strict: ignored — did you build @cronus-ui/ui?)`);
     }
   }
 
@@ -494,7 +496,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log("\nbundle-check: OK — all tracked routes and @kronus-ui/ui entries within budget.");
+  console.log("\nbundle-check: OK — all tracked routes and @cronus-ui/ui entries within budget.");
 }
 
 main();

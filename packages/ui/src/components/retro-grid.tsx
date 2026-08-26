@@ -20,7 +20,7 @@ export interface RetroGridProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const RETRO_KEYFRAMES =
-  "@keyframes kronus-retro-grid{from{transform:translateY(0)}to{transform:translateY(var(--retro-cell,48px))}}";
+  "@keyframes cronus-retro-grid{from{transform:translateY(0)}to{transform:translateY(var(--retro-cell,48px))}}";
 
 function finiteOr(value: number, fallback: number) {
   return Number.isFinite(value) ? value : fallback;
@@ -66,10 +66,10 @@ export function RetroGrid({
           style={{ transform: `rotateX(${tilt}deg)` }}
         >
           <div
-            className="absolute inset-0 [animation-duration:var(--retro-duration)] [animation-iteration-count:infinite] [animation-name:kronus-retro-grid] [animation-timing-function:linear] motion-reduce:[animation-name:none]"
+            className="absolute inset-0 [animation-duration:var(--retro-duration)] [animation-iteration-count:infinite] [animation-name:cronus-retro-grid] [animation-timing-function:linear] motion-reduce:[animation-name:none]"
             style={{
               backgroundImage:
-                "linear-gradient(to right, color-mix(in oklch, var(--kronus-border) 70%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklch, var(--kronus-border) 70%, transparent) 1px, transparent 1px)",
+                "linear-gradient(to right, color-mix(in oklch, var(--cronus-border) 70%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklch, var(--cronus-border) 70%, transparent) 1px, transparent 1px)",
               backgroundSize: "48px 48px",
             }}
           />

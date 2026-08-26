@@ -25,8 +25,8 @@ import {
   TableRow,
   UsageMeterCircular,
   UsageMeterLinear,
-} from "@kronus-ui/ui";
-import { CURRENT_PLAN_ID, INVOICES, PLANS, planById, USAGE_METERS } from "@kronus-ui/ui/demo-saas";
+} from "@cronus-ui/ui";
+import { CURRENT_PLAN_ID, INVOICES, PLANS, planById, USAGE_METERS } from "@cronus-ui/ui/demo-saas";
 import { CalendarClock, Check, CreditCard, Download, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
@@ -182,7 +182,7 @@ const subscriptionCode = `import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { CreditCard, Download } from "lucide-react";
 import { INVOICES, USAGE_METERS } from "../lib/demo-saas.js";
 
@@ -401,7 +401,7 @@ import {
   CardTitle,
   Separator,
   Switch,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Check } from "lucide-react";
 import { useState } from "react";
 import { PLANS } from "../lib/demo-saas.js";
@@ -571,7 +571,7 @@ const manageSubscriptionCode = `import {
   CardTitle,
   Separator,
   UsageMeterLinear,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { CalendarClock, CreditCard } from "lucide-react";
 
 interface MeterRow {
@@ -728,7 +728,7 @@ const paymentMethodCode = `import {
   RadioGroup,
   RadioGroupItem,
   Separator,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { CreditCard } from "lucide-react";
 
 interface SavedCard {
@@ -878,7 +878,7 @@ const paymentMethodAddCode = `import {
   Label,
   Separator,
   Switch,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 
 export function PaymentMethodAddBlock() {
   return (
@@ -1084,7 +1084,7 @@ const usageDashboardCode = `import {
   TableRow,
   UsageMeterCircular,
   UsageMeterLinear,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { CURRENT_PLAN_ID, planById, USAGE_METERS } from "../lib/demo-saas.js";
 
 // Sparkline chrome is presentational (not data): bind by index so labels stay in the lib.
@@ -1278,7 +1278,7 @@ const cancelFlowCode = `import {
   RadioGroup,
   RadioGroupItem,
   Separator,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Sparkles } from "lucide-react";
 
 const cancelReasons = [

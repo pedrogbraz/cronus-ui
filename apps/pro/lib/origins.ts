@@ -1,5 +1,5 @@
 /**
- * Split origins. Kronus OSS (docs, registry, live previews) and Kronus Pro
+ * Split origins. Cronus OSS (docs, registry, live previews) and Cronus Pro
  * (this site) are different hosts — heroui.com / heroui.pro, not a /pro route
  * on the docs chrome.
  *
@@ -15,14 +15,14 @@ const isDev = process.env.NODE_ENV === "development";
 
 export const OSS_URL = stripSlash(
   process.env.NEXT_PUBLIC_OSS_URL ??
-    (isDev ? "http://localhost:4747" : "https://ui.testkronus.cloud"),
+    (isDev ? "http://localhost:4747" : "https://ui.testcronus.cloud"),
 );
 
 export const PRO_URL = stripSlash(
-  process.env.NEXT_PUBLIC_PRO_URL ?? (isDev ? "http://localhost:4748" : "https://kronusui.pro"),
+  process.env.NEXT_PUBLIC_PRO_URL ?? (isDev ? "http://localhost:4748" : "https://cronusui.pro"),
 );
 
-export const GITHUB_URL = "https://github.com/pedrogbraz/kronus-ui";
+export const GITHUB_URL = "https://github.com/pedrogbraz/cronus-ui";
 
 export function ossUrl(path = "/"): string {
   return `${OSS_URL}${path.startsWith("/") ? path : `/${path}`}`;

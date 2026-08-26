@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { PRO_URL } from "../lib/site-url";
 
-const STORAGE_KEY = "kronus-pro-nudge-v1";
+const STORAGE_KEY = "cronus-pro-nudge-v1";
 
 /**
- * Corner card for Kronus Pro (HeroUI-style). Desktop only, dismissible, hidden
+ * Corner card for Cronus Pro (HeroUI-style). Desktop only, dismissible, hidden
  * on the Pro origin. Not in the primary nav.
  */
 export function ProNudge() {
@@ -37,7 +37,7 @@ export function ProNudge() {
 
   return (
     <aside
-      aria-label="Kronus Pro"
+      aria-label="Cronus Pro"
       className="pointer-events-none fixed bottom-4 left-4 z-40 hidden w-[18.5rem] md:block"
     >
       <div className="pointer-events-auto overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-lg">

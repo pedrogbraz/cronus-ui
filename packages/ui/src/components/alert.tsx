@@ -24,7 +24,7 @@ const alertVariants = cva(
         success: "bg-success/10 text-fg border-success/30 [&>svg]:text-success",
         warning: "bg-warning/10 text-fg border-warning/30 [&>svg]:text-warning",
         // `destructive` keeps the conventional shadcn name but maps to the
-        // Kronus `error` token (mirrors button.tsx's destructive variant).
+        // Cronus `error` token (mirrors button.tsx's destructive variant).
         destructive: "bg-error/10 text-fg border-error/30 [&>svg]:text-error",
       },
     },

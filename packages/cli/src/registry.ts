@@ -34,7 +34,7 @@ export type RegistryIndex = RegistryIndexEntry[];
 
 /**
  * Matches a release-pinned "/vX.Y.Z/" path segment in a registry source, e.g.
- * ".../kronus-ui/v0.5.0/registry" (the default raw.githubusercontent.com layout)
+ * ".../cronus-ui/v0.5.0/registry" (the default raw.githubusercontent.com layout)
  * or a local ".../v0.5.0/registry" mirror. The trailing separator is a
  * lookahead so replacements never eat it.
  */

@@ -2,7 +2,7 @@
  * demo-saas — the single source of truth for the SaaS dashboard demo dataset.
  *
  * PURE TS DATA (zero React / hooks / DOM), so it is safe to import from a React
- * Server Component and ships as a `registry:lib` item (`kronus-ui add demo-saas`
+ * Server Component and ships as a `registry:lib` item (`cronus-ui add demo-saas`
  * writes `lib/demo-saas.ts`). The application/dashboard/billing blocks (KPIs,
  * revenue chart, activity feed, team, plans, usage, invoices) are meant to read
  * from HERE so the same team, plans, and numbers appear across every surface.
@@ -11,7 +11,7 @@
  * blocks (behaviour-preserving), so visual snapshots stay byte-identical.
  *
  * Brand: {@link BRAND} is the standalone demo app name ("Northwind"), used when
- * this dataset is consumed on its own. It is a demo default — `kronus-ui compose`
+ * this dataset is consumed on its own. It is a demo default — `cronus-ui compose`
  * does NOT override it (the composed app's brand reaches its VISIBLE chrome via
  * the separate brandTokens literal-replacement path, not this lib).
  */
@@ -96,7 +96,7 @@ export const ACTIVITY: Activity[] = [
   {
     id: "INV-2048",
     customer: "Mara Castillo",
-    email: "mara@kronus.io",
+    email: "mara@cronus.io",
     initials: "MC",
     avatar: "https://i.pravatar.cc/96?img=12",
     amount: "$1,290.00",
@@ -157,7 +157,7 @@ export const TEAM: TeamMember[] = [
   {
     id: "m1",
     name: "Mara Castillo",
-    email: "mara@kronus.io",
+    email: "mara@cronus.io",
     role: "Owner",
     initials: "MC",
     avatar: "https://i.pravatar.cc/96?img=12",
@@ -165,21 +165,21 @@ export const TEAM: TeamMember[] = [
   {
     id: "m2",
     name: "Devon Lane",
-    email: "devon@kronus.io",
+    email: "devon@cronus.io",
     role: "Admin",
     initials: "DL",
     avatar: "https://i.pravatar.cc/96?img=33",
   },
-  { id: "m3", name: "Priya Sharma", email: "priya@kronus.io", role: "Member", initials: "PS" },
+  { id: "m3", name: "Priya Sharma", email: "priya@cronus.io", role: "Member", initials: "PS" },
   {
     id: "m4",
     name: "Tobias Funke",
-    email: "tobias@kronus.io",
+    email: "tobias@cronus.io",
     role: "Member",
     initials: "TF",
     avatar: "https://i.pravatar.cc/96?img=68",
   },
-  { id: "m5", name: "Aiko Tanaka", email: "aiko@kronus.io", role: "Member", initials: "AT" },
+  { id: "m5", name: "Aiko Tanaka", email: "aiko@cronus.io", role: "Member", initials: "AT" },
 ];
 
 /** The signed-in account (workspace owner). */
@@ -193,7 +193,7 @@ export interface SaasUser {
 /** The demo account — the workspace Owner (Mara). */
 export const USER: SaasUser = {
   name: "Mara Castillo",
-  email: "mara@kronus.io",
+  email: "mara@cronus.io",
   initials: "MC",
   role: "Owner",
 };

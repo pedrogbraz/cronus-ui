@@ -1,11 +1,11 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Kronus UI — The product UI system that themes itself";
+export const alt = "Cronus UI — The product UI system that themes itself";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 // Neutral dark tokens, hardcoded as sRGB — ImageResponse renders through Satori,
-// which resolves neither the `--kronus-*` CSS variables nor `oklch()`.
+// which resolves neither the `--cronus-*` CSS variables nor `oklch()`.
 // Source of truth: packages/tokens/src/tokens.ts (neutralDark); the hex below is
 // the exact sRGB conversion of each oklch value, noted per line.
 const neutral = {
@@ -75,7 +75,7 @@ export default function Image() {
             letterSpacing: -4,
           }}
         >
-          Kronus UI
+          Cronus UI
         </div>
       </div>
 

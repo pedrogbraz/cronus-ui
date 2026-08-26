@@ -3,7 +3,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@kronus-ui/ui/accordion";
+} from "@cronus-ui/ui/accordion";
 import { FAQ } from "../lib/catalog";
 
 export function FaqSection() {

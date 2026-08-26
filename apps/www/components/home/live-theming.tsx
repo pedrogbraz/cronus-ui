@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "@kronus-ui/theme";
+import { useTheme } from "@cronus-ui/theme";
 import {
   Avatar,
   AvatarFallback,
@@ -15,7 +15,7 @@ import {
   MetricValue,
   Slider,
   Switch,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Check, Moon, Sun } from "lucide-react";
 import { Eyebrow } from "../showcase-ui";
 
@@ -130,7 +130,7 @@ export function LiveTheming() {
         {/* The live preview — a curated mini-app that re-themes with the swatches. */}
         <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-surface-raised">
           <div className="flex items-center justify-between border-b border-border px-4 py-3 sm:px-6">
-            <span className="font-mono text-xs text-fg-tertiary">app.kronus.dev</span>
+            <span className="font-mono text-xs text-fg-tertiary">app.cronus.dev</span>
             <Badge variant="outline" className="capitalize">
               {theme}
             </Badge>
@@ -203,7 +203,7 @@ export function LiveTheming() {
               <div className="grid gap-4 sm:grid-cols-[1fr_auto_auto] sm:items-end">
                 <div className="flex flex-col gap-1.5">
                   <Label htmlFor="theming-email">Work email</Label>
-                  <Input id="theming-email" placeholder="you@kronus.dev" />
+                  <Input id="theming-email" placeholder="you@cronus.dev" />
                 </div>
                 <div className="flex items-center gap-2">
                   <Switch id="theming-notify" defaultChecked aria-label="Notifications" />

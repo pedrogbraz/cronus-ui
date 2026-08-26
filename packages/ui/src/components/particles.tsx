@@ -80,7 +80,7 @@ export function Particles({ ref, className, children, count = 40, ...props }: Pa
       if (!parent) return;
       const { width, height } = parent.getBoundingClientRect();
       context.clearRect(0, 0, width, height);
-      context.fillStyle = "color-mix(in oklch, var(--kronus-fg) 35%, transparent)";
+      context.fillStyle = "color-mix(in oklch, var(--cronus-fg) 35%, transparent)";
       for (const speck of specks.current) {
         speck.x += speck.vx;
         speck.y += speck.vy;

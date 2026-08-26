@@ -15,7 +15,7 @@ export interface HighlighterProps extends HTMLAttributes<HTMLSpanElement> {
 }
 
 const HIGHLIGHT_KEYFRAMES =
-  "@keyframes kronus-highlighter{from{transform:scaleX(0)}to{transform:scaleX(1)}}";
+  "@keyframes cronus-highlighter{from{transform:scaleX(0)}to{transform:scaleX(1)}}";
 
 function finiteOr(value: number, fallback: number) {
   return Number.isFinite(value) ? value : fallback;
@@ -49,7 +49,7 @@ export function Highlighter({
       <style>{HIGHLIGHT_KEYFRAMES}</style>
       <span
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-[0.08em] -z-10 h-[0.45em] origin-bottom-start rounded-sm bg-primary/25 [animation-duration:var(--highlight-duration)] [animation-fill-mode:forwards] [animation-name:kronus-highlighter] [animation-timing-function:cubic-bezier(.22,1,.36,1)] motion-reduce:[animation-name:none]"
+        className="absolute inset-x-0 bottom-[0.08em] -z-10 h-[0.45em] origin-bottom-start rounded-sm bg-primary/25 [animation-duration:var(--highlight-duration)] [animation-fill-mode:forwards] [animation-name:cronus-highlighter] [animation-timing-function:cubic-bezier(.22,1,.36,1)] motion-reduce:[animation-name:none]"
       />
       {children}
     </span>

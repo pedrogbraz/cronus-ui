@@ -1,7 +1,7 @@
 {
-  "name": "@kronus-ui/theme",
+  "name": "@cronus-ui/theme",
   "version": "0.5.0",
-  "description": "Kronus runtime theming engine — KronusUIProvider + useTheme (CSS-var only, no re-render).",
+  "description": "Cronus runtime theming engine — CronusUIProvider + useTheme (CSS-var only, no re-render).",
   "type": "module",
   "exports": {
     ".": {
@@ -13,18 +13,18 @@
   "types": "./dist/index.d.ts",
   "sideEffects": false,
   "license": "MIT",
-  "author": "Kronus",
+  "author": "Cronus",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pedrogbraz/kronus-ui.git",
+    "url": "git+https://github.com/pedrogbraz/cronus-ui.git",
     "directory": "packages/theme"
   },
-  "homepage": "https://github.com/pedrogbraz/kronus-ui#readme",
+  "homepage": "https://github.com/pedrogbraz/cronus-ui#readme",
   "bugs": {
-    "url": "https://github.com/pedrogbraz/kronus-ui/issues"
+    "url": "https://github.com/pedrogbraz/cronus-ui/issues"
   },
   "keywords": [
-    "kronus",
+    "cronus",
     "design-system",
     "react",
     "tailwind",
@@ -46,7 +46,7 @@
     "prepublishOnly": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@kronus-ui/tokens": "workspace:*"
+    "@cronus-ui/tokens": "workspace:*"
   },
   "peerDependencies": {
     "react": "^18.3.0 || ^19.0.0",

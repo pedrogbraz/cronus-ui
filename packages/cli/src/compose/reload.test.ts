@@ -19,9 +19,9 @@ const stubRecord = (hash?: string): ComposedRecord => ({
 });
 
 describe("baseSnapshotDir", () => {
-  it("is .kronus-ui/base/<composed-key>", () => {
-    expect(baseSnapshotDir("landing")).toBe(join(".kronus-ui", "base", "landing"));
-    expect(baseSnapshotDir("tiny")).toBe(join(".kronus-ui", "base", "tiny"));
+  it("is .cronus-ui/base/<composed-key>", () => {
+    expect(baseSnapshotDir("landing")).toBe(join(".cronus-ui", "base", "landing"));
+    expect(baseSnapshotDir("tiny")).toBe(join(".cronus-ui", "base", "tiny"));
   });
 });
 
@@ -29,7 +29,7 @@ describe("readBaseSnapshot — composed-key first, package-name fallback", () =>
   let cwd: string;
 
   beforeEach(() => {
-    cwd = mkdtempSync(join(tmpdir(), "kronus-snapshot-"));
+    cwd = mkdtempSync(join(tmpdir(), "cronus-snapshot-"));
   });
 
   afterEach(() => {
@@ -39,7 +39,7 @@ describe("readBaseSnapshot — composed-key first, package-name fallback", () =>
   const rel = join("app", "(site)", "page.tsx");
 
   function writeSnap(appKey: string, content: string): void {
-    const dest = join(cwd, ".kronus-ui", "base", appKey, rel);
+    const dest = join(cwd, ".cronus-ui", "base", appKey, rel);
     mkdirSync(dirname(dest), { recursive: true });
     writeFileSync(dest, content, "utf8");
   }
@@ -62,7 +62,7 @@ describe("readBaseSnapshot — composed-key first, package-name fallback", () =>
   it("lists rels from both dirs (union) so mixed pre/post-fix snapshots are visible", async () => {
     writeSnap("landing", "NEW");
     const extra = join("app", "(site)", "faq", "page.tsx");
-    const dest = join(cwd, ".kronus-ui", "base", "loja", extra);
+    const dest = join(cwd, ".cronus-ui", "base", "loja", extra);
     mkdirSync(dirname(dest), { recursive: true });
     writeFileSync(dest, "FAQ", "utf8");
     const rels = await listBaseSnapshotRels(cwd, "landing", "loja");
@@ -85,7 +85,7 @@ describe("reloadManifest — provenance", () => {
   });
 
   it("loads an explicit --manifest file without checking provenance", async () => {
-    const dir = mkdtempSync(join(tmpdir(), "kronus-manifest-"));
+    const dir = mkdtempSync(join(tmpdir(), "cronus-manifest-"));
     const path = join(dir, "custom.json");
     writeFileSync(
       path,
@@ -113,10 +113,10 @@ describe("reloadManifest — provenance", () => {
 
 describe("readBaseSnapshot dest round-trip", () => {
   it("does not invent a package-name snapshot when keys match", async () => {
-    const cwd = mkdtempSync(join(tmpdir(), "kronus-samekey-"));
+    const cwd = mkdtempSync(join(tmpdir(), "cronus-samekey-"));
     try {
       const rel = join("app", "(site)", "page.tsx");
-      const dest = join(cwd, ".kronus-ui", "base", "tiny", rel);
+      const dest = join(cwd, ".cronus-ui", "base", "tiny", rel);
       mkdirSync(dirname(dest), { recursive: true });
       writeFileSync(dest, "OK", "utf8");
       expect(await readBaseSnapshot(cwd, "tiny", "tiny", rel)).toBe("OK");

@@ -20,7 +20,7 @@ export interface FlickeringGridProps extends HTMLAttributes<HTMLDivElement> {
   rows?: number;
 }
 
-const FLICKER_KEYFRAMES = "@keyframes kronus-flicker{0%,100%{opacity:0.08}50%{opacity:0.45}}";
+const FLICKER_KEYFRAMES = "@keyframes cronus-flicker{0%,100%{opacity:0.08}50%{opacity:0.45}}";
 
 function finiteOr(value: number, fallback: number) {
   return Number.isFinite(value) ? value : fallback;
@@ -72,7 +72,7 @@ export function FlickeringGrid({
             <span
               // biome-ignore lint/suspicious/noArrayIndexKey: cells are positional and never reorder.
               key={index}
-              className="rounded-[1px] bg-fg [animation-delay:var(--flicker-delay)] [animation-duration:var(--flicker-duration)] [animation-iteration-count:infinite] [animation-name:kronus-flicker] motion-reduce:[animation-name:none]"
+              className="rounded-[1px] bg-fg [animation-delay:var(--flicker-delay)] [animation-duration:var(--flicker-duration)] [animation-iteration-count:infinite] [animation-name:cronus-flicker] motion-reduce:[animation-name:none]"
               style={cellStyle}
             />
           );

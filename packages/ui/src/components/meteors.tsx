@@ -17,7 +17,7 @@ export interface MeteorsProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const METEOR_KEYFRAMES =
-  "@keyframes kronus-meteor{0%{transform:translate3d(0,0,0);opacity:0}8%{opacity:1}to{transform:translate3d(var(--meteor-travel),var(--meteor-travel),0);opacity:0}}";
+  "@keyframes cronus-meteor{0%{transform:translate3d(0,0,0);opacity:0}8%{opacity:1}to{transform:translate3d(var(--meteor-travel),var(--meteor-travel),0);opacity:0}}";
 
 function finiteOr(value: number, fallback: number) {
   return Number.isFinite(value) ? value : fallback;
@@ -54,11 +54,11 @@ export function Meteors({ ref, className, children, count = 20, style, ...props 
             <span
               // biome-ignore lint/suspicious/noArrayIndexKey: meteors are positional and never reorder.
               key={index}
-              className="absolute h-px w-14 -rotate-45 [animation-delay:var(--meteor-delay)] [animation-duration:var(--meteor-duration)] [animation-iteration-count:infinite] [animation-name:kronus-meteor] [animation-timing-function:linear]"
+              className="absolute h-px w-14 -rotate-45 [animation-delay:var(--meteor-delay)] [animation-duration:var(--meteor-duration)] [animation-iteration-count:infinite] [animation-name:cronus-meteor] [animation-timing-function:linear]"
               style={{
                 ...meteorStyle,
                 background:
-                  "linear-gradient(to right, color-mix(in oklch, var(--kronus-fg) 80%, transparent), transparent)",
+                  "linear-gradient(to right, color-mix(in oklch, var(--cronus-fg) 80%, transparent), transparent)",
               }}
             />
           );

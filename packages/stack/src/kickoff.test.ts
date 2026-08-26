@@ -59,7 +59,7 @@ describe("kickoff — conventions & standards", () => {
     const md = generateKickoff(config, "acme", catalog);
     expect(md).toContain("  package.json     # scripts and selected dependencies");
     expect(md).toContain("  src/app/        # Next.js App Router starter");
-    expect(md).toContain("  kronus-ui.json    # Kronus UI registry paths and pinned registry URL");
+    expect(md).toContain("  cronus-ui.json    # Cronus UI registry paths and pinned registry URL");
     expect(md).toContain("bun install");
     expect(md).toContain("bun dev");
     expect(md).toContain("bun typecheck");

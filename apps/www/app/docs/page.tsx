@@ -1,4 +1,4 @@
-import { Badge } from "@kronus-ui/ui";
+import { Badge } from "@cronus-ui/ui";
 import {
   DocCallout,
   DocsCard,
@@ -14,17 +14,17 @@ const foundations = [
   {
     title: "Tokens",
     description:
-      "@kronus-ui/tokens owns semantic colors, radius, fonts, chart colors, CSS variables, and Tailwind v4 mappings.",
+      "@cronus-ui/tokens owns semantic colors, radius, fonts, chart colors, CSS variables, and Tailwind v4 mappings.",
   },
   {
     title: "Theme provider",
     description:
-      "@kronus-ui/theme applies presets and runtime overrides with CSS variables, so theme changes do not require component rewrites.",
+      "@cronus-ui/theme applies presets and runtime overrides with CSS variables, so theme changes do not require component rewrites.",
   },
   {
     title: "Component catalog",
     description:
-      "@kronus-ui/ui ships accessible primitives and composed patterns built with variants, focus states, and data-slot markers.",
+      "@cronus-ui/ui ships accessible primitives and composed patterns built with variants, focus states, and data-slot markers.",
   },
   {
     title: "Registry",
@@ -41,8 +41,8 @@ export default function DocsOverviewPage() {
     <div className="py-10">
       <DocsHeader
         eyebrow="Documentation"
-        title="Build production interfaces with Kronus UI"
-        description="Kronus UI is a product UI system. One command composes a themed SaaS from validated blocks. Catalog, registry, and Create studio are the pieces."
+        title="Build production interfaces with Cronus UI"
+        description="Cronus UI is a product UI system. One command composes a themed SaaS from validated blocks. Catalog, registry, and Create studio are the pieces."
       >
         <PrimaryLink href="/docs/getting-started">Get started</PrimaryLink>
         <SecondaryLink href="/create">Open Create</SecondaryLink>

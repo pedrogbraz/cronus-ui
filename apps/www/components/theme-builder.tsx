@@ -1,8 +1,8 @@
 "use client";
 
-import { useTheme } from "@kronus-ui/theme";
-import { modes, serializeOverrides, type ThemeOverrides, themeNames } from "@kronus-ui/tokens";
-import { Button, cn, Label, Separator } from "@kronus-ui/ui";
+import { useTheme } from "@cronus-ui/theme";
+import { modes, serializeOverrides, type ThemeOverrides, themeNames } from "@cronus-ui/tokens";
+import { Button, cn, Label, Separator } from "@cronus-ui/ui";
 import { Check, Copy, Moon, RotateCcw, Sun } from "lucide-react";
 import { type ReactNode, useState } from "react";
 

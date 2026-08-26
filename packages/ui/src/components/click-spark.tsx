@@ -26,7 +26,7 @@ export interface ClickSparkProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const SPARK_KEYFRAMES =
-  "@keyframes kronus-click-spark{from{transform:translate(0,0) scale(1);opacity:1}to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}";
+  "@keyframes cronus-click-spark{from{transform:translate(0,0) scale(1);opacity:1}to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}";
 
 function finiteOr(value: number, fallback: number) {
   return Number.isFinite(value) ? value : fallback;
@@ -94,7 +94,7 @@ export function ClickSpark({
               <span
                 // biome-ignore lint/suspicious/noArrayIndexKey: sparks are positional rays around a burst origin.
                 key={`${spark.id}-${index}`}
-                className="absolute size-1 rounded-full bg-primary [animation-duration:500ms] [animation-fill-mode:forwards] [animation-name:kronus-click-spark] [animation-timing-function:cubic-bezier(.22,1,.36,1)]"
+                className="absolute size-1 rounded-full bg-primary [animation-duration:500ms] [animation-fill-mode:forwards] [animation-name:cronus-click-spark] [animation-timing-function:cubic-bezier(.22,1,.36,1)]"
                 style={{
                   left: spark.x,
                   top: spark.y,

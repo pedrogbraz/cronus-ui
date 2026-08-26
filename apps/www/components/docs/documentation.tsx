@@ -1,4 +1,4 @@
-import { Badge, cn } from "@kronus-ui/ui";
+import { Badge, cn } from "@cronus-ui/ui";
 import { ArrowRight, CheckCircle2, Info } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
@@ -203,7 +203,7 @@ export function SecondaryLink({ href, children }: { href: string; children: Reac
 /** In-prose docs link. Header CTAs use PrimaryLink / SecondaryLink. */
 export function DocsTextLink({ href, children }: { href: string; children: ReactNode }) {
   return (
-    <Link href={href} className="font-medium text-fg underline-offset-4 hover:underline">
+    <Link href={href} className="font-medium text-fg underline underline-offset-4">
       {children}
     </Link>
   );

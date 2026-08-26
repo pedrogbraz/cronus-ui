@@ -1,4 +1,4 @@
-import { KronusThemeScript, KronusUIProvider } from "@kronus-ui/theme";
+import { CronusThemeScript, CronusUIProvider } from "@cronus-ui/theme";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { SITE_URL } from "../lib/site-url";
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   // Absolute base for og:image / twitter:image URLs (Next falls back to
   // localhost in production output without it).
   metadataBase: new URL(SITE_URL),
-  title: "Kronus UI — Product UI system",
+  title: "Cronus UI — Product UI system",
   description:
     "A product UI system: accessible, themeable React components, a shadcn-compatible registry, and a generator that composes a SaaS from validated blocks.",
 };
@@ -17,17 +17,17 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      data-kronus-theme="neutral"
-      data-kronus-mode="dark"
+      data-cronus-theme="neutral"
+      data-cronus-mode="dark"
       data-force-motion
       className="dark"
-      // The KronusThemeScript below mutates <html> (theme/mode/dark class) before
+      // The CronusThemeScript below mutates <html> (theme/mode/dark class) before
       // hydration, so React must not warn about the resulting attribute mismatch.
       suppressHydrationWarning
     >
       <head>
-        <KronusThemeScript
-          storageKey="kronus-ui-theme-v2"
+        <CronusThemeScript
+          storageKey="cronus-ui-theme-v2"
           defaultThemeName="neutral"
           defaultModeName="dark"
         />
@@ -39,14 +39,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           Skip to content
         </a>
-        <KronusUIProvider
+        <CronusUIProvider
           asRoot
           defaultThemeName="neutral"
           defaultModeName="dark"
-          storageKey="kronus-ui-theme-v2"
+          storageKey="cronus-ui-theme-v2"
         >
           {children}
-        </KronusUIProvider>
+        </CronusUIProvider>
       </body>
     </html>
   );

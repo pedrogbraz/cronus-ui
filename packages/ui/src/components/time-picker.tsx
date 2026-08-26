@@ -299,7 +299,7 @@ function TimeColumn({
                 "flex h-9 scroll-my-2 items-center justify-center rounded-md text-sm tabular-nums transition-colors duration-150 motion-reduce:transition-none",
                 disabled ? "cursor-default" : "cursor-pointer",
                 isSelected
-                  ? "bg-[color-mix(in_oklch,var(--kronus-primary),black_30%)] font-semibold text-white shadow-xs"
+                  ? "bg-[color-mix(in_oklch,var(--cronus-primary),black_30%)] font-semibold text-white shadow-xs"
                   : "text-fg-secondary hover:bg-surface-overlay hover:text-fg",
               )}
             >

@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@import "@cronus-ui/tokens/styles.css";
+
+/*
+ * REQUIRED on Tailwind v4.
+ *
+ * Tailwind v4 does not scan node_modules by default, and @cronus-ui/ui ships its
+ * Tailwind class strings baked into pre-compiled JS under dist. Without the
+ * @source below, none of the component utility classes (bg-primary, rounded-lg,
+ * bg-surface-raised, …) would be emitted and the components would render
+ * unstyled.
+ */
+@source "../node_modules/@cronus-ui/ui/dist/**/*.js";
+
+/* Scan this app's own source too. */
+@source "./**/*.{ts,tsx}";

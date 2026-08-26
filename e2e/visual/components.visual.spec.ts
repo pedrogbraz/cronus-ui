@@ -29,8 +29,8 @@ import { expect, type Page, test } from "@playwright/test";
  * the "Visual regression" section of CONTRIBUTING.md).
  */
 
-/** Must match the `storageKey` given to KronusThemeScript/KronusUIProvider in apps/www/app/layout.tsx. */
-const THEME_STORAGE_KEY = "kronus-ui-theme";
+/** Must match the `storageKey` given to CronusThemeScript/CronusUIProvider in apps/www/app/layout.tsx. */
+const THEME_STORAGE_KEY = "cronus-ui-theme";
 
 type Mode = "light" | "dark";
 
@@ -95,8 +95,8 @@ const SCREENSHOT_OPTIONS = {
 
 /**
  * Persist the theme BEFORE any document script runs, exactly the way the site
- * does it: KronusThemeScript reads `localStorage[storageKey]` as JSON
- * `{ theme, mode }` pre-paint and sets `data-kronus-theme` / `data-kronus-mode`
+ * does it: CronusThemeScript reads `localStorage[storageKey]` as JSON
+ * `{ theme, mode }` pre-paint and sets `data-cronus-theme` / `data-cronus-mode`
  * / `.dark` on <html> (see packages/theme/src/theme-script.tsx).
  */
 async function useTheme(page: Page, theme: string, mode: Mode): Promise<void> {

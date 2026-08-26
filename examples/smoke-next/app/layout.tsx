@@ -1,19 +1,19 @@
-import { KronusUIProvider } from "@kronus-ui/theme";
+import { CronusUIProvider } from "@cronus-ui/theme";
 import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata = {
-  title: "Kronus UI — Next.js smoke",
-  description: "External-consumer smoke fixture for @kronus-ui/ui.",
+  title: "Cronus UI — Next.js smoke",
+  description: "External-consumer smoke fixture for @cronus-ui/ui.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <KronusUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">
+        <CronusUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">
           {children}
-        </KronusUIProvider>
+        </CronusUIProvider>
       </body>
     </html>
   );

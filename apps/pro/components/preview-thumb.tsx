@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@kronus-ui/ui/cn";
+import { cn } from "@cronus-ui/ui/cn";
 import { useEffect, useRef, useState } from "react";
 import type { PackApp } from "../lib/catalog";
 import { previewEmbedUrl } from "../lib/origins";
@@ -47,8 +47,8 @@ export function PreviewThumb({ app, className }: { app: PackApp; className?: str
     <div
       ref={hostRef}
       data-slot="pro-preview-thumb"
-      data-kronus-theme={app.theme}
-      data-kronus-mode={app.mode}
+      data-cronus-theme={app.theme}
+      data-cronus-mode={app.mode}
       className={cn(
         "relative aspect-[16/10] overflow-hidden bg-surface-base",
         app.mode === "dark" ? "dark" : undefined,
@@ -57,13 +57,13 @@ export function PreviewThumb({ app, className }: { app: PackApp; className?: str
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(var(--kronus-border)_1px,transparent_1px)] opacity-40 [background-size:16px_16px]"
+        className="absolute inset-0 bg-[radial-gradient(var(--cronus-border)_1px,transparent_1px)] opacity-40 [background-size:16px_16px]"
       />
       {inView ? (
         <iframe
           src={previewEmbedUrl(app.slug)}
           title={`${app.name} live preview`}
-          tabIndex={-1}
+          inert
           loading="lazy"
           className="pointer-events-none absolute left-0 top-0 origin-top-left border-0"
           style={{

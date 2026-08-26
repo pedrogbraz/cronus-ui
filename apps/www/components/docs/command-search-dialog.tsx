@@ -7,7 +7,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@kronus-ui/ui/command";
+} from "@cronus-ui/ui/command";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 // Server-safe block metadata only — names, slugs, variant ids + descriptions.

@@ -23,7 +23,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const entry = getTemplate(slug);
   return {
-    title: entry ? `${entry.name} preview — Kronus UI` : "Template preview — Kronus UI",
+    title: entry ? `${entry.name} preview — Cronus UI` : "Template preview — Cronus UI",
     description: entry?.description,
     robots: { index: false, follow: false },
   };

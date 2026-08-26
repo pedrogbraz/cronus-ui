@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Input, Reveal } from "@kronus-ui/ui";
+import { Button, Input, Reveal } from "@cronus-ui/ui";
 import { AlertTriangle, Check, Clock, RotateCw, Search, Wrench } from "lucide-react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
 import { BlockViewBody } from "../../components/blocks/block-view-body";
@@ -38,7 +38,7 @@ export function NotFoundBlock() {
   );
 }
 
-const notFoundCode = `import { Button, Input, Reveal } from "@kronus-ui/ui";
+const notFoundCode = `import { Button, Input, Reveal } from "@cronus-ui/ui";
 import { Search } from "lucide-react";
 
 export function NotFoundBlock() {
@@ -99,7 +99,7 @@ export function ErrorStateBlock() {
   );
 }
 
-const errorStateCode = `import { Button, Reveal } from "@kronus-ui/ui";
+const errorStateCode = `import { Button, Reveal } from "@cronus-ui/ui";
 import { AlertTriangle, RotateCw } from "lucide-react";
 
 export function ErrorStateBlock() {
@@ -156,7 +156,7 @@ export function SuccessStateBlock() {
   );
 }
 
-const successStateCode = `import { Button, Reveal } from "@kronus-ui/ui";
+const successStateCode = `import { Button, Reveal } from "@cronus-ui/ui";
 import { Check } from "lucide-react";
 
 export function SuccessStateBlock() {
@@ -216,7 +216,7 @@ export function MaintenanceBlock() {
   );
 }
 
-const maintenanceCode = `import { Button, Input, Reveal } from "@kronus-ui/ui";
+const maintenanceCode = `import { Button, Input, Reveal } from "@cronus-ui/ui";
 import { Clock, Wrench } from "lucide-react";
 
 export function MaintenanceBlock() {

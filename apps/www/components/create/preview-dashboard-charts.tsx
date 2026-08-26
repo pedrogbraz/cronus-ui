@@ -16,7 +16,7 @@ import {
   Metric,
   MetricDelta,
   MetricValue,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ArrowRight } from "lucide-react";
 import {
   Area,

@@ -1,10 +1,10 @@
 /**
- * Test utilities for apps built on Kronus UI — imported from
- * `@kronus-ui/ui/testing` (deliberately not part of the main barrel, so test
+ * Test utilities for apps built on Cronus UI — imported from
+ * `@cronus-ui/ui/testing` (deliberately not part of the main barrel, so test
  * helpers can never leak into an app bundle).
  *
- * - `renderWithKronus` — Testing Library `render` wrapped in a scoped
- *   `KronusUIProvider`, plus `rerenderWithTheme` to flip theme/mode mid-test.
+ * - `renderWithCronus` — Testing Library `render` wrapped in a scoped
+ *   `CronusUIProvider`, plus `rerenderWithTheme` to flip theme/mode mid-test.
  * - `findDialog` / `findTooltip` — document.body-scoped async queries for
  *   Radix surfaces that render through portals (outside the render container).
  * - `expectNoA11yViolations` — the house axe gate: run axe-core over an
@@ -15,7 +15,7 @@
  * (`expectNoA11yViolations` only) are optional peer dependencies — install
  * them with your dev dependencies. Runs under jsdom with Vitest or Jest.
  */
-import { KronusUIProvider, type KronusUIProviderProps } from "@kronus-ui/theme";
+import { CronusUIProvider, type CronusUIProviderProps } from "@cronus-ui/theme";
 import {
   type RenderOptions,
   type RenderResult,
@@ -25,43 +25,43 @@ import {
 } from "@testing-library/react";
 import type { ReactElement, ReactNode } from "react";
 
-/** Theme preset accepted by {@link renderWithKronus} (e.g. "aurora", "neutral"). */
-export type KronusTheme = NonNullable<KronusUIProviderProps["defaultThemeName"]>;
-/** Mode accepted by {@link renderWithKronus} ("dark" | "light"). */
-export type KronusMode = NonNullable<KronusUIProviderProps["defaultModeName"]>;
+/** Theme preset accepted by {@link renderWithCronus} (e.g. "aurora", "neutral"). */
+export type CronusTheme = NonNullable<CronusUIProviderProps["defaultThemeName"]>;
+/** Mode accepted by {@link renderWithCronus} ("dark" | "light"). */
+export type CronusMode = NonNullable<CronusUIProviderProps["defaultModeName"]>;
 
-export interface RenderWithKronusOptions extends Omit<RenderOptions, "queries"> {
+export interface RenderWithCronusOptions extends Omit<RenderOptions, "queries"> {
   /** Theme preset to mount the UI under. @default "aurora" */
-  theme?: KronusTheme;
+  theme?: CronusTheme;
   /** Color mode to mount the UI under. @default "dark" */
-  mode?: KronusMode;
+  mode?: CronusMode;
 }
 
-export interface RenderWithKronusResult extends RenderResult {
+export interface RenderWithCronusResult extends RenderResult {
   /**
    * Remount the themed scope under a different theme/mode (the provider seeds
    * its state from the mount-time defaults, so switching requires a remount —
    * component state inside the tree is reset, exactly like a fresh render).
    */
-  rerenderWithTheme: (theme: KronusTheme, mode?: KronusMode) => void;
+  rerenderWithTheme: (theme: CronusTheme, mode?: CronusMode) => void;
 }
 
 /**
- * Testing Library `render` with the UI wrapped in a scoped `KronusUIProvider`
+ * Testing Library `render` with the UI wrapped in a scoped `CronusUIProvider`
  * (non-`asRoot`): the theme attributes land on a wrapper `<div
- * data-kronus-theme data-kronus-mode>`, never on `<html>`, so parallel tests
+ * data-cronus-theme data-cronus-mode>`, never on `<html>`, so parallel tests
  * cannot bleed theme state into each other through the document.
  *
  * Returns the usual render result — `rerender` keeps re-wrapping in the same
- * provider — plus {@link RenderWithKronusResult.rerenderWithTheme}.
+ * provider — plus {@link RenderWithCronusResult.rerenderWithTheme}.
  *
  * Note: Radix overlays portal to `document.body`, outside the themed wrapper.
  * Use `baseElement` (not `container`) for assertions that must see them.
  */
-export function renderWithKronus(
+export function renderWithCronus(
   ui: ReactElement,
-  options: RenderWithKronusOptions = {},
-): RenderWithKronusResult {
+  options: RenderWithCronusOptions = {},
+): RenderWithCronusResult {
   const { theme = "aurora", mode = "dark", ...rtlOptions } = options;
   const current = { theme, mode };
   let lastUi: ReactNode = ui;
@@ -69,13 +69,13 @@ export function renderWithKronus(
   // The provider seeds theme/mode state from its `default*` props, so a theme
   // change must remount it — the key encodes the active pair to force that.
   const wrap = (el: ReactNode) => (
-    <KronusUIProvider
+    <CronusUIProvider
       key={`${current.theme}:${current.mode}`}
       defaultThemeName={current.theme}
       defaultModeName={current.mode}
     >
       {el}
-    </KronusUIProvider>
+    </CronusUIProvider>
   );
 
   const result = render(wrap(ui), rtlOptions);
@@ -86,7 +86,7 @@ export function renderWithKronus(
       lastUi = next;
       result.rerender(wrap(next));
     },
-    rerenderWithTheme: (nextTheme: KronusTheme, nextMode?: KronusMode) => {
+    rerenderWithTheme: (nextTheme: CronusTheme, nextMode?: CronusMode) => {
       current.theme = nextTheme;
       current.mode = nextMode ?? current.mode;
       result.rerender(wrap(lastUi));
@@ -133,7 +133,7 @@ async function loadVitestAxe(): Promise<VitestAxe> {
     return await import("vitest-axe");
   } catch {
     throw new Error(
-      '@kronus-ui/ui/testing: expectNoA11yViolations needs the optional peer dependency "vitest-axe". ' +
+      '@cronus-ui/ui/testing: expectNoA11yViolations needs the optional peer dependency "vitest-axe". ' +
         "Install it with your dev dependencies (e.g. `npm i -D vitest-axe`) and re-run the tests.",
     );
   }
@@ -141,7 +141,7 @@ async function loadVitestAxe(): Promise<VitestAxe> {
 
 /**
  * Run axe-core over an element and fail with the formatted violations if any
- * are found — the same gate the Kronus UI component suite runs on every
+ * are found — the same gate the Cronus UI component suite runs on every
  * surface. Overlays portal to `document.body`, so pass Testing Library's
  * `baseElement` (rather than `container`) to include them in the scan.
  *

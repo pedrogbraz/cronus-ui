@@ -1,14 +1,14 @@
 /**
- * Curated design DATA for the Kronus UI "Create" studio.
+ * Curated design DATA for the Cronus UI "Create" studio.
  *
  * Pure, server-safe data — NO "use client". These are the cohesive presets and
  * palettes a user picks from. Ramps are tuned to mirror the lightness scale of
- * `@kronus-ui/tokens` (dark surfaces ~0.11→0.31, light surfaces ~0.96→1, fg dark
+ * `@cronus-ui/tokens` (dark surfaces ~0.11→0.31, light surfaces ~0.96→1, fg dark
  * ~0.93/0.7/0.62/0.44, fg light ~0.145/0.43/0.556/0.705) with each base ramp's
  * own hue + chroma applied, and harmonious brand / chart values throughout.
  */
 
-import type { ThemeOverrides } from "@kronus-ui/tokens";
+import type { ThemeOverrides } from "@cronus-ui/tokens";
 import { ICON_LIBRARIES, type IconLibraryId } from "./icon-library-list";
 import type {
   BaseColor,
@@ -574,33 +574,33 @@ export function configToThemeOverrides(config: DesignConfig): ThemeOverrides {
 export function serializeCreateCss(config: DesignConfig, selector = ":root"): string {
   const overrides = configToThemeOverrides(config);
   const cssVars: Record<string, string> = {
-    "--kronus-primary": overrides.primary ?? "",
-    "--kronus-primary-foreground": overrides.primaryForeground ?? "",
-    "--kronus-accent": overrides.accent ?? "",
-    "--kronus-accent-foreground": overrides.accentForeground ?? "",
-    "--kronus-surface-base": overrides.surfaceBase ?? "",
-    "--kronus-surface-inset": overrides.surfaceInset ?? "",
-    "--kronus-surface-raised": overrides.surfaceRaised ?? "",
-    "--kronus-surface-overlay": overrides.surfaceOverlay ?? "",
-    "--kronus-surface-elevated": overrides.surfaceElevated ?? "",
-    "--kronus-surface-floating": overrides.surfaceFloating ?? "",
-    "--kronus-fg": overrides.fg ?? "",
-    "--kronus-fg-secondary": overrides.fgSecondary ?? "",
-    "--kronus-fg-tertiary": overrides.fgTertiary ?? "",
-    "--kronus-fg-muted": overrides.fgMuted ?? "",
-    "--kronus-border": overrides.border ?? "",
-    "--kronus-border-strong": overrides.borderStrong ?? "",
-    "--kronus-border-soft": overrides.borderSoft ?? "",
-    "--kronus-ring": overrides.ring ?? "",
-    "--kronus-radius": overrides.radius ?? "",
-    "--kronus-font-display": overrides.fontDisplay ?? "",
-    "--kronus-font-sans": overrides.fontSans ?? "",
-    "--kronus-font-mono": overrides.fontMono ?? "",
-    "--kronus-chart-1": overrides.chart1 ?? "",
-    "--kronus-chart-2": overrides.chart2 ?? "",
-    "--kronus-chart-3": overrides.chart3 ?? "",
-    "--kronus-chart-4": overrides.chart4 ?? "",
-    "--kronus-chart-5": overrides.chart5 ?? "",
+    "--cronus-primary": overrides.primary ?? "",
+    "--cronus-primary-foreground": overrides.primaryForeground ?? "",
+    "--cronus-accent": overrides.accent ?? "",
+    "--cronus-accent-foreground": overrides.accentForeground ?? "",
+    "--cronus-surface-base": overrides.surfaceBase ?? "",
+    "--cronus-surface-inset": overrides.surfaceInset ?? "",
+    "--cronus-surface-raised": overrides.surfaceRaised ?? "",
+    "--cronus-surface-overlay": overrides.surfaceOverlay ?? "",
+    "--cronus-surface-elevated": overrides.surfaceElevated ?? "",
+    "--cronus-surface-floating": overrides.surfaceFloating ?? "",
+    "--cronus-fg": overrides.fg ?? "",
+    "--cronus-fg-secondary": overrides.fgSecondary ?? "",
+    "--cronus-fg-tertiary": overrides.fgTertiary ?? "",
+    "--cronus-fg-muted": overrides.fgMuted ?? "",
+    "--cronus-border": overrides.border ?? "",
+    "--cronus-border-strong": overrides.borderStrong ?? "",
+    "--cronus-border-soft": overrides.borderSoft ?? "",
+    "--cronus-ring": overrides.ring ?? "",
+    "--cronus-radius": overrides.radius ?? "",
+    "--cronus-font-display": overrides.fontDisplay ?? "",
+    "--cronus-font-sans": overrides.fontSans ?? "",
+    "--cronus-font-mono": overrides.fontMono ?? "",
+    "--cronus-chart-1": overrides.chart1 ?? "",
+    "--cronus-chart-2": overrides.chart2 ?? "",
+    "--cronus-chart-3": overrides.chart3 ?? "",
+    "--cronus-chart-4": overrides.chart4 ?? "",
+    "--cronus-chart-5": overrides.chart5 ?? "",
   };
   const lines = Object.entries(cssVars)
     .filter(([, value]) => value.length > 0)
@@ -614,18 +614,18 @@ export function serializeCreateProvider(config: DesignConfig): string {
     .replace(/"([^"]+)":/g, "$1:")
     .replace(/"/g, '"');
 
-  return `import { KronusUIProvider } from "@kronus-ui/theme";
+  return `import { CronusUIProvider } from "@cronus-ui/theme";
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
-    <KronusUIProvider
+    <CronusUIProvider
       asRoot
       defaultThemeName="neutral"
       defaultModeName="${config.mode}"
       overrides={${body}}
     >
       {children}
-    </KronusUIProvider>
+    </CronusUIProvider>
   );
 }`;
 }
@@ -666,7 +666,7 @@ export function serializePresetCode(preset: StylePreset): string {
   const bytes = new TextEncoder().encode(json);
   let binary = "";
   for (const byte of bytes) binary += String.fromCharCode(byte);
-  return `kronus:${btoa(binary)}`;
+  return `cronus:${btoa(binary)}`;
 }
 
 export function parsePresetCode(value: string): StylePreset {
@@ -677,7 +677,7 @@ export function parsePresetCode(value: string): StylePreset {
 
   const raw = trimmed.startsWith("{")
     ? trimmed
-    : decodePresetPayload(trimmed.replace(/^kronus:/, ""));
+    : decodePresetPayload(trimmed.replace(/^cronus:/, ""));
   const parsed = JSON.parse(raw) as Partial<StylePreset>;
 
   if (!parsed.name || !parsed.config) {

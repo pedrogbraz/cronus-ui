@@ -10,11 +10,11 @@ import {
 } from "react";
 import { cn } from "../lib/cn.js";
 
-/** Kronus house default open delay (ms) — snappier than Radix's 700ms. */
+/** Cronus house default open delay (ms) — snappier than Radix's 700ms. */
 const DEFAULT_DELAY_DURATION = 200;
 
 /**
- * Marks that a Kronus <TooltipProvider> is mounted above, so <Tooltip> renders
+ * Marks that a Cronus <TooltipProvider> is mounted above, so <Tooltip> renders
  * a bare Radix Root instead of mounting its provider-less fallback. Radix
  * providers do not inherit from ancestors — nesting one would silently reset
  * the app-level config — so detection is the only way to honor both contracts.
@@ -46,7 +46,7 @@ export const TooltipProvider = ({
 TooltipProvider.displayName = "TooltipProvider";
 
 /**
- * Radix Tooltip.Root with Kronus defaults. Under a <TooltipProvider> it renders
+ * Radix Tooltip.Root with Cronus defaults. Under a <TooltipProvider> it renders
  * bare, so the provider's config genuinely applies; per-tooltip
  * `delayDuration` / `disableHoverableContent` props go to the Root and win
  * over the provider's values. Without a provider it mounts a private fallback
@@ -78,7 +78,7 @@ export const TooltipContent = forwardRef<
         data-slot="tooltip-content"
         sideOffset={sideOffset}
         className={cn(
-          "z-50 overflow-hidden rounded-md border border-border bg-surface-floating px-2.5 py-1 text-xs text-fg shadow-md data-[state=open]:animate-[kronus-pop-in_150ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[kronus-pop-out_110ms_var(--ease-out-quart)_both]",
+          "z-50 overflow-hidden rounded-md border border-border bg-surface-floating px-2.5 py-1 text-xs text-fg shadow-md data-[state=open]:animate-[cronus-pop-in_150ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[cronus-pop-out_110ms_var(--ease-out-quart)_both]",
           className,
         )}
         {...props}

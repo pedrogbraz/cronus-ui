@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@kronus-ui/ui";
+import { cn } from "@cronus-ui/ui";
 import { ArrowRight, Search } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -69,7 +69,7 @@ export function BlocksCatalog() {
                 Ready-made sections
               </h1>
               <p className="mt-4 max-w-2xl text-lg text-fg-secondary">
-                Copy-paste UI sections composed from Kronus UI. Open a family, compare variations,
+                Copy-paste UI sections composed from Cronus UI. Open a family, compare variations,
                 then launch the live preview and source.
               </p>
             </div>
@@ -161,7 +161,7 @@ export function BlocksCatalog() {
                 <div className="relative flex h-36 items-center justify-center overflow-hidden border-b border-border/60 bg-surface-inset">
                   <div
                     aria-hidden="true"
-                    className="absolute inset-0 bg-[radial-gradient(var(--kronus-border)_1px,transparent_1px)] opacity-40 [background-size:16px_16px]"
+                    className="absolute inset-0 bg-[radial-gradient(var(--cronus-border)_1px,transparent_1px)] opacity-40 [background-size:16px_16px]"
                   />
                   <span
                     className={cn(

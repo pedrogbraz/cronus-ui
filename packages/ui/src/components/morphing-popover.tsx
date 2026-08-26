@@ -71,7 +71,7 @@ export interface MorphingPopoverProps extends HTMLAttributes<HTMLDivElement> {
   defaultOpen?: boolean;
   /** Called whenever the open state should change (controlled or not). */
   onOpenChange?: (open: boolean) => void;
-  /** Override the morph spring (advanced — defaults to the Kronus morph spring). */
+  /** Override the morph spring (advanced — defaults to the Cronus morph spring). */
   transition?: Transition;
   /**
    * How `prefers-reduced-motion` is honoured. Defaults to `"user"`: users who

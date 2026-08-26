@@ -1,5 +1,5 @@
 /**
- * The Kronus Stack Builder resolver — PURE and DETERMINISTIC.
+ * The Cronus Stack Builder resolver — PURE and DETERMINISTIC.
  *
  * Given a {@link Catalog} and a raw {@link Selection}, `resolve()` returns a
  * fully resolved {@link Resolution}:
@@ -164,7 +164,7 @@ function reasonFor(
       break;
     case "orm-mongoose":
       return "Mongoose only works with MongoDB";
-    case "ui-kronus":
+    case "ui-cronus":
     case "ui-shadcn":
     case "ui-heroui":
     case "ui-aceternity":
@@ -530,7 +530,7 @@ export function toggleMulti(
 /**
  * The canonical default selection: every single category at its first option,
  * toggles per {@link TOGGLE_DEFAULTS_ON}, multis per {@link MULTI_DEFAULTS},
- * with `ui` nudged to Kronus UI (the product default) when a React web frontend
+ * with `ui` nudged to Cronus UI (the product default) when a React web frontend
  * is present. Always valid.
  */
 export function defaultSelection(catalog: Catalog = defaultCatalog): Selection {
@@ -545,9 +545,9 @@ export function defaultSelection(catalog: Catalog = defaultCatalog): Selection {
       seed[cat.id] = TOGGLE_DEFAULTS_ON.has(cat.id);
     }
   }
-  // Product defaults: Next.js + Kronus UI.
+  // Product defaults: Next.js + Cronus UI.
   seed.web = "web-next";
-  seed.ui = "ui-kronus";
+  seed.ui = "ui-cronus";
   return resolve(catalog, seed).selection;
 }
 

@@ -33,7 +33,7 @@ const FEATURES: Feature[] = [
     body: (
       <>
         <code className="rounded bg-surface-overlay px-1 py-0.5 font-mono text-[0.85em] text-fg">
-          npx kronus-ui add &lt;component&gt;
+          npx cronus-ui add &lt;component&gt;
         </code>{" "}
         copies real source into your repo.{" "}
         <code className="rounded bg-surface-overlay px-1 py-0.5 font-mono text-[0.85em] text-fg">
@@ -79,7 +79,7 @@ const FEATURES: Feature[] = [
 ];
 
 /**
- * "Why Kronus UI" feature grid — a premium, token-driven homepage section that
+ * "Why Cronus UI" feature grid — a premium, token-driven homepage section that
  * surfaces the six defining strengths of the product UI system.
  *
  * Everything is driven by semantic design tokens (surfaces, foregrounds,
@@ -95,7 +95,7 @@ export function FeatureGrid() {
       <SectionGlow />
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
         <div className="flex flex-col gap-3">
-          <Eyebrow>Why Kronus UI</Eyebrow>
+          <Eyebrow>Why Cronus UI</Eyebrow>
           <h2 className="max-w-2xl font-display text-3xl tracking-[-0.025em] sm:text-5xl">
             The catalog is the means
           </h2>

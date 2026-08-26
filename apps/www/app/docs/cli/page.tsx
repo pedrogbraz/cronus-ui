@@ -12,7 +12,7 @@ const cliCommands = [
   {
     title: "init",
     description:
-      "Writes kronus-ui.json, the cn() helper, and base dependencies. Flags: --cwd, --registry, --yes, --skip-install.",
+      "Writes cronus-ui.json, the cn() helper, and base dependencies. Flags: --cwd, --registry, --yes, --skip-install.",
     badge: "setup",
   },
   {
@@ -47,7 +47,7 @@ const cliCommands = [
   {
     title: "upgrade",
     description:
-      "3-way merge with git merge-file --diff3 of installed components and of generated pages/layouts from compose (.kronus-ui/base vs local vs new render). Clean merges write; conflicts write markers if you confirm. Unresolved files get a prompt in KRONUS-UPGRADE.md. Flags: --all, --dry-run, --yes, --overwrite, --manifest.",
+      "3-way merge with git merge-file --diff3 of installed components and of generated pages/layouts from compose (.cronus-ui/base vs local vs new render). Clean merges write; conflicts write markers if you confirm. Unresolved files get a prompt in CRONUS-UPGRADE.md. Flags: --all, --dry-run, --yes, --overwrite, --manifest.",
     badge: "maintain",
   },
   {
@@ -70,25 +70,25 @@ const cliCommands = [
   },
 ] as const;
 
-const inspectCommands = `npx kronus-ui@latest list
-npx kronus-ui@latest diff button`;
+const inspectCommands = `npx cronus-ui@latest list
+npx cronus-ui@latest diff button`;
 
-const addPageExample = `npx kronus-ui@latest add-page --route /faq --blocks faq,cta --nav FAQ
-npx kronus-ui@latest add-page --route /faq --blocks faq,cta --dry-run`;
+const addPageExample = `npx cronus-ui@latest add-page --route /faq --blocks faq,cta --nav FAQ
+npx cronus-ui@latest add-page --route /faq --blocks faq,cta --dry-run`;
 
-const upgradeExample = `npx kronus-ui@latest upgrade --all --dry-run
-npx kronus-ui@latest upgrade button card
-npx kronus-ui@latest upgrade --all --yes`;
+const upgradeExample = `npx cronus-ui@latest upgrade --all --dry-run
+npx cronus-ui@latest upgrade button card
+npx cronus-ui@latest upgrade --all --yes`;
 
-const themeExample = `npx kronus-ui@latest theme set aurora
-npx kronus-ui@latest theme set midnight --mode light
-npx kronus-ui@latest theme add ./my-theme.json`;
+const themeExample = `npx cronus-ui@latest theme set aurora
+npx cronus-ui@latest theme set midnight --mode light
+npx cronus-ui@latest theme add ./my-theme.json`;
 
-const aiExample = `npx kronus-ui@latest ai
-npx kronus-ui@latest ai --assistants claude,cursor --preset saas --skills all`;
+const aiExample = `npx cronus-ui@latest ai
+npx cronus-ui@latest ai --assistants claude,cursor --preset saas --skills all`;
 
-const composeDryRun = `npx kronus-ui@latest compose saas --dry-run
-npx kronus-ui@latest compose store --variant login=split --brand Acme`;
+const composeDryRun = `npx cronus-ui@latest compose saas --dry-run
+npx cronus-ui@latest compose store --variant login=split --brand Acme`;
 
 const config = `{
   "aliases": {
@@ -101,7 +101,7 @@ const config = `{
     "lib": "lib",
     "blocks": "components/blocks"
   },
-  "registry": "https://raw.githubusercontent.com/pedrogbraz/kronus-ui/v0.5.0/registry",
+  "registry": "https://raw.githubusercontent.com/pedrogbraz/cronus-ui/v0.5.0/registry",
   "theme": {
     "name": "aurora",
     "mode": "dark"
@@ -116,7 +116,7 @@ export default function CliPage() {
       <DocsHeader
         eyebrow="CLI"
         title="Install, compose, theme, and upgrade from the terminal"
-        description="The kronus-ui CLI is the shadcn-style path for apps that own their source. New product? Scaffold with create-kronus-app, then use these commands inside the repo."
+        description="The cronus-ui CLI is the shadcn-style path for apps that own their source. New product? Scaffold with create-cronus-app, then use these commands inside the repo."
       />
 
       <DocsSection title="Initialize a project">
@@ -156,7 +156,7 @@ export default function CliPage() {
 
       <DocsSection
         title="Upgrade without losing edits"
-        description="Each add records the release in kronus-ui.json installed. upgrade 3-way-merges that base, your file, and upstream with git merge-file --diff3. Composed pages and layouts use the same merge against .kronus-ui/base (snapshot vs local vs new render); add-page routes are kept and user files are never deleted. Custom compose apps take --manifest. Clean merges write; conflicts write markers only if you confirm (or --yes). Unresolved files get a ready-to-paste agent prompt in KRONUS-UPGRADE.md."
+        description="Each add records the release in cronus-ui.json installed. upgrade 3-way-merges that base, your file, and upstream with git merge-file --diff3. Composed pages and layouts use the same merge against .cronus-ui/base (snapshot vs local vs new render); add-page routes are kept and user files are never deleted. Custom compose apps take --manifest. Clean merges write; conflicts write markers only if you confirm (or --yes). Unresolved files get a ready-to-paste agent prompt in CRONUS-UPGRADE.md."
       >
         <CodeBlock code={upgradeExample} language="bash" />
       </DocsSection>
@@ -177,7 +177,7 @@ export default function CliPage() {
 
       <DocsSection
         title="Command surface"
-        description="The commands exported by kronus-ui. Flags match --help — nothing extra."
+        description="The commands exported by cronus-ui. Flags match --help — nothing extra."
       >
         <DocsGrid columns={2}>
           {cliCommands.map((command) => (
@@ -193,14 +193,14 @@ export default function CliPage() {
 
       <DocsSection
         title="Config"
-        description="kronus-ui.json keeps aliases explicit and pins the registry to a release tag — never main/registry. add fills installed; compose fills composed."
+        description="cronus-ui.json keeps aliases explicit and pins the registry to a release tag — never main/registry. add fills installed; compose fills composed."
       >
         <CodeBlock code={config} language="json" />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
           <InlineCode>installed</InlineCode> records each item&apos;s version and files so upgrade
           has a merge base. <InlineCode>composed</InlineCode> records each generated app (plan
           version, choices, files) so add-page can extend it and upgrade can 3-way-merge pages
-          against <InlineCode>.kronus-ui/base</InlineCode>. Use{" "}
+          against <InlineCode>.cronus-ui/base</InlineCode>. Use{" "}
           <InlineCode>--registry ./registry</InlineCode> for offline testing against a local
           registry build.
         </p>

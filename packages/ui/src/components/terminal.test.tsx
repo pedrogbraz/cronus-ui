@@ -5,7 +5,7 @@ import { axe } from "vitest-axe";
 import { Terminal, type TerminalLine } from "./terminal.js";
 
 const SCRIPT: TerminalLine[] = [
-  { type: "input", text: "npm create kronus@latest", delay: 0 },
+  { type: "input", text: "npm create cronus@latest", delay: 0 },
   { type: "output", text: "Project ready in 1.2s", delay: 0 },
 ];
 
@@ -22,7 +22,7 @@ describe("Terminal", () => {
     const { container } = render(<Terminal lines={SCRIPT} title="zsh" motionPreference="never" />);
 
     const pane = screenPane(container);
-    expect(pane?.textContent).toContain("npm create kronus@latest");
+    expect(pane?.textContent).toContain("npm create cronus@latest");
     expect(pane?.textContent).toContain("Project ready in 1.2s");
     expect(screen.getByText("zsh")).toBeInTheDocument();
     // The prompt is rendered for input lines only.
@@ -40,7 +40,7 @@ describe("Terminal", () => {
     const { container } = render(<Terminal lines={SCRIPT} motionPreference="always" />);
 
     const transcript = container.querySelector('[data-slot="terminal-transcript"]');
-    expect(transcript?.textContent).toBe("$ npm create kronus@latest\nProject ready in 1.2s");
+    expect(transcript?.textContent).toBe("$ npm create cronus@latest\nProject ready in 1.2s");
     // …while the visual pane hasn't typed anything yet.
     expect(screenPane(container)?.textContent).not.toContain("npm");
   });
@@ -107,7 +107,7 @@ describe("Terminal", () => {
     render(
       <Terminal
         lines={[
-          { type: "input", text: "npm i @kronus-ui/ui" },
+          { type: "input", text: "npm i @cronus-ui/ui" },
           { type: "output", text: "added 1 package" },
           { type: "input", text: "npm run dev" },
         ]}
@@ -116,7 +116,7 @@ describe("Terminal", () => {
     );
 
     await userEvent.click(screen.getByRole("button", { name: "Copy commands" }));
-    expect(writeText).toHaveBeenCalledWith("npm i @kronus-ui/ui\nnpm run dev");
+    expect(writeText).toHaveBeenCalledWith("npm i @cronus-ui/ui\nnpm run dev");
   });
 
   it("hides the copy button when the script has no input lines", () => {

@@ -16,7 +16,7 @@ export interface SparklesTextProps extends HTMLAttributes<HTMLSpanElement> {
 }
 
 const SPARKLE_KEYFRAMES =
-  "@keyframes kronus-sparkle{0%,100%{transform:scale(0);opacity:0}40%{transform:scale(1);opacity:1}70%{transform:scale(0.6);opacity:0.6}}";
+  "@keyframes cronus-sparkle{0%,100%{transform:scale(0);opacity:0}40%{transform:scale(1);opacity:1}70%{transform:scale(0.6);opacity:0.6}}";
 
 function finiteOr(value: number, fallback: number) {
   return Number.isFinite(value) ? value : fallback;
@@ -65,7 +65,7 @@ export function SparklesText({ ref, className, children, count = 4, ...props }: 
             <span
               // biome-ignore lint/suspicious/noArrayIndexKey: sparkles are positional and never reorder.
               key={index}
-              className="absolute size-2 text-primary [animation-delay:var(--sparkle-delay)] [animation-duration:var(--sparkle-duration)] [animation-iteration-count:infinite] [animation-name:kronus-sparkle]"
+              className="absolute size-2 text-primary [animation-delay:var(--sparkle-delay)] [animation-duration:var(--sparkle-duration)] [animation-iteration-count:infinite] [animation-name:cronus-sparkle]"
               style={sparkleStyle}
             >
               <svg viewBox="0 0 16 16" className="size-full fill-current" aria-hidden="true">

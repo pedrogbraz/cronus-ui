@@ -1,7 +1,7 @@
 "use client";
 
-import { tokensToCssVars } from "@kronus-ui/tokens";
-import { cn } from "@kronus-ui/ui";
+import { tokensToCssVars } from "@cronus-ui/tokens";
+import { cn } from "@cronus-ui/ui";
 import { Maximize2, Moon, RotateCcw, Sun } from "lucide-react";
 import { type ReactNode, useRef, useState } from "react";
 
@@ -64,13 +64,13 @@ export function BlockPreview({ children }: { children: ReactNode }) {
       {/* Themed, scrollable preview surface */}
       <div
         key={resetKey}
-        data-kronus-theme="aurora"
-        data-kronus-mode={mode}
+        data-cronus-theme="aurora"
+        data-cronus-mode={mode}
         style={style}
         className={cn(
           "flex-1 overflow-x-auto overflow-y-auto bg-surface-base px-4 py-14 sm:px-6 lg:px-8",
           // Smoothly cross-fade the brand colors when a preset is chosen.
-          "transition-[--kronus-primary,--kronus-accent,--kronus-ring] duration-300 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
+          "transition-[--cronus-primary,--cronus-accent,--cronus-ring] duration-300 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
           mode === "dark" ? "dark" : "",
         )}
       >

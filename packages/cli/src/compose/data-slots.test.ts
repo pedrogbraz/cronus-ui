@@ -11,13 +11,13 @@ import {
 const SOURCE = [
   "import x from 'y';",
   "",
-  "/* @kronus:data navbar-links */",
+  "/* @cronus:data navbar-links */",
   "const NAVBAR_LINKS = [",
   '  { label: "Old", href: "#old" },',
   "];",
-  "/* @kronus:data-end */",
+  "/* @cronus:data-end */",
   "",
-  "export function NavbarBlock() { return <span>Kronus</span>; }",
+  "export function NavbarBlock() { return <span>Cronus</span>; }",
 ].join("\n");
 
 describe("replaceDataSlot", () => {
@@ -47,7 +47,7 @@ describe("replaceDataSlot", () => {
   });
 
   it("FAILS LOUD when the closing marker is absent", () => {
-    const truncated = "/* @kronus:data navbar-links */\nconst X = [];";
+    const truncated = "/* @cronus:data navbar-links */\nconst X = [];";
     expect(() => replaceDataSlot(truncated, "navbar-links", "x")).toThrow(/closing marker/);
   });
 
@@ -57,17 +57,17 @@ describe("replaceDataSlot", () => {
   });
 
   // Regression: the close marker is GENERIC and shared by every slot, so a block
-  // with two data-slots has two `@kronus:data-end` markers. Rewriting the FIRST
+  // with two data-slots has two `@cronus:data-end` markers. Rewriting the FIRST
   // slot must pair with its OWN (first-following) close marker and leave the
   // second slot's region intact — not throw "appears more than once".
   it("supports a block with two data-slots (pairs each open with its first-following close)", () => {
     const two = [
-      "/* @kronus:data navbar-links */",
+      "/* @cronus:data navbar-links */",
       "const NAVBAR_LINKS = [{ label: 'A' }];",
-      "/* @kronus:data-end */",
-      "/* @kronus:data footer-links */",
+      "/* @cronus:data-end */",
+      "/* @cronus:data footer-links */",
       "const FOOTER_LINKS = [{ label: 'B' }];",
-      "/* @kronus:data-end */",
+      "/* @cronus:data-end */",
     ].join("\n");
 
     // Rewriting the FIRST slot must succeed and touch only its region.
@@ -75,7 +75,7 @@ describe("replaceDataSlot", () => {
     expect(afterNav).toContain("const NAVBAR_LINKS = [{ label: 'X' }];");
     expect(afterNav).not.toContain("const NAVBAR_LINKS = [{ label: 'A' }];");
     // The second slot's region is untouched (both its markers + body survive).
-    expect(afterNav).toContain("/* @kronus:data footer-links */");
+    expect(afterNav).toContain("/* @cronus:data footer-links */");
     expect(afterNav).toContain("const FOOTER_LINKS = [{ label: 'B' }];");
 
     // Rewriting the SECOND slot also works and only touches its own region.
@@ -117,16 +117,16 @@ function tsxParseDiagnostics(source: string): readonly ts.Diagnostic[] {
   return (sourceFile as unknown as { parseDiagnostics?: ts.Diagnostic[] }).parseDiagnostics ?? [];
 }
 
-// A minimal but faithful chrome source: `Kronus` sits in JSX TEXT nodes exactly as
+// A minimal but faithful chrome source: `Cronus` sits in JSX TEXT nodes exactly as
 // in the shipped navbar/footer (the wordmark <span> and the copyright <p>), which
 // is the context the brand is injected into.
 const CHROME_SOURCE = [
-  'import { Badge } from "@kronus-ui/ui";',
+  'import { Badge } from "@cronus-ui/ui";',
   "",
   "export function SiteNav() {",
   "  return (",
   "    <nav>",
-  '      <span className="font-display text-lg font-semibold text-fg">Kronus</span>',
+  '      <span className="font-display text-lg font-semibold text-fg">Cronus</span>',
   "    </nav>",
   "  );",
   "}",
@@ -134,8 +134,8 @@ const CHROME_SOURCE = [
   "export function SiteFooter() {",
   "  return (",
   "    <footer>",
-  '      <span className="font-display text-lg font-semibold text-fg">Kronus</span>',
-  "      <p>© 2026 Kronus. All rights reserved.</p>",
+  '      <span className="font-display text-lg font-semibold text-fg">Cronus</span>',
+  "      <p>© 2026 Cronus. All rights reserved.</p>",
   "    </footer>",
   "  );",
   "}",
@@ -161,16 +161,16 @@ describe("escapeJsxText", () => {
 
 describe("replaceBrandLiteral", () => {
   it("replaces every occurrence of the literal", () => {
-    const src = "<span>Kronus</span> ... © 2026 Kronus.";
-    expect(replaceBrandLiteral(src, "Kronus", "Acme")).toBe("<span>Acme</span> ... © 2026 Acme.");
+    const src = "<span>Cronus</span> ... © 2026 Cronus.";
+    expect(replaceBrandLiteral(src, "Cronus", "Acme")).toBe("<span>Acme</span> ... © 2026 Acme.");
   });
 
   it("is a no-op escape for safe brands (byte-identical to a raw substitution)", () => {
-    expect(replaceBrandLiteral("Kronus", "Kronus", "A$B (x)")).toBe("A$B (x)");
+    expect(replaceBrandLiteral("Cronus", "Cronus", "A$B (x)")).toBe("A$B (x)");
   });
 
   it("FAILS LOUD when the literal is absent", () => {
-    expect(() => replaceBrandLiteral("no brand here", "Kronus", "Acme")).toThrow(DataSlotError);
+    expect(() => replaceBrandLiteral("no brand here", "Cronus", "Acme")).toThrow(DataSlotError);
   });
 
   // The point of the fix: the injected brand lands in a JSX TEXT context, so the
@@ -178,7 +178,7 @@ describe("replaceBrandLiteral", () => {
   // prove it by TS-parsing the rewritten chrome and asserting 0 parse diagnostics
   // — the SOURCE-side literal match alone never guaranteed this.
   it("baseline: a safe brand keeps the emitted chrome valid TSX", () => {
-    const out = replaceBrandLiteral(CHROME_SOURCE, "Kronus", "Acme");
+    const out = replaceBrandLiteral(CHROME_SOURCE, "Cronus", "Acme");
     expect(tsxParseDiagnostics(out)).toHaveLength(0);
     expect(out).toContain(">Acme<");
   });
@@ -189,7 +189,7 @@ describe("replaceBrandLiteral", () => {
     ["Ben <Labs>", "Ben &lt;Labs&gt;"],
     ["A & B", "A &amp; B"],
   ])("emits valid TSX for a brand with JSX-hostile chars: %s", (brand, escaped) => {
-    const out = replaceBrandLiteral(CHROME_SOURCE, "Kronus", brand);
+    const out = replaceBrandLiteral(CHROME_SOURCE, "Cronus", brand);
     // The rewritten chrome parses with zero syntax errors (would break
     // tsc/next build if the brand were injected raw).
     expect(tsxParseDiagnostics(out)).toHaveLength(0);
@@ -202,7 +202,7 @@ describe("replaceBrandLiteral", () => {
   it("proves the RAW (unescaped) brand would have produced invalid TSX", () => {
     // Guard the guard: injecting the raw brand into the same context yields parse
     // diagnostics, so the escaping above is doing load-bearing work.
-    const raw = CHROME_SOURCE.split("Kronus").join("Tom > Jerry");
+    const raw = CHROME_SOURCE.split("Cronus").join("Tom > Jerry");
     expect(tsxParseDiagnostics(raw).length).toBeGreaterThan(0);
   });
 });

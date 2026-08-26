@@ -21,15 +21,15 @@ const stackSubpath = (name: string) => src(`./packages/stack/src/${name}.ts`);
 export default defineConfig({
   resolve: {
     alias: {
-      "@kronus-ui/ai-kit": aiKitSrc,
-      "@kronus-ui/stack": stackSrc,
-      "@kronus-ui/stack/catalog": stackSubpath("catalog"),
-      "@kronus-ui/stack/cli": stackSubpath("cli"),
-      "@kronus-ui/stack/constants": stackSubpath("constants"),
-      "@kronus-ui/stack/engine": stackSubpath("engine"),
-      "@kronus-ui/stack/kickoff": stackSubpath("kickoff"),
-      "@kronus-ui/stack/schema": stackSubpath("schema"),
-      "@kronus-ui/stack/types": stackSubpath("types"),
+      "@cronus-ui/ai-kit": aiKitSrc,
+      "@cronus-ui/stack": stackSrc,
+      "@cronus-ui/stack/catalog": stackSubpath("catalog"),
+      "@cronus-ui/stack/cli": stackSubpath("cli"),
+      "@cronus-ui/stack/constants": stackSubpath("constants"),
+      "@cronus-ui/stack/engine": stackSubpath("engine"),
+      "@cronus-ui/stack/kickoff": stackSubpath("kickoff"),
+      "@cronus-ui/stack/schema": stackSubpath("schema"),
+      "@cronus-ui/stack/types": stackSubpath("types"),
     },
   },
   test: {
@@ -52,8 +52,8 @@ export default defineConfig({
       },
       {
         test: {
-          name: "create-kronus-app",
-          root: "./packages/create-kronus-app",
+          name: "create-cronus-app",
+          root: "./packages/create-cronus-app",
           environment: "node",
           include: ["src/**/*.test.ts"],
         },
@@ -68,8 +68,8 @@ export default defineConfig({
       },
       {
         test: {
-          name: "create-kronus-stack",
-          root: "./packages/create-kronus-stack",
+          name: "create-cronus-stack",
+          root: "./packages/create-cronus-stack",
           environment: "node",
           include: ["src/**/*.test.ts"],
         },

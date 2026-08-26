@@ -101,7 +101,7 @@ const DEFAULT_OUTPUT_DELAY = 150;
  * theme's `animate-caret-blink` utility.
  */
 const TERMINAL_KEYFRAMES =
-  "@keyframes kronus-terminal-fade{from{opacity:0;transform:translateY(2px)}to{opacity:1;transform:none}}";
+  "@keyframes cronus-terminal-fade{from{opacity:0;transform:translateY(2px)}to{opacity:1;transform:none}}";
 
 interface TerminalProgress {
   /** Lines `0..revealed-1` are fully shown; `lines[revealed]` is the active line. */
@@ -149,7 +149,7 @@ function TerminalRow({
         "flex gap-2",
         !isInput &&
           reveal &&
-          "[animation:kronus-terminal-fade_240ms_ease-out_both] motion-reduce:[animation:none]",
+          "[animation:cronus-terminal-fade_240ms_ease-out_both] motion-reduce:[animation:none]",
       )}
     >
       {isInput ? (

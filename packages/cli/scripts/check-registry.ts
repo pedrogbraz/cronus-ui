@@ -1,6 +1,6 @@
 /**
  * Fails (exit 1) when the committed `registry/*.json` (incl. the `meta.json`
- * sidecar) has drifted from the current @kronus-ui/ui + block sources.
+ * sidecar) has drifted from the current @cronus-ui/ui + block sources.
  * Regenerates the registry AND metadata into a temporary directory, then diffs
  * every file (content + presence) against the committed `registry/`.
  *
@@ -511,7 +511,7 @@ async function main() {
 
   const expected = serializeRegistry(items, meta);
 
-  const tmp = await mkdtemp(join(tmpdir(), "kronus-registry-check-"));
+  const tmp = await mkdtemp(join(tmpdir(), "cronus-registry-check-"));
   const diffs: string[] = [];
   try {
     await writeRegistry(tmp, items, meta);
@@ -543,7 +543,7 @@ async function main() {
   if (diffs.length > 0) {
     console.error("registry:check FAILED — registry/ is out of sync with packages/ui:");
     for (const d of diffs) console.error(`  - ${d}`);
-    console.error("\nRun `bun run -F kronus-ui registry` and commit the result.");
+    console.error("\nRun `bun run -F cronus-ui registry` and commit the result.");
     process.exit(1);
   }
 

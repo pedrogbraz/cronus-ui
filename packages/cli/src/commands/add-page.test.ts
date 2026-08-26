@@ -52,7 +52,7 @@ describe("parseBlockRefs — --blocks parsing", () => {
   });
 });
 
-/** Write a minimal consumer project (package.json + kronus-ui.json) pointed at the repo registry. */
+/** Write a minimal consumer project (package.json + cronus-ui.json) pointed at the repo registry. */
 function seedProject(cwd: string, name = "loja"): void {
   mkdirSync(cwd, { recursive: true });
   writeFileSync(
@@ -70,7 +70,7 @@ describe.skipIf(!HAS_REGISTRY)("addPage — integration (local repo registry)", 
   let cwd: string;
 
   beforeEach(async () => {
-    root = mkdtempSync(join(tmpdir(), "kronus-add-page-test-"));
+    root = mkdtempSync(join(tmpdir(), "cronus-add-page-test-"));
     cwd = join(root, "project");
     seedProject(cwd);
     vi.spyOn(console, "log").mockImplementation(() => {});
@@ -143,7 +143,7 @@ describe.skipIf(!HAS_REGISTRY)("addPage — integration (local repo registry)", 
     expect(config.installed?.about).toBeDefined();
 
     // Base snapshot mirrors the emitted page bytes (F4 merge base).
-    const snap = readFileSync(join(cwd, `.kronus-ui/base/landing/${pageRel}`), "utf8");
+    const snap = readFileSync(join(cwd, `.cronus-ui/base/landing/${pageRel}`), "utf8");
     expect(snap).toBe(page);
   });
 
@@ -185,7 +185,7 @@ describe.skipIf(!HAS_REGISTRY)("addPage — integration (local repo registry)", 
     expect(navbar).toContain('{ label: "Home", href: "/" }');
     // Brand re-applied (placeholder gone).
     expect(navbar).toContain("Minha Loja");
-    expect(navbar).not.toContain(">Kronus<");
+    expect(navbar).not.toContain(">Cronus<");
   });
 
   it("--dry-run (previewAddPage) writes nothing", async () => {
@@ -237,7 +237,7 @@ describe.skipIf(!HAS_REGISTRY)("addPage — integration (local repo registry)", 
     // The new layout is recorded + base-snapshotted.
     const config = await readConfig(app);
     expect(config.composed?.store?.files).toContain("app/(bare)/layout.tsx");
-    expect(existsSync(join(app, ".kronus-ui/base/store/app/(bare)/layout.tsx"))).toBe(true);
+    expect(existsSync(join(app, ".cronus-ui/base/store/app/(bare)/layout.tsx"))).toBe(true);
   });
 
   it("rejects a route that collides with an existing page (no --overwrite)", async () => {
@@ -337,7 +337,7 @@ describe.skipIf(!HAS_REGISTRY)("addPage — confirmed-defect fixes", () => {
   let root: string;
 
   beforeEach(() => {
-    root = mkdtempSync(join(tmpdir(), "kronus-add-page-fix-"));
+    root = mkdtempSync(join(tmpdir(), "cronus-add-page-fix-"));
     vi.spyOn(console, "log").mockImplementation(() => {});
     vi.spyOn(console, "error").mockImplementation(() => {});
   });
@@ -454,8 +454,8 @@ describe.skipIf(!HAS_REGISTRY)("addPage — confirmed-defect fixes", () => {
     });
     expect(existsSync(join(app, "components/blocks/navbar.tsx"))).toBe(true);
     const nav = readFileSync(join(app, "components/blocks/navbar.tsx"), "utf8");
-    // Brand replaced (no leftover ">Kronus<" placeholder wordmark).
-    expect(nav).not.toContain(">Kronus<");
+    // Brand replaced (no leftover ">Cronus<" placeholder wordmark).
+    expect(nav).not.toContain(">Cronus<");
     expect(nav).toContain("Acme Store");
     // The customized block is tracked as a generated file.
     expect(result.generatedFiles).toContain("components/blocks/navbar.tsx");
@@ -680,7 +680,7 @@ describe.skipIf(!HAS_REGISTRY)("addPage — confirmed-defect fixes", () => {
     expect(files).toContain("app/(site)/login/page.tsx");
     expect(files).not.toContain("app/(bare)/login/page.tsx");
     // The base snapshot of the old page is removed too.
-    expect(existsSync(join(app, ".kronus-ui/base/store/app/(bare)/login/page.tsx"))).toBe(false);
+    expect(existsSync(join(app, ".cronus-ui/base/store/app/(bare)/login/page.tsx"))).toBe(false);
     expect(result.route).toBe("/login");
   });
 

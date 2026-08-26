@@ -25,8 +25,8 @@ import {
   MetricValue,
   Separator,
   Switch,
-} from "@kronus-ui/ui";
-import { KPIS, type Role, TEAM, USER } from "@kronus-ui/ui/demo-saas";
+} from "@cronus-ui/ui";
+import { KPIS, type Role, TEAM, USER } from "@cronus-ui/ui/demo-saas";
 import { Activity, DollarSign, MoreHorizontal, TrendingDown, UserMinus, Users } from "lucide-react";
 import { useState } from "react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
@@ -78,7 +78,7 @@ const statsCode = `import {
   MetricDelta,
   MetricLabel,
   MetricValue,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { KPIS } from "../lib/demo-saas.js";
 import { Activity, DollarSign, TrendingDown, Users } from "lucide-react";
 
@@ -155,7 +155,7 @@ const statsCompactCode = `import {
   MetricDelta,
   MetricLabel,
   MetricValue,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 
 export function StatsCompactBlock() {
   const stats = [
@@ -252,7 +252,7 @@ const statsPipelineCode = `import {
   MetricDelta,
   MetricLabel,
   MetricValue,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Activity, DollarSign, Users } from "lucide-react";
 
 export function StatsPipelineBlock() {
@@ -439,7 +439,7 @@ import {
   Label,
   Separator,
   Switch,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { TEAM, USER } from "../lib/demo-saas.js";
 import { useState } from "react";
 
@@ -640,7 +640,7 @@ const teamCode = `import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   Separator,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { TEAM, type Role } from "../lib/demo-saas.js";
 import { MoreHorizontal, UserMinus, Users } from "lucide-react";
 

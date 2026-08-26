@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 const PRO_ORIGIN = process.env.PLAYWRIGHT_PRO_URL ?? "http://localhost:4748";
 
 /**
- * Kronus Pro is a separate origin. OSS CTAs leave the docs chrome; the Pro
+ * Cronus Pro is a separate origin. OSS CTAs leave the docs chrome; the Pro
  * site is additive (looks/SaaS stay free) and lists Maker / Studio.
  */
 test.describe("Pro origin split", () => {
@@ -12,7 +12,7 @@ test.describe("Pro origin split", () => {
 
     const seePro = page.locator("footer").getByRole("link", { name: "Pro" });
     await expect(seePro).toBeVisible();
-    await expect(seePro).toHaveAttribute("href", /localhost:4748|kronusui\.pro/);
+    await expect(seePro).toHaveAttribute("href", /localhost:4748|cronusui\.pro/);
   });
 
   test("Pro landing is additive, priced, and previewable", async ({ page }) => {

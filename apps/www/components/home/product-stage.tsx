@@ -1,12 +1,12 @@
 "use client";
 
-import { Avatar, AvatarFallback } from "@kronus-ui/ui/avatar";
-import { Badge } from "@kronus-ui/ui/badge";
-import { Button } from "@kronus-ui/ui/button";
-import { Input } from "@kronus-ui/ui/input";
-import { Label } from "@kronus-ui/ui/label";
-import { Metric, MetricDelta, MetricLabel, MetricValue } from "@kronus-ui/ui/metric";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@kronus-ui/ui/tabs";
+import { Avatar, AvatarFallback } from "@cronus-ui/ui/avatar";
+import { Badge } from "@cronus-ui/ui/badge";
+import { Button } from "@cronus-ui/ui/button";
+import { Input } from "@cronus-ui/ui/input";
+import { Label } from "@cronus-ui/ui/label";
+import { Metric, MetricDelta, MetricLabel, MetricValue } from "@cronus-ui/ui/metric";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@cronus-ui/ui/tabs";
 import { Check } from "lucide-react";
 import type { ReactNode } from "react";
 import { Eyebrow, SectionGlow } from "../showcase-ui";
@@ -35,7 +35,7 @@ function Frame({ title, children }: { title: string; children: ReactNode }) {
 
 function DashboardPreview() {
   return (
-    <Frame title="app.kronus.dev/overview">
+    <Frame title="app.cronus.dev/overview">
       <div className="grid gap-4 lg:grid-cols-3">
         <div className="rounded-xl border border-border bg-surface-raised p-4">
           <Metric>
@@ -94,7 +94,7 @@ function DashboardPreview() {
 
 function AuthPreview() {
   return (
-    <Frame title="app.kronus.dev/login">
+    <Frame title="app.cronus.dev/login">
       <div className="mx-auto max-w-sm">
         <h3 className="font-display text-2xl font-normal tracking-[-0.02em] text-fg">
           Welcome back
@@ -107,7 +107,7 @@ function AuthPreview() {
               id="stage-email"
               type="email"
               autoComplete="email"
-              placeholder="you@kronus.dev"
+              placeholder="you@cronus.dev"
             />
           </div>
           <div className="flex flex-col gap-1.5">
@@ -126,7 +126,7 @@ function AuthPreview() {
 
 function BillingPreview() {
   return (
-    <Frame title="app.kronus.dev/billing">
+    <Frame title="app.cronus.dev/billing">
       <div className="grid gap-4 md:grid-cols-2">
         <article className="flex flex-col rounded-xl border border-border bg-surface-raised p-5">
           <p className="text-sm font-medium text-fg">Free</p>
@@ -174,7 +174,7 @@ function BillingPreview() {
 }
 
 /**
- * Tabbed live surfaces — the landing proof that Kronus is a product system,
+ * Tabbed live surfaces — the landing proof that Cronus is a product system,
  * not a sticker sheet of buttons.
  */
 export function ProductStage() {
@@ -191,7 +191,7 @@ export function ProductStage() {
             The catalog, running as an app
           </h2>
           <p className="max-w-2xl text-fg-secondary">
-            Dashboard, auth, billing — real Kronus components, not screenshots. This is what compose
+            Dashboard, auth, billing — real Cronus components, not screenshots. This is what compose
             writes.
           </p>
         </div>

@@ -17,7 +17,7 @@ const badgeVariants = cva(
         outline: "text-fg border-border",
         // Same-hue text on a 15% tint reads <4.5:1 in several themes, so the
         // label uses the AA-tuned `*-strong` text variant (the tint stays the raw
-        // fill). See @kronus-ui/tokens CONTRACT.md.
+        // fill). See @cronus-ui/tokens CONTRACT.md.
         success: "bg-success/15 text-success-strong border-transparent",
         warning: "bg-warning/15 text-warning-strong border-transparent",
         destructive: "bg-error/15 text-error-strong border-transparent",

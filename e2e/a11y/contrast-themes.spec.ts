@@ -21,14 +21,14 @@ import { expect, test } from "@playwright/test";
  * `--workers=4` (see the `test:contrast` script) to stay in budget.
  *
  * Themes are set exactly as the showcase does it: the value written to
- * `localStorage["kronus-ui-theme"]` (`{ theme, mode }`) is read pre-paint by
- * `KronusThemeScript`, so `addInitScript` guarantees the very first paint is in
+ * `localStorage["cronus-ui-theme"]` (`{ theme, mode }`) is read pre-paint by
+ * `CronusThemeScript`, so `addInitScript` guarantees the very first paint is in
  * the target theme — no flash, no post-hydration reflow to race.
  */
 
 const THEMES = ["aurora", "neutral", "midnight", "sunset", "emerald"] as const;
 const MODES = ["light", "dark"] as const;
-const STORAGE_KEY = "kronus-ui-theme";
+const STORAGE_KEY = "cronus-ui-theme";
 
 // Contrast-only, WCAG 2.0/2.1 AA. `serious`/`critical` block; anything softer
 // is informational.
@@ -95,7 +95,7 @@ for (const theme of THEMES) {
   for (const mode of MODES) {
     for (const path of ROUTES) {
       test(`contrast: ${theme}/${mode} ${path}`, async ({ page }) => {
-        // Seed the theme BEFORE any script runs so KronusThemeScript picks it up
+        // Seed the theme BEFORE any script runs so CronusThemeScript picks it up
         // pre-paint — the first paint is already in the target theme.
         await page.addInitScript(
           ([key, t, m]) => {

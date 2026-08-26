@@ -16,17 +16,17 @@ every session. This file adds only what is specific to Gemini CLI.
 - Keep commits free of AI attribution — none in commit messages, PR bodies, or
   code comments.
 
-## Kronus UI product loop
+## Cronus UI product loop
 
-When this project uses Kronus UI (`kronus-ui.json`, `KICKOFF.md` / `stack.json`):
+When this project uses Cronus UI (`cronus-ui.json`, `KICKOFF.md` / `stack.json`):
 
-- New app: `npx create-kronus-app <name> --template saas`. Never omit `--template`
+- New app: `npx create-cronus-app <name> --template saas`. Never omit `--template`
   (CLI default is an empty starter). Other composed templates: `store`, `landing`.
-- New route: `npx kronus-ui add-page` or MCP `add_page`. Pages are installed
+- New route: `npx cronus-ui add-page` or MCP `add_page`. Pages are installed
   blocks stacked in `<main>` — do not hand-write a page of Cards.
-- One primitive: `npx kronus-ui add <slug>` (MCP `install_component`).
-- Theme: `npx kronus-ui theme set` / `useTheme`. Never `bg-zinc-*` or palette
+- One primitive: `npx cronus-ui add <slug>` (MCP `install_component`).
+- Theme: `npx cronus-ui theme set` / `useTheme`. Never `bg-zinc-*` or palette
   utilities.
-- Upgrade: `npx kronus-ui upgrade --all --dry-run`, then `--all`. Refreshes
+- Upgrade: `npx cronus-ui upgrade --all --dry-run`, then `--all`. Refreshes
   installed items and composed pages. MCP `upgrade_components`.
 - Never run shadcn init or write a shadcn `components.json`.

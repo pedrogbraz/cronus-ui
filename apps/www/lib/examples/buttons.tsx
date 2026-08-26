@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "@kronus-ui/theme";
+import { useTheme } from "@cronus-ui/theme";
 import {
   AnimatedButton,
   Button,
@@ -13,7 +13,7 @@ import {
   Toggle,
   ToggleGroup,
   ToggleGroupItem,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import {
   AlignCenter,
   AlignLeft,
@@ -494,8 +494,8 @@ return (
       title: "Default",
       description:
         "An icon button that writes `value` to the clipboard and swaps to a check for a moment. It manages its own copied state.",
-      code: `<CopyButton value="npm install @kronus-ui/ui" />`,
-      preview: <CopyButton value="npm install @kronus-ui/ui" />,
+      code: `<CopyButton value="npm install @cronus-ui/ui" />`,
+      preview: <CopyButton value="npm install @cronus-ui/ui" />,
     },
     {
       id: "inline",
@@ -503,9 +503,9 @@ return (
       description:
         "Drop it next to a value the user might copy, such as an API key or command. Use `copyLabel` / `copiedLabel` to localise the accessible text, and the outline variant to sit flush with a field.",
       code: `<div className="flex items-center gap-2">
-  <code className="rounded bg-surface-inset px-2 py-1 font-mono text-sm">kronus_sk_live_…a1b2</code>
+  <code className="rounded bg-surface-inset px-2 py-1 font-mono text-sm">cronus_sk_live_…a1b2</code>
   <CopyButton
-    value="kronus_sk_live_a1b2"
+    value="cronus_sk_live_a1b2"
     variant="outline"
     copyLabel="Copy API key"
     copiedLabel="API key copied"
@@ -514,10 +514,10 @@ return (
       preview: (
         <div className="flex items-center gap-2">
           <code className="rounded bg-surface-inset px-2 py-1 font-mono text-sm">
-            kronus_sk_live_…a1b2
+            cronus_sk_live_…a1b2
           </code>
           <CopyButton
-            value="kronus_sk_live_a1b2"
+            value="cronus_sk_live_a1b2"
             variant="outline"
             copyLabel="Copy API key"
             copiedLabel="API key copied"
@@ -813,7 +813,7 @@ return (
       id: "theme-provider",
       title: "Wired to a theme provider",
       description:
-        "The component never touches the DOM root — hand it your provider's mode. This one is live: it drives the whole docs site through `useTheme` from `@kronus-ui/theme`.",
+        "The component never touches the DOM root — hand it your provider's mode. This one is live: it drives the whole docs site through `useTheme` from `@cronus-ui/theme`.",
       code: `const { mode, setMode } = useTheme();
 
 return <ModeToggle mode={mode} onModeChange={setMode} />;`,

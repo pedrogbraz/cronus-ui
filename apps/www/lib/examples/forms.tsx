@@ -1,6 +1,5 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Autocomplete,
   type AutocompleteOption,
@@ -64,7 +63,8 @@ import {
   Switch,
   TagsInput,
   Textarea,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { AtSign, Check, FileText, Link2, Lock, Mail } from "lucide-react";
 import { useId, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -179,8 +179,8 @@ const inputGroupUrlCode = `<InputGroup>
     <Link2 />
     https://
   </InputGroupAddon>
-  <Input placeholder="acme.kronus.app" />
-  <InputGroupAddon align="end">.kronus.app</InputGroupAddon>
+  <Input placeholder="acme.cronus.app" />
+  <InputGroupAddon align="end">.cronus.app</InputGroupAddon>
 </InputGroup>`;
 
 const inputGroupEmailCode = `<InputGroup>
@@ -757,7 +757,7 @@ function FormDemo() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="you@kronus.dev" {...field} />
+                <Input type="email" placeholder="you@cronus.dev" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -826,7 +826,7 @@ function FormDemo() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="you@kronus.dev" {...field} />
+                <Input type="email" placeholder="you@cronus.dev" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -1625,8 +1625,8 @@ export const formsExamples: ExampleMap = {
       id: "default",
       title: "Default",
       description: "A single-line text input.",
-      code: `<Input placeholder="you@kronus.dev" />`,
-      preview: <Input placeholder="you@kronus.dev" className="max-w-xs" />,
+      code: `<Input placeholder="you@cronus.dev" />`,
+      preview: <Input placeholder="you@cronus.dev" className="max-w-xs" />,
     },
     {
       id: "invalid-state",
@@ -1814,8 +1814,8 @@ export const formsExamples: ExampleMap = {
             <Link2 />
             https://
           </InputGroupAddon>
-          <Input placeholder="acme.kronus.app" />
-          <InputGroupAddon align="end">.kronus.app</InputGroupAddon>
+          <Input placeholder="acme.cronus.app" />
+          <InputGroupAddon align="end">.cronus.app</InputGroupAddon>
         </InputGroup>
       ),
     },
@@ -2035,7 +2035,7 @@ function StepperDemo() {
       id: "default",
       title: "Default",
       description:
-        "A Tiptap WYSIWYG editor with a Kronus-styled toolbar. Controlled via `value` / `onChange` (serialized HTML); `immediatelyRender: false` keeps it SSR-safe. Formats text, headings, lists, quotes, and code.",
+        "A Tiptap WYSIWYG editor with a Cronus-styled toolbar. Controlled via `value` / `onChange` (serialized HTML); `immediatelyRender: false` keeps it SSR-safe. Formats text, headings, lists, quotes, and code.",
       code: richTextEditorDemoCode,
       preview: <RichTextEditorDemo />,
     },
@@ -2234,7 +2234,7 @@ function StepperDemo() {
   <FloatingLabelInput
     label="Email address"
     type="email"
-    defaultValue="ada@kronus.dev"
+    defaultValue="ada@cronus.dev"
     startAdornment={<Mail />}
   />
   <FloatingLabelInput label="Password" type="password" startAdornment={<Lock />} />
@@ -2244,7 +2244,7 @@ function StepperDemo() {
           <FloatingLabelInput
             label="Email address"
             type="email"
-            defaultValue="ada@kronus.dev"
+            defaultValue="ada@cronus.dev"
             startAdornment={<Mail />}
           />
           <FloatingLabelInput label="Password" type="password" startAdornment={<Lock />} />

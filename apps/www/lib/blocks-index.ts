@@ -1,6 +1,6 @@
 /**
  * Server-safe metadata for "Blocks" — larger, copy-paste UI sections composed
- * from @kronus-ui/ui primitives. The live preview + source live in `lib/blocks/*`.
+ * from @cronus-ui/ui primitives. The live preview + source live in `lib/blocks/*`.
  */
 
 export interface BlockMeta {

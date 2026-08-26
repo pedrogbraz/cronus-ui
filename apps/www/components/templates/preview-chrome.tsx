@@ -1,4 +1,4 @@
-import { CopyButton } from "@kronus-ui/ui";
+import { CopyButton } from "@cronus-ui/ui";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import type { TemplateCatalogEntry } from "../../lib/templates/catalog";

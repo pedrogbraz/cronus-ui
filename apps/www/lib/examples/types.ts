@@ -9,7 +9,7 @@ export interface Example {
   description?: string;
   /** Optional install metadata rendered between the preview and source code. */
   install?: {
-    /** Registry item name for `kronus-ui add`. Defaults to the component slug when omitted by callers. */
+    /** Registry item name for `cronus-ui add`. Defaults to the component slug when omitted by callers. */
     registryItem: string;
     /** Extra package dependencies required for manual copy-paste installs. */
     dependencies?: string[];

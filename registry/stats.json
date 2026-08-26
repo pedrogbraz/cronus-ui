@@ -2,7 +2,7 @@
   "name": "stats",
   "type": "registry:block",
   "dependencies": [
-    "@kronus-ui/ui@0.5.0",
+    "@cronus-ui/ui@0.5.0",
     "lucide-react@^0.577.0"
   ],
   "registryDependencies": [
@@ -11,7 +11,7 @@
   "files": [
     {
       "path": "stats.tsx",
-      "content": "import {\n  Card,\n  CardContent,\n  Metric,\n  MetricDelta,\n  MetricLabel,\n  MetricValue,\n} from \"@kronus-ui/ui\";\nimport { KPIS } from \"../lib/demo-saas.js\";\nimport { Activity, DollarSign, TrendingDown, Users } from \"lucide-react\";\n\nconst STAT_ICONS = [DollarSign, Users, Activity, TrendingDown] as const;\n\nexport function StatsBlock() {\n  const stats = KPIS.map((kpi, i) => ({\n    ...kpi,\n    icon: STAT_ICONS[i] ?? DollarSign,\n    hint: \"vs. last month\",\n  }));\n\n  return (\n    <div className=\"grid grid-cols-[repeat(auto-fit,minmax(min(100%,13rem),1fr))] gap-4\">\n      {stats.map(({ label, value, delta, trend, icon: Icon, hint }) => (\n        <Card key={label} className=\"gap-4 py-5\">\n          <CardContent className=\"flex flex-col gap-3\">\n            <div className=\"flex items-center justify-between\">\n              <span className=\"inline-flex size-9 items-center justify-center rounded-lg bg-surface-overlay text-fg-secondary\">\n                <Icon className=\"size-4\" aria-hidden=\"true\" />\n              </span>\n              <MetricDelta trend={trend}>{delta}</MetricDelta>\n            </div>\n            <Metric className=\"gap-1.5\">\n              <MetricLabel>{label}</MetricLabel>\n              <MetricValue className=\"text-3xl\">{value}</MetricValue>\n              <span className=\"text-xs text-fg-tertiary\">{hint}</span>\n            </Metric>\n          </CardContent>\n        </Card>\n      ))}\n    </div>\n  );\n}",
+      "content": "import {\n  Card,\n  CardContent,\n  Metric,\n  MetricDelta,\n  MetricLabel,\n  MetricValue,\n} from \"@cronus-ui/ui\";\nimport { KPIS } from \"../lib/demo-saas.js\";\nimport { Activity, DollarSign, TrendingDown, Users } from \"lucide-react\";\n\nconst STAT_ICONS = [DollarSign, Users, Activity, TrendingDown] as const;\n\nexport function StatsBlock() {\n  const stats = KPIS.map((kpi, i) => ({\n    ...kpi,\n    icon: STAT_ICONS[i] ?? DollarSign,\n    hint: \"vs. last month\",\n  }));\n\n  return (\n    <div className=\"grid grid-cols-[repeat(auto-fit,minmax(min(100%,13rem),1fr))] gap-4\">\n      {stats.map(({ label, value, delta, trend, icon: Icon, hint }) => (\n        <Card key={label} className=\"gap-4 py-5\">\n          <CardContent className=\"flex flex-col gap-3\">\n            <div className=\"flex items-center justify-between\">\n              <span className=\"inline-flex size-9 items-center justify-center rounded-lg bg-surface-overlay text-fg-secondary\">\n                <Icon className=\"size-4\" aria-hidden=\"true\" />\n              </span>\n              <MetricDelta trend={trend}>{delta}</MetricDelta>\n            </div>\n            <Metric className=\"gap-1.5\">\n              <MetricLabel>{label}</MetricLabel>\n              <MetricValue className=\"text-3xl\">{value}</MetricValue>\n              <span className=\"text-xs text-fg-tertiary\">{hint}</span>\n            </Metric>\n          </CardContent>\n        </Card>\n      ))}\n    </div>\n  );\n}",
       "target": "block"
     }
   ]

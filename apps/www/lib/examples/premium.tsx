@@ -72,7 +72,7 @@ import {
   TiltCard,
   TypingText,
   WordRotate,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import {
   ArrowRight,
   Bell,
@@ -878,7 +878,7 @@ export const premiumExamples: ExampleMap = {
       The best teams are already here
     </p>
     <h3 className="font-display text-6xl font-semibold leading-none text-fg">
-      Join Kronus UI
+      Join Cronus UI
     </h3>
   </div>
   <LogoCarousel items={logos} columns={3} ariaLabel="Customer logos" />
@@ -890,7 +890,7 @@ export const premiumExamples: ExampleMap = {
               The best teams are already here
             </p>
             <h3 className="font-display text-6xl font-semibold leading-none text-fg sm:text-8xl">
-              Join Kronus UI
+              Join Cronus UI
             </h3>
           </div>
           <LogoCarousel
@@ -1303,7 +1303,7 @@ export const premiumExamples: ExampleMap = {
       title: "Browser chrome",
       description:
         "Wrap a screenshot or mockup in browser chrome — traffic-light dots plus an address bar fed by `url`. Anything you nest becomes the framed content.",
-      code: `<Frame url="kronus.app/dashboard">
+      code: `<Frame url="cronus.app/dashboard">
   <div className="space-y-2 p-6">
     <h3 className="font-display text-lg font-semibold text-fg">Faturamento</h3>
     <p className="text-sm text-fg-secondary">R$ 128.940 nos últimos 30 dias.</p>
@@ -1311,7 +1311,7 @@ export const premiumExamples: ExampleMap = {
   </div>
 </Frame>`,
       preview: (
-        <Frame url="kronus.app/dashboard" className="w-full max-w-md">
+        <Frame url="cronus.app/dashboard" className="w-full max-w-md">
           <div className="space-y-2 p-6">
             <h3 className="font-display text-lg font-semibold text-fg">Faturamento</h3>
             <p className="text-sm text-fg-secondary">R$ 128.940 nos últimos 30 dias.</p>
@@ -1437,7 +1437,7 @@ export const premiumExamples: ExampleMap = {
   <div className="flex items-center gap-3 rounded-2xl bg-surface-raised px-4 py-3">
     <Sparkles className="size-4 shrink-0 text-primary" aria-hidden="true" />
     <span className="flex-1 truncate text-sm text-fg-tertiary">
-      Pergunte qualquer coisa ao Kronus…
+      Pergunte qualquer coisa ao Cronus…
     </span>
     <Button size="icon" variant="primary" aria-label="Enviar">
       <ArrowRight aria-hidden="true" className="size-4" />
@@ -1449,7 +1449,7 @@ export const premiumExamples: ExampleMap = {
           <div className="flex items-center gap-3 rounded-2xl bg-surface-raised px-4 py-3">
             <Sparkles className="size-4 shrink-0 text-primary" aria-hidden="true" />
             <span className="flex-1 truncate text-sm text-fg-tertiary">
-              Pergunte qualquer coisa ao Kronus…
+              Pergunte qualquer coisa ao Cronus…
             </span>
             <Button size="icon" variant="primary" aria-label="Enviar">
               <ArrowRight aria-hidden="true" className="size-4" />
@@ -1753,7 +1753,7 @@ export const premiumExamples: ExampleMap = {
 >
   <div className="flex flex-col gap-6">
     <div className="flex items-start justify-between">
-      <span className="font-display text-lg font-semibold">Kronus</span>
+      <span className="font-display text-lg font-semibold">Cronus</span>
       <Wifi className="size-6 rotate-90 opacity-90" aria-hidden="true" />
     </div>
     <div className="h-9 w-12 rounded-md bg-white/25 ring-1 ring-white/20" aria-hidden="true" />
@@ -1776,7 +1776,7 @@ export const premiumExamples: ExampleMap = {
         >
           <div className="flex flex-col gap-6">
             <div className="flex items-start justify-between">
-              <span className="font-display text-lg font-semibold">Kronus</span>
+              <span className="font-display text-lg font-semibold">Cronus</span>
               <Wifi className="size-6 rotate-90 opacity-90" aria-hidden="true" />
             </div>
             <div
@@ -1806,7 +1806,7 @@ export const premiumExamples: ExampleMap = {
     </span>
     <div className="min-w-0">
       <p className="truncate text-sm font-medium text-fg">Ana Ribeiro</p>
-      <p className="truncate text-sm text-fg-tertiary">ana@kronus.app</p>
+      <p className="truncate text-sm text-fg-tertiary">ana@cronus.app</p>
     </div>
     <ArrowRight className="ml-auto size-4 shrink-0 text-fg-tertiary" aria-hidden="true" />
   </div>
@@ -1819,7 +1819,7 @@ export const premiumExamples: ExampleMap = {
             </span>
             <div className="min-w-0">
               <p className="truncate text-sm font-medium text-fg">Ana Ribeiro</p>
-              <p className="truncate text-sm text-fg-tertiary">ana@kronus.app</p>
+              <p className="truncate text-sm text-fg-tertiary">ana@cronus.app</p>
             </div>
             <ArrowRight className="ml-auto size-4 shrink-0 text-fg-tertiary" aria-hidden="true" />
           </div>
@@ -2053,7 +2053,7 @@ export const premiumExamples: ExampleMap = {
   title="zsh"
   loop
   lines={[
-    { type: "input", text: "npx kronus-ui add terminal" },
+    { type: "input", text: "npx cronus-ui add terminal" },
     { type: "output", text: "✔ 1 component installed" },
     { type: "output", text: "  src/components/ui/terminal.tsx" },
     { type: "input", text: "bun run dev" },
@@ -2067,7 +2067,7 @@ export const premiumExamples: ExampleMap = {
           motionPreference="always"
           className="w-full max-w-xl"
           lines={[
-            { type: "input", text: "npx kronus-ui add terminal" },
+            { type: "input", text: "npx cronus-ui add terminal" },
             { type: "output", text: "✔ 1 component installed" },
             { type: "output", text: "  src/components/ui/terminal.tsx" },
             { type: "input", text: "bun run dev" },
@@ -2088,9 +2088,9 @@ export const premiumExamples: ExampleMap = {
   chrome={false}
   motionPreference="never"
   lines={[
-    { type: "input", text: "kronus deploy --prod" },
+    { type: "input", text: "cronus deploy --prod" },
     { type: "output", text: "Build completed in 8.2s" },
-    { type: "output", text: "Deployed to https://app.kronus.com" },
+    { type: "output", text: "Deployed to https://app.cronus.com" },
   ]}
 />`,
       preview: (
@@ -2099,9 +2099,9 @@ export const premiumExamples: ExampleMap = {
           motionPreference="never"
           className="w-full max-w-xl"
           lines={[
-            { type: "input", text: "kronus deploy --prod" },
+            { type: "input", text: "cronus deploy --prod" },
             { type: "output", text: "Build completed in 8.2s" },
-            { type: "output", text: "Deployed to https://app.kronus.com" },
+            { type: "output", text: "Deployed to https://app.cronus.com" },
           ]}
         />
       ),
@@ -2316,8 +2316,8 @@ export const premiumExamples: ExampleMap = {
       title: "Orbit",
       description:
         "The phrase is laid out around a circle. Assistive tech reads the original string once.",
-      code: `<SpinningText radius={56}>kronus ui · product · </SpinningText>`,
-      preview: <SpinningText radius={56}>kronus ui · product · </SpinningText>,
+      code: `<SpinningText radius={56}>cronus ui · product · </SpinningText>`,
+      preview: <SpinningText radius={56}>cronus ui · product · </SpinningText>,
     },
   ],
   "sparkles-text": [
@@ -2369,8 +2369,8 @@ export const premiumExamples: ExampleMap = {
       title: "Decrypt",
       description:
         "Random glyphs lock in left-to-right. Assistive tech gets the resolved phrase immediately.",
-      code: `<ScrambleText className="font-display text-3xl text-fg">kronus-ui</ScrambleText>`,
-      preview: <ScrambleText className="font-display text-3xl text-fg">kronus-ui</ScrambleText>,
+      code: `<ScrambleText className="font-display text-3xl text-fg">cronus-ui</ScrambleText>`,
+      preview: <ScrambleText className="font-display text-3xl text-fg">cronus-ui</ScrambleText>,
     },
   ],
   "glare-hover": [
@@ -2527,7 +2527,7 @@ export const premiumExamples: ExampleMap = {
         "A compact pill that morphs between views. The dots are a tablist; the shell resizes with a spring.",
       code: `<DynamicIsland
   views={[
-    { id: "idle", label: "Idle", content: <span className="text-sm">Kronus</span> },
+    { id: "idle", label: "Idle", content: <span className="text-sm">Cronus</span> },
     {
       id: "now",
       label: "Now playing",
@@ -2538,7 +2538,7 @@ export const premiumExamples: ExampleMap = {
       preview: (
         <DynamicIsland
           views={[
-            { id: "idle", label: "Idle", content: <span className="text-sm">Kronus</span> },
+            { id: "idle", label: "Idle", content: <span className="text-sm">Cronus</span> },
             {
               id: "now",
               label: "Now playing",

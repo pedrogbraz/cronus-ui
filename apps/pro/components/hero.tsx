@@ -1,8 +1,8 @@
-import { AuroraBackground } from "@kronus-ui/ui/aurora-background";
-import { GridPattern } from "@kronus-ui/ui/grid-pattern";
-import { LightRays } from "@kronus-ui/ui/light-rays";
-import { Particles } from "@kronus-ui/ui/particles";
-import { ShinyText } from "@kronus-ui/ui/shiny-text";
+import { AuroraBackground } from "@cronus-ui/ui/aurora-background";
+import { GridPattern } from "@cronus-ui/ui/grid-pattern";
+import { LightRays } from "@cronus-ui/ui/light-rays";
+import { Particles } from "@cronus-ui/ui/particles";
+import { ShinyText } from "@cronus-ui/ui/shiny-text";
 import { ArrowRight } from "lucide-react";
 import { PACK, packApp } from "../lib/catalog";
 import { OSS_URL } from "../lib/origins";
@@ -28,7 +28,7 @@ export function Hero() {
         <div>
           <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-fg-tertiary">
             <span aria-hidden="true" className="size-1.5 rounded-full bg-primary" />
-            Kronus <ShinyText>Pro</ShinyText>
+            Cronus <ShinyText>Pro</ShinyText>
           </p>
           <h1
             id="hero-heading"

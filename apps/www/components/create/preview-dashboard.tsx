@@ -27,7 +27,7 @@ import {
   Separator,
   Slider,
   Textarea,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import {
   ArrowDownLeft,
   ArrowUpRight,
@@ -154,7 +154,7 @@ function SpotlightCard() {
           <div className="flex min-w-0 flex-col gap-2.5">
             <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-xs font-medium ring-1 ring-inset ring-white/20 backdrop-blur-sm">
               <Sparkles className="size-3" aria-hidden="true" />
-              Kronus balance
+              Cronus balance
             </span>
             <span className="font-display text-4xl font-medium leading-none tracking-[-0.025em] tabular-nums sm:text-5xl sm:tracking-[-0.03em]">
               {usd.format(128450)}
@@ -168,7 +168,7 @@ function SpotlightCard() {
         <div className="flex flex-wrap items-center gap-2.5">
           <button
             type="button"
-            className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-[color-mix(in_oklch,var(--kronus-primary),black_35%)] shadow-sm transition-[transform,opacity] duration-200 ease-[cubic-bezier(.22,1,.36,1)] hover:opacity-90 active:scale-[0.98]"
+            className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-[color-mix(in_oklch,var(--cronus-primary),black_35%)] shadow-sm transition-[transform,opacity] duration-200 ease-[cubic-bezier(.22,1,.36,1)] hover:opacity-90 active:scale-[0.98]"
           >
             <Send className="size-4" aria-hidden="true" />
             Send payout
@@ -364,7 +364,7 @@ function InvestCard() {
       <Card className={surfaceCard}>
         <CardHeader>
           <CardTitle className="font-display text-base">Buy investment</CardTitle>
-          <CardDescription>Kronus Growth Index — CGX</CardDescription>
+          <CardDescription>Cronus Growth Index — CGX</CardDescription>
           <CardAction>
             <Badge variant="success" className="gap-1">
               <TrendingUp className="size-3" aria-hidden="true" />

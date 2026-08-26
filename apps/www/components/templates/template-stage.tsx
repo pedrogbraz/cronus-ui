@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@kronus-ui/ui";
+import { cn } from "@cronus-ui/ui";
 import { aiBlocks } from "../../lib/blocks/ai";
 import { applicationBlocks } from "../../lib/blocks/application";
 import { billingBlocks } from "../../lib/blocks/billing";
@@ -48,7 +48,7 @@ function previewFor(ref: TemplateBlockRef) {
 /**
  * Stacks the same block variants a compose manifest installs, inside the
  * template's theme/mode scope. Used by `/preview/t/[slug]` (full site and
- * embed thumbs) — live Kronus blocks, not screenshots.
+ * embed thumbs) — live Cronus blocks, not screenshots.
  */
 export function TemplateStage({ entry }: { entry: TemplateCatalogEntry }) {
   const refs = stageRefs(entry);
@@ -57,8 +57,8 @@ export function TemplateStage({ entry }: { entry: TemplateCatalogEntry }) {
     <div
       data-slot="template-stage"
       data-template={entry.slug}
-      data-kronus-theme={entry.theme}
-      data-kronus-mode={entry.mode}
+      data-cronus-theme={entry.theme}
+      data-cronus-mode={entry.mode}
       className={cn(
         "min-h-svh bg-surface-base text-fg",
         entry.mode === "dark" ? "dark" : undefined,

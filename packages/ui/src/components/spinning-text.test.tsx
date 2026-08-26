@@ -5,13 +5,13 @@ import { SpinningText } from "./spinning-text.js";
 
 describe("SpinningText", () => {
   it("exposes the phrase to assistive tech once", () => {
-    render(<SpinningText>Kronus UI</SpinningText>);
-    expect(screen.getByText("Kronus UI")).toHaveClass("sr-only");
+    render(<SpinningText>Cronus UI</SpinningText>);
+    expect(screen.getByText("Cronus UI")).toHaveClass("sr-only");
     expect(document.querySelector('[data-slot="spinning-text"]')).not.toBeNull();
   });
 
   it("has no axe violations", async () => {
-    const { container } = render(<SpinningText>Kronus UI</SpinningText>);
+    const { container } = render(<SpinningText>Cronus UI</SpinningText>);
     expect(await axe(container)).toHaveNoViolations();
   });
 });

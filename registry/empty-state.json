@@ -2,14 +2,14 @@
   "name": "empty-state",
   "type": "registry:block",
   "dependencies": [
-    "@kronus-ui/ui@0.5.0",
+    "@cronus-ui/ui@0.5.0",
     "lucide-react@^0.577.0"
   ],
   "registryDependencies": [],
   "files": [
     {
       "path": "empty-state.tsx",
-      "content": "import {\n  Button,\n  Empty,\n  EmptyContent,\n  EmptyDescription,\n  EmptyIcon,\n  EmptyTitle,\n} from \"@kronus-ui/ui\";\nimport { Inbox, Plus } from \"lucide-react\";\n\nexport function EmptyStateBlock() {\n  return (\n    <Empty className=\"bg-surface-raised\">\n      <EmptyIcon>\n        <Inbox aria-hidden=\"true\" />\n      </EmptyIcon>\n      <EmptyTitle>No projects yet</EmptyTitle>\n      <EmptyDescription>\n        Create your first project to start shipping. You can invite teammates and connect a\n        repository at any time.\n      </EmptyDescription>\n      <EmptyContent>\n        <Button variant=\"outline\" size=\"sm\">\n          Import existing\n        </Button>\n        <Button variant=\"primary\" size=\"sm\">\n          <Plus className=\"size-4\" aria-hidden=\"true\" />\n          New project\n        </Button>\n      </EmptyContent>\n    </Empty>\n  );\n}",
+      "content": "import {\n  Button,\n  Empty,\n  EmptyContent,\n  EmptyDescription,\n  EmptyIcon,\n  EmptyTitle,\n} from \"@cronus-ui/ui\";\nimport { Inbox, Plus } from \"lucide-react\";\n\nexport function EmptyStateBlock() {\n  return (\n    <Empty className=\"bg-surface-raised\">\n      <EmptyIcon>\n        <Inbox aria-hidden=\"true\" />\n      </EmptyIcon>\n      <EmptyTitle>No projects yet</EmptyTitle>\n      <EmptyDescription>\n        Create your first project to start shipping. You can invite teammates and connect a\n        repository at any time.\n      </EmptyDescription>\n      <EmptyContent>\n        <Button variant=\"outline\" size=\"sm\">\n          Import existing\n        </Button>\n        <Button variant=\"primary\" size=\"sm\">\n          <Plus className=\"size-4\" aria-hidden=\"true\" />\n          New project\n        </Button>\n      </EmptyContent>\n    </Empty>\n  );\n}",
       "target": "block"
     }
   ]

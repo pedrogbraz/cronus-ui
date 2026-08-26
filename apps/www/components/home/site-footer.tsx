@@ -1,6 +1,6 @@
 import { ArrowUpRight, Github } from "lucide-react";
 import { PRO_URL } from "../../lib/site-url";
-import { KronusMark } from "../brand/kronus-mark";
+import { CronusMark } from "../brand/cronus-mark";
 
 interface FooterLink {
   label: string;
@@ -28,7 +28,7 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
       { label: "Compare", href: "/docs/compare" },
       { label: "Changelog", href: "/changelog" },
       { label: "Sponsor", href: "/sponsor" },
-      { label: "GitHub", href: "https://github.com/pedrogbraz/kronus-ui" },
+      { label: "GitHub", href: "https://github.com/pedrogbraz/cronus-ui" },
     ],
   },
   {
@@ -51,18 +51,18 @@ export function SiteFooter() {
           {/* Brand */}
           <div className="max-w-sm">
             <div className="flex items-center gap-2">
-              <KronusMark className="h-4 w-8 text-fg" />
-              <span className="font-display text-lg font-semibold text-fg">Kronus UI</span>
+              <CronusMark className="h-4 w-8 text-fg" />
+              <span className="font-display text-lg font-semibold text-fg">Cronus UI</span>
             </div>
             <p className="mt-4 text-sm leading-relaxed text-fg-secondary">
-              The Kronus product UI system — compose a SaaS from source you can upgrade, as an npm
+              The Cronus product UI system — compose a SaaS from source you can upgrade, as an npm
               package or a copy-paste registry you own.
             </p>
             <div className="mt-5 inline-flex max-w-full items-center gap-3 overflow-hidden rounded-xl border border-border bg-surface-raised px-4 py-2.5 font-mono text-sm text-fg-secondary shadow-xs">
               <span className="text-fg-tertiary" aria-hidden="true">
                 $
               </span>
-              <span className="truncate">npx create-kronus-app my-app --template saas</span>
+              <span className="truncate">npx create-cronus-app my-app --template saas</span>
             </div>
           </div>
 
@@ -91,12 +91,12 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-6 text-sm text-fg-tertiary sm:flex-row">
-          <span>© {new Date().getFullYear()} Kronus UI — built with itself.</span>
+          <span>© {new Date().getFullYear()} Cronus UI — built with itself.</span>
           <a
-            href="https://github.com/pedrogbraz/kronus-ui"
+            href="https://github.com/pedrogbraz/cronus-ui"
             className="inline-flex items-center gap-1.5 rounded-md text-fg-secondary outline-none transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <Github className="size-4" aria-hidden="true" /> pedrogbraz/kronus-ui
+            <Github className="size-4" aria-hidden="true" /> pedrogbraz/cronus-ui
             <ArrowUpRight className="size-3.5" aria-hidden="true" />
           </a>
         </div>

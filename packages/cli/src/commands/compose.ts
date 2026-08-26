@@ -15,9 +15,9 @@ import { listTemplates, loadManifestFile, loadTemplate } from "../compose/templa
 import {
   CLI_VERSION,
   type ComposedRecord,
+  type CronusUIConfig,
   hasConfig,
   type InstalledRecord,
-  type KronusUIConfig,
   readConfig,
   writeConfig,
 } from "../config.js";
@@ -87,7 +87,7 @@ export async function readProjectName(cwd: string): Promise<string> {
 
 /** Options accepted by the composeApp library entry + the CLI command. */
 export interface ComposeAppOptions {
-  /** Project root (must contain kronus-ui.json). */
+  /** Project root (must contain cronus-ui.json). */
   targetDir: string;
   /** Bundled template name (mutually exclusive with `manifestPath`). */
   template?: string;
@@ -115,7 +115,7 @@ export interface ComposeAppResult {
 }
 
 /**
- * Compose an app template into an existing Kronus UI project: resolve + install the
+ * Compose an app template into an existing Cronus UI project: resolve + install the
  * blocks, customize the chrome copies (nav data + brand), write the generated
  * pages/layouts/wrappers, snapshot the emitted bytes, and record `installed{}` +
  * `composed{}`. Reuses the exact `add` install core — this is one more caller, not
@@ -125,7 +125,7 @@ export interface ComposeAppResult {
 export async function composeApp(options: ComposeAppOptions): Promise<ComposeAppResult> {
   const { targetDir } = options;
   if (!hasConfig(targetDir)) {
-    throw new Error("No kronus-ui.json found. Run `kronus-ui init` first.");
+    throw new Error("No cronus-ui.json found. Run `cronus-ui init` first.");
   }
   const config = await readConfig(targetDir);
   const sourceUsed = options.registry ?? config.registry;
@@ -216,7 +216,7 @@ export async function composeApp(options: ComposeAppOptions): Promise<ComposeApp
   // --overwrite) every page + chrome copy already exists and goes to
   // skippedFiles, so `generatedFiles` is empty; a straight assignment would
   // clobber the record to `files: []` and orphan every composed page from its
-  // .kronus-ui/base/ snapshot (the F4 3-way upgrade merge base). Union with the
+  // .cronus-ui/base/ snapshot (the F4 3-way upgrade merge base). Union with the
   // prior record so a no-op re-run never empties the tracked file set.
   const composed: Record<string, ComposedRecord> = { ...config.composed };
   const priorFiles = config.composed?.[plan.templateName]?.files ?? [];
@@ -229,7 +229,7 @@ export async function composeApp(options: ComposeAppOptions): Promise<ComposeApp
     // manifest this app was composed from (guards the bundled-name collision).
     manifestHash: manifestFingerprint(manifest),
   };
-  const nextConfig: KronusUIConfig = { ...config, installed, composed };
+  const nextConfig: CronusUIConfig = { ...config, installed, composed };
   await writeConfig(targetDir, nextConfig);
 
   // --- Install npm deps (best-effort, like add) -----------------------------
@@ -254,7 +254,7 @@ export async function composeApp(options: ComposeAppOptions): Promise<ComposeApp
 
 function requireTemplate(template: string | undefined): string {
   if (template === undefined || template.length === 0) {
-    throw new Error("No template given. Pass a template name, e.g. `kronus-ui compose store`.");
+    throw new Error("No template given. Pass a template name, e.g. `cronus-ui compose store`.");
   }
   return template;
 }
@@ -306,7 +306,7 @@ function parsePages(spec: string | undefined): string[] | undefined {
 }
 
 /**
- * The `kronus-ui compose` command. Resolves a template (bundled or `--manifest`),
+ * The `cronus-ui compose` command. Resolves a template (bundled or `--manifest`),
  * plans + validates it (aggregating errors), and either prints a deterministic
  * dry-run preview or applies it via {@link composeApp}. TTY-prompts for a template
  * when none is given (unless `--yes`).
@@ -318,7 +318,7 @@ export async function compose(
   const { cwd } = options;
 
   if (!hasConfig(cwd)) {
-    log.err("No kronus-ui.json found. Run `kronus-ui init` first.");
+    log.err("No cronus-ui.json found. Run `cronus-ui init` first.");
     process.exitCode = 1;
     return;
   }
@@ -445,9 +445,9 @@ export async function compose(
     `Done — ${result.templateName}: ${result.installedBlocks.length} block(s) + ${result.generatedFiles.length} generated file(s).`,
   );
   log.title("Next steps");
-  log.step("npx kronus-ui add-page --route /pricing --blocks pricing,cta --nav Pricing");
-  log.step("npx kronus-ui theme set aurora --mode dark");
-  log.step("npx kronus-ui upgrade --all --dry-run");
+  log.step("npx cronus-ui add-page --route /pricing --blocks pricing,cta --nav Pricing");
+  log.step("npx cronus-ui theme set aurora --mode dark");
+  log.step("npx cronus-ui upgrade --all --dry-run");
 }
 
 /** Print a plan/manifest error's aggregated list, or a plain message. */

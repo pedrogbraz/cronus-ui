@@ -27,7 +27,7 @@ import {
   TabsTrigger,
   ToggleGroup,
   ToggleGroupItem,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import {
   Download,
   FileQuestion,
@@ -117,7 +117,7 @@ const pageHeaderCode = `import {
   BreadcrumbPage,
   BreadcrumbSeparator,
   Button,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Download, Plus } from "lucide-react";
 
 export function PageHeaderBlock() {
@@ -247,7 +247,7 @@ const pageHeaderTabsCode = `import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 
 export function PageHeaderTabsBlock() {
   return (
@@ -424,7 +424,7 @@ const filterBarCode = `import {
   SelectValue,
   ToggleGroup,
   ToggleGroupItem,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { LayoutGrid, List, Search, SlidersHorizontal, X } from "lucide-react";
 
 const statusOptions = [
@@ -555,7 +555,7 @@ const emptyStateCode = `import {
   EmptyDescription,
   EmptyIcon,
   EmptyTitle,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Inbox, Plus } from "lucide-react";
 
 export function EmptyStateBlock() {
@@ -613,7 +613,7 @@ const emptyStateErrorCode = `import {
   EmptyDescription,
   EmptyIcon,
   EmptyTitle,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { FileQuestion, RefreshCw } from "lucide-react";
 
 export function EmptyStateErrorBlock() {

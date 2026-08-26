@@ -1,1 +1,1 @@
-export * from "@kronus-ui/stack/kickoff";
+export * from "@cronus-ui/stack/kickoff";

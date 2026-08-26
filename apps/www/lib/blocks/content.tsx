@@ -14,7 +14,7 @@ import {
   Label,
   Marquee,
   Separator,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import {
   Aperture,
   ArrowRight,
@@ -256,7 +256,7 @@ const blogGridCode = `import {
   Badge,
   Button,
   Card,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ArrowRight } from "lucide-react";
 
 interface BlogPost {
@@ -587,7 +587,7 @@ const blogListCode = `import {
   AvatarFallback,
   Badge,
   Separator,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ArrowRight } from "lucide-react";
 
 interface BlogPost {
@@ -829,7 +829,7 @@ const blogPostArticleCode = `import {
   Badge,
   Button,
   Separator,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Link2, Mail, Share2 } from "lucide-react";
 
 export function BlogPostArticleBlock() {
@@ -1072,7 +1072,7 @@ const blogPostSidebarCode = `import {
   CardTitle,
   Input,
   Label,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 
 const tocItems = [
   { id: "hierarchy", label: "Hierarchy beats whitespace", active: true },
@@ -1342,7 +1342,7 @@ export function LogoCloudMarqueeBlock() {
   );
 }
 
-const logoCloudMarqueeCode = `import { Marquee } from "@kronus-ui/ui";
+const logoCloudMarqueeCode = `import { Marquee } from "@cronus-ui/ui";
 import {
   Aperture,
   Box,
@@ -1536,7 +1536,7 @@ const aboutStoryCode = `import {
   Badge,
   Card,
   CardContent,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Quote } from "lucide-react";
 
 const storyStats = [
@@ -1749,7 +1749,7 @@ export function AboutValuesBlock() {
   );
 }
 
-const aboutValuesCode = `import { Badge, Card, CardContent } from "@kronus-ui/ui";
+const aboutValuesCode = `import { Badge, Card, CardContent } from "@cronus-ui/ui";
 import { Eye, Gem, MessagesSquare, Rocket, Sparkles, Sprout, Users } from "lucide-react";
 
 const companyValues = [

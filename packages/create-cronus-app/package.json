@@ -1,0 +1,56 @@
+{
+  "name": "create-cronus-app",
+  "version": "0.5.0",
+  "description": "Scaffold a Next.js + Cronus UI app: npx create-cronus-app my-app --template saas.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Cronus",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedrogbraz/cronus-ui.git",
+    "directory": "packages/create-cronus-app"
+  },
+  "homepage": "https://github.com/pedrogbraz/cronus-ui#readme",
+  "bugs": {
+    "url": "https://github.com/pedrogbraz/cronus-ui/issues"
+  },
+  "keywords": [
+    "cronus",
+    "create-cronus-app",
+    "design-system",
+    "next",
+    "scaffold",
+    "starter",
+    "tailwind",
+    "ui"
+  ],
+  "bin": {
+    "create-cronus-app": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "templates",
+    "LICENSE",
+    "README.md",
+    "!dist/**/*.map"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepublishOnly": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@cronus-ui/ai-kit": "workspace:*",
+    "cronus-ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

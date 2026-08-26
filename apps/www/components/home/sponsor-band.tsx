@@ -15,7 +15,7 @@ export function SponsorBand() {
               id="sponsor-heading"
               className="mt-3 font-display text-2xl font-normal tracking-[-0.02em] text-fg"
             >
-              Buy Kronus a coffee
+              Buy Cronus a coffee
             </h2>
             <p className="mt-2 text-sm leading-6 text-fg-secondary">
               The engine is free. If it helped you ship, you can leave any amount — one-time, no

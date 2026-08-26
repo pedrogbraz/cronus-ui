@@ -41,7 +41,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import {
   ACTIVITY,
   type ActivityStatus,
@@ -49,7 +49,7 @@ import {
   REVENUE_SERIES,
   TEAM,
   USER,
-} from "@kronus-ui/ui/demo-saas";
+} from "@cronus-ui/ui/demo-saas";
 import {
   Activity,
   Bell,
@@ -147,7 +147,7 @@ export function DashboardAnalyticsBlock() {
             <ChartColumnIncreasing className="size-4" aria-hidden="true" />
           </span>
           <div className="flex min-w-0 flex-col">
-            <span className="truncate text-sm font-semibold text-fg">Kronus Analytics</span>
+            <span className="truncate text-sm font-semibold text-fg">Cronus Analytics</span>
             <span className="truncate text-xs text-fg-tertiary">Acme Inc.</span>
           </div>
         </div>
@@ -394,7 +394,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { ACTIVITY, type ActivityStatus, KPIS, REVENUE_SERIES, TEAM, USER } from "../lib/demo-saas.js";
 import {
   Activity,
@@ -458,7 +458,7 @@ export function DashboardAnalyticsBlock() {
             <ChartColumnIncreasing className="size-4" aria-hidden="true" />
           </span>
           <div className="flex min-w-0 flex-col">
-            <span className="truncate text-sm font-semibold text-fg">Kronus Analytics</span>
+            <span className="truncate text-sm font-semibold text-fg">Cronus Analytics</span>
             <span className="truncate text-xs text-fg-tertiary">Acme Inc.</span>
           </div>
         </div>
@@ -713,7 +713,7 @@ export function DashboardAdminOverviewBlock() {
             <ChartColumnIncreasing className="size-4" aria-hidden="true" />
           </span>
           <span className="truncate text-sm font-semibold text-fg group-data-[collapsible=icon]/sidebar:hidden">
-            Kronus Admin
+            Cronus Admin
           </span>
         </div>
       </SidebarHeader>
@@ -942,7 +942,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { TEAM, USER } from "../lib/demo-saas.js";
 import {
   ChartColumnIncreasing,
@@ -1014,7 +1014,7 @@ export function DashboardAdminOverviewBlock() {
             <ChartColumnIncreasing className="size-4" aria-hidden="true" />
           </span>
           <span className="truncate text-sm font-semibold text-fg group-data-[collapsible=icon]/sidebar:hidden">
-            Kronus Admin
+            Cronus Admin
           </span>
         </div>
       </SidebarHeader>

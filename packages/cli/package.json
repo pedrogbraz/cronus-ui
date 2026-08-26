@@ -1,21 +1,21 @@
 {
-  "name": "kronus-ui",
+  "name": "cronus-ui",
   "version": "0.5.0",
-  "description": "kronus-ui — add Kronus UI components to your project, shadcn-style (copy-paste registry).",
+  "description": "cronus-ui — add Cronus UI components to your project, shadcn-style (copy-paste registry).",
   "type": "module",
   "license": "MIT",
-  "author": "Kronus",
+  "author": "Cronus",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pedrogbraz/kronus-ui.git",
+    "url": "git+https://github.com/pedrogbraz/cronus-ui.git",
     "directory": "packages/cli"
   },
-  "homepage": "https://github.com/pedrogbraz/kronus-ui#readme",
+  "homepage": "https://github.com/pedrogbraz/cronus-ui#readme",
   "bugs": {
-    "url": "https://github.com/pedrogbraz/kronus-ui/issues"
+    "url": "https://github.com/pedrogbraz/cronus-ui/issues"
   },
   "keywords": [
-    "kronus",
+    "cronus",
     "components",
     "design-system",
     "registry",
@@ -24,7 +24,7 @@
     "ui"
   ],
   "bin": {
-    "kronus-ui": "./dist/index.js"
+    "cronus-ui": "./dist/index.js"
   },
   "files": [
     "dist",
@@ -54,7 +54,7 @@
     "registry:check": "bun run scripts/check-registry.ts"
   },
   "dependencies": {
-    "@kronus-ui/ai-kit": "workspace:*",
+    "@cronus-ui/ai-kit": "workspace:*",
     "commander": "^15.0.0",
     "picocolors": "^1.1.1"
   },

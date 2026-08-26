@@ -12,7 +12,7 @@ export interface BlockVariant {
   description: string;
   /** Preferred gallery appearance used by the family filter and thumbnail theme. */
   appearance?: BlockVariantAppearance;
-  /** The rendered block (composed from @kronus-ui/ui). */
+  /** The rendered block (composed from @cronus-ui/ui). */
   preview: ReactNode;
   /** The full source shown in the Usage code block (should match `preview`). */
   code: string;

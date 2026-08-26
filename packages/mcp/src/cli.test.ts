@@ -24,7 +24,7 @@ import {
 import { SERVER_VERSION } from "./version.js";
 
 /**
- * A fake `kronus-ui` CLI used to assert the spawn wiring. It echoes its argv and
+ * A fake `cronus-ui` CLI used to assert the spawn wiring. It echoes its argv and
  * cwd as a JSON first line, then prints representative add / compose /
  * add-page / upgrade / theme log lines so the output parsers are exercised.
  */
@@ -78,7 +78,7 @@ let failArgv: string[];
 let sleepArgv: string[];
 
 beforeAll(() => {
-  fixtures = mkdtempSync(join(tmpdir(), "kronus-ui-mcp-cli-"));
+  fixtures = mkdtempSync(join(tmpdir(), "cronus-ui-mcp-cli-"));
   writeFileSync(join(fixtures, "echo-cli.mjs"), ECHO_CLI);
   writeFileSync(join(fixtures, "fail-cli.mjs"), FAIL_CLI);
   writeFileSync(join(fixtures, "sleep-cli.mjs"), SLEEP_CLI);
@@ -97,7 +97,7 @@ afterAll(() => {
 
 describe("resolveCliInvocations", () => {
   it("pins the CLI to the server's own version", () => {
-    expect(PINNED_CLI).toBe(`kronus-ui@${SERVER_VERSION}`);
+    expect(PINNED_CLI).toBe(`cronus-ui@${SERVER_VERSION}`);
   });
 
   it("defaults to bunx with an npx fallback", () => {
@@ -107,8 +107,8 @@ describe("resolveCliInvocations", () => {
     ]);
   });
 
-  it("lets KRONUS_MCP_CLI_CMD replace the launchers entirely", () => {
-    expect(resolveCliInvocations({ KRONUS_MCP_CLI_CMD: "bun /repo/cli/index.ts" })).toEqual([
+  it("lets CRONUS_MCP_CLI_CMD replace the launchers entirely", () => {
+    expect(resolveCliInvocations({ CRONUS_MCP_CLI_CMD: "bun /repo/cli/index.ts" })).toEqual([
       ["bun", "/repo/cli/index.ts"],
     ]);
   });
@@ -121,9 +121,9 @@ describe("resolveCliTimeoutMs", () => {
   });
 
   it("honours a valid override and rejects garbage", () => {
-    expect(resolveCliTimeoutMs({ KRONUS_MCP_CLI_TIMEOUT_MS: "5000" })).toBe(5000);
-    expect(resolveCliTimeoutMs({ KRONUS_MCP_CLI_TIMEOUT_MS: "abc" })).toBe(DEFAULT_CLI_TIMEOUT_MS);
-    expect(resolveCliTimeoutMs({ KRONUS_MCP_CLI_TIMEOUT_MS: "-1" })).toBe(DEFAULT_CLI_TIMEOUT_MS);
+    expect(resolveCliTimeoutMs({ CRONUS_MCP_CLI_TIMEOUT_MS: "5000" })).toBe(5000);
+    expect(resolveCliTimeoutMs({ CRONUS_MCP_CLI_TIMEOUT_MS: "abc" })).toBe(DEFAULT_CLI_TIMEOUT_MS);
+    expect(resolveCliTimeoutMs({ CRONUS_MCP_CLI_TIMEOUT_MS: "-1" })).toBe(DEFAULT_CLI_TIMEOUT_MS);
   });
 });
 
@@ -131,16 +131,16 @@ describe("findProjectRoot", () => {
   it("walks up to the nearest package.json", () => {
     const nested = join(project, "src", "app");
     mkdirSync(nested, { recursive: true });
-    expect(findProjectRoot(nested)).toEqual({ dir: project, hasKronusConfig: false });
+    expect(findProjectRoot(nested)).toEqual({ dir: project, hasCronusConfig: false });
   });
 
-  it("prefers a kronus-ui.json anywhere up the tree over a nearer package.json", () => {
+  it("prefers a cronus-ui.json anywhere up the tree over a nearer package.json", () => {
     const root = join(fixtures, "config-wins");
     const workspace = join(root, "apps", "web");
     mkdirSync(workspace, { recursive: true });
-    writeFileSync(join(root, "kronus-ui.json"), "{}");
+    writeFileSync(join(root, "cronus-ui.json"), "{}");
     writeFileSync(join(workspace, "package.json"), "{}");
-    expect(findProjectRoot(workspace)).toEqual({ dir: root, hasKronusConfig: true });
+    expect(findProjectRoot(workspace)).toEqual({ dir: root, hasCronusConfig: true });
   });
 
   it("returns undefined when no project marker exists up the tree", () => {
@@ -265,7 +265,7 @@ describe("installComponent spawn wiring", () => {
   it("forwards a registry override so the CLI resolves the same registry", async () => {
     const result = await installComponent(
       { names: ["button"] },
-      { cwd: project, candidates: [echoArgv], env: { KRONUS_UI_REGISTRY: "/some/registry" } },
+      { cwd: project, candidates: [echoArgv], env: { CRONUS_UI_REGISTRY: "/some/registry" } },
     );
     expect(echoed(result.stdout).argv).toEqual(["add", "button", "--registry", "/some/registry"]);
   });
@@ -304,7 +304,7 @@ describe("installComponent spawn wiring", () => {
   it("falls back to the next launcher when one is not installed (ENOENT)", async () => {
     const result = await installComponent(
       { names: ["button"] },
-      { cwd: project, candidates: [["kronus-ui-mcp-no-such-launcher"], echoArgv], env: {} },
+      { cwd: project, candidates: [["cronus-ui-mcp-no-such-launcher"], echoArgv], env: {} },
     );
     expect(result.status).toBe("success");
     expect(echoed(result.stdout).argv).toEqual(["add", "button"]);
@@ -316,13 +316,13 @@ describe("installComponent spawn wiring", () => {
         { names: ["button"] },
         { cwd: project, candidates: [["no-launcher-a"], ["no-launcher-b"]], env: {} },
       ),
-    ).rejects.toThrow(/Could not launch the kronus-ui CLI/);
+    ).rejects.toThrow(/Could not launch the cronus-ui CLI/);
   });
 
-  it.skipIf(process.execPath.includes(" "))("honours the KRONUS_MCP_CLI_CMD env seam", async () => {
+  it.skipIf(process.execPath.includes(" "))("honours the CRONUS_MCP_CLI_CMD env seam", async () => {
     const result = await installComponent(
       { names: ["button"] },
-      { cwd: project, env: { KRONUS_MCP_CLI_CMD: echoArgv.join(" ") } },
+      { cwd: project, env: { CRONUS_MCP_CLI_CMD: echoArgv.join(" ") } },
     );
     expect(result.status).toBe("success");
     expect(echoed(result.stdout).argv).toEqual(["add", "button"]);
@@ -339,7 +339,7 @@ describe("applyTheme", () => {
 
   it("composes the theme add argv (with --dry-run) and parses the report", async () => {
     const result = await applyTheme(
-      { source: "https://kronus-ui.dev/studio?c=abc123", dryRun: true },
+      { source: "https://cronus-ui.dev/studio?c=abc123", dryRun: true },
       { cwd: project, candidates: [echoArgv], env: {} },
     );
     expect(result.status).toBe("success");
@@ -348,7 +348,7 @@ describe("applyTheme", () => {
     expect(echoed(result.stdout).argv).toEqual([
       "theme",
       "add",
-      "https://kronus-ui.dev/studio?c=abc123",
+      "https://cronus-ui.dev/studio?c=abc123",
       "--dry-run",
     ]);
     expect(result.changes).toEqual(["Updated app/layout.tsx (2 attribute(s) changed)"]);
@@ -390,7 +390,7 @@ describe("composeApp", () => {
   it("forwards --brand, --dry-run, and a registry override", async () => {
     const result = await composeApp(
       { template: "store", brand: "Acme", dryRun: true },
-      { cwd: project, candidates: [echoArgv], env: { KRONUS_UI_REGISTRY: "/some/registry" } },
+      { cwd: project, candidates: [echoArgv], env: { CRONUS_UI_REGISTRY: "/some/registry" } },
     );
     expect(result.dryRun).toBe(true);
     expect(echoed(result.stdout).argv).toEqual([
@@ -494,7 +494,7 @@ describe("addPage", () => {
   it("allows slug=variant block tokens and forwards --dry-run + registry", async () => {
     const result = await addPage(
       { route: "/login", blocks: "login=split,cta", dryRun: true },
-      { cwd: project, candidates: [echoArgv], env: { KRONUS_UI_REGISTRY: "/some/registry" } },
+      { cwd: project, candidates: [echoArgv], env: { CRONUS_UI_REGISTRY: "/some/registry" } },
     );
     expect(result.dryRun).toBe(true);
     expect(echoed(result.stdout).argv).toEqual([
@@ -651,7 +651,7 @@ describe("upgradeComponents", () => {
   it("upgrades named items without --all and forwards -y + registry", async () => {
     const result = await upgradeComponents(
       { names: ["button", "card"], yes: true },
-      { cwd: project, candidates: [echoArgv], env: { KRONUS_UI_REGISTRY: "/some/registry" } },
+      { cwd: project, candidates: [echoArgv], env: { CRONUS_UI_REGISTRY: "/some/registry" } },
     );
     expect(echoed(result.stdout).argv).toEqual([
       "upgrade",
@@ -707,14 +707,14 @@ describe.skipIf(!hasBun || !existsSync(REPO_CLI) || !existsSync(REPO_REGISTRY))(
   "real CLI smoke (bun + local registry)",
   () => {
     it("installs button into a scratch consumer project", async () => {
-      const consumer = mkdtempSync(join(tmpdir(), "kronus-ui-mcp-consumer-"));
+      const consumer = mkdtempSync(join(tmpdir(), "cronus-ui-mcp-consumer-"));
       try {
         writeFileSync(
           join(consumer, "package.json"),
           JSON.stringify({ name: "scratch-consumer", version: "0.0.0", private: true }),
         );
         writeFileSync(
-          join(consumer, "kronus-ui.json"),
+          join(consumer, "cronus-ui.json"),
           JSON.stringify({
             aliases: { ui: "@/components/ui", lib: "@/lib", blocks: "@/components/blocks" },
             paths: { ui: "components/ui", lib: "lib", blocks: "components/blocks" },
@@ -727,7 +727,7 @@ describe.skipIf(!hasBun || !existsSync(REPO_CLI) || !existsSync(REPO_REGISTRY))(
           {
             cwd: consumer,
             candidates: [["bun", REPO_CLI]],
-            env: { KRONUS_UI_REGISTRY: REPO_REGISTRY },
+            env: { CRONUS_UI_REGISTRY: REPO_REGISTRY },
             timeoutMs: 60_000,
           },
         );

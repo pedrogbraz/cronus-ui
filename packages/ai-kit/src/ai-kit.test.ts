@@ -13,7 +13,7 @@ function templatesRoot(): string {
   const found = candidates.find((p) => existsSync(join(p, "AGENTS.base.md")));
   if (!found) {
     throw new Error(
-      `Could not locate @kronus-ui/ai-kit templates (looked in: ${candidates.join(", ")}).`,
+      `Could not locate @cronus-ui/ai-kit templates (looked in: ${candidates.join(", ")}).`,
     );
   }
   return found;
@@ -39,7 +39,7 @@ describe("writeAiKit", () => {
       expect(existsSync(join(dir, `.claude/skills/${s}/SKILL.md`))).toBe(true);
     }
     expect(existsSync(join(dir, ".cursor/rules/00-doctrine.mdc"))).toBe(true);
-    expect(existsSync(join(dir, ".cursor/rules/10-kronus-ui.mdc"))).toBe(true);
+    expect(existsSync(join(dir, ".cursor/rules/10-cronus-ui.mdc"))).toBe(true);
     expect(existsSync(join(dir, ".github/copilot-instructions.md"))).toBe(true);
     expect(existsSync(join(dir, ".windsurf/rules/doctrine.md"))).toBe(true);
     expect(existsSync(join(dir, "GEMINI.md"))).toBe(true);
@@ -91,15 +91,15 @@ describe("writeAiKit", () => {
     expect(existsSync(join(dir, "CLAUDE.md"))).toBe(false);
     expect(existsSync(join(dir, ".claude/agents/code-reviewer.md"))).toBe(false);
     expect(existsSync(join(dir, ".cursor/rules/00-doctrine.mdc"))).toBe(false);
-    expect(existsSync(join(dir, ".cursor/rules/10-kronus-ui.mdc"))).toBe(true);
+    expect(existsSync(join(dir, ".cursor/rules/10-cronus-ui.mdc"))).toBe(true);
   });
 
-  it("can emit generic assistant tooling without Kronus UI rules or skills", () => {
+  it("can emit generic assistant tooling without Cronus UI rules or skills", () => {
     writeAiKit({
       targetDir: dir,
       name: "acme",
       assistants: ["claude", "cursor", "copilot"],
-      includeKronusUi: false,
+      includeCronusUi: false,
     });
 
     expect(existsSync(join(dir, "AGENTS.md"))).toBe(true);
@@ -112,19 +112,19 @@ describe("writeAiKit", () => {
     expect(existsSync(join(dir, ".claude/skills/theme/SKILL.md"))).toBe(false);
     expect(existsSync(join(dir, ".claude/skills/compose/SKILL.md"))).toBe(false);
     expect(existsSync(join(dir, ".cursor/rules/00-doctrine.mdc"))).toBe(true);
-    expect(existsSync(join(dir, ".cursor/rules/10-kronus-ui.mdc"))).toBe(false);
+    expect(existsSync(join(dir, ".cursor/rules/10-cronus-ui.mdc"))).toBe(false);
     expect(existsSync(join(dir, ".github/copilot-instructions.md"))).toBe(true);
 
     const claude = readFileSync(join(dir, "CLAUDE.md"), "utf8");
     expect(claude).toContain("If `.mcp.json` registers");
   });
 
-  it("omits the compose skill when includeKronusUi is false (with ui-add and theme)", () => {
+  it("omits the compose skill when includeCronusUi is false (with ui-add and theme)", () => {
     writeAiKit({
       targetDir: dir,
       name: "acme",
       assistants: ["claude"],
-      includeKronusUi: false,
+      includeCronusUi: false,
     });
     expect(existsSync(join(dir, ".claude/skills/compose/SKILL.md"))).toBe(false);
     expect(existsSync(join(dir, ".claude/skills/ui-add/SKILL.md"))).toBe(false);
@@ -132,16 +132,16 @@ describe("writeAiKit", () => {
     expect(existsSync(join(dir, ".claude/skills/code-review/SKILL.md"))).toBe(true);
   });
 
-  it("decouples the kronus-ui MCP config from the Claude assistant", () => {
+  it("decouples the cronus-ui MCP config from the Claude assistant", () => {
     writeAiKit({
       targetDir: dir,
       name: "acme",
       assistants: ["cursor"],
-      kronusUiMcp: true,
+      cronusUiMcp: true,
     });
 
     expect(existsSync(join(dir, ".mcp.json"))).toBe(true);
-    expect(existsSync(join(dir, ".cursor/rules/10-kronus-ui.mdc"))).toBe(true);
+    expect(existsSync(join(dir, ".cursor/rules/10-cronus-ui.mdc"))).toBe(true);
     expect(existsSync(join(dir, ".claude/settings.json"))).toBe(false);
   });
 
@@ -173,17 +173,17 @@ describe("parseList", () => {
   });
 });
 
-describe("Kronus skill templates (product-loop holes)", () => {
+describe("Cronus skill templates (product-loop holes)", () => {
   const root = templatesRoot();
   const compose = readFileSync(join(root, "claude", "skills", "compose", "SKILL.md"), "utf8");
   const uiAdd = readFileSync(join(root, "claude", "skills", "ui-add", "SKILL.md"), "utf8");
-  const cursor = readFileSync(join(root, "cursor", "rules", "10-kronus-ui.mdc"), "utf8");
+  const cursor = readFileSync(join(root, "cursor", "rules", "10-cronus-ui.mdc"), "utf8");
 
   it("compose names the saas template, --no-install, --theme, AI kit, and upgrade --all", () => {
     expect(compose).toContain("--template saas");
     expect(compose).toContain("--no-install");
     expect(compose).toContain("--theme");
-    expect(compose.includes("npx kronus-ui ai") || compose.includes("kronus-ui ai")).toBe(true);
+    expect(compose.includes("npx cronus-ui ai") || compose.includes("cronus-ui ai")).toBe(true);
     expect(compose).toContain("upgrade --all");
   });
 
@@ -202,7 +202,7 @@ describe("Kronus skill templates (product-loop holes)", () => {
     expect(cursor.includes("bg-surface") || cursor.includes("setOverrides")).toBe(true);
   });
 
-  it("cursor Kronus rule is always applied so greenfield chats see the loop", () => {
+  it("cursor Cronus rule is always applied so greenfield chats see the loop", () => {
     expect(cursor).toMatch(/alwaysApply:\s*true/);
   });
 
@@ -211,7 +211,7 @@ describe("Kronus skill templates (product-loop holes)", () => {
     "gemini/GEMINI.md",
     "windsurf/rules/doctrine.md",
     "CLAUDE.md",
-    "cursor/rules/10-kronus-ui.mdc",
+    "cursor/rules/10-cronus-ui.mdc",
   ])("%s encodes the product loop and never npx shadcn init", (rel) => {
     const body = readFileSync(join(root, ...rel.split("/")), "utf8");
     expect(body).toContain("--template saas");

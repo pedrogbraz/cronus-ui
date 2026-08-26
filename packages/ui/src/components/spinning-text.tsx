@@ -25,7 +25,7 @@ export interface SpinningTextProps extends Omit<HTMLAttributes<HTMLDivElement>, 
 }
 
 const SPIN_KEYFRAMES =
-  "@keyframes kronus-spinning-text{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}";
+  "@keyframes cronus-spinning-text{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}";
 
 const graphemeSegmenter =
   typeof Intl !== "undefined" && "Segmenter" in Intl
@@ -82,7 +82,7 @@ export function SpinningText({
       <div
         aria-hidden="true"
         className={cn(
-          "absolute inset-0 [animation-duration:var(--spin-duration)] [animation-iteration-count:infinite] [animation-name:kronus-spinning-text] [animation-timing-function:linear] motion-reduce:[animation-name:none]",
+          "absolute inset-0 [animation-duration:var(--spin-duration)] [animation-iteration-count:infinite] [animation-name:cronus-spinning-text] [animation-timing-function:linear] motion-reduce:[animation-name:none]",
           reverse && "[animation-direction:reverse]",
         )}
       >

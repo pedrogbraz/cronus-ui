@@ -17,7 +17,7 @@ const buttonVariants = cva(
         // black lifts every theme/mode above 4.5:1 (min 6.63:1) while staying
         // theme-relative.
         destructive:
-          "bg-[color-mix(in_oklch,var(--kronus-error),black_30%)] text-white hover:opacity-90 shadow-xs",
+          "bg-[color-mix(in_oklch,var(--cronus-error),black_30%)] text-white hover:opacity-90 shadow-xs",
         // `text-primary-strong` (not `text-primary`): a link is small body text,
         // and the raw brand primary reads <4.5:1 on surface-base in the bright
         // light themes; the -strong variant is the AA-tuned same-hue text color.

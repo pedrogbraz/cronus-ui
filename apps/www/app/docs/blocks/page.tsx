@@ -79,10 +79,10 @@ const families = [
   },
 ] as const;
 
-const installCode = `npx kronus-ui add login`;
+const installCode = `npx cronus-ui add login`;
 
 const installManyCode = `# Add several blocks in one run
-npx kronus-ui add login signup pricing dashboard`;
+npx cronus-ui add login signup pricing dashboard`;
 
 const composeCode = `import { LoginBlock } from "@/components/blocks/login";
 
@@ -101,14 +101,14 @@ export default function BlocksPage() {
       <DocsHeader
         eyebrow="Documentation"
         title="Blocks"
-        description="Larger, composed UI sections — auth cards, dashboards, pricing tables, and more — built from Kronus UI primitives and ready to drop into a page."
+        description="Larger, composed UI sections — auth cards, dashboards, pricing tables, and more — built from Cronus UI primitives and ready to drop into a page."
       >
         <PrimaryLink href="/blocks">Browse blocks</PrimaryLink>
       </DocsHeader>
 
       <DocsSection
         title="What blocks are"
-        description="A component is a single primitive — a Button, an Input, a Card. A block is a larger, opinionated section composed from those primitives: a centered login card, a KPI dashboard, a three-tier pricing grid. Blocks import the @kronus-ui/ui package directly, so you get a working section in one command instead of wiring primitives together by hand."
+        description="A component is a single primitive — a Button, an Input, a Card. A block is a larger, opinionated section composed from those primitives: a centered login card, a KPI dashboard, a three-tier pricing grid. Blocks import the @cronus-ui/ui package directly, so you get a working section in one command instead of wiring primitives together by hand."
       >
         <p className="text-sm leading-6 text-fg-secondary">
           There are 13 families covering roughly 48 blocks today, from auth and marketing to
@@ -143,9 +143,9 @@ export default function BlocksPage() {
         <CodeBlock code={installCode} language="bash" expandable />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
           This writes <InlineCode>components/blocks/login.tsx</InlineCode> and installs the
-          block&apos;s dependencies (<InlineCode>@kronus-ui/ui</InlineCode> plus any extras like{" "}
+          block&apos;s dependencies (<InlineCode>@cronus-ui/ui</InlineCode> plus any extras like{" "}
           <InlineCode>lucide-react</InlineCode>). Unlike components, a block imports{" "}
-          <InlineCode>@kronus-ui/ui</InlineCode> rather than vendoring each primitive — so adding a
+          <InlineCode>@cronus-ui/ui</InlineCode> rather than vendoring each primitive — so adding a
           block never floods your tree with copied component files. The written file is yours to
           edit.
         </p>

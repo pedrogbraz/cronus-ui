@@ -5,13 +5,13 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { CONFIG_FILE, DEFAULT_CONFIG, readConfig } from "../config.js";
 import { OVERRIDES_BEGIN, OVERRIDES_END, themeAdd, themeSet } from "./theme.js";
 
-const LAYOUT = `import { KronusThemeScript } from "@kronus-ui/theme";
+const LAYOUT = `import { CronusThemeScript } from "@cronus-ui/theme";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <KronusThemeScript defaultThemeName="aurora" defaultModeName="dark" />
+        <CronusThemeScript defaultThemeName="aurora" defaultModeName="dark" />
       </head>
       <body>{children}</body>
     </html>
@@ -35,7 +35,7 @@ describe("themeSet", () => {
   let cwd: string;
 
   beforeEach(() => {
-    cwd = mkdtempSync(join(tmpdir(), "kronus-ui-theme-"));
+    cwd = mkdtempSync(join(tmpdir(), "cronus-ui-theme-"));
   });
 
   afterEach(() => {
@@ -130,7 +130,7 @@ describe("themeSet", () => {
   });
 
   it("ignores a layout that does not mount the theme runtime", async () => {
-    // A layout.tsx without KronusThemeScript/KronusUIProvider must be left alone.
+    // A layout.tsx without CronusThemeScript/CronusUIProvider must be left alone.
     const bare = "export default function RootLayout() {\n  return null;\n}\n";
     const layoutPath = writeLayout(cwd, bare);
     writeConfigFile(cwd, { name: "aurora", mode: "dark" });
@@ -142,7 +142,7 @@ describe("themeSet", () => {
     expect(config.theme).toEqual({ name: "midnight", mode: "dark" });
   });
 
-  it("does not crash when there is no kronus-ui.json", async () => {
+  it("does not crash when there is no cronus-ui.json", async () => {
     writeLayout(cwd);
 
     await expect(themeSet({ name: "sunset", cwd })).resolves.toBeUndefined();
@@ -152,7 +152,7 @@ describe("themeSet", () => {
   });
 });
 
-const GLOBALS = `@import "tailwindcss";\n@import "@kronus-ui/tokens/styles.css";\n`;
+const GLOBALS = `@import "tailwindcss";\n@import "@cronus-ui/tokens/styles.css";\n`;
 
 function writeGlobals(cwd: string, content = GLOBALS): string {
   mkdirSync(join(cwd, "app"), { recursive: true });
@@ -175,13 +175,13 @@ const EDITORIAL_TOKEN = encodeToken({
   h: "serif",
   d: 12,
 });
-const EDITORIAL_URL = `https://ui.testkronus.cloud/create?c=${EDITORIAL_TOKEN}`;
+const EDITORIAL_URL = `https://ui.testcronus.cloud/create?c=${EDITORIAL_TOKEN}`;
 
 describe("themeAdd", () => {
   let cwd: string;
 
   beforeEach(() => {
-    cwd = mkdtempSync(join(tmpdir(), "kronus-ui-theme-add-"));
+    cwd = mkdtempSync(join(tmpdir(), "cronus-ui-theme-add-"));
   });
 
   afterEach(() => {
@@ -205,19 +205,19 @@ describe("themeAdd", () => {
     const globals = readFileSync(globalsPath, "utf8");
     expect(globals).toContain(OVERRIDES_BEGIN);
     expect(globals).toContain(OVERRIDES_END);
-    expect(globals).toContain(":root[data-kronus-theme] {");
+    expect(globals).toContain(":root[data-cronus-theme] {");
     // rose (light mode → primaryLight/accentLight), mirrored into ring/info.
-    expect(globals).toContain("--kronus-primary: oklch(0.53 0.2 18);");
-    expect(globals).toContain("--kronus-ring: oklch(0.53 0.2 18);");
-    expect(globals).toContain("--kronus-accent: oklch(0.55 0.17 0);");
-    expect(globals).toContain("--kronus-info: oklch(0.55 0.17 0);");
+    expect(globals).toContain("--cronus-primary: oklch(0.53 0.2 18);");
+    expect(globals).toContain("--cronus-ring: oklch(0.53 0.2 18);");
+    expect(globals).toContain("--cronus-accent: oklch(0.55 0.17 0);");
+    expect(globals).toContain("--cronus-info: oklch(0.55 0.17 0);");
     // stone light ramp + warm charts + serif display + 12px radius.
-    expect(globals).toContain("--kronus-surface-base: oklch(0.985 0.003 70);");
-    expect(globals).toContain("--kronus-chart-1: oklch(0.82 0.13 88);");
+    expect(globals).toContain("--cronus-surface-base: oklch(0.985 0.003 70);");
+    expect(globals).toContain("--cronus-chart-1: oklch(0.82 0.13 88);");
     expect(globals).toContain(
-      '--kronus-font-display: Charter, "Iowan Old Style", "New York", Georgia, ui-serif, serif;',
+      '--cronus-font-display: Charter, "Iowan Old Style", "New York", Georgia, ui-serif, serif;',
     );
-    expect(globals).toContain("--kronus-radius: 12px;");
+    expect(globals).toContain("--cronus-radius: 12px;");
     // The original imports stay untouched above the block.
     expect(globals.startsWith(GLOBALS)).toBe(true);
 
@@ -234,7 +234,7 @@ describe("themeAdd", () => {
     await themeAdd({ source: `c=${EDITORIAL_TOKEN}`, cwd });
 
     const globals = readFileSync(globalsPath, "utf8");
-    expect(globals).toContain("--kronus-primary: oklch(0.53 0.2 18);");
+    expect(globals).toContain("--cronus-primary: oklch(0.53 0.2 18);");
     expect(process.exitCode).toBeUndefined();
   });
 
@@ -263,12 +263,12 @@ describe("themeAdd", () => {
 
     const globals = readFileSync(globalsPath, "utf8");
     // emerald dark primary + neutral dark ramp + mono fonts + 4px radius.
-    expect(globals).toContain("--kronus-primary: oklch(0.715 0.155 162.5);");
-    expect(globals).toContain("--kronus-surface-base: oklch(0.11 0 0);");
+    expect(globals).toContain("--cronus-primary: oklch(0.715 0.155 162.5);");
+    expect(globals).toContain("--cronus-surface-base: oklch(0.11 0 0);");
     expect(globals).toContain(
-      '--kronus-font-sans: "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;',
+      '--cronus-font-sans: "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;',
     );
-    expect(globals).toContain("--kronus-radius: 4px;");
+    expect(globals).toContain("--cronus-radius: 4px;");
 
     const config = await readConfig(cwd);
     expect(config.theme).toEqual({ name: "neutral", mode: "dark" });
@@ -297,10 +297,10 @@ describe("themeAdd", () => {
 
     const globals = readFileSync(globalsPath, "utf8");
     // The freeform primary wins over the brand's value and feeds ring + glow.
-    expect(globals).toContain("--kronus-primary: #ff0044;");
-    expect(globals).toContain("--kronus-ring: #ff0044;");
-    expect(globals).toContain("--kronus-surface-base: oklch(0.11 0.012 252);");
-    expect(globals).toContain("--kronus-radius: 20px;");
+    expect(globals).toContain("--cronus-primary: #ff0044;");
+    expect(globals).toContain("--cronus-ring: #ff0044;");
+    expect(globals).toContain("--cronus-surface-base: oklch(0.11 0.012 252);");
+    expect(globals).toContain("--cronus-radius: 20px;");
   });
 
   it("rejects an undecodable payload without touching any file", async () => {
@@ -321,7 +321,7 @@ describe("themeAdd", () => {
     writeLayout(cwd);
     const globalsPath = writeGlobals(cwd);
 
-    await themeAdd({ source: "https://ui.testkronus.cloud/create", cwd });
+    await themeAdd({ source: "https://ui.testcronus.cloud/create", cwd });
 
     expect(process.exitCode).toBe(1);
     expect(readFileSync(globalsPath, "utf8")).toBe(GLOBALS);
@@ -388,14 +388,14 @@ describe("themeAdd", () => {
 
     // Different theme → block swapped in place, never duplicated.
     const violetToken = encodeToken({ b: "slate", r: "violet", d: 16 });
-    await themeAdd({ source: `https://ui.testkronus.cloud/create?c=${violetToken}`, cwd });
+    await themeAdd({ source: `https://ui.testcronus.cloud/create?c=${violetToken}`, cwd });
     const second = readFileSync(globalsPath, "utf8");
 
     expect(second.split(OVERRIDES_BEGIN)).toHaveLength(2);
     expect(second.split(OVERRIDES_END)).toHaveLength(2);
-    expect(second).toContain("--kronus-primary: oklch(0.66 0.2 292);");
-    expect(second).toContain("--kronus-radius: 16px;");
-    expect(second).not.toContain("--kronus-primary: oklch(0.53 0.2 18);");
+    expect(second).toContain("--cronus-primary: oklch(0.66 0.2 292);");
+    expect(second).toContain("--cronus-radius: 16px;");
+    expect(second).not.toContain("--cronus-primary: oklch(0.53 0.2 18);");
     expect(second.startsWith(GLOBALS)).toBe(true);
   });
 

@@ -7,7 +7,7 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { Cell, Label, Pie, PieChart } from "recharts";
 
 /**
@@ -19,11 +19,11 @@ import { Cell, Label, Pie, PieChart } from "recharts";
 
 const chartConfig = {
   visitors: { label: "Visitors" },
-  direct: { label: "Direct", color: "var(--kronus-chart-1)" },
-  organic: { label: "Organic", color: "var(--kronus-chart-2)" },
-  referral: { label: "Referral", color: "var(--kronus-chart-3)" },
-  social: { label: "Social", color: "var(--kronus-chart-4)" },
-  email: { label: "Email", color: "var(--kronus-chart-5)" },
+  direct: { label: "Direct", color: "var(--cronus-chart-1)" },
+  organic: { label: "Organic", color: "var(--cronus-chart-2)" },
+  referral: { label: "Referral", color: "var(--cronus-chart-3)" },
+  social: { label: "Social", color: "var(--cronus-chart-4)" },
+  email: { label: "Email", color: "var(--cronus-chart-5)" },
 } satisfies ChartConfig;
 
 const chartData = [

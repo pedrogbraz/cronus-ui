@@ -1,5 +1,5 @@
 /**
- * Kronus Pro pack + license list. Server-safe. Kept here so the Pro origin
+ * Cronus Pro pack + license list. Server-safe. Kept here so the Pro origin
  * does not import `apps/www` (the two Next apps stay siblings).
  */
 
@@ -18,7 +18,7 @@ export interface PackApp {
 }
 
 function cmd(slug: PackApp["slug"]): string {
-  return `bunx create-kronus-app my-app --template ${slug}`;
+  return `bunx create-cronus-app my-app --template ${slug}`;
 }
 
 export const PACK: readonly PackApp[] = [
@@ -130,7 +130,7 @@ export const COMPARE_ROWS: { label: string; hint?: string; oss: Cell; pro: Cell 
   { label: "AI Kit (MIT)", oss: "both", pro: "both" },
   {
     label: "Figma Variables JSON",
-    hint: "Already in @kronus-ui/tokens",
+    hint: "Already in @cronus-ui/tokens",
     oss: "both",
     pro: "both",
   },
@@ -165,10 +165,10 @@ export const FAQ = [
   },
   {
     q: "Why isn't there a Mobile or Super edition?",
-    a: "Kronus is web. We don't ship React Native, so we don't sell a mobile SKU or a bundle that pretends we do.",
+    a: "Cronus is web. We don't ship React Native, so we don't sell a mobile SKU or a bundle that pretends we do.",
   },
   {
     q: "Is the CLI gated?",
-    a: "Not in this repository. `create-kronus-app --template mail` still composes. When the license publishes, it covers the pack and support — the MIT engine does not move.",
+    a: "Not in this repository. `create-cronus-app --template mail` still composes. When the license publishes, it covers the pack and support — the MIT engine does not move.",
   },
 ] as const;

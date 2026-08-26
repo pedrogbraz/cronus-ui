@@ -1,4 +1,4 @@
-import { KronusThemeScript, KronusUIProvider } from "@kronus-ui/theme";
+import { CronusThemeScript, CronusUIProvider } from "@cronus-ui/theme";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { ProFooter } from "../components/pro-footer";
@@ -8,23 +8,23 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(PRO_URL),
-  title: "Kronus Pro — Mail, chat, and finance",
+  title: "Cronus Pro — Mail, chat, and finance",
   description:
-    "Additive pack on the Kronus product UI system. OSS stays complete. Pro adds mail, chat, and finance — one-time, perpetual, not billed yet.",
+    "Additive pack on the Cronus product UI system. OSS stays complete. Pro adds mail, chat, and finance — one-time, perpetual, not billed yet.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      data-kronus-theme="aurora"
-      data-kronus-mode="dark"
+      data-cronus-theme="aurora"
+      data-cronus-mode="dark"
       className="dark"
       suppressHydrationWarning
     >
       <head>
-        <KronusThemeScript
-          storageKey="kronus-pro-theme-v1"
+        <CronusThemeScript
+          storageKey="cronus-pro-theme-v1"
           defaultThemeName="aurora"
           defaultModeName="dark"
         />
@@ -36,18 +36,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           Skip to content
         </a>
-        <KronusUIProvider
+        <CronusUIProvider
           asRoot
           defaultThemeName="aurora"
           defaultModeName="dark"
-          storageKey="kronus-pro-theme-v1"
+          storageKey="cronus-pro-theme-v1"
         >
           <div className="min-h-screen bg-surface-base text-fg">
             <ProHeader />
             {children}
             <ProFooter />
           </div>
-        </KronusUIProvider>
+        </CronusUIProvider>
       </body>
     </html>
   );

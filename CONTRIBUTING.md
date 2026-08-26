@@ -1,6 +1,6 @@
-# Contributing to Kronus UI
+# Contributing to Cronus UI
 
-Thanks for helping build Kronus UI. This guide covers the dev setup, the quality
+Thanks for helping build Cronus UI. This guide covers the dev setup, the quality
 gates every change must pass, and what we expect from PRs.
 
 ## Prerequisites
@@ -11,17 +11,17 @@ gates every change must pass, and what we expect from PRs.
 ## Setup
 
 ```sh
-git clone https://github.com/pedrogbraz/kronus-ui.git
-cd kronus-ui
+git clone https://github.com/pedrogbraz/cronus-ui.git
+cd cronus-ui
 bun install
 bun run build        # turbo builds every package + www + pro
 bun run www          # showcase dev server → http://localhost:4747
-bun run pro          # Kronus Pro origin → http://localhost:4748
+bun run pro          # Cronus Pro origin → http://localhost:4748
 ```
 
 The monorepo layout: publishable packages live in `packages/*`
-(`ui`, `tokens`, `theme`, `stack`, `cli`, `mcp`, `ai-kit`, `create-kronus-app`,
-`create-kronus-stack`), the showcase/docs app is `apps/www`, Kronus Pro is
+(`ui`, `tokens`, `theme`, `stack`, `cli`, `mcp`, `ai-kit`, `create-cronus-app`,
+`create-cronus-stack`), the showcase/docs app is `apps/www`, Cronus Pro is
 `apps/pro`, and the CLI's component registry is generated into `registry/`.
 
 ## Quality gates
@@ -73,7 +73,7 @@ across OSes:
   regenerate and commit the changed PNGs alongside the code:
 
   ```sh
-  bunx turbo build --filter=@kronus-ui/www
+  bunx turbo build --filter=@cronus-ui/www
   bunx playwright test --project=visual --update-snapshots
   ```
 
@@ -95,7 +95,7 @@ Read [`CONTRACT.md`](./CONTRACT.md) first — it is the authoring contract and
 CI enforces most of it. The short version:
 
 - **Semantic tokens only.** Never raw Tailwind colors or hex values; use the
-  `--kronus-*`-backed utilities (`bg-surface-raised`, `text-fg-secondary`, ...).
+  `--cronus-*`-backed utilities (`bg-surface-raised`, `text-fg-secondary`, ...).
 - Variants via **CVA**, exported alongside the component.
 - **`forwardRef`** on interactive elements, `data-slot="<name>"` on the root.
 - Accessibility is non-negotiable: real semantics, the shared focus-ring
@@ -114,9 +114,9 @@ A new component also needs:
 Generated files are committed; the `*:check` gates fail if they drift.
 
 ```sh
-bun run -F kronus-ui registry            # rebuild the CLI registry from packages/ui
-bun run -F @kronus-ui/tokens tokens:generate   # rebuild token CSS from tokens.ts
-bun run -F @kronus-ui/www props          # rebuild the docs Props tables
+bun run -F cronus-ui registry            # rebuild the CLI registry from packages/ui
+bun run -F @cronus-ui/tokens tokens:generate   # rebuild token CSS from tokens.ts
+bun run -F @cronus-ui/www props          # rebuild the docs Props tables
 ```
 
 ## Commit style

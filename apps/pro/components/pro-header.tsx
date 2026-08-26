@@ -1,12 +1,12 @@
 "use client";
 
-import { useTheme } from "@kronus-ui/theme";
-import { Badge } from "@kronus-ui/ui/badge";
-import { cn } from "@kronus-ui/ui/cn";
+import { useTheme } from "@cronus-ui/theme";
+import { Badge } from "@cronus-ui/ui/badge";
+import { cn } from "@cronus-ui/ui/cn";
 import { ArrowUpRight, Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import { OSS_URL } from "../lib/origins";
-import { KronusMark } from "./brand/kronus-mark";
+import { CronusMark } from "./brand/cronus-mark";
 
 const NAV = [
   { label: "Pack", href: "#pack" },
@@ -52,9 +52,9 @@ export function ProHeader() {
           href="/"
           className="group flex shrink-0 items-center gap-3 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base"
         >
-          <KronusMark className="h-5 w-10 text-fg transition-opacity group-hover:opacity-90" />
+          <CronusMark className="h-5 w-10 text-fg transition-opacity group-hover:opacity-90" />
           <span className="flex items-center gap-2">
-            <span className="font-display text-base font-semibold text-fg">Kronus Pro</span>
+            <span className="font-display text-base font-semibold text-fg">Cronus Pro</span>
             <Badge variant="secondary" className="hidden px-1.5 py-0 text-[10px] sm:inline-flex">
               Additive
             </Badge>

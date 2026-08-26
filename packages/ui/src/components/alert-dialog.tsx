@@ -22,7 +22,7 @@ const AlertDialogOverlay = forwardRef<
       ref={ref}
       data-slot="alert-dialog-overlay"
       className={cn(
-        "fixed inset-0 z-50 bg-black/50 backdrop-blur-sm data-[state=open]:animate-[kronus-overlay-in_200ms_var(--ease-out-quart)] data-[state=closed]:animate-[kronus-overlay-out_160ms_var(--ease-out-quart)]",
+        "fixed inset-0 z-50 bg-black/50 backdrop-blur-sm data-[state=open]:animate-[cronus-overlay-in_200ms_var(--ease-out-quart)] data-[state=closed]:animate-[cronus-overlay-out_160ms_var(--ease-out-quart)]",
         className,
       )}
       {...props}
@@ -42,7 +42,7 @@ export const AlertDialogContent = forwardRef<
         ref={ref}
         data-slot="alert-dialog-content"
         className={cn(
-          "fixed inset-0 z-50 m-auto grid h-fit w-full max-w-lg gap-4 rounded-xl border border-border bg-surface-floating p-6 text-fg shadow-lg data-[state=open]:animate-[kronus-pop-in_200ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[kronus-pop-out_160ms_var(--ease-out-quart)_both]",
+          "fixed inset-0 z-50 m-auto grid h-fit w-full max-w-lg gap-4 rounded-xl border border-border bg-surface-floating p-6 text-fg shadow-lg data-[state=open]:animate-[cronus-pop-in_200ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[cronus-pop-out_160ms_var(--ease-out-quart)_both]",
           className,
         )}
         {...props}

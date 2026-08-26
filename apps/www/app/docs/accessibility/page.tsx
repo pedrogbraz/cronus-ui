@@ -27,8 +27,8 @@ const skipLinkExample = `// app/layout.tsx — one skip link, then exactly one <
 {/* ...elsewhere in the route... */}
 <main id="main-content">{children}</main>`;
 
-const iconButtonExample = `import { Button } from "@kronus-ui/ui";
-import { Label } from "@kronus-ui/ui";
+const iconButtonExample = `import { Button } from "@cronus-ui/ui";
+import { Label } from "@cronus-ui/ui";
 import { X } from "lucide-react";
 
 // Form controls get a real label tied to the input.
@@ -40,7 +40,7 @@ import { X } from "lucide-react";
   <X />
 </Button>`;
 
-const dialogExample = `import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@kronus-ui/ui";
+const dialogExample = `import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@cronus-ui/ui";
 
 <Dialog>
   <DialogContent>
@@ -51,7 +51,7 @@ const dialogExample = `import { Dialog, DialogContent, DialogDescription, Dialog
   </DialogContent>
 </Dialog>`;
 
-const reducedMotionExample = `import { Marquee } from "@kronus-ui/ui";
+const reducedMotionExample = `import { Marquee } from "@cronus-ui/ui";
 
 // Default motionPreference="respect" — scrolls for everyone except
 // visitors with prefers-reduced-motion, who get a static row.
@@ -75,16 +75,16 @@ const complexWidgetExample = `// Charts can't be made node-accessible, so descri
 
 const testingInstallExample = `npm i -D @testing-library/react vitest-axe`;
 
-const testingHelpersExample = `// invite-panel.test.tsx — Vitest + jsdom, using @kronus-ui/ui/testing.
-import { expectNoA11yViolations, findDialog, renderWithKronus } from "@kronus-ui/ui/testing";
+const testingHelpersExample = `// invite-panel.test.tsx — Vitest + jsdom, using @cronus-ui/ui/testing.
+import { expectNoA11yViolations, findDialog, renderWithCronus } from "@cronus-ui/ui/testing";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { it } from "vitest";
 
 it("invite dialog stays accessible", async () => {
   const user = userEvent.setup();
-  // render() wrapped in a scoped KronusUIProvider (a wrapper div, not <html>).
-  const { baseElement, rerenderWithTheme } = renderWithKronus(<InvitePanel />, {
+  // render() wrapped in a scoped CronusUIProvider (a wrapper div, not <html>).
+  const { baseElement, rerenderWithTheme } = renderWithCronus(<InvitePanel />, {
     theme: "aurora",
     mode: "dark",
   });
@@ -114,7 +114,7 @@ export default function AccessibilityPage() {
       <DocsHeader
         eyebrow="Accessibility"
         title="Accessibility is part of the component contract"
-        description="Kronus UI components ship with keyboard behavior, visible focus, semantic structure, and framework integration notes so teams do not rediscover the same edge cases."
+        description="Cronus UI components ship with keyboard behavior, visible focus, semantic structure, and framework integration notes so teams do not rediscover the same edge cases."
       />
 
       <DocsSection title="Quality bars">
@@ -222,10 +222,10 @@ export default function AccessibilityPage() {
         <CodeBlock code={axeExample} language="tsx" />
         <p className="text-fg-secondary">
           Run the same axe gate on your own components with{" "}
-          <InlineCode>@kronus-ui/ui/testing</InlineCode> — Testing Library helpers that render under
-          a scoped <InlineCode>KronusUIProvider</InlineCode>, find Radix surfaces through their
+          <InlineCode>@cronus-ui/ui/testing</InlineCode> — Testing Library helpers that render under
+          a scoped <InlineCode>CronusUIProvider</InlineCode>, find Radix surfaces through their
           portals, and assert zero axe violations. Both testing packages are optional peer
-          dependencies of <InlineCode>@kronus-ui/ui</InlineCode>, so they never touch your app
+          dependencies of <InlineCode>@cronus-ui/ui</InlineCode>, so they never touch your app
           bundle:
         </p>
         <CodeBlock code={testingInstallExample} language="bash" />

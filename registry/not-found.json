@@ -2,14 +2,14 @@
   "name": "not-found",
   "type": "registry:block",
   "dependencies": [
-    "@kronus-ui/ui@0.5.0",
+    "@cronus-ui/ui@0.5.0",
     "lucide-react@^0.577.0"
   ],
   "registryDependencies": [],
   "files": [
     {
       "path": "not-found.tsx",
-      "content": "import { Button, Input, Reveal } from \"@kronus-ui/ui\";\nimport { Search } from \"lucide-react\";\n\nexport function NotFoundBlock() {\n  return (\n    <div className=\"flex min-h-[28rem] flex-col items-center justify-center px-6 py-16 text-center\">\n      <Reveal className=\"flex w-full max-w-md flex-col items-center gap-5\">\n        <span className=\"bg-gradient-primary bg-clip-text font-display text-7xl font-bold text-transparent\">\n          404\n        </span>\n        <div className=\"flex flex-col gap-2\">\n          <h1 className=\"font-display text-2xl font-semibold text-fg\">Page not found</h1>\n          <p className=\"text-sm text-fg-secondary\">\n            The page you&apos;re looking for doesn&apos;t exist or has been moved.\n          </p>\n        </div>\n        <div className=\"relative w-full max-w-xs\">\n          <Search className=\"absolute left-3 top-1/2 size-4 -translate-y-1/2 text-fg-tertiary\" />\n          <Input className=\"pl-9\" placeholder=\"Search the docs…\" />\n        </div>\n        <div className=\"flex flex-wrap items-center justify-center gap-3\">\n          <Button variant=\"primary\">Back to home</Button>\n          <Button variant=\"ghost\">Contact support</Button>\n        </div>\n      </Reveal>\n    </div>\n  );\n}",
+      "content": "import { Button, Input, Reveal } from \"@cronus-ui/ui\";\nimport { Search } from \"lucide-react\";\n\nexport function NotFoundBlock() {\n  return (\n    <div className=\"flex min-h-[28rem] flex-col items-center justify-center px-6 py-16 text-center\">\n      <Reveal className=\"flex w-full max-w-md flex-col items-center gap-5\">\n        <span className=\"bg-gradient-primary bg-clip-text font-display text-7xl font-bold text-transparent\">\n          404\n        </span>\n        <div className=\"flex flex-col gap-2\">\n          <h1 className=\"font-display text-2xl font-semibold text-fg\">Page not found</h1>\n          <p className=\"text-sm text-fg-secondary\">\n            The page you&apos;re looking for doesn&apos;t exist or has been moved.\n          </p>\n        </div>\n        <div className=\"relative w-full max-w-xs\">\n          <Search className=\"absolute left-3 top-1/2 size-4 -translate-y-1/2 text-fg-tertiary\" />\n          <Input className=\"pl-9\" placeholder=\"Search the docs…\" />\n        </div>\n        <div className=\"flex flex-wrap items-center justify-center gap-3\">\n          <Button variant=\"primary\">Back to home</Button>\n          <Button variant=\"ghost\">Contact support</Button>\n        </div>\n      </Reveal>\n    </div>\n  );\n}",
       "target": "block"
     }
   ]

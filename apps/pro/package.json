@@ -1,5 +1,5 @@
 {
-  "name": "@kronus-ui/pro",
+  "name": "@cronus-ui/pro",
   "version": "0.2.0",
   "private": true,
   "type": "module",
@@ -10,9 +10,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@kronus-ui/theme": "workspace:*",
-    "@kronus-ui/tokens": "workspace:*",
-    "@kronus-ui/ui": "workspace:*",
+    "@cronus-ui/theme": "workspace:*",
+    "@cronus-ui/tokens": "workspace:*",
+    "@cronus-ui/ui": "workspace:*",
     "lucide-react": "^0.577.0",
     "next": "16.2.10",
     "react": "^19.2.0",

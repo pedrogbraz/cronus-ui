@@ -25,7 +25,7 @@ beforeAll(() => {
 
 describe("TextEffect", () => {
   it("exposes the full string in the accessible tree exactly once (sr-only)", () => {
-    const text = "Welcome to Kronus";
+    const text = "Welcome to Cronus";
     const { container } = render(<TextEffect trigger="mount">{text}</TextEffect>);
     // getByText (default exact match against accessible text) finds the single
     // sr-only copy; the animated per-unit spans are aria-hidden.

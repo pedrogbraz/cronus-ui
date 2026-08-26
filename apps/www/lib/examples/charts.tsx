@@ -56,8 +56,8 @@ export const chartsExamples: ExampleMap = {
       description:
         "A recharts BarChart composed inside ChartContainer. The ChartConfig maps each series to a theme token, exposed to bars as `var(--color-*)`.",
       code: `const chartConfig = {
-  revenue: { label: "Revenue", color: "var(--kronus-primary)" },
-  profit: { label: "Profit", color: "var(--kronus-info)" },
+  revenue: { label: "Revenue", color: "var(--cronus-primary)" },
+  profit: { label: "Profit", color: "var(--cronus-info)" },
 } satisfies ChartConfig;
 
 const chartData = [
@@ -75,7 +75,7 @@ return (
       <CartesianGrid vertical={false} />
       <XAxis dataKey="month" tickLine={false} tickMargin={10} axisLine={false} />
       <ChartTooltip
-        cursor={{ fill: "var(--kronus-fg)", fillOpacity: 0.05, radius: 8 }}
+        cursor={{ fill: "var(--cronus-fg)", fillOpacity: 0.05, radius: 8 }}
         content={<ChartTooltipContent />}
       />
       <Bar dataKey="revenue" fill="var(--color-revenue)" radius={4} />
@@ -92,11 +92,11 @@ return (
         "A traffic-sources donut. Each slice maps to a theme token via the ChartConfig and renders through `Cell`, with a legend and tooltip wired to the same config.",
       code: `const chartConfig = {
   visitors: { label: "Visitors" },
-  direct: { label: "Direct", color: "var(--kronus-chart-1)" },
-  organic: { label: "Organic", color: "var(--kronus-chart-2)" },
-  referral: { label: "Referral", color: "var(--kronus-chart-3)" },
-  social: { label: "Social", color: "var(--kronus-chart-4)" },
-  email: { label: "Email", color: "var(--kronus-chart-5)" },
+  direct: { label: "Direct", color: "var(--cronus-chart-1)" },
+  organic: { label: "Organic", color: "var(--cronus-chart-2)" },
+  referral: { label: "Referral", color: "var(--cronus-chart-3)" },
+  social: { label: "Social", color: "var(--cronus-chart-4)" },
+  email: { label: "Email", color: "var(--cronus-chart-5)" },
 } satisfies ChartConfig;
 
 const chartData = [
@@ -164,8 +164,8 @@ return (
       description:
         "A two-series radar comparing Current vs Target across six metrics. Each Radar reads its fill and stroke from the config token, so themes recolor both shapes at once.",
       code: `const chartConfig = {
-  current: { label: "Current", color: "var(--kronus-primary)" },
-  target: { label: "Target", color: "var(--kronus-info)" },
+  current: { label: "Current", color: "var(--cronus-primary)" },
+  target: { label: "Target", color: "var(--cronus-info)" },
 } satisfies ChartConfig;
 
 const chartData = [
@@ -206,10 +206,10 @@ return (
         "Visitors-by-device drawn as concentric radial bars with rounded ring caps. The tracked `background` ring and `cornerRadius` give each device a clean gauge read.",
       code: `const chartConfig = {
   visitors: { label: "Visitors" },
-  desktop: { label: "Desktop", color: "var(--kronus-chart-1)" },
-  mobile: { label: "Mobile", color: "var(--kronus-chart-2)" },
-  tablet: { label: "Tablet", color: "var(--kronus-chart-3)" },
-  other: { label: "Other", color: "var(--kronus-chart-4)" },
+  desktop: { label: "Desktop", color: "var(--cronus-chart-1)" },
+  mobile: { label: "Mobile", color: "var(--cronus-chart-2)" },
+  tablet: { label: "Tablet", color: "var(--cronus-chart-3)" },
+  other: { label: "Other", color: "var(--cronus-chart-4)" },
 } satisfies ChartConfig;
 
 const chartData = [

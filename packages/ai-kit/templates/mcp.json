@@ -1,9 +1,9 @@
 {
   "mcpServers": {
-    "kronus-ui": {
+    "cronus-ui": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "kronus-ui-mcp"]
+      "args": ["-y", "cronus-ui-mcp"]
     }
   }
 }

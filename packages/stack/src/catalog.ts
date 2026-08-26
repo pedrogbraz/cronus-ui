@@ -1,5 +1,5 @@
 /**
- * The Kronus Stack Builder taxonomy.
+ * The Cronus Stack Builder taxonomy.
  *
  * Coherent, robust, and CORRECT — every cross-category rule below is encoded on
  * the options themselves (`requires` / `conflicts` / `implies` / `recommends`)
@@ -376,12 +376,12 @@ export const catalog: Catalog = [
     kind: "single",
     options: [
       {
-        id: "ui-kronus",
-        name: "Kronus UI",
+        id: "ui-cronus",
+        name: "Cronus UI",
         description: "Product UI system: compose + live theme + copy-in you can upgrade.",
         icon: "sparkles",
         requires: ["web-react"],
-        recommends: ["mcp-kronus-ui"],
+        recommends: ["mcp-cronus-ui"],
       },
       {
         id: "ui-shadcn",
@@ -453,11 +453,11 @@ export const catalog: Catalog = [
     kind: "multi",
     options: [
       {
-        id: "mcp-kronus-ui",
-        name: "kronus-ui",
-        description: "Kronus UI component & token context.",
+        id: "mcp-cronus-ui",
+        name: "cronus-ui",
+        description: "Cronus UI component & token context.",
         icon: "sparkles",
-        recommends: ["ui-kronus"],
+        recommends: ["ui-cronus"],
       },
       {
         id: "mcp-postgres",

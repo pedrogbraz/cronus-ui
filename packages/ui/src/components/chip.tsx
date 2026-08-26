@@ -56,22 +56,22 @@ const chipVariants = cva(
       {
         variant: "solid",
         color: "success",
-        class: "bg-[color-mix(in_oklch,var(--kronus-success),black_30%)] text-white",
+        class: "bg-[color-mix(in_oklch,var(--cronus-success),black_30%)] text-white",
       },
       {
         variant: "solid",
         color: "warning",
-        class: "bg-[color-mix(in_oklch,var(--kronus-warning),black_30%)] text-white",
+        class: "bg-[color-mix(in_oklch,var(--cronus-warning),black_30%)] text-white",
       },
       {
         variant: "solid",
         color: "error",
-        class: "bg-[color-mix(in_oklch,var(--kronus-error),black_30%)] text-white",
+        class: "bg-[color-mix(in_oklch,var(--cronus-error),black_30%)] text-white",
       },
       {
         variant: "solid",
         color: "info",
-        class: "bg-[color-mix(in_oklch,var(--kronus-info),black_30%)] text-white",
+        class: "bg-[color-mix(in_oklch,var(--cronus-info),black_30%)] text-white",
       },
       // ── soft ── 15% tints. Same-hue text on a tint can read <4.5:1, so the
       // label uses the AA-tuned `*-strong` text variants (tokens contract).

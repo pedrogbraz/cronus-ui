@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, AvatarFallback, Badge, Button, Input, Label } from "@kronus-ui/ui";
+import { Avatar, AvatarFallback, Badge, Button, Input, Label } from "@cronus-ui/ui";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
@@ -141,7 +141,7 @@ export function WaitlistHeroBlock() {
 
 const waitlistCode = `"use client";
 
-import { Avatar, AvatarFallback, Badge, Button, Input, Label } from "@kronus-ui/ui";
+import { Avatar, AvatarFallback, Badge, Button, Input, Label } from "@cronus-ui/ui";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { useState } from "react";
 

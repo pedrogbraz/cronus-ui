@@ -1,4 +1,4 @@
-import { CopyButton } from "@kronus-ui/ui/copy-button";
+import { CopyButton } from "@cronus-ui/ui/copy-button";
 
 export function CopyCommand({ command }: { command: string }) {
   return (

@@ -21,7 +21,7 @@ import {
   toast,
   UsageMeter,
   UsageMeterCircular,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import {
   ArrowRight,
   CircleAlert,
@@ -196,7 +196,7 @@ export const feedbackExamples: ExampleMap = {
       code: `<Banner
   variant="brand"
   icon={<Sparkles aria-hidden="true" />}
-  title="Kronus UI 1.0 is here."
+  title="Cronus UI 1.0 is here."
   description="60+ themeable components, now stable."
   action={
     <Button size="sm" variant="secondary">
@@ -210,7 +210,7 @@ export const feedbackExamples: ExampleMap = {
           variant="brand"
           className="rounded-lg border"
           icon={<Sparkles aria-hidden="true" />}
-          title="Kronus UI 1.0 is here."
+          title="Cronus UI 1.0 is here."
           description="60+ themeable components, now stable."
           action={
             <Button size="sm" variant="secondary">

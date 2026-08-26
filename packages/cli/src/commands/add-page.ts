@@ -1,5 +1,5 @@
 /**
- * `kronus-ui add-page` — incrementally add ONE page to an already-composed app
+ * `cronus-ui add-page` — incrementally add ONE page to an already-composed app
  * (D3 graft, F2). It reuses the exact compose plan/render/install core: it
  * reconstructs the app's manifest (chrome + already-composed pages), appends the
  * new page, re-plans + re-validates the WHOLE app (so the new page's chrome ref,
@@ -43,9 +43,9 @@ import {
 import {
   CLI_VERSION,
   type ComposedRecord,
+  type CronusUIConfig,
   hasConfig,
   type InstalledRecord,
-  type KronusUIConfig,
   readConfig,
   writeConfig,
 } from "../config.js";
@@ -64,7 +64,7 @@ import { readChromeSources, readComposeMeta } from "./compose.js";
 
 /** Options accepted by the addPage library entry + the CLI command. */
 export interface AddPageOptions {
-  /** Project root (must contain kronus-ui.json with a composed app). */
+  /** Project root (must contain cronus-ui.json with a composed app). */
   targetDir: string;
   /** New route to add, e.g. "/faq". */
   route: string;
@@ -121,13 +121,13 @@ function defaultTitle(route: string): string {
  * callers never re-assert on `config.composed`.
  */
 function pickComposedApp(
-  config: KronusUIConfig,
+  config: CronusUIConfig,
   app: string | undefined,
 ): { name: string; record: ComposedRecord } {
   const composed = config.composed ?? {};
   const keys = Object.keys(composed).sort();
   if (keys.length === 0) {
-    throw new Error("No composed app found. Run `kronus-ui compose <template>` first.");
+    throw new Error("No composed app found. Run `cronus-ui compose <template>` first.");
   }
   const pick = (name: string): { name: string; record: ComposedRecord } => {
     const record = composed[name];
@@ -226,7 +226,7 @@ function replanVariants(
 export async function addPage(options: AddPageOptions): Promise<AddPageResult> {
   const { targetDir } = options;
   if (!hasConfig(targetDir)) {
-    throw new Error("No kronus-ui.json found. Run `kronus-ui init` first.");
+    throw new Error("No cronus-ui.json found. Run `cronus-ui init` first.");
   }
   const config = await readConfig(targetDir);
   const { name: appName, record: composedRecord } = pickComposedApp(config, options.app);
@@ -375,10 +375,10 @@ export async function addPage(options: AddPageOptions): Promise<AddPageResult> {
   // Two triggers: (1) `--nav` grows an EXISTING group's nav set, so its chrome
   // block(s) must be re-rendered with the larger nav; (2) a BRAND-NEW group whose
   // chrome block we just installed pristine — it still carries the placeholder
-  // nav const + the "Kronus" brand literal, so it MUST be customized to match what
+  // nav const + the "Cronus" brand literal, so it MUST be customized to match what
   // compose emits (brand replaced, nav data filled), else the new group ships an
   // uncustomized chrome. We rewrite from the PRISTINE registry source (exactly as
-  // compose does): the brand literal ("Kronus") only exists in the pristine source
+  // compose does): the brand literal ("Cronus") only exists in the pristine source
   // — the on-disk copy already replaced it with the app brand, so re-running the
   // brand pass over the on-disk copy would fail to find the anchor. Rewriting the
   // pristine source re-applies BOTH the nav data-slot and the brand, yielding the
@@ -495,7 +495,7 @@ async function removeMovedPage(
 async function ensureChromeScaffold(
   plan: ComposePlan,
   chrome: PlanChrome,
-  config: KronusUIConfig,
+  config: CronusUIConfig,
   targetDir: string,
   appName: string,
   generatedFiles: string[],
@@ -580,19 +580,19 @@ export function parseBlockRefs(spec: string | undefined): BlockRef[] {
 }
 
 /**
- * The `kronus-ui add-page` command: adds ONE page to a composed app, or previews
+ * The `cronus-ui add-page` command: adds ONE page to a composed app, or previews
  * it with `--dry-run` (writes nothing). Aggregated plan errors are printed as a
  * list, like `compose`.
  */
 export async function addPageCommand(options: AddPageCommandOptions): Promise<void> {
   const { cwd } = options;
   if (!hasConfig(cwd)) {
-    log.err("No kronus-ui.json found. Run `kronus-ui init` first.");
+    log.err("No cronus-ui.json found. Run `cronus-ui init` first.");
     process.exitCode = 1;
     return;
   }
   if (options.route === undefined || options.route.length === 0) {
-    log.err("--route is required, e.g. `kronus-ui add-page --route /faq --blocks faq,cta`.");
+    log.err("--route is required, e.g. `cronus-ui add-page --route /faq --blocks faq,cta`.");
     process.exitCode = 1;
     return;
   }
@@ -666,9 +666,9 @@ export async function addPageCommand(options: AddPageCommandOptions): Promise<vo
   }
   log.title(`Added ${result.route} to "${result.appName}".`);
   log.title("Next steps");
-  log.step("npx kronus-ui add-page --route /pricing --blocks pricing,cta --nav Pricing");
-  log.step("npx kronus-ui theme set aurora --mode dark");
-  log.step("npx kronus-ui upgrade --all --dry-run");
+  log.step("npx cronus-ui add-page --route /pricing --blocks pricing,cta --nav Pricing");
+  log.step("npx cronus-ui theme set aurora --mode dark");
+  log.step("npx cronus-ui upgrade --all --dry-run");
 }
 
 /** A dry-run preview of an add-page: the files it would write + blocks it would install. */
@@ -689,7 +689,7 @@ export async function previewAddPage(
 ): Promise<AddPagePreview> {
   const { targetDir } = options;
   if (!hasConfig(targetDir)) {
-    throw new Error("No kronus-ui.json found. Run `kronus-ui init` first.");
+    throw new Error("No cronus-ui.json found. Run `cronus-ui init` first.");
   }
   const config = await readConfig(targetDir);
   const { name: appName, record: composedRecord } = pickComposedApp(config, options.app);

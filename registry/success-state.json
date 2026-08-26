@@ -2,14 +2,14 @@
   "name": "success-state",
   "type": "registry:block",
   "dependencies": [
-    "@kronus-ui/ui@0.5.0",
+    "@cronus-ui/ui@0.5.0",
     "lucide-react@^0.577.0"
   ],
   "registryDependencies": [],
   "files": [
     {
       "path": "success-state.tsx",
-      "content": "import { Button, Reveal } from \"@kronus-ui/ui\";\nimport { Check } from \"lucide-react\";\n\nexport function SuccessStateBlock() {\n  return (\n    <div className=\"flex min-h-[28rem] flex-col items-center justify-center px-6 py-16 text-center\">\n      <Reveal className=\"flex w-full max-w-md flex-col items-center gap-5\">\n        <span className=\"inline-flex size-16 items-center justify-center rounded-full bg-success/10 text-success\">\n          <Check className=\"size-8\" aria-hidden=\"true\" />\n        </span>\n        <div className=\"flex flex-col gap-2\">\n          <h1 className=\"font-display text-2xl font-semibold text-fg\">You&apos;re all set!</h1>\n          <p className=\"text-sm text-fg-secondary\">\n            Your account is ready. Everything has been configured and is good to go.\n          </p>\n        </div>\n        <div className=\"flex flex-wrap items-center justify-center gap-3\">\n          <Button variant=\"primary\">Go to dashboard</Button>\n          <Button variant=\"ghost\">View details</Button>\n        </div>\n      </Reveal>\n    </div>\n  );\n}",
+      "content": "import { Button, Reveal } from \"@cronus-ui/ui\";\nimport { Check } from \"lucide-react\";\n\nexport function SuccessStateBlock() {\n  return (\n    <div className=\"flex min-h-[28rem] flex-col items-center justify-center px-6 py-16 text-center\">\n      <Reveal className=\"flex w-full max-w-md flex-col items-center gap-5\">\n        <span className=\"inline-flex size-16 items-center justify-center rounded-full bg-success/10 text-success\">\n          <Check className=\"size-8\" aria-hidden=\"true\" />\n        </span>\n        <div className=\"flex flex-col gap-2\">\n          <h1 className=\"font-display text-2xl font-semibold text-fg\">You&apos;re all set!</h1>\n          <p className=\"text-sm text-fg-secondary\">\n            Your account is ready. Everything has been configured and is good to go.\n          </p>\n        </div>\n        <div className=\"flex flex-wrap items-center justify-center gap-3\">\n          <Button variant=\"primary\">Go to dashboard</Button>\n          <Button variant=\"ghost\">View details</Button>\n        </div>\n      </Reveal>\n    </div>\n  );\n}",
       "target": "block"
     }
   ]

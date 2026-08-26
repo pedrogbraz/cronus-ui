@@ -44,7 +44,7 @@ export interface AnimatedNumberProps
   formatOptions?: Intl.NumberFormatOptions;
   /** Tween length in seconds. Defaults to ~0.8s; overrides the spring's natural duration. */
   duration?: number;
-  /** Override the settle spring (advanced — defaults to the Kronus count spring). */
+  /** Override the settle spring (advanced — defaults to the Cronus count spring). */
   spring?: AnimatedNumberSpring;
   /**
    * How `prefers-reduced-motion` is honoured. Defaults to `"user"` (snap for

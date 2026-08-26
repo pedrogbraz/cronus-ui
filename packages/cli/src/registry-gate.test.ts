@@ -142,7 +142,7 @@ describe("buildMeta — happy path invariants", () => {
     expect(navbar?.kind).toBe("chrome");
     // data-slot markers → recorded slot; brand literal → recorded token literal.
     expect(navbar?.dataSlots).toEqual(["navbar-links"]);
-    expect(navbar?.brandTokens).toEqual([{ token: "brand", literal: "Kronus" }]);
+    expect(navbar?.brandTokens).toEqual([{ token: "brand", literal: "Cronus" }]);
 
     // Block keys are sorted ascending (stable, index-order-independent).
     const keys = Object.keys(meta.blocks);
@@ -168,10 +168,10 @@ describe("buildMeta — fail-loud invariants (each SHOULD throw)", () => {
 
   it("throws when a declared brand-token literal is absent from the shipped source", async () => {
     const bad = cloneSources();
-    // Remove the "Kronus" wordmark so the brand substitution has no anchor.
-    bad.set("navbar", (bad.get("navbar") as string).replaceAll("Kronus", "Brandless"));
+    // Remove the "Cronus" wordmark so the brand substitution has no anchor.
+    bad.set("navbar", (bad.get("navbar") as string).replaceAll("Cronus", "Brandless"));
     await expect(buildMeta(bad, variantSources)).rejects.toThrowError(
-      /block "navbar": brand-token literal "Kronus" .* is absent from the shipped source/,
+      /block "navbar": brand-token literal "Cronus" .* is absent from the shipped source/,
     );
   });
 
@@ -663,7 +663,7 @@ describe("distinctiveLibValues — programmatic forbidden-value derivation (F3)"
     expect(forbidden.has("INV-2026-006")).toBe(true);
     expect(forbidden.has("INV-2046")).toBe(true); // was NOT an old sentinel
     expect(forbidden.has("Mara Castillo")).toBe(true);
-    expect(forbidden.has("mara@kronus.io")).toBe(true); // team email — never an old sentinel
+    expect(forbidden.has("mara@cronus.io")).toBe(true); // team email — never an old sentinel
     expect(forbidden.has("Total revenue")).toBe(true); // KPI label — never an old sentinel
     expect(forbidden.has("Active users")).toBe(true);
     expect(forbidden.has("For growing teams that need room to scale.")).toBe(true); // tagline

@@ -7,11 +7,11 @@ import {
   type ThemeName,
   type ThemeOverrides,
   tokensToCssVars,
-} from "@kronus-ui/tokens";
+} from "@cronus-ui/tokens";
 import { type ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 import { ThemeContext, type ThemeContextValue } from "./use-theme.js";
 
-export interface KronusUIProviderProps {
+export interface CronusUIProviderProps {
   children: ReactNode;
   /** Initial theme. @default "aurora" */
   defaultThemeName?: ThemeName;
@@ -33,8 +33,8 @@ export interface KronusUIProviderProps {
 function applyRootAttributes(theme: ThemeName, mode: Mode) {
   if (typeof document === "undefined") return;
   const el = document.documentElement;
-  el.dataset.kronusTheme = theme;
-  el.dataset.kronusMode = mode;
+  el.dataset.cronusTheme = theme;
+  el.dataset.cronusMode = mode;
   el.classList.toggle("dark", mode === "dark");
 }
 
@@ -43,7 +43,7 @@ function applyRootAttributes(theme: ThemeName, mode: Mode) {
  * re-render, no context churn beyond the controls themselves. Overriding
  * `radius`, `primary`, `border`, etc. updates the entire subtree instantly.
  */
-export function KronusUIProvider({
+export function CronusUIProvider({
   children,
   defaultThemeName = defaultTheme,
   defaultModeName = defaultMode,
@@ -51,7 +51,7 @@ export function KronusUIProvider({
   asRoot = false,
   storageKey,
   className,
-}: KronusUIProviderProps) {
+}: CronusUIProviderProps) {
   const [theme, setThemeState] = useState<ThemeName>(defaultThemeName);
   const [mode, setModeState] = useState<Mode>(defaultModeName);
   // `overrides` seeds the initial value; the effect below keeps it in sync when
@@ -155,8 +155,8 @@ export function KronusUIProvider({
         children
       ) : (
         <div
-          data-kronus-theme={theme}
-          data-kronus-mode={mode}
+          data-cronus-theme={theme}
+          data-cronus-mode={mode}
           className={mode === "dark" ? `dark ${className ?? ""}` : className}
           style={style}
         >

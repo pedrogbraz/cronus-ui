@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@kronus-ui/ui";
+import { cn } from "@cronus-ui/ui";
 import { useEffect, useRef, useState } from "react";
 import {
   hasLivePreview,
@@ -61,8 +61,8 @@ export function TemplateThumb({
     <div
       ref={hostRef}
       data-slot="template-thumb"
-      data-kronus-theme={entry.theme}
-      data-kronus-mode={entry.mode}
+      data-cronus-theme={entry.theme}
+      data-cronus-mode={entry.mode}
       className={cn(
         "relative aspect-[16/10] overflow-hidden bg-surface-base",
         entry.mode === "dark" ? "dark" : undefined,
@@ -71,13 +71,13 @@ export function TemplateThumb({
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(var(--kronus-border)_1px,transparent_1px)] opacity-40 [background-size:16px_16px]"
+        className="absolute inset-0 bg-[radial-gradient(var(--cronus-border)_1px,transparent_1px)] opacity-40 [background-size:16px_16px]"
       />
       {live && inView ? (
         <iframe
           src={previewPath(entry.slug, true)}
           title={`${entry.name} live preview`}
-          tabIndex={-1}
+          inert
           loading="lazy"
           className="pointer-events-none absolute left-0 top-0 origin-top-left border-0"
           style={{

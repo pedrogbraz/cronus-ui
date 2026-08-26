@@ -2,11 +2,11 @@ import { existsSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
-export const CONFIG_FILE = "kronus-ui.json";
+export const CONFIG_FILE = "cronus-ui.json";
 
 export const CLI_VERSION = "0.5.0";
 
-export const DEFAULT_REGISTRY = `https://raw.githubusercontent.com/pedrogbraz/kronus-ui/v${CLI_VERSION}/registry`;
+export const DEFAULT_REGISTRY = `https://raw.githubusercontent.com/pedrogbraz/cronus-ui/v${CLI_VERSION}/registry`;
 
 /** Manifest entry `add`/`upgrade` record per installed registry item. */
 export interface InstalledRecord {
@@ -36,7 +36,7 @@ export interface ComposedChoices {
 /**
  * Per-composed-app record written by `compose` (mirrors {@link InstalledRecord}
  * for `installed`). `files` are the generated page/layout/chrome paths (NOT the
- * installed blocks — those live in `installed`). The `.kronus-ui/base/<composed-key>/`
+ * installed blocks — those live in `installed`). The `.cronus-ui/base/<composed-key>/`
  * snapshot (template name; legacy compose used the package.json name and F4
  * falls back to that dir) holds the exact bytes for the F4 page-upgrade merge
  * base.
@@ -61,7 +61,7 @@ export interface ComposedRecord {
   manifestHash?: string;
 }
 
-export interface KronusUIConfig {
+export interface CronusUIConfig {
   /** Import aliases used when rewriting component sources. */
   aliases: {
     ui: string;
@@ -92,12 +92,12 @@ export interface KronusUIConfig {
    * Compose manifest: which app templates were generated into this project, the
    * plan version + normalized choices, and the generated files each owns. Mirrors
    * `installed` (round-tripped verbatim); the F4 page-upgrade reads it to know
-   * which pages to re-render against their `.kronus-ui/base/` snapshot.
+   * which pages to re-render against their `.cronus-ui/base/` snapshot.
    */
   composed?: Record<string, ComposedRecord>;
 }
 
-export const DEFAULT_CONFIG: KronusUIConfig = {
+export const DEFAULT_CONFIG: CronusUIConfig = {
   aliases: { ui: "@/components/ui", lib: "@/lib", blocks: "@/components/blocks" },
   paths: { ui: "components/ui", lib: "lib", blocks: "components/blocks" },
   registry: DEFAULT_REGISTRY,
@@ -111,9 +111,9 @@ export function hasConfig(cwd: string): boolean {
   return existsSync(configPath(cwd));
 }
 
-export async function readConfig(cwd: string): Promise<KronusUIConfig> {
+export async function readConfig(cwd: string): Promise<CronusUIConfig> {
   const raw = await readFile(configPath(cwd), "utf8");
-  const parsed = JSON.parse(raw) as Partial<KronusUIConfig>;
+  const parsed = JSON.parse(raw) as Partial<CronusUIConfig>;
   return {
     aliases: { ...DEFAULT_CONFIG.aliases, ...parsed.aliases },
     paths: { ...DEFAULT_CONFIG.paths, ...parsed.paths },
@@ -129,6 +129,6 @@ export async function readConfig(cwd: string): Promise<KronusUIConfig> {
   };
 }
 
-export async function writeConfig(cwd: string, config: KronusUIConfig): Promise<void> {
+export async function writeConfig(cwd: string, config: CronusUIConfig): Promise<void> {
   await writeFile(configPath(cwd), `${JSON.stringify(config, null, 2)}\n`, "utf8");
 }

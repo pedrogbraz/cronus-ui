@@ -1,6 +1,6 @@
 "use client";
 
-import { CopyButton } from "@kronus-ui/ui/copy-button";
+import { CopyButton } from "@cronus-ui/ui/copy-button";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Highlight, type PrismTheme } from "prism-react-renderer";
@@ -15,7 +15,7 @@ const SNIPPETS = [
     label: "bun",
     language: "bash",
     code: `# Scaffold a themed SaaS
-bunx create-kronus-app my-app --template saas
+bunx create-cronus-app my-app --template saas
 cd my-app
 bun run dev`,
   },
@@ -23,14 +23,14 @@ bun run dev`,
     id: "react",
     label: "React",
     language: "tsx",
-    code: `import { KronusUIProvider } from "@kronus-ui/theme";
-import { Button } from "@kronus-ui/ui/button";
+    code: `import { CronusUIProvider } from "@cronus-ui/theme";
+import { Button } from "@cronus-ui/ui/button";
 
 export function App() {
   return (
-    <KronusUIProvider defaultThemeName="aurora">
+    <CronusUIProvider defaultThemeName="aurora">
       <Button>Get started</Button>
-    </KronusUIProvider>
+    </CronusUIProvider>
   );
 }`,
   },
@@ -39,33 +39,33 @@ export function App() {
     label: "add",
     language: "bash",
     code: `# Copy primitives into your repo
-npx kronus-ui add button card data-table
+npx cronus-ui add button card data-table
 
 # Grow a composed route
-npx kronus-ui add-page --route /faq --blocks faq,cta --nav FAQ`,
+npx cronus-ui add-page --route /faq --blocks faq,cta --nav FAQ`,
   },
   {
     id: "upgrade",
     label: "upgrade",
     language: "bash",
     code: `# See what would change
-npx kronus-ui upgrade --all --dry-run
+npx cronus-ui upgrade --all --dry-run
 
 # Apply — 3-way merge, local edits kept
-npx kronus-ui upgrade --all`,
+npx cronus-ui upgrade --all`,
   },
 ] as const;
 
 const theme: PrismTheme = {
-  plain: { color: "var(--kronus-fg)", backgroundColor: "transparent" },
+  plain: { color: "var(--cronus-fg)", backgroundColor: "transparent" },
   styles: [
-    { types: ["comment"], style: { color: "var(--kronus-fg-tertiary)", fontStyle: "italic" } },
-    { types: ["keyword", "tag", "operator"], style: { color: "var(--kronus-syntax-keyword)" } },
-    { types: ["function", "class-name"], style: { color: "var(--kronus-syntax-fn)" } },
-    { types: ["string", "attr-value"], style: { color: "var(--kronus-syntax-string)" } },
-    { types: ["attr-name", "property"], style: { color: "var(--kronus-syntax-attr)" } },
-    { types: ["number"], style: { color: "var(--kronus-syntax-number)" } },
-    { types: ["plain", "punctuation"], style: { color: "var(--kronus-fg-secondary)" } },
+    { types: ["comment"], style: { color: "var(--cronus-fg-tertiary)", fontStyle: "italic" } },
+    { types: ["keyword", "tag", "operator"], style: { color: "var(--cronus-syntax-keyword)" } },
+    { types: ["function", "class-name"], style: { color: "var(--cronus-syntax-fn)" } },
+    { types: ["string", "attr-value"], style: { color: "var(--cronus-syntax-string)" } },
+    { types: ["attr-name", "property"], style: { color: "var(--cronus-syntax-attr)" } },
+    { types: ["number"], style: { color: "var(--cronus-syntax-number)" } },
+    { types: ["plain", "punctuation"], style: { color: "var(--cronus-fg-secondary)" } },
   ],
 };
 
@@ -120,9 +120,8 @@ export function DeveloperCli({ displayClassName }: { displayClassName?: string }
           <dl className="mt-10 grid grid-cols-3 gap-4">
             {MINI.map((item) => (
               <div key={item.label}>
-                <dt className="sr-only">{item.label}</dt>
                 <dd className="text-xl text-fg">{item.value}</dd>
-                <p className="text-xs text-fg-tertiary">{item.label}</p>
+                <dt className="text-xs text-fg-tertiary">{item.label}</dt>
               </div>
             ))}
           </dl>

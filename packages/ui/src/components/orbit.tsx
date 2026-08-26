@@ -13,10 +13,10 @@ import { cn } from "../lib/cn.js";
  * CSS custom properties and the `rotate` property, so a single fixed name
  * covers every ring and every item. It is injected once per `<Orbit>` stage;
  * repeated identical definitions are deduped by the browser (same pattern as
- * `BorderBeam`'s `kronus-border-beam`).
+ * `BorderBeam`'s `cronus-border-beam`).
  */
 const ORBIT_KEYFRAMES =
-  "@keyframes kronus-orbit-spin{from{transform:rotate(0turn)}to{transform:rotate(1turn)}}";
+  "@keyframes cronus-orbit-spin{from{transform:rotate(0turn)}to{transform:rotate(1turn)}}";
 
 const DEFAULT_DURATION = 24;
 const MIN_DURATION = 1;
@@ -74,7 +74,7 @@ export interface OrbitItemProps extends HTMLAttributes<HTMLDivElement> {}
  *
  * **Mechanism** — pure CSS, zero JS per frame. Each item hangs off a
  * *positioner* that fills the ring's circle and spins via one shared keyframe
- * (`kronus-orbit-spin`, injected here once). The positioner's slot angle lives
+ * (`cronus-orbit-spin`, injected here once). The positioner's slot angle lives
  * in the CSS `rotate` property, which the browser **composes with** the
  * animated `transform` instead of being overwritten by it — so one keyframe
  * serves every slot. The item itself runs the same keyframe with
@@ -181,7 +181,7 @@ export const OrbitRing = forwardRef<HTMLDivElement, OrbitRingProps>(
               key={key}
               data-slot="orbit-positioner"
               className={cn(
-                "absolute inset-0 [animation-name:kronus-orbit-spin] [will-change:transform]",
+                "absolute inset-0 [animation-name:cronus-orbit-spin] [will-change:transform]",
                 "[animation-duration:var(--orbit-duration)] [animation-timing-function:linear]",
                 "[animation-iteration-count:infinite] [animation-direction:var(--orbit-spin-direction)]",
                 "group-hover/orbit:[animation-play-state:paused] motion-reduce:[animation-name:none]",
@@ -220,7 +220,7 @@ export const OrbitItem = forwardRef<HTMLDivElement, OrbitItemProps>(
       ref={ref}
       data-slot="orbit-item"
       className={cn(
-        "pointer-events-auto flex items-center justify-center [animation-name:kronus-orbit-spin]",
+        "pointer-events-auto flex items-center justify-center [animation-name:cronus-orbit-spin]",
         "[animation-duration:var(--orbit-duration,24s)] [animation-timing-function:linear]",
         "[animation-iteration-count:infinite] [animation-direction:var(--orbit-counter-direction,reverse)]",
         "group-hover/orbit:[animation-play-state:paused] motion-reduce:[animation-name:none]",

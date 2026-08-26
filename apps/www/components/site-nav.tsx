@@ -1,15 +1,15 @@
 "use client";
 
-import { useTheme } from "@kronus-ui/theme";
-import { type ThemeName, themeNames } from "@kronus-ui/tokens";
-import { Badge } from "@kronus-ui/ui/badge";
-import { cn } from "@kronus-ui/ui/cn";
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@kronus-ui/ui/sheet";
+import { useTheme } from "@cronus-ui/theme";
+import { type ThemeName, themeNames } from "@cronus-ui/tokens";
+import { Badge } from "@cronus-ui/ui/badge";
+import { cn } from "@cronus-ui/ui/cn";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@cronus-ui/ui/sheet";
 import { Check, Github, Menu, Moon, Palette, Sun } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { PRO_URL } from "../lib/site-url";
-import { KronusMark } from "./brand/kronus-mark";
+import { CronusMark } from "./brand/cronus-mark";
 import { CommandSearch } from "./docs/command-search";
 import { ComponentNavList } from "./docs/docs-sidebar";
 import { DocumentationNavList } from "./docs/documentation-nav";
@@ -31,7 +31,7 @@ const moreLinks = [
   { label: "Sponsor", href: "/sponsor" },
 ] as const;
 
-const GITHUB_URL = "https://github.com/pedrogbraz/kronus-ui";
+const GITHUB_URL = "https://github.com/pedrogbraz/cronus-ui";
 
 /** Friendly Title Case label for each theme preset. */
 const themeLabels: Record<ThemeName, string> = {
@@ -194,9 +194,9 @@ export function SiteNav() {
           href="/"
           className="group flex shrink-0 items-center gap-3 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base"
         >
-          <KronusMark className="h-5 w-10 text-fg transition-opacity group-hover:opacity-90" />
+          <CronusMark className="h-5 w-10 text-fg transition-opacity group-hover:opacity-90" />
           <span className="flex items-center gap-2">
-            <span className="font-display text-base font-semibold text-fg">Kronus UI</span>
+            <span className="font-display text-base font-semibold text-fg">Cronus UI</span>
             <Badge variant="secondary" className="hidden px-1.5 py-0 text-[10px] sm:inline-flex">
               v0.5.0
             </Badge>
@@ -225,7 +225,7 @@ export function SiteNav() {
             href={GITHUB_URL}
             target="_blank"
             rel="noreferrer noopener"
-            aria-label="View Kronus UI on GitHub"
+            aria-label="View Cronus UI on GitHub"
             className="grid size-9 place-items-center rounded-lg text-fg-secondary outline-none transition-colors hover:bg-surface-overlay hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
           >
             <Github className="size-[18px]" aria-hidden="true" />

@@ -48,7 +48,7 @@ Quando usar literal, deixe o motivo no código, como o `button.tsx` já faz.
 - **Manter a letra e refatorar as 42 ocorrências** — descartada. Trocaria
   decisões corretas e comentadas por tokens que não acrescentam nada, e em
   vários casos pioraria o contraste.
-- **Criar um token `--kronus-on-gradient`** — descartada por ora. Adiciona
+- **Criar um token `--cronus-on-gradient`** — descartada por ora. Adiciona
   superfície de API ao pacote de tokens para resolver um caso que o literal
   já resolve bem. Revisitar se aparecer um tema cujo gradiente seja claro.
 

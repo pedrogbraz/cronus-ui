@@ -1,32 +1,32 @@
 ---
 name: ui-add
-description: Add a Kronus UI component or block to __APP_NAME__. Use whenever the user asks to add/create a single primitive or section — resolve the need to a registry slug and install it with `npx kronus-ui add` instead of hand-writing it. Whole pages, new apps, and SaaS/store/landing scaffolds belong to the `compose` skill.
+description: Add a Cronus UI component or block to __APP_NAME__. Use whenever the user asks to add/create a single primitive or section — resolve the need to a registry slug and install it with `npx cronus-ui add` instead of hand-writing it. Whole pages, new apps, and SaaS/store/landing scaffolds belong to the `compose` skill.
 argument-hint: "[component…]"
 allowed-tools: Bash, Read, Edit, Write
 ---
 
-# Add a Kronus UI component or block
+# Add a Cronus UI component or block
 
-This app is built on Kronus UI. Prefer **installing** a component or block from the
+This app is built on Cronus UI. Prefer **installing** a component or block from the
 registry over hand-rolling one. Installed items are copied into the project (source you
 own), wired to the design tokens, accessible, and reduced-motion aware.
 
 The thing the user wants to build: `$ARGUMENTS`
 
 **Whole app, new route, or SaaS/store/landing page** → stop and use the `compose` skill
-(`create-kronus-app`, `kronus-ui compose`, `kronus-ui add-page`). This skill is for a
+(`create-cronus-app`, `cronus-ui compose`, `cronus-ui add-page`). This skill is for a
 single primitive or a single block, not a multi-section page architecture.
 
 ## 1. Discover
 
 Find what exists before writing anything:
 
-- If the **kronus-ui MCP server** is connected, use it — it is the same registry the CLI
+- If the **cronus-ui MCP server** is connected, use it — it is the same registry the CLI
   installs from:
   - `search_registry { "query": "<keyword>" }` to find matches,
   - `list_components` / `list_blocks` to browse,
   - `get_component { "name": "<slug>" }` for the source, deps, and exact install command.
-- Otherwise run `npx kronus-ui list` to print the registry.
+- Otherwise run `npx cronus-ui list` to print the registry.
 
 Pick the smallest thing that covers the need:
 
@@ -42,7 +42,7 @@ If several slugs together model one section, install them together. If they mode
 ## 2. Install
 
 ```sh
-npx kronus-ui add <slug> [<slug> ...]
+npx cronus-ui add <slug> [<slug> ...]
 ```
 
 MCP: `install_component { "names": ["<slug>"] }`.
@@ -51,8 +51,8 @@ This copies the source into `components/ui` (components) or `components/blocks` 
 and **automatically pulls registry dependencies and npm dependencies**. Do not add those
 by hand. Use `--overwrite` only when intentionally refreshing an existing file.
 
-To pull upstream later without losing local edits: `npx kronus-ui upgrade --all --dry-run`
-first, then `npx kronus-ui upgrade --all`. This also 3-way-merges generated compose pages
+To pull upstream later without losing local edits: `npx cronus-ui upgrade --all --dry-run`
+first, then `npx cronus-ui upgrade --all`. This also 3-way-merges generated compose pages
 (not only primitives). Never `shadcn add` or overwrite blindly.
 
 ### Invoices / billing table
@@ -60,7 +60,7 @@ first, then `npx kronus-ui upgrade --all`. This also 3-way-merges generated comp
 If the ask is a table of invoices or billing rows:
 
 ```sh
-npx kronus-ui add data-table demo-saas
+npx cronus-ui add data-table demo-saas
 ```
 
 Then read `INVOICES` from `@/lib/demo-saas` (or `../lib/demo-saas.js` in the
@@ -68,7 +68,7 @@ installed source). Do not invent rows.
 
 ### Split login
 
-The registry item is `login--split`: `npx kronus-ui add login--split` (compose /
+The registry item is `login--split`: `npx cronus-ui add login--split` (compose /
 add-page use `--variant login=split` / `login=split` — same item).
 
 ## 3. Wire it in
@@ -92,5 +92,5 @@ add-page use `--variant login=split` / `login=split` — same item).
 ## 5. Only hand-write when the registry has nothing
 
 If discovery turns up no suitable component or block, build the new piece **out of
-existing Kronus UI primitives** and the same tokens, matching their prop and a11y
+existing Cronus UI primitives** and the same tokens, matching their prop and a11y
 conventions — never a bespoke, unthemed one-off.

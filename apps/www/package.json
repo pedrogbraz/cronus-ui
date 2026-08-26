@@ -1,5 +1,5 @@
 {
-  "name": "@kronus-ui/www",
+  "name": "@cronus-ui/www",
   "version": "0.2.0",
   "private": true,
   "type": "module",
@@ -12,10 +12,10 @@
     "props:check": "bun run scripts/check-props.ts"
   },
   "dependencies": {
-    "@kronus-ui/stack": "workspace:*",
-    "@kronus-ui/theme": "workspace:*",
-    "@kronus-ui/tokens": "workspace:*",
-    "@kronus-ui/ui": "workspace:*",
+    "@cronus-ui/stack": "workspace:*",
+    "@cronus-ui/theme": "workspace:*",
+    "@cronus-ui/tokens": "workspace:*",
+    "@cronus-ui/ui": "workspace:*",
     "@hookform/resolvers": "^5.4.0",
     "@hugeicons/core-free-icons": "^4.2.1",
     "@hugeicons/react": "^1.1.7",

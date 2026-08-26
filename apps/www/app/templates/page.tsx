@@ -14,7 +14,7 @@ import {
 } from "../../lib/templates/catalog";
 
 export const metadata: Metadata = {
-  title: "Templates — Kronus UI",
+  title: "Templates — Cronus UI",
   description:
     "Scaffold a themed product in one command. Live previews of composed apps — click through to the full site, or Open Preview for the real stage.",
 };
@@ -33,7 +33,7 @@ export default function TemplatesPage() {
                 Start from a real app
               </h1>
               <p className="mt-4 max-w-2xl text-lg text-fg-secondary">
-                Live previews of composed Kronus blocks — themed, scrollable, the same stack install
+                Live previews of composed Cronus blocks — themed, scrollable, the same stack install
                 writes. Open a card, then Open Preview for the full site.
               </p>
             </div>
@@ -41,7 +41,7 @@ export default function TemplatesPage() {
               <span className="text-fg-tertiary" aria-hidden="true">
                 $
               </span>
-              <span className="truncate">bunx create-kronus-app my-app --template saas</span>
+              <span className="truncate">bunx create-cronus-app my-app --template saas</span>
             </div>
           </div>
         </div>
@@ -76,7 +76,7 @@ export default function TemplatesPage() {
       <p className="mx-auto max-w-7xl px-4 text-sm text-fg-tertiary sm:px-6 lg:px-8">
         Every template prompts for (or accepts) <code className="text-fg-secondary">--theme</code>{" "}
         and <code className="text-fg-secondary">--mode</code>, bakes your pick into the app, and
-        ships a <code className="text-fg-secondary">kronus-ui.json</code> so the registry CLI works
+        ships a <code className="text-fg-secondary">cronus-ui.json</code> so the registry CLI works
         from the first commit.
       </p>
 
@@ -90,7 +90,7 @@ export default function TemplatesPage() {
                 Grow the app after you scaffold
               </h2>
               <p className="mt-2 max-w-xl text-sm leading-6 text-fg-secondary">
-                Add a route with <code className="text-fg">kronus-ui add-page</code>, switch presets
+                Add a route with <code className="text-fg">cronus-ui add-page</code>, switch presets
                 with <code className="text-fg">theme set</code>, or pull a single primitive with{" "}
                 <code className="text-fg">add</code>. Upstream fixes land through{" "}
                 <code className="text-fg">upgrade</code> without wiping local edits.

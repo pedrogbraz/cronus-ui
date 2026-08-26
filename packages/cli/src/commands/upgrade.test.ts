@@ -72,10 +72,10 @@ function writeRegistry(root: string, version: string, items: TestItem[]): string
 
 describe("registry source version pinning", () => {
   it("extracts and re-pins the /vX.Y.Z/ segment of the default registry URL", () => {
-    const url = "https://raw.githubusercontent.com/pedrogbraz/kronus-ui/v0.2.0/registry";
+    const url = "https://raw.githubusercontent.com/pedrogbraz/cronus-ui/v0.2.0/registry";
     expect(registrySourceVersion(url)).toBe("0.2.0");
     expect(registrySourceAtVersion(url, "0.1.0")).toBe(
-      "https://raw.githubusercontent.com/pedrogbraz/kronus-ui/v0.1.0/registry",
+      "https://raw.githubusercontent.com/pedrogbraz/cronus-ui/v0.1.0/registry",
     );
   });
 
@@ -92,7 +92,7 @@ describe("upgrade", () => {
   let errors: string[];
 
   beforeEach(() => {
-    root = mkdtempSync(join(tmpdir(), "kronus-ui-upgrade-test-"));
+    root = mkdtempSync(join(tmpdir(), "cronus-ui-upgrade-test-"));
     cwd = join(root, "project");
     mkdirSync(join(cwd, "components", "ui"), { recursive: true });
     logs = [];
@@ -451,7 +451,7 @@ describe.skipIf(!HAS_REGISTRY)("upgrade --all — composed pages (F4)", () => {
   let errors: string[];
 
   beforeEach(() => {
-    root = mkdtempSync(join(tmpdir(), "kronus-ui-upgrade-compose-"));
+    root = mkdtempSync(join(tmpdir(), "cronus-ui-upgrade-compose-"));
     cwd = join(root, "project");
     seedComposeProject(cwd);
     logs = [];
@@ -474,7 +474,7 @@ describe.skipIf(!HAS_REGISTRY)("upgrade --all — composed pages (F4)", () => {
   const errorText = (): string => errors.join("\n");
   const pageFile = (rel = HOME_PAGE): string => readFileSync(join(cwd, rel), "utf8");
   const snapFile = (key: string, rel = HOME_PAGE): string =>
-    readFileSync(join(cwd, `.kronus-ui/base/${key}/${rel}`), "utf8");
+    readFileSync(join(cwd, `.cronus-ui/base/${key}/${rel}`), "utf8");
 
   async function composeTiny(manifestPath: string): Promise<void> {
     await composeApp({
@@ -487,8 +487,8 @@ describe.skipIf(!HAS_REGISTRY)("upgrade --all — composed pages (F4)", () => {
 
   it("compose snapshot path is the composed key, not the package name", async () => {
     await composeTiny(writeTinyManifest(cwd, ["hero"]));
-    expect(existsSync(join(cwd, `.kronus-ui/base/tiny/${HOME_PAGE}`))).toBe(true);
-    expect(existsSync(join(cwd, `.kronus-ui/base/loja/${HOME_PAGE}`))).toBe(false);
+    expect(existsSync(join(cwd, `.cronus-ui/base/tiny/${HOME_PAGE}`))).toBe(true);
+    expect(existsSync(join(cwd, `.cronus-ui/base/loja/${HOME_PAGE}`))).toBe(false);
   });
 
   it("fast-forwards a composed page when local == snapshot and upstream gained a block", async () => {
@@ -599,7 +599,7 @@ describe.skipIf(!HAS_REGISTRY)("upgrade --all — composed pages (F4)", () => {
     expect(pageFile()).toContain("<CtaBlock />");
   });
 
-  it("dry-run writes nothing: page, snapshot, and kronus-ui.json stay identical", async () => {
+  it("dry-run writes nothing: page, snapshot, and cronus-ui.json stay identical", async () => {
     const manifestPath = writeTinyManifest(cwd, ["hero"]);
     await composeTiny(manifestPath);
     writeTinyManifest(cwd, ["hero", "cta"]);

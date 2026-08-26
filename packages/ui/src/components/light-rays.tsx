@@ -15,7 +15,7 @@ export interface LightRaysProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const RAYS_KEYFRAMES =
-  "@keyframes kronus-light-rays{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}";
+  "@keyframes cronus-light-rays{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}";
 
 function finiteOr(value: number, fallback: number) {
   return Number.isFinite(value) ? value : fallback;
@@ -51,10 +51,10 @@ export function LightRays({
       >
         <style>{RAYS_KEYFRAMES}</style>
         <div
-          className="absolute -inset-1/2 [animation-duration:var(--rays-duration)] [animation-iteration-count:infinite] [animation-name:kronus-light-rays] [animation-timing-function:linear] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]"
+          className="absolute -inset-1/2 [animation-duration:var(--rays-duration)] [animation-iteration-count:infinite] [animation-name:cronus-light-rays] [animation-timing-function:linear] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]"
           style={{
             background:
-              "repeating-conic-gradient(from 0deg, color-mix(in oklch, var(--kronus-primary) 22%, transparent) 0deg 6deg, transparent 6deg 28deg)",
+              "repeating-conic-gradient(from 0deg, color-mix(in oklch, var(--cronus-primary) 22%, transparent) 0deg 6deg, transparent 6deg 28deg)",
           }}
         />
       </div>

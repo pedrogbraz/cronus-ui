@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "Kronus Pro — The rest of the product";
+export const alt = "Cronus Pro — The rest of the product";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -38,7 +38,7 @@ export default function Image() {
         }}
       />
       <div style={{ display: "flex", fontSize: 28, color: aurora.primary, letterSpacing: 6 }}>
-        KRONUS PRO
+        CRONUS PRO
       </div>
       <div
         style={{

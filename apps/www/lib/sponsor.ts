@@ -1,5 +1,5 @@
 /**
- * OSS support. Kronus is free; this is an optional coffee, not a paywall.
+ * OSS support. Cronus is free; this is an optional coffee, not a paywall.
  *
  * Checkout defaults to GitHub Sponsors (custom one-time amounts). Point
  * `NEXT_PUBLIC_SPONSOR_URL` at Buy Me a Coffee or Ko-fi if you prefer that rail.

@@ -1,7 +1,7 @@
 // GENERATED FILE — do not edit; run `bun run props` to regenerate.
 //
 // Props/API tables extracted from the exported `*Props` interfaces of every
-// @kronus-ui/ui component via the TypeScript compiler API (no module execution),
+// @cronus-ui/ui component via the TypeScript compiler API (no module execution),
 // so the documented API can never drift from the source.
 
 export interface PropDef {
@@ -4141,7 +4141,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           type: "Transition",
           required: false,
           description:
-            "Override the morph spring (advanced — defaults to the Kronus morph spring).",
+            "Override the morph spring (advanced — defaults to the Cronus morph spring).",
           default: "MORPHING_POPOVER_TRANSITION",
         },
         {
@@ -4291,7 +4291,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           type: "AnimatedNumberSpring",
           required: false,
           description:
-            "Override the settle spring (advanced — defaults to the Kronus count spring).",
+            "Override the settle spring (advanced — defaults to the Cronus count spring).",
         },
         {
           name: "reducedMotion",
@@ -4404,7 +4404,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           type: "Transition",
           required: false,
           description:
-            "Override the thumb spring (advanced — defaults to the Kronus thumb spring).",
+            "Override the thumb spring (advanced — defaults to the Cronus thumb spring).",
           default: "SEGMENTED_THUMB_TRANSITION",
         },
         {
@@ -4613,16 +4613,16 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           type: "string",
           required: false,
           description:
-            "Colour of the leading edge of the beam. Defaults to the theme primary (`var(--kronus-primary)`).",
-          default: '"var(--kronus-primary)"',
+            "Colour of the leading edge of the beam. Defaults to the theme primary (`var(--cronus-primary)`).",
+          default: '"var(--cronus-primary)"',
         },
         {
           name: "colorTo",
           type: "string",
           required: false,
           description:
-            "Colour the trail fades through before it dissolves. Defaults to the theme accent (`var(--kronus-accent)`).",
-          default: '"var(--kronus-accent)"',
+            "Colour the trail fades through before it dissolves. Defaults to the theme accent (`var(--cronus-accent)`).",
+          default: '"var(--cronus-accent)"',
         },
         {
           name: "borderWidth",

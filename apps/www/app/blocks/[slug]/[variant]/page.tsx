@@ -28,7 +28,7 @@ export async function generateMetadata({
       : undefined;
 
   return {
-    title: titlePrefix ? `${titlePrefix} — Kronus UI Blocks` : "Blocks — Kronus UI",
+    title: titlePrefix ? `${titlePrefix} — Cronus UI Blocks` : "Blocks — Cronus UI",
     description: variantMeta?.description ?? meta?.description,
   };
 }

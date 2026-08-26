@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@kronus-ui/ui";
+import { cn } from "@cronus-ui/ui";
 import { ArrowRight, Grid2X2, Search, SlidersHorizontal } from "lucide-react";
 import Link from "next/link";
 import { type ReactNode, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
@@ -253,8 +253,8 @@ export function BlockGalleryBody({
                     )}
                   >
                     <div
-                      data-kronus-theme="aurora"
-                      data-kronus-mode={appearance}
+                      data-cronus-theme="aurora"
+                      data-cronus-mode={appearance}
                       className={cn(
                         "relative h-[28rem] overflow-hidden border-b border-border/60 bg-surface-inset",
                         appearance === "dark" ? "dark" : "",
@@ -262,7 +262,7 @@ export function BlockGalleryBody({
                     >
                       <div
                         aria-hidden="true"
-                        className="absolute inset-0 bg-[radial-gradient(var(--kronus-border)_1px,transparent_1px)] opacity-45 [background-size:18px_18px]"
+                        className="absolute inset-0 bg-[radial-gradient(var(--cronus-border)_1px,transparent_1px)] opacity-45 [background-size:18px_18px]"
                       />
                       <div className="pointer-events-none absolute inset-0">
                         <ScaledPreview>{variant.preview}</ScaledPreview>

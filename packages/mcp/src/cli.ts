@@ -5,11 +5,11 @@ import { SERVER_VERSION } from "./version.js";
 
 /**
  * The pinned CLI spec the write tools execute. The MCP server and the CLI are
- * released in lockstep from the same repo tag, so pinning `kronus-ui` to the
+ * released in lockstep from the same repo tag, so pinning `cronus-ui` to the
  * server's own version guarantees the spawned CLI resolves items from the same
  * registry release the read tools describe.
  */
-export const PINNED_CLI = `kronus-ui@${SERVER_VERSION}`;
+export const PINNED_CLI = `cronus-ui@${SERVER_VERSION}`;
 
 /** Default wall-clock budget for one CLI run (registry fetch + npm install). */
 export const DEFAULT_CLI_TIMEOUT_MS = 120_000;
@@ -18,14 +18,14 @@ export const DEFAULT_CLI_TIMEOUT_MS = 120_000;
  * Launcher command lines to try, in order. Each entry is an argv prefix the
  * CLI subcommand args are appended to.
  *
- * - `KRONUS_MCP_CLI_CMD` (whitespace-split, e.g. "bun /repo/packages/cli/src/index.ts")
+ * - `CRONUS_MCP_CLI_CMD` (whitespace-split, e.g. "bun /repo/packages/cli/src/index.ts")
  *   replaces the launchers entirely — used by tests and local development.
  *   Paths containing spaces are not supported in this seam.
- * - Otherwise: `bunx --bun kronus-ui@<version>`, falling back to
- *   `npx -y kronus-ui@<version>` when `bunx` is not installed.
+ * - Otherwise: `bunx --bun cronus-ui@<version>`, falling back to
+ *   `npx -y cronus-ui@<version>` when `bunx` is not installed.
  */
 export function resolveCliInvocations(env: NodeJS.ProcessEnv = process.env): string[][] {
-  const seam = env.KRONUS_MCP_CLI_CMD?.trim();
+  const seam = env.CRONUS_MCP_CLI_CMD?.trim();
   if (seam) return [seam.split(/\s+/)];
   return [
     ["bunx", "--bun", PINNED_CLI],
@@ -33,9 +33,9 @@ export function resolveCliInvocations(env: NodeJS.ProcessEnv = process.env): str
   ];
 }
 
-/** The per-run timeout, honouring the `KRONUS_MCP_CLI_TIMEOUT_MS` override. */
+/** The per-run timeout, honouring the `CRONUS_MCP_CLI_TIMEOUT_MS` override. */
 export function resolveCliTimeoutMs(env: NodeJS.ProcessEnv = process.env): number {
-  const raw = env.KRONUS_MCP_CLI_TIMEOUT_MS?.trim();
+  const raw = env.CRONUS_MCP_CLI_TIMEOUT_MS?.trim();
   if (!raw) return DEFAULT_CLI_TIMEOUT_MS;
   const parsed = Number(raw);
   return Number.isFinite(parsed) && parsed > 0 ? parsed : DEFAULT_CLI_TIMEOUT_MS;
@@ -44,13 +44,13 @@ export function resolveCliTimeoutMs(env: NodeJS.ProcessEnv = process.env): numbe
 /** Where a write tool operates: the detected consumer project root. */
 export interface ProjectRoot {
   dir: string;
-  /** Whether `kronus-ui.json` (the CLI's own config) was found there. */
-  hasKronusConfig: boolean;
+  /** Whether `cronus-ui.json` (the CLI's own config) was found there. */
+  hasCronusConfig: boolean;
 }
 
 /**
  * Detect the consumer project root by walking up from `startDir`:
- * the nearest directory containing `kronus-ui.json` wins (that is where the CLI
+ * the nearest directory containing `cronus-ui.json` wins (that is where the CLI
  * must run); otherwise the nearest directory containing `package.json`.
  * Returns undefined when neither exists anywhere up the tree.
  */
@@ -58,7 +58,7 @@ export function findProjectRoot(startDir: string = process.cwd()): ProjectRoot |
   let dir = resolve(startDir);
   let packageJsonDir: string | undefined;
   for (;;) {
-    if (existsSync(join(dir, "kronus-ui.json"))) return { dir, hasKronusConfig: true };
+    if (existsSync(join(dir, "cronus-ui.json"))) return { dir, hasCronusConfig: true };
     if (packageJsonDir === undefined && existsSync(join(dir, "package.json"))) {
       packageJsonDir = dir;
     }
@@ -66,7 +66,7 @@ export function findProjectRoot(startDir: string = process.cwd()): ProjectRoot |
     if (parent === dir) break;
     dir = parent;
   }
-  return packageJsonDir === undefined ? undefined : { dir: packageJsonDir, hasKronusConfig: false };
+  return packageJsonDir === undefined ? undefined : { dir: packageJsonDir, hasCronusConfig: false };
 }
 
 /** Options shared by {@link runCli} and the write-tool entry points. */
@@ -134,7 +134,7 @@ function spawnOnce(argv: string[], cwd: string, timeoutMs: number): Promise<CliR
 }
 
 /**
- * Run one `kronus-ui` CLI invocation with the given subcommand args, trying
+ * Run one `cronus-ui` CLI invocation with the given subcommand args, trying
  * each launcher candidate in order (a missing launcher binary — ENOENT — moves
  * on to the next; any other spawn failure is thrown as-is).
  */
@@ -155,8 +155,8 @@ export async function runCli(
   }
   const tried = candidates.map((c) => c[0]).join(", ");
   throw new Error(
-    `Could not launch the kronus-ui CLI — none of the launchers exist on PATH (tried: ${tried}). ` +
-      "Install bun or node/npm, or point KRONUS_MCP_CLI_CMD at a runnable CLI.",
+    `Could not launch the cronus-ui CLI — none of the launchers exist on PATH (tried: ${tried}). ` +
+      "Install bun or node/npm, or point CRONUS_MCP_CLI_CMD at a runnable CLI.",
   );
 }
 
@@ -178,7 +178,7 @@ export function stripAnsi(text: string): string {
   return text.replace(ANSI_PATTERN, "");
 }
 
-/** What `kronus-ui add` reported doing, extracted from its output. */
+/** What `cronus-ui add` reported doing, extracted from its output. */
 export interface ParsedAddOutput {
   /** Project-relative paths written this run (components, blocks, lib files). */
   installedFiles: string[];
@@ -192,7 +192,7 @@ export interface ParsedAddOutput {
   };
 }
 
-/** Parse the `kronus-ui add` log lines into a structured summary. */
+/** Parse the `cronus-ui add` log lines into a structured summary. */
 export function parseAddOutput(stdout: string): ParsedAddOutput {
   const installedFiles: string[] = [];
   const skippedFiles: string[] = [];
@@ -224,7 +224,7 @@ export function parseAddOutput(stdout: string): ParsedAddOutput {
   return { installedFiles, skippedFiles, dependencies: { installed, pending } };
 }
 
-/** What `kronus-ui theme add` reported doing, extracted from its output. */
+/** What `cronus-ui theme add` reported doing, extracted from its output. */
 export interface ParsedThemeOutput {
   /** Completed writes ("Updated app/layout.tsx …", "Wrote the override block …"). */
   changes: string[];
@@ -234,7 +234,7 @@ export interface ParsedThemeOutput {
   warnings: string[];
 }
 
-/** Parse the `kronus-ui theme add` log lines into a structured summary. */
+/** Parse the `cronus-ui theme add` log lines into a structured summary. */
 export function parseThemeOutput(stdout: string): ParsedThemeOutput {
   const changes: string[] = [];
   const planned: string[] = [];
@@ -284,9 +284,9 @@ function requireProjectRoot(cwd: string | undefined): ProjectRoot {
   const root = findProjectRoot(start);
   if (!root) {
     throw new Error(
-      `Not inside a project: no kronus-ui.json or package.json found walking up from ${resolve(start)}. ` +
+      `Not inside a project: no cronus-ui.json or package.json found walking up from ${resolve(start)}. ` +
         "Start the MCP server inside the consumer project (its package.json directory), " +
-        "and run `npx kronus-ui init` there once to create kronus-ui.json.",
+        "and run `npx cronus-ui init` there once to create cronus-ui.json.",
     );
   }
   return root;
@@ -312,7 +312,7 @@ export interface InstallComponentResult extends ParsedAddOutput {
 
 /**
  * Install registry items into the consumer project by running the pinned
- * `kronus-ui add` CLI at the detected project root.
+ * `cronus-ui add` CLI at the detected project root.
  */
 export async function installComponent(
   input: InstallComponentInput,
@@ -327,7 +327,7 @@ export async function installComponent(
   if (input.skipInstall) args.push("--skip-install");
   // Keep the CLI on the same registry the read tools describe when the server
   // was started with a registry override.
-  const registry = env.KRONUS_UI_REGISTRY?.trim();
+  const registry = env.CRONUS_UI_REGISTRY?.trim();
   if (registry) args.push("--registry", registry);
 
   const run = await runCli(args, { ...options, cwd: root.dir, env });
@@ -361,7 +361,7 @@ export interface ApplyThemeResult extends ParsedThemeOutput {
 
 /**
  * Apply a Create Studio theme to the consumer project by running the pinned
- * `kronus-ui theme add` CLI at the detected project root.
+ * `cronus-ui theme add` CLI at the detected project root.
  */
 export async function applyTheme(
   input: ApplyThemeInput,
@@ -455,7 +455,7 @@ function cleanManifestPath(raw: string | undefined): string | undefined {
 }
 
 function appendRegistry(args: string[], env: NodeJS.ProcessEnv): void {
-  const registry = env.KRONUS_UI_REGISTRY?.trim();
+  const registry = env.CRONUS_UI_REGISTRY?.trim();
   if (registry) args.push("--registry", registry);
 }
 
@@ -517,7 +517,7 @@ export interface ComposeAppResult {
 
 /**
  * Compose a full app from a validated template by running the pinned
- * `kronus-ui compose` CLI at the detected project root.
+ * `cronus-ui compose` CLI at the detected project root.
  */
 export async function composeApp(
   input: ComposeAppInput,
@@ -641,7 +641,7 @@ export interface AddPageResult {
 
 /**
  * Add one page to an already-composed app by running the pinned
- * `kronus-ui add-page` CLI at the detected project root.
+ * `cronus-ui add-page` CLI at the detected project root.
  */
 export async function addPage(
   input: AddPageInput,
@@ -699,7 +699,7 @@ export interface SetThemeResult extends ParsedThemeOutput {
 }
 
 /**
- * Switch a baked-in theme preset by running the pinned `kronus-ui theme set`
+ * Switch a baked-in theme preset by running the pinned `cronus-ui theme set`
  * CLI at the detected project root. Create Studio permalinks use {@link applyTheme}.
  */
 export async function setTheme(
@@ -762,10 +762,10 @@ export interface UpgradeComponentsResult {
 }
 
 /**
- * Upgrade installed components by running the pinned `kronus-ui upgrade` CLI
+ * Upgrade installed components by running the pinned `cronus-ui upgrade` CLI
  * at the detected project root. Defaults to `--all` when no names are given
  * (the usual "pull latest" request). `--all` also 3-way-merges composed
- * pages/layouts vs `.kronus-ui/base`. Named upgrades do not touch pages.
+ * pages/layouts vs `.cronus-ui/base`. Named upgrades do not touch pages.
  * Prefer this over `install_component` with overwrite: it 3-way merges so
  * local edits survive.
  */

@@ -1,8 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
 /**
- * Playwright configuration for the Kronus UI showcase (`@kronus-ui/www`) and
- * the Pro origin (`@kronus-ui/pro`).
+ * Playwright configuration for the Cronus UI showcase (`@cronus-ui/www`) and
+ * the Pro origin (`@cronus-ui/pro`).
  *
  * Three projects, all Chromium-headless, separated by spec directory so each
  * suite can be targeted on its own:
@@ -16,7 +16,7 @@ import { defineConfig, devices } from "@playwright/test";
  * first too). We deliberately do NOT build inside the webServer command so the
  * server boots fast and the suite reflects the shipped SSG/SSR output.
  *
- * Port 4747 is OSS (`apps/www`). Port 4748 is Kronus Pro (`apps/pro`).
+ * Port 4747 is OSS (`apps/www`). Port 4748 is Cronus Pro (`apps/pro`).
  * `reuseExistingServer` is on outside CI so a dev server you already have
  * running is reused.
  */
@@ -80,7 +80,7 @@ export default defineConfig({
     {
       // Serve the already-built apps. Build is the CI step BEFORE these tests
       // (and you must `bun run build` locally before running the suite).
-      command: "bun run --filter @kronus-ui/www start",
+      command: "bun run --filter @cronus-ui/www start",
       url: BASE_URL,
       reuseExistingServer: !isCI,
       timeout: 120_000,
@@ -88,7 +88,7 @@ export default defineConfig({
       stderr: "pipe",
     },
     {
-      command: "bun run --filter @kronus-ui/pro start",
+      command: "bun run --filter @cronus-ui/pro start",
       url: PRO_URL,
       reuseExistingServer: !isCI,
       timeout: 120_000,

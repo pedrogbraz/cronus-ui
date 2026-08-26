@@ -11,7 +11,7 @@ import {
   Label,
   Rating,
   Textarea,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { BookOpen, Mail, MessageCircle } from "lucide-react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
 import { BlockViewBody } from "../../components/blocks/block-view-body";
@@ -31,7 +31,7 @@ export function NpsSurveyBlock() {
       <Card className="w-full max-w-lg gap-6 shadow-lg">
         <CardHeader>
           <CardTitle className="font-display text-lg">
-            How likely are you to recommend Kronus to a friend or colleague?
+            How likely are you to recommend Cronus to a friend or colleague?
           </CardTitle>
         </CardHeader>
 
@@ -85,7 +85,7 @@ const npsSurveyCode = `import {
   CardTitle,
   Label,
   Textarea,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 
 const NPS_SCORES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -95,7 +95,7 @@ export function NpsSurveyBlock() {
       <Card className="w-full max-w-lg gap-6 shadow-lg">
         <CardHeader>
           <CardTitle className="font-display text-lg">
-            How likely are you to recommend Kronus to a friend or colleague?
+            How likely are you to recommend Cronus to a friend or colleague?
           </CardTitle>
         </CardHeader>
 
@@ -211,7 +211,7 @@ const feedbackFormCode = `import {
   Label,
   Rating,
   Textarea,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 
 const FEEDBACK_CATEGORIES = ["Bug", "Idea", "Praise", "Other"];
 
@@ -292,7 +292,7 @@ export function ContactFormBlock() {
               </span>
               <div className="flex flex-col">
                 <span className="text-sm font-medium">Email</span>
-                <span className="text-sm text-fg-secondary">contact@kronus.com</span>
+                <span className="text-sm text-fg-secondary">contact@cronus.com</span>
               </div>
             </div>
 
@@ -312,7 +312,7 @@ export function ContactFormBlock() {
               </span>
               <div className="flex flex-col">
                 <span className="text-sm font-medium">Docs</span>
-                <span className="text-sm text-fg-secondary">docs.kronus.com</span>
+                <span className="text-sm text-fg-secondary">docs.cronus.com</span>
               </div>
             </div>
           </div>
@@ -363,7 +363,7 @@ const contactFormCode = `import {
   Input,
   Label,
   Textarea,
-} from "@kronus-ui/ui";
+} from "@cronus-ui/ui";
 import { BookOpen, Mail, MessageCircle } from "lucide-react";
 
 export function ContactFormBlock() {
@@ -385,7 +385,7 @@ export function ContactFormBlock() {
               </span>
               <div className="flex flex-col">
                 <span className="text-sm font-medium">Email</span>
-                <span className="text-sm text-fg-secondary">contact@kronus.com</span>
+                <span className="text-sm text-fg-secondary">contact@cronus.com</span>
               </div>
             </div>
 
@@ -405,7 +405,7 @@ export function ContactFormBlock() {
               </span>
               <div className="flex flex-col">
                 <span className="text-sm font-medium">Docs</span>
-                <span className="text-sm text-fg-secondary">docs.kronus.com</span>
+                <span className="text-sm text-fg-secondary">docs.cronus.com</span>
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
-import { Avatar, AvatarFallback } from "@kronus-ui/ui/avatar";
-import { Badge } from "@kronus-ui/ui/badge";
-import { Marquee } from "@kronus-ui/ui/marquee";
+import { Avatar, AvatarFallback } from "@cronus-ui/ui/avatar";
+import { Badge } from "@cronus-ui/ui/badge";
+import { Marquee } from "@cronus-ui/ui/marquee";
 
 const ROW_A = [
   { kind: "badge", label: "Gradient", variant: "primary" },

@@ -1,9 +1,9 @@
 import { render } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { KronusThemeScript } from "./theme-script.js";
+import { CronusThemeScript } from "./theme-script.js";
 
 function scriptText(storageKey: string, props?: { defaultThemeName?: "aurora" | "neutral" }) {
-  const { container, unmount } = render(<KronusThemeScript storageKey={storageKey} {...props} />);
+  const { container, unmount } = render(<CronusThemeScript storageKey={storageKey} {...props} />);
   const el = container.querySelector("script");
   const text = el?.textContent ?? "";
   unmount();
@@ -19,21 +19,21 @@ function runScript(source: string) {
 afterEach(() => {
   localStorage.clear();
   const d = document.documentElement;
-  delete d.dataset.kronusTheme;
-  delete d.dataset.kronusMode;
+  delete d.dataset.cronusTheme;
+  delete d.dataset.cronusMode;
   d.classList.remove("dark");
 });
 
-describe("KronusThemeScript — emitted markup", () => {
+describe("CronusThemeScript — emitted markup", () => {
   it("renders a <script> referencing the storage key and the root dataset/class logic", () => {
-    const { el, text } = scriptText("kronus-ui-theme");
+    const { el, text } = scriptText("cronus-ui-theme");
 
     expect(el).not.toBeNull();
     expect(el?.tagName).toBe("SCRIPT");
-    expect(text).toContain(JSON.stringify("kronus-ui-theme"));
+    expect(text).toContain(JSON.stringify("cronus-ui-theme"));
     expect(text).toContain("document.documentElement");
-    expect(text).toContain("dataset.kronusTheme");
-    expect(text).toContain("dataset.kronusMode");
+    expect(text).toContain("dataset.cronusTheme");
+    expect(text).toContain("dataset.cronusMode");
     expect(text).toContain('classList.toggle("dark"');
     expect(text).toContain("localStorage.getItem");
     // Defaults baked in for the empty-storage path.
@@ -51,12 +51,12 @@ describe("KronusThemeScript — emitted markup", () => {
   });
 
   it("forwards the nonce to the <script> for CSP", () => {
-    const { container } = render(<KronusThemeScript storageKey="k" nonce="abc123" />);
+    const { container } = render(<CronusThemeScript storageKey="k" nonce="abc123" />);
     expect(container.querySelector("script")?.getAttribute("nonce")).toBe("abc123");
   });
 });
 
-describe("KronusThemeScript — IIFE behavior in jsdom", () => {
+describe("CronusThemeScript — IIFE behavior in jsdom", () => {
   it("applies the SAVED theme/mode from localStorage to <html>", () => {
     localStorage.setItem("k", JSON.stringify({ theme: "neutral", mode: "light" }));
     const { text } = scriptText("k");
@@ -65,8 +65,8 @@ describe("KronusThemeScript — IIFE behavior in jsdom", () => {
     runScript(text);
 
     const d = document.documentElement;
-    expect(d.dataset.kronusTheme).toBe("neutral");
-    expect(d.dataset.kronusMode).toBe("light");
+    expect(d.dataset.cronusTheme).toBe("neutral");
+    expect(d.dataset.cronusMode).toBe("light");
     expect(d.classList.contains("dark")).toBe(false);
   });
 
@@ -77,8 +77,8 @@ describe("KronusThemeScript — IIFE behavior in jsdom", () => {
     runScript(text);
 
     const d = document.documentElement;
-    expect(d.dataset.kronusTheme).toBe("aurora");
-    expect(d.dataset.kronusMode).toBe("dark");
+    expect(d.dataset.cronusTheme).toBe("aurora");
+    expect(d.dataset.cronusMode).toBe("dark");
     expect(d.classList.contains("dark")).toBe(true);
   });
 
@@ -88,8 +88,8 @@ describe("KronusThemeScript — IIFE behavior in jsdom", () => {
     runScript(text);
 
     const d = document.documentElement;
-    expect(d.dataset.kronusTheme).toBe("neutral");
-    expect(d.dataset.kronusMode).toBe("dark");
+    expect(d.dataset.cronusTheme).toBe("neutral");
+    expect(d.dataset.cronusMode).toBe("dark");
     expect(d.classList.contains("dark")).toBe(true);
   });
 
@@ -100,7 +100,7 @@ describe("KronusThemeScript — IIFE behavior in jsdom", () => {
     expect(() => runScript(text)).not.toThrow();
 
     const d = document.documentElement;
-    expect(d.dataset.kronusTheme).toBe("aurora");
-    expect(d.dataset.kronusMode).toBe("dark");
+    expect(d.dataset.cronusTheme).toBe("aurora");
+    expect(d.dataset.cronusMode).toBe("dark");
   });
 });

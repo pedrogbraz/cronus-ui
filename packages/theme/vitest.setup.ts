@@ -1,5 +1,5 @@
 /**
- * jsdom setup for the @kronus-ui/theme render tests (the "theme-dom" Vitest
+ * jsdom setup for the @cronus-ui/theme render tests (the "theme-dom" Vitest
  * project). Adds Testing Library DOM matchers and unmounts every render between
  * tests so jsdom state never leaks across cases.
  */

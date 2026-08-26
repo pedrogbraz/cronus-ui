@@ -1,21 +1,21 @@
 {
-  "name": "@kronus-ui/stack",
+  "name": "@cronus-ui/stack",
   "version": "0.5.0",
-  "description": "Kronus Stack Builder core — catalog, resolver, CLI flags, KICKOFF.md and stack.json artifacts.",
+  "description": "Cronus Stack Builder core — catalog, resolver, CLI flags, KICKOFF.md and stack.json artifacts.",
   "type": "module",
   "license": "MIT",
-  "author": "Kronus",
+  "author": "Cronus",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pedrogbraz/kronus-ui.git",
+    "url": "git+https://github.com/pedrogbraz/cronus-ui.git",
     "directory": "packages/stack"
   },
-  "homepage": "https://github.com/pedrogbraz/kronus-ui#readme",
+  "homepage": "https://github.com/pedrogbraz/cronus-ui#readme",
   "bugs": {
-    "url": "https://github.com/pedrogbraz/kronus-ui/issues"
+    "url": "https://github.com/pedrogbraz/cronus-ui/issues"
   },
   "keywords": [
-    "kronus",
+    "cronus",
     "stack",
     "scaffold",
     "kickoff",
