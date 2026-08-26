@@ -1,6 +1,6 @@
 "use client";
 
-import type { Mode, ThemeName, ThemeOverrides } from "@cooud-ui/tokens";
+import type { Mode, ThemeName, ThemeOverrides } from "@kronus-ui/tokens";
 import { createContext, useContext } from "react";
 
 export interface ThemeContextValue {
@@ -18,7 +18,7 @@ export const ThemeContext = createContext<ThemeContextValue | null>(null);
 export function useTheme(): ThemeContextValue {
   const ctx = useContext(ThemeContext);
   if (!ctx) {
-    throw new Error("useTheme must be used within a <CooudUIProvider>");
+    throw new Error("useTheme must be used within a <KronusUIProvider>");
   }
   return ctx;
 }

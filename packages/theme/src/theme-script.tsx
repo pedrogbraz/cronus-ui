@@ -1,8 +1,8 @@
-import { defaultMode, defaultTheme, type Mode, type ThemeName } from "@cooud-ui/tokens";
+import { defaultMode, defaultTheme, type Mode, type ThemeName } from "@kronus-ui/tokens";
 
-export interface CooudThemeScriptProps {
+export interface KronusThemeScriptProps {
   /**
-   * The same `storageKey` passed to `<CooudUIProvider>`. The script reads the
+   * The same `storageKey` passed to `<KronusUIProvider>`. The script reads the
    * persisted `{ theme, mode }` from `localStorage[storageKey]`.
    */
   storageKey: string;
@@ -16,7 +16,7 @@ export interface CooudThemeScriptProps {
 
 /**
  * Builds the dependency-free IIFE source. The body mirrors the provider's
- * `applyRootAttributes` byte-for-byte (dataset.cooudTheme / dataset.cooudMode /
+ * `applyRootAttributes` byte-for-byte (dataset.kronusTheme / dataset.kronusMode /
  * classList.toggle("dark", …)) so the pre-paint state matches what React would
  * compute on hydration. All interpolated values are `JSON.stringify`-encoded so
  * a storage key or default containing quotes can't break out of the script.
@@ -33,13 +33,13 @@ function buildScript(
     defaultThemeName,
   )},m=${JSON.stringify(defaultModeName)};try{var s=localStorage.getItem(${JSON.stringify(
     storageKey,
-  )});if(s){var p=JSON.parse(s);if(p&&p.theme)t=p.theme;if(p&&p.mode)m=p.mode;}}catch(e){}d.dataset.cooudTheme=t;d.dataset.cooudMode=m;d.classList.toggle("dark",m==="dark");})();`;
+  )});if(s){var p=JSON.parse(s);if(p&&p.theme)t=p.theme;if(p&&p.mode)m=p.mode;}}catch(e){}d.dataset.kronusTheme=t;d.dataset.kronusMode=m;d.classList.toggle("dark",m==="dark");})();`;
 }
 
 /**
  * Inline head script that applies the persisted theme/mode to `<html>` BEFORE
  * first paint, eliminating the flash of the default theme that otherwise occurs
- * while `<CooudUIProvider asRoot storageKey>` hydrates from `localStorage` in a
+ * while `<KronusUIProvider asRoot storageKey>` hydrates from `localStorage` in a
  * post-paint effect.
  *
  * Place it inside `<head>` (above the app) and add `suppressHydrationWarning` to
@@ -48,18 +48,18 @@ function buildScript(
  * ```tsx
  * <html lang="en" suppressHydrationWarning>
  *   <head>
- *     <CooudThemeScript storageKey="cooud-ui-theme" defaultThemeName="aurora" defaultModeName="dark" />
+ *     <KronusThemeScript storageKey="kronus-ui-theme" defaultThemeName="aurora" defaultModeName="dark" />
  *   </head>
  *   ...
  * </html>
  * ```
  */
-export function CooudThemeScript({
+export function KronusThemeScript({
   storageKey,
   defaultThemeName = defaultTheme,
   defaultModeName = defaultMode,
   nonce,
-}: CooudThemeScriptProps) {
+}: KronusThemeScriptProps) {
   return (
     <script
       // biome-ignore lint/security/noDangerouslySetInnerHtml: required to inline a pre-paint anti-FOUC script; all interpolated values are JSON.stringify-encoded.

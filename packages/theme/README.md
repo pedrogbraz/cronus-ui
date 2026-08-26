@@ -1,36 +1,36 @@
-# @cooud-ui/theme
+# @kronus-ui/theme
 
-The Cooud UI runtime theming engine — a React provider and hook that apply
-[`@cooud-ui/tokens`](../tokens) to your app and let you re-theme any subtree live.
+The Kronus UI runtime theming engine — a React provider and hook that apply
+[`@kronus-ui/tokens`](../tokens) to your app and let you re-theme any subtree live.
 
 Theming happens entirely through CSS custom properties: switching theme, toggling
 light/dark, or overriding a token (radius, primary, border, …) updates the whole
 subtree instantly **without re-rendering the components below it**. This is what
 makes brand portals, per-tenant styling, and visual preview builders cheap.
 
-You need this package if you render `@cooud-ui/ui` components and want runtime theme
+You need this package if you render `@kronus-ui/ui` components and want runtime theme
 control, mode switching, or token overrides. (It is also the only supported way to
-inject the `--cooud-*` variables when running on Tailwind v3.)
+inject the `--kronus-*` variables when running on Tailwind v3.)
 
 ## Install
 
-> Published on npm under the `@cooud-ui` scope.
+> Published on npm under the `@kronus-ui` scope.
 
 ```sh
 # npm
-npm i @cooud-ui/theme @cooud-ui/tokens
+npm i @kronus-ui/theme @kronus-ui/tokens
 # pnpm
-pnpm add @cooud-ui/theme @cooud-ui/tokens
+pnpm add @kronus-ui/theme @kronus-ui/tokens
 # bun
-bun add @cooud-ui/theme @cooud-ui/tokens
+bun add @kronus-ui/theme @kronus-ui/tokens
 ```
 
 ### Prerequisites
 
 - **React 19** (also works with React 18.3+) — `react` and `react-dom` are peer
   dependencies.
-- [`@cooud-ui/tokens`](../tokens) — the token data this provider applies (installed
-  alongside above; on Tailwind v4 also import `@cooud-ui/tokens/styles.css` once).
+- [`@kronus-ui/tokens`](../tokens) — the token data this provider applies (installed
+  alongside above; on Tailwind v4 also import `@kronus-ui/tokens/styles.css` once).
 
 ## Usage
 
@@ -39,16 +39,16 @@ are written to `<html>` and the whole document is themed.
 
 ```tsx
 // app/layout.tsx (Next.js App Router) — or your root component
-import "@cooud-ui/tokens/styles.css";
-import { CooudUIProvider } from "@cooud-ui/theme";
+import "@kronus-ui/tokens/styles.css";
+import { KronusUIProvider } from "@kronus-ui/theme";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <CooudUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">
+        <KronusUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">
           {children}
-        </CooudUIProvider>
+        </KronusUIProvider>
       </body>
     </html>
   );
@@ -62,30 +62,30 @@ theme/mode from `localStorage` in an effect that runs **after** first paint — 
 a returning visitor whose saved choice differs from the defaults briefly sees the
 default theme before it swaps (a "flash of the wrong theme", or FOUC).
 
-Render `<CooudThemeScript>` in your document `<head>` to apply the saved
+Render `<KronusThemeScript>` in your document `<head>` to apply the saved
 theme/mode **before** paint. It emits one tiny inline script that reads the same
-`storageKey` and sets the `data-cooud-theme` / `data-cooud-mode` attributes and
+`storageKey` and sets the `data-kronus-theme` / `data-kronus-mode` attributes and
 the `dark` class on `<html>` exactly as the provider does.
 
 ```tsx
 // app/layout.tsx (Next.js App Router)
-import { CooudThemeScript, CooudUIProvider } from "@cooud-ui/theme";
+import { KronusThemeScript, KronusUIProvider } from "@kronus-ui/theme";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     // suppressHydrationWarning: the script mutates <html> before React hydrates.
     <html lang="en" suppressHydrationWarning>
       <head>
-        <CooudThemeScript
-          storageKey="cooud-ui-theme"
+        <KronusThemeScript
+          storageKey="kronus-ui-theme"
           defaultThemeName="aurora"
           defaultModeName="dark"
         />
       </head>
       <body>
-        <CooudUIProvider asRoot storageKey="cooud-ui-theme">
+        <KronusUIProvider asRoot storageKey="kronus-ui-theme">
           {children}
-        </CooudUIProvider>
+        </KronusUIProvider>
       </body>
     </html>
   );
@@ -95,7 +95,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 Pass the **same** `storageKey` to both the script and the provider. Add
 `suppressHydrationWarning` to `<html>` because the script changes those
 attributes before hydration; without it React logs a hydration mismatch. For a
-strict CSP, pass a `nonce` to `<CooudThemeScript nonce={nonce} />`.
+strict CSP, pass a `nonce` to `<KronusThemeScript nonce={nonce} />`.
 
 ### `useTheme`
 
@@ -103,7 +103,7 @@ Read and control the active theme from anywhere inside the provider.
 
 ```tsx
 "use client";
-import { useTheme } from "@cooud-ui/theme";
+import { useTheme } from "@kronus-ui/theme";
 
 export function ThemeControls() {
   const { theme, mode, setTheme, setMode, toggleMode, setOverrides } = useTheme();
@@ -131,15 +131,15 @@ export function ThemeControls() {
 }
 ```
 
-Calling `useTheme()` outside a `<CooudUIProvider>` throws.
+Calling `useTheme()` outside a `<KronusUIProvider>` throws.
 
 ## API
 
-### `<CooudUIProvider>`
+### `<KronusUIProvider>`
 
 | Prop               | Type             | Default    | Description                                                                 |
 | ------------------ | ---------------- | ---------- | --------------------------------------------------------------------------- |
-| `defaultThemeName` | `ThemeName`      | `"aurora"` | Initial theme (`"aurora"` \| `"neutral"`).                                  |
+| `defaultThemeName` | `ThemeName`      | `"aurora"` | Initial theme (`"aurora"` \| `"neutral"` \| `"midnight"` \| `"sunset"` \| `"emerald"`). |
 | `defaultModeName`  | `Mode`           | `"dark"`   | Initial mode (`"light"` \| `"dark"`).                                       |
 | `overrides`        | `ThemeOverrides` | —          | Seed per-scope token overrides (initial value only; later use `setOverrides`). |
 | `asRoot`           | `boolean`        | `false`    | Write attributes to `<html>` (whole document) instead of a wrapper `<div>`. |
@@ -154,14 +154,14 @@ subtree — useful for previews and isolated brand sections.
 > equal content does not loop or reset live overrides. `setOverrides` from
 > `useTheme` still drives uncontrolled changes.
 
-### `<CooudThemeScript>`
+### `<KronusThemeScript>`
 
 Inline anti-FOUC head script (see [Avoiding a flash of the wrong
 theme](#avoiding-a-flash-of-the-wrong-theme)).
 
 | Prop               | Type        | Default    | Description                                                       |
 | ------------------ | ----------- | ---------- | ----------------------------------------------------------------- |
-| `storageKey`       | `string`    | —          | Required. The same key passed to `<CooudUIProvider storageKey>`.  |
+| `storageKey`       | `string`    | —          | Required. The same key passed to `<KronusUIProvider storageKey>`.  |
 | `defaultThemeName` | `ThemeName` | `"aurora"` | Theme applied when storage is empty or unreadable.                |
 | `defaultModeName`  | `Mode`      | `"dark"`   | Mode applied when storage is empty or unreadable.                 |
 | `nonce`            | `string`    | —          | CSP nonce forwarded to the inline `<script>`.                     |
@@ -169,20 +169,20 @@ theme](#avoiding-a-flash-of-the-wrong-theme)).
 ### `useTheme(): ThemeContextValue`
 
 Returns `{ theme, mode, overrides, setTheme, setMode, toggleMode, setOverrides }`.
-`ThemeName`, `Mode`, and `ThemeOverrides` come from [`@cooud-ui/tokens`](../tokens).
+`ThemeName`, `Mode`, and `ThemeOverrides` come from [`@kronus-ui/tokens`](../tokens).
 
 ## How it works
 
-`overrides` are converted to a `{ "--cooud-*": value }` style object
-(via `@cooud-ui/tokens`) and set on the themed element; the `@cooud-ui/tokens` Tailwind
+`overrides` are converted to a `{ "--kronus-*": value }` style object
+(via `@kronus-ui/tokens`) and set on the themed element; the `@kronus-ui/tokens` Tailwind
 bridge maps utilities like `bg-primary` and `rounded-lg` onto those variables.
 Because everything resolves through CSS variables, overriding a token restyles the
 subtree with no React re-render of the components it contains.
 
 ## Related packages
 
-- [`@cooud-ui/tokens`](../tokens) — the token source this provider applies.
-- [`@cooud-ui/ui`](../ui) — the components that render against the applied tokens.
+- [`@kronus-ui/tokens`](../tokens) — the token source this provider applies.
+- [`@kronus-ui/ui`](../ui) — the components that render against the applied tokens.
 - See the [docs site](../../apps/www) for the live theme builder.
 
 ## License
