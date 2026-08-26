@@ -34,6 +34,10 @@ const CORE_ROUTES: ReadonlyArray<{ path: string; label: string }> = [
   { path: "/stack", label: "stack builder" },
   { path: "/docs", label: "docs landing" },
   { path: "/docs/installation", label: "docs · installation" },
+  { path: "/templates", label: "templates" },
+  { path: "/sponsor", label: "sponsor" },
+  { path: "/templates/landing-studio", label: "templates · landing-studio" },
+  { path: "/preview/t/landing-studio", label: "preview · landing-studio" },
   // P3 wave 1 components — live demo pages.
   { path: "/components/alert", label: "components · alert" },
   { path: "/components/combobox", label: "components · combobox" },

@@ -1,7 +1,8 @@
 import { defineConfig, devices } from "@playwright/test";
 
 /**
- * Playwright configuration for the Cooud UI showcase app (`@cooud-ui/www`).
+ * Playwright configuration for the Kronus UI showcase (`@kronus-ui/www`) and
+ * the Pro origin (`@kronus-ui/pro`).
  *
  * Three projects, all Chromium-headless, separated by spec directory so each
  * suite can be targeted on its own:
@@ -10,17 +11,20 @@ import { defineConfig, devices } from "@playwright/test";
  *   - `visual` → e2e/visual/** (screenshot regression of the component galleries;
  *                run with `bunx playwright test --project=visual`)
  *
- * The `webServer` serves the **already-built** production app via `next start`
+ * The `webServer`s serve the **already-built** production apps via `next start`
  * (the CI runs `bun run build` before the test steps; locally you must build
  * first too). We deliberately do NOT build inside the webServer command so the
  * server boots fast and the suite reflects the shipped SSG/SSR output.
  *
- * Port 4747 matches `apps/www`'s `start`/`dev` scripts. `reuseExistingServer`
- * is on outside CI so a dev server you already have running is reused.
+ * Port 4747 is OSS (`apps/www`). Port 4748 is Kronus Pro (`apps/pro`).
+ * `reuseExistingServer` is on outside CI so a dev server you already have
+ * running is reused.
  */
 
 const PORT = Number(process.env.PLAYWRIGHT_PORT ?? 4747);
+const PRO_PORT = Number(process.env.PLAYWRIGHT_PRO_PORT ?? 4748);
 const BASE_URL = `http://localhost:${PORT}`;
+const PRO_URL = `http://localhost:${PRO_PORT}`;
 const isCI = !!process.env.CI;
 
 export default defineConfig({
@@ -72,14 +76,24 @@ export default defineConfig({
     },
   ],
 
-  webServer: {
-    // Serve the already-built app. Build is the CI step BEFORE these tests
-    // (and you must `bun run build` locally before running the suite).
-    command: "bun run --filter @cooud-ui/www start",
-    url: BASE_URL,
-    reuseExistingServer: !isCI,
-    timeout: 120_000,
-    stdout: "ignore",
-    stderr: "pipe",
-  },
+  webServer: [
+    {
+      // Serve the already-built apps. Build is the CI step BEFORE these tests
+      // (and you must `bun run build` locally before running the suite).
+      command: "bun run --filter @kronus-ui/www start",
+      url: BASE_URL,
+      reuseExistingServer: !isCI,
+      timeout: 120_000,
+      stdout: "ignore",
+      stderr: "pipe",
+    },
+    {
+      command: "bun run --filter @kronus-ui/pro start",
+      url: PRO_URL,
+      reuseExistingServer: !isCI,
+      timeout: 120_000,
+      stdout: "ignore",
+      stderr: "pipe",
+    },
+  ],
 });

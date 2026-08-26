@@ -3,7 +3,7 @@ import { expect, type Page, test } from "@playwright/test";
 import routes from "./routes.generated.json" with { type: "json" };
 
 /**
- * Accessibility coverage (axe-core) for EVERY Cooud UI route.
+ * Accessibility coverage (axe-core) for EVERY Kronus UI route.
  *
  * For each route we run the full axe-core rule set, scoped to WCAG 2.0/2.1
  * A & AA tags, and assert ZERO violations at impact level `serious` or
@@ -33,6 +33,10 @@ const CORE_PAGES: ReadonlyArray<Route> = [
   { path: "/components", label: "components overview" },
   { path: "/blocks", label: "blocks overview" },
   { path: "/templates", label: "templates" },
+  { path: "/sponsor", label: "sponsor" },
+  { path: "/templates/mail", label: "templates · mail" },
+  { path: "/templates/saas", label: "templates · saas" },
+  { path: "/templates/landing-studio", label: "templates · landing-studio" },
   { path: "/themes", label: "themes gallery" },
   {
     path: "/create",
@@ -44,6 +48,8 @@ const CORE_PAGES: ReadonlyArray<Route> = [
   { path: "/stack", label: "stack builder" },
   { path: "/docs", label: "docs landing" },
   { path: "/docs/installation", label: "docs · installation" },
+  { path: "/docs/cli", label: "docs · cli" },
+  { path: "/docs/compare", label: "docs · compare" },
   { path: "/docs/theming", label: "docs · theming" },
   { path: "/docs/frameworks", label: "docs · frameworks" },
   { path: "/docs/accessibility", label: "docs · accessibility" },
