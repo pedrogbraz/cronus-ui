@@ -1,51 +1,57 @@
-# Cooud UI
+# Kronus UI
 
-[![@cooud-ui/ui on npm](https://img.shields.io/npm/v/@cooud-ui/ui?label=%40cooud-ui%2Fui&color=0ea5e9)](https://www.npmjs.com/package/@cooud-ui/ui)
-[![npm downloads](https://img.shields.io/npm/dm/@cooud-ui/ui?color=0ea5e9)](https://www.npmjs.com/package/@cooud-ui/ui)
-[![cooud-ui CLI](https://img.shields.io/npm/v/cooud-ui?label=cooud-ui&color=0ea5e9)](https://www.npmjs.com/package/cooud-ui)
-[![license](https://img.shields.io/npm/l/@cooud-ui/ui?color=0ea5e9)](LICENSE)
+[![@kronus-ui/ui on npm](https://img.shields.io/npm/v/@kronus-ui/ui?label=%40kronus-ui%2Fui&color=0ea5e9)](https://www.npmjs.com/package/@kronus-ui/ui)
+[![npm downloads](https://img.shields.io/npm/dm/@kronus-ui/ui?color=0ea5e9)](https://www.npmjs.com/package/@kronus-ui/ui)
+[![kronus-ui CLI](https://img.shields.io/npm/v/kronus-ui?label=kronus-ui&color=0ea5e9)](https://www.npmjs.com/package/kronus-ui)
+[![license](https://img.shields.io/npm/l/@kronus-ui/ui?color=0ea5e9)](LICENSE)
+[![sponsor](https://img.shields.io/badge/sponsor-coffee-0ea5e9)](https://github.com/sponsors/pedrogbraz)
 
-The Cooud design system — a themeable, accessible, shadcn-class React component
-library that **is** the Cooud design language. Default theme **Aurora** (premium
-sky/cyan), with **Neutral** as a first-class preset and arbitrary brand override.
+Kronus UI is a **product UI system** — the Kronus design language, a live theme
+runtime, and a compose path that turns validated blocks into apps. Dual
+distribution: install `@kronus-ui/ui` from npm, or copy the source in with the
+CLI. Canonical start: `npx create-kronus-app my-app --template saas`.
+
+Aurora is the flagship theme of generated product; Neutral is the docs chrome.
 
 > **v0.5.0 working release** — the app-generator matures: installable block
 > variants + `--variant`, the SaaS `app-shell` template, `add-page`, and shared
 > `demo-store`/`demo-saas` data libs for cohesive, editable generated-app data.
+> Public category is a product UI system (compose + live theme + contract), not
+> a component-count race. See [ADR 0003](docs/adr/0003-product-ui-system.md).
 
 ## Monorepo layout
 
 ```
 packages/
-  tokens/   @cooud-ui/tokens   — source-of-truth tokens (TS) + CSS-var bridge + Tailwind v4 @theme
-  theme/    @cooud-ui/theme    — <CooudUIProvider> + useTheme (runtime theming, CSS-var only, no re-render)
-  ui/       @cooud-ui/ui       — components (Radix + CVA + cn)
-  stack/    @cooud-ui/stack    — Stack Builder catalog, resolver, schema, KICKOFF artifacts
-  ai-kit/   @cooud-ui/ai-kit   — assistant doctrine, skills, and config templates
-  cli/      cooud-ui           — shadcn-style component installer
-  create-cooud-app/ create-cooud-app      — Next.js + Cooud UI app scaffold
-  create-cooud-stack/ create-cooud-stack  — Stack Builder scaffold generator
-  mcp/      cooud-ui-mcp       — MCP server for registry discovery
+  tokens/   @kronus-ui/tokens   — source-of-truth tokens (TS) + CSS-var bridge + Tailwind v4 @theme
+  theme/    @kronus-ui/theme    — <KronusUIProvider> + useTheme (runtime theming, CSS-var only, no re-render)
+  ui/       @kronus-ui/ui       — components (Radix + CVA + cn)
+  stack/    @kronus-ui/stack    — Stack Builder catalog, resolver, schema, KICKOFF artifacts
+  ai-kit/   @kronus-ui/ai-kit   — assistant doctrine, skills, and config templates
+  cli/      kronus-ui           — copy-in installer, compose, theme, upgrade
+  create-kronus-app/ create-kronus-app      — Next.js + Kronus UI app scaffold
+  create-kronus-stack/ create-kronus-stack  — Stack Builder scaffold generator
+  mcp/      kronus-ui-mcp       — MCP server for registry discovery
 apps/
-  www/      @cooud-ui/www      — HeroUI-style showcase + ThemeBuilder (Next.js 16)
+  www/      @kronus-ui/www      — documentation, showcase, ThemeBuilder (Next.js 16)
 ```
 
 ### Which package do I need?
 
 | You want…                                          | Install                                | Docs                                    |
 | -------------------------------------------------- | -------------------------------------- | --------------------------------------- |
-| Ready-made Cooud components                        | `@cooud-ui/ui` (+ `tokens` + `theme`)     | [packages/ui](packages/ui/README.md)    |
-| Runtime theming — switch theme/mode, override tokens | `@cooud-ui/theme` (+ `tokens`)          | [packages/theme](packages/theme/README.md) |
-| Just the design tokens / Tailwind preset           | `@cooud-ui/tokens`                        | [packages/tokens](packages/tokens/README.md) |
-| Stack Builder core artifacts                       | `@cooud-ui/stack`                         | [packages/stack](packages/stack/README.md) |
-| AI assistant doctrine, skills, and rules           | `@cooud-ui/ai-kit`                        | [packages/ai-kit](packages/ai-kit/README.md) |
-| To own the component source (copy-in, shadcn-style) | `npx cooud-ui add <component>`        | [packages/cli](packages/cli/README.md)  |
-| To scaffold a new app                              | `npx create-cooud-app my-app`             | [packages/create-cooud-app](packages/create-cooud-app/README.md) |
-| To scaffold a runnable default stack + KICKOFF     | `bun create cooud-stack@latest my-app`    | [packages/create-cooud-stack](packages/create-cooud-stack/README.md) |
-| To expose the registry through MCP                 | `npx cooud-ui-mcp`                        | [packages/mcp](packages/mcp/README.md) |
+| Ready-made Kronus components                        | `@kronus-ui/ui` (+ `tokens` + `theme`)     | [packages/ui](packages/ui/README.md)    |
+| Runtime theming — switch theme/mode, override tokens | `@kronus-ui/theme` (+ `tokens`)          | [packages/theme](packages/theme/README.md) |
+| Just the design tokens / Tailwind preset           | `@kronus-ui/tokens`                        | [packages/tokens](packages/tokens/README.md) |
+| Stack Builder core artifacts                       | `@kronus-ui/stack`                         | [packages/stack](packages/stack/README.md) |
+| AI assistant doctrine, skills, and rules           | `@kronus-ui/ai-kit`                        | [packages/ai-kit](packages/ai-kit/README.md) |
+| To own the component source (copy-in, shadcn-style) | `npx kronus-ui add <component>`        | [packages/cli](packages/cli/README.md)  |
+| To scaffold a new app                              | `npx create-kronus-app my-app --template saas` | [packages/create-kronus-app](packages/create-kronus-app/README.md) |
+| To scaffold a runnable default stack + KICKOFF     | `bun create kronus-stack@latest my-app`    | [packages/create-kronus-stack](packages/create-kronus-stack/README.md) |
+| To expose the registry through MCP                 | `npx kronus-ui-mcp`                        | [packages/mcp](packages/mcp/README.md) |
 
-Most apps install all three library packages — `@cooud-ui/ui` renders against the
-`@cooud-ui/tokens` bridge and the `@cooud-ui/theme` provider.
+Most apps install all three library packages — `@kronus-ui/ui` renders against the
+`@kronus-ui/tokens` bridge and the `@kronus-ui/theme` provider.
 
 ## Quickstart
 
@@ -58,11 +64,20 @@ bun run lint        # biome
 
 ## Install (external consumer)
 
-Install the three runtime library packages from public npm (published under the
-`@cooud-ui` scope — see [RELEASE.md](RELEASE.md)):
+```sh
+npx create-kronus-app my-app --template saas
+```
+
+That scaffolds a composed SaaS app (Aurora). The `create-kronus-app` CLI default
+template remains `default` so existing invocations do not break; marketing and
+these docs use `saas`.
+
+To consume the library without the scaffolder, install the three runtime
+packages from public npm (published under the `@kronus-ui` scope — see
+[RELEASE.md](RELEASE.md)):
 
 ```sh
-npm i @cooud-ui/ui @cooud-ui/tokens @cooud-ui/theme
+npm i @kronus-ui/ui @kronus-ui/tokens @kronus-ui/theme
 # peers (provide what you don't already have):
 npm i react react-dom
 ```
@@ -76,38 +91,38 @@ In your global stylesheet (e.g. `app/globals.css` / `src/index.css`):
 
 ```css
 @import "tailwindcss";
-@import "@cooud-ui/tokens/styles.css";
+@import "@kronus-ui/tokens/styles.css";
 
 /* REQUIRED. Tailwind v4 does not scan node_modules by default, so the utility
    classes baked into the shipped components (dist/**/*.js) would never be
    emitted and your components would render unstyled. This @source opts the
    published package back into content detection. Adjust the relative path so it
    resolves to your node_modules from this CSS file. */
-@source "../node_modules/@cooud-ui/ui/dist/**/*.js";
+@source "../node_modules/@kronus-ui/ui/dist/**/*.js";
 ```
 
 That's it — no PostCSS config beyond the standard `@tailwindcss/postcss` (or the
-Vite plugin). The `@import "@cooud-ui/tokens/styles.css"` line brings in the Aurora
+Vite plugin). The `@import "@kronus-ui/tokens/styles.css"` line brings in the Aurora
 theme tokens and the `@theme inline` bridge that maps `bg-primary`, `rounded-lg`,
-`text-fg-secondary`, `shadow-glow`, etc. onto the runtime `--cooud-*` variables.
+`text-fg-secondary`, `shadow-glow`, etc. onto the runtime `--kronus-*` variables.
 
 ### Tailwind v3 (config JS)
 
-Consume the `@cooud-ui/tokens/preset` (it maps `bg-primary`, `rounded-lg`, `shadow-glow`,
-… onto the `--cooud-*` variables) and add the package `dist` to `content[]` so the
+Consume the `@kronus-ui/tokens/preset` (it maps `bg-primary`, `rounded-lg`, `shadow-glow`,
+… onto the `--kronus-*` variables) and add the package `dist` to `content[]` so the
 component classes survive purging:
 
 ```js
 // tailwind.config.js
-import cooudPreset from "@cooud-ui/tokens/preset";
+import kronusPreset from "@kronus-ui/tokens/preset";
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  presets: [cooudPreset],
+  presets: [kronusPreset],
   content: [
     "./src/**/*.{ts,tsx}",
     // REQUIRED: keep the utilities used inside the shipped components.
-    "./node_modules/@cooud-ui/ui/dist/**/*.js",
+    "./node_modules/@kronus-ui/ui/dist/**/*.js",
   ],
 };
 ```
@@ -119,10 +134,10 @@ export default {
 @tailwind utilities;
 ```
 
-> **v3 does not import `@cooud-ui/tokens/styles.css`.** That file is Tailwind v4-only
+> **v3 does not import `@kronus-ui/tokens/styles.css`.** That file is Tailwind v4-only
 > (it uses `@theme inline` / `@utility`, which the v3 PostCSS engine can't parse).
-> On v3 the `--cooud-*` runtime variables are injected for you by
-> `<CooudUIProvider>` from `@cooud-ui/theme` (see below) — the preset is what connects
+> On v3 the `--kronus-*` runtime variables are injected for you by
+> `<KronusUIProvider>` from `@kronus-ui/theme` (see below) — the preset is what connects
 > the utility classes to those variables.
 
 > Why the extra `@source` (v4) / `content` (v3) entry on both paths? The components
@@ -135,12 +150,12 @@ export default {
 
 ```tsx
 // layout.tsx (or your root)
-import { CooudUIProvider } from "@cooud-ui/theme";
-<CooudUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">{children}</CooudUIProvider>
+import { KronusUIProvider } from "@kronus-ui/theme";
+<KronusUIProvider asRoot defaultThemeName="aurora" defaultModeName="dark">{children}</KronusUIProvider>
 
 // anywhere
-import { Button, Card, Badge } from "@cooud-ui/ui";
-<Button variant="gradient">Ship it</Button>
+import { Button, Card, Badge } from "@kronus-ui/ui";
+<Button variant="primary">Ship it</Button>
 ```
 
 ### Customize everything (runtime)
@@ -160,10 +175,12 @@ proof that an external install renders *styled*.
 ## Or copy-paste, shadcn-style (you own the code)
 
 ```sh
-npx cooud-ui init                     # writes cooud-ui.json + the cn() helper
-npx cooud-ui add button card dialog   # resolves deps, rewrites imports to your aliases
-npx cooud-ui list                     # list registry items (alias: ls)
-npx cooud-ui diff                     # show which installed components drifted
+npx kronus-ui init
+npx kronus-ui add button card dialog
+npx kronus-ui compose saas --brand Acme
+npx kronus-ui add-page --route /faq --blocks faq,cta --nav FAQ
+npx kronus-ui theme set aurora --mode dark
+npx kronus-ui upgrade --all --dry-run
 ```
 
 The registry under `registry/` is generated from the real component sources by
@@ -173,12 +190,12 @@ distribution modes (npm package + CLI registry) share one source of truth.
 ## Publishing
 
 Nine packages publish to public npm in lockstep from `v0.2.0` onward:
-`@cooud-ui/tokens`,
-`@cooud-ui/theme`, `@cooud-ui/ui`, `@cooud-ui/stack`, `@cooud-ui/ai-kit`,
-`cooud-ui`, `create-cooud-app`, `create-cooud-stack`, and `cooud-ui-mcp` (all
+`@kronus-ui/tokens`,
+`@kronus-ui/theme`, `@kronus-ui/ui`, `@kronus-ui/stack`, `@kronus-ui/ai-kit`,
+`kronus-ui`, `create-kronus-app`, `create-kronus-stack`, and `kronus-ui-mcp` (all
 with `access: public`) — see [RELEASE.md](RELEASE.md). Run `bun run release` for
 the default dry-run, and only run `bun run release --publish` when you intend to
-publish and tag. A real publish needs npm rights for the `@cooud-ui` scope and
+publish and tag. A real publish needs npm rights for the `@kronus-ui` scope and
 the unscoped package names.
 
 ## Components
@@ -204,10 +221,22 @@ LogoCarousel · motion presets. The premium Aurora layer (glass, gradients,
 springs, scroll reveals, rotating brand surfaces).
 
 ## Conventions
-See `CONTRACT.md` — semantic tokens only, CVA variants, `forwardRef`, `data-slot`,
-`focus-visible` rings, no raw colors. This is what keeps the library re-themeable.
+See `CONTRACT.md` — semantic tokens (no palette scales, no raw hex), CVA
+variants, forwarded `ref`, `data-slot`, `focus-visible` rings. This is what
+keeps the library re-themeable.
 
 ## Roadmap
-~~Wave 1 (forms)~~ ✅ → ~~Wave 2 (overlays/nav)~~ ✅ → ~~Wave 3 (data)~~ ✅ → ~~Wave 4 (premium/brand)~~ ✅ →
-`cooud-ui` CLI registry (`npx cooud-ui add`) + `create-cooud-stack` generator → publish the scoped and unscoped packages to public npm
-→ migrate `dashboard` first. Full plan in the SDD.
+
+Waves 0–4 (foundation through premium/brand) are done. The CLI, registry,
+public npm packages, and compose generator have shipped.
+
+Shipped: compose as the default path (`--template saas` in marketing; the CLI
+default remains `default` until a breaking 0.6), add-page, 3-way upgrade of
+components and composed pages, agent kit + MCP, and a public compare against
+shadcn/ui, HeroUI, and Aceternity.
+
+Still not this quarter: inflating component count.
+
+Reserved: `create-kronus-app` `DEFAULT_TEMPLATE` → `saas` is a breaking change
+for 0.6. A live Cursor/Claude 20-prompt eval is for a human — no score claimed
+here.

@@ -1,4 +1,4 @@
-# AGENTS.md — cooud-ui
+# AGENTS.md — kronus-ui
 
 Contrato para humanos e agentes de IA. Leia isto antes da primeira linha.
 
@@ -14,10 +14,13 @@ um app de produto, e várias regras genéricas não se aplicam.
 Design system publicado: componentes React, tokens de tema, CLI de instalação,
 registry no estilo shadcn e um site de documentação. Monorepo Bun + Turborepo.
 
+O produto público é um **product UI system** — compose de apps, tema vivo e
+contrato de autoria. O catálogo é o meio, não a categoria (ADR 0003).
+
 **Antes de tocar em `packages/ui`, leia o `CONTRACT.md`.** Ele é o contrato de
 autoria de componente e não é negociável — tokens semânticos, CVA para
-variantes, `forwardRef`, `data-slot`, padrão de focus ring. Um componente que
-não segue não entra.
+variantes, encaminhamento de `ref`, `data-slot`, padrão de focus ring. Um
+componente que não segue não entra.
 
 @CONTRACT.md
 
@@ -25,7 +28,7 @@ não segue não entra.
 
 ## Stack
 
-Bun 1.3 · Turborepo · TypeScript 6 · React 19 · Next 16 (`apps/www`) ·
+Bun 1.3 · Turborepo · TypeScript 6 · React 19 · Next 16 (`apps/www`, `apps/pro`) ·
 Tailwind v4 · Biome 2.5 · Vitest · Playwright
 
 **O gerenciador é o Bun.** `npm` e `pnpm` são recusados pelo `package.json`.
@@ -38,7 +41,8 @@ Tailwind v4 · Biome 2.5 · Vitest · Playwright
 |---|---|
 | `bun install` | instala |
 | `bun run dev` | tudo em watch (turbo) |
-| `bun run www` | só o site de documentação |
+| `bun run www` | site de documentação (OSS, :4747) |
+| `bun run pro` | Kronus Pro (origem própria, :4748) |
 | `bun run lint` | `biome check .` |
 | `bun run format` | `biome format --write .` |
 | `bun run typecheck` | tipos, via turbo |
@@ -74,12 +78,13 @@ packages/
 ├─ ui/        os componentes                    → theme
 ├─ stack/     catálogo e engine de stack        (folha)
 ├─ ai-kit/    geração de AGENTS/skills          (folha)
-├─ cli/       `cooud-ui` — instala componentes  → ai-kit
+├─ cli/       `kronus-ui` — instala componentes  → ai-kit
 ├─ mcp/       servidor MCP do registry          (folha)
-├─ create-cooud-app/    scaffold de app         → ai-kit, cli
-└─ create-cooud-stack/  scaffold de stack       → ai-kit, stack
+├─ create-kronus-app/    scaffold de app         → ai-kit, cli
+└─ create-kronus-stack/  scaffold de stack       → ai-kit, stack
 
-apps/www/     documentação e showcase           → tokens, theme, ui, stack
+apps/www/     documentação e showcase (OSS, :4747)  → tokens, theme, ui, stack
+apps/pro/     Kronus Pro (origem própria, :4748)     → tokens, theme, ui
 registry/     GERADO. não edite à mão
 e2e/          Playwright: a11y, contraste, fluxos
 ```

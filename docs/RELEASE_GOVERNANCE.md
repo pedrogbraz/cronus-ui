@@ -62,17 +62,17 @@ A restored release job should **pack first, then attest, then publish the same b
 3. `actions/attest-build-provenance` signs a SLSA-style provenance attestation
    over each tarball via OIDC (no long-lived signing key).
 4. `npm publish <tarball>` ships the attested bytes: all nine packages
-   (`@cooud-ui/tokens`, `@cooud-ui/theme`, `@cooud-ui/ui`, `@cooud-ui/stack`,
-   `@cooud-ui/ai-kit`, `cooud-ui`, `create-cooud-app`, `create-cooud-stack`, and
-   `cooud-ui-mcp`) to public npm.
+   (`@kronus-ui/tokens`, `@kronus-ui/theme`, `@kronus-ui/ui`, `@kronus-ui/stack`,
+   `@kronus-ui/ai-kit`, `kronus-ui`, `create-kronus-app`, `create-kronus-stack`, and
+   `kronus-ui-mcp`) to public npm.
 
-The separate per-package artifact directories are intentional: `@cooud-ui/ui`
-and `cooud-ui` both pack to `cooud-ui-<version>.tgz`.
+The separate per-package artifact directories are intentional: `@kronus-ui/ui`
+and `kronus-ui` both pack to `kronus-ui-<version>.tgz`.
 
 When attestation is restored, consumers can verify provenance with:
 
 ```sh
-gh attestation verify <tarball-or-oci-ref> --owner cooud
+gh attestation verify <tarball-or-oci-ref> --owner kronus
 ```
 
 ---
@@ -171,8 +171,8 @@ When hosted release automation is restored, the `publish` job should run in
 - **Environment secrets:** store publish secrets here so they are only exposed
   to the approved `release` deployment, never to PR/CI runs:
   - `NPM_TOKEN` — for all nine packages on public npm (the scoped
-    `@cooud-ui/*` packages and the unscoped `cooud-ui`, `create-cooud-app`,
-    `create-cooud-stack`, and `cooud-ui-mcp` packages). The release workflow
+    `@kronus-ui/*` packages and the unscoped `kronus-ui`, `create-kronus-app`,
+    `create-kronus-stack`, and `kronus-ui-mcp` packages). The release workflow
     validates this secret before any package publish step runs.
 - **Wait timer (optional):** a short delay gives a window to cancel a bad release.
 
@@ -183,17 +183,17 @@ When hosted release automation is restored, the `publish` job should run in
 These are **not** code changes — they are account/settings actions that must
 exist for releases to be reproducible **and** approved:
 
-1. **Own the `@cooud-ui` scope on npmjs** (and have publish rights) so the
-   scoped `@cooud-ui/*` packages can publish with `access: public`; otherwise
+1. **Own the `@kronus-ui` scope on npmjs** (and have publish rights) so the
+   scoped `@kronus-ui/*` packages can publish with `access: public`; otherwise
    the scoped publishes are rejected.
-2. **Own the unscoped npm names `cooud-ui`, `create-cooud-app`,
-   `create-cooud-stack`, and `cooud-ui-mcp`** on npmjs, and add an `NPM_TOKEN`
+2. **Own the unscoped npm names `kronus-ui`, `create-kronus-app`,
+   `create-kronus-stack`, and `kronus-ui-mcp`** on npmjs, and add an `NPM_TOKEN`
    as a `release`-environment secret.
 3. **Enable** branch protection (§3) and tag protection (§4). Enable the future
    `release` environment with required reviewers (§5) only when hosted release
    automation is restored.
 4. **Replace the placeholder owners** in `.github/CODEOWNERS` (`@pedrogbraz`)
-   with the real `cooud` org teams/handles once the org exists.
+   with the real `kronus` org teams/handles once the org exists.
 5. **Clear the remaining dev-only `vite`/`esbuild` advisories** (bump `vitest`
    when upstream ships a fix), then make `audit` a blocking gate in `ci.yml` (§2).
 

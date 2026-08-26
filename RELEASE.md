@@ -1,4 +1,4 @@
-# Releasing cooud-ui
+# Releasing kronus-ui
 
 This monorepo publishes **nine** packages. They are versioned in lockstep at
 `0.x` and released **locally** (GitHub Actions was removed — see
@@ -6,17 +6,17 @@ This monorepo publishes **nine** packages. They are versioned in lockstep at
 
 | Package                       | Name                  | Registry                     | `publishConfig`  | Notes                                      |
 | ----------------------------- | --------------------- | ---------------------------- | ---------------- | ------------------------------------------ |
-| `packages/tokens`             | `@cooud-ui/tokens`    | `https://registry.npmjs.org` | `access: public` | Design tokens + CSS bridge + TW preset     |
-| `packages/theme`              | `@cooud-ui/theme`     | `https://registry.npmjs.org` | `access: public` | Runtime theming engine (depends tokens)    |
-| `packages/ui`                 | `@cooud-ui/ui`        | `https://registry.npmjs.org` | `access: public` | React components                           |
-| `packages/stack`              | `@cooud-ui/stack`     | `https://registry.npmjs.org` | `access: public` | Stack Builder catalog/resolver/artifacts   |
-| `packages/ai-kit`             | `@cooud-ui/ai-kit`    | `https://registry.npmjs.org` | `access: public` | AI assistant doctrine, skills, and configs |
-| `packages/cli`                | `cooud-ui`            | `https://registry.npmjs.org` | `access: public` | shadcn-style component installer (CLI)     |
-| `packages/create-cooud-app`   | `create-cooud-app`    | `https://registry.npmjs.org` | `access: public` | App scaffold CLI                           |
-| `packages/create-cooud-stack` | `create-cooud-stack`  | `https://registry.npmjs.org` | `access: public` | Stack Builder scaffold CLI                 |
-| `packages/mcp`                | `cooud-ui-mcp`        | `https://registry.npmjs.org` | `access: public` | MCP server for registry discovery          |
+| `packages/tokens`             | `@kronus-ui/tokens`    | `https://registry.npmjs.org` | `access: public` | Design tokens + CSS bridge + TW preset     |
+| `packages/theme`              | `@kronus-ui/theme`     | `https://registry.npmjs.org` | `access: public` | Runtime theming engine (depends tokens)    |
+| `packages/ui`                 | `@kronus-ui/ui`        | `https://registry.npmjs.org` | `access: public` | React components                           |
+| `packages/stack`              | `@kronus-ui/stack`     | `https://registry.npmjs.org` | `access: public` | Stack Builder catalog/resolver/artifacts   |
+| `packages/ai-kit`             | `@kronus-ui/ai-kit`    | `https://registry.npmjs.org` | `access: public` | AI assistant doctrine, skills, and configs |
+| `packages/cli`                | `kronus-ui`            | `https://registry.npmjs.org` | `access: public` | shadcn-style component installer (CLI)     |
+| `packages/create-kronus-app`   | `create-kronus-app`    | `https://registry.npmjs.org` | `access: public` | App scaffold CLI                           |
+| `packages/create-kronus-stack` | `create-kronus-stack`  | `https://registry.npmjs.org` | `access: public` | Stack Builder scaffold CLI                 |
+| `packages/mcp`                | `kronus-ui-mcp`        | `https://registry.npmjs.org` | `access: public` | MCP server for registry discovery          |
 
-`apps/www` (showcase) is **not** published.
+`apps/www` (showcase) and `apps/pro` (Kronus Pro origin) are **not** published.
 
 The active release tooling is intentionally pinned to public npmjs
 (`https://registry.npmjs.org/`) so a developer machine's `.npmrc` cannot
@@ -57,9 +57,9 @@ In order, the script:
    GitHub tag are resolvable before any package is public (only with `--publish`;
    a dry-run just prints the tag it would cut).
 5. **Publish** — for each package in dependency order
-   **`@cooud-ui/tokens` → `@cooud-ui/theme` → `@cooud-ui/ui` →
-   `@cooud-ui/stack` → `@cooud-ui/ai-kit` → `cooud-ui` →
-   `create-cooud-app` → `create-cooud-stack` → `cooud-ui-mcp`**:
+   **`@kronus-ui/tokens` → `@kronus-ui/theme` → `@kronus-ui/ui` →
+   `@kronus-ui/stack` → `@kronus-ui/ai-kit` → `kronus-ui` →
+   `create-kronus-app` → `create-kronus-stack` → `kronus-ui-mcp`**:
    - packs it with `bun pm pack` (this rewrites `workspace:*` ranges to the
      concrete version **and** carries each package's `publishConfig`),
    - runs `npm publish <tarball> --registry=https://registry.npmjs.org/`, which
@@ -81,9 +81,9 @@ In order, the script:
 ### Authentication
 
 All nine packages publish to **public npm**, so one credential covers the whole
-release. Be logged in to npmjs with publish rights for the `@cooud-ui` scope and
-the unscoped package names (`cooud-ui`, `create-cooud-app`,
-`create-cooud-stack`, `cooud-ui-mcp`), or have an `NPM_TOKEN` with those publish
+release. Be logged in to npmjs with publish rights for the `@kronus-ui` scope and
+the unscoped package names (`kronus-ui`, `create-kronus-app`,
+`create-kronus-stack`, `kronus-ui-mcp`), or have an `NPM_TOKEN` with those publish
 rights in your user `~/.npmrc`. No repo-level `.npmrc` and no GitHub Packages
 token are needed.
 
@@ -107,7 +107,7 @@ needed.
    [`packages/cli/src/config.ts`](packages/cli/src/config.ts) and
    `SERVER_VERSION` in [`packages/mcp/src/version.ts`](packages/mcp/src/version.ts)
    to the same value — the CLI and MCP default registries are pinned to their own
-   tag (`https://raw.githubusercontent.com/pedrogbraz/cooud-ui/vX.Y.Z/registry`),
+   tag (`https://raw.githubusercontent.com/pedrogbraz/kronus-ui/vX.Y.Z/registry`),
    and tests fail if either runtime version drifts from `package.json`.
 2. **Build:** `bun run build`.
 3. **Gate + smoke (dry-run preflight):** `bun run release` — this runs the full
@@ -121,18 +121,18 @@ needed.
    full gate, checks npm auth and confirms the GitHub repo is public before any
    tag mutation, runs
    `SMOKE_FULL=1 bun run package:smoke`, pushes `vX.Y.Z`, then publishes
-   `@cooud-ui/tokens` → `@cooud-ui/theme` → `@cooud-ui/ui` →
-   `@cooud-ui/stack` → `@cooud-ui/ai-kit` → `cooud-ui` →
-   `create-cooud-app` → `create-cooud-stack` → `cooud-ui-mcp`.
+   `@kronus-ui/tokens` → `@kronus-ui/theme` → `@kronus-ui/ui` →
+   `@kronus-ui/stack` → `@kronus-ui/ai-kit` → `kronus-ui` →
+   `create-kronus-app` → `create-kronus-stack` → `kronus-ui-mcp`.
 
    > `v0.1.0` already exists, so the stack-generator release line starts at
    > `v0.2.0`: all nine publishable packages must share `0.2.0`, and the
    > release cuts `v0.2.0` before any future `0.x` bump.
 
 6. **Repo visibility is a hard preflight.** Before publishing, confirm
-   `pedrogbraz/cooud-ui` is **public** so the CLI's pinned registry
-   (`raw.githubusercontent.com/pedrogbraz/cooud-ui/vX.Y.Z/registry`) is reachable
-   and `npx cooud-ui add <component>` resolves component sources from the tagged
+   `pedrogbraz/kronus-ui` is **public** so the CLI's pinned registry
+   (`raw.githubusercontent.com/pedrogbraz/kronus-ui/vX.Y.Z/registry`) is reachable
+   and `npx kronus-ui add <component>` resolves component sources from the tagged
    `vX.Y.Z` registry (not mutable `main`). The release script verifies this in
    preflight and aborts if it cannot prove public visibility.
 
@@ -149,7 +149,7 @@ own `publishConfig.access: public`):
 ```sh
 bun run build
 
-# all nine go to public npm — be logged in with @cooud-ui scope and unscoped-name rights:
+# all nine go to public npm — be logged in with @kronus-ui scope and unscoped-name rights:
 npm login
 
 cd packages/tokens && bun pm pack && npm publish ./*.tgz --registry=https://registry.npmjs.org/ && rm ./*.tgz && cd -
@@ -158,8 +158,8 @@ cd packages/ui     && bun pm pack && npm publish ./*.tgz --registry=https://regi
 cd packages/stack  && bun pm pack && npm publish ./*.tgz --registry=https://registry.npmjs.org/ && rm ./*.tgz && cd -
 cd packages/ai-kit && bun pm pack && npm publish ./*.tgz --registry=https://registry.npmjs.org/ && rm ./*.tgz && cd -
 cd packages/cli    && bun pm pack && npm publish ./*.tgz --registry=https://registry.npmjs.org/ && rm ./*.tgz && cd -
-cd packages/create-cooud-app && bun pm pack && npm publish ./*.tgz --registry=https://registry.npmjs.org/ && rm ./*.tgz && cd -
-cd packages/create-cooud-stack && bun pm pack && npm publish ./*.tgz --registry=https://registry.npmjs.org/ && rm ./*.tgz && cd -
+cd packages/create-kronus-app && bun pm pack && npm publish ./*.tgz --registry=https://registry.npmjs.org/ && rm ./*.tgz && cd -
+cd packages/create-kronus-stack && bun pm pack && npm publish ./*.tgz --registry=https://registry.npmjs.org/ && rm ./*.tgz && cd -
 cd packages/mcp    && bun pm pack && npm publish ./*.tgz --registry=https://registry.npmjs.org/ && rm ./*.tgz && cd -
 ```
 
@@ -186,8 +186,8 @@ attestation** (`actions/attest-build-provenance`, SLSA-style, OIDC-signed) over
 every tarball; and `npm publish` in the same nine-package order used by
 `scripts/release.mjs`.
 
-> Tarball naming footgun (still relevant to manual packs): `@cooud-ui/ui` and
-> `cooud-ui` both pack to `cooud-ui-<version>.tgz`. The local pipeline packs into
+> Tarball naming footgun (still relevant to manual packs): `@kronus-ui/ui` and
+> `kronus-ui` both pack to `kronus-ui-<version>.tgz`. The local pipeline packs into
 > a temporary `.release-tarballs/` one package at a time, so a stale tarball
 > can't be selected by mistake.
 

@@ -62,7 +62,16 @@ qual vale para código novo.
 **Aceitamos:** a inconsistência é visível e documentada, que é melhor que
 uma regra uniforme e errada.
 
+## Nota de follow-up (2026-08-25)
+
+A regra 3 do `CONTRACT.md` foi reescrita com a redação desta ADR. O
+`contract:check` **ainda não** a enforça. A reescrita do contrato não liga
+o gate — isso fica para um PR posterior, quando o check puder distinguir
+`ref` encaminhada (padrão React 19) de `forwardRef` legado sem falso
+positivo.
+
 ## Revisitar quando
 
-O `CONTRACT.md` for atualizado com a redação acima — aí a regra entra no
-`contract-check.mjs` e esta ADR passa a "substituída".
+O `contract-check.mjs` passar a verificar o encaminhamento de `ref`. Só
+então esta ADR passa a "substituída". Não ligar o gate no mesmo PR da
+reescrita.

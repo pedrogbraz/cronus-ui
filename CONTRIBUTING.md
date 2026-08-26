@@ -1,6 +1,6 @@
-# Contributing to Cooud UI
+# Contributing to Kronus UI
 
-Thanks for helping build Cooud UI. This guide covers the dev setup, the quality
+Thanks for helping build Kronus UI. This guide covers the dev setup, the quality
 gates every change must pass, and what we expect from PRs.
 
 ## Prerequisites
@@ -11,17 +11,18 @@ gates every change must pass, and what we expect from PRs.
 ## Setup
 
 ```sh
-git clone https://github.com/pedrogbraz/cooud-ui.git
-cd cooud-ui
+git clone https://github.com/pedrogbraz/kronus-ui.git
+cd kronus-ui
 bun install
-bun run build        # turbo builds every package + the showcase app
+bun run build        # turbo builds every package + www + pro
 bun run www          # showcase dev server → http://localhost:4747
+bun run pro          # Kronus Pro origin → http://localhost:4748
 ```
 
 The monorepo layout: publishable packages live in `packages/*`
-(`ui`, `tokens`, `theme`, `stack`, `cli`, `mcp`, `ai-kit`, `create-cooud-app`,
-`create-cooud-stack`), the showcase/docs app is `apps/www`, and the CLI's
-component registry is generated into `registry/`.
+(`ui`, `tokens`, `theme`, `stack`, `cli`, `mcp`, `ai-kit`, `create-kronus-app`,
+`create-kronus-stack`), the showcase/docs app is `apps/www`, Kronus Pro is
+`apps/pro`, and the CLI's component registry is generated into `registry/`.
 
 ## Quality gates
 
@@ -29,7 +30,7 @@ CI (`.github/workflows/ci.yml`) runs the full battery on every PR — the same
 scripts you can run locally. A PR must be green on all of them:
 
 ```sh
-bun run build                       # turbo build of all packages + www
+bun run build                       # turbo build of all packages + www + pro
 bun run lint                        # biome check .
 bun run typecheck                   # tsc across the workspaces
 bun run test                        # vitest unit tests
@@ -72,7 +73,7 @@ across OSes:
   regenerate and commit the changed PNGs alongside the code:
 
   ```sh
-  bunx turbo build --filter=@cooud-ui/www
+  bunx turbo build --filter=@kronus-ui/www
   bunx playwright test --project=visual --update-snapshots
   ```
 
@@ -94,7 +95,7 @@ Read [`CONTRACT.md`](./CONTRACT.md) first — it is the authoring contract and
 CI enforces most of it. The short version:
 
 - **Semantic tokens only.** Never raw Tailwind colors or hex values; use the
-  `--cooud-*`-backed utilities (`bg-surface-raised`, `text-fg-secondary`, ...).
+  `--kronus-*`-backed utilities (`bg-surface-raised`, `text-fg-secondary`, ...).
 - Variants via **CVA**, exported alongside the component.
 - **`forwardRef`** on interactive elements, `data-slot="<name>"` on the root.
 - Accessibility is non-negotiable: real semantics, the shared focus-ring
@@ -113,9 +114,9 @@ A new component also needs:
 Generated files are committed; the `*:check` gates fail if they drift.
 
 ```sh
-bun run -F cooud-ui registry            # rebuild the CLI registry from packages/ui
-bun run -F @cooud-ui/tokens tokens:generate   # rebuild token CSS from tokens.ts
-bun run -F @cooud-ui/www props          # rebuild the docs Props tables
+bun run -F kronus-ui registry            # rebuild the CLI registry from packages/ui
+bun run -F @kronus-ui/tokens tokens:generate   # rebuild token CSS from tokens.ts
+bun run -F @kronus-ui/www props          # rebuild the docs Props tables
 ```
 
 ## Commit style
