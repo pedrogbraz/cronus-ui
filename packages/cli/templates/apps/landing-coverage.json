@@ -1,0 +1,23 @@
+{
+  "name": "landing-coverage",
+  "type": "registry:app",
+  "planVersion": 1,
+  "manifest": {
+    "title": "Coverage",
+    "description": "Global-services landing: centered hero, stats, testimonial grid, FAQ, and CTA. Sunset, light.",
+    "chrome": {
+      "site": { "navbar": "navbar", "footer": "footer" }
+    },
+    "pages": [
+      {
+        "route": "/",
+        "title": "Home",
+        "nav": "Home",
+        "chrome": "site",
+        "blocks": ["hero", "stats", { "block": "testimonials", "variant": "grid" }, "faq", "cta"]
+      }
+    ],
+    "extras": { "not-found": "not-found" },
+    "defaults": { "theme": "sunset", "mode": "light", "brand": "__APP_NAME__" }
+  }
+}

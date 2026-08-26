@@ -1,0 +1,31 @@
+{
+  "name": "landing-secure",
+  "type": "registry:app",
+  "planVersion": 1,
+  "manifest": {
+    "title": "Secure",
+    "description": "Infrastructure/security landing: compact registry hero, feature grid, metrics, proof, usage pricing, split FAQ, and CTA.",
+    "chrome": {
+      "site": { "navbar": "navbar", "footer": "footer" }
+    },
+    "pages": [
+      {
+        "route": "/",
+        "title": "Home",
+        "nav": "Home",
+        "chrome": "site",
+        "blocks": [
+          { "block": "hero", "variant": "compact" },
+          "feature-grid",
+          "stats",
+          { "block": "testimonials", "variant": "grid" },
+          { "block": "pricing", "variant": "usage" },
+          { "block": "faq", "variant": "split" },
+          "cta"
+        ]
+      }
+    ],
+    "extras": { "not-found": "not-found" },
+    "defaults": { "theme": "midnight", "mode": "dark", "brand": "__APP_NAME__" }
+  }
+}

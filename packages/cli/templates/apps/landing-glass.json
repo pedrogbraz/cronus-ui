@@ -1,0 +1,28 @@
+{
+  "name": "landing-glass",
+  "type": "registry:app",
+  "planVersion": 1,
+  "manifest": {
+    "title": "Glass",
+    "description": "Glass-dark landing: atmospheric hero, bento features, split FAQ, and a split-visual CTA. Midnight, dark.",
+    "chrome": {
+      "site": { "navbar": "navbar", "footer": "footer" }
+    },
+    "pages": [
+      {
+        "route": "/",
+        "title": "Home",
+        "nav": "Home",
+        "chrome": "site",
+        "blocks": [
+          { "block": "hero", "variant": "atmosphere" },
+          { "block": "feature-grid", "variant": "bento" },
+          { "block": "faq", "variant": "split" },
+          { "block": "cta", "variant": "split-visual" }
+        ]
+      }
+    ],
+    "extras": { "not-found": "not-found" },
+    "defaults": { "theme": "midnight", "mode": "dark", "brand": "__APP_NAME__" }
+  }
+}

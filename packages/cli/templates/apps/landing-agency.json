@@ -1,0 +1,31 @@
+{
+  "name": "landing-agency",
+  "type": "registry:app",
+  "planVersion": 1,
+  "manifest": {
+    "title": "Agency",
+    "description": "Studio/agency landing: split hero, logo cloud, about story, services grid, stats, testimonials, and CTA. Midnight, dark.",
+    "chrome": {
+      "site": { "navbar": "navbar", "footer": "footer" }
+    },
+    "pages": [
+      {
+        "route": "/",
+        "title": "Home",
+        "nav": "Home",
+        "chrome": "site",
+        "blocks": [
+          { "block": "hero", "variant": "split" },
+          "logo-cloud",
+          "about",
+          "feature-grid",
+          "stats",
+          "testimonials",
+          "cta"
+        ]
+      }
+    ],
+    "extras": { "not-found": "not-found" },
+    "defaults": { "theme": "midnight", "mode": "dark", "brand": "__APP_NAME__" }
+  }
+}

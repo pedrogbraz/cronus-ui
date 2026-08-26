@@ -1,0 +1,30 @@
+{
+  "name": "landing-studio",
+  "type": "registry:app",
+  "planVersion": 1,
+  "manifest": {
+    "title": "Studio",
+    "description": "Dark AI design-tool landing: atmospheric hero, logo marquee, bento features, stats, pricing, and a split product CTA.",
+    "chrome": {
+      "site": { "navbar": "navbar", "footer": "footer" }
+    },
+    "pages": [
+      {
+        "route": "/",
+        "title": "Home",
+        "nav": "Home",
+        "chrome": "site",
+        "blocks": [
+          { "block": "hero", "variant": "atmosphere" },
+          { "block": "logo-cloud", "variant": "marquee" },
+          { "block": "feature-grid", "variant": "bento" },
+          "stats",
+          "pricing",
+          { "block": "cta", "variant": "split-visual" }
+        ]
+      }
+    ],
+    "extras": { "not-found": "not-found" },
+    "defaults": { "theme": "midnight", "mode": "dark", "brand": "__APP_NAME__" }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "landing-broadcast",
+  "type": "registry:app",
+  "planVersion": 1,
+  "manifest": {
+    "title": "Broadcast",
+    "description": "Studio/show landing: atmospheric hero, marquee logos, feature grid, testimonials, pricing, and footer chrome. Aurora, dark.",
+    "chrome": {
+      "site": { "navbar": "navbar", "footer": "footer" }
+    },
+    "pages": [
+      {
+        "route": "/",
+        "title": "Home",
+        "nav": "Home",
+        "chrome": "site",
+        "blocks": [
+          { "block": "hero", "variant": "atmosphere" },
+          { "block": "logo-cloud", "variant": "marquee" },
+          "feature-grid",
+          "testimonials",
+          "pricing"
+        ]
+      }
+    ],
+    "extras": { "not-found": "not-found" },
+    "defaults": { "theme": "aurora", "mode": "dark", "brand": "__APP_NAME__" }
+  }
+}

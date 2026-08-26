@@ -1,0 +1,32 @@
+{
+  "name": "landing-agents",
+  "type": "registry:app",
+  "planVersion": 1,
+  "manifest": {
+    "title": "Agents",
+    "description": "Automation/agent landing: split hero, marquee logos, bento features, stats, proof, pricing, FAQ, and a banner CTA. Emerald, light.",
+    "chrome": {
+      "site": { "navbar": "navbar", "footer": "footer" }
+    },
+    "pages": [
+      {
+        "route": "/",
+        "title": "Home",
+        "nav": "Home",
+        "chrome": "site",
+        "blocks": [
+          { "block": "hero", "variant": "split" },
+          { "block": "logo-cloud", "variant": "marquee" },
+          { "block": "feature-grid", "variant": "bento" },
+          "stats",
+          "testimonials",
+          "pricing",
+          "faq",
+          { "block": "cta", "variant": "banner" }
+        ]
+      }
+    ],
+    "extras": { "not-found": "not-found" },
+    "defaults": { "theme": "emerald", "mode": "light", "brand": "__APP_NAME__" }
+  }
+}

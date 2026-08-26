@@ -1,0 +1,27 @@
+{
+  "name": "landing-shop",
+  "type": "registry:app",
+  "planVersion": 1,
+  "manifest": {
+    "title": "Shop",
+    "description": "Apparel/storefront landing: compact hero, editorial product showcase, and a banner CTA. Sunset, light.",
+    "chrome": {
+      "site": { "navbar": "navbar", "footer": "footer" }
+    },
+    "pages": [
+      {
+        "route": "/",
+        "title": "Home",
+        "nav": "Home",
+        "chrome": "site",
+        "blocks": [
+          { "block": "hero", "variant": "compact" },
+          { "block": "product-grid", "variant": "showcase" },
+          { "block": "cta", "variant": "banner" }
+        ]
+      }
+    ],
+    "extras": { "not-found": "not-found" },
+    "defaults": { "theme": "sunset", "mode": "light", "brand": "__APP_NAME__" }
+  }
+}

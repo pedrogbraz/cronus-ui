@@ -1,0 +1,29 @@
+{
+  "name": "landing-ops",
+  "type": "registry:app",
+  "planVersion": 1,
+  "manifest": {
+    "title": "Ops",
+    "description": "Linear-style product landing: split hero with a quality panel, logo cloud, workflow features, integrations, and a full-width CTA.",
+    "chrome": {
+      "site": { "navbar": "navbar", "footer": "footer" }
+    },
+    "pages": [
+      {
+        "route": "/",
+        "title": "Home",
+        "nav": "Home",
+        "chrome": "site",
+        "blocks": [
+          { "block": "hero", "variant": "split" },
+          "logo-cloud",
+          "feature-grid",
+          "integrations",
+          { "block": "cta", "variant": "banner" }
+        ]
+      }
+    ],
+    "extras": { "not-found": "not-found" },
+    "defaults": { "theme": "aurora", "mode": "dark", "brand": "__APP_NAME__" }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "name": "mail",
+  "type": "registry:app",
+  "planVersion": 1,
+  "manifest": {
+    "title": "Mail",
+    "description": "A Pro inbox app: notification panel and activity feed under an app shell, plus compose and notification preferences.",
+    "chrome": {
+      "shell": { "block": "app-shell-chrome" },
+      "bare": {}
+    },
+    "pages": [
+      {
+        "route": "/login",
+        "title": "Sign in",
+        "chrome": "bare",
+        "blocks": [{ "block": "login", "variant": "split" }]
+      },
+      {
+        "route": "/",
+        "title": "Inbox",
+        "nav": "Inbox",
+        "chrome": "shell",
+        "blocks": ["notification-panel", "activity-feed"]
+      },
+      {
+        "route": "/compose",
+        "title": "Compose",
+        "nav": "Compose",
+        "chrome": "shell",
+        "blocks": ["contact-form"]
+      },
+      {
+        "route": "/preferences",
+        "title": "Preferences",
+        "nav": "Preferences",
+        "chrome": "shell",
+        "blocks": ["notification-preferences"]
+      }
+    ],
+    "extras": { "not-found": "not-found" },
+    "defaults": { "theme": "midnight", "mode": "dark", "brand": "__APP_NAME__" }
+  }
+}

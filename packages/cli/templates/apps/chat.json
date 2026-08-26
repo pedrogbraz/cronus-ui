@@ -1,0 +1,44 @@
+{
+  "name": "chat",
+  "type": "registry:app",
+  "planVersion": 1,
+  "manifest": {
+    "title": "Chat",
+    "description": "A Pro assistant app: chat thread and prompt box under an app shell, plus a replies surface and settings.",
+    "chrome": {
+      "shell": { "block": "app-shell-chrome" },
+      "bare": {}
+    },
+    "pages": [
+      {
+        "route": "/login",
+        "title": "Sign in",
+        "chrome": "bare",
+        "blocks": [{ "block": "login", "variant": "split" }]
+      },
+      {
+        "route": "/",
+        "title": "Thread",
+        "nav": "Thread",
+        "chrome": "shell",
+        "blocks": ["chat-thread"]
+      },
+      {
+        "route": "/new",
+        "title": "New",
+        "nav": "New",
+        "chrome": "shell",
+        "blocks": ["prompt-box", "ai-response"]
+      },
+      {
+        "route": "/settings",
+        "title": "Settings",
+        "nav": "Settings",
+        "chrome": "shell",
+        "blocks": ["settings"]
+      }
+    ],
+    "extras": { "not-found": "not-found" },
+    "defaults": { "theme": "aurora", "mode": "dark", "brand": "__APP_NAME__" }
+  }
+}

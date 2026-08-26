@@ -1,0 +1,31 @@
+{
+  "name": "landing-premium",
+  "type": "registry:app",
+  "planVersion": 1,
+  "manifest": {
+    "title": "Premium SaaS",
+    "description": "Full SaaS marketing page: split hero, logo cloud, features, toggle pricing, testimonials, FAQ, and CTA. Aurora, light.",
+    "chrome": {
+      "site": { "navbar": "navbar", "footer": "footer" }
+    },
+    "pages": [
+      {
+        "route": "/",
+        "title": "Home",
+        "nav": "Home",
+        "chrome": "site",
+        "blocks": [
+          { "block": "hero", "variant": "split" },
+          "logo-cloud",
+          "feature-grid",
+          { "block": "pricing", "variant": "toggle" },
+          "testimonials",
+          "faq",
+          "cta"
+        ]
+      }
+    ],
+    "extras": { "not-found": "not-found" },
+    "defaults": { "theme": "aurora", "mode": "light", "brand": "__APP_NAME__" }
+  }
+}

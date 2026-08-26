@@ -1,0 +1,29 @@
+{
+  "name": "landing-docs",
+  "type": "registry:app",
+  "planVersion": 1,
+  "manifest": {
+    "title": "Docs product",
+    "description": "Developer-tool landing: announcement navbar energy via compact hero, logo cloud, features, integrations, and CTA.",
+    "chrome": {
+      "site": { "navbar": "navbar", "footer": "footer" }
+    },
+    "pages": [
+      {
+        "route": "/",
+        "title": "Home",
+        "nav": "Home",
+        "chrome": "site",
+        "blocks": [
+          { "block": "hero", "variant": "compact" },
+          "logo-cloud",
+          "feature-grid",
+          "integrations",
+          "cta"
+        ]
+      }
+    ],
+    "extras": { "not-found": "not-found" },
+    "defaults": { "theme": "aurora", "mode": "dark", "brand": "__APP_NAME__" }
+  }
+}

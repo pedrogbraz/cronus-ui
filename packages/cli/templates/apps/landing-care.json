@@ -1,0 +1,28 @@
+{
+  "name": "landing-care",
+  "type": "registry:app",
+  "planVersion": 1,
+  "manifest": {
+    "title": "Care",
+    "description": "Calm healthcare/conversion landing: waitlist hero, bento features, testimonials, and a contained CTA. Emerald, light.",
+    "chrome": {
+      "site": { "navbar": "navbar", "footer": "footer" }
+    },
+    "pages": [
+      {
+        "route": "/",
+        "title": "Home",
+        "nav": "Home",
+        "chrome": "site",
+        "blocks": [
+          "waitlist",
+          { "block": "feature-grid", "variant": "bento" },
+          "testimonials",
+          "cta"
+        ]
+      }
+    ],
+    "extras": { "not-found": "not-found" },
+    "defaults": { "theme": "emerald", "mode": "light", "brand": "__APP_NAME__" }
+  }
+}

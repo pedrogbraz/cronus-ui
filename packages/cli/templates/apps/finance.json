@@ -1,0 +1,44 @@
+{
+  "name": "finance",
+  "type": "registry:app",
+  "planVersion": 1,
+  "manifest": {
+    "title": "Finance",
+    "description": "A Pro money app: payouts and invoices on the home, plus billing, usage, and analytics under an app shell.",
+    "chrome": {
+      "shell": { "block": "app-shell-chrome" },
+      "bare": {}
+    },
+    "pages": [
+      {
+        "route": "/login",
+        "title": "Sign in",
+        "chrome": "bare",
+        "blocks": [{ "block": "login", "variant": "split" }]
+      },
+      {
+        "route": "/",
+        "title": "Money",
+        "nav": "Money",
+        "chrome": "shell",
+        "blocks": ["payouts", "invoice"]
+      },
+      {
+        "route": "/billing",
+        "title": "Billing",
+        "nav": "Billing",
+        "chrome": "shell",
+        "blocks": ["billing", "usage-dashboard"]
+      },
+      {
+        "route": "/analytics",
+        "title": "Analytics",
+        "nav": "Analytics",
+        "chrome": "shell",
+        "blocks": ["analytics"]
+      }
+    ],
+    "extras": { "not-found": "not-found" },
+    "defaults": { "theme": "emerald", "mode": "light", "brand": "__APP_NAME__" }
+  }
+}
