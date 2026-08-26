@@ -49,7 +49,7 @@ function optionIdForFlag(category: Category, value: string, flag: string): strin
  * Parse CLI-style flag values into a partial Stack Builder selection.
  *
  * Values intentionally use the same short tokens emitted by `generateCommand`
- * (`--web next`, `--db-setup neon`, `--mcp cooud-ui,github`, ...). The resolver
+ * (`--web next`, `--db-setup neon`, `--mcp kronus-ui,github`, ...). The resolver
  * still performs the final cascade, so invalid combinations auto-correct through
  * the same rules the UI uses.
  */

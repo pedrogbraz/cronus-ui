@@ -1,21 +1,21 @@
 {
-  "name": "@cooud-ui/stack",
+  "name": "@kronus-ui/stack",
   "version": "0.5.0",
-  "description": "Cooud Stack Builder core — catalog, resolver, CLI flags, KICKOFF.md and stack.json artifacts.",
+  "description": "Kronus Stack Builder core — catalog, resolver, CLI flags, KICKOFF.md and stack.json artifacts.",
   "type": "module",
   "license": "MIT",
-  "author": "Cooud",
+  "author": "Kronus",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pedrogbraz/cooud-ui.git",
+    "url": "git+https://github.com/pedrogbraz/kronus-ui.git",
     "directory": "packages/stack"
   },
-  "homepage": "https://github.com/pedrogbraz/cooud-ui#readme",
+  "homepage": "https://github.com/pedrogbraz/kronus-ui#readme",
   "bugs": {
-    "url": "https://github.com/pedrogbraz/cooud-ui/issues"
+    "url": "https://github.com/pedrogbraz/kronus-ui/issues"
   },
   "keywords": [
-    "cooud",
+    "kronus",
     "stack",
     "scaffold",
     "kickoff",

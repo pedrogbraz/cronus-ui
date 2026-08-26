@@ -1,5 +1,5 @@
 /**
- * The Cooud Stack Builder model — a Better-T-Stack-class stack configurator.
+ * The Kronus Stack Builder model — a Better-T-Stack-class stack configurator.
  *
  * The whole builder is driven by a single declarative {@link Catalog}: a list of
  * {@link Category}, each holding {@link Option}s that wire up to each other via

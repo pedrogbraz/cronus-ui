@@ -1,5 +1,5 @@
 /**
- * Unit tests for the Cooud Stack Builder engine + kickoff.
+ * Unit tests for the Kronus Stack Builder engine + kickoff.
  *
  * Pure functions, node environment — no DOM, no I/O. These lock down the
  * cross-category constraints the UI relies on, so a regression here means the
@@ -203,15 +203,15 @@ describe("runtime / backend constraints", () => {
 });
 
 describe("ui library", () => {
-  it("Cooud UI requires a React web frontend (disabled on Svelte)", () => {
+  it("Kronus UI requires a React web frontend (disabled on Svelte)", () => {
     const svelte = resolve(catalog, base({ web: "web-svelte" }));
-    expect(ro(svelte, "ui", "ui-cooud").available).toBe(false);
-    expect(ro(svelte, "ui", "ui-cooud").reason).toMatch(/react/i);
-    // cascade pushed ui off Cooud onto an available choice.
-    expect(svelte.selection.ui).not.toBe("ui-cooud");
+    expect(ro(svelte, "ui", "ui-kronus").available).toBe(false);
+    expect(ro(svelte, "ui", "ui-kronus").reason).toMatch(/react/i);
+    // cascade pushed ui off Kronus onto an available choice.
+    expect(svelte.selection.ui).not.toBe("ui-kronus");
 
     const next = resolve(catalog, base({ web: "web-next" }));
-    expect(ro(next, "ui", "ui-cooud").available).toBe(true);
+    expect(ro(next, "ui", "ui-kronus").available).toBe(true);
   });
 
   it("Tailwind-only / None stay available without React", () => {
@@ -262,11 +262,11 @@ describe("generateCommand", () => {
       base({ web: "web-next", database: "db-postgres", orm: "orm-drizzle" }),
       "My App!!",
     );
-    expect(cmd).toContain("bun create cooud-stack@latest my-app --yes");
+    expect(cmd).toContain("bun create kronus-stack@latest my-app --yes");
     expect(cmd).toContain("--web next");
     expect(cmd).toContain("--database postgres");
     expect(cmd).toContain("--orm drizzle");
-    expect(cmd).toContain("--ui cooud");
+    expect(cmd).toContain("--ui kronus");
     expect(cmd).toContain("--git");
   });
 
@@ -294,36 +294,36 @@ describe("sanitizeProjectName (security)", () => {
   });
 
   it("falls back to a safe default when nothing usable remains", () => {
-    expect(sanitizeProjectName("!!!")).toBe("my-cooud-app");
-    expect(sanitizeProjectName("")).toBe("my-cooud-app");
+    expect(sanitizeProjectName("!!!")).toBe("my-kronus-app");
+    expect(sanitizeProjectName("")).toBe("my-kronus-app");
   });
 
   it("the sanitized name reaches the command unbroken", () => {
     const cmd = generateCommand(base(), "evil; cat /etc/passwd");
-    expect(cmd).toContain("cooud-stack@latest evil-cat-etc-passwd --yes");
+    expect(cmd).toContain("kronus-stack@latest evil-cat-etc-passwd --yes");
     expect(cmd).not.toContain(";");
     expect(cmd).not.toContain("/etc/passwd");
   });
 });
 
 describe("generateKickoff & generateStackJson", () => {
-  it("includes the resolved stack and a Cooud UI contract when UI=Cooud", () => {
+  it("includes the resolved stack and a Kronus UI contract when UI=Kronus", () => {
     const md = generateKickoff(base({ web: "web-next" }), "my-app");
     expect(md).toContain("# KICKOFF — my-app");
-    expect(md).toContain("Cooud UI contract");
-    expect(md).toContain("@cooud-ui/ui");
+    expect(md).toContain("Kronus UI contract");
+    expect(md).toContain("@kronus-ui/ui");
     expect(md).toContain("Definition of Done");
   });
 
-  it("omits the Cooud UI contract when UI is not Cooud", () => {
+  it("omits the Kronus UI contract when UI is not Kronus", () => {
     const md = generateKickoff(base({ web: "web-svelte", ui: "ui-tailwind" }), "site");
-    expect(md).not.toContain("Cooud UI contract");
+    expect(md).not.toContain("Kronus UI contract");
   });
 
   it("stack.json is valid JSON carrying the sanitized name and stack", () => {
     const json = JSON.parse(generateStackJson(base({ web: "web-next" }), "Hello World"));
     expect(json.name).toBe("hello-world");
     expect(json.version).toBe(1);
-    expect(json.stack.ui).toBe("ui-cooud");
+    expect(json.stack.ui).toBe("ui-kronus");
   });
 });

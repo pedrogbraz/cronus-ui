@@ -12,9 +12,9 @@ describe("resolveStackFlags", () => {
         database: "postgres",
         orm: "drizzle",
         "db-setup": "neon",
-        ui: "cooud",
+        ui: "kronus",
         ai: "claude-code,cursor",
-        mcp: "cooud-ui,github",
+        mcp: "kronus-ui,github",
         "no-install": true,
       },
       { catalog },
@@ -24,9 +24,9 @@ describe("resolveStackFlags", () => {
     expect(config.database).toBe("db-postgres");
     expect(config.orm).toBe("orm-drizzle");
     expect(config.dbSetup).toBe("dbsetup-neon");
-    expect(config.ui).toBe("ui-cooud");
+    expect(config.ui).toBe("ui-kronus");
     expect(config.assistants).toEqual(["ai-claude-code", "ai-cursor"]);
-    expect(config.mcp).toEqual(["mcp-cooud-ui", "mcp-github"]);
+    expect(config.mcp).toEqual(["mcp-kronus-ui", "mcp-github"]);
     expect(config.install).toBe(false);
   });
 

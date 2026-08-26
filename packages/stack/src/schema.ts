@@ -5,11 +5,11 @@ import type { Category } from "./types.js";
 type JsonSchema = Record<string, unknown>;
 
 export const STACK_SCHEMA_VERSION = 1;
-export const STACK_SCHEMA_ID = "https://cooud.dev/schema/stack-1.json";
+export const STACK_SCHEMA_ID = "https://kronus.dev/schema/stack-1.json";
 export const STACK_GENERATOR_PACKAGE = STACK_CREATE_PACKAGE;
 
 export const STACK_BUILDER_METADATA = {
-  name: "Cooud Stack Builder",
+  name: "Kronus Stack Builder",
   statusLabel: "Stable",
   route: "/stack",
   docsRoute: "/docs/stack-builder",
@@ -19,7 +19,7 @@ export const STACK_BUILDER_METADATA = {
   generatorCreateAlias: STACK_CREATE_ALIAS,
   generatorPackageExistsInRepo: true,
   generatorTruth:
-    "This repository ships create-cooud-stack; bun create cooud-stack@latest resolves to that generator package after publish.",
+    "This repository ships create-kronus-stack; bun create kronus-stack@latest resolves to that generator package after publish.",
   artifacts: ["Scaffolding command", "KICKOFF.md", "stack.json"],
 } as const;
 
@@ -59,8 +59,8 @@ const stackProperties = Object.fromEntries(
 export const STACK_SCHEMA: JsonSchema = {
   $schema: "https://json-schema.org/draft/2020-12/schema",
   $id: STACK_SCHEMA_ID,
-  title: "Cooud Stack Builder snapshot",
-  description: "A machine-readable snapshot emitted by the Cooud Stack Builder.",
+  title: "Kronus Stack Builder snapshot",
+  description: "A machine-readable snapshot emitted by the Kronus Stack Builder.",
   type: "object",
   additionalProperties: false,
   required: ["$schema", "version", "name", "generator", "stack"],
@@ -94,7 +94,7 @@ export const STACK_SCHEMA: JsonSchema = {
 export const STACK_SCHEMA_EXAMPLE = {
   $schema: STACK_SCHEMA_ID,
   version: STACK_SCHEMA_VERSION,
-  name: "my-cooud-app",
+  name: "my-kronus-app",
   generator: STACK_BUILDER_GENERATOR,
   stack: {
     web: "web-next",
@@ -106,7 +106,7 @@ export const STACK_SCHEMA_EXAMPLE = {
     dbSetup: "dbsetup-basic",
     auth: "auth-none",
     payments: "pay-none",
-    ui: "ui-cooud",
+    ui: "ui-kronus",
     assistants: ["ai-claude-code"],
     mcp: [],
     skills: [],
