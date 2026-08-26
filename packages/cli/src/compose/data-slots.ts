@@ -1,12 +1,12 @@
 /**
- * Anchored replacement of a block's `@cooud:data <name>` data const and its brand
+ * Anchored replacement of a block's `@kronus:data <name>` data const and its brand
  * literal. Both mechanisms are marker/literal driven and FAIL LOUD when the anchor
  * is absent — the composer must never silently target a missing slot or brand
  * (the same guarantee `registry:check` enforces at build time, re-checked here
  * against the bytes actually on disk).
  *
  * The data-slot replacement operates on DATA CONSTS ONLY (never JSX): the region
- * between `/* @cooud:data X *\/` and the FIRST following `/* @cooud:data-end *\/`
+ * between `/* @kronus:data X *\/` and the FIRST following `/* @kronus:data-end *\/`
  * is replaced wholesale with a freshly-serialized const, keeping the markers so a
  * re-compose stays idempotent. The brand replacement, by contrast, targets JSX
  * TEXT (the chrome wordmark/copyright), so its injected value is JSX-escaped —
@@ -15,7 +15,7 @@
 
 /** The exact marker pair for a named data-slot (mirrors build-registry's `dataSlotMarkers`). */
 export function dataSlotMarkers(name: string): { open: string; close: string } {
-  return { open: `/* @cooud:data ${name} */`, close: "/* @cooud:data-end */" };
+  return { open: `/* @kronus:data ${name} */`, close: "/* @kronus:data-end */" };
 }
 
 /** Thrown when a required data-slot marker or brand literal is missing from a source. */
@@ -33,12 +33,12 @@ export class DataSlotError extends Error {
  * {@link DataSlotError} when the opening marker is absent or ambiguous (appears
  * more than once), or when no closing marker follows it — never a silent no-op.
  *
- * The close marker is GENERIC (`/* @cooud:data-end *\/`) and shared by every slot,
+ * The close marker is GENERIC (`/* @kronus:data-end *\/`) and shared by every slot,
  * so a block with two data-slots carries two close markers. We therefore pair the
  * open marker with the FIRST close marker that follows it (its own region end),
  * rather than rejecting any source in which the shared close marker repeats. This
  * is deterministic and unambiguous because slot regions are flat siblings (never
- * nested), so the first `data-end` after an `@cooud:data <name>` open always
+ * nested), so the first `data-end` after an `@kronus:data <name>` open always
  * belongs to that same slot. The only ambiguity we still reject is a duplicated
  * OPEN marker for this named slot (we would not know which region to rewrite).
  *
@@ -74,7 +74,7 @@ export function replaceDataSlot(source: string, name: string, replacement: strin
 
 /**
  * JSX-escape a value destined for a JSX **text** context (element children). The
- * chrome brand literal (`Cooud`) lives inside JSX text nodes — the navbar/footer
+ * chrome brand literal (`Kronus`) lives inside JSX text nodes — the navbar/footer
  * wordmark `<span>…</span>` and the footer copyright `<p>…</p>` — so a raw
  * substitution of a brand containing `<`, `>`, `{` or `}` would emit invalid TSX
  * (`<`/`>` are token starts) or an undefined JSX expression container (`{Store}`),
@@ -94,7 +94,7 @@ export function escapeJsxText(value: string): string {
 
 /**
  * Replace EVERY occurrence of a brand `literal` in the source with `brand`. Used
- * for the chrome wordmark/copyright (`Cooud` → the app brand), which sit in JSX
+ * for the chrome wordmark/copyright (`Kronus` → the app brand), which sit in JSX
  * text nodes. Throws {@link DataSlotError} when the literal is absent so a
  * renamed/removed anchor fails loud instead of leaving the placeholder brand.
  *

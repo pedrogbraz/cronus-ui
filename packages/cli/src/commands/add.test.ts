@@ -27,7 +27,7 @@ describe("add records the install manifest", () => {
   let cwd: string;
 
   beforeEach(() => {
-    root = mkdtempSync(join(tmpdir(), "cooud-ui-add-test-"));
+    root = mkdtempSync(join(tmpdir(), "kronus-ui-add-test-"));
     cwd = join(root, "project");
     mkdirSync(cwd, { recursive: true });
     vi.spyOn(console, "log").mockImplementation(() => {});

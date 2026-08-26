@@ -21,7 +21,7 @@ describe("release-pinned registry defaults", () => {
 
   it("uses the matching release tag instead of mutable main", () => {
     expect(DEFAULT_REGISTRY).toBe(
-      `https://raw.githubusercontent.com/pedrogbraz/cooud-ui/v${pkg.version}/registry`,
+      `https://raw.githubusercontent.com/pedrogbraz/kronus-ui/v${pkg.version}/registry`,
     );
     expect(DEFAULT_REGISTRY).not.toContain("/main/registry");
     expect(DEFAULT_CONFIG.registry).toBe(DEFAULT_REGISTRY);
@@ -39,7 +39,7 @@ describe("readConfig (backward-compatible merge)", () => {
   let cwd: string;
 
   beforeEach(() => {
-    cwd = mkdtempSync(join(tmpdir(), "cooud-ui-cfg-"));
+    cwd = mkdtempSync(join(tmpdir(), "kronus-ui-cfg-"));
   });
 
   afterEach(() => {
@@ -47,7 +47,7 @@ describe("readConfig (backward-compatible merge)", () => {
   });
 
   it("falls back to the blocks defaults for a config written before blocks existed", async () => {
-    // A pre-blocks cooud-ui.json — only ui/lib aliases + paths.
+    // A pre-blocks kronus-ui.json — only ui/lib aliases + paths.
     writeFileSync(
       join(cwd, CONFIG_FILE),
       JSON.stringify({

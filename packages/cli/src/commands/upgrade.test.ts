@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   CLI_VERSION,
@@ -10,6 +11,8 @@ import {
   readConfig,
 } from "../config.js";
 import { registrySourceAtVersion, registrySourceVersion } from "../registry.js";
+import { addPage } from "./add-page.js";
+import { composeApp } from "./compose.js";
 import { REPORT_FILE, upgrade } from "./upgrade.js";
 
 /**
@@ -69,10 +72,10 @@ function writeRegistry(root: string, version: string, items: TestItem[]): string
 
 describe("registry source version pinning", () => {
   it("extracts and re-pins the /vX.Y.Z/ segment of the default registry URL", () => {
-    const url = "https://raw.githubusercontent.com/pedrogbraz/cooud-ui/v0.2.0/registry";
+    const url = "https://raw.githubusercontent.com/pedrogbraz/kronus-ui/v0.2.0/registry";
     expect(registrySourceVersion(url)).toBe("0.2.0");
     expect(registrySourceAtVersion(url, "0.1.0")).toBe(
-      "https://raw.githubusercontent.com/pedrogbraz/cooud-ui/v0.1.0/registry",
+      "https://raw.githubusercontent.com/pedrogbraz/kronus-ui/v0.1.0/registry",
     );
   });
 
@@ -89,7 +92,7 @@ describe("upgrade", () => {
   let errors: string[];
 
   beforeEach(() => {
-    root = mkdtempSync(join(tmpdir(), "cooud-ui-upgrade-test-"));
+    root = mkdtempSync(join(tmpdir(), "kronus-ui-upgrade-test-"));
     cwd = join(root, "project");
     mkdirSync(join(cwd, "components", "ui"), { recursive: true });
     logs = [];
@@ -401,5 +404,252 @@ describe("upgrade", () => {
 
     expect(process.exitCode).toBe(1);
     expect(errors.join("\n")).toContain('Did you mean "widget"?');
+  });
+});
+
+const REPO_REGISTRY = fileURLToPath(new URL("../../../../registry", import.meta.url));
+const HAS_REGISTRY = existsSync(join(REPO_REGISTRY, "meta.json"));
+const HOME_PAGE = "app/(site)/page.tsx";
+const FAQ_PAGE = "app/(site)/faq/page.tsx";
+
+/** Write a tiny custom app manifest (one chrome group, one `/` page). */
+function writeTinyManifest(dir: string, blocks: string[], name = "tiny"): string {
+  const path = join(dir, `${name}.json`);
+  writeFileSync(
+    path,
+    JSON.stringify({
+      name,
+      type: "registry:app",
+      planVersion: 1,
+      manifest: {
+        title: "Tiny",
+        description: "test",
+        chrome: { site: { navbar: "navbar", footer: "footer" } },
+        pages: [{ route: "/", title: "Home", nav: "Home", chrome: "site", blocks }],
+      },
+    }),
+  );
+  return path;
+}
+
+function seedComposeProject(cwd: string, name = "loja"): void {
+  mkdirSync(cwd, { recursive: true });
+  writeFileSync(
+    join(cwd, "package.json"),
+    JSON.stringify({ name, version: "0.0.0", private: true }),
+  );
+  writeFileSync(
+    join(cwd, CONFIG_FILE),
+    JSON.stringify({ ...DEFAULT_CONFIG, registry: REPO_REGISTRY }, null, 2),
+  );
+}
+
+describe.skipIf(!HAS_REGISTRY)("upgrade --all — composed pages (F4)", () => {
+  let root: string;
+  let cwd: string;
+  let logs: string[];
+  let errors: string[];
+
+  beforeEach(() => {
+    root = mkdtempSync(join(tmpdir(), "kronus-ui-upgrade-compose-"));
+    cwd = join(root, "project");
+    seedComposeProject(cwd);
+    logs = [];
+    errors = [];
+    vi.spyOn(console, "log").mockImplementation((...args: unknown[]) => {
+      logs.push(args.join(" "));
+    });
+    vi.spyOn(console, "error").mockImplementation((...args: unknown[]) => {
+      errors.push(args.join(" "));
+    });
+  });
+
+  afterEach(() => {
+    rmSync(root, { recursive: true, force: true });
+    vi.restoreAllMocks();
+    process.exitCode = undefined;
+  });
+
+  const loggedText = (): string => logs.join("\n");
+  const errorText = (): string => errors.join("\n");
+  const pageFile = (rel = HOME_PAGE): string => readFileSync(join(cwd, rel), "utf8");
+  const snapFile = (key: string, rel = HOME_PAGE): string =>
+    readFileSync(join(cwd, `.kronus-ui/base/${key}/${rel}`), "utf8");
+
+  async function composeTiny(manifestPath: string): Promise<void> {
+    await composeApp({
+      targetDir: cwd,
+      manifestPath,
+      skipInstall: true,
+      choices: { brand: "Acme" },
+    });
+  }
+
+  it("compose snapshot path is the composed key, not the package name", async () => {
+    await composeTiny(writeTinyManifest(cwd, ["hero"]));
+    expect(existsSync(join(cwd, `.kronus-ui/base/tiny/${HOME_PAGE}`))).toBe(true);
+    expect(existsSync(join(cwd, `.kronus-ui/base/loja/${HOME_PAGE}`))).toBe(false);
+  });
+
+  it("fast-forwards a composed page when local == snapshot and upstream gained a block", async () => {
+    const manifestPath = writeTinyManifest(cwd, ["hero"]);
+    await composeTiny(manifestPath);
+    expect(pageFile()).toContain("<HeroBlock />");
+    expect(pageFile()).not.toContain("<CtaBlock />");
+    expect(snapFile("tiny")).toBe(pageFile());
+
+    writeTinyManifest(cwd, ["hero", "cta"]);
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, manifestPath });
+
+    expect(pageFile()).toContain("<CtaBlock />");
+    expect(pageFile()).toContain("<HeroBlock />");
+    expect(snapFile("tiny")).toBe(pageFile());
+    expect((await readConfig(cwd)).composed?.tiny?.version).toBe(CLI_VERSION);
+    expect((await readConfig(cwd)).installed?.cta).toBeDefined();
+    expect(existsSync(join(cwd, "components/blocks/cta.tsx"))).toBe(true);
+    expect(loggedText()).toContain("fast-forward");
+  });
+
+  it("keeps local page edits when upstream did not change", async () => {
+    const manifestPath = writeTinyManifest(cwd, ["hero"]);
+    await composeTiny(manifestPath);
+    const marker = "// KEEP-ME-UNIQUE";
+    writeFileSync(join(cwd, HOME_PAGE), `${marker}\n${pageFile()}`, "utf8");
+    const snapBefore = snapFile("tiny");
+
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, manifestPath });
+
+    expect(pageFile()).toContain(marker);
+    expect(snapFile("tiny")).toBe(snapBefore);
+    expect(loggedText()).toContain("kept your edits");
+  });
+
+  it("leaves a conflicted composed page untouched without --yes", async () => {
+    const manifestPath = writeTinyManifest(cwd, ["hero"]);
+    await composeTiny(manifestPath);
+    const localRewrite = [
+      "// USER REWRITE",
+      "export default function HomePage() {",
+      "  return <div>mine</div>;",
+      "}",
+      "",
+    ].join("\n");
+    writeFileSync(join(cwd, HOME_PAGE), localRewrite, "utf8");
+    const snapBefore = snapFile("tiny");
+    writeTinyManifest(cwd, ["hero", "cta"]);
+
+    await upgrade([], {
+      cwd,
+      all: true,
+      registry: REPO_REGISTRY,
+      manifestPath,
+      confirm: async () => false,
+    });
+
+    expect(pageFile()).toBe(localRewrite);
+    expect(pageFile()).not.toContain("<<<<<<<");
+    expect(snapFile("tiny")).toBe(snapBefore);
+    expect(loggedText()).toContain("CONFLICT");
+  });
+
+  it("writes composed-page conflict markers with --yes and snapshots upstream", async () => {
+    const manifestPath = writeTinyManifest(cwd, ["hero"]);
+    await composeTiny(manifestPath);
+    writeFileSync(
+      join(cwd, HOME_PAGE),
+      [
+        "// USER REWRITE",
+        "export default function HomePage() {",
+        "  return <div>mine</div>;",
+        "}",
+        "",
+      ].join("\n"),
+      "utf8",
+    );
+    writeTinyManifest(cwd, ["hero", "cta"]);
+
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, manifestPath, yes: true });
+
+    expect(pageFile()).toContain("<<<<<<< LOCAL (your edits)");
+    expect(pageFile()).toContain(">>>>>>> UPSTREAM");
+    // Snapshot is the new upstream render, not the conflict-marked local file.
+    expect(snapFile("tiny")).toContain("<CtaBlock />");
+    expect(snapFile("tiny")).not.toContain("<<<<<<<");
+  });
+
+  it("does not delete an add-page route when upgrading other pages", async () => {
+    const manifestPath = writeTinyManifest(cwd, ["hero"]);
+    await composeTiny(manifestPath);
+    await addPage({
+      targetDir: cwd,
+      route: "/faq",
+      blocks: ["faq"],
+      skipInstall: true,
+      manifestPath,
+    });
+    expect(existsSync(join(cwd, FAQ_PAGE))).toBe(true);
+    expect((await readConfig(cwd)).composed?.tiny?.choices.pages).toEqual(["/", "/faq"]);
+
+    writeTinyManifest(cwd, ["hero", "cta"]);
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, manifestPath });
+
+    expect(existsSync(join(cwd, FAQ_PAGE))).toBe(true);
+    expect(pageFile(FAQ_PAGE)).toContain("<Faq");
+    expect((await readConfig(cwd)).composed?.tiny?.choices.pages).toEqual(["/", "/faq"]);
+    expect(pageFile()).toContain("<CtaBlock />");
+  });
+
+  it("dry-run writes nothing: page, snapshot, and kronus-ui.json stay identical", async () => {
+    const manifestPath = writeTinyManifest(cwd, ["hero"]);
+    await composeTiny(manifestPath);
+    writeTinyManifest(cwd, ["hero", "cta"]);
+    const pageBefore = pageFile();
+    const snapBefore = snapFile("tiny");
+    const jsonBefore = readFileSync(join(cwd, CONFIG_FILE), "utf8");
+
+    await upgrade([], {
+      cwd,
+      all: true,
+      dryRun: true,
+      yes: true,
+      registry: REPO_REGISTRY,
+      manifestPath,
+    });
+
+    expect(pageFile()).toBe(pageBefore);
+    expect(snapFile("tiny")).toBe(snapBefore);
+    expect(readFileSync(join(cwd, CONFIG_FILE), "utf8")).toBe(jsonBefore);
+    expect(existsSync(join(cwd, REPORT_FILE))).toBe(false);
+    expect(existsSync(join(cwd, "components/blocks/cta.tsx"))).toBe(false);
+    expect(loggedText()).toContain("would install cta");
+    expect(loggedText()).toContain("Nothing written (dry-run)");
+  });
+
+  it("fails loud on a bundled-name collision without --manifest", async () => {
+    const manifestPath = writeTinyManifest(cwd, ["hero"], "landing");
+    await composeTiny(manifestPath);
+    const pageBefore = pageFile();
+    const jsonBefore = readFileSync(join(cwd, CONFIG_FILE), "utf8");
+
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY });
+
+    expect(process.exitCode).toBe(1);
+    expect(errorText()).toMatch(/provenance hash mismatch|Re-run with --manifest/);
+    expect(pageFile()).toBe(pageBefore);
+    expect(readFileSync(join(cwd, CONFIG_FILE), "utf8")).toBe(jsonBefore);
+  });
+
+  it("named upgrade does not touch composed pages", async () => {
+    const manifestPath = writeTinyManifest(cwd, ["hero"]);
+    await composeTiny(manifestPath);
+    writeTinyManifest(cwd, ["hero", "cta"]);
+    const pageBefore = pageFile();
+    const snapBefore = snapFile("tiny");
+
+    await upgrade(["hero"], { cwd, registry: REPO_REGISTRY });
+
+    expect(pageFile()).toBe(pageBefore);
+    expect(pageFile()).not.toContain("<CtaBlock />");
+    expect(snapFile("tiny")).toBe(snapBefore);
   });
 });

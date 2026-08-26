@@ -1,6 +1,6 @@
 import { mkdir } from "node:fs/promises";
 import { join } from "node:path";
-import { type CooudUIConfig, DEFAULT_CONFIG, hasConfig, writeConfig } from "../config.js";
+import { DEFAULT_CONFIG, hasConfig, type KronusUIConfig, writeConfig } from "../config.js";
 import { Registry } from "../registry.js";
 import { detectPackageManager, log, runInstall, writeItemFiles } from "../utils.js";
 
@@ -17,18 +17,18 @@ export async function init(options: InitOptions): Promise<void> {
   const { cwd } = options;
 
   if (hasConfig(cwd) && !options.yes) {
-    log.warn(`${"cooud-ui.json"} already exists. Re-run with --yes to overwrite.`);
+    log.warn(`${"kronus-ui.json"} already exists. Re-run with --yes to overwrite.`);
     return;
   }
 
-  const config: CooudUIConfig = {
+  const config: KronusUIConfig = {
     ...DEFAULT_CONFIG,
     registry: options.registry ?? DEFAULT_CONFIG.registry,
   };
 
-  log.title("Initializing Cooud UI");
+  log.title("Initializing Kronus UI");
   await writeConfig(cwd, config);
-  log.ok("Wrote cooud-ui.json");
+  log.ok("Wrote kronus-ui.json");
 
   await mkdir(join(cwd, config.paths.ui), { recursive: true });
   await mkdir(join(cwd, config.paths.lib), { recursive: true });
@@ -60,11 +60,11 @@ export async function init(options: InitOptions): Promise<void> {
 
   log.title("Next steps");
   log.step(
-    "1. Add Cooud CSS variables or install @cooud-ui/tokens if your registry access allows it.",
+    "1. Add Kronus CSS variables or install @kronus-ui/tokens if your registry access allows it.",
   );
-  log.step('2. In your global CSS:  @import "tailwindcss";  then import your Cooud token CSS.');
+  log.step('2. In your global CSS:  @import "tailwindcss";  then import your Kronus token CSS.');
   log.step(
-    "3. Wrap your app in <CooudUIProvider> from @cooud-ui/theme if you use the theme package.",
+    "3. Wrap your app in <KronusUIProvider> from @kronus-ui/theme if you use the theme package.",
   );
-  log.step("4. Add components:  npx cooud-ui add button card dialog");
+  log.step("4. Add components:  npx kronus-ui add button card dialog");
 }

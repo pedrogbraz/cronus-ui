@@ -28,7 +28,7 @@ export async function list(options: ListOptions): Promise<void> {
   const ui = index.filter((i) => i.type === "registry:ui").map((i) => i.name);
   const lib = index.filter((i) => i.type === "registry:lib").map((i) => i.name);
 
-  log.title(`Cooud UI registry — ${index.length} items`);
+  log.title(`Kronus UI registry — ${index.length} items`);
   if (lib.length > 0) console.log(`${pc.dim("lib")}  ${lib.join(", ")}`);
   console.log(`${pc.dim("ui")}   ${ui.join(", ")}`);
 }

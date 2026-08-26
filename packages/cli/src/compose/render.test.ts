@@ -212,8 +212,8 @@ describe("renderPlan — app-shell chrome (F2 saas shell)", () => {
     expect(out).not.toContain('{ label: "Home", href: "/dashboard" }');
     // Brand wordmark replaced; markers preserved for a recompose.
     expect(out).toContain("Sidebar>Acme<");
-    expect(out).not.toContain(">Cooud<");
-    expect(out).toContain("/* @cooud:data app-nav */");
+    expect(out).not.toContain(">Kronus<");
+    expect(out).toContain("/* @kronus:data app-nav */");
   });
 
   it("a bare-only group layout under the same plan stays a passthrough (no shell leak)", () => {
@@ -230,10 +230,10 @@ describe("rewriteChromeBlock — data-slot + brand injection", () => {
     expect(out).toContain('{ label: "Home", href: "/" }');
     expect(out).not.toContain('{ label: "Features", href: "#features" }');
     expect(out).toContain("<span>Acme</span>");
-    expect(out).not.toContain("Cooud");
+    expect(out).not.toContain("Kronus");
     // Markers preserved so a recompose stays anchored.
-    expect(out).toContain("/* @cooud:data navbar-links */");
-    expect(out).toContain("/* @cooud:data-end */");
+    expect(out).toContain("/* @kronus:data navbar-links */");
+    expect(out).toContain("/* @kronus:data-end */");
   });
 
   it("wraps the nav links in a single Navigation column for the footer", () => {
@@ -242,7 +242,7 @@ describe("rewriteChromeBlock — data-slot + brand injection", () => {
     expect(out).toContain('heading: "Navigation"');
     expect(out).toContain('{ label: "Home", href: "/" }');
     // Both brand occurrences (wordmark + copyright) replaced.
-    expect(out).not.toContain("Cooud");
+    expect(out).not.toContain("Kronus");
     expect((out.match(/Acme/g) ?? []).length).toBe(2);
   });
 });

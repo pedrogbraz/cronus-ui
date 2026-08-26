@@ -142,7 +142,7 @@ describe("buildMeta — happy path invariants", () => {
     expect(navbar?.kind).toBe("chrome");
     // data-slot markers → recorded slot; brand literal → recorded token literal.
     expect(navbar?.dataSlots).toEqual(["navbar-links"]);
-    expect(navbar?.brandTokens).toEqual([{ token: "brand", literal: "Cooud" }]);
+    expect(navbar?.brandTokens).toEqual([{ token: "brand", literal: "Kronus" }]);
 
     // Block keys are sorted ascending (stable, index-order-independent).
     const keys = Object.keys(meta.blocks);
@@ -168,10 +168,10 @@ describe("buildMeta — fail-loud invariants (each SHOULD throw)", () => {
 
   it("throws when a declared brand-token literal is absent from the shipped source", async () => {
     const bad = cloneSources();
-    // Remove the "Cooud" wordmark so the brand substitution has no anchor.
-    bad.set("navbar", (bad.get("navbar") as string).replaceAll("Cooud", "Brandless"));
+    // Remove the "Kronus" wordmark so the brand substitution has no anchor.
+    bad.set("navbar", (bad.get("navbar") as string).replaceAll("Kronus", "Brandless"));
     await expect(buildMeta(bad, variantSources)).rejects.toThrowError(
-      /block "navbar": brand-token literal "Cooud" .* is absent from the shipped source/,
+      /block "navbar": brand-token literal "Kronus" .* is absent from the shipped source/,
     );
   });
 
@@ -663,7 +663,7 @@ describe("distinctiveLibValues — programmatic forbidden-value derivation (F3)"
     expect(forbidden.has("INV-2026-006")).toBe(true);
     expect(forbidden.has("INV-2046")).toBe(true); // was NOT an old sentinel
     expect(forbidden.has("Mara Castillo")).toBe(true);
-    expect(forbidden.has("mara@cooud.io")).toBe(true); // team email — never an old sentinel
+    expect(forbidden.has("mara@kronus.io")).toBe(true); // team email — never an old sentinel
     expect(forbidden.has("Total revenue")).toBe(true); // KPI label — never an old sentinel
     expect(forbidden.has("Active users")).toBe(true);
     expect(forbidden.has("For growing teams that need room to scale.")).toBe(true); // tagline
@@ -706,9 +706,7 @@ describe("validateNoInlineMocks — anti-inline-mock gate (F3)", () => {
   });
 
   it("covers exactly the blocks that are 100% free of inline lib-data", () => {
-    // `dashboard` is DE-LISTED: it carries block-local person data (Lena Park /
-    // lena@acme.dev) never lifted into demo-saas, so it is not a fully-migrated
-    // block and must not appear here (honesty over migrated-count).
+    // Compact/pipeline stats variants stay un-migrated (not the saas default KPI grid).
     expect([...MIGRATED_BLOCKS]).toEqual([
       "cart",
       "cart--drawer",
@@ -718,8 +716,26 @@ describe("validateNoInlineMocks — anti-inline-mock gate (F3)", () => {
       "product-grid--with-filters",
       "billing",
       "billing--plans",
+      "usage-dashboard",
+      "app-shell-chrome",
+      "dashboard",
+      "settings",
+      "stats",
+      "team",
+      "dashboard--admin-overview",
+      "analytics",
+      "product-detail",
+      "product-detail--gallery",
+      "product-detail--minimal",
+      "checkout",
+      "product-grid--showcase",
+      "invoice",
+      "order-tracking",
+      "order-tracking--delivered",
+      "signup",
+      "signup--split-proof",
+      "signup--with-plan",
     ]);
-    expect([...MIGRATED_BLOCKS]).not.toContain("dashboard");
   });
 
   it("every migrated block still imports its demo lib (nothing dropped)", () => {
@@ -844,11 +860,8 @@ describe("validateNoInlineMocks — anti-inline-mock gate (F3)", () => {
     // The un-migrated cards variant carries "#CD-58291" inline by design.
     const cards = variantSources.get("order-history--cards");
     if (cards) expect(cards.includes("#CD-58291")).toBe(true);
-    // `dashboard` (de-listed) carries block-local "Lena Park" inline person data.
-    expect((map.get("dashboard") as string).includes("Lena Park")).toBe(true);
-    // Yet the gate reports nothing for either (neither is in MIGRATED_BLOCKS).
+    // Yet the gate reports nothing for it (it is not in MIGRATED_BLOCKS).
     const problems = run(map);
     expect(problems.some((p) => p.startsWith("order-history--cards:"))).toBe(false);
-    expect(problems.some((p) => p.startsWith("dashboard:"))).toBe(false);
   });
 });

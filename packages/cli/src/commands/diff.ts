@@ -14,7 +14,7 @@ interface DiffOptions {
 export async function diff(names: string[], options: DiffOptions): Promise<void> {
   const { cwd } = options;
   if (!hasConfig(cwd)) {
-    log.err("No cooud-ui.json found. Run `cooud-ui init` first.");
+    log.err("No kronus-ui.json found. Run `kronus-ui init` first.");
     process.exitCode = 1;
     return;
   }
@@ -55,6 +55,6 @@ export async function diff(names: string[], options: DiffOptions): Promise<void>
   if (changed === 0) log.title("Everything is up to date.");
   else
     log.title(
-      `${changed} component(s) differ. Run \`cooud-ui upgrade\` to merge upstream updates without losing your edits.`,
+      `${changed} component(s) differ. Run \`kronus-ui upgrade\` to merge upstream updates without losing your edits.`,
     );
 }

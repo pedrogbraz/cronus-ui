@@ -57,20 +57,20 @@ describe("writeItemFiles (registry:block)", () => {
   let projectDir: string;
 
   beforeEach(() => {
-    projectDir = mkdtempSync(join(tmpdir(), "cooud-ui-blk-"));
+    projectDir = mkdtempSync(join(tmpdir(), "kronus-ui-blk-"));
   });
 
   afterEach(() => {
     rmSync(projectDir, { recursive: true, force: true });
   });
 
-  it("writes a block to paths.blocks and leaves @cooud-ui/ui imports untouched", async () => {
+  it("writes a block to paths.blocks and leaves @kronus-ui/ui imports untouched", async () => {
     const source =
-      'import { Button, Card } from "@cooud-ui/ui";\n\nexport function Dashboard() {}\n';
+      'import { Button, Card } from "@kronus-ui/ui";\n\nexport function Dashboard() {}\n';
     const item: RegistryItem = {
       name: "dashboard",
       type: "registry:block",
-      dependencies: ["@cooud-ui/ui@0.2.0", "lucide-react@^0.460.0"],
+      dependencies: ["@kronus-ui/ui@0.2.0", "lucide-react@^0.460.0"],
       registryDependencies: [],
       files: [{ path: "dashboard.tsx", content: source, target: "block" }],
     };
@@ -84,7 +84,7 @@ describe("writeItemFiles (registry:block)", () => {
     expect(skipped).toEqual([]);
 
     const onDisk = readFileSync(join(projectDir, expectedRel), "utf8");
-    expect(onDisk).toContain('from "@cooud-ui/ui"');
+    expect(onDisk).toContain('from "@kronus-ui/ui"');
     expect(onDisk).toBe(source);
   });
 });

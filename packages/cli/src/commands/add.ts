@@ -26,12 +26,12 @@ export async function add(names: string[], options: AddOptions): Promise<void> {
   const { cwd } = options;
 
   if (!hasConfig(cwd)) {
-    log.err("No cooud-ui.json found. Run `cooud-ui init` first.");
+    log.err("No kronus-ui.json found. Run `kronus-ui init` first.");
     process.exitCode = 1;
     return;
   }
   if (names.length === 0) {
-    log.err("Specify at least one component, e.g. `cooud-ui add button card`.");
+    log.err("Specify at least one component, e.g. `kronus-ui add button card`.");
     process.exitCode = 1;
     return;
   }
@@ -55,7 +55,7 @@ export async function add(names: string[], options: AddOptions): Promise<void> {
             : `Unknown item "${name}".`,
         );
       }
-      log.step("Run `cooud-ui list` to see all available items.");
+      log.step("Run `kronus-ui list` to see all available items.");
       process.exitCode = 1;
       return;
     }
@@ -74,7 +74,7 @@ export async function add(names: string[], options: AddOptions): Promise<void> {
 
   const requested = new Set(names);
   // Transitive registry items pulled in to satisfy a requested item's
-  // registryDependencies. Blocks import the @cooud-ui/ui package rather than
+  // registryDependencies. Blocks import the @kronus-ui/ui package rather than
   // copied source, so they never pull in components — only ui/lib items do.
   const pulledIn = items.filter(
     (i) => !requested.has(i.name) && (i.type === "registry:ui" || i.type === "registry:lib"),

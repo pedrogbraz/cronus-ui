@@ -1,6 +1,6 @@
 /**
- * Generates the copy-paste registry consumed by the `cooud-ui add` CLI.
- * Reads the real @cooud-ui/ui component sources, derives npm + cross-component
+ * Generates the copy-paste registry consumed by the `kronus-ui add` CLI.
+ * Reads the real @kronus-ui/ui component sources, derives npm + cross-component
  * dependencies by parsing imports, and writes registry/*.json at the repo root.
  *
  * Run from anywhere:  bun run packages/cli/scripts/build-registry.ts
@@ -118,6 +118,7 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     variants: [
       { id: "split", constName: "splitHeroCode" },
       { id: "compact", constName: "compactHeroCode" },
+      { id: "atmosphere", constName: "atmosphereHeroCode" },
     ],
   },
   {
@@ -469,13 +470,13 @@ const CATEGORY_KIND: Readonly<Record<string, BlockKind>> = {
  * only the two chrome blocks that carry the brand wordmark.
  */
 const BLOCK_BRAND_TOKENS: Readonly<Record<string, ReadonlyArray<BrandTokenMeta>>> = {
-  navbar: [{ token: "brand", literal: "Cooud" }],
-  footer: [{ token: "brand", literal: "Cooud" }],
-  "app-shell-chrome": [{ token: "brand", literal: "Cooud" }],
+  navbar: [{ token: "brand", literal: "Kronus" }],
+  footer: [{ token: "brand", literal: "Kronus" }],
+  "app-shell-chrome": [{ token: "brand", literal: "Kronus" }],
 };
 
 /**
- * Data-slot expectations per block: the `@cooud:data <name>` markers the block
+ * Data-slot expectations per block: the `@kronus:data <name>` markers the block
  * source MUST contain so the composer can replace the delimited data const. Both
  * `build-registry` (records them in meta) and `registry:check` (fails if absent)
  * read this table, so the two never drift.
@@ -488,7 +489,7 @@ export const BLOCK_DATA_SLOTS: Readonly<Record<string, ReadonlyArray<string>>> =
 
 /** Open/close markers for a named data-slot inside a block source. */
 export function dataSlotMarkers(name: string): { open: string; close: string } {
-  return { open: `/* @cooud:data ${name} */`, close: "/* @cooud:data-end */" };
+  return { open: `/* @kronus:data ${name} */`, close: "/* @kronus:data-end */" };
 }
 
 /**
@@ -730,7 +731,7 @@ export async function buildMeta(
       exportNameOwner.set(exportName, item.slug);
 
       // Every declared data-slot marker must be present in the shipped source
-      // (both the opening `@cooud:data <name>` and its `@cooud:data-end`), so the
+      // (both the opening `@kronus:data <name>` and its `@kronus:data-end`), so the
       // composer's anchored replacement can never silently target a missing slot.
       for (const slot of BLOCK_DATA_SLOTS[item.slug] ?? []) {
         const { open, close } = dataSlotMarkers(slot);
@@ -991,7 +992,7 @@ export async function readDemoLibSources(): Promise<Map<string, string>> {
   return sources;
 }
 
-/** Read the @cooud-ui/ui sources and derive the full, validated set of registry items. */
+/** Read the @kronus-ui/ui sources and derive the full, validated set of registry items. */
 export async function buildItems(): Promise<RegistryItem[]> {
   const pkg = JSON.parse(await readFile(join(uiRoot, "package.json"), "utf8")) as PkgJson;
   const versions = { ...pkg.dependencies, ...pkg.peerDependencies };
@@ -1063,24 +1064,24 @@ export async function buildItems(): Promise<RegistryItem[]> {
   }
 
   // Installable blocks: copy-paste product sections that depend on the published
-  // @cooud-ui/ui PACKAGE (not on copied component files), so they carry npm
+  // @kronus-ui/ui PACKAGE (not on copied component files), so they carry npm
   // `dependencies` only and an empty `registryDependencies`. Their source is
   // TS-parsed out of the app's block family files — never imported/executed.
-  const uiPackage = `@cooud-ui/ui@${pkg.version ?? "latest"}`;
+  const uiPackage = `@kronus-ui/ui@${pkg.version ?? "latest"}`;
   const blockSources = await readBlockSources();
   const variantSources = await readVariantSources();
 
   /**
    * Derive a block item's dependencies from its shipped source (bare or variant):
-   * npm `dependencies` (always pinned `@cooud-ui/ui` + any other bare imports) and
+   * npm `dependencies` (always pinned `@kronus-ui/ui` + any other bare imports) and
    * `registryDependencies` — the shared `registry:lib` modules the block imports
    * via `../lib/<name>.js` (F3: `demo-store`/`demo-saas`). Today every unmigrated
-   * block imports only `@cooud-ui/ui` + `lucide-react`, so `registryDeps` is `[]`;
+   * block imports only `@kronus-ui/ui` + `lucide-react`, so `registryDeps` is `[]`;
    * once a block is migrated to read the demo dataset it declares the lib here and
    * `resolve` pulls it in transitively (`writeItemFiles` places it under `lib`).
    */
   const blockItemDeps = (source: string): { npm: string[]; registry: string[] } => {
-    // @cooud-ui/ui is a bare import in every block but is not in the ui package's
+    // @kronus-ui/ui is a bare import in every block but is not in the ui package's
     // own dependency map, so pin it explicitly to the ui package version.
     const npm = new Set<string>([uiPackage]);
     const registry = new Set<string>();
@@ -1092,7 +1093,7 @@ export async function buildItems(): Promise<RegistryItem[]> {
       }
       if (spec.startsWith(".")) continue;
       const pkgName = packageNameOf(spec);
-      if (pkgName === "@cooud-ui/ui" || IGNORED_NPM.has(pkgName)) continue;
+      if (pkgName === "@kronus-ui/ui" || IGNORED_NPM.has(pkgName)) continue;
       npm.add(resolveDep(pkgName));
     }
     return { npm: [...npm].sort(), registry: [...registry].sort() };

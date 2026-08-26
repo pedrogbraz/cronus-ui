@@ -10,54 +10,54 @@ import type { ComposeMeta } from "./plan.js";
 
 /** Chrome sources with the exact marker + brand anchors the composer rewrites. */
 export const NAVBAR_SOURCE = [
-  'import { Badge } from "@cooud-ui/ui";',
+  'import { Badge } from "@kronus-ui/ui";',
   "",
-  "/* @cooud:data navbar-links */",
+  "/* @kronus:data navbar-links */",
   "const NAVBAR_LINKS = [",
   '  { label: "Features", href: "#features" },',
   "];",
-  "/* @cooud:data-end */",
+  "/* @kronus:data-end */",
   "",
   "export function NavbarBlock() {",
-  "  return <span>Cooud</span>;",
+  "  return <span>Kronus</span>;",
   "}",
   "",
 ].join("\n");
 
 export const FOOTER_SOURCE = [
-  'import { Separator } from "@cooud-ui/ui";',
+  'import { Separator } from "@kronus-ui/ui";',
   "",
-  "/* @cooud:data footer-links */",
+  "/* @kronus:data footer-links */",
   "const FOOTER_COLUMNS = [",
   '  { heading: "Product", links: [] },',
   "];",
-  "/* @cooud:data-end */",
+  "/* @kronus:data-end */",
   "",
   "export function FooterBlock() {",
-  "  return <footer>Cooud — © 2026 Cooud.</footer>;",
+  "  return <footer>Kronus — © 2026 Kronus.</footer>;",
   "}",
   "",
 ].join("\n");
 
 /**
  * App-shell chrome source: a client-boundary block that composes {children}
- * beside a sidebar nav (an `@cooud:data app-nav` const the composer rewrites)
+ * beside a sidebar nav (an `@kronus:data app-nav` const the composer rewrites)
  * and a brand wordmark. Mirrors the real `app-shell-chrome` block's anchors.
  */
 export const APP_SHELL_SOURCE = [
   '"use client";',
   "",
-  'import { AppShell, Sidebar } from "@cooud-ui/ui";',
+  'import { AppShell, Sidebar } from "@kronus-ui/ui";',
   'import type { ReactNode } from "react";',
   "",
-  "/* @cooud:data app-nav */",
+  "/* @kronus:data app-nav */",
   "const APP_NAV = [",
   '  { label: "Home", href: "/dashboard" },',
   "];",
-  "/* @cooud:data-end */",
+  "/* @kronus:data-end */",
   "",
   "export function AppShellChromeBlock({ children }: { children: ReactNode }) {",
-  "  return <AppShell sidebar={<Sidebar>Cooud</Sidebar>}><div>{children}</div></AppShell>;",
+  "  return <AppShell sidebar={<Sidebar>Kronus</Sidebar>}><div>{children}</div></AppShell>;",
   "}",
   "",
 ].join("\n");
@@ -104,7 +104,7 @@ export const FIXTURE_BLOCKS: Record<
  * resolve/install can find what a variant plan installs).
  */
 export function fixtureIndex(): RegistryIndex {
-  const dependencies = ["@cooud-ui/ui@0.5.0", "lucide-react@^0.400.0"];
+  const dependencies = ["@kronus-ui/ui@0.5.0", "lucide-react@^0.400.0"];
   const entries: RegistryIndex = [];
   for (const [slug, info] of Object.entries(FIXTURE_BLOCKS)) {
     entries.push({ name: slug, type: "registry:block", dependencies, registryDependencies: [] });
@@ -152,7 +152,7 @@ export function fixtureMeta(): ComposeMeta {
       exportName: info.exportName,
       kind: info.kind as ComposeMeta["blocks"][string]["kind"],
       dataSlots,
-      brandTokens: isChrome ? [{ token: "brand", literal: "Cooud" }] : [],
+      brandTokens: isChrome ? [{ token: "brand", literal: "Kronus" }] : [],
       ...(variants !== undefined ? { variants } : {}),
     };
   }

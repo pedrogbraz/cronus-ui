@@ -100,7 +100,7 @@ export interface PlanExtra {
 export interface ComposePlan {
   /** The template/manifest name — the key of the `composed{}` record. */
   templateName: string;
-  /** The project name (brand default + `__APP_NAME__` + base-snapshot dir). */
+  /** The project name (brand default + `__APP_NAME__` + legacy snapshot-dir fallback). */
   appName: string;
   planVersion: number;
   title: string;

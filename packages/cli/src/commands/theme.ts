@@ -4,7 +4,7 @@ import { isAbsolute, join } from "node:path";
 import { CONFIG_FILE, hasConfig, readConfig, writeConfig } from "../config.js";
 import { log, writeFileEnsured } from "../utils.js";
 
-/** The theme presets shipped by @cooud-ui/theme. */
+/** The theme presets shipped by @kronus-ui/theme. */
 export const THEME_PRESETS = ["aurora", "neutral", "midnight", "sunset", "emerald"] as const;
 
 /** The two color modes a preset can be pinned to. */
@@ -23,7 +23,7 @@ const LAYOUT_CANDIDATES = [
  * rewriting attributes there would be pointless (and risk touching an unrelated
  * `layout.tsx`). Either the anti-flash script tag or the provider qualifies.
  */
-const THEME_MARKERS = ["CooudThemeScript", "CooudUIProvider"];
+const THEME_MARKERS = ["KronusThemeScript", "KronusUIProvider"];
 
 interface ThemeSetOptions {
   name: string;
@@ -51,7 +51,7 @@ function rewriteAttr(
   return { content, changed };
 }
 
-/** First existing candidate layout that mounts the Cooud theme runtime. */
+/** First existing candidate layout that mounts the Kronus theme runtime. */
 async function findLayout(
   cwd: string,
 ): Promise<{ path: string; rel: string; content: string } | undefined> {
@@ -98,7 +98,7 @@ export async function themeSet(options: ThemeSetOptions): Promise<void> {
     log.ok(`Updated ${layout.rel} (${changed} attribute(s) changed)`);
   } else {
     log.warn(
-      "No app layout mounting <CooudThemeScript>/<CooudUIProvider> found — updating config only.",
+      "No app layout mounting <KronusThemeScript>/<KronusUIProvider> found — updating config only.",
     );
   }
 
@@ -124,12 +124,12 @@ export async function themeSet(options: ThemeSetOptions): Promise<void> {
  * `?c=` permalink token or an exported JSON config. This section is a
  * dependency-free port of the Studio codec + token pipeline
  * (apps/www/lib/create/presets.ts) and of `serializeOverrides` from
- * @cooud-ui/tokens, so the published CLI can decode a link fully offline
+ * @kronus-ui/tokens, so the published CLI can decode a link fully offline
  * and materialize the theme in a consumer project:
  *
  *   1. pin the layout to the "neutral" base preset + the theme's mode
  *      (exactly what the Studio's own provider export does), and
- *   2. write the computed `--cooud-*` overrides into the consumer's
+ *   2. write the computed `--kronus-*` overrides into the consumer's
  *      globals CSS inside BEGIN/END markers (re-runs replace the block).
  * ------------------------------------------------------------------ */
 
@@ -461,39 +461,39 @@ const STUDIO_DEFAULTS: Omit<StudioConfig, "style" | "primaryColor" | "accentColo
 };
 
 /**
- * Ported subset of the @cooud-ui/tokens `cssVarMap` — exactly the tokens a
+ * Ported subset of the @kronus-ui/tokens `cssVarMap` — exactly the tokens a
  * Studio theme overrides. Key order here IS the emitted CSS order.
  */
 const STUDIO_CSS_VARS = {
-  primary: "--cooud-primary",
-  primaryForeground: "--cooud-primary-foreground",
-  accent: "--cooud-accent",
-  accentForeground: "--cooud-accent-foreground",
-  surfaceBase: "--cooud-surface-base",
-  surfaceInset: "--cooud-surface-inset",
-  surfaceRaised: "--cooud-surface-raised",
-  surfaceOverlay: "--cooud-surface-overlay",
-  surfaceElevated: "--cooud-surface-elevated",
-  surfaceFloating: "--cooud-surface-floating",
-  fg: "--cooud-fg",
-  fgSecondary: "--cooud-fg-secondary",
-  fgTertiary: "--cooud-fg-tertiary",
-  fgMuted: "--cooud-fg-muted",
-  border: "--cooud-border",
-  borderStrong: "--cooud-border-strong",
-  borderSoft: "--cooud-border-soft",
-  ring: "--cooud-ring",
-  info: "--cooud-info",
-  radius: "--cooud-radius",
-  fontDisplay: "--cooud-font-display",
-  fontSans: "--cooud-font-sans",
-  fontMono: "--cooud-font-mono",
-  chart1: "--cooud-chart-1",
-  chart2: "--cooud-chart-2",
-  chart3: "--cooud-chart-3",
-  chart4: "--cooud-chart-4",
-  chart5: "--cooud-chart-5",
-  shadowGlow: "--cooud-shadow-glow",
+  primary: "--kronus-primary",
+  primaryForeground: "--kronus-primary-foreground",
+  accent: "--kronus-accent",
+  accentForeground: "--kronus-accent-foreground",
+  surfaceBase: "--kronus-surface-base",
+  surfaceInset: "--kronus-surface-inset",
+  surfaceRaised: "--kronus-surface-raised",
+  surfaceOverlay: "--kronus-surface-overlay",
+  surfaceElevated: "--kronus-surface-elevated",
+  surfaceFloating: "--kronus-surface-floating",
+  fg: "--kronus-fg",
+  fgSecondary: "--kronus-fg-secondary",
+  fgTertiary: "--kronus-fg-tertiary",
+  fgMuted: "--kronus-fg-muted",
+  border: "--kronus-border",
+  borderStrong: "--kronus-border-strong",
+  borderSoft: "--kronus-border-soft",
+  ring: "--kronus-ring",
+  info: "--kronus-info",
+  radius: "--kronus-radius",
+  fontDisplay: "--kronus-font-display",
+  fontSans: "--kronus-font-sans",
+  fontMono: "--kronus-font-mono",
+  chart1: "--kronus-chart-1",
+  chart2: "--kronus-chart-2",
+  chart3: "--kronus-chart-3",
+  chart4: "--kronus-chart-4",
+  chart5: "--kronus-chart-5",
+  shadowGlow: "--kronus-shadow-glow",
 } as const;
 
 type StudioTokenKey = keyof typeof STUDIO_CSS_VARS;
@@ -504,16 +504,16 @@ const STUDIO_BASE_THEME = "neutral";
 
 /**
  * Selector for the generated block. The tokens stylesheet sets theme values on
- * `[data-cooud-theme]` and mode values on `[data-cooud-theme][data-cooud-mode]`
+ * `[data-kronus-theme]` and mode values on `[data-kronus-theme][data-kronus-mode]`
  * (specificity 0,2,0), so a bare `:root` block would lose to the mode block.
- * `:root[data-cooud-theme]` ties that specificity and wins by source order —
+ * `:root[data-kronus-theme]` ties that specificity and wins by source order —
  * the consumer's globals rules always follow their `@import`s.
  */
-const OVERRIDES_SELECTOR = ":root[data-cooud-theme]";
+const OVERRIDES_SELECTOR = ":root[data-kronus-theme]";
 
 export const OVERRIDES_BEGIN =
-  "/* cooud-ui theme overrides — BEGIN (generated by `cooud-ui theme add`; re-runs replace this block) */";
-export const OVERRIDES_END = "/* cooud-ui theme overrides — END */";
+  "/* kronus-ui theme overrides — BEGIN (generated by `kronus-ui theme add`; re-runs replace this block) */";
+export const OVERRIDES_END = "/* kronus-ui theme overrides — END */";
 
 /** Globals-CSS locations probed (relative to cwd) when `--css` is not given. */
 const CSS_CANDIDATES = [
@@ -759,7 +759,7 @@ function computeStudioOverrides(config: StudioConfig): StudioOverrides {
   };
 }
 
-/** Port of `serializeOverrides` from @cooud-ui/tokens, framed by the markers. */
+/** Port of `serializeOverrides` from @kronus-ui/tokens, framed by the markers. */
 function serializeStudioOverrides(overrides: StudioOverrides): string {
   const lines = (Object.keys(STUDIO_CSS_VARS) as StudioTokenKey[]).map(
     (key) => `  ${STUDIO_CSS_VARS[key]}: ${overrides[key]};`,
@@ -841,7 +841,7 @@ export async function themeAdd(options: ThemeAddOptions): Promise<void> {
     }
   } else {
     log.warn(
-      "No app layout mounting <CooudThemeScript>/<CooudUIProvider> found — skipped the theme/mode attributes.",
+      "No app layout mounting <KronusThemeScript>/<KronusUIProvider> found — skipped the theme/mode attributes.",
     );
   }
 
@@ -867,7 +867,7 @@ export async function themeAdd(options: ThemeAddOptions): Promise<void> {
     );
   }
 
-  // 3. cooud-ui.json — the same record `theme set` keeps.
+  // 3. kronus-ui.json — the same record `theme set` keeps.
   if (hasConfig(cwd)) {
     if (dryRun) {
       log.step(

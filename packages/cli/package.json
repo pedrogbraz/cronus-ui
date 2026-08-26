@@ -1,21 +1,21 @@
 {
-  "name": "cooud-ui",
+  "name": "kronus-ui",
   "version": "0.5.0",
-  "description": "cooud-ui — add Cooud UI components to your project, shadcn-style (copy-paste registry).",
+  "description": "kronus-ui — add Kronus UI components to your project, shadcn-style (copy-paste registry).",
   "type": "module",
   "license": "MIT",
-  "author": "Cooud",
+  "author": "Kronus",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pedrogbraz/cooud-ui.git",
+    "url": "git+https://github.com/pedrogbraz/kronus-ui.git",
     "directory": "packages/cli"
   },
-  "homepage": "https://github.com/pedrogbraz/cooud-ui#readme",
+  "homepage": "https://github.com/pedrogbraz/kronus-ui#readme",
   "bugs": {
-    "url": "https://github.com/pedrogbraz/cooud-ui/issues"
+    "url": "https://github.com/pedrogbraz/kronus-ui/issues"
   },
   "keywords": [
-    "cooud",
+    "kronus",
     "components",
     "design-system",
     "registry",
@@ -24,7 +24,7 @@
     "ui"
   ],
   "bin": {
-    "cooud-ui": "./dist/index.js"
+    "kronus-ui": "./dist/index.js"
   },
   "files": [
     "dist",
@@ -54,7 +54,7 @@
     "registry:check": "bun run scripts/check-registry.ts"
   },
   "dependencies": {
-    "@cooud-ui/ai-kit": "workspace:*",
+    "@kronus-ui/ai-kit": "workspace:*",
     "commander": "^15.0.0",
     "picocolors": "^1.1.1"
   },

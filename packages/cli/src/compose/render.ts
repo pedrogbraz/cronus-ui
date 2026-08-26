@@ -12,7 +12,7 @@
  * ordering — so `registry:check`-style byte-equality and the F4 3-way base hold.
  */
 
-import type { CooudUIConfig } from "../config.js";
+import type { KronusUIConfig } from "../config.js";
 import { replaceBrandLiteral, replaceDataSlot } from "./data-slots.js";
 import type { ComposePlan, PlanBlock, PlanChrome, PlanExtra, PlanPage } from "./plan.js";
 
@@ -194,12 +194,12 @@ export function blockImportBase(block: { slug: string; variant?: string }): stri
 }
 
 /** Import specifier for a block via the consumer's blocks alias. */
-function blockImport(config: CooudUIConfig, importBase: string): string {
+function blockImport(config: KronusUIConfig, importBase: string): string {
   return `${config.aliases.blocks}/${importBase}`;
 }
 
 /** Render a single page.tsx: imports of its blocks + a <main> stacking them. */
-export function renderPage(page: PlanPage, config: CooudUIConfig): string {
+export function renderPage(page: PlanPage, config: KronusUIConfig): string {
   // De-dupe imports by exportName (a page may legitimately repeat a section, but
   // it must be imported once); keep first-seen order for determinism.
   const imports: string[] = [];
@@ -247,7 +247,7 @@ export function pagePath(page: PlanPage): string {
 }
 
 /** Import path from a route-group layout to a chrome wrapper via the blocks alias. */
-function chromeWrapperImport(config: CooudUIConfig, name: string): string {
+function chromeWrapperImport(config: KronusUIConfig, name: string): string {
   // Wrappers live under the blocks path in a `chrome/` subdir; import via the
   // blocks alias so the consumer's tsconfig path mapping resolves them.
   return `${config.aliases.blocks}/chrome/${name}`;
@@ -259,7 +259,7 @@ function chromeWrapperImport(config: CooudUIConfig, name: string): string {
  *   - shell = the AppShellNav thin wrapper (sidebar + header) around {children};
  *   - bare  = a passthrough layout (centered pages own their own frame).
  */
-export function renderLayout(chrome: PlanChrome, config: CooudUIConfig): string {
+export function renderLayout(chrome: PlanChrome, config: KronusUIConfig): string {
   const hasNav = chrome.navbar !== undefined;
   const hasFooter = chrome.footer !== undefined;
   const hasShell = chrome.block !== undefined;
@@ -345,7 +345,7 @@ export function renderChromeWrapper(
   exportAs: string,
   blockSlug: string,
   blockExportName: string,
-  config: CooudUIConfig,
+  config: KronusUIConfig,
 ): string {
   return [
     `import { ${blockExportName} } from ${jsString(blockImport(config, blockSlug))};`,
@@ -368,7 +368,7 @@ export function renderShellWrapper(
   exportAs: string,
   blockSlug: string,
   blockExportName: string,
-  config: CooudUIConfig,
+  config: KronusUIConfig,
 ): string {
   return [
     `import type { ReactNode } from "react";`,
@@ -382,7 +382,7 @@ export function renderShellWrapper(
 }
 
 /** Path of a chrome wrapper file under the blocks path. */
-export function chromeWrapperPath(config: CooudUIConfig, name: string): string {
+export function chromeWrapperPath(config: KronusUIConfig, name: string): string {
   return `${config.paths.blocks}/chrome/${name}.tsx`;
 }
 
@@ -392,7 +392,7 @@ export function chromeWrapperPath(config: CooudUIConfig, name: string): string {
  * block and centers it in a single `<main>` — no new UI. The component name is
  * PascalCase(key)Page (e.g. "not-found" → NotFoundPage). Pure.
  */
-export function renderExtra(extra: PlanExtra, config: CooudUIConfig): string {
+export function renderExtra(extra: PlanExtra, config: KronusUIConfig): string {
   const componentName = `${extra.key
     .split(/[-_]/)
     .filter((s) => s.length > 0)
@@ -424,7 +424,7 @@ export function renderExtra(extra: PlanExtra, config: CooudUIConfig): string {
  * libs (`demo-store`/`demo-saas`) carry their own standalone `BRAND` default for
  * the storefront/dashboard demo name; compose does not override it.
  */
-export function renderPlan(plan: ComposePlan, config: CooudUIConfig): RenderResult {
+export function renderPlan(plan: ComposePlan, config: KronusUIConfig): RenderResult {
   const files: GeneratedFile[] = [];
   const chromeRewrites: ChromeRewrite[] = [];
 

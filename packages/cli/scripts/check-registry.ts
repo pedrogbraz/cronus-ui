@@ -1,6 +1,6 @@
 /**
  * Fails (exit 1) when the committed `registry/*.json` (incl. the `meta.json`
- * sidecar) has drifted from the current @cooud-ui/ui + block sources.
+ * sidecar) has drifted from the current @kronus-ui/ui + block sources.
  * Regenerates the registry AND metadata into a temporary directory, then diffs
  * every file (content + presence) against the committed `registry/`.
  *
@@ -233,16 +233,22 @@ export function validateVariantItems(items: RegistryItem[], meta: RegistryMeta):
  * blocks must READ its data from the lib import — never re-declare a distinctive
  * lib data value inline — so the storefront/dashboard narrative has a single
  * source of truth. Keep this set EXACTLY equal to the blocks that are 100% free
- * of inline lib-data; a block that has not been migrated (e.g. a JSX-entangled
- * `product-detail`, the un-migrated `order-history--cards` / `reviews--compact`
- * variants, or a block that still carries block-local person/mock data never
- * lifted into a lib) legitimately keeps its inline data and must NOT appear here.
+ * of inline lib-data; a block that has not been migrated (e.g. the un-migrated
+ * `order-history--cards` / `reviews--compact` variants, or a block that still
+ * carries block-local person/mock data never lifted into a lib) legitimately
+ * keeps its inline data and must NOT appear here.
  *
- * `dashboard` is deliberately ABSENT: its sidebar/topbar avatar person
- * (`Lena Park` / `lena@acme.dev`) was never lifted into `demo-saas` (the lib's
- * owner is `Mara Castillo`), so the block still carries that inline person data.
- * Listing it here would be a false "fully migrated" claim, so it is de-listed —
- * it reads its KPIs/activity/revenue from `demo-saas` but keeps its own avatar.
+ * `dashboard` analytics chrome and `dashboard--admin-overview` (table + footer)
+ * read identity from `USER` + `TEAM`. `analytics` (admin overview) maps `KPIS`
+ * by index; `analytics--engagement` stays un-migrated (cohorts, not the saas
+ * KPI grid). Stats compact/pipeline variants stay un-migrated (they are not
+ * the saas default KPI grid). `product-detail` (and gallery/minimal) read the
+ * Aurora SKU via `productById`; `checkout` (classic) reads the playbook line.
+ * `checkout--one-page` / `checkout--multi-step` stay un-migrated (other catalog).
+ * `product-grid--showcase` maps the digital SKUs + playbook hero; `invoice` maps
+ * the playbook line via `ORDERS[1]` (seats/support stay local). `order-tracking`
+ * / `--delivered` read `ORDERS[0]` / `ORDERS[1]`; `--delayed` and `invoice--receipt`
+ * stay un-migrated.
  */
 export const MIGRATED_BLOCKS = [
   "cart",
@@ -253,6 +259,25 @@ export const MIGRATED_BLOCKS = [
   "product-grid--with-filters",
   "billing",
   "billing--plans",
+  "usage-dashboard",
+  "app-shell-chrome",
+  "dashboard",
+  "settings",
+  "stats",
+  "team",
+  "dashboard--admin-overview",
+  "analytics",
+  "product-detail",
+  "product-detail--gallery",
+  "product-detail--minimal",
+  "checkout",
+  "product-grid--showcase",
+  "invoice",
+  "order-tracking",
+  "order-tracking--delivered",
+  "signup",
+  "signup--split-proof",
+  "signup--with-plan",
 ] as const;
 
 /** Which `registry:lib` a migrated block reads its demo data from. */
@@ -486,7 +511,7 @@ async function main() {
 
   const expected = serializeRegistry(items, meta);
 
-  const tmp = await mkdtemp(join(tmpdir(), "cooud-registry-check-"));
+  const tmp = await mkdtemp(join(tmpdir(), "kronus-registry-check-"));
   const diffs: string[] = [];
   try {
     await writeRegistry(tmp, items, meta);
@@ -518,7 +543,7 @@ async function main() {
   if (diffs.length > 0) {
     console.error("registry:check FAILED — registry/ is out of sync with packages/ui:");
     for (const d of diffs) console.error(`  - ${d}`);
-    console.error("\nRun `bun run -F cooud-ui registry` and commit the result.");
+    console.error("\nRun `bun run -F kronus-ui registry` and commit the result.");
     process.exit(1);
   }
 

@@ -1,13 +1,7 @@
 import { existsSync } from "node:fs";
-import { readdir, readFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
-import {
-  type AppManifest,
-  type ManifestError,
-  manifestFingerprint,
-  parseManifest,
-} from "../compose/manifest.js";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+import { type AppManifest, type ManifestError, manifestFingerprint } from "../compose/manifest.js";
 import {
   buildComposePlan,
   type ComposeChoiceInput,
@@ -15,19 +9,20 @@ import {
   ComposePlanError,
 } from "../compose/plan.js";
 import { renderPreview } from "../compose/preview.js";
+import { baseSnapshotDir } from "../compose/reload.js";
 import { renderPlan } from "../compose/render.js";
+import { listTemplates, loadManifestFile, loadTemplate } from "../compose/templates.js";
 import {
   CLI_VERSION,
   type ComposedRecord,
-  type CooudUIConfig,
   hasConfig,
   type InstalledRecord,
+  type KronusUIConfig,
   readConfig,
   writeConfig,
 } from "../config.js";
 import { Registry, type RegistryItem, registrySourceVersion } from "../registry.js";
 import {
-  closestName,
   collectDependencies,
   detectPackageManager,
   log,
@@ -37,55 +32,10 @@ import {
   writeItemFiles,
 } from "../utils.js";
 
-/** Directory holding the bundled app-template manifests (dist/ or src/ layout). */
-function appsTemplatesDir(): string {
-  const here = dirname(fileURLToPath(import.meta.url));
-  // compiled: dist/commands/compose.js → dist/../templates ; source: src/commands → ../../templates
-  const compiled = join(here, "..", "..", "templates", "apps");
-  const fromSource = join(here, "..", "templates", "apps");
-  // Named consts instead of indexing: the fallback is a value we hold, not an
-  // element the compiler has to be told exists.
-  return [compiled, fromSource].find((p) => existsSync(p)) ?? compiled;
-}
-
-/** List the bundled template names (basename without .json), sorted. */
-export async function listTemplates(): Promise<string[]> {
-  try {
-    return (await readdir(appsTemplatesDir()))
-      .filter((f) => f.endsWith(".json"))
-      .map((f) => f.slice(0, -".json".length))
-      .sort();
-  } catch {
-    return [];
-  }
-}
-
-/** Load + strictly parse a bundled template manifest by name. Throws on missing/invalid. */
-export async function loadTemplate(name: string): Promise<AppManifest> {
-  const file = join(appsTemplatesDir(), `${name}.json`);
-  let raw: string;
-  try {
-    raw = await readFile(file, "utf8");
-  } catch {
-    const available = await listTemplates();
-    const suggestion = closestName(name, available);
-    throw new Error(
-      suggestion
-        ? `Unknown template "${name}". Did you mean "${suggestion}"? (available: ${available.join(", ")})`
-        : `Unknown template "${name}" (available: ${available.join(", ") || "none"}).`,
-    );
-  }
-  return parseManifest(JSON.parse(raw) as unknown);
-}
-
-/** Load + strictly parse a manifest from an explicit file path. */
-export async function loadManifestFile(path: string): Promise<AppManifest> {
-  const raw = await readFile(path, "utf8");
-  return parseManifest(JSON.parse(raw) as unknown);
-}
+export { listTemplates, loadManifestFile, loadTemplate } from "../compose/templates.js";
 
 /** Read the chrome block sources named by the manifest's chrome map from the registry. */
-async function readChromeSources(
+export async function readChromeSources(
   manifest: AppManifest,
   registry: Registry,
 ): Promise<Record<string, string>> {
@@ -109,7 +59,7 @@ async function readChromeSources(
 }
 
 /** The compose meta subset, loaded from the registry's `meta.json`. */
-async function readComposeMeta(registry: Registry): Promise<ComposeMeta | null> {
+export async function readComposeMeta(registry: Registry): Promise<ComposeMeta | null> {
   const meta = await registry.meta<{ blocks?: Record<string, unknown> }>();
   if (meta === null || meta.blocks === undefined) return null;
   return meta as ComposeMeta;
@@ -121,7 +71,7 @@ async function readComposeMeta(registry: Registry): Promise<ComposeMeta | null> 
  * composer never fails on a bare project. Derives the trailing segment of a scoped
  * name ("@acme/shop" → "shop").
  */
-async function readProjectName(cwd: string): Promise<string> {
+export async function readProjectName(cwd: string): Promise<string> {
   const fallback = cwd.split(/[/\\]/).filter(Boolean).pop() ?? "app";
   try {
     const pkg = JSON.parse(await readFile(join(cwd, "package.json"), "utf8")) as { name?: unknown };
@@ -137,7 +87,7 @@ async function readProjectName(cwd: string): Promise<string> {
 
 /** Options accepted by the composeApp library entry + the CLI command. */
 export interface ComposeAppOptions {
-  /** Project root (must contain cooud-ui.json). */
+  /** Project root (must contain kronus-ui.json). */
   targetDir: string;
   /** Bundled template name (mutually exclusive with `manifestPath`). */
   template?: string;
@@ -164,13 +114,8 @@ export interface ComposeAppResult {
   skippedFiles: string[];
 }
 
-/** Base-snapshot directory for an app's generated bytes (F4 merge base). */
-function baseSnapshotDir(appName: string): string {
-  return join(".cooud-ui", "base", appName);
-}
-
 /**
- * Compose an app template into an existing Cooud UI project: resolve + install the
+ * Compose an app template into an existing Kronus UI project: resolve + install the
  * blocks, customize the chrome copies (nav data + brand), write the generated
  * pages/layouts/wrappers, snapshot the emitted bytes, and record `installed{}` +
  * `composed{}`. Reuses the exact `add` install core — this is one more caller, not
@@ -180,7 +125,7 @@ function baseSnapshotDir(appName: string): string {
 export async function composeApp(options: ComposeAppOptions): Promise<ComposeAppResult> {
   const { targetDir } = options;
   if (!hasConfig(targetDir)) {
-    throw new Error("No cooud-ui.json found. Run `cooud-ui init` first.");
+    throw new Error("No kronus-ui.json found. Run `kronus-ui init` first.");
   }
   const config = await readConfig(targetDir);
   const sourceUsed = options.registry ?? config.registry;
@@ -256,7 +201,9 @@ export async function composeApp(options: ComposeAppOptions): Promise<ComposeApp
     await writeFileEnsured(dest, file.content);
     generatedFiles.push(file.path);
     // Base snapshot: the exact bytes emitted, for the F4 3-way page upgrade.
-    const snapDest = resolveSafeDest(targetDir, baseSnapshotDir(plan.appName), file.path);
+    // Keyed by template name (the composed{} key), not package.json name — a
+    // project can compose several templates.
+    const snapDest = resolveSafeDest(targetDir, baseSnapshotDir(plan.templateName), file.path);
     await writeFileEnsured(snapDest, file.content);
   }
 
@@ -269,7 +216,7 @@ export async function composeApp(options: ComposeAppOptions): Promise<ComposeApp
   // --overwrite) every page + chrome copy already exists and goes to
   // skippedFiles, so `generatedFiles` is empty; a straight assignment would
   // clobber the record to `files: []` and orphan every composed page from its
-  // .cooud-ui/base/ snapshot (the F4 3-way upgrade merge base). Union with the
+  // .kronus-ui/base/ snapshot (the F4 3-way upgrade merge base). Union with the
   // prior record so a no-op re-run never empties the tracked file set.
   const composed: Record<string, ComposedRecord> = { ...config.composed };
   const priorFiles = config.composed?.[plan.templateName]?.files ?? [];
@@ -282,7 +229,7 @@ export async function composeApp(options: ComposeAppOptions): Promise<ComposeApp
     // manifest this app was composed from (guards the bundled-name collision).
     manifestHash: manifestFingerprint(manifest),
   };
-  const nextConfig: CooudUIConfig = { ...config, installed, composed };
+  const nextConfig: KronusUIConfig = { ...config, installed, composed };
   await writeConfig(targetDir, nextConfig);
 
   // --- Install npm deps (best-effort, like add) -----------------------------
@@ -307,7 +254,7 @@ export async function composeApp(options: ComposeAppOptions): Promise<ComposeApp
 
 function requireTemplate(template: string | undefined): string {
   if (template === undefined || template.length === 0) {
-    throw new Error("No template given. Pass a template name, e.g. `cooud-ui compose store`.");
+    throw new Error("No template given. Pass a template name, e.g. `kronus-ui compose store`.");
   }
   return template;
 }
@@ -359,7 +306,7 @@ function parsePages(spec: string | undefined): string[] | undefined {
 }
 
 /**
- * The `cooud-ui compose` command. Resolves a template (bundled or `--manifest`),
+ * The `kronus-ui compose` command. Resolves a template (bundled or `--manifest`),
  * plans + validates it (aggregating errors), and either prints a deterministic
  * dry-run preview or applies it via {@link composeApp}. TTY-prompts for a template
  * when none is given (unless `--yes`).
@@ -371,7 +318,7 @@ export async function compose(
   const { cwd } = options;
 
   if (!hasConfig(cwd)) {
-    log.err("No cooud-ui.json found. Run `cooud-ui init` first.");
+    log.err("No kronus-ui.json found. Run `kronus-ui init` first.");
     process.exitCode = 1;
     return;
   }
@@ -497,6 +444,10 @@ export async function compose(
   log.title(
     `Done — ${result.templateName}: ${result.installedBlocks.length} block(s) + ${result.generatedFiles.length} generated file(s).`,
   );
+  log.title("Next steps");
+  log.step("npx kronus-ui add-page --route /pricing --blocks pricing,cta --nav Pricing");
+  log.step("npx kronus-ui theme set aurora --mode dark");
+  log.step("npx kronus-ui upgrade --all --dry-run");
 }
 
 /** Print a plan/manifest error's aggregated list, or a plain message. */

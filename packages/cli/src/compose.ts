@@ -1,6 +1,6 @@
 /**
  * Public library entry for programmatic composition (consumed by
- * `create-cooud-app`'s post-scaffold step). Re-exports the pure apply core so a
+ * `create-kronus-app`'s post-scaffold step). Re-exports the pure apply core so a
  * scaffolder can generate an app template into a freshly-created project without
  * shelling out to the CLI.
  */

@@ -38,7 +38,7 @@ describe("parseVariants — --variant slug=variant parsing", () => {
   });
 });
 
-/** Write a minimal consumer project (package.json + cooud-ui.json) pointed at the repo registry. */
+/** Write a minimal consumer project (package.json + kronus-ui.json) pointed at the repo registry. */
 function seedProject(cwd: string, name = "loja"): void {
   mkdirSync(cwd, { recursive: true });
   writeFileSync(
@@ -56,7 +56,7 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
   let cwd: string;
 
   beforeEach(() => {
-    root = mkdtempSync(join(tmpdir(), "cooud-compose-test-"));
+    root = mkdtempSync(join(tmpdir(), "kronus-compose-test-"));
     cwd = join(root, "project");
     seedProject(cwd);
     vi.spyOn(console, "log").mockImplementation(() => {});
@@ -93,7 +93,7 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     // Chrome blocks were installed AND customized (brand replaced, nav injected).
     const navbar = readFileSync(join(cwd, "components/blocks/navbar.tsx"), "utf8");
     expect(navbar).toContain("Minha Loja");
-    expect(navbar).not.toContain(">Cooud<");
+    expect(navbar).not.toContain(">Kronus<");
     expect(navbar).toContain('{ label: "Home", href: "/" }');
 
     // installed{} records the blocks; composed{} records the app.
@@ -106,9 +106,11 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(config.composed?.landing?.choices.brand).toBe("Minha Loja");
     expect(config.composed?.landing?.files).toContain("app/(site)/page.tsx");
 
-    // Base snapshot mirrors the emitted bytes (F4 merge base).
-    const snap = readFileSync(join(cwd, ".cooud-ui/base/loja/app/(site)/page.tsx"), "utf8");
+    // Base snapshot mirrors the emitted bytes (F4 merge base), keyed by template
+    // name (the composed{} key) — not the package.json name (`loja`).
+    const snap = readFileSync(join(cwd, ".kronus-ui/base/landing/app/(site)/page.tsx"), "utf8");
     expect(snap).toBe(page);
+    expect(existsSync(join(cwd, ".kronus-ui/base/loja/app/(site)/page.tsx"))).toBe(false);
   });
 
   it("composes the 9-page store template with all routes", async () => {
@@ -229,7 +231,7 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     for (const rel of afterFiles) {
       expect(existsSync(join(cwd, rel))).toBe(true);
     }
-    expect(existsSync(join(cwd, ".cooud-ui/base/loja/app/(site)/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, ".kronus-ui/base/landing/app/(site)/page.tsx"))).toBe(true);
   });
 
   it("composes a login variant: installs login-split.tsx + page imports LoginSplitBlock", async () => {
@@ -269,11 +271,11 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     ).rejects.toThrow(/Unknown template "stroe".*Did you mean "store"/);
   });
 
-  it("requires a cooud-ui.json (init first)", async () => {
+  it("requires a kronus-ui.json (init first)", async () => {
     const bare = join(root, "bare");
     mkdirSync(bare, { recursive: true });
     await expect(composeApp({ targetDir: bare, template: "store" })).rejects.toThrow(
-      /No cooud-ui.json/,
+      /No kronus-ui.json/,
     );
   });
 });

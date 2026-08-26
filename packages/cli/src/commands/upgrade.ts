@@ -5,11 +5,21 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createInterface } from "node:readline/promises";
 import pc from "picocolors";
+import { buildComposePlan, type ComposeChoiceInput } from "../compose/plan.js";
+import {
+  baseSnapshotDest,
+  filterManifestToComposedPages,
+  listBaseSnapshotRels,
+  readBaseSnapshot,
+  reloadManifest,
+} from "../compose/reload.js";
+import { renderPlan } from "../compose/render.js";
 import {
   CLI_VERSION,
-  type CooudUIConfig,
+  type ComposedRecord,
   hasConfig,
   type InstalledRecord,
+  type KronusUIConfig,
   readConfig,
   writeConfig,
 } from "../config.js";
@@ -26,10 +36,12 @@ import {
   rewriteImports,
   targetDir,
   writeFileEnsured,
+  writeItemFiles,
 } from "../utils.js";
+import { readChromeSources, readComposeMeta, readProjectName } from "./compose.js";
 
 /** Where the human/agent-readable conflict report is written (project root). */
-export const REPORT_FILE = "COOUD-UPGRADE.md";
+export const REPORT_FILE = "KRONUS-UPGRADE.md";
 
 export interface UpgradeOptions {
   cwd: string;
@@ -42,6 +54,8 @@ export interface UpgradeOptions {
   yes?: boolean;
   /** Legacy items (no manifest entry): allow replacing local files with upstream. */
   overwrite?: boolean;
+  /** Reload composed apps from this manifest file (same flag as add-page/compose). */
+  manifestPath?: string;
   /** Test seam — replaces the interactive stdin confirmation when provided. */
   confirm?: (question: string) => Promise<boolean>;
 }
@@ -79,6 +93,13 @@ interface FilePlan {
   overwritten?: boolean;
   /** The registry version this file was merged FROM (for report labels). */
   baseVersion?: string;
+  /**
+   * Upstream bytes to snapshot after a write (composed-page 3-way). The next
+   * merge base must be the render we merged TO, not the merged local file.
+   */
+  snapshotContent?: string;
+  /** Absolute snapshot dest (composed-key dir). Set only on compose file plans. */
+  snapshotDest?: string;
 }
 
 interface ItemPlan {
@@ -88,6 +109,14 @@ interface ItemPlan {
   plans: FilePlan[];
   /** Rel paths of every upstream file — the manifest files list after upgrade. */
   targetFiles: string[];
+  /** Set for composed-page upgrades: the `composed{}` key (template name). */
+  composeKey?: string;
+  /**
+   * Registry items the re-plan newly requires that are not in `installed{}`.
+   * A template page that grew a block would otherwise import a file that is
+   * not on disk. Dry-run logs them; apply writes them (no overwrite).
+   */
+  installItems?: RegistryItem[];
 }
 
 /* -------------------------------------------------------------------------- */
@@ -118,7 +147,7 @@ async function withTempFiles<T>(
   contents: Record<string, string>,
   fn: (paths: Record<string, string>) => Promise<T>,
 ): Promise<T> {
-  const dir = await mkdtemp(join(tmpdir(), "cooud-ui-upgrade-"));
+  const dir = await mkdtemp(join(tmpdir(), "kronus-ui-upgrade-"));
   try {
     const paths: Record<string, string> = {};
     for (const [name, content] of Object.entries(contents)) {
@@ -209,7 +238,7 @@ function same(a: string, b: string): boolean {
 
 /** Rel path + safe absolute dest for one registry file (throws on traversal). */
 function fileDest(
-  config: CooudUIConfig,
+  config: KronusUIConfig,
   cwd: string,
   file: RegistryItem["files"][number],
 ): { rel: string; dest: string } {
@@ -218,8 +247,9 @@ function fileDest(
 }
 
 /**
- * Plan the upgrade of an item that HAS a merge base (install manifest + the
- * registry at the installed version). Decision matrix per upstream file:
+ * Decision matrix for one file of a 3-way upgrade (components AND composed
+ * pages). `base === undefined` means the file is not in the merge base
+ * (snapshot missing → treat as empty, same as an upstream-new collision).
  *
  *   missing locally, new upstream        → new-file        (write upstream)
  *   missing locally, existed in base     → locally-deleted (respect deletion)
@@ -227,13 +257,62 @@ function fileDest(
  *   base == upstream (only local moved)  → local-edits     (keep local)
  *   local == base (only upstream moved)  → fast-forward    (write upstream)
  *   all three differ                     → 3-way merge     (merged | conflict)
- *
- * Files present in base but dropped upstream are reported (removed-upstream)
- * and never deleted — removing user files is not this command's call.
+ */
+async function planThreeWayFile(args: {
+  item: string;
+  relPath: string;
+  dest: string;
+  base: string | undefined;
+  local: string | undefined;
+  target: string;
+  labels: { base: string; target: string };
+  baseVersion?: string;
+}): Promise<FilePlan> {
+  const { item, relPath, dest, base, local, target, labels, baseVersion } = args;
+  const common = { item, relPath, dest, baseVersion };
+
+  if (local === undefined) {
+    return base === undefined
+      ? { ...common, status: "new-file", content: target }
+      : { ...common, status: "locally-deleted" };
+  }
+  if (same(local, target)) {
+    return { ...common, status: "up-to-date" };
+  }
+  if (base !== undefined && same(base, target)) {
+    return { ...common, status: "local-edits" };
+  }
+  if (base !== undefined && same(local, base)) {
+    return { ...common, status: "fast-forward", content: target };
+  }
+  // All three versions differ (an upstream-new file colliding with an
+  // existing local file merges against an empty base).
+  const merged = await mergeThreeWay(base ?? "", local, target, labels);
+  if (merged.status === "clean") {
+    return { ...common, status: "merged", content: merged.content };
+  }
+  if (merged.status === "conflict") {
+    const upstreamDiff = await unifiedDiff(base ?? "", target, labels.base, labels.target);
+    return {
+      ...common,
+      status: "conflict",
+      content: merged.content,
+      upstreamDiff,
+      targetContent: target,
+    };
+  }
+  return { ...common, status: "manual", targetContent: target };
+}
+
+/**
+ * Plan the upgrade of an item that HAS a merge base (install manifest + the
+ * registry at the installed version). Files present in base but dropped
+ * upstream are reported (removed-upstream) and never deleted — removing user
+ * files is not this command's call.
  */
 async function planManifestItem(args: {
   name: string;
-  config: CooudUIConfig;
+  config: KronusUIConfig;
   cwd: string;
   baseItem: RegistryItem;
   targetItem: RegistryItem;
@@ -263,48 +342,19 @@ async function planManifestItem(args: {
     targetFiles.push(rel);
     const target = rewriteImports(file.content, config);
     const base = baseByRel.get(rel);
-    const common = { item: name, relPath: rel, dest, baseVersion };
-
-    if (!existsSync(dest)) {
-      plans.push(
-        base === undefined
-          ? { ...common, status: "new-file", content: target }
-          : { ...common, status: "locally-deleted" },
-      );
-      continue;
-    }
-    const local = await readFile(dest, "utf8");
-    if (same(local, target)) {
-      plans.push({ ...common, status: "up-to-date" });
-      continue;
-    }
-    if (base !== undefined && same(base, target)) {
-      plans.push({ ...common, status: "local-edits" });
-      continue;
-    }
-    if (base !== undefined && same(local, base)) {
-      plans.push({ ...common, status: "fast-forward", content: target });
-      continue;
-    }
-    // All three versions differ (an upstream-new file colliding with an
-    // existing local file merges against an empty base).
-    const merged = await mergeThreeWay(base ?? "", local, target, labels);
-    if (merged.status === "clean") {
-      plans.push({ ...common, status: "merged", content: merged.content });
-      continue;
-    }
-    if (merged.status === "conflict") {
-      const upstreamDiff = await unifiedDiff(base ?? "", target, labels.base, labels.target);
-      plans.push({
-        ...common,
-        status: "conflict",
-        content: merged.content,
-        upstreamDiff,
-        targetContent: target,
-      });
-      continue;
-    }
-    plans.push({ ...common, status: "manual", targetContent: target });
+    const local = existsSync(dest) ? await readFile(dest, "utf8") : undefined;
+    plans.push(
+      await planThreeWayFile({
+        item: name,
+        relPath: rel,
+        dest,
+        base,
+        local,
+        target,
+        labels,
+        baseVersion,
+      }),
+    );
   }
 
   for (const rel of baseByRel.keys()) {
@@ -325,7 +375,7 @@ async function planManifestItem(args: {
  */
 async function planLegacyItem(args: {
   name: string;
-  config: CooudUIConfig;
+  config: KronusUIConfig;
   cwd: string;
   targetItem: RegistryItem;
   targetVersion: string;
@@ -371,6 +421,133 @@ async function planLegacyItem(args: {
 
 function labelFor(version: string): string {
   return `registry v${version}`;
+}
+
+/** Rel paths owned by `installed{}` items — chrome blocks, not generated pages. */
+function installedFileSet(config: KronusUIConfig): Set<string> {
+  const out = new Set<string>();
+  for (const rec of Object.values(config.installed ?? {})) {
+    for (const file of rec.files) out.add(file);
+  }
+  return out;
+}
+
+/**
+ * Plan a 3-way upgrade of one composed app's generated pages/layouts/wrappers.
+ * Reloads the manifest (same provenance guard as add-page), re-renders with
+ * recorded choices, and runs the same decision matrix as {@link planManifestItem}.
+ * Chrome rewrites are NOT applied — chrome blocks are `installed{}` items.
+ */
+async function planComposedApp(args: {
+  composedKey: string;
+  record: ComposedRecord;
+  config: KronusUIConfig;
+  cwd: string;
+  registry: Registry;
+  targetVersion: string;
+  manifestPath: string | undefined;
+}): Promise<ItemPlan> {
+  const { composedKey, record, config, cwd, registry, targetVersion, manifestPath } = args;
+  const item = `compose:${composedKey}`;
+  const labels = {
+    base: `registry v${record.version}`,
+    target: `registry v${targetVersion}`,
+  };
+
+  const base = await reloadManifest(composedKey, manifestPath, record);
+  const synthetic = filterManifestToComposedPages(base, record);
+
+  const meta = await readComposeMeta(registry);
+  if (meta === null) {
+    throw new Error(
+      "This registry does not ship a meta.json sidecar — compose upgrade needs it (upgrade to v0.4.0+).",
+    );
+  }
+  const index = await registry.index();
+  const chromeSources = await readChromeSources(synthetic, registry);
+  const appName = await readProjectName(cwd);
+  const keptRoutes = synthetic.manifest.pages.map((p) => p.route);
+  const choices: ComposeChoiceInput = {
+    brand: record.choices.brand,
+    variants: record.choices.variants,
+    appName,
+    ...(record.choices.seed !== undefined ? { seed: record.choices.seed } : {}),
+    ...(keptRoutes.length > 0 ? { pages: keptRoutes } : {}),
+  };
+  const plan = buildComposePlan(synthetic, choices, index, meta, chromeSources);
+  // Pages + layouts + chrome WRAPPERS only. Chrome block bodies are installed{}
+  // items and already 3-way as local edits — do not re-run brand/nav rewrite.
+  const { files } = renderPlan(plan, config);
+
+  const plans: FilePlan[] = [];
+  const targetFiles: string[] = [];
+
+  for (const file of files) {
+    let dest: string;
+    try {
+      dest = resolveSafeDest(cwd, ".", file.path);
+    } catch (err) {
+      log.warn(`${item}: ${(err as Error).message}`);
+      continue;
+    }
+    targetFiles.push(file.path);
+    const target = file.content;
+    // Snapshot missing → empty base (same as upstream-new colliding with local).
+    const snap = await readBaseSnapshot(cwd, composedKey, plan.appName, file.path);
+    const local = existsSync(dest) ? await readFile(dest, "utf8") : undefined;
+    const filePlan = await planThreeWayFile({
+      item,
+      relPath: file.path,
+      dest,
+      base: snap,
+      local,
+      target,
+      labels,
+      baseVersion: record.version,
+    });
+    // Snapshot dest is always the composed key (new writes never go to appName).
+    let snapshotDest: string | undefined;
+    try {
+      snapshotDest = baseSnapshotDest(cwd, composedKey, file.path);
+    } catch {
+      snapshotDest = undefined;
+    }
+    plans.push({ ...filePlan, snapshotContent: target, snapshotDest });
+  }
+
+  const installedFiles = installedFileSet(config);
+  const tracked = new Set<string>([
+    ...targetFiles,
+    ...(await listBaseSnapshotRels(cwd, composedKey, plan.appName)),
+  ]);
+  for (const rel of record.files) {
+    if (!installedFiles.has(rel)) tracked.add(rel);
+  }
+  for (const rel of tracked) {
+    if (!targetFiles.includes(rel)) {
+      plans.push({
+        item,
+        relPath: rel,
+        status: "removed-upstream",
+        baseVersion: record.version,
+      });
+    }
+  }
+
+  // Template pages may have grown a block the project never installed. Resolve
+  // those items (plus transitive registry deps) so apply can write them before
+  // the page that imports them. Already-installed slugs are left alone.
+  const missing = plan.blockSlugs.filter((slug) => config.installed?.[slug] === undefined);
+  const installItems = missing.length > 0 ? await registry.resolve(missing) : [];
+
+  return {
+    name: item,
+    legacy: false,
+    plans,
+    targetFiles,
+    composeKey: composedKey,
+    installItems,
+  };
 }
 
 /* -------------------------------------------------------------------------- */
@@ -424,6 +601,53 @@ function statusLabel(plan: FilePlan): string {
 
 /** Statuses that write the planned content to disk unconditionally. */
 const WRITE_STATUSES: ReadonlySet<FileStatus> = new Set(["fast-forward", "new-file", "merged"]);
+
+function fileWasWritten(plan: FilePlan): boolean {
+  return WRITE_STATUSES.has(plan.status) || plan.markersWritten === true;
+}
+
+/**
+ * After a composed-page write, refresh the snapshot to the NEW UPSTREAM render
+ * (not the merged local). The next upgrade's base must be "the bytes we emitted
+ * last time from the template".
+ */
+async function refreshComposeSnapshots(items: ItemPlan[]): Promise<void> {
+  for (const item of items) {
+    if (item.composeKey === undefined) continue;
+    for (const plan of item.plans) {
+      if (!fileWasWritten(plan)) continue;
+      if (plan.snapshotDest === undefined || plan.snapshotContent === undefined) continue;
+      await writeFileEnsured(plan.snapshotDest, plan.snapshotContent);
+    }
+  }
+}
+
+/**
+ * Write registry items a composed re-plan newly requires. Never overwrites an
+ * existing file (same collision-safety as `add` without `--overwrite`). Returns
+ * the `installed{}` records for items whose files all landed.
+ */
+async function installPendingBlocks(
+  items: ItemPlan[],
+  config: KronusUIConfig,
+  cwd: string,
+  version: string,
+): Promise<Record<string, InstalledRecord>> {
+  const next: Record<string, InstalledRecord> = {};
+  const seen = new Set<string>();
+  for (const item of items) {
+    for (const registryItem of item.installItems ?? []) {
+      if (seen.has(registryItem.name)) continue;
+      seen.add(registryItem.name);
+      const { written } = await writeItemFiles(registryItem, config, cwd, { overwrite: false });
+      if (written.length === registryItem.files.length && written.length > 0) {
+        next[registryItem.name] = { version, files: written };
+        log.ok(`${pc.dim(item.name)} install ${registryItem.name}`);
+      }
+    }
+  }
+  return next;
+}
 
 /** Execute a plan: write files, asking before conflict markers / overwrites. */
 async function applyPlans(
@@ -497,7 +721,7 @@ function agentPrompt(plan: FilePlan, targetVersion: string): string {
 
   if (plan.status === "legacy-differs") {
     return [
-      `2-way merge \`${plan.relPath}\` (Cooud UI item "${plan.item}", upgrading to ${target}).`,
+      `2-way merge \`${plan.relPath}\` (Kronus UI item "${plan.item}", upgrading to ${target}).`,
       "This component predates install manifests, so there is no recorded base version.",
       "The file on disk is my edited copy. Apply the upstream changes below onto it,",
       "keeping my local intent (naming, added props, styling tweaks) and adopting the",
@@ -512,7 +736,7 @@ function agentPrompt(plan: FilePlan, targetVersion: string): string {
   }
 
   const base = labelFor(plan.baseVersion ?? "unknown");
-  const intro = `3-way merge \`${plan.relPath}\` (Cooud UI item "${plan.item}", ${base} → ${target}).`;
+  const intro = `3-way merge \`${plan.relPath}\` (Kronus UI item "${plan.item}", ${base} → ${target}).`;
   const state =
     plan.markersWritten === true
       ? [
@@ -536,7 +760,7 @@ function agentPrompt(plan: FilePlan, targetVersion: string): string {
   return [intro, "", ...state, "", reference, "", diffBlock].join("\n");
 }
 
-/** Build COOUD-UPGRADE.md: status table + one agent prompt per pending file. */
+/** Build KRONUS-UPGRADE.md: status table + one agent prompt per pending file. */
 function buildReport(items: ItemPlan[], targetVersion: string): string {
   const rows = items.flatMap((item) =>
     item.plans.map((plan) => `| ${plan.item} | \`${plan.relPath}\` | ${statusLabel(plan)} |`),
@@ -556,9 +780,9 @@ function buildReport(items: ItemPlan[], targetVersion: string): string {
   );
 
   return [
-    "# Cooud UI upgrade report",
+    "# Kronus UI upgrade report",
     "",
-    `- Generated by \`cooud-ui upgrade\` on ${new Date().toISOString()}`,
+    `- Generated by \`kronus-ui upgrade\` on ${new Date().toISOString()}`,
     `- Upgrade target: registry v${targetVersion}`,
     "- This file is safe to delete once every conflict below is resolved.",
     "",
@@ -585,7 +809,7 @@ async function resolveTargets(
   options: UpgradeOptions,
   installed: Record<string, InstalledRecord>,
   registry: Registry,
-  config: CooudUIConfig,
+  config: KronusUIConfig,
   cwd: string,
 ): Promise<string[] | undefined> {
   if (names.length > 0) {
@@ -613,7 +837,7 @@ async function resolveTargets(
   }
 
   if (options.all !== true) {
-    log.err("Specify component names or use --all, e.g. `cooud-ui upgrade button` .");
+    log.err("Specify component names or use --all, e.g. `kronus-ui upgrade button` .");
     process.exitCode = 1;
     return undefined;
   }
@@ -645,23 +869,21 @@ async function resolveTargets(
 }
 
 /**
- * `cooud-ui upgrade` — pull upstream component updates WITHOUT losing local
- * edits. For every target item it 3-way merges base (the registry release the
- * item was installed from, recorded in cooud-ui.json's `installed` manifest),
- * local (the file on disk) and upstream (the registry at the current CLI
- * release) via `git merge-file --diff3`. Conflicts are never silently
- * clobbered: markers are only written with consent, and COOUD-UPGRADE.md gets
- * a ready-to-paste agent prompt per unresolved file.
+ * `kronus-ui upgrade` — pull upstream component (and, with `--all`, composed
+ * page) updates WITHOUT losing local edits. For every target it 3-way merges
+ * base, local, and upstream via `git merge-file --diff3`. Conflicts are never
+ * silently clobbered: markers are only written with consent, and
+ * KRONUS-UPGRADE.md gets a ready-to-paste agent prompt per unresolved file.
  */
 export async function upgrade(names: string[], options: UpgradeOptions): Promise<void> {
   const { cwd } = options;
   if (!hasConfig(cwd)) {
-    log.err("No cooud-ui.json found. Run `cooud-ui init` first.");
+    log.err("No kronus-ui.json found. Run `kronus-ui init` first.");
     process.exitCode = 1;
     return;
   }
   const config = await readConfig(cwd);
-  // Target = the registry at the RUNNING CLI's release. A cooud-ui.json written
+  // Target = the registry at the RUNNING CLI's release. A kronus-ui.json written
   // by an older CLI still carries its old pinned URL, so re-pin it; an explicit
   // --registry is respected verbatim.
   const targetSource =
@@ -669,11 +891,14 @@ export async function upgrade(names: string[], options: UpgradeOptions): Promise
   const targetVersion = registrySourceVersion(targetSource) ?? CLI_VERSION;
   const targetRegistry = new Registry(targetSource);
   const installed: Record<string, InstalledRecord> = { ...config.installed };
+  const composed: Record<string, ComposedRecord> = { ...config.composed };
+  const composedKeys = Object.keys(composed).sort();
+  const upgradeComposed = options.all === true && composedKeys.length > 0;
   const confirm = options.confirm ?? askConfirmDefault;
 
   const targets = await resolveTargets(names, options, installed, targetRegistry, config, cwd);
   if (targets === undefined) return;
-  if (targets.length === 0) {
+  if (targets.length === 0 && !upgradeComposed) {
     log.title("Nothing to upgrade — no installed components found.");
     return;
   }
@@ -740,6 +965,31 @@ export async function upgrade(names: string[], options: UpgradeOptions): Promise
     itemPlans.push(itemPlan);
   }
 
+  // Composed pages: plan after components, fail loud before any write.
+  if (upgradeComposed) {
+    try {
+      for (const key of composedKeys) {
+        const record = composed[key];
+        if (record === undefined) continue;
+        itemPlans.push(
+          await planComposedApp({
+            composedKey: key,
+            record,
+            config,
+            cwd,
+            registry: targetRegistry,
+            targetVersion,
+            manifestPath: options.manifestPath,
+          }),
+        );
+      }
+    } catch (err) {
+      log.err((err as Error).message);
+      process.exitCode = 1;
+      return;
+    }
+  }
+
   if (itemPlans.length === 0) {
     log.title("Nothing to upgrade.");
     return;
@@ -750,17 +1000,34 @@ export async function upgrade(names: string[], options: UpgradeOptions): Promise
     return;
   }
 
+  // Install newly required blocks BEFORE writing pages that import them.
+  const newlyInstalled = await installPendingBlocks(itemPlans, config, cwd, targetVersion);
+  Object.assign(installed, newlyInstalled);
+
   const written = await applyPlans(itemPlans, options, confirm);
+  await refreshComposeSnapshots(itemPlans);
 
   // Manifest: record every item that now fully embodies the target release.
+  // Compose items update `composed{}` (never `installed{}`) and never drop
+  // add-page files from the tracked set.
   let manifestChanged = false;
   for (const item of itemPlans) {
+    if (item.composeKey !== undefined) {
+      const rec = composed[item.composeKey];
+      if (rec === undefined) continue;
+      const writtenRels = item.plans.filter(fileWasWritten).map((p) => p.relPath);
+      const files = [...new Set([...rec.files, ...item.targetFiles, ...writtenRels])].sort();
+      const version = itemFullyUpgraded(item) ? targetVersion : rec.version;
+      composed[item.composeKey] = { ...rec, files, version };
+      manifestChanged = true;
+      continue;
+    }
     if (!itemFullyUpgraded(item)) continue;
     installed[item.name] = { version: targetVersion, files: item.targetFiles };
     manifestChanged = true;
   }
   if (manifestChanged) {
-    await writeConfig(cwd, { ...config, installed });
+    await writeConfig(cwd, { ...config, installed, composed });
   }
 
   for (const item of itemPlans) {
@@ -792,6 +1059,9 @@ function printPlan(items: ItemPlan[]): void {
       const line = `${pc.dim(plan.item)} ${plan.relPath}: ${label}`;
       if (needsAttention(plan)) log.warn(line);
       else log.step(line);
+    }
+    for (const registryItem of item.installItems ?? []) {
+      log.step(`${pc.dim(item.name)} would install ${registryItem.name}`);
     }
   }
   const tally = [...counts.entries()].map(([label, count]) => `${count} ${label}`).join(", ");
