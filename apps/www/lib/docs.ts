@@ -13,6 +13,10 @@ export type PackageManagerCommand = {
   label: string;
   init: string;
   add: string;
+  create: string;
+  compose: string;
+  addPage: string;
+  upgrade: string;
 };
 
 export const DOC_NAV_SECTIONS: { heading: string; items: DocNavItem[] }[] = [
@@ -22,12 +26,21 @@ export const DOC_NAV_SECTIONS: { heading: string; items: DocNavItem[] }[] = [
       {
         label: "Introduction",
         href: "/docs",
-        description: "Project shape, distribution modes, and design-system contract.",
+        description:
+          "Product UI system: compose a themed SaaS from validated blocks, dual distribution, live theme.",
       },
       {
         label: "Getting started",
         href: "/docs/getting-started",
-        description: "Zero to a themed UI: install, provider, first component, theme, and a block.",
+        description:
+          "Zero to a composed SaaS: scaffold, provider, theme, add-page, upgrade, or init into an existing app.",
+      },
+      {
+        label: "Compare",
+        href: "/docs/compare",
+        description:
+          "Kronus UI next to shadcn/ui, HeroUI, and Aceternity — distribution, theming, compose, and a11y gates.",
+        status: "new",
       },
       {
         label: "Components",
@@ -42,7 +55,7 @@ export const DOC_NAV_SECTIONS: { heading: string; items: DocNavItem[] }[] = [
       {
         label: "Installation",
         href: "/docs/installation",
-        description: "Start from Create, the CLI, or an existing app.",
+        description: "Scaffold a SaaS, use Create, the CLI, or an existing app.",
       },
       {
         label: "Theming",
@@ -57,7 +70,7 @@ export const DOC_NAV_SECTIONS: { heading: string; items: DocNavItem[] }[] = [
       {
         label: "CLI",
         href: "/docs/cli",
-        description: "Install, add, diff, and inspect registry components.",
+        description: "init, add, compose, add-page, diff, upgrade, theme, ai.",
       },
       {
         label: "Stack Builder",
@@ -115,32 +128,55 @@ export const PACKAGE_MANAGERS: PackageManagerCommand[] = [
   {
     id: "pnpm",
     label: "pnpm",
-    init: "pnpm dlx cooud-ui@latest init",
-    add: "pnpm dlx cooud-ui@latest add button card dialog",
+    init: "pnpm dlx kronus-ui@latest init",
+    add: "pnpm dlx kronus-ui@latest add button card dialog",
+    create: "pnpm dlx create-kronus-app@latest my-app --template saas",
+    compose: "pnpm dlx kronus-ui@latest compose saas",
+    addPage: "pnpm dlx kronus-ui@latest add-page --route /faq --blocks faq,cta --nav FAQ",
+    upgrade: "pnpm dlx kronus-ui@latest upgrade --all --dry-run",
   },
   {
     id: "npm",
     label: "npm",
-    init: "npx cooud-ui@latest init",
-    add: "npx cooud-ui@latest add button card dialog",
+    init: "npx kronus-ui@latest init",
+    add: "npx kronus-ui@latest add button card dialog",
+    create: "npx create-kronus-app@latest my-app --template saas",
+    compose: "npx kronus-ui@latest compose saas",
+    addPage: "npx kronus-ui@latest add-page --route /faq --blocks faq,cta --nav FAQ",
+    upgrade: "npx kronus-ui@latest upgrade --all --dry-run",
   },
   {
     id: "yarn",
     label: "yarn",
-    init: "yarn dlx cooud-ui@latest init",
-    add: "yarn dlx cooud-ui@latest add button card dialog",
+    init: "yarn dlx kronus-ui@latest init",
+    add: "yarn dlx kronus-ui@latest add button card dialog",
+    create: "yarn dlx create-kronus-app@latest my-app --template saas",
+    compose: "yarn dlx kronus-ui@latest compose saas",
+    addPage: "yarn dlx kronus-ui@latest add-page --route /faq --blocks faq,cta --nav FAQ",
+    upgrade: "yarn dlx kronus-ui@latest upgrade --all --dry-run",
   },
   {
     id: "bun",
     label: "bun",
-    init: "bunx cooud-ui@latest init",
-    add: "bunx cooud-ui@latest add button card dialog",
+    init: "bunx kronus-ui@latest init",
+    add: "bunx kronus-ui@latest add button card dialog",
+    create: "bunx create-kronus-app@latest my-app --template saas",
+    compose: "bunx kronus-ui@latest compose saas",
+    addPage: "bunx kronus-ui@latest add-page --route /faq --blocks faq,cta --nav FAQ",
+    upgrade: "bunx kronus-ui@latest upgrade --all --dry-run",
   },
 ];
 
 export const INSTALL_OPTIONS = [
   {
-    title: "Use Cooud Create",
+    title: "Scaffold a SaaS app",
+    description:
+      "npx create-kronus-app my-app --template saas — a Next.js product composed from validated blocks, with theme and AI Kit.",
+    href: "/docs/getting-started",
+    action: "Get started",
+  },
+  {
+    title: "Use Kronus Create",
     description:
       "Build a preset visually, save it, and generate the setup snippets for your stack.",
     href: "/create",
@@ -155,7 +191,7 @@ export const INSTALL_OPTIONS = [
   },
   {
     title: "Use the CLI",
-    description: "Run init inside your project to wire tokens, providers, and config.",
+    description: "init, add, compose, add-page, diff, upgrade, theme, and ai — inside any project.",
     href: "/docs/cli",
     action: "Read CLI docs",
   },
@@ -171,7 +207,7 @@ export const FRAMEWORKS = [
   {
     slug: "next",
     name: "Next.js",
-    command: "npx create-next-app@latest app && cd app && npx cooud-ui@latest init",
+    command: "npx create-next-app@latest app && cd app && npx kronus-ui@latest init",
     description: "App Router, RSC-safe provider placement, metadata, and route-level themes.",
     checks: [
       "Provider in app/layout.tsx",
@@ -182,14 +218,14 @@ export const FRAMEWORKS = [
   {
     slug: "vite",
     name: "Vite",
-    command: "npm create vite@latest app && cd app && npx cooud-ui@latest init",
+    command: "npm create vite@latest app && cd app && npx kronus-ui@latest init",
     description: "SPA setup with a root provider, CSS token import, and fast registry adds.",
     checks: ["Provider wraps <App />", "semantic tokens in src/index.css", "keyboard traps tested"],
   },
   {
     slug: "tanstack-start",
     name: "TanStack Start",
-    command: "npm create @tanstack/start@latest app && cd app && npx cooud-ui@latest init",
+    command: "npm create @tanstack/start@latest app && cd app && npx kronus-ui@latest init",
     description:
       "File routes, server functions, and persistent theme state across route transitions.",
     checks: [
@@ -201,14 +237,14 @@ export const FRAMEWORKS = [
   {
     slug: "react-router",
     name: "React Router",
-    command: "npx create-react-router@latest app && cd app && npx cooud-ui@latest init",
+    command: "npx create-react-router@latest app && cd app && npx kronus-ui@latest init",
     description: "Framework mode with route modules, loader-friendly forms, and progressive UX.",
     checks: ["Root.tsx owns provider", "forms expose field errors", "links keep visible focus"],
   },
   {
     slug: "astro",
     name: "Astro",
-    command: "npm create astro@latest app && cd app && npx cooud-ui@latest init",
+    command: "npm create astro@latest app && cd app && npx kronus-ui@latest init",
     description: "Island components with shared CSS tokens and isolated interactive surfaces.",
     checks: [
       "client islands import UI only where needed",
@@ -219,7 +255,7 @@ export const FRAMEWORKS = [
   {
     slug: "laravel",
     name: "Laravel",
-    command: "laravel new app && cd app && npx cooud-ui@latest init",
+    command: "laravel new app && cd app && npx kronus-ui@latest init",
     description: "Blade or Inertia setup with Vite, shared token CSS, and server-rendered forms.",
     checks: [
       "Vite entry imports tokens",
@@ -254,6 +290,46 @@ export const ACCESSIBILITY_CHECKS = [
 
 export const CHANGELOG_ENTRIES = [
   {
+    date: "2026-07-13",
+    version: "v0.5.0",
+    status: "Released",
+    title: "App generator matures",
+    summary:
+      "Block variants, a SaaS template, add-page, and shared demo-store / demo-saas libs — compose a product, then grow it one route at a time.",
+    items: [
+      "Installable block variants and a repeatable --variant flag on compose",
+      "create-kronus-app --template saas: app-shell chrome, dashboard, team, billing, settings, split login",
+      "kronus-ui add-page grows a composed app (blocks, nav, base snapshot, --dry-run)",
+      "Shared demo-store / demo-saas libs as registry:lib, installed transitively with add/compose",
+    ],
+  },
+  {
+    date: "2026-07-13",
+    version: "v0.4.0",
+    status: "Released",
+    title: "Kronus Compose",
+    summary:
+      "Generate a multi-page Next.js app from validated registry blocks. Every page is imports plus a <main> that stacks them.",
+    items: [
+      "kronus-ui compose <template> and create-kronus-app --template store|landing",
+      "Bundled store and landing manifests, --dry-run sitemap preview, .kronus-ui/ base snapshot",
+      "registry/meta.json sidecar and MCP search/list/get enriched from it",
+    ],
+  },
+  {
+    date: "2026-07-13",
+    version: "v0.3.0",
+    status: "Released",
+    title: "Optional peers, 17 blocks, 5 components",
+    summary:
+      "Heavy leaf libraries moved to optional peerDependencies of @kronus-ui/ui. CLI add still installs per-item deps. Catalog grew.",
+    items: [
+      "recharts, tiptap, dnd-kit, tanstack-table, react-day-picker, and date-fns are optional peers",
+      "17 new blocks across store, account, admin, and content families (56 → 73)",
+      "Chip, StatusDot, ImageZoom, VideoPlayer, and DescriptionList",
+    ],
+  },
+  {
     date: "2026-07-07",
     version: "v0.2.0",
     status: "Released",
@@ -261,13 +337,13 @@ export const CHANGELOG_ENTRIES = [
     summary:
       "Promoted Stack Builder into the publishable package set, added app and stack generators, refreshed the homepage, and hardened the local v0.2 release path.",
     items: [
-      "Nine publishables in lockstep: tokens, theme, UI, stack, AI Kit, CLI, create-cooud-app, create-cooud-stack, and MCP",
-      "Stack Builder docs, schema metadata, KICKOFF.md, stack.json, and create-cooud-stack scaffold output",
+      "Nine publishables in lockstep: tokens, theme, UI, stack, AI Kit, CLI, create-kronus-app, create-kronus-stack, and MCP",
+      "Stack Builder docs, schema metadata, KICKOFF.md, stack.json, and create-kronus-stack scaffold output",
       "Full package smoke coverage for runtime installs, installed bins, scaffold checks, and tarball dependency pins",
     ],
   },
   {
-    date: "2026-06-21",
+    date: "2026-06-23",
     version: "v0.1.0",
     status: "Released",
     title: "Foundation component waves",
@@ -281,15 +357,14 @@ export const CHANGELOG_ENTRIES = [
   },
   {
     date: "Next",
-    version: "v0.3.0",
+    version: "Next",
     status: "Planned",
-    title: "Framework adapters and examples",
+    title: "Registry app manifests and catalog-data reconciliation",
     summary:
-      "Add framework-specific examples, install smoke tests, and migration recipes for production Cooud apps.",
+      "Bundled app templates stay in-repo for now. Next is migrating them to registry:app and unifying remaining block mock data onto shared libs.",
     items: [
-      "Per-framework starter snapshots",
-      "Registry diff reports in docs",
-      "Accessibility snapshots for complex primitives",
+      "registry:app manifests for store, landing, saas, and named landing-* flavors",
+      "Catalog-data reconciliation for blocks still on divergent mocks",
     ],
   },
 ] as const;

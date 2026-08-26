@@ -7,7 +7,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@cooud-ui/ui/command";
+} from "@kronus-ui/ui/command";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 // Server-safe block metadata only — names, slugs, variant ids + descriptions.
@@ -16,6 +16,8 @@ import { useCallback } from "react";
 import { BLOCK_CATEGORIES } from "../../lib/blocks-index";
 import { CATEGORIES, getComponentDisplayName } from "../../lib/components-index";
 import { DOC_NAV_SECTIONS } from "../../lib/docs";
+import { PRO_URL } from "../../lib/site-url";
+import { TEMPLATE_CATALOG } from "../../lib/templates/catalog";
 
 const docItems = DOC_NAV_SECTIONS.flatMap((section) => section.items);
 
@@ -168,6 +170,52 @@ export default function CommandSearchDialog({
             <span className="text-sm text-fg">Blocks</span>
             <span className="text-xs text-fg-tertiary">Browse production-ready blocks.</span>
           </CommandItem>
+          <CommandItem
+            value="Sponsor donate coffee buy me a coffee support oss github"
+            onSelect={() => onSelectRoute("/sponsor")}
+            className="flex flex-col items-start gap-0.5"
+          >
+            <span className="text-sm text-fg">Sponsor</span>
+            <span className="text-xs text-fg-tertiary">
+              Optional coffee for the OSS engine. Any amount, one-time.
+            </span>
+          </CommandItem>
+          <CommandItem
+            value="Pro pack mail chat finance license additive"
+            onSelect={() => {
+              onOpenChange(false);
+              window.location.assign(PRO_URL);
+            }}
+            className="flex flex-col items-start gap-0.5"
+          >
+            <span className="text-sm text-fg">Pro</span>
+            <span className="text-xs text-fg-tertiary">
+              Additive apps: mail, chat, finance. OSS stays complete.
+            </span>
+          </CommandItem>
+          <CommandItem
+            value="Templates live preview compose scaffold landing saas store"
+            onSelect={() => onSelectRoute("/templates")}
+            className="flex flex-col items-start gap-0.5"
+          >
+            <span className="text-sm text-fg">Templates</span>
+            <span className="text-xs text-fg-tertiary">
+              Live previews of composed apps. Open Preview for the full site.
+            </span>
+          </CommandItem>
+        </CommandGroup>
+        <CommandGroup heading="Templates">
+          {TEMPLATE_CATALOG.map((entry) => (
+            <CommandItem
+              key={entry.slug}
+              value={`${entry.name} ${entry.tagline} ${entry.description} ${entry.slug} template ${entry.kind}`}
+              onSelect={() => onSelectRoute(`/templates/${entry.slug}`)}
+              className="flex flex-col items-start gap-0.5"
+            >
+              <span className="text-sm text-fg">{entry.name}</span>
+              <span className="text-xs text-fg-tertiary">{entry.tagline}</span>
+            </CommandItem>
+          ))}
         </CommandGroup>
         <CommandGroup heading="Blocks">
           {blockSearchEntries.map((entry) => (

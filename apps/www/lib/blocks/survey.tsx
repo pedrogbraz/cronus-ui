@@ -11,7 +11,7 @@ import {
   Label,
   Rating,
   Textarea,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { BookOpen, Mail, MessageCircle } from "lucide-react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
 import { BlockViewBody } from "../../components/blocks/block-view-body";
@@ -31,7 +31,7 @@ export function NpsSurveyBlock() {
       <Card className="w-full max-w-lg gap-6 shadow-lg">
         <CardHeader>
           <CardTitle className="font-display text-lg">
-            How likely are you to recommend Cooud to a friend or colleague?
+            How likely are you to recommend Kronus to a friend or colleague?
           </CardTitle>
         </CardHeader>
 
@@ -68,7 +68,7 @@ export function NpsSurveyBlock() {
             <Textarea id="nps-reason" placeholder="Tell us what shaped your rating…" rows={3} />
           </div>
 
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Submit feedback
           </Button>
         </CardContent>
@@ -85,7 +85,7 @@ const npsSurveyCode = `import {
   CardTitle,
   Label,
   Textarea,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 
 const NPS_SCORES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -95,7 +95,7 @@ export function NpsSurveyBlock() {
       <Card className="w-full max-w-lg gap-6 shadow-lg">
         <CardHeader>
           <CardTitle className="font-display text-lg">
-            How likely are you to recommend Cooud to a friend or colleague?
+            How likely are you to recommend Kronus to a friend or colleague?
           </CardTitle>
         </CardHeader>
 
@@ -132,7 +132,7 @@ export function NpsSurveyBlock() {
             <Textarea id="nps-reason" placeholder="Tell us what shaped your rating…" rows={3} />
           </div>
 
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Submit feedback
           </Button>
         </CardContent>
@@ -192,7 +192,7 @@ export function FeedbackFormBlock() {
             />
           </div>
 
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Send feedback
           </Button>
         </CardContent>
@@ -211,7 +211,7 @@ const feedbackFormCode = `import {
   Label,
   Rating,
   Textarea,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 
 const FEEDBACK_CATEGORIES = ["Bug", "Idea", "Praise", "Other"];
 
@@ -260,7 +260,7 @@ export function FeedbackFormBlock() {
             />
           </div>
 
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Send feedback
           </Button>
         </CardContent>
@@ -292,7 +292,7 @@ export function ContactFormBlock() {
               </span>
               <div className="flex flex-col">
                 <span className="text-sm font-medium">Email</span>
-                <span className="text-sm text-fg-secondary">contact@cooud.com</span>
+                <span className="text-sm text-fg-secondary">contact@kronus.com</span>
               </div>
             </div>
 
@@ -312,7 +312,7 @@ export function ContactFormBlock() {
               </span>
               <div className="flex flex-col">
                 <span className="text-sm font-medium">Docs</span>
-                <span className="text-sm text-fg-secondary">docs.cooud.com</span>
+                <span className="text-sm text-fg-secondary">docs.kronus.com</span>
               </div>
             </div>
           </div>
@@ -346,7 +346,7 @@ export function ContactFormBlock() {
               <Textarea id="contact-message" placeholder="Tell us a little more…" rows={4} />
             </div>
 
-            <Button variant="gradient" size="lg" className="w-full">
+            <Button variant="primary" size="lg" className="w-full">
               Send message
             </Button>
           </CardContent>
@@ -363,7 +363,7 @@ const contactFormCode = `import {
   Input,
   Label,
   Textarea,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { BookOpen, Mail, MessageCircle } from "lucide-react";
 
 export function ContactFormBlock() {
@@ -385,7 +385,7 @@ export function ContactFormBlock() {
               </span>
               <div className="flex flex-col">
                 <span className="text-sm font-medium">Email</span>
-                <span className="text-sm text-fg-secondary">contact@cooud.com</span>
+                <span className="text-sm text-fg-secondary">contact@kronus.com</span>
               </div>
             </div>
 
@@ -405,7 +405,7 @@ export function ContactFormBlock() {
               </span>
               <div className="flex flex-col">
                 <span className="text-sm font-medium">Docs</span>
-                <span className="text-sm text-fg-secondary">docs.cooud.com</span>
+                <span className="text-sm text-fg-secondary">docs.kronus.com</span>
               </div>
             </div>
           </div>
@@ -439,7 +439,7 @@ export function ContactFormBlock() {
               <Textarea id="contact-message" placeholder="Tell us a little more…" rows={4} />
             </div>
 
-            <Button variant="gradient" size="lg" className="w-full">
+            <Button variant="primary" size="lg" className="w-full">
               Send message
             </Button>
           </CardContent>

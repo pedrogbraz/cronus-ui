@@ -1,9 +1,9 @@
-import { cn } from "@cooud-ui/ui";
+import { cn } from "@kronus-ui/ui";
 import type { CSSProperties } from "react";
 
 const MARK_MASK_STYLE: CSSProperties = {
-  WebkitMaskImage: "url(/brand/cooud-mark.png)",
-  maskImage: "url(/brand/cooud-mark.png)",
+  WebkitMaskImage: "url(/brand/kronus-mark.png)",
+  maskImage: "url(/brand/kronus-mark.png)",
   WebkitMaskPosition: "center",
   maskPosition: "center",
   WebkitMaskRepeat: "no-repeat",
@@ -12,7 +12,7 @@ const MARK_MASK_STYLE: CSSProperties = {
   maskSize: "contain",
 };
 
-export function CooudMark({ className, title }: { className?: string; title?: string }) {
+export function KronusMark({ className, title }: { className?: string; title?: string }) {
   if (title) {
     return (
       <span

@@ -1,6 +1,6 @@
 "use client";
 
-import { cn, Label, Switch } from "@cooud-ui/ui";
+import { cn, Label, Switch } from "@kronus-ui/ui";
 import { type KeyboardEvent, useEffect, useId, useRef, useState } from "react";
 import type { ResolvedCategory } from "@/lib/stack/types";
 import { OptionCard } from "./option-card";
@@ -22,7 +22,7 @@ export interface CategorySectionProps {
  *  - `single` → a `role="radiogroup"` grid of radio cards with roving tabindex
  *    (Arrow keys move focus among AVAILABLE options, wrapping; Home/End jump).
  *  - `multi`  → a group of `aria-pressed` toggle cards.
- *  - `toggle` → a labelled Cooud UI Switch.
+ *  - `toggle` → a labelled Kronus UI Switch.
  */
 export function CategorySection({
   resolved,

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Card, Separator } from "@cooud-ui/ui";
+import { Button, Card, Separator } from "@kronus-ui/ui";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
 import { BlockViewBody } from "../../components/blocks/block-view-body";
 import { getBlockMeta } from "../blocks-index";
@@ -20,13 +20,13 @@ export function EmailWelcomeBlock() {
             <span className="inline-flex size-7 items-center justify-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
               <span className="size-3 rounded-sm bg-primary-foreground/90" aria-hidden="true" />
             </span>
-            <span className="font-display text-lg font-semibold tracking-tight">Cooud</span>
+            <span className="font-display text-lg font-semibold tracking-tight">Kronus</span>
           </span>
         </div>
 
         <div className="flex flex-col gap-5 px-8 py-8">
           <h1 className="font-display text-2xl font-semibold tracking-tight">
-            Welcome to Cooud 🎉
+            Welcome to Kronus 🎉
           </h1>
           <p className="text-sm leading-relaxed text-fg-secondary">
             Hi Mara, we&apos;re thrilled to have you on board. Your workspace is ready and
@@ -38,7 +38,7 @@ export function EmailWelcomeBlock() {
           </p>
 
           <div>
-            <Button variant="gradient" size="lg">
+            <Button variant="primary" size="lg">
               Get started
             </Button>
           </div>
@@ -73,19 +73,19 @@ export function EmailWelcomeBlock() {
 
         <div className="flex flex-col gap-1 border-t border-border/60 px-8 py-6 text-xs text-fg-tertiary">
           <p>
-            You&apos;re receiving this because you signed up for Cooud.{" "}
+            You&apos;re receiving this because you signed up for Kronus.{" "}
             <a href="#unsubscribe" className="underline underline-offset-4 hover:text-fg-secondary">
               Unsubscribe
             </a>
           </p>
-          <p>Cooud, Inc. · 2261 Market St, San Francisco</p>
+          <p>Kronus, Inc. · 2261 Market St, San Francisco</p>
         </div>
       </Card>
     </div>
   );
 }
 
-const emailWelcomeCode = `import { Button, Card } from "@cooud-ui/ui";
+const emailWelcomeCode = `import { Button, Card } from "@kronus-ui/ui";
 
 export function EmailWelcomeBlock() {
   return (
@@ -96,13 +96,13 @@ export function EmailWelcomeBlock() {
             <span className="inline-flex size-7 items-center justify-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
               <span className="size-3 rounded-sm bg-primary-foreground/90" aria-hidden="true" />
             </span>
-            <span className="font-display text-lg font-semibold tracking-tight">Cooud</span>
+            <span className="font-display text-lg font-semibold tracking-tight">Kronus</span>
           </span>
         </div>
 
         <div className="flex flex-col gap-5 px-8 py-8">
           <h1 className="font-display text-2xl font-semibold tracking-tight">
-            Welcome to Cooud 🎉
+            Welcome to Kronus 🎉
           </h1>
           <p className="text-sm leading-relaxed text-fg-secondary">
             Hi Mara, we&apos;re thrilled to have you on board. Your workspace is ready and there&apos;s
@@ -114,7 +114,7 @@ export function EmailWelcomeBlock() {
           </p>
 
           <div>
-            <Button variant="gradient" size="lg">
+            <Button variant="primary" size="lg">
               Get started
             </Button>
           </div>
@@ -140,12 +140,12 @@ export function EmailWelcomeBlock() {
 
         <div className="flex flex-col gap-1 border-t border-border/60 px-8 py-6 text-xs text-fg-tertiary">
           <p>
-            You&apos;re receiving this because you signed up for Cooud.{" "}
+            You&apos;re receiving this because you signed up for Kronus.{" "}
             <a href="#unsubscribe" className="underline underline-offset-4 hover:text-fg-secondary">
               Unsubscribe
             </a>
           </p>
-          <p>Cooud, Inc. · 2261 Market St, San Francisco</p>
+          <p>Kronus, Inc. · 2261 Market St, San Francisco</p>
         </div>
       </Card>
     </div>
@@ -165,14 +165,14 @@ export function EmailReceiptBlock() {
             <span className="inline-flex size-7 items-center justify-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
               <span className="size-3 rounded-sm bg-primary-foreground/90" aria-hidden="true" />
             </span>
-            <span className="font-display text-lg font-semibold tracking-tight">Cooud</span>
+            <span className="font-display text-lg font-semibold tracking-tight">Kronus</span>
           </span>
         </div>
 
         <div className="flex flex-col gap-5 px-8 py-8">
           <div className="flex flex-col gap-1">
             <h1 className="font-display text-2xl font-semibold tracking-tight">
-              Receipt from Cooud
+              Receipt from Kronus
             </h1>
             <p className="text-sm text-fg-secondary">Order #CO-10482 · April 18, 2026</p>
           </div>
@@ -218,7 +218,7 @@ export function EmailReceiptBlock() {
           </div>
 
           <div>
-            <Button variant="gradient" size="lg">
+            <Button variant="primary" size="lg">
               View invoice
             </Button>
           </div>
@@ -228,17 +228,17 @@ export function EmailReceiptBlock() {
           <p>
             Questions about this charge? Contact{" "}
             <a href="#support" className="underline underline-offset-4 hover:text-fg-secondary">
-              support@cooud.com
+              support@kronus.com
             </a>
           </p>
-          <p>Cooud, Inc. · 2261 Market St, San Francisco</p>
+          <p>Kronus, Inc. · 2261 Market St, San Francisco</p>
         </div>
       </Card>
     </div>
   );
 }
 
-const emailReceiptCode = `import { Button, Card, Separator } from "@cooud-ui/ui";
+const emailReceiptCode = `import { Button, Card, Separator } from "@kronus-ui/ui";
 
 export function EmailReceiptBlock() {
   return (
@@ -249,13 +249,13 @@ export function EmailReceiptBlock() {
             <span className="inline-flex size-7 items-center justify-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
               <span className="size-3 rounded-sm bg-primary-foreground/90" aria-hidden="true" />
             </span>
-            <span className="font-display text-lg font-semibold tracking-tight">Cooud</span>
+            <span className="font-display text-lg font-semibold tracking-tight">Kronus</span>
           </span>
         </div>
 
         <div className="flex flex-col gap-5 px-8 py-8">
           <div className="flex flex-col gap-1">
-            <h1 className="font-display text-2xl font-semibold tracking-tight">Receipt from Cooud</h1>
+            <h1 className="font-display text-2xl font-semibold tracking-tight">Receipt from Kronus</h1>
             <p className="text-sm text-fg-secondary">
               Order #CO-10482 · April 18, 2026
             </p>
@@ -302,7 +302,7 @@ export function EmailReceiptBlock() {
           </div>
 
           <div>
-            <Button variant="gradient" size="lg">
+            <Button variant="primary" size="lg">
               View invoice
             </Button>
           </div>
@@ -312,10 +312,10 @@ export function EmailReceiptBlock() {
           <p>
             Questions about this charge? Contact{" "}
             <a href="#support" className="underline underline-offset-4 hover:text-fg-secondary">
-              support@cooud.com
+              support@kronus.com
             </a>
           </p>
-          <p>Cooud, Inc. · 2261 Market St, San Francisco</p>
+          <p>Kronus, Inc. · 2261 Market St, San Francisco</p>
         </div>
       </Card>
     </div>
@@ -335,7 +335,7 @@ export function EmailVerifyBlock() {
             <span className="inline-flex size-7 items-center justify-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
               <span className="size-3 rounded-sm bg-primary-foreground/90" aria-hidden="true" />
             </span>
-            <span className="font-display text-lg font-semibold tracking-tight">Cooud</span>
+            <span className="font-display text-lg font-semibold tracking-tight">Kronus</span>
           </span>
         </div>
 
@@ -344,11 +344,11 @@ export function EmailVerifyBlock() {
             Confirm your email address
           </h1>
           <p className="text-sm leading-relaxed text-fg-secondary">
-            Tap the button below to verify your email and activate your Cooud account.
+            Tap the button below to verify your email and activate your Kronus account.
           </p>
 
           <div>
-            <Button variant="gradient" size="lg">
+            <Button variant="primary" size="lg">
               Verify email
             </Button>
           </div>
@@ -365,14 +365,14 @@ export function EmailVerifyBlock() {
 
         <div className="flex flex-col gap-1 border-t border-border/60 px-8 py-6 text-xs text-fg-tertiary">
           <p>If you didn&apos;t create an account you can ignore this email.</p>
-          <p>Cooud, Inc. · 2261 Market St, San Francisco</p>
+          <p>Kronus, Inc. · 2261 Market St, San Francisco</p>
         </div>
       </Card>
     </div>
   );
 }
 
-const emailVerifyCode = `import { Button, Card } from "@cooud-ui/ui";
+const emailVerifyCode = `import { Button, Card } from "@kronus-ui/ui";
 
 export function EmailVerifyBlock() {
   return (
@@ -383,7 +383,7 @@ export function EmailVerifyBlock() {
             <span className="inline-flex size-7 items-center justify-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
               <span className="size-3 rounded-sm bg-primary-foreground/90" aria-hidden="true" />
             </span>
-            <span className="font-display text-lg font-semibold tracking-tight">Cooud</span>
+            <span className="font-display text-lg font-semibold tracking-tight">Kronus</span>
           </span>
         </div>
 
@@ -392,11 +392,11 @@ export function EmailVerifyBlock() {
             Confirm your email address
           </h1>
           <p className="text-sm leading-relaxed text-fg-secondary">
-            Tap the button below to verify your email and activate your Cooud account.
+            Tap the button below to verify your email and activate your Kronus account.
           </p>
 
           <div>
-            <Button variant="gradient" size="lg">
+            <Button variant="primary" size="lg">
               Verify email
             </Button>
           </div>
@@ -413,7 +413,7 @@ export function EmailVerifyBlock() {
 
         <div className="flex flex-col gap-1 border-t border-border/60 px-8 py-6 text-xs text-fg-tertiary">
           <p>If you didn&apos;t create an account you can ignore this email.</p>
-          <p>Cooud, Inc. · 2261 Market St, San Francisco</p>
+          <p>Kronus, Inc. · 2261 Market St, San Francisco</p>
         </div>
       </Card>
     </div>

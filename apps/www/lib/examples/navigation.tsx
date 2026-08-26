@@ -63,7 +63,7 @@ import {
   ToolbarButton,
   ToolbarGroup,
   ToolbarSeparator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import {
   AlignCenter,
   AlignLeft,
@@ -210,7 +210,7 @@ const TOC_DEMO_SECTIONS = [
     id: "toc-demo-cli",
     label: "With the CLI",
     depth: 1,
-    body: "npx cooud-ui add table-of-contents drops the source file into your components directory.",
+    body: "npx kronus-ui add table-of-contents drops the source file into your components directory.",
   },
   {
     id: "toc-demo-manual",

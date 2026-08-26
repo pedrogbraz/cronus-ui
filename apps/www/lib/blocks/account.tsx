@@ -31,7 +31,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import {
   Check,
   Download,
@@ -249,7 +249,7 @@ const accountSecurityTwoFactorCode = `import {
   CopyButton,
   Separator,
   Switch,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Download, RefreshCw, ShieldCheck } from "lucide-react";
 
 const qrModules = [
@@ -478,7 +478,7 @@ export function AccountSecurityPasswordBlock() {
         </CardContent>
         <CardFooter className="justify-end gap-3">
           <Button variant="ghost">Cancel</Button>
-          <Button variant="gradient">Update password</Button>
+          <Button variant="primary">Update password</Button>
         </CardFooter>
       </Card>
 
@@ -534,7 +534,7 @@ const accountSecurityPasswordCode = `import {
   Input,
   Label,
   Progress,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { MailCheck, Trash2 } from "lucide-react";
 
 export function AccountSecurityPasswordBlock() {
@@ -586,7 +586,7 @@ export function AccountSecurityPasswordBlock() {
         </CardContent>
         <CardFooter className="justify-end gap-3">
           <Button variant="ghost">Cancel</Button>
-          <Button variant="gradient">Update password</Button>
+          <Button variant="primary">Update password</Button>
         </CardFooter>
       </Card>
 
@@ -657,7 +657,7 @@ const deviceSessions: DeviceSession[] = [
   {
     id: "ses-02",
     device: "iPhone 15 Pro",
-    client: "Cooud iOS 2.4.1",
+    client: "Kronus iOS 2.4.1",
     location: "San Francisco, US",
     lastActive: "25 minutes ago",
     icon: Smartphone,
@@ -747,7 +747,7 @@ const sessionsListCode = `import {
   CardHeader,
   CardTitle,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Laptop, LogOut, type LucideIcon, Monitor, Smartphone, Tablet } from "lucide-react";
 
 interface DeviceSession {
@@ -773,7 +773,7 @@ const deviceSessions: DeviceSession[] = [
   {
     id: "ses-02",
     device: "iPhone 15 Pro",
-    client: "Cooud iOS 2.4.1",
+    client: "Kronus iOS 2.4.1",
     location: "San Francisco, US",
     lastActive: "25 minutes ago",
     icon: Smartphone,
@@ -876,7 +876,7 @@ const sessions: UserSession[] = [
   {
     id: "ses-02",
     device: "iPhone 15 Pro",
-    client: "Cooud iOS 2.4.1",
+    client: "Kronus iOS 2.4.1",
     location: "San Francisco, US",
     lastActive: "25 minutes ago",
     icon: Smartphone,
@@ -1005,7 +1005,7 @@ const sessionsTableCode = `import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Laptop, LogOut, type LucideIcon, Monitor, Smartphone, Tablet } from "lucide-react";
 
 interface UserSession {
@@ -1032,7 +1032,7 @@ const sessions: UserSession[] = [
   {
     id: "ses-02",
     device: "iPhone 15 Pro",
-    client: "Cooud iOS 2.4.1",
+    client: "Kronus iOS 2.4.1",
     location: "San Francisco, US",
     lastActive: "25 minutes ago",
     icon: Smartphone,
@@ -1193,9 +1193,9 @@ export function ApiKeysListBlock() {
     <Card className="mx-auto w-full max-w-2xl gap-0 pb-0 shadow-md">
       <CardHeader>
         <CardTitle className="font-display text-lg">API keys</CardTitle>
-        <CardDescription>Programmatic access to your Cooud workspace.</CardDescription>
+        <CardDescription>Programmatic access to your Kronus workspace.</CardDescription>
         <CardAction>
-          <Button variant="gradient" size="sm">
+          <Button variant="primary" size="sm">
             <Plus className="size-3.5" aria-hidden="true" />
             Create key
           </Button>
@@ -1261,7 +1261,7 @@ const apiKeysListCode = `import {
   CardTitle,
   CopyButton,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Eye, Plus } from "lucide-react";
 
 interface ApiKey {
@@ -1310,9 +1310,9 @@ export function ApiKeysListBlock() {
     <Card className="mx-auto w-full max-w-2xl gap-0 pb-0 shadow-md">
       <CardHeader>
         <CardTitle className="font-display text-lg">API keys</CardTitle>
-        <CardDescription>Programmatic access to your Cooud workspace.</CardDescription>
+        <CardDescription>Programmatic access to your Kronus workspace.</CardDescription>
         <CardAction>
-          <Button variant="gradient" size="sm">
+          <Button variant="primary" size="sm">
             <Plus className="size-3.5" aria-hidden="true" />
             Create key
           </Button>
@@ -1460,7 +1460,7 @@ export function ApiKeysCreateBlock() {
         </CardContent>
         <CardFooter className="justify-end gap-3">
           <Button variant="ghost">Cancel</Button>
-          <Button variant="gradient">
+          <Button variant="primary">
             <KeyRound className="size-4" aria-hidden="true" />
             Generate key
           </Button>
@@ -1522,7 +1522,7 @@ const apiKeysCreateCode = `import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Check, KeyRound, TriangleAlert } from "lucide-react";
 
 interface KeyScope {
@@ -1619,7 +1619,7 @@ export function ApiKeysCreateBlock() {
         </CardContent>
         <CardFooter className="justify-end gap-3">
           <Button variant="ghost">Cancel</Button>
-          <Button variant="gradient">
+          <Button variant="primary">
             <KeyRound className="size-4" aria-hidden="true" />
             Generate key
           </Button>
@@ -1804,7 +1804,7 @@ export function NotificationPreferencesMatrixBlock() {
       <Separator />
       <CardFooter className="justify-between gap-3 py-5">
         <span className="text-xs text-fg-tertiary">SMS is reserved for critical alerts.</span>
-        <Button variant="gradient" size="sm">
+        <Button variant="primary" size="sm">
           Save preferences
         </Button>
       </CardFooter>
@@ -1822,7 +1822,7 @@ const notificationPreferencesMatrixCode = `import {
   CardTitle,
   Separator,
   Switch,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 
 interface NotificationRule {
   id: string;
@@ -1963,7 +1963,7 @@ export function NotificationPreferencesMatrixBlock() {
       <Separator />
       <CardFooter className="justify-between gap-3 py-5">
         <span className="text-xs text-fg-tertiary">SMS is reserved for critical alerts.</span>
-        <Button variant="gradient" size="sm">
+        <Button variant="primary" size="sm">
           Save preferences
         </Button>
       </CardFooter>
@@ -2022,7 +2022,7 @@ const preferenceSections: PreferenceSection[] = [
       {
         id: "pref-product-news",
         label: "Product updates",
-        description: "New Cooud features and improvements.",
+        description: "New Kronus features and improvements.",
         enabled: true,
       },
       {
@@ -2085,7 +2085,7 @@ const notificationPreferencesSimpleCode = `import {
   Label,
   Separator,
   Switch,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 
 interface PreferenceToggle {
   id: string;
@@ -2138,7 +2138,7 @@ const preferenceSections: PreferenceSection[] = [
       {
         id: "pref-product-news",
         label: "Product updates",
-        description: "New Cooud features and improvements.",
+        description: "New Kronus features and improvements.",
         enabled: true,
       },
       {

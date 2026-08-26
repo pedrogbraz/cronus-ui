@@ -1,6 +1,6 @@
 "use client";
 
-import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@cooud-ui/ui";
+import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@kronus-ui/ui";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 /**
@@ -11,8 +11,8 @@ import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
  */
 
 const chartConfig = {
-  revenue: { label: "Revenue", color: "var(--cooud-primary)" },
-  profit: { label: "Profit", color: "var(--cooud-info)" },
+  revenue: { label: "Revenue", color: "var(--kronus-primary)" },
+  profit: { label: "Profit", color: "var(--kronus-info)" },
 } satisfies ChartConfig;
 
 const chartData = [
@@ -31,7 +31,7 @@ export default function BarChartDemo() {
         <CartesianGrid vertical={false} />
         <XAxis dataKey="month" tickLine={false} tickMargin={10} axisLine={false} />
         <ChartTooltip
-          cursor={{ fill: "var(--cooud-fg)", fillOpacity: 0.05, radius: 8 }}
+          cursor={{ fill: "var(--kronus-fg)", fillOpacity: 0.05, radius: 8 }}
           content={<ChartTooltipContent />}
         />
         <Bar dataKey="revenue" fill="var(--color-revenue)" radius={4} />

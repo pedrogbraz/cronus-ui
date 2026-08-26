@@ -1,6 +1,6 @@
 "use client";
 
-import { cn, Tabs, TabsContent, TabsList, TabsTrigger } from "@cooud-ui/ui";
+import { cn, Tabs, TabsContent, TabsList, TabsTrigger } from "@kronus-ui/ui";
 import { Check, Copy, Terminal } from "lucide-react";
 import { useState } from "react";
 

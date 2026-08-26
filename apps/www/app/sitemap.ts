@@ -4,6 +4,7 @@ import type { MetadataRoute } from "next";
 import { BLOCK_SLUGS } from "../lib/blocks-index";
 import { COMPONENT_SLUGS } from "../lib/components-index";
 import { absoluteUrl } from "../lib/site-url";
+import { TEMPLATE_SLUGS } from "../lib/templates/catalog";
 
 /**
  * Sitemap for the whole showcase. Evaluated once at build time (no dynamic
@@ -39,15 +40,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // /components, /blocks, /docs, /create, /stack, /changelog, ... (+ any future
   // top-level page, e.g. /playground, the moment its page.tsx lands).
-  const topLevel = staticChildRoutes(APP_DIR).map((route) => {
-    const isCatalog = route === "components" || route === "blocks" || route === "docs";
-    return entry(`/${route}`, isCatalog ? 0.9 : 0.7);
-  });
+  const topLevel = staticChildRoutes(APP_DIR)
+    .filter((route) => route !== "pro")
+    .map((route) => {
+      const isCatalog = route === "components" || route === "blocks" || route === "docs";
+      return entry(`/${route}`, isCatalog ? 0.9 : 0.7);
+    });
 
   const docs = staticChildRoutes(join(APP_DIR, "docs")).map((page) => entry(`/docs/${page}`, 0.7));
 
   const components = COMPONENT_SLUGS.map((slug) => entry(`/components/${slug}`, 0.6));
   const blocks = BLOCK_SLUGS.map((slug) => entry(`/blocks/${slug}`, 0.6));
+  const templates = TEMPLATE_SLUGS.map((slug) => entry(`/templates/${slug}`, 0.6));
 
-  return [entry("/", 1), ...topLevel, ...docs, ...components, ...blocks];
+  return [entry("/", 1), ...topLevel, ...docs, ...components, ...blocks, ...templates];
 }

@@ -20,7 +20,8 @@ import {
   Label,
   Rating,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
+import { USER } from "@kronus-ui/ui/demo-saas";
 import {
   Apple,
   ArrowLeft,
@@ -54,7 +55,7 @@ export function LoginBlock() {
           </span>
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Welcome back</CardTitle>
-            <p className="text-sm text-fg-secondary">Sign in to your Cooud workspace</p>
+            <p className="text-sm text-fg-secondary">Sign in to your Kronus workspace</p>
           </div>
         </CardHeader>
 
@@ -95,7 +96,7 @@ export function LoginBlock() {
             </a>
           </div>
 
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Sign in
           </Button>
 
@@ -144,7 +145,7 @@ const loginCode = `import {
   Input,
   Label,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { ChartColumnIncreasing, Chrome, Github } from "lucide-react";
 
 export function LoginBlock() {
@@ -157,7 +158,7 @@ export function LoginBlock() {
           </span>
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Welcome back</CardTitle>
-            <p className="text-sm text-fg-secondary">Sign in to your Cooud workspace</p>
+            <p className="text-sm text-fg-secondary">Sign in to your Kronus workspace</p>
           </div>
         </CardHeader>
 
@@ -190,7 +191,7 @@ export function LoginBlock() {
             </a>
           </div>
 
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Sign in
           </Button>
 
@@ -240,7 +241,7 @@ export function LoginSplitBlock() {
         <div className="flex flex-col justify-center gap-6 p-8 sm:p-10 lg:order-2">
           <div className="flex flex-col gap-1">
             <h2 className="font-display text-xl font-semibold text-fg">Welcome back</h2>
-            <p className="text-sm text-fg-secondary">Sign in to your Cooud workspace.</p>
+            <p className="text-sm text-fg-secondary">Sign in to your Kronus workspace.</p>
           </div>
 
           <div className="flex flex-col gap-4">
@@ -272,7 +273,7 @@ export function LoginSplitBlock() {
               />
             </div>
 
-            <Button variant="gradient" size="lg" className="w-full">
+            <Button variant="primary" size="lg" className="w-full">
               Sign in
             </Button>
           </div>
@@ -300,14 +301,14 @@ export function LoginSplitBlock() {
                 <ChartColumnIncreasing className="size-4" aria-hidden="true" />
               </span>
               <span className="font-display text-lg font-semibold text-primary-foreground">
-                Cooud
+                Kronus
               </span>
             </div>
 
             <figure className="flex flex-col gap-5">
               <Quote className="size-7 text-primary-foreground/50" aria-hidden="true" />
               <blockquote className="font-display text-xl font-medium leading-snug text-primary-foreground">
-                “Cooud replaced four tools on day one — and our checkout conversion is up 23%.”
+                “Kronus replaced four tools on day one — and our checkout conversion is up 23%.”
               </blockquote>
               <figcaption className="flex items-center gap-3">
                 <Avatar>
@@ -328,7 +329,7 @@ export function LoginSplitBlock() {
   );
 }
 
-const loginSplitCode = `import { Avatar, AvatarFallback, Button, Input, Label } from "@cooud-ui/ui";
+const loginSplitCode = `import { Avatar, AvatarFallback, Button, Input, Label } from "@kronus-ui/ui";
 import { ChartColumnIncreasing, Quote } from "lucide-react";
 
 export function LoginSplitBlock() {
@@ -339,7 +340,7 @@ export function LoginSplitBlock() {
         <div className="flex flex-col justify-center gap-6 p-8 sm:p-10 lg:order-2">
           <div className="flex flex-col gap-1">
             <h2 className="font-display text-xl font-semibold text-fg">Welcome back</h2>
-            <p className="text-sm text-fg-secondary">Sign in to your Cooud workspace.</p>
+            <p className="text-sm text-fg-secondary">Sign in to your Kronus workspace.</p>
           </div>
 
           <div className="flex flex-col gap-4">
@@ -371,7 +372,7 @@ export function LoginSplitBlock() {
               />
             </div>
 
-            <Button variant="gradient" size="lg" className="w-full">
+            <Button variant="primary" size="lg" className="w-full">
               Sign in
             </Button>
           </div>
@@ -399,14 +400,14 @@ export function LoginSplitBlock() {
                 <ChartColumnIncreasing className="size-4" aria-hidden="true" />
               </span>
               <span className="font-display text-lg font-semibold text-primary-foreground">
-                Cooud
+                Kronus
               </span>
             </div>
 
             <figure className="flex flex-col gap-5">
               <Quote className="size-7 text-primary-foreground/50" aria-hidden="true" />
               <blockquote className="font-display text-xl font-medium leading-snug text-primary-foreground">
-                “Cooud replaced four tools on day one — and our checkout conversion is up 23%.”
+                “Kronus replaced four tools on day one — and our checkout conversion is up 23%.”
               </blockquote>
               <figcaption className="flex items-center gap-3">
                 <Avatar>
@@ -440,7 +441,7 @@ export function LoginSocialFirstBlock() {
             <ChartColumnIncreasing className="size-5" aria-hidden="true" />
           </span>
           <div className="flex flex-col gap-1">
-            <CardTitle className="font-display text-xl">Sign in to Cooud</CardTitle>
+            <CardTitle className="font-display text-xl">Sign in to Kronus</CardTitle>
             <p className="text-sm text-fg-secondary">Pick up right where you left off.</p>
           </div>
         </CardHeader>
@@ -495,14 +496,14 @@ export function LoginSocialFirstBlock() {
             />
           </div>
 
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Sign in
           </Button>
         </CardContent>
 
         <CardFooter className="justify-center">
           <p className="text-sm text-fg-secondary">
-            New to Cooud?{" "}
+            New to Kronus?{" "}
             <a
               href="#signup"
               className="font-medium text-primary-strong underline-offset-4 hover:underline"
@@ -526,7 +527,7 @@ const loginSocialFirstCode = `import {
   Input,
   Label,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Apple, ChartColumnIncreasing, Chrome, Github } from "lucide-react";
 
 export function LoginSocialFirstBlock() {
@@ -538,7 +539,7 @@ export function LoginSocialFirstBlock() {
             <ChartColumnIncreasing className="size-5" aria-hidden="true" />
           </span>
           <div className="flex flex-col gap-1">
-            <CardTitle className="font-display text-xl">Sign in to Cooud</CardTitle>
+            <CardTitle className="font-display text-xl">Sign in to Kronus</CardTitle>
             <p className="text-sm text-fg-secondary">Pick up right where you left off.</p>
           </div>
         </CardHeader>
@@ -593,14 +594,14 @@ export function LoginSocialFirstBlock() {
             />
           </div>
 
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Sign in
           </Button>
         </CardContent>
 
         <CardFooter className="justify-center">
           <p className="text-sm text-fg-secondary">
-            New to Cooud?{" "}
+            New to Kronus?{" "}
             <a
               href="#signup"
               className="font-medium text-primary-strong underline-offset-4 hover:underline"
@@ -627,7 +628,7 @@ export function LoginMinimalBlock() {
         </span>
 
         <div className="flex flex-col gap-1.5">
-          <h2 className="font-display text-2xl font-semibold text-fg">Sign in to Cooud</h2>
+          <h2 className="font-display text-2xl font-semibold text-fg">Sign in to Kronus</h2>
           <p className="text-sm text-fg-secondary">Use your work email to continue.</p>
         </div>
 
@@ -642,7 +643,7 @@ export function LoginMinimalBlock() {
             autoComplete="email"
             className="h-11 text-center"
           />
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Continue
           </Button>
         </div>
@@ -671,7 +672,7 @@ export function LoginMinimalBlock() {
   );
 }
 
-const loginMinimalCode = `import { Button, Input, Label, Separator } from "@cooud-ui/ui";
+const loginMinimalCode = `import { Button, Input, Label, Separator } from "@kronus-ui/ui";
 import { ChartColumnIncreasing } from "lucide-react";
 
 export function LoginMinimalBlock() {
@@ -683,7 +684,7 @@ export function LoginMinimalBlock() {
         </span>
 
         <div className="flex flex-col gap-1.5">
-          <h2 className="font-display text-2xl font-semibold text-fg">Sign in to Cooud</h2>
+          <h2 className="font-display text-2xl font-semibold text-fg">Sign in to Kronus</h2>
           <p className="text-sm text-fg-secondary">Use your work email to continue.</p>
         </div>
 
@@ -698,7 +699,7 @@ export function LoginMinimalBlock() {
             autoComplete="email"
             className="h-11 text-center"
           />
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Continue
           </Button>
         </div>
@@ -741,14 +742,14 @@ export function SignupBlock() {
           </span>
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Create your account</CardTitle>
-            <p className="text-sm text-fg-secondary">Start building with Cooud in minutes.</p>
+            <p className="text-sm text-fg-secondary">Start building with Kronus in minutes.</p>
           </div>
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <Label htmlFor="signup-name">Full name</Label>
-            <Input id="signup-name" placeholder="Mara Castillo" autoComplete="name" />
+            <Input id="signup-name" placeholder={USER.name} autoComplete="name" />
           </div>
 
           <div className="flex flex-col gap-2">
@@ -779,7 +780,7 @@ export function SignupBlock() {
             <Checkbox id="signup-terms" defaultChecked />I agree to the Terms and Privacy Policy.
           </Label>
 
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Create account
           </Button>
 
@@ -828,7 +829,8 @@ const signupCode = `import {
   Input,
   Label,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
+import { USER } from "../lib/demo-saas.js";
 import { ChartColumnIncreasing, Chrome, Github } from "lucide-react";
 
 export function SignupBlock() {
@@ -841,14 +843,14 @@ export function SignupBlock() {
           </span>
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Create your account</CardTitle>
-            <p className="text-sm text-fg-secondary">Start building with Cooud in minutes.</p>
+            <p className="text-sm text-fg-secondary">Start building with Kronus in minutes.</p>
           </div>
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <Label htmlFor="signup-name">Full name</Label>
-            <Input id="signup-name" placeholder="Mara Castillo" autoComplete="name" />
+            <Input id="signup-name" placeholder={USER.name} autoComplete="name" />
           </div>
 
           <div className="flex flex-col gap-2">
@@ -874,7 +876,7 @@ export function SignupBlock() {
             <Checkbox id="signup-terms" defaultChecked />I agree to the Terms and Privacy Policy.
           </Label>
 
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Create account
           </Button>
 
@@ -954,7 +956,7 @@ export function SignupSplitProofBlock() {
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               <Label htmlFor="signup-proof-name">Full name</Label>
-              <Input id="signup-proof-name" placeholder="Mara Castillo" autoComplete="name" />
+              <Input id="signup-proof-name" placeholder={USER.name} autoComplete="name" />
             </div>
 
             <div className="flex flex-col gap-2">
@@ -984,7 +986,7 @@ export function SignupSplitProofBlock() {
               <Checkbox id="signup-proof-terms" defaultChecked />I agree to the Terms of Service.
             </Label>
 
-            <Button variant="gradient" size="lg" className="w-full">
+            <Button variant="primary" size="lg" className="w-full">
               Create account
             </Button>
           </div>
@@ -1004,7 +1006,7 @@ export function SignupSplitProofBlock() {
         <div className="flex flex-col justify-center gap-8 border-t border-border bg-surface-inset p-8 sm:p-10 lg:order-1 lg:border-t-0 lg:border-e">
           <div className="flex flex-col gap-2">
             <h2 className="font-display text-2xl font-semibold text-fg">
-              Join 12,000+ creators selling with Cooud
+              Join 12,000+ creators selling with Kronus
             </h2>
             <p className="text-sm text-fg-secondary">
               Courses, communities, and digital products — one storefront.
@@ -1059,7 +1061,8 @@ const signupSplitProofCode = `import {
   Input,
   Label,
   Rating,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
+import { USER } from "../lib/demo-saas.js";
 
 const proofBrands = ["Northwind", "Framelane", "Luma Labs", "Postbox"];
 
@@ -1099,7 +1102,7 @@ export function SignupSplitProofBlock() {
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               <Label htmlFor="signup-proof-name">Full name</Label>
-              <Input id="signup-proof-name" placeholder="Mara Castillo" autoComplete="name" />
+              <Input id="signup-proof-name" placeholder={USER.name} autoComplete="name" />
             </div>
 
             <div className="flex flex-col gap-2">
@@ -1129,7 +1132,7 @@ export function SignupSplitProofBlock() {
               <Checkbox id="signup-proof-terms" defaultChecked />I agree to the Terms of Service.
             </Label>
 
-            <Button variant="gradient" size="lg" className="w-full">
+            <Button variant="primary" size="lg" className="w-full">
               Create account
             </Button>
           </div>
@@ -1149,7 +1152,7 @@ export function SignupSplitProofBlock() {
         <div className="flex flex-col justify-center gap-8 border-t border-border bg-surface-inset p-8 sm:p-10 lg:order-1 lg:border-t-0 lg:border-e">
           <div className="flex flex-col gap-2">
             <h2 className="font-display text-2xl font-semibold text-fg">
-              Join 12,000+ creators selling with Cooud
+              Join 12,000+ creators selling with Kronus
             </h2>
             <p className="text-sm text-fg-secondary">
               Courses, communities, and digital products — one storefront.
@@ -1221,7 +1224,7 @@ export function SignupWithPlanBlock() {
           <CardContent className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               <Label htmlFor="signup-plan-name">Full name</Label>
-              <Input id="signup-plan-name" placeholder="Mara Castillo" autoComplete="name" />
+              <Input id="signup-plan-name" placeholder={USER.name} autoComplete="name" />
             </div>
 
             <div className="flex flex-col gap-2">
@@ -1252,7 +1255,7 @@ export function SignupWithPlanBlock() {
               <Checkbox id="signup-plan-terms" defaultChecked />I agree to the Terms of Service.
             </Label>
 
-            <Button variant="gradient" size="lg" className="w-full">
+            <Button variant="primary" size="lg" className="w-full">
               Start free trial
             </Button>
           </CardContent>
@@ -1348,7 +1351,8 @@ const signupWithPlanCode = `import {
   Input,
   Label,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
+import { USER } from "../lib/demo-saas.js";
 import { Check } from "lucide-react";
 
 const growthPlanFeatures = [
@@ -1372,7 +1376,7 @@ export function SignupWithPlanBlock() {
           <CardContent className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               <Label htmlFor="signup-plan-name">Full name</Label>
-              <Input id="signup-plan-name" placeholder="Mara Castillo" autoComplete="name" />
+              <Input id="signup-plan-name" placeholder={USER.name} autoComplete="name" />
             </div>
 
             <div className="flex flex-col gap-2">
@@ -1403,7 +1407,7 @@ export function SignupWithPlanBlock() {
               <Checkbox id="signup-plan-terms" defaultChecked />I agree to the Terms of Service.
             </Label>
 
-            <Button variant="gradient" size="lg" className="w-full">
+            <Button variant="primary" size="lg" className="w-full">
               Start free trial
             </Button>
           </CardContent>
@@ -1516,7 +1520,7 @@ export function ForgotPasswordBlock() {
             />
           </div>
 
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Send reset link
           </Button>
         </CardContent>
@@ -1544,7 +1548,7 @@ const forgotPasswordCode = `import {
   CardTitle,
   Input,
   Label,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { ArrowLeft, KeyRound } from "lucide-react";
 
 export function ForgotPasswordBlock() {
@@ -1569,7 +1573,7 @@ export function ForgotPasswordBlock() {
             <Input id="forgot-email" type="email" placeholder="you@company.com" autoComplete="email" />
           </div>
 
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Send reset link
           </Button>
         </CardContent>
@@ -1599,7 +1603,7 @@ export function ForgotPasswordSentBlock() {
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Check your inbox</CardTitle>
             <p className="text-sm text-fg-secondary">
-              We sent a password reset link to mara@cooud.io.
+              We sent a password reset link to mara@kronus.io.
             </p>
           </div>
         </CardHeader>
@@ -1609,7 +1613,7 @@ export function ForgotPasswordSentBlock() {
             Didn&apos;t get it? Check your spam folder, or resend below.
           </p>
 
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Resend email
           </Button>
         </CardContent>
@@ -1635,7 +1639,7 @@ const forgotPasswordSentCode = `import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { ArrowLeft, MailCheck } from "lucide-react";
 
 export function ForgotPasswordSentBlock() {
@@ -1649,7 +1653,7 @@ export function ForgotPasswordSentBlock() {
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Check your inbox</CardTitle>
             <p className="text-sm text-fg-secondary">
-              We sent a password reset link to mara@cooud.io.
+              We sent a password reset link to mara@kronus.io.
             </p>
           </div>
         </CardHeader>
@@ -1659,7 +1663,7 @@ export function ForgotPasswordSentBlock() {
             Didn&apos;t get it? Check your spam folder, or resend below.
           </p>
 
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Resend email
           </Button>
         </CardContent>
@@ -1712,7 +1716,7 @@ export function OtpBlock() {
             </InputOTP>
           </div>
 
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Verify
           </Button>
 
@@ -1751,7 +1755,7 @@ const otpCode = `import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { ArrowLeft, ShieldCheck } from "lucide-react";
 
 export function OtpBlock() {
@@ -1784,7 +1788,7 @@ export function OtpBlock() {
             </InputOTP>
           </div>
 
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Verify
           </Button>
 
@@ -1844,7 +1848,7 @@ export function MagicLinkBlock() {
             />
           </div>
 
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Send magic link
           </Button>
 
@@ -1892,7 +1896,7 @@ const magicLinkCode = `import {
   Input,
   Label,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Chrome, Github, Sparkles } from "lucide-react";
 
 export function MagicLinkBlock() {
@@ -1917,7 +1921,7 @@ export function MagicLinkBlock() {
             <Input id="magic-email" type="email" placeholder="you@company.com" autoComplete="email" />
           </div>
 
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Send magic link
           </Button>
 
@@ -1966,7 +1970,7 @@ export function MagicLinkSentBlock() {
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Check your email</CardTitle>
             <p className="text-sm text-fg-secondary">
-              We emailed a magic link to mara@cooud.io. Click it to sign in.
+              We emailed a magic link to mara@kronus.io. Click it to sign in.
             </p>
           </div>
         </CardHeader>
@@ -2000,7 +2004,7 @@ const magicLinkSentCode = `import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { ArrowLeft, MailCheck } from "lucide-react";
 
 export function MagicLinkSentBlock() {
@@ -2014,7 +2018,7 @@ export function MagicLinkSentBlock() {
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Check your email</CardTitle>
             <p className="text-sm text-fg-secondary">
-              We emailed a magic link to mara@cooud.io. Click it to sign in.
+              We emailed a magic link to mara@kronus.io. Click it to sign in.
             </p>
           </div>
         </CardHeader>

@@ -41,8 +41,15 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@cooud-ui/ui";
-import { ACTIVITY, type ActivityStatus, KPIS, REVENUE_SERIES } from "@cooud-ui/ui/demo-saas";
+} from "@kronus-ui/ui";
+import {
+  ACTIVITY,
+  type ActivityStatus,
+  KPIS,
+  REVENUE_SERIES,
+  TEAM,
+  USER,
+} from "@kronus-ui/ui/demo-saas";
 import {
   Activity,
   Bell,
@@ -99,15 +106,12 @@ const analyticsNav: NavLink[] = [
   { id: "settings", label: "Settings", icon: Settings },
 ];
 
-// KPI icons are presentational (not data): map each demo-saas KPI to its icon.
-const KPI_ICONS: Record<string, typeof DollarSign> = {
-  "Total revenue": DollarSign,
-  "Active users": Users,
-  Conversion: Activity,
-  Churn: TrendingDown,
-};
+// KPI icons are presentational (not data): bind by index so labels stay in the lib.
+const KPI_ICONS = [DollarSign, Users, Activity, TrendingDown] as const;
 
-const analyticsKpis = KPIS.map((kpi) => ({ ...kpi, icon: KPI_ICONS[kpi.label] ?? DollarSign }));
+const analyticsKpis = KPIS.map((kpi, i) => ({ ...kpi, icon: KPI_ICONS[i] ?? DollarSign }));
+
+const OWNER = TEAM.find((m) => m.email === USER.email);
 
 const revenueData = REVENUE_SERIES;
 
@@ -143,7 +147,7 @@ export function DashboardAnalyticsBlock() {
             <ChartColumnIncreasing className="size-4" aria-hidden="true" />
           </span>
           <div className="flex min-w-0 flex-col">
-            <span className="truncate text-sm font-semibold text-fg">Cooud Analytics</span>
+            <span className="truncate text-sm font-semibold text-fg">Kronus Analytics</span>
             <span className="truncate text-xs text-fg-tertiary">Acme Inc.</span>
           </div>
         </div>
@@ -172,12 +176,12 @@ export function DashboardAnalyticsBlock() {
       <SidebarFooter>
         <div className="flex items-center gap-2 rounded-lg px-2 py-1.5">
           <Avatar className="size-8">
-            <AvatarImage src="https://i.pravatar.cc/96?img=5" alt="Lena Park" />
-            <AvatarFallback>LP</AvatarFallback>
+            {OWNER?.avatar ? <AvatarImage src={OWNER.avatar} alt={USER.name} /> : null}
+            <AvatarFallback>{USER.initials}</AvatarFallback>
           </Avatar>
           <div className="flex min-w-0 flex-col">
-            <span className="truncate text-sm font-medium text-fg">Lena Park</span>
-            <span className="truncate text-xs text-fg-tertiary">lena@acme.dev</span>
+            <span className="truncate text-sm font-medium text-fg">{USER.name}</span>
+            <span className="truncate text-xs text-fg-tertiary">{USER.email}</span>
           </div>
         </div>
       </SidebarFooter>
@@ -219,8 +223,8 @@ export function DashboardAnalyticsBlock() {
           <Bell className="size-4" aria-hidden="true" />
         </Button>
         <Avatar className="size-8">
-          <AvatarImage src="https://i.pravatar.cc/96?img=5" alt="Lena Park" />
-          <AvatarFallback>LP</AvatarFallback>
+          {OWNER?.avatar ? <AvatarImage src={OWNER.avatar} alt={USER.name} /> : null}
+          <AvatarFallback>{USER.initials}</AvatarFallback>
         </Avatar>
       </div>
     </div>
@@ -390,8 +394,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@cooud-ui/ui";
-import { ACTIVITY, type ActivityStatus, KPIS, REVENUE_SERIES } from "../lib/demo-saas.js";
+} from "@kronus-ui/ui";
+import { ACTIVITY, type ActivityStatus, KPIS, REVENUE_SERIES, TEAM, USER } from "../lib/demo-saas.js";
 import {
   Activity,
   Bell,
@@ -414,15 +418,12 @@ const nav = [
   { id: "settings", label: "Settings", icon: Settings },
 ];
 
-// KPI icons are presentational (not data): map each demo-saas KPI to its icon.
-const kpiIcons: Record<string, typeof DollarSign> = {
-  "Total revenue": DollarSign,
-  "Active users": Users,
-  Conversion: Activity,
-  Churn: TrendingDown,
-};
+// KPI icons are presentational (not data): bind by index so labels stay in the lib.
+const kpiIcons = [DollarSign, Users, Activity, TrendingDown] as const;
 
-const kpis = KPIS.map((kpi) => ({ ...kpi, icon: kpiIcons[kpi.label] ?? DollarSign }));
+const kpis = KPIS.map((kpi, i) => ({ ...kpi, icon: kpiIcons[i] ?? DollarSign }));
+
+const OWNER = TEAM.find((m) => m.email === USER.email);
 
 const revenueData = REVENUE_SERIES;
 
@@ -457,7 +458,7 @@ export function DashboardAnalyticsBlock() {
             <ChartColumnIncreasing className="size-4" aria-hidden="true" />
           </span>
           <div className="flex min-w-0 flex-col">
-            <span className="truncate text-sm font-semibold text-fg">Cooud Analytics</span>
+            <span className="truncate text-sm font-semibold text-fg">Kronus Analytics</span>
             <span className="truncate text-xs text-fg-tertiary">Acme Inc.</span>
           </div>
         </div>
@@ -483,12 +484,12 @@ export function DashboardAnalyticsBlock() {
       <SidebarFooter>
         <div className="flex items-center gap-2 rounded-lg px-2 py-1.5">
           <Avatar className="size-8">
-            <AvatarImage src="https://i.pravatar.cc/96?img=5" alt="Lena Park" />
-            <AvatarFallback>LP</AvatarFallback>
+            {OWNER?.avatar ? <AvatarImage src={OWNER.avatar} alt={USER.name} /> : null}
+            <AvatarFallback>{USER.initials}</AvatarFallback>
           </Avatar>
           <div className="flex min-w-0 flex-col">
-            <span className="truncate text-sm font-medium text-fg">Lena Park</span>
-            <span className="truncate text-xs text-fg-tertiary">lena@acme.dev</span>
+            <span className="truncate text-sm font-medium text-fg">{USER.name}</span>
+            <span className="truncate text-xs text-fg-tertiary">{USER.email}</span>
           </div>
         </div>
       </SidebarFooter>
@@ -529,8 +530,8 @@ export function DashboardAnalyticsBlock() {
           <Bell className="size-4" aria-hidden="true" />
         </Button>
         <Avatar className="size-8">
-          <AvatarImage src="https://i.pravatar.cc/96?img=5" alt="Lena Park" />
-          <AvatarFallback>LP</AvatarFallback>
+          {OWNER?.avatar ? <AvatarImage src={OWNER.avatar} alt={USER.name} /> : null}
+          <AvatarFallback>{USER.initials}</AvatarFallback>
         </Avatar>
       </div>
     </div>
@@ -682,85 +683,26 @@ const signupsConfig = {
   signups: { label: "Signups", color: "var(--color-chart-2)" },
 } satisfies ChartConfig;
 
-interface AdminRow {
-  id: string;
-  name: string;
-  email: string;
-  initials: string;
-  avatar?: string;
-  role: string;
-  roleVariant: "primary" | "info" | "secondary";
-  orders: number;
-  spend: string;
-  status: "Active" | "Invited" | "Suspended";
-  statusVariant: "success" | "warning" | "error";
-}
+// Role → badge variant is presentational (not data).
+const ROLE_VARIANT = {
+  Owner: "primary",
+  Admin: "info",
+  Member: "secondary",
+} as const;
 
-const adminRows: AdminRow[] = [
-  {
-    id: "u1",
-    name: "Mara Castillo",
-    email: "mara@northwind.io",
-    initials: "MC",
-    avatar: "https://i.pravatar.cc/96?img=12",
-    role: "Owner",
-    roleVariant: "primary",
-    orders: 42,
-    spend: "$18,240",
-    status: "Active",
-    statusVariant: "success",
-  },
-  {
-    id: "u2",
-    name: "Devon Lane",
-    email: "devon@acme.dev",
-    initials: "DL",
-    avatar: "https://i.pravatar.cc/96?img=33",
-    role: "Admin",
-    roleVariant: "info",
-    orders: 28,
-    spend: "$9,610",
-    status: "Active",
-    statusVariant: "success",
-  },
-  {
-    id: "u3",
-    name: "Priya Sharma",
-    email: "priya@lumon.co",
-    initials: "PS",
-    role: "Member",
-    roleVariant: "secondary",
-    orders: 11,
-    spend: "$3,180",
-    status: "Invited",
-    statusVariant: "warning",
-  },
-  {
-    id: "u4",
-    name: "Tobias Funke",
-    email: "tobias@bluth.com",
-    initials: "TF",
-    avatar: "https://i.pravatar.cc/96?img=68",
-    role: "Member",
-    roleVariant: "secondary",
-    orders: 6,
-    spend: "$1,420",
-    status: "Suspended",
-    statusVariant: "error",
-  },
-  {
-    id: "u5",
-    name: "Aiko Tanaka",
-    email: "aiko@hooli.com",
-    initials: "AT",
-    role: "Member",
-    roleVariant: "secondary",
-    orders: 19,
-    spend: "$6,050",
-    status: "Active",
-    statusVariant: "success",
-  },
-];
+const extras = {
+  m1: { orders: 42, spend: "$18,240", status: "Active", statusVariant: "success" },
+  m2: { orders: 28, spend: "$9,610", status: "Active", statusVariant: "success" },
+  m3: { orders: 11, spend: "$3,180", status: "Invited", statusVariant: "warning" },
+  m4: { orders: 6, spend: "$1,420", status: "Suspended", statusVariant: "error" },
+  m5: { orders: 19, spend: "$6,050", status: "Active", statusVariant: "success" },
+} as const;
+
+const adminRows = TEAM.map((member) => ({
+  ...member,
+  roleVariant: ROLE_VARIANT[member.role],
+  ...extras[member.id as keyof typeof extras],
+}));
 
 export function DashboardAdminOverviewBlock() {
   const sidebar = (
@@ -771,7 +713,7 @@ export function DashboardAdminOverviewBlock() {
             <ChartColumnIncreasing className="size-4" aria-hidden="true" />
           </span>
           <span className="truncate text-sm font-semibold text-fg group-data-[collapsible=icon]/sidebar:hidden">
-            Cooud Admin
+            Kronus Admin
           </span>
         </div>
       </SidebarHeader>
@@ -805,12 +747,12 @@ export function DashboardAdminOverviewBlock() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton tooltip="Lena Park" aria-label="Lena Park">
+            <SidebarMenuButton tooltip={USER.name} aria-label={USER.name}>
               <Avatar className="size-6">
-                <AvatarImage src="https://i.pravatar.cc/96?img=5" alt="Lena Park" />
-                <AvatarFallback>LP</AvatarFallback>
+                {OWNER?.avatar ? <AvatarImage src={OWNER.avatar} alt={USER.name} /> : null}
+                <AvatarFallback>{USER.initials}</AvatarFallback>
               </Avatar>
-              <span>Lena Park</span>
+              <span>{USER.name}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -829,7 +771,7 @@ export function DashboardAdminOverviewBlock() {
         <Button variant="outline" size="sm">
           Export
         </Button>
-        <Button variant="gradient" size="sm">
+        <Button variant="primary" size="sm">
           New user
         </Button>
       </div>
@@ -1000,7 +942,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
+import { TEAM, USER } from "../lib/demo-saas.js";
 import {
   ChartColumnIncreasing,
   CreditCard,
@@ -1039,13 +982,28 @@ const signupsConfig = {
   signups: { label: "Signups", color: "var(--color-chart-2)" },
 } satisfies ChartConfig;
 
-const rows = [
-  { id: "u1", name: "Mara Castillo", email: "mara@northwind.io", initials: "MC", avatar: "https://i.pravatar.cc/96?img=12", role: "Owner", roleVariant: "primary" as const, orders: 42, spend: "$18,240", status: "Active", statusVariant: "success" as const },
-  { id: "u2", name: "Devon Lane", email: "devon@acme.dev", initials: "DL", avatar: "https://i.pravatar.cc/96?img=33", role: "Admin", roleVariant: "info" as const, orders: 28, spend: "$9,610", status: "Active", statusVariant: "success" as const },
-  { id: "u3", name: "Priya Sharma", email: "priya@lumon.co", initials: "PS", role: "Member", roleVariant: "secondary" as const, orders: 11, spend: "$3,180", status: "Invited", statusVariant: "warning" as const },
-  { id: "u4", name: "Tobias Funke", email: "tobias@bluth.com", initials: "TF", avatar: "https://i.pravatar.cc/96?img=68", role: "Member", roleVariant: "secondary" as const, orders: 6, spend: "$1,420", status: "Suspended", statusVariant: "error" as const },
-  { id: "u5", name: "Aiko Tanaka", email: "aiko@hooli.com", initials: "AT", role: "Member", roleVariant: "secondary" as const, orders: 19, spend: "$6,050", status: "Active", statusVariant: "success" as const },
-];
+// Role → badge variant is presentational (not data).
+const ROLE_VARIANT = {
+  Owner: "primary",
+  Admin: "info",
+  Member: "secondary",
+} as const;
+
+const extras = {
+  m1: { orders: 42, spend: "$18,240", status: "Active", statusVariant: "success" },
+  m2: { orders: 28, spend: "$9,610", status: "Active", statusVariant: "success" },
+  m3: { orders: 11, spend: "$3,180", status: "Invited", statusVariant: "warning" },
+  m4: { orders: 6, spend: "$1,420", status: "Suspended", statusVariant: "error" },
+  m5: { orders: 19, spend: "$6,050", status: "Active", statusVariant: "success" },
+} as const;
+
+const OWNER = TEAM.find((m) => m.email === USER.email);
+
+const rows = TEAM.map((member) => ({
+  ...member,
+  roleVariant: ROLE_VARIANT[member.role],
+  ...extras[member.id as keyof typeof extras],
+}));
 
 export function DashboardAdminOverviewBlock() {
   const sidebar = (
@@ -1056,7 +1014,7 @@ export function DashboardAdminOverviewBlock() {
             <ChartColumnIncreasing className="size-4" aria-hidden="true" />
           </span>
           <span className="truncate text-sm font-semibold text-fg group-data-[collapsible=icon]/sidebar:hidden">
-            Cooud Admin
+            Kronus Admin
           </span>
         </div>
       </SidebarHeader>
@@ -1081,12 +1039,12 @@ export function DashboardAdminOverviewBlock() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton tooltip="Lena Park" aria-label="Lena Park">
+            <SidebarMenuButton tooltip={USER.name} aria-label={USER.name}>
               <Avatar className="size-6">
-                <AvatarImage src="https://i.pravatar.cc/96?img=5" alt="Lena Park" />
-                <AvatarFallback>LP</AvatarFallback>
+                {OWNER?.avatar ? <AvatarImage src={OWNER.avatar} alt={USER.name} /> : null}
+                <AvatarFallback>{USER.initials}</AvatarFallback>
               </Avatar>
-              <span>Lena Park</span>
+              <span>{USER.name}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -1103,7 +1061,7 @@ export function DashboardAdminOverviewBlock() {
       </div>
       <div className="ml-auto flex items-center gap-2">
         <Button variant="outline" size="sm">Export</Button>
-        <Button variant="gradient" size="sm">New user</Button>
+        <Button variant="primary" size="sm">New user</Button>
       </div>
     </div>
   );

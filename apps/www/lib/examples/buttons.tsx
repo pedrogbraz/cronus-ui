@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "@cooud-ui/theme";
+import { useTheme } from "@kronus-ui/theme";
 import {
   AnimatedButton,
   Button,
@@ -13,7 +13,7 @@ import {
   Toggle,
   ToggleGroup,
   ToggleGroupItem,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import {
   AlignCenter,
   AlignLeft,
@@ -228,10 +228,9 @@ export const buttonsExamples: ExampleMap = {
     {
       id: "variants",
       title: "Variants",
-      description: "Seven visual styles, from the primary call-to-action down to a subtle link.",
+      description: "Six visual styles, from the primary call-to-action down to a subtle link.",
       code: `<div className="flex flex-wrap items-center gap-3">
   <Button variant="primary">Primary</Button>
-  <Button variant="gradient">Gradient</Button>
   <Button variant="secondary">Secondary</Button>
   <Button variant="outline">Outline</Button>
   <Button variant="ghost">Ghost</Button>
@@ -241,7 +240,6 @@ export const buttonsExamples: ExampleMap = {
       preview: (
         <div className="flex flex-wrap items-center gap-3">
           <Button variant="primary">Primary</Button>
-          <Button variant="gradient">Gradient</Button>
           <Button variant="secondary">Secondary</Button>
           <Button variant="outline">Outline</Button>
           <Button variant="ghost">Ghost</Button>
@@ -361,7 +359,6 @@ export const buttonsExamples: ExampleMap = {
         "Drop-in replacement for Button that lifts on hover and presses in on tap with a snappy spring.",
       code: `<div className="flex flex-wrap items-center gap-3">
   <AnimatedButton variant="primary">Primary</AnimatedButton>
-  <AnimatedButton variant="gradient">Gradient</AnimatedButton>
   <AnimatedButton variant="outline">Outline</AnimatedButton>
   <AnimatedButton variant="secondary">
     <Download />
@@ -371,7 +368,6 @@ export const buttonsExamples: ExampleMap = {
       preview: (
         <div className="flex flex-wrap items-center gap-3">
           <AnimatedButton variant="primary">Primary</AnimatedButton>
-          <AnimatedButton variant="gradient">Gradient</AnimatedButton>
           <AnimatedButton variant="outline">Outline</AnimatedButton>
           <AnimatedButton variant="secondary">
             <Download />
@@ -498,8 +494,8 @@ return (
       title: "Default",
       description:
         "An icon button that writes `value` to the clipboard and swaps to a check for a moment. It manages its own copied state.",
-      code: `<CopyButton value="npm install @cooud-ui/ui" />`,
-      preview: <CopyButton value="npm install @cooud-ui/ui" />,
+      code: `<CopyButton value="npm install @kronus-ui/ui" />`,
+      preview: <CopyButton value="npm install @kronus-ui/ui" />,
     },
     {
       id: "inline",
@@ -507,9 +503,9 @@ return (
       description:
         "Drop it next to a value the user might copy, such as an API key or command. Use `copyLabel` / `copiedLabel` to localise the accessible text, and the outline variant to sit flush with a field.",
       code: `<div className="flex items-center gap-2">
-  <code className="rounded bg-surface-inset px-2 py-1 font-mono text-sm">cooud_sk_live_…a1b2</code>
+  <code className="rounded bg-surface-inset px-2 py-1 font-mono text-sm">kronus_sk_live_…a1b2</code>
   <CopyButton
-    value="cooud_sk_live_a1b2"
+    value="kronus_sk_live_a1b2"
     variant="outline"
     copyLabel="Copy API key"
     copiedLabel="API key copied"
@@ -518,10 +514,10 @@ return (
       preview: (
         <div className="flex items-center gap-2">
           <code className="rounded bg-surface-inset px-2 py-1 font-mono text-sm">
-            cooud_sk_live_…a1b2
+            kronus_sk_live_…a1b2
           </code>
           <CopyButton
-            value="cooud_sk_live_a1b2"
+            value="kronus_sk_live_a1b2"
             variant="outline"
             copyLabel="Copy API key"
             copiedLabel="API key copied"
@@ -699,15 +695,6 @@ return (
     Primary
   </SplitButton>
   <SplitButton
-    variant="gradient"
-    items={[
-      { icon: <Copy />, label: "Duplicate" },
-      { icon: <Share2 />, label: "Share" },
-    ]}
-  >
-    Gradient
-  </SplitButton>
-  <SplitButton
     variant="secondary"
     items={[
       { icon: <Copy />, label: "Duplicate" },
@@ -736,15 +723,6 @@ return (
             ]}
           >
             Primary
-          </SplitButton>
-          <SplitButton
-            variant="gradient"
-            items={[
-              { icon: <Copy />, label: "Duplicate" },
-              { icon: <Share2 />, label: "Share" },
-            ]}
-          >
-            Gradient
           </SplitButton>
           <SplitButton
             variant="secondary"
@@ -835,7 +813,7 @@ return (
       id: "theme-provider",
       title: "Wired to a theme provider",
       description:
-        "The component never touches the DOM root — hand it your provider's mode. This one is live: it drives the whole docs site through `useTheme` from `@cooud-ui/theme`.",
+        "The component never touches the DOM root — hand it your provider's mode. This one is live: it drives the whole docs site through `useTheme` from `@kronus-ui/theme`.",
       code: `const { mode, setMode } = useTheme();
 
 return <ModeToggle mode={mode} onModeChange={setMode} />;`,

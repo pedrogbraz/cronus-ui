@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  AnimatedList,
   AnimatedNumber,
   AuroraBackground,
   BorderBeam,
@@ -9,6 +10,7 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
+  CardStack,
   CardTitle,
   Carousel,
   CarouselContent,
@@ -16,17 +18,28 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  ClickSpark,
+  Confetti,
   Dock,
+  DotPattern,
+  DynamicIsland,
+  ExpandableTabs,
+  FlickeringGrid,
   FlipCard,
   FlipCardBack,
   FlipCardFront,
   Frame,
+  GlareHover,
   GlassCard,
   GradientBorder,
   GradientText,
+  GridPattern,
+  Highlighter,
+  LightRays,
   LogoCarousel,
   Magnetic,
   Marquee,
+  Meteors,
   MorphingPopover,
   MorphingPopoverBody,
   MorphingPopoverButton,
@@ -34,19 +47,32 @@ import {
   MorphingPopoverContent,
   MorphingPopoverFooter,
   MorphingPopoverTrigger,
+  Noise,
   Orbit,
   OrbitItem,
   OrbitRing,
+  Particles,
+  PillNav,
+  ProgressiveBlur,
+  RetroGrid,
   Reveal,
+  Ripple,
+  ScrambleText,
   ScrollProgress,
   SegmentedControl,
   SegmentedControlItem,
   Shimmer,
+  ShinyText,
+  SparklesText,
+  SpinningText,
   SpotlightCard,
+  StarBorder,
   Terminal,
   TextEffect,
   TiltCard,
-} from "@cooud-ui/ui";
+  TypingText,
+  WordRotate,
+} from "@kronus-ui/ui";
 import {
   ArrowRight,
   Bell,
@@ -787,7 +813,7 @@ export const premiumExamples: ExampleMap = {
     <p className="text-balance text-sm text-fg-secondary">
       Accessible, token-driven React components with premium motion baked in.
     </p>
-    <Button variant="gradient" size="lg">
+    <Button variant="primary" size="lg">
       Get started
       <ArrowRight aria-hidden="true" />
     </Button>
@@ -804,7 +830,7 @@ export const premiumExamples: ExampleMap = {
             <p className="text-balance text-sm text-fg-secondary">
               Accessible, token-driven React components with premium motion baked in.
             </p>
-            <Button variant="gradient" size="lg">
+            <Button variant="primary" size="lg">
               Get started
               <ArrowRight aria-hidden="true" />
             </Button>
@@ -852,7 +878,7 @@ export const premiumExamples: ExampleMap = {
       The best teams are already here
     </p>
     <h3 className="font-display text-6xl font-semibold leading-none text-fg">
-      Join Cooud UI
+      Join Kronus UI
     </h3>
   </div>
   <LogoCarousel items={logos} columns={3} ariaLabel="Customer logos" />
@@ -864,7 +890,7 @@ export const premiumExamples: ExampleMap = {
               The best teams are already here
             </p>
             <h3 className="font-display text-6xl font-semibold leading-none text-fg sm:text-8xl">
-              Join Cooud UI
+              Join Kronus UI
             </h3>
           </div>
           <LogoCarousel
@@ -1277,7 +1303,7 @@ export const premiumExamples: ExampleMap = {
       title: "Browser chrome",
       description:
         "Wrap a screenshot or mockup in browser chrome — traffic-light dots plus an address bar fed by `url`. Anything you nest becomes the framed content.",
-      code: `<Frame url="cooud.app/dashboard">
+      code: `<Frame url="kronus.app/dashboard">
   <div className="space-y-2 p-6">
     <h3 className="font-display text-lg font-semibold text-fg">Faturamento</h3>
     <p className="text-sm text-fg-secondary">R$ 128.940 nos últimos 30 dias.</p>
@@ -1285,7 +1311,7 @@ export const premiumExamples: ExampleMap = {
   </div>
 </Frame>`,
       preview: (
-        <Frame url="cooud.app/dashboard" className="w-full max-w-md">
+        <Frame url="kronus.app/dashboard" className="w-full max-w-md">
           <div className="space-y-2 p-6">
             <h3 className="font-display text-lg font-semibold text-fg">Faturamento</h3>
             <p className="text-sm text-fg-secondary">R$ 128.940 nos últimos 30 dias.</p>
@@ -1369,7 +1395,7 @@ export const premiumExamples: ExampleMap = {
       <span className="font-display text-3xl font-semibold text-fg">R$ 79</span>
       <span className="text-sm text-fg-tertiary">/ mês</span>
     </div>
-    <Button variant="gradient" className="w-full">
+    <Button variant="primary" className="w-full">
       Assinar o Pro
       <ArrowRight aria-hidden="true" className="size-4" />
     </Button>
@@ -1394,7 +1420,7 @@ export const premiumExamples: ExampleMap = {
               <span className="font-display text-3xl font-semibold text-fg">R$ 79</span>
               <span className="text-sm text-fg-tertiary">/ mês</span>
             </div>
-            <Button variant="gradient" className="w-full">
+            <Button variant="primary" className="w-full">
               Assinar o Pro
               <ArrowRight aria-hidden="true" className="size-4" />
             </Button>
@@ -1411,9 +1437,9 @@ export const premiumExamples: ExampleMap = {
   <div className="flex items-center gap-3 rounded-2xl bg-surface-raised px-4 py-3">
     <Sparkles className="size-4 shrink-0 text-primary" aria-hidden="true" />
     <span className="flex-1 truncate text-sm text-fg-tertiary">
-      Pergunte qualquer coisa ao Cooud…
+      Pergunte qualquer coisa ao Kronus…
     </span>
-    <Button size="icon" variant="gradient" aria-label="Enviar">
+    <Button size="icon" variant="primary" aria-label="Enviar">
       <ArrowRight aria-hidden="true" className="size-4" />
     </Button>
   </div>
@@ -1423,9 +1449,9 @@ export const premiumExamples: ExampleMap = {
           <div className="flex items-center gap-3 rounded-2xl bg-surface-raised px-4 py-3">
             <Sparkles className="size-4 shrink-0 text-primary" aria-hidden="true" />
             <span className="flex-1 truncate text-sm text-fg-tertiary">
-              Pergunte qualquer coisa ao Cooud…
+              Pergunte qualquer coisa ao Kronus…
             </span>
-            <Button size="icon" variant="gradient" aria-label="Enviar">
+            <Button size="icon" variant="primary" aria-label="Enviar">
               <ArrowRight aria-hidden="true" className="size-4" />
             </Button>
           </div>
@@ -1511,7 +1537,7 @@ export const premiumExamples: ExampleMap = {
         Suporte prioritário
       </li>
     </ul>
-    <Button variant="gradient" className="w-full">
+    <Button variant="primary" className="w-full">
       Assinar o Pro
       <ArrowRight aria-hidden="true" className="size-4" />
     </Button>
@@ -1546,7 +1572,7 @@ export const premiumExamples: ExampleMap = {
                 Suporte prioritário
               </li>
             </ul>
-            <Button variant="gradient" className="w-full">
+            <Button variant="primary" className="w-full">
               Assinar o Pro
               <ArrowRight aria-hidden="true" className="size-4" />
             </Button>
@@ -1727,7 +1753,7 @@ export const premiumExamples: ExampleMap = {
 >
   <div className="flex flex-col gap-6">
     <div className="flex items-start justify-between">
-      <span className="font-display text-lg font-semibold">Cooud</span>
+      <span className="font-display text-lg font-semibold">Kronus</span>
       <Wifi className="size-6 rotate-90 opacity-90" aria-hidden="true" />
     </div>
     <div className="h-9 w-12 rounded-md bg-white/25 ring-1 ring-white/20" aria-hidden="true" />
@@ -1750,7 +1776,7 @@ export const premiumExamples: ExampleMap = {
         >
           <div className="flex flex-col gap-6">
             <div className="flex items-start justify-between">
-              <span className="font-display text-lg font-semibold">Cooud</span>
+              <span className="font-display text-lg font-semibold">Kronus</span>
               <Wifi className="size-6 rotate-90 opacity-90" aria-hidden="true" />
             </div>
             <div
@@ -1780,7 +1806,7 @@ export const premiumExamples: ExampleMap = {
     </span>
     <div className="min-w-0">
       <p className="truncate text-sm font-medium text-fg">Ana Ribeiro</p>
-      <p className="truncate text-sm text-fg-tertiary">ana@cooud.app</p>
+      <p className="truncate text-sm text-fg-tertiary">ana@kronus.app</p>
     </div>
     <ArrowRight className="ml-auto size-4 shrink-0 text-fg-tertiary" aria-hidden="true" />
   </div>
@@ -1793,7 +1819,7 @@ export const premiumExamples: ExampleMap = {
             </span>
             <div className="min-w-0">
               <p className="truncate text-sm font-medium text-fg">Ana Ribeiro</p>
-              <p className="truncate text-sm text-fg-tertiary">ana@cooud.app</p>
+              <p className="truncate text-sm text-fg-tertiary">ana@kronus.app</p>
             </div>
             <ArrowRight className="ml-auto size-4 shrink-0 text-fg-tertiary" aria-hidden="true" />
           </div>
@@ -2027,7 +2053,7 @@ export const premiumExamples: ExampleMap = {
   title="zsh"
   loop
   lines={[
-    { type: "input", text: "npx cooud-ui add terminal" },
+    { type: "input", text: "npx kronus-ui add terminal" },
     { type: "output", text: "✔ 1 component installed" },
     { type: "output", text: "  src/components/ui/terminal.tsx" },
     { type: "input", text: "bun run dev" },
@@ -2041,7 +2067,7 @@ export const premiumExamples: ExampleMap = {
           motionPreference="always"
           className="w-full max-w-xl"
           lines={[
-            { type: "input", text: "npx cooud-ui add terminal" },
+            { type: "input", text: "npx kronus-ui add terminal" },
             { type: "output", text: "✔ 1 component installed" },
             { type: "output", text: "  src/components/ui/terminal.tsx" },
             { type: "input", text: "bun run dev" },
@@ -2062,9 +2088,9 @@ export const premiumExamples: ExampleMap = {
   chrome={false}
   motionPreference="never"
   lines={[
-    { type: "input", text: "cooud deploy --prod" },
+    { type: "input", text: "kronus deploy --prod" },
     { type: "output", text: "Build completed in 8.2s" },
-    { type: "output", text: "Deployed to https://app.cooud.com" },
+    { type: "output", text: "Deployed to https://app.kronus.com" },
   ]}
 />`,
       preview: (
@@ -2073,11 +2099,484 @@ export const premiumExamples: ExampleMap = {
           motionPreference="never"
           className="w-full max-w-xl"
           lines={[
-            { type: "input", text: "cooud deploy --prod" },
+            { type: "input", text: "kronus deploy --prod" },
             { type: "output", text: "Build completed in 8.2s" },
-            { type: "output", text: "Deployed to https://app.cooud.com" },
+            { type: "output", text: "Deployed to https://app.kronus.com" },
           ]}
         />
+      ),
+    },
+  ],
+  ripple: [
+    {
+      id: "pulse",
+      title: "Pulse",
+      description:
+        "Concentric rings expand from the centre and fade out. Reduced-motion visitors see the surface with no animation.",
+      code: `<Ripple className="grid min-h-56 place-items-center rounded-2xl border border-border bg-surface-raised">
+  <p className="font-display text-2xl text-fg">Now live</p>
+</Ripple>`,
+      preview: (
+        <Ripple className="grid min-h-56 w-full place-items-center rounded-2xl border border-border bg-surface-raised">
+          <p className="font-display text-2xl text-fg">Now live</p>
+        </Ripple>
+      ),
+    },
+  ],
+  meteors: [
+    {
+      id: "field",
+      title: "Shooting stars",
+      description:
+        "Thin trails drift diagonally across the surface. Positions are derived from the meteor index, so server and client paint the same field.",
+      code: `<Meteors className="grid min-h-56 place-items-center rounded-2xl border border-border bg-surface-raised">
+  <p className="font-display text-2xl text-fg">Launch window</p>
+</Meteors>`,
+      preview: (
+        <Meteors className="grid min-h-56 w-full place-items-center rounded-2xl border border-border bg-surface-raised">
+          <p className="font-display text-2xl text-fg">Launch window</p>
+        </Meteors>
+      ),
+    },
+  ],
+  "dot-pattern": [
+    {
+      id: "field",
+      title: "Dotted field",
+      description: "A faint SVG dotted field. Colour inherits currentColor from the wrapper.",
+      code: `<DotPattern className="grid min-h-56 place-items-center rounded-2xl border border-border bg-surface-raised">
+  <p className="font-display text-2xl text-fg">Quiet texture</p>
+</DotPattern>`,
+      preview: (
+        <DotPattern className="grid min-h-56 w-full place-items-center rounded-2xl border border-border bg-surface-raised">
+          <p className="font-display text-2xl text-fg">Quiet texture</p>
+        </DotPattern>
+      ),
+    },
+  ],
+  "grid-pattern": [
+    {
+      id: "field",
+      title: "Grid field",
+      description: "A faint SVG grid behind content. Colour inherits currentColor.",
+      code: `<GridPattern className="grid min-h-56 place-items-center rounded-2xl border border-border bg-surface-raised">
+  <p className="font-display text-2xl text-fg">Blueprint</p>
+</GridPattern>`,
+      preview: (
+        <GridPattern className="grid min-h-56 w-full place-items-center rounded-2xl border border-border bg-surface-raised">
+          <p className="font-display text-2xl text-fg">Blueprint</p>
+        </GridPattern>
+      ),
+    },
+  ],
+  "retro-grid": [
+    {
+      id: "floor",
+      title: "Perspective floor",
+      description:
+        "A receding grid floor that scrolls toward the horizon. Reduced-motion visitors keep the floor, without the scroll.",
+      code: `<RetroGrid className="grid min-h-64 place-items-center rounded-2xl border border-border bg-surface-raised">
+  <p className="font-display text-2xl text-fg">Horizon</p>
+</RetroGrid>`,
+      preview: (
+        <RetroGrid className="grid min-h-64 w-full place-items-center rounded-2xl border border-border bg-surface-raised">
+          <p className="font-display text-2xl text-fg">Horizon</p>
+        </RetroGrid>
+      ),
+    },
+  ],
+  noise: [
+    {
+      id: "grain",
+      title: "Film grain",
+      description: "A still SVG turbulence overlay. No animation — analog depth, not flicker.",
+      code: `<Noise className="grid min-h-56 place-items-center rounded-2xl border border-border bg-surface-raised">
+  <p className="font-display text-2xl text-fg">Print</p>
+</Noise>`,
+      preview: (
+        <Noise className="grid min-h-56 w-full place-items-center rounded-2xl border border-border bg-surface-raised">
+          <p className="font-display text-2xl text-fg">Print</p>
+        </Noise>
+      ),
+    },
+  ],
+  "light-rays": [
+    {
+      id: "shafts",
+      title: "Light shafts",
+      description:
+        "A rotating conic gradient masked into volumetric shafts. Paused under reduced motion.",
+      code: `<LightRays className="grid min-h-56 place-items-center rounded-2xl border border-border bg-surface-raised">
+  <p className="font-display text-2xl text-fg">Dawn</p>
+</LightRays>`,
+      preview: (
+        <LightRays className="grid min-h-56 w-full place-items-center rounded-2xl border border-border bg-surface-raised">
+          <p className="font-display text-2xl text-fg">Dawn</p>
+        </LightRays>
+      ),
+    },
+  ],
+  "progressive-blur": [
+    {
+      id: "edge",
+      title: "Edge fade",
+      description:
+        "Stacked backdrop-blur that fades a scroll region into the chrome. Place it over overflowing content.",
+      code: `<div className="relative h-48 w-full overflow-hidden rounded-2xl border border-border bg-surface-raised">
+  <div className="h-full overflow-y-auto p-4 pb-16">
+    <p className="text-sm text-fg-secondary">
+      Scroll under the blur. The band is decorative and sits on the edge of the region.
+    </p>
+    <p className="mt-4 text-sm text-fg-secondary">More copy so the panel actually scrolls.</p>
+    <p className="mt-4 text-sm text-fg-secondary">Keep going — the fade holds the last lines.</p>
+    <p className="mt-4 text-sm text-fg-secondary">Last line of the stack.</p>
+  </div>
+  <ProgressiveBlur side="bottom" />
+</div>`,
+      preview: (
+        <div className="relative h-48 w-full overflow-hidden rounded-2xl border border-border bg-surface-raised">
+          <div className="h-full overflow-y-auto p-4 pb-16">
+            <p className="text-sm text-fg-secondary">
+              Scroll under the blur. The band is decorative and sits on the edge of the region.
+            </p>
+            <p className="mt-4 text-sm text-fg-secondary">
+              More copy so the panel actually scrolls.
+            </p>
+            <p className="mt-4 text-sm text-fg-secondary">
+              Keep going — the fade holds the last lines.
+            </p>
+            <p className="mt-4 text-sm text-fg-secondary">Last line of the stack.</p>
+          </div>
+          <ProgressiveBlur side="bottom" />
+        </div>
+      ),
+    },
+  ],
+  "flickering-grid": [
+    {
+      id: "signal",
+      title: "Signal grid",
+      description:
+        "Cells flicker on independent, index-derived timings so SSR and the client match. Reduced-motion visitors get a still, faint grid.",
+      code: `<FlickeringGrid className="grid min-h-56 place-items-center rounded-2xl border border-border bg-surface-raised">
+  <p className="font-display text-2xl text-fg">Signal</p>
+</FlickeringGrid>`,
+      preview: (
+        <FlickeringGrid className="grid min-h-56 w-full place-items-center rounded-2xl border border-border bg-surface-raised">
+          <p className="font-display text-2xl text-fg">Signal</p>
+        </FlickeringGrid>
+      ),
+    },
+  ],
+  "star-border": [
+    {
+      id: "twinkle",
+      title: "Twinkle border",
+      description:
+        "Two sparkle heads chase each other around the perimeter. Distinct from BorderBeam, which is a comet trail.",
+      code: `<StarBorder className="rounded-2xl border border-border bg-surface-raised p-8">
+  <p className="font-display text-xl text-fg">Featured</p>
+</StarBorder>`,
+      preview: (
+        <StarBorder className="w-full max-w-sm rounded-2xl border border-border bg-surface-raised p-8">
+          <p className="font-display text-xl text-fg">Featured</p>
+        </StarBorder>
+      ),
+    },
+  ],
+  "shiny-text": [
+    {
+      id: "sheen",
+      title: "Sheen",
+      description:
+        "A metallic sheen sweeps across live text. Reduced-motion visitors see the resting fill.",
+      code: `<ShinyText className="font-display text-4xl">Ship the surface</ShinyText>`,
+      preview: <ShinyText className="font-display text-4xl">Ship the surface</ShinyText>,
+    },
+  ],
+  highlighter: [
+    {
+      id: "mark",
+      title: "Marker",
+      description:
+        "A marker stroke draws in behind a phrase. The words stay in the accessibility tree; the mark is decorative.",
+      code: `<p className="font-display text-3xl text-fg">
+  Build the <Highlighter>product surface</Highlighter> first.
+</p>`,
+      preview: (
+        <p className="font-display text-3xl text-fg">
+          Build the <Highlighter>product surface</Highlighter> first.
+        </p>
+      ),
+    },
+  ],
+  "spinning-text": [
+    {
+      id: "orbit",
+      title: "Orbit",
+      description:
+        "The phrase is laid out around a circle. Assistive tech reads the original string once.",
+      code: `<SpinningText radius={56}>kronus ui · product · </SpinningText>`,
+      preview: <SpinningText radius={56}>kronus ui · product · </SpinningText>,
+    },
+  ],
+  "sparkles-text": [
+    {
+      id: "twinkle",
+      title: "Sparkles",
+      description: "Twinkling sparkles around a phrase. Hidden under reduced motion.",
+      code: `<SparklesText className="font-display text-4xl text-fg">Launch</SparklesText>`,
+      preview: <SparklesText className="font-display text-4xl text-fg">Launch</SparklesText>,
+    },
+  ],
+  "typing-text": [
+    {
+      id: "typewriter",
+      title: "Typewriter",
+      description:
+        "Types, pauses, deletes, and moves to the next phrase. Reduced-motion visitors see the first phrase in full.",
+      code: `<TypingText
+  className="font-display text-3xl text-fg"
+  text={["Design systems.", "Product surfaces.", "Copy you can upgrade."]}
+/>`,
+      preview: (
+        <TypingText
+          className="font-display text-3xl text-fg"
+          text={["Design systems.", "Product surfaces.", "Copy you can upgrade."]}
+        />
+      ),
+    },
+  ],
+  "word-rotate": [
+    {
+      id: "cycle",
+      title: "Word cycle",
+      description:
+        "Cycles through a list of words with a vertical swap. A polite live region announces the current word.",
+      code: `<p className="font-display text-3xl text-fg">
+  Ship <WordRotate words={["faster", "calmer", "on-brand"]} />.
+</p>`,
+      preview: (
+        <p className="font-display text-3xl text-fg">
+          Ship <WordRotate words={["faster", "calmer", "on-brand"]} />.
+        </p>
+      ),
+    },
+  ],
+  "scramble-text": [
+    {
+      id: "decrypt",
+      title: "Decrypt",
+      description:
+        "Random glyphs lock in left-to-right. Assistive tech gets the resolved phrase immediately.",
+      code: `<ScrambleText className="font-display text-3xl text-fg">kronus-ui</ScrambleText>`,
+      preview: <ScrambleText className="font-display text-3xl text-fg">kronus-ui</ScrambleText>,
+    },
+  ],
+  "glare-hover": [
+    {
+      id: "glare",
+      title: "Pointer glare",
+      description:
+        "A diagonal glare tracks the pointer. Position is written to CSS variables, so pointer motion never re-renders React.",
+      code: `<GlareHover className="rounded-2xl border border-border bg-surface-raised p-8">
+  <p className="font-display text-xl text-fg">Hover the surface</p>
+</GlareHover>`,
+      preview: (
+        <GlareHover className="w-full max-w-sm rounded-2xl border border-border bg-surface-raised p-8">
+          <p className="font-display text-xl text-fg">Hover the surface</p>
+        </GlareHover>
+      ),
+    },
+  ],
+  "click-spark": [
+    {
+      id: "burst",
+      title: "Click burst",
+      description: "Click anywhere on the wrapper to emit sparks from the pointer.",
+      code: `<ClickSpark className="grid min-h-40 place-items-center rounded-2xl border border-border bg-surface-raised">
+  <Button>Click me</Button>
+</ClickSpark>`,
+      preview: (
+        <ClickSpark className="grid min-h-40 w-full place-items-center rounded-2xl border border-border bg-surface-raised">
+          <Button>Click me</Button>
+        </ClickSpark>
+      ),
+    },
+  ],
+  "animated-list": [
+    {
+      id: "stagger",
+      title: "Staggered list",
+      description:
+        "Children enter with a short rise and fade. Pass the item body, not an li — the component wraps each child.",
+      code: `<AnimatedList className="w-full max-w-sm">
+  <div className="rounded-xl border border-border bg-surface-raised px-4 py-3 text-sm text-fg">
+    Deploy finished
+  </div>
+  <div className="rounded-xl border border-border bg-surface-raised px-4 py-3 text-sm text-fg">
+    Invite accepted
+  </div>
+  <div className="rounded-xl border border-border bg-surface-raised px-4 py-3 text-sm text-fg">
+    Invoice paid
+  </div>
+</AnimatedList>`,
+      preview: (
+        <AnimatedList className="w-full max-w-sm">
+          <div className="rounded-xl border border-border bg-surface-raised px-4 py-3 text-sm text-fg">
+            Deploy finished
+          </div>
+          <div className="rounded-xl border border-border bg-surface-raised px-4 py-3 text-sm text-fg">
+            Invite accepted
+          </div>
+          <div className="rounded-xl border border-border bg-surface-raised px-4 py-3 text-sm text-fg">
+            Invoice paid
+          </div>
+        </AnimatedList>
+      ),
+    },
+  ],
+  "card-stack": [
+    {
+      id: "fan",
+      title: "Fanned stack",
+      description:
+        "Click or press Space / ArrowRight on the front card to send it to the back. Labels can be localized.",
+      code: `<CardStack
+  items={[
+    { id: "one", content: <p className="font-display text-lg">Northwind</p> },
+    { id: "two", content: <p className="font-display text-lg">Contoso</p> },
+    { id: "three", content: <p className="font-display text-lg">Adventure Works</p> },
+  ]}
+/>`,
+      preview: (
+        <CardStack
+          items={[
+            {
+              id: "one",
+              content: <p className="font-display text-lg text-fg">Northwind</p>,
+            },
+            {
+              id: "two",
+              content: <p className="font-display text-lg text-fg">Contoso</p>,
+            },
+            {
+              id: "three",
+              content: <p className="font-display text-lg text-fg">Adventure Works</p>,
+            },
+          ]}
+        />
+      ),
+    },
+  ],
+  "pill-nav": [
+    {
+      id: "pills",
+      title: "Sliding pill",
+      description:
+        "A compact nav row whose active item is marked by a sliding pill. Arrow keys move selection.",
+      code: `<PillNav
+  aria-label="Product sections"
+  items={[
+    { value: "overview", label: "Overview" },
+    { value: "pricing", label: "Pricing" },
+    { value: "docs", label: "Docs" },
+  ]}
+/>`,
+      preview: (
+        <PillNav
+          aria-label="Product sections"
+          items={[
+            { value: "overview", label: "Overview" },
+            { value: "pricing", label: "Pricing" },
+            { value: "docs", label: "Docs" },
+          ]}
+        />
+      ),
+    },
+  ],
+  "expandable-tabs": [
+    {
+      id: "icons",
+      title: "Expanding tabs",
+      description:
+        "Icon tabs where the active item expands to reveal its label. Inactive labels stay available to assistive tech.",
+      code: `<ExpandableTabs
+  items={[
+    { value: "home", label: "Home", icon: <Home /> },
+    { value: "search", label: "Search", icon: <Search /> },
+    { value: "settings", label: "Settings", icon: <Settings /> },
+  ]}
+/>`,
+      preview: (
+        <ExpandableTabs
+          items={[
+            { value: "home", label: "Home", icon: <Home /> },
+            { value: "search", label: "Search", icon: <Search /> },
+            { value: "settings", label: "Settings", icon: <Settings /> },
+          ]}
+        />
+      ),
+    },
+  ],
+  "dynamic-island": [
+    {
+      id: "live",
+      title: "Live activity",
+      description:
+        "A compact pill that morphs between views. The dots are a tablist; the shell resizes with a spring.",
+      code: `<DynamicIsland
+  views={[
+    { id: "idle", label: "Idle", content: <span className="text-sm">Kronus</span> },
+    {
+      id: "now",
+      label: "Now playing",
+      content: <span className="text-sm">Shipping the surface</span>,
+    },
+  ]}
+/>`,
+      preview: (
+        <DynamicIsland
+          views={[
+            { id: "idle", label: "Idle", content: <span className="text-sm">Kronus</span> },
+            {
+              id: "now",
+              label: "Now playing",
+              content: <span className="text-sm">Shipping the surface</span>,
+            },
+          ]}
+        />
+      ),
+    },
+  ],
+  confetti: [
+    {
+      id: "burst",
+      title: "Burst",
+      description:
+        "Click anywhere on the wrapper to fire a burst from the pointer. A no-op under reduced motion.",
+      code: `<Confetti className="grid min-h-40 place-items-center rounded-2xl border border-border bg-surface-raised">
+  <Button>Celebrate</Button>
+</Confetti>`,
+      preview: (
+        <Confetti className="grid min-h-40 w-full place-items-center rounded-2xl border border-border bg-surface-raised">
+          <Button>Celebrate</Button>
+        </Confetti>
+      ),
+    },
+  ],
+  particles: [
+    {
+      id: "field",
+      title: "Drifting field",
+      description: "A calm 2D particle field. Canvas-only, no WebGL. Undrawn under reduced motion.",
+      code: `<Particles className="grid min-h-56 place-items-center rounded-2xl border border-border bg-surface-raised">
+  <p className="font-display text-2xl text-fg">Atmosphere</p>
+</Particles>`,
+      preview: (
+        <Particles className="grid min-h-56 w-full place-items-center rounded-2xl border border-border bg-surface-raised">
+          <p className="font-display text-2xl text-fg">Atmosphere</p>
+        </Particles>
       ),
     },
   ],

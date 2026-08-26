@@ -12,7 +12,7 @@ import {
   Input,
   Separator,
   Textarea,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import {
   ArrowUp,
   ChevronDown,
@@ -42,7 +42,7 @@ export function ChatThreadBlock() {
             <Sparkles className="size-4" aria-hidden="true" />
           </span>
           <div className="flex flex-1 items-center gap-2">
-            <span className="font-medium text-sm">Cooud Assistant</span>
+            <span className="font-medium text-sm">Kronus Assistant</span>
             <span className="size-2 rounded-full bg-success" aria-hidden="true" />
           </div>
           <Button variant="ghost" size="sm">
@@ -53,7 +53,7 @@ export function ChatThreadBlock() {
         <CardContent className="flex flex-col gap-4 p-4">
           <div className="flex items-start justify-end gap-2">
             <div className="max-w-[75%] rounded-2xl rounded-tr-sm bg-primary px-3 py-2 text-primary-foreground text-sm">
-              How do I theme a Cooud component?
+              How do I theme a Kronus component?
             </div>
             <Avatar className="size-7">
               <AvatarFallback>MC</AvatarFallback>
@@ -65,7 +65,7 @@ export function ChatThreadBlock() {
               <Sparkles className="size-3.5" aria-hidden="true" />
             </span>
             <div className="max-w-[75%] rounded-2xl rounded-tl-sm bg-surface-overlay px-3 py-2 text-sm">
-              Wrap your app in CooudThemeProvider and override the design tokens you want to change.
+              Wrap your app in KronusUIProvider and override the design tokens you want to change.
             </div>
           </div>
 
@@ -100,8 +100,8 @@ export function ChatThreadBlock() {
         </CardContent>
 
         <CardFooter className="gap-2 border-t border-border p-3">
-          <Input placeholder="Message Cooud Assistant…" className="flex-1" />
-          <Button variant="gradient" size="icon" aria-label="Send message">
+          <Input placeholder="Message Kronus Assistant…" className="flex-1" />
+          <Button variant="primary" size="icon" aria-label="Send message">
             <ArrowUp className="size-4" aria-hidden="true" />
           </Button>
         </CardFooter>
@@ -119,7 +119,7 @@ const chatThreadCode = `import {
   CardFooter,
   CardHeader,
   Input,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { ArrowUp, Sparkles } from "lucide-react";
 
 export function ChatThreadBlock() {
@@ -131,7 +131,7 @@ export function ChatThreadBlock() {
             <Sparkles className="size-4" aria-hidden="true" />
           </span>
           <div className="flex flex-1 items-center gap-2">
-            <span className="font-medium text-sm">Cooud Assistant</span>
+            <span className="font-medium text-sm">Kronus Assistant</span>
             <span className="size-2 rounded-full bg-success" aria-hidden="true" />
           </div>
           <Button variant="ghost" size="sm">
@@ -142,7 +142,7 @@ export function ChatThreadBlock() {
         <CardContent className="flex flex-col gap-4 p-4">
           <div className="flex items-start justify-end gap-2">
             <div className="max-w-[75%] rounded-2xl rounded-tr-sm bg-primary px-3 py-2 text-primary-foreground text-sm">
-              How do I theme a Cooud component?
+              How do I theme a Kronus component?
             </div>
             <Avatar className="size-7">
               <AvatarFallback>MC</AvatarFallback>
@@ -154,7 +154,7 @@ export function ChatThreadBlock() {
               <Sparkles className="size-3.5" aria-hidden="true" />
             </span>
             <div className="max-w-[75%] rounded-2xl rounded-tl-sm bg-surface-overlay px-3 py-2 text-sm">
-              Wrap your app in CooudThemeProvider and override the design tokens you want to change.
+              Wrap your app in KronusUIProvider and override the design tokens you want to change.
             </div>
           </div>
 
@@ -189,8 +189,8 @@ export function ChatThreadBlock() {
         </CardContent>
 
         <CardFooter className="gap-2 border-t border-border p-3">
-          <Input placeholder="Message Cooud Assistant…" className="flex-1" />
-          <Button variant="gradient" size="icon" aria-label="Send message">
+          <Input placeholder="Message Kronus Assistant…" className="flex-1" />
+          <Button variant="primary" size="icon" aria-label="Send message">
             <ArrowUp className="size-4" aria-hidden="true" />
           </Button>
         </CardFooter>
@@ -234,12 +234,12 @@ export function PromptBoxBlock() {
               </Button>
               <Button variant="ghost" size="sm" className="gap-1.5">
                 <Badge variant="secondary" className="rounded-sm">
-                  Cooud · Fast
+                  Kronus · Fast
                 </Badge>
                 <ChevronDown className="size-4" aria-hidden="true" />
               </Button>
             </div>
-            <Button variant="gradient" size="icon" aria-label="Send prompt">
+            <Button variant="primary" size="icon" aria-label="Send prompt">
               <ArrowUp className="size-4" aria-hidden="true" />
             </Button>
           </div>
@@ -249,7 +249,7 @@ export function PromptBoxBlock() {
   );
 }
 
-const promptBoxCode = `import { Badge, Button, Card, Textarea } from "@cooud-ui/ui";
+const promptBoxCode = `import { Badge, Button, Card, Textarea } from "@kronus-ui/ui";
 import { ArrowUp, ChevronDown, Paperclip } from "lucide-react";
 
 export function PromptBoxBlock() {
@@ -283,12 +283,12 @@ export function PromptBoxBlock() {
               </Button>
               <Button variant="ghost" size="sm" className="gap-1.5">
                 <Badge variant="secondary" className="rounded-sm">
-                  Cooud · Fast
+                  Kronus · Fast
                 </Badge>
                 <ChevronDown className="size-4" aria-hidden="true" />
               </Button>
             </div>
-            <Button variant="gradient" size="icon" aria-label="Send prompt">
+            <Button variant="primary" size="icon" aria-label="Send prompt">
               <ArrowUp className="size-4" aria-hidden="true" />
             </Button>
           </div>
@@ -310,14 +310,14 @@ export function AiResponseBlock() {
           <span className="inline-flex size-8 items-center justify-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
             <Sparkles className="size-4" aria-hidden="true" />
           </span>
-          <span className="flex-1 font-medium text-sm">Cooud Assistant</span>
+          <span className="flex-1 font-medium text-sm">Kronus Assistant</span>
           <Badge variant="secondary">Answer</Badge>
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
           <p className="text-sm text-fg-secondary">
-            Cooud UI ships themeable components built on design tokens, so you can restyle the whole
-            system without touching component code. The essentials:
+            Kronus UI ships themeable components built on design tokens, so you can restyle the
+            whole system without touching component code. The essentials:
           </p>
           <ul className="flex list-disc flex-col gap-1.5 pl-5 text-sm text-fg-secondary">
             <li>Every color, radius, and shadow is driven by a CSS variable token.</li>
@@ -332,17 +332,17 @@ export function AiResponseBlock() {
             <div className="flex items-center gap-2 text-sm">
               <span className="size-5 shrink-0 rounded bg-surface-overlay" aria-hidden="true" />
               <span className="flex-1 truncate">Theming guide</span>
-              <span className="text-fg-tertiary text-xs">cooud-ui.dev</span>
+              <span className="text-fg-tertiary text-xs">kronus-ui.dev</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
               <span className="size-5 shrink-0 rounded bg-surface-overlay" aria-hidden="true" />
               <span className="flex-1 truncate">Design tokens reference</span>
-              <span className="text-fg-tertiary text-xs">cooud-ui.dev</span>
+              <span className="text-fg-tertiary text-xs">kronus-ui.dev</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
               <span className="size-5 shrink-0 rounded bg-surface-overlay" aria-hidden="true" />
               <span className="flex-1 truncate">CLI: add a component</span>
-              <span className="text-fg-tertiary text-xs">cooud-ui.dev</span>
+              <span className="text-fg-tertiary text-xs">kronus-ui.dev</span>
             </div>
           </div>
 
@@ -370,7 +370,7 @@ export function AiResponseBlock() {
   );
 }
 
-const aiResponseCode = `import { Badge, Button, Card, CardContent, CardHeader, Separator } from "@cooud-ui/ui";
+const aiResponseCode = `import { Badge, Button, Card, CardContent, CardHeader, Separator } from "@kronus-ui/ui";
 import { Copy, RefreshCw, Sparkles, ThumbsDown, ThumbsUp } from "lucide-react";
 
 export function AiResponseBlock() {
@@ -381,13 +381,13 @@ export function AiResponseBlock() {
           <span className="inline-flex size-8 items-center justify-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
             <Sparkles className="size-4" aria-hidden="true" />
           </span>
-          <span className="flex-1 font-medium text-sm">Cooud Assistant</span>
+          <span className="flex-1 font-medium text-sm">Kronus Assistant</span>
           <Badge variant="secondary">Answer</Badge>
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
           <p className="text-sm text-fg-secondary">
-            Cooud UI ships themeable components built on design tokens, so you can restyle the whole
+            Kronus UI ships themeable components built on design tokens, so you can restyle the whole
             system without touching component code. The essentials:
           </p>
           <ul className="flex list-disc flex-col gap-1.5 pl-5 text-sm text-fg-secondary">
@@ -403,17 +403,17 @@ export function AiResponseBlock() {
             <div className="flex items-center gap-2 text-sm">
               <span className="size-5 shrink-0 rounded bg-surface-overlay" aria-hidden="true" />
               <span className="flex-1 truncate">Theming guide</span>
-              <span className="text-fg-tertiary text-xs">cooud-ui.dev</span>
+              <span className="text-fg-tertiary text-xs">kronus-ui.dev</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
               <span className="size-5 shrink-0 rounded bg-surface-overlay" aria-hidden="true" />
               <span className="flex-1 truncate">Design tokens reference</span>
-              <span className="text-fg-tertiary text-xs">cooud-ui.dev</span>
+              <span className="text-fg-tertiary text-xs">kronus-ui.dev</span>
             </div>
             <div className="flex items-center gap-2 text-sm">
               <span className="size-5 shrink-0 rounded bg-surface-overlay" aria-hidden="true" />
               <span className="flex-1 truncate">CLI: add a component</span>
-              <span className="text-fg-tertiary text-xs">cooud-ui.dev</span>
+              <span className="text-fg-tertiary text-xs">kronus-ui.dev</span>
             </div>
           </div>
 

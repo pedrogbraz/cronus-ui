@@ -1,14 +1,18 @@
 "use client";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@cooud-ui/ui";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@kronus-ui/ui";
 import { PACKAGE_MANAGERS, type PackageManagerCommand } from "../../lib/docs";
 import { CodeBlock } from "./code-block";
 
-type CommandKind = "init" | "add";
+type CommandKind = "init" | "add" | "create" | "compose" | "addPage" | "upgrade";
 
 const commandLabels: Record<CommandKind, string> = {
   init: "Initialize project",
   add: "Add components",
+  create: "Scaffold a SaaS app",
+  compose: "Compose a template",
+  addPage: "Add a page",
+  upgrade: "Upgrade (dry-run)",
 };
 
 export function PackageManagerTabs({

@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Button, Card } from "@cooud-ui/ui";
+import { Badge, Button, Card } from "@kronus-ui/ui";
 import { Check, Minus, Sparkles } from "lucide-react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
 import { BlockViewBody } from "../../components/blocks/block-view-body";
@@ -187,7 +187,7 @@ export function FeatureMatrixBlock() {
                     </div>
                     <p className="mt-1 font-normal text-fg-tertiary text-xs">{plan.tagline}</p>
                     <Button
-                      variant={plan.featured ? "gradient" : "outline"}
+                      variant={plan.featured ? "primary" : "outline"}
                       size="sm"
                       className="mt-4 w-full"
                       aria-label={`${plan.cta} with the ${plan.name} plan`}
@@ -262,7 +262,7 @@ export function FeatureMatrixBlock() {
                 </div>
                 <p className="mt-1 text-fg-tertiary text-sm">{plan.tagline}</p>
                 <Button
-                  variant={plan.featured ? "gradient" : "outline"}
+                  variant={plan.featured ? "primary" : "outline"}
                   className="mt-4 w-full"
                   aria-label={`${plan.cta} with the ${plan.name} plan`}
                 >
@@ -295,7 +295,7 @@ export function FeatureMatrixBlock() {
   );
 }
 
-const featureMatrixCode = `import { Badge, Button, Card } from "@cooud-ui/ui";
+const featureMatrixCode = `import { Badge, Button, Card } from "@kronus-ui/ui";
 import { Check, Minus, Sparkles } from "lucide-react";
 
 /** true = included, false = not included, string = a literal limit. */
@@ -461,7 +461,7 @@ export function FeatureMatrixBlock() {
                     </div>
                     <p className="mt-1 font-normal text-fg-tertiary text-xs">{plan.tagline}</p>
                     <Button
-                      variant={plan.featured ? "gradient" : "outline"}
+                      variant={plan.featured ? "primary" : "outline"}
                       size="sm"
                       className="mt-4 w-full"
                       aria-label={\`\${plan.cta} with the \${plan.name} plan\`}
@@ -536,7 +536,7 @@ export function FeatureMatrixBlock() {
                 </div>
                 <p className="mt-1 text-fg-tertiary text-sm">{plan.tagline}</p>
                 <Button
-                  variant={plan.featured ? "gradient" : "outline"}
+                  variant={plan.featured ? "primary" : "outline"}
                   className="mt-4 w-full"
                   aria-label={\`\${plan.cta} with the \${plan.name} plan\`}
                 >

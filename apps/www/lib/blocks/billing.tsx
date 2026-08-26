@@ -25,8 +25,8 @@ import {
   TableRow,
   UsageMeterCircular,
   UsageMeterLinear,
-} from "@cooud-ui/ui";
-import { INVOICES, PLANS, USAGE_METERS } from "@cooud-ui/ui/demo-saas";
+} from "@kronus-ui/ui";
+import { CURRENT_PLAN_ID, INVOICES, PLANS, planById, USAGE_METERS } from "@kronus-ui/ui/demo-saas";
 import { CalendarClock, Check, CreditCard, Download, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
@@ -182,7 +182,7 @@ const subscriptionCode = `import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { CreditCard, Download } from "lucide-react";
 import { INVOICES, USAGE_METERS } from "../lib/demo-saas.js";
 
@@ -377,7 +377,7 @@ export function PlansBlock() {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Button variant={plan.popular ? "gradient" : "outline"} className="w-full">
+                <Button variant={plan.popular ? "primary" : "outline"} className="w-full">
                   {plan.cta}
                 </Button>
               </CardFooter>
@@ -401,7 +401,7 @@ import {
   CardTitle,
   Separator,
   Switch,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Check } from "lucide-react";
 import { useState } from "react";
 import { PLANS } from "../lib/demo-saas.js";
@@ -469,7 +469,7 @@ export function PlansBlock() {
                 </ul>
               </CardContent>
               <CardFooter>
-                <Button variant={plan.popular ? "gradient" : "outline"} className="w-full">
+                <Button variant={plan.popular ? "primary" : "outline"} className="w-full">
                   {plan.cta}
                 </Button>
               </CardFooter>
@@ -571,7 +571,7 @@ const manageSubscriptionCode = `import {
   CardTitle,
   Separator,
   UsageMeterLinear,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { CalendarClock, CreditCard } from "lucide-react";
 
 interface MeterRow {
@@ -707,7 +707,7 @@ export function PaymentMethodBlock() {
           <Button variant="ghost" size="sm">
             Cancel
           </Button>
-          <Button variant="gradient" size="sm">
+          <Button variant="primary" size="sm">
             Save
           </Button>
         </CardFooter>
@@ -728,7 +728,7 @@ const paymentMethodCode = `import {
   RadioGroup,
   RadioGroupItem,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { CreditCard } from "lucide-react";
 
 interface SavedCard {
@@ -785,7 +785,7 @@ export function PaymentMethodBlock() {
           <Button variant="ghost" size="sm">
             Cancel
           </Button>
-          <Button variant="gradient" size="sm">
+          <Button variant="primary" size="sm">
             Save
           </Button>
         </CardFooter>
@@ -858,7 +858,7 @@ export function PaymentMethodAddBlock() {
           <Button variant="ghost" size="sm">
             Cancel
           </Button>
-          <Button variant="gradient" size="sm">
+          <Button variant="primary" size="sm">
             Add card
           </Button>
         </CardFooter>
@@ -878,7 +878,7 @@ const paymentMethodAddCode = `import {
   Label,
   Separator,
   Switch,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 
 export function PaymentMethodAddBlock() {
   return (
@@ -944,7 +944,7 @@ export function PaymentMethodAddBlock() {
           <Button variant="ghost" size="sm">
             Cancel
           </Button>
-          <Button variant="gradient" size="sm">
+          <Button variant="primary" size="sm">
             Add card
           </Button>
         </CardFooter>
@@ -957,46 +957,24 @@ export function PaymentMethodAddBlock() {
  * 5. Usage dashboard — metric cards with sparklines + quota meters
  * ────────────────────────────────────────────────────────────────────────── */
 
-interface UsageStat {
-  id: string;
-  label: string;
-  value: string;
-  delta: string;
-  trend: number[];
-  tone: "success" | "primary" | "info";
-}
+// Sparkline chrome is presentational (not data): bind by index so labels stay in the lib.
+const METER_DELTAS = ["+12%", "+6%", "+3%"] as const;
+const METER_TONES = ["success", "primary", "info"] as const;
+const METER_TRENDS = [
+  [42, 48, 45, 53, 60, 58, 67, 74, 82],
+  [60, 58, 62, 59, 64, 70, 68, 73, 78],
+  [70, 72, 69, 74, 73, 76, 75, 79, 81],
+] as const;
 
-const usageStats: UsageStat[] = [
-  {
-    id: "stat-requests",
-    label: "API requests",
-    value: "842K",
-    delta: "+12%",
-    trend: [42, 48, 45, 53, 60, 58, 67, 74, 82],
-    tone: "success",
-  },
-  {
-    id: "stat-bandwidth",
-    label: "Bandwidth",
-    value: "1.2 TB",
-    delta: "+6%",
-    trend: [60, 58, 62, 59, 64, 70, 68, 73, 78],
-    tone: "primary",
-  },
-  {
-    id: "stat-users",
-    label: "Active users",
-    value: "9,184",
-    delta: "+3%",
-    trend: [70, 72, 69, 74, 73, 76, 75, 79, 81],
-    tone: "info",
-  },
-];
+const usageCards = USAGE_METERS.map((meter, i) => ({
+  ...meter,
+  delta: METER_DELTAS[i] ?? "",
+  trend: [...(METER_TRENDS[i] ?? [])],
+  tone: METER_TONES[i] ?? "primary",
+}));
 
-const usageQuotas: MeterRow[] = [
-  { id: "quota-compute", label: "Compute hours", value: 312, max: 500 },
-  { id: "quota-storage", label: "Object storage", value: 164, max: 250, unit: "GB" },
-];
+const currentPlan = planById(CURRENT_PLAN_ID);
+const apiMeter = USAGE_METERS.find((m) => m.id === "usage-api");
 
 const topResources = [
   { id: "res-edge", name: "Edge functions", share: "38%" },
@@ -1008,14 +986,14 @@ export function UsageDashboardBlock() {
   return (
     <section aria-label="Usage dashboard" className="mx-auto flex w-full max-w-3xl flex-col gap-6">
       <div className="grid gap-4 sm:grid-cols-3">
-        {usageStats.map(({ id, label, value, delta, trend, tone }) => (
+        {usageCards.map(({ id, label, display, delta, trend, tone }) => (
           <Card key={id} className="gap-4 shadow-sm">
             <CardContent className="flex flex-col gap-3">
               <div className="flex items-center justify-between">
                 <span className="text-sm text-fg-secondary">{label}</span>
                 <Badge variant="success">{delta}</Badge>
               </div>
-              <span className="font-display text-2xl font-semibold text-fg">{value}</span>
+              <span className="font-display text-2xl font-semibold text-fg">{display}</span>
               <Sparkline
                 data={trend}
                 tone={tone}
@@ -1035,18 +1013,26 @@ export function UsageDashboardBlock() {
           <CardHeader>
             <CardTitle className="font-display text-lg">Plan usage</CardTitle>
             <p className="col-span-full text-sm text-fg-secondary">
-              Resets Jul 1, 2026 · Pro plan quotas.
+              Resets Jul 1, 2026 · {currentPlan?.name} plan quotas.
             </p>
           </CardHeader>
           <CardContent className="flex flex-col gap-5">
-            {usageQuotas.map(({ id, label, value, max, unit }) => (
-              <UsageMeterLinear key={id} label={label} value={value} max={max} unit={unit} />
+            {USAGE_METERS.map(({ id, label, used, limit }) => (
+              <UsageMeterLinear key={id} label={label} value={used} max={limit} />
             ))}
           </CardContent>
         </Card>
         <Card className="shadow-md">
           <CardContent className="flex items-center justify-center py-6">
-            <UsageMeterCircular value={842} max={1000} label="API quota" unit="K" size={120} />
+            {apiMeter ? (
+              <UsageMeterCircular
+                value={apiMeter.used / 1000}
+                max={apiMeter.limit / 1000}
+                label={apiMeter.label}
+                unit="K"
+                size={120}
+              />
+            ) : null}
           </CardContent>
         </Card>
       </div>
@@ -1098,56 +1084,27 @@ const usageDashboardCode = `import {
   TableRow,
   UsageMeterCircular,
   UsageMeterLinear,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
+import { CURRENT_PLAN_ID, planById, USAGE_METERS } from "../lib/demo-saas.js";
 
-interface UsageStat {
-  id: string;
-  label: string;
-  value: string;
-  delta: string;
-  trend: number[];
-  tone: "success" | "primary" | "info";
-}
+// Sparkline chrome is presentational (not data): bind by index so labels stay in the lib.
+const METER_DELTAS = ["+12%", "+6%", "+3%"] as const;
+const METER_TONES = ["success", "primary", "info"] as const;
+const METER_TRENDS = [
+  [42, 48, 45, 53, 60, 58, 67, 74, 82],
+  [60, 58, 62, 59, 64, 70, 68, 73, 78],
+  [70, 72, 69, 74, 73, 76, 75, 79, 81],
+] as const;
 
-interface MeterRow {
-  id: string;
-  label: string;
-  value: number;
-  max: number;
-  unit?: string;
-}
+const usageCards = USAGE_METERS.map((meter, i) => ({
+  ...meter,
+  delta: METER_DELTAS[i] ?? "",
+  trend: [...(METER_TRENDS[i] ?? [])],
+  tone: METER_TONES[i] ?? "primary",
+}));
 
-const usageStats: UsageStat[] = [
-  {
-    id: "stat-requests",
-    label: "API requests",
-    value: "842K",
-    delta: "+12%",
-    trend: [42, 48, 45, 53, 60, 58, 67, 74, 82],
-    tone: "success",
-  },
-  {
-    id: "stat-bandwidth",
-    label: "Bandwidth",
-    value: "1.2 TB",
-    delta: "+6%",
-    trend: [60, 58, 62, 59, 64, 70, 68, 73, 78],
-    tone: "primary",
-  },
-  {
-    id: "stat-users",
-    label: "Active users",
-    value: "9,184",
-    delta: "+3%",
-    trend: [70, 72, 69, 74, 73, 76, 75, 79, 81],
-    tone: "info",
-  },
-];
-
-const usageQuotas: MeterRow[] = [
-  { id: "quota-compute", label: "Compute hours", value: 312, max: 500 },
-  { id: "quota-storage", label: "Object storage", value: 164, max: 250, unit: "GB" },
-];
+const currentPlan = planById(CURRENT_PLAN_ID);
+const apiMeter = USAGE_METERS.find((m) => m.id === "usage-api");
 
 const topResources = [
   { id: "res-edge", name: "Edge functions", share: "38%" },
@@ -1159,14 +1116,14 @@ export function UsageDashboardBlock() {
   return (
     <section aria-label="Usage dashboard" className="mx-auto flex w-full max-w-3xl flex-col gap-6">
       <div className="grid gap-4 sm:grid-cols-3">
-        {usageStats.map(({ id, label, value, delta, trend, tone }) => (
+        {usageCards.map(({ id, label, display, delta, trend, tone }) => (
           <Card key={id} className="gap-4 shadow-sm">
             <CardContent className="flex flex-col gap-3">
               <div className="flex items-center justify-between">
                 <span className="text-sm text-fg-secondary">{label}</span>
                 <Badge variant="success">{delta}</Badge>
               </div>
-              <span className="font-display text-2xl font-semibold text-fg">{value}</span>
+              <span className="font-display text-2xl font-semibold text-fg">{display}</span>
               <Sparkline
                 data={trend}
                 tone={tone}
@@ -1186,18 +1143,26 @@ export function UsageDashboardBlock() {
           <CardHeader>
             <CardTitle className="font-display text-lg">Plan usage</CardTitle>
             <p className="col-span-full text-sm text-fg-secondary">
-              Resets Jul 1, 2026 · Pro plan quotas.
+              Resets Jul 1, 2026 · {currentPlan?.name} plan quotas.
             </p>
           </CardHeader>
           <CardContent className="flex flex-col gap-5">
-            {usageQuotas.map(({ id, label, value, max, unit }) => (
-              <UsageMeterLinear key={id} label={label} value={value} max={max} unit={unit} />
+            {USAGE_METERS.map(({ id, label, used, limit }) => (
+              <UsageMeterLinear key={id} label={label} value={used} max={limit} />
             ))}
           </CardContent>
         </Card>
         <Card className="shadow-md">
           <CardContent className="flex items-center justify-center py-6">
-            <UsageMeterCircular value={842} max={1000} label="API quota" unit="K" size={120} />
+            {apiMeter ? (
+              <UsageMeterCircular
+                value={apiMeter.used / 1000}
+                max={apiMeter.limit / 1000}
+                label={apiMeter.label}
+                unit="K"
+                size={120}
+              />
+            ) : null}
           </CardContent>
         </Card>
       </div>
@@ -1292,7 +1257,7 @@ export function CancelFlowBlock() {
           <Button variant="ghost" size="sm" className="text-error hover:text-error">
             Cancel anyway
           </Button>
-          <Button variant="gradient" size="sm">
+          <Button variant="primary" size="sm">
             Keep my subscription
           </Button>
         </CardFooter>
@@ -1313,7 +1278,7 @@ const cancelFlowCode = `import {
   RadioGroup,
   RadioGroupItem,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Sparkles } from "lucide-react";
 
 const cancelReasons = [
@@ -1370,7 +1335,7 @@ export function CancelFlowBlock() {
           <Button variant="ghost" size="sm" className="text-error hover:text-error">
             Cancel anyway
           </Button>
-          <Button variant="gradient" size="sm">
+          <Button variant="primary" size="sm">
             Keep my subscription
           </Button>
         </CardFooter>

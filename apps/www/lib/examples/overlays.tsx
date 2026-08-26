@@ -77,7 +77,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import {
   CalendarDays,
   ClipboardPaste,
@@ -290,7 +290,7 @@ const INITIAL_NOTIFICATIONS: NotificationItem[] = [
   {
     id: "star",
     title: "Your release hit 1,000 stars",
-    description: "cooud-ui reached a new milestone.",
+    description: "kronus-ui reached a new milestone.",
     timestamp: "1h ago",
     icon: <Heart aria-hidden="true" />,
   },
@@ -324,12 +324,12 @@ function NotificationCenterDemo() {
 }
 
 const LIGHTBOX_IMAGES: LightboxImage[] = [
-  { src: "https://picsum.photos/seed/cooud1/800/600", alt: "Mountain ridge at dawn" },
-  { src: "https://picsum.photos/seed/cooud2/800/600", alt: "Coastline from above" },
-  { src: "https://picsum.photos/seed/cooud3/800/600", alt: "Forest canopy" },
-  { src: "https://picsum.photos/seed/cooud4/800/600", alt: "City skyline at dusk" },
-  { src: "https://picsum.photos/seed/cooud5/800/600", alt: "Desert dunes" },
-  { src: "https://picsum.photos/seed/cooud6/800/600", alt: "Quiet harbour" },
+  { src: "https://picsum.photos/seed/kronus1/800/600", alt: "Mountain ridge at dawn" },
+  { src: "https://picsum.photos/seed/kronus2/800/600", alt: "Coastline from above" },
+  { src: "https://picsum.photos/seed/kronus3/800/600", alt: "Forest canopy" },
+  { src: "https://picsum.photos/seed/kronus4/800/600", alt: "City skyline at dusk" },
+  { src: "https://picsum.photos/seed/kronus5/800/600", alt: "Desert dunes" },
+  { src: "https://picsum.photos/seed/kronus6/800/600", alt: "Quiet harbour" },
 ];
 
 function LightboxDemo() {
@@ -798,7 +798,7 @@ export const overlaysExamples: ExampleMap = {
   {
     id: "star",
     title: "Your release hit 1,000 stars",
-    description: "cooud-ui reached a new milestone.",
+    description: "kronus-ui reached a new milestone.",
     timestamp: "1h ago",
     icon: <Heart aria-hidden="true" />,
   },
@@ -842,7 +842,7 @@ function NotificationCenterDemo() {
       code: `<HoverCard>
   <HoverCardTrigger asChild>
     <Button variant="link" className="px-0">
-      @cooud
+      @kronus
     </Button>
   </HoverCardTrigger>
   <HoverCardContent className="w-72">
@@ -854,7 +854,7 @@ function NotificationCenterDemo() {
         <Users className="size-5" />
       </span>
       <div className="flex flex-col gap-1">
-        <p className="text-sm font-semibold text-fg">Cooud</p>
+        <p className="text-sm font-semibold text-fg">Kronus</p>
         <p className="text-sm text-fg-secondary">
           The token-driven design system that themes itself.
         </p>
@@ -870,7 +870,7 @@ function NotificationCenterDemo() {
         <HoverCard>
           <HoverCardTrigger asChild>
             <Button variant="link" className="px-0">
-              @cooud
+              @kronus
             </Button>
           </HoverCardTrigger>
           <HoverCardContent className="w-72">
@@ -882,7 +882,7 @@ function NotificationCenterDemo() {
                 <Users className="size-5" />
               </span>
               <div className="flex flex-col gap-1">
-                <p className="text-sm font-semibold text-fg">Cooud</p>
+                <p className="text-sm font-semibold text-fg">Kronus</p>
                 <p className="text-sm text-fg-secondary">
                   The token-driven design system that themes itself.
                 </p>

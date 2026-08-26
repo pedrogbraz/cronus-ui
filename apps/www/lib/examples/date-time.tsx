@@ -11,7 +11,7 @@ import {
   type SchedulerEvent,
   TimePicker,
   type TimeValue,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { useState } from "react";
 import { ExampleList } from "../../components/docs/example-list";
 import type { ExampleMap } from "./types";

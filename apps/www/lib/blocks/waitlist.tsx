@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, AvatarFallback, Badge, Button, Input, Label } from "@cooud-ui/ui";
+import { Avatar, AvatarFallback, Badge, Button, Input, Label } from "@kronus-ui/ui";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
@@ -112,7 +112,7 @@ export function WaitlistHeroBlock() {
                 onChange={(event) => setEmail(event.target.value)}
                 className="h-11 flex-1"
               />
-              <Button type="submit" variant="gradient" size="lg" className="shrink-0">
+              <Button type="submit" variant="primary" size="lg" className="shrink-0">
                 Join the waitlist
                 <ArrowRight aria-hidden="true" />
               </Button>
@@ -141,7 +141,7 @@ export function WaitlistHeroBlock() {
 
 const waitlistCode = `"use client";
 
-import { Avatar, AvatarFallback, Badge, Button, Input, Label } from "@cooud-ui/ui";
+import { Avatar, AvatarFallback, Badge, Button, Input, Label } from "@kronus-ui/ui";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { useState } from "react";
 
@@ -232,7 +232,7 @@ export function WaitlistHeroBlock() {
                 onChange={(event) => setEmail(event.target.value)}
                 className="h-11 flex-1"
               />
-              <Button type="submit" variant="gradient" size="lg" className="shrink-0">
+              <Button type="submit" variant="primary" size="lg" className="shrink-0">
                 Join the waitlist
                 <ArrowRight aria-hidden="true" />
               </Button>

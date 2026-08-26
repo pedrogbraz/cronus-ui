@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@cooud-ui/ui", "@cooud-ui/theme", "@cooud-ui/tokens", "@cooud-ui/stack"],
+  transpilePackages: ["@kronus-ui/ui", "@kronus-ui/theme", "@kronus-ui/tokens", "@kronus-ui/stack"],
 };
 
 export default nextConfig;

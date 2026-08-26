@@ -3,7 +3,7 @@ import { getShadcnItem, shadcnItemParams } from "../../../lib/shadcn-registry";
 /**
  * shadcn-spec registry items, one URL per item:
  *
- *   npx shadcn@latest add https://ui.testcooud.cloud/r/button.json
+ *   npx shadcn@latest add https://ui.testkronus.cloud/r/button.json
  *
  * Every known item is prerendered at build time; anything else 404s.
  */

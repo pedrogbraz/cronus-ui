@@ -18,7 +18,8 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
   SidebarTrigger,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
+import { TEAM, USER } from "@kronus-ui/ui/demo-saas";
 import { Bell, Hexagon } from "lucide-react";
 import type { ReactNode } from "react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
@@ -34,8 +35,8 @@ import type { BlockContentMap } from "./types";
  * header.
  *
  * The composer treats this like navbar/footer: the sidebar links live inside a
- * `@cooud:data app-nav` data-slot const it rewrites from the (app) group's nav
- * pages, and the brand wordmark ("Cooud") is a brand token it replaces with the
+ * `@kronus:data app-nav` data-slot const it rewrites from the (app) group's nav
+ * pages, and the brand wordmark ("Kronus") is a brand token it replaces with the
  * app brand. The shipped code literal below MUST start with "use client"
  * because AppShell/Sidebar use React context + hooks — a generated RSC layout
  * imports it as a client boundary (like SiteNav wraps the client navbar).
@@ -58,7 +59,7 @@ const SHELL_HOST_CLASS =
   "[&_[data-slot=app-shell-content]]:!min-h-0 [&_[data-slot=app-shell-content]]:h-full " +
   "[&_[data-slot=app-shell-content]>*]:!min-h-0";
 
-/* @cooud:data app-nav */
+/* @kronus:data app-nav */
 const APP_NAV = [
   { label: "Dashboard", href: "/dashboard" },
   { label: "Analytics", href: "/analytics" },
@@ -66,7 +67,9 @@ const APP_NAV = [
   { label: "Billing", href: "/billing" },
   { label: "Settings", href: "/settings" },
 ] as const;
-/* @cooud:data-end */
+/* @kronus:data-end */
+
+const OWNER = TEAM.find((m) => m.email === USER.email);
 
 function AppShellChrome({ children }: { children: ReactNode }) {
   const sidebar = (
@@ -76,7 +79,7 @@ function AppShellChrome({ children }: { children: ReactNode }) {
           <span className="inline-flex size-8 items-center justify-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
             <Hexagon className="size-4" aria-hidden="true" />
           </span>
-          <span className="truncate font-display text-sm font-semibold text-fg">Cooud</span>
+          <span className="truncate font-display text-sm font-semibold text-fg">Kronus</span>
         </div>
       </SidebarHeader>
 
@@ -104,12 +107,12 @@ function AppShellChrome({ children }: { children: ReactNode }) {
       <SidebarFooter>
         <div className="flex items-center gap-2 rounded-lg px-2 py-1.5">
           <Avatar className="size-8">
-            <AvatarImage src="https://i.pravatar.cc/96?img=5" alt="Lena Park" />
-            <AvatarFallback>LP</AvatarFallback>
+            {OWNER?.avatar ? <AvatarImage src={OWNER.avatar} alt={USER.name} /> : null}
+            <AvatarFallback>{USER.initials}</AvatarFallback>
           </Avatar>
           <div className="flex min-w-0 flex-col">
-            <span className="truncate text-sm font-medium text-fg">Lena Park</span>
-            <span className="truncate text-xs text-fg-tertiary">lena@acme.dev</span>
+            <span className="truncate text-sm font-medium text-fg">{USER.name}</span>
+            <span className="truncate text-xs text-fg-tertiary">{USER.email}</span>
           </div>
         </div>
       </SidebarFooter>
@@ -119,14 +122,14 @@ function AppShellChrome({ children }: { children: ReactNode }) {
   const header = (
     <div className="flex w-full items-center gap-3">
       <SidebarTrigger className="md:hidden" />
-      <span className="font-display text-sm font-semibold text-fg">Cooud</span>
+      <span className="font-display text-sm font-semibold text-fg">Kronus</span>
       <div className="ml-auto flex items-center gap-2">
         <Button variant="ghost" size="icon-sm" aria-label="Notifications">
           <Bell className="size-4" aria-hidden="true" />
         </Button>
         <Avatar className="size-8">
-          <AvatarImage src="https://i.pravatar.cc/96?img=5" alt="Lena Park" />
-          <AvatarFallback>LP</AvatarFallback>
+          {OWNER?.avatar ? <AvatarImage src={OWNER.avatar} alt={USER.name} /> : null}
+          <AvatarFallback>{USER.initials}</AvatarFallback>
         </Avatar>
       </div>
     </div>
@@ -174,11 +177,12 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
   SidebarTrigger,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
+import { TEAM, USER } from "../lib/demo-saas.js";
 import { Bell, Hexagon } from "lucide-react";
 import type { ReactNode } from "react";
 
-/* @cooud:data app-nav */
+/* @kronus:data app-nav */
 const APP_NAV = [
   { label: "Dashboard", href: "/dashboard" },
   { label: "Analytics", href: "/analytics" },
@@ -186,7 +190,9 @@ const APP_NAV = [
   { label: "Billing", href: "/billing" },
   { label: "Settings", href: "/settings" },
 ];
-/* @cooud:data-end */
+/* @kronus:data-end */
+
+const OWNER = TEAM.find((m) => m.email === USER.email);
 
 export function AppShellChromeBlock({ children }: { children: ReactNode }) {
   const sidebar = (
@@ -196,7 +202,7 @@ export function AppShellChromeBlock({ children }: { children: ReactNode }) {
           <span className="inline-flex size-8 items-center justify-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
             <Hexagon className="size-4" aria-hidden="true" />
           </span>
-          <span className="truncate font-display text-sm font-semibold text-fg">Cooud</span>
+          <span className="truncate font-display text-sm font-semibold text-fg">Kronus</span>
         </div>
       </SidebarHeader>
 
@@ -224,12 +230,12 @@ export function AppShellChromeBlock({ children }: { children: ReactNode }) {
       <SidebarFooter>
         <div className="flex items-center gap-2 rounded-lg px-2 py-1.5">
           <Avatar className="size-8">
-            <AvatarImage src="https://i.pravatar.cc/96?img=5" alt="Lena Park" />
-            <AvatarFallback>LP</AvatarFallback>
+            {OWNER?.avatar ? <AvatarImage src={OWNER.avatar} alt={USER.name} /> : null}
+            <AvatarFallback>{USER.initials}</AvatarFallback>
           </Avatar>
           <div className="flex min-w-0 flex-col">
-            <span className="truncate text-sm font-medium text-fg">Lena Park</span>
-            <span className="truncate text-xs text-fg-tertiary">lena@acme.dev</span>
+            <span className="truncate text-sm font-medium text-fg">{USER.name}</span>
+            <span className="truncate text-xs text-fg-tertiary">{USER.email}</span>
           </div>
         </div>
       </SidebarFooter>
@@ -239,14 +245,14 @@ export function AppShellChromeBlock({ children }: { children: ReactNode }) {
   const header = (
     <div className="flex w-full items-center gap-3">
       <SidebarTrigger className="md:hidden" />
-      <span className="font-display text-sm font-semibold text-fg">Cooud</span>
+      <span className="font-display text-sm font-semibold text-fg">Kronus</span>
       <div className="ml-auto flex items-center gap-2">
         <Button variant="ghost" size="icon-sm" aria-label="Notifications">
           <Bell className="size-4" aria-hidden="true" />
         </Button>
         <Avatar className="size-8">
-          <AvatarImage src="https://i.pravatar.cc/96?img=5" alt="Lena Park" />
-          <AvatarFallback>LP</AvatarFallback>
+          {OWNER?.avatar ? <AvatarImage src={OWNER.avatar} alt={USER.name} /> : null}
+          <AvatarFallback>{USER.initials}</AvatarFallback>
         </Avatar>
       </div>
     </div>

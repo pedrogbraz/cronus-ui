@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge } from "@cooud-ui/ui";
+import { Badge } from "@kronus-ui/ui";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
 import { BlockViewBody } from "../../components/blocks/block-view-body";
 import { getBlockMeta } from "../blocks-index";
@@ -92,7 +92,7 @@ const RELEASES: ReadonlyArray<ChangelogRelease> = [
     changes: [
       {
         kind: "Feature",
-        text: "CooudThemeScript inlines the stored theme before hydration — no dark-mode flash.",
+        text: "KronusThemeScript inlines the stored theme before hydration — no dark-mode flash.",
       },
       {
         kind: "Feature",
@@ -165,7 +165,7 @@ export function ChangelogBlock() {
   );
 }
 
-const changelogCode = `import { Badge } from "@cooud-ui/ui";
+const changelogCode = `import { Badge } from "@kronus-ui/ui";
 
 type ChangeKind = "Feature" | "Fix" | "Perf";
 
@@ -248,7 +248,7 @@ const RELEASES: ReadonlyArray<ChangelogRelease> = [
     changes: [
       {
         kind: "Feature",
-        text: "CooudThemeScript inlines the stored theme before hydration — no dark-mode flash.",
+        text: "KronusThemeScript inlines the stored theme before hydration — no dark-mode flash.",
       },
       {
         kind: "Feature",

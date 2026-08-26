@@ -1,6 +1,6 @@
 /**
  * Fails (exit 1) when the committed `lib/props.generated.ts` has drifted from the
- * current @cooud-ui/ui component sources. Regenerates the props map in memory and
+ * current @kronus-ui/ui component sources. Regenerates the props map in memory and
  * diffs the serialized module against the committed file.
  *
  * Run:  bun run apps/www/scripts/check-props.ts
@@ -23,13 +23,13 @@ async function main(): Promise<void> {
 
   if (committed === null) {
     console.error("props:check FAILED — lib/props.generated.ts is missing.");
-    console.error("\nRun `bun run -F @cooud-ui/www props` and commit the result.");
+    console.error("\nRun `bun run -F @kronus-ui/www props` and commit the result.");
     process.exit(1);
   }
 
   if (committed !== expected) {
     console.error("props:check FAILED — lib/props.generated.ts is out of sync with packages/ui.");
-    console.error("\nRun `bun run -F @cooud-ui/www props` and commit the result.");
+    console.error("\nRun `bun run -F @kronus-ui/www props` and commit the result.");
     process.exit(1);
   }
 

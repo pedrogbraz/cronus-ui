@@ -18,7 +18,7 @@ import {
   TimelineItem,
   TimelineTime,
   TimelineTitle,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import {
   CheckCircle2,
   CreditCard,
@@ -155,7 +155,7 @@ const notificationPanelCode = `import {
   CardHeader,
   CardTitle,
   Reveal,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 
 export function NotificationPanelBlock() {
   return (
@@ -341,7 +341,7 @@ const activityFeedCode = `import {
   TimelineItem,
   TimelineTime,
   TimelineTitle,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { CreditCard, FolderPlus, MessageSquare, TriangleAlert, UserPlus } from "lucide-react";
 
 export function ActivityFeedBlock() {
@@ -497,7 +497,7 @@ export function ToastStackBlock() {
   );
 }
 
-const toastStackCode = `import { Button, Reveal } from "@cooud-ui/ui";
+const toastStackCode = `import { Button, Reveal } from "@kronus-ui/ui";
 import { CheckCircle2, Info, TriangleAlert, X, XCircle } from "lucide-react";
 
 export function ToastStackBlock() {

@@ -25,7 +25,8 @@ import {
   MetricValue,
   Separator,
   Switch,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
+import { KPIS, type Role, TEAM, USER } from "@kronus-ui/ui/demo-saas";
 import { Activity, DollarSign, MoreHorizontal, TrendingDown, UserMinus, Users } from "lucide-react";
 import { useState } from "react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
@@ -38,41 +39,14 @@ import type { BlockContentMap } from "./types";
  * 1. Stats — dashboard KPI row
  * ────────────────────────────────────────────────────────────────────────── */
 
+const STAT_ICONS = [DollarSign, Users, Activity, TrendingDown] as const;
+
 export function StatsBlock() {
-  const stats = [
-    {
-      label: "Revenue",
-      value: "$48,290",
-      delta: "+12.4%",
-      trend: "up" as const,
-      icon: DollarSign,
-      hint: "vs. last month",
-    },
-    {
-      label: "Active users",
-      value: "9,184",
-      delta: "+5.2%",
-      trend: "up" as const,
-      icon: Users,
-      hint: "vs. last month",
-    },
-    {
-      label: "Conversion",
-      value: "3.84%",
-      delta: "+0.6%",
-      trend: "up" as const,
-      icon: Activity,
-      hint: "vs. last month",
-    },
-    {
-      label: "Churn",
-      value: "1.92%",
-      delta: "-0.3%",
-      trend: "down" as const,
-      icon: TrendingDown,
-      hint: "vs. last month",
-    },
-  ];
+  const stats = KPIS.map((kpi, i) => ({
+    ...kpi,
+    icon: STAT_ICONS[i] ?? DollarSign,
+    hint: "vs. last month",
+  }));
 
   return (
     <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,13rem),1fr))] gap-4">
@@ -104,44 +78,18 @@ const statsCode = `import {
   MetricDelta,
   MetricLabel,
   MetricValue,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
+import { KPIS } from "../lib/demo-saas.js";
 import { Activity, DollarSign, TrendingDown, Users } from "lucide-react";
 
+const STAT_ICONS = [DollarSign, Users, Activity, TrendingDown] as const;
+
 export function StatsBlock() {
-  const stats = [
-    {
-      label: "Revenue",
-      value: "$48,290",
-      delta: "+12.4%",
-      trend: "up" as const,
-      icon: DollarSign,
-      hint: "vs. last month",
-    },
-    {
-      label: "Active users",
-      value: "9,184",
-      delta: "+5.2%",
-      trend: "up" as const,
-      icon: Users,
-      hint: "vs. last month",
-    },
-    {
-      label: "Conversion",
-      value: "3.84%",
-      delta: "+0.6%",
-      trend: "up" as const,
-      icon: Activity,
-      hint: "vs. last month",
-    },
-    {
-      label: "Churn",
-      value: "1.92%",
-      delta: "-0.3%",
-      trend: "down" as const,
-      icon: TrendingDown,
-      hint: "vs. last month",
-    },
-  ];
+  const stats = KPIS.map((kpi, i) => ({
+    ...kpi,
+    icon: STAT_ICONS[i] ?? DollarSign,
+    hint: "vs. last month",
+  }));
 
   return (
     <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,13rem),1fr))] gap-4">
@@ -207,7 +155,7 @@ const statsCompactCode = `import {
   MetricDelta,
   MetricLabel,
   MetricValue,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 
 export function StatsCompactBlock() {
   const stats = [
@@ -304,7 +252,7 @@ const statsPipelineCode = `import {
   MetricDelta,
   MetricLabel,
   MetricValue,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Activity, DollarSign, Users } from "lucide-react";
 
 export function StatsPipelineBlock() {
@@ -390,6 +338,8 @@ const preferences: Preference[] = [
   },
 ];
 
+const OWNER = TEAM.find((m) => m.email === USER.email);
+
 export function SettingsBlock() {
   const [enabled, setEnabled] = useState<Record<string, boolean>>({
     "pref-product": true,
@@ -418,8 +368,8 @@ export function SettingsBlock() {
           </h3>
           <div className="flex items-center gap-4">
             <Avatar className="size-14">
-              <AvatarImage src="https://i.pravatar.cc/96?img=12" alt="Mara Castillo" />
-              <AvatarFallback>MC</AvatarFallback>
+              {OWNER?.avatar ? <AvatarImage src={OWNER.avatar} alt={USER.name} /> : null}
+              <AvatarFallback>{USER.initials}</AvatarFallback>
             </Avatar>
             <Button variant="outline" size="sm">
               Change photo
@@ -428,11 +378,11 @@ export function SettingsBlock() {
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="flex flex-col gap-2">
               <Label htmlFor="settings-name">Full name</Label>
-              <Input id="settings-name" defaultValue="Mara Castillo" />
+              <Input id="settings-name" defaultValue={USER.name} />
             </div>
             <div className="flex flex-col gap-2">
               <Label htmlFor="settings-email">Email</Label>
-              <Input id="settings-email" type="email" defaultValue="mara@cooud.io" />
+              <Input id="settings-email" type="email" defaultValue={USER.email} />
             </div>
           </div>
         </section>
@@ -467,7 +417,7 @@ export function SettingsBlock() {
 
       <CardFooter className="justify-end gap-3">
         <Button variant="outline">Cancel</Button>
-        <Button variant="gradient">Save changes</Button>
+        <Button variant="primary">Save changes</Button>
       </CardFooter>
     </Card>
   );
@@ -489,7 +439,8 @@ import {
   Label,
   Separator,
   Switch,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
+import { TEAM, USER } from "../lib/demo-saas.js";
 import { useState } from "react";
 
 interface Preference {
@@ -516,6 +467,8 @@ const preferences: Preference[] = [
   },
 ];
 
+const OWNER = TEAM.find((m) => m.email === USER.email);
+
 export function SettingsBlock() {
   const [enabled, setEnabled] = useState<Record<string, boolean>>({
     "pref-product": true,
@@ -544,8 +497,8 @@ export function SettingsBlock() {
           </h3>
           <div className="flex items-center gap-4">
             <Avatar className="size-14">
-              <AvatarImage src="https://i.pravatar.cc/96?img=12" alt="Mara Castillo" />
-              <AvatarFallback>MC</AvatarFallback>
+              {OWNER?.avatar ? <AvatarImage src={OWNER.avatar} alt={USER.name} /> : null}
+              <AvatarFallback>{USER.initials}</AvatarFallback>
             </Avatar>
             <Button variant="outline" size="sm">
               Change photo
@@ -554,11 +507,11 @@ export function SettingsBlock() {
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="flex flex-col gap-2">
               <Label htmlFor="settings-name">Full name</Label>
-              <Input id="settings-name" defaultValue="Mara Castillo" />
+              <Input id="settings-name" defaultValue={USER.name} />
             </div>
             <div className="flex flex-col gap-2">
               <Label htmlFor="settings-email">Email</Label>
-              <Input id="settings-email" type="email" defaultValue="mara@cooud.io" />
+              <Input id="settings-email" type="email" defaultValue={USER.email} />
             </div>
           </div>
         </section>
@@ -593,7 +546,7 @@ export function SettingsBlock() {
 
       <CardFooter className="justify-end gap-3">
         <Button variant="outline">Cancel</Button>
-        <Button variant="gradient">Save changes</Button>
+        <Button variant="primary">Save changes</Button>
       </CardFooter>
     </Card>
   );
@@ -603,61 +556,11 @@ export function SettingsBlock() {
  * 3. Team — team-members list
  * ────────────────────────────────────────────────────────────────────────── */
 
-interface Member {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  roleVariant: "primary" | "info" | "secondary";
-  avatar?: string;
-  initials: string;
-}
-
-const members: Member[] = [
-  {
-    id: "m1",
-    name: "Mara Castillo",
-    email: "mara@cooud.io",
-    role: "Owner",
-    roleVariant: "primary",
-    avatar: "https://i.pravatar.cc/96?img=12",
-    initials: "MC",
-  },
-  {
-    id: "m2",
-    name: "Devon Lane",
-    email: "devon@cooud.io",
-    role: "Admin",
-    roleVariant: "info",
-    avatar: "https://i.pravatar.cc/96?img=33",
-    initials: "DL",
-  },
-  {
-    id: "m3",
-    name: "Priya Sharma",
-    email: "priya@cooud.io",
-    role: "Member",
-    roleVariant: "secondary",
-    initials: "PS",
-  },
-  {
-    id: "m4",
-    name: "Tobias Funke",
-    email: "tobias@cooud.io",
-    role: "Member",
-    roleVariant: "secondary",
-    avatar: "https://i.pravatar.cc/96?img=68",
-    initials: "TF",
-  },
-  {
-    id: "m5",
-    name: "Aiko Tanaka",
-    email: "aiko@cooud.io",
-    role: "Member",
-    roleVariant: "secondary",
-    initials: "AT",
-  },
-];
+const ROLE_VARIANT: Record<Role, "primary" | "info" | "secondary"> = {
+  Owner: "primary",
+  Admin: "info",
+  Member: "secondary",
+};
 
 export function TeamBlock() {
   return (
@@ -667,7 +570,7 @@ export function TeamBlock() {
           <CardTitle className="font-display text-lg">Team members</CardTitle>
           <p className="text-sm text-fg-secondary">Invite and manage your workspace teammates.</p>
         </div>
-        <Button variant="gradient" size="sm" className="col-start-2 row-span-2 self-center">
+        <Button variant="primary" size="sm" className="col-start-2 row-span-2 self-center">
           <Users className="size-4" aria-hidden="true" />
           Invite
         </Button>
@@ -676,11 +579,11 @@ export function TeamBlock() {
       <Separator />
 
       <ul className="flex flex-col">
-        {members.map((member, i) => (
+        {TEAM.map((member, i) => (
           <li
             key={member.id}
             className={`flex items-center gap-4 px-6 py-4 transition-colors hover:bg-surface-overlay/60 ${
-              i !== members.length - 1 ? "border-b border-border" : ""
+              i !== TEAM.length - 1 ? "border-b border-border" : ""
             }`}
           >
             <Avatar>
@@ -693,7 +596,7 @@ export function TeamBlock() {
               <span className="truncate text-sm text-fg-secondary">{member.email}</span>
             </div>
 
-            <Badge variant={member.roleVariant}>{member.role}</Badge>
+            <Badge variant={ROLE_VARIANT[member.role]}>{member.role}</Badge>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -737,64 +640,15 @@ const teamCode = `import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
+import { TEAM, type Role } from "../lib/demo-saas.js";
 import { MoreHorizontal, UserMinus, Users } from "lucide-react";
 
-interface Member {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  roleVariant: "primary" | "info" | "secondary";
-  avatar?: string;
-  initials: string;
-}
-
-const members: Member[] = [
-  {
-    id: "m1",
-    name: "Mara Castillo",
-    email: "mara@cooud.io",
-    role: "Owner",
-    roleVariant: "primary",
-    avatar: "https://i.pravatar.cc/96?img=12",
-    initials: "MC",
-  },
-  {
-    id: "m2",
-    name: "Devon Lane",
-    email: "devon@cooud.io",
-    role: "Admin",
-    roleVariant: "info",
-    avatar: "https://i.pravatar.cc/96?img=33",
-    initials: "DL",
-  },
-  {
-    id: "m3",
-    name: "Priya Sharma",
-    email: "priya@cooud.io",
-    role: "Member",
-    roleVariant: "secondary",
-    initials: "PS",
-  },
-  {
-    id: "m4",
-    name: "Tobias Funke",
-    email: "tobias@cooud.io",
-    role: "Member",
-    roleVariant: "secondary",
-    avatar: "https://i.pravatar.cc/96?img=68",
-    initials: "TF",
-  },
-  {
-    id: "m5",
-    name: "Aiko Tanaka",
-    email: "aiko@cooud.io",
-    role: "Member",
-    roleVariant: "secondary",
-    initials: "AT",
-  },
-];
+const ROLE_VARIANT: Record<Role, "primary" | "info" | "secondary"> = {
+  Owner: "primary",
+  Admin: "info",
+  Member: "secondary",
+};
 
 export function TeamBlock() {
   return (
@@ -804,7 +658,7 @@ export function TeamBlock() {
           <CardTitle className="font-display text-lg">Team members</CardTitle>
           <p className="text-sm text-fg-secondary">Invite and manage your workspace teammates.</p>
         </div>
-        <Button variant="gradient" size="sm" className="col-start-2 row-span-2 self-center">
+        <Button variant="primary" size="sm" className="col-start-2 row-span-2 self-center">
           <Users className="size-4" aria-hidden="true" />
           Invite
         </Button>
@@ -813,11 +667,11 @@ export function TeamBlock() {
       <Separator />
 
       <ul className="flex flex-col">
-        {members.map((member, i) => (
+        {TEAM.map((member, i) => (
           <li
             key={member.id}
             className={\`flex items-center gap-4 px-6 py-4 transition-colors hover:bg-surface-overlay/60 \${
-              i !== members.length - 1 ? "border-b border-border" : ""
+              i !== TEAM.length - 1 ? "border-b border-border" : ""
             }\`}
           >
             <Avatar>
@@ -830,7 +684,7 @@ export function TeamBlock() {
               <span className="truncate text-sm text-fg-secondary">{member.email}</span>
             </div>
 
-            <Badge variant={member.roleVariant}>{member.role}</Badge>
+            <Badge variant={ROLE_VARIANT[member.role]}>{member.role}</Badge>
 
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

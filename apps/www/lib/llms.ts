@@ -7,7 +7,7 @@
  * code is lifted from `lib/examples/<family>.tsx` with the TypeScript compiler
  * API — never importing/executing those client modules (same technique as
  * scripts/build-props.ts) — and block sources come from the committed registry
- * items, i.e. exactly what `npx cooud-ui add <slug>` installs.
+ * items, i.e. exactly what `npx kronus-ui add <slug>` installs.
  */
 import { existsSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
@@ -237,8 +237,8 @@ const PACKAGE_DIRS = [
   "stack",
   "ai-kit",
   "cli",
-  "create-cooud-app",
-  "create-cooud-stack",
+  "create-kronus-app",
+  "create-kronus-stack",
   "mcp",
 ] as const;
 
@@ -334,8 +334,8 @@ export function componentMarkdown(slug: string): string | undefined {
     "",
     "## Install",
     "",
-    ...fencedCode(`npx cooud-ui add ${slug}`, "bash"),
-    ...fencedCode(`import { ${meta.importName ?? meta.name} } from "@cooud-ui/ui";`, "tsx"),
+    ...fencedCode(`npx kronus-ui add ${slug}`, "bash"),
+    ...fencedCode(`import { ${meta.importName ?? meta.name} } from "@kronus-ui/ui";`, "tsx"),
     ...dependencyLines(readRegistryItem(slug)),
   ];
 
@@ -345,7 +345,7 @@ export function componentMarkdown(slug: string): string | undefined {
       lines.push(`### ${example.title}`, "");
       if (example.description) lines.push(example.description, "");
       if (example.registryItem && example.registryItem !== slug) {
-        lines.push(...fencedCode(`npx cooud-ui add ${example.registryItem}`, "bash"));
+        lines.push(...fencedCode(`npx kronus-ui add ${example.registryItem}`, "bash"));
       }
       lines.push(...fencedCode(example.code, "tsx"));
     }
@@ -377,7 +377,7 @@ export function blockMarkdown(slug: string, includeSource = true): string | unde
     "",
     "## Install",
     "",
-    ...fencedCode(`npx cooud-ui add ${slug}`, "bash"),
+    ...fencedCode(`npx kronus-ui add ${slug}`, "bash"),
     ...dependencyLines(item),
   ];
 
@@ -437,7 +437,7 @@ function guideExtras(slug: string): string[] {
   switch (slug) {
     case "index": {
       const lines = [
-        `Cooud UI ships ${ALL_COMPONENTS.length} components and ${ALL_BLOCKS.length} blocks, distributed two ways: as npm packages (\`@cooud-ui/ui\` + \`@cooud-ui/tokens\` + \`@cooud-ui/theme\`) or as source copied into your project through the shadcn-style registry (\`npx cooud-ui add <slug>\`).`,
+        "Kronus UI is distributed two ways: as npm packages (`@kronus-ui/ui` + `@kronus-ui/tokens` + `@kronus-ui/theme`) or as source copied into your project through the shadcn-style registry (`npx kronus-ui add <slug>`).",
         "",
         "## Packages",
         "",
@@ -450,7 +450,14 @@ function guideExtras(slug: string): string[] {
     case "cli": {
       const lines = ["## Commands", ""];
       for (const pm of PACKAGE_MANAGERS) {
-        lines.push(`### ${pm.label}`, "", ...fencedCode(`${pm.init}\n${pm.add}`, "bash"));
+        lines.push(
+          `### ${pm.label}`,
+          "",
+          ...fencedCode(
+            `${pm.create}\n${pm.compose}\n${pm.addPage}\n${pm.upgrade}\n${pm.init}\n${pm.add}`,
+            "bash",
+          ),
+        );
       }
       return lines;
     }
@@ -459,9 +466,16 @@ function guideExtras(slug: string): string[] {
       for (const option of INSTALL_OPTIONS) {
         lines.push(`- ${option.title} (${absoluteUrl(option.href)}): ${option.description}`);
       }
-      lines.push("", "## Init and add", "");
+      lines.push("", "## Scaffold, compose, add-page, upgrade, init, and add", "");
       for (const pm of PACKAGE_MANAGERS) {
-        lines.push(`### ${pm.label}`, "", ...fencedCode(`${pm.init}\n${pm.add}`, "bash"));
+        lines.push(
+          `### ${pm.label}`,
+          "",
+          ...fencedCode(
+            `${pm.create}\n${pm.compose}\n${pm.addPage}\n${pm.upgrade}\n${pm.init}\n${pm.add}`,
+            "bash",
+          ),
+        );
       }
       return lines;
     }
@@ -515,7 +529,7 @@ export function guideMarkdown(slug: string): string | undefined {
   if (!page) return undefined;
 
   const lines: string[] = [
-    `# ${page.label} — Cooud UI`,
+    `# ${page.label} — Kronus UI`,
     "",
     page.description,
     "",
@@ -532,13 +546,13 @@ export function guideMarkdown(slug: string): string | undefined {
 /* -------------------------------------------------------------------------- */
 
 function summaryBlockquote(): string {
-  return `> Cooud UI is Cooud's themeable, accessible React component library and design system: ${ALL_COMPONENTS.length} components, ${ALL_BLOCKS.length} copy-paste blocks, design tokens, and a runtime theming engine (Radix + CVA + Tailwind v4). It installs from npm (\`@cooud-ui/ui\`) or as source through a shadcn-style registry via \`npx cooud-ui add <slug>\`.`;
+  return `> Kronus UI is a product UI system: themeable, accessible React components, design tokens, a runtime theming engine (Radix + CVA + Tailwind v4), and a compose path that turns validated blocks into apps — grow with add-page, then \`upgrade --all\`. Install from npm (\`@kronus-ui/ui\`) or copy source with \`npx kronus-ui add <slug>\`. Canonical start: \`npx create-kronus-app my-app --template saas\`.`;
 }
 
 /** The /llms.txt index, in the llms.txt spec format. */
 export function buildLlmsTxt(): string {
   const lines: string[] = [
-    "# Cooud UI",
+    "# Kronus UI",
     "",
     summaryBlockquote(),
     "",
@@ -592,7 +606,7 @@ export function buildLlmsTxt(): string {
  */
 export function buildLlmsFullTxt(): string {
   const parts: string[] = [
-    `# Cooud UI — full documentation\n\n${summaryBlockquote()}\n\nThis file inlines every guide and component doc. Block docs are inlined without their full sources — each links its own markdown mirror.\n`,
+    `# Kronus UI — full documentation\n\n${summaryBlockquote()}\n\nThis file inlines every guide and component doc. Block docs are inlined without their full sources — each links its own markdown mirror.\n`,
   ];
 
   for (const page of getGuidePages()) {

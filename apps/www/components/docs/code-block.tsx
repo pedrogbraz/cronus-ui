@@ -6,35 +6,35 @@ import { useState } from "react";
 
 /**
  * Token theme for the code viewer. Every color is a CSS variable so the palette
- * adapts to the active mode: the `--cooud-syntax-*` vars (defined in globals.css)
+ * adapts to the active mode: the `--kronus-syntax-*` vars (defined in globals.css)
  * are bright on the dark inset and darkened on the light inset, keeping code
  * AA-legible (>=4.5:1) in both — a single hardcoded bright color fails on light.
  */
 const theme: PrismTheme = {
-  plain: { color: "var(--cooud-fg)", backgroundColor: "transparent" },
+  plain: { color: "var(--kronus-fg)", backgroundColor: "transparent" },
   styles: [
     {
       types: ["comment", "prolog", "doctype", "cdata"],
       // fg-tertiary (not fg-muted) keeps comments muted while clearing AA contrast
       // (>=4.5:1) on the code surface — fg-muted fails at ~2.5:1.
-      style: { color: "var(--cooud-fg-tertiary)", fontStyle: "italic" },
+      style: { color: "var(--kronus-fg-tertiary)", fontStyle: "italic" },
     },
-    { types: ["punctuation"], style: { color: "var(--cooud-fg-tertiary)" } },
+    { types: ["punctuation"], style: { color: "var(--kronus-fg-tertiary)" } },
     {
       types: ["tag", "operator", "keyword", "boolean", "selector"],
-      style: { color: "var(--cooud-syntax-keyword)" },
+      style: { color: "var(--kronus-syntax-keyword)" },
     },
     {
       types: ["function", "class-name", "maybe-class-name"],
-      style: { color: "var(--cooud-syntax-fn)" },
+      style: { color: "var(--kronus-syntax-fn)" },
     },
     {
       types: ["string", "char", "attr-value", "inserted"],
-      style: { color: "var(--cooud-syntax-string)" },
+      style: { color: "var(--kronus-syntax-string)" },
     },
-    { types: ["attr-name", "property"], style: { color: "var(--cooud-syntax-attr)" } },
-    { types: ["number", "constant", "symbol"], style: { color: "var(--cooud-syntax-number)" } },
-    { types: ["script", "plain"], style: { color: "var(--cooud-fg-secondary)" } },
+    { types: ["attr-name", "property"], style: { color: "var(--kronus-syntax-attr)" } },
+    { types: ["number", "constant", "symbol"], style: { color: "var(--kronus-syntax-number)" } },
+    { types: ["script", "plain"], style: { color: "var(--kronus-fg-secondary)" } },
   ],
 };
 

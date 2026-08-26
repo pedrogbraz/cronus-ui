@@ -1,5 +1,5 @@
 /**
- * Pure, server-safe icon-library METADATA for the Cooud UI "Create" studio.
+ * Pure, server-safe icon-library METADATA for the Kronus UI "Create" studio.
  *
  * NO "use client", NO icon imports — just the selectable library ids + display
  * names and their id type. The actual icon components/data and the React

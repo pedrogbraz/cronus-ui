@@ -1,6 +1,6 @@
 "use client";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@cooud-ui/ui";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@kronus-ui/ui";
 import type { Example } from "../../lib/examples/types";
 import { PreviewFrame } from "../showcase-ui";
 import { CodeBlock } from "./code-block";
@@ -62,7 +62,7 @@ function ExampleInstallation({ install }: { install: InstallMetadata }) {
           <p className="text-sm text-fg-secondary">
             Copy the registry item into your app with its source-owned dependencies.
           </p>
-          <CodeBlock code={`npx cooud-ui add ${install.registryItem}`} language="bash" />
+          <CodeBlock code={`npx kronus-ui add ${install.registryItem}`} language="bash" />
         </TabsContent>
 
         <TabsContent value="manual" className="mt-0 space-y-4">

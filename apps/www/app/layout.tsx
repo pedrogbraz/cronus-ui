@@ -1,4 +1,4 @@
-import { CooudThemeScript, CooudUIProvider } from "@cooud-ui/theme";
+import { KronusThemeScript, KronusUIProvider } from "@kronus-ui/theme";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { SITE_URL } from "../lib/site-url";
@@ -8,25 +8,26 @@ export const metadata: Metadata = {
   // Absolute base for og:image / twitter:image URLs (Next falls back to
   // localhost in production output without it).
   metadataBase: new URL(SITE_URL),
-  title: "Cooud UI — Design System",
-  description: "The Cooud design system: themeable, accessible React components. Aurora + Neutral.",
+  title: "Kronus UI — Product UI system",
+  description:
+    "A product UI system: accessible, themeable React components, a shadcn-compatible registry, and a generator that composes a SaaS from validated blocks.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      data-cooud-theme="neutral"
-      data-cooud-mode="dark"
+      data-kronus-theme="neutral"
+      data-kronus-mode="dark"
       data-force-motion
       className="dark"
-      // The CooudThemeScript below mutates <html> (theme/mode/dark class) before
+      // The KronusThemeScript below mutates <html> (theme/mode/dark class) before
       // hydration, so React must not warn about the resulting attribute mismatch.
       suppressHydrationWarning
     >
       <head>
-        <CooudThemeScript
-          storageKey="cooud-ui-theme-v2"
+        <KronusThemeScript
+          storageKey="kronus-ui-theme-v2"
           defaultThemeName="neutral"
           defaultModeName="dark"
         />
@@ -38,14 +39,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           Skip to content
         </a>
-        <CooudUIProvider
+        <KronusUIProvider
           asRoot
           defaultThemeName="neutral"
           defaultModeName="dark"
-          storageKey="cooud-ui-theme-v2"
+          storageKey="kronus-ui-theme-v2"
         >
           {children}
-        </CooudUIProvider>
+        </KronusUIProvider>
       </body>
     </html>
   );

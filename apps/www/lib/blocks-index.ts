@@ -1,6 +1,6 @@
 /**
  * Server-safe metadata for "Blocks" — larger, copy-paste UI sections composed
- * from @cooud-ui/ui primitives. The live preview + source live in `lib/blocks/*`.
+ * from @kronus-ui/ui primitives. The live preview + source live in `lib/blocks/*`.
  */
 
 export interface BlockMeta {
@@ -219,6 +219,12 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
             id: "compact",
             name: "Compact registry",
             description: "Contained hero card for docs, registries and template libraries.",
+          },
+          {
+            id: "atmosphere",
+            name: "Atmosphere",
+            description:
+              "Centered launch hero over a receding grid floor, shooting stars, and a typing headline.",
           },
         ],
       },

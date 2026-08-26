@@ -1,14 +1,14 @@
 /**
- * Curated design DATA for the Cooud UI "Create" studio.
+ * Curated design DATA for the Kronus UI "Create" studio.
  *
  * Pure, server-safe data — NO "use client". These are the cohesive presets and
  * palettes a user picks from. Ramps are tuned to mirror the lightness scale of
- * `@cooud-ui/tokens` (dark surfaces ~0.11→0.31, light surfaces ~0.96→1, fg dark
+ * `@kronus-ui/tokens` (dark surfaces ~0.11→0.31, light surfaces ~0.96→1, fg dark
  * ~0.93/0.7/0.62/0.44, fg light ~0.145/0.43/0.556/0.705) with each base ramp's
  * own hue + chroma applied, and harmonious brand / chart values throughout.
  */
 
-import type { ThemeOverrides } from "@cooud-ui/tokens";
+import type { ThemeOverrides } from "@kronus-ui/tokens";
 import { ICON_LIBRARIES, type IconLibraryId } from "./icon-library-list";
 import type {
   BaseColor,
@@ -574,33 +574,33 @@ export function configToThemeOverrides(config: DesignConfig): ThemeOverrides {
 export function serializeCreateCss(config: DesignConfig, selector = ":root"): string {
   const overrides = configToThemeOverrides(config);
   const cssVars: Record<string, string> = {
-    "--cooud-primary": overrides.primary ?? "",
-    "--cooud-primary-foreground": overrides.primaryForeground ?? "",
-    "--cooud-accent": overrides.accent ?? "",
-    "--cooud-accent-foreground": overrides.accentForeground ?? "",
-    "--cooud-surface-base": overrides.surfaceBase ?? "",
-    "--cooud-surface-inset": overrides.surfaceInset ?? "",
-    "--cooud-surface-raised": overrides.surfaceRaised ?? "",
-    "--cooud-surface-overlay": overrides.surfaceOverlay ?? "",
-    "--cooud-surface-elevated": overrides.surfaceElevated ?? "",
-    "--cooud-surface-floating": overrides.surfaceFloating ?? "",
-    "--cooud-fg": overrides.fg ?? "",
-    "--cooud-fg-secondary": overrides.fgSecondary ?? "",
-    "--cooud-fg-tertiary": overrides.fgTertiary ?? "",
-    "--cooud-fg-muted": overrides.fgMuted ?? "",
-    "--cooud-border": overrides.border ?? "",
-    "--cooud-border-strong": overrides.borderStrong ?? "",
-    "--cooud-border-soft": overrides.borderSoft ?? "",
-    "--cooud-ring": overrides.ring ?? "",
-    "--cooud-radius": overrides.radius ?? "",
-    "--cooud-font-display": overrides.fontDisplay ?? "",
-    "--cooud-font-sans": overrides.fontSans ?? "",
-    "--cooud-font-mono": overrides.fontMono ?? "",
-    "--cooud-chart-1": overrides.chart1 ?? "",
-    "--cooud-chart-2": overrides.chart2 ?? "",
-    "--cooud-chart-3": overrides.chart3 ?? "",
-    "--cooud-chart-4": overrides.chart4 ?? "",
-    "--cooud-chart-5": overrides.chart5 ?? "",
+    "--kronus-primary": overrides.primary ?? "",
+    "--kronus-primary-foreground": overrides.primaryForeground ?? "",
+    "--kronus-accent": overrides.accent ?? "",
+    "--kronus-accent-foreground": overrides.accentForeground ?? "",
+    "--kronus-surface-base": overrides.surfaceBase ?? "",
+    "--kronus-surface-inset": overrides.surfaceInset ?? "",
+    "--kronus-surface-raised": overrides.surfaceRaised ?? "",
+    "--kronus-surface-overlay": overrides.surfaceOverlay ?? "",
+    "--kronus-surface-elevated": overrides.surfaceElevated ?? "",
+    "--kronus-surface-floating": overrides.surfaceFloating ?? "",
+    "--kronus-fg": overrides.fg ?? "",
+    "--kronus-fg-secondary": overrides.fgSecondary ?? "",
+    "--kronus-fg-tertiary": overrides.fgTertiary ?? "",
+    "--kronus-fg-muted": overrides.fgMuted ?? "",
+    "--kronus-border": overrides.border ?? "",
+    "--kronus-border-strong": overrides.borderStrong ?? "",
+    "--kronus-border-soft": overrides.borderSoft ?? "",
+    "--kronus-ring": overrides.ring ?? "",
+    "--kronus-radius": overrides.radius ?? "",
+    "--kronus-font-display": overrides.fontDisplay ?? "",
+    "--kronus-font-sans": overrides.fontSans ?? "",
+    "--kronus-font-mono": overrides.fontMono ?? "",
+    "--kronus-chart-1": overrides.chart1 ?? "",
+    "--kronus-chart-2": overrides.chart2 ?? "",
+    "--kronus-chart-3": overrides.chart3 ?? "",
+    "--kronus-chart-4": overrides.chart4 ?? "",
+    "--kronus-chart-5": overrides.chart5 ?? "",
   };
   const lines = Object.entries(cssVars)
     .filter(([, value]) => value.length > 0)
@@ -614,18 +614,18 @@ export function serializeCreateProvider(config: DesignConfig): string {
     .replace(/"([^"]+)":/g, "$1:")
     .replace(/"/g, '"');
 
-  return `import { CooudUIProvider } from "@cooud-ui/theme";
+  return `import { KronusUIProvider } from "@kronus-ui/theme";
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
-    <CooudUIProvider
+    <KronusUIProvider
       asRoot
       defaultThemeName="neutral"
       defaultModeName="${config.mode}"
       overrides={${body}}
     >
       {children}
-    </CooudUIProvider>
+    </KronusUIProvider>
   );
 }`;
 }
@@ -666,7 +666,7 @@ export function serializePresetCode(preset: StylePreset): string {
   const bytes = new TextEncoder().encode(json);
   let binary = "";
   for (const byte of bytes) binary += String.fromCharCode(byte);
-  return `cooud:${btoa(binary)}`;
+  return `kronus:${btoa(binary)}`;
 }
 
 export function parsePresetCode(value: string): StylePreset {
@@ -677,7 +677,7 @@ export function parsePresetCode(value: string): StylePreset {
 
   const raw = trimmed.startsWith("{")
     ? trimmed
-    : decodePresetPayload(trimmed.replace(/^cooud:/, ""));
+    : decodePresetPayload(trimmed.replace(/^kronus:/, ""));
   const parsed = JSON.parse(raw) as Partial<StylePreset>;
 
   if (!parsed.name || !parsed.config) {

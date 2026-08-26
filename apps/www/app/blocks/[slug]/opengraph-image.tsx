@@ -1,12 +1,12 @@
 import { ImageResponse } from "next/og";
 import { getBlockMeta } from "../../../lib/blocks-index";
 
-export const alt = "Cooud UI block";
+export const alt = "Kronus UI block";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 // Neutral dark tokens, hardcoded as sRGB — ImageResponse renders through Satori,
-// which resolves neither the `--cooud-*` CSS variables nor `oklch()`.
+// which resolves neither the `--kronus-*` CSS variables nor `oklch()`.
 // Source of truth: packages/tokens/src/tokens.ts (neutralDark); the hex below is
 // the exact sRGB conversion of each oklch value, noted per line.
 const neutral = {
@@ -22,8 +22,8 @@ const neutral = {
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const meta = getBlockMeta(slug);
-  const name = meta?.name ?? "Cooud UI";
-  const description = meta?.description ?? "The design system that themes itself";
+  const name = meta?.name ?? "Kronus UI";
+  const description = meta?.description ?? "The product UI system that themes itself";
   const kicker = meta ? `Block · ${meta.category}` : "Block";
 
   return new ImageResponse(
@@ -74,7 +74,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           }}
         />
         <div style={{ display: "flex", fontSize: 34, fontWeight: 400, color: neutral.fg }}>
-          Cooud UI
+          Kronus UI
         </div>
       </div>
 
@@ -127,7 +127,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             color: neutral.fg,
           }}
         >
-          {`npx cooud-ui add ${slug}`}
+          {`npx kronus-ui add ${slug}`}
         </div>
       </div>
     </div>,

@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Input, Reveal } from "@cooud-ui/ui";
+import { Button, Input, Reveal } from "@kronus-ui/ui";
 import { AlertTriangle, Check, Clock, RotateCw, Search, Wrench } from "lucide-react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
 import { BlockViewBody } from "../../components/blocks/block-view-body";
@@ -30,7 +30,7 @@ export function NotFoundBlock() {
           <Input className="pl-9" placeholder="Search the docs…" />
         </div>
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <Button variant="gradient">Back to home</Button>
+          <Button variant="primary">Back to home</Button>
           <Button variant="ghost">Contact support</Button>
         </div>
       </Reveal>
@@ -38,7 +38,7 @@ export function NotFoundBlock() {
   );
 }
 
-const notFoundCode = `import { Button, Input, Reveal } from "@cooud-ui/ui";
+const notFoundCode = `import { Button, Input, Reveal } from "@kronus-ui/ui";
 import { Search } from "lucide-react";
 
 export function NotFoundBlock() {
@@ -59,7 +59,7 @@ export function NotFoundBlock() {
           <Input className="pl-9" placeholder="Search the docs…" />
         </div>
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <Button variant="gradient">Back to home</Button>
+          <Button variant="primary">Back to home</Button>
           <Button variant="ghost">Contact support</Button>
         </div>
       </Reveal>
@@ -88,7 +88,7 @@ export function ErrorStateBlock() {
           ERR_500 · request 8f2c
         </span>
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <Button variant="gradient">
+          <Button variant="primary">
             <RotateCw className="size-4" aria-hidden="true" />
             Try again
           </Button>
@@ -99,7 +99,7 @@ export function ErrorStateBlock() {
   );
 }
 
-const errorStateCode = `import { Button, Reveal } from "@cooud-ui/ui";
+const errorStateCode = `import { Button, Reveal } from "@kronus-ui/ui";
 import { AlertTriangle, RotateCw } from "lucide-react";
 
 export function ErrorStateBlock() {
@@ -119,7 +119,7 @@ export function ErrorStateBlock() {
           ERR_500 · request 8f2c
         </span>
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <Button variant="gradient">
+          <Button variant="primary">
             <RotateCw className="size-4" aria-hidden="true" />
             Try again
           </Button>
@@ -148,7 +148,7 @@ export function SuccessStateBlock() {
           </p>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <Button variant="gradient">Go to dashboard</Button>
+          <Button variant="primary">Go to dashboard</Button>
           <Button variant="ghost">View details</Button>
         </div>
       </Reveal>
@@ -156,7 +156,7 @@ export function SuccessStateBlock() {
   );
 }
 
-const successStateCode = `import { Button, Reveal } from "@cooud-ui/ui";
+const successStateCode = `import { Button, Reveal } from "@kronus-ui/ui";
 import { Check } from "lucide-react";
 
 export function SuccessStateBlock() {
@@ -173,7 +173,7 @@ export function SuccessStateBlock() {
           </p>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <Button variant="gradient">Go to dashboard</Button>
+          <Button variant="primary">Go to dashboard</Button>
           <Button variant="ghost">View details</Button>
         </div>
       </Reveal>
@@ -209,14 +209,14 @@ export function MaintenanceBlock() {
             placeholder="you@company.com"
             autoComplete="email"
           />
-          <Button variant="gradient">Notify me</Button>
+          <Button variant="primary">Notify me</Button>
         </div>
       </Reveal>
     </div>
   );
 }
 
-const maintenanceCode = `import { Button, Input, Reveal } from "@cooud-ui/ui";
+const maintenanceCode = `import { Button, Input, Reveal } from "@kronus-ui/ui";
 import { Clock, Wrench } from "lucide-react";
 
 export function MaintenanceBlock() {
@@ -243,7 +243,7 @@ export function MaintenanceBlock() {
             placeholder="you@company.com"
             autoComplete="email"
           />
-          <Button variant="gradient">Notify me</Button>
+          <Button variant="primary">Notify me</Button>
         </div>
       </Reveal>
     </div>

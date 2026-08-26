@@ -32,8 +32,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@cooud-ui/ui";
-import { PRODUCTS } from "@cooud-ui/ui/demo-store";
+} from "@kronus-ui/ui";
+import { ORDERS, PRODUCTS, productById } from "@kronus-ui/ui/demo-store";
 import {
   ArrowLeft,
   ArrowRight,
@@ -62,12 +62,14 @@ interface OrderLine {
   price: string;
 }
 
+const playbook = productById("playbook");
+const playbookOption = ORDERS[1]?.items[0]?.option ?? "";
 const orderLines: OrderLine[] = [
   {
-    id: "course",
-    name: "The Creator Playbook",
-    detail: "Lifetime access · 42 lessons",
-    price: "$129.00",
+    id: playbook?.id ?? "playbook",
+    name: playbook?.name ?? "",
+    detail: `${playbookOption} · ${playbook?.kind?.split(" · ")[1] ?? ""}`,
+    price: playbook?.price ?? "",
   },
   { id: "templates", name: "Notion template pack", detail: "Order bump", price: "$24.00" },
 ];
@@ -82,7 +84,9 @@ export function CheckoutBlock() {
       <Card className="h-fit gap-0 pb-0 shadow-md lg:order-2">
         <CardHeader>
           <CardTitle className="font-display text-lg">Order summary</CardTitle>
-          <p className="col-span-full text-sm text-fg-secondary">Cooud Studio · digital products</p>
+          <p className="col-span-full text-sm text-fg-secondary">
+            Kronus Studio · digital products
+          </p>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
           {orderLines.map((line) => (
@@ -178,7 +182,7 @@ export function CheckoutBlock() {
         </CardContent>
         <Separator />
         <CardFooter className="flex-col items-stretch gap-3">
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Pay $122.40
           </Button>
           <p className="flex items-center justify-center gap-2 text-xs text-fg-tertiary">
@@ -202,7 +206,8 @@ const checkoutCode = `import {
   Input,
   Label,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
+import { ORDERS, productById } from "../lib/demo-store.js";
 import { CreditCard, Lock, ShieldCheck } from "lucide-react";
 
 interface OrderLine {
@@ -212,8 +217,15 @@ interface OrderLine {
   price: string;
 }
 
+const playbook = productById("playbook");
+const playbookOption = ORDERS[1]?.items[0]?.option ?? "";
 const orderLines: OrderLine[] = [
-  { id: "course", name: "The Creator Playbook", detail: "Lifetime access · 42 lessons", price: "$129.00" },
+  {
+    id: playbook?.id ?? "playbook",
+    name: playbook?.name ?? "",
+    detail: playbookOption + " · " + (playbook?.kind?.split(" · ")[1] ?? ""),
+    price: playbook?.price ?? "",
+  },
   { id: "templates", name: "Notion template pack", detail: "Order bump", price: "$24.00" },
 ];
 
@@ -224,7 +236,7 @@ export function CheckoutBlock() {
       <Card className="h-fit gap-0 pb-0 shadow-md lg:order-2">
         <CardHeader>
           <CardTitle className="font-display text-lg">Order summary</CardTitle>
-          <p className="col-span-full text-sm text-fg-secondary">Cooud Studio · digital products</p>
+          <p className="col-span-full text-sm text-fg-secondary">Kronus Studio · digital products</p>
         </CardHeader>
         <CardContent className="flex flex-col gap-4">
           {orderLines.map((line) => (
@@ -310,7 +322,7 @@ export function CheckoutBlock() {
         </CardContent>
         <Separator />
         <CardFooter className="flex-col items-stretch gap-3">
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Pay $122.40
           </Button>
           <p className="flex items-center justify-center gap-2 text-xs text-fg-tertiary">
@@ -562,7 +574,7 @@ export function CheckoutOnePageBlock() {
         </CardContent>
         <Separator />
         <CardFooter className="flex-col items-stretch gap-3">
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Pay $332.64
           </Button>
           <p className="flex items-center justify-center gap-2 text-xs text-fg-tertiary">
@@ -593,7 +605,7 @@ const checkoutOnePageCode = `import {
   SelectTrigger,
   SelectValue,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { CreditCard, Lock, ShieldCheck } from "lucide-react";
 
 interface CartItem {
@@ -831,7 +843,7 @@ export function CheckoutOnePageBlock() {
         </CardContent>
         <Separator />
         <CardFooter className="flex-col items-stretch gap-3">
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Pay $332.64
           </Button>
           <p className="flex items-center justify-center gap-2 text-xs text-fg-tertiary">
@@ -962,7 +974,7 @@ export function CheckoutMultiStepBlock() {
             <ArrowLeft className="size-4" aria-hidden="true" />
             Back
           </Button>
-          <Button variant="gradient">
+          <Button variant="primary">
             Continue to review
             <ArrowRight className="size-4" aria-hidden="true" />
           </Button>
@@ -991,7 +1003,7 @@ const checkoutMultiStepCode = `import {
   StepperList,
   StepperSeparator,
   StepperTitle,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { ArrowLeft, ArrowRight, CreditCard, Lock } from "lucide-react";
 
 export function CheckoutMultiStepBlock() {
@@ -1108,7 +1120,7 @@ export function CheckoutMultiStepBlock() {
             <ArrowLeft className="size-4" aria-hidden="true" />
             Back
           </Button>
-          <Button variant="gradient">
+          <Button variant="primary">
             Continue to review
             <ArrowRight className="size-4" aria-hidden="true" />
           </Button>
@@ -1183,7 +1195,7 @@ export function PayoutsBlock() {
               <span className="font-display text-4xl font-semibold text-fg">$8,240</span>
               <span className="text-sm text-fg-tertiary">.50 USD</span>
             </div>
-            <Button variant="gradient">
+            <Button variant="primary">
               <Wallet className="size-4" aria-hidden="true" />
               Withdraw
             </Button>
@@ -1256,7 +1268,7 @@ const payoutsCode = `import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Wallet } from "lucide-react";
 
 interface Payout {
@@ -1296,7 +1308,7 @@ export function PayoutsBlock() {
               <span className="font-display text-4xl font-semibold text-fg">$8,240</span>
               <span className="text-sm text-fg-tertiary">.50 USD</span>
             </div>
-            <Button variant="gradient">
+            <Button variant="primary">
               <Wallet className="size-4" aria-hidden="true" />
               Withdraw
             </Button>
@@ -1437,7 +1449,7 @@ const productGridCode = `import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { PRODUCTS } from "../lib/demo-store.js";
 import { ArrowUpRight } from "lucide-react";
 
@@ -1693,7 +1705,7 @@ const productGridWithFiltersCode = `import {
   SelectValue,
   Separator,
   Slider,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { PRODUCTS } from "../lib/demo-store.js";
 import { ArrowUpRight, SlidersHorizontal } from "lucide-react";
 
@@ -1899,40 +1911,27 @@ interface ShowcaseTile {
   initials: string;
 }
 
-const showcaseTiles: ShowcaseTile[] = [
-  {
-    id: "presets",
-    title: "Cinematic LUT Presets",
-    kind: "Asset pack",
-    price: "$39",
-    gradient: "from-info/30 to-success/20",
-    initials: "LP",
-  },
-  {
-    id: "notion",
-    title: "Launch Notion System",
-    kind: "Template",
-    price: "$24",
-    gradient: "from-warning/30 to-primary/20",
-    initials: "NS",
-  },
-  {
-    id: "soundkit",
-    title: "Ambient Sound Kit",
-    kind: "Audio",
-    price: "$29",
-    gradient: "from-success/30 to-info/20",
-    initials: "SK",
-  },
-  {
-    id: "workshop",
-    title: "Monetization Workshop",
-    kind: "Replay",
-    price: "$89",
-    gradient: "from-primary/30 to-warning/20",
-    initials: "MW",
-  },
-];
+const SHOWCASE_IDS = ["presets", "templates", "soundkit", "workshop"] as const;
+const SHOWCASE_GRADIENTS: Record<string, string> = {
+  presets: "from-info/30 to-success/20",
+  templates: "from-warning/30 to-primary/20",
+  soundkit: "from-success/30 to-info/20",
+  workshop: "from-primary/30 to-warning/20",
+};
+const showcaseTiles: ShowcaseTile[] = SHOWCASE_IDS.flatMap((id) => {
+  const p = productById(id);
+  if (!p) return [];
+  return [
+    {
+      id: p.id,
+      title: p.name,
+      kind: p.kind.split(" · ")[0] ?? p.kind,
+      price: `$${p.priceValue}`,
+      gradient: SHOWCASE_GRADIENTS[id] ?? p.gradient,
+      initials: p.initials,
+    },
+  ];
+});
 
 export function ProductGridShowcaseBlock() {
   return (
@@ -1966,21 +1965,23 @@ export function ProductGridShowcaseBlock() {
             aria-hidden="true"
             className="absolute inset-0 flex items-center justify-center font-display text-8xl font-semibold text-fg-muted"
           >
-            CP
+            {playbook?.initials}
           </span>
           <div className="absolute start-4 top-4">
-            <Badge variant="primary">Bestseller</Badge>
+            <Badge variant="primary">{playbook?.badge}</Badge>
           </div>
           <div className="relative flex flex-col gap-4 bg-gradient-to-t from-surface-base via-surface-base/80 to-transparent p-6 pt-16">
             <div className="flex flex-col gap-1">
-              <h3 className="font-display text-2xl font-semibold text-fg">The Creator Playbook</h3>
+              <h3 className="font-display text-2xl font-semibold text-fg">{playbook?.name}</h3>
               <p className="text-sm text-fg-secondary">
                 42 lessons on building a paid audience — 2026 edition.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <span className="font-display text-2xl font-semibold text-fg">$129</span>
-              <Button variant="gradient">
+              <span className="font-display text-2xl font-semibold text-fg">
+                {`$${playbook?.priceValue ?? 0}`}
+              </span>
+              <Button variant="primary">
                 Shop the drop
                 <ArrowUpRight className="size-4" aria-hidden="true" />
               </Button>
@@ -2021,8 +2022,11 @@ export function ProductGridShowcaseBlock() {
   );
 }
 
-const productGridShowcaseCode = `import { Badge, Button, cn } from "@cooud-ui/ui";
+const productGridShowcaseCode = `import { Badge, Button, cn } from "@kronus-ui/ui";
+import { productById } from "../lib/demo-store.js";
 import { ArrowUpRight } from "lucide-react";
+
+const playbook = productById("playbook");
 
 interface ShowcaseTile {
   id: string;
@@ -2033,40 +2037,27 @@ interface ShowcaseTile {
   initials: string;
 }
 
-const showcaseTiles: ShowcaseTile[] = [
-  {
-    id: "presets",
-    title: "Cinematic LUT Presets",
-    kind: "Asset pack",
-    price: "$39",
-    gradient: "from-info/30 to-success/20",
-    initials: "LP",
-  },
-  {
-    id: "notion",
-    title: "Launch Notion System",
-    kind: "Template",
-    price: "$24",
-    gradient: "from-warning/30 to-primary/20",
-    initials: "NS",
-  },
-  {
-    id: "soundkit",
-    title: "Ambient Sound Kit",
-    kind: "Audio",
-    price: "$29",
-    gradient: "from-success/30 to-info/20",
-    initials: "SK",
-  },
-  {
-    id: "workshop",
-    title: "Monetization Workshop",
-    kind: "Replay",
-    price: "$89",
-    gradient: "from-primary/30 to-warning/20",
-    initials: "MW",
-  },
-];
+const SHOWCASE_IDS = ["presets", "templates", "soundkit", "workshop"] as const;
+const SHOWCASE_GRADIENTS: Record<string, string> = {
+  presets: "from-info/30 to-success/20",
+  templates: "from-warning/30 to-primary/20",
+  soundkit: "from-success/30 to-info/20",
+  workshop: "from-primary/30 to-warning/20",
+};
+const showcaseTiles: ShowcaseTile[] = SHOWCASE_IDS.flatMap((id) => {
+  const p = productById(id);
+  if (!p) return [];
+  return [
+    {
+      id: p.id,
+      title: p.name,
+      kind: p.kind.split(" · ")[0] ?? p.kind,
+      price: "$" + p.priceValue,
+      gradient: SHOWCASE_GRADIENTS[id] ?? p.gradient,
+      initials: p.initials,
+    },
+  ];
+});
 
 export function ProductGridShowcaseBlock() {
   return (
@@ -2100,23 +2091,25 @@ export function ProductGridShowcaseBlock() {
             aria-hidden="true"
             className="absolute inset-0 flex items-center justify-center font-display text-8xl font-semibold text-fg-muted"
           >
-            CP
+            {playbook?.initials}
           </span>
           <div className="absolute start-4 top-4">
-            <Badge variant="primary">Bestseller</Badge>
+            <Badge variant="primary">{playbook?.badge}</Badge>
           </div>
           <div
             className="relative flex flex-col gap-4 bg-gradient-to-t from-surface-base via-surface-base/80 to-transparent p-6 pt-16"
           >
             <div className="flex flex-col gap-1">
-              <h3 className="font-display text-2xl font-semibold text-fg">The Creator Playbook</h3>
+              <h3 className="font-display text-2xl font-semibold text-fg">{playbook?.name}</h3>
               <p className="text-sm text-fg-secondary">
                 42 lessons on building a paid audience — 2026 edition.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <span className="font-display text-2xl font-semibold text-fg">$129</span>
-              <Button variant="gradient">
+              <span className="font-display text-2xl font-semibold text-fg">
+                {"$" + (playbook?.priceValue ?? 0)}
+              </span>
+              <Button variant="primary">
                 Shop the drop
                 <ArrowUpRight className="size-4" aria-hidden="true" />
               </Button>
@@ -2173,11 +2166,11 @@ interface InvoiceItem {
 
 const invoiceItems: InvoiceItem[] = [
   {
-    id: "playbook",
-    description: "The Creator Playbook — Lifetime",
-    qty: 1,
-    unit: "$129.00",
-    amount: "$129.00",
+    id: playbook?.id ?? "playbook",
+    description: `${playbook?.name ?? ""} — Lifetime`,
+    qty: ORDERS[1]?.items[0]?.qty ?? 1,
+    unit: playbook?.price ?? "",
+    amount: playbook?.price ?? "",
   },
   { id: "seats", description: "Team seats", qty: 3, unit: "$12.00", amount: "$36.00" },
   {
@@ -2209,8 +2202,8 @@ export function InvoiceBlock() {
       <CardContent className="grid grid-cols-2 gap-4 pb-2">
         <div className="flex flex-col gap-1">
           <span className="text-xs font-medium uppercase tracking-wide text-fg-tertiary">From</span>
-          <span className="text-sm font-medium text-fg">Cooud Studio</span>
-          <span className="text-sm text-fg-secondary">billing@cooud.studio</span>
+          <span className="text-sm font-medium text-fg">Kronus Studio</span>
+          <span className="text-sm text-fg-secondary">billing@kronus.studio</span>
         </div>
         <div className="flex flex-col gap-1">
           <span className="text-xs font-medium uppercase tracking-wide text-fg-tertiary">
@@ -2296,7 +2289,8 @@ const invoiceCode = `import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
+import { ORDERS, productById } from "../lib/demo-store.js";
 import { Download } from "lucide-react";
 
 interface InvoiceItem {
@@ -2307,8 +2301,15 @@ interface InvoiceItem {
   amount: string;
 }
 
+const playbook = productById("playbook");
 const invoiceItems: InvoiceItem[] = [
-  { id: "playbook", description: "The Creator Playbook — Lifetime", qty: 1, unit: "$129.00", amount: "$129.00" },
+  {
+    id: playbook?.id ?? "playbook",
+    description: (playbook?.name ?? "") + " — Lifetime",
+    qty: ORDERS[1]?.items[0]?.qty ?? 1,
+    unit: playbook?.price ?? "",
+    amount: playbook?.price ?? "",
+  },
   { id: "seats", description: "Team seats", qty: 3, unit: "$12.00", amount: "$36.00" },
   { id: "support", description: "Priority support — 1 year", qty: 1, unit: "$48.00", amount: "$48.00" },
 ];
@@ -2327,8 +2328,8 @@ export function InvoiceBlock() {
       <CardContent className="grid grid-cols-2 gap-4 pb-2">
         <div className="flex flex-col gap-1">
           <span className="text-xs font-medium uppercase tracking-wide text-fg-tertiary">From</span>
-          <span className="text-sm font-medium text-fg">Cooud Studio</span>
-          <span className="text-sm text-fg-secondary">billing@cooud.studio</span>
+          <span className="text-sm font-medium text-fg">Kronus Studio</span>
+          <span className="text-sm text-fg-secondary">billing@kronus.studio</span>
         </div>
         <div className="flex flex-col gap-1">
           <span className="text-xs font-medium uppercase tracking-wide text-fg-tertiary">
@@ -2418,7 +2419,7 @@ export function InvoiceReceiptBlock() {
   return (
     <Card role="group" aria-label="Receipt" className="mx-auto w-full max-w-xs gap-0 shadow-md">
       <CardHeader className="flex flex-col items-center gap-1 text-center">
-        <CardTitle className="font-display text-lg">Cooud Studio</CardTitle>
+        <CardTitle className="font-display text-lg">Kronus Studio</CardTitle>
         <p className="text-xs text-fg-secondary">548 Market St · San Francisco, CA</p>
         <p className="font-mono text-xs text-fg-tertiary">INV-2026-0188 · Jun 18, 2026 · 14:32</p>
       </CardHeader>
@@ -2479,7 +2480,7 @@ const invoiceReceiptCode = `import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 
 interface ReceiptLine {
   id: string;
@@ -2498,7 +2499,7 @@ export function InvoiceReceiptBlock() {
   return (
     <Card role="group" aria-label="Receipt" className="mx-auto w-full max-w-xs gap-0 shadow-md">
       <CardHeader className="flex flex-col items-center gap-1 text-center">
-        <CardTitle className="font-display text-lg">Cooud Studio</CardTitle>
+        <CardTitle className="font-display text-lg">Kronus Studio</CardTitle>
         <p className="text-xs text-fg-secondary">548 Market St · San Francisco, CA</p>
         <p className="font-mono text-xs text-fg-tertiary">INV-2026-0188 · Jun 18, 2026 · 14:32</p>
       </CardHeader>

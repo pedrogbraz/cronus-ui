@@ -43,7 +43,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
+import { KPIS } from "@kronus-ui/ui/demo-saas";
 import {
   CalendarDays,
   ChevronRight,
@@ -152,7 +153,7 @@ export function UserManagementTableBlock() {
         <CardTitle className="font-display text-lg">Team members</CardTitle>
         <CardDescription>Manage roles and access for the Meridian workspace.</CardDescription>
         <CardAction>
-          <Button variant="gradient" size="sm">
+          <Button variant="primary" size="sm">
             <UserPlus className="size-4" aria-hidden="true" />
             Invite member
           </Button>
@@ -317,7 +318,7 @@ const userManagementTableCode = `import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { MoreHorizontal, Search, UserPlus } from "lucide-react";
 
 interface TeamMember {
@@ -348,7 +349,7 @@ export function UserManagementTableBlock() {
         <CardTitle className="font-display text-lg">Team members</CardTitle>
         <CardDescription>Manage roles and access for the Meridian workspace.</CardDescription>
         <CardAction>
-          <Button variant="gradient" size="sm">
+          <Button variant="primary" size="sm">
             <UserPlus className="size-4" aria-hidden="true" />
             Invite member
           </Button>
@@ -544,7 +545,7 @@ export function UserManagementCardsBlock() {
               className="ps-9 sm:w-56"
             />
           </div>
-          <Button variant="gradient" size="sm">
+          <Button variant="primary" size="sm">
             <UserPlus className="size-4" aria-hidden="true" />
             Invite member
           </Button>
@@ -616,7 +617,7 @@ const userManagementCardsCode = `import {
   DropdownMenuTrigger,
   Input,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { MoreHorizontal, Search, UserPlus } from "lucide-react";
 
 interface TeamMember {
@@ -659,7 +660,7 @@ export function UserManagementCardsBlock() {
               className="ps-9 sm:w-56"
             />
           </div>
-          <Button variant="gradient" size="sm">
+          <Button variant="primary" size="sm">
             <UserPlus className="size-4" aria-hidden="true" />
             Invite member
           </Button>
@@ -718,17 +719,6 @@ export function UserManagementCardsBlock() {
  * 2. Analytics — KPI metrics, traffic trend & engagement cohorts
  * ────────────────────────────────────────────────────────────────────────── */
 
-interface OverviewKpi {
-  label: string;
-  value: string;
-  delta: string;
-  trend: "up" | "down";
-  /** Tone override for deltas where the trend direction flips the sentiment. */
-  deltaClassName?: string;
-  tone: "primary" | "success" | "warning" | "info";
-  series: number[];
-}
-
 interface BreakdownRow {
   id: string;
   label: string;
@@ -736,42 +726,19 @@ interface BreakdownRow {
   share: number;
 }
 
-const overviewKpis: OverviewKpi[] = [
-  {
-    label: "Page views",
-    value: "1.24M",
-    delta: "+18.2%",
-    trend: "up",
-    tone: "primary",
-    series: [86, 92, 88, 97, 104, 99, 112, 118, 115, 124],
-  },
-  {
-    label: "Unique visitors",
-    value: "312.4k",
-    delta: "+9.6%",
-    trend: "up",
-    tone: "info",
-    series: [58, 61, 60, 64, 66, 63, 68, 70, 69, 72],
-  },
-  {
-    label: "Avg. session",
-    value: "4m 32s",
-    delta: "+12s",
-    trend: "up",
-    tone: "success",
-    series: [238, 241, 246, 244, 252, 250, 258, 262, 266, 272],
-  },
-  {
-    label: "Bounce rate",
-    value: "38.1%",
-    delta: "-2.4%",
-    trend: "down",
-    // A falling bounce rate is an improvement: keep the down arrow, show it as success.
-    deltaClassName: "text-success-strong",
-    tone: "warning",
-    series: [44, 43, 43, 42, 41, 42, 40, 39, 39, 38],
-  },
+const KPI_TONES = ["primary", "info", "success", "warning"] as const;
+const KPI_SERIES = [
+  [86, 92, 88, 97, 104, 99, 112, 118, 115, 124],
+  [58, 61, 60, 64, 66, 63, 68, 70, 69, 72],
+  [238, 241, 246, 244, 252, 250, 258, 262, 266, 272],
+  [44, 43, 43, 42, 41, 42, 40, 39, 39, 38],
 ];
+
+const overviewKpis = KPIS.map((kpi, i) => ({
+  ...kpi,
+  tone: KPI_TONES[i] ?? "primary",
+  series: KPI_SERIES[i] ?? [],
+}));
 
 const trafficSeries = [
   24100, 25800, 24900, 26400, 27200, 26100, 28900, 30400, 29800, 31500, 30900, 32800, 34100, 33200,
@@ -823,9 +790,7 @@ export function AnalyticsOverviewBlock() {
               <Metric className="gap-1.5">
                 <MetricLabel>{kpi.label}</MetricLabel>
                 <MetricValue className="text-2xl">{kpi.value}</MetricValue>
-                <MetricDelta trend={kpi.trend} className={kpi.deltaClassName}>
-                  {kpi.delta}
-                </MetricDelta>
+                <MetricDelta trend={kpi.trend}>{kpi.delta}</MetricDelta>
               </Metric>
               <Sparkline
                 data={kpi.series}
@@ -930,18 +895,8 @@ const analyticsOverviewCode = `import {
   SelectTrigger,
   SelectValue,
   Sparkline,
-} from "@cooud-ui/ui";
-
-interface OverviewKpi {
-  label: string;
-  value: string;
-  delta: string;
-  trend: "up" | "down";
-  /** Tone override for deltas where the trend direction flips the sentiment. */
-  deltaClassName?: string;
-  tone: "primary" | "success" | "warning" | "info";
-  series: number[];
-}
+} from "@kronus-ui/ui";
+import { KPIS } from "../lib/demo-saas.js";
 
 interface BreakdownRow {
   id: string;
@@ -950,13 +905,19 @@ interface BreakdownRow {
   share: number;
 }
 
-const overviewKpis: OverviewKpi[] = [
-  { label: "Page views", value: "1.24M", delta: "+18.2%", trend: "up", tone: "primary", series: [86, 92, 88, 97, 104, 99, 112, 118, 115, 124] },
-  { label: "Unique visitors", value: "312.4k", delta: "+9.6%", trend: "up", tone: "info", series: [58, 61, 60, 64, 66, 63, 68, 70, 69, 72] },
-  { label: "Avg. session", value: "4m 32s", delta: "+12s", trend: "up", tone: "success", series: [238, 241, 246, 244, 252, 250, 258, 262, 266, 272] },
-  // A falling bounce rate is an improvement: keep the down arrow, show it as success.
-  { label: "Bounce rate", value: "38.1%", delta: "-2.4%", trend: "down", deltaClassName: "text-success-strong", tone: "warning", series: [44, 43, 43, 42, 41, 42, 40, 39, 39, 38] },
+const KPI_TONES = ["primary", "info", "success", "warning"] as const;
+const KPI_SERIES = [
+  [86, 92, 88, 97, 104, 99, 112, 118, 115, 124],
+  [58, 61, 60, 64, 66, 63, 68, 70, 69, 72],
+  [238, 241, 246, 244, 252, 250, 258, 262, 266, 272],
+  [44, 43, 43, 42, 41, 42, 40, 39, 39, 38],
 ];
+
+const overviewKpis = KPIS.map((kpi, i) => ({
+  ...kpi,
+  tone: KPI_TONES[i] ?? "primary",
+  series: KPI_SERIES[i] ?? [],
+}));
 
 const trafficSeries = [
   24100, 25800, 24900, 26400, 27200, 26100, 28900, 30400, 29800, 31500, 30900, 32800,
@@ -1008,9 +969,7 @@ export function AnalyticsOverviewBlock() {
               <Metric className="gap-1.5">
                 <MetricLabel>{kpi.label}</MetricLabel>
                 <MetricValue className="text-2xl">{kpi.value}</MetricValue>
-                <MetricDelta trend={kpi.trend} className={kpi.deltaClassName}>
-                  {kpi.delta}
-                </MetricDelta>
+                <MetricDelta trend={kpi.trend}>{kpi.delta}</MetricDelta>
               </Metric>
               <Sparkline
                 data={kpi.series}
@@ -1283,7 +1242,7 @@ const analyticsEngagementCode = `import {
   SelectTrigger,
   SelectValue,
   Sparkline,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 
 interface RetentionStat {
   label: string;
@@ -1589,7 +1548,7 @@ export function KanbanBoardBlock() {
           <h2 className="font-display text-lg font-semibold text-fg">Sprint 24 · Growth squad</h2>
           <p className="text-sm text-fg-secondary">Jul 7 – Jul 18 · 10 tasks across 4 stages</p>
         </div>
-        <Button variant="gradient" size="sm">
+        <Button variant="primary" size="sm">
           <Plus className="size-4" aria-hidden="true" />
           New task
         </Button>
@@ -1658,7 +1617,7 @@ export function KanbanBoardBlock() {
   );
 }
 
-const kanbanBoardCode = `import { Avatar, AvatarFallback, Badge, Button } from "@cooud-ui/ui";
+const kanbanBoardCode = `import { Avatar, AvatarFallback, Badge, Button } from "@kronus-ui/ui";
 import { CalendarDays, MessageSquare, Plus } from "lucide-react";
 
 interface BoardLabel {
@@ -1731,7 +1690,7 @@ export function KanbanBoardBlock() {
           <h2 className="font-display text-lg font-semibold text-fg">Sprint 24 · Growth squad</h2>
           <p className="text-sm text-fg-secondary">Jul 7 – Jul 18 · 10 tasks across 4 stages</p>
         </div>
-        <Button variant="gradient" size="sm">
+        <Button variant="primary" size="sm">
           <Plus className="size-4" aria-hidden="true" />
           New task
         </Button>
@@ -1975,7 +1934,7 @@ export function KanbanBoardCompactBlock() {
   );
 }
 
-const kanbanBoardCompactCode = `import { Avatar, AvatarFallback, Badge, Button } from "@cooud-ui/ui";
+const kanbanBoardCompactCode = `import { Avatar, AvatarFallback, Badge, Button } from "@kronus-ui/ui";
 import { Plus } from "lucide-react";
 
 interface CompactTask {
@@ -2289,7 +2248,7 @@ const auditLogTimelineCode = `import {
   CardHeader,
   CardTitle,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Download } from "lucide-react";
 
 interface AuditEvent {
@@ -2639,7 +2598,7 @@ const auditLogTableCode = `import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { ChevronRight, Download, Search } from "lucide-react";
 
 interface AuditRow {

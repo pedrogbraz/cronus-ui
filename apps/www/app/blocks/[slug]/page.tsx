@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const meta = getBlockMeta(slug);
   return {
-    title: meta ? `${meta.name} Variations — Cooud UI Blocks` : "Blocks — Cooud UI",
+    title: meta ? `${meta.name} Variations — Kronus UI Blocks` : "Blocks — Kronus UI",
     description: meta?.description,
   };
 }

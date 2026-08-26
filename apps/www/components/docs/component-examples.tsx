@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@cooud-ui/ui";
+import { cn } from "@kronus-ui/ui";
 import dynamic from "next/dynamic";
 import { type ComponentType, useState } from "react";
 import { type ExampleFamily, getExampleFamily } from "../../lib/examples/registry";

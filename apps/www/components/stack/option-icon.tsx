@@ -1,4 +1,4 @@
-import { cn } from "@cooud-ui/ui";
+import { cn } from "@kronus-ui/ui";
 import {
   Accessibility,
   AppWindow,

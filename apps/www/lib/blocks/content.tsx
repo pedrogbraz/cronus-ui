@@ -14,7 +14,7 @@ import {
   Label,
   Marquee,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import {
   Aperture,
   ArrowRight,
@@ -256,7 +256,7 @@ const blogGridCode = `import {
   Badge,
   Button,
   Card,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { ArrowRight } from "lucide-react";
 
 interface BlogPost {
@@ -587,7 +587,7 @@ const blogListCode = `import {
   AvatarFallback,
   Badge,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { ArrowRight } from "lucide-react";
 
 interface BlogPost {
@@ -829,7 +829,7 @@ const blogPostArticleCode = `import {
   Badge,
   Button,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Link2, Mail, Share2 } from "lucide-react";
 
 export function BlogPostArticleBlock() {
@@ -1049,7 +1049,7 @@ export function BlogPostSidebarBlock() {
               placeholder="you@company.com"
               autoComplete="email"
             />
-            <Button variant="gradient" className="w-full">
+            <Button variant="primary" className="w-full">
               Subscribe
             </Button>
             <p className="text-xs text-fg-tertiary">One email a month. Unsubscribe anytime.</p>
@@ -1072,7 +1072,7 @@ const blogPostSidebarCode = `import {
   CardTitle,
   Input,
   Label,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 
 const tocItems = [
   { id: "hierarchy", label: "Hierarchy beats whitespace", active: true },
@@ -1195,7 +1195,7 @@ export function BlogPostSidebarBlock() {
               placeholder="you@company.com"
               autoComplete="email"
             />
-            <Button variant="gradient" className="w-full">
+            <Button variant="primary" className="w-full">
               Subscribe
             </Button>
             <p className="text-xs text-fg-tertiary">One email a month. Unsubscribe anytime.</p>
@@ -1342,7 +1342,7 @@ export function LogoCloudMarqueeBlock() {
   );
 }
 
-const logoCloudMarqueeCode = `import { Marquee } from "@cooud-ui/ui";
+const logoCloudMarqueeCode = `import { Marquee } from "@kronus-ui/ui";
 import {
   Aperture,
   Box,
@@ -1536,7 +1536,7 @@ const aboutStoryCode = `import {
   Badge,
   Card,
   CardContent,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Quote } from "lucide-react";
 
 const storyStats = [
@@ -1749,7 +1749,7 @@ export function AboutValuesBlock() {
   );
 }
 
-const aboutValuesCode = `import { Badge, Card, CardContent } from "@cooud-ui/ui";
+const aboutValuesCode = `import { Badge, Card, CardContent } from "@kronus-ui/ui";
 import { Eye, Gem, MessagesSquare, Rocket, Sparkles, Sprout, Users } from "lucide-react";
 
 const companyValues = [

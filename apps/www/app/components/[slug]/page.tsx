@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const meta = getComponentMeta(slug);
   return {
-    title: meta ? `${getComponentDisplayName(meta.name)} — Cooud UI` : "Cooud UI",
+    title: meta ? `${getComponentDisplayName(meta.name)} — Kronus UI` : "Kronus UI",
     description: meta?.description,
   };
 }

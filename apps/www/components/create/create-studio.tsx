@@ -1,7 +1,7 @@
 "use client";
 
-import { useTheme } from "@cooud-ui/theme";
-import type { ThemeOverrides } from "@cooud-ui/tokens";
+import { useTheme } from "@kronus-ui/theme";
+import type { ThemeOverrides } from "@kronus-ui/tokens";
 import {
   Accordion,
   AccordionContent,
@@ -53,7 +53,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import {
   Check,
   Code2,
@@ -115,7 +115,7 @@ import { SectionGlow } from "../showcase-ui";
 import { LiftTile } from "./lift-card";
 import { PreviewDashboard } from "./preview-dashboard";
 
-const STORAGE_KEY = "cooud-ui-create-presets-v1";
+const STORAGE_KEY = "kronus-ui-create-presets-v1";
 type CodeTab = "install" | "provider" | "css" | "json";
 type PackageManager = "bun" | "pnpm" | "npm" | "yarn";
 type LockKey = "mode" | "base" | "brand" | "chart" | "heading" | "body" | "icon" | "radius";
@@ -128,10 +128,10 @@ const codeTabs: { id: CodeTab; label: string }[] = [
 ];
 
 const installCommands: Record<PackageManager, string> = {
-  bun: "bun add @cooud-ui/ui @cooud-ui/theme @cooud-ui/tokens",
-  pnpm: "pnpm add @cooud-ui/ui @cooud-ui/theme @cooud-ui/tokens",
-  npm: "npm install @cooud-ui/ui @cooud-ui/theme @cooud-ui/tokens",
-  yarn: "yarn add @cooud-ui/ui @cooud-ui/theme @cooud-ui/tokens",
+  bun: "bun add @kronus-ui/ui @kronus-ui/theme @kronus-ui/tokens",
+  pnpm: "pnpm add @kronus-ui/ui @kronus-ui/theme @kronus-ui/tokens",
+  npm: "npm install @kronus-ui/ui @kronus-ui/theme @kronus-ui/tokens",
+  yarn: "yarn add @kronus-ui/ui @kronus-ui/theme @kronus-ui/tokens",
 };
 
 const defaultLocks: Record<LockKey, boolean> = {
@@ -489,7 +489,7 @@ export function CreateStudio() {
                     <Dices aria-hidden="true" />
                     Shuffle
                   </Button>
-                  <Button variant="gradient" onClick={() => setCodeOpen(true)}>
+                  <Button variant="primary" onClick={() => setCodeOpen(true)}>
                     <Code2 aria-hidden="true" />
                     Get code
                   </Button>
@@ -559,7 +559,7 @@ export function CreateStudio() {
           <Button variant="outline" size="icon" onClick={shuffle} aria-label="Shuffle design">
             <Dices aria-hidden="true" />
           </Button>
-          <Button variant="gradient" className="flex-1" onClick={() => setCodeOpen(true)}>
+          <Button variant="primary" className="flex-1" onClick={() => setCodeOpen(true)}>
             <Code2 aria-hidden="true" />
             Get code
           </Button>
@@ -954,7 +954,7 @@ function CreateControls({
               <Dices aria-hidden="true" />
               Shuffle
             </Button>
-            <Button variant="gradient" onClick={onGetCode}>
+            <Button variant="primary" onClick={onGetCode}>
               <Code2 aria-hidden="true" />
               Get code
             </Button>
@@ -1277,7 +1277,7 @@ function ComponentSampler({ config }: { config: DesignConfig }) {
         <CardContent className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="sampler-name">Workspace</Label>
-            <Input id="sampler-name" defaultValue="Cooud Growth" />
+            <Input id="sampler-name" defaultValue="Kronus Growth" />
           </div>
           <div
             className={cn("flex items-center justify-between border-t border-border pt-3", LIQUID)}
@@ -1310,7 +1310,7 @@ function ComponentSampler({ config }: { config: DesignConfig }) {
             ))}
           </RadioGroup>
           <div className="flex gap-2">
-            <Button variant="gradient" className="flex-1">
+            <Button variant="primary" className="flex-1">
               Primary
             </Button>
             <Button variant="outline" className="flex-1">
@@ -1556,7 +1556,7 @@ function PresetExchange({
         <Textarea
           value={presetCode}
           onChange={(event) => onPresetCodeChange(event.target.value)}
-          placeholder="Paste cooud: preset code or JSON"
+          placeholder="Paste kronus: preset code or JSON"
           rows={4}
           className="resize-none font-mono text-xs"
           aria-label="Preset import code"
@@ -1603,7 +1603,7 @@ function CodeDialog({
             Get code
           </DialogTitle>
           <DialogDescription>
-            Install Cooud UI, wire the provider, or copy the exact CSS variables for this preset.
+            Install Kronus UI, wire the provider, or copy the exact CSS variables for this preset.
           </DialogDescription>
         </DialogHeader>
 

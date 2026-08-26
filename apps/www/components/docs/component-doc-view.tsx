@@ -1,4 +1,4 @@
-import { Badge } from "@cooud-ui/ui";
+import { Badge } from "@kronus-ui/ui";
 import { getComponentDisplayName, getComponentMeta } from "../../lib/components-index";
 import { getExampleSections } from "../../lib/examples/sections";
 import { COMPONENT_PROPS } from "../../lib/props.generated";
@@ -54,8 +54,8 @@ export function ComponentDocView({ slug }: { slug: string }) {
         <section id="import" className="mt-10 scroll-mt-24">
           <h2 className="font-display text-xl font-medium tracking-[-0.02em] text-fg">Import</h2>
           <div className="mt-4 flex flex-col gap-3">
-            <CodeBlock code={`import { ${meta.importName ?? meta.name} } from "@cooud-ui/ui";`} />
-            <CodeBlock code={`npx cooud-ui add ${slug}`} language="bash" />
+            <CodeBlock code={`import { ${meta.importName ?? meta.name} } from "@kronus-ui/ui";`} />
+            <CodeBlock code={`npx kronus-ui add ${slug}`} language="bash" />
           </div>
         </section>
 

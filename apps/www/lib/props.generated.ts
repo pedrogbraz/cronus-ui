@@ -1,7 +1,7 @@
 // GENERATED FILE — do not edit; run `bun run props` to regenerate.
 //
 // Props/API tables extracted from the exported `*Props` interfaces of every
-// @cooud-ui/ui component via the TypeScript compiler API (no module execution),
+// @kronus-ui/ui component via the TypeScript compiler API (no module execution),
 // so the documented API can never drift from the source.
 
 export interface PropDef {
@@ -33,7 +33,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
         },
         {
           name: "variant",
-          type: '"primary" | "gradient" | "secondary" | "outline" | "ghost" | "destructive" | "link"',
+          type: '"primary" | "secondary" | "outline" | "ghost" | "destructive" | "link"',
           required: false,
           default: '"primary"',
         },
@@ -4140,7 +4140,8 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "transition",
           type: "Transition",
           required: false,
-          description: "Override the morph spring (advanced — defaults to the Cooud morph spring).",
+          description:
+            "Override the morph spring (advanced — defaults to the Kronus morph spring).",
           default: "MORPHING_POPOVER_TRANSITION",
         },
         {
@@ -4290,7 +4291,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           type: "AnimatedNumberSpring",
           required: false,
           description:
-            "Override the settle spring (advanced — defaults to the Cooud count spring).",
+            "Override the settle spring (advanced — defaults to the Kronus count spring).",
         },
         {
           name: "reducedMotion",
@@ -4402,7 +4403,8 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "transition",
           type: "Transition",
           required: false,
-          description: "Override the thumb spring (advanced — defaults to the Cooud thumb spring).",
+          description:
+            "Override the thumb spring (advanced — defaults to the Kronus thumb spring).",
           default: "SEGMENTED_THUMB_TRANSITION",
         },
         {
@@ -4611,16 +4613,16 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           type: "string",
           required: false,
           description:
-            "Colour of the leading edge of the beam. Defaults to the theme primary (`var(--cooud-primary)`).",
-          default: '"var(--cooud-primary)"',
+            "Colour of the leading edge of the beam. Defaults to the theme primary (`var(--kronus-primary)`).",
+          default: '"var(--kronus-primary)"',
         },
         {
           name: "colorTo",
           type: "string",
           required: false,
           description:
-            "Colour the trail fades through before it dissolves. Defaults to the theme accent (`var(--cooud-accent)`).",
-          default: '"var(--cooud-accent)"',
+            "Colour the trail fades through before it dissolves. Defaults to the theme accent (`var(--kronus-accent)`).",
+          default: '"var(--kronus-accent)"',
         },
         {
           name: "borderWidth",
@@ -4878,6 +4880,734 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           description:
             'Whether the typing animation plays vs. honours `prefers-reduced-motion`: `"respect"` (default), `"always"` (force motion), or `"never"` (always static).',
           default: '"respect"',
+        },
+      ],
+    },
+  ],
+  ripple: [
+    {
+      interfaceName: "RippleProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "count",
+          type: "number",
+          required: false,
+          description: "Number of concentric rings. Clamped to `1–16`.",
+          default: "8",
+        },
+        {
+          name: "duration",
+          type: "number",
+          required: false,
+          description: "Seconds for one expansion cycle.",
+          default: "8",
+        },
+      ],
+    },
+  ],
+  meteors: [
+    {
+      interfaceName: "MeteorsProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "count",
+          type: "number",
+          required: false,
+          description: "Number of shooting stars. Clamped to `1–60`.",
+          default: "20",
+        },
+      ],
+    },
+  ],
+  "dot-pattern": [
+    {
+      interfaceName: "DotPatternProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "gap",
+          type: "number",
+          required: false,
+          description: "Gap between dots, in pixels.",
+          default: "16",
+        },
+        {
+          name: "radius",
+          type: "number",
+          required: false,
+          description: "Dot radius, in pixels.",
+          default: "1",
+        },
+      ],
+    },
+  ],
+  "grid-pattern": [
+    {
+      interfaceName: "GridPatternProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "size",
+          type: "number",
+          required: false,
+          description: "Cell size, in pixels.",
+          default: "24",
+        },
+        {
+          name: "strokeWidth",
+          type: "number",
+          required: false,
+          description: "Stroke width of the grid lines, in pixels.",
+          default: "1",
+        },
+      ],
+    },
+  ],
+  "retro-grid": [
+    {
+      interfaceName: "RetroGridProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "duration",
+          type: "number",
+          required: false,
+          description: "Seconds for one floor-scroll cycle.",
+          default: "8",
+        },
+        {
+          name: "angle",
+          type: "number",
+          required: false,
+          description: "Perspective tilt of the floor, in degrees.",
+          default: "60",
+        },
+      ],
+    },
+  ],
+  noise: [
+    {
+      interfaceName: "NoiseProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "opacity",
+          type: "number",
+          required: false,
+          description: "Overlay opacity of the grain, `0–1`.",
+          default: "0.08",
+        },
+      ],
+    },
+  ],
+  "light-rays": [
+    {
+      interfaceName: "LightRaysProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "duration",
+          type: "number",
+          required: false,
+          description: "Seconds for one full rotation of the ray fan.",
+          default: "18",
+        },
+      ],
+    },
+  ],
+  "progressive-blur": [
+    {
+      interfaceName: "ProgressiveBlurProps",
+      extends:
+        "Extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof progressiveBlurVariants>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "height",
+          type: "string",
+          required: false,
+          description: "Height of the blur band.",
+          default: '"6rem"',
+        },
+        {
+          name: "side",
+          type: '"top" | "bottom"',
+          required: false,
+          default: '"bottom"',
+        },
+      ],
+    },
+  ],
+  "flickering-grid": [
+    {
+      interfaceName: "FlickeringGridProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "columns",
+          type: "number",
+          required: false,
+          description: "Number of columns in the grid.",
+          default: "16",
+        },
+        {
+          name: "rows",
+          type: "number",
+          required: false,
+          description: "Number of rows in the grid.",
+          default: "10",
+        },
+      ],
+    },
+  ],
+  "star-border": [
+    {
+      interfaceName: "StarBorderProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "duration",
+          type: "number",
+          required: false,
+          description: "Seconds for one sparkle lap around the perimeter.",
+          default: "6",
+        },
+      ],
+    },
+  ],
+  "shiny-text": [
+    {
+      interfaceName: "ShinyTextProps",
+      extends: "Extends HTMLAttributes<HTMLSpanElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLSpanElement>",
+          required: false,
+        },
+        {
+          name: "asChild",
+          type: "boolean",
+          required: false,
+          default: "false",
+        },
+        {
+          name: "duration",
+          type: "number",
+          required: false,
+          description: "Seconds for one sheen sweep.",
+          default: "3",
+        },
+      ],
+    },
+  ],
+  highlighter: [
+    {
+      interfaceName: "HighlighterProps",
+      extends: "Extends HTMLAttributes<HTMLSpanElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLSpanElement>",
+          required: false,
+        },
+        {
+          name: "duration",
+          type: "number",
+          required: false,
+          description: "Seconds the marker takes to draw on.",
+          default: "0.6",
+        },
+      ],
+    },
+  ],
+  "spinning-text": [
+    {
+      interfaceName: "SpinningTextProps",
+      extends: 'Extends Omit<HTMLAttributes<HTMLDivElement>, "children">',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "children",
+          type: "string",
+          required: true,
+          description: "The phrase laid out around the circle.",
+        },
+        {
+          name: "radius",
+          type: "number",
+          required: false,
+          description: "Radius of the circle, in pixels.",
+          default: "48",
+        },
+        {
+          name: "duration",
+          type: "number",
+          required: false,
+          description: "Seconds for one full revolution.",
+          default: "16",
+        },
+        {
+          name: "reverse",
+          type: "boolean",
+          required: false,
+          description: "Spin counter-clockwise.",
+          default: "false",
+        },
+      ],
+    },
+  ],
+  "sparkles-text": [
+    {
+      interfaceName: "SparklesTextProps",
+      extends: "Extends HTMLAttributes<HTMLSpanElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLSpanElement>",
+          required: false,
+        },
+        {
+          name: "count",
+          type: "number",
+          required: false,
+          description: "Number of sparkles around the text. Clamped to `2–12`.",
+          default: "4",
+        },
+      ],
+    },
+  ],
+  "typing-text": [
+    {
+      interfaceName: "TypingTextProps",
+      extends: 'Extends Omit<HTMLAttributes<HTMLSpanElement>, "children">',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLSpanElement>",
+          required: false,
+        },
+        {
+          name: "text",
+          type: "string | string[]",
+          required: true,
+          description:
+            "Phrases to type. A single string is treated as one phrase. When more than one is provided the component types, pauses, deletes, and moves on.",
+        },
+        {
+          name: "typingSpeed",
+          type: "number",
+          required: false,
+          description: "Milliseconds per typed character.",
+          default: "50",
+        },
+        {
+          name: "deletingSpeed",
+          type: "number",
+          required: false,
+          description: "Milliseconds per deleted character.",
+          default: "30",
+        },
+        {
+          name: "pause",
+          type: "number",
+          required: false,
+          description: "Milliseconds to rest on a finished phrase before deleting.",
+          default: "1400",
+        },
+        {
+          name: "loop",
+          type: "boolean",
+          required: false,
+          description:
+            "Loop back to the first phrase after the last. Defaults to `true` when more than one phrase is provided.",
+        },
+        {
+          name: "reducedMotion",
+          type: "TypingTextMotionPreference",
+          required: false,
+          description:
+            'How `prefers-reduced-motion` is honoured. Defaults to `"respect"` (show the current phrase in full). `"always"` forces the typewriter; `"never"` always shows the first phrase statically.',
+          default: '"respect"',
+        },
+      ],
+    },
+  ],
+  "word-rotate": [
+    {
+      interfaceName: "WordRotateProps",
+      extends: 'Extends Omit<HTMLAttributes<HTMLSpanElement>, "children">',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLSpanElement>",
+          required: false,
+        },
+        {
+          name: "words",
+          type: "string[]",
+          required: true,
+          description: "Phrases to cycle through.",
+        },
+        {
+          name: "interval",
+          type: "number",
+          required: false,
+          description: "Milliseconds each word stays on screen.",
+          default: "2200",
+        },
+        {
+          name: "reducedMotion",
+          type: '"user" | "always" | "never"',
+          required: false,
+          description:
+            'How `prefers-reduced-motion` is honoured. Defaults to `"user"` (cross-fade becomes a cut). `"never"` always animates; `"always"` always cuts.',
+          default: '"user"',
+        },
+        {
+          name: "lockWidth",
+          type: "boolean",
+          required: false,
+          description:
+            "When true (default), the box stays as wide as the longest word so the line does not reflow. Set false when an underline or similar chrome should track the visible word.",
+          default: "true",
+        },
+      ],
+    },
+  ],
+  "scramble-text": [
+    {
+      interfaceName: "ScrambleTextProps",
+      extends: 'Extends Omit<HTMLAttributes<HTMLSpanElement>, "children">',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLSpanElement>",
+          required: false,
+        },
+        {
+          name: "children",
+          type: "string",
+          required: true,
+          description: "The phrase to resolve to.",
+        },
+        {
+          name: "speed",
+          type: "number",
+          required: false,
+          description: "Milliseconds between scramble ticks.",
+          default: "40",
+        },
+        {
+          name: "ticksPerGlyph",
+          type: "number",
+          required: false,
+          description: "How many ticks each glyph stays scrambled before locking.",
+          default: "4",
+        },
+        {
+          name: "charset",
+          type: "string",
+          required: false,
+          description: "Glyphs used while scrambling. Defaults to a Latin + digit set.",
+          default: "DEFAULT_CHARSET",
+        },
+        {
+          name: "reducedMotion",
+          type: "ScrambleTextMotionPreference",
+          required: false,
+          description:
+            'How `prefers-reduced-motion` is honoured. Defaults to `"respect"` (show the resolved phrase immediately).',
+          default: '"respect"',
+        },
+      ],
+    },
+  ],
+  "glare-hover": [
+    {
+      interfaceName: "GlareHoverProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+      ],
+    },
+  ],
+  "click-spark": [
+    {
+      interfaceName: "ClickSparkProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "sparkCount",
+          type: "number",
+          required: false,
+          description: "Number of sparks emitted per click.",
+          default: "8",
+        },
+      ],
+    },
+  ],
+  "animated-list": [
+    {
+      interfaceName: "AnimatedListProps",
+      extends: "Extends HTMLAttributes<HTMLUListElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLUListElement>",
+          required: false,
+        },
+        {
+          name: "stagger",
+          type: "number",
+          required: false,
+          description: "Seconds between consecutive item reveals.",
+          default: "0.08",
+        },
+        {
+          name: "reducedMotion",
+          type: '"user" | "always" | "never"',
+          required: false,
+          description:
+            'How `prefers-reduced-motion` is honoured. Defaults to `"user"` (items appear without the stagger). `"never"` always animates.',
+          default: '"user"',
+        },
+      ],
+    },
+  ],
+  "card-stack": [
+    {
+      interfaceName: "CardStackProps",
+      extends: 'Extends Omit<HTMLAttributes<HTMLElement>, "children">',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLElement>",
+          required: false,
+        },
+        {
+          name: "items",
+          type: "CardStackItem[]",
+          required: true,
+        },
+        {
+          name: "labels",
+          type: "{ region?: string; next?: string; }",
+          required: false,
+          description: 'Accessible name for the stack. Defaults to `"Card stack"`.',
+        },
+      ],
+    },
+  ],
+  "pill-nav": [
+    {
+      interfaceName: "PillNavProps",
+      extends: 'Extends Omit<HTMLAttributes<HTMLElement>, "onChange">',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLElement>",
+          required: false,
+        },
+        {
+          name: "items",
+          type: "PillNavItem[]",
+          required: true,
+        },
+        {
+          name: "value",
+          type: "string",
+          required: false,
+          description: "Controlled selected value.",
+        },
+        {
+          name: "defaultValue",
+          type: "string",
+          required: false,
+          description: "Initial selected value when uncontrolled.",
+        },
+        {
+          name: "onValueChange",
+          type: "(value: string) => void",
+          required: false,
+        },
+      ],
+    },
+  ],
+  "expandable-tabs": [
+    {
+      interfaceName: "ExpandableTabsProps",
+      extends: 'Extends Omit<HTMLAttributes<HTMLDivElement>, "onChange">',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "items",
+          type: "ExpandableTab[]",
+          required: true,
+        },
+        {
+          name: "value",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "defaultValue",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "onValueChange",
+          type: "(value: string) => void",
+          required: false,
+        },
+      ],
+    },
+  ],
+  "dynamic-island": [
+    {
+      interfaceName: "DynamicIslandProps",
+      extends: 'Extends Omit<HTMLAttributes<HTMLDivElement>, "children">',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "views",
+          type: "DynamicIslandView[]",
+          required: true,
+        },
+        {
+          name: "value",
+          type: "string",
+          required: false,
+          description: "Controlled active view id.",
+        },
+        {
+          name: "defaultValue",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "onValueChange",
+          type: "(id: string) => void",
+          required: false,
+        },
+      ],
+    },
+  ],
+  confetti: [
+    {
+      interfaceName: "ConfettiProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "count",
+          type: "number",
+          required: false,
+          description: "Pieces spawned per burst.",
+          default: "48",
+        },
+        {
+          name: "fireOnMount",
+          type: "boolean",
+          required: false,
+          description: "Fire a burst on mount.",
+          default: "false",
+        },
+      ],
+    },
+  ],
+  particles: [
+    {
+      interfaceName: "ParticlesProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "count",
+          type: "number",
+          required: false,
+          description: "Number of drifting specks.",
+          default: "40",
         },
       ],
     },

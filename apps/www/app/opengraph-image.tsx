@@ -1,13 +1,11 @@
 import { ImageResponse } from "next/og";
-import { BLOCK_COUNT } from "../lib/blocks-index";
-import { COMPONENT_COUNT } from "../lib/components-index";
 
-export const alt = "Cooud UI — The design system that themes itself";
+export const alt = "Kronus UI — The product UI system that themes itself";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 // Neutral dark tokens, hardcoded as sRGB — ImageResponse renders through Satori,
-// which resolves neither the `--cooud-*` CSS variables nor `oklch()`.
+// which resolves neither the `--kronus-*` CSS variables nor `oklch()`.
 // Source of truth: packages/tokens/src/tokens.ts (neutralDark); the hex below is
 // the exact sRGB conversion of each oklch value, noted per line.
 const neutral = {
@@ -77,7 +75,7 @@ export default function Image() {
             letterSpacing: -4,
           }}
         >
-          Cooud UI
+          Kronus UI
         </div>
       </div>
 
@@ -89,7 +87,7 @@ export default function Image() {
           color: neutral.fgSecondary,
         }}
       >
-        The design system that themes itself
+        The product UI system that themes itself
       </div>
 
       <div
@@ -104,7 +102,7 @@ export default function Image() {
           color: neutral.fgSecondary,
         }}
       >
-        {`${COMPONENT_COUNT} components · ${BLOCK_COUNT} blocks · React · Tailwind v4`}
+        Compose · live theme · 3-way upgrade · React · Tailwind v4
       </div>
     </div>,
     size,

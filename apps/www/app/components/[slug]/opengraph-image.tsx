@@ -1,11 +1,11 @@
 import { ImageResponse } from "next/og";
 import { getComponentDisplayName, getComponentMeta } from "../../../lib/components-index";
 
-export const alt = "Cooud UI component";
+export const alt = "Kronus UI component";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// Aurora dark tokens, hardcoded — Satori cannot resolve the `--cooud-*` CSS
+// Aurora dark tokens, hardcoded — Satori cannot resolve the `--kronus-*` CSS
 // variables. Source of truth: packages/tokens/src/tokens.ts (auroraDark).
 const aurora = {
   surfaceBase: "#09090b",
@@ -20,8 +20,8 @@ const aurora = {
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const meta = getComponentMeta(slug);
-  const name = meta ? getComponentDisplayName(meta.name) : "Cooud UI";
-  const description = meta?.description ?? "The design system that themes itself";
+  const name = meta ? getComponentDisplayName(meta.name) : "Kronus UI";
+  const description = meta?.description ?? "The product UI system that themes itself";
   const kicker = meta ? `Component · ${meta.category}` : "Component";
 
   return new ImageResponse(
@@ -72,7 +72,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           }}
         />
         <div style={{ display: "flex", fontSize: 34, fontWeight: 700, color: aurora.fg }}>
-          Cooud UI
+          Kronus UI
         </div>
       </div>
 
@@ -125,7 +125,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
             color: aurora.fg,
           }}
         >
-          {`npx cooud-ui add ${slug}`}
+          {`npx kronus-ui add ${slug}`}
         </div>
       </div>
     </div>,

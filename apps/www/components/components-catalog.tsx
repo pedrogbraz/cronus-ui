@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@cooud-ui/ui";
+import { cn } from "@kronus-ui/ui";
 import { Search } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -228,7 +228,7 @@ function ComponentCard({
           <div className="absolute inset-0 flex items-center justify-center p-6 transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.01] motion-reduce:transition-none motion-reduce:group-hover:scale-100">
             <div
               aria-hidden="true"
-              className="absolute inset-0 bg-[radial-gradient(var(--cooud-border)_1px,transparent_1px)] opacity-50 [background-size:16px_16px]"
+              className="absolute inset-0 bg-[radial-gradient(var(--kronus-border)_1px,transparent_1px)] opacity-50 [background-size:16px_16px]"
             />
             <span className="relative px-4 text-center font-display text-lg text-fg-tertiary transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] group-hover:text-fg motion-reduce:transition-none">
               {displayName}

@@ -1,1 +1,1 @@
-export type * from "@cooud-ui/stack/types";
+export type * from "@kronus-ui/stack/types";

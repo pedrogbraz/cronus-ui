@@ -41,8 +41,15 @@ import {
   TimelineTitle,
   ToggleGroup,
   ToggleGroupItem,
-} from "@cooud-ui/ui";
-import { CART, ORDERS, productById, RATING_DISTRIBUTION, REVIEWS } from "@cooud-ui/ui/demo-store";
+} from "@kronus-ui/ui";
+import {
+  CART,
+  ORDERS,
+  productById,
+  RATING_DISTRIBUTION,
+  RATING_SUMMARY,
+  REVIEWS,
+} from "@kronus-ui/ui/demo-store";
 import {
   Check,
   Clock,
@@ -77,6 +84,9 @@ import type { BlockContentMap } from "./types";
  * 1. Product detail — standard, gallery and minimal layouts
  * ────────────────────────────────────────────────────────────────────────── */
 
+/** Store compose default SKU (`/products/[id]`). */
+const product = productById("aurora");
+
 export function ProductDetailBlock() {
   return (
     <section
@@ -100,9 +110,7 @@ export function ProductDetailBlock() {
           <span className="text-xs font-medium uppercase tracking-wide text-fg-tertiary">
             Aurora Audio · Over-ear
           </span>
-          <h1 className="font-display text-3xl font-semibold text-fg">
-            Aurora Wireless Headphones
-          </h1>
+          <h1 className="font-display text-3xl font-semibold text-fg">{product?.name}</h1>
           <div className="flex flex-wrap items-center gap-2">
             <span className="flex items-center gap-0.5">
               <Star className="size-4 fill-warning text-warning" aria-hidden="true" />
@@ -111,18 +119,18 @@ export function ProductDetailBlock() {
               <Star className="size-4 fill-warning text-warning" aria-hidden="true" />
               <StarHalf className="size-4 fill-warning text-warning" aria-hidden="true" />
             </span>
-            <span className="text-sm font-medium text-fg">4.8</span>
+            <span className="text-sm font-medium text-fg">{product?.rating}</span>
             <a
               href="#reviews"
               className="text-sm text-fg-secondary underline-offset-4 hover:underline"
             >
-              1,284 reviews
+              {RATING_SUMMARY.count} reviews
             </a>
           </div>
         </div>
 
         <div className="flex flex-wrap items-baseline gap-2">
-          <span className="font-display text-3xl font-semibold text-fg">$349.00</span>
+          <span className="font-display text-3xl font-semibold text-fg">{product?.price}</span>
           <span className="text-base text-fg-tertiary line-through">$399.00</span>
           <Badge variant="success">Save $50</Badge>
         </div>
@@ -155,7 +163,7 @@ export function ProductDetailBlock() {
                 <span className="sr-only">Increase quantity</span>
               </Button>
             </div>
-            <Button variant="gradient" size="lg" className="flex-1">
+            <Button variant="primary" size="lg" className="flex-1">
               <ShoppingCart className="size-4" aria-hidden="true" />
               Add to cart
             </Button>
@@ -226,7 +234,7 @@ const productDetailCode = `import {
   Button,
   ToggleGroup,
   ToggleGroupItem,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import {
   Headphones,
   Heart,
@@ -239,6 +247,9 @@ import {
   StarHalf,
   Truck,
 } from "lucide-react";
+import { productById, RATING_SUMMARY } from "../lib/demo-store.js";
+
+const product = productById("aurora");
 
 export function ProductDetailBlock() {
   return (
@@ -264,7 +275,7 @@ export function ProductDetailBlock() {
             Aurora Audio · Over-ear
           </span>
           <h1 className="font-display text-3xl font-semibold text-fg">
-            Aurora Wireless Headphones
+            {product?.name}
           </h1>
           <div className="flex flex-wrap items-center gap-2">
             <span className="flex items-center gap-0.5">
@@ -274,18 +285,18 @@ export function ProductDetailBlock() {
               <Star className="size-4 fill-warning text-warning" aria-hidden="true" />
               <StarHalf className="size-4 fill-warning text-warning" aria-hidden="true" />
             </span>
-            <span className="text-sm font-medium text-fg">4.8</span>
+            <span className="text-sm font-medium text-fg">{product?.rating}</span>
             <a
               href="#reviews"
               className="text-sm text-fg-secondary underline-offset-4 hover:underline"
             >
-              1,284 reviews
+              {RATING_SUMMARY.count} reviews
             </a>
           </div>
         </div>
 
         <div className="flex flex-wrap items-baseline gap-2">
-          <span className="font-display text-3xl font-semibold text-fg">$349.00</span>
+          <span className="font-display text-3xl font-semibold text-fg">{product?.price}</span>
           <span className="text-base text-fg-tertiary line-through">$399.00</span>
           <Badge variant="success">Save $50</Badge>
         </div>
@@ -318,7 +329,7 @@ export function ProductDetailBlock() {
                 <span className="sr-only">Increase quantity</span>
               </Button>
             </div>
-            <Button variant="gradient" size="lg" className="flex-1">
+            <Button variant="primary" size="lg" className="flex-1">
               <ShoppingCart className="size-4" aria-hidden="true" />
               Add to cart
             </Button>
@@ -423,7 +434,7 @@ export function ProductDetailGalleryBlock() {
         <div className="relative flex min-h-64 flex-1 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/30 to-info/20">
           <Headphones className="size-24 text-fg/40" aria-hidden="true" />
           <div className="absolute start-4 top-4">
-            <Badge variant="primary">Bestseller</Badge>
+            <Badge variant="primary">{product?.badge}</Badge>
           </div>
         </div>
       </div>
@@ -434,9 +445,7 @@ export function ProductDetailGalleryBlock() {
           <span className="text-xs font-medium uppercase tracking-wide text-fg-tertiary">
             Aurora Audio · Over-ear
           </span>
-          <h1 className="font-display text-3xl font-semibold text-fg">
-            Aurora Wireless Headphones
-          </h1>
+          <h1 className="font-display text-3xl font-semibold text-fg">{product?.name}</h1>
           <div className="flex flex-wrap items-center gap-2">
             <span className="flex items-center gap-0.5">
               <Star className="size-4 fill-warning text-warning" aria-hidden="true" />
@@ -445,18 +454,18 @@ export function ProductDetailGalleryBlock() {
               <Star className="size-4 fill-warning text-warning" aria-hidden="true" />
               <StarHalf className="size-4 fill-warning text-warning" aria-hidden="true" />
             </span>
-            <span className="text-sm font-medium text-fg">4.8</span>
+            <span className="text-sm font-medium text-fg">{product?.rating}</span>
             <a
               href="#reviews"
               className="text-sm text-fg-secondary underline-offset-4 hover:underline"
             >
-              1,284 reviews
+              {RATING_SUMMARY.count} reviews
             </a>
           </div>
         </div>
 
         <div className="flex flex-wrap items-baseline gap-2">
-          <span className="font-display text-3xl font-semibold text-fg">$349.00</span>
+          <span className="font-display text-3xl font-semibold text-fg">{product?.price}</span>
           <span className="text-base text-fg-tertiary line-through">$399.00</span>
           <Badge variant="success">Save $50</Badge>
         </div>
@@ -486,9 +495,9 @@ export function ProductDetailGalleryBlock() {
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
-          <Button variant="gradient" size="lg" className="flex-1">
+          <Button variant="primary" size="lg" className="flex-1">
             <ShoppingCart className="size-4" aria-hidden="true" />
-            Add to cart — $349.00
+            Add to cart — {product?.price}
           </Button>
           <Button variant="outline" size="icon" className="size-11">
             <Heart className="size-4" aria-hidden="true" />
@@ -505,8 +514,11 @@ export function ProductDetailGalleryBlock() {
   );
 }
 
-const productDetailGalleryCode = `import { Badge, Button, ToggleGroup, ToggleGroupItem } from "@cooud-ui/ui";
+const productDetailGalleryCode = `import { Badge, Button, ToggleGroup, ToggleGroupItem } from "@kronus-ui/ui";
+import { productById, RATING_SUMMARY } from "../lib/demo-store.js";
 import { Headphones, Heart, ShoppingCart, Star, StarHalf, Truck } from "lucide-react";
+
+const product = productById("aurora");
 
 interface GalleryShot {
   id: string;
@@ -551,7 +563,7 @@ export function ProductDetailGalleryBlock() {
         <div className="relative flex min-h-64 flex-1 items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-primary/30 to-info/20">
           <Headphones className="size-24 text-fg/40" aria-hidden="true" />
           <div className="absolute start-4 top-4">
-            <Badge variant="primary">Bestseller</Badge>
+            <Badge variant="primary">{product?.badge}</Badge>
           </div>
         </div>
       </div>
@@ -563,7 +575,7 @@ export function ProductDetailGalleryBlock() {
             Aurora Audio · Over-ear
           </span>
           <h1 className="font-display text-3xl font-semibold text-fg">
-            Aurora Wireless Headphones
+            {product?.name}
           </h1>
           <div className="flex flex-wrap items-center gap-2">
             <span className="flex items-center gap-0.5">
@@ -573,18 +585,18 @@ export function ProductDetailGalleryBlock() {
               <Star className="size-4 fill-warning text-warning" aria-hidden="true" />
               <StarHalf className="size-4 fill-warning text-warning" aria-hidden="true" />
             </span>
-            <span className="text-sm font-medium text-fg">4.8</span>
+            <span className="text-sm font-medium text-fg">{product?.rating}</span>
             <a
               href="#reviews"
               className="text-sm text-fg-secondary underline-offset-4 hover:underline"
             >
-              1,284 reviews
+              {RATING_SUMMARY.count} reviews
             </a>
           </div>
         </div>
 
         <div className="flex flex-wrap items-baseline gap-2">
-          <span className="font-display text-3xl font-semibold text-fg">$349.00</span>
+          <span className="font-display text-3xl font-semibold text-fg">{product?.price}</span>
           <span className="text-base text-fg-tertiary line-through">$399.00</span>
           <Badge variant="success">Save $50</Badge>
         </div>
@@ -614,9 +626,9 @@ export function ProductDetailGalleryBlock() {
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
-          <Button variant="gradient" size="lg" className="flex-1">
+          <Button variant="primary" size="lg" className="flex-1">
             <ShoppingCart className="size-4" aria-hidden="true" />
-            Add to cart — $349.00
+            Add to cart — {product?.price}
           </Button>
           <Button variant="outline" size="icon" className="size-11">
             <Heart className="size-4" aria-hidden="true" />
@@ -650,7 +662,7 @@ export function ProductDetailMinimalBlock() {
         <span className="text-xs font-medium uppercase tracking-wide text-fg-tertiary">
           Aurora Audio
         </span>
-        <h1 className="font-display text-2xl font-semibold text-fg">Aurora Wireless Headphones</h1>
+        <h1 className="font-display text-2xl font-semibold text-fg">{product?.name}</h1>
         <div className="flex items-center gap-2">
           <span className="flex items-center gap-0.5">
             <Star className="size-4 fill-warning text-warning" aria-hidden="true" />
@@ -659,7 +671,9 @@ export function ProductDetailMinimalBlock() {
             <Star className="size-4 fill-warning text-warning" aria-hidden="true" />
             <StarHalf className="size-4 fill-warning text-warning" aria-hidden="true" />
           </span>
-          <span className="text-sm text-fg-secondary">4.8 · 1,284 reviews</span>
+          <span className="text-sm text-fg-secondary">
+            {product?.rating} · {RATING_SUMMARY.count} reviews
+          </span>
         </div>
         <p className="text-sm leading-relaxed text-fg-secondary">
           Adaptive noise cancellation, spatial audio and a 40-hour battery. Everything you need,
@@ -685,7 +699,7 @@ export function ProductDetailMinimalBlock() {
               <span className="sr-only">Increase quantity</span>
             </Button>
           </div>
-          <Button variant="gradient" size="lg" className="flex-1">
+          <Button variant="primary" size="lg" className="flex-1">
             <ShoppingCart className="size-4" aria-hidden="true" />
             Add to cart
           </Button>
@@ -699,8 +713,11 @@ export function ProductDetailMinimalBlock() {
   );
 }
 
-const productDetailMinimalCode = `import { Badge, Button } from "@cooud-ui/ui";
+const productDetailMinimalCode = `import { Badge, Button } from "@kronus-ui/ui";
+import { productById, RATING_SUMMARY } from "../lib/demo-store.js";
 import { Headphones, Minus, Plus, ShieldCheck, ShoppingCart, Star, StarHalf } from "lucide-react";
+
+const product = productById("aurora");
 
 export function ProductDetailMinimalBlock() {
   return (
@@ -719,9 +736,7 @@ export function ProductDetailMinimalBlock() {
         <span className="text-xs font-medium uppercase tracking-wide text-fg-tertiary">
           Aurora Audio
         </span>
-        <h1 className="font-display text-2xl font-semibold text-fg">
-          Aurora Wireless Headphones
-        </h1>
+        <h1 className="font-display text-2xl font-semibold text-fg">{product?.name}</h1>
         <div className="flex items-center gap-2">
           <span className="flex items-center gap-0.5">
             <Star className="size-4 fill-warning text-warning" aria-hidden="true" />
@@ -730,7 +745,9 @@ export function ProductDetailMinimalBlock() {
             <Star className="size-4 fill-warning text-warning" aria-hidden="true" />
             <StarHalf className="size-4 fill-warning text-warning" aria-hidden="true" />
           </span>
-          <span className="text-sm text-fg-secondary">4.8 · 1,284 reviews</span>
+          <span className="text-sm text-fg-secondary">
+            {product?.rating} · {RATING_SUMMARY.count} reviews
+          </span>
         </div>
         <p className="text-sm leading-relaxed text-fg-secondary">
           Adaptive noise cancellation, spatial audio and a 40-hour battery. Everything you
@@ -756,7 +773,7 @@ export function ProductDetailMinimalBlock() {
               <span className="sr-only">Increase quantity</span>
             </Button>
           </div>
-          <Button variant="gradient" size="lg" className="flex-1">
+          <Button variant="primary" size="lg" className="flex-1">
             <ShoppingCart className="size-4" aria-hidden="true" />
             Add to cart
           </Button>
@@ -888,7 +905,7 @@ export function CartPageBlock() {
             <span className="font-medium text-fg">Total</span>
             <span className="font-display text-2xl font-semibold text-fg">$387.60</span>
           </div>
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Checkout
           </Button>
           <p className="flex items-center justify-center gap-2 text-xs text-fg-tertiary">
@@ -912,7 +929,7 @@ const cartPageCode = `import {
   Input,
   Label,
   Separator,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Minus, Package, Plus, ShieldCheck, Trash2 } from "lucide-react";
 import { CART, productById } from "../lib/demo-store.js";
 
@@ -1029,7 +1046,7 @@ export function CartPageBlock() {
             <span className="font-medium text-fg">Total</span>
             <span className="font-display text-2xl font-semibold text-fg">$387.60</span>
           </div>
-          <Button variant="gradient" size="lg" className="w-full">
+          <Button variant="primary" size="lg" className="w-full">
             Checkout
           </Button>
           <p className="flex items-center justify-center gap-2 text-xs text-fg-tertiary">
@@ -1096,7 +1113,7 @@ export function CartDrawerBlock() {
             <p className="text-xs text-fg-tertiary">
               Shipping and taxes are calculated at checkout.
             </p>
-            <Button variant="gradient" className="w-full">
+            <Button variant="primary" className="w-full">
               <ShoppingBag className="size-4" aria-hidden="true" />
               Checkout — $456.00
             </Button>
@@ -1110,7 +1127,7 @@ export function CartDrawerBlock() {
   );
 }
 
-const cartDrawerCode = `import { Badge, Button, Progress } from "@cooud-ui/ui";
+const cartDrawerCode = `import { Badge, Button, Progress } from "@kronus-ui/ui";
 import { Package, ShoppingBag, X } from "lucide-react";
 import { CART, productById } from "../lib/demo-store.js";
 
@@ -1192,7 +1209,7 @@ export function CartDrawerBlock() {
             <p className="text-xs text-fg-tertiary">
               Shipping and taxes are calculated at checkout.
             </p>
-            <Button variant="gradient" className="w-full">
+            <Button variant="primary" className="w-full">
               <ShoppingBag className="size-4" aria-hidden="true" />
               Checkout — $456.00
             </Button>
@@ -1210,6 +1227,9 @@ export function CartDrawerBlock() {
  * 3. Order tracking — in transit, delivered and delayed states
  * ────────────────────────────────────────────────────────────────────────── */
 
+const transitOrder = ORDERS[0];
+const deliveredOrder = ORDERS[1];
+
 export function OrderTrackingBlock() {
   return (
     <Card
@@ -1218,12 +1238,13 @@ export function OrderTrackingBlock() {
       className="mx-auto w-full max-w-2xl gap-0 shadow-md"
     >
       <CardHeader>
-        <CardTitle className="font-display text-lg">Order #CD-58291</CardTitle>
+        <CardTitle className="font-display text-lg">Order {transitOrder?.id}</CardTitle>
         <p className="col-span-full text-sm text-fg-secondary">
-          Placed Jul 9, 2026 · 4 items · $387.60
+          Placed {transitOrder?.date} · {itemsLabel(transitOrder?.items ?? [])} ·{" "}
+          {transitOrder?.total}
         </p>
         <div className="col-start-2 row-span-2 row-start-1 self-start justify-self-end">
-          <Badge variant="info">In transit</Badge>
+          <Badge variant="info">{transitOrder?.status}</Badge>
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-6 pt-2">
@@ -1315,8 +1336,16 @@ const orderTrackingCode = `import {
   TimelineItem,
   TimelineTime,
   TimelineTitle,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
+import { ORDERS } from "../lib/demo-store.js";
 import { Check, MapPin, Package, Truck } from "lucide-react";
+
+function itemsLabel(items: { qty: number }[]): string {
+  const count = items.reduce((sum, item) => sum + item.qty, 0);
+  return count + (count === 1 ? " item" : " items");
+}
+
+const transitOrder = ORDERS[0];
 
 export function OrderTrackingBlock() {
   return (
@@ -1326,12 +1355,12 @@ export function OrderTrackingBlock() {
       className="mx-auto w-full max-w-2xl gap-0 shadow-md"
     >
       <CardHeader>
-        <CardTitle className="font-display text-lg">Order #CD-58291</CardTitle>
+        <CardTitle className="font-display text-lg">Order {transitOrder?.id}</CardTitle>
         <p className="col-span-full text-sm text-fg-secondary">
-          Placed Jul 9, 2026 · 4 items · $387.60
+          Placed {transitOrder?.date} · {itemsLabel(transitOrder?.items ?? [])} · {transitOrder?.total}
         </p>
         <div className="col-start-2 row-span-2 row-start-1 self-start justify-self-end">
-          <Badge variant="info">In transit</Badge>
+          <Badge variant="info">{transitOrder?.status}</Badge>
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-6 pt-2">
@@ -1413,12 +1442,13 @@ export function OrderDeliveredBlock() {
       className="mx-auto w-full max-w-2xl gap-0 shadow-md"
     >
       <CardHeader>
-        <CardTitle className="font-display text-lg">Order #CD-57904</CardTitle>
+        <CardTitle className="font-display text-lg">Order {deliveredOrder?.id}</CardTitle>
         <p className="col-span-full text-sm text-fg-secondary">
-          Placed Jun 20, 2026 · 1 item · $129.00
+          Placed {deliveredOrder?.date} · {itemsLabel(deliveredOrder?.items ?? [])} ·{" "}
+          {deliveredOrder?.total}
         </p>
         <div className="col-start-2 row-span-2 row-start-1 self-start justify-self-end">
-          <Badge variant="success">Delivered</Badge>
+          <Badge variant="success">{deliveredOrder?.status}</Badge>
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-6 pt-2">
@@ -1480,7 +1510,7 @@ export function OrderDeliveredBlock() {
             ))}
           </div>
         </div>
-        <Button variant="gradient" size="sm">
+        <Button variant="primary" size="sm">
           Leave a review
         </Button>
       </CardFooter>
@@ -1507,8 +1537,16 @@ const orderDeliveredCode = `import {
   TimelineItem,
   TimelineTime,
   TimelineTitle,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
+import { ORDERS } from "../lib/demo-store.js";
 import { Check, Package, PackageCheck, Star, Truck } from "lucide-react";
+
+function itemsLabel(items: { qty: number }[]): string {
+  const count = items.reduce((sum, item) => sum + item.qty, 0);
+  return count + (count === 1 ? " item" : " items");
+}
+
+const deliveredOrder = ORDERS[1];
 
 export function OrderDeliveredBlock() {
   return (
@@ -1518,12 +1556,13 @@ export function OrderDeliveredBlock() {
       className="mx-auto w-full max-w-2xl gap-0 shadow-md"
     >
       <CardHeader>
-        <CardTitle className="font-display text-lg">Order #CD-57904</CardTitle>
+        <CardTitle className="font-display text-lg">Order {deliveredOrder?.id}</CardTitle>
         <p className="col-span-full text-sm text-fg-secondary">
-          Placed Jun 20, 2026 · 1 item · $129.00
+          Placed {deliveredOrder?.date} · {itemsLabel(deliveredOrder?.items ?? [])} ·{" "}
+          {deliveredOrder?.total}
         </p>
         <div className="col-start-2 row-span-2 row-start-1 self-start justify-self-end">
-          <Badge variant="success">Delivered</Badge>
+          <Badge variant="success">{deliveredOrder?.status}</Badge>
         </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-6 pt-2">
@@ -1585,7 +1624,7 @@ export function OrderDeliveredBlock() {
             ))}
           </div>
         </div>
-        <Button variant="gradient" size="sm">
+        <Button variant="primary" size="sm">
           Leave a review
         </Button>
       </CardFooter>
@@ -1706,7 +1745,7 @@ const orderDelayedCode = `import {
   TimelineItem,
   TimelineTime,
   TimelineTitle,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Check, Clock, MapPin, MessageCircle, Package, TriangleAlert } from "lucide-react";
 
 export function OrderDelayedBlock() {
@@ -1923,7 +1962,7 @@ const orderHistoryTableCode = `import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Download, MoreHorizontal } from "lucide-react";
 import { ORDERS } from "../lib/demo-store.js";
 
@@ -2132,7 +2171,7 @@ const orderHistoryCardsCode = `import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Package, RotateCcw } from "lucide-react";
 
 type OrderStatus = "Delivered" | "In transit" | "Processing" | "Refunded";
@@ -2347,7 +2386,7 @@ const reviewsSummaryCode = `import {
   CardHeader,
   CardTitle,
   Progress,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Star, StarHalf } from "lucide-react";
 import { RATING_DISTRIBUTION, REVIEWS } from "../lib/demo-store.js";
 
@@ -2548,7 +2587,7 @@ export function ReviewsCompactBlock() {
   );
 }
 
-const reviewsCompactCode = `import { Avatar, AvatarFallback, Badge, Button, Card, CardContent } from "@cooud-ui/ui";
+const reviewsCompactCode = `import { Avatar, AvatarFallback, Badge, Button, Card, CardContent } from "@kronus-ui/ui";
 import { Star, StarHalf } from "lucide-react";
 
 function ReviewStars({ rating, label }: { rating: number; label: string }) {

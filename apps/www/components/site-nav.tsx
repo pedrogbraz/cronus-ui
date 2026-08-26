@@ -1,31 +1,37 @@
 "use client";
 
-import { useTheme } from "@cooud-ui/theme";
-import { type ThemeName, themeNames } from "@cooud-ui/tokens";
-import { Badge } from "@cooud-ui/ui/badge";
-import { cn } from "@cooud-ui/ui/cn";
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@cooud-ui/ui/sheet";
+import { useTheme } from "@kronus-ui/theme";
+import { type ThemeName, themeNames } from "@kronus-ui/tokens";
+import { Badge } from "@kronus-ui/ui/badge";
+import { cn } from "@kronus-ui/ui/cn";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@kronus-ui/ui/sheet";
 import { Check, Github, Menu, Moon, Palette, Sun } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { CooudMark } from "./brand/cooud-mark";
+import { PRO_URL } from "../lib/site-url";
+import { KronusMark } from "./brand/kronus-mark";
 import { CommandSearch } from "./docs/command-search";
 import { ComponentNavList } from "./docs/docs-sidebar";
 import { DocumentationNavList } from "./docs/documentation-nav";
+import { SiteAnnouncement } from "./site-announcement";
 
+/** Primary chrome — short on purpose. Pro lives in the announcement + nudge. */
 const navLinks = [
   { label: "Docs", href: "/docs" },
   { label: "Components", href: "/components" },
   { label: "Blocks", href: "/blocks" },
   { label: "Templates", href: "/templates" },
   { label: "Create", href: "/create" },
-  { label: "Themes", href: "/themes" },
-  { label: "Theming", href: "/docs/theming" },
-  { label: "Stack", href: "/stack" },
-  { label: "Changelog", href: "/changelog" },
 ] as const;
 
-const GITHUB_URL = "https://github.com/pedrogbraz/cooud-ui";
+const moreLinks = [
+  { label: "Themes", href: "/themes" },
+  { label: "Stack", href: "/stack" },
+  { label: "Changelog", href: "/changelog" },
+  { label: "Sponsor", href: "/sponsor" },
+] as const;
+
+const GITHUB_URL = "https://github.com/pedrogbraz/kronus-ui";
 
 /** Friendly Title Case label for each theme preset. */
 const themeLabels: Record<ThemeName, string> = {
@@ -177,21 +183,22 @@ export function SiteNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-surface-base/70 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 overflow-x-clip border-b border-border bg-surface-base/70 backdrop-blur-xl">
+      <SiteAnnouncement />
       <nav
-        className="relative z-10 mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8"
+        className="relative z-10 mx-auto flex h-16 w-full min-w-0 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8"
         aria-label="Primary"
       >
         {/* Left — logo + wordmark + version */}
         <Link
           href="/"
-          className="group flex items-center gap-3 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base"
+          className="group flex shrink-0 items-center gap-3 rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base"
         >
-          <CooudMark className="h-5 w-10 text-fg transition-opacity group-hover:opacity-90" />
+          <KronusMark className="h-5 w-10 text-fg transition-opacity group-hover:opacity-90" />
           <span className="flex items-center gap-2">
-            <span className="font-display text-base font-semibold text-fg">Cooud UI</span>
+            <span className="font-display text-base font-semibold text-fg">Kronus UI</span>
             <Badge variant="secondary" className="hidden px-1.5 py-0 text-[10px] sm:inline-flex">
-              v0.2.0
+              v0.5.0
             </Badge>
           </span>
         </Link>
@@ -211,14 +218,14 @@ export function SiteNav() {
         </ul>
 
         {/* Right — search + github + mode toggle + mobile menu */}
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <CommandSearch />
 
           <a
             href={GITHUB_URL}
             target="_blank"
             rel="noreferrer noopener"
-            aria-label="View Cooud UI on GitHub"
+            aria-label="View Kronus UI on GitHub"
             className="grid size-9 place-items-center rounded-lg text-fg-secondary outline-none transition-colors hover:bg-surface-overlay hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
           >
             <Github className="size-[18px]" aria-hidden="true" />
@@ -253,7 +260,7 @@ export function SiteNav() {
               <SheetTitle>Menu</SheetTitle>
 
               <ul className="mt-4 flex flex-col gap-1">
-                {navLinks.map((link) => (
+                {[...navLinks, ...moreLinks].map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
@@ -264,6 +271,15 @@ export function SiteNav() {
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <a
+                    href={PRO_URL}
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm text-fg-secondary outline-none transition-colors hover:bg-surface-overlay hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    Pro
+                  </a>
+                </li>
               </ul>
 
               <nav aria-label="Documentation" className="mt-6 text-sm">

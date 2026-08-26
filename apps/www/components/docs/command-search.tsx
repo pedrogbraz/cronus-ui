@@ -46,11 +46,11 @@ export function CommandSearch() {
           setMounted(true);
           setOpen(true);
         }}
-        className="inline-grid size-9 place-items-center rounded-lg border border-border bg-surface-inset text-xs text-fg-tertiary outline-none transition-colors hover:border-border-strong hover:text-fg-secondary focus-visible:ring-2 focus-visible:ring-ring xl:inline-flex xl:w-64 xl:justify-start xl:gap-2 xl:px-3"
+        className="inline-grid size-9 place-items-center rounded-lg border border-border bg-surface-inset text-xs text-fg-tertiary outline-none transition-colors hover:border-border-strong hover:text-fg-secondary focus-visible:ring-2 focus-visible:ring-ring 2xl:inline-flex 2xl:w-64 2xl:justify-start 2xl:gap-2 2xl:px-3"
       >
-        <Search className="size-4 xl:size-3.5" aria-hidden="true" />
-        <span className="hidden xl:inline">Search documentation…</span>
-        <kbd className="ml-auto hidden rounded border border-border bg-surface-raised px-1.5 py-0.5 font-mono text-[10px] text-fg-tertiary xl:inline">
+        <Search className="size-4 2xl:size-3.5" aria-hidden="true" />
+        <span className="hidden 2xl:inline">Search documentation…</span>
+        <kbd className="ml-auto hidden rounded border border-border bg-surface-raised px-1.5 py-0.5 font-mono text-[10px] text-fg-tertiary 2xl:inline">
           ⌘K
         </kbd>
       </button>

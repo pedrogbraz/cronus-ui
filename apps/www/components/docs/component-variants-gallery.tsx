@@ -37,7 +37,7 @@ export function ComponentVariantsGallery({
           <div className="relative flex min-h-[15rem] flex-1 items-center justify-center overflow-auto border-b border-border/60 bg-surface-inset p-8">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-[radial-gradient(var(--cooud-border)_1px,transparent_1px)] opacity-40 [background-size:18px_18px]"
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(var(--kronus-border)_1px,transparent_1px)] opacity-40 [background-size:18px_18px]"
             />
             <div className="relative flex w-full items-center justify-center">
               {example.preview}

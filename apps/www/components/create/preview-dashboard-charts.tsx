@@ -16,7 +16,7 @@ import {
   Metric,
   MetricDelta,
   MetricValue,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { ArrowRight } from "lucide-react";
 import {
   Area,

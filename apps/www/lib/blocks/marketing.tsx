@@ -17,11 +17,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
+  Highlighter,
   Input,
   Label,
   Marquee,
+  Meteors,
+  RetroGrid,
   Separator,
-} from "@cooud-ui/ui";
+  TypingText,
+} from "@kronus-ui/ui";
 import {
   ArrowRight,
   BarChart3,
@@ -73,7 +77,7 @@ function HeroBlock() {
         </p>
 
         <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
-          <Button variant="gradient" size="lg">
+          <Button variant="primary" size="lg">
             Start free trial
             <ArrowRight aria-hidden="true" />
           </Button>
@@ -106,7 +110,7 @@ const heroCode = `import {
   AvatarFallback,
   Badge,
   Button,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 export function HeroBlock() {
@@ -133,7 +137,7 @@ export function HeroBlock() {
         </p>
 
         <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
-          <Button variant="gradient" size="lg">
+          <Button variant="primary" size="lg">
             Start free trial
             <ArrowRight aria-hidden="true" />
           </Button>
@@ -178,7 +182,7 @@ function SplitHeroBlock() {
             re-solving every interaction from scratch.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button variant="gradient" size="lg">
+            <Button variant="primary" size="lg">
               Start building
               <ArrowRight aria-hidden="true" />
             </Button>
@@ -214,7 +218,7 @@ function SplitHeroBlock() {
   );
 }
 
-const splitHeroCode = `import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from "@cooud-ui/ui";
+const splitHeroCode = `import { Badge, Button, Card, CardContent, CardDescription, CardHeader, CardTitle } from "@kronus-ui/ui";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 export function SplitHeroBlock() {
@@ -234,7 +238,7 @@ export function SplitHeroBlock() {
             re-solving every interaction from scratch.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button variant="gradient" size="lg">Start building <ArrowRight aria-hidden="true" /></Button>
+            <Button variant="primary" size="lg">Start building <ArrowRight aria-hidden="true" /></Button>
             <Button variant="outline" size="lg">View templates</Button>
           </div>
         </div>
@@ -274,7 +278,7 @@ function CompactHeroBlock() {
           Blocks inherit your theme, radius, color scale, and typography automatically.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button variant="gradient" size="lg">
+          <Button variant="primary" size="lg">
             Browse blocks
             <ArrowRight aria-hidden="true" />
           </Button>
@@ -298,7 +302,79 @@ function CompactHeroBlock() {
   );
 }
 
-const compactHeroCode = `import { Badge, Button } from "@cooud-ui/ui";
+function AtmosphereHeroBlock() {
+  return (
+    <RetroGrid className="relative overflow-hidden">
+      <Meteors className="px-6 py-24 sm:py-32">
+        <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+          <Badge variant="primary" className="gap-1.5">
+            <Sparkles aria-hidden="true" className="size-3.5" />
+            Now in public beta
+          </Badge>
+          <h1 className="mt-6 text-balance font-display text-5xl font-semibold leading-[1.05] text-fg sm:text-6xl">
+            Ship products your team is <Highlighter>proud of</Highlighter>
+          </h1>
+          <p className="mt-6 max-w-xl text-balance text-lg text-fg-secondary">
+            A product UI system: compose the app, theme it live, and keep the copy-in you can{" "}
+            <TypingText className="font-medium text-fg" text={["upgrade.", "restyle.", "ship."]} />
+          </p>
+          <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
+            <Button variant="primary" size="lg">
+              Start free trial
+              <ArrowRight aria-hidden="true" />
+            </Button>
+            <Button variant="outline" size="lg">
+              Book a demo
+            </Button>
+          </div>
+        </div>
+      </Meteors>
+    </RetroGrid>
+  );
+}
+
+const atmosphereHeroCode = `import {
+  Badge,
+  Button,
+  Highlighter,
+  Meteors,
+  RetroGrid,
+  TypingText,
+} from "@kronus-ui/ui";
+import { ArrowRight, Sparkles } from "lucide-react";
+
+export function AtmosphereHeroBlock() {
+  return (
+    <RetroGrid className="relative overflow-hidden">
+      <Meteors className="px-6 py-24 sm:py-32">
+        <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+          <Badge variant="primary" className="gap-1.5">
+            <Sparkles aria-hidden="true" className="size-3.5" />
+            Now in public beta
+          </Badge>
+          <h1 className="mt-6 text-balance font-display text-5xl font-semibold leading-[1.05] text-fg sm:text-6xl">
+            Ship products your team is <Highlighter>proud of</Highlighter>
+          </h1>
+          <p className="mt-6 max-w-xl text-balance text-lg text-fg-secondary">
+            A product UI system: compose the app, theme it live, and keep the copy-in you can{" "}
+            <TypingText className="font-medium text-fg" text={["upgrade.", "restyle.", "ship."]} />
+          </p>
+          <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
+            <Button variant="primary" size="lg">
+              Start free trial
+              <ArrowRight aria-hidden="true" />
+            </Button>
+            <Button variant="outline" size="lg">
+              Book a demo
+            </Button>
+          </div>
+        </div>
+      </Meteors>
+    </RetroGrid>
+  );
+}`;
+
+const compactHeroCode = `import { Badge, Button } from "@kronus-ui/ui";
 import { ArrowRight, Check } from "lucide-react";
 
 export function CompactHeroBlock() {
@@ -313,7 +389,7 @@ export function CompactHeroBlock() {
           Blocks inherit your theme, radius, color scale, and typography automatically.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button variant="gradient" size="lg">Browse blocks <ArrowRight aria-hidden="true" /></Button>
+          <Button variant="primary" size="lg">Browse blocks <ArrowRight aria-hidden="true" /></Button>
           <Button variant="ghost" size="lg">Read docs</Button>
         </div>
         <div className="mx-auto mt-9 grid max-w-2xl gap-3 text-left sm:grid-cols-3">
@@ -426,7 +502,7 @@ function PricingBlock() {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button variant={tier.featured ? "gradient" : "outline"} className="w-full">
+              <Button variant={tier.featured ? "primary" : "outline"} className="w-full">
                 {tier.cta}
               </Button>
             </CardFooter>
@@ -446,7 +522,7 @@ const pricingCode = `import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Check, Sparkles } from "lucide-react";
 
 const PRICING_TIERS = [
@@ -539,7 +615,7 @@ export function PricingBlock() {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button variant={tier.featured ? "gradient" : "outline"} className="w-full">
+              <Button variant={tier.featured ? "primary" : "outline"} className="w-full">
                 {tier.cta}
               </Button>
             </CardFooter>
@@ -608,7 +684,7 @@ function PricingToggleBlock() {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button variant={index === 1 ? "gradient" : "outline"} className="w-full">
+              <Button variant={index === 1 ? "primary" : "outline"} className="w-full">
                 Choose {tier.name}
               </Button>
             </CardFooter>
@@ -628,7 +704,7 @@ const pricingToggleCode = `import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Check } from "lucide-react";
 
 export function PricingToggleBlock() {
@@ -689,7 +765,7 @@ export function PricingToggleBlock() {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button variant={index === 1 ? "gradient" : "outline"} className="w-full">
+              <Button variant={index === 1 ? "primary" : "outline"} className="w-full">
                 Choose {tier.name}
               </Button>
             </CardFooter>
@@ -743,7 +819,7 @@ function UsagePricingBlock() {
               ))}
             </CardContent>
             <CardFooter>
-              <Button variant="gradient" className="w-full">
+              <Button variant="primary" className="w-full">
                 Estimate usage
               </Button>
             </CardFooter>
@@ -763,7 +839,7 @@ const usagePricingCode = `import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Check } from "lucide-react";
 
 export function UsagePricingBlock() {
@@ -809,7 +885,7 @@ export function UsagePricingBlock() {
               ))}
             </CardContent>
             <CardFooter>
-              <Button variant="gradient" className="w-full">
+              <Button variant="primary" className="w-full">
                 Estimate usage
               </Button>
             </CardFooter>
@@ -893,7 +969,7 @@ const featureGridCode = `import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import {
   BarChart3,
   Layers,
@@ -1008,7 +1084,7 @@ function BentoFeatureBlock() {
   );
 }
 
-const bentoFeatureCode = `import { Badge, Card, CardDescription, CardHeader, CardTitle } from "@cooud-ui/ui";
+const bentoFeatureCode = `import { Badge, Card, CardDescription, CardHeader, CardTitle } from "@kronus-ui/ui";
 import { BarChart3, Layers, Lock, Palette, Workflow, Zap } from "lucide-react";
 
 const FEATURES = [
@@ -1145,7 +1221,7 @@ function CtaBlock() {
 
 const ctaCode = `"use client";
 
-import { Button, Input, Label } from "@cooud-ui/ui";
+import { Button, Input, Label } from "@kronus-ui/ui";
 import { Send } from "lucide-react";
 
 export function CtaBlock() {
@@ -1216,7 +1292,7 @@ function CtaBannerBlock() {
       <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-8 text-center lg:flex-row lg:justify-between lg:text-start">
         <div className="max-w-2xl">
           <h2 className="text-balance font-display text-3xl font-semibold tracking-tight text-primary-foreground sm:text-4xl">
-            Ship your next launch on Cooud.
+            Ship your next launch on Kronus.
           </h2>
           <p className="mt-3 text-balance text-lg text-primary-foreground/80">
             Every block, theme, and primitive wired together — production-ready from day one.
@@ -1240,7 +1316,7 @@ function CtaBannerBlock() {
   );
 }
 
-const ctaBannerCode = `import { Button } from "@cooud-ui/ui";
+const ctaBannerCode = `import { Button } from "@kronus-ui/ui";
 import { ArrowRight } from "lucide-react";
 
 export function CtaBannerBlock() {
@@ -1257,7 +1333,7 @@ export function CtaBannerBlock() {
       <div className="relative mx-auto flex max-w-5xl flex-col items-center gap-8 text-center lg:flex-row lg:justify-between lg:text-start">
         <div className="max-w-2xl">
           <h2 className="text-balance font-display text-3xl font-semibold tracking-tight text-primary-foreground sm:text-4xl">
-            Ship your next launch on Cooud.
+            Ship your next launch on Kronus.
           </h2>
           <p className="mt-3 text-balance text-lg text-primary-foreground/80">
             Every block, theme, and primitive wired together — production-ready from day one.
@@ -1309,7 +1385,7 @@ function CtaSplitVisualBlock() {
             ))}
           </ul>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button variant="gradient" size="lg">
+            <Button variant="primary" size="lg">
               Start building
               <ArrowRight aria-hidden="true" />
             </Button>
@@ -1329,7 +1405,7 @@ function CtaSplitVisualBlock() {
               <span aria-hidden="true" className="size-2.5 rounded-full bg-error/60" />
               <span aria-hidden="true" className="size-2.5 rounded-full bg-warning/60" />
               <span aria-hidden="true" className="size-2.5 rounded-full bg-success/60" />
-              <span className="ms-3 text-xs text-fg-tertiary">app.cooud.com/overview</span>
+              <span className="ms-3 text-xs text-fg-tertiary">app.kronus.com/overview</span>
             </div>
             <div className="flex flex-col gap-5 p-5">
               <div className="flex items-center justify-between gap-4">
@@ -1366,7 +1442,7 @@ function CtaSplitVisualBlock() {
   );
 }
 
-const ctaSplitVisualCode = `import { Badge, Button } from "@cooud-ui/ui";
+const ctaSplitVisualCode = `import { Badge, Button } from "@kronus-ui/ui";
 import { ArrowRight, Check } from "lucide-react";
 
 export function CtaSplitVisualBlock() {
@@ -1397,7 +1473,7 @@ export function CtaSplitVisualBlock() {
             ))}
           </ul>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button variant="gradient" size="lg">
+            <Button variant="primary" size="lg">
               Start building
               <ArrowRight aria-hidden="true" />
             </Button>
@@ -1417,7 +1493,7 @@ export function CtaSplitVisualBlock() {
               <span aria-hidden="true" className="size-2.5 rounded-full bg-error/60" />
               <span aria-hidden="true" className="size-2.5 rounded-full bg-warning/60" />
               <span aria-hidden="true" className="size-2.5 rounded-full bg-success/60" />
-              <span className="ms-3 text-xs text-fg-tertiary">app.cooud.com/overview</span>
+              <span className="ms-3 text-xs text-fg-tertiary">app.kronus.com/overview</span>
             </div>
             <div className="flex flex-col gap-5 p-5">
               <div className="flex items-center justify-between gap-4">
@@ -1461,7 +1537,7 @@ export function CtaSplitVisualBlock() {
 const TESTIMONIALS = [
   {
     quote:
-      "Cooud let us replace a tangle of one-off components with one themeable system. Our redesign shipped weeks early.",
+      "Kronus let us replace a tangle of one-off components with one themeable system. Our redesign shipped weeks early.",
     name: "Amara Okafor",
     role: "VP Design, Northwind",
     initials: "AO",
@@ -1501,7 +1577,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "Cooud is the first design system our designers and engineers actually agree on. That alone paid for itself.",
+      "Kronus is the first design system our designers and engineers actually agree on. That alone paid for itself.",
     name: "David Chen",
     role: "CTO, Parallel",
     initials: "DC",
@@ -1532,9 +1608,9 @@ function TestimonialsHeader() {
         accessible, themeable, and consistent.
       </p>
       <div className="mt-7 flex items-center gap-3">
-        <AvatarGroup avatars={TESTIMONIAL_AVATARS} aria-label="Teams using Cooud" />
+        <AvatarGroup avatars={TESTIMONIAL_AVATARS} aria-label="Teams using Kronus" />
         <p className="text-sm text-fg-tertiary">
-          Join <span className="font-medium text-fg">4,000+</span> teams shipping with Cooud
+          Join <span className="font-medium text-fg">4,000+</span> teams shipping with Kronus
         </p>
       </div>
     </div>
@@ -1587,13 +1663,13 @@ const testimonialsCode = `import {
   Card,
   CardContent,
   Marquee,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Sparkles } from "lucide-react";
 
 const TESTIMONIALS = [
   {
     quote:
-      "Cooud let us replace a tangle of one-off components with one themeable system. Our redesign shipped weeks early.",
+      "Kronus let us replace a tangle of one-off components with one themeable system. Our redesign shipped weeks early.",
     name: "Amara Okafor",
     role: "VP Design, Northwind",
     initials: "AO",
@@ -1633,7 +1709,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "Cooud is the first design system our designers and engineers actually agree on. That alone paid for itself.",
+      "Kronus is the first design system our designers and engineers actually agree on. That alone paid for itself.",
     name: "David Chen",
     role: "CTO, Parallel",
     initials: "DC",
@@ -1687,9 +1763,9 @@ export function TestimonialsBlock() {
           accessible, themeable, and consistent.
         </p>
         <div className="mt-7 flex items-center gap-3">
-          <AvatarGroup avatars={TESTIMONIAL_AVATARS} aria-label="Teams using Cooud" />
+          <AvatarGroup avatars={TESTIMONIAL_AVATARS} aria-label="Teams using Kronus" />
           <p className="text-sm text-fg-tertiary">
-            Join <span className="font-medium text-fg">4,000+</span> teams shipping with Cooud
+            Join <span className="font-medium text-fg">4,000+</span> teams shipping with Kronus
           </p>
         </div>
       </div>
@@ -1741,13 +1817,13 @@ const testimonialsGridCode = `import {
   Badge,
   Card,
   CardContent,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Sparkles } from "lucide-react";
 
 const TESTIMONIALS = [
   {
     quote:
-      "Cooud let us replace a tangle of one-off components with one themeable system. Our redesign shipped weeks early.",
+      "Kronus let us replace a tangle of one-off components with one themeable system. Our redesign shipped weeks early.",
     name: "Amara Okafor",
     role: "VP Design, Northwind",
     initials: "AO",
@@ -1787,7 +1863,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "Cooud is the first design system our designers and engineers actually agree on. That alone paid for itself.",
+      "Kronus is the first design system our designers and engineers actually agree on. That alone paid for itself.",
     name: "David Chen",
     role: "CTO, Parallel",
     initials: "DC",
@@ -1819,9 +1895,9 @@ export function TestimonialsGridBlock() {
           accessible, themeable, and consistent.
         </p>
         <div className="mt-7 flex items-center gap-3">
-          <AvatarGroup avatars={TESTIMONIAL_AVATARS} aria-label="Teams using Cooud" />
+          <AvatarGroup avatars={TESTIMONIAL_AVATARS} aria-label="Teams using Kronus" />
           <p className="text-sm text-fg-tertiary">
-            Join <span className="font-medium text-fg">4,000+</span> teams shipping with Cooud
+            Join <span className="font-medium text-fg">4,000+</span> teams shipping with Kronus
           </p>
         </div>
       </div>
@@ -1856,7 +1932,7 @@ export function TestimonialsGridBlock() {
 
 const FAQ_ITEMS = [
   {
-    question: "What exactly do I get with Cooud?",
+    question: "What exactly do I get with Kronus?",
     answer:
       "A themeable component library plus a registry of copy-paste product sections. Add what you need with the CLI and everything inherits your tokens, radius, and color scale automatically.",
   },
@@ -1914,11 +1990,11 @@ const faqCode = `import {
   AccordionItem,
   AccordionTrigger,
   Badge,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 
 const FAQ_ITEMS = [
   {
-    question: "What exactly do I get with Cooud?",
+    question: "What exactly do I get with Kronus?",
     answer:
       "A themeable component library plus a registry of copy-paste product sections. Add what you need with the CLI and everything inherits your tokens, radius, and color scale automatically.",
   },
@@ -2014,11 +2090,11 @@ const faqSplitCode = `import {
   AccordionTrigger,
   Badge,
   Button,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 
 const FAQ_ITEMS = [
   {
-    question: "What exactly do I get with Cooud?",
+    question: "What exactly do I get with Kronus?",
     answer:
       "A themeable component library plus a registry of copy-paste product sections. Add what you need with the CLI and everything inherits your tokens, radius, and color scale automatically.",
   },
@@ -2085,7 +2161,7 @@ export function FaqSplitBlock() {
    7. FOOTER
    ────────────────────────────────────────────────────────────────── */
 
-/* @cooud:data footer-links */
+/* @kronus:data footer-links */
 const FOOTER_COLUMNS = [
   {
     heading: "Product",
@@ -2118,7 +2194,7 @@ const FOOTER_COLUMNS = [
     ],
   },
 ] as const;
-/* @cooud:data-end */
+/* @kronus:data-end */
 
 function FooterBlock() {
   return (
@@ -2130,7 +2206,7 @@ function FooterBlock() {
               <span className="grid size-9 place-items-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
                 <Hexagon aria-hidden="true" className="size-5" />
               </span>
-              <span className="font-display text-lg font-semibold text-fg">Cooud</span>
+              <span className="font-display text-lg font-semibold text-fg">Kronus</span>
             </div>
             <p className="mt-4 text-sm leading-6 text-fg-secondary">
               The themeable component library and block registry for teams who ship polished
@@ -2191,7 +2267,7 @@ function FooterBlock() {
                 autoComplete="email"
               />
             </div>
-            <Button type="submit" variant="gradient">
+            <Button type="submit" variant="primary">
               Subscribe
               <Send aria-hidden="true" />
             </Button>
@@ -2201,7 +2277,7 @@ function FooterBlock() {
         <Separator className="my-8" />
 
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="text-sm text-fg-tertiary">© 2026 Cooud. All rights reserved.</p>
+          <p className="text-sm text-fg-tertiary">© 2026 Kronus. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <a
               href="#privacy"
@@ -2224,10 +2300,10 @@ function FooterBlock() {
 
 const footerCode = `"use client";
 
-import { Button, Input, Label, Separator } from "@cooud-ui/ui";
+import { Button, Input, Label, Separator } from "@kronus-ui/ui";
 import { Github, Hexagon, Linkedin, Send, Twitter } from "lucide-react";
 
-/* @cooud:data footer-links */
+/* @kronus:data footer-links */
 const FOOTER_COLUMNS = [
   {
     heading: "Product",
@@ -2260,7 +2336,7 @@ const FOOTER_COLUMNS = [
     ],
   },
 ];
-/* @cooud:data-end */
+/* @kronus:data-end */
 
 export function FooterBlock() {
   return (
@@ -2272,7 +2348,7 @@ export function FooterBlock() {
               <span className="grid size-9 place-items-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
                 <Hexagon aria-hidden="true" className="size-5" />
               </span>
-              <span className="font-display text-lg font-semibold text-fg">Cooud</span>
+              <span className="font-display text-lg font-semibold text-fg">Kronus</span>
             </div>
             <p className="mt-4 text-sm leading-6 text-fg-secondary">
               The themeable component library and block registry for teams who ship polished
@@ -2333,7 +2409,7 @@ export function FooterBlock() {
                 autoComplete="email"
               />
             </div>
-            <Button type="submit" variant="gradient">
+            <Button type="submit" variant="primary">
               Subscribe
               <Send aria-hidden="true" />
             </Button>
@@ -2343,7 +2419,7 @@ export function FooterBlock() {
         <Separator className="my-8" />
 
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <p className="text-sm text-fg-tertiary">© 2026 Cooud. All rights reserved.</p>
+          <p className="text-sm text-fg-tertiary">© 2026 Kronus. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <a
               href="#privacy"
@@ -2423,7 +2499,7 @@ function FooterMegaBlock() {
               <span className="grid size-9 place-items-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
                 <Hexagon aria-hidden="true" className="size-5" />
               </span>
-              <span className="font-display text-lg font-semibold text-fg">Cooud</span>
+              <span className="font-display text-lg font-semibold text-fg">Kronus</span>
             </div>
             <p className="mt-4 text-sm leading-6 text-fg-secondary">
               Product updates, new blocks, and launch guides — a few times a month.
@@ -2445,7 +2521,7 @@ function FooterMegaBlock() {
                 autoComplete="email"
               />
             </div>
-            <Button type="submit" variant="gradient">
+            <Button type="submit" variant="primary">
               Subscribe
               <Send aria-hidden="true" />
             </Button>
@@ -2475,7 +2551,7 @@ function FooterMegaBlock() {
         <Separator className="my-10" />
 
         <div className="flex flex-col-reverse items-center justify-between gap-6 lg:flex-row">
-          <p className="text-sm text-fg-tertiary">© 2026 Cooud Labs, Inc. All rights reserved.</p>
+          <p className="text-sm text-fg-tertiary">© 2026 Kronus Labs, Inc. All rights reserved.</p>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
             <a
               href="#status"
@@ -2504,7 +2580,7 @@ function FooterMegaBlock() {
 
 const footerMegaCode = `"use client";
 
-import { Button, Input, Label, Separator } from "@cooud-ui/ui";
+import { Button, Input, Label, Separator } from "@kronus-ui/ui";
 import { Github, Hexagon, Linkedin, Send, Twitter } from "lucide-react";
 
 const FOOTER_MEGA_COLUMNS = [
@@ -2566,7 +2642,7 @@ export function FooterMegaBlock() {
               <span className="grid size-9 place-items-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
                 <Hexagon aria-hidden="true" className="size-5" />
               </span>
-              <span className="font-display text-lg font-semibold text-fg">Cooud</span>
+              <span className="font-display text-lg font-semibold text-fg">Kronus</span>
             </div>
             <p className="mt-4 text-sm leading-6 text-fg-secondary">
               Product updates, new blocks, and launch guides — a few times a month.
@@ -2588,7 +2664,7 @@ export function FooterMegaBlock() {
                 autoComplete="email"
               />
             </div>
-            <Button type="submit" variant="gradient">
+            <Button type="submit" variant="primary">
               Subscribe
               <Send aria-hidden="true" />
             </Button>
@@ -2618,7 +2694,7 @@ export function FooterMegaBlock() {
         <Separator className="my-10" />
 
         <div className="flex flex-col-reverse items-center justify-between gap-6 lg:flex-row">
-          <p className="text-sm text-fg-tertiary">© 2026 Cooud Labs, Inc. All rights reserved.</p>
+          <p className="text-sm text-fg-tertiary">© 2026 Kronus Labs, Inc. All rights reserved.</p>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
             <a
               href="#status"
@@ -2659,7 +2735,7 @@ function FooterMinimalBlock() {
           <span className="grid size-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
             <Hexagon aria-hidden="true" className="size-4" />
           </span>
-          <span className="font-display text-base font-semibold text-fg">Cooud</span>
+          <span className="font-display text-base font-semibold text-fg">Kronus</span>
         </div>
 
         <div className="flex items-center gap-6">
@@ -2674,7 +2750,7 @@ function FooterMinimalBlock() {
           ))}
         </div>
 
-        <p className="text-sm text-fg-tertiary">© 2026 Cooud. All rights reserved.</p>
+        <p className="text-sm text-fg-tertiary">© 2026 Kronus. All rights reserved.</p>
       </div>
     </footer>
   );
@@ -2696,7 +2772,7 @@ export function FooterMinimalBlock() {
           <span className="grid size-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
             <Hexagon aria-hidden="true" className="size-4" />
           </span>
-          <span className="font-display text-base font-semibold text-fg">Cooud</span>
+          <span className="font-display text-base font-semibold text-fg">Kronus</span>
         </div>
 
         <div className="flex items-center gap-6">
@@ -2711,7 +2787,7 @@ export function FooterMinimalBlock() {
           ))}
         </div>
 
-        <p className="text-sm text-fg-tertiary">© 2026 Cooud. All rights reserved.</p>
+        <p className="text-sm text-fg-tertiary">© 2026 Kronus. All rights reserved.</p>
       </div>
     </footer>
   );
@@ -2721,14 +2797,14 @@ export function FooterMinimalBlock() {
    8. NAVBAR
    ────────────────────────────────────────────────────────────────── */
 
-/* @cooud:data navbar-links */
+/* @kronus:data navbar-links */
 const NAVBAR_LINKS = [
   { label: "Features", href: "#features" },
   { label: "Pricing", href: "#pricing" },
   { label: "Docs", href: "#docs" },
   { label: "Changelog", href: "#changelog" },
 ] as const;
-/* @cooud:data-end */
+/* @kronus:data-end */
 
 function NavbarBlock() {
   return (
@@ -2738,7 +2814,7 @@ function NavbarBlock() {
           <span className="grid size-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
             <Hexagon aria-hidden="true" className="size-4" />
           </span>
-          <span className="font-display text-base font-semibold text-fg">Cooud</span>
+          <span className="font-display text-base font-semibold text-fg">Kronus</span>
           <Badge variant="secondary" className="ml-0.5">
             Beta
           </Badge>
@@ -2760,7 +2836,7 @@ function NavbarBlock() {
           <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
             Sign in
           </Button>
-          <Button variant="gradient" size="sm">
+          <Button variant="primary" size="sm">
             Get started
           </Button>
           <Button variant="ghost" size="icon-sm" className="md:hidden" aria-label="Open menu">
@@ -2772,17 +2848,17 @@ function NavbarBlock() {
   );
 }
 
-const navbarCode = `import { Badge, Button } from "@cooud-ui/ui";
+const navbarCode = `import { Badge, Button } from "@kronus-ui/ui";
 import { Hexagon, Menu } from "lucide-react";
 
-/* @cooud:data navbar-links */
+/* @kronus:data navbar-links */
 const NAVBAR_LINKS = [
   { label: "Features", href: "#features" },
   { label: "Pricing", href: "#pricing" },
   { label: "Docs", href: "#docs" },
   { label: "Changelog", href: "#changelog" },
 ];
-/* @cooud:data-end */
+/* @kronus:data-end */
 
 export function NavbarBlock() {
   return (
@@ -2792,7 +2868,7 @@ export function NavbarBlock() {
           <span className="grid size-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
             <Hexagon aria-hidden="true" className="size-4" />
           </span>
-          <span className="font-display text-base font-semibold text-fg">Cooud</span>
+          <span className="font-display text-base font-semibold text-fg">Kronus</span>
           <Badge variant="secondary" className="ml-0.5">
             Beta
           </Badge>
@@ -2814,7 +2890,7 @@ export function NavbarBlock() {
           <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
             Sign in
           </Button>
-          <Button variant="gradient" size="sm">
+          <Button variant="primary" size="sm">
             Get started
           </Button>
           <Button variant="ghost" size="icon-sm" className="md:hidden" aria-label="Open menu">
@@ -2834,7 +2910,7 @@ function NavbarCenteredBlock() {
           <span className="grid size-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
             <Hexagon aria-hidden="true" className="size-4" />
           </span>
-          <span className="font-display text-base font-semibold text-fg">Cooud</span>
+          <span className="font-display text-base font-semibold text-fg">Kronus</span>
         </div>
 
         <div className="hidden items-center gap-6 md:flex">
@@ -2850,7 +2926,7 @@ function NavbarCenteredBlock() {
         </div>
 
         <div className="col-start-3 flex items-center justify-end gap-2">
-          <Button variant="gradient" size="sm" className="hidden sm:inline-flex">
+          <Button variant="primary" size="sm" className="hidden sm:inline-flex">
             Get started
           </Button>
           <Button variant="ghost" size="icon-sm" className="md:hidden" aria-label="Open menu">
@@ -2862,7 +2938,7 @@ function NavbarCenteredBlock() {
   );
 }
 
-const navbarCenteredCode = `import { Button } from "@cooud-ui/ui";
+const navbarCenteredCode = `import { Button } from "@kronus-ui/ui";
 import { Hexagon, Menu } from "lucide-react";
 
 const NAVBAR_LINKS = [
@@ -2880,7 +2956,7 @@ export function NavbarCenteredBlock() {
           <span className="grid size-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
             <Hexagon aria-hidden="true" className="size-4" />
           </span>
-          <span className="font-display text-base font-semibold text-fg">Cooud</span>
+          <span className="font-display text-base font-semibold text-fg">Kronus</span>
         </div>
 
         <div className="hidden items-center gap-6 md:flex">
@@ -2896,7 +2972,7 @@ export function NavbarCenteredBlock() {
         </div>
 
         <div className="col-start-3 flex items-center justify-end gap-2">
-          <Button variant="gradient" size="sm" className="hidden sm:inline-flex">
+          <Button variant="primary" size="sm" className="hidden sm:inline-flex">
             Get started
           </Button>
           <Button variant="ghost" size="icon-sm" className="md:hidden" aria-label="Open menu">
@@ -2918,7 +2994,7 @@ function NavbarAnnouncementBlock() {
             New
           </Badge>
           <p className="truncate text-sm text-fg-secondary">
-            Cooud 2.0 is live — 40 new blocks and a refreshed theme engine.
+            Kronus 2.0 is live — 40 new blocks and a refreshed theme engine.
           </p>
           <a
             href="#changelog"
@@ -2934,7 +3010,7 @@ function NavbarAnnouncementBlock() {
             <span className="grid size-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
               <Hexagon aria-hidden="true" className="size-4" />
             </span>
-            <span className="font-display text-base font-semibold text-fg">Cooud</span>
+            <span className="font-display text-base font-semibold text-fg">Kronus</span>
           </div>
 
           <div className="hidden items-center gap-6 md:flex">
@@ -2953,7 +3029,7 @@ function NavbarAnnouncementBlock() {
             <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
               Sign in
             </Button>
-            <Button variant="gradient" size="sm">
+            <Button variant="primary" size="sm">
               Get started
             </Button>
             <Button variant="ghost" size="icon-sm" className="md:hidden" aria-label="Open menu">
@@ -2966,7 +3042,7 @@ function NavbarAnnouncementBlock() {
   );
 }
 
-const navbarAnnouncementCode = `import { Badge, Button } from "@cooud-ui/ui";
+const navbarAnnouncementCode = `import { Badge, Button } from "@kronus-ui/ui";
 import { ArrowRight, Hexagon, Menu, Sparkles } from "lucide-react";
 
 const NAVBAR_LINKS = [
@@ -2986,7 +3062,7 @@ export function NavbarAnnouncementBlock() {
             New
           </Badge>
           <p className="truncate text-sm text-fg-secondary">
-            Cooud 2.0 is live — 40 new blocks and a refreshed theme engine.
+            Kronus 2.0 is live — 40 new blocks and a refreshed theme engine.
           </p>
           <a
             href="#changelog"
@@ -3002,7 +3078,7 @@ export function NavbarAnnouncementBlock() {
             <span className="grid size-8 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
               <Hexagon aria-hidden="true" className="size-4" />
             </span>
-            <span className="font-display text-base font-semibold text-fg">Cooud</span>
+            <span className="font-display text-base font-semibold text-fg">Kronus</span>
           </div>
 
           <div className="hidden items-center gap-6 md:flex">
@@ -3021,7 +3097,7 @@ export function NavbarAnnouncementBlock() {
             <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
               Sign in
             </Button>
-            <Button variant="gradient" size="sm">
+            <Button variant="primary" size="sm">
               Get started
             </Button>
             <Button variant="ghost" size="icon-sm" className="md:hidden" aria-label="Open menu">
@@ -3066,6 +3142,15 @@ export const marketingBlocks: BlockContentMap = {
         appearance: "light",
         preview: <CompactHeroBlock />,
         code: compactHeroCode,
+      },
+      {
+        id: "atmosphere",
+        name: "Atmosphere",
+        description:
+          "Centered launch hero over a receding grid floor, shooting stars, and a typing headline.",
+        appearance: "dark",
+        preview: <AtmosphereHeroBlock />,
+        code: atmosphereHeroCode,
       },
     ],
   },

@@ -1,5 +1,5 @@
 /**
- * Icon-library DATA + renderer for the Cooud UI "Create" studio.
+ * Icon-library DATA + renderer for the Kronus UI "Create" studio.
  *
  * Client component (`"use client"`): it renders React icon components from five
  * installed icon libraries so the studio can preview the SAME curated icons in

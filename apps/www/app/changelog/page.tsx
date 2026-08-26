@@ -1,4 +1,4 @@
-import { cn } from "@cooud-ui/ui";
+import { cn } from "@kronus-ui/ui";
 import { CalendarDays, GitBranch } from "lucide-react";
 import { DocsHeader, DocsSection } from "../../components/docs/documentation";
 import { SectionGlow } from "../../components/showcase-ui";

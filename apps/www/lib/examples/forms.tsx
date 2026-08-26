@@ -1,5 +1,6 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Autocomplete,
   type AutocompleteOption,
@@ -63,8 +64,7 @@ import {
   Switch,
   TagsInput,
   Textarea,
-} from "@cooud-ui/ui";
-import { zodResolver } from "@hookform/resolvers/zod";
+} from "@kronus-ui/ui";
 import { AtSign, Check, FileText, Link2, Lock, Mail } from "lucide-react";
 import { useId, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -179,8 +179,8 @@ const inputGroupUrlCode = `<InputGroup>
     <Link2 />
     https://
   </InputGroupAddon>
-  <Input placeholder="acme.cooud.app" />
-  <InputGroupAddon align="end">.cooud.app</InputGroupAddon>
+  <Input placeholder="acme.kronus.app" />
+  <InputGroupAddon align="end">.kronus.app</InputGroupAddon>
 </InputGroup>`;
 
 const inputGroupEmailCode = `<InputGroup>
@@ -757,7 +757,7 @@ function FormDemo() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="you@cooud.dev" {...field} />
+                <Input type="email" placeholder="you@kronus.dev" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -826,7 +826,7 @@ function FormDemo() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="you@cooud.dev" {...field} />
+                <Input type="email" placeholder="you@kronus.dev" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -1625,8 +1625,8 @@ export const formsExamples: ExampleMap = {
       id: "default",
       title: "Default",
       description: "A single-line text input.",
-      code: `<Input placeholder="you@cooud.dev" />`,
-      preview: <Input placeholder="you@cooud.dev" className="max-w-xs" />,
+      code: `<Input placeholder="you@kronus.dev" />`,
+      preview: <Input placeholder="you@kronus.dev" className="max-w-xs" />,
     },
     {
       id: "invalid-state",
@@ -1814,8 +1814,8 @@ export const formsExamples: ExampleMap = {
             <Link2 />
             https://
           </InputGroupAddon>
-          <Input placeholder="acme.cooud.app" />
-          <InputGroupAddon align="end">.cooud.app</InputGroupAddon>
+          <Input placeholder="acme.kronus.app" />
+          <InputGroupAddon align="end">.kronus.app</InputGroupAddon>
         </InputGroup>
       ),
     },
@@ -2035,7 +2035,7 @@ function StepperDemo() {
       id: "default",
       title: "Default",
       description:
-        "A Tiptap WYSIWYG editor with a Cooud-styled toolbar. Controlled via `value` / `onChange` (serialized HTML); `immediatelyRender: false` keeps it SSR-safe. Formats text, headings, lists, quotes, and code.",
+        "A Tiptap WYSIWYG editor with a Kronus-styled toolbar. Controlled via `value` / `onChange` (serialized HTML); `immediatelyRender: false` keeps it SSR-safe. Formats text, headings, lists, quotes, and code.",
       code: richTextEditorDemoCode,
       preview: <RichTextEditorDemo />,
     },
@@ -2234,7 +2234,7 @@ function StepperDemo() {
   <FloatingLabelInput
     label="Email address"
     type="email"
-    defaultValue="ada@cooud.dev"
+    defaultValue="ada@kronus.dev"
     startAdornment={<Mail />}
   />
   <FloatingLabelInput label="Password" type="password" startAdornment={<Lock />} />
@@ -2244,7 +2244,7 @@ function StepperDemo() {
           <FloatingLabelInput
             label="Email address"
             type="email"
-            defaultValue="ada@cooud.dev"
+            defaultValue="ada@kronus.dev"
             startAdornment={<Mail />}
           />
           <FloatingLabelInput label="Password" type="password" startAdornment={<Lock />} />

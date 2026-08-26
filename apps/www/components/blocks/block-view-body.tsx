@@ -83,17 +83,17 @@ export function BlockViewBody({
                 source-owned dependencies.
               </p>
               <div className="mt-3">
-                <CodeBlock code={`npx cooud-ui add ${slug}`} language="bash" />
+                <CodeBlock code={`npx kronus-ui add ${slug}`} language="bash" />
               </div>
             </div>
 
             <div className="mt-8">
               <h3 className="font-display text-base font-medium text-fg">Manual</h3>
               <p className="mt-1.5 text-sm text-fg-secondary">
-                Install the Cooud UI packages, then paste the block below.
+                Install the Kronus UI packages, then paste the block below.
               </p>
               <div className="mt-3">
-                <InstallTabs packages="@cooud-ui/ui @cooud-ui/tokens @cooud-ui/theme" />
+                <InstallTabs packages="@kronus-ui/ui @kronus-ui/tokens @kronus-ui/theme" />
               </div>
             </div>
           </section>

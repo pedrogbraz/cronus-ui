@@ -7,7 +7,7 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
 
 /**
@@ -18,8 +18,8 @@ import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
  */
 
 const chartConfig = {
-  current: { label: "Current", color: "var(--cooud-primary)" },
-  target: { label: "Target", color: "var(--cooud-info)" },
+  current: { label: "Current", color: "var(--kronus-primary)" },
+  target: { label: "Target", color: "var(--kronus-info)" },
 } satisfies ChartConfig;
 
 const chartData = [

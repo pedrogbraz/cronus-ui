@@ -1,7 +1,7 @@
 /**
  * Generates the Props/API tables consumed by every component doc page.
  *
- * For each slug in `CATEGORIES`, it reads the real @cooud-ui/ui component source at
+ * For each slug in `CATEGORIES`, it reads the real @kronus-ui/ui component source at
  * `packages/ui/src/components/<slug>.tsx`, parses it with the TypeScript compiler
  * API (NEVER importing/executing the module — same technique the registry block
  * extractor uses), and extracts every exported `*Props` interface and its members.
@@ -404,7 +404,7 @@ export function serializePropsModule(map: Record<string, PropsDoc[]>): string {
     "// GENERATED FILE — do not edit; run `bun run props` to regenerate.",
     "//",
     "// Props/API tables extracted from the exported `*Props` interfaces of every",
-    "// @cooud-ui/ui component via the TypeScript compiler API (no module execution),",
+    "// @kronus-ui/ui component via the TypeScript compiler API (no module execution),",
     "// so the documented API can never drift from the source.",
     "",
     "export interface PropDef {",

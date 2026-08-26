@@ -1,12 +1,12 @@
 "use client";
 
-import { Badge, cn, Tooltip, TooltipContent, TooltipTrigger } from "@cooud-ui/ui";
+import { Badge, cn, Tooltip, TooltipContent, TooltipTrigger } from "@kronus-ui/ui";
 import { Check } from "lucide-react";
 import { type KeyboardEvent, useId } from "react";
 import type { Badge as BadgeKind, ResolvedOption } from "@/lib/stack/types";
 import { OptionIcon } from "./option-icon";
 
-/** Map a catalog {@link BadgeKind} to a Cooud UI Badge variant + label. */
+/** Map a catalog {@link BadgeKind} to a Kronus UI Badge variant + label. */
 const BADGE_META: Record<BadgeKind, { label: string; variant: "warning" | "info" | "primary" }> = {
   beta: { label: "Beta", variant: "warning" },
   new: { label: "New", variant: "info" },

@@ -27,7 +27,7 @@ import {
   TabsTrigger,
   ToggleGroup,
   ToggleGroupItem,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import {
   Download,
   FileQuestion,
@@ -98,7 +98,7 @@ export function PageHeaderBlock() {
             <Download className="size-4" aria-hidden="true" />
             Export
           </Button>
-          <Button variant="gradient">
+          <Button variant="primary">
             <Plus className="size-4" aria-hidden="true" />
             New deploy
           </Button>
@@ -117,7 +117,7 @@ const pageHeaderCode = `import {
   BreadcrumbPage,
   BreadcrumbSeparator,
   Button,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Download, Plus } from "lucide-react";
 
 export function PageHeaderBlock() {
@@ -157,7 +157,7 @@ export function PageHeaderBlock() {
             <Download className="size-4" aria-hidden="true" />
             Export
           </Button>
-          <Button variant="gradient">
+          <Button variant="primary">
             <Plus className="size-4" aria-hidden="true" />
             New deploy
           </Button>
@@ -200,7 +200,7 @@ export function PageHeaderTabsBlock() {
 
         <div className="flex flex-wrap items-center gap-3">
           <Button variant="outline">View invoices</Button>
-          <Button variant="gradient">Manage plan</Button>
+          <Button variant="primary">Manage plan</Button>
         </div>
       </div>
 
@@ -247,7 +247,7 @@ const pageHeaderTabsCode = `import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 
 export function PageHeaderTabsBlock() {
   return (
@@ -277,7 +277,7 @@ export function PageHeaderTabsBlock() {
 
         <div className="flex flex-wrap items-center gap-3">
           <Button variant="outline">View invoices</Button>
-          <Button variant="gradient">Manage plan</Button>
+          <Button variant="primary">Manage plan</Button>
         </div>
       </div>
 
@@ -424,7 +424,7 @@ const filterBarCode = `import {
   SelectValue,
   ToggleGroup,
   ToggleGroupItem,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { LayoutGrid, List, Search, SlidersHorizontal, X } from "lucide-react";
 
 const statusOptions = [
@@ -539,7 +539,7 @@ export function EmptyStateBlock() {
         <Button variant="outline" size="sm">
           Import existing
         </Button>
-        <Button variant="gradient" size="sm">
+        <Button variant="primary" size="sm">
           <Plus className="size-4" aria-hidden="true" />
           New project
         </Button>
@@ -555,7 +555,7 @@ const emptyStateCode = `import {
   EmptyDescription,
   EmptyIcon,
   EmptyTitle,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Inbox, Plus } from "lucide-react";
 
 export function EmptyStateBlock() {
@@ -573,7 +573,7 @@ export function EmptyStateBlock() {
         <Button variant="outline" size="sm">
           Import existing
         </Button>
-        <Button variant="gradient" size="sm">
+        <Button variant="primary" size="sm">
           <Plus className="size-4" aria-hidden="true" />
           New project
         </Button>
@@ -597,7 +597,7 @@ export function EmptyStateErrorBlock() {
         <Button variant="outline" size="sm">
           Back to dashboard
         </Button>
-        <Button variant="gradient" size="sm">
+        <Button variant="primary" size="sm">
           <RefreshCw className="size-4" aria-hidden="true" />
           Try again
         </Button>
@@ -613,7 +613,7 @@ const emptyStateErrorCode = `import {
   EmptyDescription,
   EmptyIcon,
   EmptyTitle,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { FileQuestion, RefreshCw } from "lucide-react";
 
 export function EmptyStateErrorBlock() {
@@ -631,7 +631,7 @@ export function EmptyStateErrorBlock() {
         <Button variant="outline" size="sm">
           Back to dashboard
         </Button>
-        <Button variant="gradient" size="sm">
+        <Button variant="primary" size="sm">
           <RefreshCw className="size-4" aria-hidden="true" />
           Try again
         </Button>

@@ -70,7 +70,7 @@ import {
   type TreeNode,
   TreeView,
   VideoPlayer,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import type { ColumnDef } from "@tanstack/react-table";
 import {
   ArrowUpDown,
@@ -166,7 +166,7 @@ const memberData: Member[] = [
   {
     id: "u-1024",
     name: "Ada Lovelace",
-    email: "ada@cooud.dev",
+    email: "ada@kronus.dev",
     role: "Owner",
     status: "active",
     seats: 5,
@@ -174,7 +174,7 @@ const memberData: Member[] = [
   {
     id: "u-1025",
     name: "Grace Hopper",
-    email: "grace@cooud.dev",
+    email: "grace@kronus.dev",
     role: "Admin",
     status: "active",
     seats: 3,
@@ -182,7 +182,7 @@ const memberData: Member[] = [
   {
     id: "u-1026",
     name: "Alan Turing",
-    email: "alan@cooud.dev",
+    email: "alan@kronus.dev",
     role: "Member",
     status: "active",
     seats: 1,
@@ -190,7 +190,7 @@ const memberData: Member[] = [
   {
     id: "u-1027",
     name: "Katherine Johnson",
-    email: "katherine@cooud.dev",
+    email: "katherine@kronus.dev",
     role: "Member",
     status: "invited",
     seats: 1,
@@ -198,7 +198,7 @@ const memberData: Member[] = [
   {
     id: "u-1028",
     name: "Margaret Hamilton",
-    email: "margaret@cooud.dev",
+    email: "margaret@kronus.dev",
     role: "Admin",
     status: "active",
     seats: 2,
@@ -206,7 +206,7 @@ const memberData: Member[] = [
   {
     id: "u-1029",
     name: "Dennis Ritchie",
-    email: "dennis@cooud.dev",
+    email: "dennis@kronus.dev",
     role: "Viewer",
     status: "suspended",
     seats: 0,
@@ -214,7 +214,7 @@ const memberData: Member[] = [
   {
     id: "u-1030",
     name: "Barbara Liskov",
-    email: "barbara@cooud.dev",
+    email: "barbara@kronus.dev",
     role: "Member",
     status: "active",
     seats: 1,
@@ -222,7 +222,7 @@ const memberData: Member[] = [
   {
     id: "u-1031",
     name: "Donald Knuth",
-    email: "donald@cooud.dev",
+    email: "donald@kronus.dev",
     role: "Member",
     status: "invited",
     seats: 1,
@@ -230,7 +230,7 @@ const memberData: Member[] = [
   {
     id: "u-1032",
     name: "Edsger Dijkstra",
-    email: "edsger@cooud.dev",
+    email: "edsger@kronus.dev",
     role: "Viewer",
     status: "active",
     seats: 1,
@@ -238,7 +238,7 @@ const memberData: Member[] = [
   {
     id: "u-1033",
     name: "Linus Torvalds",
-    email: "linus@cooud.dev",
+    email: "linus@kronus.dev",
     role: "Admin",
     status: "active",
     seats: 4,
@@ -246,7 +246,7 @@ const memberData: Member[] = [
   {
     id: "u-1034",
     name: "Tim Berners-Lee",
-    email: "tim@cooud.dev",
+    email: "tim@kronus.dev",
     role: "Member",
     status: "suspended",
     seats: 0,
@@ -254,7 +254,7 @@ const memberData: Member[] = [
   {
     id: "u-1035",
     name: "Radia Perlman",
-    email: "radia@cooud.dev",
+    email: "radia@kronus.dev",
     role: "Member",
     status: "active",
     seats: 2,
@@ -709,7 +709,7 @@ function ImageZoomStateDemo() {
     <div className="flex w-full max-w-md flex-col items-center gap-3">
       <ImageZoom zoom={3} onZoomChange={setZoomed} labels={{ zoom: "Zoom fabric detail" }}>
         {/* biome-ignore lint/performance/noImgElement: docs example renders an external picsum image directly */}
-        <img src="https://picsum.photos/seed/cooud-fabric/1200/675" alt="" />
+        <img src="https://picsum.photos/seed/kronus-fabric/1200/675" alt="" />
       </ImageZoom>
       <Badge variant={zoomed ? "primary" : "secondary"}>
         {zoomed ? "Zoomed 3×" : "Hover, tap or press Enter to zoom"}
@@ -723,7 +723,7 @@ const imageZoomStateDemoCode = `function ImageZoomStateDemo() {
   return (
     <div className="flex w-full max-w-md flex-col items-center gap-3">
       <ImageZoom zoom={3} onZoomChange={setZoomed} labels={{ zoom: "Zoom fabric detail" }}>
-        <img src="https://picsum.photos/seed/cooud-fabric/1200/675" alt="" />
+        <img src="https://picsum.photos/seed/kronus-fabric/1200/675" alt="" />
       </ImageZoom>
       <Badge variant={zoomed ? "primary" : "secondary"}>
         {zoomed ? "Zoomed 3×" : "Hover, tap or press Enter to zoom"}
@@ -907,7 +907,7 @@ function DescriptionListGridDemo() {
       <DescriptionItem term="Region">São Paulo (GRU)</DescriptionItem>
       <DescriptionItem term="Runtime">Node 22 LTS</DescriptionItem>
       <DescriptionItem term="Instances">3 × shared-cpu</DescriptionItem>
-      <DescriptionItem term="Custom domain">store.cooud.dev</DescriptionItem>
+      <DescriptionItem term="Custom domain">store.kronus.dev</DescriptionItem>
       <DescriptionItem term="TLS">Auto-managed</DescriptionItem>
       <DescriptionItem term="Deploy hook">Enabled</DescriptionItem>
     </DescriptionList>
@@ -918,7 +918,7 @@ const descriptionListGridDemoCode = `<DescriptionList layout="grid" size="sm">
   <DescriptionItem term="Region">São Paulo (GRU)</DescriptionItem>
   <DescriptionItem term="Runtime">Node 22 LTS</DescriptionItem>
   <DescriptionItem term="Instances">3 × shared-cpu</DescriptionItem>
-  <DescriptionItem term="Custom domain">store.cooud.dev</DescriptionItem>
+  <DescriptionItem term="Custom domain">store.kronus.dev</DescriptionItem>
   <DescriptionItem term="TLS">Auto-managed</DescriptionItem>
   <DescriptionItem term="Deploy hook">Enabled</DescriptionItem>
 </DescriptionList>`;
@@ -995,13 +995,13 @@ export const dataDisplayExamples: ExampleMap = {
       description:
         "Product-style inline zoom: a fine pointer magnifies on hover and the pan follows the cursor via transform-origin tracking; touch taps and Enter/Space toggle a sticky zoom instead. The zoom indicator fades away while zoomed.",
       code: `<ImageZoom
-  src="https://picsum.photos/seed/cooud-product/900/600"
+  src="https://picsum.photos/seed/kronus-product/900/600"
   alt="Studio product photo"
   className="max-w-md"
 />`,
       preview: (
         <ImageZoom
-          src="https://picsum.photos/seed/cooud-product/900/600"
+          src="https://picsum.photos/seed/kronus-product/900/600"
           alt="Studio product photo"
           className="max-w-md"
         />
@@ -1014,12 +1014,12 @@ export const dataDisplayExamples: ExampleMap = {
         "`zoom` sets the magnification applied while zoomed (values below 1 clamp to 1). Defaults to 2.",
       code: `<div className="grid w-full max-w-2xl gap-4 sm:grid-cols-2">
   <div className="flex flex-col items-center gap-2">
-    <ImageZoom src="https://picsum.photos/seed/cooud-loft/700/500" alt="" />
+    <ImageZoom src="https://picsum.photos/seed/kronus-loft/700/500" alt="" />
     <span className="text-sm text-fg-secondary">zoom 2 (default)</span>
   </div>
   <div className="flex flex-col items-center gap-2">
     <ImageZoom
-      src="https://picsum.photos/seed/cooud-loft/700/500"
+      src="https://picsum.photos/seed/kronus-loft/700/500"
       alt=""
       zoom={4}
       labels={{ zoom: "Zoom image (4×)" }}
@@ -1030,12 +1030,12 @@ export const dataDisplayExamples: ExampleMap = {
       preview: (
         <div className="grid w-full max-w-2xl gap-4 sm:grid-cols-2">
           <div className="flex flex-col items-center gap-2">
-            <ImageZoom src="https://picsum.photos/seed/cooud-loft/700/500" alt="" />
+            <ImageZoom src="https://picsum.photos/seed/kronus-loft/700/500" alt="" />
             <span className="text-sm text-fg-secondary">zoom 2 (default)</span>
           </div>
           <div className="flex flex-col items-center gap-2">
             <ImageZoom
-              src="https://picsum.photos/seed/cooud-loft/700/500"
+              src="https://picsum.photos/seed/kronus-loft/700/500"
               alt=""
               zoom={4}
               labels={{ zoom: "Zoom image (4×)" }}
@@ -1291,7 +1291,7 @@ export const dataDisplayExamples: ExampleMap = {
     <span className="text-sm text-fg-tertiary">/ month</span>
   </CardContent>
   <CardFooter>
-    <Button variant="gradient" className="w-full">
+    <Button variant="primary" className="w-full">
       Upgrade now
     </Button>
   </CardFooter>
@@ -1310,7 +1310,7 @@ export const dataDisplayExamples: ExampleMap = {
             <span className="text-sm text-fg-tertiary">/ month</span>
           </CardContent>
           <CardFooter>
-            <Button variant="gradient" className="w-full">
+            <Button variant="primary" className="w-full">
               Upgrade now
             </Button>
           </CardFooter>
@@ -1455,7 +1455,7 @@ const data: Payment[] = [
       title: "Sortable",
       description:
         "Use the exported `DataTableColumnHeader` in a column header to get an accessible, three-state sort toggle (asc → desc → none) with the right icon and aria-label. Click any header to sort.",
-      code: `import { DataTable, DataTableColumnHeader } from "@cooud-ui/ui";
+      code: `import { DataTable, DataTableColumnHeader } from "@kronus-ui/ui";
 
 const columns: ColumnDef<Member>[] = [
   {
@@ -2027,13 +2027,13 @@ const statusFilter: DataTableFacetedFilter = {
       code: `<CodeBlock
   language="bash"
   filename="terminal"
-  code="bunx cooud-ui add button card dialog"
+  code="bunx kronus-ui add button card dialog"
 />`,
       preview: (
         <CodeBlock
           language="bash"
           filename="terminal"
-          code="bunx cooud-ui add button card dialog"
+          code="bunx kronus-ui add button card dialog"
           className="max-w-xl"
         />
       ),
@@ -2045,7 +2045,7 @@ const statusFilter: DataTableFacetedFilter = {
       code: `<CodeBlock
   language="tsx"
   showLineNumbers
-  code={\`import { Button } from "@cooud-ui/ui";
+  code={\`import { Button } from "@kronus-ui/ui";
 
 export function Save() {
   return <Button>Save</Button>;
@@ -2056,7 +2056,7 @@ export function Save() {
           language="tsx"
           showLineNumbers
           className="max-w-xl"
-          code={`import { Button } from "@cooud-ui/ui";
+          code={`import { Button } from "@kronus-ui/ui";
 
 export function Save() {
   return <Button>Save</Button>;
@@ -2078,10 +2078,10 @@ export function Save() {
       code: `<CodeTabs
   storageKey="pkg-manager"
   items={[
-    { label: "bun", code: "bunx cooud-ui add code-tabs", language: "bash" },
-    { label: "npm", code: "npx cooud-ui add code-tabs", language: "bash" },
-    { label: "pnpm", code: "pnpm dlx cooud-ui add code-tabs", language: "bash" },
-    { label: "yarn", code: "yarn dlx cooud-ui add code-tabs", language: "bash" },
+    { label: "bun", code: "bunx kronus-ui add code-tabs", language: "bash" },
+    { label: "npm", code: "npx kronus-ui add code-tabs", language: "bash" },
+    { label: "pnpm", code: "pnpm dlx kronus-ui add code-tabs", language: "bash" },
+    { label: "yarn", code: "yarn dlx kronus-ui add code-tabs", language: "bash" },
   ]}
 />`,
       preview: (
@@ -2089,19 +2089,19 @@ export function Save() {
           <CodeTabs
             storageKey="www-demo-pkg-manager"
             items={[
-              { label: "bun", code: "bunx cooud-ui add code-tabs", language: "bash" },
-              { label: "npm", code: "npx cooud-ui add code-tabs", language: "bash" },
-              { label: "pnpm", code: "pnpm dlx cooud-ui add code-tabs", language: "bash" },
-              { label: "yarn", code: "yarn dlx cooud-ui add code-tabs", language: "bash" },
+              { label: "bun", code: "bunx kronus-ui add code-tabs", language: "bash" },
+              { label: "npm", code: "npx kronus-ui add code-tabs", language: "bash" },
+              { label: "pnpm", code: "pnpm dlx kronus-ui add code-tabs", language: "bash" },
+              { label: "yarn", code: "yarn dlx kronus-ui add code-tabs", language: "bash" },
             ]}
           />
           <CodeTabs
             storageKey="www-demo-pkg-manager"
             items={[
-              { label: "bun", code: "bun add @cooud-ui/ui", language: "bash" },
-              { label: "npm", code: "npm install @cooud-ui/ui", language: "bash" },
-              { label: "pnpm", code: "pnpm add @cooud-ui/ui", language: "bash" },
-              { label: "yarn", code: "yarn add @cooud-ui/ui", language: "bash" },
+              { label: "bun", code: "bun add @kronus-ui/ui", language: "bash" },
+              { label: "npm", code: "npm install @kronus-ui/ui", language: "bash" },
+              { label: "pnpm", code: "pnpm add @kronus-ui/ui", language: "bash" },
+              { label: "yarn", code: "yarn add @kronus-ui/ui", language: "bash" },
             ]}
           />
         </div>
