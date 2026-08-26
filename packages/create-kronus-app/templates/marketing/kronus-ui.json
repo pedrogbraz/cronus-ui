@@ -1,0 +1,17 @@
+{
+  "aliases": {
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "blocks": "@/components/blocks"
+  },
+  "paths": {
+    "ui": "components/ui",
+    "lib": "lib",
+    "blocks": "components/blocks"
+  },
+  "registry": "https://raw.githubusercontent.com/pedrogbraz/kronus-ui/v0.5.0/registry",
+  "theme": {
+    "name": "__THEME__",
+    "mode": "__MODE__"
+  }
+}
