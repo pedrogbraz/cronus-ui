@@ -20,8 +20,8 @@ updates:
       - /packages/cli
       - /packages/stack
       - /packages/ai-kit
-      - /packages/create-cooud-app
-      - /packages/create-cooud-stack
+      - /packages/create-kronus-app
+      - /packages/create-kronus-stack
       - /packages/mcp
       - /apps/www
     schedule:

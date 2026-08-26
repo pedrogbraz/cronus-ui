@@ -1,5 +1,5 @@
 name: Bug report
-description: Something in a @cooud-ui package, the CLI, or the docs site doesn't work as documented.
+description: Something in a @kronus-ui package, the CLI, or the docs site doesn't work as documented.
 title: "[bug]: "
 labels: ["bug"]
 body:
@@ -13,14 +13,14 @@ body:
       label: Package
       description: Where does the bug live?
       options:
-        - "@cooud-ui/ui (components)"
-        - "@cooud-ui/tokens"
-        - "@cooud-ui/theme"
-        - "@cooud-ui/stack"
-        - "cooud-ui (CLI / registry)"
-        - "create-cooud-app / create-cooud-stack"
-        - "@cooud-ui/mcp"
-        - "Docs site (ui.testcooud.cloud)"
+        - "@kronus-ui/ui (components)"
+        - "@kronus-ui/tokens"
+        - "@kronus-ui/theme"
+        - "@kronus-ui/stack"
+        - "kronus-ui (CLI / registry)"
+        - "create-kronus-app / create-kronus-stack"
+        - "@kronus-ui/mcp"
+        - "Docs site (ui.testkronus.cloud)"
         - "Other / not sure"
     validations:
       required: true
@@ -28,8 +28,8 @@ body:
     id: version
     attributes:
       label: Version
-      description: The published package version (`npm ls @cooud-ui/ui`) or "docs site".
-      placeholder: "0.2.0"
+      description: The published package version (`npm ls @kronus-ui/ui`) or "docs site".
+      placeholder: "0.5.0"
     validations:
       required: true
   - type: textarea
@@ -38,7 +38,7 @@ body:
       label: Steps to reproduce
       description: Minimal steps or a repro repo/StackBlitz. The smaller the repro, the faster the fix.
       placeholder: |
-        1. `npx cooud-ui add button`
+        1. `npx kronus-ui add button`
         2. Render `<Button asChild>` with ...
         3. Click ...
     validations:

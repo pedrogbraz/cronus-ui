@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Documentation
-    url: https://ui.testcooud.cloud/docs
+    url: https://ui.testkronus.cloud/docs
     about: Guides, theming, CLI usage, and per-component API references.
   - name: Security report
-    url: https://github.com/pedrogbraz/cooud-ui/blob/main/.github/SECURITY.md
+    url: https://github.com/pedrogbraz/kronus-ui/blob/main/.github/SECURITY.md
     about: Please report security issues privately — never in a public issue.

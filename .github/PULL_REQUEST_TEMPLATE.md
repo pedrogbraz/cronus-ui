@@ -17,6 +17,6 @@
 - [ ] `bun run build` + `bun run lint` + `bun run typecheck` + `bun run test` pass locally
 - [ ] Drift gates pass: `bun run registry:check`, `bun run tokens:check`, `bun run props:check`, `bun run check:example-sections`
 - [ ] `BUNDLE_CHECK_STRICT=1 bun run bundle:check` passes (www changes)
-- [ ] Component changes follow [`CONTRACT.md`](https://github.com/pedrogbraz/cooud-ui/blob/main/CONTRACT.md) (semantic tokens only, CVA variants, `data-slot`, a11y)
+- [ ] Component changes follow [`CONTRACT.md`](https://github.com/pedrogbraz/kronus-ui/blob/main/CONTRACT.md) (semantic tokens only, CVA variants, `data-slot`, a11y)
 - [ ] New behavior is covered by tests (vitest / Playwright where it applies)
 - [ ] Commits follow [Conventional Commits](https://www.conventionalcommits.org/)

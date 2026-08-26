@@ -6,8 +6,8 @@
 # hard merge gate.
 #
 # NOTE: the owners below are placeholders pointing at the intended GitHub
-# org/team. Replace @cooud-ui/* teams (or @pedrogbraz) with the real handles
-# once the repo moves under the `cooud` org (see docs/RELEASE_GOVERNANCE.md).
+# org/team. Replace @kronus-ui/* teams (or @pedrogbraz) with the real handles
+# once the repo moves under the `kronus` org (see docs/RELEASE_GOVERNANCE.md).
 
 # ----------------------------------------------------------------------------
 # Default owner for everything not matched by a more specific rule below.
@@ -21,7 +21,7 @@
 /packages/theme/               @pedrogbraz
 /packages/ui/                  @pedrogbraz
 
-# CLI is the unscoped public-npm entry point ("cooud-ui").
+# CLI is the unscoped public-npm entry point ("kronus-ui").
 /packages/cli/                 @pedrogbraz
 
 # ----------------------------------------------------------------------------

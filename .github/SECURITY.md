@@ -2,11 +2,11 @@
 
 ## Supported versions
 
-Cooud UI is pre-1.0 and follows a rolling release model. Only the latest
+Kronus UI is pre-1.0 and follows a rolling release model. Only the latest
 published `0.x` release of each package receives security fixes:
-`@cooud-ui/tokens`, `@cooud-ui/theme`, `@cooud-ui/ui`, `@cooud-ui/stack`,
-`@cooud-ui/ai-kit`, `cooud-ui`, `create-cooud-app`, `create-cooud-stack`, and
-`cooud-ui-mcp`. Please upgrade to the latest version before reporting an issue.
+`@kronus-ui/tokens`, `@kronus-ui/theme`, `@kronus-ui/ui`, `@kronus-ui/stack`,
+`@kronus-ui/ai-kit`, `kronus-ui`, `create-kronus-app`, `create-kronus-stack`, and
+`kronus-ui-mcp`. Please upgrade to the latest version before reporting an issue.
 
 | Version | Supported |
 | ------- | --------- |
@@ -20,7 +20,7 @@ issue, pull request, or discussion for them.
 
 - Preferred: open a private report via GitHub Security Advisories
   ("Report a vulnerability" under the repository's **Security** tab).
-- Alternatively, email **security@cooud.com** with a description, affected
+- Alternatively, email **security@kronus.com** with a description, affected
   package and version, and reproduction steps or a proof of concept.
 
 ## What to expect
