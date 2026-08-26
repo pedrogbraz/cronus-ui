@@ -1,9 +1,9 @@
 /**
- * Cooud design tokens — single source of truth.
+ * Kronus design tokens — single source of truth.
  *
  * These TS objects mirror the CSS variables defined in `styles/tokens.css`.
  * They are consumed by the ThemeBuilder (to generate override snippets) and by
- * `@cooud-ui/theme` (to apply runtime overrides). Components NEVER read these
+ * `@kronus-ui/theme` (to apply runtime overrides). Components NEVER read these
  * directly — they use semantic Tailwind utilities that resolve to the CSS vars.
  *
  * Values are cherry-picked from the premium Aurora language (cooud-workforce /
@@ -453,53 +453,67 @@ export const modes: Mode[] = ["light", "dark"];
 export const defaultTheme: ThemeName = "aurora";
 export const defaultMode: Mode = "dark";
 
-/** Maps a ThemeTokens key to its runtime CSS custom property name. */
-export const cssVarMap: Record<keyof ThemeTokens, string> = {
-  primary: "--cooud-primary",
-  primaryForeground: "--cooud-primary-foreground",
-  primaryText: "--cooud-primary-text",
-  accent: "--cooud-accent",
-  accentForeground: "--cooud-accent-foreground",
-  surfaceBase: "--cooud-surface-base",
-  surfaceInset: "--cooud-surface-inset",
-  surfaceRaised: "--cooud-surface-raised",
-  surfaceOverlay: "--cooud-surface-overlay",
-  surfaceElevated: "--cooud-surface-elevated",
-  surfaceFloating: "--cooud-surface-floating",
-  fg: "--cooud-fg",
-  fgSecondary: "--cooud-fg-secondary",
-  fgTertiary: "--cooud-fg-tertiary",
-  fgMuted: "--cooud-fg-muted",
-  fgInverse: "--cooud-fg-inverse",
-  border: "--cooud-border",
-  borderStrong: "--cooud-border-strong",
-  borderSoft: "--cooud-border-soft",
-  ring: "--cooud-ring",
-  success: "--cooud-success",
-  successText: "--cooud-success-text",
-  warning: "--cooud-warning",
-  warningText: "--cooud-warning-text",
-  error: "--cooud-error",
-  errorText: "--cooud-error-text",
-  info: "--cooud-info",
-  infoText: "--cooud-info-text",
-  radius: "--cooud-radius",
-  fontSans: "--cooud-font-sans",
-  fontDisplay: "--cooud-font-display",
-  fontMono: "--cooud-font-mono",
-  chart1: "--cooud-chart-1",
-  chart2: "--cooud-chart-2",
-  chart3: "--cooud-chart-3",
-  chart4: "--cooud-chart-4",
-  chart5: "--cooud-chart-5",
-  shadowXs: "--cooud-shadow-xs",
-  shadowSm: "--cooud-shadow-sm",
-  shadowMd: "--cooud-shadow-md",
-  shadowLg: "--cooud-shadow-lg",
-  shadowGlow: "--cooud-shadow-glow",
+/**
+ * Material language — orthogonal to {@link ThemeName} (palette) and {@link Mode}.
+ * Applied via `data-kronus-look` on any subtree. Docs chrome stays `default`.
+ */
+export type LookName = "default" | "brutalist" | "glass" | "mauve";
+export const lookNames: LookName[] = ["default", "brutalist", "glass", "mauve"];
+export const defaultLook: LookName = "default";
+export const lookLabels: Record<LookName, string> = {
+  default: "Default",
+  brutalist: "Brutalist",
+  glass: "Glass",
+  mauve: "Mauve",
 };
 
-/** Convert a (partial) token set into a `{ "--cooud-*": value }` style object. */
+/** Maps a ThemeTokens key to its runtime CSS custom property name. */
+export const cssVarMap: Record<keyof ThemeTokens, string> = {
+  primary: "--kronus-primary",
+  primaryForeground: "--kronus-primary-foreground",
+  primaryText: "--kronus-primary-text",
+  accent: "--kronus-accent",
+  accentForeground: "--kronus-accent-foreground",
+  surfaceBase: "--kronus-surface-base",
+  surfaceInset: "--kronus-surface-inset",
+  surfaceRaised: "--kronus-surface-raised",
+  surfaceOverlay: "--kronus-surface-overlay",
+  surfaceElevated: "--kronus-surface-elevated",
+  surfaceFloating: "--kronus-surface-floating",
+  fg: "--kronus-fg",
+  fgSecondary: "--kronus-fg-secondary",
+  fgTertiary: "--kronus-fg-tertiary",
+  fgMuted: "--kronus-fg-muted",
+  fgInverse: "--kronus-fg-inverse",
+  border: "--kronus-border",
+  borderStrong: "--kronus-border-strong",
+  borderSoft: "--kronus-border-soft",
+  ring: "--kronus-ring",
+  success: "--kronus-success",
+  successText: "--kronus-success-text",
+  warning: "--kronus-warning",
+  warningText: "--kronus-warning-text",
+  error: "--kronus-error",
+  errorText: "--kronus-error-text",
+  info: "--kronus-info",
+  infoText: "--kronus-info-text",
+  radius: "--kronus-radius",
+  fontSans: "--kronus-font-sans",
+  fontDisplay: "--kronus-font-display",
+  fontMono: "--kronus-font-mono",
+  chart1: "--kronus-chart-1",
+  chart2: "--kronus-chart-2",
+  chart3: "--kronus-chart-3",
+  chart4: "--kronus-chart-4",
+  chart5: "--kronus-chart-5",
+  shadowXs: "--kronus-shadow-xs",
+  shadowSm: "--kronus-shadow-sm",
+  shadowMd: "--kronus-shadow-md",
+  shadowLg: "--kronus-shadow-lg",
+  shadowGlow: "--kronus-shadow-glow",
+};
+
+/** Convert a (partial) token set into a `{ "--kronus-*": value }` style object. */
 export function tokensToCssVars(tokens: ThemeOverrides): Record<string, string> {
   const out: Record<string, string> = {};
   for (const key of Object.keys(tokens) as (keyof ThemeTokens)[]) {

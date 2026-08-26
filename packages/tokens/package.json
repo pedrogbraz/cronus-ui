@@ -1,7 +1,7 @@
 {
-  "name": "@cooud-ui/tokens",
+  "name": "@kronus-ui/tokens",
   "version": "0.5.0",
-  "description": "Cooud design tokens — source of truth (TS) + CSS variable bridge + Tailwind v4 preset.",
+  "description": "Kronus design tokens — source of truth (TS) + CSS variable bridge + Tailwind v4 preset.",
   "type": "module",
   "exports": {
     ".": {
@@ -23,18 +23,18 @@
     "./styles/tokens.css"
   ],
   "license": "MIT",
-  "author": "Cooud",
+  "author": "Kronus",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pedrogbraz/cooud-ui.git",
+    "url": "git+https://github.com/pedrogbraz/kronus-ui.git",
     "directory": "packages/tokens"
   },
-  "homepage": "https://github.com/pedrogbraz/cooud-ui#readme",
+  "homepage": "https://github.com/pedrogbraz/kronus-ui#readme",
   "bugs": {
-    "url": "https://github.com/pedrogbraz/cooud-ui/issues"
+    "url": "https://github.com/pedrogbraz/kronus-ui/issues"
   },
   "keywords": [
-    "cooud",
+    "kronus",
     "design-system",
     "react",
     "tailwind",

@@ -1,17 +1,17 @@
 /**
- * @cooud-ui/tokens — CSS variable bridge for Tailwind v4.
+ * @kronus-ui/tokens — CSS variable bridge for Tailwind v4.
  *
  * Layering:
- *  1. Runtime layer  (--cooud-*)      → set per theme/mode block + overridable
- *                                        by <CooudUIProvider> on any scope.
+ *  1. Runtime layer  (--kronus-*)      → set per theme/mode block + overridable
+ *                                        by <KronusUIProvider> on any scope.
  *  2. @theme inline                   → maps Tailwind utilities to the runtime
  *                                        layer, so `bg-primary`, `rounded-lg`,
  *                                        `shadow-glow`, `text-fg-secondary` all
- *                                        resolve to --cooud-* and re-theme live.
+ *                                        resolve to --kronus-* and re-theme live.
  *
  * Import order in a consumer app:
  *    @import "tailwindcss";
- *    @import "@cooud-ui/tokens/styles.css";
+ *    @import "@kronus-ui/tokens/styles.css";
  */
 
 /* ------------------------------------------------------------------ *
@@ -22,26 +22,26 @@
  * Register the animatable brand color vars as typed custom properties so a
  * theme/preset switch CROSS-FADES instead of hard-snapping (e.g. the Blocks
  * preset switcher interpolating primary/accent/ring). These ship WITH the
- * package so every @cooud-ui/tokens adopter gets smooth token transitions — not
- * just this docs app. `inherits: true` lets a scoped <CooudUIProvider> override
+ * package so every @kronus-ui/tokens adopter gets smooth token transitions — not
+ * just this docs app. `inherits: true` lets a scoped <KronusUIProvider> override
  * cascade into descendants.
  */
-@property --cooud-primary {
+@property --kronus-primary {
   syntax: "<color>";
   inherits: true;
   initial-value: oklch(0.685 0.169 237.3);
 }
-@property --cooud-primary-text {
+@property --kronus-primary-text {
   syntax: "<color>";
   inherits: true;
   initial-value: oklch(0.685 0.169 237.3);
 }
-@property --cooud-accent {
+@property --kronus-accent {
   syntax: "<color>";
   inherits: true;
   initial-value: oklch(0.715 0.143 215.2);
 }
-@property --cooud-ring {
+@property --kronus-ring {
   syntax: "<color>";
   inherits: true;
   initial-value: oklch(0.685 0.169 237.3);
@@ -49,161 +49,162 @@
 
 /* Aurora (default) — dark-first */
 :root,
-[data-cooud-theme="aurora"] {
+[data-kronus-theme="aurora"] {
   /* Dark-first: tells the UA to render native form controls, date/time
      pickers, and default scrollbars with a dark palette. */
   color-scheme: dark;
-  --cooud-primary: oklch(0.685 0.169 237.3);
-  --cooud-primary-foreground: oklch(0.145 0.005 285.8);
-  --cooud-primary-text: oklch(0.685 0.169 237.3);
-  --cooud-accent: oklch(0.715 0.143 215.2);
-  --cooud-accent-foreground: oklch(0.145 0 0);
-  --cooud-surface-base: oklch(0.145 0.005 285.8);
-  --cooud-surface-inset: oklch(0.165 0.005 285.8);
-  --cooud-surface-raised: oklch(0.195 0.005 285.8);
-  --cooud-surface-overlay: oklch(0.235 0.006 285.9);
-  --cooud-surface-elevated: oklch(0.27 0.006 286);
-  --cooud-surface-floating: oklch(0.2 0.006 286);
-  --cooud-fg: oklch(0.985 0.001 106.4);
-  --cooud-fg-secondary: oklch(0.705 0.015 286);
-  --cooud-fg-tertiary: oklch(0.62 0.014 286);
-  --cooud-fg-muted: oklch(0.442 0.013 286);
-  --cooud-fg-inverse: oklch(0.235 0.006 285.9);
-  --cooud-border: oklch(1 0 0 / 0.1);
-  --cooud-border-strong: oklch(1 0 0 / 0.14);
-  --cooud-border-soft: oklch(1 0 0 / 0.06);
-  --cooud-ring: oklch(0.685 0.169 237.3);
-  --cooud-success: oklch(0.715 0.155 162.5);
-  --cooud-success-text: oklch(0.715 0.155 162.5);
-  --cooud-warning: oklch(0.769 0.166 70.08);
-  --cooud-warning-text: oklch(0.769 0.166 70.08);
-  --cooud-error: oklch(0.645 0.222 16.44);
-  --cooud-error-text: oklch(0.69 0.222 16.44);
-  --cooud-info: oklch(0.715 0.143 215.2);
-  --cooud-info-text: oklch(0.715 0.143 215.2);
-  --cooud-radius: 14px;
-  --cooud-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
-  --cooud-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.22);
-  --cooud-shadow-md: 0 6px 12px rgba(0, 0, 0, 0.24), 0 2px 4px rgba(0, 0, 0, 0.16);
-  --cooud-shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.28), 0 4px 8px rgba(0, 0, 0, 0.18);
-  --cooud-shadow-glow: 0 12px 32px rgba(14, 165, 233, 0.32);
+  --kronus-primary: oklch(0.685 0.169 237.3);
+  --kronus-primary-foreground: oklch(0.145 0.005 285.8);
+  --kronus-primary-text: oklch(0.685 0.169 237.3);
+  --kronus-accent: oklch(0.715 0.143 215.2);
+  --kronus-accent-foreground: oklch(0.145 0 0);
+  --kronus-surface-base: oklch(0.145 0.005 285.8);
+  --kronus-surface-inset: oklch(0.165 0.005 285.8);
+  --kronus-surface-raised: oklch(0.195 0.005 285.8);
+  --kronus-surface-overlay: oklch(0.235 0.006 285.9);
+  --kronus-surface-elevated: oklch(0.27 0.006 286);
+  --kronus-surface-floating: oklch(0.2 0.006 286);
+  --kronus-fg: oklch(0.985 0.001 106.4);
+  --kronus-fg-secondary: oklch(0.705 0.015 286);
+  --kronus-fg-tertiary: oklch(0.62 0.014 286);
+  --kronus-fg-muted: oklch(0.442 0.013 286);
+  --kronus-fg-inverse: oklch(0.235 0.006 285.9);
+  --kronus-border: oklch(1 0 0 / 0.1);
+  --kronus-border-strong: oklch(1 0 0 / 0.14);
+  --kronus-border-soft: oklch(1 0 0 / 0.06);
+  --kronus-ring: oklch(0.685 0.169 237.3);
+  --kronus-success: oklch(0.715 0.155 162.5);
+  --kronus-success-text: oklch(0.715 0.155 162.5);
+  --kronus-warning: oklch(0.769 0.166 70.08);
+  --kronus-warning-text: oklch(0.769 0.166 70.08);
+  --kronus-error: oklch(0.645 0.222 16.44);
+  --kronus-error-text: oklch(0.69 0.222 16.44);
+  --kronus-info: oklch(0.715 0.143 215.2);
+  --kronus-info-text: oklch(0.715 0.143 215.2);
+  --kronus-radius: 14px;
+  --kronus-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --kronus-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.22);
+  --kronus-shadow-md: 0 6px 12px rgba(0, 0, 0, 0.24), 0 2px 4px rgba(0, 0, 0, 0.16);
+  --kronus-shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.28), 0 4px 8px rgba(0, 0, 0, 0.18);
+  --kronus-shadow-glow: 0 12px 32px rgba(14, 165, 233, 0.32);
   /* Fonts (runtime-overridable so the Create studio can swap them). */
-  --cooud-font-display:
+  --kronus-font-display:
     "SF Pro Display", Geist, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --cooud-font-sans: "SF Pro Text", Geist, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --cooud-font-mono: "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --kronus-font-sans:
+    "SF Pro Text", Geist, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --kronus-font-mono: "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
   /* Chart palette. */
-  --cooud-chart-1: oklch(0.685 0.169 237.3);
-  --cooud-chart-2: oklch(0.715 0.143 215.2);
-  --cooud-chart-3: oklch(0.62 0.21 292);
-  --cooud-chart-4: oklch(0.7 0.15 162);
-  --cooud-chart-5: oklch(0.78 0.16 70);
+  --kronus-chart-1: oklch(0.685 0.169 237.3);
+  --kronus-chart-2: oklch(0.715 0.143 215.2);
+  --kronus-chart-3: oklch(0.62 0.21 292);
+  --kronus-chart-4: oklch(0.7 0.15 162);
+  --kronus-chart-5: oklch(0.78 0.16 70);
 }
 
-[data-cooud-theme="aurora"][data-cooud-mode="light"] {
+[data-kronus-theme="aurora"][data-kronus-mode="light"] {
   color-scheme: light;
-  --cooud-primary-foreground: oklch(0.145 0.005 285.8);
-  --cooud-primary-text: oklch(0.515 0.12 237.3);
-  --cooud-accent-foreground: oklch(0.145 0 0);
-  --cooud-surface-base: oklch(1 0 0);
-  --cooud-surface-inset: oklch(0.985 0 0);
-  --cooud-surface-raised: oklch(1 0 0);
-  --cooud-surface-overlay: oklch(0.967 0.001 286);
-  --cooud-surface-elevated: oklch(1 0 0);
-  --cooud-surface-floating: oklch(1 0 0);
-  --cooud-fg: oklch(0.235 0.006 285.9);
-  --cooud-fg-secondary: oklch(0.442 0.013 286);
-  --cooud-fg-tertiary: oklch(0.54 0.014 286);
-  --cooud-fg-muted: oklch(0.705 0.015 286);
-  --cooud-fg-inverse: oklch(0.985 0.001 106.4);
-  --cooud-border: oklch(0 0 0 / 0.1);
-  --cooud-border-strong: oklch(0 0 0 / 0.14);
-  --cooud-border-soft: oklch(0 0 0 / 0.06);
-  --cooud-shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.06);
-  --cooud-shadow-sm: 0 2px 4px rgba(16, 24, 40, 0.08);
-  --cooud-shadow-md: 0 6px 12px rgba(16, 24, 40, 0.1), 0 2px 4px rgba(16, 24, 40, 0.06);
-  --cooud-shadow-lg: 0 12px 24px rgba(16, 24, 40, 0.12), 0 4px 8px rgba(16, 24, 40, 0.08);
-  --cooud-shadow-glow: 0 12px 32px rgba(14, 165, 233, 0.22);
-  --cooud-success: oklch(0.52 0.15 162);
-  --cooud-success-text: oklch(0.48 0.15 162);
-  --cooud-warning: oklch(0.52 0.12 70);
-  --cooud-warning-text: oklch(0.518 0.12 70);
-  --cooud-info: oklch(0.52 0.16 235);
-  --cooud-info-text: oklch(0.49 0.16 235);
-  --cooud-error: oklch(0.55 0.2 25);
-  --cooud-error-text: oklch(0.531 0.2 25);
+  --kronus-primary-foreground: oklch(0.145 0.005 285.8);
+  --kronus-primary-text: oklch(0.515 0.12 237.3);
+  --kronus-accent-foreground: oklch(0.145 0 0);
+  --kronus-surface-base: oklch(1 0 0);
+  --kronus-surface-inset: oklch(0.985 0 0);
+  --kronus-surface-raised: oklch(1 0 0);
+  --kronus-surface-overlay: oklch(0.967 0.001 286);
+  --kronus-surface-elevated: oklch(1 0 0);
+  --kronus-surface-floating: oklch(1 0 0);
+  --kronus-fg: oklch(0.235 0.006 285.9);
+  --kronus-fg-secondary: oklch(0.442 0.013 286);
+  --kronus-fg-tertiary: oklch(0.54 0.014 286);
+  --kronus-fg-muted: oklch(0.705 0.015 286);
+  --kronus-fg-inverse: oklch(0.985 0.001 106.4);
+  --kronus-border: oklch(0 0 0 / 0.1);
+  --kronus-border-strong: oklch(0 0 0 / 0.14);
+  --kronus-border-soft: oklch(0 0 0 / 0.06);
+  --kronus-shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --kronus-shadow-sm: 0 2px 4px rgba(16, 24, 40, 0.08);
+  --kronus-shadow-md: 0 6px 12px rgba(16, 24, 40, 0.1), 0 2px 4px rgba(16, 24, 40, 0.06);
+  --kronus-shadow-lg: 0 12px 24px rgba(16, 24, 40, 0.12), 0 4px 8px rgba(16, 24, 40, 0.08);
+  --kronus-shadow-glow: 0 12px 32px rgba(14, 165, 233, 0.22);
+  --kronus-success: oklch(0.52 0.15 162);
+  --kronus-success-text: oklch(0.48 0.15 162);
+  --kronus-warning: oklch(0.52 0.12 70);
+  --kronus-warning-text: oklch(0.518 0.12 70);
+  --kronus-info: oklch(0.52 0.16 235);
+  --kronus-info-text: oklch(0.49 0.16 235);
+  --kronus-error: oklch(0.55 0.2 25);
+  --kronus-error-text: oklch(0.531 0.2 25);
 }
 
 /* Neutral preset — light-first */
-[data-cooud-theme="neutral"] {
+[data-kronus-theme="neutral"] {
   color-scheme: light;
-  --cooud-primary: oklch(0.205 0 0);
-  --cooud-primary-foreground: oklch(0.985 0 0);
-  --cooud-primary-text: oklch(0.205 0 0);
-  --cooud-accent: oklch(0.96 0 0);
-  --cooud-accent-foreground: oklch(0.205 0 0);
-  --cooud-surface-base: oklch(0.985 0 0);
-  --cooud-surface-inset: oklch(0.97 0 0);
-  --cooud-surface-raised: oklch(1 0 0);
-  --cooud-surface-overlay: oklch(0.96 0 0);
-  --cooud-surface-elevated: oklch(1 0 0);
-  --cooud-surface-floating: oklch(1 0 0);
-  --cooud-fg: oklch(0.145 0 0);
-  --cooud-fg-secondary: oklch(0.43 0 0);
-  --cooud-fg-tertiary: oklch(0.53 0 0);
-  --cooud-fg-muted: oklch(0.705 0 0);
-  --cooud-fg-inverse: oklch(0.985 0 0);
-  --cooud-border: oklch(0.915 0 0);
-  --cooud-border-strong: oklch(0.86 0 0);
-  --cooud-border-soft: oklch(0.94 0 0);
-  --cooud-ring: oklch(0.705 0 0);
-  --cooud-success: oklch(0.52 0.15 162);
-  --cooud-success-text: oklch(0.48 0.15 162);
-  --cooud-warning: oklch(0.52 0.12 70);
-  --cooud-warning-text: oklch(0.518 0.12 70);
-  --cooud-error: oklch(0.55 0.2 25);
-  --cooud-error-text: oklch(0.531 0.2 25);
-  --cooud-info: oklch(0.52 0.16 235);
-  --cooud-info-text: oklch(0.49 0.16 235);
-  --cooud-radius: 14px;
-  --cooud-shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.05);
-  --cooud-shadow-sm: 0 1px 3px rgba(16, 24, 40, 0.08);
-  --cooud-shadow-md: 0 4px 8px rgba(16, 24, 40, 0.08), 0 2px 4px rgba(16, 24, 40, 0.04);
-  --cooud-shadow-lg: 0 12px 24px rgba(16, 24, 40, 0.1), 0 4px 8px rgba(16, 24, 40, 0.06);
-  --cooud-shadow-glow: 0 0 0 4px oklch(0.705 0 0 / 0.18);
+  --kronus-primary: oklch(0.205 0 0);
+  --kronus-primary-foreground: oklch(0.985 0 0);
+  --kronus-primary-text: oklch(0.205 0 0);
+  --kronus-accent: oklch(0.96 0 0);
+  --kronus-accent-foreground: oklch(0.205 0 0);
+  --kronus-surface-base: oklch(0.985 0 0);
+  --kronus-surface-inset: oklch(0.97 0 0);
+  --kronus-surface-raised: oklch(1 0 0);
+  --kronus-surface-overlay: oklch(0.96 0 0);
+  --kronus-surface-elevated: oklch(1 0 0);
+  --kronus-surface-floating: oklch(1 0 0);
+  --kronus-fg: oklch(0.145 0 0);
+  --kronus-fg-secondary: oklch(0.43 0 0);
+  --kronus-fg-tertiary: oklch(0.53 0 0);
+  --kronus-fg-muted: oklch(0.705 0 0);
+  --kronus-fg-inverse: oklch(0.985 0 0);
+  --kronus-border: oklch(0.915 0 0);
+  --kronus-border-strong: oklch(0.86 0 0);
+  --kronus-border-soft: oklch(0.94 0 0);
+  --kronus-ring: oklch(0.705 0 0);
+  --kronus-success: oklch(0.52 0.15 162);
+  --kronus-success-text: oklch(0.48 0.15 162);
+  --kronus-warning: oklch(0.52 0.12 70);
+  --kronus-warning-text: oklch(0.518 0.12 70);
+  --kronus-error: oklch(0.55 0.2 25);
+  --kronus-error-text: oklch(0.531 0.2 25);
+  --kronus-info: oklch(0.52 0.16 235);
+  --kronus-info-text: oklch(0.49 0.16 235);
+  --kronus-radius: 14px;
+  --kronus-shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.05);
+  --kronus-shadow-sm: 0 1px 3px rgba(16, 24, 40, 0.08);
+  --kronus-shadow-md: 0 4px 8px rgba(16, 24, 40, 0.08), 0 2px 4px rgba(16, 24, 40, 0.04);
+  --kronus-shadow-lg: 0 12px 24px rgba(16, 24, 40, 0.1), 0 4px 8px rgba(16, 24, 40, 0.06);
+  --kronus-shadow-glow: 0 0 0 4px oklch(0.705 0 0 / 0.18);
 }
 
-[data-cooud-theme="neutral"][data-cooud-mode="dark"] {
+[data-kronus-theme="neutral"][data-kronus-mode="dark"] {
   color-scheme: dark;
-  --cooud-primary: oklch(0.93 0 0);
-  --cooud-primary-foreground: oklch(0.11 0 0);
-  --cooud-primary-text: oklch(0.93 0 0);
-  --cooud-accent: oklch(0.27 0 0);
-  --cooud-accent-foreground: oklch(0.93 0 0);
-  --cooud-surface-base: oklch(0.11 0 0);
-  --cooud-surface-inset: oklch(0.13 0 0);
-  --cooud-surface-raised: oklch(0.16 0 0);
-  --cooud-surface-overlay: oklch(0.2 0 0);
-  --cooud-surface-elevated: oklch(0.23 0 0);
-  --cooud-surface-floating: oklch(0.165 0 0);
-  --cooud-fg: oklch(0.93 0 0);
-  --cooud-fg-secondary: oklch(0.7 0 0);
-  --cooud-fg-tertiary: oklch(0.62 0 0);
-  --cooud-fg-muted: oklch(0.44 0 0);
-  --cooud-fg-inverse: oklch(0.11 0 0);
-  --cooud-border: oklch(1 0 0 / 0.1);
-  --cooud-border-strong: oklch(1 0 0 / 0.16);
-  --cooud-border-soft: oklch(1 0 0 / 0.06);
-  --cooud-ring: oklch(0.55 0 0);
-  --cooud-success: oklch(0.715 0.155 162.5);
-  --cooud-success-text: oklch(0.715 0.155 162.5);
-  --cooud-warning: oklch(0.769 0.166 70.08);
-  --cooud-warning-text: oklch(0.769 0.166 70.08);
-  --cooud-info: oklch(0.715 0.143 215.2);
-  --cooud-info-text: oklch(0.715 0.143 215.2);
-  --cooud-error: oklch(0.704 0.191 22.216);
-  --cooud-error-text: oklch(0.704 0.191 22.216);
-  --cooud-shadow-glow: 0 0 0 4px oklch(0.6 0 0 / 0.3);
+  --kronus-primary: oklch(0.93 0 0);
+  --kronus-primary-foreground: oklch(0.11 0 0);
+  --kronus-primary-text: oklch(0.93 0 0);
+  --kronus-accent: oklch(0.27 0 0);
+  --kronus-accent-foreground: oklch(0.93 0 0);
+  --kronus-surface-base: oklch(0.11 0 0);
+  --kronus-surface-inset: oklch(0.13 0 0);
+  --kronus-surface-raised: oklch(0.16 0 0);
+  --kronus-surface-overlay: oklch(0.2 0 0);
+  --kronus-surface-elevated: oklch(0.23 0 0);
+  --kronus-surface-floating: oklch(0.165 0 0);
+  --kronus-fg: oklch(0.93 0 0);
+  --kronus-fg-secondary: oklch(0.7 0 0);
+  --kronus-fg-tertiary: oklch(0.62 0 0);
+  --kronus-fg-muted: oklch(0.44 0 0);
+  --kronus-fg-inverse: oklch(0.11 0 0);
+  --kronus-border: oklch(1 0 0 / 0.1);
+  --kronus-border-strong: oklch(1 0 0 / 0.16);
+  --kronus-border-soft: oklch(1 0 0 / 0.06);
+  --kronus-ring: oklch(0.55 0 0);
+  --kronus-success: oklch(0.715 0.155 162.5);
+  --kronus-success-text: oklch(0.715 0.155 162.5);
+  --kronus-warning: oklch(0.769 0.166 70.08);
+  --kronus-warning-text: oklch(0.769 0.166 70.08);
+  --kronus-info: oklch(0.715 0.143 215.2);
+  --kronus-info-text: oklch(0.715 0.143 215.2);
+  --kronus-error: oklch(0.704 0.191 22.216);
+  --kronus-error-text: oklch(0.704 0.191 22.216);
+  --kronus-shadow-glow: 0 0 0 4px oklch(0.6 0 0 / 0.3);
 }
 
 /*
@@ -213,301 +214,301 @@
  */
 
 /* Midnight preset — light base; dark delta below. */
-[data-cooud-theme="midnight"] {
+[data-kronus-theme="midnight"] {
   color-scheme: light;
-  --cooud-primary: oklch(0.55 0.205 280);
-  --cooud-primary-foreground: oklch(0.985 0.005 285);
-  --cooud-primary-text: oklch(0.528 0.205 280);
-  --cooud-accent: oklch(0.53 0.2 292);
-  --cooud-accent-foreground: oklch(0.985 0.005 285);
-  --cooud-surface-base: oklch(1 0 0);
-  --cooud-surface-inset: oklch(0.985 0 0);
-  --cooud-surface-raised: oklch(1 0 0);
-  --cooud-surface-overlay: oklch(0.967 0.001 286);
-  --cooud-surface-elevated: oklch(1 0 0);
-  --cooud-surface-floating: oklch(1 0 0);
-  --cooud-fg: oklch(0.235 0.006 285.9);
-  --cooud-fg-secondary: oklch(0.442 0.013 286);
-  --cooud-fg-tertiary: oklch(0.54 0.014 286);
-  --cooud-fg-muted: oklch(0.705 0.015 286);
-  --cooud-fg-inverse: oklch(0.985 0.001 106.4);
-  --cooud-border: oklch(0 0 0 / 0.1);
-  --cooud-border-strong: oklch(0 0 0 / 0.14);
-  --cooud-border-soft: oklch(0 0 0 / 0.06);
-  --cooud-ring: oklch(0.55 0.205 280);
-  --cooud-success: oklch(0.52 0.15 162);
-  --cooud-success-text: oklch(0.48 0.15 162);
-  --cooud-warning: oklch(0.52 0.12 70);
-  --cooud-warning-text: oklch(0.518 0.12 70);
-  --cooud-error: oklch(0.55 0.2 25);
-  --cooud-error-text: oklch(0.531 0.2 25);
-  --cooud-info: oklch(0.5 0.17 280);
-  --cooud-info-text: oklch(0.5 0.17 280);
-  --cooud-radius: 14px;
-  --cooud-chart-1: oklch(0.55 0.205 280);
-  --cooud-chart-2: oklch(0.6 0.2 295);
-  --cooud-chart-3: oklch(0.66 0.2 300);
-  --cooud-chart-4: oklch(0.62 0.19 268);
-  --cooud-chart-5: oklch(0.7 0.16 315);
-  --cooud-shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.06);
-  --cooud-shadow-sm: 0 2px 4px rgba(16, 24, 40, 0.08);
-  --cooud-shadow-md: 0 6px 12px rgba(16, 24, 40, 0.1), 0 2px 4px rgba(16, 24, 40, 0.06);
-  --cooud-shadow-lg: 0 12px 24px rgba(16, 24, 40, 0.12), 0 4px 8px rgba(16, 24, 40, 0.08);
-  --cooud-shadow-glow: 0 12px 32px rgba(97, 88, 228, 0.24);
+  --kronus-primary: oklch(0.55 0.205 280);
+  --kronus-primary-foreground: oklch(0.985 0.005 285);
+  --kronus-primary-text: oklch(0.528 0.205 280);
+  --kronus-accent: oklch(0.53 0.2 292);
+  --kronus-accent-foreground: oklch(0.985 0.005 285);
+  --kronus-surface-base: oklch(1 0 0);
+  --kronus-surface-inset: oklch(0.985 0 0);
+  --kronus-surface-raised: oklch(1 0 0);
+  --kronus-surface-overlay: oklch(0.967 0.001 286);
+  --kronus-surface-elevated: oklch(1 0 0);
+  --kronus-surface-floating: oklch(1 0 0);
+  --kronus-fg: oklch(0.235 0.006 285.9);
+  --kronus-fg-secondary: oklch(0.442 0.013 286);
+  --kronus-fg-tertiary: oklch(0.54 0.014 286);
+  --kronus-fg-muted: oklch(0.705 0.015 286);
+  --kronus-fg-inverse: oklch(0.985 0.001 106.4);
+  --kronus-border: oklch(0 0 0 / 0.1);
+  --kronus-border-strong: oklch(0 0 0 / 0.14);
+  --kronus-border-soft: oklch(0 0 0 / 0.06);
+  --kronus-ring: oklch(0.55 0.205 280);
+  --kronus-success: oklch(0.52 0.15 162);
+  --kronus-success-text: oklch(0.48 0.15 162);
+  --kronus-warning: oklch(0.52 0.12 70);
+  --kronus-warning-text: oklch(0.518 0.12 70);
+  --kronus-error: oklch(0.55 0.2 25);
+  --kronus-error-text: oklch(0.531 0.2 25);
+  --kronus-info: oklch(0.5 0.17 280);
+  --kronus-info-text: oklch(0.5 0.17 280);
+  --kronus-radius: 14px;
+  --kronus-chart-1: oklch(0.55 0.205 280);
+  --kronus-chart-2: oklch(0.6 0.2 295);
+  --kronus-chart-3: oklch(0.66 0.2 300);
+  --kronus-chart-4: oklch(0.62 0.19 268);
+  --kronus-chart-5: oklch(0.7 0.16 315);
+  --kronus-shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --kronus-shadow-sm: 0 2px 4px rgba(16, 24, 40, 0.08);
+  --kronus-shadow-md: 0 6px 12px rgba(16, 24, 40, 0.1), 0 2px 4px rgba(16, 24, 40, 0.06);
+  --kronus-shadow-lg: 0 12px 24px rgba(16, 24, 40, 0.12), 0 4px 8px rgba(16, 24, 40, 0.08);
+  --kronus-shadow-glow: 0 12px 32px rgba(97, 88, 228, 0.24);
 }
 
-[data-cooud-theme="midnight"][data-cooud-mode="dark"] {
+[data-kronus-theme="midnight"][data-kronus-mode="dark"] {
   color-scheme: dark;
-  --cooud-primary-text: oklch(0.665 0.205 280);
-  --cooud-surface-base: oklch(0.145 0.005 285.8);
-  --cooud-surface-inset: oklch(0.165 0.005 285.8);
-  --cooud-surface-raised: oklch(0.195 0.005 285.8);
-  --cooud-surface-overlay: oklch(0.235 0.006 285.9);
-  --cooud-surface-elevated: oklch(0.27 0.006 286);
-  --cooud-surface-floating: oklch(0.2 0.006 286);
-  --cooud-fg: oklch(0.985 0.001 106.4);
-  --cooud-fg-secondary: oklch(0.705 0.015 286);
-  --cooud-fg-tertiary: oklch(0.62 0.014 286);
-  --cooud-fg-muted: oklch(0.442 0.013 286);
-  --cooud-fg-inverse: oklch(0.235 0.006 285.9);
-  --cooud-border: oklch(1 0 0 / 0.1);
-  --cooud-border-strong: oklch(1 0 0 / 0.14);
-  --cooud-border-soft: oklch(1 0 0 / 0.06);
-  --cooud-success: oklch(0.715 0.155 162.5);
-  --cooud-success-text: oklch(0.715 0.155 162.5);
-  --cooud-warning: oklch(0.769 0.166 70.08);
-  --cooud-warning-text: oklch(0.769 0.166 70.08);
-  --cooud-error: oklch(0.645 0.222 16.44);
-  --cooud-error-text: oklch(0.69 0.222 16.44);
-  --cooud-info: oklch(0.62 0.16 280);
-  --cooud-info-text: oklch(0.68 0.16 280);
-  --cooud-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
-  --cooud-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.22);
-  --cooud-shadow-md: 0 6px 12px rgba(0, 0, 0, 0.24), 0 2px 4px rgba(0, 0, 0, 0.16);
-  --cooud-shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.28), 0 4px 8px rgba(0, 0, 0, 0.18);
-  --cooud-shadow-glow: 0 12px 32px rgba(97, 88, 228, 0.34);
+  --kronus-primary-text: oklch(0.665 0.205 280);
+  --kronus-surface-base: oklch(0.145 0.005 285.8);
+  --kronus-surface-inset: oklch(0.165 0.005 285.8);
+  --kronus-surface-raised: oklch(0.195 0.005 285.8);
+  --kronus-surface-overlay: oklch(0.235 0.006 285.9);
+  --kronus-surface-elevated: oklch(0.27 0.006 286);
+  --kronus-surface-floating: oklch(0.2 0.006 286);
+  --kronus-fg: oklch(0.985 0.001 106.4);
+  --kronus-fg-secondary: oklch(0.705 0.015 286);
+  --kronus-fg-tertiary: oklch(0.62 0.014 286);
+  --kronus-fg-muted: oklch(0.442 0.013 286);
+  --kronus-fg-inverse: oklch(0.235 0.006 285.9);
+  --kronus-border: oklch(1 0 0 / 0.1);
+  --kronus-border-strong: oklch(1 0 0 / 0.14);
+  --kronus-border-soft: oklch(1 0 0 / 0.06);
+  --kronus-success: oklch(0.715 0.155 162.5);
+  --kronus-success-text: oklch(0.715 0.155 162.5);
+  --kronus-warning: oklch(0.769 0.166 70.08);
+  --kronus-warning-text: oklch(0.769 0.166 70.08);
+  --kronus-error: oklch(0.645 0.222 16.44);
+  --kronus-error-text: oklch(0.69 0.222 16.44);
+  --kronus-info: oklch(0.62 0.16 280);
+  --kronus-info-text: oklch(0.68 0.16 280);
+  --kronus-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --kronus-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.22);
+  --kronus-shadow-md: 0 6px 12px rgba(0, 0, 0, 0.24), 0 2px 4px rgba(0, 0, 0, 0.16);
+  --kronus-shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.28), 0 4px 8px rgba(0, 0, 0, 0.18);
+  --kronus-shadow-glow: 0 12px 32px rgba(97, 88, 228, 0.34);
 }
 
 /* Sunset preset — light base; dark delta below. */
-[data-cooud-theme="sunset"] {
+[data-kronus-theme="sunset"] {
   color-scheme: light;
-  --cooud-primary: oklch(0.78 0.16 65);
-  --cooud-primary-foreground: oklch(0.24 0.05 55);
-  --cooud-primary-text: oklch(0.54 0.129 65);
-  --cooud-accent: oklch(0.585 0.22 18);
-  --cooud-accent-foreground: oklch(0.99 0.01 40);
-  --cooud-surface-base: oklch(1 0 0);
-  --cooud-surface-inset: oklch(0.985 0 0);
-  --cooud-surface-raised: oklch(1 0 0);
-  --cooud-surface-overlay: oklch(0.967 0.001 286);
-  --cooud-surface-elevated: oklch(1 0 0);
-  --cooud-surface-floating: oklch(1 0 0);
-  --cooud-fg: oklch(0.235 0.006 285.9);
-  --cooud-fg-secondary: oklch(0.442 0.013 286);
-  --cooud-fg-tertiary: oklch(0.54 0.014 286);
-  --cooud-fg-muted: oklch(0.705 0.015 286);
-  --cooud-fg-inverse: oklch(0.985 0.001 106.4);
-  --cooud-border: oklch(0 0 0 / 0.1);
-  --cooud-border-strong: oklch(0 0 0 / 0.14);
-  --cooud-border-soft: oklch(0 0 0 / 0.06);
-  --cooud-ring: oklch(0.78 0.16 65);
-  --cooud-success: oklch(0.55 0.15 130);
-  --cooud-success-text: oklch(0.5 0.15 130);
-  --cooud-warning: oklch(0.52 0.12 70);
-  --cooud-warning-text: oklch(0.518 0.12 70);
-  --cooud-error: oklch(0.55 0.2 25);
-  --cooud-error-text: oklch(0.531 0.2 25);
-  --cooud-info: oklch(0.55 0.13 55);
-  --cooud-info-text: oklch(0.52 0.13 55);
-  --cooud-radius: 14px;
-  --cooud-chart-1: oklch(0.7 0.16 60);
-  --cooud-chart-2: oklch(0.62 0.19 40);
-  --cooud-chart-3: oklch(0.585 0.22 18);
-  --cooud-chart-4: oklch(0.76 0.16 85);
-  --cooud-chart-5: oklch(0.58 0.18 4);
-  --cooud-shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.06);
-  --cooud-shadow-sm: 0 2px 4px rgba(16, 24, 40, 0.08);
-  --cooud-shadow-md: 0 6px 12px rgba(16, 24, 40, 0.1), 0 2px 4px rgba(16, 24, 40, 0.06);
-  --cooud-shadow-lg: 0 12px 24px rgba(16, 24, 40, 0.12), 0 4px 8px rgba(16, 24, 40, 0.08);
-  --cooud-shadow-glow: 0 12px 32px rgba(252, 159, 48, 0.24);
+  --kronus-primary: oklch(0.78 0.16 65);
+  --kronus-primary-foreground: oklch(0.24 0.05 55);
+  --kronus-primary-text: oklch(0.54 0.129 65);
+  --kronus-accent: oklch(0.585 0.22 18);
+  --kronus-accent-foreground: oklch(0.99 0.01 40);
+  --kronus-surface-base: oklch(1 0 0);
+  --kronus-surface-inset: oklch(0.985 0 0);
+  --kronus-surface-raised: oklch(1 0 0);
+  --kronus-surface-overlay: oklch(0.967 0.001 286);
+  --kronus-surface-elevated: oklch(1 0 0);
+  --kronus-surface-floating: oklch(1 0 0);
+  --kronus-fg: oklch(0.235 0.006 285.9);
+  --kronus-fg-secondary: oklch(0.442 0.013 286);
+  --kronus-fg-tertiary: oklch(0.54 0.014 286);
+  --kronus-fg-muted: oklch(0.705 0.015 286);
+  --kronus-fg-inverse: oklch(0.985 0.001 106.4);
+  --kronus-border: oklch(0 0 0 / 0.1);
+  --kronus-border-strong: oklch(0 0 0 / 0.14);
+  --kronus-border-soft: oklch(0 0 0 / 0.06);
+  --kronus-ring: oklch(0.78 0.16 65);
+  --kronus-success: oklch(0.55 0.15 130);
+  --kronus-success-text: oklch(0.5 0.15 130);
+  --kronus-warning: oklch(0.52 0.12 70);
+  --kronus-warning-text: oklch(0.518 0.12 70);
+  --kronus-error: oklch(0.55 0.2 25);
+  --kronus-error-text: oklch(0.531 0.2 25);
+  --kronus-info: oklch(0.55 0.13 55);
+  --kronus-info-text: oklch(0.52 0.13 55);
+  --kronus-radius: 14px;
+  --kronus-chart-1: oklch(0.7 0.16 60);
+  --kronus-chart-2: oklch(0.62 0.19 40);
+  --kronus-chart-3: oklch(0.585 0.22 18);
+  --kronus-chart-4: oklch(0.76 0.16 85);
+  --kronus-chart-5: oklch(0.58 0.18 4);
+  --kronus-shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --kronus-shadow-sm: 0 2px 4px rgba(16, 24, 40, 0.08);
+  --kronus-shadow-md: 0 6px 12px rgba(16, 24, 40, 0.1), 0 2px 4px rgba(16, 24, 40, 0.06);
+  --kronus-shadow-lg: 0 12px 24px rgba(16, 24, 40, 0.12), 0 4px 8px rgba(16, 24, 40, 0.08);
+  --kronus-shadow-glow: 0 12px 32px rgba(252, 159, 48, 0.24);
 }
 
-[data-cooud-theme="sunset"][data-cooud-mode="dark"] {
+[data-kronus-theme="sunset"][data-kronus-mode="dark"] {
   color-scheme: dark;
-  --cooud-primary-text: oklch(0.78 0.16 65);
-  --cooud-surface-base: oklch(0.145 0.005 285.8);
-  --cooud-surface-inset: oklch(0.165 0.005 285.8);
-  --cooud-surface-raised: oklch(0.195 0.005 285.8);
-  --cooud-surface-overlay: oklch(0.235 0.006 285.9);
-  --cooud-surface-elevated: oklch(0.27 0.006 286);
-  --cooud-surface-floating: oklch(0.2 0.006 286);
-  --cooud-fg: oklch(0.985 0.001 106.4);
-  --cooud-fg-secondary: oklch(0.705 0.015 286);
-  --cooud-fg-tertiary: oklch(0.62 0.014 286);
-  --cooud-fg-muted: oklch(0.442 0.013 286);
-  --cooud-fg-inverse: oklch(0.235 0.006 285.9);
-  --cooud-border: oklch(1 0 0 / 0.1);
-  --cooud-border-strong: oklch(1 0 0 / 0.14);
-  --cooud-border-soft: oklch(1 0 0 / 0.06);
-  --cooud-success: oklch(0.74 0.16 130);
-  --cooud-success-text: oklch(0.74 0.16 130);
-  --cooud-warning: oklch(0.769 0.166 70.08);
-  --cooud-warning-text: oklch(0.769 0.166 70.08);
-  --cooud-error: oklch(0.645 0.222 16.44);
-  --cooud-error-text: oklch(0.69 0.222 16.44);
-  --cooud-info: oklch(0.72 0.13 55);
-  --cooud-info-text: oklch(0.72 0.13 55);
-  --cooud-chart-1: oklch(0.78 0.16 65);
-  --cooud-chart-2: oklch(0.7 0.19 40);
-  --cooud-chart-4: oklch(0.82 0.16 85);
-  --cooud-chart-5: oklch(0.66 0.18 4);
-  --cooud-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
-  --cooud-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.22);
-  --cooud-shadow-md: 0 6px 12px rgba(0, 0, 0, 0.24), 0 2px 4px rgba(0, 0, 0, 0.16);
-  --cooud-shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.28), 0 4px 8px rgba(0, 0, 0, 0.18);
-  --cooud-shadow-glow: 0 12px 32px rgba(252, 159, 48, 0.34);
+  --kronus-primary-text: oklch(0.78 0.16 65);
+  --kronus-surface-base: oklch(0.145 0.005 285.8);
+  --kronus-surface-inset: oklch(0.165 0.005 285.8);
+  --kronus-surface-raised: oklch(0.195 0.005 285.8);
+  --kronus-surface-overlay: oklch(0.235 0.006 285.9);
+  --kronus-surface-elevated: oklch(0.27 0.006 286);
+  --kronus-surface-floating: oklch(0.2 0.006 286);
+  --kronus-fg: oklch(0.985 0.001 106.4);
+  --kronus-fg-secondary: oklch(0.705 0.015 286);
+  --kronus-fg-tertiary: oklch(0.62 0.014 286);
+  --kronus-fg-muted: oklch(0.442 0.013 286);
+  --kronus-fg-inverse: oklch(0.235 0.006 285.9);
+  --kronus-border: oklch(1 0 0 / 0.1);
+  --kronus-border-strong: oklch(1 0 0 / 0.14);
+  --kronus-border-soft: oklch(1 0 0 / 0.06);
+  --kronus-success: oklch(0.74 0.16 130);
+  --kronus-success-text: oklch(0.74 0.16 130);
+  --kronus-warning: oklch(0.769 0.166 70.08);
+  --kronus-warning-text: oklch(0.769 0.166 70.08);
+  --kronus-error: oklch(0.645 0.222 16.44);
+  --kronus-error-text: oklch(0.69 0.222 16.44);
+  --kronus-info: oklch(0.72 0.13 55);
+  --kronus-info-text: oklch(0.72 0.13 55);
+  --kronus-chart-1: oklch(0.78 0.16 65);
+  --kronus-chart-2: oklch(0.7 0.19 40);
+  --kronus-chart-4: oklch(0.82 0.16 85);
+  --kronus-chart-5: oklch(0.66 0.18 4);
+  --kronus-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --kronus-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.22);
+  --kronus-shadow-md: 0 6px 12px rgba(0, 0, 0, 0.24), 0 2px 4px rgba(0, 0, 0, 0.16);
+  --kronus-shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.28), 0 4px 8px rgba(0, 0, 0, 0.18);
+  --kronus-shadow-glow: 0 12px 32px rgba(252, 159, 48, 0.34);
 }
 
 /* Emerald preset — light base; dark delta below. */
-[data-cooud-theme="emerald"] {
+[data-kronus-theme="emerald"] {
   color-scheme: light;
-  --cooud-primary: oklch(0.74 0.16 160);
-  --cooud-primary-foreground: oklch(0.2 0.04 160);
-  --cooud-primary-text: oklch(0.515 0.121 160);
-  --cooud-accent: oklch(0.76 0.12 185);
-  --cooud-accent-foreground: oklch(0.2 0.04 185);
-  --cooud-surface-base: oklch(1 0 0);
-  --cooud-surface-inset: oklch(0.985 0 0);
-  --cooud-surface-raised: oklch(1 0 0);
-  --cooud-surface-overlay: oklch(0.967 0.001 286);
-  --cooud-surface-elevated: oklch(1 0 0);
-  --cooud-surface-floating: oklch(1 0 0);
-  --cooud-fg: oklch(0.235 0.006 285.9);
-  --cooud-fg-secondary: oklch(0.442 0.013 286);
-  --cooud-fg-tertiary: oklch(0.54 0.014 286);
-  --cooud-fg-muted: oklch(0.705 0.015 286);
-  --cooud-fg-inverse: oklch(0.985 0.001 106.4);
-  --cooud-border: oklch(0 0 0 / 0.1);
-  --cooud-border-strong: oklch(0 0 0 / 0.14);
-  --cooud-border-soft: oklch(0 0 0 / 0.06);
-  --cooud-ring: oklch(0.74 0.16 160);
-  --cooud-success: oklch(0.52 0.14 160);
-  --cooud-success-text: oklch(0.485 0.14 160);
-  --cooud-warning: oklch(0.52 0.12 70);
-  --cooud-warning-text: oklch(0.518 0.12 70);
-  --cooud-error: oklch(0.55 0.2 25);
-  --cooud-error-text: oklch(0.531 0.2 25);
-  --cooud-info: oklch(0.52 0.11 185);
-  --cooud-info-text: oklch(0.49 0.11 185);
-  --cooud-radius: 14px;
-  --cooud-chart-1: oklch(0.6 0.15 160);
-  --cooud-chart-2: oklch(0.62 0.11 185);
-  --cooud-chart-3: oklch(0.55 0.14 145);
-  --cooud-chart-4: oklch(0.58 0.12 200);
-  --cooud-chart-5: oklch(0.68 0.14 130);
-  --cooud-shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.06);
-  --cooud-shadow-sm: 0 2px 4px rgba(16, 24, 40, 0.08);
-  --cooud-shadow-md: 0 6px 12px rgba(16, 24, 40, 0.1), 0 2px 4px rgba(16, 24, 40, 0.06);
-  --cooud-shadow-lg: 0 12px 24px rgba(16, 24, 40, 0.12), 0 4px 8px rgba(16, 24, 40, 0.08);
-  --cooud-shadow-glow: 0 12px 32px rgba(35, 201, 135, 0.22);
+  --kronus-primary: oklch(0.74 0.16 160);
+  --kronus-primary-foreground: oklch(0.2 0.04 160);
+  --kronus-primary-text: oklch(0.515 0.121 160);
+  --kronus-accent: oklch(0.76 0.12 185);
+  --kronus-accent-foreground: oklch(0.2 0.04 185);
+  --kronus-surface-base: oklch(1 0 0);
+  --kronus-surface-inset: oklch(0.985 0 0);
+  --kronus-surface-raised: oklch(1 0 0);
+  --kronus-surface-overlay: oklch(0.967 0.001 286);
+  --kronus-surface-elevated: oklch(1 0 0);
+  --kronus-surface-floating: oklch(1 0 0);
+  --kronus-fg: oklch(0.235 0.006 285.9);
+  --kronus-fg-secondary: oklch(0.442 0.013 286);
+  --kronus-fg-tertiary: oklch(0.54 0.014 286);
+  --kronus-fg-muted: oklch(0.705 0.015 286);
+  --kronus-fg-inverse: oklch(0.985 0.001 106.4);
+  --kronus-border: oklch(0 0 0 / 0.1);
+  --kronus-border-strong: oklch(0 0 0 / 0.14);
+  --kronus-border-soft: oklch(0 0 0 / 0.06);
+  --kronus-ring: oklch(0.74 0.16 160);
+  --kronus-success: oklch(0.52 0.14 160);
+  --kronus-success-text: oklch(0.485 0.14 160);
+  --kronus-warning: oklch(0.52 0.12 70);
+  --kronus-warning-text: oklch(0.518 0.12 70);
+  --kronus-error: oklch(0.55 0.2 25);
+  --kronus-error-text: oklch(0.531 0.2 25);
+  --kronus-info: oklch(0.52 0.11 185);
+  --kronus-info-text: oklch(0.49 0.11 185);
+  --kronus-radius: 14px;
+  --kronus-chart-1: oklch(0.6 0.15 160);
+  --kronus-chart-2: oklch(0.62 0.11 185);
+  --kronus-chart-3: oklch(0.55 0.14 145);
+  --kronus-chart-4: oklch(0.58 0.12 200);
+  --kronus-chart-5: oklch(0.68 0.14 130);
+  --kronus-shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.06);
+  --kronus-shadow-sm: 0 2px 4px rgba(16, 24, 40, 0.08);
+  --kronus-shadow-md: 0 6px 12px rgba(16, 24, 40, 0.1), 0 2px 4px rgba(16, 24, 40, 0.06);
+  --kronus-shadow-lg: 0 12px 24px rgba(16, 24, 40, 0.12), 0 4px 8px rgba(16, 24, 40, 0.08);
+  --kronus-shadow-glow: 0 12px 32px rgba(35, 201, 135, 0.22);
 }
 
-[data-cooud-theme="emerald"][data-cooud-mode="dark"] {
+[data-kronus-theme="emerald"][data-kronus-mode="dark"] {
   color-scheme: dark;
-  --cooud-primary-text: oklch(0.74 0.16 160);
-  --cooud-surface-base: oklch(0.145 0.005 285.8);
-  --cooud-surface-inset: oklch(0.165 0.005 285.8);
-  --cooud-surface-raised: oklch(0.195 0.005 285.8);
-  --cooud-surface-overlay: oklch(0.235 0.006 285.9);
-  --cooud-surface-elevated: oklch(0.27 0.006 286);
-  --cooud-surface-floating: oklch(0.2 0.006 286);
-  --cooud-fg: oklch(0.985 0.001 106.4);
-  --cooud-fg-secondary: oklch(0.705 0.015 286);
-  --cooud-fg-tertiary: oklch(0.62 0.014 286);
-  --cooud-fg-muted: oklch(0.442 0.013 286);
-  --cooud-fg-inverse: oklch(0.235 0.006 285.9);
-  --cooud-border: oklch(1 0 0 / 0.1);
-  --cooud-border-strong: oklch(1 0 0 / 0.14);
-  --cooud-border-soft: oklch(1 0 0 / 0.06);
-  --cooud-success: oklch(0.715 0.155 162.5);
-  --cooud-success-text: oklch(0.715 0.155 162.5);
-  --cooud-warning: oklch(0.769 0.166 70.08);
-  --cooud-warning-text: oklch(0.769 0.166 70.08);
-  --cooud-error: oklch(0.645 0.222 16.44);
-  --cooud-error-text: oklch(0.69 0.222 16.44);
-  --cooud-info: oklch(0.74 0.12 185);
-  --cooud-info-text: oklch(0.74 0.12 185);
-  --cooud-chart-1: oklch(0.74 0.16 160);
-  --cooud-chart-2: oklch(0.76 0.12 185);
-  --cooud-chart-3: oklch(0.68 0.15 145);
-  --cooud-chart-4: oklch(0.7 0.13 200);
-  --cooud-chart-5: oklch(0.8 0.15 130);
-  --cooud-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
-  --cooud-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.22);
-  --cooud-shadow-md: 0 6px 12px rgba(0, 0, 0, 0.24), 0 2px 4px rgba(0, 0, 0, 0.16);
-  --cooud-shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.28), 0 4px 8px rgba(0, 0, 0, 0.18);
-  --cooud-shadow-glow: 0 12px 32px rgba(35, 201, 135, 0.34);
+  --kronus-primary-text: oklch(0.74 0.16 160);
+  --kronus-surface-base: oklch(0.145 0.005 285.8);
+  --kronus-surface-inset: oklch(0.165 0.005 285.8);
+  --kronus-surface-raised: oklch(0.195 0.005 285.8);
+  --kronus-surface-overlay: oklch(0.235 0.006 285.9);
+  --kronus-surface-elevated: oklch(0.27 0.006 286);
+  --kronus-surface-floating: oklch(0.2 0.006 286);
+  --kronus-fg: oklch(0.985 0.001 106.4);
+  --kronus-fg-secondary: oklch(0.705 0.015 286);
+  --kronus-fg-tertiary: oklch(0.62 0.014 286);
+  --kronus-fg-muted: oklch(0.442 0.013 286);
+  --kronus-fg-inverse: oklch(0.235 0.006 285.9);
+  --kronus-border: oklch(1 0 0 / 0.1);
+  --kronus-border-strong: oklch(1 0 0 / 0.14);
+  --kronus-border-soft: oklch(1 0 0 / 0.06);
+  --kronus-success: oklch(0.715 0.155 162.5);
+  --kronus-success-text: oklch(0.715 0.155 162.5);
+  --kronus-warning: oklch(0.769 0.166 70.08);
+  --kronus-warning-text: oklch(0.769 0.166 70.08);
+  --kronus-error: oklch(0.645 0.222 16.44);
+  --kronus-error-text: oklch(0.69 0.222 16.44);
+  --kronus-info: oklch(0.74 0.12 185);
+  --kronus-info-text: oklch(0.74 0.12 185);
+  --kronus-chart-1: oklch(0.74 0.16 160);
+  --kronus-chart-2: oklch(0.76 0.12 185);
+  --kronus-chart-3: oklch(0.68 0.15 145);
+  --kronus-chart-4: oklch(0.7 0.13 200);
+  --kronus-chart-5: oklch(0.8 0.15 130);
+  --kronus-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --kronus-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.22);
+  --kronus-shadow-md: 0 6px 12px rgba(0, 0, 0, 0.24), 0 2px 4px rgba(0, 0, 0, 0.16);
+  --kronus-shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.28), 0 4px 8px rgba(0, 0, 0, 0.18);
+  --kronus-shadow-glow: 0 12px 32px rgba(35, 201, 135, 0.34);
 }
 
 /* ------------------------------------------------------------------ *
  * 2. @theme inline — Tailwind v4 utility bridge
  * ------------------------------------------------------------------ */
 @theme inline {
-  --color-primary: var(--cooud-primary);
-  --color-primary-foreground: var(--cooud-primary-foreground);
-  --color-primary-strong: var(--cooud-primary-text);
-  --color-accent: var(--cooud-accent);
-  --color-accent-foreground: var(--cooud-accent-foreground);
+  --color-primary: var(--kronus-primary);
+  --color-primary-foreground: var(--kronus-primary-foreground);
+  --color-primary-strong: var(--kronus-primary-text);
+  --color-accent: var(--kronus-accent);
+  --color-accent-foreground: var(--kronus-accent-foreground);
 
-  --color-surface-base: var(--cooud-surface-base);
-  --color-surface-inset: var(--cooud-surface-inset);
-  --color-surface-raised: var(--cooud-surface-raised);
-  --color-surface-overlay: var(--cooud-surface-overlay);
-  --color-surface-elevated: var(--cooud-surface-elevated);
-  --color-surface-floating: var(--cooud-surface-floating);
+  --color-surface-base: var(--kronus-surface-base);
+  --color-surface-inset: var(--kronus-surface-inset);
+  --color-surface-raised: var(--kronus-surface-raised);
+  --color-surface-overlay: var(--kronus-surface-overlay);
+  --color-surface-elevated: var(--kronus-surface-elevated);
+  --color-surface-floating: var(--kronus-surface-floating);
 
-  --color-fg: var(--cooud-fg);
-  --color-fg-secondary: var(--cooud-fg-secondary);
-  --color-fg-tertiary: var(--cooud-fg-tertiary);
-  --color-fg-muted: var(--cooud-fg-muted);
-  --color-fg-inverse: var(--cooud-fg-inverse);
+  --color-fg: var(--kronus-fg);
+  --color-fg-secondary: var(--kronus-fg-secondary);
+  --color-fg-tertiary: var(--kronus-fg-tertiary);
+  --color-fg-muted: var(--kronus-fg-muted);
+  --color-fg-inverse: var(--kronus-fg-inverse);
 
-  --color-border: var(--cooud-border);
-  --color-border-strong: var(--cooud-border-strong);
-  --color-border-soft: var(--cooud-border-soft);
-  --color-ring: var(--cooud-ring);
+  --color-border: var(--kronus-border);
+  --color-border-strong: var(--kronus-border-strong);
+  --color-border-soft: var(--kronus-border-soft);
+  --color-ring: var(--kronus-ring);
 
-  --color-success: var(--cooud-success);
-  --color-success-strong: var(--cooud-success-text);
-  --color-warning: var(--cooud-warning);
-  --color-warning-strong: var(--cooud-warning-text);
-  --color-error: var(--cooud-error);
-  --color-error-strong: var(--cooud-error-text);
-  --color-info: var(--cooud-info);
-  --color-info-strong: var(--cooud-info-text);
+  --color-success: var(--kronus-success);
+  --color-success-strong: var(--kronus-success-text);
+  --color-warning: var(--kronus-warning);
+  --color-warning-strong: var(--kronus-warning-text);
+  --color-error: var(--kronus-error);
+  --color-error-strong: var(--kronus-error-text);
+  --color-info: var(--kronus-info);
+  --color-info-strong: var(--kronus-info-text);
 
-  --radius-sm: max(0px, calc(var(--cooud-radius) - 8px));
-  --radius-md: max(0px, calc(var(--cooud-radius) - 4px));
-  --radius-lg: var(--cooud-radius);
-  --radius-xl: calc(var(--cooud-radius) + 4px);
-  --radius-2xl: calc(var(--cooud-radius) + 8px);
-  --radius-3xl: calc(var(--cooud-radius) + 14px);
+  --radius-sm: max(0px, calc(var(--kronus-radius) - 8px));
+  --radius-md: max(0px, calc(var(--kronus-radius) - 4px));
+  --radius-lg: var(--kronus-radius);
+  --radius-xl: calc(var(--kronus-radius) + 4px);
+  --radius-2xl: calc(var(--kronus-radius) + 8px);
+  --radius-3xl: calc(var(--kronus-radius) + 14px);
 
-  --shadow-xs: var(--cooud-shadow-xs);
-  --shadow-sm: var(--cooud-shadow-sm);
-  --shadow-md: var(--cooud-shadow-md);
-  --shadow-lg: var(--cooud-shadow-lg);
-  --shadow-glow: var(--cooud-shadow-glow);
+  --shadow-xs: var(--kronus-shadow-xs);
+  --shadow-sm: var(--kronus-shadow-sm);
+  --shadow-md: var(--kronus-shadow-md);
+  --shadow-lg: var(--kronus-shadow-lg);
+  --shadow-glow: var(--kronus-shadow-glow);
 
-  --font-sans: var(--cooud-font-sans);
-  --font-display: var(--cooud-font-display);
-  --font-mono: var(--cooud-font-mono);
+  --font-sans: var(--kronus-font-sans);
+  --font-display: var(--kronus-font-display);
+  --font-mono: var(--kronus-font-mono);
 
-  --color-chart-1: var(--cooud-chart-1);
-  --color-chart-2: var(--cooud-chart-2);
-  --color-chart-3: var(--cooud-chart-3);
-  --color-chart-4: var(--cooud-chart-4);
-  --color-chart-5: var(--cooud-chart-5);
+  --color-chart-1: var(--kronus-chart-1);
+  --color-chart-2: var(--kronus-chart-2);
+  --color-chart-3: var(--kronus-chart-3);
+  --color-chart-4: var(--kronus-chart-4);
+  --color-chart-5: var(--kronus-chart-5);
 
   --ease-out-quart: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -517,7 +518,7 @@
  * 3. Base — gradients + reduced-motion safety
  * ------------------------------------------------------------------ */
 @utility bg-gradient-primary {
-  background-image: linear-gradient(135deg, var(--cooud-primary), var(--cooud-accent));
+  background-image: linear-gradient(135deg, var(--kronus-primary), var(--kronus-accent));
 }
 
 /*
@@ -528,8 +529,8 @@
 @utility bg-gradient-primary-strong {
   background-image: linear-gradient(
     135deg,
-    color-mix(in oklch, var(--cooud-primary), black 30%),
-    color-mix(in oklch, var(--cooud-accent), black 30%)
+    color-mix(in oklch, var(--kronus-primary), black 30%),
+    color-mix(in oklch, var(--kronus-accent), black 30%)
   );
 }
 
@@ -539,9 +540,9 @@
      themes (neutral/midnight) and broke the "re-themes live" contract. */
   background-image: linear-gradient(
     135deg,
-    var(--cooud-primary),
-    var(--cooud-accent),
-    color-mix(in oklch, var(--cooud-accent) 65%, var(--cooud-primary))
+    var(--kronus-primary),
+    var(--kronus-accent),
+    color-mix(in oklch, var(--kronus-accent) 65%, var(--kronus-primary))
   );
 }
 
@@ -585,74 +586,74 @@
  * Overlay enter/exit animations driven by Radix `data-[state=open|closed]`.
  * Keyframes (not transitions) so Radix waits for the EXIT animation before
  * unmounting — both directions stay fluid. Consume via arbitrary utilities,
- * e.g. `data-[state=open]:animate-[cooud-pop-in_180ms_var(--ease-out-quart)_both]`.
+ * e.g. `data-[state=open]:animate-[kronus-pop-in_180ms_var(--ease-out-quart)_both]`.
  * `--ease-out-quart` is the shared easing; `both` fill-mode avoids first/last
  * frame flashes.
  */
-@keyframes cooud-overlay-in {
+@keyframes kronus-overlay-in {
   from {
     opacity: 0;
   }
 }
-@keyframes cooud-overlay-out {
+@keyframes kronus-overlay-out {
   to {
     opacity: 0;
   }
 }
-@keyframes cooud-pop-in {
+@keyframes kronus-pop-in {
   from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-}
-@keyframes cooud-pop-out {
-  to {
     opacity: 0;
     transform: scale(0.95);
   }
 }
-@keyframes cooud-slide-in-right {
+@keyframes kronus-pop-out {
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+@keyframes kronus-slide-in-right {
   from {
     transform: translateX(100%);
   }
 }
-@keyframes cooud-slide-out-right {
+@keyframes kronus-slide-out-right {
   to {
     transform: translateX(100%);
   }
 }
-@keyframes cooud-slide-in-left {
+@keyframes kronus-slide-in-left {
   from {
     transform: translateX(-100%);
   }
 }
-@keyframes cooud-slide-out-left {
+@keyframes kronus-slide-out-left {
   to {
     transform: translateX(-100%);
   }
 }
-@keyframes cooud-slide-in-top {
+@keyframes kronus-slide-in-top {
   from {
     transform: translateY(-100%);
   }
 }
-@keyframes cooud-slide-out-top {
+@keyframes kronus-slide-out-top {
   to {
     transform: translateY(-100%);
   }
 }
-@keyframes cooud-slide-in-bottom {
+@keyframes kronus-slide-in-bottom {
   from {
     transform: translateY(100%);
   }
 }
-@keyframes cooud-slide-out-bottom {
+@keyframes kronus-slide-out-bottom {
   to {
     transform: translateY(100%);
   }
 }
 /* Height collapse/expand — drive off the Radix content-height vars. */
-@keyframes cooud-accordion-down {
+@keyframes kronus-accordion-down {
   from {
     height: 0;
   }
@@ -660,7 +661,7 @@
     height: var(--radix-accordion-content-height);
   }
 }
-@keyframes cooud-accordion-up {
+@keyframes kronus-accordion-up {
   from {
     height: var(--radix-accordion-content-height);
   }
@@ -668,7 +669,7 @@
     height: 0;
   }
 }
-@keyframes cooud-collapsible-down {
+@keyframes kronus-collapsible-down {
   from {
     height: 0;
   }
@@ -676,7 +677,7 @@
     height: var(--radix-collapsible-content-height);
   }
 }
-@keyframes cooud-collapsible-up {
+@keyframes kronus-collapsible-up {
   from {
     height: var(--radix-collapsible-content-height);
   }
@@ -706,5 +707,93 @@
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Looks — material language, orthogonal to theme (palette) and mode.
+ * Set `data-kronus-look` on a subtree. Only existing --kronus-* tokens
+ * are overridden (plus the Tailwind radius scale, so rounded-xl follows).
+ * ------------------------------------------------------------------ */
+
+[data-slot="look-stage"] {
+  background-color: var(--kronus-surface-inset);
+}
+
+[data-kronus-look="brutalist"] {
+  --kronus-radius: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-full: 0px;
+  --kronus-shadow-xs: 3px 3px 0 color-mix(in oklab, var(--kronus-fg) 70%, transparent);
+  --kronus-shadow-sm: 4px 4px 0 color-mix(in oklab, var(--kronus-fg) 70%, transparent);
+  --kronus-shadow-md: 6px 6px 0 color-mix(in oklab, var(--kronus-fg) 65%, transparent);
+  --kronus-shadow-lg: 8px 8px 0 color-mix(in oklab, var(--kronus-fg) 60%, transparent);
+  --kronus-shadow-glow: none;
+  --kronus-border: color-mix(in oklab, var(--kronus-fg) 42%, transparent);
+  --kronus-border-strong: color-mix(in oklab, var(--kronus-fg) 62%, transparent);
+}
+
+[data-kronus-look="brutalist"] [data-slot="button"],
+[data-kronus-look="brutalist"] [data-slot="badge"],
+[data-kronus-look="brutalist"] [data-slot="card-title"] {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+[data-kronus-look="brutalist"] [data-slot="button"] {
+  border-width: 2px;
+  box-shadow: none;
+}
+
+[data-kronus-look="glass"] {
+  --kronus-radius: 16px;
+}
+
+[data-kronus-look="glass"][data-slot="look-stage"] {
+  background-color: transparent;
+  background-image: linear-gradient(
+    145deg,
+    color-mix(in oklab, var(--kronus-primary) 45%, var(--kronus-surface-base)),
+    color-mix(in oklab, var(--kronus-accent) 28%, var(--kronus-surface-inset)) 52%,
+    var(--kronus-surface-base)
+  );
+}
+
+[data-kronus-look="glass"] [data-slot="card"],
+[data-kronus-look="glass"] [data-slot="input"] {
+  background-color: color-mix(in oklab, var(--kronus-surface-raised) 48%, transparent);
+  border-color: color-mix(in oklab, var(--kronus-border-strong) 70%, transparent);
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+}
+
+[data-kronus-look="mauve"] {
+  --kronus-radius: 20px;
+}
+
+[data-kronus-look="mauve"][data-slot="look-stage"] {
+  background-color: color-mix(in oklab, var(--kronus-primary) 22%, var(--kronus-surface-inset));
+}
+
+[data-kronus-look="mauve"] [data-slot="card"] {
+  background-color: color-mix(in oklab, var(--kronus-surface-raised) 90%, var(--kronus-primary));
+}
+
+[data-kronus-look="mauve"] [data-slot="button"] {
+  border-radius: calc(var(--kronus-radius) + 999px);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  [data-kronus-look="glass"] [data-slot="card"],
+  [data-kronus-look="glass"] [data-slot="input"] {
+    background-color: var(--kronus-surface-raised);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }

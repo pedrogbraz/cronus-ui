@@ -1,37 +1,37 @@
-# @cooud-ui/tokens
+# @kronus-ui/tokens
 
-The Cooud design tokens — the single source of truth for color, typography,
-elevation, and shape across the Cooud UI system.
+The Kronus design tokens — the single source of truth for color, typography,
+elevation, and shape across the Kronus UI system.
 
 Tokens are authored once in TypeScript and compiled to consumable artifacts: a
 **CSS variable bridge** for Tailwind v4, a **preset** for Tailwind v3, and
 machine-readable token JSON — including [design-tool formats](#design-tool-handoff)
 (W3C DTCG + Figma Variables). Every
-`@cooud-ui/ui` component renders against these tokens through semantic utilities
+`@kronus-ui/ui` component renders against these tokens through semantic utilities
 (`bg-primary`, `text-fg-secondary`, `rounded-lg`, `shadow-glow`), so a single
 token change re-themes the whole library — at build time or at runtime.
 
-You need this package if you use `@cooud-ui/ui` or `@cooud-ui/theme`, or if you want the
-Cooud color/typography/elevation scale in your own components.
+You need this package if you use `@kronus-ui/ui` or `@kronus-ui/theme`, or if you want the
+Kronus color/typography/elevation scale in your own components.
 
 ## Install
 
-> Published on npm under the `@cooud-ui` scope.
+> Published on npm under the `@kronus-ui` scope.
 
 ```sh
 # npm
-npm i @cooud-ui/tokens
+npm i @kronus-ui/tokens
 # pnpm
-pnpm add @cooud-ui/tokens
+pnpm add @kronus-ui/tokens
 # bun
-bun add @cooud-ui/tokens
+bun add @kronus-ui/tokens
 ```
 
 No peer dependencies — the package is framework-agnostic.
 
 ## Usage
 
-The token system has two layers: a **runtime layer** of `--cooud-*` CSS custom
+The token system has two layers: a **runtime layer** of `--kronus-*` CSS custom
 properties (one block per theme/mode), and a **bridge** that maps Tailwind
 utilities onto those variables. Wire it up the way your Tailwind version expects.
 
@@ -42,42 +42,42 @@ default **Aurora** theme tokens and the `@theme inline` bridge.
 
 ```css
 @import "tailwindcss";
-@import "@cooud-ui/tokens/styles.css";
+@import "@kronus-ui/tokens/styles.css";
 ```
 
 ### Tailwind v3 (config preset)
 
 Import the preset in your config. It maps the same semantic utilities onto the
-`--cooud-*` variables.
+`--kronus-*` variables.
 
 ```js
 // tailwind.config.js
-import cooudPreset from "@cooud-ui/tokens/preset";
+import kronusPreset from "@kronus-ui/tokens/preset";
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  presets: [cooudPreset],
+  presets: [kronusPreset],
   content: ["./src/**/*.{ts,tsx}"],
 };
 ```
 
-> On v3, do **not** import `@cooud-ui/tokens/styles.css` — it uses Tailwind v4-only
-> syntax. The `--cooud-*` variables are instead injected at runtime by
-> `<CooudUIProvider>` from `@cooud-ui/theme`; the preset connects the utilities to
+> On v3, do **not** import `@kronus-ui/tokens/styles.css` — it uses Tailwind v4-only
+> syntax. The `--kronus-*` variables are instead injected at runtime by
+> `<KronusUIProvider>` from `@kronus-ui/theme`; the preset connects the utilities to
 > those variables.
 
 ### Programmatic access (TypeScript)
 
-The TS export is the canonical token data, used by tooling and by `@cooud-ui/theme`
+The TS export is the canonical token data, used by tooling and by `@kronus-ui/theme`
 to apply runtime overrides. Components never read these objects directly.
 
 ```ts
-import { themes, tokensToCssVars, serializeOverrides } from "@cooud-ui/tokens";
-import type { ThemeName, Mode, ThemeTokens, ThemeOverrides } from "@cooud-ui/tokens";
+import { themes, tokensToCssVars, serializeOverrides } from "@kronus-ui/tokens";
+import type { ThemeName, Mode, ThemeTokens, ThemeOverrides } from "@kronus-ui/tokens";
 
 themes.aurora.dark.primary; // "oklch(0.685 0.169 237.3)"
 
-// Turn a (partial) token set into a { "--cooud-*": value } style object:
+// Turn a (partial) token set into a { "--kronus-*": value } style object:
 const style = tokensToCssVars({ radius: "20px", primary: "#7c3aed" });
 
 // Or render overrides as a copy-pasteable CSS block:
@@ -87,7 +87,7 @@ serializeOverrides({ radius: "20px" }, ":root");
 Exports: `themes`, `themeNames`, `modes`, `defaultTheme`, `defaultMode`,
 `cssVarMap`, `tokensToCssVars`, `serializeOverrides`, and the types `ThemeName`,
 `Mode`, `ThemeTokens`, `ThemeOverrides`. The raw token map is also published as
-`@cooud-ui/tokens/tokens.json`, alongside the two design-tool artifacts
+`@kronus-ui/tokens/tokens.json`, alongside the two design-tool artifacts
 described below.
 
 ## The token system
@@ -127,17 +127,17 @@ Two generated artifacts bridge the tokens into design tools. Both are emitted
 by `tokens:generate` next to `tokens.json`, drift-checked by `tokens:check`,
 and shipped with the package:
 
-- **`@cooud-ui/tokens/tokens.dtcg.json`** — the tokens in the
+- **`@kronus-ui/tokens/tokens.dtcg.json`** — the tokens in the
   [W3C Design Tokens (DTCG) format](https://design-tokens.github.io/community-group/format/),
   for token pipelines such as Style Dictionary or Tokens Studio. Tokens are
-  grouped `cooud.{theme}.{mode}.{token}` (e.g. `cooud.aurora.dark.primary`).
+  grouped `kronus.{theme}.{mode}.{token}` (e.g. `kronus.aurora.dark.primary`).
   Color `$value`s are the source-of-truth CSS color strings (mostly `oklch()`,
   some with an alpha channel) kept verbatim rather than converted, so nothing
   is lost — convert downstream if a tool needs hex. Shadows are structured
   DTCG shadow objects, font stacks are family arrays, radius is a dimension.
-- **`@cooud-ui/tokens/figma-variables.json`** — a pragmatic import shape for
+- **`@kronus-ui/tokens/figma-variables.json`** — a pragmatic import shape for
   Figma Variables plugins and the Figma Variables REST API: one collection
-  (`Cooud UI`) with ten modes (`{theme}-{mode}`, e.g. `aurora-dark`) and one
+  (`Kronus UI`) with ten modes (`{theme}-{mode}`, e.g. `aurora-dark`) and one
   variable per token, grouped by slash-prefix (`color/primary`, `font/sans`,
   `shadow/glow`, `radius`). Colors are converted from `oklch()` to sRGB hex
   (`#rrggbb`, or `#rrggbbaa` when the token carries alpha) and clamped to the
@@ -152,9 +152,9 @@ they re-theme automatically and are not tokens.
 
 ## Related packages
 
-- [`@cooud-ui/theme`](../theme) — `<CooudUIProvider>` + `useTheme`; applies these
+- [`@kronus-ui/theme`](../theme) — `<KronusUIProvider>` + `useTheme`; applies these
   tokens at runtime and powers per-scope overrides.
-- [`@cooud-ui/ui`](../ui) — the component library that renders against these tokens.
+- [`@kronus-ui/ui`](../ui) — the component library that renders against these tokens.
 - See the [docs site](../../apps/www) for the live theme builder and previews.
 
 ## License
