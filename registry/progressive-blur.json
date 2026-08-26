@@ -1,0 +1,17 @@
+{
+  "name": "progressive-blur",
+  "type": "registry:ui",
+  "dependencies": [
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "progressive-blur.tsx",
+      "content": "import { cva, type VariantProps } from \"class-variance-authority\";\nimport type { HTMLAttributes, Ref } from \"react\";\nimport { cn } from \"../lib/cn.js\";\n\nconst progressiveBlurVariants = cva(\n  \"pointer-events-none absolute inset-x-0 z-10 motion-reduce:hidden\",\n  {\n    variants: {\n      side: {\n        top: \"top-0\",\n        bottom: \"bottom-0\",\n      },\n    },\n    defaultVariants: { side: \"bottom\" },\n  },\n);\n\nexport interface ProgressiveBlurProps\n  extends HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof progressiveBlurVariants> {\n  ref?: Ref<HTMLDivElement>;\n  /**\n   * Height of the blur band.\n   * @default \"6rem\"\n   */\n  height?: string;\n}\n\n/**\n * A stacked backdrop-blur that fades content out toward an edge — the iOS\n * \"scrolls under the chrome\" treatment. Place it over a scroll region; the\n * blur layers are decorative (`aria-hidden`).\n */\nexport function ProgressiveBlur({\n  ref,\n  className,\n  side = \"bottom\",\n  height = \"6rem\",\n  ...props\n}: ProgressiveBlurProps) {\n  const mask =\n    side === \"top\"\n      ? \"linear-gradient(to bottom, black, transparent)\"\n      : \"linear-gradient(to top, black, transparent)\";\n\n  return (\n    <div\n      ref={ref}\n      data-slot=\"progressive-blur\"\n      aria-hidden=\"true\"\n      className={cn(progressiveBlurVariants({ side }), className)}\n      style={{ height }}\n      {...props}\n    >\n      <div\n        className=\"absolute inset-0 backdrop-blur-[1px]\"\n        style={{\n          maskImage: mask,\n          WebkitMaskImage: mask,\n        }}\n      />\n      <div\n        className=\"absolute inset-0 backdrop-blur-[4px]\"\n        style={{\n          maskImage:\n            side === \"top\"\n              ? \"linear-gradient(to bottom, black 30%, transparent 70%)\"\n              : \"linear-gradient(to top, black 30%, transparent 70%)\",\n          WebkitMaskImage:\n            side === \"top\"\n              ? \"linear-gradient(to bottom, black 30%, transparent 70%)\"\n              : \"linear-gradient(to top, black 30%, transparent 70%)\",\n        }}\n      />\n      <div\n        className=\"absolute inset-0 backdrop-blur-[12px]\"\n        style={{\n          maskImage:\n            side === \"top\"\n              ? \"linear-gradient(to bottom, black 10%, transparent 45%)\"\n              : \"linear-gradient(to top, black 10%, transparent 45%)\",\n          WebkitMaskImage:\n            side === \"top\"\n              ? \"linear-gradient(to bottom, black 10%, transparent 45%)\"\n              : \"linear-gradient(to top, black 10%, transparent 45%)\",\n        }}\n      />\n    </div>\n  );\n}\nProgressiveBlur.displayName = \"ProgressiveBlur\";\n\nexport { progressiveBlurVariants };\n",
+      "target": "ui"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "dynamic-island",
+  "type": "registry:ui",
+  "dependencies": [
+    "motion@^12.23.0"
+  ],
+  "registryDependencies": [
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "dynamic-island.tsx",
+      "content": "\"use client\";\n\nimport { motion, useReducedMotion } from \"motion/react\";\nimport { type HTMLAttributes, type ReactNode, type Ref, useState } from \"react\";\nimport { cn } from \"../lib/cn.js\";\n\nexport interface DynamicIslandView {\n  id: string;\n  /** Accessible name for this view. */\n  label: string;\n  content: ReactNode;\n}\n\nexport interface DynamicIslandProps extends Omit<HTMLAttributes<HTMLDivElement>, \"children\"> {\n  ref?: Ref<HTMLDivElement>;\n  views: DynamicIslandView[];\n  /** Controlled active view id. */\n  value?: string;\n  defaultValue?: string;\n  onValueChange?: (id: string) => void;\n}\n\n/**\n * A compact live-activity pill that morphs between views. The shell resizes\n * with a spring; inner content cross-fades. Views are a tablist so the\n * control is keyboard-operable. Reduced-motion visitors get an instant\n * resize instead of the morph.\n */\nexport function DynamicIsland({\n  ref,\n  className,\n  views,\n  value,\n  defaultValue,\n  onValueChange,\n  ...props\n}: DynamicIslandProps) {\n  const reduce = !!useReducedMotion();\n  const fallback = defaultValue ?? views[0]?.id;\n  const [uncontrolled, setUncontrolled] = useState(fallback);\n  const selected = value ?? uncontrolled;\n  const active = views.find((view) => view.id === selected) ?? views[0];\n\n  const select = (id: string) => {\n    if (id === selected) return;\n    if (value === undefined) setUncontrolled(id);\n    onValueChange?.(id);\n  };\n\n  return (\n    <div\n      ref={ref}\n      data-slot=\"dynamic-island\"\n      className={cn(\"inline-flex flex-col items-center gap-3\", className)}\n      {...props}\n    >\n      <motion.div\n        layout={!reduce}\n        data-slot=\"dynamic-island-shell\"\n        className=\"overflow-hidden rounded-full border border-border bg-surface-floating px-4 py-2 text-fg shadow-md\"\n        transition={reduce ? { duration: 0 } : { type: \"spring\", bounce: 0.18, duration: 0.45 }}\n      >\n        <motion.div\n          key={active?.id ?? \"empty\"}\n          initial={reduce ? false : { opacity: 0, filter: \"blur(6px)\" }}\n          animate={{ opacity: 1, filter: \"blur(0px)\" }}\n          transition={reduce ? { duration: 0 } : { duration: 0.2 }}\n          className=\"flex items-center gap-3\"\n        >\n          {active?.content}\n        </motion.div>\n      </motion.div>\n      <div role=\"tablist\" aria-label={active?.label} className=\"flex items-center gap-1\">\n        {views.map((view) => {\n          const isActive = view.id === selected;\n          return (\n            <button\n              key={view.id}\n              type=\"button\"\n              role=\"tab\"\n              aria-selected={isActive}\n              aria-label={view.label}\n              data-slot=\"dynamic-island-trigger\"\n              className={cn(\n                \"size-2 rounded-full outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base\",\n                isActive ? \"bg-fg\" : \"bg-border hover:bg-border-strong\",\n              )}\n              onClick={() => select(view.id)}\n            />\n          );\n        })}\n      </div>\n    </div>\n  );\n}\nDynamicIsland.displayName = \"DynamicIsland\";\n",
+      "target": "ui"
+    }
+  ]
+}

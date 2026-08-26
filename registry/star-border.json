@@ -1,0 +1,15 @@
+{
+  "name": "star-border",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "star-border.tsx",
+      "content": "import type { CSSProperties, HTMLAttributes, Ref } from \"react\";\nimport { cn } from \"../lib/cn.js\";\n\ninterface StarBorderStyle extends CSSProperties {\n  \"--star-duration\"?: string;\n}\n\nexport interface StarBorderProps extends HTMLAttributes<HTMLDivElement> {\n  ref?: Ref<HTMLDivElement>;\n  /**\n   * Seconds for one sparkle lap around the perimeter.\n   * @default 6\n   */\n  duration?: number;\n}\n\nconst STAR_KEYFRAMES =\n  \"@keyframes kronus-star-border{from{offset-distance:0%}to{offset-distance:100%}}\";\n\nfunction finiteOr(value: number, fallback: number) {\n  return Number.isFinite(value) ? value : fallback;\n}\n\n/**\n * Two sparkle heads that chase each other around a card's border. Distinct\n * from `BorderBeam` (a comet trail): these are discrete twinkles, not a\n * continuous beam. Decorative and hidden under reduced motion.\n */\nexport function StarBorder({\n  ref,\n  className,\n  children,\n  duration = 6,\n  style,\n  ...props\n}: StarBorderProps) {\n  const cycle = Math.max(2, finiteOr(duration, 6));\n  const starStyle: StarBorderStyle = { \"--star-duration\": `${cycle}s` };\n\n  return (\n    <div\n      ref={ref}\n      data-slot=\"star-border\"\n      className={cn(\"relative rounded-2xl\", className)}\n      style={{ ...starStyle, ...style }}\n      {...props}\n    >\n      <div\n        aria-hidden=\"true\"\n        className=\"pointer-events-none absolute inset-0 overflow-hidden rounded-[inherit] motion-reduce:hidden\"\n      >\n        <style>{STAR_KEYFRAMES}</style>\n        {[0, 50].map((phase) => (\n          <span\n            key={phase}\n            className=\"absolute size-1.5 rounded-full bg-primary shadow-glow [animation-duration:var(--star-duration)] [animation-iteration-count:infinite] [animation-name:kronus-star-border] [animation-timing-function:linear] [offset-path:rect(0_auto_auto_0_round_12px)]\"\n            style={{ animationDelay: `-${(phase / 100) * cycle}s` }}\n          />\n        ))}\n      </div>\n      <div className=\"relative\">{children}</div>\n    </div>\n  );\n}\nStarBorder.displayName = \"StarBorder\";\n",
+      "target": "ui"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "retro-grid",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "retro-grid.tsx",
+      "content": "import type { CSSProperties, HTMLAttributes, Ref } from \"react\";\nimport { cn } from \"../lib/cn.js\";\n\ninterface RetroGridStyle extends CSSProperties {\n  \"--retro-duration\"?: string;\n}\n\nexport interface RetroGridProps extends HTMLAttributes<HTMLDivElement> {\n  ref?: Ref<HTMLDivElement>;\n  /**\n   * Seconds for one floor-scroll cycle.\n   * @default 8\n   */\n  duration?: number;\n  /**\n   * Perspective tilt of the floor, in degrees.\n   * @default 60\n   */\n  angle?: number;\n}\n\nconst RETRO_KEYFRAMES =\n  \"@keyframes kronus-retro-grid{from{transform:translateY(0)}to{transform:translateY(var(--retro-cell,48px))}}\";\n\nfunction finiteOr(value: number, fallback: number) {\n  return Number.isFinite(value) ? value : fallback;\n}\n\n/**\n * A receding perspective grid floor — the synthwave stage behind a hero.\n * Scrolls slowly toward the horizon and is fully suppressed under\n * `prefers-reduced-motion: reduce` (the floor still renders, it just stops\n * moving).\n */\nexport function RetroGrid({\n  ref,\n  className,\n  children,\n  duration = 8,\n  angle = 60,\n  style,\n  ...props\n}: RetroGridProps) {\n  const cycle = Math.max(1, finiteOr(duration, 8));\n  const tilt = finiteOr(angle, 60);\n  const gridStyle: RetroGridStyle = {\n    \"--retro-duration\": `${cycle}s`,\n    perspective: \"240px\",\n  };\n\n  return (\n    <div\n      ref={ref}\n      data-slot=\"retro-grid\"\n      className={cn(\"relative overflow-hidden\", className)}\n      style={{ ...gridStyle, ...style }}\n      {...props}\n    >\n      <div\n        aria-hidden=\"true\"\n        className=\"pointer-events-none absolute inset-0 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_70%,transparent)]\"\n      >\n        <style>{RETRO_KEYFRAMES}</style>\n        <div\n          className=\"absolute inset-x-0 -bottom-1/2 h-[200%] origin-[50%_0%] motion-reduce:[animation-name:none]\"\n          style={{ transform: `rotateX(${tilt}deg)` }}\n        >\n          <div\n            className=\"absolute inset-0 [animation-duration:var(--retro-duration)] [animation-iteration-count:infinite] [animation-name:kronus-retro-grid] [animation-timing-function:linear] motion-reduce:[animation-name:none]\"\n            style={{\n              backgroundImage:\n                \"linear-gradient(to right, color-mix(in oklch, var(--kronus-border) 70%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in oklch, var(--kronus-border) 70%, transparent) 1px, transparent 1px)\",\n              backgroundSize: \"48px 48px\",\n            }}\n          />\n        </div>\n      </div>\n      <div className=\"relative\">{children}</div>\n    </div>\n  );\n}\nRetroGrid.displayName = \"RetroGrid\";\n",
+      "target": "ui"
+    }
+  ]
+}

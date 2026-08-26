@@ -133,7 +133,7 @@
       "brandTokens": [
         {
           "token": "brand",
-          "literal": "Cooud"
+          "literal": "Kronus"
         }
       ],
       "variants": []
@@ -567,7 +567,7 @@
       "brandTokens": [
         {
           "token": "brand",
-          "literal": "Cooud"
+          "literal": "Kronus"
         }
       ],
       "variants": [
@@ -648,6 +648,13 @@
           "description": "Contained hero card for docs, registries and template libraries.",
           "item": "hero--compact",
           "exportName": "CompactHeroBlock"
+        },
+        {
+          "id": "atmosphere",
+          "name": "Atmosphere",
+          "description": "Centered launch hero over a receding grid floor, shooting stars, and a typing headline.",
+          "item": "hero--atmosphere",
+          "exportName": "AtmosphereHeroBlock"
         }
       ]
     },
@@ -832,7 +839,7 @@
       "brandTokens": [
         {
           "token": "brand",
-          "literal": "Cooud"
+          "literal": "Kronus"
         }
       ],
       "variants": [
@@ -1457,6 +1464,12 @@
       "description": "Motion-powered button with spring feedback.",
       "rsc": false
     },
+    "animated-list": {
+      "title": "AnimatedList",
+      "category": "premium",
+      "description": "Staggers list items in with a short rise and fade.",
+      "rsc": false
+    },
     "animated-number": {
       "title": "AnimatedNumber",
       "category": "premium",
@@ -1547,6 +1560,12 @@
       "description": "Surface that groups related content.",
       "rsc": true
     },
+    "card-stack": {
+      "title": "CardStack",
+      "category": "premium",
+      "description": "A fanned stack of cards that cycles on click or keyboard.",
+      "rsc": false
+    },
     "carousel": {
       "title": "Carousel",
       "category": "premium",
@@ -1570,6 +1589,12 @@
       "category": "forms",
       "description": "Interactive filter/selection chip — toggleable, dismissible, with icon and avatar slots.",
       "rsc": true
+    },
+    "click-spark": {
+      "title": "ClickSpark",
+      "category": "premium",
+      "description": "Emits a burst of sparks from the pointer on click.",
+      "rsc": false
     },
     "code-block": {
       "title": "CodeBlock",
@@ -1611,6 +1636,12 @@
       "title": "ComparisonSlider",
       "category": "data-display",
       "description": "Drag a divider to reveal a before/after comparison of two layers.",
+      "rsc": false
+    },
+    "confetti": {
+      "title": "Confetti",
+      "category": "premium",
+      "description": "Canvas confetti that bursts from the pointer.",
       "rsc": false
     },
     "confirmation-dialog": {
@@ -1685,6 +1716,12 @@
       "description": "A macOS-style icon dock that magnifies items as the pointer nears.",
       "rsc": false
     },
+    "dot-pattern": {
+      "title": "DotPattern",
+      "category": "premium",
+      "description": "A faint SVG dotted field behind content.",
+      "rsc": true
+    },
     "drawer": {
       "title": "Drawer",
       "category": "overlays",
@@ -1697,11 +1734,23 @@
       "description": "Actions menu with submenus.",
       "rsc": false
     },
+    "dynamic-island": {
+      "title": "DynamicIsland",
+      "category": "premium",
+      "description": "A compact live-activity pill that morphs between views.",
+      "rsc": false
+    },
     "empty": {
       "title": "Empty",
       "category": "data-display",
       "description": "Empty-state placeholder.",
       "rsc": true
+    },
+    "expandable-tabs": {
+      "title": "ExpandableTabs",
+      "category": "premium",
+      "description": "Icon tabs where the active item expands to reveal its label.",
+      "rsc": false
     },
     "fab": {
       "title": "Fab",
@@ -1720,6 +1769,12 @@
       "category": "forms",
       "description": "Drag-and-drop file upload area.",
       "rsc": false
+    },
+    "flickering-grid": {
+      "title": "FlickeringGrid",
+      "category": "premium",
+      "description": "A grid of cells that independently flicker.",
+      "rsc": true
     },
     "flip-card": {
       "title": "FlipCard",
@@ -1745,6 +1800,12 @@
       "description": "Browser/window chrome that frames a screenshot or product mockup.",
       "rsc": true
     },
+    "glare-hover": {
+      "title": "GlareHover",
+      "category": "premium",
+      "description": "A diagonal glare that tracks the pointer across a surface.",
+      "rsc": false
+    },
     "glass-card": {
       "title": "GlassCard",
       "category": "premium",
@@ -1763,10 +1824,22 @@
       "description": "Gradient-clipped text.",
       "rsc": true
     },
+    "grid-pattern": {
+      "title": "GridPattern",
+      "category": "premium",
+      "description": "A faint SVG grid behind content.",
+      "rsc": true
+    },
     "heatmap": {
       "title": "Heatmap",
       "category": "data-display",
       "description": "A calendar-style contribution heatmap that buckets daily activity into levels.",
+      "rsc": true
+    },
+    "highlighter": {
+      "title": "Highlighter",
+      "category": "premium",
+      "description": "A marker stroke that draws in behind a phrase.",
       "rsc": true
     },
     "hover-card": {
@@ -1823,6 +1896,12 @@
       "description": "Accessible label tied to a control.",
       "rsc": true
     },
+    "light-rays": {
+      "title": "LightRays",
+      "category": "premium",
+      "description": "Volumetric light shafts fanning across a surface.",
+      "rsc": true
+    },
     "lightbox": {
       "title": "Lightbox",
       "category": "overlays",
@@ -1859,6 +1938,12 @@
       "description": "Desktop-style menu bar with File / Edit / View menus.",
       "rsc": false
     },
+    "meteors": {
+      "title": "Meteors",
+      "category": "premium",
+      "description": "A field of shooting-star trails drifting across a surface.",
+      "rsc": true
+    },
     "metric": {
       "title": "Metric",
       "category": "data-display",
@@ -1889,6 +1974,12 @@
       "description": "Horizontal menu bar with disclosure panels.",
       "rsc": false
     },
+    "noise": {
+      "title": "Noise",
+      "category": "premium",
+      "description": "A still film-grain overlay.",
+      "rsc": true
+    },
     "notification-center": {
       "title": "NotificationCenter",
       "category": "overlays",
@@ -1913,6 +2004,12 @@
       "description": "Navigate between pages.",
       "rsc": true
     },
+    "particles": {
+      "title": "Particles",
+      "category": "premium",
+      "description": "A calm 2D particle field that drifts behind content.",
+      "rsc": false
+    },
     "password-input": {
       "title": "PasswordInput",
       "category": "forms",
@@ -1925,6 +2022,12 @@
       "description": "International phone field with a country selector, emitting E.164.",
       "rsc": false
     },
+    "pill-nav": {
+      "title": "PillNav",
+      "category": "premium",
+      "description": "A compact nav row whose active item is marked by a sliding pill.",
+      "rsc": false
+    },
     "popover": {
       "title": "Popover",
       "category": "overlays",
@@ -1935,6 +2038,12 @@
       "title": "Progress",
       "category": "feedback",
       "description": "Determinate progress bar.",
+      "rsc": true
+    },
+    "progressive-blur": {
+      "title": "ProgressiveBlur",
+      "category": "premium",
+      "description": "A stacked backdrop-blur that fades content out toward an edge.",
       "rsc": true
     },
     "radio-group": {
@@ -1955,6 +2064,12 @@
       "description": "Draggable split panes for resizable layouts.",
       "rsc": false
     },
+    "retro-grid": {
+      "title": "RetroGrid",
+      "category": "premium",
+      "description": "A receding perspective grid floor.",
+      "rsc": true
+    },
     "reveal": {
       "title": "Reveal",
       "category": "premium",
@@ -1967,10 +2082,22 @@
       "description": "Tiptap WYSIWYG editor with a formatting toolbar and HTML output.",
       "rsc": false
     },
+    "ripple": {
+      "title": "Ripple",
+      "category": "premium",
+      "description": "Concentric rings that expand from the centre of a surface.",
+      "rsc": true
+    },
     "scheduler": {
       "title": "Scheduler",
       "category": "date-time",
       "description": "Month-view event calendar that lays events onto day cells.",
+      "rsc": false
+    },
+    "scramble-text": {
+      "title": "ScrambleText",
+      "category": "premium",
+      "description": "Resolves a phrase by cycling random glyphs until it locks in.",
       "rsc": false
     },
     "scroll-area": {
@@ -2015,6 +2142,12 @@
       "description": "Premium shimmer surface.",
       "rsc": true
     },
+    "shiny-text": {
+      "title": "ShinyText",
+      "category": "premium",
+      "description": "A metallic sheen that sweeps across live text.",
+      "rsc": true
+    },
     "sidebar": {
       "title": "Sidebar",
       "category": "navigation",
@@ -2045,6 +2178,12 @@
       "description": "Transient notifications via Sonner.",
       "rsc": false
     },
+    "sparkles-text": {
+      "title": "SparklesText",
+      "category": "premium",
+      "description": "Twinkling sparkles around a phrase.",
+      "rsc": true
+    },
     "sparkline": {
       "title": "Sparkline",
       "category": "data-display",
@@ -2055,6 +2194,12 @@
       "title": "Spinner",
       "category": "feedback",
       "description": "Indeterminate loading indicator.",
+      "rsc": true
+    },
+    "spinning-text": {
+      "title": "SpinningText",
+      "category": "premium",
+      "description": "A phrase laid out around a slowly rotating circle.",
       "rsc": true
     },
     "split-button": {
@@ -2068,6 +2213,12 @@
       "category": "premium",
       "description": "Cursor-following spotlight.",
       "rsc": false
+    },
+    "star-border": {
+      "title": "StarBorder",
+      "category": "premium",
+      "description": "Two sparkle heads chasing each other around a border.",
+      "rsc": true
     },
     "status-dot": {
       "title": "StatusDot",
@@ -2177,6 +2328,12 @@
       "description": "Data-driven, accessible hierarchy with keyboard navigation.",
       "rsc": false
     },
+    "typing-text": {
+      "title": "TypingText",
+      "category": "premium",
+      "description": "A typewriter that types one or more phrases with a blinking caret.",
+      "rsc": false
+    },
     "usage-meter": {
       "title": "UsageMeter",
       "category": "feedback",
@@ -2188,13 +2345,94 @@
       "category": "data-display",
       "description": "Native video wrapped in token-styled custom controls: seek, volume, playback speed, and fullscreen.",
       "rsc": false
+    },
+    "word-rotate": {
+      "title": "WordRotate",
+      "category": "premium",
+      "description": "Cycles through a list of words with a vertical swap.",
+      "rsc": false
     }
   },
   "apps": {
+    "chat": {
+      "title": "Chat",
+      "description": "A Pro assistant app: chat thread and prompt box under an app shell, plus a replies surface and settings.",
+      "pages": 4
+    },
+    "finance": {
+      "title": "Finance",
+      "description": "A Pro money app: payouts and invoices on the home, plus billing, usage, and analytics under an app shell.",
+      "pages": 4
+    },
     "landing": {
       "title": "Landing",
       "description": "A single polished marketing page — hero, features, pricing, testimonials, FAQ, and a call to action — with a real navbar and footer.",
       "pages": 1
+    },
+    "landing-agency": {
+      "title": "Agency",
+      "description": "Studio/agency landing: split hero, logo cloud, about story, services grid, stats, testimonials, and CTA. Midnight, dark.",
+      "pages": 1
+    },
+    "landing-agents": {
+      "title": "Agents",
+      "description": "Automation/agent landing: split hero, marquee logos, bento features, stats, proof, pricing, FAQ, and a banner CTA. Emerald, light.",
+      "pages": 1
+    },
+    "landing-broadcast": {
+      "title": "Broadcast",
+      "description": "Studio/show landing: atmospheric hero, marquee logos, feature grid, testimonials, pricing, and footer chrome. Aurora, dark.",
+      "pages": 1
+    },
+    "landing-care": {
+      "title": "Care",
+      "description": "Calm healthcare/conversion landing: waitlist hero, bento features, testimonials, and a contained CTA. Emerald, light.",
+      "pages": 1
+    },
+    "landing-coverage": {
+      "title": "Coverage",
+      "description": "Global-services landing: centered hero, stats, testimonial grid, FAQ, and CTA. Sunset, light.",
+      "pages": 1
+    },
+    "landing-docs": {
+      "title": "Docs product",
+      "description": "Developer-tool landing: announcement navbar energy via compact hero, logo cloud, features, integrations, and CTA.",
+      "pages": 1
+    },
+    "landing-glass": {
+      "title": "Glass",
+      "description": "Glass-dark landing: atmospheric hero, bento features, split FAQ, and a split-visual CTA. Midnight, dark.",
+      "pages": 1
+    },
+    "landing-ops": {
+      "title": "Ops",
+      "description": "Linear-style product landing: split hero with a quality panel, logo cloud, workflow features, integrations, and a full-width CTA.",
+      "pages": 1
+    },
+    "landing-premium": {
+      "title": "Premium SaaS",
+      "description": "Full SaaS marketing page: split hero, logo cloud, features, toggle pricing, testimonials, FAQ, and CTA. Aurora, light.",
+      "pages": 1
+    },
+    "landing-secure": {
+      "title": "Secure",
+      "description": "Infrastructure/security landing: compact registry hero, feature grid, metrics, proof, usage pricing, split FAQ, and CTA.",
+      "pages": 1
+    },
+    "landing-shop": {
+      "title": "Shop",
+      "description": "Apparel/storefront landing: compact hero, editorial product showcase, and a banner CTA. Sunset, light.",
+      "pages": 1
+    },
+    "landing-studio": {
+      "title": "Studio",
+      "description": "Dark AI design-tool landing: atmospheric hero, logo marquee, bento features, stats, pricing, and a split product CTA.",
+      "pages": 1
+    },
+    "mail": {
+      "title": "Mail",
+      "description": "A Pro inbox app: notification panel and activity feed under an app shell, plus compose and notification preferences.",
+      "pages": 4
     },
     "saas": {
       "title": "SaaS",

@@ -2,14 +2,14 @@
   "name": "empty-state--error",
   "type": "registry:block",
   "dependencies": [
-    "@cooud-ui/ui@0.5.0",
+    "@kronus-ui/ui@0.5.0",
     "lucide-react@^0.577.0"
   ],
   "registryDependencies": [],
   "files": [
     {
       "path": "empty-state-error.tsx",
-      "content": "import {\n  Button,\n  Empty,\n  EmptyContent,\n  EmptyDescription,\n  EmptyIcon,\n  EmptyTitle,\n} from \"@cooud-ui/ui\";\nimport { FileQuestion, RefreshCw } from \"lucide-react\";\n\nexport function EmptyStateErrorBlock() {\n  return (\n    <Empty className=\"border-error/30 bg-surface-raised\">\n      <EmptyIcon className=\"bg-error/15 text-error\">\n        <FileQuestion aria-hidden=\"true\" />\n      </EmptyIcon>\n      <EmptyTitle>Something went wrong</EmptyTitle>\n      <EmptyDescription>\n        We couldn&apos;t load this page. The link may be broken or the resource may have been\n        moved. Try again, or head back to your dashboard.\n      </EmptyDescription>\n      <EmptyContent>\n        <Button variant=\"outline\" size=\"sm\">\n          Back to dashboard\n        </Button>\n        <Button variant=\"gradient\" size=\"sm\">\n          <RefreshCw className=\"size-4\" aria-hidden=\"true\" />\n          Try again\n        </Button>\n      </EmptyContent>\n    </Empty>\n  );\n}",
+      "content": "import {\n  Button,\n  Empty,\n  EmptyContent,\n  EmptyDescription,\n  EmptyIcon,\n  EmptyTitle,\n} from \"@kronus-ui/ui\";\nimport { FileQuestion, RefreshCw } from \"lucide-react\";\n\nexport function EmptyStateErrorBlock() {\n  return (\n    <Empty className=\"border-error/30 bg-surface-raised\">\n      <EmptyIcon className=\"bg-error/15 text-error\">\n        <FileQuestion aria-hidden=\"true\" />\n      </EmptyIcon>\n      <EmptyTitle>Something went wrong</EmptyTitle>\n      <EmptyDescription>\n        We couldn&apos;t load this page. The link may be broken or the resource may have been\n        moved. Try again, or head back to your dashboard.\n      </EmptyDescription>\n      <EmptyContent>\n        <Button variant=\"outline\" size=\"sm\">\n          Back to dashboard\n        </Button>\n        <Button variant=\"primary\" size=\"sm\">\n          <RefreshCw className=\"size-4\" aria-hidden=\"true\" />\n          Try again\n        </Button>\n      </EmptyContent>\n    </Empty>\n  );\n}",
       "target": "block"
     }
   ]

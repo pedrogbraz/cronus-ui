@@ -2,14 +2,14 @@
   "name": "error-state",
   "type": "registry:block",
   "dependencies": [
-    "@cooud-ui/ui@0.5.0",
+    "@kronus-ui/ui@0.5.0",
     "lucide-react@^0.577.0"
   ],
   "registryDependencies": [],
   "files": [
     {
       "path": "error-state.tsx",
-      "content": "import { Button, Reveal } from \"@cooud-ui/ui\";\nimport { AlertTriangle, RotateCw } from \"lucide-react\";\n\nexport function ErrorStateBlock() {\n  return (\n    <div className=\"flex min-h-[28rem] flex-col items-center justify-center px-6 py-16 text-center\">\n      <Reveal className=\"flex w-full max-w-md flex-col items-center gap-5\">\n        <span className=\"inline-flex size-14 items-center justify-center rounded-2xl bg-error/10 text-error\">\n          <AlertTriangle className=\"size-7\" aria-hidden=\"true\" />\n        </span>\n        <div className=\"flex flex-col gap-2\">\n          <h1 className=\"font-display text-2xl font-semibold text-fg\">Something went wrong</h1>\n          <p className=\"text-sm text-fg-secondary\">\n            An unexpected error occurred while processing your request. Please try again.\n          </p>\n        </div>\n        <span className=\"rounded bg-surface-inset px-2 py-1 font-mono text-xs text-fg-tertiary\">\n          ERR_500 · request 8f2c\n        </span>\n        <div className=\"flex flex-wrap items-center justify-center gap-3\">\n          <Button variant=\"gradient\">\n            <RotateCw className=\"size-4\" aria-hidden=\"true\" />\n            Try again\n          </Button>\n          <Button variant=\"outline\">Contact support</Button>\n        </div>\n      </Reveal>\n    </div>\n  );\n}",
+      "content": "import { Button, Reveal } from \"@kronus-ui/ui\";\nimport { AlertTriangle, RotateCw } from \"lucide-react\";\n\nexport function ErrorStateBlock() {\n  return (\n    <div className=\"flex min-h-[28rem] flex-col items-center justify-center px-6 py-16 text-center\">\n      <Reveal className=\"flex w-full max-w-md flex-col items-center gap-5\">\n        <span className=\"inline-flex size-14 items-center justify-center rounded-2xl bg-error/10 text-error\">\n          <AlertTriangle className=\"size-7\" aria-hidden=\"true\" />\n        </span>\n        <div className=\"flex flex-col gap-2\">\n          <h1 className=\"font-display text-2xl font-semibold text-fg\">Something went wrong</h1>\n          <p className=\"text-sm text-fg-secondary\">\n            An unexpected error occurred while processing your request. Please try again.\n          </p>\n        </div>\n        <span className=\"rounded bg-surface-inset px-2 py-1 font-mono text-xs text-fg-tertiary\">\n          ERR_500 · request 8f2c\n        </span>\n        <div className=\"flex flex-wrap items-center justify-center gap-3\">\n          <Button variant=\"primary\">\n            <RotateCw className=\"size-4\" aria-hidden=\"true\" />\n            Try again\n          </Button>\n          <Button variant=\"outline\">Contact support</Button>\n        </div>\n      </Reveal>\n    </div>\n  );\n}",
       "target": "block"
     }
   ]

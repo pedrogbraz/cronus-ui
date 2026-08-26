@@ -1,0 +1,15 @@
+{
+  "name": "grid-pattern",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "grid-pattern.tsx",
+      "content": "import { type HTMLAttributes, type Ref, useId } from \"react\";\nimport { cn } from \"../lib/cn.js\";\n\nexport interface GridPatternProps extends HTMLAttributes<HTMLDivElement> {\n  ref?: Ref<HTMLDivElement>;\n  /**\n   * Cell size, in pixels.\n   * @default 24\n   */\n  size?: number;\n  /**\n   * Stroke width of the grid lines, in pixels.\n   * @default 1\n   */\n  strokeWidth?: number;\n}\n\nfunction finiteOr(value: number, fallback: number) {\n  return Number.isFinite(value) ? value : fallback;\n}\n\n/**\n * A faint SVG grid that sits behind content. Colour inherits `currentColor`.\n * Decorative (`aria-hidden`) with no motion of its own.\n */\nexport function GridPattern({\n  ref,\n  className,\n  children,\n  size = 24,\n  strokeWidth = 1,\n  ...props\n}: GridPatternProps) {\n  const patternId = useId();\n  const cell = Math.max(4, finiteOr(size, 24));\n  const stroke = Math.max(0.25, finiteOr(strokeWidth, 1));\n\n  return (\n    <div\n      ref={ref}\n      data-slot=\"grid-pattern\"\n      className={cn(\"relative overflow-hidden text-border\", className)}\n      {...props}\n    >\n      <svg aria-hidden=\"true\" className=\"pointer-events-none absolute inset-0 size-full\">\n        <defs>\n          <pattern id={patternId} width={cell} height={cell} patternUnits=\"userSpaceOnUse\">\n            <path\n              d={`M ${cell} 0 L 0 0 0 ${cell}`}\n              fill=\"none\"\n              stroke=\"currentColor\"\n              strokeWidth={stroke}\n            />\n          </pattern>\n        </defs>\n        <rect width=\"100%\" height=\"100%\" fill={`url(#${patternId})`} />\n      </svg>\n      <div className=\"relative\">{children}</div>\n    </div>\n  );\n}\nGridPattern.displayName = \"GridPattern\";\n",
+      "target": "ui"
+    }
+  ]
+}

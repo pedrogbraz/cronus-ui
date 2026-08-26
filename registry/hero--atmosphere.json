@@ -1,0 +1,16 @@
+{
+  "name": "hero--atmosphere",
+  "type": "registry:block",
+  "dependencies": [
+    "@kronus-ui/ui@0.5.0",
+    "lucide-react@^0.577.0"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "hero-atmosphere.tsx",
+      "content": "import {\n  Badge,\n  Button,\n  Highlighter,\n  Meteors,\n  RetroGrid,\n  TypingText,\n} from \"@kronus-ui/ui\";\nimport { ArrowRight, Sparkles } from \"lucide-react\";\n\nexport function AtmosphereHeroBlock() {\n  return (\n    <RetroGrid className=\"relative overflow-hidden\">\n      <Meteors className=\"px-6 py-24 sm:py-32\">\n        <div className=\"mx-auto flex max-w-3xl flex-col items-center text-center\">\n          <Badge variant=\"primary\" className=\"gap-1.5\">\n            <Sparkles aria-hidden=\"true\" className=\"size-3.5\" />\n            Now in public beta\n          </Badge>\n          <h1 className=\"mt-6 text-balance font-display text-5xl font-semibold leading-[1.05] text-fg sm:text-6xl\">\n            Ship products your team is <Highlighter>proud of</Highlighter>\n          </h1>\n          <p className=\"mt-6 max-w-xl text-balance text-lg text-fg-secondary\">\n            A product UI system: compose the app, theme it live, and keep the copy-in you can{\" \"}\n            <TypingText className=\"font-medium text-fg\" text={[\"upgrade.\", \"restyle.\", \"ship.\"]} />\n          </p>\n          <div className=\"mt-9 flex flex-col items-center gap-3 sm:flex-row\">\n            <Button variant=\"primary\" size=\"lg\">\n              Start free trial\n              <ArrowRight aria-hidden=\"true\" />\n            </Button>\n            <Button variant=\"outline\" size=\"lg\">\n              Book a demo\n            </Button>\n          </div>\n        </div>\n      </Meteors>\n    </RetroGrid>\n  );\n}",
+      "target": "block"
+    }
+  ]
+}
