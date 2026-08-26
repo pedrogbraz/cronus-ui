@@ -51,6 +51,9 @@ export default defineConfig({
     {
       name: "a11y",
       testDir: "./e2e/a11y",
+      // data-table (and a few other galleries) have a large live DOM; axe
+      // analyze() regularly exceeds the 30s suite default on linux CI.
+      timeout: 60_000,
       use: { ...devices["Desktop Chrome"] },
     },
     {
