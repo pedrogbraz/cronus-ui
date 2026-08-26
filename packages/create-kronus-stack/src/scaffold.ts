@@ -1,13 +1,13 @@
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { type Assistant, writeAiKit } from "@cooud-ui/ai-kit";
-import type { Catalog, StackConfig } from "@cooud-ui/stack";
+import { type Assistant, writeAiKit } from "@kronus-ui/ai-kit";
+import type { Catalog, StackConfig } from "@kronus-ui/stack";
 import {
   catalog as defaultCatalog,
   generateKickoff,
   generateStackJson,
   sanitizeProjectName,
-} from "@cooud-ui/stack";
+} from "@kronus-ui/stack";
 import { type PackageManager, packageManagerFromConfig, runCommand } from "./utils.js";
 import { CREATE_STACK_VERSION } from "./version.js";
 
@@ -37,8 +37,8 @@ function add(deps: Record<string, string>, name: string, range: string): void {
   deps[name] = range;
 }
 
-const COOUD_UI_VERSION_RANGE = `^${CREATE_STACK_VERSION}`;
-const COOUD_UI_REGISTRY = `https://raw.githubusercontent.com/pedrogbraz/cooud-ui/v${CREATE_STACK_VERSION}/registry`;
+const KRONUS_UI_VERSION_RANGE = `^${CREATE_STACK_VERSION}`;
+const KRONUS_UI_REGISTRY = `https://raw.githubusercontent.com/pedrogbraz/kronus-ui/v${CREATE_STACK_VERSION}/registry`;
 
 function write(targetDir: string, rel: string, content: string): void {
   const path = join(targetDir, rel);
@@ -55,7 +55,7 @@ function aliasTarget(config: StackConfig): string | undefined {
   return appDir(config).startsWith("src/") ? "./src/*" : "./*";
 }
 
-function cooudUiPaths(config: StackConfig): Record<"ui" | "lib" | "blocks", string> {
+function kronusUiPaths(config: StackConfig): Record<"ui" | "lib" | "blocks", string> {
   const prefix = appDir(config).startsWith("src/") ? "src/" : "";
   return {
     ui: `${prefix}components/ui`,
@@ -64,13 +64,13 @@ function cooudUiPaths(config: StackConfig): Record<"ui" | "lib" | "blocks", stri
   };
 }
 
-function usesCooudUi(config: StackConfig): boolean {
-  return single(config, "ui") === "ui-cooud";
+function usesKronusUi(config: StackConfig): boolean {
+  return single(config, "ui") === "ui-kronus";
 }
 
 function packageJson(projectName: string, config: StackConfig): string {
   const isNext = single(config, "web") === "web-next";
-  const isCooudUi = usesCooudUi(config);
+  const isKronusUi = usesKronusUi(config);
   const deps: Record<string, string> = {};
   const devDeps: Record<string, string> = {
     typescript: "^6.0.3",
@@ -85,10 +85,10 @@ function packageJson(projectName: string, config: StackConfig): string {
     add(devDeps, "@types/react-dom", "^19.0.0");
   }
 
-  if (isCooudUi) {
-    add(deps, "@cooud-ui/theme", COOUD_UI_VERSION_RANGE);
-    add(deps, "@cooud-ui/tokens", COOUD_UI_VERSION_RANGE);
-    add(deps, "@cooud-ui/ui", COOUD_UI_VERSION_RANGE);
+  if (isKronusUi) {
+    add(deps, "@kronus-ui/theme", KRONUS_UI_VERSION_RANGE);
+    add(deps, "@kronus-ui/tokens", KRONUS_UI_VERSION_RANGE);
+    add(deps, "@kronus-ui/ui", KRONUS_UI_VERSION_RANGE);
     add(devDeps, "@tailwindcss/postcss", "^4.3.0");
     add(devDeps, "tailwindcss", "^4.3.0");
   }
@@ -177,11 +177,11 @@ function tsconfig(config: StackConfig): string {
 function globalsCss(config: StackConfig): string {
   const app = appDir(config);
   const sourceNodeModules = app.startsWith("src/")
-    ? "../../node_modules/@cooud-ui/ui/dist/**/*.js"
-    : "../node_modules/@cooud-ui/ui/dist/**/*.js";
+    ? "../../node_modules/@kronus-ui/ui/dist/**/*.js"
+    : "../node_modules/@kronus-ui/ui/dist/**/*.js";
   const sourceApp = app.startsWith("src/") ? "../**/*.{ts,tsx}" : "./**/*.{ts,tsx}";
   return `@import "tailwindcss";
-@import "@cooud-ui/tokens/styles.css";
+@import "@kronus-ui/tokens/styles.css";
 
 @source "${sourceNodeModules}";
 @source "${sourceApp}";
@@ -209,31 +209,31 @@ a {
 }
 
 function layoutTsx(projectName: string): string {
-  return `import { CooudThemeScript, CooudUIProvider } from "@cooud-ui/theme";
+  return `import { KronusThemeScript, KronusUIProvider } from "@kronus-ui/theme";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "${projectName}",
-  description: "A Next.js app built with Cooud UI.",
+  description: "A Next.js app built with Kronus UI.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <CooudThemeScript storageKey="theme" defaultThemeName="aurora" defaultModeName="dark" />
+        <KronusThemeScript storageKey="theme" defaultThemeName="aurora" defaultModeName="dark" />
       </head>
       <body>
-        <CooudUIProvider
+        <KronusUIProvider
           asRoot
           storageKey="theme"
           defaultThemeName="aurora"
           defaultModeName="dark"
         >
           {children}
-        </CooudUIProvider>
+        </KronusUIProvider>
       </body>
     </html>
   );
@@ -248,7 +248,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "${projectName}",
-  description: "A Next.js app generated by create-cooud-stack.",
+  description: "A Next.js app generated by create-kronus-stack.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -262,9 +262,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 }
 
 function pageTsx(): string {
-  return `import { Badge } from "@cooud-ui/ui/badge";
-import { Button } from "@cooud-ui/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@cooud-ui/ui/card";
+  return `import { Badge } from "@kronus-ui/ui/badge";
+import { Button } from "@kronus-ui/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@kronus-ui/ui/card";
 
 const metrics = [
   { label: "Revenue", value: "R$ 48.2k" },
@@ -277,17 +277,17 @@ export default function Page() {
     <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-8 px-6 py-12">
       <header className="flex flex-col gap-4">
         <Badge variant="primary" className="w-fit">
-          Built with Cooud UI
+          Built with Kronus UI
         </Badge>
         <div className="flex flex-col gap-3">
           <h1 className="text-4xl font-semibold tracking-tight text-fg">Your stack is ready</h1>
           <p className="max-w-prose text-fg-secondary">
-            This app was scaffolded from the Cooud Stack Builder. Read KICKOFF.md before changing
+            This app was scaffolded from the Kronus Stack Builder. Read KICKOFF.md before changing
             frameworks, databases, auth, payments, or design-system rules.
           </p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <Button variant="gradient">Start building</Button>
+          <Button variant="primary">Start building</Button>
           <Button variant="outline">Read KICKOFF.md</Button>
         </div>
       </header>
@@ -326,14 +326,14 @@ export default function Page() {
   return (
     <main style={{ margin: "0 auto", maxWidth: "64rem", padding: "4rem 1.5rem" }}>
       <p style={{ color: "#38bdf8", fontSize: "0.875rem", fontWeight: 700 }}>
-        Generated by create-cooud-stack
+        Generated by create-kronus-stack
       </p>
       <h1 style={{ fontSize: "3rem", letterSpacing: "-0.04em", margin: "1rem 0" }}>
         Your neutral stack starter is ready
       </h1>
       <p style={{ color: "#cbd5e1", fontSize: "1.125rem", lineHeight: 1.7, maxWidth: "42rem" }}>
-        This project records your selected stack in KICKOFF.md and stack.json. The default Cooud UI
-        stack is runnable immediately; non-Cooud UI choices are intentionally left as explicit
+        This project records your selected stack in KICKOFF.md and stack.json. The default Kronus UI
+        stack is runnable immediately; non-Kronus UI choices are intentionally left as explicit
         follow-up so the scaffold does not install or import the wrong design system.
       </p>
       <ul style={{ color: "#e2e8f0", lineHeight: 1.8, marginTop: "2rem", paddingLeft: "1.25rem" }}>
@@ -358,7 +358,7 @@ function readme(projectName: string, config: StackConfig, unsupported: string[])
   const install = pm === "yarn" ? "yarn" : `${pm} install`;
   return `# ${projectName}
 
-Generated by \`create-cooud-stack\`.
+Generated by \`create-kronus-stack\`.
 
 Read \`KICKOFF.md\` first. It is the source of truth for stack choices,
 conventions, AI capabilities, guardrails, and Definition of Done.
@@ -410,9 +410,9 @@ function unsupportedNotes(config: StackConfig): string[] {
     );
   }
   const ui = single(config, "ui");
-  if (ui && ui !== "ui-cooud" && ui !== "ui-none") {
+  if (ui && ui !== "ui-kronus" && ui !== "ui-none") {
     notes.push(
-      "The selected UI library is captured in KICKOFF.md; this generator writes a neutral Next.js starter unless Cooud UI is selected, so install and wire the chosen UI library manually.",
+      "The selected UI library is captured in KICKOFF.md; this generator writes a neutral Next.js starter unless Kronus UI is selected, so install and wire the chosen UI library manually.",
     );
   }
   if (
@@ -435,14 +435,14 @@ function unsupportedNotes(config: StackConfig): string[] {
     notes.push("Add Cline workspace configuration manually; AI Kit does not emit Cline files yet.");
   }
   const mcpIds = multi(config, "mcp");
-  const unsupportedMcp = mcpIds.filter((id) => id !== "mcp-cooud-ui");
+  const unsupportedMcp = mcpIds.filter((id) => id !== "mcp-kronus-ui");
   if (unsupportedMcp.length > 0) {
     notes.push(
-      "Configure the selected non-Cooud MCP servers manually; the generated AI Kit template only ships the cooud-ui MCP entry today.",
+      "Configure the selected non-Kronus MCP servers manually; the generated AI Kit template only ships the kronus-ui MCP entry today.",
     );
   }
-  if (mcpIds.includes("mcp-cooud-ui") && !usesCooudUi(config)) {
-    notes.push("The cooud-ui MCP server is not generated for stacks that do not use Cooud UI.");
+  if (mcpIds.includes("mcp-kronus-ui") && !usesKronusUi(config)) {
+    notes.push("The kronus-ui MCP server is not generated for stacks that do not use Kronus UI.");
   }
   if (multi(config, "skills").length > 0) {
     notes.push(
@@ -498,24 +498,24 @@ export function scaffoldStack(options: ScaffoldStackOptions): ScaffoldStackResul
   }
 
   if (single(config, "web") === "web-next") {
-    const isCooudUi = usesCooudUi(config);
+    const isKronusUi = usesKronusUi(config);
     emit(
       "next.config.mjs",
       "/** @type {import('next').NextConfig} */\nconst nextConfig = {};\n\nexport default nextConfig;\n",
     );
     const app = appDir(config);
-    if (isCooudUi) {
+    if (isKronusUi) {
       emit("postcss.config.mjs", 'export default { plugins: { "@tailwindcss/postcss": {} } };\n');
       emit(`${app}/globals.css`, globalsCss(config));
       emit(`${app}/layout.tsx`, layoutTsx(projectName));
       emit(`${app}/page.tsx`, pageTsx());
       emit(
-        "cooud-ui.json",
+        "kronus-ui.json",
         `${JSON.stringify(
           {
             aliases: { ui: "@/components/ui", lib: "@/lib", blocks: "@/components/blocks" },
-            paths: cooudUiPaths(config),
-            registry: COOUD_UI_REGISTRY,
+            paths: kronusUiPaths(config),
+            registry: KRONUS_UI_REGISTRY,
             theme: { name: "aurora", mode: "dark" },
           },
           null,
@@ -532,16 +532,16 @@ export function scaffoldStack(options: ScaffoldStackOptions): ScaffoldStackResul
   }
 
   const assistants = assistantIds(config);
-  const isCooudUi = usesCooudUi(config);
-  const cooudUiMcp = isCooudUi && multi(config, "mcp").includes("mcp-cooud-ui");
-  if (assistants.length > 0 || cooudUiMcp) {
+  const isKronusUi = usesKronusUi(config);
+  const kronusUiMcp = isKronusUi && multi(config, "mcp").includes("mcp-kronus-ui");
+  if (assistants.length > 0 || kronusUiMcp) {
     const { written } = writeAiKit({
       targetDir,
       name: projectName,
       assistants,
       preset: "standard",
-      includeCooudUi: isCooudUi,
-      cooudUiMcp,
+      includeKronusUi: isKronusUi,
+      kronusUiMcp,
     });
     fileCount += written.length;
   }

@@ -1,5 +1,5 @@
 import { spawnSync } from "node:child_process";
-import type { StackConfig } from "@cooud-ui/stack";
+import type { StackConfig } from "@kronus-ui/stack";
 
 export const PACKAGE_MANAGERS = ["bun", "npm", "pnpm", "yarn"] as const;
 export type PackageManager = (typeof PACKAGE_MANAGERS)[number];
@@ -20,7 +20,7 @@ export const c = {
 
 export const log = {
   intro(): void {
-    process.stdout.write(`\n${c.magenta(c.bold("create-cooud-stack"))}\n\n`);
+    process.stdout.write(`\n${c.magenta(c.bold("create-kronus-stack"))}\n\n`);
   },
   step(msg: string): void {
     process.stdout.write(`${c.cyan("›")} ${msg}\n`);
@@ -39,7 +39,7 @@ export const log = {
     const dev = pm === "npm" ? "npm run dev" : `${pm} dev`;
     const lines = [
       "",
-      `${c.green(c.bold("Done!"))} Your Cooud stack is ready in ${c.cyan(name)}.`,
+      `${c.green(c.bold("Done!"))} Your Kronus stack is ready in ${c.cyan(name)}.`,
       "",
       "Next steps:",
       `  ${c.dim("$")} cd ${name}`,

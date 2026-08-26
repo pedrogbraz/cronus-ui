@@ -1,31 +1,31 @@
 {
-  "name": "create-cooud-stack",
+  "name": "create-kronus-stack",
   "version": "0.5.0",
-  "description": "Scaffold a Cooud stack from the Cooud Stack Builder contract: app files, stack.json, KICKOFF.md, and optional AI Kit.",
+  "description": "Scaffold a Kronus stack from the Kronus Stack Builder contract: app files, stack.json, KICKOFF.md, and optional AI Kit.",
   "type": "module",
   "license": "MIT",
-  "author": "Cooud",
+  "author": "Kronus",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pedrogbraz/cooud-ui.git",
-    "directory": "packages/create-cooud-stack"
+    "url": "git+https://github.com/pedrogbraz/kronus-ui.git",
+    "directory": "packages/create-kronus-stack"
   },
-  "homepage": "https://github.com/pedrogbraz/cooud-ui#readme",
+  "homepage": "https://github.com/pedrogbraz/kronus-ui#readme",
   "bugs": {
-    "url": "https://github.com/pedrogbraz/cooud-ui/issues"
+    "url": "https://github.com/pedrogbraz/kronus-ui/issues"
   },
   "keywords": [
-    "cooud",
-    "create-cooud-stack",
+    "kronus",
+    "create-kronus-stack",
     "stack",
     "scaffold",
     "next",
-    "cooud-ui",
+    "kronus-ui",
     "ai"
   ],
   "bin": {
-    "create-cooud-stack": "./dist/index.js",
-    "cooud-stack": "./dist/index.js"
+    "create-kronus-stack": "./dist/index.js",
+    "kronus-stack": "./dist/index.js"
   },
   "files": [
     "dist",
@@ -44,8 +44,8 @@
     "prepublishOnly": "tsc -p tsconfig.json"
   },
   "dependencies": {
-    "@cooud-ui/ai-kit": "workspace:*",
-    "@cooud-ui/stack": "workspace:*"
+    "@kronus-ui/ai-kit": "workspace:*",
+    "@kronus-ui/stack": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

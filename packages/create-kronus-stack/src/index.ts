@@ -11,7 +11,7 @@ import {
   resolveStackFlags,
   type StackFlagValues,
   sanitizeProjectName,
-} from "@cooud-ui/stack";
+} from "@kronus-ui/stack";
 import { assertWritableTarget, initGit, runInstall, scaffoldStack } from "./scaffold.js";
 import { c, log, packageManagerFromConfig } from "./utils.js";
 import { CREATE_STACK_VERSION } from "./version.js";
@@ -29,11 +29,11 @@ export function stackFlagHelpLines(): string {
   }).join("\n");
 }
 
-const HELP = `${c.bold("create-cooud-stack")} — scaffold from the Cooud Stack Builder.
+const HELP = `${c.bold("create-kronus-stack")} — scaffold from the Kronus Stack Builder.
 
 ${c.bold("Usage")}
-  create-cooud-stack [project-name] [options]
-  bun create cooud-stack@latest [project-name] [options]
+  create-kronus-stack [project-name] [options]
+  bun create kronus-stack@latest [project-name] [options]
 
 ${c.bold("Stack flags")}
 ${stackFlagHelpLines()}
@@ -45,8 +45,8 @@ ${stackFlagHelpLines()}
   -v, --version              Show the version
 
 ${c.bold("Examples")}
-  bun create cooud-stack@latest my-app --yes --no-install
-  bun create cooud-stack@latest admin --web next --ui cooud --ai claude-code,cursor
+  bun create kronus-stack@latest my-app --yes --no-install
+  bun create kronus-stack@latest admin --web next --ui kronus --ai claude-code,cursor
 `;
 
 interface ParsedCli {
@@ -75,7 +75,7 @@ export function parseCli(args: string[]): ParsedCli {
   });
 
   return {
-    name: sanitizeProjectName(positionals[0] ?? "my-cooud-app"),
+    name: sanitizeProjectName(positionals[0] ?? "my-kronus-app"),
     yes: values.yes === true,
     help: values.help === true,
     version: values.version === true,

@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { CLI_FLAGS } from "@cooud-ui/stack";
+import { CLI_FLAGS } from "@kronus-ui/stack";
 import { describe, expect, it } from "vitest";
 import { parseCli, stackFlagHelpLines } from "./index.js";
 import { CREATE_STACK_VERSION } from "./version.js";
@@ -8,7 +8,7 @@ const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url),
   version: string;
 };
 
-describe("create-cooud-stack CLI", () => {
+describe("create-kronus-stack CLI", () => {
   it("keeps the runtime version aligned with package.json", () => {
     expect(CREATE_STACK_VERSION).toBe(pkg.version);
   });
