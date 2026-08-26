@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "@cooud-ui/theme";
+import { useTheme } from "@kronus-ui/theme";
 import {
   Avatar,
   AvatarFallback,
@@ -15,9 +15,9 @@ import {
   MetricValue,
   Slider,
   Switch,
-} from "@cooud-ui/ui";
+} from "@kronus-ui/ui";
 import { Check, Moon, Sun } from "lucide-react";
-import { Eyebrow, SectionGlow } from "../showcase-ui";
+import { Eyebrow } from "../showcase-ui";
 
 /** The five shipped presets, each with a fixed swatch derived from its `primary`. */
 const THEMES = [
@@ -49,13 +49,12 @@ export function LiveTheming() {
   const isDark = mode === "dark";
 
   return (
-    <section id="theming" className="relative scroll-mt-20 border-t border-border/60">
-      <SectionGlow />
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
+    <section id="theming" className="relative scroll-mt-20">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="flex flex-col gap-3">
           <Eyebrow>Live theming</Eyebrow>
           <h2 className="max-w-2xl font-display text-3xl tracking-[-0.025em] sm:text-4xl">
-            One palette. Everything follows.
+            One palette. The whole page follows.
           </h2>
           <p className="max-w-2xl text-fg-secondary">
             Pick a theme — every surface, border, gradient and shadow on this page re-themes
@@ -129,16 +128,10 @@ export function LiveTheming() {
         </div>
 
         {/* The live preview — a curated mini-app that re-themes with the swatches. */}
-        <div className="mt-8 overflow-hidden rounded-3xl border border-border bg-surface-inset/60 shadow-lg">
-          {/* window chrome */}
-          <div className="flex items-center gap-2 border-b border-border/70 bg-surface-raised/60 px-4 py-3">
-            <span className="flex gap-1.5" aria-hidden="true">
-              <span className="size-2.5 rounded-full bg-border-strong" />
-              <span className="size-2.5 rounded-full bg-border-strong" />
-              <span className="size-2.5 rounded-full bg-border-strong" />
-            </span>
-            <span className="ml-2 font-mono text-xs text-fg-tertiary">app.cooud.dev</span>
-            <Badge variant="outline" className="ml-auto capitalize">
+        <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-surface-raised">
+          <div className="flex items-center justify-between border-b border-border px-4 py-3 sm:px-6">
+            <span className="font-mono text-xs text-fg-tertiary">app.kronus.dev</span>
+            <Badge variant="outline" className="capitalize">
               {theme}
             </Badge>
           </div>
@@ -154,7 +147,9 @@ export function LiveTheming() {
                 </Metric>
                 <div className="flex gap-2">
                   <Badge variant="success">Live</Badge>
-                  <Badge variant="info">Aurora</Badge>
+                  <Badge variant="info" className="capitalize">
+                    {theme}
+                  </Badge>
                 </div>
               </div>
               <div className="flex h-28 items-end gap-2">
@@ -189,7 +184,7 @@ export function LiveTheming() {
                 </div>
               </div>
               <div className="flex flex-col gap-2">
-                <Button variant="gradient" size="sm" className="w-full">
+                <Button size="sm" className="w-full">
                   Deploy
                 </Button>
                 <div className="flex gap-2">
@@ -208,7 +203,7 @@ export function LiveTheming() {
               <div className="grid gap-4 sm:grid-cols-[1fr_auto_auto] sm:items-end">
                 <div className="flex flex-col gap-1.5">
                   <Label htmlFor="theming-email">Work email</Label>
-                  <Input id="theming-email" placeholder="you@cooud.dev" />
+                  <Input id="theming-email" placeholder="you@kronus.dev" />
                 </div>
                 <div className="flex items-center gap-2">
                   <Switch id="theming-notify" defaultChecked aria-label="Notifications" />
@@ -216,9 +211,7 @@ export function LiveTheming() {
                     Notify me
                   </Label>
                 </div>
-                <Button variant="gradient" size="md">
-                  Subscribe
-                </Button>
+                <Button size="md">Subscribe</Button>
               </div>
             </div>
           </div>

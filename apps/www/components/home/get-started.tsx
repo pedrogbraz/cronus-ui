@@ -1,7 +1,6 @@
 "use client";
 
-import { Button } from "@cooud-ui/ui/button";
-import { ArrowRight, Check, Copy, PackagePlus, Sparkles, Terminal } from "lucide-react";
+import { ArrowRight, Check, Copy, FilePlus, PackagePlus, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import { type ReactNode, useState } from "react";
 import { Eyebrow, SectionGlow } from "../showcase-ui";
@@ -75,80 +74,84 @@ function PathCard({ icon, title, description, command }: PathCardProps) {
 export function GetStarted() {
   return (
     <>
-      {/* Part 1 — three ways in */}
+      {/* Part 1 — product loop: create → add-page → upgrade */}
       <section className="relative border-t border-border/60">
         <SectionGlow />
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
           <div className="flex flex-col gap-3">
             <Eyebrow>Get started</Eyebrow>
             <h2 className="max-w-2xl font-display text-3xl tracking-[-0.025em] sm:text-4xl">
-              Three ways in — all take a minute
+              Compose a product, add a page, keep it
             </h2>
             <p className="max-w-2xl text-fg-secondary">
-              Scaffold a fresh app, generate a resolved stack, or drop components into the app you
-              already have.
+              One command composes a themed SaaS from validated blocks. Add a page when you need
+              another route. Upgrade pulls the next release without losing local edits.
             </p>
           </div>
 
           <div className="mt-10 grid min-w-0 gap-4 lg:grid-cols-3">
             <PathCard
               icon={<PackagePlus className="size-5" aria-hidden="true" />}
-              title="Start fresh"
-              description="A Next.js app pre-wired with Cooud UI, a theme, and the AI Kit."
-              command="npx create-cooud-app my-app"
+              title="Start a SaaS"
+              description="A Next.js app composed from validated blocks — auth, dashboard shell, billing — plus theme and AI Kit."
+              command="npx create-kronus-app my-app --template saas"
             />
             <PathCard
-              icon={<Sparkles className="size-5" aria-hidden="true" />}
-              title="Generate a stack"
-              description="Resolve your framework, AI tools, MCP, docs, and handoff files from Stack Builder."
-              command="bun create cooud-stack@latest my-app"
+              icon={<FilePlus className="size-5" aria-hidden="true" />}
+              title="Grow a page"
+              description="Install blocks, write the route, and update chrome nav — a composed page, not a hand-rolled layout."
+              command="npx kronus-ui add-page --route /faq --blocks faq,cta --nav FAQ"
             />
             <PathCard
-              icon={<Terminal className="size-5" aria-hidden="true" />}
-              title="Add to your app"
-              description="Install from the registry — the real source lands in your repo, yours to edit."
-              command="npx cooud-ui add button card dialog"
+              icon={<RefreshCw className="size-5" aria-hidden="true" />}
+              title="Keep it"
+              description="Dry-run first. Upgrade 3-way-merges primitives and composed pages without wiping local edits."
+              command="npx kronus-ui upgrade --all --dry-run"
             />
           </div>
+
+          <p className="mt-6 max-w-3xl text-sm text-fg-tertiary">
+            Already have a repo?{" "}
+            <code className="font-mono text-[0.85em] text-fg-secondary">npx kronus-ui init</code>{" "}
+            then add. Prefer a stack?{" "}
+            <Link href="/stack" className="text-fg-secondary underline-offset-4 hover:underline">
+              Stack Builder
+            </Link>{" "}
+            or{" "}
+            <code className="font-mono text-[0.85em] text-fg-secondary">
+              bun create kronus-stack@latest
+            </code>
+            .
+          </p>
         </div>
       </section>
 
       {/* Part 2 — final CTA band */}
       <section className="pb-16 sm:pb-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-surface-raised px-6 py-14 text-center shadow-lg sm:px-12">
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 -z-10 bg-gradient-aurora opacity-[0.10] blur-2xl"
-            />
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(var(--cooud-border)_1px,transparent_1px)] opacity-40 [background-size:22px_22px]"
-            />
-
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-overlay/60 px-3 py-1 text-xs font-medium text-fg-secondary backdrop-blur">
-              <Sparkles className="size-3.5 text-fg-tertiary" aria-hidden="true" />
-              Aurora, by default
-            </span>
-
-            <h2 className="mt-5 font-display text-3xl tracking-[-0.025em] sm:text-4xl">
-              Create a design system in minutes
+          <div className="rounded-2xl border border-border bg-surface-raised px-6 py-14 text-center sm:px-12">
+            <h2 className="font-display text-3xl tracking-[-0.025em] sm:text-4xl">
+              Compose, then upgrade without losing edits
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-fg-secondary">
-              Pick a theme, tune your tokens, and ship accessible, on-brand components across every
-              surface — no design debt, no lock-in.
+              Scaffold a themed SaaS, add pages as you grow, and pull the next release without
+              wiping local work.
             </p>
 
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button asChild variant="gradient" size="lg">
-                <Link href="/create">
-                  Create a system
-                  <ArrowRight aria-hidden="true" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link href="/docs">Read the docs</Link>
-              </Button>
+              <Link
+                href="/docs/getting-started"
+                className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground outline-none transition-opacity duration-150 ease-[cubic-bezier(.22,1,.36,1)] hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                Get started
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+              <Link
+                href="/create"
+                className="inline-flex items-center rounded-full border border-border bg-surface-raised px-5 py-2.5 text-sm font-medium text-fg outline-none transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] hover:border-border-strong focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                Create Studio
+              </Link>
             </div>
           </div>
         </div>

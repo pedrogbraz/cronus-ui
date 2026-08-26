@@ -1,24 +1,24 @@
 "use client";
 
-import { Avatar, AvatarFallback } from "@cooud-ui/ui/avatar";
-import { Badge } from "@cooud-ui/ui/badge";
-import { Button } from "@cooud-ui/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@cooud-ui/ui/card";
-import { Input } from "@cooud-ui/ui/input";
-import { Label } from "@cooud-ui/ui/label";
-import { Metric, MetricDelta, MetricLabel, MetricValue } from "@cooud-ui/ui/metric";
-import { Separator } from "@cooud-ui/ui/separator";
-import { Slider } from "@cooud-ui/ui/slider";
-import { Switch } from "@cooud-ui/ui/switch";
+import { Avatar, AvatarFallback } from "@kronus-ui/ui/avatar";
+import { Badge } from "@kronus-ui/ui/badge";
+import { Button } from "@kronus-ui/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@kronus-ui/ui/card";
+import { Input } from "@kronus-ui/ui/input";
+import { Label } from "@kronus-ui/ui/label";
+import { Metric, MetricDelta, MetricLabel, MetricValue } from "@kronus-ui/ui/metric";
+import { Separator } from "@kronus-ui/ui/separator";
+import { Slider } from "@kronus-ui/ui/slider";
+import { Switch } from "@kronus-ui/ui/switch";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { CATEGORIES, COMPONENT_COUNT } from "../../lib/components-index";
+import { CATEGORIES } from "../../lib/components-index";
 import { Eyebrow, PreviewFrame, SectionGlow } from "../showcase-ui";
 
 /**
  * A single collage tile: a tiny uppercase caption above a dotted-grid
- * `PreviewFrame` that renders a live cluster of real Cooud UI components.
+ * `PreviewFrame` that renders a live cluster of real Kronus UI components.
  * `h-full` + `flex-1` keep every tile flush to its grid row height.
  */
 function Tile({ caption, children }: { caption: string; children: ReactNode }) {
@@ -27,7 +27,9 @@ function Tile({ caption, children }: { caption: string; children: ReactNode }) {
       <span className="text-xs font-medium uppercase tracking-widest text-fg-tertiary">
         {caption}
       </span>
-      <PreviewFrame className="flex-1">{children}</PreviewFrame>
+      <PreviewFrame className="flex-1 transition-[border-color,transform] duration-200 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-0.5 hover:border-border-strong">
+        {children}
+      </PreviewFrame>
     </div>
   );
 }
@@ -50,13 +52,12 @@ export function ComponentShowcase() {
       <SectionGlow />
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
         <div className="flex flex-col gap-3">
-          <Eyebrow>Component library</Eyebrow>
+          <Eyebrow>The catalog</Eyebrow>
           <h2 className="max-w-2xl font-display text-3xl tracking-[-0.025em] sm:text-4xl">
-            {COMPONENT_COUNT} components, fully documented
+            Primitives you can feel
           </h2>
           <p className="max-w-2xl text-fg-secondary">
-            Buttons to charts, forms to overlays — every one live-previewed, accessible, and
-            token-driven.
+            The primitives behind compose — live-previewed, accessible, and token-driven.
           </p>
         </div>
 
@@ -65,9 +66,7 @@ export function ComponentShowcase() {
           {/* 1 · Buttons */}
           <Tile caption="Buttons">
             <div className="flex w-full flex-wrap items-center justify-center gap-2">
-              <Button size="sm" variant="gradient">
-                Gradient
-              </Button>
+              <Button size="sm">Primary</Button>
               <Button size="sm" variant="secondary">
                 Secondary
               </Button>
@@ -96,7 +95,7 @@ export function ComponentShowcase() {
             <div className="flex w-full flex-col gap-4">
               <div className="flex flex-col gap-2">
                 <Label htmlFor="showcase-email">Email</Label>
-                <Input id="showcase-email" type="email" placeholder="you@cooud.com" />
+                <Input id="showcase-email" type="email" placeholder="you@kronus.com" />
               </div>
               <div className="flex items-center justify-between">
                 <Label htmlFor="showcase-notify">Notifications</Label>
@@ -137,7 +136,7 @@ export function ComponentShowcase() {
                 <CardDescription>Everything to ship a themeable product.</CardDescription>
               </CardHeader>
               <CardContent>
-                <Button variant="gradient" className="w-full">
+                <Button className="w-full">
                   Start building
                   <ArrowRight aria-hidden="true" />
                 </Button>
@@ -149,7 +148,6 @@ export function ComponentShowcase() {
           <Tile caption="Theming">
             <div className="flex w-full flex-col gap-4">
               <div className="flex flex-wrap items-center justify-center gap-2">
-                <Swatch className="bg-gradient-primary" label="Aurora gradient" />
                 <Swatch className="bg-primary" label="Primary" />
                 <Swatch className="bg-success" label="Success" />
                 <Swatch className="bg-warning" label="Warning" />
@@ -182,12 +180,13 @@ export function ComponentShowcase() {
 
         {/* CTA */}
         <div className="mt-8">
-          <Button asChild variant="gradient" size="lg">
-            <Link href="/components">
-              Explore all components
-              <ArrowRight aria-hidden="true" />
-            </Link>
-          </Button>
+          <Link
+            href="/components"
+            className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground outline-none transition-opacity duration-150 ease-[cubic-bezier(.22,1,.36,1)] hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            Explore all components
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </Link>
         </div>
       </div>
     </section>

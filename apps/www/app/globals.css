@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "@cooud-ui/tokens/styles.css";
+@import "@kronus-ui/tokens/styles.css";
 
 /* Scan the UI package source + this app so utilities used in components emit. */
 @source "../../../packages/ui/src/**/*.{ts,tsx}";
@@ -12,22 +12,22 @@
    stays AA-legible in every theme. Dark values are the originals; light values are
    lowered in lightness to clear 4.5:1 on the light inset. */
 :root {
-  --cooud-syntax-keyword: oklch(0.5 0.17 262);
-  --cooud-syntax-fn: oklch(0.5 0.11 215);
-  --cooud-syntax-string: oklch(0.47 0.13 150);
-  --cooud-syntax-attr: oklch(0.5 0.11 70);
-  --cooud-syntax-number: oklch(0.51 0.16 38);
+  --kronus-syntax-keyword: oklch(0.5 0.17 262);
+  --kronus-syntax-fn: oklch(0.5 0.11 215);
+  --kronus-syntax-string: oklch(0.47 0.13 150);
+  --kronus-syntax-attr: oklch(0.5 0.11 70);
+  --kronus-syntax-number: oklch(0.51 0.16 38);
 }
 .dark {
-  --cooud-syntax-keyword: oklch(0.72 0.15 235);
-  --cooud-syntax-fn: oklch(0.78 0.13 200);
-  --cooud-syntax-string: oklch(0.78 0.14 150);
-  --cooud-syntax-attr: oklch(0.8 0.12 90);
-  --cooud-syntax-number: oklch(0.8 0.13 50);
+  --kronus-syntax-keyword: oklch(0.72 0.15 235);
+  --kronus-syntax-fn: oklch(0.78 0.13 200);
+  --kronus-syntax-string: oklch(0.78 0.14 150);
+  --kronus-syntax-attr: oklch(0.8 0.12 90);
+  --kronus-syntax-number: oklch(0.8 0.13 50);
 }
 
-/* The typed `@property --cooud-*` registrations that make token overrides
-   cross-fade now ship in @cooud-ui/tokens (imported above), so every adopter — not
+/* The typed `@property --kronus-*` registrations that make token overrides
+   cross-fade now ship in @kronus-ui/tokens (imported above), so every adopter — not
    just this app — gets smooth token transitions. */
 
 html,
@@ -35,9 +35,23 @@ body {
   min-height: 100%;
 }
 
+/* Accidental horizontal overflow (a too-wide nav, a 100vw + scrollbar)
+   must not widen the document: trackpads then axis-lock to X and vertical
+   scroll feels broken. clip (not hidden) keeps overflow-y visible so
+   position:sticky on the site header still works. */
+html {
+  overflow-x: clip;
+}
+
+/* Embed thumbs (`/preview/t/[slug]?embed=1`) hide the root skip link so the
+   scaled iframe is only the composed stage. */
+html[data-kronus-preview-embed] > body > a[href="#main-content"] {
+  display: none !important;
+}
+
 body {
-  background-color: var(--cooud-surface-base);
-  color: var(--cooud-fg);
+  background-color: var(--kronus-surface-base);
+  color: var(--kronus-fg);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -48,13 +62,13 @@ body {
    solid-primary fallback for engines without color-mix; modern engines get the
    low-alpha tint and keep the element's own text color. */
 ::selection {
-  background-color: var(--cooud-primary);
-  color: var(--cooud-primary-foreground);
+  background-color: var(--kronus-primary);
+  color: var(--kronus-primary-foreground);
 }
 
 @supports (background-color: color-mix(in oklab, red 24%, transparent)) {
   ::selection {
-    background-color: color-mix(in oklab, var(--cooud-primary) 24%, transparent);
+    background-color: color-mix(in oklab, var(--kronus-primary) 24%, transparent);
     color: currentcolor;
   }
 }
@@ -71,8 +85,12 @@ body {
    explicit `focus-visible:ring-*` utility. Declared in @layer base so
    component-level `outline-none` + ring utilities still take precedence. */
 @layer base {
+  html {
+    overflow-x: clip;
+  }
+
   :focus-visible {
-    outline: 2px solid var(--cooud-ring);
+    outline: 2px solid var(--kronus-ring);
     outline-offset: 2px;
   }
 }
@@ -80,7 +98,7 @@ body {
 /* Thin, subtle gray scrollbars (HeroUI-style) across the app. */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--cooud-border-strong) transparent;
+  scrollbar-color: var(--kronus-border-strong) transparent;
 }
 
 *::-webkit-scrollbar {
@@ -93,15 +111,106 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: var(--cooud-border-strong);
+  background-color: var(--kronus-border-strong);
   border-radius: 9999px;
   border: 2px solid transparent;
   background-clip: content-box;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background-color: var(--cooud-fg-muted);
+  background-color: var(--kronus-fg-muted);
   background-clip: content-box;
+}
+
+/* Homepage product-stage float — one curve, paused under reduced motion. */
+@keyframes kronus-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .kronus-float {
+    animation: kronus-float 6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  }
+  .kronus-float-delay {
+    animation-delay: -3s;
+  }
+
+  .kronus-rise {
+    animation: kronus-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .kronus-rise-2 {
+    animation-delay: 90ms;
+  }
+  .kronus-rise-3 {
+    animation-delay: 160ms;
+  }
+}
+
+@keyframes kronus-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Stats section — a comet of token hues traveling the grid (x.ai-style). Linear
+   on purpose: a beam crossing space is constant velocity, not a UI ease. */
+@keyframes kronus-travel {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(350%);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .kronus-travel {
+    animation: kronus-travel 3.2s linear infinite;
+  }
+}
+
+/* Hero rotator — faint hairline with a tight rainbow band sweeping across
+   (x.ai `hero-shimmer`: rest is nearly invisible, color is the visible stroke). */
+@keyframes kronus-word-underline {
+  0% {
+    background-position: 150% center;
+  }
+  100% {
+    background-position: -150% center;
+  }
+}
+
+.kronus-word-underline {
+  background-image: linear-gradient(
+    90deg,
+    var(--kronus-border-strong) 0%,
+    var(--kronus-border-strong) 35%,
+    var(--kronus-chart-1) 40%,
+    var(--kronus-chart-3) 45%,
+    var(--kronus-warning) 52%,
+    var(--kronus-chart-5) 58%,
+    var(--kronus-border-strong) 65%,
+    var(--kronus-border-strong) 100%
+  );
+  background-size: 400% 100%;
+  background-position: 150% center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .kronus-word-underline {
+    animation: kronus-word-underline 3s linear infinite;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────────────

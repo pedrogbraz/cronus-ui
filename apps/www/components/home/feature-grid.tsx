@@ -33,16 +33,30 @@ const FEATURES: Feature[] = [
     body: (
       <>
         <code className="rounded bg-surface-overlay px-1 py-0.5 font-mono text-[0.85em] text-fg">
-          npx cooud-ui add &lt;component&gt;
+          npx kronus-ui add &lt;component&gt;
         </code>{" "}
-        copies real source into your repo. No black-box lock-in.
+        copies real source into your repo.{" "}
+        <code className="rounded bg-surface-overlay px-1 py-0.5 font-mono text-[0.85em] text-fg">
+          upgrade
+        </code>{" "}
+        3-way-merges the next release of primitives and composed pages without wiping local edits.
       </>
     ),
   },
   {
     icon: Blocks,
     title: "Blocks, not just primitives",
-    body: "Full, composable sections — marketing, dashboards, auth — ready to drop in.",
+    body: (
+      <>
+        Full sections — marketing, dashboards, auth — plus{" "}
+        <code className="rounded bg-surface-overlay px-1 py-0.5 font-mono text-[0.85em] text-fg">
+          compose
+        </code>{" "}
+        templates <code className="font-mono text-[0.85em] text-fg">store</code>,{" "}
+        <code className="font-mono text-[0.85em] text-fg">landing</code>, and{" "}
+        <code className="font-mono text-[0.85em] text-fg">saas</code>.
+      </>
+    ),
   },
   {
     icon: Sparkles,
@@ -53,7 +67,7 @@ const FEATURES: Feature[] = [
         <code className="rounded bg-surface-overlay px-1 py-0.5 font-mono text-[0.85em] text-fg">
           AGENTS.md
         </code>{" "}
-        doctrine + skills so your coding agent uses the system correctly from the first prompt.
+        doctrine plus skills so agents compose, add-page, and theme — not just add a button.
       </>
     ),
   },
@@ -65,8 +79,8 @@ const FEATURES: Feature[] = [
 ];
 
 /**
- * "Why Cooud UI" feature grid — a premium, token-driven homepage section that
- * surfaces the six defining strengths of the design system.
+ * "Why Kronus UI" feature grid — a premium, token-driven homepage section that
+ * surfaces the six defining strengths of the product UI system.
  *
  * Everything is driven by semantic design tokens (surfaces, foregrounds,
  * borders, brand gradients) so the section re-themes live alongside the rest of
@@ -81,17 +95,17 @@ export function FeatureGrid() {
       <SectionGlow />
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
         <div className="flex flex-col gap-3">
-          <Eyebrow>Why Cooud UI</Eyebrow>
-          <h2 className="max-w-2xl font-display text-3xl tracking-[-0.025em] sm:text-4xl">
-            Everything you need to ship a themeable product
+          <Eyebrow>Why Kronus UI</Eyebrow>
+          <h2 className="max-w-2xl font-display text-3xl tracking-[-0.025em] sm:text-5xl">
+            The catalog is the means
           </h2>
-          <p className="max-w-2xl text-fg-secondary">
-            Accessible, own-your-code components and full blocks — wired to one semantic token
-            system, with an AI Kit that teaches your agent the rules.
+          <p className="max-w-2xl text-lg text-fg-secondary">
+            Accessible, own-your-code components and full blocks — wired to one token system, with
+            an AI Kit that teaches your agent the loop.
           </p>
         </div>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-4 md:grid-cols-2">
           {FEATURES.map((feature) => (
             <FeatureCard key={feature.title} {...feature} />
           ))}
@@ -103,11 +117,13 @@ export function FeatureGrid() {
 
 function FeatureCard({ icon: Icon, title, body }: Feature) {
   return (
-    <div className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-border bg-surface-raised p-6 shadow-xs transition-[transform,background-color,border-color] duration-[400ms] ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-1 hover:border-border-strong hover:bg-surface-overlay">
-      <div className="relative grid size-10 place-items-center rounded-xl border border-border bg-surface-inset text-fg-tertiary transition-colors duration-[400ms] ease-[cubic-bezier(.22,1,.36,1)] group-hover:text-fg">
+    <div className="group relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-border bg-surface-raised p-8 shadow-xs transition-[transform,background-color,border-color] duration-[400ms] ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-1 hover:border-border-strong hover:bg-surface-overlay">
+      <div className="relative grid size-11 place-items-center rounded-xl border border-border bg-surface-inset text-fg-tertiary transition-colors duration-[400ms] ease-[cubic-bezier(.22,1,.36,1)] group-hover:text-fg">
         <Icon aria-hidden="true" className="size-5" />
       </div>
-      <h3 className="relative text-base font-medium text-fg">{title}</h3>
+      <h3 className="relative font-display text-xl font-normal tracking-[-0.02em] text-fg">
+        {title}
+      </h3>
       <p className="relative text-sm leading-relaxed text-fg-secondary">{body}</p>
     </div>
   );
