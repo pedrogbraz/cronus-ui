@@ -1,0 +1,73 @@
+@import "tailwindcss";
+@import "@kronus-ui/tokens/styles.css";
+
+@source "../../../packages/ui/src/**/*.{ts,tsx}";
+@source "../app/**/*.{ts,tsx}";
+@source "../components/**/*.{ts,tsx}";
+
+html,
+body {
+  min-height: 100%;
+}
+
+html {
+  overflow-x: clip;
+}
+
+body {
+  background-color: var(--kronus-surface-base);
+  color: var(--kronus-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background-color: var(--kronus-primary);
+  color: var(--kronus-primary-foreground);
+}
+
+@supports (background-color: color-mix(in oklab, red 24%, transparent)) {
+  ::selection {
+    background-color: color-mix(in oklab, var(--kronus-primary) 24%, transparent);
+    color: currentcolor;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer base {
+  html {
+    overflow-x: clip;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--kronus-ring);
+    outline-offset: 2px;
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--kronus-border-strong) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--kronus-border-strong);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
