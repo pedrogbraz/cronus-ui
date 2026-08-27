@@ -3,6 +3,7 @@
 import { cn } from "@cronus-ui/ui";
 import { Search } from "lucide-react";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { CATEGORIES, getComponentDisplayName } from "../lib/components-index";
 
@@ -36,7 +37,10 @@ const CATEGORY_FILTERS = [
 
 export function ComponentsCatalog() {
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState("all");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const requested = searchParams.get("category") ?? "all";
+  const category = CATEGORY_FILTERS.some((filter) => filter.slug === requested) ? requested : "all";
 
   const normalized = query.trim().toLowerCase();
   // Default view (no search, "All"): keep the grouped, anchor-linkable sections
@@ -76,8 +80,8 @@ export function ComponentsCatalog() {
 
       {/* Sticky filter toolbar: search + category chips, in reach while scrolling
           the long catalog. Sits just under the 4rem site nav. */}
-      <div className="sticky top-16 z-10 border-b border-border-soft bg-surface-base/85 py-4 backdrop-blur supports-[backdrop-filter]:bg-surface-base/70">
-        <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-4">
+      <div className="sticky top-0 z-30 border-b border-border-soft bg-surface-base/85 py-4 backdrop-blur supports-[backdrop-filter]:bg-surface-base/70">
+        <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:gap-4">
           <label className="relative block w-full lg:max-w-xs">
             <span className="sr-only">Search components</span>
             <Search
@@ -92,20 +96,22 @@ export function ComponentsCatalog() {
             />
           </label>
 
-          <div className="-mx-6 flex items-center gap-2 overflow-x-auto px-6 pb-1 lg:mx-0 lg:flex-1 lg:flex-wrap lg:overflow-visible lg:px-0 lg:pb-0">
+          <div className="flex flex-1 flex-wrap items-center gap-2">
             {CATEGORY_FILTERS.map((filter) => {
               const active = category === filter.slug;
+              const href =
+                filter.slug === "all" ? "/components" : `/components?category=${filter.slug}`;
 
               return (
                 // Selected reads achromatically — a firmed border on a raised
                 // surface — so the filter row carries no decorative hue. Hover
                 // firms the border and the label only: color-only tweens, no
-                // layout shift.
-                <button
+                // layout shift. Chips are links so Back restores the filter.
+                <Link
                   key={filter.slug}
-                  type="button"
-                  aria-pressed={active}
-                  onClick={() => setCategory(filter.slug)}
+                  href={href}
+                  scroll={false}
+                  aria-current={active ? "page" : undefined}
                   className={cn(
                     "inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm outline-none",
                     "transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none",
@@ -124,7 +130,7 @@ export function ComponentsCatalog() {
                   >
                     {filter.count}
                   </span>
-                </button>
+                </Link>
               );
             })}
           </div>
@@ -145,7 +151,7 @@ export function ComponentsCatalog() {
               type="button"
               onClick={() => {
                 setQuery("");
-                setCategory("all");
+                if (category !== "all") router.replace("/components");
               }}
               className="mt-3 text-sm font-medium text-primary underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring"
             >
@@ -155,7 +161,7 @@ export function ComponentsCatalog() {
         ) : isDefaultView ? (
           <div className="mt-6 flex flex-col gap-12">
             {CATEGORIES.map((cat) => (
-              <section key={cat.slug} id={cat.slug} className="scroll-mt-36">
+              <section key={cat.slug} id={cat.slug} className="scroll-mt-28">
                 <h2 className="font-display text-2xl font-medium tracking-[-0.02em] text-fg">
                   {cat.name}
                 </h2>
@@ -249,7 +255,7 @@ function ComponentCard({
         <Link
           href={`/components/${slug}`}
           aria-label={displayName}
-          className="absolute inset-0 z-20 rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="absolute inset-0 rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-ring"
         />
       </div>
     </div>

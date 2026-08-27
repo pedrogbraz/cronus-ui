@@ -8,10 +8,10 @@ import { DOC_NAV_SECTIONS, type DocNavItem } from "../../lib/docs";
 
 export function DocumentationSidebar() {
   return (
-    <aside className="hidden pt-10 lg:block">
+    <aside className="hidden h-full min-h-0 lg:block">
       <nav
         aria-label="Documentation"
-        className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pb-12 pr-4 text-sm"
+        className="h-full overflow-y-auto overscroll-contain pt-10 pb-12 pr-4 text-sm"
       >
         <DocumentationNavList />
       </nav>

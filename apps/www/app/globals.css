@@ -12,6 +12,8 @@
    stays AA-legible in every theme. Dark values are the originals; light values are
    lowered in lightness to clear 4.5:1 on the light inset. */
 :root {
+  /* Fallback = primary nav only. SiteNav writes the live height (nav + Pro strip). */
+  --site-header-height: 4rem;
   --cronus-syntax-keyword: oklch(0.5 0.17 262);
   --cronus-syntax-fn: oklch(0.5 0.11 215);
   --cronus-syntax-string: oklch(0.47 0.13 150);
@@ -37,10 +39,22 @@ body {
 
 /* Accidental horizontal overflow (a too-wide nav, a 100vw + scrollbar)
    must not widen the document: trackpads then axis-lock to X and vertical
-   scroll feels broken. clip (not hidden) keeps overflow-y visible so
-   position:sticky on the site header still works. */
+   scroll feels broken. clip (not hidden) keeps overflow-y visible.
+   `scrollbar-gutter: stable` stops the page from jumping when a modal
+   hides the scrollbar. The site header is `position: fixed` because
+   Radix RemoveScroll's overflow:hidden on body unsticks `sticky`. */
 html {
   overflow-x: clip;
+  scrollbar-gutter: stable;
+}
+
+/* Docs/components app shell: inner columns scroll. The root must not, or the
+   side rails travel with the window. `clip` is not a scroll container, so
+   hash navigation cannot programmatically drag html/body the way `hidden` can. */
+html.docs-shell,
+html.docs-shell body {
+  overflow: clip;
+  overscroll-behavior: none;
 }
 
 /* Embed thumbs (`/preview/t/[slug]?embed=1`) hide the root skip link so the
