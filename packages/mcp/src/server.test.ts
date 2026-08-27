@@ -89,17 +89,20 @@ afterAll(async () => {
 });
 
 describe("MCP server over an in-memory transport", () => {
-  it("exposes the five read tools and the six write tools", async () => {
+  it("exposes the read tools and the six write tools", async () => {
     const { tools } = await client.listTools();
     expect(tools.map((t) => t.name).sort()).toEqual([
       "add_page",
       "apply_theme",
       "compose_app",
       "get_component",
+      "get_design_context",
       "get_install_command",
       "install_component",
       "list_blocks",
+      "list_catalog",
       "list_components",
+      "match_catalog",
       "search_registry",
       "set_theme",
       "upgrade_components",
@@ -113,8 +116,11 @@ describe("MCP server over an in-memory transport", () => {
     for (const name of [
       "list_components",
       "list_blocks",
+      "list_catalog",
+      "match_catalog",
       "search_registry",
       "get_component",
+      "get_design_context",
       "get_install_command",
     ]) {
       expect(byName.get(name)?.annotations, name).toMatchObject({
@@ -146,6 +152,36 @@ describe("MCP server over an in-memory transport", () => {
     const listed = body(result) as { count: number; items: { name: string }[] };
     expect(listed.count).toBe(1);
     expect(listed.items[0]?.name).toBe("button");
+  });
+
+  it("answers match_catalog without requiring extra agent context", async () => {
+    const result = await client.callTool({
+      name: "match_catalog",
+      arguments: { query: "login page with smooth animation" },
+    });
+    expect(result.isError).toBeFalsy();
+    const payload = body(result) as { filters: { intent?: string; motion?: string } };
+    expect(payload.filters.intent).toBe("login");
+    expect(payload.filters.motion).toBe("smooth");
+  });
+
+  it("returns DESIGN.md taste from get_design_context", async () => {
+    const result = await client.callTool({
+      name: "get_design_context",
+      arguments: { theme: "neutral", look: "brutalist", format: "compact" },
+    });
+    expect(result.isError).toBeFalsy();
+    const payload = body(result) as {
+      theme: string;
+      look: string;
+      format: string;
+      markdown: string;
+    };
+    expect(payload.theme).toBe("neutral");
+    expect(payload.look).toBe("brutalist");
+    expect(payload.format).toBe("compact");
+    expect(payload.markdown).toContain("# Cronus UI — DESIGN.md (compact)");
+    expect(payload.markdown).toContain("**neutral**");
   });
 
   it("runs install_component through the CLI seam at the project root", async () => {

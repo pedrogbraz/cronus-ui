@@ -1,5 +1,6 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
+import { CATALOG_KINDS } from "./catalog.js";
 import {
   addPage,
   applyTheme,
@@ -15,10 +16,16 @@ import {
 } from "./cli.js";
 import type { RegistryClient } from "./registry.js";
 import {
+  DESIGN_FORMATS,
+  DESIGN_LOOKS,
+  DESIGN_THEMES,
   getComponent,
+  getDesignContext,
   getInstallCommand,
   listBlocks,
+  listCatalog,
   listComponents,
+  matchCatalog,
   searchRegistry,
 } from "./tools.js";
 import { SERVER_VERSION } from "./version.js";
@@ -133,6 +140,85 @@ export function createServer(
   );
 
   server.registerTool(
+    "list_catalog",
+    {
+      title: "List the tagged Cronus UI catalog",
+      description:
+        "Return compact Hydra-ready cards for every component, block, variant, and template: " +
+        "name, short description, design style, palette, motion, intents, and the install command. " +
+        "No source files — cheap on tokens. Filter with `kind`. Use `match_catalog` to pick " +
+        "the best item for a prompt (login + smooth animation, etc.).",
+      inputSchema: {
+        kind: z
+          .enum(CATALOG_KINDS)
+          .optional()
+          .describe("Restrict to component, block, variant, or template cards."),
+      },
+      annotations: READ_ONLY,
+    },
+    async ({ kind }) => {
+      try {
+        return ok(await listCatalog(client, kind));
+      } catch (error) {
+        return fail(error);
+      }
+    },
+  );
+
+  server.registerTool(
+    "match_catalog",
+    {
+      title: "Match Cronus UI catalog tags",
+      description:
+        "Two-query catalog match for low-context agents. Pass a free-text `query` " +
+        "(e.g. 'login page with smooth animation') and/or structured filters " +
+        "(`intent`, `motion`, `style`, `palette`). Returns `pick` (the recommended " +
+        "combination), `intent` hits, `motion` hits, and ranked `matches`. Cards carry " +
+        "description, design style, palette, motion, and intents — not source. " +
+        "Fetch source with `get_component` only after picking a name.",
+      inputSchema: {
+        query: z
+          .string()
+          .optional()
+          .describe(
+            "Natural-language request, e.g. 'login page with smooth animation'. " +
+              "Intent and motion are inferred from the text when those fields are omitted.",
+          ),
+        intent: z
+          .string()
+          .optional()
+          .describe("Use-case intent: login, signup, pricing, dashboard, chart, form, …"),
+        style: z
+          .string()
+          .optional()
+          .describe("Design style: default, editorial, operational, glass, brutalist."),
+        palette: z
+          .string()
+          .optional()
+          .describe(
+            "Palette: semantic (follows theme), aurora, neutral, midnight, sunset, emerald.",
+          ),
+        motion: z.string().optional().describe("Motion: none, snappy, smooth, cinematic."),
+        kind: z
+          .enum(CATALOG_KINDS)
+          .optional()
+          .describe("Restrict to component, block, variant, or template."),
+        limit: z.number().int().min(1).max(24).optional().describe("Max hits per list. Default 8."),
+      },
+      annotations: READ_ONLY,
+    },
+    async ({ query, intent, style, palette, motion, kind, limit }) => {
+      try {
+        return ok(
+          await matchCatalog(client, { query, intent, style, palette, motion, kind, limit }),
+        );
+      } catch (error) {
+        return fail(error);
+      }
+    },
+  );
+
+  server.registerTool(
     "search_registry",
     {
       title: "Search the Cronus UI registry",
@@ -151,6 +237,42 @@ export function createServer(
     async ({ query }) => {
       try {
         return ok(await searchRegistry(client, query));
+      } catch (error) {
+        return fail(error);
+      }
+    },
+  );
+
+  server.registerTool(
+    "get_design_context",
+    {
+      title: "Get Cronus UI DESIGN.md taste",
+      description:
+        "Return the Cronus UI visual taste file (DESIGN.md) for a theme × look. " +
+        "Use this before generating UI so the agent follows Aurora/Neutral dual identity, " +
+        "one primary CTA, hairline elevation, and look rules. compact fits a system prompt; " +
+        "extended is the repo file. Does not modify the project.",
+      inputSchema: {
+        theme: z
+          .enum(DESIGN_THEMES)
+          .optional()
+          .describe(
+            "Palette: aurora (generated product), neutral (docs chrome), midnight, sunset, emerald.",
+          ),
+        look: z
+          .enum(DESIGN_LOOKS)
+          .optional()
+          .describe("Material: default, brutalist, or glass. Orthogonal to theme."),
+        format: z
+          .enum(DESIGN_FORMATS)
+          .optional()
+          .describe("compact (~prompt) or extended (full DESIGN.md). Default extended."),
+      },
+      annotations: READ_ONLY,
+    },
+    ({ theme, look, format }) => {
+      try {
+        return ok(getDesignContext({ theme, look, format }));
       } catch (error) {
         return fail(error);
       }
@@ -534,6 +656,27 @@ export function createServer(
       return {
         contents: [
           { uri: uri.href, mimeType: "application/json", text: JSON.stringify(index, null, 2) },
+        ],
+      };
+    },
+  );
+
+  server.registerResource(
+    "catalog-tags",
+    "cronus-ui://catalog/tags",
+    {
+      title: "Cronus UI Hydra catalog tags",
+      description:
+        "Compact tagged catalog (component, description, design style, palette, motion, intents) " +
+        "for every installable item. The mapping Hydra ranks against. " +
+        `Source: ${source}`,
+      mimeType: "application/json",
+    },
+    async (uri) => {
+      const catalog = await listCatalog(client);
+      return {
+        contents: [
+          { uri: uri.href, mimeType: "application/json", text: JSON.stringify(catalog, null, 2) },
         ],
       };
     },

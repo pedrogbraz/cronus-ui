@@ -14,6 +14,7 @@ import ts from "typescript";
 // UI code into the build-registry process. If either ever gains a React import,
 // switch to reading the manifest + a small typed lift instead.
 import { BLOCK_CATEGORIES } from "../../../apps/www/lib/blocks-index.ts";
+import { resolveCatalogTags } from "../../../apps/www/lib/catalog-tags.ts";
 import { CATEGORIES as COMPONENT_CATEGORIES } from "../../../apps/www/lib/components-index.ts";
 
 const scriptDir = dirname(fileURLToPath(import.meta.url));
@@ -502,7 +503,17 @@ export interface BrandTokenMeta {
   token: string;
   literal: string;
 }
-export interface VariantMeta {
+export interface CatalogTagFields {
+  /** Design style: default, editorial, operational, glass, brutalist. */
+  style: string;
+  /** Palette family: semantic (follows theme) or a baked preset. */
+  palette: string;
+  /** Motion character: none, snappy, smooth, cinematic. */
+  motion: string;
+  /** Use-case intents Hydra ranks against (login, pricing, dashboard, …). */
+  intents: string[];
+}
+export interface VariantMeta extends CatalogTagFields {
   id: string;
   name: string;
   description: string;
@@ -514,7 +525,7 @@ export interface VariantMeta {
   /** The component export a generated page imports for this variant. */
   exportName: string;
 }
-export interface BlockMetaEntry {
+export interface BlockMetaEntry extends CatalogTagFields {
   title: string;
   description: string;
   category: string;
@@ -524,13 +535,13 @@ export interface BlockMetaEntry {
   brandTokens: BrandTokenMeta[];
   variants: VariantMeta[];
 }
-export interface ComponentMetaEntry {
+export interface ComponentMetaEntry extends CatalogTagFields {
   title: string;
   category: string;
   description: string;
   rsc: boolean;
 }
-export interface AppMetaEntry {
+export interface AppMetaEntry extends CatalogTagFields {
   title: string;
   description: string;
   pages: number;
@@ -676,10 +687,12 @@ async function buildAppsMeta(): Promise<Record<string, AppMetaEntry>> {
     const m =
       (raw as { manifest?: { title?: unknown; description?: unknown; pages?: unknown } })
         .manifest ?? {};
+    const tags = resolveCatalogTags({ slug: name, category: "application", kind: "template" });
     apps[name] = {
       title: typeof m.title === "string" ? m.title : name,
       description: typeof m.description === "string" ? m.description : "",
       pages: Array.isArray(m.pages) ? m.pages.length : 0,
+      ...tags,
     };
   }
   // Stable key ordering regardless of readdir order.
@@ -763,6 +776,12 @@ export async function buildMeta(
       const manifestVariants = MANIFEST_BY_SLUG.get(item.slug)?.variants ?? [];
       const nonDefaultIds = new Set(manifestVariants.map((v) => v.id));
       const variants: VariantMeta[] = (item.variants ?? []).map((v) => {
+        const tags = resolveCatalogTags({
+          slug: item.slug,
+          category: category.slug,
+          kind: "block",
+          variantId: v.id,
+        });
         if (!nonDefaultIds.has(v.id)) {
           // Default variant → the bare block item + the block's own export.
           return {
@@ -771,6 +790,7 @@ export async function buildMeta(
             description: v.description,
             item: item.slug,
             exportName,
+            ...tags,
           };
         }
         const variantItem = variantItemName(item.slug, v.id);
@@ -788,9 +808,15 @@ export async function buildMeta(
           description: v.description,
           item: variantItem,
           exportName: variantExport,
+          ...tags,
         };
       });
 
+      const blockTags = resolveCatalogTags({
+        slug: item.slug,
+        category: category.slug,
+        kind: "block",
+      });
       blocks[item.slug] = {
         title: item.name,
         description: item.description,
@@ -800,6 +826,7 @@ export async function buildMeta(
         dataSlots: [...(BLOCK_DATA_SLOTS[item.slug] ?? [])],
         brandTokens: (BLOCK_BRAND_TOKENS[item.slug] ?? []).map((b) => ({ ...b })),
         variants,
+        ...blockTags,
       };
     }
   }
@@ -807,13 +834,34 @@ export async function buildMeta(
   const components: Record<string, ComponentMetaEntry> = {};
   for (const category of COMPONENT_CATEGORIES) {
     for (const item of category.items) {
+      const tags = resolveCatalogTags({
+        slug: item.slug,
+        category: category.slug,
+        kind: "component",
+      });
       components[item.slug] = {
         title: item.name,
         category: category.slug,
         description: item.description,
         rsc: item.rsc === true,
+        ...tags,
       };
     }
+  }
+  // Shared helper shipped as registry:ui but not listed in the docs catalog.
+  if (components["motion-presets"] === undefined) {
+    const tags = resolveCatalogTags({
+      slug: "motion-presets",
+      category: "premium",
+      kind: "component",
+    });
+    components["motion-presets"] = {
+      title: "Motion presets",
+      category: "premium",
+      description: "Shared easing curves and motion variants used by animated components.",
+      rsc: true,
+      ...tags,
+    };
   }
 
   return {
@@ -1036,16 +1084,23 @@ export async function buildItems(): Promise<RegistryItem[]> {
     });
   }
 
+  const chartPeers = Object.keys(versions).filter(
+    (dep) => dep.startsWith("@visx/") || dep.startsWith("d3-") || dep === "react-use-measure",
+  );
+
   for (const file of entries) {
     const name = basename(file, extname(file));
     const content = await readFile(join(componentsDir, file), "utf8");
     const npm = new Set<string>();
     const reg = new Set<string>();
+    let usesChartEngine = false;
 
     for (const spec of parseImports(content)) {
       const libDep = libDependencyOf(spec);
       if (libDep !== undefined) {
         reg.add(libDep);
+      } else if (spec.startsWith("../charts/")) {
+        usesChartEngine = true;
       } else if (spec.startsWith("./")) {
         reg.add(spec.replace(/^\.\//, "").replace(/\.js$/, ""));
       } else if (!spec.startsWith(".")) {
@@ -1054,12 +1109,19 @@ export async function buildItems(): Promise<RegistryItem[]> {
       }
     }
 
+    let shipped = content;
+    if (usesChartEngine) {
+      npm.add(`@cronus-ui/ui@${pkg.version ?? "latest"}`);
+      for (const dep of chartPeers) npm.add(resolveDep(dep));
+      shipped = shipped.replaceAll(/from "\.\.\/charts\/[^"]+"/g, 'from "@cronus-ui/ui/charts"');
+    }
+
     items.push({
       name,
       type: "registry:ui",
       dependencies: [...npm].sort(),
       registryDependencies: [...reg].sort(),
-      files: [{ path: file, content, target: "ui" }],
+      files: [{ path: file, content: shipped, target: "ui" }],
     });
   }
 
