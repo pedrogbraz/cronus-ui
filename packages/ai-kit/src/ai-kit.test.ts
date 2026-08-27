@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { ASSISTANTS, parseList, SKILLS, writeAiKit } from "./ai-kit.js";
+import { ASSISTANTS, parseList, SKILLS, writeAiKit, writeDesignDocuments } from "./ai-kit.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 
@@ -43,6 +43,9 @@ describe("writeAiKit", () => {
     expect(existsSync(join(dir, ".github/copilot-instructions.md"))).toBe(true);
     expect(existsSync(join(dir, ".windsurf/rules/doctrine.md"))).toBe(true);
     expect(existsSync(join(dir, "GEMINI.md"))).toBe(true);
+    expect(existsSync(join(dir, "DESIGN.md"))).toBe(true);
+    expect(existsSync(join(dir, "DESIGN.compact.md"))).toBe(true);
+    expect(readFileSync(join(dir, "DESIGN.md"), "utf8")).toContain("Cronus UI — DESIGN.md");
     expect(written.length).toBeGreaterThan(10);
   });
 
@@ -92,6 +95,7 @@ describe("writeAiKit", () => {
     expect(existsSync(join(dir, ".claude/agents/code-reviewer.md"))).toBe(false);
     expect(existsSync(join(dir, ".cursor/rules/00-doctrine.mdc"))).toBe(false);
     expect(existsSync(join(dir, ".cursor/rules/10-cronus-ui.mdc"))).toBe(true);
+    expect(existsSync(join(dir, "DESIGN.md"))).toBe(true);
   });
 
   it("can emit generic assistant tooling without Cronus UI rules or skills", () => {
@@ -113,6 +117,7 @@ describe("writeAiKit", () => {
     expect(existsSync(join(dir, ".claude/skills/compose/SKILL.md"))).toBe(false);
     expect(existsSync(join(dir, ".cursor/rules/00-doctrine.mdc"))).toBe(true);
     expect(existsSync(join(dir, ".cursor/rules/10-cronus-ui.mdc"))).toBe(false);
+    expect(existsSync(join(dir, "DESIGN.md"))).toBe(false);
     expect(existsSync(join(dir, ".github/copilot-instructions.md"))).toBe(true);
 
     const claude = readFileSync(join(dir, "CLAUDE.md"), "utf8");
@@ -150,6 +155,28 @@ describe("writeAiKit", () => {
     const second = writeAiKit({ targetDir: dir, name: "acme" });
     expect(second.written).toEqual([]);
     expect(second.skipped.length).toBeGreaterThan(10);
+  });
+
+  it("writeDesignDocuments emits only the taste files", () => {
+    const { written } = writeDesignDocuments(dir);
+    expect(written.sort()).toEqual(["DESIGN.compact.md", "DESIGN.md"]);
+    expect(existsSync(join(dir, "AGENTS.md"))).toBe(false);
+  });
+
+  it("bakes a known theme into DESIGN.md and ignores unknown names", () => {
+    writeDesignDocuments(dir, { theme: "sunset", look: "glass" });
+    const extended = readFileSync(join(dir, "DESIGN.md"), "utf8");
+    const compact = readFileSync(join(dir, "DESIGN.compact.md"), "utf8");
+    expect(extended).toContain("**Theme:** sunset");
+    expect(extended).toContain("**Look:** glass");
+    expect(compact).toContain("**sunset**");
+    expect(compact).toContain("**glass**");
+
+    const other = mkdtempSync(join(tmpdir(), "ai-kit-"));
+    writeDesignDocuments(other, { theme: "mauve", look: "neon" });
+    expect(readFileSync(join(other, "DESIGN.md"), "utf8")).toContain("**Theme:** aurora");
+    expect(readFileSync(join(other, "DESIGN.md"), "utf8")).toContain("**Look:** default");
+    rmSync(other, { recursive: true, force: true });
   });
 });
 

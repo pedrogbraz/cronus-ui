@@ -44,6 +44,9 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "prepublishOnly": "tsc -p tsconfig.json"
   },
+  "dependencies": {
+    "@cronus-ui/tokens": "workspace:*"
+  },
   "devDependencies": {
     "@types/node": "^22.10.0",
     "typescript": "^6.0.3"
