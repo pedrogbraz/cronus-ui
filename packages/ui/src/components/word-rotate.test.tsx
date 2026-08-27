@@ -24,6 +24,17 @@ describe("WordRotate", () => {
     expect(document.querySelectorAll("[data-word-rotate-sizer]")).toHaveLength(0);
   });
 
+  it("does not leak announce onto the host when the live region is off", () => {
+    const { container } = render(
+      <WordRotate words={["mail.", "chat."]} announce={false} reducedMotion="always" />,
+    );
+    const host = container.querySelector('[data-slot="word-rotate"]');
+    expect(host).not.toBeNull();
+    expect(host).not.toHaveAttribute("announce");
+    expect(host?.querySelector("[aria-live]")).toBeNull();
+    expect(host?.querySelector(".sr-only")).toHaveTextContent("mail.");
+  });
+
   it("has no axe violations", async () => {
     const { container } = render(<WordRotate words={["One"]} reducedMotion="always" />);
     expect(await axe(container)).toHaveNoViolations();

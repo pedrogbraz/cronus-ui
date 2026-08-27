@@ -26,6 +26,12 @@ export interface WordRotateProps extends Omit<HTMLAttributes<HTMLSpanElement>, "
    * @default true
    */
   lockWidth?: boolean;
+  /**
+   * When false, skip the polite live region — use inside a heading so
+   * assistive tech is not re-announced every interval.
+   * @default true
+   */
+  announce?: boolean;
 }
 
 function finiteOr(value: number, fallback: number) {
@@ -44,6 +50,7 @@ export function WordRotate({
   interval = 2200,
   reducedMotion = "user",
   lockWidth = true,
+  announce = true,
   ...props
 }: WordRotateProps) {
   const systemReduced = useReducedMotion();
@@ -73,9 +80,13 @@ export function WordRotate({
       )}
       {...props}
     >
-      <span className="sr-only" aria-live="polite">
-        {current}
-      </span>
+      {announce ? (
+        <span className="sr-only" aria-live="polite">
+          {current}
+        </span>
+      ) : (
+        <span className="sr-only">{current}</span>
+      )}
       {lockWidth
         ? list.map((word, i) => (
             <span
