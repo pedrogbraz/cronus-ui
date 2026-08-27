@@ -7,8 +7,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **CurrencyInput.** Opening the selector no longer scroll-locks the document
+  (Radix modal dropdown was unsticking the site header and shoving the sidebar).
+  The default list is a full ISO 4217 set, not just BRL/USD/EUR.
+- **Overlay scroll-lock.** DropdownMenu, ContextMenu, and Popover default to
+  `modal={false}` so a menu cannot freeze the document. The site header is
+  `position: fixed` (with a spacer) so Dialog / Command / AlertDialog / Sheet
+  RemoveScroll can no longer unstick the navbar. `scrollbar-gutter: stable` on
+  `html` stops the page from jumping when the scrollbar hides.
+- **Meteors.** Keyframes were overwriting `-rotate-45`, so streaks slid
+  sideways as horizontal dashes. They now fall diagonally from the top and
+  burst as they leave the bottom.
+- **Premium demos.** Icon wells, BorderBeam, and TiltCard examples dropped the
+  `bg-gradient-primary` rainbow (and hex amber→pink) for surface / fg tokens.
+- **Candlestick (Default).** Wicks and bodies render again — Recharts 3 never
+  injected `yAxis.scale` into Scatter shapes, so every candle bailed out.
+  Hover no longer paints a second date over the x-axis ticks.
+- **Neutral charts.** Neutral was inheriting Aurora's sky/cyan `--cronus-chart-*`
+  from `:root`, so docs charts looked chromatic on a zero-chroma theme. Neutral
+  now ships its own zinc ramp. Chart-1 is the darkest series in both modes
+  (same as the Motion engine's zinc-800 / zinc-600 scatter rings).
+
 ### Changed
 
+- **Scatter (Motion).** Same 24-month sessions/conversions as the docs preview:
+  offset rings (fill + gap + stroke), hover dim/blur, clip-reveal enter.
+  Neutral dark `--cronus-chart-1/2` is zinc-dark, so rings read as hollow
+  outlines instead of glowing white discs.
+- **Composed (Motion).** Thirty daily points — units as bars, run-rate as area,
+  revenue as a Catmull-Rom line. Clip-reveal, hover dim, date pill, crosshair.
+- **Live line (Motion).** Stream uses wall-clock timestamps so the line fills
+  the window; the live pill uses tooltip tokens (no black box); X ticks are
+  local HH:MM:SS.
+- **Bar (Motion).** Grouped revenue/profit preview matches the docs pattern:
+  round caps, hover dims other months to 22%, tooltip with thousands separators.
+  Stacked uses a 3px segment gap instead of stacked pills.
+- **Choropleth (Motion).** Loads a world FeatureCollection (not two fake
+  rectangles), zoom +/- , and a country-name tooltip.
 - **GitHub.** Repo slug is `pedrogbraz/cronus-ui` (still private). CLI registry
   stays on that slug; `npx cronus-ui add` needs a public tag or `-r ./registry`.
 - **compose -y.** With no template name, compose picks `saas`, not the
@@ -31,6 +68,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Catalog tags + MCP match.** Every component, block, variant, and compose
+  app now ships Hydra-ready tags in `registry/meta.json`: short description,
+  design style, palette, motion, and intents. MCP `list_catalog` dumps the
+  compact cards (no source). `match_catalog` runs the two-query path
+  (`login` × `smooth`) from a free-text prompt so an agent does not need the
+  docs in context. Resource `cronus-ui://catalog/tags`.
+- **Chart docs.** Named chart pages now include Installation (Default vs Motion), Usage, the Motion subcomponent API (nested in On this page), extra customizations, data format, theming, and peer dependencies — not only Default/Motion previews. `/llms/components/<chart>.md` mirrors the same sections.
+- **Charts catalog.** Every named chart ships two visuals on the same page:
+  Default (ready-made) and Motion (clip-reveal, crosshair, date pill). Motion
+  pieces import from `@cronus-ui/ui/charts`. The low-level `Chart` primitive
+  stays. Listed under Components → Charts.
+- **DESIGN.md.** Agent-readable taste: Aurora vs Neutral, looks, one primary
+  CTA, hairline elevation. Emitted by `create-cronus-app` (including `--no-ai`),
+  `cronus-ui ai`, and compose. Compact + extended. MCP `get_design_context`.
+  Live at `/docs/design` and `/llms/docs/design.md`. Named radius roles
+  (`rounded-button` / `badge` / `card` / `pill`) follow the primitives.
 - **Sponsor (optional coffee).** `/sponsor` is a Buy Me a Coffee-style picker:
   Coffee $5, Lunch $15, a working day $50, or a custom USD amount. Checkout is
   GitHub Sponsors (one-time, any amount) unless `NEXT_PUBLIC_SPONSOR_URL` points
