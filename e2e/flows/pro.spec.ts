@@ -18,12 +18,13 @@ test.describe("Pro origin split", () => {
   test("Pro landing is additive, priced, and previewable", async ({ page }) => {
     await page.goto(PRO_ORIGIN, { waitUntil: "domcontentloaded" });
 
+    await expect(page.locator("html")).toHaveAttribute("data-cronus-theme", "neutral");
     await expect(page.getByRole("heading", { name: "The rest of the product." })).toBeVisible();
 
     const table = page.getByRole("table");
     await expect(table).toBeVisible();
 
-    const looks = page.getByRole("row", { name: /Looks — Default, Brutalist, Glass, Mauve/ });
+    const looks = page.getByRole("row", { name: /Looks — Default, Brutalist, Glass/ });
     await expect(looks.getByLabel("Included")).toHaveCount(2);
 
     const saas = page.getByRole("row", { name: /SaaS, store, landing/ });

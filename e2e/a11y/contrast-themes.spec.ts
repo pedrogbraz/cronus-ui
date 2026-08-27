@@ -5,7 +5,7 @@ import { expect, test } from "@playwright/test";
  * Per-theme color-contrast gate.
  *
  * The broad a11y gate (`core-routes.a11y.spec.ts`) runs the FULL axe rule set
- * over EVERY route, but only in the default theme (aurora/dark). That leaves
+ * over EVERY route, but only in the default chrome (neutral/dark). That leaves
  * light mode and the four non-default themes ungated for contrast: a token edit
  * that darkens `muted-foreground` in `sunset/light`, or an under-contrast badge
  * in `emerald/dark`, would ship silently.
@@ -21,14 +21,17 @@ import { expect, test } from "@playwright/test";
  * `--workers=4` (see the `test:contrast` script) to stay in budget.
  *
  * Themes are set exactly as the showcase does it: the value written to
- * `localStorage["cronus-ui-theme"]` (`{ theme, mode }`) is read pre-paint by
+ * `localStorage["cronus-ui-theme-v2"]` (`{ theme, mode }`) is read pre-paint by
  * `CronusThemeScript`, so `addInitScript` guarantees the very first paint is in
  * the target theme — no flash, no post-hydration reflow to race.
+ *
+ * `/` is omitted: ChromeThemeLock forces Neutral after hydrate, so a matrix
+ * scan of the homepage cannot represent non-Neutral presets.
  */
 
 const THEMES = ["aurora", "neutral", "midnight", "sunset", "emerald"] as const;
 const MODES = ["light", "dark"] as const;
-const STORAGE_KEY = "cronus-ui-theme";
+const STORAGE_KEY = "cronus-ui-theme-v2";
 
 // Contrast-only, WCAG 2.0/2.1 AA. `serious`/`critical` block; anything softer
 // is informational.
@@ -46,7 +49,7 @@ const BLOCKING_IMPACTS = new Set(["serious", "critical"]);
  */
 const ROUTES = [
   // Core pages — the full app chrome + docs prose + gallery grids.
-  "/",
+  // Homepage `/` is Neutral-locked; contrast for the lock lives in flows.
   "/components",
   "/docs",
   "/stack",

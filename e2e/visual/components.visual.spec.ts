@@ -12,11 +12,10 @@ import { expect, type Page, test } from "@playwright/test";
  * HOW it stays deterministic:
  *  - `reducedMotion: "reduce"` is emulated → JS-driven animations that check
  *    `matchMedia` (e.g. Terminal's typing script) render their final, static
- *    state. NOTE: the showcase root sets `data-force-motion`, which disables
- *    the tokens.css reduced-motion CSS reset — so we ALSO inject a global
- *    `animation/transition: none` style tag (later in the cascade, so it wins
- *    the `!important` tie) and pass `animations: "disabled"` to
- *    `toHaveScreenshot` as the final backstop.
+ *    state. Preview frames set `data-force-motion` (not `<html>`), so the
+ *    tokens.css reduced-motion reset still applies to chrome. We ALSO inject a
+ *    global `animation/transition: none` style tag and pass
+ *    `animations: "disabled"` to `toHaveScreenshot` as the final backstop.
  *  - Blinking text carets are hidden (`caret-color: transparent`).
  *  - We wait for the lazily-loaded example family chunk (first
  *    `[data-slot="preview-frame"]` visible) and for `document.fonts.ready`.
@@ -30,7 +29,7 @@ import { expect, type Page, test } from "@playwright/test";
  */
 
 /** Must match the `storageKey` given to CronusThemeScript/CronusUIProvider in apps/www/app/layout.tsx. */
-const THEME_STORAGE_KEY = "cronus-ui-theme";
+const THEME_STORAGE_KEY = "cronus-ui-theme-v2";
 
 type Mode = "light" | "dark";
 
@@ -113,7 +112,7 @@ async function useTheme(page: Page, theme: string, mode: Mode): Promise<void> {
 
 /** Navigate to a component docs page and settle it for screenshotting. */
 async function openComponentPage(page: Page, slug: string): Promise<void> {
-  await page.goto(`/components/${slug}`, { waitUntil: "networkidle" });
+  await page.goto(`/components/${slug}`, { waitUntil: "load" });
   // The example family chunk is code-split & lazy — hydrated once the first
   // real preview frame replaces the loading skeleton.
   await expect(page.locator('[data-slot="preview-frame"]').first()).toBeVisible();
