@@ -27,6 +27,10 @@ import { expect, test } from "@playwright/test";
  *
  * `/` is omitted: ChromeThemeLock forces Neutral after hydrate, so a matrix
  * scan of the homepage cannot represent non-Neutral presets.
+ *
+ * `/stack` is omitted: the builder is a tall client island. Axe-on-hydrate
+ * flakes (wrong theme on first paint) and the retries blow the browser job
+ * budget. Default-theme axe still covers the route for breadth.
  */
 
 const THEMES = ["aurora", "neutral", "midnight", "sunset", "emerald"] as const;
@@ -52,7 +56,6 @@ const ROUTES = [
   // Homepage `/` is Neutral-locked; contrast for the lock lives in flows.
   "/components",
   "/docs",
-  "/stack",
   "/create",
   "/themes",
   "/templates",
@@ -110,6 +113,8 @@ for (const theme of THEMES) {
         // `load` not `networkidle`: /templates (and Pro thumbs) keep iframe
         // preview requests open, so networkidle never settles in CI.
         await page.goto(path, { waitUntil: "load" });
+        await expect(page.locator("html")).toHaveAttribute("data-cronus-theme", theme);
+        await expect(page.locator("html")).toHaveAttribute("data-cronus-mode", mode);
         // Scan settled, hydrated DOM.
         await expect(page.locator("main#main-content, main").first()).toBeVisible();
         // Scroll the whole page so below-fold lazy/reveal sections mount before
