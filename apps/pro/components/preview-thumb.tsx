@@ -64,6 +64,7 @@ export function PreviewThumb({ app, className }: { app: PackApp; className?: str
           src={previewEmbedUrl(app.slug)}
           title={`${app.name} live preview`}
           inert
+          sandbox="allow-scripts allow-same-origin"
           loading="lazy"
           className="pointer-events-none absolute left-0 top-0 origin-top-left border-0"
           style={{

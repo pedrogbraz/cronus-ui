@@ -13,8 +13,10 @@ chrome keeps the visitor inside the catalog site and undersells the pack.
 
 ## Decisão
 
-1. **Cronus Pro is its own Next app** (`apps/pro`, port 4748). Aurora dark is
-   the product identity (ADR 0003). Docs chrome stays on `apps/www`.
+1. **Cronus Pro is its own Next app** (`apps/pro`, port 4748). Landing chrome
+   is Neutral (same as OSS docs chrome). Aurora remains the flagship of
+   *generated* product and of pack preview iframes (ADR 0003) — not the Pro
+   marketing chrome. Docs stay on `apps/www`.
 2. **See Pro / Explore Pro leave the OSS origin** via `NEXT_PUBLIC_PRO_URL`
    (dev: `http://localhost:4748`, prod name: `https://cronusui.pro`). `/pro` on
    www redirects there so bookmarks still work.

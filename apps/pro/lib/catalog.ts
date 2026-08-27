@@ -124,7 +124,7 @@ export type Cell = "both" | "pro" | "oss-note";
 
 export const COMPARE_ROWS: { label: string; hint?: string; oss: Cell; pro: Cell }[] = [
   { label: "Components, tokens, CLI", oss: "both", pro: "both" },
-  { label: "Looks — Default, Brutalist, Glass, Mauve", oss: "both", pro: "both" },
+  { label: "Looks — Default, Brutalist, Glass", oss: "both", pro: "both" },
   { label: "SaaS, store, landing + flavors", oss: "both", pro: "both" },
   { label: "Live preview, compose, add-page, upgrade", oss: "both", pro: "both" },
   { label: "AI Kit (MIT)", oss: "both", pro: "both" },
@@ -152,12 +152,12 @@ export const FAQ = [
     a: "No. Tokens, looks, SaaS, store, landing, compose, add-page, upgrade, and the AI Kit stay MIT. Pro only adds rows.",
   },
   {
-    q: "Are looks (Glass, Brutalist, Mauve) paid?",
+    q: "Are looks (Glass, Brutalist) paid?",
     a: "No. Looks are an OSS token axis. Paywalling Glass would contradict the category — the engine is the product, not a skin.",
   },
   {
     q: "Can I see the apps before paying?",
-    a: "Yes. Live previews on this page iframe the OSS stage. Scaffold commands work in this open monorepo; the license is commercial positioning, not a fake lock.",
+    a: "Yes. Live previews iframe the OSS stage. Mail, chat, and finance templates are in this MIT monorepo — compose still works. Maker/Studio is the public price for a commercial seat, Figma file, and support when billing opens. Looks and the engine stay free.",
   },
   {
     q: "When can I pay?",
@@ -169,6 +169,6 @@ export const FAQ = [
   },
   {
     q: "Is the CLI gated?",
-    a: "Not in this repository. `create-cronus-app --template mail` still composes. When the license publishes, it covers the pack and support — the MIT engine does not move.",
+    a: "`create-cronus-app --template mail` still composes — the pack source is MIT here. When billing opens, the commercial license is the pack seat plus support/Figma, not a lock on tokens, looks, or SaaS.",
   },
 ] as const;

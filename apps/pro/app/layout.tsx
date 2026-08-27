@@ -1,6 +1,7 @@
 import { CronusThemeScript, CronusUIProvider } from "@cronus-ui/theme";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { ChromeThemeLock } from "../components/chrome-theme-lock";
 import { ProFooter } from "../components/pro-footer";
 import { ProHeader } from "../components/pro-header";
 import { PRO_URL } from "../lib/origins";
@@ -17,15 +18,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      data-cronus-theme="aurora"
+      data-cronus-theme="neutral"
       data-cronus-mode="dark"
       className="dark"
       suppressHydrationWarning
     >
       <head>
         <CronusThemeScript
-          storageKey="cronus-pro-theme-v1"
-          defaultThemeName="aurora"
+          storageKey="cronus-pro-theme-v2"
+          defaultThemeName="neutral"
           defaultModeName="dark"
         />
       </head>
@@ -38,10 +39,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         </a>
         <CronusUIProvider
           asRoot
-          defaultThemeName="aurora"
+          defaultThemeName="neutral"
           defaultModeName="dark"
-          storageKey="cronus-pro-theme-v1"
+          storageKey="cronus-pro-theme-v2"
         >
+          <ChromeThemeLock />
           <div className="min-h-screen bg-surface-base text-fg">
             <ProHeader />
             {children}

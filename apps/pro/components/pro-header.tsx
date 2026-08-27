@@ -3,8 +3,10 @@
 import { useTheme } from "@cronus-ui/theme";
 import { Badge } from "@cronus-ui/ui/badge";
 import { cn } from "@cronus-ui/ui/cn";
-import { ArrowUpRight, Moon, Sun } from "lucide-react";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@cronus-ui/ui/sheet";
+import { ArrowUpRight, Menu, Moon, Sun } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 import { OSS_URL } from "../lib/origins";
 import { CronusMark } from "./brand/cronus-mark";
 
@@ -41,6 +43,7 @@ function ModeIcon({ isDark }: { isDark: boolean }) {
 export function ProHeader() {
   const { mode, toggleMode } = useTheme();
   const isDark = mode === "dark";
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 overflow-x-clip border-b border-border bg-surface-base/70 backdrop-blur-xl">
@@ -84,7 +87,7 @@ export function ProHeader() {
           </a>
           <a
             href="#pricing"
-            className="inline-flex items-center rounded-xl bg-primary px-3 py-2 text-sm font-medium text-primary-foreground outline-none transition-opacity duration-150 ease-[cubic-bezier(.22,1,.36,1)] hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring"
+            className="inline-flex items-center rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground outline-none transition-opacity duration-150 ease-[cubic-bezier(.22,1,.36,1)] hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring"
           >
             Get Pro
           </a>
@@ -96,6 +99,39 @@ export function ProHeader() {
           >
             <ModeIcon isDark={isDark} />
           </button>
+          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+            <SheetTrigger
+              aria-label="Open navigation menu"
+              className="grid size-9 place-items-center rounded-lg text-fg-secondary outline-none transition-colors hover:bg-surface-overlay hover:text-fg focus-visible:ring-2 focus-visible:ring-ring md:hidden"
+            >
+              <Menu className="size-[18px]" aria-hidden="true" />
+            </SheetTrigger>
+            <SheetContent side="left" className="w-80 max-w-[85vw]" aria-label="Navigation">
+              <SheetTitle>Menu</SheetTitle>
+              <ul className="mt-6 flex flex-col gap-1">
+                {NAV.map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="flex rounded-lg px-3 py-2 text-sm text-fg-secondary outline-none hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+                <li>
+                  <a
+                    href={OSS_URL}
+                    className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm text-fg-secondary outline-none hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    Open source
+                    <ArrowUpRight className="size-3.5" aria-hidden="true" />
+                  </a>
+                </li>
+              </ul>
+            </SheetContent>
+          </Sheet>
         </div>
       </nav>
     </header>

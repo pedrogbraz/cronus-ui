@@ -4,12 +4,11 @@ export const alt = "Cronus Pro — The rest of the product";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// Aurora dark, hardcoded as sRGB — ImageResponse cannot resolve oklch tokens.
-const aurora = {
-  surfaceBase: "#071018",
-  primary: "#5ec8ff",
-  fg: "#e8f4ff",
-  fgSecondary: "#9bb0c0",
+// Neutral dark, hardcoded as sRGB — ImageResponse cannot resolve oklch tokens.
+const neutral = {
+  surfaceBase: "#1c1c1c",
+  fg: "#e8e8e8",
+  fgSecondary: "#a3a3a3",
 };
 
 export default function Image() {
@@ -22,22 +21,11 @@ export default function Image() {
         flexDirection: "column",
         justifyContent: "center",
         padding: 80,
-        backgroundColor: aurora.surfaceBase,
+        backgroundColor: neutral.surfaceBase,
         position: "relative",
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          top: -200,
-          right: -80,
-          width: 640,
-          height: 640,
-          display: "flex",
-          backgroundImage: "radial-gradient(circle, rgba(94,200,255,0.22), transparent 65%)",
-        }}
-      />
-      <div style={{ display: "flex", fontSize: 28, color: aurora.primary, letterSpacing: 6 }}>
+      <div style={{ display: "flex", fontSize: 28, color: neutral.fgSecondary, letterSpacing: 6 }}>
         CRONUS PRO
       </div>
       <div
@@ -46,14 +34,14 @@ export default function Image() {
           marginTop: 24,
           fontSize: 72,
           fontWeight: 400,
-          color: aurora.fg,
+          color: neutral.fg,
           letterSpacing: -2,
           lineHeight: 1.05,
         }}
       >
         The rest of the product.
       </div>
-      <div style={{ display: "flex", marginTop: 28, fontSize: 28, color: aurora.fgSecondary }}>
+      <div style={{ display: "flex", marginTop: 28, fontSize: 28, color: neutral.fgSecondary }}>
         Mail · Chat · Finance — additive to OSS
       </div>
     </div>,
