@@ -174,6 +174,10 @@ function emitPresetJs(): string {
     `        xl: "calc(${radius} + 4px)",`,
     `        "2xl": "calc(${radius} + 8px)",`,
     `        "3xl": "calc(${radius} + 14px)",`,
+    `        button: "${radius}",`,
+    `        badge: "max(0px, calc(${radius} - 4px))",`,
+    `        card: "calc(${radius} + 4px)",`,
+    '        pill: "9999px",',
     "      },",
     "      boxShadow: {",
     `        xs: "${v("shadowXs")}",`,
@@ -738,8 +742,8 @@ interface CascadeLayers {
  *           document-wide fonts + chart palette.
  *   aurora:  `[data-cronus-theme="aurora"]` (== dark base) + a light delta block.
  *   neutral: `[data-cronus-theme="neutral"]` (== light base) + a dark delta block;
- *           it intentionally OMITS `--cronus-font-*` / `--cronus-chart-*`, so those
- *           resolve from `:root`.
+ *           it omits `--cronus-font-*` (inherited from `:root`) and declares its
+ *           own achromatic `--cronus-chart-*` ramp.
  */
 function cascadeLayers(css: string, theme: ThemeName, mode: Mode): CascadeLayers {
   const rootBody = extractRuleBody(css, ":root");
@@ -769,10 +773,8 @@ function cascadeLayers(css: string, theme: ThemeName, mode: Mode): CascadeLayers
  *
  * Where a theme block DECLARES a var, that value must equal the TS token exactly
  * (strict — this is the per-theme contract the showcase depends on). Where a
- * theme block OMITS a var (fonts + chart palette for neutral), it resolves from
- * `:root`; we require that the `:root` value is present so the cascade resolves,
- * and (informationally) flag if it diverges from the TS token — that documents
- * the intentional global-default inheritance instead of silently passing.
+ * theme block OMITS a var (fonts on Neutral), it resolves from `:root`; we
+ * require that the `:root` value is present so the cascade resolves.
  */
 function checkCssAgainstTokens(rawCss: string): string[] {
   const css = stripCssComments(rawCss);

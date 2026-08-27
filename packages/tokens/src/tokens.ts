@@ -296,6 +296,13 @@ const neutralDark: ThemeTokens = {
   error: "oklch(0.704 0.191 22.216)",
   errorText: "oklch(0.704 0.191 22.216)", // = error — this lighter-hued rose clears >=5.6:1 on its dark tint
   shadowGlow: "0 0 0 4px oklch(0.6 0 0 / 0.3)",
+  // Same zinc ramp as light — chart-1 is the darkest series in both modes
+  // (Motion scatter rings, bars, lines). Inverting it made dark-mode dots glow.
+  chart1: "oklch(0.3 0 0)",
+  chart2: "oklch(0.44 0 0)",
+  chart3: "oklch(0.58 0 0)",
+  chart4: "oklch(0.72 0 0)",
+  chart5: "oklch(0.85 0 0)",
 };
 
 /*
@@ -453,6 +460,10 @@ export const modes: Mode[] = ["light", "dark"];
 export const defaultTheme: ThemeName = "aurora";
 export const defaultMode: Mode = "dark";
 
+export function isThemeName(value: string | undefined): value is ThemeName {
+  return value !== undefined && (themeNames as readonly string[]).includes(value);
+}
+
 /**
  * Material language — orthogonal to {@link ThemeName} (palette) and {@link Mode}.
  * Applied via `data-cronus-look` on any subtree. Docs chrome stays `default`.
@@ -460,6 +471,10 @@ export const defaultMode: Mode = "dark";
 export type LookName = "default" | "brutalist" | "glass";
 export const lookNames: LookName[] = ["default", "brutalist", "glass"];
 export const defaultLook: LookName = "default";
+
+export function isLookName(value: string | undefined): value is LookName {
+  return value !== undefined && (lookNames as readonly string[]).includes(value);
+}
 export const lookLabels: Record<LookName, string> = {
   default: "Default",
   brutalist: "Brutalist",
