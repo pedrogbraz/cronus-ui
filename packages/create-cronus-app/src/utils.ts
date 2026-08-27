@@ -92,7 +92,7 @@ export const log = {
 /**
  * Product landing flavors (compose apps). Each is a distinctive stack of
  * validated marketing blocks + a theme/mode default — not a bundled directory.
- * `landing` stays the generic marketing page; these are the named looks.
+ * `landing` stays the generic marketing page; these are the named flavors.
  */
 export const LANDING_FLAVORS = [
   "landing-studio",

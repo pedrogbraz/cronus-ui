@@ -97,9 +97,7 @@ async function main(): Promise<void> {
   log.intro();
 
   if (!parsed.yes && process.stdin.isTTY) {
-    log.warn(
-      "Interactive questions are not implemented yet; using resolved Stack Builder defaults.",
-    );
+    log.warn("Using Stack Builder defaults. Pass flags or -y to skip this notice.");
   }
 
   const config = resolveStackFlags(parsed.values, { catalog });
