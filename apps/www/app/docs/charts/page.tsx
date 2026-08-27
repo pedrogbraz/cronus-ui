@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CodeBlock } from "../../../components/docs/code-block";
 import {
   DocCallout,
@@ -7,6 +8,7 @@ import {
   InlineCode,
   PrimaryLink,
 } from "../../../components/docs/documentation";
+import { CATEGORIES } from "../../../lib/components-index";
 
 const primitivesCode = `import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@cronus-ui/ui";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
@@ -232,16 +234,38 @@ const accessibleWrapperCode = `// recharts tags every sector with role="img" and
   </div>
 </div>`;
 
+const CHART_ITEMS = CATEGORIES.find((category) => category.slug === "charts")?.items ?? [];
+
 export default function ChartsPage() {
   return (
     <div className="py-10">
       <DocsHeader
         eyebrow="Documentation"
         title="Charts"
-        description="Compose accessible, theme-aware charts by wiring recharts into ChartContainer with a typed ChartConfig that maps each series to a Cronus token."
+        description="Each named chart has Default and Motion previews, plus Installation, Usage, the Motion subcomponent API, data format, theming, and peer dependencies. ChartContainer stays the low-level recharts escape hatch."
       >
-        <PrimaryLink href="/components/chart">Chart component</PrimaryLink>
+        <PrimaryLink href="/components?category=charts">All chart components</PrimaryLink>
+        <PrimaryLink href="/components/chart">Chart primitive</PrimaryLink>
       </DocsHeader>
+
+      <DocsSection
+        title="Catalog"
+        description="Each type is its own component — find them under Components → Charts. Open a page for live Default/Motion examples, then the composable Motion API (children, props, data shape, tokens)."
+      >
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {CHART_ITEMS.map((item) => (
+            <li key={item.slug}>
+              <Link
+                href={`/components/${item.slug}`}
+                className="block rounded-xl border border-border bg-surface-raised p-4 outline-none hover:border-border-strong focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <p className="font-medium text-fg">{item.name}</p>
+                <p className="mt-1 text-sm text-fg-secondary">{item.description}</p>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </DocsSection>
 
       <DocsSection
         title="The chart primitives"

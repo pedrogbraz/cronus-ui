@@ -107,6 +107,7 @@ export default function ThemingPage() {
         description="Cronus UI treats theme as a design-system object: color ramps, brand accents, chart colors, typography, and radius move together."
       >
         <PrimaryLink href="/create">Build a preset</PrimaryLink>
+        <PrimaryLink href="/docs/design">DESIGN.md</PrimaryLink>
       </DocsHeader>
 
       {/* Live Create Studio callout — a quick path to the interactive preset builder.

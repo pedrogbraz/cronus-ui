@@ -63,6 +63,13 @@ export const DOC_NAV_SECTIONS: { heading: string; items: DocNavItem[] }[] = [
         description: "Tokens, presets, runtime overrides, and dark mode.",
       },
       {
+        label: "Design",
+        href: "/docs/design",
+        description:
+          "DESIGN.md — visual taste for agents: Aurora vs Neutral, looks, one primary CTA.",
+        status: "new",
+      },
+      {
         label: "Styling",
         href: "/docs/styling",
         description: "Override, extend, and re-skin components with className, CVA, and data-slot.",
@@ -96,7 +103,8 @@ export const DOC_NAV_SECTIONS: { heading: string; items: DocNavItem[] }[] = [
       {
         label: "Charts",
         href: "/docs/charts",
-        description: "ChartContainer, the config token mapping, and bar/donut/radar/radial.",
+        description:
+          "ChartContainer catalog: area, line, live, bar, donut, radar, gauge, composed, candle, funnel, scatter, sankey, P/L.",
       },
       {
         label: "Recipes",
@@ -297,6 +305,8 @@ export const CHANGELOG_ENTRIES = [
     summary: "Material looks, Neutral landings, and an additive Pro origin — the engine stays OSS.",
     items: [
       "Looks: Default, Brutalist, Glass via data-cronus-look (Mauve is gone)",
+      "DESIGN.md taste file for agents (compact + extended, MCP get_design_context)",
+      "Charts catalog: AreaChart, LineChart, LiveLine, Bar, Composed, Candlestick, Funnel, Gauge, Pie, Ring, Radar, Scatter, Sankey, P/L, Choropleth, Sunburst, HeatmapChart",
       "OSS and Pro landings share Neutral chrome; Aurora stays the generated-product flag",
       "Cronus Pro at :4748 — mail, chat, finance pack, Maker/Studio list, not billed yet",
       "compose -y with no template name composes saas, not lexicographic first",

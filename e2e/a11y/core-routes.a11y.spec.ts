@@ -51,6 +51,7 @@ const CORE_PAGES: ReadonlyArray<Route> = [
   { path: "/docs/cli", label: "docs · cli" },
   { path: "/docs/compare", label: "docs · compare" },
   { path: "/docs/theming", label: "docs · theming" },
+  { path: "/docs/design", label: "docs · design" },
   { path: "/docs/frameworks", label: "docs · frameworks" },
   { path: "/docs/accessibility", label: "docs · accessibility" },
   { path: "/docs/accessibility/conformance", label: "docs · conformance" },
