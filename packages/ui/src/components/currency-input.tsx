@@ -25,7 +25,7 @@ import {
 
 /**
  * A premium, payments-grade money input. A compact currency selector (symbol +
- * ISO code, e.g. `R$ BRL`) is fused to a right-aligned numeric field that
+ * ISO code, e.g. `R$ BRL`) is fused to an end-aligned numeric field that
  * live-formats thousands separators and decimals **as the user types**, driven
  * entirely by `Intl.NumberFormat` for the active currency's locale.
  *
@@ -141,7 +141,7 @@ const DEFAULT_CURRENCIES: [CurrencyOption, ...CurrencyOption[]] = [
   { code: "SEK", symbol: "kr", locale: "sv-SE", label: "Swedish Krona" },
   { code: "NOK", symbol: "kr", locale: "nb-NO", label: "Norwegian Krone" },
   { code: "DKK", symbol: "kr", locale: "da-DK", label: "Danish Krone" },
-  { code: "PLN", symbol: "zł", locale: "pl-PL", label: "Polish Zloty" },
+  { code: "PLN", symbol: "zł", locale: "pl-PL", label: "Polish Zloty" }, // contract-ok: BCP-47 locale, not padding
   { code: "CZK", symbol: "Kč", locale: "cs-CZ", label: "Czech Koruna" },
   { code: "HUF", symbol: "Ft", locale: "hu-HU", label: "Hungarian Forint", fractionDigits: 0 },
   { code: "RON", symbol: "lei", locale: "ro-RO", label: "Romanian Leu" },
@@ -392,7 +392,7 @@ export const CurrencyInput = forwardRef<HTMLInputElement, CurrencyInputProps>(
           <span
             data-slot="currency-input-prefix"
             aria-hidden="true"
-            className="flex shrink-0 select-none items-center gap-1.5 border-r border-border px-3 text-sm"
+            className="flex shrink-0 select-none items-center gap-1.5 border-e border-border px-3 text-sm"
           >
             <span className="font-medium text-fg">{active.symbol}</span>
             <span className="text-xs font-medium text-fg-tertiary">{active.code}</span>
@@ -406,7 +406,7 @@ export const CurrencyInput = forwardRef<HTMLInputElement, CurrencyInputProps>(
                 aria-label={selectorLabel}
                 data-slot="currency-input-selector"
                 className={cn(
-                  "group/trigger flex shrink-0 select-none items-center gap-1.5 border-r border-border pr-2.5 pl-3 text-sm outline-none",
+                  "group/trigger flex shrink-0 select-none items-center gap-1.5 border-e border-border pe-2.5 ps-3 text-sm outline-none",
                   "transition-colors duration-150 hover:bg-surface-overlay focus-visible:bg-surface-overlay data-[state=open]:bg-surface-overlay motion-reduce:transition-none",
                 )}
               >
@@ -431,7 +431,7 @@ export const CurrencyInput = forwardRef<HTMLInputElement, CurrencyInputProps>(
                     <span className="min-w-[2.5ch] font-medium text-fg">{option.symbol}</span>
                     <span className="font-medium">{option.code}</span>
                     {option.label ? (
-                      <span className="ml-auto pl-6 text-xs text-fg-tertiary">{option.label}</span>
+                      <span className="ms-auto ps-6 text-xs text-fg-tertiary">{option.label}</span>
                     ) : null}
                   </DropdownMenuRadioItem>
                 ))}
@@ -454,7 +454,7 @@ export const CurrencyInput = forwardRef<HTMLInputElement, CurrencyInputProps>(
           aria-invalid={isInvalid ? true : ariaInvalid}
           data-slot="currency-input-field"
           className={cn(
-            "min-w-0 flex-1 bg-transparent px-3 text-right text-sm text-fg tabular-nums",
+            "min-w-0 flex-1 bg-transparent px-3 text-end text-sm text-fg tabular-nums",
             "outline-none placeholder:text-fg-tertiary disabled:pointer-events-none",
             "selection:bg-primary selection:text-primary-foreground",
             inputClassName,
