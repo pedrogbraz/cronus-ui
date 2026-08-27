@@ -150,6 +150,11 @@ describe("buildInstallCommand", () => {
     expect(() => buildInstallCommand([])).toThrow(/at least one/i);
     expect(() => buildInstallCommand(["  ", ""])).toThrow(/at least one/i);
   });
+
+  it("rejects flag-like or path-like names", () => {
+    expect(() => buildInstallCommand(["--overwrite"])).toThrow(/Invalid component name/);
+    expect(() => buildInstallCommand(["../button"])).toThrow(/Invalid component name/);
+  });
 });
 
 describe("listComponents", () => {

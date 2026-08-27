@@ -356,17 +356,17 @@ export function createServer(
       title: "Compose a Cronus UI app from a template",
       description:
         "MODIFIES THE FILESYSTEM. Generate a full multi-page app from a validated Cronus UI " +
-        "template (saas, store, or landing) by running the version-pinned `cronus-ui compose` " +
-        "CLI at the detected project root. Prefer this over hand-writing pages: it installs " +
-        "the template's blocks, writes route files that only stack those blocks in <main>, " +
-        "and records the app in cronus-ui.json. Use when the user wants a full product " +
-        "(SaaS / store / landing), not a single primitive. Set `dryRun` to preview without " +
-        "writing. Requires a project initialised with `npx cronus-ui init` — this does not " +
-        "scaffold a new app (use `npx create-cronus-app` for greenfield).",
+        "template (saas, store, landing, landing-*, mail, chat, finance) by running the " +
+        "version-pinned `cronus-ui compose` CLI at the detected project root. Prefer this " +
+        "over hand-writing pages: it installs the template's blocks, writes route files " +
+        "that only stack those blocks in <main>, and records the app in cronus-ui.json. " +
+        "Use when the user wants a full product, not a single primitive. Set `dryRun` to " +
+        "preview without writing. Requires a project initialised with `npx cronus-ui init` " +
+        "— this does not scaffold a new app (use `npx create-cronus-app` for greenfield).",
       inputSchema: {
         template: z
           .enum(COMPOSE_TEMPLATES)
-          .describe("Bundled app template to compose: 'saas', 'store', or 'landing'."),
+          .describe("Bundled app template (saas, store, landing, landing-*, mail, chat, finance)."),
         brand: z
           .string()
           .optional()

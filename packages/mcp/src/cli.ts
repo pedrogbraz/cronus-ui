@@ -394,7 +394,26 @@ export async function applyTheme(
 }
 
 /** Bundled compose templates the `compose_app` tool accepts. */
-export const COMPOSE_TEMPLATES = ["store", "landing", "saas", "mail", "chat", "finance"] as const;
+export const COMPOSE_TEMPLATES = [
+  "saas",
+  "store",
+  "landing",
+  "landing-agency",
+  "landing-agents",
+  "landing-broadcast",
+  "landing-care",
+  "landing-coverage",
+  "landing-docs",
+  "landing-glass",
+  "landing-ops",
+  "landing-premium",
+  "landing-secure",
+  "landing-shop",
+  "landing-studio",
+  "mail",
+  "chat",
+  "finance",
+] as const;
 export type ComposeTemplate = (typeof COMPOSE_TEMPLATES)[number];
 
 /** Baked-in presets the `set_theme` tool accepts. */

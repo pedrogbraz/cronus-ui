@@ -8,12 +8,17 @@ export const ADD_COMMAND = "npx cronus-ui add";
  * Names are emitted in the given order, de-duplicated, preserving the first
  * occurrence. Throws on an empty list so callers surface a clear error.
  */
+const INSTALL_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
 export function buildInstallCommand(names: string[]): string {
   const cleaned: string[] = [];
   const seen = new Set<string>();
   for (const raw of names) {
     const name = raw.trim();
     if (name.length === 0 || seen.has(name)) continue;
+    if (!INSTALL_SLUG.test(name) || name.startsWith("-")) {
+      throw new Error(`Invalid component name: "${name}".`);
+    }
     seen.add(name);
     cleaned.push(name);
   }
