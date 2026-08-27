@@ -26,11 +26,11 @@ export interface BorderBeamProps extends HTMLAttributes<HTMLDivElement> {
    * loop instead of moving in lockstep. Defaults to `0`.
    */
   delay?: number;
-  /** Colour of the leading edge of the beam. Defaults to the theme primary (`var(--cronus-primary)`). */
+  /** Colour of the leading edge of the beam. Defaults to `var(--cronus-fg)`. */
   colorFrom?: string;
-  /** Colour the trail fades through before it dissolves. Defaults to the theme accent (`var(--cronus-accent)`). */
+  /** Colour the trail fades through before it dissolves. Defaults to transparent. */
   colorTo?: string;
-  /** Thickness of the border band the beam rides in, in pixels. Defaults to `1.5`. */
+  /** Thickness of the border band the beam rides in, in pixels. Defaults to `1` (hairline). */
   borderWidth?: number;
   /** Travel counter-clockwise instead of clockwise. Defaults to `false`. */
   reverse?: boolean;
@@ -67,9 +67,9 @@ export const BorderBeam = forwardRef<HTMLDivElement, BorderBeamProps>(
       size = 60,
       duration = 8,
       delay = 0,
-      colorFrom = "var(--cronus-primary)",
-      colorTo = "var(--cronus-accent)",
-      borderWidth = 1.5,
+      colorFrom = "var(--cronus-fg)",
+      colorTo = "transparent",
+      borderWidth = 1,
       reverse = false,
       style,
       ...props

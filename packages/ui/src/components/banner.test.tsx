@@ -79,8 +79,8 @@ describe("Banner", () => {
       </Banner>,
     );
     const brand = screen.getByRole("region", { name: "Promo banner" });
-    expect(brand.className).toContain("bg-gradient-primary-strong");
-    expect(brand.className).toContain("text-white");
+    expect(brand.className).toContain("bg-primary");
+    expect(brand.className).toContain("text-primary-foreground");
   });
 
   it("maps a semantic variant to its token classes", () => {

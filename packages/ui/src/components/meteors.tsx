@@ -5,6 +5,7 @@ interface MeteorStyle extends CSSProperties {
   "--meteor-delay"?: string;
   "--meteor-duration"?: string;
   "--meteor-travel"?: string;
+  "--meteor-angle"?: string;
 }
 
 export interface MeteorsProps extends HTMLAttributes<HTMLDivElement> {
@@ -16,8 +17,14 @@ export interface MeteorsProps extends HTMLAttributes<HTMLDivElement> {
   count?: number;
 }
 
+/**
+ * Travel is along the meteor's local X after `--meteor-angle`. The animation
+ * must set `rotate(...)` itself — a class `-rotate-45` is overwritten by
+ * `@keyframes { transform }` and the streak then slides sideways as a
+ * horizontal dash.
+ */
 const METEOR_KEYFRAMES =
-  "@keyframes cronus-meteor{0%{transform:translate3d(0,0,0);opacity:0}8%{opacity:1}to{transform:translate3d(var(--meteor-travel),var(--meteor-travel),0);opacity:0}}";
+  "@keyframes cronus-meteor{0%{transform:rotate(var(--meteor-angle)) translate3d(0,0,0);opacity:0}7%{opacity:1}78%{opacity:1;transform:rotate(var(--meteor-angle)) translate3d(calc(var(--meteor-travel)*0.86),0,0)}88%{opacity:0.55;transform:rotate(var(--meteor-angle)) translate3d(var(--meteor-travel),0,0) scale(1.85)}100%{transform:rotate(var(--meteor-angle)) translate3d(var(--meteor-travel),0,0) scale(0.12);opacity:0}}";
 
 function finiteOr(value: number, fallback: number) {
   return Number.isFinite(value) ? value : fallback;
@@ -43,22 +50,25 @@ export function Meteors({ ref, className, children, count = 20, style, ...props 
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 motion-reduce:hidden">
         <style>{METEOR_KEYFRAMES}</style>
         {Array.from({ length: meteorCount }, (_, index) => {
+          // Spawn along the top / upper-right so travel at ~125° (down-left)
+          // crosses the field and exits through the bottom.
           const meteorStyle: MeteorStyle = {
-            insetBlockStart: `${(index * 37) % 100}%`,
-            insetInlineStart: `${(index * 53) % 100}%`,
+            insetBlockStart: `${-14 + ((index * 17) % 32)}%`,
+            insetInlineStart: `${8 + ((index * 43) % 92)}%`,
             "--meteor-delay": `${((index * 13) % 80) / 10}s`,
-            "--meteor-duration": `${2 + ((index * 7) % 20) / 10}s`,
-            "--meteor-travel": "180px",
+            "--meteor-duration": `${1.8 + ((index * 7) % 22) / 10}s`,
+            "--meteor-travel": `${340 + ((index * 29) % 220)}px`,
+            "--meteor-angle": `${122 + ((index * 11) % 16)}deg`,
           };
           return (
             <span
               // biome-ignore lint/suspicious/noArrayIndexKey: meteors are positional and never reorder.
               key={index}
-              className="absolute h-px w-14 -rotate-45 [animation-delay:var(--meteor-delay)] [animation-duration:var(--meteor-duration)] [animation-iteration-count:infinite] [animation-name:cronus-meteor] [animation-timing-function:linear]"
+              className="absolute h-px w-16 origin-left [animation-delay:var(--meteor-delay)] [animation-duration:var(--meteor-duration)] [animation-iteration-count:infinite] [animation-name:cronus-meteor] [animation-timing-function:linear]"
               style={{
                 ...meteorStyle,
                 background:
-                  "linear-gradient(to right, color-mix(in oklch, var(--cronus-fg) 80%, transparent), transparent)",
+                  "linear-gradient(to right, transparent, color-mix(in oklch, var(--cronus-fg) 85%, transparent))",
               }}
             />
           );

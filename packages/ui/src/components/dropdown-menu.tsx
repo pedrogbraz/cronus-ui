@@ -3,6 +3,7 @@
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { Check, ChevronRight, Circle } from "lucide-react";
 import {
+  type ComponentProps,
   type ComponentPropsWithoutRef,
   type ComponentRef,
   forwardRef,
@@ -10,7 +11,17 @@ import {
 } from "react";
 import { cn } from "../lib/cn.js";
 
-export const DropdownMenu = DropdownMenuPrimitive.Root;
+/**
+ * Non-modal by default. Radix's modal dropdown installs RemoveScroll on
+ * `body`, which unsticks site chrome (`position: sticky` + `overflow-x: clip`)
+ * and makes the navbar/sidebar jump. A menu is not a dialog — don't lock the page.
+ */
+export function DropdownMenu({
+  modal = false,
+  ...props
+}: ComponentProps<typeof DropdownMenuPrimitive.Root>) {
+  return <DropdownMenuPrimitive.Root modal={modal} {...props} />;
+}
 export const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
 export const DropdownMenuGroup = DropdownMenuPrimitive.Group;
 export const DropdownMenuPortal = DropdownMenuPrimitive.Portal;

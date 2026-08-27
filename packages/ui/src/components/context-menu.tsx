@@ -3,6 +3,7 @@
 import * as ContextMenuPrimitive from "@radix-ui/react-context-menu";
 import { Check, ChevronRight, Circle } from "lucide-react";
 import {
+  type ComponentProps,
   type ComponentPropsWithoutRef,
   type ComponentRef,
   forwardRef,
@@ -10,7 +11,13 @@ import {
 } from "react";
 import { cn } from "../lib/cn.js";
 
-export const ContextMenu = ContextMenuPrimitive.Root;
+/** Non-modal by default — same scroll-lock trap as {@link DropdownMenu}. */
+export function ContextMenu({
+  modal = false,
+  ...props
+}: ComponentProps<typeof ContextMenuPrimitive.Root>) {
+  return <ContextMenuPrimitive.Root modal={modal} {...props} />;
+}
 export const ContextMenuTrigger = ContextMenuPrimitive.Trigger;
 export const ContextMenuGroup = ContextMenuPrimitive.Group;
 export const ContextMenuPortal = ContextMenuPrimitive.Portal;

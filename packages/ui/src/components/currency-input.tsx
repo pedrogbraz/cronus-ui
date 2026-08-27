@@ -114,11 +114,52 @@ export interface CurrencyInputProps
   inputClassName?: string;
 }
 
-/** BRL, USD, EUR — the on-brand default set (typed non-empty). */
+/** ISO 4217 set covering the currencies a payments field actually sees. */
 const DEFAULT_CURRENCIES: [CurrencyOption, ...CurrencyOption[]] = [
   { code: "BRL", symbol: "R$", locale: "pt-BR", label: "Brazilian Real" },
   { code: "USD", symbol: "US$", locale: "en-US", label: "US Dollar" },
   { code: "EUR", symbol: "€", locale: "de-DE", label: "Euro" },
+  { code: "GBP", symbol: "£", locale: "en-GB", label: "British Pound" },
+  { code: "JPY", symbol: "¥", locale: "ja-JP", label: "Japanese Yen", fractionDigits: 0 },
+  { code: "CNY", symbol: "¥", locale: "zh-CN", label: "Chinese Yuan" },
+  { code: "INR", symbol: "₹", locale: "en-IN", label: "Indian Rupee" },
+  { code: "AUD", symbol: "A$", locale: "en-AU", label: "Australian Dollar" },
+  { code: "CAD", symbol: "CA$", locale: "en-CA", label: "Canadian Dollar" },
+  { code: "CHF", symbol: "CHF", locale: "de-CH", label: "Swiss Franc" },
+  { code: "MXN", symbol: "MX$", locale: "es-MX", label: "Mexican Peso" },
+  { code: "ARS", symbol: "AR$", locale: "es-AR", label: "Argentine Peso" },
+  { code: "CLP", symbol: "CL$", locale: "es-CL", label: "Chilean Peso", fractionDigits: 0 },
+  { code: "COP", symbol: "CO$", locale: "es-CO", label: "Colombian Peso" },
+  { code: "PEN", symbol: "S/", locale: "es-PE", label: "Peruvian Sol" },
+  { code: "UYU", symbol: "$U", locale: "es-UY", label: "Uruguayan Peso" },
+  { code: "PYG", symbol: "₲", locale: "es-PY", label: "Paraguayan Guarani", fractionDigits: 0 },
+  { code: "BOB", symbol: "Bs", locale: "es-BO", label: "Bolivian Boliviano" },
+  { code: "KRW", symbol: "₩", locale: "ko-KR", label: "South Korean Won", fractionDigits: 0 },
+  { code: "HKD", symbol: "HK$", locale: "zh-HK", label: "Hong Kong Dollar" },
+  { code: "SGD", symbol: "S$", locale: "en-SG", label: "Singapore Dollar" },
+  { code: "NZD", symbol: "NZ$", locale: "en-NZ", label: "New Zealand Dollar" },
+  { code: "SEK", symbol: "kr", locale: "sv-SE", label: "Swedish Krona" },
+  { code: "NOK", symbol: "kr", locale: "nb-NO", label: "Norwegian Krone" },
+  { code: "DKK", symbol: "kr", locale: "da-DK", label: "Danish Krone" },
+  { code: "PLN", symbol: "zł", locale: "pl-PL", label: "Polish Zloty" },
+  { code: "CZK", symbol: "Kč", locale: "cs-CZ", label: "Czech Koruna" },
+  { code: "HUF", symbol: "Ft", locale: "hu-HU", label: "Hungarian Forint", fractionDigits: 0 },
+  { code: "RON", symbol: "lei", locale: "ro-RO", label: "Romanian Leu" },
+  { code: "TRY", symbol: "₺", locale: "tr-TR", label: "Turkish Lira" },
+  { code: "ZAR", symbol: "R", locale: "en-ZA", label: "South African Rand" },
+  { code: "NGN", symbol: "₦", locale: "en-NG", label: "Nigerian Naira" },
+  { code: "EGP", symbol: "E£", locale: "ar-EG", label: "Egyptian Pound" },
+  { code: "AED", symbol: "د.إ", locale: "ar-AE", label: "UAE Dirham" },
+  { code: "SAR", symbol: "﷼", locale: "ar-SA", label: "Saudi Riyal" },
+  { code: "ILS", symbol: "₪", locale: "he-IL", label: "Israeli Shekel" },
+  { code: "THB", symbol: "฿", locale: "th-TH", label: "Thai Baht" },
+  { code: "IDR", symbol: "Rp", locale: "id-ID", label: "Indonesian Rupiah" },
+  { code: "MYR", symbol: "RM", locale: "ms-MY", label: "Malaysian Ringgit" },
+  { code: "PHP", symbol: "₱", locale: "en-PH", label: "Philippine Peso" },
+  { code: "VND", symbol: "₫", locale: "vi-VN", label: "Vietnamese Dong", fractionDigits: 0 },
+  { code: "TWD", symbol: "NT$", locale: "zh-TW", label: "New Taiwan Dollar" },
+  { code: "PKR", symbol: "₨", locale: "en-PK", label: "Pakistani Rupee" },
+  { code: "BDT", symbol: "৳", locale: "bn-BD", label: "Bangladeshi Taka" },
 ];
 
 /** The active option for `code`, always resolving to a real currency. */
@@ -357,7 +398,7 @@ export const CurrencyInput = forwardRef<HTMLInputElement, CurrencyInputProps>(
             <span className="text-xs font-medium text-fg-tertiary">{active.code}</span>
           </span>
         ) : (
-          <DropdownMenu>
+          <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
               <button
                 type="button"
@@ -377,7 +418,11 @@ export const CurrencyInput = forwardRef<HTMLInputElement, CurrencyInputProps>(
                 />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="min-w-[13rem]">
+            <DropdownMenuContent
+              align="start"
+              className="max-h-72 min-w-[16rem] overflow-y-auto"
+              onCloseAutoFocus={(event) => event.preventDefault()}
+            >
               <DropdownMenuLabel>Currency</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuRadioGroup value={activeCode} onValueChange={handleCurrencyChange}>
