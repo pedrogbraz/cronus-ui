@@ -48,7 +48,7 @@ function buildScript(
  * ```tsx
  * <html lang="en" suppressHydrationWarning>
  *   <head>
- *     <CronusThemeScript storageKey="cronus-ui-theme" defaultThemeName="aurora" defaultModeName="dark" />
+ *     <CronusThemeScript storageKey="theme" defaultThemeName="aurora" defaultModeName="dark" />
  *   </head>
  *   ...
  * </html>

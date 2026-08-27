@@ -157,7 +157,9 @@ export function CronusUIProvider({
         <div
           data-cronus-theme={theme}
           data-cronus-mode={mode}
-          className={mode === "dark" ? `dark ${className ?? ""}` : className}
+          className={[mode === "dark" ? "dark" : null, "text-fg", className]
+            .filter(Boolean)
+            .join(" ")}
           style={style}
         >
           {children}

@@ -22,3 +22,8 @@ export function useTheme(): ThemeContextValue {
   }
   return ctx;
 }
+
+/** Mode from the nearest provider, or null outside one. */
+export function useOptionalThemeMode(): Mode | null {
+  return useContext(ThemeContext)?.mode ?? null;
+}

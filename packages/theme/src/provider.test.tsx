@@ -11,6 +11,20 @@ afterEach(() => {
   root().style.cssText = "";
 });
 
+describe("CronusUIProvider — nested island", () => {
+  it("sets text-fg on the wrapper so color is not inherited from chrome", () => {
+    const { container } = render(
+      <CronusUIProvider defaultThemeName="aurora" defaultModeName="dark">
+        <span>child</span>
+      </CronusUIProvider>,
+    );
+    const island = container.querySelector("[data-cronus-theme='aurora']");
+    expect(island).toHaveClass("text-fg");
+    expect(island).toHaveClass("dark");
+    expect(island).toHaveAttribute("data-cronus-mode", "dark");
+  });
+});
+
 describe("CronusUIProvider — reactive overrides", () => {
   it("applies the overrides prop to <html> when asRoot", () => {
     render(
