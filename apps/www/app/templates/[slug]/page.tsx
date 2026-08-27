@@ -10,7 +10,10 @@ import {
   appearanceLabel,
   getTemplate,
   isProTemplate,
+  similarTemplates,
+  TEMPLATE_MOOD_LABELS,
   TEMPLATE_SLUGS,
+  templateMood,
 } from "../../../lib/templates/catalog";
 
 export const dynamicParams = false;
@@ -119,6 +122,30 @@ export default async function TemplateDetailPage({
           </div>
         </div>
       </section>
+
+      {similarTemplates(entry.slug).length > 0 ? (
+        <section
+          aria-labelledby="more-like-this"
+          className="mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:px-8"
+        >
+          <h2 id="more-like-this" className="font-display text-xl tracking-[-0.02em] text-fg">
+            More {TEMPLATE_MOOD_LABELS[templateMood(entry)]}
+          </h2>
+          <ul className="mt-4 grid gap-3 sm:grid-cols-3">
+            {similarTemplates(entry.slug).map((related) => (
+              <li key={related.slug}>
+                <Link
+                  href={`/templates/${related.slug}`}
+                  className="block rounded-xl border border-border bg-surface-raised p-4 outline-none hover:border-border-strong focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  <p className="font-medium text-fg">{related.name}</p>
+                  <p className="mt-1 text-sm text-fg-secondary">{related.tagline}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
     </div>
   );
 }

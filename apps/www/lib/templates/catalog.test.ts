@@ -9,9 +9,12 @@ import {
   isProTemplate,
   previewPath,
   scaffoldCommands,
+  similarTemplates,
   stageRefs,
   TEMPLATE_CATALOG,
+  TEMPLATE_MOOD_BY_SLUG,
   TEMPLATE_SLUGS,
+  templateMood,
   templatesPro,
 } from "./catalog";
 
@@ -65,6 +68,19 @@ describe("template catalog", () => {
     expect(appearanceLabel(getTemplate("landing-studio")!)).toBe("Midnight · dark");
     expect(scaffoldCommands("saas").map((item) => item.id)).toEqual(["bun", "pnpm", "npm", "yarn"]);
     expect(scaffoldCommands("default")[0]?.command).toBe("bunx create-cronus-app my-app");
+  });
+
+  it("groups similar templates by mood", () => {
+    expect(templateMood(getTemplate("saas")!)).toBe("saas");
+    expect(templateMood(getTemplate("landing-glass")!)).toBe("glass");
+    expect(similarTemplates("saas").every((entry) => templateMood(entry) === "saas")).toBe(true);
+    expect(similarTemplates("saas").some((entry) => entry.slug === "saas")).toBe(false);
+  });
+
+  it("assigns an explicit mood to every catalog slug", () => {
+    for (const slug of TEMPLATE_SLUGS) {
+      expect(TEMPLATE_MOOD_BY_SLUG[slug], slug).toBeDefined();
+    }
   });
 
   it("keeps saas/store/landing OSS and lists mail/chat/finance as additive Pro", () => {

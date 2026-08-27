@@ -1,9 +1,10 @@
 import { CronusUIProvider } from "@cronus-ui/theme";
-import { type ThemeName, themes } from "@cronus-ui/tokens";
+import { designMarkdown, type ThemeName, themes } from "@cronus-ui/tokens";
 import { Badge, Button, Input } from "@cronus-ui/ui";
 import { ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { CodeBlock } from "../../components/docs/code-block";
 import { Eyebrow, SectionGlow } from "../../components/showcase-ui";
 import { DEFAULT_CONFIG, encodeConfigParam } from "../../lib/create/presets";
 import type { DesignConfig } from "../../lib/create/types";
@@ -205,11 +206,18 @@ export default function ThemesPage() {
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-fg-secondary">
             Five built-in presets ship with every install — and any theme you build in the Create
-            Studio travels as a plain permalink. Paste it into{" "}
+            Studio travels as a plain permalink. Agents should read{" "}
+            <Link
+              href="/docs/design"
+              className="text-fg underline underline-offset-4 outline-none hover:text-fg-secondary focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              DESIGN.md
+            </Link>{" "}
+            first (taste), then apply a preset with{" "}
             <code className="rounded-md border border-border bg-surface-inset px-1.5 py-0.5 font-mono text-[0.85em] text-fg">
-              cronus-ui theme add
-            </code>{" "}
-            and the CLI materializes it in your app.
+              cronus-ui theme set
+            </code>
+            .
           </p>
         </div>
       </header>
@@ -234,6 +242,17 @@ export default function ThemesPage() {
           {CARDS.map((card) => (
             <ThemeCardView key={card.name} card={card} />
           ))}
+        </div>
+        <div className="mt-12">
+          <h3 className="font-display text-lg tracking-[-0.02em] text-fg">DESIGN.md (compact)</h3>
+          <p className="mt-2 max-w-2xl text-sm text-fg-secondary">
+            Aurora dark, Default look. Copy this into a prompt, or fetch{" "}
+            <code className="font-mono text-fg">/llms/design.compact.md</code>. MCP:{" "}
+            <code className="font-mono text-fg">get_design_context</code>.
+          </p>
+          <div className="mt-4">
+            <CodeBlock code={designMarkdown({ format: "compact" })} language="markdown" />
+          </div>
         </div>
       </section>
 

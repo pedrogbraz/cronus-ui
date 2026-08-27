@@ -8,7 +8,11 @@ import { PRO_URL } from "../../lib/site-url";
 import {
   appearanceLabel,
   isProTemplate,
+  isTemplateMood,
+  TEMPLATE_MOOD_LABELS,
+  TEMPLATE_MOODS,
   type TemplateCatalogEntry,
+  templateMood,
   templatesOssOfKind,
   templatesPro,
 } from "../../lib/templates/catalog";
@@ -19,7 +23,16 @@ export const metadata: Metadata = {
     "Scaffold a themed product in one command. Live previews of composed apps — click through to the full site, or Open Preview for the real stage.",
 };
 
-export default function TemplatesPage() {
+export default async function TemplatesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ mood?: string }>;
+}) {
+  const { mood: rawMood } = await searchParams;
+  const mood = isTemplateMood(rawMood) ? rawMood : undefined;
+  const filter = (list: TemplateCatalogEntry[]) =>
+    mood === undefined ? list : list.filter((entry) => templateMood(entry) === mood);
+
   return (
     <div className="relative min-h-[calc(100vh-4rem)] pb-16">
       <SectionGlow />
@@ -47,16 +60,45 @@ export default function TemplatesPage() {
         </div>
       </header>
 
+      <nav
+        aria-label="Template mood"
+        className="mx-auto flex max-w-7xl flex-wrap gap-2 px-4 pt-8 sm:px-6 lg:px-8"
+      >
+        <Link
+          href="/templates"
+          className={`rounded-full border px-3 py-1 text-xs font-medium outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+            mood === undefined
+              ? "border-border-strong bg-surface-overlay text-fg"
+              : "border-border bg-surface-raised text-fg-secondary hover:text-fg"
+          }`}
+        >
+          All
+        </Link>
+        {TEMPLATE_MOODS.map((id) => (
+          <Link
+            key={id}
+            href={`/templates?mood=${id}`}
+            className={`rounded-full border px-3 py-1 text-xs font-medium outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+              mood === id
+                ? "border-border-strong bg-surface-overlay text-fg"
+                : "border-border bg-surface-raised text-fg-secondary hover:text-fg"
+            }`}
+          >
+            {TEMPLATE_MOOD_LABELS[id]}
+          </Link>
+        ))}
+      </nav>
+
       <TemplateGrid
         heading="Generated products"
         description="Default base plus compose: every page is installed blocks stacked in a main. This is the product loop."
-        templates={templatesOssOfKind("product")}
+        templates={filter(templatesOssOfKind("product"))}
       />
 
       <TemplateGrid
         heading="Pro pack"
         description="Mail, chat, and finance — extra composed apps. Everything above stays free. Pro only adds."
-        templates={templatesPro()}
+        templates={filter(templatesPro())}
         href={PRO_URL}
         hrefLabel="What's in Pro"
       />
@@ -64,13 +106,13 @@ export default function TemplatesPage() {
       <TemplateGrid
         heading="Landing pages"
         description="Named marketing looks composed from the same blocks as landing — swap the stack, keep the upgrade path. Click a card to open the live site."
-        templates={templatesOssOfKind("landing")}
+        templates={filter(templatesOssOfKind("landing"))}
       />
 
       <TemplateGrid
         heading="Starters"
         description="Bundled directories when you want a smaller surface and will add pieces yourself."
-        templates={templatesOssOfKind("starter")}
+        templates={filter(templatesOssOfKind("starter"))}
       />
 
       <p className="mx-auto max-w-7xl px-4 text-sm text-fg-tertiary sm:px-6 lg:px-8">
@@ -132,6 +174,7 @@ function TemplateGrid({
   href?: string;
   hrefLabel?: string;
 }) {
+  if (templates.length === 0) return null;
   return (
     <section aria-label={heading} className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
       <div className="flex max-w-2xl flex-col gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-6">

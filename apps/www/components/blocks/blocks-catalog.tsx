@@ -85,7 +85,7 @@ export function BlocksCatalog() {
 
       {/* Sticky filter toolbar: search + category chips. Stays in reach while
           scrolling a long catalog. Sits just under the 4rem site nav. */}
-      <div className="sticky top-16 z-10 border-b border-border/60 bg-surface-base/85 backdrop-blur supports-[backdrop-filter]:bg-surface-base/70">
+      <div className="sticky top-[var(--site-header-height)] z-30 border-b border-border/60 bg-surface-base/85 backdrop-blur supports-[backdrop-filter]:bg-surface-base/70">
         <div className="mx-auto flex max-w-[92rem] flex-col gap-3 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:gap-4 lg:px-8">
           <label className="relative block w-full lg:max-w-xs">
             <span className="sr-only">Search blocks</span>
@@ -204,7 +204,7 @@ export function BlocksCatalog() {
                 <Link
                   href={`/blocks/${block.slug}`}
                   aria-label={block.name}
-                  className="absolute inset-0 z-20 rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="absolute inset-0 rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 />
               </article>
             ))}
