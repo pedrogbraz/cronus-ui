@@ -85,6 +85,14 @@ const FREEZE_CSS = `
     scroll-behavior: auto !important;
     caret-color: transparent !important;
   }
+  * {
+    scrollbar-width: none !important;
+  }
+  *::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
 `;
 
 const SCREENSHOT_OPTIONS = {
