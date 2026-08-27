@@ -1,13 +1,21 @@
 "use client";
 
 import { GripVertical } from "lucide-react";
-import type { ComponentProps } from "react";
+import { type ComponentProps, useId, useLayoutEffect } from "react";
 import {
   PanelResizeHandle as ResizablePrimitiveHandle,
   Panel as ResizablePrimitivePanel,
   PanelGroup as ResizablePrimitivePanelGroup,
 } from "react-resizable-panels";
 import { cn } from "../lib/cn.js";
+
+const VALUE_ATTRS = ["aria-valuenow", "aria-valuemin", "aria-valuemax"] as const;
+
+function ensureSplitterValues(el: Element) {
+  if (!el.getAttribute("aria-valuenow")) el.setAttribute("aria-valuenow", "50");
+  if (!el.getAttribute("aria-valuemin")) el.setAttribute("aria-valuemin", "0");
+  if (!el.getAttribute("aria-valuemax")) el.setAttribute("aria-valuemax", "100");
+}
 
 /**
  * Resizable layout primitives — a thin, themed wrapper over
@@ -55,9 +63,31 @@ export interface ResizableHandleProps extends ComponentProps<typeof ResizablePri
  * geometry for vertical groups, and — when `withHandle` is set — hosts a small
  * rounded grip with a {@link GripVertical} glyph for a clearer drag target.
  */
-export function ResizableHandle({ withHandle = false, className, ...props }: ResizableHandleProps) {
+export function ResizableHandle({
+  withHandle = false,
+  className,
+  id: idFromProps,
+  ...props
+}: ResizableHandleProps) {
+  const generatedId = useId().replace(/[^a-zA-Z0-9_-]/g, "");
+  const handleId = idFromProps ?? `cronus-rh-${generatedId}`;
+
+  // react-resizable-panels paints role="separator" immediately but only writes
+  // aria-valuenow after it measures layout — and its effect cleanup removes
+  // the attributes between updates. Keep a numeric value on the splitter so
+  // axe (and AT) never see a separator without aria-valuenow.
+  useLayoutEffect(() => {
+    const el = document.querySelector(`[data-panel-resize-handle-id="${CSS.escape(handleId)}"]`);
+    if (!el) return;
+    ensureSplitterValues(el);
+    const mo = new MutationObserver(() => ensureSplitterValues(el));
+    mo.observe(el, { attributes: true, attributeFilter: [...VALUE_ATTRS] });
+    return () => mo.disconnect();
+  }, [handleId]);
+
   return (
     <ResizablePrimitiveHandle
+      id={handleId}
       data-slot="resizable-handle"
       className={cn(
         // Base divider: a 1px line that owns a small hit area via flex centering.

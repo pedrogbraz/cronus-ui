@@ -57,9 +57,21 @@ const CORE_PAGES: ReadonlyArray<Route> = [
   { path: "/changelog", label: "changelog" },
 ];
 
+const COMPONENT_SETTLE: Partial<Record<string, (page: Page) => Promise<void>>> = {
+  resizable: async (page) => {
+    const handles = page.locator('[data-slot="resizable-handle"]');
+    await expect(handles.first()).toBeVisible();
+    const count = await handles.count();
+    for (let i = 0; i < count; i += 1) {
+      await expect(handles.nth(i)).toHaveAttribute("aria-valuenow", /^\d+$/);
+    }
+  },
+};
+
 const COMPONENT_ROUTES: ReadonlyArray<Route> = routes.components.map((slug) => ({
   path: `/components/${slug}`,
   label: `components · ${slug}`,
+  settle: COMPONENT_SETTLE[slug],
 }));
 
 const BLOCK_ROUTES: ReadonlyArray<Route> = routes.blocks.map((slug) => ({

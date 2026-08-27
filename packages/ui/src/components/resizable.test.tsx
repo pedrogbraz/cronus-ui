@@ -35,6 +35,14 @@ describe("Resizable", () => {
     expect(handle).toHaveAttribute("tabindex", "0");
   });
 
+  it("keeps a numeric aria-valuenow on the separator before layout measure", () => {
+    render(<Basic />);
+    const handle = screen.getByRole("separator");
+    expect(handle.getAttribute("aria-valuenow")).toMatch(/^\d+$/);
+    expect(handle.getAttribute("aria-valuemin")).toMatch(/^\d+$/);
+    expect(handle.getAttribute("aria-valuemax")).toMatch(/^\d+$/);
+  });
+
   it("propagates the group direction to the group for axis-aware styling", () => {
     const { container } = render(<Basic direction="vertical" />);
     const group = container.querySelector('[data-slot="resizable-panel-group"]');
@@ -50,12 +58,6 @@ describe("Resizable", () => {
 
   it("has no axe violations", async () => {
     const { container } = render(<Basic withHandle />);
-    // The handle gets role="separator" + tabindex from react-resizable-panels,
-    // but its aria-valuenow is only populated once the group measures a real
-    // layout — which jsdom never does — so "aria-required-attr" is an
-    // environment artifact of the isolated mount, not a defect in the wrapper.
-    expect(
-      await axe(container, { rules: { "aria-required-attr": { enabled: false } } }),
-    ).toHaveNoViolations();
+    expect(await axe(container)).toHaveNoViolations();
   });
 });
