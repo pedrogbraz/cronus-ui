@@ -2,13 +2,14 @@
   "name": "sonner",
   "type": "registry:ui",
   "dependencies": [
+    "@cronus-ui/theme@workspace:*",
     "sonner@^2.0.7"
   ],
   "registryDependencies": [],
   "files": [
     {
       "path": "sonner.tsx",
-      "content": "\"use client\";\n\nimport { Toaster as Sonner, toast } from \"sonner\";\n\nexport interface ToasterProps extends React.ComponentProps<typeof Sonner> {}\n\nexport const Toaster = ({ theme = \"dark\", ...props }: ToasterProps) => {\n  return (\n    <Sonner\n      theme={theme}\n      className=\"toaster group\"\n      style={\n        {\n          \"--normal-bg\": \"var(--cronus-surface-floating)\",\n          \"--normal-text\": \"var(--cronus-fg)\",\n          \"--normal-border\": \"var(--cronus-border)\",\n          \"--border-radius\": \"var(--cronus-radius)\",\n        } as React.CSSProperties\n      }\n      {...props}\n    />\n  );\n};\nToaster.displayName = \"Toaster\";\n\nexport { toast };\n",
+      "content": "\"use client\";\n\nimport { useOptionalThemeMode } from \"@cronus-ui/theme\";\nimport { Toaster as Sonner, toast } from \"sonner\";\n\nexport interface ToasterProps extends React.ComponentProps<typeof Sonner> {}\n\nexport const Toaster = ({ theme, ...props }: ToasterProps) => {\n  const mode = useOptionalThemeMode();\n  const resolved = theme ?? (mode === \"light\" ? \"light\" : \"dark\");\n\n  return (\n    <div data-slot=\"toaster\">\n      <Sonner\n        theme={resolved}\n        className=\"toaster group\"\n        style={\n          {\n            \"--normal-bg\": \"var(--cronus-surface-floating)\",\n            \"--normal-text\": \"var(--cronus-fg)\",\n            \"--normal-border\": \"var(--cronus-border)\",\n            \"--border-radius\": \"var(--cronus-radius)\",\n          } as React.CSSProperties\n        }\n        {...props}\n      />\n    </div>\n  );\n};\nToaster.displayName = \"Toaster\";\n\nexport { toast };\n",
       "target": "ui"
     }
   ]
