@@ -6,8 +6,9 @@ React components built on Radix UI, [CVA](https://cva.style/), and Tailwind v4.
 Components are unstyled at the structural level and rendered against semantic
 [`@cronus-ui/tokens`](../tokens) (`bg-primary`, `text-fg-secondary`, `rounded-lg`,
 `shadow-glow`, …), so the entire library re-themes from one token change — and can
-be re-themed live by [`@cronus-ui/theme`](../theme). Every component uses `forwardRef`,
-carries `data-slot` hooks, and ships visible `focus-visible` rings.
+be re-themed live by [`@cronus-ui/theme`](../theme). New components take `ref` as a
+prop (React 19). Existing ones may still use `forwardRef`. Every component
+carries `data-slot` and visible `focus-visible` rings.
 
 Reach for this package when you want production-ready Cronus components as a managed
 dependency. Prefer to own the source instead? Copy components into your project
