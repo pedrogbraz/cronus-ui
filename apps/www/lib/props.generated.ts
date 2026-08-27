@@ -5327,6 +5327,14 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
             "When true (default), the box stays as wide as the longest word so the line does not reflow. Set false when an underline or similar chrome should track the visible word.",
           default: "true",
         },
+        {
+          name: "announce",
+          type: "boolean",
+          required: false,
+          description:
+            "When false, skip the polite live region — use inside a heading so assistive tech is not re-announced every interval.",
+          default: "true",
+        },
       ],
     },
   ],

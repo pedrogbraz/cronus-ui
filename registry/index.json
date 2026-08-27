@@ -1280,6 +1280,7 @@
     "name": "sonner",
     "type": "registry:ui",
     "dependencies": [
+      "@cronus-ui/theme@workspace:*",
       "sonner@^2.0.7"
     ],
     "registryDependencies": []
