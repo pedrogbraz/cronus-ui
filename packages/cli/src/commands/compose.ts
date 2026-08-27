@@ -11,7 +11,12 @@ import {
 import { renderPreview } from "../compose/preview.js";
 import { baseSnapshotDir } from "../compose/reload.js";
 import { renderPlan } from "../compose/render.js";
-import { listTemplates, loadManifestFile, loadTemplate } from "../compose/templates.js";
+import {
+  defaultComposeTemplate,
+  listTemplates,
+  loadManifestFile,
+  loadTemplate,
+} from "../compose/templates.js";
 import {
   CLI_VERSION,
   type ComposedRecord,
@@ -467,11 +472,10 @@ function reportError(err: unknown): void {
   log.err((err as Error).message);
 }
 
-/** TTY-prompt for a template name; `--yes`/non-TTY picks the first available. */
+/** TTY-prompt for a template name; `--yes`/non-TTY picks SaaS (not lexical first). */
 async function promptTemplate(available: string[], yes: boolean): Promise<string> {
-  const first = available[0];
-  if (first === undefined) throw new Error("no app templates are bundled with this CLI");
-  if (yes || !process.stdin.isTTY) return first;
+  const fallback = defaultComposeTemplate(available);
+  if (yes || !process.stdin.isTTY) return fallback;
   const { createInterface } = await import("node:readline/promises");
   const rl = createInterface({ input: process.stdin, output: process.stdout });
   try {
@@ -479,14 +483,16 @@ async function promptTemplate(available: string[], yes: boolean): Promise<string
     available.forEach((name, i) => {
       console.log(`  ${i + 1} ${name}`);
     });
-    const answer = (await rl.question(`(1-${available.length} or name, default ${first}) `)).trim();
-    if (answer.length === 0) return first;
+    const answer = (
+      await rl.question(`(1-${available.length} or name, default ${fallback}) `)
+    ).trim();
+    if (answer.length === 0) return fallback;
     const asNum = Number.parseInt(answer, 10);
     if (Number.isInteger(asNum)) {
       const picked = available[asNum - 1];
       if (picked !== undefined) return picked;
     }
-    return available.includes(answer) ? answer : first;
+    return available.includes(answer) ? answer : fallback;
   } finally {
     rl.close();
   }

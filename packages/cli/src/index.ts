@@ -56,7 +56,7 @@ program
   .description(
     "Generate a full app from a validated template (pages + chrome from installed blocks).",
   )
-  .argument("[template]", "app template name (e.g. store, landing)")
+  .argument("[template]", "app template name (default with -y: saas)")
   .option("-c, --cwd <dir>", "working directory", process.cwd())
   .option("-r, --registry <source>", "registry URL or local directory")
   .option(
