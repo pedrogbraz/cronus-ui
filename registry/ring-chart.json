@@ -1,0 +1,18 @@
+{
+  "name": "ring-chart",
+  "type": "registry:ui",
+  "dependencies": [
+    "recharts@^3.9.2"
+  ],
+  "registryDependencies": [
+    "chart",
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "ring-chart.tsx",
+      "content": "import type { HTMLAttributes } from \"react\";\nimport { Cell, Label, Pie, PieChart } from \"recharts\";\nimport { cn } from \"../lib/cn.js\";\nimport {\n  ChartContainer,\n  type ChartSeries,\n  ChartTooltip,\n  ChartTooltipContent,\n  chartSeriesConfig,\n} from \"./chart.js\";\n\nexport interface RingChartItem {\n  key: string;\n  value: number;\n}\n\nexport interface RingChartProps extends HTMLAttributes<HTMLDivElement> {\n  data: RingChartItem[];\n  series: ChartSeries[];\n  centerLabel?: string;\n}\n\nconst TOTAL = new Intl.NumberFormat(\"en-US\", { notation: \"compact\", maximumFractionDigits: 1 });\n\nexport function RingChart({\n  data,\n  series,\n  centerLabel = \"Total\",\n  className,\n  ...props\n}: RingChartProps) {\n  const config = chartSeriesConfig(series);\n  const rows = data.map((item) => ({ ...item, fill: `var(--color-${item.key})` }));\n  const sum = data.reduce((acc, item) => acc + item.value, 0);\n\n  return (\n    <div data-slot=\"ring-chart\" className={cn(\"h-64 w-full\", className)} {...props}>\n      <ChartContainer config={config} className=\"h-full w-full\">\n        <PieChart accessibilityLayer>\n          <ChartTooltip content={<ChartTooltipContent hideLabel />} />\n          <Pie\n            data={rows}\n            dataKey=\"value\"\n            nameKey=\"key\"\n            innerRadius={64}\n            outerRadius={98}\n            paddingAngle={3}\n            strokeWidth={0}\n          >\n            {rows.map((item) => (\n              <Cell key={item.key} fill={item.fill} />\n            ))}\n            <Label\n              content={({ viewBox }) => {\n                if (!viewBox || !(\"cx\" in viewBox) || !(\"cy\" in viewBox)) return null;\n                return (\n                  <text x={viewBox.cx} y={viewBox.cy} textAnchor=\"middle\" dominantBaseline=\"middle\">\n                    <tspan x={viewBox.cx} y={viewBox.cy} className=\"fill-fg text-2xl font-medium\">\n                      {TOTAL.format(sum)}\n                    </tspan>\n                    <tspan\n                      x={viewBox.cx}\n                      y={(viewBox.cy ?? 0) + 20}\n                      className=\"fill-fg-tertiary text-xs\"\n                    >\n                      {centerLabel}\n                    </tspan>\n                  </text>\n                );\n              }}\n            />\n          </Pie>\n        </PieChart>\n      </ChartContainer>\n    </div>\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}

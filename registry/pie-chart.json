@@ -1,0 +1,18 @@
+{
+  "name": "pie-chart",
+  "type": "registry:ui",
+  "dependencies": [
+    "recharts@^3.9.2"
+  ],
+  "registryDependencies": [
+    "chart",
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "pie-chart.tsx",
+      "content": "import type { HTMLAttributes } from \"react\";\nimport { Cell, Pie, PieChart as RechartsPieChart } from \"recharts\";\nimport { cn } from \"../lib/cn.js\";\nimport {\n  ChartContainer,\n  type ChartSeries,\n  ChartTooltip,\n  ChartTooltipContent,\n  chartSeriesConfig,\n} from \"./chart.js\";\n\nexport interface PieChartItem {\n  key: string;\n  value: number;\n}\n\nexport interface PieChartProps extends HTMLAttributes<HTMLDivElement> {\n  data: PieChartItem[];\n  series: ChartSeries[];\n}\n\nexport function PieChart({ data, series, className, ...props }: PieChartProps) {\n  const config = chartSeriesConfig(series);\n  const rows = data.map((item) => ({\n    ...item,\n    fill: `var(--color-${item.key})`,\n  }));\n\n  return (\n    <div data-slot=\"pie-chart\" className={cn(\"h-64 w-full\", className)} {...props}>\n      <ChartContainer config={config} className=\"h-full w-full\">\n        <RechartsPieChart accessibilityLayer>\n          <ChartTooltip content={<ChartTooltipContent hideLabel />} />\n          <Pie data={rows} dataKey=\"value\" nameKey=\"key\" strokeWidth={0}>\n            {rows.map((item) => (\n              <Cell key={item.key} fill={item.fill} />\n            ))}\n          </Pie>\n        </RechartsPieChart>\n      </ChartContainer>\n    </div>\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}

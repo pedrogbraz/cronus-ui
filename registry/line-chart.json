@@ -1,0 +1,18 @@
+{
+  "name": "line-chart",
+  "type": "registry:ui",
+  "dependencies": [
+    "recharts@^3.9.2"
+  ],
+  "registryDependencies": [
+    "chart",
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "line-chart.tsx",
+      "content": "import type { HTMLAttributes } from \"react\";\nimport { CartesianGrid, Line, LineChart as RechartsLineChart, XAxis } from \"recharts\";\nimport { cn } from \"../lib/cn.js\";\nimport {\n  ChartContainer,\n  ChartCursor,\n  type ChartSeries,\n  ChartTooltip,\n  ChartTooltipContent,\n  chartSeriesConfig,\n} from \"./chart.js\";\n\nexport interface LineChartProps extends HTMLAttributes<HTMLDivElement> {\n  data: Record<string, unknown>[];\n  xKey?: string;\n  series: ChartSeries[];\n  formatValue?: (value: number, name: string) => string;\n}\n\nexport function LineChart({\n  data,\n  xKey = \"date\",\n  series,\n  formatValue,\n  className,\n  ...props\n}: LineChartProps) {\n  const config = chartSeriesConfig(series);\n\n  return (\n    <div data-slot=\"line-chart\" className={cn(\"h-64 w-full\", className)} {...props}>\n      <ChartContainer config={config} className=\"h-full w-full\">\n        <RechartsLineChart accessibilityLayer data={data} margin={{ left: 8, right: 8, top: 8 }}>\n          <CartesianGrid vertical={false} strokeDasharray=\"4 4\" />\n          <XAxis dataKey={xKey} tickLine={false} axisLine={false} tickMargin={12} minTickGap={24} />\n          <ChartTooltip\n            cursor={<ChartCursor labelKey={xKey} />}\n            content={<ChartTooltipContent formatValue={formatValue} />}\n          />\n          {series.map((item) => (\n            <Line\n              key={item.key}\n              type=\"monotone\"\n              dataKey={item.key}\n              stroke={`var(--color-${item.key})`}\n              strokeWidth={2}\n              dot={false}\n              activeDot={{ r: 4, strokeWidth: 0 }}\n              animationDuration={1100}\n              animationEasing=\"ease-out\"\n            />\n          ))}\n        </RechartsLineChart>\n      </ChartContainer>\n    </div>\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}

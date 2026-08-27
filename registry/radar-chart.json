@@ -1,0 +1,18 @@
+{
+  "name": "radar-chart",
+  "type": "registry:ui",
+  "dependencies": [
+    "recharts@^3.9.2"
+  ],
+  "registryDependencies": [
+    "chart",
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "radar-chart.tsx",
+      "content": "import type { HTMLAttributes } from \"react\";\nimport { PolarAngleAxis, PolarGrid, Radar, RadarChart as RechartsRadarChart } from \"recharts\";\nimport { cn } from \"../lib/cn.js\";\nimport {\n  ChartContainer,\n  type ChartSeries,\n  ChartTooltip,\n  ChartTooltipContent,\n  chartSeriesConfig,\n} from \"./chart.js\";\n\nexport interface RadarChartProps extends HTMLAttributes<HTMLDivElement> {\n  data: Record<string, unknown>[];\n  angleKey?: string;\n  series: ChartSeries[];\n}\n\nexport function RadarChart({\n  data,\n  angleKey = \"metric\",\n  series,\n  className,\n  ...props\n}: RadarChartProps) {\n  const config = chartSeriesConfig(series);\n\n  return (\n    <div data-slot=\"radar-chart\" className={cn(\"h-64 w-full\", className)} {...props}>\n      <ChartContainer config={config} className=\"h-full w-full\">\n        <RechartsRadarChart data={data} cx=\"50%\" cy=\"50%\" outerRadius=\"70%\">\n          <PolarGrid />\n          <PolarAngleAxis dataKey={angleKey} />\n          <ChartTooltip content={<ChartTooltipContent />} />\n          {series.map((item) => (\n            <Radar\n              key={item.key}\n              dataKey={item.key}\n              stroke={`var(--color-${item.key})`}\n              fill={`var(--color-${item.key})`}\n              fillOpacity={0.25}\n            />\n          ))}\n        </RechartsRadarChart>\n      </ChartContainer>\n    </div>\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}

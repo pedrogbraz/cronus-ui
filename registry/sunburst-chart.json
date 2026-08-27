@@ -1,0 +1,15 @@
+{
+  "name": "sunburst-chart",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "sunburst-chart.tsx",
+      "content": "import { type HTMLAttributes, useMemo } from \"react\";\nimport { cn } from \"../lib/cn.js\";\n\nexport interface SunburstNode {\n  name: string;\n  value?: number;\n  children?: SunburstNode[];\n}\n\nexport interface SunburstChartProps extends HTMLAttributes<HTMLDivElement> {\n  data: SunburstNode[];\n}\n\nfunction polar(cx: number, cy: number, r: number, a: number) {\n  return [cx + r * Math.cos(a), cy + r * Math.sin(a)] as const;\n}\n\nfunction arcPath(cx: number, cy: number, r0: number, r1: number, a0: number, a1: number) {\n  const large = a1 - a0 > Math.PI ? 1 : 0;\n  const [x0, y0] = polar(cx, cy, r1, a0);\n  const [x1, y1] = polar(cx, cy, r1, a1);\n  const [x2, y2] = polar(cx, cy, r0, a1);\n  const [x3, y3] = polar(cx, cy, r0, a0);\n  return `M ${x0} ${y0} A ${r1} ${r1} 0 ${large} 1 ${x1} ${y1} L ${x2} ${y2} A ${r0} ${r0} 0 ${large} 0 ${x3} ${y3} Z`;\n}\n\nexport function SunburstChart({ data, className, ...props }: SunburstChartProps) {\n  const slices = useMemo(() => {\n    const total = data.reduce((acc, node) => acc + (node.value ?? 0), 0) || 1;\n    let angle = -Math.PI / 2;\n    const out: { d: string; color: string; name: string }[] = [];\n    data.forEach((node, index) => {\n      const span = ((node.value ?? 0) / total) * Math.PI * 2;\n      out.push({\n        d: arcPath(100, 100, 36, 64, angle, angle + span),\n        color: `var(--cronus-chart-${(index % 5) + 1})`,\n        name: node.name,\n      });\n      const kids = node.children ?? [];\n      const kidTotal = kids.reduce((acc, child) => acc + (child.value ?? 0), 0) || 1;\n      let inner = angle;\n      for (const child of kids) {\n        const kidSpan = ((child.value ?? 0) / kidTotal) * span;\n        out.push({\n          d: arcPath(100, 100, 66, 94, inner, inner + kidSpan),\n          color: `var(--cronus-chart-${((index + 1) % 5) + 1})`,\n          name: child.name,\n        });\n        inner += kidSpan;\n      }\n      angle += span;\n    });\n    return out;\n  }, [data]);\n\n  return (\n    <div data-slot=\"sunburst-chart\" className={cn(\"h-64 w-full\", className)} {...props}>\n      <svg viewBox=\"0 0 200 200\" className=\"mx-auto h-full\" role=\"img\" aria-label=\"Sunburst chart\">\n        {slices.map((slice) => (\n          <path key={`${slice.name}-${slice.d.slice(0, 24)}`} d={slice.d} fill={slice.color}>\n            <title>{slice.name}</title>\n          </path>\n        ))}\n      </svg>\n    </div>\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}

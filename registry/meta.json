@@ -15,15 +15,33 @@
           "name": "Story",
           "description": "Mission statement, stats row, founder quote, and a milestone timeline.",
           "item": "about",
-          "exportName": "AboutStoryBlock"
+          "exportName": "AboutStoryBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "content"
+          ]
         },
         {
           "id": "values",
           "name": "Values",
           "description": "A values card grid with icons and a token-built culture collage.",
           "item": "about--values",
-          "exportName": "AboutValuesBlock"
+          "exportName": "AboutValuesBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "content"
+          ]
         }
+      ],
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "content"
       ]
     },
     "account-security": {
@@ -40,15 +58,36 @@
           "name": "Two-factor setup",
           "description": "Status card plus QR pairing, setup key, and one-time backup codes.",
           "item": "account-security",
-          "exportName": "AccountSecurityTwoFactorBlock"
+          "exportName": "AccountSecurityTwoFactorBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "account",
+            "settings"
+          ]
         },
         {
           "id": "password",
           "name": "Password & danger zone",
           "description": "Password change with strength meter, recovery email, and a danger zone.",
           "item": "account-security--password",
-          "exportName": "AccountSecurityPasswordBlock"
+          "exportName": "AccountSecurityPasswordBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "account",
+            "settings"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "account",
+        "settings"
       ]
     },
     "activity-feed": {
@@ -59,7 +98,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "feedback"
+      ]
     },
     "ai-response": {
       "title": "AI Response",
@@ -69,7 +114,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "ai"
+      ]
     },
     "analytics": {
       "title": "Analytics",
@@ -85,15 +136,36 @@
           "name": "Traffic overview",
           "description": "KPI metrics with sparklines, a 30-day traffic trend and top pages and referrers breakdowns.",
           "item": "analytics",
-          "exportName": "AnalyticsOverviewBlock"
+          "exportName": "AnalyticsOverviewBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "dashboard",
+            "data"
+          ]
         },
         {
           "id": "engagement",
           "name": "Engagement cohorts",
           "description": "Retention stat cards plus a weekly cohort heat grid built from token-colored cells.",
           "item": "analytics--engagement",
-          "exportName": "AnalyticsEngagementBlock"
+          "exportName": "AnalyticsEngagementBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "dashboard",
+            "data"
+          ]
         }
+      ],
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "dashboard",
+        "data"
       ]
     },
     "api-keys": {
@@ -110,15 +182,36 @@
           "name": "Key list",
           "description": "Masked keys with reveal and copy, scope badges, and usage metadata.",
           "item": "api-keys",
-          "exportName": "ApiKeysListBlock"
+          "exportName": "ApiKeysListBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "account",
+            "settings"
+          ]
         },
         {
           "id": "create",
           "name": "Create key",
           "description": "Scoped key creation with expiry and a one-time generated-key reveal.",
           "item": "api-keys--create",
-          "exportName": "ApiKeysCreateBlock"
+          "exportName": "ApiKeysCreateBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "account",
+            "settings"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "account",
+        "settings"
       ]
     },
     "app-shell-chrome": {
@@ -136,7 +229,15 @@
           "literal": "Cronus"
         }
       ],
-      "variants": []
+      "variants": [],
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "chrome",
+        "nav",
+        "layout"
+      ]
     },
     "audit-log": {
       "title": "Audit log",
@@ -152,15 +253,33 @@
           "name": "Day-grouped timeline",
           "description": "A grouped-by-day security feed with actor avatars, emphasized names and severity badges.",
           "item": "audit-log",
-          "exportName": "AuditLogTimelineBlock"
+          "exportName": "AuditLogTimelineBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "admin"
+          ]
         },
         {
           "id": "table",
           "name": "Filterable table",
           "description": "A filterable event table with type badges, actors, IP addresses and detail affordances.",
           "item": "audit-log--table",
-          "exportName": "AuditLogTableBlock"
+          "exportName": "AuditLogTableBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "admin"
+          ]
         }
+      ],
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "admin"
       ]
     },
     "billing": {
@@ -177,15 +296,33 @@
           "name": "Subscription",
           "description": "Current plan, usage meters, payment method, and a downloadable invoice history.",
           "item": "billing",
-          "exportName": "SubscriptionBlock"
+          "exportName": "SubscriptionBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "billing"
+          ]
         },
         {
           "id": "plans",
           "name": "Plan selector",
           "description": "Three-tier plan picker with a highlighted popular plan and a monthly/annual toggle.",
           "item": "billing--plans",
-          "exportName": "PlansBlock"
+          "exportName": "PlansBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "billing"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "billing"
       ]
     },
     "blog": {
@@ -202,15 +339,33 @@
           "name": "Featured grid",
           "description": "A featured hero post above a responsive three-column post grid.",
           "item": "blog",
-          "exportName": "BlogGridBlock"
+          "exportName": "BlogGridBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "content"
+          ]
         },
         {
           "id": "list",
           "name": "Editorial list",
           "description": "An editorial list layout with larger typography and horizontal cards.",
           "item": "blog--list",
-          "exportName": "BlogListBlock"
+          "exportName": "BlogListBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "content"
+          ]
         }
+      ],
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "content"
       ]
     },
     "blog-post": {
@@ -227,15 +382,33 @@
           "name": "Article",
           "description": "A single-column article with token-styled prose and a share row.",
           "item": "blog-post",
-          "exportName": "BlogPostArticleBlock"
+          "exportName": "BlogPostArticleBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "content"
+          ]
         },
         {
           "id": "with-sidebar",
           "name": "With sidebar",
           "description": "The article beside a sticky table of contents and a newsletter card.",
           "item": "blog-post--with-sidebar",
-          "exportName": "BlogPostSidebarBlock"
+          "exportName": "BlogPostSidebarBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "content"
+          ]
         }
+      ],
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "content"
       ]
     },
     "cancel-flow": {
@@ -246,7 +419,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "billing"
+      ]
     },
     "cart": {
       "title": "Cart",
@@ -262,15 +441,33 @@
           "name": "Cart page",
           "description": "Full cart page with editable line items and an order summary.",
           "item": "cart",
-          "exportName": "CartPageBlock"
+          "exportName": "CartPageBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce"
+          ]
         },
         {
           "id": "drawer",
           "name": "Drawer",
           "description": "Slide-over mini cart with a free-shipping meter and quick checkout.",
           "item": "cart--drawer",
-          "exportName": "CartDrawerBlock"
+          "exportName": "CartDrawerBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "commerce"
       ]
     },
     "changelog": {
@@ -281,7 +478,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "marketing"
+      ]
     },
     "chat-thread": {
       "title": "Chat Thread",
@@ -291,7 +494,14 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "ai",
+        "social"
+      ]
     },
     "checkout": {
       "title": "Checkout",
@@ -307,22 +517,50 @@
           "name": "Card payment",
           "description": "Two-column checkout with an order summary beside a card payment form.",
           "item": "checkout",
-          "exportName": "CheckoutBlock"
+          "exportName": "CheckoutBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce",
+            "billing"
+          ]
         },
         {
           "id": "one-page",
           "name": "One page",
           "description": "Single-page checkout stacking contact, shipping, and payment beside a sticky order summary.",
           "item": "checkout--one-page",
-          "exportName": "CheckoutOnePageBlock"
+          "exportName": "CheckoutOnePageBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce",
+            "billing"
+          ]
         },
         {
           "id": "multi-step",
           "name": "Multi-step",
           "description": "Wizard checkout with a shipping–payment–review stepper and back/continue navigation.",
           "item": "checkout--multi-step",
-          "exportName": "CheckoutMultiStepBlock"
+          "exportName": "CheckoutMultiStepBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce",
+            "billing"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "commerce",
+        "billing"
       ]
     },
     "comment-thread": {
@@ -333,7 +571,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "social"
+      ]
     },
     "contact-form": {
       "title": "Contact Form",
@@ -343,7 +587,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "cta": {
       "title": "Call to Action",
@@ -359,22 +609,46 @@
           "name": "Gradient panel",
           "description": "Contained gradient panel with an email-capture form and dotted texture.",
           "item": "cta",
-          "exportName": "CtaBlock"
+          "exportName": "CtaBlock",
+          "style": "editorial",
+          "palette": "aurora",
+          "motion": "none",
+          "intents": [
+            "marketing"
+          ]
         },
         {
           "id": "banner",
           "name": "Gradient banner",
           "description": "Full-width gradient band with a display headline and dual CTAs.",
           "item": "cta--banner",
-          "exportName": "CtaBannerBlock"
+          "exportName": "CtaBannerBlock",
+          "style": "editorial",
+          "palette": "aurora",
+          "motion": "none",
+          "intents": [
+            "marketing"
+          ]
         },
         {
           "id": "split-visual",
           "name": "Split with visual",
           "description": "Copy and checkmark bullets beside a token-built product mock panel.",
           "item": "cta--split-visual",
-          "exportName": "CtaSplitVisualBlock"
+          "exportName": "CtaSplitVisualBlock",
+          "style": "editorial",
+          "palette": "aurora",
+          "motion": "smooth",
+          "intents": [
+            "marketing"
+          ]
         }
+      ],
+      "style": "editorial",
+      "palette": "aurora",
+      "motion": "none",
+      "intents": [
+        "marketing"
       ]
     },
     "dashboard": {
@@ -391,15 +665,33 @@
           "name": "Analytics dashboard",
           "description": "A full application shell — sidebar nav, search topbar, KPI cards, a revenue chart and a recent-activity table.",
           "item": "dashboard",
-          "exportName": "DashboardAnalyticsBlock"
+          "exportName": "DashboardAnalyticsBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "dashboard"
+          ]
         },
         {
           "id": "admin-overview",
           "name": "Admin overview",
           "description": "An admin console with an icon-collapsible sidebar, status cards, a signups trend and a larger users & orders table.",
           "item": "dashboard--admin-overview",
-          "exportName": "DashboardAdminOverviewBlock"
+          "exportName": "DashboardAdminOverviewBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "dashboard"
+          ]
         }
+      ],
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "dashboard"
       ]
     },
     "email-receipt": {
@@ -410,7 +702,13 @@
       "kind": "email",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "email"
+      ]
     },
     "email-verify": {
       "title": "Verify Email",
@@ -420,7 +718,13 @@
       "kind": "email",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "email"
+      ]
     },
     "email-welcome": {
       "title": "Welcome Email",
@@ -430,7 +734,13 @@
       "kind": "email",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "email"
+      ]
     },
     "empty-state": {
       "title": "Empty State",
@@ -446,15 +756,33 @@
           "name": "Empty list",
           "description": "A friendly empty list with an illustration, guidance, and creation CTAs.",
           "item": "empty-state",
-          "exportName": "EmptyStateBlock"
+          "exportName": "EmptyStateBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "layout"
+          ]
         },
         {
           "id": "error",
           "name": "Error / not found",
           "description": "An error state for failed loads or 404s, with retry and recovery actions.",
           "item": "empty-state--error",
-          "exportName": "EmptyStateErrorBlock"
+          "exportName": "EmptyStateErrorBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "layout"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "layout"
       ]
     },
     "error-state": {
@@ -465,7 +793,14 @@
       "kind": "page",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "empty",
+        "feedback"
+      ]
     },
     "faq": {
       "title": "FAQ",
@@ -481,15 +816,33 @@
           "name": "Centered accordion",
           "description": "A centered, width-constrained accordion of common questions and answers.",
           "item": "faq",
-          "exportName": "FaqBlock"
+          "exportName": "FaqBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "marketing"
+          ]
         },
         {
           "id": "split",
           "name": "Split with support",
           "description": "A two-column layout pairing the questions with a contact-support panel.",
           "item": "faq--split",
-          "exportName": "FaqSplitBlock"
+          "exportName": "FaqSplitBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "marketing"
+          ]
         }
+      ],
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "marketing"
       ]
     },
     "feature-grid": {
@@ -506,15 +859,33 @@
           "name": "Card grid",
           "description": "Six balanced feature cards for broad capability overviews.",
           "item": "feature-grid",
-          "exportName": "FeatureGridBlock"
+          "exportName": "FeatureGridBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "marketing"
+          ]
         },
         {
           "id": "bento",
           "name": "Bento grid",
           "description": "Editorial bento layout for showcasing a platform narrative.",
           "item": "feature-grid--bento",
-          "exportName": "BentoFeatureBlock"
+          "exportName": "BentoFeatureBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "marketing"
+          ]
         }
+      ],
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "marketing"
       ]
     },
     "feature-matrix": {
@@ -525,7 +896,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "marketing"
+      ]
     },
     "feedback-form": {
       "title": "Feedback Form",
@@ -535,7 +912,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "filter-bar": {
       "title": "Filter Bar",
@@ -551,8 +934,20 @@
           "name": "Search and filters",
           "description": "Search input, status select, owner combobox, list/grid toggle, removable filter chips, and a result count.",
           "item": "filter-bar",
-          "exportName": "FilterBarBlock"
+          "exportName": "FilterBarBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "layout"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "layout"
       ]
     },
     "footer": {
@@ -576,22 +971,50 @@
           "name": "Columns with newsletter",
           "description": "Brand column, three link columns and a newsletter panel.",
           "item": "footer",
-          "exportName": "FooterBlock"
+          "exportName": "FooterBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "chrome",
+            "marketing"
+          ]
         },
         {
           "id": "mega",
           "name": "Mega",
           "description": "Five link columns, newsletter, social icons and a live-status legal row.",
           "item": "footer--mega",
-          "exportName": "FooterMegaBlock"
+          "exportName": "FooterMegaBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "chrome",
+            "marketing"
+          ]
         },
         {
           "id": "minimal",
           "name": "Minimal",
           "description": "A single-row footer with logo, three links and copyright.",
           "item": "footer--minimal",
-          "exportName": "FooterMinimalBlock"
+          "exportName": "FooterMinimalBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "chrome",
+            "marketing"
+          ]
         }
+      ],
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "chrome",
+        "marketing"
       ]
     },
     "forgot-password": {
@@ -608,15 +1031,36 @@
           "name": "Request link",
           "description": "Email entry that sends a one-time password reset link.",
           "item": "forgot-password",
-          "exportName": "ForgotPasswordBlock"
+          "exportName": "ForgotPasswordBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "auth",
+            "form"
+          ]
         },
         {
           "id": "sent",
           "name": "Link sent",
           "description": "Confirmation that a reset link was emailed, with a resend action.",
           "item": "forgot-password--sent",
-          "exportName": "ForgotPasswordSentBlock"
+          "exportName": "ForgotPasswordSentBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "auth",
+            "form"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "auth",
+        "form"
       ]
     },
     "hero": {
@@ -633,29 +1077,59 @@
           "name": "Centered launch",
           "description": "Classic centered SaaS hero with trust proof and two CTAs.",
           "item": "hero",
-          "exportName": "HeroBlock"
+          "exportName": "HeroBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "marketing"
+          ]
         },
         {
           "id": "split",
           "name": "Split dashboard",
           "description": "Two-column hero with a compact product-quality panel.",
           "item": "hero--split",
-          "exportName": "SplitHeroBlock"
+          "exportName": "SplitHeroBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "marketing"
+          ]
         },
         {
           "id": "compact",
           "name": "Compact registry",
           "description": "Contained hero card for docs, registries and template libraries.",
           "item": "hero--compact",
-          "exportName": "CompactHeroBlock"
+          "exportName": "CompactHeroBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "marketing"
+          ]
         },
         {
           "id": "atmosphere",
           "name": "Atmosphere",
           "description": "Centered launch hero over a receding grid floor, shooting stars, and a typing headline.",
           "item": "hero--atmosphere",
-          "exportName": "AtmosphereHeroBlock"
+          "exportName": "AtmosphereHeroBlock",
+          "style": "editorial",
+          "palette": "aurora",
+          "motion": "cinematic",
+          "intents": [
+            "marketing"
+          ]
         }
+      ],
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "marketing"
       ]
     },
     "integrations": {
@@ -666,7 +1140,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "settings"
+      ]
     },
     "invoice": {
       "title": "Invoice",
@@ -682,15 +1162,33 @@
           "name": "Detailed invoice",
           "description": "Full invoice with billing parties, line items, totals, and a download action.",
           "item": "invoice",
-          "exportName": "InvoiceBlock"
+          "exportName": "InvoiceBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce"
+          ]
         },
         {
           "id": "receipt",
           "name": "Receipt",
           "description": "Narrow thermal-style receipt with mono totals, dashed separators, and a paid stamp.",
           "item": "invoice--receipt",
-          "exportName": "InvoiceReceiptBlock"
+          "exportName": "InvoiceReceiptBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "commerce"
       ]
     },
     "kanban-board": {
@@ -707,15 +1205,33 @@
           "name": "Sprint board",
           "description": "Four columns of labeled cards with assignees, due dates, comment counts and add actions.",
           "item": "kanban-board",
-          "exportName": "KanbanBoardBlock"
+          "exportName": "KanbanBoardBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "admin"
+          ]
         },
         {
           "id": "compact",
           "name": "Compact WIP board",
           "description": "A dense single-line task list with per-column WIP limits and at-limit indicators.",
           "item": "kanban-board--compact",
-          "exportName": "KanbanBoardCompactBlock"
+          "exportName": "KanbanBoardCompactBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "admin"
+          ]
         }
+      ],
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "admin"
       ]
     },
     "login": {
@@ -732,29 +1248,64 @@
           "name": "Classic card",
           "description": "Centered email and password card with social sign-in shortcuts.",
           "item": "login",
-          "exportName": "LoginBlock"
+          "exportName": "LoginBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "login",
+            "auth"
+          ]
         },
         {
           "id": "split",
           "name": "Split panel",
           "description": "Brand gradient panel with a customer testimonial beside the sign-in form.",
           "item": "login--split",
-          "exportName": "LoginSplitBlock"
+          "exportName": "LoginSplitBlock",
+          "style": "editorial",
+          "palette": "aurora",
+          "motion": "smooth",
+          "intents": [
+            "login",
+            "auth"
+          ]
         },
         {
           "id": "social-first",
           "name": "Social first",
           "description": "Google, GitHub, and Apple buttons stacked above the email fallback.",
           "item": "login--social-first",
-          "exportName": "LoginSocialFirstBlock"
+          "exportName": "LoginSocialFirstBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "snappy",
+          "intents": [
+            "login",
+            "auth"
+          ]
         },
         {
           "id": "minimal",
           "name": "Minimal",
           "description": "Ultra-clean logo mark, email, and continue button with quiet footer links.",
           "item": "login--minimal",
-          "exportName": "LoginMinimalBlock"
+          "exportName": "LoginMinimalBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "login",
+            "auth"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "login",
+        "auth"
       ]
     },
     "logo-cloud": {
@@ -771,15 +1322,33 @@
           "name": "Trust grid",
           "description": "A quiet responsive grid of customer wordmarks under a trust heading.",
           "item": "logo-cloud",
-          "exportName": "LogoCloudGridBlock"
+          "exportName": "LogoCloudGridBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "content"
+          ]
         },
         {
           "id": "marquee",
           "name": "Dual marquee",
           "description": "Two counter-scrolling, pause-on-hover marquee rows of customer wordmarks.",
           "item": "logo-cloud--marquee",
-          "exportName": "LogoCloudMarqueeBlock"
+          "exportName": "LogoCloudMarqueeBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "smooth",
+          "intents": [
+            "content"
+          ]
         }
+      ],
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "content"
       ]
     },
     "magic-link": {
@@ -796,15 +1365,36 @@
           "name": "Request link",
           "description": "Passwordless email entry that sends a single-use sign-in link.",
           "item": "magic-link",
-          "exportName": "MagicLinkBlock"
+          "exportName": "MagicLinkBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "auth",
+            "form"
+          ]
         },
         {
           "id": "sent",
           "name": "Link sent",
           "description": "Confirmation that a magic sign-in link was emailed, with a resend action.",
           "item": "magic-link--sent",
-          "exportName": "MagicLinkSentBlock"
+          "exportName": "MagicLinkSentBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "auth",
+            "form"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "auth",
+        "form"
       ]
     },
     "maintenance": {
@@ -815,7 +1405,14 @@
       "kind": "page",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "empty",
+        "feedback"
+      ]
     },
     "manage-subscription": {
       "title": "Manage Subscription",
@@ -825,7 +1422,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "billing"
+      ]
     },
     "navbar": {
       "title": "Navbar",
@@ -848,22 +1451,50 @@
           "name": "Pill with actions",
           "description": "Rounded navbar with brand badge, primary links and sign-in actions.",
           "item": "navbar",
-          "exportName": "NavbarBlock"
+          "exportName": "NavbarBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "nav",
+            "chrome"
+          ]
         },
         {
           "id": "centered",
           "name": "Centered pill",
           "description": "Floating pill navbar with centered links on a blurred overlay surface.",
           "item": "navbar--centered",
-          "exportName": "NavbarCenteredBlock"
+          "exportName": "NavbarCenteredBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "nav",
+            "chrome"
+          ]
         },
         {
           "id": "with-announcement",
           "name": "With announcement",
           "description": "Announcement bar with a badge and link above the navigation row.",
           "item": "navbar--with-announcement",
-          "exportName": "NavbarAnnouncementBlock"
+          "exportName": "NavbarAnnouncementBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "nav",
+            "chrome"
+          ]
         }
+      ],
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "nav",
+        "chrome"
       ]
     },
     "not-found": {
@@ -874,7 +1505,14 @@
       "kind": "page",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "empty",
+        "feedback"
+      ]
     },
     "notification-panel": {
       "title": "Notification Panel",
@@ -884,7 +1522,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "feedback"
+      ]
     },
     "notification-preferences": {
       "title": "Notification preferences",
@@ -900,15 +1544,36 @@
           "name": "Channel matrix",
           "description": "Per-event switches across email, push, and SMS, grouped by area.",
           "item": "notification-preferences",
-          "exportName": "NotificationPreferencesMatrixBlock"
+          "exportName": "NotificationPreferencesMatrixBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "account",
+            "settings"
+          ]
         },
         {
           "id": "simple",
           "name": "Simple toggles",
           "description": "Grouped email toggles with a plain-language description per row.",
           "item": "notification-preferences--simple",
-          "exportName": "NotificationPreferencesSimpleBlock"
+          "exportName": "NotificationPreferencesSimpleBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "account",
+            "settings"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "account",
+        "settings"
       ]
     },
     "nps-survey": {
@@ -919,7 +1584,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "order-history": {
       "title": "Order history",
@@ -935,15 +1606,33 @@
           "name": "Table",
           "description": "Dense orders table with status badges and a per-row actions menu.",
           "item": "order-history",
-          "exportName": "OrderHistoryTableBlock"
+          "exportName": "OrderHistoryTableBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce"
+          ]
         },
         {
           "id": "cards",
           "name": "Cards",
           "description": "Stacked order cards with item thumbnails and one-tap reorder.",
           "item": "order-history--cards",
-          "exportName": "OrderHistoryCardsBlock"
+          "exportName": "OrderHistoryCardsBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "commerce"
       ]
     },
     "order-tracking": {
@@ -960,22 +1649,46 @@
           "name": "In transit",
           "description": "Shipment timeline with the current leg highlighted and courier info.",
           "item": "order-tracking",
-          "exportName": "OrderTrackingBlock"
+          "exportName": "OrderTrackingBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce"
+          ]
         },
         {
           "id": "delivered",
           "name": "Delivered",
           "description": "Completed timeline with a delivery confirmation and a review prompt.",
           "item": "order-tracking--delivered",
-          "exportName": "OrderDeliveredBlock"
+          "exportName": "OrderDeliveredBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce"
+          ]
         },
         {
           "id": "delayed",
           "name": "Delayed",
           "description": "Late shipment with a warning notice, a new estimate and support actions.",
           "item": "order-tracking--delayed",
-          "exportName": "OrderDelayedBlock"
+          "exportName": "OrderDelayedBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "commerce"
       ]
     },
     "otp": {
@@ -986,7 +1699,14 @@
       "kind": "page",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "auth",
+        "form"
+      ]
     },
     "page-header": {
       "title": "Page Header",
@@ -1002,15 +1722,33 @@
           "name": "Title and actions",
           "description": "Breadcrumb, title with status badge, supporting copy, and primary/secondary actions.",
           "item": "page-header",
-          "exportName": "PageHeaderBlock"
+          "exportName": "PageHeaderBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "layout"
+          ]
         },
         {
           "id": "with-tabs",
           "name": "Title and tabs",
           "description": "Adds a section tab row beneath the header for switching detail views.",
           "item": "page-header--with-tabs",
-          "exportName": "PageHeaderTabsBlock"
+          "exportName": "PageHeaderTabsBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "layout"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "layout"
       ]
     },
     "payment-method": {
@@ -1027,15 +1765,33 @@
           "name": "Select method",
           "description": "Pick a saved card from a radio list, mark a default, or add a new payment method.",
           "item": "payment-method",
-          "exportName": "PaymentMethodBlock"
+          "exportName": "PaymentMethodBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "billing"
+          ]
         },
         {
           "id": "add-card",
           "name": "Add card",
           "description": "A new-card form with cardholder, number, expiry, CVC, and a set-as-default toggle.",
           "item": "payment-method--add-card",
-          "exportName": "PaymentMethodAddBlock"
+          "exportName": "PaymentMethodAddBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "billing"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "billing"
       ]
     },
     "payouts": {
@@ -1046,7 +1802,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "commerce"
+      ]
     },
     "post-card": {
       "title": "Post Card",
@@ -1056,7 +1818,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "social"
+      ]
     },
     "pricing": {
       "title": "Pricing",
@@ -1072,22 +1840,46 @@
           "name": "Three tiers",
           "description": "A responsive three-plan grid with a highlighted popular tier.",
           "item": "pricing",
-          "exportName": "PricingBlock"
+          "exportName": "PricingBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "marketing"
+          ]
         },
         {
           "id": "toggle",
           "name": "Plan toggle",
           "description": "Two-plan pricing with a monthly/annual segmented control.",
           "item": "pricing--toggle",
-          "exportName": "PricingToggleBlock"
+          "exportName": "PricingToggleBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "snappy",
+          "intents": [
+            "marketing"
+          ]
         },
         {
           "id": "usage",
           "name": "Usage based",
           "description": "A metered pricing layout for API, infra and event-based products.",
           "item": "pricing--usage",
-          "exportName": "UsagePricingBlock"
+          "exportName": "UsagePricingBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "marketing"
+          ]
         }
+      ],
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "marketing"
       ]
     },
     "product-detail": {
@@ -1104,22 +1896,46 @@
           "name": "Standard",
           "description": "Full product page with variant selectors, a quantity stepper and detail accordions.",
           "item": "product-detail",
-          "exportName": "ProductDetailBlock"
+          "exportName": "ProductDetailBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce"
+          ]
         },
         {
           "id": "gallery",
           "name": "Gallery",
           "description": "Thumbnail rail beside the main image, with a quick spec strip.",
           "item": "product-detail--gallery",
-          "exportName": "ProductDetailGalleryBlock"
+          "exportName": "ProductDetailGalleryBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce"
+          ]
         },
         {
           "id": "minimal",
           "name": "Minimal",
           "description": "Centered single-column layout, ideal for one-product stores.",
           "item": "product-detail--minimal",
-          "exportName": "ProductDetailMinimalBlock"
+          "exportName": "ProductDetailMinimalBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "commerce"
       ]
     },
     "product-grid": {
@@ -1136,22 +1952,50 @@
           "name": "Storefront grid",
           "description": "Three-column storefront grid with product art, pricing, and buy actions.",
           "item": "product-grid",
-          "exportName": "ProductGridBlock"
+          "exportName": "ProductGridBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce",
+            "marketing"
+          ]
         },
         {
           "id": "with-filters",
           "name": "With filters",
           "description": "Catalog layout with category, price, and color filters beside a sortable product grid.",
           "item": "product-grid--with-filters",
-          "exportName": "ProductGridWithFiltersBlock"
+          "exportName": "ProductGridWithFiltersBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce",
+            "marketing"
+          ]
         },
         {
           "id": "showcase",
           "name": "Editorial showcase",
           "description": "Hero product feature with an asymmetric grid and overlay shop actions.",
           "item": "product-grid--showcase",
-          "exportName": "ProductGridShowcaseBlock"
+          "exportName": "ProductGridShowcaseBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce",
+            "marketing"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "commerce",
+        "marketing"
       ]
     },
     "profile-card": {
@@ -1162,7 +2006,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "social"
+      ]
     },
     "prompt-box": {
       "title": "Prompt Box",
@@ -1172,7 +2022,14 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "ai",
+        "form"
+      ]
     },
     "reviews": {
       "title": "Reviews",
@@ -1188,15 +2045,33 @@
           "name": "Summary",
           "description": "Aggregate rating with a distribution chart next to the top reviews.",
           "item": "reviews",
-          "exportName": "ReviewsSummaryBlock"
+          "exportName": "ReviewsSummaryBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce"
+          ]
         },
         {
           "id": "compact",
           "name": "Compact grid",
           "description": "Dense grid of short reviews for landing and product pages.",
           "item": "reviews--compact",
-          "exportName": "ReviewsCompactBlock"
+          "exportName": "ReviewsCompactBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "commerce"
       ]
     },
     "sessions": {
@@ -1213,15 +2088,36 @@
           "name": "Device list",
           "description": "Signed-in devices with client, location, last activity, and revoke.",
           "item": "sessions",
-          "exportName": "SessionsListBlock"
+          "exportName": "SessionsListBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "account",
+            "settings"
+          ]
         },
         {
           "id": "table",
           "name": "Selectable table",
           "description": "Session table with bulk selection and a revoke-selected action.",
           "item": "sessions--table",
-          "exportName": "SessionsTableBlock"
+          "exportName": "SessionsTableBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "account",
+            "settings"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "account",
+        "settings"
       ]
     },
     "settings": {
@@ -1232,7 +2128,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "dashboard"
+      ]
     },
     "setup-checklist": {
       "title": "Setup Checklist",
@@ -1242,7 +2144,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "onboarding"
+      ]
     },
     "setup-wizard": {
       "title": "Setup Wizard",
@@ -1252,7 +2160,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "onboarding"
+      ]
     },
     "signup": {
       "title": "Sign Up",
@@ -1268,22 +2182,50 @@
           "name": "Classic card",
           "description": "Centered create-account card with social sign-up shortcuts.",
           "item": "signup",
-          "exportName": "SignupBlock"
+          "exportName": "SignupBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "signup",
+            "auth"
+          ]
         },
         {
           "id": "split-proof",
           "name": "Split with proof",
           "description": "Create-account form beside customer logos, a star rating, and short quotes.",
           "item": "signup--split-proof",
-          "exportName": "SignupSplitProofBlock"
+          "exportName": "SignupSplitProofBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "signup",
+            "auth"
+          ]
         },
         {
           "id": "with-plan",
           "name": "With plan summary",
           "description": "Signup form beside the selected plan, trial terms, and first-charge summary.",
           "item": "signup--with-plan",
-          "exportName": "SignupWithPlanBlock"
+          "exportName": "SignupWithPlanBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "signup",
+            "auth"
+          ]
         }
+      ],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "signup",
+        "auth"
       ]
     },
     "stats": {
@@ -1300,22 +2242,46 @@
           "name": "KPI grid",
           "description": "Four-card dashboard metrics with icons, deltas, and contextual hints.",
           "item": "stats",
-          "exportName": "StatsBlock"
+          "exportName": "StatsBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "dashboard"
+          ]
         },
         {
           "id": "compact-summary",
           "name": "Compact summary",
           "description": "A single-card metric summary for dense dashboards and overview panels.",
           "item": "stats--compact-summary",
-          "exportName": "StatsCompactBlock"
+          "exportName": "StatsCompactBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "dashboard"
+          ]
         },
         {
           "id": "pipeline-funnel",
           "name": "Pipeline funnel",
           "description": "A segmented stats card for activation, pipeline, or conversion steps.",
           "item": "stats--pipeline-funnel",
-          "exportName": "StatsPipelineBlock"
+          "exportName": "StatsPipelineBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "dashboard"
+          ]
         }
+      ],
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "dashboard"
       ]
     },
     "status-page": {
@@ -1326,7 +2292,13 @@
       "kind": "page",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "layout"
+      ]
     },
     "success-state": {
       "title": "Success State",
@@ -1336,7 +2308,14 @@
       "kind": "page",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "empty",
+        "feedback"
+      ]
     },
     "team": {
       "title": "Team Members",
@@ -1346,7 +2325,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "dashboard"
+      ]
     },
     "testimonials": {
       "title": "Testimonials",
@@ -1362,15 +2347,33 @@
           "name": "Marquee wall",
           "description": "A scrolling, pause-on-hover wall of testimonials with avatar social proof.",
           "item": "testimonials",
-          "exportName": "TestimonialsBlock"
+          "exportName": "TestimonialsBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "marketing"
+          ]
         },
         {
           "id": "grid",
           "name": "Card grid",
           "description": "A static responsive grid of testimonial cards for dense social proof.",
           "item": "testimonials--grid",
-          "exportName": "TestimonialsGridBlock"
+          "exportName": "TestimonialsGridBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "marketing"
+          ]
         }
+      ],
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "marketing"
       ]
     },
     "toast-stack": {
@@ -1381,7 +2384,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "feedback"
+      ]
     },
     "usage-dashboard": {
       "title": "Usage Dashboard",
@@ -1391,7 +2400,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "billing"
+      ]
     },
     "user-management": {
       "title": "User management",
@@ -1407,15 +2422,33 @@
           "name": "Directory table",
           "description": "A searchable member table with a role filter, status badges, row actions and pagination.",
           "item": "user-management",
-          "exportName": "UserManagementTableBlock"
+          "exportName": "UserManagementTableBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "admin"
+          ]
         },
         {
           "id": "cards",
           "name": "Member cards",
           "description": "A card grid with the same member actions — a better fit for small teams.",
           "item": "user-management--cards",
-          "exportName": "UserManagementCardsBlock"
+          "exportName": "UserManagementCardsBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "admin"
+          ]
         }
+      ],
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "admin"
       ]
     },
     "waitlist": {
@@ -1426,7 +2459,14 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "marketing",
+        "form"
+      ]
     },
     "welcome": {
       "title": "Welcome",
@@ -1436,7 +2476,13 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": []
+      "variants": [],
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "onboarding"
+      ]
     }
   },
   "components": {
@@ -1444,1005 +2490,2302 @@
       "title": "Accordion",
       "category": "navigation",
       "description": "Collapsible content sections.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "nav"
+      ]
     },
     "alert": {
       "title": "Alert",
       "category": "feedback",
       "description": "Inline callout banner with semantic variants.",
-      "rsc": true
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "feedback"
+      ]
     },
     "alert-dialog": {
       "title": "AlertDialog",
       "category": "feedback",
       "description": "Confirm a destructive action.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "feedback"
+      ]
     },
     "animated-button": {
       "title": "AnimatedButton",
       "category": "buttons",
       "description": "Motion-powered button with spring feedback.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "action",
+        "motion"
+      ]
     },
     "animated-list": {
       "title": "AnimatedList",
       "category": "premium",
       "description": "Staggers list items in with a short rise and fade.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "motion"
+      ]
     },
     "animated-number": {
       "title": "AnimatedNumber",
       "category": "premium",
       "description": "Number that springs to its target — counts up or down.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "motion"
+      ]
     },
     "app-shell": {
       "title": "AppShell",
       "category": "navigation",
       "description": "Sidebar + header + content layout in one step.",
-      "rsc": true
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "nav",
+        "chrome",
+        "layout"
+      ]
+    },
+    "area-chart": {
+      "title": "AreaChart",
+      "category": "charts",
+      "description": "Time series with a filled region. Default and Motion variants.",
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "chart",
+        "data"
+      ]
     },
     "aspect-ratio": {
       "title": "AspectRatio",
       "category": "data-display",
       "description": "Constrain content to a fixed width-to-height ratio.",
-      "rsc": true
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "aurora-background": {
       "title": "AuroraBackground",
       "category": "premium",
       "description": "Animated aurora backdrop.",
-      "rsc": true
+      "rsc": true,
+      "style": "editorial",
+      "palette": "aurora",
+      "motion": "cinematic",
+      "intents": [
+        "motion",
+        "marketing"
+      ]
     },
     "autocomplete": {
       "title": "Autocomplete",
       "category": "forms",
       "description": "Free-text input with sync or async suggestions.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "avatar": {
       "title": "Avatar",
       "category": "data-display",
       "description": "User image with a fallback.",
-      "rsc": true
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "avatar-group": {
       "title": "AvatarGroup",
       "category": "data-display",
       "description": "Overlapping avatar stack with a \"+N\" overflow chip.",
-      "rsc": true
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "badge": {
       "title": "Badge",
       "category": "data-display",
       "description": "Small status / category label.",
-      "rsc": true
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "banner": {
       "title": "Banner",
       "category": "feedback",
       "description": "Dismissible full-width announcement / promo bar with a CTA.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "feedback"
+      ]
+    },
+    "bar-chart": {
+      "title": "BarChart",
+      "category": "charts",
+      "description": "Grouped or stacked columns. Default and Motion variants.",
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "chart",
+        "data"
+      ]
     },
     "border-beam": {
       "title": "BorderBeam",
       "category": "premium",
       "description": "An animated light beam that travels around an element's border.",
-      "rsc": true
+      "rsc": true,
+      "style": "editorial",
+      "palette": "aurora",
+      "motion": "smooth",
+      "intents": [
+        "motion"
+      ]
     },
     "breadcrumb": {
       "title": "Breadcrumb",
       "category": "navigation",
       "description": "Hierarchical page trail.",
-      "rsc": true
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "nav"
+      ]
     },
     "button": {
       "title": "Button",
       "category": "buttons",
       "description": "Clickable action with variants, sizes and asChild.",
-      "rsc": true
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "action"
+      ]
     },
     "button-group": {
       "title": "ButtonGroup",
       "category": "buttons",
       "description": "Attaches a row or column of buttons into one segmented unit.",
-      "rsc": true
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "action"
+      ]
     },
     "calendar": {
       "title": "Calendar",
       "category": "date-time",
       "description": "Date grid (react-day-picker).",
-      "rsc": false
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form",
+        "data"
+      ]
+    },
+    "candlestick-chart": {
+      "title": "CandlestickChart",
+      "category": "charts",
+      "description": "OHLC candles. Default and Motion variants.",
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "chart",
+        "data"
+      ]
     },
     "card": {
       "title": "Card",
       "category": "data-display",
       "description": "Surface that groups related content.",
-      "rsc": true
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "card-stack": {
       "title": "CardStack",
       "category": "premium",
       "description": "A fanned stack of cards that cycles on click or keyboard.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "motion"
+      ]
     },
     "carousel": {
       "title": "Carousel",
       "category": "premium",
       "description": "Scroll-snap slide gallery with prev/next, dots and keyboard nav.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "media",
+        "motion"
+      ]
     },
     "chart": {
       "title": "Chart",
       "category": "charts",
-      "description": "Recharts wrapper with tokens.",
-      "rsc": false
+      "description": "Low-level recharts primitive: ChartContainer, tooltip, cursor, legend.",
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "chart",
+        "data"
+      ]
     },
     "checkbox": {
       "title": "Checkbox",
       "category": "forms",
       "description": "Binary choice with an indicator.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "chip": {
       "title": "Chip",
       "category": "forms",
       "description": "Interactive filter/selection chip — toggleable, dismissible, with icon and avatar slots.",
-      "rsc": true
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
+    },
+    "choropleth-chart": {
+      "title": "ChoroplethChart",
+      "category": "charts",
+      "description": "Region intensity map. Default and Motion variants.",
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "chart",
+        "data"
+      ]
     },
     "click-spark": {
       "title": "ClickSpark",
       "category": "premium",
       "description": "Emits a burst of sparks from the pointer on click.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "action",
+        "motion"
+      ]
     },
     "code-block": {
       "title": "CodeBlock",
       "category": "data-display",
       "description": "Source snippet with header, line numbers and copy.",
-      "rsc": true
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "code-tabs": {
       "title": "CodeTabs",
       "category": "data-display",
       "description": "Tabbed code snippets with per-tab copy and a localStorage-synced tab choice.",
-      "rsc": false
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "collapsible": {
       "title": "Collapsible",
       "category": "data-display",
       "description": "Animated show/hide for a single section.",
-      "rsc": false
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "color-picker": {
       "title": "ColorPicker",
       "category": "forms",
       "description": "OKLCH-native color input on a popover, with an area, hue slider and swatches.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "combobox": {
       "title": "Combobox",
       "category": "forms",
       "description": "Searchable single-select with autocomplete.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "command": {
       "title": "Command",
       "category": "overlays",
       "description": "⌘K command palette (cmdk).",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "nav",
+        "overlay"
+      ]
     },
     "comparison-slider": {
       "title": "ComparisonSlider",
       "category": "data-display",
       "description": "Drag a divider to reveal a before/after comparison of two layers.",
-      "rsc": false
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
+    },
+    "composed-chart": {
+      "title": "ComposedChart",
+      "category": "charts",
+      "description": "Area, bar, and line on one axis. Default and Motion variants.",
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "chart",
+        "data"
+      ]
     },
     "confetti": {
       "title": "Confetti",
       "category": "premium",
       "description": "Canvas confetti that bursts from the pointer.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "cinematic",
+      "intents": [
+        "feedback",
+        "motion"
+      ]
     },
     "confirmation-dialog": {
       "title": "ConfirmationDialog",
       "category": "overlays",
       "description": "Ergonomic AlertDialog wrapper for destructive actions with async confirm.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "overlay"
+      ]
     },
     "context-menu": {
       "title": "ContextMenu",
       "category": "overlays",
       "description": "Right-click menu with items, checkboxes and submenus.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "overlay"
+      ]
     },
     "copy-button": {
       "title": "CopyButton",
       "category": "buttons",
       "description": "Copy text to the clipboard with success feedback.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "action"
+      ]
     },
     "countdown": {
       "title": "Countdown",
       "category": "date-time",
       "description": "Ticking day/hour/minute/second tiles counting down to a target.",
-      "rsc": false
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form",
+        "data"
+      ]
     },
     "credit-card-input": {
       "title": "CreditCardInput",
       "category": "forms",
       "description": "Card number, expiry and CVC with brand detection and Luhn validation.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form",
+        "billing",
+        "commerce"
+      ]
     },
     "currency-input": {
       "title": "CurrencyInput",
       "category": "forms",
       "description": "Money field with a currency selector and live thousand/decimal formatting.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form",
+        "billing"
+      ]
     },
     "data-table": {
       "title": "DataTable",
       "category": "data-display",
       "description": "TanStack table with sorting, search & faceted filters, pagination, row selection with bulk actions, column visibility, density, and loading/empty/error states.",
-      "rsc": false
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data",
+        "dashboard"
+      ]
     },
     "date-picker": {
       "title": "DatePicker",
       "category": "date-time",
       "description": "Popover-based date selection.",
-      "rsc": false
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form",
+        "data"
+      ]
     },
     "date-range-picker": {
       "title": "DateRangePicker",
       "category": "date-time",
       "description": "Start/end date selection with presets.",
-      "rsc": false
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form",
+        "data"
+      ]
     },
     "description-list": {
       "title": "DescriptionList",
       "category": "data-display",
       "description": "Semantic dl/dt/dd pairs in stacked, horizontal, or grid-card layouts for detail panes and order summaries.",
-      "rsc": true
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "dialog": {
       "title": "Dialog",
       "category": "overlays",
       "description": "Modal dialog with header and footer.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "overlay"
+      ]
     },
     "dock": {
       "title": "Dock",
       "category": "premium",
       "description": "A macOS-style icon dock that magnifies items as the pointer nears.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "nav",
+        "motion"
+      ]
     },
     "dot-pattern": {
       "title": "DotPattern",
       "category": "premium",
       "description": "A faint SVG dotted field behind content.",
-      "rsc": true
+      "rsc": true,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "motion"
+      ]
     },
     "drawer": {
       "title": "Drawer",
       "category": "overlays",
       "description": "Bottom drawer (vaul).",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "overlay"
+      ]
     },
     "dropdown-menu": {
       "title": "DropdownMenu",
       "category": "overlays",
       "description": "Actions menu with submenus.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "overlay"
+      ]
     },
     "dynamic-island": {
       "title": "DynamicIsland",
       "category": "premium",
       "description": "A compact live-activity pill that morphs between views.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "feedback",
+        "motion"
+      ]
     },
     "empty": {
       "title": "Empty",
       "category": "data-display",
       "description": "Empty-state placeholder.",
-      "rsc": true
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "expandable-tabs": {
       "title": "ExpandableTabs",
       "category": "premium",
       "description": "Icon tabs where the active item expands to reveal its label.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "nav"
+      ]
     },
     "fab": {
       "title": "Fab",
       "category": "buttons",
       "description": "Floating action button with an optional speed-dial of actions.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "action"
+      ]
     },
     "field": {
       "title": "Field",
       "category": "forms",
       "description": "Label + description + error layout.",
-      "rsc": true
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "file-dropzone": {
       "title": "FileDropzone",
       "category": "forms",
       "description": "Drag-and-drop file upload area.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form",
+        "media"
+      ]
     },
     "flickering-grid": {
       "title": "FlickeringGrid",
       "category": "premium",
       "description": "A grid of cells that independently flicker.",
-      "rsc": true
+      "rsc": true,
+      "style": "brutalist",
+      "palette": "semantic",
+      "motion": "cinematic",
+      "intents": [
+        "motion"
+      ]
     },
     "flip-card": {
       "title": "FlipCard",
       "category": "premium",
       "description": "A 3D card that flips between a front and a back face.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "motion"
+      ]
     },
     "floating-label-input": {
       "title": "FloatingLabelInput",
       "category": "forms",
       "description": "Text field whose label floats above on focus or when filled.",
-      "rsc": true
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "form": {
       "title": "Form",
       "category": "forms",
       "description": "react-hook-form + zod integration.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "frame": {
       "title": "Frame",
       "category": "premium",
       "description": "Browser/window chrome that frames a screenshot or product mockup.",
-      "rsc": true
+      "rsc": true,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "motion"
+      ]
+    },
+    "funnel-chart": {
+      "title": "FunnelChart",
+      "category": "charts",
+      "description": "Stage drop-off. Default and Motion variants.",
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "chart",
+        "data"
+      ]
+    },
+    "gauge-chart": {
+      "title": "GaugeChart",
+      "category": "charts",
+      "description": "Radial score. Default and Motion variants.",
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "chart",
+        "data"
+      ]
     },
     "glare-hover": {
       "title": "GlareHover",
       "category": "premium",
       "description": "A diagonal glare that tracks the pointer across a surface.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "motion"
+      ]
     },
     "glass-card": {
       "title": "GlassCard",
       "category": "premium",
       "description": "Frosted-glass surface.",
-      "rsc": true
+      "rsc": true,
+      "style": "glass",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "motion"
+      ]
     },
     "gradient-border": {
       "title": "GradientBorder",
       "category": "premium",
       "description": "Aurora gradient border.",
-      "rsc": true
+      "rsc": true,
+      "style": "editorial",
+      "palette": "aurora",
+      "motion": "none",
+      "intents": [
+        "motion"
+      ]
     },
     "gradient-text": {
       "title": "GradientText",
       "category": "premium",
       "description": "Gradient-clipped text.",
-      "rsc": true
+      "rsc": true,
+      "style": "editorial",
+      "palette": "aurora",
+      "motion": "none",
+      "intents": [
+        "motion"
+      ]
     },
     "grid-pattern": {
       "title": "GridPattern",
       "category": "premium",
       "description": "A faint SVG grid behind content.",
-      "rsc": true
+      "rsc": true,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "motion"
+      ]
     },
     "heatmap": {
       "title": "Heatmap",
       "category": "data-display",
       "description": "A calendar-style contribution heatmap that buckets daily activity into levels.",
-      "rsc": true
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
+    },
+    "heatmap-chart": {
+      "title": "HeatmapChart",
+      "category": "charts",
+      "description": "Calendar heatmap. Default and Motion variants.",
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "chart",
+        "data"
+      ]
     },
     "highlighter": {
       "title": "Highlighter",
       "category": "premium",
       "description": "A marker stroke that draws in behind a phrase.",
-      "rsc": true
+      "rsc": true,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "motion"
+      ]
     },
     "hover-card": {
       "title": "HoverCard",
       "category": "overlays",
       "description": "Preview content on hover.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "overlay"
+      ]
     },
     "image-zoom": {
       "title": "ImageZoom",
       "category": "data-display",
       "description": "Inline hover/press zoom that magnifies product imagery and pans with the cursor.",
-      "rsc": false
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "media"
+      ]
     },
     "input": {
       "title": "Input",
       "category": "forms",
       "description": "Single-line text field with invalid state.",
-      "rsc": true
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "input-group": {
       "title": "InputGroup",
       "category": "forms",
       "description": "A composable wrapper that fuses prefix/suffix addons to an Input into one bordered field.",
-      "rsc": true
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "input-otp": {
       "title": "InputOTP",
       "category": "forms",
       "description": "One-time-code input with slots.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form",
+        "auth"
+      ]
     },
     "json-viewer": {
       "title": "JsonViewer",
       "category": "data-display",
       "description": "Collapsible JSON tree with type-colored values and per-row copy.",
-      "rsc": false
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "kanban": {
       "title": "Kanban",
       "category": "data-display",
       "description": "Drag-and-drop board with cards that reorder and move across columns.",
-      "rsc": false
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data",
+        "dashboard"
+      ]
     },
     "kbd": {
       "title": "Kbd",
       "category": "data-display",
       "description": "Keyboard key hint.",
-      "rsc": true
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "label": {
       "title": "Label",
       "category": "forms",
       "description": "Accessible label tied to a control.",
-      "rsc": true
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "light-rays": {
       "title": "LightRays",
       "category": "premium",
       "description": "Volumetric light shafts fanning across a surface.",
-      "rsc": true
+      "rsc": true,
+      "style": "editorial",
+      "palette": "aurora",
+      "motion": "cinematic",
+      "intents": [
+        "motion"
+      ]
     },
     "lightbox": {
       "title": "Lightbox",
       "category": "overlays",
       "description": "Full-screen image gallery with thumbnails and keyboard navigation.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "overlay"
+      ]
+    },
+    "line-chart": {
+      "title": "LineChart",
+      "category": "charts",
+      "description": "Multi-series line. Default and Motion variants.",
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "chart",
+        "data"
+      ]
+    },
+    "live-line-chart": {
+      "title": "LiveLineChart",
+      "category": "charts",
+      "description": "Streaming line. Default and Motion variants.",
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "chart",
+        "data"
+      ]
     },
     "logo-carousel": {
       "title": "LogoCarousel",
       "category": "premium",
       "description": "Animated hero logo carousel with reduced-motion fallback.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "marketing",
+        "motion"
+      ]
     },
     "magnetic": {
       "title": "Magnetic",
       "category": "premium",
       "description": "Wrapper whose content is gently pulled toward the cursor.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "motion"
+      ]
     },
     "marquee": {
       "title": "Marquee",
       "category": "premium",
       "description": "Seamless infinite scroller for logos, testimonials, or a ticker.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "marketing",
+        "motion"
+      ]
     },
     "masonry": {
       "title": "Masonry",
       "category": "data-display",
       "description": "A responsive CSS multi-column masonry layout for cards and images.",
-      "rsc": true
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "menubar": {
       "title": "Menubar",
       "category": "navigation",
       "description": "Desktop-style menu bar with File / Edit / View menus.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "nav"
+      ]
     },
     "meteors": {
       "title": "Meteors",
       "category": "premium",
       "description": "A field of shooting-star trails drifting across a surface.",
-      "rsc": true
+      "rsc": true,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "cinematic",
+      "intents": [
+        "motion",
+        "marketing"
+      ]
     },
     "metric": {
       "title": "Metric",
       "category": "data-display",
       "description": "KPI value with trend delta.",
-      "rsc": true
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data",
+        "dashboard"
+      ]
     },
     "mode-toggle": {
       "title": "ModeToggle",
       "category": "buttons",
       "description": "Animated sun ⇄ moon light/dark toggle icon-button.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "action",
+        "settings"
+      ]
     },
     "morphing-popover": {
       "title": "MorphingPopover",
       "category": "premium",
       "description": "Trigger that morphs into a non-modal dialog surface.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "overlay",
+        "motion"
+      ]
+    },
+    "motion-presets": {
+      "title": "Motion presets",
+      "category": "premium",
+      "description": "Shared easing curves and motion variants used by animated components.",
+      "rsc": true,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "motion"
+      ]
     },
     "multi-select": {
       "title": "MultiSelect",
       "category": "forms",
       "description": "Pick multiple values shown as removable chips.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "navigation-menu": {
       "title": "NavigationMenu",
       "category": "navigation",
       "description": "Horizontal menu bar with disclosure panels.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "nav"
+      ]
     },
     "noise": {
       "title": "Noise",
       "category": "premium",
       "description": "A still film-grain overlay.",
-      "rsc": true
+      "rsc": true,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "motion"
+      ]
     },
     "notification-center": {
       "title": "NotificationCenter",
       "category": "overlays",
       "description": "Bell-trigger inbox with unread badge and a scrollable list.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "overlay"
+      ]
     },
     "number-input": {
       "title": "NumberInput",
       "category": "forms",
       "description": "Numeric field with steppers, clamping and keyboard control.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "orbit": {
       "title": "Orbit",
       "category": "premium",
       "description": "Icons or avatars revolving around a nucleus on pure-CSS rings.",
-      "rsc": true
+      "rsc": true,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "cinematic",
+      "intents": [
+        "motion"
+      ]
     },
     "pagination": {
       "title": "Pagination",
       "category": "navigation",
       "description": "Navigate between pages.",
-      "rsc": true
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "nav"
+      ]
     },
     "particles": {
       "title": "Particles",
       "category": "premium",
       "description": "A calm 2D particle field that drifts behind content.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "cinematic",
+      "intents": [
+        "motion",
+        "marketing"
+      ]
     },
     "password-input": {
       "title": "PasswordInput",
       "category": "forms",
       "description": "A password field with a show/hide toggle and an optional strength meter.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form",
+        "auth"
+      ]
     },
     "phone-input": {
       "title": "PhoneInput",
       "category": "forms",
       "description": "International phone field with a country selector, emitting E.164.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
+    },
+    "pie-chart": {
+      "title": "PieChart",
+      "category": "charts",
+      "description": "Full pie. Default and Motion variants.",
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "chart",
+        "data"
+      ]
     },
     "pill-nav": {
       "title": "PillNav",
       "category": "premium",
       "description": "A compact nav row whose active item is marked by a sliding pill.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "nav"
+      ]
     },
     "popover": {
       "title": "Popover",
       "category": "overlays",
       "description": "Floating content anchored to a trigger.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "overlay"
+      ]
+    },
+    "profit-loss-chart": {
+      "title": "ProfitLossChart",
+      "category": "charts",
+      "description": "Series split at zero. Default and Motion variants.",
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "chart",
+        "data"
+      ]
     },
     "progress": {
       "title": "Progress",
       "category": "feedback",
       "description": "Determinate progress bar.",
-      "rsc": true
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "feedback"
+      ]
     },
     "progressive-blur": {
       "title": "ProgressiveBlur",
       "category": "premium",
       "description": "A stacked backdrop-blur that fades content out toward an edge.",
-      "rsc": true
+      "rsc": true,
+      "style": "glass",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "motion"
+      ]
+    },
+    "radar-chart": {
+      "title": "RadarChart",
+      "category": "charts",
+      "description": "Polar comparison. Default and Motion variants.",
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "chart",
+        "data"
+      ]
     },
     "radio-group": {
       "title": "RadioGroup",
       "category": "forms",
       "description": "Single choice among options.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "rating": {
       "title": "Rating",
       "category": "forms",
       "description": "Star rating input — interactive or read-only, with optional half stars.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "resizable": {
       "title": "Resizable",
       "category": "navigation",
       "description": "Draggable split panes for resizable layouts.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "nav"
+      ]
     },
     "retro-grid": {
       "title": "RetroGrid",
       "category": "premium",
       "description": "A receding perspective grid floor.",
-      "rsc": true
+      "rsc": true,
+      "style": "brutalist",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "motion"
+      ]
     },
     "reveal": {
       "title": "Reveal",
       "category": "premium",
       "description": "Scroll-into-view reveal wrapper.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "motion"
+      ]
     },
     "rich-text-editor": {
       "title": "RichTextEditor",
       "category": "forms",
       "description": "Tiptap WYSIWYG editor with a formatting toolbar and HTML output.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
+    },
+    "ring-chart": {
+      "title": "RingChart",
+      "category": "charts",
+      "description": "Donut with a hub total. Default and Motion variants.",
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "chart",
+        "data"
+      ]
     },
     "ripple": {
       "title": "Ripple",
       "category": "premium",
       "description": "Concentric rings that expand from the centre of a surface.",
-      "rsc": true
+      "rsc": true,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "motion"
+      ]
+    },
+    "sankey-chart": {
+      "title": "SankeyChart",
+      "category": "charts",
+      "description": "Flow between nodes. Default and Motion variants.",
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "chart",
+        "data"
+      ]
+    },
+    "scatter-chart": {
+      "title": "ScatterChart",
+      "category": "charts",
+      "description": "Two-axis scatter. Default and Motion variants.",
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "chart",
+        "data"
+      ]
     },
     "scheduler": {
       "title": "Scheduler",
       "category": "date-time",
       "description": "Month-view event calendar that lays events onto day cells.",
-      "rsc": false
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form",
+        "data"
+      ]
     },
     "scramble-text": {
       "title": "ScrambleText",
       "category": "premium",
       "description": "Resolves a phrase by cycling random glyphs until it locks in.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "motion"
+      ]
     },
     "scroll-area": {
       "title": "ScrollArea",
       "category": "data-display",
       "description": "Custom-styled scroll container.",
-      "rsc": false
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "scroll-progress": {
       "title": "ScrollProgress",
       "category": "premium",
       "description": "A bar or ring that tracks how far a scroll container has been read.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "nav",
+        "motion"
+      ]
     },
     "segmented-control": {
       "title": "SegmentedControl",
       "category": "premium",
       "description": "Single-select toggle row with a thumb that slides between options.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "nav",
+        "form"
+      ]
     },
     "select": {
       "title": "Select",
       "category": "forms",
       "description": "Composable dropdown with groups.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "separator": {
       "title": "Separator",
       "category": "data-display",
       "description": "Visual divider between content.",
-      "rsc": true
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "sheet": {
       "title": "Sheet",
       "category": "overlays",
       "description": "Side-anchored panel.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "overlay"
+      ]
     },
     "shimmer": {
       "title": "Shimmer",
       "category": "premium",
       "description": "Premium shimmer surface.",
-      "rsc": true
+      "rsc": true,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "motion"
+      ]
     },
     "shiny-text": {
       "title": "ShinyText",
       "category": "premium",
       "description": "A metallic sheen that sweeps across live text.",
-      "rsc": true
+      "rsc": true,
+      "style": "editorial",
+      "palette": "aurora",
+      "motion": "smooth",
+      "intents": [
+        "motion"
+      ]
     },
     "sidebar": {
       "title": "Sidebar",
       "category": "navigation",
       "description": "Composable, collapsible app sidebar.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "nav",
+        "chrome",
+        "layout"
+      ]
     },
     "signature-pad": {
       "title": "SignaturePad",
       "category": "forms",
       "description": "Canvas signature input with smoothed strokes, undo/clear, and data-URL output.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form",
+        "media"
+      ]
     },
     "skeleton": {
       "title": "Skeleton",
       "category": "data-display",
       "description": "Loading placeholder shimmer.",
-      "rsc": true
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "slider": {
       "title": "Slider",
       "category": "forms",
       "description": "Pick a value or a range.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "sonner": {
       "title": "Toast",
       "category": "feedback",
       "description": "Transient notifications via Sonner.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "feedback"
+      ]
     },
     "sparkles-text": {
       "title": "SparklesText",
       "category": "premium",
       "description": "Twinkling sparkles around a phrase.",
-      "rsc": true
+      "rsc": true,
+      "style": "editorial",
+      "palette": "aurora",
+      "motion": "smooth",
+      "intents": [
+        "motion"
+      ]
     },
     "sparkline": {
       "title": "Sparkline",
       "category": "data-display",
       "description": "Tiny inline line, area, or bar trend chart for stat tiles.",
-      "rsc": true
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "data",
+        "chart"
+      ]
     },
     "spinner": {
       "title": "Spinner",
       "category": "feedback",
       "description": "Indeterminate loading indicator.",
-      "rsc": true
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "feedback"
+      ]
     },
     "spinning-text": {
       "title": "SpinningText",
       "category": "premium",
       "description": "A phrase laid out around a slowly rotating circle.",
-      "rsc": true
+      "rsc": true,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "motion"
+      ]
     },
     "split-button": {
       "title": "SplitButton",
       "category": "buttons",
       "description": "Primary action fused to a dropdown of secondary actions.",
-      "rsc": true
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "action"
+      ]
     },
     "spotlight-card": {
       "title": "SpotlightCard",
       "category": "premium",
       "description": "Cursor-following spotlight.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "cinematic",
+      "intents": [
+        "motion"
+      ]
     },
     "star-border": {
       "title": "StarBorder",
       "category": "premium",
       "description": "Two sparkle heads chasing each other around a border.",
-      "rsc": true
+      "rsc": true,
+      "style": "editorial",
+      "palette": "aurora",
+      "motion": "smooth",
+      "intents": [
+        "motion"
+      ]
     },
     "status-dot": {
       "title": "StatusDot",
       "category": "data-display",
       "description": "Presence dot with pulse, optional label, and avatar-overlay anchoring.",
-      "rsc": true
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "stepper": {
       "title": "Stepper",
       "category": "forms",
       "description": "Multi-step wizard progress with optional clickable steps.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
+    },
+    "sunburst-chart": {
+      "title": "SunburstChart",
+      "category": "charts",
+      "description": "Hierarchical rings. Default and Motion variants.",
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "chart",
+        "data"
+      ]
     },
     "switch": {
       "title": "Switch",
       "category": "forms",
       "description": "Toggle a setting on or off.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "table": {
       "title": "Table",
       "category": "data-display",
       "description": "Styled semantic table primitives.",
-      "rsc": true
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "table-of-contents": {
       "title": "TableOfContents",
       "category": "navigation",
       "description": "Scrollspy on-this-page nav with an animated active indicator.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "nav"
+      ]
     },
     "tabs": {
       "title": "Tabs",
       "category": "navigation",
       "description": "Switch between panels.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "nav"
+      ]
     },
     "tags-input": {
       "title": "TagsInput",
       "category": "forms",
       "description": "Type and commit free-form tags as removable chips.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "terminal": {
       "title": "Terminal",
       "category": "premium",
       "description": "Animated terminal window that types a scripted shell session.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "motion"
+      ]
     },
     "text-effect": {
       "title": "TextEffect",
       "category": "premium",
       "description": "Reveal text by staggering words or characters (fade / blur / slide).",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "motion"
+      ]
     },
     "textarea": {
       "title": "Textarea",
       "category": "forms",
       "description": "Multi-line auto-sizing text field.",
-      "rsc": true
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form"
+      ]
     },
     "tilt-card": {
       "title": "TiltCard",
       "category": "premium",
       "description": "A card that tilts in 3D toward the pointer, with an optional glare.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "motion"
+      ]
     },
     "time-picker": {
       "title": "TimePicker",
       "category": "date-time",
       "description": "Popover hour/minute (and optional second) selection, 12h or 24h.",
-      "rsc": false
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "form",
+        "data"
+      ]
     },
     "timeline": {
       "title": "Timeline",
       "category": "data-display",
       "description": "Vertical activity feed with dots, connectors, timestamps and descriptions.",
-      "rsc": true
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "toggle": {
       "title": "Toggle",
       "category": "buttons",
       "description": "A two-state on/off button.",
-      "rsc": true
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "action"
+      ]
     },
     "toggle-group": {
       "title": "ToggleGroup",
       "category": "buttons",
       "description": "A set of toggles, single or multiple.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "action"
+      ]
     },
     "toolbar": {
       "title": "Toolbar",
       "category": "navigation",
       "description": "An accessible button toolbar with roving focus and grouped controls.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "nav"
+      ]
     },
     "tooltip": {
       "title": "Tooltip",
       "category": "overlays",
       "description": "Short hint on hover or focus.",
-      "rsc": false
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "overlay"
+      ]
     },
     "tree-view": {
       "title": "TreeView",
       "category": "data-display",
       "description": "Data-driven, accessible hierarchy with keyboard navigation.",
-      "rsc": false
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data"
+      ]
     },
     "typing-text": {
       "title": "TypingText",
       "category": "premium",
       "description": "A typewriter that types one or more phrases with a blinking caret.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "motion"
+      ]
     },
     "usage-meter": {
       "title": "UsageMeter",
       "category": "feedback",
       "description": "Linear or circular quota / billing usage indicator with severity tones.",
-      "rsc": true
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "feedback"
+      ]
     },
     "video-player": {
       "title": "VideoPlayer",
       "category": "data-display",
       "description": "Native video wrapped in token-styled custom controls: seek, volume, playback speed, and fullscreen.",
-      "rsc": false
+      "rsc": false,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "media"
+      ]
     },
     "word-rotate": {
       "title": "WordRotate",
       "category": "premium",
       "description": "Cycles through a list of words with a vertical swap.",
-      "rsc": false
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "motion"
+      ]
     }
   },
   "apps": {
     "chat": {
       "title": "Chat",
       "description": "A Pro assistant app: chat thread and prompt box under an app shell, plus a replies surface and settings.",
-      "pages": 4
+      "pages": 4,
+      "style": "default",
+      "palette": "aurora",
+      "motion": "snappy",
+      "intents": [
+        "ai",
+        "social"
+      ]
     },
     "finance": {
       "title": "Finance",
       "description": "A Pro money app: payouts and invoices on the home, plus billing, usage, and analytics under an app shell.",
-      "pages": 4
+      "pages": 4,
+      "style": "operational",
+      "palette": "aurora",
+      "motion": "none",
+      "intents": [
+        "billing",
+        "data"
+      ]
     },
     "landing": {
       "title": "Landing",
       "description": "A single polished marketing page — hero, features, pricing, testimonials, FAQ, and a call to action — with a real navbar and footer.",
-      "pages": 1
+      "pages": 1,
+      "style": "editorial",
+      "palette": "aurora",
+      "motion": "none",
+      "intents": [
+        "marketing"
+      ]
     },
     "landing-agency": {
       "title": "Agency",
       "description": "Studio/agency landing: split hero, logo cloud, about story, services grid, stats, testimonials, and CTA. Midnight, dark.",
-      "pages": 1
+      "pages": 1,
+      "style": "editorial",
+      "palette": "aurora",
+      "motion": "none",
+      "intents": [
+        "marketing"
+      ]
     },
     "landing-agents": {
       "title": "Agents",
       "description": "Automation/agent landing: split hero, marquee logos, bento features, stats, proof, pricing, FAQ, and a banner CTA. Emerald, light.",
-      "pages": 1
+      "pages": 1,
+      "style": "editorial",
+      "palette": "aurora",
+      "motion": "smooth",
+      "intents": [
+        "marketing",
+        "ai"
+      ]
     },
     "landing-broadcast": {
       "title": "Broadcast",
       "description": "Studio/show landing: atmospheric hero, marquee logos, feature grid, testimonials, pricing, and footer chrome. Aurora, dark.",
-      "pages": 1
+      "pages": 1,
+      "style": "operational",
+      "palette": "aurora",
+      "motion": "none",
+      "intents": [
+        "marketing"
+      ]
     },
     "landing-care": {
       "title": "Care",
       "description": "Calm healthcare/conversion landing: waitlist hero, bento features, testimonials, and a contained CTA. Emerald, light.",
-      "pages": 1
+      "pages": 1,
+      "style": "editorial",
+      "palette": "emerald",
+      "motion": "none",
+      "intents": [
+        "marketing"
+      ]
     },
     "landing-coverage": {
       "title": "Coverage",
       "description": "Global-services landing: centered hero, stats, testimonial grid, FAQ, and CTA. Sunset, light.",
-      "pages": 1
+      "pages": 1,
+      "style": "operational",
+      "palette": "aurora",
+      "motion": "none",
+      "intents": [
+        "marketing"
+      ]
     },
     "landing-docs": {
       "title": "Docs product",
       "description": "Developer-tool landing: announcement navbar energy via compact hero, logo cloud, features, integrations, and CTA.",
-      "pages": 1
+      "pages": 1,
+      "style": "default",
+      "palette": "aurora",
+      "motion": "none",
+      "intents": [
+        "marketing"
+      ]
     },
     "landing-glass": {
       "title": "Glass",
       "description": "Glass-dark landing: atmospheric hero, bento features, split FAQ, and a split-visual CTA. Midnight, dark.",
-      "pages": 1
+      "pages": 1,
+      "style": "glass",
+      "palette": "aurora",
+      "motion": "smooth",
+      "intents": [
+        "marketing"
+      ]
     },
     "landing-ops": {
       "title": "Ops",
       "description": "Linear-style product landing: split hero with a quality panel, logo cloud, workflow features, integrations, and a full-width CTA.",
-      "pages": 1
+      "pages": 1,
+      "style": "operational",
+      "palette": "aurora",
+      "motion": "none",
+      "intents": [
+        "marketing",
+        "dashboard"
+      ]
     },
     "landing-premium": {
       "title": "Premium SaaS",
       "description": "Full SaaS marketing page: split hero, logo cloud, features, toggle pricing, testimonials, FAQ, and CTA. Aurora, light.",
-      "pages": 1
+      "pages": 1,
+      "style": "editorial",
+      "palette": "aurora",
+      "motion": "smooth",
+      "intents": [
+        "marketing"
+      ]
     },
     "landing-secure": {
       "title": "Secure",
       "description": "Infrastructure/security landing: compact registry hero, feature grid, metrics, proof, usage pricing, split FAQ, and CTA.",
-      "pages": 1
+      "pages": 1,
+      "style": "operational",
+      "palette": "midnight",
+      "motion": "none",
+      "intents": [
+        "marketing"
+      ]
     },
     "landing-shop": {
       "title": "Shop",
       "description": "Apparel/storefront landing: compact hero, editorial product showcase, and a banner CTA. Sunset, light.",
-      "pages": 1
+      "pages": 1,
+      "style": "editorial",
+      "palette": "sunset",
+      "motion": "none",
+      "intents": [
+        "commerce"
+      ]
     },
     "landing-studio": {
       "title": "Studio",
       "description": "Dark AI design-tool landing: atmospheric hero, logo marquee, bento features, stats, pricing, and a split product CTA.",
-      "pages": 1
+      "pages": 1,
+      "style": "editorial",
+      "palette": "midnight",
+      "motion": "cinematic",
+      "intents": [
+        "marketing",
+        "ai"
+      ]
     },
     "mail": {
       "title": "Mail",
       "description": "A Pro inbox app: notification panel and activity feed under an app shell, plus compose and notification preferences.",
-      "pages": 4
+      "pages": 4,
+      "style": "operational",
+      "palette": "aurora",
+      "motion": "none",
+      "intents": [
+        "email"
+      ]
     },
     "saas": {
       "title": "SaaS",
       "description": "A complete multi-page SaaS app: split login/signup, and a sidebar-shell dashboard, analytics, team, billing and settings — all from validated blocks.",
-      "pages": 7
+      "pages": 7,
+      "style": "operational",
+      "palette": "aurora",
+      "motion": "smooth",
+      "intents": [
+        "dashboard",
+        "auth"
+      ]
     },
     "store": {
       "title": "Store",
       "description": "A complete, navigable storefront: home, catalog, product, cart, checkout, auth, and account — all from validated blocks.",
-      "pages": 9
+      "pages": 9,
+      "style": "default",
+      "palette": "aurora",
+      "motion": "none",
+      "intents": [
+        "commerce"
+      ]
     }
   }
 }

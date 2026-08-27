@@ -1,0 +1,18 @@
+{
+  "name": "scatter-chart",
+  "type": "registry:ui",
+  "dependencies": [
+    "recharts@^3.9.2"
+  ],
+  "registryDependencies": [
+    "chart",
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "scatter-chart.tsx",
+      "content": "import type { HTMLAttributes } from \"react\";\nimport {\n  CartesianGrid,\n  ScatterChart as RechartsScatterChart,\n  Scatter,\n  XAxis,\n  YAxis,\n  ZAxis,\n} from \"recharts\";\nimport { cn } from \"../lib/cn.js\";\nimport {\n  ChartContainer,\n  type ChartSeries,\n  ChartTooltip,\n  ChartTooltipContent,\n  chartSeriesConfig,\n} from \"./chart.js\";\n\nexport interface ScatterChartSeries extends ChartSeries {\n  data: Record<string, unknown>[];\n}\n\nexport interface ScatterChartProps extends HTMLAttributes<HTMLDivElement> {\n  xKey?: string;\n  yKey?: string;\n  series: ScatterChartSeries[];\n}\n\nexport function ScatterChart({\n  xKey = \"x\",\n  yKey = \"y\",\n  series,\n  className,\n  ...props\n}: ScatterChartProps) {\n  const config = chartSeriesConfig(series);\n\n  return (\n    <div data-slot=\"scatter-chart\" className={cn(\"h-64 w-full\", className)} {...props}>\n      <ChartContainer config={config} className=\"h-full w-full\">\n        <RechartsScatterChart margin={{ left: 8, right: 8, top: 8 }}>\n          <CartesianGrid strokeDasharray=\"4 4\" />\n          <XAxis dataKey={xKey} tickLine={false} axisLine={false} type=\"number\" />\n          <YAxis dataKey={yKey} tickLine={false} axisLine={false} type=\"number\" />\n          <ZAxis range={[60, 60]} />\n          <ChartTooltip content={<ChartTooltipContent />} />\n          {series.map((item) => (\n            <Scatter\n              key={item.key}\n              name={item.label}\n              data={item.data}\n              fill={`var(--color-${item.key})`}\n            />\n          ))}\n        </RechartsScatterChart>\n      </ChartContainer>\n    </div>\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "composed-chart",
+  "type": "registry:ui",
+  "dependencies": [
+    "recharts@^3.9.2"
+  ],
+  "registryDependencies": [
+    "chart",
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "composed-chart.tsx",
+      "content": "\"use client\";\n\nimport { type HTMLAttributes, useId } from \"react\";\nimport {\n  Area,\n  Bar,\n  CartesianGrid,\n  Line,\n  ComposedChart as RechartsComposedChart,\n  XAxis,\n} from \"recharts\";\nimport { cn } from \"../lib/cn.js\";\nimport {\n  ChartContainer,\n  ChartCursor,\n  type ChartSeries,\n  ChartTooltip,\n  ChartTooltipContent,\n  chartSeriesConfig,\n} from \"./chart.js\";\n\nexport interface ComposedChartSeries extends ChartSeries {\n  type: \"area\" | \"bar\" | \"line\";\n}\n\nexport interface ComposedChartProps extends HTMLAttributes<HTMLDivElement> {\n  data: Record<string, unknown>[];\n  xKey?: string;\n  series: ComposedChartSeries[];\n  formatValue?: (value: number, name: string) => string;\n}\n\nexport function ComposedChart({\n  data,\n  xKey = \"date\",\n  series,\n  formatValue,\n  className,\n  ...props\n}: ComposedChartProps) {\n  const uid = useId().replace(/:/g, \"\");\n  const config = chartSeriesConfig(series);\n\n  return (\n    <div data-slot=\"composed-chart\" className={cn(\"h-64 w-full\", className)} {...props}>\n      <ChartContainer config={config} className=\"h-full w-full\">\n        <RechartsComposedChart\n          accessibilityLayer\n          data={data}\n          margin={{ left: 8, right: 8, top: 8 }}\n        >\n          <defs>\n            {series\n              .filter((item) => item.type === \"area\")\n              .map((item) => (\n                <linearGradient\n                  key={item.key}\n                  id={`${uid}-${item.key}`}\n                  x1=\"0\"\n                  y1=\"0\"\n                  x2=\"0\"\n                  y2=\"1\"\n                >\n                  <stop offset=\"0%\" stopColor={`var(--color-${item.key})`} stopOpacity={0.35} />\n                  <stop offset=\"100%\" stopColor={`var(--color-${item.key})`} stopOpacity={0} />\n                </linearGradient>\n              ))}\n          </defs>\n          <CartesianGrid vertical={false} strokeDasharray=\"4 4\" />\n          <XAxis dataKey={xKey} tickLine={false} axisLine={false} tickMargin={12} minTickGap={24} />\n          <ChartTooltip\n            cursor={<ChartCursor labelKey={xKey} />}\n            content={<ChartTooltipContent formatValue={formatValue} />}\n          />\n          {series.map((item) => {\n            if (item.type === \"bar\") {\n              return (\n                <Bar\n                  key={item.key}\n                  dataKey={item.key}\n                  fill={`var(--color-${item.key})`}\n                  radius={4}\n                />\n              );\n            }\n            if (item.type === \"area\") {\n              return (\n                <Area\n                  key={item.key}\n                  type=\"monotone\"\n                  dataKey={item.key}\n                  stroke={`var(--color-${item.key})`}\n                  fill={`url(#${uid}-${item.key})`}\n                  strokeWidth={2}\n                  dot={false}\n                />\n              );\n            }\n            return (\n              <Line\n                key={item.key}\n                type=\"monotone\"\n                dataKey={item.key}\n                stroke={`var(--color-${item.key})`}\n                strokeWidth={2}\n                dot={false}\n              />\n            );\n          })}\n        </RechartsComposedChart>\n      </ChartContainer>\n    </div>\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}
