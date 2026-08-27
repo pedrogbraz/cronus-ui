@@ -40,6 +40,7 @@ test.describe("Pro origin split", () => {
     await expect(page.getByRole("button", { name: "Get Studio" })).toBeVisible();
 
     await expect(page.getByRole("link", { name: "Looks stay free" })).toBeVisible();
-    await expect(page.getByRole("article").filter({ hasText: "Mail" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Explore Mail" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Open Mail on the open-source site" })).toBeVisible();
   });
 });
