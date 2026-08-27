@@ -114,8 +114,8 @@ uma na outra, isso é um sinal de que a peça pertence a um terceiro lugar.
   e páginas de doc guardam JSX dentro de template literals (`const xCode = ...`)
   para o viewer de código. Um replace global que entra nessas faixas quebra o
   parse — uma crase aninhada fecha a string externa. Edite só o JSX real.
-- **`apps/www` é o único Next.** `packages/*` é agnóstico de framework:
-  não importe `next/image`, `next/link` nem nada de `next/` ali.
+- **Só `apps/www` e `apps/pro` são Next.** `packages/*` é agnóstico de
+  framework: não importe `next/image`, `next/link` nem nada de `next/` ali.
 - **Componente novo entra no `packages/ui/src/index.ts`** com o nome exato
   que o `CONTRACT.md` define. O barrel é a API pública da biblioteca.
 

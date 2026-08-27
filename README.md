@@ -13,11 +13,10 @@ CLI. Canonical start: `npx create-cronus-app my-app --template saas`.
 
 Aurora is the flagship theme of generated product; Neutral is the docs chrome.
 
-> **v0.5.0 working release** — the app-generator matures: installable block
-> variants + `--variant`, the SaaS `app-shell` template, `add-page`, and shared
-> `demo-store`/`demo-saas` data libs for cohesive, editable generated-app data.
-> Public category is a product UI system (compose + live theme + contract), not
-> a component-count race. See [ADR 0003](docs/adr/0003-product-ui-system.md).
+> **Unreleased on main** — looks (Default / Brutalist / Glass), Neutral chrome
+> on both landings, Cronus Pro at `:4748` (additive pack). Canonical start:
+> `npx create-cronus-app my-app --template saas`. See
+> [ADR 0003](docs/adr/0003-product-ui-system.md).
 
 ## Monorepo layout
 
@@ -33,7 +32,8 @@ packages/
   create-cronus-stack/ create-cronus-stack  — Stack Builder scaffold generator
   mcp/      cronus-ui-mcp       — MCP server for registry discovery
 apps/
-  www/      @cronus-ui/www      — documentation, showcase, ThemeBuilder (Next.js 16)
+  www/      @cronus-ui/www      — OSS docs and landing (Neutral chrome, :4747)
+  pro/      @cronus-ui/pro      — Cronus Pro origin (Neutral chrome, :4748)
 ```
 
 ### Which package do I need?
@@ -58,7 +58,8 @@ Most apps install all three library packages — `@cronus-ui/ui` renders against
 ```sh
 bun install
 bun run build       # turbo: builds all packages and the docs app
-bun run www         # dev the showcase at http://localhost:4747
+bun run www         # OSS landing + docs at http://localhost:4747
+bun run pro         # Cronus Pro at http://localhost:4748
 bun run lint        # biome
 ```
 

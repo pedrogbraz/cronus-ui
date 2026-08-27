@@ -186,8 +186,8 @@ would break the byte-compare in `registry:check`.
     "button": { "title": "Button", "category": "buttons", "description": "…", "rsc": true }
   },
   "apps": {
-    // Bundled app templates read from packages/cli/templates/apps/*.json.
-    // Empty ({}) until Milestone B adds them; the generator re-runs then.
+    // Bundled app templates from packages/cli/templates/apps/*.json
+    // (saas, store, landing, landing-*, mail, chat, finance).
     "store": { "title": "Store", "description": "…", "pages": 9 }
   }
 }

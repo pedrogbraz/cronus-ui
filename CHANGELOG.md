@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **GitHub.** Repo slug is `pedrogbraz/cronus-ui` (still private). CLI registry
+  stays on that slug; `npx cronus-ui add` needs a public tag or `-r ./registry`.
+- **compose -y.** With no template name, compose picks `saas`, not the
+  lexicographic first bundled app (`chat`).
 - **Button.** Dropped the `gradient` variant. Primary is the token pair
   (`bg-primary` / `text-primary-foreground`) — white on Neutral dark, like the
   homepage CTA. Outline is a hairline on a transparent fill.
@@ -20,6 +24,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   announcement strip plus a dismissible corner card, not a tenth link. See Pro
   leaves this origin for Cronus Pro (`apps/pro`, :4748 / cronusui.pro).
 
+### Removed
+
+- **Mauve look.** Dropped from the material axis — it was a tint, not a
+  material. Looks are Default, Brutalist, and Glass.
+
 ### Added
 
 - **Sponsor (optional coffee).** `/sponsor` is a Buy Me a Coffee-style picker:
@@ -27,17 +36,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   GitHub Sponsors (one-time, any amount) unless `NEXT_PUBLIC_SPONSOR_URL` points
   at another rail. OSS stays free — this is not a paywall. Homepage band +
   footer + command palette.
-- **Cronus Pro origin.** `apps/pro` is a second Next app (port 4748) with its
-  own Aurora chrome — not `/pro` on the docs nav. Maker $199 / Studio $299
-  perpetual (not billed yet). OSS CTAs and `/pro` redirect to
-  `NEXT_PUBLIC_PRO_URL`.
+- **Cronus Pro origin.** `apps/pro` is a second Next app (port 4748) — not
+  `/pro` on the docs nav. Maker $199 / Studio $299 perpetual (not billed yet).
+  OSS CTAs and `/pro` redirect to `NEXT_PUBLIC_PRO_URL`. The Pro landing
+  matches the OSS editorial (centered hero, pack cards, section ticks) — no
+  rays, grid, or particles. Chrome is Neutral, same palette as the OSS
+  landing; pack previews keep their own themes.
 - **Cronus Pro pack (additive).** Mail, chat, and finance compose apps — extra
   products, not a paywall on the engine. Looks, SaaS, store, landing, and
   upgrade stay OSS. License is not billed yet.
-- **Looks (Default, Brutalist, Glass, Mauve).** A material axis orthogonal to
+- **Looks (Default, Brutalist, Glass).** A material axis orthogonal to
   theme and mode: `data-cronus-look` restyles radius, border, shadow, and
   glass surfaces from existing tokens — no forked components. Homepage
-  stage at `#looks`. Docs chrome stays Default.
+  stage at `#looks`. Docs chrome stays Default. Glass in light is a pastel
+  field (info / warning washes) behind a frosted pane; dark keeps the
+  chromatic blobs. The live-theming specimen on `#theming` is a Neutral
+  glass pane on the landing surface. Theme chips recolor the catalog
+  inside (buttons, chart, badges), not the pane.
 - **Live template previews.** `/templates` cards render the composed site
   (themed Cronus blocks, not screenshots). Click through for Preview / Code
   plus device frames; **Open Preview** is the full page at `/preview/t/[slug]`.

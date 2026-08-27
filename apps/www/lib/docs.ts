@@ -290,6 +290,19 @@ export const ACCESSIBILITY_CHECKS = [
 
 export const CHANGELOG_ENTRIES = [
   {
+    date: "2026-08-26",
+    version: "Unreleased",
+    status: "In development",
+    title: "Looks, Neutral chrome, Cronus Pro",
+    summary: "Material looks, Neutral landings, and an additive Pro origin — the engine stays OSS.",
+    items: [
+      "Looks: Default, Brutalist, Glass via data-cronus-look (Mauve is gone)",
+      "OSS and Pro landings share Neutral chrome; Aurora stays the generated-product flag",
+      "Cronus Pro at :4748 — mail, chat, finance pack, Maker/Studio list, not billed yet",
+      "compose -y with no template name composes saas, not lexicographic first",
+    ],
+  },
+  {
     date: "2026-07-13",
     version: "v0.5.0",
     status: "Released",
