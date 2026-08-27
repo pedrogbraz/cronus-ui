@@ -1,0 +1,17 @@
+"use client";
+
+import { cn } from "../../lib/cn.js";
+import { useLegendItem } from "./legend-context.js";
+
+export interface LegendLabelProps {
+  /** Label class name. Default: "text-sm font-medium" */
+  className?: string;
+}
+
+export function LegendLabel({ className = "text-sm font-medium" }: LegendLabelProps) {
+  const { item } = useLegendItem();
+
+  return <span className={cn("text-legend-foreground", className)}>{item.label}</span>;
+}
+
+LegendLabel.displayName = "LegendLabel";
