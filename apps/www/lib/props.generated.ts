@@ -5025,25 +5025,24 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "colorFrom",
           type: "string",
           required: false,
-          description:
-            "Colour of the leading edge of the beam. Defaults to the theme primary (`var(--cronus-primary)`).",
-          default: '"var(--cronus-primary)"',
+          description: "Colour of the leading edge of the beam. Defaults to `var(--cronus-fg)`.",
+          default: '"var(--cronus-fg)"',
         },
         {
           name: "colorTo",
           type: "string",
           required: false,
           description:
-            "Colour the trail fades through before it dissolves. Defaults to the theme accent (`var(--cronus-accent)`).",
-          default: '"var(--cronus-accent)"',
+            "Colour the trail fades through before it dissolves. Defaults to transparent.",
+          default: '"transparent"',
         },
         {
           name: "borderWidth",
           type: "number",
           required: false,
           description:
-            "Thickness of the border band the beam rides in, in pixels. Defaults to `1.5`.",
-          default: "1.5",
+            "Thickness of the border band the beam rides in, in pixels. Defaults to `1` (hairline).",
+          default: "1",
         },
         {
           name: "reverse",

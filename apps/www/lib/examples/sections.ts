@@ -282,75 +282,11 @@ export const EXAMPLE_SECTIONS: Record<string, ExampleSectionMeta[]> = {
     { id: "container", title: "ChartContainer" },
     { id: "radial-chart", title: "Radial bar (primitive)" },
   ],
-  "area-chart": [
-    { id: "default", title: "Default" },
-    { id: "motion", title: "Motion" },
-  ],
-  "line-chart": [
-    { id: "default", title: "Default" },
-    { id: "motion", title: "Motion" },
-  ],
-  "live-line-chart": [
-    { id: "default", title: "Default" },
-    { id: "motion", title: "Motion" },
-  ],
   "bar-chart": [
     { id: "default", title: "Default" },
     { id: "stacked", title: "Stacked" },
     { id: "motion", title: "Motion" },
     { id: "motion-stacked", title: "Motion stacked" },
-  ],
-  "composed-chart": [
-    { id: "default", title: "Default" },
-    { id: "motion", title: "Motion" },
-  ],
-  "candlestick-chart": [
-    { id: "default", title: "Default" },
-    { id: "motion", title: "Motion" },
-  ],
-  "funnel-chart": [
-    { id: "default", title: "Default" },
-    { id: "motion", title: "Motion" },
-  ],
-  "gauge-chart": [
-    { id: "default", title: "Default" },
-    { id: "motion", title: "Motion" },
-  ],
-  "pie-chart": [
-    { id: "default", title: "Default" },
-    { id: "motion", title: "Motion" },
-  ],
-  "ring-chart": [
-    { id: "default", title: "Default" },
-    { id: "motion", title: "Motion" },
-  ],
-  "radar-chart": [
-    { id: "default", title: "Default" },
-    { id: "motion", title: "Motion" },
-  ],
-  "scatter-chart": [
-    { id: "default", title: "Default" },
-    { id: "motion", title: "Motion" },
-  ],
-  "sankey-chart": [
-    { id: "default", title: "Default" },
-    { id: "motion", title: "Motion" },
-  ],
-  "profit-loss-chart": [
-    { id: "default", title: "Default" },
-    { id: "motion", title: "Motion" },
-  ],
-  "choropleth-chart": [
-    { id: "default", title: "Default" },
-    { id: "motion", title: "Motion" },
-  ],
-  "sunburst-chart": [
-    { id: "default", title: "Default" },
-    { id: "motion", title: "Motion" },
-  ],
-  "heatmap-chart": [
-    { id: "default", title: "Default" },
-    { id: "motion", title: "Motion" },
   ],
   "glass-card": [{ id: "frosted-surface", title: "Frosted surface" }],
   "gradient-border": [
