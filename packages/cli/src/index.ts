@@ -70,7 +70,7 @@ program
   .option("-o, --overwrite", "overwrite existing files")
   .option("--skip-install", "do not install npm dependencies")
   .option("--dry-run", "print the validated plan + per-file preview, write nothing")
-  .option("-y, --yes", "non-interactive: pick the first template if none is given")
+  .option("-y, --yes", "non-interactive: pick saas if no template is given")
   .action((template, opts) =>
     compose(template, {
       cwd: opts.cwd,
