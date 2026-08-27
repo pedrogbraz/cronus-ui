@@ -48,6 +48,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         ref={ref}
         data-slot="button"
+        data-variant={variant ?? "primary"}
         type={asChild ? undefined : (type ?? "button")}
         className={cn(buttonVariants({ variant, size }), className)}
         {...props}

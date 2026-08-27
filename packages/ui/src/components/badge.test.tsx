@@ -14,6 +14,7 @@ describe("Badge", () => {
     const badge = screen.getByText("Failed");
     expect(badge).toHaveClass("text-error-strong");
     expect(badge).toHaveAttribute("data-slot", "badge");
+    expect(badge).toHaveAttribute("data-variant", "destructive");
   });
 
   it("applies the success variant classes", () => {
