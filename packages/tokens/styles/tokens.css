@@ -716,6 +716,10 @@
  * are overridden (plus the Tailwind radius scale, so rounded-xl follows).
  * ------------------------------------------------------------------ */
 
+[data-cronus-theme] {
+  color: var(--cronus-fg);
+}
+
 [data-slot="look-stage"] {
   background-color: var(--cronus-surface-inset);
 }
@@ -751,47 +755,211 @@
   box-shadow: none;
 }
 
-[data-cronus-look="glass"] {
-  --cronus-radius: 16px;
+/* Radius lock stays off the live-theming stage so the radius slider still
+   drives --cronus-radius / rounded-* on the specimen. */
+[data-cronus-look="glass"]:not([data-slot="theme-stage"]) {
+  --cronus-radius: 22px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 22px;
+  --radius-2xl: 26px;
+  --radius-3xl: 32px;
 }
 
-[data-cronus-look="glass"][data-slot="look-stage"] {
-  background-color: transparent;
-  background-image: linear-gradient(
-    145deg,
-    color-mix(in oklab, var(--cronus-primary) 45%, var(--cronus-surface-base)),
-    color-mix(in oklab, var(--cronus-accent) 28%, var(--cronus-surface-inset)) 52%,
-    var(--cronus-surface-base)
-  );
+/* Colored field the glass sits on. Mode is on the same node as the look —
+   descendant-from-<html> selectors would leak chrome mode into a nested
+   specimen. Dark: glowing blobs. Light: opaque pastel washes. */
+[data-cronus-look="glass"][data-cronus-mode="dark"][data-slot="look-stage"] {
+  background-color: var(--cronus-surface-inset);
+  background-image:
+    radial-gradient(
+      ellipse 55% 70% at 16% 18%,
+      color-mix(in oklab, var(--cronus-info) 52%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 60% at 88% 14%,
+      color-mix(in oklab, var(--cronus-success) 40%, transparent),
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse 45% 55% at 74% 88%,
+      color-mix(in oklab, var(--cronus-warning) 34%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 35% 40% at 8% 82%,
+      color-mix(in oklab, var(--cronus-error) 22%, transparent),
+      transparent 65%
+    );
+}
+
+[data-cronus-look="glass"][data-cronus-mode="light"][data-slot="look-stage"] {
+  background-color: color-mix(in oklab, var(--cronus-info) 12%, var(--cronus-surface-inset));
+  background-image:
+    radial-gradient(
+      ellipse 75% 95% at 0% 48%,
+      color-mix(in oklab, var(--cronus-info) 34%, var(--cronus-surface-inset)),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 70% 90% at 100% 38%,
+      color-mix(in oklab, var(--cronus-warning) 28%, var(--cronus-surface-inset)),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 55% at 78% 92%,
+      color-mix(in oklab, var(--cronus-success) 16%, var(--cronus-surface-inset)),
+      transparent 68%
+    ),
+    linear-gradient(
+      105deg,
+      color-mix(in oklab, var(--cronus-info) 18%, var(--cronus-surface-inset)),
+      color-mix(in oklab, var(--cronus-warning) 14%, var(--cronus-surface-inset)) 68%,
+      color-mix(in oklab, var(--cronus-surface-inset) 92%, var(--cronus-fg-inverse))
+    );
 }
 
 [data-cronus-look="glass"] [data-slot="card"],
-[data-cronus-look="glass"] [data-slot="input"] {
-  background-color: color-mix(in oklab, var(--cronus-surface-raised) 48%, transparent);
-  border-color: color-mix(in oklab, var(--cronus-border-strong) 70%, transparent);
-  backdrop-filter: blur(24px) saturate(1.5);
-  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+[data-cronus-look="glass"] [data-slot="glass-card"] {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transform: translateZ(0);
+  background-color: color-mix(in oklab, var(--cronus-fg) 7%, transparent);
+  border-color: color-mix(in oklab, var(--cronus-fg) 22%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklab, var(--cronus-fg) 28%, transparent),
+    inset 0 -1px 0 color-mix(in oklab, var(--cronus-fg) 6%, transparent),
+    0 24px 60px color-mix(in oklab, black 38%, transparent);
 }
 
-[data-cronus-look="mauve"] {
-  --cronus-radius: 20px;
+/* Light frost uses the inverse (the bright surface). Mixing --cronus-fg
+   here would tint the pane with dark ink and kill the glass. */
+[data-cronus-look="glass"][data-cronus-mode="light"] [data-slot="card"],
+[data-cronus-look="glass"][data-cronus-mode="light"] [data-slot="glass-card"] {
+  background-color: color-mix(in oklab, var(--cronus-fg-inverse) 68%, transparent);
+  border-color: color-mix(in oklab, var(--cronus-fg) 12%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklab, var(--cronus-fg-inverse) 86%, transparent),
+    inset 0 -1px 0 color-mix(in oklab, var(--cronus-fg) 4%, transparent),
+    0 20px 48px color-mix(in oklab, var(--cronus-fg) 8%, transparent);
 }
 
-[data-cronus-look="mauve"][data-slot="look-stage"] {
-  background-color: color-mix(in oklab, var(--cronus-primary) 22%, var(--cronus-surface-inset));
+@supports (backdrop-filter: blur(1px)) {
+  [data-cronus-look="glass"] [data-slot="card"],
+  [data-cronus-look="glass"] [data-slot="glass-card"] {
+    backdrop-filter: blur(40px) saturate(1.85);
+    -webkit-backdrop-filter: blur(40px) saturate(1.85);
+  }
+  [data-cronus-look="glass"] [data-slot="input"],
+  [data-cronus-look="glass"] [data-slot="badge"][data-variant="outline"],
+  [data-cronus-look="glass"] [data-slot="badge"][data-variant="default"] {
+    backdrop-filter: blur(18px) saturate(1.5);
+    -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  }
+  [data-cronus-look="glass"] [data-slot="button"][data-variant="outline"],
+  [data-cronus-look="glass"] [data-slot="button"][data-variant="secondary"] {
+    backdrop-filter: blur(16px) saturate(1.5);
+    -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  }
 }
 
-[data-cronus-look="mauve"] [data-slot="card"] {
-  background-color: color-mix(in oklab, var(--cronus-surface-raised) 90%, var(--cronus-primary));
+[data-cronus-look="glass"] [data-slot="card"]::before,
+[data-cronus-look="glass"] [data-slot="glass-card"]::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    165deg,
+    color-mix(in oklab, var(--cronus-fg) 18%, transparent),
+    transparent 42%
+  );
 }
 
-[data-cronus-look="mauve"] [data-slot="button"] {
-  border-radius: calc(var(--cronus-radius) + 999px);
+[data-cronus-look="glass"][data-cronus-mode="light"] [data-slot="card"]::before,
+[data-cronus-look="glass"][data-cronus-mode="light"] [data-slot="glass-card"]::before {
+  background: linear-gradient(
+    165deg,
+    color-mix(in oklab, var(--cronus-fg-inverse) 70%, transparent),
+    transparent 48%
+  );
+}
+
+[data-cronus-look="glass"] [data-slot="input"],
+[data-cronus-look="glass"] [data-slot="badge"][data-variant="outline"],
+[data-cronus-look="glass"] [data-slot="badge"][data-variant="default"] {
+  background-color: color-mix(in oklab, var(--cronus-fg) 8%, transparent);
+  border-color: color-mix(in oklab, var(--cronus-fg) 20%, transparent);
+}
+
+[data-cronus-look="glass"] [data-slot="button"][data-variant="outline"],
+[data-cronus-look="glass"] [data-slot="button"][data-variant="secondary"] {
+  background-color: color-mix(in oklab, var(--cronus-fg) 8%, transparent);
+  border-color: color-mix(in oklab, var(--cronus-fg) 22%, transparent);
+}
+
+[data-cronus-look="glass"][data-cronus-mode="light"] [data-slot="input"],
+[data-cronus-look="glass"][data-cronus-mode="light"] [data-slot="badge"][data-variant="outline"],
+[data-cronus-look="glass"][data-cronus-mode="light"] [data-slot="badge"][data-variant="default"] {
+  background-color: color-mix(in oklab, var(--cronus-fg-inverse) 72%, transparent);
+  border-color: color-mix(in oklab, var(--cronus-fg) 14%, transparent);
+}
+
+[data-cronus-look="glass"][data-cronus-mode="light"] [data-slot="button"][data-variant="outline"],
+[data-cronus-look="glass"][data-cronus-mode="light"]
+  [data-slot="button"][data-variant="secondary"] {
+  background-color: color-mix(in oklab, var(--cronus-fg-inverse) 72%, transparent);
+  border-color: color-mix(in oklab, var(--cronus-fg) 16%, transparent);
+}
+
+/* Live theming pane is chrome glass (Neutral page tokens). Primary stays
+   off the fill — the nested theme only recolors catalog inside. */
+[data-slot="theme-stage"][data-cronus-look="glass"][data-cronus-mode="dark"] [data-slot="card"] {
+  background-color: color-mix(in oklab, var(--cronus-fg) 11%, transparent);
+  border-color: color-mix(in oklab, var(--cronus-fg) 20%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklab, var(--cronus-fg) 38%, transparent),
+    inset 0 -1px 0 color-mix(in oklab, var(--cronus-fg) 5%, transparent),
+    0 1px 0 color-mix(in oklab, var(--cronus-fg) 6%, transparent),
+    0 18px 40px color-mix(in oklab, black 22%, transparent);
+}
+
+[data-slot="theme-stage"][data-cronus-look="glass"][data-cronus-mode="light"] [data-slot="card"] {
+  background-color: color-mix(in oklab, var(--cronus-fg-inverse) 62%, transparent);
+  border-color: color-mix(in oklab, var(--cronus-fg) 11%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklab, var(--cronus-fg-inverse) 90%, transparent),
+    0 14px 36px color-mix(in oklab, var(--cronus-fg) 6%, transparent);
+}
+
+[data-slot="theme-stage"] [data-slot="card"]::before {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--cronus-fg) 16%, transparent),
+    transparent 26%
+  );
+}
+
+[data-slot="theme-stage"][data-cronus-mode="light"] [data-slot="card"]::before {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--cronus-fg-inverse) 52%, transparent),
+    transparent 28%
+  );
 }
 
 @media (prefers-reduced-transparency: reduce) {
   [data-cronus-look="glass"] [data-slot="card"],
-  [data-cronus-look="glass"] [data-slot="input"] {
+  [data-cronus-look="glass"] [data-slot="glass-card"],
+  [data-cronus-look="glass"] [data-slot="input"],
+  [data-cronus-look="glass"] [data-slot="badge"][data-variant="outline"],
+  [data-cronus-look="glass"] [data-slot="badge"][data-variant="default"],
+  [data-cronus-look="glass"] [data-slot="button"][data-variant="outline"],
+  [data-cronus-look="glass"] [data-slot="button"][data-variant="secondary"] {
     background-color: var(--cronus-surface-raised);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;

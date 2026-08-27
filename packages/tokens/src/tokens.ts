@@ -457,14 +457,13 @@ export const defaultMode: Mode = "dark";
  * Material language — orthogonal to {@link ThemeName} (palette) and {@link Mode}.
  * Applied via `data-cronus-look` on any subtree. Docs chrome stays `default`.
  */
-export type LookName = "default" | "brutalist" | "glass" | "mauve";
-export const lookNames: LookName[] = ["default", "brutalist", "glass", "mauve"];
+export type LookName = "default" | "brutalist" | "glass";
+export const lookNames: LookName[] = ["default", "brutalist", "glass"];
 export const defaultLook: LookName = "default";
 export const lookLabels: Record<LookName, string> = {
   default: "Default",
   brutalist: "Brutalist",
   glass: "Glass",
-  mauve: "Mauve",
 };
 
 /** Maps a ThemeTokens key to its runtime CSS custom property name. */

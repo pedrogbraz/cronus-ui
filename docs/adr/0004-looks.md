@@ -8,8 +8,8 @@
 ## Contexto
 
 Tema (Aurora / Neutral / Midnight / Sunset / Emerald) é paleta. Mode é
-claro/escuro. O mercado (HeroUI Pro) vende um terceiro eixo — Brutalism, Glass,
-Mauve — como “premium themes”, um catálogo à parte.
+claro/escuro. O mercado (HeroUI Pro) vende um terceiro eixo — Brutalism, Glass
+— como “premium themes”, um catálogo à parte.
 
 Cronus já re-tema via tokens. Copiar o paywall de looks é a partida errada:
 o motor já existe. O que faltava era nomear o eixo e aplicá-lo com
@@ -17,7 +17,7 @@ o motor já existe. O que faltava era nomear o eixo e aplicá-lo com
 
 ## Decisão
 
-1. **Look é material, não paleta.** `default` | `brutalist` | `glass` | `mauve`.
+1. **Look é material, não paleta.** `default` | `brutalist` | `glass`.
    Radius, borda, sombra, blur, transform de label. A paleta continua no tema.
 2. **Orthogonal.** Qualquer look × qualquer tema × qualquer mode. Glass +
    Midnight e Brutalist + Sunset são válidos.
@@ -25,7 +25,7 @@ o motor já existe. O que faltava era nomear o eixo e aplicá-lo com
    docs permanece `default` (Neutral). Apps gerados opt-in no `<html>`.
 4. **Sem fork de componente.** Looks restilizam `data-slot` + tokens existentes.
    Não há `ButtonBrutalist`.
-5. **OSS neste ciclo.** Os quatro looks entram no motor. Pro, se existir, não é
+5. **OSS neste ciclo.** Os três looks entram no motor. Pro, se existir, não é
    “pagar para ter Glass” — é o loop de produto (templates, Figma, suporte,
    looks extras depois).
 
@@ -46,5 +46,5 @@ continuam no CSS do look.
 **Ruins:** Glass translúcido em cima de paleta clara precisa de cuidado AA;
 `prefers-reduced-transparency` desliga o blur.
 
-**Aceitamos:** o nome é **Mauve**, não “Mouve”. Brutalist, não “Brutalism” como
-marca de terceiro.
+**Aceitamos:** Brutalist, não “Brutalism” como marca de terceiro. Mauve saiu
+do eixo — não era material, era um tint, e o palco da homepage ficava sujo.
