@@ -166,7 +166,7 @@ export const SplitButton = forwardRef<HTMLDivElement, SplitButtonProps>(
                   data-destructive={item.destructive ? "" : undefined}
                   className={cn(
                     item.destructive &&
-                      "text-error focus:bg-error/10 focus:text-error [&_svg]:text-error",
+                      "text-error-strong focus:bg-error/10 focus:text-error-strong [&_svg]:text-error-strong",
                   )}
                 >
                   {item.icon}

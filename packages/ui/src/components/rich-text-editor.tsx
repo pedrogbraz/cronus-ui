@@ -258,7 +258,7 @@ export const RichTextEditor = forwardRef<HTMLDivElement, RichTextEditorProps>(
             "[&_ul]:my-2 [&_ul]:list-disc [&_ul]:pl-6",
             "[&_ol]:my-2 [&_ol]:list-decimal [&_ol]:pl-6",
             "[&_li]:my-0.5",
-            "[&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4",
+            "[&_a]:text-primary-strong [&_a]:underline [&_a]:underline-offset-4",
             "[&_blockquote]:my-3 [&_blockquote]:border-border [&_blockquote]:border-l-2 [&_blockquote]:pl-4 [&_blockquote]:text-fg-secondary [&_blockquote]:italic",
             "[&_code]:rounded [&_code]:bg-surface-overlay [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-sm",
             "[&_pre]:my-3 [&_pre]:overflow-x-auto [&_pre]:rounded-lg [&_pre]:bg-surface-overlay [&_pre]:p-4 [&_pre]:font-mono [&_pre]:text-sm",

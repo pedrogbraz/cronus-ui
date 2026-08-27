@@ -447,7 +447,7 @@ export const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
           />
         </fieldset>
         {error ? (
-          <p id={errorId} role="alert" className="text-xs text-error">
+          <p id={errorId} role="alert" className="text-xs text-error-strong">
             {error}
           </p>
         ) : null}

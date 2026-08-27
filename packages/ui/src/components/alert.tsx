@@ -59,10 +59,7 @@ export const AlertTitle = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLPa
       <div
         ref={ref}
         data-slot="alert-title"
-        className={cn(
-          "col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight text-fg",
-          className,
-        )}
+        className={cn("col-start-2 line-clamp-1 min-h-4 font-medium text-fg", className)}
         {...props}
       />
     );

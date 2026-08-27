@@ -53,7 +53,7 @@ export const FieldError = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLPa
         ref={ref}
         data-slot="field-error"
         role="alert"
-        className={cn("text-xs text-error", className)}
+        className={cn("text-xs text-error-strong", className)}
         {...props}
       >
         {children}

@@ -107,7 +107,7 @@ export const NotificationRow = forwardRef<HTMLButtonElement, NotificationRowProp
           {description ? (
             <span className="min-w-0 break-words text-sm text-fg-secondary">{description}</span>
           ) : null}
-          {timestamp ? <span className="text-xs text-fg-muted">{timestamp}</span> : null}
+          {timestamp ? <span className="text-xs text-fg-tertiary">{timestamp}</span> : null}
         </span>
       </button>
     );

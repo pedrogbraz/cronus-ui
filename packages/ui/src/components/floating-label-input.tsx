@@ -96,14 +96,14 @@ export const FloatingLabelInput = forwardRef<HTMLInputElement, FloatingLabelInpu
               "motion-reduce:transition-none motion-reduce:duration-0",
               // Floated (base — applies when filled, and re-asserted on focus below).
               "-translate-y-[1.6rem] scale-[0.8]",
-              invalid ? "text-error" : "text-fg-secondary",
+              invalid ? "text-error-strong" : "text-fg-secondary",
               // Resting: empty and unfocused → sits in the placeholder position.
               "peer-placeholder-shown:translate-y-[-50%] peer-placeholder-shown:scale-100 peer-placeholder-shown:text-fg-tertiary",
               // Focused: float back up and take the accent (or error) color.
               // `text-primary-strong` (AA-tuned): the raw `primary` fill reads
               // ~2:1 as this small label on white in the bright-accent light themes.
               "peer-focus:-translate-y-[1.6rem] peer-focus:scale-[0.8]",
-              invalid ? "peer-focus:text-error" : "peer-focus:text-primary-strong",
+              invalid ? "peer-focus:text-error-strong" : "peer-focus:text-primary-strong",
               // Disabled dimming mirrors the input.
               "peer-disabled:opacity-50",
               labelClassName,
@@ -127,7 +127,10 @@ export const FloatingLabelInput = forwardRef<HTMLInputElement, FloatingLabelInpu
             id={helperId}
             data-slot="floating-label-input-helper"
             role={invalid ? "alert" : undefined}
-            className={cn("mt-1.5 px-1 text-xs", invalid ? "text-error" : "text-fg-secondary")}
+            className={cn(
+              "mt-1.5 px-1 text-xs",
+              invalid ? "text-error-strong" : "text-fg-secondary",
+            )}
           >
             {helperText}
           </p>

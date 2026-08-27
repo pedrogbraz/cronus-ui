@@ -113,7 +113,7 @@ export const FormLabel = forwardRef<
       data-slot="form-label"
       data-error={!!error}
       htmlFor={formItemId}
-      className={cn(error && "text-error", className)}
+      className={cn(error && "text-error-strong", className)}
       {...props}
     />
   );
@@ -168,7 +168,7 @@ export const FormMessage = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLP
         data-slot="form-message"
         id={formMessageId}
         role="alert"
-        className={cn("text-xs text-error", className)}
+        className={cn("text-xs text-error-strong", className)}
         {...props}
       >
         {body}
