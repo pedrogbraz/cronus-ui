@@ -2437,7 +2437,7 @@ return <JsonViewer data={payload} defaultExpandedDepth={2} />;`,
     </div>
   }
   after={
-    <div className="flex size-full items-center justify-center bg-gradient-primary">
+    <div className="flex size-full items-center justify-center bg-primary">
       <span className="rounded-md bg-surface-base/80 px-3 py-1 text-sm font-medium text-fg">
         After
       </span>
@@ -2456,7 +2456,7 @@ return <JsonViewer data={payload} defaultExpandedDepth={2} />;`,
             </div>
           }
           after={
-            <div className="flex size-full items-center justify-center bg-gradient-primary">
+            <div className="flex size-full items-center justify-center bg-primary">
               <span className="rounded-md bg-surface-base/80 px-3 py-1 text-sm font-medium text-fg">
                 After
               </span>
