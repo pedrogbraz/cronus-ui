@@ -13,7 +13,9 @@
 #             promoted into the repo, and passes with a notice (see the
 #             "Visual regression" section of CONTRIBUTING.md).
 #
-# The repo is public, so GitHub-hosted runners are free.
+# GitHub-hosted runners. The GitHub repo is private; npm packages stay
+# public. `npx cronus-ui add` hits raw.githubusercontent.com only after
+# a public tag (release preflight). Local: `-r ./registry`.
 name: CI
 
 on:
@@ -60,6 +62,8 @@ jobs:
         env:
           BUNDLE_CHECK_STRICT: "1"
         run: bun run bundle:check
+      - name: Package smoke (light)
+        run: bun run package:smoke
 
   browser:
     runs-on: ubuntu-latest
