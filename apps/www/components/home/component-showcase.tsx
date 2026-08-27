@@ -48,7 +48,7 @@ function Swatch({ className, label }: { className: string; label: string }) {
 
 export function ComponentShowcase() {
   return (
-    <section id="components" className="relative scroll-mt-20 border-t border-border/60">
+    <section id="components" className="relative scroll-mt-20">
       <SectionGlow />
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
         <div className="flex flex-col gap-3">

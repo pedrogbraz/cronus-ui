@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Highlight, type PrismTheme } from "prism-react-renderer";
 import { useState } from "react";
 import { COMPONENT_COUNT } from "../../lib/components-index";
+import { SectionGlow } from "../showcase-ui";
 
 const count = new Intl.NumberFormat("en-US");
 
@@ -72,7 +73,7 @@ const theme: PrismTheme = {
 const MINI = [
   { value: count.format(COMPONENT_COUNT), label: "components" },
   { value: "5", label: "themes" },
-  { value: "4", label: "looks" },
+  { value: "3", label: "looks" },
 ] as const;
 
 function Corner({ className }: { className: string }) {
@@ -87,7 +88,8 @@ export function DeveloperCli({ displayClassName }: { displayClassName?: string }
   }
 
   return (
-    <section aria-labelledby="cli-heading" className="border-t border-border/60 py-20 sm:py-28">
+    <section id="cli" aria-labelledby="cli-heading" className="relative py-20 sm:py-28">
+      <SectionGlow />
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
         <div>
           <p className="text-sm text-fg-tertiary">For builders</p>

@@ -26,18 +26,16 @@ interface EyebrowProps {
 }
 
 /**
- * A tasteful "aurora glass" accent for a section's top edge: a glowing hairline
- * that sits on the border plus a soft aurora glow bleeding downward — the same
- * blue-glass shimmer the translucent nav catches on scroll. Drop it as the first
- * child of a `relative` section (it's absolutely positioned + aria-hidden).
+ * Short faded hairline between landing sections. The fade eats most of the
+ * width so the rule reads as a tick, not a full-bleed bar.
  */
 export function SectionGlow({ className }: { className?: string }) {
   return (
     <div
       aria-hidden="true"
-      className={cn("pointer-events-none absolute inset-x-0 top-0", className)}
+      className={cn("pointer-events-none absolute inset-x-0 top-0 flex justify-center", className)}
     >
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border-strong to-transparent" />
+      <div className="h-px w-[min(12rem,32%)] bg-gradient-to-r from-transparent via-border to-transparent" />
     </div>
   );
 }
@@ -108,6 +106,7 @@ export function PreviewFrame({ label, children, className }: PreviewFrameProps) 
   return (
     <div
       data-slot="preview-frame"
+      data-force-motion
       className={cn(
         "relative flex min-h-[8rem] items-center justify-center gap-4 overflow-x-auto overflow-y-hidden rounded-2xl border border-border bg-surface-inset/50 p-8",
         className,

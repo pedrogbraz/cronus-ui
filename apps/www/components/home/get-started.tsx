@@ -75,7 +75,7 @@ export function GetStarted() {
   return (
     <>
       {/* Part 1 — product loop: create → add-page → upgrade */}
-      <section className="relative border-t border-border/60">
+      <section className="relative">
         <SectionGlow />
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
           <div className="flex flex-col gap-3">

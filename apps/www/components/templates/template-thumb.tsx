@@ -78,6 +78,7 @@ export function TemplateThumb({
           src={previewPath(entry.slug, true)}
           title={`${entry.name} live preview`}
           inert
+          sandbox="allow-scripts allow-same-origin"
           loading="lazy"
           className="pointer-events-none absolute left-0 top-0 origin-top-left border-0"
           style={{

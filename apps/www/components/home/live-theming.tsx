@@ -1,6 +1,7 @@
 "use client";
 
-import { useTheme } from "@cronus-ui/theme";
+import { CronusUIProvider, useTheme } from "@cronus-ui/theme";
+import type { ThemeName } from "@cronus-ui/tokens";
 import {
   Avatar,
   AvatarFallback,
@@ -17,7 +18,8 @@ import {
   Switch,
 } from "@cronus-ui/ui";
 import { Check, Moon, Sun } from "lucide-react";
-import { Eyebrow } from "../showcase-ui";
+import { useState } from "react";
+import { Eyebrow, SectionGlow } from "../showcase-ui";
 
 /** The five shipped presets, each with a fixed swatch derived from its `primary`. */
 const THEMES = [
@@ -31,38 +33,33 @@ const THEMES = [
 /** Static bar heights for the preview chart (percent) — stable across renders. */
 const BARS = [38, 62, 45, 78, 56, 90, 68];
 
-function parseRadius(radius: string | undefined): number {
-  if (!radius) return 14;
-  const n = Number.parseInt(radius, 10);
-  return Number.isNaN(n) ? 14 : n;
-}
-
 /**
- * The signature section: a prominent theme-swatch row that re-themes the entire
- * page live (via `setTheme`), plus a rich preview of real components so the
- * "themes itself" promise is felt, not just claimed. All token-driven — one
- * palette change cascades through every surface, border, gradient and shadow.
+ * Signature section. Theme chips recolor the catalog inside the pane.
+ * Light/dark is the landing mode — the glass samples the page. A nested
+ * opposite mode puts light type on dark glass (or a solid plate on light).
  */
 export function LiveTheming() {
-  const { theme, mode, overrides, setTheme, setMode, setOverrides } = useTheme();
-  const radius = parseRadius(overrides.radius);
-  const isDark = mode === "dark";
+  const { mode: chromeMode, toggleMode } = useTheme();
+  const [theme, setTheme] = useState<ThemeName>("aurora");
+  const [radius, setRadius] = useState(14);
+  const isDark = chromeMode === "dark";
 
   return (
     <section id="theming" className="relative scroll-mt-20">
+      <SectionGlow />
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="flex flex-col gap-3">
           <Eyebrow>Live theming</Eyebrow>
           <h2 className="max-w-2xl font-display text-3xl tracking-[-0.025em] sm:text-4xl">
-            One palette. The whole page follows.
+            One palette. The whole product follows.
           </h2>
           <p className="max-w-2xl text-fg-secondary">
-            Pick a theme — every surface, border, gradient and shadow on this page re-themes
+            Pick a theme — every surface, border, gradient and shadow in the preview re-themes
             instantly. No re-render, no rebuild. This is the whole idea.
           </p>
         </div>
 
-        {/* Controls: the theme swatches (the star), + mode + radius. */}
+        {/* Controls stay on Neutral chrome so they follow the page light/dark. */}
         <div className="mt-8 flex flex-wrap items-center gap-3">
           <div className="flex flex-wrap items-center gap-2">
             {THEMES.map((t) => {
@@ -99,7 +96,7 @@ export function LiveTheming() {
 
           <button
             type="button"
-            onClick={() => setMode(isDark ? "light" : "dark")}
+            onClick={toggleMode}
             className="inline-flex items-center gap-2 rounded-full border border-border bg-surface-raised px-3 py-1.5 text-sm font-medium text-fg-secondary outline-none transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] hover:border-border-strong hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
             aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
           >
@@ -115,7 +112,7 @@ export function LiveTheming() {
             <span className="whitespace-nowrap">Radius</span>
             <Slider
               value={[radius]}
-              onValueChange={([next]) => setOverrides({ ...overrides, radius: `${next}px` })}
+              onValueChange={([next]) => setRadius(next ?? 14)}
               max={28}
               step={1}
               aria-label="Corner radius"
@@ -127,93 +124,109 @@ export function LiveTheming() {
           </div>
         </div>
 
-        {/* The live preview — a curated mini-app that re-themes with the swatches. */}
-        <div className="mt-8 overflow-hidden rounded-2xl border border-border bg-surface-raised">
-          <div className="flex items-center justify-between border-b border-border px-4 py-3 sm:px-6">
-            <span className="font-mono text-xs text-fg-tertiary">app.cronus.dev</span>
-            <Badge variant="outline" className="capitalize">
-              {theme}
-            </Badge>
-          </div>
+        {/* Pane is Neutral chrome glass — theme/mode of the page. The
+            nested provider re-themes only the catalog inside. */}
+        <div
+          data-slot="theme-stage"
+          data-cronus-look="glass"
+          data-cronus-mode={chromeMode}
+          className="mt-8 text-fg"
+        >
+          <div
+            data-slot="card"
+            className="relative rounded-2xl border text-fg backdrop-blur-[40px] backdrop-saturate-150"
+          >
+            <CronusUIProvider
+              defaultThemeName={theme}
+              defaultModeName={chromeMode}
+              overrides={{ radius: `${radius}px` }}
+              key={`${theme}-${chromeMode}`}
+              className="text-fg"
+            >
+              <div className="relative flex items-center justify-between border-b border-border/50 px-4 py-3 sm:px-6">
+                <span className="font-mono text-xs text-fg-secondary">app.cronus.dev</span>
+                <Badge variant="outline" className="capitalize">
+                  {theme}
+                </Badge>
+              </div>
 
-          <div className="grid gap-x-6 gap-y-5 px-4 pb-5 sm:px-6 sm:pb-6 lg:grid-cols-3">
-            {/* Revenue metric + bar chart */}
-            <div className="flex flex-col gap-4 pt-5 lg:col-span-2">
-              <div className="flex items-start justify-between gap-4">
-                <Metric>
-                  <MetricLabel>Monthly revenue</MetricLabel>
-                  <MetricValue>$248,900</MetricValue>
-                  <MetricDelta trend="up">+18.2% vs last month</MetricDelta>
-                </Metric>
-                <div className="flex gap-2">
-                  <Badge variant="success">Live</Badge>
-                  <Badge variant="info" className="capitalize">
-                    {theme}
-                  </Badge>
+              <div className="relative grid gap-x-6 gap-y-5 px-4 pb-5 sm:px-6 sm:pb-6 lg:grid-cols-3">
+                <div className="flex flex-col gap-4 pt-5 lg:col-span-2">
+                  <div className="flex items-start justify-between gap-4">
+                    <Metric>
+                      <MetricLabel>Monthly revenue</MetricLabel>
+                      <MetricValue>$248,900</MetricValue>
+                      <MetricDelta trend="up">+18.2% vs last month</MetricDelta>
+                    </Metric>
+                    <div className="flex gap-2">
+                      <Badge variant="success">Live</Badge>
+                      <Badge variant="info" className="capitalize">
+                        {theme}
+                      </Badge>
+                    </div>
+                  </div>
+                  <div className="flex h-28 items-end gap-2">
+                    {BARS.map((h, i) => (
+                      <div
+                        key={h}
+                        className={cn(
+                          "flex-1 rounded-t-md transition-[height] duration-300 ease-[cubic-bezier(.22,1,.36,1)]",
+                          i === BARS.length - 1 ? "bg-primary" : "bg-primary/20",
+                        )}
+                        style={{ height: `${h}%` }}
+                      />
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div className="flex h-28 items-end gap-2">
-                {BARS.map((h, i) => (
-                  <div
-                    key={h}
-                    className={cn(
-                      "flex-1 rounded-t-md transition-[height] duration-300 ease-[cubic-bezier(.22,1,.36,1)]",
-                      i === BARS.length - 1 ? "bg-primary" : "bg-primary/25",
-                    )}
-                    style={{ height: `${h}%` }}
-                  />
-                ))}
-              </div>
-            </div>
 
-            {/* Team + actions */}
-            <div className="flex flex-col gap-4 border-t border-border pt-5 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-5">
-              <div>
-                <p className="text-sm font-medium text-fg">Your team</p>
-                <div className="mt-3 flex -space-x-2">
-                  {["AK", "MR", "JD", "SL"].map((initials) => (
-                    <Avatar key={initials} className="size-8 border-2 border-surface-inset">
-                      <AvatarFallback className="bg-surface-overlay text-[11px] text-fg-secondary">
-                        {initials}
-                      </AvatarFallback>
-                    </Avatar>
-                  ))}
-                  <span className="grid size-8 place-items-center rounded-full border-2 border-surface-inset bg-surface-overlay text-[11px] font-medium text-fg-secondary">
-                    +9k
-                  </span>
+                <div className="flex flex-col gap-4 border-t border-border/50 pt-5 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-5">
+                  <div>
+                    <p className="text-sm font-medium text-fg">Your team</p>
+                    <div className="mt-3 flex -space-x-2">
+                      {["AK", "MR", "JD", "SL"].map((initials) => (
+                        <Avatar key={initials} className="size-8 border-2 border-border/60">
+                          <AvatarFallback className="bg-surface-overlay/70 text-[11px] text-fg-secondary">
+                            {initials}
+                          </AvatarFallback>
+                        </Avatar>
+                      ))}
+                      <span className="grid size-8 place-items-center rounded-full border-2 border-border/60 bg-surface-overlay/70 text-[11px] font-medium text-fg-secondary">
+                        +9k
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <Button size="sm" className="w-full">
+                      Deploy
+                    </Button>
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm" className="flex-1">
+                        Invite
+                      </Button>
+                      <Button variant="ghost" size="sm" className="flex-1">
+                        Settings
+                      </Button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <Button size="sm" className="w-full">
-                  Deploy
-                </Button>
-                <div className="flex gap-2">
-                  <Button variant="outline" size="sm" className="flex-1">
-                    Invite
-                  </Button>
-                  <Button variant="ghost" size="sm" className="flex-1">
-                    Settings
-                  </Button>
-                </div>
-              </div>
-            </div>
 
-            {/* A small form row */}
-            <div className="flex flex-col gap-4 border-t border-border pt-5 lg:col-span-3">
-              <div className="grid gap-4 sm:grid-cols-[1fr_auto_auto] sm:items-end">
-                <div className="flex flex-col gap-1.5">
-                  <Label htmlFor="theming-email">Work email</Label>
-                  <Input id="theming-email" placeholder="you@cronus.dev" />
+                <div className="flex flex-col gap-4 border-t border-border/50 pt-5 lg:col-span-3">
+                  <div className="grid gap-4 sm:grid-cols-[1fr_auto_auto] sm:items-end">
+                    <div className="flex flex-col gap-1.5">
+                      <Label htmlFor="theming-email">Work email</Label>
+                      <Input id="theming-email" placeholder="you@cronus.dev" />
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Switch id="theming-notify" defaultChecked aria-label="Notifications" />
+                      <Label htmlFor="theming-notify" className="text-fg-secondary">
+                        Notify me
+                      </Label>
+                    </div>
+                    <Button size="md">Subscribe</Button>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Switch id="theming-notify" defaultChecked aria-label="Notifications" />
-                  <Label htmlFor="theming-notify" className="text-fg-secondary">
-                    Notify me
-                  </Label>
-                </div>
-                <Button size="md">Subscribe</Button>
               </div>
-            </div>
+            </CronusUIProvider>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { ArrowUpRight, Github } from "lucide-react";
 import { PRO_URL } from "../../lib/site-url";
 import { CronusMark } from "../brand/cronus-mark";
+import { SectionGlow } from "../showcase-ui";
 
 interface FooterLink {
   label: string;
@@ -45,7 +46,8 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
 /** The homepage footer — brand block, link columns, and a bottom bar. */
 export function SiteFooter() {
   return (
-    <footer id="cli" className="border-t border-border/60 bg-surface-inset/40">
+    <footer className="relative bg-surface-inset/40">
+      <SectionGlow />
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
         <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
           {/* Brand */}

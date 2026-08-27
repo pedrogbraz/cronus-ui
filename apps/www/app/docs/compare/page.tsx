@@ -22,14 +22,16 @@ const rows = [
   },
   {
     dimension: "Live theming",
-    cronus: "5 themes × light/dark, CSS variables, no re-render",
+    cronus:
+      "5 themes × light/dark, plus looks (default / brutalist / glass); CSS variables, no re-render",
     shadcn: "Utility classes you restyle",
     heroui: "Built-in look",
     aceternity: "Tailwind / Motion, not a token runtime",
   },
   {
     dimension: "Product generation",
-    cronus: "compose templates store, landing, saas; upgrade without losing edits",
+    cronus:
+      "compose saas, store, landing + landing-* flavors; additive mail/chat/finance; upgrade without losing edits. Looks stay OSS.",
     shadcn: "You assemble",
     heroui: "No",
     aceternity: "Marketing templates and sections, not a composed app",

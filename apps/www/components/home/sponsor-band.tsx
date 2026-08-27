@@ -5,7 +5,7 @@ import { Eyebrow, SectionGlow } from "../showcase-ui";
 /** Quiet homepage ask — OSS stays free; this is optional. */
 export function SponsorBand() {
   return (
-    <section aria-labelledby="sponsor-heading" className="relative border-t border-border/60">
+    <section aria-labelledby="sponsor-heading" className="relative">
       <SectionGlow />
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
         <div className="flex flex-col gap-6 rounded-2xl border border-border bg-surface-raised p-8 sm:flex-row sm:items-center sm:justify-between">

@@ -393,7 +393,7 @@ export const FONT_CHOICES: FontChoice[] = [
 ];
 
 /* ------------------------------------------------------------------ *
- * 5. STYLE PRESETS — 6 cohesive named "looks".
+ * 5. STYLE PRESETS — 6 cohesive named presets (not data-cronus-look).
  * ------------------------------------------------------------------ */
 
 export const STYLE_PRESETS: StylePreset[] = [

@@ -33,7 +33,7 @@ export function Hero({ displayClassName }: { displayClassName?: string }) {
           <span className="mt-[0.06em] inline-flex flex-nowrap items-baseline justify-center gap-x-[0.28em] max-sm:flex-wrap">
             <span className="whitespace-nowrap">for everything you</span>
             <span className="relative inline-block whitespace-nowrap align-baseline leading-none">
-              <WordRotate words={ROTATE} interval={2800} lockWidth={false} />
+              <WordRotate words={ROTATE} interval={2800} lockWidth={false} announce={false} />
               <span
                 aria-hidden="true"
                 className="cronus-word-underline pointer-events-none absolute inset-x-0 h-[3px] rounded-full bottom-[0.1em]"

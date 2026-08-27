@@ -1,13 +1,13 @@
 "use client";
 
 import { useTheme } from "@cronus-ui/theme";
-import { type ThemeName, themeNames } from "@cronus-ui/tokens";
 import { Badge } from "@cronus-ui/ui/badge";
 import { cn } from "@cronus-ui/ui/cn";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@cronus-ui/ui/sheet";
-import { Check, Github, Menu, Moon, Palette, Sun } from "lucide-react";
+import { Github, Menu, Moon, Sun } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { PRO_URL } from "../lib/site-url";
 import { CronusMark } from "./brand/cronus-mark";
 import { CommandSearch } from "./docs/command-search";
@@ -33,24 +33,6 @@ const moreLinks = [
 
 const GITHUB_URL = "https://github.com/pedrogbraz/cronus-ui";
 
-/** Friendly Title Case label for each theme preset. */
-const themeLabels: Record<ThemeName, string> = {
-  aurora: "Aurora",
-  neutral: "Neutral",
-  midnight: "Midnight",
-  sunset: "Sunset",
-  emerald: "Emerald",
-};
-
-/** A representative swatch per theme, derived from each preset's `primary` token. */
-const themeSwatches: Record<ThemeName, string> = {
-  aurora: "oklch(0.685 0.169 237.3)",
-  neutral: "oklch(0.62 0 0)",
-  midnight: "oklch(0.55 0.205 280)",
-  sunset: "oklch(0.78 0.16 65)",
-  emerald: "oklch(0.74 0.16 160)",
-};
-
 /** Sun ⇄ moon glyph that crossfades with the active color mode (motion-reduce safe). */
 function ModeIcon({ isDark }: { isDark: boolean }) {
   return (
@@ -75,112 +57,11 @@ function ModeIcon({ isDark }: { isDark: boolean }) {
   );
 }
 
-/**
- * Theme-preset selector — a lightweight custom popover (button + a menu of the 5
- * presets with swatches) that re-themes the whole site live via `setTheme`.
- *
- * Deliberately NOT the Radix dropdown-menu: this control lives in the shared site
- * header, so pulling `@radix-ui/react-dropdown-menu` into it would tax the First
- * Load JS of EVERY route. A ~30-line native popover (outside-click + Escape to
- * close) keeps the shared bundle within budget while preserving the UX.
- */
-function ThemeSelect() {
-  const { theme, setTheme } = useTheme();
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!open) {
-      return;
-    }
-    const onPointerDown = (event: PointerEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    };
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("pointerdown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("pointerdown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [open]);
-
-  return (
-    <div ref={ref} className="relative">
-      <button
-        type="button"
-        aria-haspopup="menu"
-        aria-expanded={open}
-        aria-label={`Change theme (current: ${themeLabels[theme]})`}
-        onClick={() => setOpen((value) => !value)}
-        className="grid size-9 place-items-center rounded-lg text-fg-secondary outline-none transition-colors hover:bg-surface-overlay hover:text-fg focus-visible:ring-2 focus-visible:ring-ring aria-expanded:bg-surface-overlay aria-expanded:text-fg"
-      >
-        <span className="relative grid size-[18px] place-items-center">
-          <Palette className="size-[18px]" aria-hidden="true" />
-          <span
-            className="absolute -right-0.5 -bottom-0.5 size-2 rounded-full ring-2 ring-surface-base"
-            style={{ backgroundColor: themeSwatches[theme] }}
-            aria-hidden="true"
-          />
-        </span>
-      </button>
-      {open ? (
-        <div
-          role="menu"
-          aria-label="Theme"
-          aria-orientation="vertical"
-          className="absolute right-0 top-full z-50 mt-2 min-w-[11rem] overflow-hidden rounded-xl border border-border bg-surface-floating p-1 shadow-lg"
-        >
-          <p className="px-2.5 py-1.5 text-xs font-medium text-fg-tertiary" aria-hidden="true">
-            Theme
-          </p>
-          {themeNames.map((name) => {
-            const active = theme === name;
-            return (
-              <button
-                key={name}
-                type="button"
-                role="menuitemradio"
-                aria-checked={active}
-                onClick={() => {
-                  setTheme(name);
-                  setOpen(false);
-                }}
-                className={cn(
-                  "flex w-full items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
-                  active
-                    ? "bg-surface-overlay text-fg"
-                    : "text-fg-secondary hover:bg-surface-overlay hover:text-fg",
-                )}
-              >
-                <span
-                  className="size-3.5 shrink-0 rounded-full shadow-xs ring-1 ring-inset ring-border"
-                  style={{ backgroundColor: themeSwatches[name] }}
-                  aria-hidden="true"
-                />
-                {themeLabels[name]}
-                {active ? (
-                  <Check className="ml-auto size-4 text-primary" aria-hidden="true" />
-                ) : null}
-              </button>
-            );
-          })}
-        </div>
-      ) : null}
-    </div>
-  );
-}
-
 export function SiteNav() {
   const { mode, toggleMode } = useTheme();
   const isDark = mode === "dark";
   const [mobileOpen, setMobileOpen] = useState(false);
+  const compactMobile = usePathname() === "/";
 
   return (
     <header className="sticky top-0 z-50 overflow-x-clip border-b border-border bg-surface-base/70 backdrop-blur-xl">
@@ -217,7 +98,7 @@ export function SiteNav() {
           ))}
         </ul>
 
-        {/* Right — search + github + mode toggle + mobile menu */}
+        {/* Right — search + github + light/dark + mobile menu */}
         <div className="flex shrink-0 items-center gap-2">
           <CommandSearch />
 
@@ -231,10 +112,7 @@ export function SiteNav() {
             <Github className="size-[18px]" aria-hidden="true" />
           </a>
 
-          {/* Theme preset selector */}
-          <ThemeSelect />
-
-          {/* Light / dark mode toggle */}
+          {/* Light / dark mode toggle — chrome stays Neutral. */}
           <button
             type="button"
             onClick={toggleMode}
@@ -282,13 +160,17 @@ export function SiteNav() {
                 </li>
               </ul>
 
-              <nav aria-label="Documentation" className="mt-6 text-sm">
-                <DocumentationNavList onNavigate={() => setMobileOpen(false)} />
-              </nav>
+              {compactMobile ? null : (
+                <>
+                  <nav aria-label="Documentation" className="mt-6 text-sm">
+                    <DocumentationNavList onNavigate={() => setMobileOpen(false)} />
+                  </nav>
 
-              <nav aria-label="Components" className="mt-6 text-sm">
-                <ComponentNavList onNavigate={() => setMobileOpen(false)} />
-              </nav>
+                  <nav aria-label="Components" className="mt-6 text-sm">
+                    <ComponentNavList onNavigate={() => setMobileOpen(false)} />
+                  </nav>
+                </>
+              )}
             </SheetContent>
           </Sheet>
         </div>

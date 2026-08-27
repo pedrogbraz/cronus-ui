@@ -28,6 +28,7 @@ export function PreviewThemeLock({
       mode: el.dataset.cronusMode,
       dark: el.classList.contains("dark"),
       embed: el.dataset.cronusPreviewEmbed,
+      forceMotion: el.dataset.forceMotion,
     };
 
     const apply = () => {
@@ -39,8 +40,10 @@ export function PreviewThemeLock({
       }
       if (embed) {
         if (el.dataset.cronusPreviewEmbed !== "1") el.dataset.cronusPreviewEmbed = "1";
-      } else if (el.dataset.cronusPreviewEmbed !== undefined) {
-        delete el.dataset.cronusPreviewEmbed;
+        if (el.dataset.forceMotion !== "") el.dataset.forceMotion = "";
+      } else {
+        if (el.dataset.cronusPreviewEmbed !== undefined) delete el.dataset.cronusPreviewEmbed;
+        if (el.dataset.forceMotion !== undefined) delete el.dataset.forceMotion;
       }
     };
 
@@ -54,6 +57,7 @@ export function PreviewThemeLock({
         "data-cronus-mode",
         "class",
         "data-cronus-preview-embed",
+        "data-force-motion",
       ],
     });
 
@@ -66,6 +70,8 @@ export function PreviewThemeLock({
       el.classList.toggle("dark", prev.dark);
       if (prev.embed) el.dataset.cronusPreviewEmbed = prev.embed;
       else delete el.dataset.cronusPreviewEmbed;
+      if (prev.forceMotion !== undefined) el.dataset.forceMotion = prev.forceMotion;
+      else delete el.dataset.forceMotion;
     };
   }, [theme, mode, embed]);
 

@@ -28,7 +28,11 @@ function CardFrame({
   children: ReactNode;
 }) {
   return (
-    <article className="flex min-h-[22rem] flex-col overflow-hidden rounded-2xl border border-border bg-surface-raised">
+    <article
+      data-cronus-theme="neutral"
+      data-cronus-mode="dark"
+      className="dark flex min-h-[22rem] flex-col overflow-hidden rounded-2xl border border-border bg-surface-base text-fg"
+    >
       <div className="min-h-0 flex-1 p-4 sm:p-5">{children}</div>
       <div className="mt-auto flex items-center justify-between border-t border-border px-4 py-3">
         <p className="text-sm text-fg-secondary">{label}</p>
@@ -36,7 +40,7 @@ function CardFrame({
           href={href}
           className="inline-flex items-center gap-1 text-sm text-fg-secondary outline-none hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
         >
-          Explore
+          Explore {label}
           <ArrowRight className="size-3.5" aria-hidden="true" />
         </Link>
       </div>

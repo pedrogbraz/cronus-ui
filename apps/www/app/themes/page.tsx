@@ -13,7 +13,7 @@ import { CopyCommand } from "./copy-command";
 export const metadata: Metadata = {
   title: "Themes — Cronus UI",
   description:
-    "The five built-in Cronus UI looks, plus shareable custom themes: design one in the Create Studio, share the permalink, and anyone applies it with `npx cronus-ui theme add`.",
+    "The five built-in Cronus UI themes, plus shareable custom themes: design one in the Create Studio, share the permalink, and anyone applies it with `npx cronus-ui theme add`.",
 };
 
 /** `{ ...DEFAULT_CONFIG }` with a per-theme patch — the Studio config each card encodes. */
@@ -33,7 +33,7 @@ const CARDS: ThemeCard[] = [
   {
     name: "aurora",
     label: "Aurora",
-    tagline: "The flagship look — luminous sky blue over deep zinc surfaces.",
+    tagline: "The flagship theme — luminous sky blue over deep zinc surfaces.",
     studio: studioConfig("Aurora", { baseColor: "zinc", headingFont: "geist", bodyFont: "geist" }),
   },
   {
@@ -87,7 +87,7 @@ const EXAMPLE_STUDIO_CONFIG = studioConfig("Custom", {
 
 /**
  * Representative swatches per theme, derived from each preset's own tokens —
- * the same primary-token pattern the site nav's ThemeSelect uses, widened to a
+ * the same primary-token pattern the Live theming lab uses, widened to a
  * six-chip palette strip.
  */
 function paletteOf(name: ThemeName): { label: string; value: string }[] {

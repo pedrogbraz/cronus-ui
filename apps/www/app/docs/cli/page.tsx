@@ -24,7 +24,7 @@ const cliCommands = [
   {
     title: "compose",
     description:
-      "Generates a full app from a template (store, landing, saas). Pages are block imports plus a main landmark. Flags: --manifest, --pages, --variant, --brand, --seed, --overwrite, --skip-install, --dry-run, --yes.",
+      "Generates a full app from a template (saas, store, landing, landing-*, mail, chat, finance). -y without a name composes saas. Pages are block imports plus a main landmark. Flags: --manifest, --pages, --variant, --brand, --seed, --overwrite, --skip-install, --dry-run, --yes.",
     badge: "product",
   },
   {
@@ -129,7 +129,7 @@ export default function CliPage() {
 
       <DocsSection
         title="Compose an app"
-        description="compose generates pages and chrome from a bundled template (store, landing, saas) or --manifest. Each page is imports of installed blocks plus a main landmark that stacks them."
+        description="compose generates pages and chrome from a bundled template (saas, store, landing, landing-*, mail, chat, finance) or --manifest. -y with no name composes saas. Each page is imports of installed blocks plus a main landmark that stacks them."
       >
         <PackageManagerTabs command="compose" description="Compose a template" />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">

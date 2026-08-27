@@ -1,4 +1,5 @@
 import { Geist } from "next/font/google";
+import { ChromeThemeLock } from "../components/chrome-theme-lock";
 import { Hero } from "../components/hero";
 import { ComponentShowcase } from "../components/home/component-showcase";
 import { DeveloperCli } from "../components/home/developer-cli";
@@ -20,6 +21,7 @@ const display = Geist({
 export default function Page() {
   return (
     <div className="min-h-screen bg-surface-base text-fg">
+      <ChromeThemeLock />
       <SiteNav />
       <main id="main-content">
         <Hero displayClassName={display.className} />

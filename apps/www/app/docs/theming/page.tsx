@@ -36,13 +36,13 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <head>
         <CronusThemeScript
-          storageKey="cronus-ui-theme"
+          storageKey="theme"
           defaultThemeName="aurora"
           defaultModeName="dark"
         />
       </head>
       <body>
-        <CronusUIProvider asRoot storageKey="cronus-ui-theme">
+        <CronusUIProvider asRoot storageKey="theme">
           {children}
         </CronusUIProvider>
       </body>
@@ -72,8 +72,8 @@ export function BrandThemeControls() {
   );
 }`;
 
-const lookCode = `<div data-cronus-look="glass" data-cronus-theme="midnight">
-  {/* radius, blur, and surfaces follow. Palette is still midnight. */}
+const lookCode = `<div data-cronus-look="glass" data-cronus-theme="midnight" data-cronus-mode="dark">
+  {/* Look + mode on the same node. Palette is still midnight. */}
 </div>`;
 
 const layers = [
@@ -89,7 +89,7 @@ const layers = [
   {
     title: "Looks",
     description:
-      "Material language — default, brutalist, glass, mauve — via data-cronus-look. Orthogonal to palette. Docs chrome stays default.",
+      "Material language — default, brutalist, glass — via data-cronus-look. Orthogonal to palette. Docs chrome stays default.",
   },
   {
     title: "Runtime overrides",
@@ -149,7 +149,7 @@ export default function ThemingPage() {
 
       <DocsSection
         title="Looks"
-        description="Material language on top of the palette. Default, brutalist, glass, and mauve share the same components. The docs chrome stays default — set the attribute on the product subtree."
+        description="Material language on top of the palette. Default, brutalist, and glass share the same components. The docs chrome stays default — set the attribute on the product subtree."
       >
         <CodeBlock code={lookCode} language="tsx" />
         <p className="mt-4 text-sm leading-6 text-fg-secondary">
@@ -192,7 +192,7 @@ export default function ThemingPage() {
 
       <DocsSection
         title="Preset catalog"
-        description="These are the cohesive looks available in Create today."
+        description="These are the cohesive presets available in Create today."
       >
         <DocsGrid columns={2}>
           {STYLE_PRESETS.map((preset) => (

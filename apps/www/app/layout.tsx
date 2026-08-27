@@ -19,7 +19,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       lang="en"
       data-cronus-theme="neutral"
       data-cronus-mode="dark"
-      data-force-motion
       className="dark"
       // The CronusThemeScript below mutates <html> (theme/mode/dark class) before
       // hydration, so React must not warn about the resulting attribute mismatch.
