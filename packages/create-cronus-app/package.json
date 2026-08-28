@@ -10,7 +10,7 @@
     "url": "git+https://github.com/pedrogbraz/cronus-ui.git",
     "directory": "packages/create-cronus-app"
   },
-  "homepage": "https://github.com/pedrogbraz/cronus-ui#readme",
+  "homepage": "https://aicronus.com",
   "bugs": {
     "url": "https://github.com/pedrogbraz/cronus-ui/issues"
   },
