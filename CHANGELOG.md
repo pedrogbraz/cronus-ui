@@ -106,6 +106,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   chromatic blobs. The live-theming specimen on `#theming` is a Neutral
   glass pane on the landing surface. Theme chips recolor the catalog
   inside (buttons, chart, badges), not the pane.
+- **Catalog thumbs.** `/components` and `/blocks` cards use the same 16/10
+  scaled-screenshot chrome as `/templates` — product miniatures (login, hero,
+  dashboard, charts), not a name on a dotted grid. Cheap Cronus primitives
+  plus token-painted charts/tables; the page still never imports example
+  families or `lib/blocks/*`. Live previews stay on the slug routes.
 - **Live template previews.** `/templates` cards render the composed site
   (themed Cronus blocks, not screenshots). Click through for Preview / Code
   plus device frames; **Open Preview** is the full page at `/preview/t/[slug]`.
