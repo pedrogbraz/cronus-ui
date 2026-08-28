@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.0] — 2026-08-28
+
 ### Fixed
 
 - **CurrencyInput.** Opening the selector no longer scroll-locks the document
@@ -49,8 +51,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Stacked uses a 3px segment gap instead of stacked pills.
 - **Choropleth (Motion).** Loads a world FeatureCollection (not two fake
   rectangles), zoom +/- , and a country-name tooltip.
-- **GitHub.** Repo slug is `pedrogbraz/cronus-ui` (still private). CLI registry
-  stays on that slug; `npx cronus-ui add` needs a public tag or `-r ./registry`.
+- **GitHub.** Repo `pedrogbraz/cronus-ui` is public. The CLI registry is
+  `https://raw.githubusercontent.com/pedrogbraz/cronus-ui/v0.6.0/registry`.
 - **compose -y.** With no template name, compose picks `saas`, not the
   lexicographic first bundled app (`chat`).
 - **Button.** Dropped the `gradient` variant. Primary is the token pair
@@ -71,6 +73,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Public release line.** GitHub `pedrogbraz/cronus-ui` is public. npm lockstep
+  `0.6.0` for `@cronus-ui/tokens`, `theme`, `ui`, `stack`, `ai-kit`, `cronus-ui`,
+  `create-cronus-app`, `create-cronus-stack`, and `cronus-ui-mcp`. The CLI
+  default registry is the `v0.6.0` tag.
 - **Catalog tags + MCP match.** Every component, block, variant, and compose
   app now ships Hydra-ready tags in `registry/meta.json`: short description,
   design style, palette, motion, and intents. MCP `list_catalog` dumps the
@@ -426,7 +432,8 @@ as installable packages and as copy-paste registry items you own.
 - Added per-entry gzipped bundle budgets for the published `@cronus-ui/ui` so a
   dependency or code-size regression is caught at build time.
 
-[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.5.0...main
+[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/pedrogbraz/cronus-ui/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/pedrogbraz/cronus-ui/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/pedrogbraz/cronus-ui/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/pedrogbraz/cronus-ui/compare/v0.2.0...v0.3.0

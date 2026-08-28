@@ -9,9 +9,9 @@
     "start": "next start"
   },
   "dependencies": {
-    "@cronus-ui/theme": "^0.5.0",
-    "@cronus-ui/tokens": "^0.5.0",
-    "@cronus-ui/ui": "^0.5.0",
+    "@cronus-ui/theme": "^0.6.0",
+    "@cronus-ui/tokens": "^0.6.0",
+    "@cronus-ui/ui": "^0.6.0",
     "next": "16.2.10",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
