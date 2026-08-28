@@ -31,8 +31,9 @@ wrapped by the root `release` script. It is **dry-run by default** and requires 
 explicit `--publish` flag to actually push the tag and publish.
 
 ```sh
-bun run release            # DRY-RUN (default): prints exactly what it would tag + publish
-bun run release --publish  # really push the tag and publish the tarballs
+bun run release                      # DRY-RUN (default): prints exactly what it would tag + publish
+bun run release --publish            # really push the tag and publish the tarballs
+bun run release --publish --skip-tag # tag already on origin; only publish packages
 ```
 
 In order, the script:
@@ -81,11 +82,15 @@ In order, the script:
 ### Authentication
 
 All nine packages publish to **public npm**, so one credential covers the whole
-release. Be logged in to npmjs with publish rights for the `@cronus-ui` scope and
-the unscoped package names (`cronus-ui`, `create-cronus-app`,
-`create-cronus-stack`, `cronus-ui-mcp`), or have an `NPM_TOKEN` with those publish
-rights in your user `~/.npmrc`. No repo-level `.npmrc` and no GitHub Packages
-token are needed.
+release. Create the `cronus-ui` organization at
+[npmjs.com/org/create](https://www.npmjs.com/org/create) before the first
+scoped publish (`@cronus-ui/tokens` and siblings 404 with "Scope not found"
+until the org exists). Be logged in to npmjs as an owner/admin of that org,
+with publish rights for the unscoped names (`cronus-ui`, `create-cronus-app`,
+`create-cronus-stack`, `cronus-ui-mcp`), or have an `NPM_TOKEN` with those
+publish rights in your user `~/.npmrc`. No repo-level `.npmrc` and no GitHub
+Packages token are needed. 2FA publish uses `--otp`; an Automation token
+bypasses OTP.
 
 `--publish` checks `npm whoami --registry=https://registry.npmjs.org/` before it
 can create or push the git tag. That proves a credential is present, not that
@@ -95,10 +100,12 @@ and re-run only with an explicit recovery plan (a re-publish of an already
 published version will error — bump the version if needed).
 
 Before a real `--publish`, name the recovery plan in the release note or run log:
-if the tag was pushed but no package was published, delete `vX.Y.Z` locally and
-remotely; after the first npm package publishes, do **not** delete or unpublish by
-default. Recover with a follow-up version and deprecate the bad version only if
-needed.
+if the tag was pushed but no package was published, **keep** `vX.Y.Z` when the
+CLI registry already points at that tag (as of 0.6.0). Re-run
+`bun run release --publish --skip-tag` after the npm org/OTP is fixed. Only
+delete the tag if nothing should resolve at that version. After the first npm
+package publishes, do **not** delete or unpublish by default. Recover with a
+follow-up version and deprecate the bad version only if needed.
 
 ## Exact release procedure
 

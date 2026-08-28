@@ -33,7 +33,9 @@
  * Usage:
  *   node scripts/release.mjs            # dry-run (default) — safe preflight
  *   node scripts/release.mjs --publish  # really push tag + publish
- *   bun run release [--publish]
+ *   node scripts/release.mjs --publish --skip-tag
+ *     # tag already exists (registry is live); only (re)publish packages
+ *   bun run release [--publish] [--skip-tag]
  *
  * Offline/auth notes: all packages publish to public npm and require a valid npm
  * login / `NPM_TOKEN`. `--publish` only runs from a local `main` that exactly
@@ -50,6 +52,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 
 const PUBLISH = process.argv.includes("--publish");
+const SKIP_TAG = process.argv.includes("--skip-tag");
 
 /* ------------------------------------------------------------------ *
  * logging
@@ -245,11 +248,6 @@ function preflight() {
   } catch {
     localTagExists = false;
   }
-  if (localTagExists) {
-    fatal(`git tag ${tag} already exists — bump the version or delete the stale tag first.`);
-  }
-  ok(`local tag ${c.bold(tag)} is free`);
-
   let remoteTag = "";
   try {
     remoteTag = run("git", ["ls-remote", "--tags", "origin", `refs/tags/${tag}`], {
@@ -258,10 +256,27 @@ function preflight() {
   } catch (err) {
     fatal(`could not verify remote tag ${tag}.`, err);
   }
-  if (remoteTag) {
-    fatal(`remote tag ${tag} already exists on origin — bump the version before releasing.`);
+
+  if (SKIP_TAG) {
+    if (!localTagExists) {
+      fatal(`--skip-tag requires local git tag ${tag} to already exist.`);
+    }
+    if (!remoteTag) {
+      fatal(`--skip-tag requires remote git tag ${tag} to already exist on origin.`);
+    }
+    ok(`tag ${c.bold(tag)} already exists locally and on origin (--skip-tag)`);
+  } else {
+    if (localTagExists) {
+      fatal(
+        `git tag ${tag} already exists — bump the version, delete the stale tag, or pass --skip-tag.`,
+      );
+    }
+    ok(`local tag ${c.bold(tag)} is free`);
+    if (remoteTag) {
+      fatal(`remote tag ${tag} already exists on origin — bump the version or pass --skip-tag.`);
+    }
+    ok(`remote tag ${c.bold(tag)} is free`);
   }
-  ok(`remote tag ${c.bold(tag)} is free`);
 
   publishSourcePreflight();
   verifyGithubRepoPublic();
@@ -393,7 +408,7 @@ function publishAll(version) {
       }
       const tarballName = tarball.replace(/^.*\//, "");
 
-      const publishArgs = ["publish", tarball, `--registry=${NPM_REGISTRY}`];
+      const publishArgs = ["publish", tarball, `--registry=${NPM_REGISTRY}`, "--access", "public"];
       if (!PUBLISH) publishArgs.push("--dry-run");
 
       if (PUBLISH) {
@@ -433,6 +448,11 @@ function publishAll(version) {
  * (d) tag — annotated v<version>, pushed to origin
  * ------------------------------------------------------------------ */
 function tagAndPush(tag) {
+  if (SKIP_TAG) {
+    group("tag — skipped (--skip-tag)");
+    ok(`using existing ${c.bold(tag)}`);
+    return;
+  }
   group(PUBLISH ? "tag" : "tag — DRY-RUN (no tag created or pushed)");
   if (!PUBLISH) {
     plan(`would create annotated tag ${c.bold(tag)} at HEAD and push it to origin`);
