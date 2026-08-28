@@ -4,7 +4,7 @@
  * lets the wider shadcn ecosystem (CLI, v0, MCP clients) install Cronus UI
  * straight from the showcase:
  *
- *   npx shadcn@latest add https://ui.testcronus.cloud/r/button.json
+ *   npx shadcn@latest add https://aicronus.com/r/button.json
  *
  * Mapping rules (schemas: https://ui.shadcn.com/schema/registry.json and
  * https://ui.shadcn.com/schema/registry-item.json):
