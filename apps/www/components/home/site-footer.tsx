@@ -1,5 +1,4 @@
 import { ArrowUpRight, Github } from "lucide-react";
-import { PRO_URL } from "../../lib/site-url";
 import { CronusMark } from "../brand/cronus-mark";
 import { SectionGlow } from "../showcase-ui";
 
@@ -13,7 +12,6 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
     title: "Product",
     links: [
       { label: "Templates", href: "/templates" },
-      { label: "Pro", href: PRO_URL },
       { label: "Components", href: "/components" },
       { label: "Blocks", href: "/docs/blocks" },
       { label: "Themes", href: "/themes" },

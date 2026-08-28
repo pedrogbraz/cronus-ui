@@ -8,14 +8,12 @@ import { Github, Menu, Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { PRO_URL } from "../lib/site-url";
 import { CronusMark } from "./brand/cronus-mark";
 import { CommandSearch } from "./docs/command-search";
 import { ComponentNavList } from "./docs/docs-sidebar";
 import { DocumentationNavList } from "./docs/documentation-nav";
-import { SiteAnnouncement } from "./site-announcement";
 
-/** Primary chrome — short on purpose. Pro lives in the announcement + nudge. */
+/** Primary chrome — short on purpose. */
 const navLinks = [
   { label: "Docs", href: "/docs" },
   { label: "Components", href: "/components" },
@@ -85,7 +83,6 @@ export function SiteNav() {
         ref={headerRef}
         className="fixed inset-x-0 top-0 z-50 border-b border-border bg-surface-base/70 backdrop-blur-xl"
       >
-        <SiteAnnouncement />
         <nav
           className="relative z-10 mx-auto flex h-16 w-full min-w-0 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8"
           aria-label="Primary"
@@ -99,7 +96,7 @@ export function SiteNav() {
             <span className="flex items-center gap-2">
               <span className="font-display text-base font-semibold text-fg">Cronus UI</span>
               <Badge variant="secondary" className="hidden px-1.5 py-0 text-[10px] sm:inline-flex">
-                v0.5.0
+                v0.6.0
               </Badge>
             </span>
           </Link>
@@ -169,15 +166,6 @@ export function SiteNav() {
                       </Link>
                     </li>
                   ))}
-                  <li>
-                    <a
-                      href={PRO_URL}
-                      onClick={() => setMobileOpen(false)}
-                      className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm text-fg-secondary outline-none transition-colors hover:bg-surface-overlay hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
-                    >
-                      Pro
-                    </a>
-                  </li>
                 </ul>
 
                 {compactMobile ? null : (

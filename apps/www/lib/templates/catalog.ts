@@ -581,7 +581,8 @@ export function similarTemplates(slug: string, limit = 3): TemplateCatalogEntry[
   if (entry === undefined) return [];
   const mood = templateMood(entry);
   return TEMPLATE_CATALOG.filter(
-    (candidate) => candidate.slug !== slug && templateMood(candidate) === mood,
+    (candidate) =>
+      candidate.slug !== slug && templateMood(candidate) === mood && !isProTemplate(candidate),
   ).slice(0, limit);
 }
 

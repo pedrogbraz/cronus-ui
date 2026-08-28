@@ -4,7 +4,7 @@ import type { MetadataRoute } from "next";
 import { BLOCK_SLUGS } from "../lib/blocks-index";
 import { COMPONENT_SLUGS } from "../lib/components-index";
 import { absoluteUrl } from "../lib/site-url";
-import { TEMPLATE_SLUGS } from "../lib/templates/catalog";
+import { isProTemplate, TEMPLATE_CATALOG } from "../lib/templates/catalog";
 
 /**
  * Sitemap for the whole showcase. Evaluated once at build time (no dynamic
@@ -51,7 +51,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const components = COMPONENT_SLUGS.map((slug) => entry(`/components/${slug}`, 0.6));
   const blocks = BLOCK_SLUGS.map((slug) => entry(`/blocks/${slug}`, 0.6));
-  const templates = TEMPLATE_SLUGS.map((slug) => entry(`/templates/${slug}`, 0.6));
+  const templates = TEMPLATE_CATALOG.filter((entry) => !isProTemplate(entry)).map((item) =>
+    entry(`/templates/${item.slug}`, 0.6),
+  );
 
   return [entry("/", 1), ...topLevel, ...docs, ...components, ...blocks, ...templates];
 }

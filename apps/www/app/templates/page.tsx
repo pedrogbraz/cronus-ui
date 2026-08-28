@@ -4,17 +4,14 @@ import Link from "next/link";
 import { Eyebrow, SectionGlow } from "../../components/showcase-ui";
 import { CommandChip } from "../../components/templates/command-chip";
 import { TemplateThumb } from "../../components/templates/template-thumb";
-import { PRO_URL } from "../../lib/site-url";
 import {
   appearanceLabel,
-  isProTemplate,
   isTemplateMood,
   TEMPLATE_MOOD_LABELS,
   TEMPLATE_MOODS,
   type TemplateCatalogEntry,
   templateMood,
   templatesOssOfKind,
-  templatesPro,
 } from "../../lib/templates/catalog";
 
 export const metadata: Metadata = {
@@ -93,14 +90,6 @@ export default async function TemplatesPage({
         heading="Generated products"
         description="Default base plus compose: every page is installed blocks stacked in a main. This is the product loop."
         templates={filter(templatesOssOfKind("product"))}
-      />
-
-      <TemplateGrid
-        heading="Pro pack"
-        description="Mail, chat, and finance — extra composed apps. Everything above stays free. Pro only adds."
-        templates={filter(templatesPro())}
-        href={PRO_URL}
-        hrefLabel="What's in Pro"
       />
 
       <TemplateGrid
@@ -229,7 +218,7 @@ function TemplateGrid({
                   </h3>
                   <span
                     className={
-                      isProTemplate(template) || template.recommended
+                      template.recommended
                         ? "shrink-0 rounded-full border border-border bg-surface-overlay px-2.5 py-0.5 text-xs font-medium text-fg"
                         : "shrink-0 rounded-full border border-border bg-surface-inset px-2.5 py-0.5 text-xs font-medium text-fg-tertiary"
                     }

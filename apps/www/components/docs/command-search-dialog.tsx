@@ -16,8 +16,7 @@ import { useCallback } from "react";
 import { BLOCK_CATEGORIES } from "../../lib/blocks-index";
 import { CATEGORIES, getComponentDisplayName } from "../../lib/components-index";
 import { DOC_NAV_SECTIONS } from "../../lib/docs";
-import { PRO_URL } from "../../lib/site-url";
-import { TEMPLATE_CATALOG } from "../../lib/templates/catalog";
+import { isProTemplate, TEMPLATE_CATALOG } from "../../lib/templates/catalog";
 
 const docItems = DOC_NAV_SECTIONS.flatMap((section) => section.items);
 
@@ -181,19 +180,6 @@ export default function CommandSearchDialog({
             </span>
           </CommandItem>
           <CommandItem
-            value="Pro pack mail chat finance license additive"
-            onSelect={() => {
-              onOpenChange(false);
-              window.location.assign(PRO_URL);
-            }}
-            className="flex flex-col items-start gap-0.5"
-          >
-            <span className="text-sm text-fg">Pro</span>
-            <span className="text-xs text-fg-tertiary">
-              Additive apps: mail, chat, finance. OSS stays complete.
-            </span>
-          </CommandItem>
-          <CommandItem
             value="Templates live preview compose scaffold landing saas store"
             onSelect={() => onSelectRoute("/templates")}
             className="flex flex-col items-start gap-0.5"
@@ -205,7 +191,7 @@ export default function CommandSearchDialog({
           </CommandItem>
         </CommandGroup>
         <CommandGroup heading="Templates">
-          {TEMPLATE_CATALOG.map((entry) => (
+          {TEMPLATE_CATALOG.filter((entry) => !isProTemplate(entry)).map((entry) => (
             <CommandItem
               key={entry.slug}
               value={`${entry.name} ${entry.tagline} ${entry.description} ${entry.slug} template ${entry.kind}`}

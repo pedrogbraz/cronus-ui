@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
-import { PRO_URL } from "../../lib/site-url";
 
-/** Bookmarks to /pro leave the OSS chrome for the Pro origin. */
+/** Pro is paused on the public site — old /pro bookmarks land on OSS. */
 export default function ProRedirectPage() {
-  redirect(PRO_URL);
+  redirect("/");
 }

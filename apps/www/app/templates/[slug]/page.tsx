@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import { Eyebrow } from "../../../components/showcase-ui";
 import { CommandChip } from "../../../components/templates/command-chip";
 import { TemplateDetail } from "../../../components/templates/template-detail";
-import { PRO_URL } from "../../../lib/site-url";
 import {
   appearanceLabel,
   getTemplate,
@@ -19,7 +18,10 @@ import {
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return TEMPLATE_SLUGS.map((slug) => ({ slug }));
+  return TEMPLATE_SLUGS.filter((slug) => {
+    const entry = getTemplate(slug);
+    return entry !== undefined && !isProTemplate(entry);
+  }).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -42,7 +44,7 @@ export default async function TemplateDetailPage({
 }) {
   const { slug } = await params;
   const entry = getTemplate(slug);
-  if (!entry) notFound();
+  if (!entry || isProTemplate(entry)) notFound();
 
   return (
     <div className="pb-16">
@@ -62,9 +64,7 @@ export default async function TemplateDetailPage({
             <span className="text-fg-secondary">{entry.name}</span>
           </nav>
 
-          <Eyebrow className="mt-8">
-            {isProTemplate(entry) ? "Pro pack" : entry.kind === "landing" ? "Landing" : entry.kind}
-          </Eyebrow>
+          <Eyebrow className="mt-8">{entry.kind === "landing" ? "Landing" : entry.kind}</Eyebrow>
           <div className="mt-3 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <div className="flex flex-wrap items-center gap-3">
@@ -82,18 +82,6 @@ export default async function TemplateDetailPage({
                 </span>
               </div>
               <p className="mt-4 max-w-2xl text-lg text-fg-secondary">{entry.description}</p>
-              {isProTemplate(entry) ? (
-                <p className="mt-3 text-sm text-fg-tertiary">
-                  Additive to OSS.{" "}
-                  <a
-                    href={PRO_URL}
-                    className="text-fg-secondary underline underline-offset-4 hover:text-fg"
-                  >
-                    See what Pro adds
-                  </a>
-                  .
-                </p>
-              ) : null}
             </div>
             <p className="text-sm text-fg-tertiary">{appearanceLabel(entry)}</p>
           </div>

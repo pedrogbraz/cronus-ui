@@ -7,12 +7,11 @@ const PRO_ORIGIN = process.env.PLAYWRIGHT_PRO_URL ?? "http://localhost:4748";
  * site is additive (looks/SaaS stay free) and lists Maker / Studio.
  */
 test.describe("Pro origin split", () => {
-  test("OSS See Pro points off-site", async ({ page }) => {
+  test("OSS chrome does not advertise Pro", async ({ page }) => {
     await page.goto("/", { waitUntil: "domcontentloaded" });
 
-    const seePro = page.locator("footer").getByRole("link", { name: "Pro" });
-    await expect(seePro).toBeVisible();
-    await expect(seePro).toHaveAttribute("href", /localhost:4748|iacronus\.com/);
+    await expect(page.locator("footer").getByRole("link", { name: "Pro" })).toHaveCount(0);
+    await expect(page.getByRole("link", { name: "See Pro" })).toHaveCount(0);
   });
 
   test("Pro landing is additive, priced, and previewable", async ({ page }) => {
