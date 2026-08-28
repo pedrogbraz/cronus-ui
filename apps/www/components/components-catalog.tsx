@@ -6,12 +6,13 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { CATEGORIES, getComponentDisplayName } from "../lib/components-index";
+import { ComponentCatalogThumb } from "./catalog/catalog-thumbs";
 
 /**
  * Flattened, server-safe catalog row for every component. Built once from the
- * lightweight `CATEGORIES` metadata — this page renders NO live previews, so it
- * never imports the heavy example families (recharts / forms / overlays). Each
- * card links to `/components/[slug]`, where the live previews stream in.
+ * lightweight `CATEGORIES` metadata — card thumbs are CSS miniatures so this
+ * page never imports the heavy example families (recharts / forms / overlays).
+ * Each card links to `/components/[slug]`, where the live previews stream in.
  */
 const ALL_COMPONENTS = CATEGORIES.flatMap((category) =>
   category.items.map((item) => ({
@@ -173,6 +174,7 @@ export function ComponentsCatalog() {
                       displayName={getComponentDisplayName(item.name)}
                       description={item.description}
                       category={cat.name}
+                      categorySlug={cat.slug}
                       index={index}
                     />
                   ))}
@@ -189,6 +191,7 @@ export function ComponentsCatalog() {
                 displayName={component.displayName}
                 description={component.description}
                 category={component.category}
+                categorySlug={component.categorySlug}
                 index={index}
                 showTag
               />
@@ -205,6 +208,7 @@ function ComponentCard({
   displayName,
   description,
   category,
+  categorySlug,
   index = 0,
   showTag = false,
 }: {
@@ -212,6 +216,7 @@ function ComponentCard({
   displayName: string;
   description: string;
   category: string;
+  categorySlug: string;
   /** Position in its grid — drives the (capped) entrance stagger delay. */
   index?: number;
   showTag?: boolean;
@@ -225,20 +230,16 @@ function ComponentCard({
       className="transition-[opacity,transform] duration-300 ease-[cubic-bezier(.22,1,.36,1)] starting:translate-y-2 starting:opacity-0 motion-reduce:transition-none motion-reduce:starting:translate-y-0 motion-reduce:starting:opacity-100"
       style={{ transitionDelay: `${Math.min(index, 8) * 40}ms` }}
     >
-      <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface-raised transition-[border-color,box-shadow,transform] duration-300 ease-[cubic-bezier(.22,1,.36,1)] hover:-translate-y-1 hover:border-border-strong hover:shadow-sm focus-within:border-border-strong focus-within:ring-2 focus-within:ring-ring motion-reduce:transition-none motion-reduce:hover:translate-y-0">
-        {/* Lightweight thumbnail — a dotted-grid card with the component name. No
-            live preview here (that lives on the /components/[slug] route). */}
-        <div className="relative flex h-40 items-center justify-center overflow-hidden border-b border-border-soft bg-surface-inset">
-          {/* The preview content (grid + name) lifts a hair on hover — a GPU
-              transform inside the overflow-hidden frame, so no layout shift. */}
-          <div className="absolute inset-0 flex items-center justify-center p-6 transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.01] motion-reduce:transition-none motion-reduce:group-hover:scale-100">
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 bg-[radial-gradient(var(--cronus-border)_1px,transparent_1px)] opacity-50 [background-size:16px_16px]"
-            />
-            <span className="relative px-4 text-center font-display text-lg text-fg-tertiary transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] group-hover:text-fg motion-reduce:transition-none">
-              {displayName}
-            </span>
+      <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface-raised transition-[border-color,box-shadow] duration-200 ease-[cubic-bezier(.22,1,.36,1)] hover:border-border-strong focus-within:border-border-strong focus-within:ring-2 focus-within:ring-ring motion-reduce:transition-none">
+        <div className="relative border-b border-border/60">
+          <div className="origin-center transition-transform duration-300 ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100">
+            <ComponentCatalogThumb slug={slug} categorySlug={categorySlug} />
+          </div>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-surface-raised/90 to-transparent px-4 py-3 opacity-0 transition-opacity duration-200 ease-[cubic-bezier(.22,1,.36,1)] group-hover:opacity-100"
+          >
+            <span className="text-xs font-medium text-fg">View component</span>
           </div>
         </div>
         <div className="flex flex-col gap-1 px-5 py-4">
@@ -250,14 +251,14 @@ function ComponentCard({
               </span>
             ) : null}
           </div>
-          <span className="line-clamp-1 text-sm text-fg-tertiary">{description}</span>
+          <span className="line-clamp-2 text-sm leading-5 text-fg-secondary">{description}</span>
         </div>
         <Link
           href={`/components/${slug}`}
           aria-label={displayName}
-          className="absolute inset-0 rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="absolute inset-0 rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
         />
-      </div>
+      </article>
     </div>
   );
 }
