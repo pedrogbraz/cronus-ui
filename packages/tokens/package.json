@@ -51,6 +51,8 @@
     "LICENSE",
     "README.md",
     "!dist/**/*.map",
+    "!dist/**/*.test.js",
+    "!dist/**/*.test.d.ts",
     "!preset/**/*.map"
   ],
   "scripts": {
