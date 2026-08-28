@@ -175,7 +175,7 @@ const EDITORIAL_TOKEN = encodeToken({
   h: "serif",
   d: 12,
 });
-const EDITORIAL_URL = `https://ui.testcronus.cloud/create?c=${EDITORIAL_TOKEN}`;
+const EDITORIAL_URL = `https://aicronus.com/create?c=${EDITORIAL_TOKEN}`;
 
 describe("themeAdd", () => {
   let cwd: string;
@@ -321,7 +321,7 @@ describe("themeAdd", () => {
     writeLayout(cwd);
     const globalsPath = writeGlobals(cwd);
 
-    await themeAdd({ source: "https://ui.testcronus.cloud/create", cwd });
+    await themeAdd({ source: "https://aicronus.com/create", cwd });
 
     expect(process.exitCode).toBe(1);
     expect(readFileSync(globalsPath, "utf8")).toBe(GLOBALS);
@@ -388,7 +388,7 @@ describe("themeAdd", () => {
 
     // Different theme → block swapped in place, never duplicated.
     const violetToken = encodeToken({ b: "slate", r: "violet", d: 16 });
-    await themeAdd({ source: `https://ui.testcronus.cloud/create?c=${violetToken}`, cwd });
+    await themeAdd({ source: `https://aicronus.com/create?c=${violetToken}`, cwd });
     const second = readFileSync(globalsPath, "utf8");
 
     expect(second.split(OVERRIDES_BEGIN)).toHaveLength(2);
