@@ -18,9 +18,8 @@ import { Button } from "./button.js";
  * wash + border + icon while the body text stays on `fg`/`fg-secondary` (which
  * meet AA against every surface), so contrast is safe across themes/modes
  * without low-chroma coloured body text. The `brand` variant is the exception:
- * it's a solid promo fill (`bg-gradient-primary-strong`) that carries white
- * text — the gradient is pre-darkened so white clears AA across the sweep — and
- * everything inside (icon, action, close) inherits `currentColor`.
+ * it's a solid `bg-primary` promo fill carrying `primary-foreground` text, and
+ * everything inside (icon, action, close) inherits that foreground.
  */
 const bannerVariants = cva(
   "flex w-full items-center gap-x-3 gap-y-1 border-b px-4 py-2.5 text-sm [&>svg]:size-5 [&>svg]:shrink-0",
@@ -28,9 +27,9 @@ const bannerVariants = cva(
     variants: {
       variant: {
         default: "bg-surface-overlay text-fg border-border [&>svg]:text-fg-secondary",
-        // Solid primary-tinted promo fill carrying white text; icon/action/close
-        // inherit `currentColor` so the whole bar reads as one brand surface.
-        brand: "bg-gradient-primary-strong text-white border-transparent [&>svg]:text-white",
+        // Solid primary promo fill; icon/action/close inherit the foreground.
+        brand:
+          "bg-primary text-primary-foreground border-transparent [&>svg]:text-primary-foreground",
         info: "bg-info/10 text-fg border-info/30 [&>svg]:text-info",
         success: "bg-success/10 text-fg border-success/30 [&>svg]:text-success",
         warning: "bg-warning/10 text-fg border-warning/30 [&>svg]:text-warning",
@@ -114,8 +113,8 @@ export const Banner = forwardRef<HTMLElement, BannerProps>(
       onDismiss?.();
     }, [isControlled, onDismiss]);
 
-    // White-text variants want their action/close on `currentColor`; tinted
-    // ones keep the muted-foreground treatment from the shared Button styles.
+    // Brand fill wants action/close on the primary foreground; tinted variants
+    // keep the muted-foreground treatment from the shared Button styles.
     const onBrand = variant === "brand";
 
     return (
@@ -154,7 +153,7 @@ export const Banner = forwardRef<HTMLElement, BannerProps>(
                 {description ? (
                   <span
                     data-slot="banner-description"
-                    className={cn(onBrand ? "text-white/85" : "text-fg-secondary")}
+                    className={cn(onBrand ? "text-primary-foreground/85" : "text-fg-secondary")}
                   >
                     {description}
                   </span>
@@ -181,7 +180,8 @@ export const Banner = forwardRef<HTMLElement, BannerProps>(
                     // Without an `action`, the close button absorbs the auto margin
                     // so it still sits flush right.
                     !action && "ml-auto",
-                    onBrand && "text-white hover:bg-white/15 hover:text-white",
+                    onBrand &&
+                      "text-primary-foreground hover:bg-primary-foreground/15 hover:text-primary-foreground",
                   )}
                 >
                   <X aria-hidden="true" />

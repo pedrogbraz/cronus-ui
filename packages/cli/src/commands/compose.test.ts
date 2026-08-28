@@ -105,6 +105,9 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(config.composed?.landing?.planVersion).toBe(1);
     expect(config.composed?.landing?.choices.brand).toBe("Minha Loja");
     expect(config.composed?.landing?.files).toContain("app/(site)/page.tsx");
+    expect(existsSync(join(cwd, "DESIGN.md"))).toBe(true);
+    expect(readFileSync(join(cwd, "DESIGN.md"), "utf8")).toContain("Cronus UI — DESIGN.md");
+    expect(existsSync(join(cwd, "DESIGN.compact.md"))).toBe(true);
 
     // Base snapshot mirrors the emitted bytes (F4 merge base), keyed by template
     // name (the composed{} key) — not the package.json name (`loja`).

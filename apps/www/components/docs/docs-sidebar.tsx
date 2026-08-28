@@ -8,10 +8,10 @@ import { CATEGORIES, getComponentDisplayName } from "../../lib/components-index"
 
 export function DocsSidebar() {
   return (
-    <aside className="hidden pt-10 lg:block">
+    <aside className="hidden h-full min-h-0 lg:block">
       <nav
         aria-label="Components"
-        className="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pb-12 pr-4 text-sm"
+        className="h-full overflow-y-auto overscroll-contain pt-10 pb-12 pr-4 text-sm"
       >
         <ComponentNavList />
       </nav>

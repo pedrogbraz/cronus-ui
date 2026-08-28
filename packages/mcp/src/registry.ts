@@ -45,18 +45,41 @@ export interface RegistryItem extends RegistryIndexEntry {
   files: RegistryFile[];
 }
 
+/** Hydra-ready tags written into `meta.json` by the registry build. */
+export interface RegistryCatalogTags {
+  style?: string;
+  palette?: string;
+  motion?: string;
+  intents?: string[];
+}
+
+export interface RegistryMetaVariant extends RegistryCatalogTags {
+  id: string;
+  name: string;
+  description: string;
+  item: string;
+  exportName?: string;
+}
+
 /** Semantic metadata for one block in `meta.json` (subset the MCP surface reads). */
-export interface RegistryMetaBlock {
+export interface RegistryMetaBlock extends RegistryCatalogTags {
+  title: string;
+  description: string;
+  category: string;
+  variants?: RegistryMetaVariant[];
+}
+
+/** Semantic metadata for one component in `meta.json` (subset the MCP surface reads). */
+export interface RegistryMetaComponent extends RegistryCatalogTags {
   title: string;
   description: string;
   category: string;
 }
 
-/** Semantic metadata for one component in `meta.json` (subset the MCP surface reads). */
-export interface RegistryMetaComponent {
+export interface RegistryMetaApp extends RegistryCatalogTags {
   title: string;
   description: string;
-  category: string;
+  pages?: number;
 }
 
 /**
@@ -68,6 +91,7 @@ export interface RegistryMeta {
   registryVersion?: string;
   blocks?: Record<string, RegistryMetaBlock>;
   components?: Record<string, RegistryMetaComponent>;
+  apps?: Record<string, RegistryMetaApp>;
 }
 
 /**

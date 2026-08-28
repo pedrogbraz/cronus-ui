@@ -133,6 +133,11 @@ animação**: `cubic-bezier(.22,1,.36,1)`.
 `font-semibold` sobrevive só em label pequeno, badge e texto de botão.
 `font-bold` e `tracking-tight` não são usados.
 
+Taste para agentes: `designMarkdown()` em `packages/tokens` (DESIGN.md compacto +
+estendido). Emitido nos apps gerados, servido em `/docs/design`, MCP
+`get_design_context`. Valores vêm dos tokens ao vivo — não invente uma linguagem
+visual paralela.
+
 ---
 
 ## Regras para agentes

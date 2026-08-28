@@ -17,6 +17,25 @@ export type ChartConfig = {
   );
 };
 
+/** One series in a ready-made chart (AreaChart, LineChart, …). */
+export interface ChartSeries {
+  key: string;
+  label: string;
+  color?: string;
+}
+
+/** Map series to a ChartConfig using chart-1..5 when color is omitted. */
+export function chartSeriesConfig(series: readonly ChartSeries[]): ChartConfig {
+  const config: ChartConfig = {};
+  for (const [index, item] of series.entries()) {
+    config[item.key] = {
+      label: item.label,
+      color: item.color ?? `var(--cronus-chart-${(index % 5) + 1})`,
+    };
+  }
+  return config;
+}
+
 type ChartContextProps = {
   config: ChartConfig;
 };
@@ -170,6 +189,8 @@ interface ChartTooltipContentProps extends React.ComponentProps<"div"> {
   hideLabel?: boolean;
   hideIndicator?: boolean;
   indicator?: "line" | "dot" | "dashed";
+  /** Format a numeric series value (default: en-US grouping). */
+  formatValue?: (value: number, name: string) => string;
 }
 
 const ChartTooltipContent = forwardRef<HTMLDivElement, ChartTooltipContentProps>(
@@ -184,6 +205,7 @@ const ChartTooltipContent = forwardRef<HTMLDivElement, ChartTooltipContentProps>
       label,
       labelKey,
       nameKey,
+      formatValue,
     },
     ref,
   ) => {
@@ -194,15 +216,24 @@ const ChartTooltipContent = forwardRef<HTMLDivElement, ChartTooltipContentProps>
         return null;
       }
       const [item] = payload;
-      const key = `${labelKey || item?.dataKey || item?.name || "value"}`;
-      const itemConfig = getPayloadConfigFromPayload(config, item, key);
-      const value =
-        !labelKey && typeof label === "string" ? config[label]?.label || label : itemConfig?.label;
-
+      let value: React.ReactNode =
+        typeof label === "string" || typeof label === "number" ? label : null;
+      if (labelKey) {
+        const datum = item?.payload as Record<string, unknown> | undefined;
+        const fromDatum = datum?.[labelKey];
+        if (typeof fromDatum === "string" || typeof fromDatum === "number") {
+          value = fromDatum;
+        } else {
+          const itemConfig = getPayloadConfigFromPayload(config, item, labelKey);
+          value = itemConfig?.label ?? value;
+        }
+      } else if (typeof label === "string" && config[label]?.label) {
+        value = config[label].label;
+      }
       if (!value) {
         return null;
       }
-      return <div className="font-medium text-fg">{value}</div>;
+      return <div className="text-[11px] text-fg-tertiary">{value}</div>;
     }, [label, labelKey, payload, hideLabel, config]);
 
     if (!active || !payload?.length) {
@@ -215,7 +246,7 @@ const ChartTooltipContent = forwardRef<HTMLDivElement, ChartTooltipContentProps>
       <div
         ref={ref}
         className={cn(
-          "grid min-w-[8rem] items-start gap-1.5 rounded-lg border border-border bg-surface-floating px-2.5 py-1.5 text-xs text-fg shadow-lg",
+          "grid min-w-[10.5rem] items-start gap-2 rounded-xl border border-border bg-surface-floating px-3 py-2.5 text-xs text-fg shadow-lg transition-[opacity,transform] duration-200 ease-[cubic-bezier(.22,1,.36,1)] starting:translate-y-1 starting:opacity-0 motion-reduce:transition-none motion-reduce:starting:translate-y-0 motion-reduce:starting:opacity-100",
           className,
         )}
       >
@@ -236,9 +267,9 @@ const ChartTooltipContent = forwardRef<HTMLDivElement, ChartTooltipContentProps>
                 ) : (
                   !hideIndicator && (
                     <div
-                      className={cn("shrink-0 rounded-[2px]", {
-                        "size-2.5": indicator === "dot",
-                        "w-1": indicator === "line",
+                      className={cn("shrink-0 rounded-full", {
+                        "size-2": indicator === "dot",
+                        "mt-0.5 h-3 w-0.5 rounded-sm": indicator === "line",
                         "w-0 border-[1.5px] border-dashed bg-transparent": indicator === "dashed",
                       })}
                       style={{ backgroundColor: indicatorColor }}
@@ -253,12 +284,12 @@ const ChartTooltipContent = forwardRef<HTMLDivElement, ChartTooltipContentProps>
                 >
                   <div className="grid gap-1.5">
                     {nestLabel ? tooltipLabel : null}
-                    <span className="text-fg-tertiary">{itemConfig?.label || item.name}</span>
+                    <span className="text-fg-secondary">{itemConfig?.label || item.name}</span>
                   </div>
                   {item.value != null && (
                     <span className="font-mono font-medium tabular-nums text-fg">
                       {typeof item.value === "number"
-                        ? TOOLTIP_NUMBER.format(item.value)
+                        ? (formatValue?.(item.value, key) ?? TOOLTIP_NUMBER.format(item.value))
                         : item.value}
                     </span>
                   )}
@@ -272,6 +303,91 @@ const ChartTooltipContent = forwardRef<HTMLDivElement, ChartTooltipContentProps>
   },
 );
 ChartTooltipContent.displayName = "ChartTooltipContent";
+
+/**
+ * Vertical crosshair + optional axis pill for cartesian tooltips.
+ * Pass as `cursor={<ChartCursor labelKey="date" />}` on ChartTooltip.
+ */
+export interface ChartCursorProps {
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  top?: number;
+  left?: number;
+  points?: { x: number; y: number }[];
+  payload?: TooltipPayloadItem[];
+  /** Field on the datum shown in the axis pill. */
+  labelKey?: string;
+  /**
+   * Draw the hovered label as a pill on the x-axis.
+   * Turn off when the axis already prints that tick — otherwise the pill
+   * stacks on the label (e.g. "Aug 6" over "Aug 7").
+   * @default true
+   */
+  showAxisLabel?: boolean;
+}
+
+function readCursorLabel(payload: TooltipPayloadItem[] | undefined, labelKey?: string): string {
+  const datum = payload?.[0]?.payload as Record<string, unknown> | undefined;
+  if (!datum) return "";
+  const keys = labelKey ? [labelKey] : ["date", "day", "month", "label", "name"];
+  for (const key of keys) {
+    const value = datum[key];
+    if (typeof value === "string" && value.length > 0) return value;
+    if (typeof value === "number") return String(value);
+  }
+  return "";
+}
+
+function ChartCursor({
+  x,
+  points,
+  height = 0,
+  top = 0,
+  payload,
+  labelKey,
+  showAxisLabel = true,
+}: ChartCursorProps) {
+  const lineX = x ?? points?.[0]?.x;
+  if (lineX == null || !Number.isFinite(lineX)) return null;
+  const tick = readCursorLabel(payload, labelKey);
+  const pillWidth = Math.max(48, Math.min(96, tick.length * 7 + 16));
+
+  return (
+    <g data-slot="chart-cursor" pointerEvents="none">
+      <line
+        x1={lineX}
+        x2={lineX}
+        y1={top}
+        y2={top + height}
+        className="stroke-fg-muted"
+        strokeWidth={1}
+      />
+      {tick && showAxisLabel ? (
+        <g transform={`translate(${lineX}, ${top + height + 14})`}>
+          <rect
+            x={-pillWidth / 2}
+            y={-10}
+            width={pillWidth}
+            height={20}
+            rx={10}
+            className="fill-fg"
+          />
+          <text
+            textAnchor="middle"
+            dominantBaseline="middle"
+            y={1}
+            className="fill-fg-inverse text-[11px] font-medium"
+          >
+            {tick}
+          </text>
+        </g>
+      ) : null}
+    </g>
+  );
+}
+ChartCursor.displayName = "ChartCursor";
 
 const ChartLegend = RechartsPrimitive.Legend;
 
@@ -362,6 +478,7 @@ function getPayloadConfigFromPayload(
 
 export {
   ChartContainer,
+  ChartCursor,
   ChartLegend,
   ChartLegendContent,
   ChartStyle,

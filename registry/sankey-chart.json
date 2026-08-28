@@ -1,0 +1,18 @@
+{
+  "name": "sankey-chart",
+  "type": "registry:ui",
+  "dependencies": [
+    "recharts@^3.9.2"
+  ],
+  "registryDependencies": [
+    "chart",
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "sankey-chart.tsx",
+      "content": "import type { HTMLAttributes } from \"react\";\nimport { Sankey, Tooltip } from \"recharts\";\nimport { cn } from \"../lib/cn.js\";\nimport { ChartContainer } from \"./chart.js\";\n\nexport interface SankeyChartData {\n  nodes: { name: string }[];\n  links: { source: number; target: number; value: number }[];\n}\n\nexport interface SankeyChartProps extends HTMLAttributes<HTMLDivElement> {\n  data: SankeyChartData;\n}\n\nexport function SankeyChart({ data, className, ...props }: SankeyChartProps) {\n  return (\n    <div data-slot=\"sankey-chart\" className={cn(\"h-64 w-full\", className)} {...props}>\n      <ChartContainer\n        config={{ flow: { label: \"Flow\", color: \"var(--cronus-chart-1)\" } }}\n        className=\"h-full w-full\"\n      >\n        <Sankey data={data} nodePadding={16} nodeWidth={12} linkCurvature={0.5} iterations={32}>\n          <Tooltip />\n        </Sankey>\n      </ChartContainer>\n    </div>\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}

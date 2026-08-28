@@ -3884,6 +3884,419 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  chart: [
+    {
+      interfaceName: "ChartCursorProps",
+      props: [
+        {
+          name: "x",
+          type: "number",
+          required: false,
+        },
+        {
+          name: "y",
+          type: "number",
+          required: false,
+        },
+        {
+          name: "width",
+          type: "number",
+          required: false,
+        },
+        {
+          name: "height",
+          type: "number",
+          required: false,
+          default: "0",
+        },
+        {
+          name: "top",
+          type: "number",
+          required: false,
+          default: "0",
+        },
+        {
+          name: "left",
+          type: "number",
+          required: false,
+        },
+        {
+          name: "points",
+          type: "{ x: number; y: number }[]",
+          required: false,
+        },
+        {
+          name: "payload",
+          type: "TooltipPayloadItem[]",
+          required: false,
+        },
+        {
+          name: "labelKey",
+          type: "string",
+          required: false,
+          description: "Field on the datum shown in the axis pill.",
+        },
+        {
+          name: "showAxisLabel",
+          type: "boolean",
+          required: false,
+          description:
+            'Draw the hovered label as a pill on the x-axis. Turn off when the axis already prints that tick — otherwise the pill stacks on the label (e.g. "Aug 6" over "Aug 7").',
+          default: "true",
+        },
+      ],
+    },
+  ],
+  "area-chart": [
+    {
+      interfaceName: "AreaChartProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "data",
+          type: "Record<string, unknown>[]",
+          required: true,
+        },
+        {
+          name: "xKey",
+          type: "string",
+          required: false,
+          description: "Category / time field.",
+          default: '"date"',
+        },
+        {
+          name: "series",
+          type: "ChartSeries[]",
+          required: true,
+        },
+        {
+          name: "formatValue",
+          type: "(value: number, name: string) => string",
+          required: false,
+        },
+      ],
+    },
+  ],
+  "line-chart": [
+    {
+      interfaceName: "LineChartProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "data",
+          type: "Record<string, unknown>[]",
+          required: true,
+        },
+        {
+          name: "xKey",
+          type: "string",
+          required: false,
+          default: '"date"',
+        },
+        {
+          name: "series",
+          type: "ChartSeries[]",
+          required: true,
+        },
+        {
+          name: "formatValue",
+          type: "(value: number, name: string) => string",
+          required: false,
+        },
+      ],
+    },
+  ],
+  "live-line-chart": [
+    {
+      interfaceName: "LiveLineChartProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "data",
+          type: "LiveLinePoint[]",
+          required: true,
+        },
+        {
+          name: "interval",
+          type: "number",
+          required: false,
+          default: "1000",
+        },
+        {
+          name: "maxPoints",
+          type: "number",
+          required: false,
+          default: "24",
+        },
+      ],
+    },
+  ],
+  "bar-chart": [
+    {
+      interfaceName: "BarChartProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "data",
+          type: "Record<string, unknown>[]",
+          required: true,
+        },
+        {
+          name: "xKey",
+          type: "string",
+          required: false,
+          default: '"month"',
+        },
+        {
+          name: "series",
+          type: "ChartSeries[]",
+          required: true,
+        },
+        {
+          name: "stacked",
+          type: "boolean",
+          required: false,
+          default: "false",
+        },
+        {
+          name: "formatValue",
+          type: "(value: number, name: string) => string",
+          required: false,
+        },
+      ],
+    },
+  ],
+  "composed-chart": [
+    {
+      interfaceName: "ComposedChartProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "data",
+          type: "Record<string, unknown>[]",
+          required: true,
+        },
+        {
+          name: "xKey",
+          type: "string",
+          required: false,
+          default: '"date"',
+        },
+        {
+          name: "series",
+          type: "ComposedChartSeries[]",
+          required: true,
+        },
+        {
+          name: "formatValue",
+          type: "(value: number, name: string) => string",
+          required: false,
+        },
+      ],
+    },
+  ],
+  "candlestick-chart": [
+    {
+      interfaceName: "CandlestickChartProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "data",
+          type: "CandlestickPoint[]",
+          required: true,
+        },
+      ],
+    },
+  ],
+  "funnel-chart": [
+    {
+      interfaceName: "FunnelChartProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "data",
+          type: "FunnelChartItem[]",
+          required: true,
+        },
+      ],
+    },
+  ],
+  "gauge-chart": [
+    {
+      interfaceName: "GaugeChartProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "value",
+          type: "number",
+          required: true,
+        },
+        {
+          name: "label",
+          type: "string",
+          required: false,
+          default: '"Score"',
+        },
+        {
+          name: "max",
+          type: "number",
+          required: false,
+          default: "100",
+        },
+      ],
+    },
+  ],
+  "pie-chart": [
+    {
+      interfaceName: "PieChartProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "data",
+          type: "PieChartItem[]",
+          required: true,
+        },
+        {
+          name: "series",
+          type: "ChartSeries[]",
+          required: true,
+        },
+      ],
+    },
+  ],
+  "ring-chart": [
+    {
+      interfaceName: "RingChartProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "data",
+          type: "RingChartItem[]",
+          required: true,
+        },
+        {
+          name: "series",
+          type: "ChartSeries[]",
+          required: true,
+        },
+        {
+          name: "centerLabel",
+          type: "string",
+          required: false,
+          default: '"Total"',
+        },
+      ],
+    },
+  ],
+  "radar-chart": [
+    {
+      interfaceName: "RadarChartProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "data",
+          type: "Record<string, unknown>[]",
+          required: true,
+        },
+        {
+          name: "angleKey",
+          type: "string",
+          required: false,
+          default: '"metric"',
+        },
+        {
+          name: "series",
+          type: "ChartSeries[]",
+          required: true,
+        },
+      ],
+    },
+  ],
+  "scatter-chart": [
+    {
+      interfaceName: "ScatterChartProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "xKey",
+          type: "string",
+          required: false,
+          default: '"x"',
+        },
+        {
+          name: "yKey",
+          type: "string",
+          required: false,
+          default: '"y"',
+        },
+        {
+          name: "series",
+          type: "ScatterChartSeries[]",
+          required: true,
+        },
+      ],
+    },
+  ],
+  "sankey-chart": [
+    {
+      interfaceName: "SankeyChartProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "data",
+          type: "SankeyChartData",
+          required: true,
+        },
+      ],
+    },
+  ],
+  "profit-loss-chart": [
+    {
+      interfaceName: "ProfitLossChartProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "data",
+          type: "ProfitLossPoint[]",
+          required: true,
+        },
+      ],
+    },
+  ],
+  "choropleth-chart": [
+    {
+      interfaceName: "ChoroplethChartProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "data",
+          type: "ChoroplethRegion[]",
+          required: false,
+          default: "CHOROPLETH_DEMO",
+        },
+      ],
+    },
+  ],
+  "sunburst-chart": [
+    {
+      interfaceName: "SunburstChartProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "data",
+          type: "SunburstNode[]",
+          required: true,
+        },
+      ],
+    },
+  ],
+  "heatmap-chart": [
+    {
+      interfaceName: "HeatmapChartProps",
+      extends: "Extends HeatmapProps",
+      props: [],
+    },
+  ],
   "gradient-border": [
     {
       interfaceName: "GradientBorderProps",
@@ -4612,25 +5025,24 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "colorFrom",
           type: "string",
           required: false,
-          description:
-            "Colour of the leading edge of the beam. Defaults to the theme primary (`var(--cronus-primary)`).",
-          default: '"var(--cronus-primary)"',
+          description: "Colour of the leading edge of the beam. Defaults to `var(--cronus-fg)`.",
+          default: '"var(--cronus-fg)"',
         },
         {
           name: "colorTo",
           type: "string",
           required: false,
           description:
-            "Colour the trail fades through before it dissolves. Defaults to the theme accent (`var(--cronus-accent)`).",
-          default: '"var(--cronus-accent)"',
+            "Colour the trail fades through before it dissolves. Defaults to transparent.",
+          default: '"transparent"',
         },
         {
           name: "borderWidth",
           type: "number",
           required: false,
           description:
-            "Thickness of the border band the beam rides in, in pixels. Defaults to `1.5`.",
-          default: "1.5",
+            "Thickness of the border band the beam rides in, in pixels. Defaults to `1` (hairline).",
+          default: "1",
         },
         {
           name: "reverse",

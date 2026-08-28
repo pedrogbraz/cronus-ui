@@ -31,6 +31,8 @@ export { AnimatedNumber } from "./components/animated-number.js";
 export type { AppShellProps } from "./components/app-shell.js";
 // ── Wave 5 — layout & app navigation ───────────────────────────────
 export { AppShell } from "./components/app-shell.js";
+export type { AreaChartProps } from "./components/area-chart.js";
+export { AreaChart } from "./components/area-chart.js";
 export type { AspectRatioProps } from "./components/aspect-ratio.js";
 export { AspectRatio } from "./components/aspect-ratio.js";
 export { AuroraBackground } from "./components/aurora-background.js";
@@ -49,6 +51,8 @@ export type { BadgeProps } from "./components/badge.js";
 export { Badge, badgeVariants } from "./components/badge.js";
 export type { BannerProps } from "./components/banner.js";
 export { Banner, bannerVariants } from "./components/banner.js";
+export type { BarChartProps } from "./components/bar-chart.js";
+export { BarChart } from "./components/bar-chart.js";
 export type { BorderBeamProps } from "./components/border-beam.js";
 export { BorderBeam } from "./components/border-beam.js";
 export type { BreadcrumbLinkProps } from "./components/breadcrumb.js";
@@ -67,6 +71,8 @@ export type { ButtonGroupProps } from "./components/button-group.js";
 export { ButtonGroup } from "./components/button-group.js";
 export type { CalendarProps } from "./components/calendar.js";
 export { Calendar } from "./components/calendar.js";
+export type { CandlestickChartProps, CandlestickPoint } from "./components/candlestick-chart.js";
+export { CandlestickChart } from "./components/candlestick-chart.js";
 export {
   Card,
   CardAction,
@@ -96,19 +102,23 @@ export {
   CarouselNext,
   CarouselPrevious,
 } from "./components/carousel.js";
-export type { ChartConfig } from "./components/chart.js";
+export type { ChartConfig, ChartCursorProps, ChartSeries } from "./components/chart.js";
 export {
   ChartContainer,
+  ChartCursor,
   ChartLegend,
   ChartLegendContent,
   ChartStyle,
   ChartTooltip,
   ChartTooltipContent,
+  chartSeriesConfig,
 } from "./components/chart.js";
 // ── Wave 1 — forms ─────────────────────────────────────────────────
 export { Checkbox } from "./components/checkbox.js";
 export type { ChipGroupProps, ChipLabels, ChipProps } from "./components/chip.js";
 export { Chip, ChipGroup, chipVariants } from "./components/chip.js";
+export type { ChoroplethChartProps, ChoroplethRegion } from "./components/choropleth-chart.js";
+export { CHOROPLETH_DEMO, ChoroplethChart } from "./components/choropleth-chart.js";
 export type { ClickSparkProps } from "./components/click-spark.js";
 export { ClickSpark } from "./components/click-spark.js";
 export type { CodeBlockProps } from "./components/code-block.js";
@@ -138,6 +148,8 @@ export {
 } from "./components/command.js";
 export type { ComparisonSliderProps } from "./components/comparison-slider.js";
 export { ComparisonSlider } from "./components/comparison-slider.js";
+export type { ComposedChartProps, ComposedChartSeries } from "./components/composed-chart.js";
+export { ComposedChart } from "./components/composed-chart.js";
 export type { ConfettiProps } from "./components/confetti.js";
 export { Confetti } from "./components/confetti.js";
 export type { ConfirmationDialogProps } from "./components/confirmation-dialog.js";
@@ -289,6 +301,10 @@ export {
 } from "./components/form.js";
 export type { FrameProps } from "./components/frame.js";
 export { Frame } from "./components/frame.js";
+export type { FunnelChartItem, FunnelChartProps } from "./components/funnel-chart.js";
+export { FunnelChart } from "./components/funnel-chart.js";
+export type { GaugeChartProps } from "./components/gauge-chart.js";
+export { GaugeChart } from "./components/gauge-chart.js";
 export type { GlareHoverProps } from "./components/glare-hover.js";
 export { GlareHover } from "./components/glare-hover.js";
 export { GlassCard } from "./components/glass-card.js";
@@ -300,6 +316,8 @@ export type { GridPatternProps } from "./components/grid-pattern.js";
 export { GridPattern } from "./components/grid-pattern.js";
 export type { HeatmapDay, HeatmapProps } from "./components/heatmap.js";
 export { getHeatmapLevel, Heatmap } from "./components/heatmap.js";
+export type { HeatmapChartProps } from "./components/heatmap-chart.js";
+export { HeatmapChart } from "./components/heatmap-chart.js";
 export type { HighlighterProps } from "./components/highlighter.js";
 export { Highlighter } from "./components/highlighter.js";
 export { HoverCard, HoverCardContent, HoverCardTrigger } from "./components/hover-card.js";
@@ -325,6 +343,10 @@ export type { LightRaysProps } from "./components/light-rays.js";
 export { LightRays } from "./components/light-rays.js";
 export type { LightboxImage, LightboxProps } from "./components/lightbox.js";
 export { Lightbox } from "./components/lightbox.js";
+export type { LineChartProps } from "./components/line-chart.js";
+export { LineChart } from "./components/line-chart.js";
+export type { LiveLineChartProps, LiveLinePoint } from "./components/live-line-chart.js";
+export { LiveLineChart } from "./components/live-line-chart.js";
 export type {
   LogoCarouselItem,
   LogoCarouselMotionPreference,
@@ -437,12 +459,18 @@ export type { PasswordInputProps } from "./components/password-input.js";
 export { getPasswordStrength, PasswordInput } from "./components/password-input.js";
 export type { PhoneCountry, PhoneInputProps } from "./components/phone-input.js";
 export { DEFAULT_PHONE_COUNTRIES, PhoneInput } from "./components/phone-input.js";
+export type { PieChartItem, PieChartProps } from "./components/pie-chart.js";
+export { PieChart } from "./components/pie-chart.js";
 export type { PillNavItem, PillNavProps } from "./components/pill-nav.js";
 export { PillNav } from "./components/pill-nav.js";
 export { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from "./components/popover.js";
+export type { ProfitLossChartProps, ProfitLossPoint } from "./components/profit-loss-chart.js";
+export { ProfitLossChart } from "./components/profit-loss-chart.js";
 export { Progress } from "./components/progress.js";
 export type { ProgressiveBlurProps } from "./components/progressive-blur.js";
 export { ProgressiveBlur, progressiveBlurVariants } from "./components/progressive-blur.js";
+export type { RadarChartProps } from "./components/radar-chart.js";
+export { RadarChart } from "./components/radar-chart.js";
 export { RadioGroup, RadioGroupItem } from "./components/radio-group.js";
 export type { RatingProps } from "./components/rating.js";
 export { Rating } from "./components/rating.js";
@@ -458,8 +486,14 @@ export type { RevealProps } from "./components/reveal.js";
 export { Reveal } from "./components/reveal.js";
 export type { RichTextEditorProps } from "./components/rich-text-editor.js";
 export { RichTextEditor } from "./components/rich-text-editor.js";
+export type { RingChartItem, RingChartProps } from "./components/ring-chart.js";
+export { RingChart } from "./components/ring-chart.js";
 export type { RippleProps } from "./components/ripple.js";
 export { Ripple } from "./components/ripple.js";
+export type { SankeyChartData, SankeyChartProps } from "./components/sankey-chart.js";
+export { SankeyChart } from "./components/sankey-chart.js";
+export type { ScatterChartProps, ScatterChartSeries } from "./components/scatter-chart.js";
+export { ScatterChart } from "./components/scatter-chart.js";
 export type {
   SchedulerEvent,
   SchedulerEventColor,
@@ -577,6 +611,8 @@ export {
   StepperTrigger,
   stepperIndicatorVariants,
 } from "./components/stepper.js";
+export type { SunburstChartProps, SunburstNode } from "./components/sunburst-chart.js";
+export { SunburstChart } from "./components/sunburst-chart.js";
 export { Switch } from "./components/switch.js";
 export {
   Table,

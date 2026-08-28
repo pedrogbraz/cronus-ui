@@ -31,7 +31,8 @@ npx cronus-ui theme set neutral --mode light
 the choice in `cronus-ui.json`.
 
 MCP: `set_theme { "name": "sunset", "mode": "dark" }`. Use this for the five shipped
-presets.
+presets. Before generating screens, call `get_design_context` (or read `DESIGN.md`)
+so the palette and look stay Cronus.
 
 ## Apply a Create Studio theme
 

@@ -636,32 +636,30 @@ export const premiumExamples: ExampleMap = {
       id: "frosted-surface",
       title: "Frosted surface",
       description:
-        "A frosted-glass panel floating over a colorful backdrop — the backdrop-blur is what reveals the depth, so always give it something vivid to sit on.",
-      code: `<div className="relative overflow-hidden rounded-2xl">
-  <AuroraBackground className="absolute inset-0" />
+        "A frosted-glass panel over a quiet inset field — the backdrop-blur needs something behind it, not a rainbow.",
+      code: `<div className="relative overflow-hidden rounded-2xl border border-border bg-surface-inset">
   <div className="relative p-6">
     <GlassCard className="flex flex-col gap-3 p-5">
-      <span className="grid size-9 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
+      <span className="grid size-9 place-items-center rounded-lg bg-surface-overlay text-fg">
         <Sparkles className="size-4" aria-hidden="true" />
       </span>
       <h3 className="font-display text-base font-semibold text-fg">Premium by default</h3>
       <p className="text-sm text-fg-secondary">
-        Aurora gradients and frosted blur ship out of the box — no design debt to pay down.
+        Frosted blur ships out of the box — sit it on a surface, not a Midjourney wash.
       </p>
     </GlassCard>
   </div>
 </div>`,
       preview: (
-        <div className="relative overflow-hidden rounded-2xl">
-          <AuroraBackground className="absolute inset-0" />
+        <div className="relative overflow-hidden rounded-2xl border border-border bg-surface-inset">
           <div className="relative p-6">
             <GlassCard className="flex flex-col gap-3 p-5">
-              <span className="grid size-9 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
+              <span className="grid size-9 place-items-center rounded-lg bg-surface-overlay text-fg">
                 <Sparkles className="size-4" aria-hidden="true" />
               </span>
               <h3 className="font-display text-base font-semibold text-fg">Premium by default</h3>
               <p className="text-sm text-fg-secondary">
-                Aurora gradients and frosted blur ship out of the box — no design debt to pay down.
+                Frosted blur ships out of the box — sit it on a surface, not a Midjourney wash.
               </p>
             </GlassCard>
           </div>
@@ -673,11 +671,11 @@ export const premiumExamples: ExampleMap = {
     {
       id: "with-glow",
       title: "With glow",
-      description: "Pass `glow` to add an ambient shadow that draws the eye to a hero surface.",
+      description: "Pass `glow` to add a quiet shadow that draws the eye to a featured surface.",
       code: `<GradientBorder glow innerClassName="flex flex-col gap-3 bg-surface-raised p-5">
   <h3 className="font-display text-base font-semibold text-fg">Pro plan</h3>
   <p className="text-sm text-fg-secondary">
-    The glowing border draws the eye to your highest-value surface.
+    The hairline ring draws the eye to your highest-value surface.
   </p>
   <div className="flex items-baseline gap-1">
     <span className="font-display text-2xl font-semibold text-fg">$29</span>
@@ -688,7 +686,7 @@ export const premiumExamples: ExampleMap = {
         <GradientBorder glow innerClassName="flex flex-col gap-3 bg-surface-raised p-5">
           <h3 className="font-display text-base font-semibold text-fg">Pro plan</h3>
           <p className="text-sm text-fg-secondary">
-            The glowing border draws the eye to your highest-value surface.
+            The hairline ring draws the eye to your highest-value surface.
           </p>
           <div className="flex items-baseline gap-1">
             <span className="font-display text-2xl font-semibold text-fg">$29</span>
@@ -700,11 +698,11 @@ export const premiumExamples: ExampleMap = {
     {
       id: "flat",
       title: "Flat",
-      description: "Omit `glow` for the same gradient ring, kept calm for secondary surfaces.",
+      description: "Omit `glow` for the same primary hairline, kept calm for secondary surfaces.",
       code: `<GradientBorder innerClassName="flex flex-col gap-3 bg-surface-raised p-5">
   <h3 className="font-display text-base font-semibold text-fg">Starter plan</h3>
   <p className="text-sm text-fg-secondary">
-    The same gradient ring, kept calm and flat for secondary surfaces.
+    The same primary hairline, kept calm and flat for secondary surfaces.
   </p>
   <div className="flex items-baseline gap-1">
     <span className="font-display text-2xl font-semibold text-fg">$0</span>
@@ -715,7 +713,7 @@ export const premiumExamples: ExampleMap = {
         <GradientBorder innerClassName="flex flex-col gap-3 bg-surface-raised p-5">
           <h3 className="font-display text-base font-semibold text-fg">Starter plan</h3>
           <p className="text-sm text-fg-secondary">
-            The same gradient ring, kept calm and flat for secondary surfaces.
+            The same primary hairline, kept calm and flat for secondary surfaces.
           </p>
           <div className="flex items-baseline gap-1">
             <span className="font-display text-2xl font-semibold text-fg">$0</span>
@@ -730,7 +728,7 @@ export const premiumExamples: ExampleMap = {
       id: "headline",
       title: "Headline",
       description:
-        "Use `asChild` to clip your own heading element to the Aurora gradient — the typography stays yours, the fill is the brand's.",
+        "Use `asChild` to clip your own heading element to a primary→foreground fade — the typography stays yours, the fill follows the theme.",
       code: `<GradientText asChild>
   <h3 className="font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
     Design that themes itself
@@ -802,14 +800,12 @@ export const premiumExamples: ExampleMap = {
       id: "animated-backdrop",
       title: "Animated backdrop",
       description:
-        "An animated aurora gradient wrapping centered hero content — the brand's signature first impression.",
+        "Soft primary blobs drift behind centered hero content. Colour lives on the CTA; the headline stays on `text-fg`.",
       code: `<AuroraBackground className="relative flex min-h-48 items-center justify-center overflow-hidden rounded-2xl">
   <div className="flex max-w-lg flex-col items-center gap-4 px-6 py-12 text-center">
-    <GradientText asChild>
-      <h3 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">
-        Ship something beautiful
-      </h3>
-    </GradientText>
+    <h3 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl text-fg">
+      Ship something beautiful
+    </h3>
     <p className="text-balance text-sm text-fg-secondary">
       Accessible, token-driven React components with premium motion baked in.
     </p>
@@ -822,11 +818,9 @@ export const premiumExamples: ExampleMap = {
       preview: (
         <AuroraBackground className="relative flex min-h-48 items-center justify-center overflow-hidden rounded-2xl">
           <div className="flex max-w-lg flex-col items-center gap-4 px-6 py-12 text-center">
-            <GradientText asChild>
-              <h3 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">
-                Ship something beautiful
-              </h3>
-            </GradientText>
+            <h3 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl text-fg">
+              Ship something beautiful
+            </h3>
             <p className="text-balance text-sm text-fg-secondary">
               Accessible, token-driven React components with premium motion baked in.
             </p>
@@ -1150,7 +1144,7 @@ export const premiumExamples: ExampleMap = {
       code: `<Reveal>
   <Card className="w-full">
     <CardHeader>
-      <span className="mb-1 grid size-11 place-items-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
+      <span className="mb-1 grid size-11 place-items-center rounded-xl bg-surface-overlay text-fg">
         <Sparkles className="size-5" aria-hidden="true" />
       </span>
       <CardTitle className="text-2xl">Reveal as you scroll</CardTitle>
@@ -1186,7 +1180,7 @@ export const premiumExamples: ExampleMap = {
         <Reveal>
           <Card className="w-full">
             <CardHeader>
-              <span className="mb-1 grid size-11 place-items-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
+              <span className="mb-1 grid size-11 place-items-center rounded-xl bg-surface-overlay text-fg">
                 <Sparkles className="size-5" aria-hidden="true" />
               </span>
               <CardTitle className="text-2xl">Reveal as you scroll</CardTitle>
@@ -1380,7 +1374,7 @@ export const premiumExamples: ExampleMap = {
       code: `<BorderBeam duration={6} className="w-full max-w-xs">
   <div className="flex flex-col gap-4 rounded-2xl bg-surface-raised p-6">
     <div className="flex items-center justify-between">
-      <span className="grid size-9 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
+      <span className="grid size-9 place-items-center rounded-lg bg-surface-overlay text-fg">
         <Sparkles className="size-4" aria-hidden="true" />
       </span>
       <span className="rounded-full border border-border px-2.5 py-0.5 text-xs font-medium text-fg-secondary">
@@ -1405,7 +1399,7 @@ export const premiumExamples: ExampleMap = {
         <BorderBeam duration={6} className="w-full max-w-xs">
           <div className="flex flex-col gap-4 rounded-2xl bg-surface-raised p-6">
             <div className="flex items-center justify-between">
-              <span className="grid size-9 place-items-center rounded-lg bg-gradient-primary text-primary-foreground shadow-glow">
+              <span className="grid size-9 place-items-center rounded-lg bg-surface-overlay text-fg">
                 <Sparkles className="size-4" aria-hidden="true" />
               </span>
               <span className="rounded-full border border-border px-2.5 py-0.5 text-xs font-medium text-fg-secondary">
@@ -1462,10 +1456,10 @@ export const premiumExamples: ExampleMap = {
       id: "custom-colours",
       title: "Custom colours & reverse",
       description:
-        "Every knob rides a CSS variable: set `colorFrom`/`colorTo` for a bespoke gradient head and `reverse` to orbit counter-clockwise. Here an amber→pink trail circles a security card.",
+        "Every knob rides a CSS variable: set `colorFrom`/`colorTo` for a token-bound head and `reverse` to orbit counter-clockwise. Here the trail is foreground fading out.",
       code: `<BorderBeam
-  colorFrom="#f59e0b"
-  colorTo="#ec4899"
+  colorFrom="var(--cronus-fg)"
+  colorTo="transparent"
   size={90}
   duration={5}
   reverse
@@ -1483,8 +1477,8 @@ export const premiumExamples: ExampleMap = {
 </BorderBeam>`,
       preview: (
         <BorderBeam
-          colorFrom="#f59e0b"
-          colorTo="#ec4899"
+          colorFrom="var(--cronus-fg)"
+          colorTo="transparent"
           size={90}
           duration={5}
           reverse
@@ -1511,7 +1505,7 @@ export const premiumExamples: ExampleMap = {
         "The default trigger flips on pointer hover and keyboard focus, so it's fully operable without a mouse. The inactive face is `inert` — its content never double-reads to a screen reader. Hover the card to reveal the plan's benefits.",
       code: `<FlipCard aria-label="Plano Pro" className="h-72 w-full max-w-xs">
   <FlipCardFront className="justify-between p-6">
-    <span className="grid size-11 place-items-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
+    <span className="grid size-11 place-items-center rounded-xl bg-surface-overlay text-fg">
       <Sparkles className="size-5" aria-hidden="true" />
     </span>
     <div>
@@ -1546,7 +1540,7 @@ export const premiumExamples: ExampleMap = {
       preview: (
         <FlipCard aria-label="Plano Pro" className="h-72 w-full max-w-xs">
           <FlipCardFront className="justify-between p-6">
-            <span className="grid size-11 place-items-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
+            <span className="grid size-11 place-items-center rounded-xl bg-surface-overlay text-fg">
               <Sparkles className="size-5" aria-hidden="true" />
             </span>
             <div>
@@ -1715,7 +1709,7 @@ export const premiumExamples: ExampleMap = {
         "A real perspective transform that tilts toward the pointer, with a soft `glare` sheen and `parallax` lifting the content toward the viewer on hover. The pointer writes straight to CSS variables inside one rAF — no re-renders — and it flattens under prefers-reduced-motion.",
       code: `<TiltCard glare parallax maxTilt={14} className="w-full max-w-xs">
   <div className="flex flex-col gap-3">
-    <span className="grid size-11 place-items-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
+    <span className="grid size-11 place-items-center rounded-xl bg-surface-overlay text-fg">
       <Zap className="size-5" aria-hidden="true" />
     </span>
     <h3 className="font-display text-lg font-semibold text-fg">Repasses instantâneos</h3>
@@ -1727,7 +1721,7 @@ export const premiumExamples: ExampleMap = {
       preview: (
         <TiltCard glare parallax maxTilt={14} className="w-full max-w-xs">
           <div className="flex flex-col gap-3">
-            <span className="grid size-11 place-items-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
+            <span className="grid size-11 place-items-center rounded-xl bg-surface-overlay text-fg">
               <Zap className="size-5" aria-hidden="true" />
             </span>
             <h3 className="font-display text-lg font-semibold text-fg">Repasses instantâneos</h3>
@@ -1743,20 +1737,20 @@ export const premiumExamples: ExampleMap = {
       id: "payment-card",
       title: "Payment card",
       description:
-        "Push `maxTilt` and `scale` for a tactile, dramatic feel — perfect for a payment-card mockup that leans into the cursor. Override the surface via `className` to paint it with the brand gradient.",
+        "Push `maxTilt` and `scale` for a tactile, dramatic feel — a payment-card mockup that leans into the cursor. The surface is inverted fg, not a rainbow fill.",
       code: `<TiltCard
   glare
   parallax
   maxTilt={16}
   scale={1.05}
-  className="w-full max-w-sm border-transparent bg-gradient-primary text-primary-foreground"
+  className="w-full max-w-sm bg-fg text-fg-inverse"
 >
   <div className="flex flex-col gap-6">
     <div className="flex items-start justify-between">
       <span className="font-display text-lg font-semibold">Cronus</span>
       <Wifi className="size-6 rotate-90 opacity-90" aria-hidden="true" />
     </div>
-    <div className="h-9 w-12 rounded-md bg-white/25 ring-1 ring-white/20" aria-hidden="true" />
+    <div className="h-9 w-12 rounded-md bg-fg-inverse/20 ring-1 ring-fg-inverse/15" aria-hidden="true" />
     <div className="flex flex-col gap-4">
       <p className="font-mono text-xl tracking-[0.25em]">4242 4242 4242 4242</p>
       <div className="flex items-center justify-between text-xs uppercase tracking-wide opacity-90">
@@ -1772,7 +1766,7 @@ export const premiumExamples: ExampleMap = {
           parallax
           maxTilt={16}
           scale={1.05}
-          className="w-full max-w-sm border-transparent bg-gradient-primary text-primary-foreground"
+          className="w-full max-w-sm bg-fg text-fg-inverse"
         >
           <div className="flex flex-col gap-6">
             <div className="flex items-start justify-between">
@@ -1780,7 +1774,7 @@ export const premiumExamples: ExampleMap = {
               <Wifi className="size-6 rotate-90 opacity-90" aria-hidden="true" />
             </div>
             <div
-              className="h-9 w-12 rounded-md bg-white/25 ring-1 ring-white/20"
+              className="h-9 w-12 rounded-md bg-fg-inverse/20 ring-1 ring-fg-inverse/15"
               aria-hidden="true"
             />
             <div className="flex flex-col gap-4">
@@ -1938,7 +1932,7 @@ export const premiumExamples: ExampleMap = {
         registryItem: "orbit",
       },
       code: `<Orbit aria-label="Tools orbiting the product core" className="size-80">
-  <span className="grid size-14 place-items-center rounded-2xl bg-gradient-primary text-primary-foreground shadow-glow">
+  <span className="grid size-14 place-items-center rounded-2xl bg-surface-overlay text-fg">
     <Zap className="size-6" />
   </span>
   <OrbitRing radius={72} duration={22}>
@@ -1960,7 +1954,7 @@ export const premiumExamples: ExampleMap = {
 </Orbit>`,
       preview: (
         <Orbit aria-label="Tools orbiting the product core" className="size-80">
-          <span className="grid size-14 place-items-center rounded-2xl bg-gradient-primary text-primary-foreground shadow-glow">
+          <span className="grid size-14 place-items-center rounded-2xl bg-surface-overlay text-fg">
             <Zap className="size-6" />
           </span>
           <OrbitRing radius={72} duration={22}>
@@ -2128,7 +2122,7 @@ export const premiumExamples: ExampleMap = {
       id: "field",
       title: "Shooting stars",
       description:
-        "Thin trails drift diagonally across the surface. Positions are derived from the meteor index, so server and client paint the same field.",
+        "Shooting stars fall diagonally from the top and burst as they leave the bottom. Positions are derived from the meteor index, so server and client paint the same field.",
       code: `<Meteors className="grid min-h-56 place-items-center rounded-2xl border border-border bg-surface-raised">
   <p className="font-display text-2xl text-fg">Launch window</p>
 </Meteors>`,

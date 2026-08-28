@@ -1,0 +1,18 @@
+{
+  "name": "profit-loss-chart",
+  "type": "registry:ui",
+  "dependencies": [
+    "recharts@^3.9.2"
+  ],
+  "registryDependencies": [
+    "chart",
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "profit-loss-chart.tsx",
+      "content": "import type { HTMLAttributes } from \"react\";\nimport { CartesianGrid, Line, LineChart, ReferenceLine, XAxis } from \"recharts\";\nimport { cn } from \"../lib/cn.js\";\nimport { ChartContainer, ChartCursor, ChartTooltip, ChartTooltipContent } from \"./chart.js\";\n\nexport interface ProfitLossPoint {\n  month: string;\n  pnl: number;\n}\n\nexport interface ProfitLossChartProps extends HTMLAttributes<HTMLDivElement> {\n  data: ProfitLossPoint[];\n}\n\nexport function ProfitLossChart({ data, className, ...props }: ProfitLossChartProps) {\n  return (\n    <div data-slot=\"profit-loss-chart\" className={cn(\"h-64 w-full\", className)} {...props}>\n      <ChartContainer\n        config={{ pnl: { label: \"P/L\", color: \"var(--cronus-success)\" } }}\n        className=\"h-full w-full\"\n      >\n        <LineChart accessibilityLayer data={data} margin={{ left: 8, right: 8, top: 8 }}>\n          <CartesianGrid vertical={false} strokeDasharray=\"4 4\" />\n          <ReferenceLine y={0} stroke=\"var(--cronus-border)\" />\n          <XAxis dataKey=\"month\" tickLine={false} axisLine={false} tickMargin={12} />\n          <ChartTooltip\n            cursor={<ChartCursor labelKey=\"month\" />}\n            content={<ChartTooltipContent />}\n          />\n          <Line\n            type=\"monotone\"\n            dataKey=\"pnl\"\n            stroke=\"var(--cronus-success)\"\n            strokeWidth={2}\n            dot={false}\n          />\n        </LineChart>\n      </ChartContainer>\n    </div>\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}

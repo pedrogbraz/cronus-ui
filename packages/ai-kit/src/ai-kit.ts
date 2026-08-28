@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { designMarkdown, isLookName, isThemeName } from "@cronus-ui/tokens";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 
@@ -52,6 +53,10 @@ export interface AiKitOptions {
    * behavior unless explicitly selected by a stack scaffold.
    */
   cronusUiMcp?: boolean;
+  /** Palette baked into DESIGN.md. Unknown names fall back to Aurora. */
+  theme?: string;
+  /** Look baked into DESIGN.md. Unknown names fall back to Default. */
+  look?: string;
 }
 
 export interface AiKitResult {
@@ -100,6 +105,8 @@ export function writeAiKit(options: AiKitOptions): AiKitResult {
     skills = DEFAULT_SKILLS,
     includeCronusUi = true,
   } = options;
+  const theme = isThemeName(options.theme) ? options.theme : undefined;
+  const look = isLookName(options.look) ? options.look : undefined;
   const root = templatesRoot();
   const written: string[] = [];
   const skipped: string[] = [];
@@ -136,6 +143,11 @@ export function writeAiKit(options: AiKitOptions): AiKitResult {
       doctrine += `\n\n${readFileSync(join(root, `AGENTS.${preset}.md`), "utf8")}`;
     }
     emit("AGENTS.md", doctrine);
+  }
+
+  if (includeCronusUi) {
+    emit("DESIGN.md", designMarkdown({ format: "extended", theme, look }));
+    emit("DESIGN.compact.md", designMarkdown({ format: "compact", theme, look }));
   }
 
   if (wantsCronusUiMcp) {
@@ -176,6 +188,27 @@ export function writeAiKit(options: AiKitOptions): AiKitResult {
   }
 
   return { written, skipped };
+}
+
+/**
+ * Taste files only — compose uses this so a generated app gets DESIGN.md
+ * without rewriting the whole AI Kit.
+ */
+export function writeDesignDocuments(
+  targetDir: string,
+  context: { theme?: string; look?: string } = {},
+): AiKitResult {
+  return writeAiKit({
+    targetDir,
+    name: "app",
+    assistants: [],
+    preset: "none",
+    skills: [],
+    includeCronusUi: true,
+    cronusUiMcp: false,
+    theme: context.theme,
+    look: context.look,
+  });
 }
 
 /**

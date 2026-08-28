@@ -11,8 +11,10 @@
  */
 import { existsSync, readFileSync } from "node:fs";
 import { join, resolve } from "node:path";
+import { designMarkdown } from "@cronus-ui/tokens";
 import ts from "typescript";
 import { ALL_BLOCKS, BLOCK_CATEGORIES, getBlockMeta } from "./blocks-index";
+import { getChartDocs } from "./charts-docs";
 import { ALL_COMPONENTS, getComponentDisplayName, getComponentMeta } from "./components-index";
 import {
   ACCESSIBILITY_CHECKS,
@@ -351,9 +353,67 @@ export function componentMarkdown(slug: string): string | undefined {
     }
   }
 
+  const chartDoc = getChartDocs(slug);
+  if (chartDoc) {
+    lines.push(
+      "## Usage",
+      "",
+      chartDoc.usageNote ??
+        "Default is a ready-made wrapper. Motion is the composable `@cronus-ui/ui/charts` API.",
+      "",
+      "### Motion",
+      "",
+      ...fencedCode(chartDoc.motionUsage, "tsx"),
+      "### Default",
+      "",
+      ...fencedCode(chartDoc.defaultUsage, "tsx"),
+      "## Components",
+      "",
+      "Motion subcomponents. Import from `@cronus-ui/ui/charts`.",
+      "",
+    );
+    for (const component of chartDoc.components) {
+      lines.push(
+        ...propsSection({
+          interfaceName: component.name,
+          props: component.props.map((prop) => ({
+            name: prop.name,
+            type: prop.type,
+            required: prop.required ?? false,
+            description: prop.description,
+            default: prop.default,
+          })),
+        }),
+      );
+    }
+    for (const extra of chartDoc.extraSections ?? []) {
+      lines.push(`## ${extra.title}`, "", extra.description, "");
+      if (extra.code) lines.push(...fencedCode(extra.code, "tsx"));
+    }
+    lines.push(
+      "## Data format",
+      "",
+      ...(chartDoc.dataFormatNote ? [chartDoc.dataFormatNote, ""] : []),
+      ...fencedCode(chartDoc.dataFormat, "ts"),
+      "## Theming",
+      "",
+      chartDoc.theming,
+      "",
+      "## Dependencies",
+      "",
+      `Default: ${codeSpan("recharts")}. Motion: ${chartDoc.dependencies.map(codeSpan).join(", ")}.`,
+      "",
+    );
+  }
+
   if (propsDocs.length > 0) {
     lines.push("## API reference", "");
-    lines.push("Generated from the component's exported types.", "");
+    lines.push(
+      chartDoc
+        ? "Generated from the Default wrapper's exported types."
+        : "Generated from the component's exported types.",
+      "",
+    );
     for (const doc of propsDocs) lines.push(...propsSection(doc));
   }
 
@@ -525,6 +585,7 @@ function guideExtras(slug: string): string[] {
 
 /** Markdown mirror of one guide page, or undefined for unknown slugs. */
 export function guideMarkdown(slug: string): string | undefined {
+  if (slug === "design") return designMarkdown({ format: "extended" });
   const page = getGuidePages().find((candidate) => candidate.slug === slug);
   if (!page) return undefined;
 
@@ -594,6 +655,7 @@ export function buildLlmsTxt(): string {
     "## Optional",
     "",
     `- [llms-full.txt](${absoluteUrl("/llms-full.txt")}): every guide and component doc inlined in one file.`,
+    `- [DESIGN.md](${absoluteUrl("/llms/docs/design.md")}): visual taste (Aurora/Neutral, looks, one primary CTA). Compact: ${absoluteUrl("/llms/design.compact.md")}.`,
     `- [Interactive showcase](${absoluteUrl("/")}): the live site with previews, theming, and the stack builder.`,
   );
   return `${lines.join("\n")}\n`;
@@ -635,11 +697,15 @@ export function markdownStaticParams(): { slug: string[] }[] {
     ...getGuidePages().map((page) => ({ slug: ["docs", `${page.slug}.md`] })),
     ...ALL_COMPONENTS.map((component) => ({ slug: ["components", `${component.slug}.md`] })),
     ...ALL_BLOCKS.map((block) => ({ slug: ["blocks", `${block.slug}.md`] })),
+    { slug: ["design.compact.md"] },
   ];
 }
 
 /** Resolve /llms/<section>/<slug>.md to its markdown, or undefined → 404. */
 export function markdownForPath(segments: string[]): string | undefined {
+  if (segments.length === 1 && segments[0] === "design.compact.md") {
+    return designMarkdown({ format: "compact" });
+  }
   const [section, file] = segments;
   if (segments.length !== 2 || section === undefined || file === undefined) return undefined;
   if (!file.endsWith(".md")) return undefined;

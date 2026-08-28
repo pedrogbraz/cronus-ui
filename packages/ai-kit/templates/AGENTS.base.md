@@ -27,6 +27,12 @@ Fill this in for your project so assistants have the specifics they need.
 
 Keep this section accurate. When these facts change, update this file in the same change.
 
+## Visual taste
+
+Read `DESIGN.md` (and `DESIGN.compact.md` when stuffing a prompt) before generating UI.
+That file is Cronus taste: Aurora vs Neutral, looks, one primary CTA, hairline elevation.
+Do not invent a parallel visual language. MCP: `get_design_context`.
+
 ## Evidence levels
 
 Report the quality of your evidence when it matters. Do not present a guess as a fact.

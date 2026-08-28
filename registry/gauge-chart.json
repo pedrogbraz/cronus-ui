@@ -1,0 +1,18 @@
+{
+  "name": "gauge-chart",
+  "type": "registry:ui",
+  "dependencies": [
+    "recharts@^3.9.2"
+  ],
+  "registryDependencies": [
+    "chart",
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "gauge-chart.tsx",
+      "content": "import type { HTMLAttributes } from \"react\";\nimport { PolarAngleAxis, RadialBar, RadialBarChart } from \"recharts\";\nimport { cn } from \"../lib/cn.js\";\nimport { ChartContainer } from \"./chart.js\";\n\nexport interface GaugeChartProps extends HTMLAttributes<HTMLDivElement> {\n  value: number;\n  label?: string;\n  max?: number;\n}\n\nexport function GaugeChart({\n  value,\n  label = \"Score\",\n  max = 100,\n  className,\n  ...props\n}: GaugeChartProps) {\n  const clamped = Math.min(max, Math.max(0, value));\n  const data = [{ name: label, value: clamped, fill: \"var(--cronus-chart-1)\" }];\n\n  return (\n    <div data-slot=\"gauge-chart\" className={cn(\"h-64 w-full\", className)} {...props}>\n      <ChartContainer\n        config={{ [label]: { label, color: \"var(--cronus-chart-1)\" } }}\n        className=\"h-full w-full\"\n      >\n        <RadialBarChart\n          data={data}\n          startAngle={210}\n          endAngle={-30}\n          innerRadius={80}\n          outerRadius={110}\n        >\n          <PolarAngleAxis type=\"number\" domain={[0, max]} tick={false} />\n          <RadialBar dataKey=\"value\" background cornerRadius={8} />\n          <text\n            x=\"50%\"\n            y=\"50%\"\n            textAnchor=\"middle\"\n            dominantBaseline=\"middle\"\n            className=\"fill-fg text-2xl font-medium\"\n          >\n            {clamped}\n          </text>\n        </RadialBarChart>\n      </ChartContainer>\n    </div>\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}

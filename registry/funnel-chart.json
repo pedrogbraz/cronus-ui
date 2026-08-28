@@ -1,0 +1,18 @@
+{
+  "name": "funnel-chart",
+  "type": "registry:ui",
+  "dependencies": [
+    "recharts@^3.9.2"
+  ],
+  "registryDependencies": [
+    "chart",
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "funnel-chart.tsx",
+      "content": "import type { HTMLAttributes } from \"react\";\nimport { Funnel, LabelList, FunnelChart as RechartsFunnelChart } from \"recharts\";\nimport { cn } from \"../lib/cn.js\";\nimport { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from \"./chart.js\";\n\nexport interface FunnelChartItem {\n  stage: string;\n  value: number;\n  key: string;\n}\n\nexport interface FunnelChartProps extends HTMLAttributes<HTMLDivElement> {\n  data: FunnelChartItem[];\n}\n\nexport function FunnelChart({ data, className, ...props }: FunnelChartProps) {\n  const config: ChartConfig = {};\n  for (const [index, item] of data.entries()) {\n    config[item.key] = {\n      label: item.stage,\n      color: `var(--cronus-chart-${(index % 5) + 1})`,\n    };\n  }\n  const rows = data.map((item) => ({ ...item, fill: `var(--color-${item.key})` }));\n\n  return (\n    <div data-slot=\"funnel-chart\" className={cn(\"h-64 w-full\", className)} {...props}>\n      <ChartContainer config={config} className=\"h-full w-full\">\n        <RechartsFunnelChart>\n          <ChartTooltip content={<ChartTooltipContent hideLabel />} />\n          <Funnel data={rows} dataKey=\"value\" nameKey=\"stage\" isAnimationActive>\n            <LabelList dataKey=\"stage\" position=\"right\" className=\"fill-fg text-xs\" />\n          </Funnel>\n        </RechartsFunnelChart>\n      </ChartContainer>\n    </div>\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}

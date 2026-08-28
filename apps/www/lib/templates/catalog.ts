@@ -6,6 +6,8 @@
 export type TemplateTheme = "aurora" | "neutral" | "midnight" | "sunset" | "emerald";
 export type TemplateMode = "dark" | "light";
 export type TemplateKind = "product" | "landing" | "starter";
+/** Visual job — chips on /templates, "more like this" on the detail page. */
+export type TemplateMood = "saas" | "editorial" | "operational" | "storefront" | "glass";
 
 export interface TemplateBlockRef {
   block: string;
@@ -520,6 +522,67 @@ export function stageRefs(entry: TemplateCatalogEntry): TemplateBlockRef[] {
   refs.push(...entry.blocks);
   if (entry.chrome.footer) refs.push({ block: entry.chrome.footer });
   return refs;
+}
+
+export const TEMPLATE_MOODS: readonly TemplateMood[] = [
+  "saas",
+  "editorial",
+  "operational",
+  "storefront",
+  "glass",
+];
+
+export const TEMPLATE_MOOD_LABELS: Record<TemplateMood, string> = {
+  saas: "Clean SaaS",
+  editorial: "Editorial",
+  operational: "Operational",
+  storefront: "Storefront",
+  glass: "Glass",
+};
+
+export const TEMPLATE_MOOD_BY_SLUG: Record<string, TemplateMood> = {
+  saas: "saas",
+  dashboard: "saas",
+  mail: "saas",
+  chat: "saas",
+  finance: "saas",
+  store: "storefront",
+  "landing-shop": "storefront",
+  landing: "editorial",
+  "landing-studio": "editorial",
+  "landing-docs": "editorial",
+  "landing-premium": "editorial",
+  "landing-agency": "editorial",
+  "landing-care": "editorial",
+  "landing-agents": "editorial",
+  marketing: "editorial",
+  default: "editorial",
+  "landing-ops": "operational",
+  "landing-secure": "operational",
+  "landing-coverage": "operational",
+  "landing-broadcast": "operational",
+  "landing-glass": "glass",
+};
+
+export function isTemplateMood(value: string | undefined): value is TemplateMood {
+  return value !== undefined && (TEMPLATE_MOODS as readonly string[]).includes(value);
+}
+
+export function templateMood(entry: TemplateCatalogEntry): TemplateMood {
+  return TEMPLATE_MOOD_BY_SLUG[entry.slug] ?? "editorial";
+}
+
+export function templatesOfMood(mood: TemplateMood): TemplateCatalogEntry[] {
+  return TEMPLATE_CATALOG.filter((entry) => templateMood(entry) === mood);
+}
+
+export function similarTemplates(slug: string, limit = 3): TemplateCatalogEntry[] {
+  const entry = getTemplate(slug);
+  if (entry === undefined) return [];
+  const mood = templateMood(entry);
+  return TEMPLATE_CATALOG.filter(
+    (candidate) => candidate.slug !== slug && templateMood(candidate) === mood,
+  ).slice(0, limit);
 }
 
 export const TEMPLATE_THEME_LABELS: Record<TemplateTheme, string> = {

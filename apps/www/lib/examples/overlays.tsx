@@ -848,7 +848,7 @@ function NotificationCenterDemo() {
   <HoverCardContent className="w-72">
     <div className="flex gap-3">
       <span
-        className="grid size-11 shrink-0 place-items-center rounded-full bg-gradient-primary text-primary-foreground"
+        className="grid size-11 shrink-0 place-items-center rounded-full bg-surface-overlay text-fg"
         aria-hidden="true"
       >
         <Users className="size-5" />
@@ -876,7 +876,7 @@ function NotificationCenterDemo() {
           <HoverCardContent className="w-72">
             <div className="flex gap-3">
               <span
-                className="grid size-11 shrink-0 place-items-center rounded-full bg-gradient-primary text-primary-foreground"
+                className="grid size-11 shrink-0 place-items-center rounded-full bg-surface-overlay text-fg"
                 aria-hidden="true"
               >
                 <Users className="size-5" />

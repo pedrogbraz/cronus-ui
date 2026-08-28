@@ -1,0 +1,18 @@
+{
+  "name": "live-line-chart",
+  "type": "registry:ui",
+  "dependencies": [
+    "recharts@^3.9.2"
+  ],
+  "registryDependencies": [
+    "chart",
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "live-line-chart.tsx",
+      "content": "\"use client\";\n\nimport { type HTMLAttributes, useEffect, useRef, useState } from \"react\";\nimport { CartesianGrid, Line, LineChart, XAxis } from \"recharts\";\nimport { cn } from \"../lib/cn.js\";\nimport { ChartContainer, ChartCursor, ChartTooltip, ChartTooltipContent } from \"./chart.js\";\n\nexport interface LiveLinePoint {\n  tick: number;\n  value: number;\n}\n\nexport interface LiveLineChartProps extends HTMLAttributes<HTMLDivElement> {\n  data: LiveLinePoint[];\n  interval?: number;\n  maxPoints?: number;\n}\n\nexport function LiveLineChart({\n  data,\n  interval = 1000,\n  maxPoints = 24,\n  className,\n  ...props\n}: LiveLineChartProps) {\n  const [points, setPoints] = useState(data);\n  const visible = useRef(true);\n\n  useEffect(() => {\n    const reduced = window.matchMedia?.(\"(prefers-reduced-motion: reduce)\")?.matches;\n    if (reduced) return;\n    const id = window.setInterval(() => {\n      if (!visible.current) return;\n      setPoints((prev) => {\n        const last = prev.at(-1);\n        const next: LiveLinePoint = {\n          tick: (last?.tick ?? 0) + 1,\n          value: Math.max(0, (last?.value ?? 50) + (Math.random() - 0.48) * 8),\n        };\n        return [...prev.slice(-(maxPoints - 1)), next];\n      });\n    }, interval);\n    return () => window.clearInterval(id);\n  }, [interval, maxPoints]);\n\n  useEffect(() => {\n    if (typeof IntersectionObserver === \"undefined\") return;\n    const root = document.querySelector(\"[data-slot='live-line-chart']\");\n    if (!root) return;\n    const io = new IntersectionObserver((entries) => {\n      visible.current = entries.some((entry) => entry.isIntersecting);\n    });\n    io.observe(root);\n    return () => io.disconnect();\n  }, []);\n\n  return (\n    <div data-slot=\"live-line-chart\" className={cn(\"h-64 w-full\", className)} {...props}>\n      <ChartContainer\n        config={{ value: { label: \"Value\", color: \"var(--cronus-chart-1)\" } }}\n        className=\"h-full w-full\"\n      >\n        <LineChart accessibilityLayer data={points} margin={{ left: 8, right: 8, top: 8 }}>\n          <CartesianGrid vertical={false} strokeDasharray=\"4 4\" />\n          <XAxis dataKey=\"tick\" tickLine={false} axisLine={false} tickMargin={12} />\n          <ChartTooltip\n            cursor={<ChartCursor labelKey=\"tick\" />}\n            content={<ChartTooltipContent />}\n          />\n          <Line\n            type=\"monotone\"\n            dataKey=\"value\"\n            stroke=\"var(--color-value)\"\n            strokeWidth={2}\n            dot={false}\n            isAnimationActive={false}\n          />\n        </LineChart>\n      </ChartContainer>\n    </div>\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { type Assistant, writeAiKit } from "@cronus-ui/ai-kit";
+import { type Assistant, writeAiKit, writeDesignDocuments } from "@cronus-ui/ai-kit";
 import type { Catalog, StackConfig } from "@cronus-ui/stack";
 import {
   catalog as defaultCatalog,
@@ -543,6 +543,9 @@ export function scaffoldStack(options: ScaffoldStackOptions): ScaffoldStackResul
       includeCronusUi: isCronusUi,
       cronusUiMcp,
     });
+    fileCount += written.length;
+  } else if (isCronusUi) {
+    const { written } = writeDesignDocuments(targetDir);
     fileCount += written.length;
   }
 

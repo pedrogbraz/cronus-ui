@@ -172,6 +172,11 @@
   --cronus-shadow-md: 0 4px 8px rgba(16, 24, 40, 0.08), 0 2px 4px rgba(16, 24, 40, 0.04);
   --cronus-shadow-lg: 0 12px 24px rgba(16, 24, 40, 0.1), 0 4px 8px rgba(16, 24, 40, 0.06);
   --cronus-shadow-glow: 0 0 0 4px oklch(0.705 0 0 / 0.18);
+  --cronus-chart-1: oklch(0.3 0 0);
+  --cronus-chart-2: oklch(0.44 0 0);
+  --cronus-chart-3: oklch(0.58 0 0);
+  --cronus-chart-4: oklch(0.72 0 0);
+  --cronus-chart-5: oklch(0.85 0 0);
 }
 
 [data-cronus-theme="neutral"][data-cronus-mode="dark"] {
@@ -205,6 +210,11 @@
   --cronus-error: oklch(0.704 0.191 22.216);
   --cronus-error-text: oklch(0.704 0.191 22.216);
   --cronus-shadow-glow: 0 0 0 4px oklch(0.6 0 0 / 0.3);
+  --cronus-chart-1: oklch(0.3 0 0);
+  --cronus-chart-2: oklch(0.44 0 0);
+  --cronus-chart-3: oklch(0.58 0 0);
+  --cronus-chart-4: oklch(0.72 0 0);
+  --cronus-chart-5: oklch(0.85 0 0);
 }
 
 /*
@@ -493,6 +503,10 @@
   --radius-xl: calc(var(--cronus-radius) + 4px);
   --radius-2xl: calc(var(--cronus-radius) + 8px);
   --radius-3xl: calc(var(--cronus-radius) + 14px);
+  --radius-button: var(--cronus-radius);
+  --radius-badge: max(0px, calc(var(--cronus-radius) - 4px));
+  --radius-card: calc(var(--cronus-radius) + 4px);
+  --radius-pill: 9999px;
 
   --shadow-xs: var(--cronus-shadow-xs);
   --shadow-sm: var(--cronus-shadow-sm);
@@ -510,8 +524,69 @@
   --color-chart-4: var(--cronus-chart-4);
   --color-chart-5: var(--cronus-chart-5);
 
+  --color-foreground: var(--cronus-fg);
+  --color-muted-foreground: var(--cronus-fg-tertiary);
+  --color-muted: var(--cronus-surface-overlay);
+  --color-popover: var(--cronus-surface-overlay);
+  --color-popover-foreground: var(--cronus-fg);
+  --color-chart-label: var(--cronus-fg-tertiary);
+  --color-legend: var(--cronus-surface-raised);
+  --color-legend-foreground: var(--cronus-fg);
+  --color-legend-muted: var(--cronus-surface-overlay);
+  --color-legend-muted-foreground: var(--cronus-fg-tertiary);
+  --color-legend-track: var(--cronus-border);
+
   --ease-out-quart: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/*
+ * Chart engine aliases — every value is a Cronus semantic token so charts
+ * re-theme with the rest of the library.
+ */
+:root,
+[data-cronus-theme] {
+  --chart-1: var(--cronus-chart-1);
+  --chart-2: var(--cronus-chart-2);
+  --chart-3: var(--cronus-chart-3);
+  --chart-4: var(--cronus-chart-4);
+  --chart-5: var(--cronus-chart-5);
+  --chart-line-primary: var(--cronus-chart-1);
+  --chart-line-secondary: var(--cronus-chart-2);
+  --chart-background: var(--cronus-surface-base);
+  --chart-foreground: var(--cronus-fg-secondary);
+  --chart-foreground-muted: var(--cronus-fg-muted);
+  --chart-label: var(--cronus-fg-tertiary);
+  --chart-crosshair: var(--cronus-fg-secondary);
+  --chart-grid: var(--cronus-border);
+  --chart-brush-border: var(--cronus-border);
+  --chart-tooltip-background: var(--cronus-surface-overlay);
+  --chart-tooltip-foreground: var(--cronus-fg);
+  --chart-tooltip-muted: var(--cronus-fg-tertiary);
+  --chart-indicator-color: var(--cronus-fg);
+  --chart-indicator-secondary-color: var(--cronus-surface-raised);
+  --chart-marker-background: var(--cronus-surface-raised);
+  --chart-marker-border: var(--cronus-border);
+  --chart-marker-foreground: var(--cronus-fg);
+  --chart-marker-badge-background: var(--cronus-fg);
+  --chart-marker-badge-foreground: var(--cronus-surface-base);
+  --chart-segment-background: color-mix(in oklch, var(--cronus-fg) 6%, transparent);
+  --chart-segment-line: color-mix(in oklch, var(--cronus-fg) 25%, transparent);
+  --chart-scale-01: color-mix(in oklch, var(--cronus-chart-1) 12%, var(--cronus-surface-base));
+  --chart-scale-02: color-mix(in oklch, var(--cronus-chart-1) 28%, var(--cronus-surface-base));
+  --chart-scale-03: color-mix(in oklch, var(--cronus-chart-1) 48%, var(--cronus-surface-base));
+  --chart-scale-04: color-mix(in oklch, var(--cronus-chart-1) 68%, var(--cronus-surface-base));
+  --chart-scale-05: var(--cronus-chart-1);
+  --chart-scale-pattern-color: color-mix(
+    in oklch,
+    var(--cronus-chart-1) 18%,
+    var(--cronus-surface-base)
+  );
+  --legend: var(--cronus-surface-raised);
+  --legend-foreground: var(--cronus-fg);
+  --legend-muted: var(--cronus-surface-overlay);
+  --legend-muted-foreground: var(--cronus-fg-tertiary);
+  --legend-track: var(--cronus-border);
 }
 
 /* ------------------------------------------------------------------ *
@@ -733,6 +808,10 @@
   --radius-2xl: 0px;
   --radius-3xl: 0px;
   --radius-full: 0px;
+  --radius-button: 0px;
+  --radius-badge: 0px;
+  --radius-card: 0px;
+  --radius-pill: 0px;
   --cronus-shadow-xs: 3px 3px 0 color-mix(in oklab, var(--cronus-fg) 70%, transparent);
   --cronus-shadow-sm: 4px 4px 0 color-mix(in oklab, var(--cronus-fg) 70%, transparent);
   --cronus-shadow-md: 6px 6px 0 color-mix(in oklab, var(--cronus-fg) 65%, transparent);
@@ -765,6 +844,10 @@
   --radius-xl: 22px;
   --radius-2xl: 26px;
   --radius-3xl: 32px;
+  --radius-button: 18px;
+  --radius-badge: 14px;
+  --radius-card: 22px;
+  --radius-pill: 9999px;
 }
 
 /* Colored field the glass sits on. Mode is on the same node as the look —

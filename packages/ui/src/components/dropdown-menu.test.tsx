@@ -41,6 +41,14 @@ describe("DropdownMenu", () => {
     );
   });
 
+  it("does not lock document scroll when opened", async () => {
+    const user = userEvent.setup();
+    render(<BasicMenu />);
+    await user.click(screen.getByRole("button", { name: "Actions" }));
+    await screen.findByRole("menu");
+    expect(document.body.style.overflow).not.toBe("hidden");
+  });
+
   it("opens a menu with its items when the trigger is activated", async () => {
     const user = userEvent.setup();
     render(<BasicMenu />);

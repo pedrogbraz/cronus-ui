@@ -21,11 +21,14 @@ It speaks MCP over **stdio** and is the same registry the
 
 | Tool | Input | Returns |
 | --- | --- | --- |
-| `list_components` | — | All installable components (`registry:ui`): name, title, dependencies, and the install command. |
+| `list_components` | — | All installable components (`registry:ui`): name, title, tags, dependencies, and the install command. |
 | `list_blocks` | — | All installable blocks (`registry:block`) — composed sections like hero, pricing, login, dashboard. |
+| `list_catalog` | `{ kind?: component\|block\|variant\|template }` | Compact Hydra-ready cards (description, design style, palette, motion, intents). No source files. |
+| `match_catalog` | `{ query?, intent?, style?, palette?, motion?, kind?, limit? }` | Two-query match for low-context agents. `query: "login page with smooth animation"` infers intent + motion and returns `pick` / `intent` / `motion` hits. |
 | `search_registry` | `{ query: string }` | Components and blocks whose name (or readable title) matches `query` (case-insensitive substring). |
 | `get_component` | `{ name: string }` | Full detail for one component **or** block: source `files` (path + content), npm `dependencies`, `registryDependencies`, and the install command. |
 | `get_install_command` | `{ names: string[] }` | The `npx cronus-ui add ...` command for one or more items. |
+| `get_design_context` | `{ theme?: aurora\|neutral\|midnight\|sunset\|emerald, look?: default\|brutalist\|glass, format?: compact\|extended }` | Cronus visual taste (`DESIGN.md`). Read this before generating UI. |
 
 These are annotated `readOnlyHint: true` — they never touch the project.
 
@@ -68,6 +71,7 @@ repository.
 | Resource | URI | Description |
 | --- | --- | --- |
 | `registry-index` | `cronus-ui://registry/index` | The full registry listing (every component and block with its dependencies) as JSON. |
+| `catalog-tags` | `cronus-ui://catalog/tags` | Compact tagged catalog Hydra ranks against (no source files). |
 
 ## Setup
 
@@ -147,7 +151,15 @@ at least `package.json`). Then:
    with `overwrite` (and over `compose --overwrite`) so local edits survive.
    Optional `manifest` when the app was composed from a custom `--manifest`.
 
-For a single primitive, keep using the registry tools:
+Low-context pick (Hydra / an agent that has not read the docs):
+
+1. `match_catalog { "query": "login page with smooth animation" }` → two
+   lookups (intent=`login`, motion=`smooth`) and a `pick` of compact cards
+   (description, design style, palette, motion, intents). No source dumped.
+2. `get_component { "name": "<picked name>" }` → source only after the pick.
+3. `install_component { "names": ["<picked name>"] }` → write it into the project.
+
+For a single primitive by name, keep using the registry tools:
 
 1. `search_registry { "query": "table" }` → finds `data-table`, `table`, `filter-bar`.
 2. `get_component { "name": "data-table" }` → returns the `.tsx` source, its npm

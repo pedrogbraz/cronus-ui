@@ -95,10 +95,12 @@ const ROUTE_BUDGETS = /** @type {Record<string, RouteBudget>} */ ({
     firstLoadGzipJsBytes: 235_000,
   },
   "/components/[slug]": {
-    firstLoadUncompressedJsBytes: 780_000,
-    firstLoadGzipJsBytes: 240_000,
+    firstLoadUncompressedJsBytes: 920_000,
+    firstLoadGzipJsBytes: 270_000,
   },
-  "/components": { firstLoadUncompressedJsBytes: 680_000, firstLoadGzipJsBytes: 205_000 },
+  // Catalog thumbs (16/10 scaled miniatures) pull Button/Input/Badge/Avatar/
+  // Switch/Metric onto the overview. Measured 2026-08-28: 709/203 KiB.
+  "/components": { firstLoadUncompressedJsBytes: 820_000, firstLoadGzipJsBytes: 245_000 },
   // Headroom covers the /create icon-library preview (5 tree-shaken icon sets,
   // ~20 glyphs each — verified named imports) plus the preview's `motion/react`
   // spring hover-lift. motion is the only animation dep on this route, so it
@@ -106,7 +108,8 @@ const ROUTE_BUDGETS = /** @type {Record<string, RouteBudget>} */ ({
   // code-split (loaded async after hydration); only the `m` runtime lands in
   // first-load JS (~13 KiB gz). Bumped from 275/935 KiB to keep ~6% headroom.
   "/create": { firstLoadUncompressedJsBytes: 1_040_000, firstLoadGzipJsBytes: 305_000 },
-  "/blocks": { firstLoadUncompressedJsBytes: 680_000, firstLoadGzipJsBytes: 205_000 },
+  // Same 16/10 thumbs as /components. Measured 2026-08-28: 731/210 KiB.
+  "/blocks": { firstLoadUncompressedJsBytes: 850_000, firstLoadGzipJsBytes: 250_000 },
   "/blocks/[slug]": { firstLoadUncompressedJsBytes: 690_000, firstLoadGzipJsBytes: 205_000 },
   "/blocks/[slug]/[variant]": {
     firstLoadUncompressedJsBytes: 700_000,
@@ -122,8 +125,8 @@ const ROUTE_BUDGETS = /** @type {Record<string, RouteBudget>} */ ({
 const SHARED_CHUNK_BUDGETS = /** @type {SharedChunkBudgets} */ ({
   commonUncompressedJsBytes: 640_000,
   commonGzipJsBytes: 190_000,
-  sharedUncompressedJsBytes: 950_000,
-  sharedGzipJsBytes: 290_000,
+  sharedUncompressedJsBytes: 1_120_000,
+  sharedGzipJsBytes: 335_000,
 });
 
 /**
@@ -145,7 +148,7 @@ const SHARED_CHUNK_BUDGETS = /** @type {SharedChunkBudgets} */ ({
  *   entry                     current gz   budget gz
  *   index.js (barrel)              2,870      3,600   (re-measured 2026-07-08 after the batch-8 exports)
  *   data-table.js                  7,359      9,400
- *   chart.js                       3,340      4,300
+ *   chart.js                       4,200      4,500
  *   calendar.js                    1,540      1,950   (re-measured 2026-07-10: the rdp v10 DayButton wrapper + classNames map)
  *   command.js                     1,294      1,660
  *   carousel.js                    5,021      6,450
@@ -172,7 +175,7 @@ const SHARED_CHUNK_BUDGETS = /** @type {SharedChunkBudgets} */ ({
 const PACKAGE_ENTRY_GZIP_BUDGETS = /** @type {Record<string, number>} */ ({
   "index.js": 3_600,
   "components/data-table.js": 9_400,
-  "components/chart.js": 4_300,
+  "components/chart.js": 4_500,
   "components/calendar.js": 1_950,
   "components/command.js": 1_660,
   "components/carousel.js": 6_450,

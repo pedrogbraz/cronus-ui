@@ -65,6 +65,10 @@ const preset = {
         xl: "calc(var(--cronus-radius) + 4px)",
         "2xl": "calc(var(--cronus-radius) + 8px)",
         "3xl": "calc(var(--cronus-radius) + 14px)",
+        button: "var(--cronus-radius)",
+        badge: "max(0px, calc(var(--cronus-radius) - 4px))",
+        card: "calc(var(--cronus-radius) + 4px)",
+        pill: "9999px",
       },
       boxShadow: {
         xs: "var(--cronus-shadow-xs)",

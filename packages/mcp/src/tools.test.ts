@@ -9,10 +9,13 @@ import {
 import {
   buildInstallCommand,
   getComponent,
+  getDesignContext,
   getInstallCommand,
   humanizeName,
   listBlocks,
+  listCatalog,
   listComponents,
+  matchCatalog,
   searchRegistry,
 } from "./tools.js";
 import { SERVER_VERSION } from "./version.js";
@@ -61,6 +64,10 @@ const META = {
       title: "Pricing",
       description: "A three-tier pricing grid with a highlighted plan.",
       category: "marketing",
+      style: "editorial",
+      palette: "semantic",
+      motion: "none",
+      intents: ["marketing"],
     },
   },
   components: {
@@ -68,6 +75,10 @@ const META = {
       title: "Button",
       description: "Clickable action with variants, sizes and asChild.",
       category: "buttons",
+      style: "default",
+      palette: "semantic",
+      motion: "snappy",
+      intents: ["action"],
     },
     "alert-dialog": {
       title: "AlertDialog",
@@ -157,6 +168,32 @@ describe("buildInstallCommand", () => {
   });
 });
 
+describe("getDesignContext", () => {
+  it("returns extended Aurora taste by default", () => {
+    const result = getDesignContext();
+    expect(result.theme).toBe("aurora");
+    expect(result.look).toBe("default");
+    expect(result.format).toBe("extended");
+    expect(result.markdown).toContain("Cronus UI — DESIGN.md");
+    expect(result.markdown).toContain("get_design_context");
+  });
+
+  it("returns compact glass on midnight", () => {
+    const result = getDesignContext({ theme: "midnight", look: "glass", format: "compact" });
+    expect(result.theme).toBe("midnight");
+    expect(result.look).toBe("glass");
+    expect(result.format).toBe("compact");
+    expect(result.markdown).toContain("**midnight**");
+    expect(result.markdown).toContain("**glass**");
+    expect(result.markdown).toContain("(compact)");
+  });
+
+  it("rejects unknown names", () => {
+    expect(() => getDesignContext({ theme: "mauve" as never })).toThrow(/Unknown theme/);
+    expect(() => getDesignContext({ look: "mauve" as never })).toThrow(/Unknown look/);
+  });
+});
+
 describe("listComponents", () => {
   it("returns only registry:ui items with the right shape", async () => {
     const result = await listComponents(client());
@@ -175,6 +212,10 @@ describe("listComponents", () => {
       // Enriched from meta.json.
       description: "Clickable action with variants, sizes and asChild.",
       category: "buttons",
+      style: "default",
+      palette: "semantic",
+      motion: "snappy",
+      intents: ["action"],
       registryDependencies: ["cn"],
       install: "npx cronus-ui add button",
     });
@@ -264,6 +305,10 @@ describe("getComponent", () => {
       title: "Button",
       description: "Clickable action with variants, sizes and asChild.",
       category: "buttons",
+      style: "default",
+      palette: "semantic",
+      motion: "snappy",
+      intents: ["action"],
       registryDependencies: ["cn"],
       install: "npx cronus-ui add button",
     });
@@ -332,5 +377,30 @@ describe("getInstallCommand", () => {
       names: ["button", "card"],
       command: "npx cronus-ui add button card",
     });
+  });
+});
+
+describe("listCatalog / matchCatalog", () => {
+  it("returns compact tagged cards without source files", async () => {
+    const result = await listCatalog(client());
+    const button = result.items.find((item) => item.name === "button");
+    expect(button).toMatchObject({
+      kind: "component",
+      description: "Clickable action with variants, sizes and asChild.",
+      style: "default",
+      palette: "semantic",
+      motion: "snappy",
+      intents: ["action"],
+      install: "npx cronus-ui add button",
+    });
+    expect(button).not.toHaveProperty("files");
+  });
+
+  it("infers filters from a free-text query even when the fixture has no login item", async () => {
+    const result = await matchCatalog(client(), {
+      query: "pagina de login com animation suave",
+    });
+    expect(result.filters.intent).toBe("login");
+    expect(result.filters.motion).toBe("smooth");
   });
 });

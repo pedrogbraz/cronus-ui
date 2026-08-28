@@ -45,6 +45,7 @@
     "prepublishOnly": "tsc -p tsconfig.json"
   },
   "dependencies": {
+    "@cronus-ui/tokens": "workspace:*",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "zod": "^4.4.3"
   },

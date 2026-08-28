@@ -1,4 +1,40 @@
+import {
+  type DesignContextOptions,
+  type DesignFormat,
+  designMarkdown,
+  type LookName,
+  lookNames,
+  resolveDesignContext,
+  type ThemeName,
+  themeNames,
+} from "@cronus-ui/tokens";
+import {
+  type CatalogKind,
+  listCatalog as listCatalogCards,
+  type MatchCatalogInput,
+  matchCatalog as rankCatalog,
+} from "./catalog.js";
 import type { RegistryClient, RegistryIndexEntry, RegistryItem, RegistryMeta } from "./registry.js";
+
+export const DESIGN_THEMES = themeNames as [ThemeName, ...ThemeName[]];
+export const DESIGN_LOOKS = lookNames as [LookName, ...LookName[]];
+export const DESIGN_FORMATS = ["compact", "extended"] as const;
+
+/** Agent-readable Cronus taste. Values come from @cronus-ui/tokens. */
+export function getDesignContext(options: DesignContextOptions = {}): {
+  theme: ThemeName;
+  look: LookName;
+  format: DesignFormat;
+  markdown: string;
+} {
+  const { theme, look, format } = resolveDesignContext(options);
+  return {
+    theme,
+    look,
+    format,
+    markdown: designMarkdown({ theme, look, format }),
+  };
+}
 
 /** The CLI invoked to install registry items into a consumer project. */
 export const ADD_COMMAND = "npx cronus-ui add";
@@ -51,6 +87,10 @@ export interface ItemSummary {
   description?: string;
   /** The item's semantic category from `meta.json`; omitted when unavailable. */
   category?: string;
+  style?: string;
+  palette?: string;
+  motion?: string;
+  intents?: string[];
   dependencies: string[];
   registryDependencies: string[];
   /** The command that installs this item. */
@@ -66,7 +106,17 @@ export interface ItemSummary {
 function metaEntryFor(
   name: string,
   meta: RegistryMeta | null,
-): { title: string; description: string; category: string } | undefined {
+):
+  | {
+      title: string;
+      description: string;
+      category: string;
+      style?: string;
+      palette?: string;
+      motion?: string;
+      intents?: string[];
+    }
+  | undefined {
   if (!meta) return undefined;
   return meta.blocks?.[name] ?? meta.components?.[name] ?? undefined;
 }
@@ -85,6 +135,10 @@ function summarise(entry: RegistryIndexEntry, meta: RegistryMeta | null): ItemSu
     title: info?.title ?? humanizeName(entry.name),
     ...(info?.description ? { description: info.description } : {}),
     ...(info?.category ? { category: info.category } : {}),
+    ...(info?.style ? { style: info.style } : {}),
+    ...(info?.palette ? { palette: info.palette } : {}),
+    ...(info?.motion ? { motion: info.motion } : {}),
+    ...(info?.intents && info.intents.length > 0 ? { intents: info.intents } : {}),
     dependencies: entry.dependencies,
     registryDependencies: entry.registryDependencies,
     install: buildInstallCommand([entry.name]),
@@ -141,6 +195,10 @@ export async function searchRegistry(client: RegistryClient, query: string): Pro
         info?.title ?? "",
         info?.description ?? "",
         info?.category ?? "",
+        info?.style ?? "",
+        info?.palette ?? "",
+        info?.motion ?? "",
+        ...(info?.intents ?? []),
       ]
         .join(" ")
         .toLowerCase();
@@ -159,6 +217,10 @@ export interface ComponentDetail {
   description?: string;
   /** The item's semantic category from `meta.json`; omitted when unavailable. */
   category?: string;
+  style?: string;
+  palette?: string;
+  motion?: string;
+  intents?: string[];
   dependencies: string[];
   registryDependencies: string[];
   files: RegistryItem["files"];
@@ -181,6 +243,10 @@ export async function getComponent(client: RegistryClient, name: string): Promis
     title: info?.title ?? humanizeName(item.name),
     ...(info?.description ? { description: info.description } : {}),
     ...(info?.category ? { category: info.category } : {}),
+    ...(info?.style ? { style: info.style } : {}),
+    ...(info?.palette ? { palette: info.palette } : {}),
+    ...(info?.motion ? { motion: info.motion } : {}),
+    ...(info?.intents && info.intents.length > 0 ? { intents: info.intents } : {}),
     dependencies: item.dependencies,
     registryDependencies: item.registryDependencies,
     files: item.files,
@@ -198,4 +264,19 @@ export interface InstallCommandResult {
 export function getInstallCommand(names: string[]): InstallCommandResult {
   const command = buildInstallCommand(names);
   return { names, command };
+}
+
+/** Compact tagged catalog (no source files) for Hydra / low-context agents. */
+export async function listCatalog(client: RegistryClient, kind?: CatalogKind) {
+  const [index, meta] = await Promise.all([client.index(), client.meta()]);
+  return listCatalogCards(index, meta, kind);
+}
+
+/**
+ * Two-query catalog match: intent (login, pricing, …) × motion/style
+ * (smooth, glass, …). Pass a free-text `query` and filters are inferred.
+ */
+export async function matchCatalog(client: RegistryClient, input: MatchCatalogInput) {
+  const [index, meta] = await Promise.all([client.index(), client.meta()]);
+  return rankCatalog(index, meta, input);
 }

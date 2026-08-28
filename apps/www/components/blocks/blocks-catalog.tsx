@@ -10,13 +10,14 @@ import {
   BLOCK_VARIANT_COUNT,
   getBlockVariantMetas,
 } from "../../lib/blocks-index";
+import { BlockCatalogThumb } from "../catalog/catalog-thumbs";
 import { Eyebrow } from "../showcase-ui";
 
 /**
  * Flattened, server-safe catalog row for every block. Built once from the
- * lightweight `BLOCK_CATEGORIES` metadata — this page renders NO live previews,
- * so it never imports the heavy `lib/blocks/*` family chunks. Each block links
- * to its `/blocks/[slug]` gallery, where the live previews stream in.
+ * lightweight `BLOCK_CATEGORIES` metadata — card thumbs are CSS miniatures
+ * (never the heavy `lib/blocks/*` family chunks). Each block links to its
+ * `/blocks/[slug]` gallery, where the live previews stream in.
  */
 const ALL_BLOCKS = BLOCK_CATEGORIES.flatMap((category) =>
   category.items.map((item) => ({
@@ -85,7 +86,7 @@ export function BlocksCatalog() {
 
       {/* Sticky filter toolbar: search + category chips. Stays in reach while
           scrolling a long catalog. Sits just under the 4rem site nav. */}
-      <div className="sticky top-16 z-10 border-b border-border/60 bg-surface-base/85 backdrop-blur supports-[backdrop-filter]:bg-surface-base/70">
+      <div className="sticky top-[var(--site-header-height)] z-30 border-b border-border/60 bg-surface-base/85 backdrop-blur supports-[backdrop-filter]:bg-surface-base/70">
         <div className="mx-auto flex max-w-[92rem] flex-col gap-3 px-4 py-4 sm:px-6 lg:flex-row lg:items-center lg:gap-4 lg:px-8">
           <label className="relative block w-full lg:max-w-xs">
             <span className="sr-only">Search blocks</span>
@@ -145,34 +146,30 @@ export function BlocksCatalog() {
         </p>
 
         {filtered.length > 0 ? (
-          <div className="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((block) => (
               <article
                 key={block.slug}
                 className={cn(
-                  "group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-surface-raised",
+                  "group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-surface-raised",
                   "transition-colors duration-200",
                   EASE,
                   "hover:border-border-strong focus-within:ring-2 focus-within:ring-ring",
                 )}
               >
-                {/* Lightweight thumbnail — dotted-grid surface + the block name.
-                    No live preview here (that lives on the gallery route). */}
-                <div className="relative flex h-36 items-center justify-center overflow-hidden border-b border-border/60 bg-surface-inset">
+                <div className="relative border-b border-border/60">
+                  <BlockCatalogThumb slug={block.slug} categorySlug={block.categorySlug} />
                   <div
                     aria-hidden="true"
-                    className="absolute inset-0 bg-[radial-gradient(var(--cronus-border)_1px,transparent_1px)] opacity-40 [background-size:16px_16px]"
-                  />
-                  <span
                     className={cn(
-                      "relative px-4 text-center font-display text-xl font-normal tracking-[-0.02em] text-fg-tertiary",
-                      "transition-colors duration-200",
+                      "pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-surface-raised/90 to-transparent px-4 py-3 opacity-0",
+                      "transition-opacity duration-200",
                       EASE,
-                      "group-hover:text-fg",
+                      "group-hover:opacity-100",
                     )}
                   >
-                    {block.name}
-                  </span>
+                    <span className="text-xs font-medium text-fg">View block</span>
+                  </div>
                 </div>
 
                 <div className="flex flex-1 flex-col gap-2 p-5">
@@ -182,7 +179,7 @@ export function BlocksCatalog() {
                       {block.category}
                     </span>
                   </div>
-                  <p className="line-clamp-2 flex-1 text-sm text-fg-tertiary">
+                  <p className="line-clamp-2 flex-1 text-sm leading-5 text-fg-secondary">
                     {block.description}
                   </p>
                   <div className="mt-1 flex items-center justify-between">
@@ -204,7 +201,7 @@ export function BlocksCatalog() {
                 <Link
                   href={`/blocks/${block.slug}`}
                   aria-label={block.name}
-                  className="absolute inset-0 z-20 rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="absolute inset-0 rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
                 />
               </article>
             ))}

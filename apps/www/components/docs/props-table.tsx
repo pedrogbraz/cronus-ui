@@ -55,10 +55,18 @@ function PropRow({
   );
 }
 
-function PropsInterfaceTable({ doc }: { doc: PropsDoc }) {
+function PropsInterfaceTable({
+  doc,
+  hideHeading = false,
+}: {
+  doc: PropsDoc;
+  hideHeading?: boolean;
+}) {
   return (
     <div>
-      <h3 className="font-mono text-sm font-medium text-fg">{doc.interfaceName}</h3>
+      {hideHeading ? null : (
+        <h3 className="font-mono text-sm font-medium text-fg">{doc.interfaceName}</h3>
+      )}
       {doc.extends ? <p className="mt-1 text-xs text-fg-tertiary">{doc.extends}</p> : null}
 
       {doc.props.length === 0 ? (
@@ -112,11 +120,17 @@ function PropsInterfaceTable({ doc }: { doc: PropsDoc }) {
  * exported `*Props` interface, with the interface name as a heading and its
  * `extends` heritage as a muted note. Props marked with `*` are required.
  */
-export function PropsTable({ docs }: { docs: PropsDoc[] }) {
+export function PropsTable({
+  docs,
+  hideHeading = false,
+}: {
+  docs: PropsDoc[];
+  hideHeading?: boolean;
+}) {
   return (
     <div className="flex flex-col gap-8">
       {docs.map((doc) => (
-        <PropsInterfaceTable key={doc.interfaceName} doc={doc} />
+        <PropsInterfaceTable key={doc.interfaceName} doc={doc} hideHeading={hideHeading} />
       ))}
     </div>
   );

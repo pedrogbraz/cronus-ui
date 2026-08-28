@@ -1,7 +1,7 @@
 {
   "name": "@cronus-ui/ui",
   "version": "0.5.0",
-  "description": "Cronus UI — themeable, accessible React components (Radix + CVA + Tailwind v4).",
+  "description": "Cronus UI \u2014 themeable, accessible React components (Radix + CVA + Tailwind v4).",
   "type": "module",
   "exports": {
     ".": {
@@ -103,6 +103,78 @@
     "./chart": {
       "types": "./dist/components/chart.d.ts",
       "import": "./dist/components/chart.js"
+    },
+    "./charts": {
+      "types": "./dist/charts/index.d.ts",
+      "import": "./dist/charts/index.js"
+    },
+    "./area-chart": {
+      "types": "./dist/components/area-chart.d.ts",
+      "import": "./dist/components/area-chart.js"
+    },
+    "./bar-chart": {
+      "types": "./dist/components/bar-chart.d.ts",
+      "import": "./dist/components/bar-chart.js"
+    },
+    "./line-chart": {
+      "types": "./dist/components/line-chart.d.ts",
+      "import": "./dist/components/line-chart.js"
+    },
+    "./live-line-chart": {
+      "types": "./dist/components/live-line-chart.d.ts",
+      "import": "./dist/components/live-line-chart.js"
+    },
+    "./composed-chart": {
+      "types": "./dist/components/composed-chart.d.ts",
+      "import": "./dist/components/composed-chart.js"
+    },
+    "./candlestick-chart": {
+      "types": "./dist/components/candlestick-chart.d.ts",
+      "import": "./dist/components/candlestick-chart.js"
+    },
+    "./funnel-chart": {
+      "types": "./dist/components/funnel-chart.d.ts",
+      "import": "./dist/components/funnel-chart.js"
+    },
+    "./gauge-chart": {
+      "types": "./dist/components/gauge-chart.d.ts",
+      "import": "./dist/components/gauge-chart.js"
+    },
+    "./pie-chart": {
+      "types": "./dist/components/pie-chart.d.ts",
+      "import": "./dist/components/pie-chart.js"
+    },
+    "./ring-chart": {
+      "types": "./dist/components/ring-chart.d.ts",
+      "import": "./dist/components/ring-chart.js"
+    },
+    "./radar-chart": {
+      "types": "./dist/components/radar-chart.d.ts",
+      "import": "./dist/components/radar-chart.js"
+    },
+    "./scatter-chart": {
+      "types": "./dist/components/scatter-chart.d.ts",
+      "import": "./dist/components/scatter-chart.js"
+    },
+    "./sankey-chart": {
+      "types": "./dist/components/sankey-chart.d.ts",
+      "import": "./dist/components/sankey-chart.js"
+    },
+    "./profit-loss-chart": {
+      "types": "./dist/components/profit-loss-chart.d.ts",
+      "import": "./dist/components/profit-loss-chart.js"
+    },
+    "./choropleth-chart": {
+      "types": "./dist/components/choropleth-chart.d.ts",
+      "import": "./dist/components/choropleth-chart.js"
+    },
+    "./sunburst-chart": {
+      "types": "./dist/components/sunburst-chart.d.ts",
+      "import": "./dist/components/sunburst-chart.js"
+    },
+    "./heatmap-chart": {
+      "types": "./dist/components/heatmap-chart.d.ts",
+      "import": "./dist/components/heatmap-chart.js"
     },
     "./checkbox": {
       "types": "./dist/components/checkbox.d.ts",
@@ -692,7 +764,27 @@
     "react-hook-form": "^7.54.0",
     "recharts": "^3.9.2",
     "vitest-axe": "^0.1.0",
-    "zod": "^3.24.0 || ^4.0.0"
+    "zod": "^3.24.0 || ^4.0.0",
+    "@visx/brush": "3.12.0",
+    "@visx/curve": "4.0.1-alpha.0",
+    "@visx/event": "4.0.1-alpha.0",
+    "@visx/geo": "4.0.1-alpha.0",
+    "@visx/gradient": "4.0.1-alpha.0",
+    "@visx/grid": "4.0.1-alpha.0",
+    "@visx/group": "4.0.1-alpha.0",
+    "@visx/heatmap": "4.0.1-alpha.0",
+    "@visx/pattern": "4.0.1-alpha.0",
+    "@visx/responsive": "4.0.1-alpha.0",
+    "@visx/sankey": "4.0.1-alpha.0",
+    "@visx/scale": "4.0.1-alpha.0",
+    "@visx/shape": "4.0.1-alpha.0",
+    "@visx/zoom": "4.0.1-alpha.0",
+    "d3-array": "3.2.4",
+    "d3-geo": "3.1.0",
+    "d3-sankey": "0.12.3",
+    "d3-scale": "4.0.2",
+    "d3-shape": "3.2.0",
+    "react-use-measure": "2.1.7"
   },
   "peerDependenciesMeta": {
     "@dnd-kit/core": {
@@ -736,6 +828,66 @@
     },
     "zod": {
       "optional": true
+    },
+    "@visx/brush": {
+      "optional": true
+    },
+    "@visx/curve": {
+      "optional": true
+    },
+    "@visx/event": {
+      "optional": true
+    },
+    "@visx/geo": {
+      "optional": true
+    },
+    "@visx/gradient": {
+      "optional": true
+    },
+    "@visx/grid": {
+      "optional": true
+    },
+    "@visx/group": {
+      "optional": true
+    },
+    "@visx/heatmap": {
+      "optional": true
+    },
+    "@visx/pattern": {
+      "optional": true
+    },
+    "@visx/responsive": {
+      "optional": true
+    },
+    "@visx/sankey": {
+      "optional": true
+    },
+    "@visx/scale": {
+      "optional": true
+    },
+    "@visx/shape": {
+      "optional": true
+    },
+    "@visx/zoom": {
+      "optional": true
+    },
+    "d3-array": {
+      "optional": true
+    },
+    "d3-geo": {
+      "optional": true
+    },
+    "d3-sankey": {
+      "optional": true
+    },
+    "d3-scale": {
+      "optional": true
+    },
+    "d3-shape": {
+      "optional": true
+    },
+    "react-use-measure": {
+      "optional": true
     }
   },
   "devDependencies": {
@@ -748,13 +900,39 @@
     "@tiptap/pm": "^3.27.1",
     "@tiptap/react": "^3.27.1",
     "@tiptap/starter-kit": "^3.27.1",
+    "@types/d3-array": "3.2.1",
+    "@types/d3-geo": "3.1.0",
+    "@types/d3-sankey": "0.12.5",
+    "@types/d3-scale": "4.0.9",
+    "@types/d3-shape": "3.1.6",
+    "@types/geojson": "7946.0.16",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@visx/brush": "3.12.0",
+    "@visx/curve": "4.0.1-alpha.0",
+    "@visx/event": "4.0.1-alpha.0",
+    "@visx/geo": "4.0.1-alpha.0",
+    "@visx/gradient": "4.0.1-alpha.0",
+    "@visx/grid": "4.0.1-alpha.0",
+    "@visx/group": "4.0.1-alpha.0",
+    "@visx/heatmap": "4.0.1-alpha.0",
+    "@visx/pattern": "4.0.1-alpha.0",
+    "@visx/responsive": "4.0.1-alpha.0",
+    "@visx/sankey": "4.0.1-alpha.0",
+    "@visx/scale": "4.0.1-alpha.0",
+    "@visx/shape": "4.0.1-alpha.0",
+    "@visx/zoom": "4.0.1-alpha.0",
+    "d3-array": "3.2.4",
+    "d3-geo": "3.1.0",
+    "d3-sankey": "0.12.3",
+    "d3-scale": "4.0.2",
+    "d3-shape": "3.2.0",
     "date-fns": "^4.4.0",
     "react": "^19.2.0",
     "react-day-picker": "^10.0.1",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.54.2",
+    "react-use-measure": "2.1.7",
     "recharts": "^3.9.2",
     "typescript": "^6.0.3",
     "vitest": "^4.1.9",

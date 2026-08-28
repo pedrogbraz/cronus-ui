@@ -1,0 +1,16 @@
+{
+  "name": "heatmap-chart",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [
+    "cn",
+    "heatmap"
+  ],
+  "files": [
+    {
+      "path": "heatmap-chart.tsx",
+      "content": "import { cn } from \"../lib/cn.js\";\nimport { Heatmap, type HeatmapProps } from \"./heatmap.js\";\n\nexport interface HeatmapChartProps extends HeatmapProps {}\n\n/** Chart-catalog alias of Heatmap. The Motion heatmap lives at `@cronus-ui/ui/charts`. */\nexport function HeatmapChart({ className, ...props }: HeatmapChartProps) {\n  return (\n    <div data-slot=\"heatmap-chart\" className={cn(\"w-full\", className)}>\n      <Heatmap {...props} />\n    </div>\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}

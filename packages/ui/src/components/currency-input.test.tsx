@@ -65,6 +65,17 @@ describe("CurrencyInput", () => {
     expect(field).toHaveValue("1.234,56"); // EUR / de-DE
   });
 
+  it("lists the full default currency set without locking page scroll", async () => {
+    const user = userEvent.setup();
+    render(<CurrencyInput aria-label="Amount" onValueChange={() => {}} />);
+    await user.click(screen.getByRole("button", { name: "Select currency" }));
+    const menu = await screen.findByRole("menu");
+    const options = within(menu).getAllByRole("menuitemradio");
+    expect(options.length).toBeGreaterThan(20);
+    expect(within(menu).getByRole("menuitemradio", { name: /Japanese Yen/ })).toBeInTheDocument();
+    expect(within(menu).getByRole("menuitemradio", { name: /Argentine Peso/ })).toBeInTheDocument();
+  });
+
   it("has no axe violations", async () => {
     const { container } = render(
       <CurrencyInput aria-label="Amount" value={1000} onValueChange={() => {}} />,

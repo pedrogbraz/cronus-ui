@@ -28,9 +28,9 @@ export interface FabProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 /**
- * A floating action button: a prominent, round, gradient button that surfaces
- * the primary action of a view. Positioning is left to the consumer — the
- * component renders a `relative inline-flex` wrapper, so add e.g.
+ * A floating action button: a prominent, round, solid-primary button that
+ * surfaces the primary action of a view. Positioning is left to the consumer —
+ * the component renders a `relative inline-flex` wrapper, so add e.g.
  * `className="fixed bottom-6 right-6"` to pin it.
  *
  * When {@link FabProps.actions} are supplied it becomes a speed-dial: clicking
@@ -97,7 +97,7 @@ export const Fab = forwardRef<HTMLButtonElement, FabProps>(
             if (hasActions) setOpen((prev) => !prev);
             onClick?.(event);
           }}
-          className="inline-flex size-14 items-center justify-center rounded-full bg-gradient-primary text-primary-foreground shadow-lg outline-none transition-[transform,box-shadow] duration-150 ease-[var(--ease-out-quart)] hover:shadow-glow focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base active:scale-95 [&_svg]:size-6 [&_svg]:shrink-0 [&_svg]:pointer-events-none"
+          className="inline-flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md outline-none transition-[transform,box-shadow,opacity] duration-150 ease-[var(--ease-out-quart)] hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base active:scale-95 [&_svg]:size-6 [&_svg]:shrink-0 [&_svg]:pointer-events-none"
           {...props}
         >
           <motion.span

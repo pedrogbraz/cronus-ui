@@ -279,10 +279,14 @@ export const EXAMPLE_SECTIONS: Record<string, ExampleSectionMeta[]> = {
     { id: "disabled", title: "Disabled" },
   ],
   chart: [
-    { id: "bar-chart", title: "Bar chart" },
-    { id: "pie-chart", title: "Donut chart" },
-    { id: "radar-chart", title: "Radar chart" },
-    { id: "radial-chart", title: "Radial bar gauge" },
+    { id: "container", title: "ChartContainer" },
+    { id: "radial-chart", title: "Radial bar (primitive)" },
+  ],
+  "bar-chart": [
+    { id: "default", title: "Default" },
+    { id: "stacked", title: "Stacked" },
+    { id: "motion", title: "Motion" },
+    { id: "motion-stacked", title: "Motion stacked" },
   ],
   "glass-card": [{ id: "frosted-surface", title: "Frosted surface" }],
   "gradient-border": [

@@ -1,0 +1,15 @@
+{
+  "name": "choropleth-chart",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "choropleth-chart.tsx",
+      "content": "import type { HTMLAttributes } from \"react\";\nimport { cn } from \"../lib/cn.js\";\n\nexport interface ChoroplethRegion {\n  id: string;\n  name: string;\n  value: number;\n}\n\nexport const CHOROPLETH_DEMO: ChoroplethRegion[] = [\n  { id: \"nw\", name: \"Northwest\", value: 42 },\n  { id: \"ne\", name: \"Northeast\", value: 78 },\n  { id: \"w\", name: \"West\", value: 31 },\n  { id: \"c\", name: \"Central\", value: 95 },\n  { id: \"e\", name: \"East\", value: 58 },\n  { id: \"sw\", name: \"Southwest\", value: 22 },\n  { id: \"se\", name: \"Southeast\", value: 67 },\n];\n\nexport interface ChoroplethChartProps extends HTMLAttributes<HTMLDivElement> {\n  data?: ChoroplethRegion[];\n}\n\nconst CELLS: Record<string, string> = {\n  nw: \"M10 10 h 80 v 50 h -80 z\",\n  ne: \"M100 10 h 80 v 50 h -80 z\",\n  w: \"M10 70 h 50 v 50 h -50 z\",\n  c: \"M70 70 h 50 v 50 h -50 z\",\n  e: \"M130 70 h 50 v 50 h -50 z\",\n  sw: \"M10 130 h 80 v 50 h -80 z\",\n  se: \"M100 130 h 80 v 50 h -80 z\",\n};\n\nexport function ChoroplethChart({\n  data = CHOROPLETH_DEMO,\n  className,\n  ...props\n}: ChoroplethChartProps) {\n  const max = data.reduce((acc, item) => Math.max(acc, item.value), 1);\n  return (\n    <div data-slot=\"choropleth-chart\" className={cn(\"h-64 w-full\", className)} {...props}>\n      <svg viewBox=\"0 0 200 190\" className=\"h-full w-full\" aria-hidden=\"true\">\n        {data.map((region) => {\n          const d = CELLS[region.id];\n          if (!d) return null;\n          const opacity = 0.15 + (region.value / max) * 0.85;\n          return (\n            <path\n              key={region.id}\n              d={d}\n              className=\"fill-primary stroke-border\"\n              style={{ fillOpacity: opacity }}\n            >\n              <title>{`${region.name}: ${region.value}`}</title>\n            </path>\n          );\n        })}\n      </svg>\n    </div>\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}

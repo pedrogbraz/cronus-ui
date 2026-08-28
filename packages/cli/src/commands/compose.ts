@@ -1,6 +1,7 @@
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { writeDesignDocuments } from "@cronus-ui/ai-kit";
 import { type AppManifest, type ManifestError, manifestFingerprint } from "../compose/manifest.js";
 import {
   buildComposePlan,
@@ -236,6 +237,8 @@ export async function composeApp(options: ComposeAppOptions): Promise<ComposeApp
   };
   const nextConfig: CronusUIConfig = { ...config, installed, composed };
   await writeConfig(targetDir, nextConfig);
+
+  writeDesignDocuments(targetDir, { theme: nextConfig.theme?.name });
 
   // --- Install npm deps (best-effort, like add) -----------------------------
   const deps = collectDependencies(items);

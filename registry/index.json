@@ -94,6 +94,17 @@
     ]
   },
   {
+    "name": "area-chart",
+    "type": "registry:ui",
+    "dependencies": [
+      "recharts@^3.9.2"
+    ],
+    "registryDependencies": [
+      "chart",
+      "cn"
+    ]
+  },
+  {
     "name": "aspect-ratio",
     "type": "registry:ui",
     "dependencies": [],
@@ -168,6 +179,17 @@
     ]
   },
   {
+    "name": "bar-chart",
+    "type": "registry:ui",
+    "dependencies": [
+      "recharts@^3.9.2"
+    ],
+    "registryDependencies": [
+      "chart",
+      "cn"
+    ]
+  },
+  {
     "name": "border-beam",
     "type": "registry:ui",
     "dependencies": [],
@@ -214,6 +236,17 @@
     ],
     "registryDependencies": [
       "button",
+      "cn"
+    ]
+  },
+  {
+    "name": "candlestick-chart",
+    "type": "registry:ui",
+    "dependencies": [
+      "recharts@^3.9.2"
+    ],
+    "registryDependencies": [
+      "chart",
       "cn"
     ]
   },
@@ -274,6 +307,14 @@
       "class-variance-authority@^0.7.1",
       "lucide-react@^0.577.0"
     ],
+    "registryDependencies": [
+      "cn"
+    ]
+  },
+  {
+    "name": "choropleth-chart",
+    "type": "registry:ui",
+    "dependencies": [],
     "registryDependencies": [
       "cn"
     ]
@@ -360,6 +401,17 @@
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
+      "cn"
+    ]
+  },
+  {
+    "name": "composed-chart",
+    "type": "registry:ui",
+    "dependencies": [
+      "recharts@^3.9.2"
+    ],
+    "registryDependencies": [
+      "chart",
       "cn"
     ]
   },
@@ -649,6 +701,28 @@
     ]
   },
   {
+    "name": "funnel-chart",
+    "type": "registry:ui",
+    "dependencies": [
+      "recharts@^3.9.2"
+    ],
+    "registryDependencies": [
+      "chart",
+      "cn"
+    ]
+  },
+  {
+    "name": "gauge-chart",
+    "type": "registry:ui",
+    "dependencies": [
+      "recharts@^3.9.2"
+    ],
+    "registryDependencies": [
+      "chart",
+      "cn"
+    ]
+  },
+  {
     "name": "glare-hover",
     "type": "registry:ui",
     "dependencies": [],
@@ -688,6 +762,15 @@
     "dependencies": [],
     "registryDependencies": [
       "cn"
+    ]
+  },
+  {
+    "name": "heatmap-chart",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [
+      "cn",
+      "heatmap"
     ]
   },
   {
@@ -814,6 +897,28 @@
     "registryDependencies": [
       "cn",
       "dialog"
+    ]
+  },
+  {
+    "name": "line-chart",
+    "type": "registry:ui",
+    "dependencies": [
+      "recharts@^3.9.2"
+    ],
+    "registryDependencies": [
+      "chart",
+      "cn"
+    ]
+  },
+  {
+    "name": "live-line-chart",
+    "type": "registry:ui",
+    "dependencies": [
+      "recharts@^3.9.2"
+    ],
+    "registryDependencies": [
+      "chart",
+      "cn"
     ]
   },
   {
@@ -1020,6 +1125,17 @@
     ]
   },
   {
+    "name": "pie-chart",
+    "type": "registry:ui",
+    "dependencies": [
+      "recharts@^3.9.2"
+    ],
+    "registryDependencies": [
+      "chart",
+      "cn"
+    ]
+  },
+  {
     "name": "pill-nav",
     "type": "registry:ui",
     "dependencies": [
@@ -1040,6 +1156,17 @@
     ]
   },
   {
+    "name": "profit-loss-chart",
+    "type": "registry:ui",
+    "dependencies": [
+      "recharts@^3.9.2"
+    ],
+    "registryDependencies": [
+      "chart",
+      "cn"
+    ]
+  },
+  {
     "name": "progress",
     "type": "registry:ui",
     "dependencies": [
@@ -1056,6 +1183,17 @@
       "class-variance-authority@^0.7.1"
     ],
     "registryDependencies": [
+      "cn"
+    ]
+  },
+  {
+    "name": "radar-chart",
+    "type": "registry:ui",
+    "dependencies": [
+      "recharts@^3.9.2"
+    ],
+    "registryDependencies": [
+      "chart",
       "cn"
     ]
   },
@@ -1125,10 +1263,43 @@
     ]
   },
   {
+    "name": "ring-chart",
+    "type": "registry:ui",
+    "dependencies": [
+      "recharts@^3.9.2"
+    ],
+    "registryDependencies": [
+      "chart",
+      "cn"
+    ]
+  },
+  {
     "name": "ripple",
     "type": "registry:ui",
     "dependencies": [],
     "registryDependencies": [
+      "cn"
+    ]
+  },
+  {
+    "name": "sankey-chart",
+    "type": "registry:ui",
+    "dependencies": [
+      "recharts@^3.9.2"
+    ],
+    "registryDependencies": [
+      "chart",
+      "cn"
+    ]
+  },
+  {
+    "name": "scatter-chart",
+    "type": "registry:ui",
+    "dependencies": [
+      "recharts@^3.9.2"
+    ],
+    "registryDependencies": [
+      "chart",
       "cn"
     ]
   },
@@ -1366,6 +1537,14 @@
       "class-variance-authority@^0.7.1",
       "lucide-react@^0.577.0"
     ],
+    "registryDependencies": [
+      "cn"
+    ]
+  },
+  {
+    "name": "sunburst-chart",
+    "type": "registry:ui",
+    "dependencies": [],
     "registryDependencies": [
       "cn"
     ]

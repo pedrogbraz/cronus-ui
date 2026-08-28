@@ -10,6 +10,7 @@ import {
   type Skill,
   writeAiKit,
 } from "@cronus-ui/ai-kit";
+import { hasConfig, readConfig } from "../config.js";
 import { log } from "../utils.js";
 
 interface AiOptions {
@@ -58,11 +59,19 @@ export async function aiAdd(options: AiOptions): Promise<void> {
   }
 
   const name = await projectName(cwd);
+  const theme = hasConfig(cwd) ? (await readConfig(cwd)).theme?.name : undefined;
 
   log.title(`Adding the Cronus UI AI Kit to ${name}`);
   log.step(`Assistants: ${assistants.join(", ")} · doctrine: ${preset}`);
 
-  const { written, skipped } = writeAiKit({ targetDir: cwd, name, assistants, preset, skills });
+  const { written, skipped } = writeAiKit({
+    targetDir: cwd,
+    name,
+    assistants,
+    preset,
+    skills,
+    theme,
+  });
 
   for (const path of written) log.ok(`Wrote ${path}`);
   if (skipped.length > 0) {

@@ -14,6 +14,7 @@ import {
   SKILLS,
   type Skill,
   writeAiKit,
+  writeDesignDocuments,
 } from "@cronus-ui/ai-kit";
 import { composeTemplate } from "./compose.js";
 import { runInstall, scaffold } from "./scaffold.js";
@@ -54,7 +55,8 @@ ${c.bold("Options")}
   --theme <${THEMES.join("|")}>
                              Theme preset to bake in (default: ${DEFAULT_THEME})
   --mode <${MODES.join("|")}>            Default color mode (default: ${DEFAULT_MODE})
-  --ai / --no-ai             Include (or skip) the AI Kit: skills, rules & doctrine
+  --ai / --no-ai             Include (or skip) the AI Kit: skills, rules & doctrine.
+                             DESIGN.md still ships with --no-ai.
   --assistants <${ASSISTANTS.join(",")}|all|none>
                              Which assistants to configure (default: all).
                              Codex CLI and Zed read the root AGENTS.md natively.
@@ -292,10 +294,22 @@ async function main(): Promise<void> {
     const assistants = parsed.assistants ?? ASSISTANTS;
     const preset = parsed.preset ?? DEFAULT_PRESET;
     const skills = parsed.skills ?? SKILLS;
-    const { written } = writeAiKit({ targetDir, name, assistants, preset, skills });
+    const { written } = writeAiKit({
+      targetDir,
+      name,
+      assistants,
+      preset,
+      skills,
+      theme,
+    });
     log.ok(
       `AI Kit added — ${written.length} files for ${assistants.join(", ")} (${preset} doctrine).`,
     );
+  } else {
+    const { written } = writeDesignDocuments(targetDir, { theme });
+    if (written.length > 0) {
+      log.ok("DESIGN.md added (visual taste).");
+    }
   }
 
   const pm = parsed.pm ?? detectPackageManager();
