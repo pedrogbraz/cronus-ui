@@ -298,9 +298,9 @@ export const ACCESSIBILITY_CHECKS = [
 
 export const CHANGELOG_ENTRIES = [
   {
-    date: "2026-08-26",
-    version: "Unreleased",
-    status: "In development",
+    date: "2026-08-28",
+    version: "v0.6.0",
+    status: "Released",
     title: "Looks, Neutral chrome, Cronus Pro",
     summary: "Material looks, Neutral landings, and an additive Pro origin — the engine stays OSS.",
     items: [

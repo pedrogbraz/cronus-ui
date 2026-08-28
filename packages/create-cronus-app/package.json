@@ -1,6 +1,6 @@
 {
   "name": "create-cronus-app",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Scaffold a Next.js + Cronus UI app: npx create-cronus-app my-app --template saas.",
   "type": "module",
   "license": "MIT",

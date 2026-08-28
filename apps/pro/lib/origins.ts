@@ -4,7 +4,8 @@
  * on the docs chrome.
  *
  * Override with `NEXT_PUBLIC_OSS_URL` / `NEXT_PUBLIC_PRO_URL`. Production
- * fallbacks name the public hosts; DNS is a deploy concern, not this file.
+ * fallbacks are `https://aicronus.com` (OSS) and `https://iacronus.com` (Pro).
+ * DNS is a deploy concern, not this file.
  */
 
 function stripSlash(url: string): string {
@@ -14,12 +15,11 @@ function stripSlash(url: string): string {
 const isDev = process.env.NODE_ENV === "development";
 
 export const OSS_URL = stripSlash(
-  process.env.NEXT_PUBLIC_OSS_URL ??
-    (isDev ? "http://localhost:4747" : "https://ui.testcronus.cloud"),
+  process.env.NEXT_PUBLIC_OSS_URL ?? (isDev ? "http://localhost:4747" : "https://aicronus.com"),
 );
 
 export const PRO_URL = stripSlash(
-  process.env.NEXT_PUBLIC_PRO_URL ?? (isDev ? "http://localhost:4748" : "https://cronusui.pro"),
+  process.env.NEXT_PUBLIC_PRO_URL ?? (isDev ? "http://localhost:4748" : "https://iacronus.com"),
 );
 
 export const GITHUB_URL = "https://github.com/pedrogbraz/cronus-ui";

@@ -2,7 +2,7 @@
   "name": "payment-method--add-card",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.5.0"
+    "@cronus-ui/ui@0.6.0"
   ],
   "registryDependencies": [],
   "files": [
