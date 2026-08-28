@@ -18,8 +18,9 @@ chrome keeps the visitor inside the catalog site and undersells the pack.
    *generated* product and of pack preview iframes (ADR 0003) — not the Pro
    marketing chrome. Docs stay on `apps/www`.
 2. **See Pro / Explore Pro leave the OSS origin** via `NEXT_PUBLIC_PRO_URL`
-   (dev: `http://localhost:4748`, prod name: `https://cronusui.pro`). `/pro` on
-   www redirects there so bookmarks still work.
+   (dev: `http://localhost:4748`, prod: `https://iacronus.com`). `/pro` on
+   www redirects there so bookmarks still work. OSS canonical is
+   `https://aicronus.com`.
 3. **Pricing is Maker ($199) and Studio ($299), one-time perpetual.** Web only.
    No Mobile/Super SKU — Cronus does not ship React Native.
 4. **Still not billed.** Cards look like checkout; the action says the license
@@ -29,5 +30,6 @@ chrome keeps the visitor inside the catalog site and undersells the pack.
 
 ## Consequências
 
-Dois `next start` no Playwright. DNS de `cronusui.pro` é deploy, não este
-repositório. ADR 0005 (additive pack, looks livres) continua válida.
+Dois `next start` no Playwright. DNS de `aicronus.com` (OSS) e
+`iacronus.com` (Pro) é deploy, não este repositório. ADR 0005
+(additive pack, looks livres) continua válida.

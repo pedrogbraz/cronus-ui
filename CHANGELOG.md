@@ -32,6 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Public origins.** OSS canonical is `https://aicronus.com` (`www` redirects
+  to apex). Cronus Pro is `https://iacronus.com`. Override with
+  `NEXT_PUBLIC_SITE_URL` / `NEXT_PUBLIC_OSS_URL` / `NEXT_PUBLIC_PRO_URL`.
 - **Scatter (Motion).** Same 24-month sessions/conversions as the docs preview:
   offset rings (fill + gap + stroke), hover dim/blur, clip-reveal enter.
   Neutral dark `--cronus-chart-1/2` is zinc-dark, so rings read as hollow
@@ -59,7 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Site chrome.** Primary nav is Docs, Components, Blocks, Templates, Create.
   Themes, Stack, Changelog, and Pro moved out of the bar — Pro is an
   announcement strip plus a dismissible corner card, not a tenth link. See Pro
-  leaves this origin for Cronus Pro (`apps/pro`, :4748 / cronusui.pro).
+  leaves this origin for Cronus Pro (`apps/pro`, :4748 / iacronus.com).
 
 ### Removed
 
