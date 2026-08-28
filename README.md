@@ -13,8 +13,8 @@ CLI. Canonical start: `npx create-cronus-app my-app --template saas`.
 
 Aurora is the flagship theme of generated product; Neutral is the docs chrome.
 
-> **Unreleased on main** — looks (Default / Brutalist / Glass), Neutral chrome
-> on both landings, Cronus Pro at `:4748` (additive pack). Canonical start:
+> **v0.6.0** — OSS at [aicronus.com](https://aicronus.com), Cronus Pro at
+> [iacronus.com](https://iacronus.com). Canonical start:
 > `npx create-cronus-app my-app --template saas`. See
 > [ADR 0003](docs/adr/0003-product-ui-system.md).
 
@@ -32,8 +32,8 @@ packages/
   create-cronus-stack/ create-cronus-stack  — Stack Builder scaffold generator
   mcp/      cronus-ui-mcp       — MCP server for registry discovery
 apps/
-  www/      @cronus-ui/www      — OSS docs and landing (Neutral chrome, :4747)
-  pro/      @cronus-ui/pro      — Cronus Pro origin (Neutral chrome, :4748)
+  www/      @cronus-ui/www      — OSS docs and landing (aicronus.com, :4747 locally)
+  pro/      @cronus-ui/pro      — Cronus Pro origin (iacronus.com, :4748 locally)
 ```
 
 ### Which package do I need?
