@@ -48,7 +48,7 @@
     "@cronus-ui/stack": "workspace:*"
   },
   "devDependencies": {
-    "@types/node": "^22.10.0",
+    "@types/node": "^26.3.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.9"
   },
