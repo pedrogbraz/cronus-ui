@@ -12,7 +12,7 @@ test.describe("Pro origin split", () => {
 
     const seePro = page.locator("footer").getByRole("link", { name: "Pro" });
     await expect(seePro).toBeVisible();
-    await expect(seePro).toHaveAttribute("href", /localhost:4748|cronusui\.pro/);
+    await expect(seePro).toHaveAttribute("href", /localhost:4748|iacronus\.com/);
   });
 
   test("Pro landing is additive, priced, and previewable", async ({ page }) => {
