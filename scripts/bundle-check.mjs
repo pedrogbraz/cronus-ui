@@ -98,7 +98,9 @@ const ROUTE_BUDGETS = /** @type {Record<string, RouteBudget>} */ ({
     firstLoadUncompressedJsBytes: 920_000,
     firstLoadGzipJsBytes: 270_000,
   },
-  "/components": { firstLoadUncompressedJsBytes: 680_000, firstLoadGzipJsBytes: 205_000 },
+  // Catalog thumbs (16/10 scaled miniatures) pull Button/Input/Badge/Avatar/
+  // Switch/Metric onto the overview. Measured 2026-08-28: 709/203 KiB.
+  "/components": { firstLoadUncompressedJsBytes: 820_000, firstLoadGzipJsBytes: 245_000 },
   // Headroom covers the /create icon-library preview (5 tree-shaken icon sets,
   // ~20 glyphs each — verified named imports) plus the preview's `motion/react`
   // spring hover-lift. motion is the only animation dep on this route, so it
@@ -106,7 +108,8 @@ const ROUTE_BUDGETS = /** @type {Record<string, RouteBudget>} */ ({
   // code-split (loaded async after hydration); only the `m` runtime lands in
   // first-load JS (~13 KiB gz). Bumped from 275/935 KiB to keep ~6% headroom.
   "/create": { firstLoadUncompressedJsBytes: 1_040_000, firstLoadGzipJsBytes: 305_000 },
-  "/blocks": { firstLoadUncompressedJsBytes: 680_000, firstLoadGzipJsBytes: 205_000 },
+  // Same 16/10 thumbs as /components. Measured 2026-08-28: 731/210 KiB.
+  "/blocks": { firstLoadUncompressedJsBytes: 850_000, firstLoadGzipJsBytes: 250_000 },
   "/blocks/[slug]": { firstLoadUncompressedJsBytes: 690_000, firstLoadGzipJsBytes: 205_000 },
   "/blocks/[slug]/[variant]": {
     firstLoadUncompressedJsBytes: 700_000,
@@ -122,8 +125,8 @@ const ROUTE_BUDGETS = /** @type {Record<string, RouteBudget>} */ ({
 const SHARED_CHUNK_BUDGETS = /** @type {SharedChunkBudgets} */ ({
   commonUncompressedJsBytes: 640_000,
   commonGzipJsBytes: 190_000,
-  sharedUncompressedJsBytes: 950_000,
-  sharedGzipJsBytes: 290_000,
+  sharedUncompressedJsBytes: 1_120_000,
+  sharedGzipJsBytes: 335_000,
 });
 
 /**
