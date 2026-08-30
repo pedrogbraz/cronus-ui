@@ -80,4 +80,16 @@ describe("kickoff — conventions & standards", () => {
     expect(md).toContain("  app/        # Next.js App Router starter");
     expect(md).not.toContain("  src/app/        # Next.js App Router starter");
   });
+
+  it("lists selected AI Kit skills in the brief", () => {
+    const md = generateKickoff(
+      { ...config, skills: ["skill-ui-add", "skill-upgrade"] },
+      "acme",
+      catalog,
+    );
+    expect(md).toContain("ui-add");
+    expect(md).toContain("upgrade");
+    expect(md).not.toContain("skill-frontend");
+    expect(md).not.toContain("frontend & component");
+  });
 });

@@ -7,11 +7,15 @@ import type { Badge as BadgeKind, ResolvedOption } from "@/lib/stack/types";
 import { OptionIcon } from "./option-icon";
 
 /** Map a catalog {@link BadgeKind} to a Cronus UI Badge variant + label. */
-const BADGE_META: Record<BadgeKind, { label: string; variant: "warning" | "info" | "primary" }> = {
+const BADGE_META: Record<
+  BadgeKind,
+  { label: string; variant: "warning" | "info" | "primary" | "secondary" }
+> = {
   beta: { label: "Beta", variant: "warning" },
   new: { label: "New", variant: "info" },
   experimental: { label: "Experimental", variant: "warning" },
   gated: { label: "Gated", variant: "primary" },
+  kickoff: { label: "Prompt", variant: "secondary" },
 };
 
 export interface OptionCardProps {
@@ -45,7 +49,12 @@ export function OptionCard({ resolved, kind, tabIndex, onSelect, onKeyNav }: Opt
   const { option, available, selected, reason } = resolved;
   const disabled = !available;
   const reasonId = useId();
-  const badge = option.badge ? BADGE_META[option.badge] : undefined;
+  const badge =
+    option.badge != null
+      ? BADGE_META[option.badge]
+      : option.emits === "scaffold"
+        ? undefined
+        : BADGE_META.kickoff;
 
   // Role + checked/pressed state are kind-dependent. Single options are radios
   // inside a radiogroup (aria-checked); multi options are pressable toggle

@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { type Assistant, writeAiKit, writeDesignDocuments } from "@cronus-ui/ai-kit";
+import { type Assistant, type Skill, writeAiKit, writeDesignDocuments } from "@cronus-ui/ai-kit";
 import type { Catalog, StackConfig } from "@cronus-ui/stack";
 import {
   catalog as defaultCatalog,
@@ -402,6 +402,28 @@ function assistantIds(config: StackConfig): Assistant[] {
   return [...picked];
 }
 
+const CATALOG_SKILL_TO_KIT: Record<string, Skill> = {
+  "skill-ui-add": "ui-add",
+  "skill-theme": "theme",
+  "skill-compose": "compose",
+  "skill-upgrade": "upgrade",
+  "skill-code-review": "code-review",
+  "skill-ship-pr": "ship-pr",
+  "skill-evidence-check": "evidence-check",
+};
+
+/** Catalog skill ids → AI Kit skills. Empty selection keeps the kit default. */
+function kitSkillsFromConfig(config: StackConfig): readonly Skill[] | undefined {
+  const selected = multi(config, "skills");
+  if (selected.length === 0) return undefined;
+  const mapped: Skill[] = [];
+  for (const id of selected) {
+    const skill = CATALOG_SKILL_TO_KIT[id];
+    if (skill) mapped.push(skill);
+  }
+  return mapped;
+}
+
 function unsupportedNotes(config: StackConfig): string[] {
   const notes: string[] = [];
   if (single(config, "web") !== "web-next") {
@@ -443,11 +465,6 @@ function unsupportedNotes(config: StackConfig): string[] {
   }
   if (mcpIds.includes("mcp-cronus-ui") && !usesCronusUi(config)) {
     notes.push("The cronus-ui MCP server is not generated for stacks that do not use Cronus UI.");
-  }
-  if (multi(config, "skills").length > 0) {
-    notes.push(
-      "Install the selected agent skill packs in your agent environment; KICKOFF.md records the choices but the scaffold does not install external skills.",
-    );
   }
   const unsupportedAddons = multi(config, "addons").filter((id) => id !== "addon-biome");
   if (unsupportedAddons.length > 0) {
@@ -540,6 +557,7 @@ export function scaffoldStack(options: ScaffoldStackOptions): ScaffoldStackResul
       name: projectName,
       assistants,
       preset: "standard",
+      skills: kitSkillsFromConfig(config),
       includeCronusUi: isCronusUi,
       cronusUiMcp,
     });

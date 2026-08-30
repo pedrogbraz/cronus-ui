@@ -17,20 +17,21 @@ const src = (path: string) => fileURLToPath(new URL(path, import.meta.url));
 const aiKitSrc = src("./packages/ai-kit/src/index.ts");
 const stackSrc = src("./packages/stack/src/index.ts");
 const stackSubpath = (name: string) => src(`./packages/stack/src/${name}.ts`);
+const workspaceAliases = {
+  "@cronus-ui/ai-kit": aiKitSrc,
+  "@cronus-ui/stack": stackSrc,
+  "@cronus-ui/stack/catalog": stackSubpath("catalog"),
+  "@cronus-ui/stack/cli": stackSubpath("cli"),
+  "@cronus-ui/stack/constants": stackSubpath("constants"),
+  "@cronus-ui/stack/engine": stackSubpath("engine"),
+  "@cronus-ui/stack/kickoff": stackSubpath("kickoff"),
+  "@cronus-ui/stack/schema": stackSubpath("schema"),
+  "@cronus-ui/stack/types": stackSubpath("types"),
+};
 
 export default defineConfig({
   resolve: {
-    alias: {
-      "@cronus-ui/ai-kit": aiKitSrc,
-      "@cronus-ui/stack": stackSrc,
-      "@cronus-ui/stack/catalog": stackSubpath("catalog"),
-      "@cronus-ui/stack/cli": stackSubpath("cli"),
-      "@cronus-ui/stack/constants": stackSubpath("constants"),
-      "@cronus-ui/stack/engine": stackSubpath("engine"),
-      "@cronus-ui/stack/kickoff": stackSubpath("kickoff"),
-      "@cronus-ui/stack/schema": stackSubpath("schema"),
-      "@cronus-ui/stack/types": stackSubpath("types"),
-    },
+    alias: workspaceAliases,
   },
   test: {
     projects: [
@@ -67,6 +68,7 @@ export default defineConfig({
         },
       },
       {
+        resolve: { alias: workspaceAliases },
         test: {
           name: "create-cronus-stack",
           root: "./packages/create-cronus-stack",

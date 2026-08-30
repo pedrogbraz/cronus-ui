@@ -441,7 +441,7 @@ export function generateKickoff(
   lines.push(`- **MCP servers:** ${mcp.length ? mcp.join(", ") : "none"}`);
   lines.push(`- **Skills:** ${skills.length ? skills.join(", ") : "none"}`);
   lines.push(
-    "- Generated files cover the supported assistants/templates; any unsupported MCP server or skill pack remains manual follow-up.",
+    "- Generated files cover the supported assistants, MCP servers, and AI Kit skills; unsupported MCP servers remain manual follow-up.",
   );
   if (vibe) {
     lines.push(

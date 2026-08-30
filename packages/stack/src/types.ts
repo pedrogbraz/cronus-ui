@@ -12,7 +12,7 @@
  */
 
 /** A short status flag rendered as a pill on an option. */
-export type Badge = "beta" | "new" | "experimental" | "gated";
+export type Badge = "beta" | "new" | "experimental" | "gated" | "kickoff";
 
 /**
  * How a category is selected:
@@ -34,6 +34,11 @@ export interface Option {
   icon?: string;
   /** Optional status pill. */
   badge?: Badge;
+  /**
+   * Whether `create-cronus-stack` writes real files/config for this option.
+   * Undefined means kickoff-only (KICKOFF.md / stack.json) — the honest default.
+   */
+  emits?: "scaffold" | "kickoff";
   /** Option ids that must ALL be selected for this option to be available. */
   requires?: string[];
   /** Option ids that, if any is selected, make this option unavailable. */

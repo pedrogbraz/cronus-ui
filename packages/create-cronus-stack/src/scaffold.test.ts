@@ -1,6 +1,7 @@
 import { existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { SKILLS } from "@cronus-ui/ai-kit";
 import { catalog, defaultSelection, resolve } from "@cronus-ui/stack";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { scaffoldStack } from "./scaffold.js";
@@ -56,6 +57,10 @@ describe("scaffoldStack", () => {
     };
     expect(stack.name).toBe("my-app");
     expect(stack.stack.web).toBe("web-next");
+
+    for (const skill of SKILLS) {
+      expect(existsSync(join(targetDir, `.claude/skills/${skill}/SKILL.md`))).toBe(true);
+    }
   });
 
   it("writes root app files when structure-root is selected", () => {
@@ -163,5 +168,35 @@ describe("scaffoldStack", () => {
       "The cronus-ui MCP server is not generated for stacks that do not use Cronus UI.",
     );
     expect(existsSync(join(targetDir, ".mcp.json"))).toBe(false);
+  });
+
+  it("writes only the selected AI Kit skills and does not record them as unsupported", () => {
+    const config = resolve(catalog, {
+      ...defaultSelection(catalog),
+      skills: ["skill-ui-add", "skill-code-review"],
+      install: false,
+    }).selection;
+    const result = scaffoldStack({ targetDir, projectName: "my-app", config, catalog });
+
+    expect(existsSync(join(targetDir, ".claude/skills/ui-add/SKILL.md"))).toBe(true);
+    expect(existsSync(join(targetDir, ".claude/skills/code-review/SKILL.md"))).toBe(true);
+    expect(existsSync(join(targetDir, ".claude/skills/theme/SKILL.md"))).toBe(false);
+    expect(existsSync(join(targetDir, ".claude/skills/compose/SKILL.md"))).toBe(false);
+    expect(existsSync(join(targetDir, ".claude/skills/upgrade/SKILL.md"))).toBe(false);
+    expect(result.unsupported.join("\n")).not.toMatch(/skill/i);
+  });
+
+  it("still notes Cline as unsupported", () => {
+    const config = resolve(catalog, {
+      ...defaultSelection(catalog),
+      assistants: ["ai-cline"],
+      install: false,
+    }).selection;
+    const result = scaffoldStack({ targetDir, projectName: "my-app", config, catalog });
+
+    expect(result.unsupported).toContain(
+      "Add Cline workspace configuration manually; AI Kit does not emit Cline files yet.",
+    );
+    expect(existsSync(join(targetDir, ".claude/settings.json"))).toBe(false);
   });
 });

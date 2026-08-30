@@ -38,6 +38,69 @@ describe("catalog integrity", () => {
   it("the default selection is valid", () => {
     expect(resolve(catalog, defaultSelection(catalog)).valid).toBe(true);
   });
+
+  it("does not preselect skills so the generator keeps the full AI Kit", () => {
+    expect(defaultSelection(catalog).skills).toEqual([]);
+  });
+
+  it("lists the AI Kit skills the generator actually writes", () => {
+    const skills = catalog.find((c) => c.id === "skills");
+    expect(skills?.kind).toBe("multi");
+    expect(skills?.options.map((o) => o.id)).toEqual([
+      "skill-ui-add",
+      "skill-theme",
+      "skill-compose",
+      "skill-upgrade",
+      "skill-code-review",
+      "skill-ship-pr",
+      "skill-evidence-check",
+    ]);
+  });
+
+  it("marks generator-backed options as scaffold and leaves prompt-only options unset", () => {
+    const byId = new Map(catalog.flatMap((c) => c.options.map((o) => [o.id, o])));
+    const scaffold = [
+      "web-next",
+      "ui-cronus",
+      "ui-shadcn",
+      "ui-heroui",
+      "ui-aceternity",
+      "ui-tailwind",
+      "ui-none",
+      "structure-src",
+      "structure-root",
+      "import-alias",
+      "import-relative",
+      "ts-strict",
+      "ts-standard",
+      "commit-conventional",
+      "commit-plain",
+      "addon-biome",
+      "ai-claude-code",
+      "ai-cursor",
+      "ai-copilot",
+      "ai-windsurf",
+      "mcp-cronus-ui",
+      "pm-bun",
+      "pm-pnpm",
+      "pm-npm",
+      "skill-ui-add",
+      "skill-theme",
+      "skill-compose",
+      "skill-upgrade",
+      "skill-code-review",
+      "skill-ship-pr",
+      "skill-evidence-check",
+    ];
+    for (const id of scaffold) {
+      expect(byId.get(id)?.emits, id).toBe("scaffold");
+    }
+    expect(byId.get("web-none")?.emits).not.toBe("scaffold");
+    expect(byId.get("web-nuxt")?.emits).not.toBe("scaffold");
+    expect(byId.get("orm-drizzle")?.emits).not.toBe("scaffold");
+    expect(byId.get("ai-cline")?.emits).not.toBe("scaffold");
+    expect(byId.get("addon-pwa")?.emits).not.toBe("scaffold");
+  });
 });
 
 describe("database / orm constraints", () => {
