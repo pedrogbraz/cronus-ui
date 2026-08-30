@@ -298,6 +298,22 @@ export const ACCESSIBILITY_CHECKS = [
 
 export const CHANGELOG_ENTRIES = [
   {
+    date: "2026-08-30",
+    version: "v0.6.1",
+    status: "Released",
+    title: "Runnable stack, admin/docs, chrome",
+    summary:
+      "create-cronus-stack emits Drizzle + SQLite and Better-Auth; InviteDialog and WorkspaceSwitcher land in the app shell; admin and docs compose from idle blocks.",
+    items: [
+      "Next + Drizzle + SQLite is a real scaffold; Better-Auth rides the same Drizzle path",
+      "InviteDialog and WorkspaceSwitcher in @cronus-ui/ui, wired into app-shell-chrome",
+      "OSS compose templates admin and docs — not landing-docs",
+      "upgrade skill and the compose → add-page → theme → upgrade loop",
+      "saas grows to 11 pages (forgot-password, welcome, setup, checklist)",
+      "Stack Builder Prompt badge for options the generator does not write",
+    ],
+  },
+  {
     date: "2026-08-28",
     version: "v0.6.0",
     status: "Released",

@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.1] — 2026-08-30
+
 ### Added
 
 - **Drizzle + SQLite (and Better-Auth) in create-cronus-stack.** Next +
@@ -460,7 +462,8 @@ as installable packages and as copy-paste registry items you own.
 - Added per-entry gzipped bundle budgets for the published `@cronus-ui/ui` so a
   dependency or code-size regression is caught at build time.
 
-[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.1...HEAD
+[0.6.1]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/pedrogbraz/cronus-ui/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/pedrogbraz/cronus-ui/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/pedrogbraz/cronus-ui/compare/v0.3.0...v0.4.0
