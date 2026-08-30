@@ -244,6 +244,59 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     expect(dashboardBlock).not.toContain("Lena Park");
     expect(dashboardBlock).toContain("demo-saas");
   });
+
+  it("composes the admin template into (shell)/(bare) with the admin-overview dashboard", async () => {
+    const result = await composeTemplate({
+      targetDir: cwd,
+      template: "admin",
+      brand: "Console",
+      registry: REPO_REGISTRY,
+      skipInstall: true,
+    });
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.pageCount).toBe(6);
+    expect(existsSync(join(cwd, "app/(bare)/login/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(shell)/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(shell)/users/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(shell)/analytics/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(shell)/board/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(shell)/audit/page.tsx"))).toBe(true);
+
+    const login = readFileSync(join(cwd, "app/(bare)/login/page.tsx"), "utf8");
+    expect(login).toContain("login-split");
+    const home = readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8");
+    expect(home).toMatch(/dashboard-admin-overview|admin-overview/);
+    const shellBlock = readFileSync(join(cwd, "components/blocks/app-shell-chrome.tsx"), "utf8");
+    expect(shellBlock).toContain('{ label: "Overview", href: "/" }');
+    expect(shellBlock).toContain("Console");
+    expect(shellBlock.startsWith('"use client"')).toBe(true);
+  });
+
+  it("composes the docs template into (site) chrome from content blocks, not landing-docs", async () => {
+    const result = await composeTemplate({
+      targetDir: cwd,
+      template: "docs",
+      brand: "Docs",
+      registry: REPO_REGISTRY,
+      skipInstall: true,
+    });
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.pageCount).toBe(5);
+    expect(existsSync(join(cwd, "app/(site)/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(site)/blog/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(site)/blog/[slug]/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(site)/faq/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(site)/about/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(shell)/page.tsx"))).toBe(false);
+
+    const home = readFileSync(join(cwd, "app/(site)/page.tsx"), "utf8");
+    expect(home).toMatch(/changelog|Changelog/);
+    expect(home).not.toMatch(/hero-compact|Hero/);
+    const article = readFileSync(join(cwd, "app/(site)/blog/[slug]/page.tsx"), "utf8");
+    expect(article).toMatch(/blog-post-with-sidebar|with-sidebar/);
+  });
 });
 
 /**

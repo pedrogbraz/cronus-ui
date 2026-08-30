@@ -93,10 +93,22 @@ describe("template catalog", () => {
     expect(saas.inside.some((line) => /welcome/.test(line) && /checklist/.test(line))).toBe(true);
   });
 
+  it("lists admin and docs as OSS product apps, not landings", () => {
+    for (const slug of ["admin", "docs"] as const) {
+      const entry = getTemplate(slug)!;
+      expect(entry.kind).toBe("product");
+      expect(isProTemplate(entry)).toBe(false);
+    }
+    expect(templateMood(getTemplate("admin")!)).toBe("saas");
+    expect(templateMood(getTemplate("docs")!)).toBe("editorial");
+  });
+
   it("keeps saas/store/landing OSS and lists mail/chat/finance as additive Pro", () => {
     expect(isProTemplate(getTemplate("saas")!)).toBe(false);
     expect(isProTemplate(getTemplate("store")!)).toBe(false);
     expect(isProTemplate(getTemplate("landing")!)).toBe(false);
+    expect(isProTemplate(getTemplate("admin")!)).toBe(false);
+    expect(isProTemplate(getTemplate("docs")!)).toBe(false);
     expect(
       templatesPro()
         .map((entry) => entry.slug)

@@ -267,6 +267,13 @@ const APP_OVERRIDES: Record<string, TagPatch> = {
     motion: "smooth",
     intents: ["dashboard", "auth"],
   },
+  admin: {
+    style: "operational",
+    palette: "midnight",
+    motion: "none",
+    intents: ["admin", "dashboard"],
+  },
+  docs: { style: "editorial", palette: "neutral", motion: "none", intents: ["content"] },
   store: { style: "default", palette: "aurora", motion: "none", intents: ["commerce"] },
   landing: { style: "editorial", palette: "aurora", motion: "none", intents: ["marketing"] },
   "landing-studio": {

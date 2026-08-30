@@ -397,6 +397,8 @@ export async function applyTheme(
 export const COMPOSE_TEMPLATES = [
   "saas",
   "store",
+  "admin",
+  "docs",
   "landing",
   "landing-agency",
   "landing-agents",

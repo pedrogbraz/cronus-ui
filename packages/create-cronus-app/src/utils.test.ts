@@ -37,6 +37,8 @@ describe("templates", () => {
     expect(TEMPLATES).toContain("store");
     expect(TEMPLATES).toContain("landing");
     expect(TEMPLATES).toContain("saas");
+    expect(TEMPLATES).toContain("admin");
+    expect(TEMPLATES).toContain("docs");
     // The bundled-dir templates stay listed too.
     expect(TEMPLATES).toContain("default");
     expect(TEMPLATES).toContain("dashboard");
@@ -67,6 +69,8 @@ describe("templates", () => {
     expect(isComposedTemplate("store")).toBe(true);
     expect(isComposedTemplate("landing")).toBe(true);
     expect(isComposedTemplate("saas")).toBe(true);
+    expect(isComposedTemplate("admin")).toBe(true);
+    expect(isComposedTemplate("docs")).toBe(true);
     expect(isComposedTemplate("landing-studio")).toBe(true);
     expect(isComposedTemplate("landing-glass")).toBe(true);
     expect(isComposedTemplate("mail")).toBe(true);
@@ -77,6 +81,8 @@ describe("templates", () => {
     expect(isComposedTemplate("marketing")).toBe(false);
     expect(Object.keys(COMPOSED_TEMPLATES).sort()).toEqual(
       [
+        "admin",
+        "docs",
         "landing",
         "landing-agency",
         "landing-agents",
@@ -160,6 +166,8 @@ describe("parseCli", () => {
     expect(parseCli(["my-app", "--template", "store"]).template).toBe("store");
     expect(parseCli(["my-app", "--template", "landing"]).template).toBe("landing");
     expect(parseCli(["my-app", "--template", "saas"]).template).toBe("saas");
+    expect(parseCli(["my-app", "--template", "admin"]).template).toBe("admin");
+    expect(parseCli(["my-app", "--template", "docs"]).template).toBe("docs");
     expect(parseCli(["my-app", "--template", "landing-studio"]).template).toBe("landing-studio");
   });
 
@@ -172,6 +180,7 @@ describe("parseCli", () => {
       "ui-add",
       "theme",
       "compose",
+      "upgrade",
       "code-review",
       "ship-pr",
       "evidence-check",
@@ -250,7 +259,7 @@ describe("outroLines", () => {
   ) => outroLines(name, pm, installed, template).join("\n");
 
   it("for composed templates, points at add-page / theme set / upgrade", () => {
-    for (const t of ["saas", "store", "landing"] as const) {
+    for (const t of ["saas", "store", "landing", "admin", "docs"] as const) {
       const text = joined("acme", "npm", true, t);
       expect(text, t).toContain(
         "npx cronus-ui add-page --route /pricing --blocks pricing,cta --nav Pricing",

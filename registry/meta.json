@@ -3475,6 +3475,18 @@
         "auth"
       ]
     },
+    "invite-dialog": {
+      "title": "InviteDialog",
+      "category": "overlays",
+      "description": "Ergonomic Dialog for inviting a member by email and role.",
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "overlay"
+      ]
+    },
     "json-viewer": {
       "title": "JsonViewer",
       "category": "data-display",
@@ -4580,9 +4592,33 @@
       "intents": [
         "motion"
       ]
+    },
+    "workspace-switcher": {
+      "title": "WorkspaceSwitcher",
+      "category": "navigation",
+      "description": "Compact workspace/org switcher for app chrome.",
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "nav"
+      ]
     }
   },
   "apps": {
+    "admin": {
+      "title": "Admin",
+      "description": "An admin console: split login, an (app) shell, overview, users, analytics, a sprint board and an audit trail — composed from validated blocks.",
+      "pages": 6,
+      "style": "operational",
+      "palette": "midnight",
+      "motion": "none",
+      "intents": [
+        "admin",
+        "dashboard"
+      ]
+    },
     "chat": {
       "title": "Chat",
       "description": "A Pro assistant app: chat thread and prompt box under an app shell, plus a replies surface and settings.",
@@ -4593,6 +4629,17 @@
       "intents": [
         "ai",
         "social"
+      ]
+    },
+    "docs": {
+      "title": "Docs",
+      "description": "A documentation site: changelog home, guides-style blog, an article, FAQ and about — composed from validated content blocks, not a marketing landing.",
+      "pages": 5,
+      "style": "editorial",
+      "palette": "neutral",
+      "motion": "none",
+      "intents": [
+        "content"
       ]
     },
     "finance": {
@@ -4766,8 +4813,8 @@
     },
     "saas": {
       "title": "SaaS",
-      "description": "A complete multi-page SaaS app: split login/signup, and a sidebar-shell dashboard, analytics, team, billing and settings — all from validated blocks.",
-      "pages": 7,
+      "description": "A complete multi-page SaaS app: split login/signup, password reset, a sidebar-shell dashboard, analytics, team, billing and settings, plus welcome, setup wizard and checklist — all from validated blocks.",
+      "pages": 11,
       "style": "operational",
       "palette": "aurora",
       "motion": "smooth",

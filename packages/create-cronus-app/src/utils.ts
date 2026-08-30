@@ -124,6 +124,8 @@ export const TEMPLATES = [
   "store",
   "landing",
   "saas",
+  "admin",
+  "docs",
   ...LANDING_FLAVORS,
   ...PRO_APPS,
 ] as const;
@@ -140,6 +142,8 @@ export const COMPOSED_TEMPLATES = {
   store: "store",
   landing: "landing",
   saas: "saas",
+  admin: "admin",
+  docs: "docs",
   "landing-studio": "landing-studio",
   "landing-ops": "landing-ops",
   "landing-secure": "landing-secure",
@@ -181,6 +185,9 @@ export const TEMPLATE_HINTS: Record<TemplateName, string> = {
   store: "generated storefront — 9 navigable pages, real nav, from validated blocks",
   landing: "generated landing page — hero, features, pricing, testimonials, FAQ, CTA",
   saas: "recommended for a full product — split auth + shell dashboard, team, billing, settings",
+  admin:
+    "admin console — split login + shell, overview, users, analytics, board, audit (midnight dark)",
+  docs: "docs site — changelog, guides, article, FAQ, about — not a marketing landing (neutral light)",
   "landing-studio": "dark AI studio landing — atmosphere hero, marquee, bento, stats, pricing",
   "landing-ops": "ops/workflow landing — split hero, logos, features, integrations",
   "landing-secure": "security/infra landing — compact hero, metrics, usage pricing, split FAQ",
@@ -235,6 +242,8 @@ export const TEMPLATE_APPEARANCE: Partial<Record<TemplateName, { theme: Theme; m
     mail: { theme: "midnight", mode: "dark" },
     chat: { theme: "aurora", mode: "dark" },
     finance: { theme: "emerald", mode: "light" },
+    admin: { theme: "midnight", mode: "dark" },
+    docs: { theme: "neutral", mode: "light" },
   };
 
 /**

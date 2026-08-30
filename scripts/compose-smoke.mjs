@@ -446,6 +446,10 @@ async function main() {
     if (store) cleanups.push(store.tmp);
     const saas = await lightComposeTemplate(dist, "saas");
     if (saas) cleanups.push(saas.tmp);
+    const admin = await lightComposeTemplate(dist, "admin");
+    if (admin) cleanups.push(admin.tmp);
+    const docs = await lightComposeTemplate(dist, "docs");
+    if (docs) cleanups.push(docs.tmp);
 
     // FULL: build the composed store AND saas. store covers the site/bare chrome
     // + plain-login path; saas covers the Phase-2 machinery (app-shell-chrome

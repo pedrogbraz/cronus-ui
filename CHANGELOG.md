@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Drizzle + SQLite (and Better-Auth) in create-cronus-stack.** Next +
+  `orm-drizzle` now writes a real client, schema, `drizzle.config.ts`, and
+  `db:push` / `db:generate` / `db:studio`. SQLite is zero-ops (`better-sqlite3`,
+  `file:./data/app.db`). Postgres and MySQL get the matching driver. Better-Auth
+  on that same Drizzle path emits `lib/auth.ts`, the React client, and
+  `app/api/auth/[...all]`. Other ORMs and Clerk stay kickoff.
+- **InviteDialog and WorkspaceSwitcher.** Product chrome primitives in
+  `@cronus-ui/ui` (Dialog + email/role invite; dropdown workspace switcher).
+  `app-shell-chrome` hosts both.
+- **admin and docs compose templates.** OSS product apps from idle blocks —
+  admin console (overview, users, analytics, board, audit) and a docs/content
+  site (changelog, guides, article, FAQ, about). Not `landing-docs`.
 - **upgrade skill.** The AI Kit ships `upgrade` as a first-class skill. Agents
   run `diff` → `upgrade --all --dry-run` → `upgrade --all` instead of
   `compose --overwrite`. `AGENTS.md` now states the product loop (compose →

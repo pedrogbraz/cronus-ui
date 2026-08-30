@@ -1,0 +1,50 @@
+{
+  "name": "docs",
+  "type": "registry:app",
+  "planVersion": 1,
+  "manifest": {
+    "title": "Docs",
+    "description": "A documentation site: changelog home, guides-style blog, an article, FAQ and about — composed from validated content blocks, not a marketing landing.",
+    "chrome": {
+      "site": { "navbar": "navbar", "footer": "footer" }
+    },
+    "pages": [
+      {
+        "route": "/",
+        "title": "Changelog",
+        "nav": "Changelog",
+        "chrome": "site",
+        "blocks": ["changelog"]
+      },
+      {
+        "route": "/blog",
+        "title": "Guides",
+        "nav": "Guides",
+        "chrome": "site",
+        "blocks": ["blog"]
+      },
+      {
+        "route": "/blog/[slug]",
+        "title": "Article",
+        "chrome": "site",
+        "blocks": [{ "block": "blog-post", "variant": "with-sidebar" }]
+      },
+      {
+        "route": "/faq",
+        "title": "FAQ",
+        "nav": "FAQ",
+        "chrome": "site",
+        "blocks": ["faq"]
+      },
+      {
+        "route": "/about",
+        "title": "About",
+        "nav": "About",
+        "chrome": "site",
+        "blocks": ["about"]
+      }
+    ],
+    "extras": { "not-found": "not-found" },
+    "defaults": { "theme": "neutral", "mode": "light", "brand": "__APP_NAME__" }
+  }
+}

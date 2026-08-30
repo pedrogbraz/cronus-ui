@@ -838,6 +838,22 @@
     ]
   },
   {
+    "name": "invite-dialog",
+    "type": "registry:ui",
+    "dependencies": [
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "button",
+      "cn",
+      "dialog",
+      "field",
+      "input",
+      "select",
+      "spinner"
+    ]
+  },
+  {
     "name": "json-viewer",
     "type": "registry:ui",
     "dependencies": [
@@ -1739,6 +1755,18 @@
     ],
     "registryDependencies": [
       "cn"
+    ]
+  },
+  {
+    "name": "workspace-switcher",
+    "type": "registry:ui",
+    "dependencies": [
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "avatar",
+      "cn",
+      "dropdown-menu"
     ]
   },
   {

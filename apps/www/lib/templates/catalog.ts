@@ -65,6 +65,45 @@ export const TEMPLATE_CATALOG: readonly TemplateCatalogEntry[] = [
     ],
   },
   {
+    slug: "admin",
+    name: "Admin",
+    tagline: "Admin console",
+    description:
+      "An admin console: split login, an (app) shell, overview, users, analytics, a sprint board and an audit trail — composed from validated blocks.",
+    command: cmd("admin"),
+    kind: "product",
+    theme: "midnight",
+    mode: "dark",
+    chrome: {},
+    blocks: [{ block: "dashboard", variant: "admin-overview" }],
+    inside: [
+      "Split login plus an (app) shell with sidebar nav",
+      "Overview, users, analytics, sprint board, and audit log",
+      "Admin-overview dashboard and engagement analytics variants",
+      "Midnight theme, dark mode",
+      "Grow with `cronus-ui add-page`; upgrade keeps local edits",
+    ],
+  },
+  {
+    slug: "docs",
+    name: "Docs",
+    tagline: "Docs site",
+    description:
+      "A documentation site: changelog home, guides-style blog, an article, FAQ and about — composed from validated content blocks, not a marketing landing.",
+    command: cmd("docs"),
+    kind: "product",
+    theme: "neutral",
+    mode: "light",
+    chrome: siteChrome,
+    blocks: [{ block: "changelog" }],
+    inside: [
+      "Changelog home, guides index, article, FAQ, and about",
+      "Site chrome (navbar + footer) — not a compact-hero marketing landing",
+      "blog-post--with-sidebar for the article route",
+      "Neutral theme, light mode",
+    ],
+  },
+  {
     slug: "store",
     name: "Store",
     tagline: "9-page storefront",
@@ -543,6 +582,7 @@ export const TEMPLATE_MOOD_LABELS: Record<TemplateMood, string> = {
 
 export const TEMPLATE_MOOD_BY_SLUG: Record<string, TemplateMood> = {
   saas: "saas",
+  admin: "saas",
   dashboard: "saas",
   mail: "saas",
   chat: "saas",
@@ -550,6 +590,7 @@ export const TEMPLATE_MOOD_BY_SLUG: Record<string, TemplateMood> = {
   store: "storefront",
   "landing-shop": "storefront",
   landing: "editorial",
+  docs: "editorial",
   "landing-studio": "editorial",
   "landing-docs": "editorial",
   "landing-premium": "editorial",
