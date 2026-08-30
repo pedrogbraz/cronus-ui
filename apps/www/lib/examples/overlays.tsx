@@ -57,6 +57,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
   Input,
+  InviteDialog,
   Label,
   Lightbox,
   type LightboxImage,
@@ -420,6 +421,54 @@ function ConfirmationDialogAsyncDemo() {
   );
 }
 
+/**
+ * Async invite demo. `onInvite` returns a promise, so the send button shows a
+ * spinner and locks both actions while it settles — the dialog can't be
+ * dismissed mid-flight. The first attempt rejects to surface the inline error
+ * region (the dialog stays open); the retry resolves and closes it.
+ */
+function InviteDialogAsyncDemo() {
+  const [open, setOpen] = useState(false);
+  const attemptRef = useRef(0);
+  const [invited, setInvited] = useState(false);
+
+  return (
+    <div className="flex flex-col items-center gap-3">
+      <InviteDialog
+        open={open}
+        onOpenChange={(next) => {
+          if (next) {
+            attemptRef.current = 0;
+            setInvited(false);
+          }
+          setOpen(next);
+        }}
+        trigger={<Button>Invite member</Button>}
+        onInvite={() =>
+          new Promise<void>((resolve, reject) => {
+            attemptRef.current += 1;
+            window.setTimeout(() => {
+              if (attemptRef.current === 1) {
+                reject(
+                  new Error("Couldn’t reach the server. Check your connection and try again."),
+                );
+              } else {
+                setInvited(true);
+                resolve();
+              }
+            }, 1400);
+          })
+        }
+      />
+      <p className="text-xs text-fg-tertiary">
+        {invited
+          ? "Invite sent."
+          : "Send to see the pending spinner — the first attempt fails inline, the retry succeeds."}
+      </p>
+    </div>
+  );
+}
+
 export const overlaysExamples: ExampleMap = {
   "confirmation-dialog": [
     {
@@ -518,6 +567,63 @@ export const overlaysExamples: ExampleMap = {
   );
 }`,
       preview: <ConfirmationDialogAsyncDemo />,
+    },
+  ],
+
+  "invite-dialog": [
+    {
+      id: "basic",
+      title: "Basic",
+      description:
+        "An ergonomic Dialog for inviting a member by email and role. Pass a `trigger`; default roles are Member and Admin. `labels` overrides the English strings.",
+      code: `<InviteDialog trigger={<Button>Invite member</Button>} />`,
+      preview: <InviteDialog trigger={<Button>Invite member</Button>} />,
+    },
+    {
+      id: "async",
+      title: "Async invite",
+      description:
+        "When `onInvite` returns a promise the send button shows a spinner and both actions lock until it settles — the dialog can’t be dismissed mid-flight. On reject it stays open and surfaces the error inline; on resolve it closes.",
+      code: `function InviteDialogAsyncDemo() {
+  const [open, setOpen] = useState(false);
+  const attemptRef = useRef(0);
+  const [invited, setInvited] = useState(false);
+
+  return (
+    <div className="flex flex-col items-center gap-3">
+      <InviteDialog
+        open={open}
+        onOpenChange={(next) => {
+          if (next) {
+            attemptRef.current = 0;
+            setInvited(false);
+          }
+          setOpen(next);
+        }}
+        trigger={<Button>Invite member</Button>}
+        onInvite={() =>
+          new Promise<void>((resolve, reject) => {
+            attemptRef.current += 1;
+            window.setTimeout(() => {
+              if (attemptRef.current === 1) {
+                reject(new Error("Couldn’t reach the server. Check your connection and try again."));
+              } else {
+                setInvited(true);
+                resolve();
+              }
+            }, 1400);
+          })
+        }
+      />
+      <p className="text-xs text-fg-tertiary">
+        {invited
+          ? "Invite sent."
+          : "Send to see the pending spinner — the first attempt fails inline, the retry succeeds."}
+      </p>
+    </div>
+  );
+}`,
+      preview: <InviteDialogAsyncDemo />,
     },
   ],
 

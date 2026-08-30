@@ -113,6 +113,7 @@ export const EXAMPLE_FAMILY_BY_SLUG: Record<string, ExampleFamily> = {
   "notification-center": "overlays",
   lightbox: "overlays",
   "confirmation-dialog": "overlays",
+  "invite-dialog": "overlays",
   // navigation
   tabs: "navigation",
   accordion: "navigation",
@@ -122,6 +123,7 @@ export const EXAMPLE_FAMILY_BY_SLUG: Record<string, ExampleFamily> = {
   menubar: "navigation",
   sidebar: "navigation",
   "app-shell": "navigation",
+  "workspace-switcher": "navigation",
   resizable: "navigation",
   toolbar: "navigation",
   "table-of-contents": "navigation",

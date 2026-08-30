@@ -63,6 +63,7 @@ import {
   ToolbarButton,
   ToolbarGroup,
   ToolbarSeparator,
+  WorkspaceSwitcher,
 } from "@cronus-ui/ui";
 import {
   AlignCenter,
@@ -80,6 +81,25 @@ import {
 import { useState } from "react";
 import { ExampleList } from "../../components/docs/example-list";
 import type { ExampleMap } from "./types";
+
+const WORKSPACES = [
+  { id: "cronus", name: "Cronus", initials: "CR" },
+  { id: "northwind", name: "Northwind", initials: "NW" },
+  { id: "acme", name: "Acme", initials: "AC" },
+];
+
+function WorkspaceSwitcherDemo() {
+  const [workspaceId, setWorkspaceId] = useState("cronus");
+  return (
+    <div className="w-56">
+      <WorkspaceSwitcher
+        workspaces={WORKSPACES}
+        value={workspaceId}
+        onValueChange={setWorkspaceId}
+      />
+    </div>
+  );
+}
 
 function MenubarDemo() {
   const [showFullPath, setShowFullPath] = useState(true);
@@ -802,6 +822,95 @@ export const navigationExamples: ExampleMap = {
           >
             <div className="p-6 text-sm text-fg-secondary">Your page content goes here.</div>
           </AppShell>
+        </div>
+      ),
+    },
+  ],
+
+  "workspace-switcher": [
+    {
+      id: "basic",
+      title: "Basic",
+      description:
+        "A compact workspace switcher. The trigger shows the current avatar, name, and chevron; picking another row calls `onValueChange` with that workspace id.",
+      code: `function WorkspaceSwitcherDemo() {
+  const [workspaceId, setWorkspaceId] = useState("cronus");
+  const workspaces = [
+    { id: "cronus", name: "Cronus", initials: "CR" },
+    { id: "northwind", name: "Northwind", initials: "NW" },
+    { id: "acme", name: "Acme", initials: "AC" },
+  ];
+
+  return (
+    <div className="w-56">
+      <WorkspaceSwitcher
+        workspaces={workspaces}
+        value={workspaceId}
+        onValueChange={setWorkspaceId}
+      />
+    </div>
+  );
+}`,
+      preview: <WorkspaceSwitcherDemo />,
+    },
+    {
+      id: "sidebar",
+      title: "In a sidebar",
+      description:
+        "Drop the switcher under a brand row in `SidebarHeader`. The trigger stretches to the sidebar width.",
+      code: `<SidebarProvider>
+  <Sidebar collapsible="none">
+    <SidebarHeader>
+      <span className="px-2 text-sm font-semibold text-fg">Cronus</span>
+      <WorkspaceSwitcher
+        workspaces={[
+          { id: "cronus", name: "Cronus", initials: "CR" },
+          { id: "northwind", name: "Northwind", initials: "NW" },
+          { id: "acme", name: "Acme", initials: "AC" },
+        ]}
+        defaultValue="cronus"
+      />
+    </SidebarHeader>
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton isActive>
+                <Home />
+                <span>Home</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    </SidebarContent>
+  </Sidebar>
+</SidebarProvider>`,
+      preview: (
+        <div className="h-[22rem] w-full overflow-hidden rounded-xl border border-border [&_[data-slot=sidebar-wrapper]]:!min-h-0 [&_[data-slot=sidebar]]:!h-full">
+          <SidebarProvider className="min-h-0 h-full">
+            <Sidebar collapsible="none" className="h-full">
+              <SidebarHeader>
+                <span className="px-2 text-sm font-semibold text-fg">Cronus</span>
+                <WorkspaceSwitcher workspaces={WORKSPACES} defaultValue="cronus" />
+              </SidebarHeader>
+              <SidebarContent>
+                <SidebarGroup>
+                  <SidebarGroupContent>
+                    <SidebarMenu>
+                      <SidebarMenuItem>
+                        <SidebarMenuButton isActive>
+                          <Home />
+                          <span>Home</span>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    </SidebarMenu>
+                  </SidebarGroupContent>
+                </SidebarGroup>
+              </SidebarContent>
+            </Sidebar>
+          </SidebarProvider>
         </div>
       ),
     },

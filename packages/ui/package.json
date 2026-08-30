@@ -316,6 +316,10 @@
       "types": "./dist/components/input-otp.d.ts",
       "import": "./dist/components/input-otp.js"
     },
+    "./invite-dialog": {
+      "types": "./dist/components/invite-dialog.d.ts",
+      "import": "./dist/components/invite-dialog.js"
+    },
     "./json-viewer": {
       "types": "./dist/components/json-viewer.d.ts",
       "import": "./dist/components/json-viewer.js"
@@ -667,6 +671,10 @@
     "./word-rotate": {
       "types": "./dist/components/word-rotate.d.ts",
       "import": "./dist/components/word-rotate.js"
+    },
+    "./workspace-switcher": {
+      "types": "./dist/components/workspace-switcher.d.ts",
+      "import": "./dist/components/workspace-switcher.js"
     },
     "./package.json": "./package.json"
   },

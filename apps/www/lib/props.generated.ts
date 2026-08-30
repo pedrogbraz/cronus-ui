@@ -3127,6 +3127,73 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  "invite-dialog": [
+    {
+      interfaceName: "InviteDialogProps",
+      extends: 'Extends Omit<ComponentPropsWithoutRef<typeof DialogContent>, "title" | "children">',
+      props: [
+        {
+          name: "trigger",
+          type: "ReactNode",
+          required: false,
+          description:
+            "Element that opens the dialog. Rendered inside a `DialogTrigger asChild`. Omit when driving the dialog purely via `open`.",
+        },
+        {
+          name: "open",
+          type: "boolean",
+          required: false,
+          description:
+            "Controlled open state. Provide alongside `onOpenChange` to control the dialog externally.",
+        },
+        {
+          name: "defaultOpen",
+          type: "boolean",
+          required: false,
+          description: "Uncontrolled initial open state.",
+          default: "false",
+        },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean) => void",
+          required: false,
+          description:
+            "Called whenever the open state changes. Dismissal is suppressed while an invite promise is pending.",
+        },
+        {
+          name: "roles",
+          type: "readonly InviteRole[]",
+          required: false,
+          description: "Roles offered in the select. Defaults to Member and Admin.",
+        },
+        {
+          name: "defaultRole",
+          type: "string",
+          required: false,
+          description: "Initially selected role `value`. Falls back to the first role.",
+        },
+        {
+          name: "onInvite",
+          type: "(payload: { email: string; role: string }) => void | Promise<void>",
+          required: false,
+          description:
+            "Invoked with the submitted email and role. If it returns a promise, the send button shows a spinner and actions are disabled until it settles; on resolve the dialog closes, on reject it stays open and surfaces the error.",
+        },
+        {
+          name: "labels",
+          type: "InviteDialogLabels",
+          required: false,
+          description: "Override any subset of the built-in English strings.",
+        },
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Forwarded to the dialog content surface.",
+        },
+      ],
+    },
+  ],
   breadcrumb: [
     {
       interfaceName: "BreadcrumbLinkProps",
@@ -3347,6 +3414,53 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           type: "string",
           required: false,
           description: "Extra classes for the sticky header.",
+        },
+      ],
+    },
+  ],
+  "workspace-switcher": [
+    {
+      interfaceName: "WorkspaceSwitcherProps",
+      props: [
+        {
+          name: "workspaces",
+          type: "readonly WorkspaceItem[]",
+          required: true,
+        },
+        {
+          name: "value",
+          type: "string",
+          required: false,
+          description: "Controlled selected workspace id. Pair with `onValueChange`.",
+        },
+        {
+          name: "defaultValue",
+          type: "string",
+          required: false,
+          description: "Uncontrolled initial workspace id. Defaults to the first workspace.",
+        },
+        {
+          name: "onValueChange",
+          type: "(id: string) => void",
+          required: false,
+          description: "Called with the selected workspace id.",
+        },
+        {
+          name: "labels",
+          type: "WorkspaceSwitcherLabels",
+          required: false,
+          description: "Override any subset of the built-in English strings.",
+        },
+        {
+          name: "className",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "ref",
+          type: "Ref<HTMLButtonElement>",
+          required: false,
+          description: "Forwarded to the trigger button.",
         },
       ],
     },

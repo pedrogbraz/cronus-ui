@@ -445,6 +445,12 @@ export const CATEGORIES: ComponentCategory[] = [
         description: "Ergonomic AlertDialog wrapper for destructive actions with async confirm.",
         importName: "ConfirmationDialog",
       },
+      {
+        slug: "invite-dialog",
+        name: "InviteDialog",
+        description: "Ergonomic Dialog for inviting a member by email and role.",
+        importName: "InviteDialog",
+      },
     ],
   },
   {
@@ -487,6 +493,12 @@ export const CATEGORIES: ComponentCategory[] = [
         description: "Sidebar + header + content layout in one step.",
         importName: "AppShell",
         rsc: true,
+      },
+      {
+        slug: "workspace-switcher",
+        name: "WorkspaceSwitcher",
+        description: "Compact workspace/org switcher for app chrome.",
+        importName: "WorkspaceSwitcher",
       },
       {
         slug: "resizable",

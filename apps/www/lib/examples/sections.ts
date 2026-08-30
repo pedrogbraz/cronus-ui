@@ -240,6 +240,10 @@ export const EXAMPLE_SECTIONS: Record<string, ExampleSectionMeta[]> = {
     { id: "destructive", title: "Destructive" },
     { id: "async", title: "Async confirm" },
   ],
+  "invite-dialog": [
+    { id: "basic", title: "Basic" },
+    { id: "async", title: "Async invite" },
+  ],
   dialog: [{ id: "basic", title: "Basic" }],
   sheet: [{ id: "sides", title: "Sides" }],
   drawer: [{ id: "bottom-drawer", title: "Bottom drawer" }],
@@ -259,6 +263,10 @@ export const EXAMPLE_SECTIONS: Record<string, ExampleSectionMeta[]> = {
   menubar: [{ id: "menus", title: "Menus" }],
   sidebar: [{ id: "collapsible-nav", title: "Collapsible navigation" }],
   "app-shell": [{ id: "shell-layout", title: "Shell layout" }],
+  "workspace-switcher": [
+    { id: "basic", title: "Basic" },
+    { id: "sidebar", title: "In a sidebar" },
+  ],
   resizable: [{ id: "split-panes", title: "Split panes" }],
   toolbar: [{ id: "formatting", title: "Formatting" }],
   "table-of-contents": [{ id: "scrollspy", title: "Scrollspy article" }],

@@ -80,6 +80,7 @@
     "input",
     "input-group",
     "input-otp",
+    "invite-dialog",
     "json-viewer",
     "kanban",
     "kbd",
@@ -168,7 +169,8 @@
     "typing-text",
     "usage-meter",
     "video-player",
-    "word-rotate"
+    "word-rotate",
+    "workspace-switcher"
   ],
   "blocks": [
     "about",

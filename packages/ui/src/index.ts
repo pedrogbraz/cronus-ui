@@ -333,6 +333,12 @@ export {
   InputOTPSeparator,
   InputOTPSlot,
 } from "./components/input-otp.js";
+export type {
+  InviteDialogLabels,
+  InviteDialogProps,
+  InviteRole,
+} from "./components/invite-dialog.js";
+export { InviteDialog } from "./components/invite-dialog.js";
 export type { JsonViewerProps } from "./components/json-viewer.js";
 export { JsonViewer } from "./components/json-viewer.js";
 export type { KanbanColumn, KanbanItem, KanbanProps } from "./components/kanban.js";
@@ -684,4 +690,10 @@ export type { VideoPlayerLabels, VideoPlayerProps } from "./components/video-pla
 export { VideoPlayer, videoPlayerVariants } from "./components/video-player.js";
 export type { WordRotateProps } from "./components/word-rotate.js";
 export { WordRotate } from "./components/word-rotate.js";
+export type {
+  WorkspaceItem,
+  WorkspaceSwitcherLabels,
+  WorkspaceSwitcherProps,
+} from "./components/workspace-switcher.js";
+export { WorkspaceSwitcher } from "./components/workspace-switcher.js";
 export { cn } from "./lib/cn.js";

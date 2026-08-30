@@ -1077,6 +1077,32 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
           </div>
         </ModalChrome>
       );
+    case "invite-dialog":
+      return (
+        <ModalChrome>
+          <p className="font-display text-lg tracking-[-0.02em] text-fg">Invite member</p>
+          <p className="mt-2 text-sm text-fg-secondary">
+            Send an invitation to join this workspace.
+          </p>
+          <div className="mt-4 flex flex-col gap-3">
+            <div className="flex h-10 items-center rounded-lg border border-border bg-surface-inset px-3 text-sm text-fg-tertiary">
+              name@example.com
+            </div>
+            <div className="flex h-10 items-center justify-between rounded-lg border border-border bg-surface-inset px-3 text-sm text-fg">
+              Member
+              <span className="text-fg-tertiary">▾</span>
+            </div>
+          </div>
+          <div className="mt-5 flex justify-end gap-2">
+            <Button size="sm" variant="outline" tabIndex={-1} type="button">
+              Cancel
+            </Button>
+            <Button size="sm" tabIndex={-1} type="button">
+              Send invite
+            </Button>
+          </div>
+        </ModalChrome>
+      );
     case "tabs":
     case "accordion":
     case "collapsible":
@@ -1147,6 +1173,24 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
     case "resizable":
     case "toolbar":
       return <DashboardScene />;
+    case "workspace-switcher":
+      return (
+        <Fill className="items-center justify-center">
+          <button
+            type="button"
+            tabIndex={-1}
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface-raised px-2.5 py-1.5 shadow-xs"
+          >
+            <span className="grid size-7 place-items-center rounded-full bg-surface-overlay text-xs font-medium text-fg-secondary">
+              CR
+            </span>
+            <span className="text-sm font-medium text-fg">Cronus</span>
+            <span className="text-fg-tertiary" aria-hidden>
+              ▾
+            </span>
+          </button>
+        </Fill>
+      );
     case "command":
       return (
         <Fill>

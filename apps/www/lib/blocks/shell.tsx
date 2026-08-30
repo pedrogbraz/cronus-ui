@@ -6,6 +6,7 @@ import {
   AvatarFallback,
   AvatarImage,
   Button,
+  InviteDialog,
   Sidebar,
   SidebarContent,
   SidebarFooter,
@@ -18,10 +19,11 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
   SidebarTrigger,
+  WorkspaceSwitcher,
 } from "@cronus-ui/ui";
 import { TEAM, USER } from "@cronus-ui/ui/demo-saas";
 import { Bell, Hexagon } from "lucide-react";
-import type { ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
 import { BlockViewBody } from "../../components/blocks/block-view-body";
 import { getBlockMeta } from "../blocks-index";
@@ -71,7 +73,14 @@ const APP_NAV = [
 
 const OWNER = TEAM.find((m) => m.email === USER.email);
 
+const WORKSPACES = [
+  { id: "cronus", name: "Cronus", initials: "CR" },
+  { id: "northwind", name: "Northwind", initials: "NW" },
+  { id: "acme", name: "Acme", initials: "AC" },
+];
+
 function AppShellChrome({ children }: { children: ReactNode }) {
+  const [workspaceId, setWorkspaceId] = useState("cronus");
   const sidebar = (
     <Sidebar collapsible="none" aria-label="Primary">
       <SidebarHeader>
@@ -81,6 +90,11 @@ function AppShellChrome({ children }: { children: ReactNode }) {
           </span>
           <span className="truncate font-display text-sm font-semibold text-fg">Cronus</span>
         </div>
+        <WorkspaceSwitcher
+          workspaces={WORKSPACES}
+          value={workspaceId}
+          onValueChange={setWorkspaceId}
+        />
       </SidebarHeader>
 
       <SidebarSeparator />
@@ -123,7 +137,14 @@ function AppShellChrome({ children }: { children: ReactNode }) {
     <div className="flex w-full items-center gap-3">
       <SidebarTrigger className="md:hidden" />
       <span className="font-display text-sm font-semibold text-fg">Cronus</span>
-      <div className="ml-auto flex items-center gap-2">
+      <div className="ms-auto flex items-center gap-2">
+        <InviteDialog
+          trigger={
+            <Button variant="outline" size="sm">
+              Invite
+            </Button>
+          }
+        />
         <Button variant="ghost" size="icon-sm" aria-label="Notifications">
           <Bell className="size-4" aria-hidden="true" />
         </Button>
@@ -165,6 +186,7 @@ import {
   AvatarFallback,
   AvatarImage,
   Button,
+  InviteDialog,
   Sidebar,
   SidebarContent,
   SidebarFooter,
@@ -177,10 +199,11 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
   SidebarTrigger,
+  WorkspaceSwitcher,
 } from "@cronus-ui/ui";
 import { TEAM, USER } from "../lib/demo-saas.js";
 import { Bell, Hexagon } from "lucide-react";
-import type { ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 
 /* @cronus:data app-nav */
 const APP_NAV = [
@@ -194,7 +217,14 @@ const APP_NAV = [
 
 const OWNER = TEAM.find((m) => m.email === USER.email);
 
+const WORKSPACES = [
+  { id: "cronus", name: "Cronus", initials: "CR" },
+  { id: "northwind", name: "Northwind", initials: "NW" },
+  { id: "acme", name: "Acme", initials: "AC" },
+];
+
 export function AppShellChromeBlock({ children }: { children: ReactNode }) {
+  const [workspaceId, setWorkspaceId] = useState("cronus");
   const sidebar = (
     <Sidebar collapsible="none" aria-label="Primary">
       <SidebarHeader>
@@ -204,6 +234,11 @@ export function AppShellChromeBlock({ children }: { children: ReactNode }) {
           </span>
           <span className="truncate font-display text-sm font-semibold text-fg">Cronus</span>
         </div>
+        <WorkspaceSwitcher
+          workspaces={WORKSPACES}
+          value={workspaceId}
+          onValueChange={setWorkspaceId}
+        />
       </SidebarHeader>
 
       <SidebarSeparator />
@@ -246,7 +281,14 @@ export function AppShellChromeBlock({ children }: { children: ReactNode }) {
     <div className="flex w-full items-center gap-3">
       <SidebarTrigger className="md:hidden" />
       <span className="font-display text-sm font-semibold text-fg">Cronus</span>
-      <div className="ml-auto flex items-center gap-2">
+      <div className="ms-auto flex items-center gap-2">
+        <InviteDialog
+          trigger={
+            <Button variant="outline" size="sm">
+              Invite
+            </Button>
+          }
+        />
         <Button variant="ghost" size="icon-sm" aria-label="Notifications">
           <Bell className="size-4" aria-hidden="true" />
         </Button>
