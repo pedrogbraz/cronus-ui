@@ -2,7 +2,7 @@
   "name": "faq--split",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.0"
+    "@cronus-ui/ui@0.6.1"
   ],
   "registryDependencies": [],
   "files": [

@@ -2,7 +2,7 @@
   "name": "pricing--toggle",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.0",
+    "@cronus-ui/ui@0.6.1",
     "lucide-react@^0.577.0"
   ],
   "registryDependencies": [],
