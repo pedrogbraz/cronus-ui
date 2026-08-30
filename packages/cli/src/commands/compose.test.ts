@@ -116,6 +116,32 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(existsSync(join(cwd, ".cronus-ui/base/loja/app/(site)/page.tsx"))).toBe(false);
   });
 
+  it("composes the saas template with password reset and activation routes", async () => {
+    const result = await composeApp({ targetDir: cwd, template: "saas", skipInstall: true });
+    expect(result.templateName).toBe("saas");
+    for (const route of [
+      "app/(bare)/login/page.tsx",
+      "app/(bare)/signup/page.tsx",
+      "app/(bare)/forgot-password/page.tsx",
+      "app/(shell)/page.tsx",
+      "app/(shell)/analytics/page.tsx",
+      "app/(shell)/team/page.tsx",
+      "app/(shell)/billing/page.tsx",
+      "app/(shell)/settings/page.tsx",
+      "app/(shell)/welcome/page.tsx",
+      "app/(shell)/setup/page.tsx",
+      "app/(shell)/checklist/page.tsx",
+    ]) {
+      expect(result.generatedFiles).toContain(route);
+      expect(existsSync(join(cwd, route))).toBe(true);
+    }
+    const welcome = readFileSync(join(cwd, "app/(shell)/welcome/page.tsx"), "utf8");
+    expect(welcome).toContain("<main");
+    expect(welcome).toContain("<WelcomeBlock />");
+    const forgot = readFileSync(join(cwd, "app/(bare)/forgot-password/page.tsx"), "utf8");
+    expect(forgot).toContain("<ForgotPasswordBlock />");
+  });
+
   it("composes the 9-page store template with all routes", async () => {
     const result = await composeApp({ targetDir: cwd, template: "store", skipInstall: true });
     expect(result.templateName).toBe("store");

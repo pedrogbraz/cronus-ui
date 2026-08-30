@@ -1,11 +1,13 @@
 import { COMPONENT_COUNT } from "../../lib/components-index";
-import { TEMPLATE_SLUGS } from "../../lib/templates/catalog";
+import { isProTemplate, TEMPLATE_CATALOG } from "../../lib/templates/catalog";
 
 const count = new Intl.NumberFormat("en-US");
 
+const OSS_TEMPLATE_COUNT = TEMPLATE_CATALOG.filter((entry) => !isProTemplate(entry)).length;
+
 const STATS = [
   { value: count.format(COMPONENT_COUNT), label: "components in the catalog" },
-  { value: count.format(TEMPLATE_SLUGS.length), label: "compose templates" },
+  { value: count.format(OSS_TEMPLATE_COUNT), label: "compose templates" },
   { value: "5", label: "crafted themes" },
 ] as const;
 

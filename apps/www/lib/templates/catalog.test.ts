@@ -83,6 +83,16 @@ describe("template catalog", () => {
     }
   });
 
+  it("describes saas with password reset and the activation loop", () => {
+    const saas = getTemplate("saas")!;
+    expect(saas.description).toMatch(/forgot-password/);
+    expect(saas.description).toMatch(/welcome/);
+    expect(saas.description).toMatch(/setup wizard/);
+    expect(saas.description).toMatch(/checklist/);
+    expect(saas.inside.some((line) => /forgot-password/.test(line))).toBe(true);
+    expect(saas.inside.some((line) => /welcome/.test(line) && /checklist/.test(line))).toBe(true);
+  });
+
   it("keeps saas/store/landing OSS and lists mail/chat/finance as additive Pro", () => {
     expect(isProTemplate(getTemplate("saas")!)).toBe(false);
     expect(isProTemplate(getTemplate("store")!)).toBe(false);

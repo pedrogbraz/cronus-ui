@@ -197,15 +197,20 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     });
     expect(result.ok).toBe(true);
     if (!result.ok) return;
-    // 7 manifest pages → 7 generated page.tsx files.
-    expect(result.pageCount).toBe(7);
+    // 11 manifest pages → 11 generated page.tsx files (auth + dashboard cluster +
+    // password reset + activation loop).
+    expect(result.pageCount).toBe(11);
     // Bare auth pages + shell pages. The dashboard is the shell HOME at "/", so it
     // lives at app/(shell)/page.tsx (not /dashboard) — this is the polished landing
     // surface that create-cronus-app opens on, and it supersedes the base app/page.tsx.
     expect(existsSync(join(cwd, "app/(bare)/login/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(bare)/forgot-password/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(shell)/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(shell)/dashboard/page.tsx"))).toBe(false);
     expect(existsSync(join(cwd, "app/(shell)/settings/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(shell)/welcome/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(shell)/setup/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(shell)/checklist/page.tsx"))).toBe(true);
 
     // The (shell) layout is a thin AppShellNav wrapper (golden rule).
     const layout = readFileSync(join(cwd, "app/(shell)/layout.tsx"), "utf8");
@@ -221,6 +226,9 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     // Dashboard nav entry now points at "/" (the shell home), not "/dashboard".
     const shellBlock = readFileSync(join(cwd, "components/blocks/app-shell-chrome.tsx"), "utf8");
     expect(shellBlock).toContain('{ label: "Dashboard", href: "/" }');
+    expect(shellBlock).toContain('{ label: "Setup", href: "/checklist" }');
+    expect(shellBlock).not.toContain('href: "/welcome"');
+    expect(shellBlock).not.toContain('href: "/setup"');
     expect(shellBlock).toContain("Painel");
     // It stays a client boundary (AppShell/Sidebar use hooks) for the RSC layout.
     expect(shellBlock.startsWith('"use client"')).toBe(true);

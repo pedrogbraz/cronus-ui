@@ -31,4 +31,44 @@ describe("compose templates", () => {
     expect(names).toContain("saas");
     expect(names.every(isTemplateSlug)).toBe(true);
   });
+
+  it("saas ships auth recovery and the activation loop after the dashboard cluster", async () => {
+    const saas = await loadTemplate("saas");
+    expect(saas.manifest.pages.map((page) => page.route)).toEqual([
+      "/login",
+      "/signup",
+      "/forgot-password",
+      "/",
+      "/analytics",
+      "/team",
+      "/billing",
+      "/settings",
+      "/welcome",
+      "/setup",
+      "/checklist",
+    ]);
+    expect(saas.manifest.pages.find((page) => page.route === "/forgot-password")).toMatchObject({
+      title: "Reset password",
+      chrome: "bare",
+      blocks: ["forgot-password"],
+    });
+    expect(saas.manifest.pages.find((page) => page.route === "/welcome")).toMatchObject({
+      title: "Welcome",
+      chrome: "shell",
+      blocks: ["welcome"],
+    });
+    expect(saas.manifest.pages.find((page) => page.route === "/setup")).toMatchObject({
+      title: "Setup",
+      chrome: "shell",
+      blocks: ["setup-wizard"],
+    });
+    expect(saas.manifest.pages.find((page) => page.route === "/checklist")).toMatchObject({
+      title: "Get started",
+      nav: "Setup",
+      chrome: "shell",
+      blocks: ["setup-checklist"],
+    });
+    expect(saas.manifest.description).toMatch(/welcome|setup|checklist/i);
+    expect(saas.manifest.description).toMatch(/password reset/i);
+  });
 });

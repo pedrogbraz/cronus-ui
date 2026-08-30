@@ -4,7 +4,7 @@
   "planVersion": 1,
   "manifest": {
     "title": "SaaS",
-    "description": "A complete multi-page SaaS app: split login/signup, and a sidebar-shell dashboard, analytics, team, billing and settings — all from validated blocks.",
+    "description": "A complete multi-page SaaS app: split login/signup, password reset, a sidebar-shell dashboard, analytics, team, billing and settings, plus welcome, setup wizard and checklist — all from validated blocks.",
     "chrome": {
       "shell": { "block": "app-shell-chrome" },
       "bare": {}
@@ -21,6 +21,12 @@
         "title": "Create account",
         "chrome": "bare",
         "blocks": ["signup"]
+      },
+      {
+        "route": "/forgot-password",
+        "title": "Reset password",
+        "chrome": "bare",
+        "blocks": ["forgot-password"]
       },
       {
         "route": "/",
@@ -56,6 +62,25 @@
         "nav": "Settings",
         "chrome": "shell",
         "blocks": ["settings", "account-security"]
+      },
+      {
+        "route": "/welcome",
+        "title": "Welcome",
+        "chrome": "shell",
+        "blocks": ["welcome"]
+      },
+      {
+        "route": "/setup",
+        "title": "Setup",
+        "chrome": "shell",
+        "blocks": ["setup-wizard"]
+      },
+      {
+        "route": "/checklist",
+        "title": "Get started",
+        "nav": "Setup",
+        "chrome": "shell",
+        "blocks": ["setup-checklist"]
       }
     ],
     "extras": { "not-found": "not-found" },

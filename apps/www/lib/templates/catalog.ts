@@ -48,7 +48,7 @@ export const TEMPLATE_CATALOG: readonly TemplateCatalogEntry[] = [
     name: "SaaS",
     tagline: "Recommended",
     description:
-      "A full product: split auth, a sidebar app shell, dashboard, analytics, team, billing, and settings — composed from validated blocks, ready to re-theme.",
+      "A full product: split auth plus forgot-password, a sidebar app shell, dashboard, analytics, team, billing, settings, and an activation loop (welcome, setup wizard, checklist) — composed from validated blocks, ready to re-theme.",
     command: cmd("saas"),
     recommended: true,
     kind: "product",
@@ -57,8 +57,9 @@ export const TEMPLATE_CATALOG: readonly TemplateCatalogEntry[] = [
     chrome: {},
     blocks: ["dashboard", "stats"].map((block) => ({ block })),
     inside: [
-      "Split login/signup plus an (app) shell with sidebar nav",
+      "Split login/signup and forgot-password plus an (app) shell with sidebar nav",
       "Dashboard, analytics, team, billing, and settings routes",
+      "Activation loop: welcome, setup wizard, and get-started checklist",
       "Aurora theme by default — `theme set` re-skins the tree",
       "Grow with `cronus-ui add-page`; upgrade keeps local edits",
     ],

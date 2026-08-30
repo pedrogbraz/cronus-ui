@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **upgrade skill.** The AI Kit ships `upgrade` as a first-class skill. Agents
+  run `diff` → `upgrade --all --dry-run` → `upgrade --all` instead of
+  `compose --overwrite`. `AGENTS.md` now states the product loop (compose →
+  add-page → theme → upgrade) for Codex/Zed. Looks vs themes is explicit in
+  the theme skill.
+- **saas activation loop.** Canonical `saas` now includes `/forgot-password`,
+  `/welcome`, `/setup`, and `/checklist` from existing blocks.
+
+### Changed
+
+- **Stack Builder honesty.** Options the generator does not write files for
+  show a Prompt badge. Catalog skills are the real AI Kit skills (`ui-add`,
+  `theme`, `compose`, `upgrade`, …), not dummy frontend/db packs.
+
 ## [0.6.0] — 2026-08-28
 
 ### Fixed
