@@ -81,6 +81,39 @@ describe("kickoff — conventions & standards", () => {
     expect(md).not.toContain("  src/app/        # Next.js App Router starter");
   });
 
+  it("tells the agent to run db:push when Drizzle is selected", () => {
+    const md = generateKickoff(
+      { ...config, database: "db-sqlite", orm: "orm-drizzle" },
+      "acme",
+      catalog,
+    );
+    expect(md).toContain("Run db:push — Drizzle schema is already in the repo.");
+    expect(md).toContain("# sync the Drizzle schema already in the repo");
+    expect(md).not.toContain("Wire **SQLite**");
+    expect(md).not.toContain("after DB is wired");
+  });
+
+  it("says Better-Auth is scaffolded when paired with Drizzle", () => {
+    const md = generateKickoff(
+      { ...config, database: "db-sqlite", orm: "orm-drizzle", auth: "auth-better-auth" },
+      "acme",
+      catalog,
+    );
+    expect(md).toContain(
+      "Better-Auth is scaffolded — set BETTER_AUTH_SECRET and protect mutating routes.",
+    );
+    expect(md).not.toContain("Implement **Better-Auth**");
+  });
+
+  it("keeps Clerk as an implement follow-up", () => {
+    const md = generateKickoff(
+      { ...config, database: "db-sqlite", orm: "orm-drizzle", auth: "auth-clerk" },
+      "acme",
+      catalog,
+    );
+    expect(md).toContain("Implement **Clerk** and protect mutating routes.");
+  });
+
   it("lists selected AI Kit skills in the brief", () => {
     const md = generateKickoff(
       { ...config, skills: ["skill-ui-add", "skill-upgrade"] },

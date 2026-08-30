@@ -61,6 +61,7 @@ describe("catalog integrity", () => {
     const byId = new Map(catalog.flatMap((c) => c.options.map((o) => [o.id, o])));
     const scaffold = [
       "web-next",
+      "orm-drizzle",
       "ui-cronus",
       "ui-shadcn",
       "ui-heroui",
@@ -97,7 +98,8 @@ describe("catalog integrity", () => {
     }
     expect(byId.get("web-none")?.emits).not.toBe("scaffold");
     expect(byId.get("web-nuxt")?.emits).not.toBe("scaffold");
-    expect(byId.get("orm-drizzle")?.emits).not.toBe("scaffold");
+    expect(byId.get("orm-prisma")?.emits).not.toBe("scaffold");
+    expect(byId.get("orm-mongoose")?.emits).not.toBe("scaffold");
     expect(byId.get("ai-cline")?.emits).not.toBe("scaffold");
     expect(byId.get("addon-pwa")?.emits).not.toBe("scaffold");
   });

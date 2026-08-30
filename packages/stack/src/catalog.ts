@@ -240,6 +240,7 @@ export const catalog: Catalog = [
         // SQL-only in this catalog: needs a SQL db, never Mongo.
         requires: ["db-sql"],
         conflicts: ["db-mongodb"],
+        emits: "scaffold",
       },
       {
         id: "orm-prisma",

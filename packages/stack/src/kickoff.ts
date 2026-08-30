@@ -301,6 +301,8 @@ export function generateKickoff(
   const backendId = singleId(config, "backend");
   const apiId = singleId(config, "api");
   const databaseId = singleId(config, "database");
+  const ormId = singleId(config, "orm");
+  const dbSetupId = singleId(config, "dbSetup");
   const authId = singleId(config, "auth");
   const paymentsId = singleId(config, "payments");
   const isNext = webId === "web-next";
@@ -405,9 +407,26 @@ export function generateKickoff(
     followUps.push(`Add the typed API contract for **${api}**.`);
   }
   if (hasDatabase && database) {
-    followUps.push(`Wire **${database}**${orm ? ` with **${orm}**` : ""} before syncing schema.`);
+    if (ormId === "orm-drizzle") {
+      followUps.push("Run db:push — Drizzle schema is already in the repo.");
+      if (dbSetup && dbSetupId && dbSetupId !== "dbsetup-basic") {
+        followUps.push(
+          `Configure **${dbSetup}**; generated Drizzle files use a local DATABASE_URL.`,
+        );
+      }
+    } else {
+      followUps.push(`Wire **${database}**${orm ? ` with **${orm}**` : ""} before syncing schema.`);
+    }
   }
-  if (auth) followUps.push(`Implement **${auth}** and protect mutating routes.`);
+  if (auth) {
+    if (authId === "auth-better-auth" && ormId === "orm-drizzle") {
+      followUps.push(
+        "Better-Auth is scaffolded — set BETTER_AUTH_SECRET and protect mutating routes.",
+      );
+    } else {
+      followUps.push(`Implement **${auth}** and protect mutating routes.`);
+    }
+  }
   if (payments) {
     followUps.push(
       `Implement **${payments}** webhooks server-side; never trust client-side amounts.`,
@@ -429,8 +448,13 @@ export function generateKickoff(
   lines.push(scriptCommand(pmBin, "typecheck"));
   if (hasLint) lines.push(scriptCommand(pmBin, "lint"));
   lines.push(scriptCommand(pmBin, "build"));
-  if (hasDatabase)
-    lines.push(`${scriptCommand(pmBin, "db:push")}   # sync schema after DB is wired`);
+  if (hasDatabase) {
+    const dbPushComment =
+      ormId === "orm-drizzle"
+        ? "sync the Drizzle schema already in the repo"
+        : "sync schema after DB is wired";
+    lines.push(`${scriptCommand(pmBin, "db:push")}   # ${dbPushComment}`);
+  }
   lines.push("```");
   lines.push("");
 
