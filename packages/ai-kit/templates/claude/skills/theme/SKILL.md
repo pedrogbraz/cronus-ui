@@ -15,9 +15,16 @@ Request: `$ARGUMENTS`
 
 ## Presets and modes
 
-- Presets: **`aurora`** (default), **`neutral`**, **`midnight`**, **`sunset`**,
-  **`emerald`**.
+- Themes (palettes): **`aurora`** (default), **`neutral`**, **`midnight`**,
+  **`sunset`**, **`emerald`**. Switch with `theme set` / MCP `set_theme`.
 - Modes: **`light`**, **`dark`** (default `dark`).
+- Looks (material): **`default`**, **`brutalist`**, **`glass`**. Apply with
+  `data-cronus-look` on `<html>` or a subtree. Looks are **not** theme names —
+  there is no `theme set glass` and no `theme set brutalist`.
+
+MCP `get_design_context` accepts `look` (`default` | `brutalist` | `glass`) as
+well as `theme`. Do not invent look-forked components (`ButtonGlass`,
+`ButtonBrutalist`).
 
 ## Switch a baked-in preset (do this first)
 
@@ -31,8 +38,9 @@ npx cronus-ui theme set neutral --mode light
 the choice in `cronus-ui.json`.
 
 MCP: `set_theme { "name": "sunset", "mode": "dark" }`. Use this for the five shipped
-presets. Before generating screens, call `get_design_context` (or read `DESIGN.md`)
-so the palette and look stay Cronus.
+presets — never a look name. Before generating screens, call `get_design_context`
+(or read `DESIGN.md`) so the palette and look stay Cronus. Pass `look` when the
+subtree is not Default.
 
 ## Apply a Create Studio theme
 

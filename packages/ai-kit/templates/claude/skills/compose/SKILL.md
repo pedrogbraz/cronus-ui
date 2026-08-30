@@ -21,14 +21,9 @@ Request: `$ARGUMENTS`
 4. **One piece** — `npx cronus-ui add <slug>` / MCP `install_component` (the `ui-add` skill).
 5. **Hand-roll** only if the registry has no matching component or block — then with semantic tokens.
 6. **Never** inline a Tailwind palette class (`bg-zinc-900`) or a raw hex.
-7. **Upgrade** — `npx cronus-ui upgrade --all --dry-run` first, then
-   `npx cronus-ui upgrade --all`. That pulls **component AND composed page/layout**
-   updates without losing local edits (3-way vs `.cronus-ui/base`).
-   Do NOT run `compose --overwrite` / `compose -o` to "upgrade" an existing app —
-   that wipes page edits. `--overwrite` is only for a fresh re-compose the user
-   asked to replace. MCP: `upgrade_components { "dryRun": true }` first, then
-   without dryRun. When the app was composed with `--manifest`, include
-   `"manifest": "path/to.json"`. Never `shadcn add` or overwrite blindly.
+7. **Upgrade / maintain** — use the `upgrade` skill. `npx cronus-ui upgrade --all --dry-run`
+   first, then `npx cronus-ui upgrade --all`. Do NOT run `compose --overwrite` / `compose -o`
+   to "upgrade" an existing app.
 
 If the cronus-ui MCP server is connected, prefer its write tools (`compose_app`,
 `add_page`, `set_theme`, `upgrade_components`) over shelling out. They spawn the same pinned CLI.
@@ -126,7 +121,7 @@ Generated pages are **only** imports of installed blocks plus a `<main>` that st
 them. Do **not** invent a new page architecture, extra layout chrome, or hand-written
 sections beside the blocks. Every visible pixel comes from a registry item.
 
-After compose / add-page, switch look via the `theme` skill:
+After compose / add-page, switch palette via the `theme` skill (`theme set`, not a look):
 
 ```sh
 npx cronus-ui theme set sunset --mode dark
@@ -135,7 +130,7 @@ npx cronus-ui theme set sunset --mode dark
 ## Keep using Cronus (AI Kit)
 
 If the project does not yet have the AI Kit (`AGENTS.md`, compose / ui-add /
-theme skills, MCP):
+theme / upgrade skills, MCP):
 
 ```sh
 npx cronus-ui ai

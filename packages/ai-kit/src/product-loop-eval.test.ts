@@ -45,6 +45,7 @@ describe("product-loop kit coverage (not a live agent score)", () => {
   const compose = readFileSync(join(root, "claude", "skills", "compose", "SKILL.md"), "utf8");
   const uiAdd = readFileSync(join(root, "claude", "skills", "ui-add", "SKILL.md"), "utf8");
   const theme = readFileSync(join(root, "claude", "skills", "theme", "SKILL.md"), "utf8");
+  const upgrade = readFileSync(join(root, "claude", "skills", "upgrade", "SKILL.md"), "utf8");
   const cursor = readFileSync(join(root, "cursor", "rules", "10-cronus-ui.mdc"), "utf8");
   const mcp = mcpReadme();
 
@@ -204,6 +205,28 @@ describe("product-loop kit coverage (not a live agent score)", () => {
       expect(theme).toContain("zinc-*");
       expect(theme).toContain("bg-surface-*");
       expect(theme).toContain("setOverrides");
+    });
+
+    it("looks vs themes: data-cronus-look, no theme set glass", () => {
+      expect(theme).toContain("data-cronus-look");
+      expect(theme).toContain("theme set glass");
+      expect(theme).toContain("ButtonGlass");
+      expect(theme).toContain("get_design_context");
+    });
+  });
+
+  describe("claude/skills/upgrade/SKILL.md", () => {
+    it("#19 upgrade --all --dry-run then --all; never compose --overwrite as upgrade", () => {
+      expect(upgrade).toContain("npx cronus-ui diff");
+      expect(upgrade).toContain("upgrade --all --dry-run");
+      expect(upgrade).toContain("upgrade --all");
+      expect(upgrade).toContain("compose --overwrite");
+      expect(upgrade).toContain("upgrade_components");
+      expect(upgrade).toContain('"dryRun": true');
+      expect(upgrade).toContain(".cronus-ui/base");
+      expect(upgrade).toContain("CRONUS-UPGRADE.md");
+      expect(upgrade).toContain("git merge-file --diff3");
+      expect(upgrade).not.toContain("npx shadcn init");
     });
   });
 

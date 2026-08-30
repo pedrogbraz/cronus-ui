@@ -27,13 +27,14 @@ export const SKILLS = [
   "ui-add",
   "theme",
   "compose",
+  "upgrade",
   "code-review",
   "ship-pr",
   "evidence-check",
 ] as const;
 export type Skill = (typeof SKILLS)[number];
 export const DEFAULT_SKILLS: readonly Skill[] = SKILLS;
-const CRONUS_UI_SKILLS: ReadonlySet<Skill> = new Set(["ui-add", "theme", "compose"]);
+const CRONUS_UI_SKILLS: ReadonlySet<Skill> = new Set(["ui-add", "theme", "compose", "upgrade"]);
 
 export interface AiKitOptions {
   /** Absolute path of the (already scaffolded) project. */

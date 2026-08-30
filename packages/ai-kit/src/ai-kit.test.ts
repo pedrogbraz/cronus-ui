@@ -86,6 +86,12 @@ describe("writeAiKit", () => {
     writeAiKit({ targetDir: dir, name: "acme", assistants: ["claude"], skills: ["ui-add"] });
     expect(existsSync(join(dir, ".claude/skills/ui-add/SKILL.md"))).toBe(true);
     expect(existsSync(join(dir, ".claude/skills/theme/SKILL.md"))).toBe(false);
+    expect(existsSync(join(dir, ".claude/skills/upgrade/SKILL.md"))).toBe(false);
+  });
+
+  it("writes .claude/skills/upgrade/SKILL.md", () => {
+    writeAiKit({ targetDir: dir, name: "acme", assistants: ["claude"] });
+    expect(existsSync(join(dir, ".claude/skills/upgrade/SKILL.md"))).toBe(true);
   });
 
   it("preset=none skips the doctrine + its references but keeps the design-system rule", () => {
@@ -115,6 +121,7 @@ describe("writeAiKit", () => {
     expect(existsSync(join(dir, ".claude/skills/ui-add/SKILL.md"))).toBe(false);
     expect(existsSync(join(dir, ".claude/skills/theme/SKILL.md"))).toBe(false);
     expect(existsSync(join(dir, ".claude/skills/compose/SKILL.md"))).toBe(false);
+    expect(existsSync(join(dir, ".claude/skills/upgrade/SKILL.md"))).toBe(false);
     expect(existsSync(join(dir, ".cursor/rules/00-doctrine.mdc"))).toBe(true);
     expect(existsSync(join(dir, ".cursor/rules/10-cronus-ui.mdc"))).toBe(false);
     expect(existsSync(join(dir, "DESIGN.md"))).toBe(false);
@@ -134,6 +141,7 @@ describe("writeAiKit", () => {
     expect(existsSync(join(dir, ".claude/skills/compose/SKILL.md"))).toBe(false);
     expect(existsSync(join(dir, ".claude/skills/ui-add/SKILL.md"))).toBe(false);
     expect(existsSync(join(dir, ".claude/skills/theme/SKILL.md"))).toBe(false);
+    expect(existsSync(join(dir, ".claude/skills/upgrade/SKILL.md"))).toBe(false);
     expect(existsSync(join(dir, ".claude/skills/code-review/SKILL.md"))).toBe(true);
   });
 
@@ -204,6 +212,8 @@ describe("Cronus skill templates (product-loop holes)", () => {
   const root = templatesRoot();
   const compose = readFileSync(join(root, "claude", "skills", "compose", "SKILL.md"), "utf8");
   const uiAdd = readFileSync(join(root, "claude", "skills", "ui-add", "SKILL.md"), "utf8");
+  const upgrade = readFileSync(join(root, "claude", "skills", "upgrade", "SKILL.md"), "utf8");
+  const agentsBase = readFileSync(join(root, "AGENTS.base.md"), "utf8");
   const cursor = readFileSync(join(root, "cursor", "rules", "10-cronus-ui.mdc"), "utf8");
 
   it("compose names the saas template, --no-install, --theme, AI kit, and upgrade --all", () => {
@@ -233,6 +243,19 @@ describe("Cronus skill templates (product-loop holes)", () => {
     expect(cursor).toMatch(/alwaysApply:\s*true/);
   });
 
+  it("upgrade skill uses --all, dry-run, forbids compose --overwrite, never npx shadcn init", () => {
+    expect(upgrade).toContain("upgrade --all");
+    expect(upgrade).toContain("dry-run");
+    expect(upgrade).toContain("compose --overwrite");
+    expect(upgrade).not.toContain("npx shadcn init");
+  });
+
+  it("AGENTS.base.md encodes the gated product loop", () => {
+    expect(agentsBase).toContain("--template saas");
+    expect(agentsBase).toContain("add-page");
+    expect(agentsBase).toContain("upgrade --all");
+  });
+
   it.each([
     "github/copilot-instructions.md",
     "gemini/GEMINI.md",
@@ -251,6 +274,7 @@ describe("Cronus skill templates (product-loop holes)", () => {
     "ui-add",
     "theme",
     "compose",
+    "upgrade",
   ] as const)("%s does not contain muted-foreground or shadcn init", (skill) => {
     const body = readFileSync(join(root, "claude", "skills", skill, "SKILL.md"), "utf8");
     expect(body).not.toContain("text-muted-foreground");

@@ -33,6 +33,21 @@ Read `DESIGN.md` (and `DESIGN.compact.md` when stuffing a prompt) before generat
 That file is Cronus taste: Aurora vs Neutral, looks, one primary CTA, hairline elevation.
 Do not invent a parallel visual language. MCP: `get_design_context`.
 
+## Cronus UI product loop
+
+If this repo uses Cronus UI (`cronus-ui.json`):
+
+- **Start:** `npx create-cronus-app <name> --template saas`. Never omit `--template`
+  (CLI default is an empty starter). Other composed templates: `store`, `landing`.
+- **Grow:** `npx cronus-ui add-page` — pages are installed blocks stacked in `<main>`.
+- **Theme:** palettes via `npx cronus-ui theme set` (`aurora` | `neutral` | `midnight` |
+  `sunset` | `emerald`). Looks (`default` | `brutalist` | `glass`) are
+  `data-cronus-look` on `<html>` or a subtree — not a theme name; there is no
+  `theme set glass`.
+- **Upgrade:** `npx cronus-ui upgrade --all --dry-run`, then `--all`. Never
+  `compose --overwrite` to pull updates.
+- Never run shadcn init or write a shadcn `components.json`.
+
 ## Evidence levels
 
 Report the quality of your evidence when it matters. Do not present a guess as a fact.
