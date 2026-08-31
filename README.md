@@ -13,7 +13,7 @@ CLI. Canonical start: `npx create-cronus-app my-app --template saas`.
 
 Aurora is the flagship theme of generated product; Neutral is the docs chrome.
 
-> **v0.6.3** — OSS at [aicronus.com](https://aicronus.com), Cronus Pro at
+> **v0.6.4** — OSS at [aicronus.com](https://aicronus.com), Cronus Pro at
 > [iacronus.com](https://iacronus.com). Canonical start:
 > `npx create-cronus-app my-app --template saas`. See
 > [ADR 0003](docs/adr/0003-product-ui-system.md).

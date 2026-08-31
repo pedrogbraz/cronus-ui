@@ -1,6 +1,6 @@
 {
   "name": "create-cronus-stack",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "Scaffold a Cronus stack from the Cronus Stack Builder contract: app files, stack.json, KICKOFF.md, and optional AI Kit.",
   "type": "module",
   "license": "MIT",

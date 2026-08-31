@@ -1,6 +1,6 @@
 {
   "name": "cronus-ui-mcp",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "Model Context Protocol server for Cronus UI — lets MCP-compatible AI agents discover and fetch Cronus UI components and blocks from the registry.",
   "type": "module",
   "license": "MIT",

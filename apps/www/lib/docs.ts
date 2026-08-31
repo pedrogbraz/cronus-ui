@@ -299,6 +299,19 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-08-31",
+    version: "v0.6.4",
+    status: "Released",
+    title: "Members list on the gold path",
+    summary:
+      "create-cronus-app --template saas lists Better-Auth org members on /team. After invite accept, the invitee appears; another workspace does not.",
+    items: [
+      "saas /team emits MembersPanel scoped to the active org",
+      "Invite from the team page uses the same InviteMember as chrome",
+      "DashboardBlock, stats, and billing stay the catalog demo",
+    ],
+  },
+  {
+    date: "2026-08-31",
     version: "v0.6.3",
     status: "Released",
     title: "Items write on the gold path",

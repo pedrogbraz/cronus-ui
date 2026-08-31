@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.4] — 2026-08-31
+
 ### Added
 
 - **Members list on the gold path.** saas `/team` lists Better-Auth org
@@ -505,7 +507,8 @@ as installable packages and as copy-paste registry items you own.
 - Added per-entry gzipped bundle budgets for the published `@cronus-ui/ui` so a
   dependency or code-size regression is caught at build time.
 
-[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.3...HEAD
+[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.4...HEAD
+[0.6.4]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.3...v0.6.4
 [0.6.3]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.2...v0.6.3
 [0.6.2]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.1...v0.6.2
 [0.6.1]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.0...v0.6.1
