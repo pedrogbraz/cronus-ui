@@ -299,6 +299,19 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-08-31",
+    version: "v0.6.3",
+    status: "Released",
+    title: "Items write on the gold path",
+    summary:
+      "create-cronus-app --template saas creates and deletes workspace-scoped items. Members of the same org see the same list; another workspace does not.",
+    items: [
+      "saas and admin emit create/delete server actions scoped to the active org",
+      "ItemsPanel lists tenant data; DashboardBlock stays the catalog demo",
+      "Invitee sees the same items; a second workspace does not",
+    ],
+  },
+  {
+    date: "2026-08-31",
     version: "v0.6.2",
     status: "Released",
     title: "Authenticated gold path",
