@@ -206,9 +206,9 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     });
     expect(result.ok).toBe(true);
     if (!result.ok) return;
-    // 11 manifest pages → 11 generated page.tsx files (auth + dashboard cluster +
-    // password reset + activation loop).
-    expect(result.pageCount).toBe(11);
+    // 11 manifest pages + gold-path accept-invitation.
+    expect(result.pageCount).toBe(12);
+    expect(existsSync(join(cwd, "app/(bare)/accept-invitation/page.tsx"))).toBe(true);
     // Bare auth pages + shell pages. The dashboard is the shell HOME at "/", so it
     // lives at app/(shell)/page.tsx (not /dashboard) — this is the polished landing
     // surface that create-cronus-app opens on, and it supersedes the base app/page.tsx.
@@ -242,13 +242,13 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     // It stays a client boundary (AppShell/Sidebar use hooks) for the RSC layout.
     expect(shellBlock.startsWith('"use client"')).toBe(true);
 
-    // One identity across chrome + stats: demo-saas USER, never the old Lena Park chrome.
-    expect(shellBlock).toContain('from "@/lib/demo-saas"');
+    // Chrome identity comes from the session, not the demo-saas USER / Lena Park.
     expect(shellBlock).not.toContain("../lib/demo-saas.js");
     expect(shellBlock).toContain("WorkspaceMenu");
     expect(shellBlock).toContain("InviteMember");
+    expect(shellBlock).toContain("SessionUser");
     expect(shellBlock).not.toContain("WORKSPACES");
-    expect(shellBlock).toContain("demo-saas");
+    expect(shellBlock).not.toContain("demo-saas");
     expect(shellBlock).not.toContain("Lena Park");
     expect(shellBlock).not.toContain("lena@acme.dev");
     const statsBlock = readFileSync(join(cwd, "components/blocks/stats.tsx"), "utf8");
@@ -283,7 +283,8 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     });
     expect(result.ok).toBe(true);
     if (!result.ok) return;
-    expect(result.pageCount).toBe(6);
+    expect(result.pageCount).toBe(7);
+    expect(existsSync(join(cwd, "app/(bare)/accept-invitation/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(bare)/login/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(shell)/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(shell)/users/page.tsx"))).toBe(true);

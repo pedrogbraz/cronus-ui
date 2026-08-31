@@ -78,8 +78,13 @@ describe("scaffoldStack", () => {
     const middleware = readFileSync(join(targetDir, "src", "middleware.ts"), "utf8");
     expect(middleware).toContain('from "better-auth/cookies"');
     expect(middleware).toContain("getSessionCookie");
+    expect(middleware).toContain("/accept-invitation");
     expect(middleware).not.toContain('from "@/db"');
     expect(middleware).not.toContain('from "@/lib/auth"');
+    expect(existsSync(join(targetDir, "src", "app", "accept-invitation", "page.tsx"))).toBe(true);
+    expect(readFileSync(join(targetDir, "src", "lib", "auth.ts"), "utf8")).toContain(
+      "/accept-invitation?id=",
+    );
 
     expect(result.unsupported.join("\n")).not.toContain("Wire the selected database");
     expect(result.unsupported.join("\n")).not.toContain("Implement the selected auth");

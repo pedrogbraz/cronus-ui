@@ -256,10 +256,15 @@ function authServerSource(): string {
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 import { organization } from "better-auth/plugins";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { db } from "@/db";
 import * as schema from "@/db/schema";
-import { member, organization as organizationTable, user as userTable } from "@/db/schema";
+import {
+  invitation as invitationTable,
+  member,
+  organization as organizationTable,
+  user as userTable,
+} from "@/db/schema";
 
 function newId(): string {
   return crypto.randomUUID().replaceAll("-", "");
@@ -286,10 +291,20 @@ export const auth = betterAuth({
             return { data: { ...session, activeOrganizationId: existing.organizationId } };
           }
           const [owner] = await db
-            .select({ name: userTable.name })
+            .select({ name: userTable.name, email: userTable.email })
             .from(userTable)
             .where(eq(userTable.id, session.userId))
             .limit(1);
+          if (owner?.email) {
+            const [pending] = await db
+              .select({ id: invitationTable.id })
+              .from(invitationTable)
+              .where(
+                and(eq(invitationTable.email, owner.email), eq(invitationTable.status, "pending")),
+              )
+              .limit(1);
+            if (pending) return;
+          }
           const orgId = newId();
           const now = new Date();
           await db.insert(organizationTable).values({
@@ -316,7 +331,7 @@ export const auth = betterAuth({
     organization({
       sendInvitationEmail: async (data) => {
         const base = process.env.BETTER_AUTH_URL ?? "http://localhost:3000";
-        console.info(\`Invite \${data.email}: \${base}/login?invitation=\${data.id}\`);
+        console.info(\`Invite \${data.email}: \${base}/accept-invitation?id=\${data.id}\`);
       },
     }),
     nextCookies(),
@@ -338,10 +353,35 @@ export const authClient = createAuthClient({
 function authAdapterSource(): string {
   return `import { authClient } from "./auth-client";
 
+const INVITE_KEY = "cronus-invitation";
+
+function readInvitation(): string | null {
+  if (typeof window === "undefined") return null;
+  const fromUrl = new URLSearchParams(window.location.search).get("invitation");
+  if (fromUrl) {
+    sessionStorage.setItem(INVITE_KEY, fromUrl);
+    return fromUrl;
+  }
+  return sessionStorage.getItem(INVITE_KEY);
+}
+
+function afterAuthPath(): string {
+  const invitation = readInvitation();
+  if (invitation) {
+    return \`/accept-invitation?id=\${encodeURIComponent(invitation)}\`;
+  }
+  return "/";
+}
+
+if (typeof window !== "undefined") {
+  readInvitation();
+}
+
 export async function signInEmail({ email, password }: { email: string; password: string }) {
-  const { error } = await authClient.signIn.email({ email, password, callbackURL: "/" });
+  const callbackURL = afterAuthPath();
+  const { error } = await authClient.signIn.email({ email, password, callbackURL });
   if (error) throw new Error(error.message || "Sign in failed");
-  window.location.assign("/");
+  window.location.assign(callbackURL);
 }
 
 export async function signUpEmail({
@@ -353,14 +393,15 @@ export async function signUpEmail({
   password: string;
   name?: string;
 }) {
+  const callbackURL = afterAuthPath();
   const { error } = await authClient.signUp.email({
     email,
     password,
     name: name ?? email,
-    callbackURL: "/",
+    callbackURL,
   });
   if (error) throw new Error(error.message || "Sign up failed");
-  window.location.assign("/");
+  window.location.assign(callbackURL);
 }
 
 export async function requestPasswordReset({ email }: { email: string }) {
@@ -385,6 +426,14 @@ import { getSessionCookie } from "better-auth/cookies";
 
 const AUTH_PAGES = ["/login", "/signup", "/forgot-password"];
 
+function invitationOf(request: NextRequest): string | null {
+  const { pathname, searchParams } = request.nextUrl;
+  return (
+    searchParams.get("invitation") ??
+    (pathname === "/accept-invitation" ? searchParams.get("id") : null)
+  );
+}
+
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   if (
@@ -397,10 +446,24 @@ export function middleware(request: NextRequest) {
 
   const sessionCookie = getSessionCookie(request);
   const isAuthPage = AUTH_PAGES.includes(pathname);
+  const invitation = invitationOf(request);
+
+  if (!sessionCookie && pathname === "/accept-invitation") {
+    const url = new URL("/signup", request.url);
+    if (invitation) url.searchParams.set("invitation", invitation);
+    return NextResponse.redirect(url);
+  }
   if (!sessionCookie && !isAuthPage) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    const url = new URL("/login", request.url);
+    if (invitation) url.searchParams.set("invitation", invitation);
+    return NextResponse.redirect(url);
   }
   if (sessionCookie && isAuthPage) {
+    if (invitation) {
+      return NextResponse.redirect(
+        new URL(\`/accept-invitation?id=\${encodeURIComponent(invitation)}\`, request.url),
+      );
+    }
     return NextResponse.redirect(new URL("/", request.url));
   }
   return NextResponse.next();
@@ -510,36 +573,192 @@ export function InviteMember({ trigger }: { trigger: ReactNode }) {
 `;
 }
 
+function sessionUserSource(authClientImport: string): string {
+  return `"use client";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@cronus-ui/ui";
+import { authClient } from ${JSON.stringify(authClientImport)};
+
+function initialsOf(name: string, email: string): string {
+  const parts = name.trim().split(/\\s+/).filter(Boolean);
+  if (parts.length >= 2) {
+    return \`\${parts[0]?.[0] ?? ""}\${parts[1]?.[0] ?? ""}\`.toUpperCase();
+  }
+  if (parts[0]?.[0]) return parts[0][0].toUpperCase();
+  return email.slice(0, 2).toUpperCase();
+}
+
+export function SessionUser({ compact = false }: { compact?: boolean }) {
+  const { data } = authClient.useSession();
+  const user = data?.user;
+  if (!user) return null;
+  const name = user.name || user.email || "Account";
+  const email = user.email || "";
+  const initials = initialsOf(name, email);
+  const avatar = (
+    <Avatar className="size-8">
+      {user.image ? <AvatarImage src={user.image} alt={name} /> : null}
+      <AvatarFallback>{initials}</AvatarFallback>
+    </Avatar>
+  );
+  if (compact) return avatar;
+  return (
+    <div className="flex items-center gap-2 rounded-lg px-2 py-1.5">
+      {avatar}
+      <div className="flex min-w-0 flex-col">
+        <span className="truncate text-sm font-medium text-fg">{name}</span>
+        <span className="truncate text-xs text-fg-tertiary">{email}</span>
+      </div>
+    </div>
+  );
+}
+`;
+}
+
+function acceptInvitationPageSource(authClientImport: string): string {
+  return `"use client";
+
+import { Suspense, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { authClient } from ${JSON.stringify(authClientImport)};
+
+function AcceptInvitation() {
+  const router = useRouter();
+  const params = useSearchParams();
+  const id = params.get("id") ?? params.get("invitation");
+  const { data: session, isPending } = authClient.useSession();
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (isPending) return;
+    if (!id) {
+      setError("Invitation is missing.");
+      return;
+    }
+    if (!session) {
+      router.replace(\`/signup?invitation=\${encodeURIComponent(id)}\`);
+      return;
+    }
+    let cancelled = false;
+    void (async () => {
+      const { data, error: acceptError } = await authClient.organization.acceptInvitation({
+        invitationId: id,
+      });
+      if (cancelled) return;
+      if (acceptError) {
+        setError(acceptError.message || "Could not accept invitation.");
+        return;
+      }
+      const orgId = data?.invitation?.organizationId ?? data?.member?.organizationId;
+      if (orgId) {
+        await authClient.organization.setActive({ organizationId: orgId });
+      }
+      try {
+        sessionStorage.removeItem("cronus-invitation");
+      } catch {
+        // ignore
+      }
+      window.location.assign("/");
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [id, isPending, router, session]);
+
+  return (
+    <main className="flex min-h-svh flex-col items-center justify-center px-6">
+      {error ? (
+        <p role="alert" className="text-sm text-error-strong">
+          {error}
+        </p>
+      ) : (
+        <p className="text-sm text-fg-tertiary">Accepting invitation…</p>
+      )}
+    </main>
+  );
+}
+
+export default function AcceptInvitationPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="flex min-h-svh flex-col items-center justify-center px-6">
+          <p className="text-sm text-fg-tertiary">Accepting invitation…</p>
+        </main>
+      }
+    >
+      <AcceptInvitation />
+    </Suspense>
+  );
+}
+`;
+}
+
+function insertImport(source: string, line: string): string {
+  if (source.includes(line)) return source;
+  const firstImport = source.match(/^import .+$/m);
+  if (firstImport?.index !== undefined) {
+    return `${source.slice(0, firstImport.index)}${line}\n${source.slice(firstImport.index)}`;
+  }
+  return `${line}\n${source}`;
+}
+
 /**
- * Wire the installed app-shell-chrome copy to live Better-Auth orgs.
- * Idempotent: a chrome that already imports WorkspaceMenu is left untouched.
- * Returns undefined when the WorkspaceSwitcher / InviteDialog anchors are missing.
+ * Wire the installed app-shell-chrome copy to live Better-Auth orgs + session.
+ * Idempotent: a chrome that already has WorkspaceMenu and SessionUser is left
+ * untouched. Returns undefined when the WorkspaceSwitcher / InviteDialog
+ * anchors are missing and nothing else can be patched.
  */
 export function patchChromeSource(
   source: string,
   workspaceImport: string,
   inviteImport: string,
+  sessionImport?: string,
 ): string | undefined {
-  if (source.includes("WorkspaceMenu")) return source;
-  if (!/<WorkspaceSwitcher[\s\S]*?\/>/.test(source) || !/<InviteDialog[\s\S]*?\/>/.test(source)) {
-    return undefined;
+  const hasMenu = source.includes("WorkspaceMenu");
+  const hasSession = source.includes("SessionUser");
+  if (hasMenu && hasSession) return source;
+  const canPatchMenu =
+    !hasMenu &&
+    /<WorkspaceSwitcher[\s\S]*?\/>/.test(source) &&
+    /<InviteDialog[\s\S]*?\/>/.test(source);
+  const canPatchSession =
+    sessionImport !== undefined &&
+    !hasSession &&
+    source.includes("{USER.email}") &&
+    source.includes("<SidebarFooter>");
+  if (!canPatchMenu && !canPatchSession) {
+    return hasMenu ? source : undefined;
   }
+
   let out = source;
-  const workspaceLine = `import { WorkspaceMenu } from ${JSON.stringify(workspaceImport)};`;
-  const inviteLine = `import { InviteMember } from ${JSON.stringify(inviteImport)};`;
-  const firstImport = out.match(/^import .+$/m);
-  if (firstImport?.index !== undefined) {
-    out = `${out.slice(0, firstImport.index)}${workspaceLine}\n${inviteLine}\n${out.slice(firstImport.index)}`;
-  } else {
-    out = `${workspaceLine}\n${inviteLine}\n${out}`;
+  if (canPatchMenu) {
+    out = insertImport(out, `import { WorkspaceMenu } from ${JSON.stringify(workspaceImport)};`);
+    out = insertImport(out, `import { InviteMember } from ${JSON.stringify(inviteImport)};`);
+    out = out.replace(/<WorkspaceSwitcher[\s\S]*?\/>/, "<WorkspaceMenu />");
+    out = out.replace(/<InviteDialog([\s\S]*?)\/>/, "<InviteMember$1/>");
+    out = out.replace(/\nconst WORKSPACES = \[[\s\S]*?\];\n/, "\n");
+    out = out.replace(/\s*const \[workspaceId, setWorkspaceId\] = useState\("[^"]*"\);\n/, "\n");
+    out = out.replace(/,\s*useState/, "");
+    out = out.replace(/\s*InviteDialog,\n/, "\n");
+    out = out.replace(/\s*WorkspaceSwitcher,\n/, "\n");
   }
-  out = out.replace(/<WorkspaceSwitcher[\s\S]*?\/>/, "<WorkspaceMenu />");
-  out = out.replace(/<InviteDialog([\s\S]*?)\/>/, "<InviteMember$1/>");
-  out = out.replace(/\nconst WORKSPACES = \[[\s\S]*?\];\n/, "\n");
-  out = out.replace(/\s*const \[workspaceId, setWorkspaceId\] = useState\("[^"]*"\);\n/, "\n");
-  out = out.replace(/,\s*useState/, "");
-  out = out.replace(/\s*InviteDialog,\n/, "\n");
-  out = out.replace(/\s*WorkspaceSwitcher,\n/, "\n");
+  if (canPatchSession && sessionImport !== undefined) {
+    out = insertImport(out, `import { SessionUser } from ${JSON.stringify(sessionImport)};`);
+    out = out.replace(
+      /<SidebarFooter>\s*<div className="flex items-center gap-2 rounded-lg px-2 py-1\.5">[\s\S]*?<\/SidebarFooter>/,
+      "<SidebarFooter>\n        <SessionUser />\n      </SidebarFooter>",
+    );
+    out = out.replace(
+      /<Avatar className="size-8">\s*\{OWNER\?\.avatar \? <AvatarImage src=\{OWNER\.avatar\} alt=\{USER\.name\} \/> : null\}\s*<AvatarFallback>\{USER\.initials\}<\/AvatarFallback>\s*<\/Avatar>/,
+      "<SessionUser compact />",
+    );
+    out = out.replace(/\nimport \{ TEAM, USER \} from "[^"]+";\n/, "\n");
+    out = out.replace(/\nconst OWNER = TEAM\.find\(\(m\) => m\.email === USER\.email\);\n/, "\n");
+    out = out.replace(/\s*Avatar,\n/, "\n");
+    out = out.replace(/\s*AvatarFallback,\n/, "\n");
+    out = out.replace(/\s*AvatarImage,\n/, "\n");
+  }
   return out;
 }
 
@@ -684,6 +903,7 @@ export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<Appl
   const itemsImport = "@/components/items-panel";
   const workspaceImport = "@/components/workspace-menu";
   const inviteImport = "@/components/invite-member";
+  const sessionImport = "@/components/session-user";
   const chromeRel = `${posix(config.paths.blocks)}/app-shell-chrome.tsx`;
 
   const written: string[] = [];
@@ -712,6 +932,16 @@ export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<Appl
       content: inviteMemberSource(authClientImport),
       always: true,
     },
+    {
+      rel: `${layout.componentsDir}/session-user.tsx`,
+      content: sessionUserSource(authClientImport),
+      always: true,
+    },
+    {
+      rel: `${appDir}/(bare)/accept-invitation/page.tsx`,
+      content: acceptInvitationPageSource(authClientImport),
+      always: true,
+    },
   ];
 
   for (const file of files) {
@@ -729,7 +959,7 @@ export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<Appl
   const chromeDest = resolveSafeDest(targetDir, ".", chromeRel);
   if (existsSync(chromeDest)) {
     const current = await readFile(chromeDest, "utf8");
-    const patched = patchChromeSource(current, workspaceImport, inviteImport);
+    const patched = patchChromeSource(current, workspaceImport, inviteImport, sessionImport);
     if (patched !== undefined && patched !== current) {
       await writeFileEnsured(chromeDest, patched);
       if (!written.includes(chromeRel)) written.push(chromeRel);

@@ -38,11 +38,18 @@ describe("isGoldPathTemplate", () => {
 const CHROME = `"use client";
 
 import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
   Button,
   InviteDialog,
+  SidebarFooter,
   WorkspaceSwitcher,
 } from "@cronus-ui/ui";
+import { TEAM, USER } from "@/lib/demo-saas";
 import { type ReactNode, useState } from "react";
+
+const OWNER = TEAM.find((m) => m.email === USER.email);
 
 const WORKSPACES = [
   { id: "cronus", name: "Cronus", initials: "CR" },
@@ -64,6 +71,22 @@ export function AppShellChromeBlock({ children }: { children: ReactNode }) {
           </Button>
         }
       />
+      <SidebarFooter>
+        <div className="flex items-center gap-2 rounded-lg px-2 py-1.5">
+          <Avatar className="size-8">
+            {OWNER?.avatar ? <AvatarImage src={OWNER.avatar} alt={USER.name} /> : null}
+            <AvatarFallback>{USER.initials}</AvatarFallback>
+          </Avatar>
+          <div className="flex min-w-0 flex-col">
+            <span className="truncate text-sm font-medium text-fg">{USER.name}</span>
+            <span className="truncate text-xs text-fg-tertiary">{USER.email}</span>
+          </div>
+        </div>
+      </SidebarFooter>
+      <Avatar className="size-8">
+        {OWNER?.avatar ? <AvatarImage src={OWNER.avatar} alt={USER.name} /> : null}
+        <AvatarFallback>{USER.initials}</AvatarFallback>
+      </Avatar>
       {children}
     </div>
   );
@@ -76,6 +99,7 @@ describe("patchChromeSource", () => {
       CHROME,
       "@/components/workspace-menu",
       "@/components/invite-member",
+      "@/components/session-user",
     );
     expect(out).toBeDefined();
     expect(out).toContain('import { WorkspaceMenu } from "@/components/workspace-menu";');
@@ -86,6 +110,10 @@ describe("patchChromeSource", () => {
     expect(out).not.toContain("WORKSPACES");
     expect(out).not.toContain("useState");
     expect(out).not.toContain("InviteDialog");
+    expect(out).toContain("SessionUser");
+    expect(out).toContain("<SessionUser compact />");
+    expect(out).not.toContain("{USER.email}");
+    expect(out).not.toContain("demo-saas");
   });
 
   it("is idempotent when WorkspaceMenu is already wired", () => {
@@ -93,6 +121,7 @@ describe("patchChromeSource", () => {
       CHROME,
       "@/components/workspace-menu",
       "@/components/invite-member",
+      "@/components/session-user",
     );
     expect(once).toBeDefined();
     expect(patchChromeSource(once as string, "@/x", "@/y")).toBe(once);
@@ -192,6 +221,8 @@ describe("applyGoldPath", () => {
     const adapter = readFileSync(join(cwd, "lib", "auth-adapter.ts"), "utf8");
     expect(adapter).toContain("authClient");
     expect(adapter).toContain("requestPasswordReset");
+    expect(adapter).toContain("cronus-invitation");
+    expect(adapter).toContain("/accept-invitation?id=");
 
     const auth = readFileSync(join(cwd, "lib", "auth.ts"), "utf8");
     expect(auth).toContain("nextCookies");
@@ -201,12 +232,23 @@ describe("applyGoldPath", () => {
     expect(auth).toContain("sendInvitationEmail");
     expect(auth).toContain("databaseHooks");
     expect(auth).toContain("activeOrganizationId");
+    expect(auth).toContain("/accept-invitation?id=");
+    expect(auth).toContain('invitationTable.status, "pending"');
+    expect(readFileSync(join(cwd, "middleware.ts"), "utf8")).toContain("/accept-invitation");
+    expect(existsSync(join(cwd, "app", "(bare)", "accept-invitation", "page.tsx"))).toBe(true);
+    const acceptPage = readFileSync(
+      join(cwd, "app", "(bare)", "accept-invitation", "page.tsx"),
+      "utf8",
+    );
+    expect(acceptPage).toContain("acceptInvitation");
+    expect(acceptPage).toContain("setActive");
 
     expect(readFileSync(join(cwd, "lib", "auth-client.ts"), "utf8")).toContain(
       "organizationClient",
     );
     expect(existsSync(join(cwd, "components", "workspace-menu.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "components", "invite-member.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "components", "session-user.tsx"))).toBe(true);
     expect(readFileSync(join(cwd, "components", "invite-member.tsx"), "utf8")).toContain(
       'role === "admin"',
     );
@@ -217,7 +259,9 @@ describe("applyGoldPath", () => {
     const chrome = readFileSync(join(cwd, "components", "blocks", "app-shell-chrome.tsx"), "utf8");
     expect(chrome).toContain("WorkspaceMenu");
     expect(chrome).toContain("InviteMember");
+    expect(chrome).toContain("SessionUser");
     expect(chrome).not.toContain("WORKSPACES");
+    expect(chrome).not.toContain("demo-saas");
 
     const home = readFileSync(join(cwd, "app", "(shell)", "page.tsx"), "utf8");
     expect(home).toContain("ItemsPanel");

@@ -1046,10 +1046,15 @@ function betterAuthServer(config: StackConfig): string {
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 import { organization } from "better-auth/plugins";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { db } from "${dbImport}";
 import * as schema from "${schemaImport}";
-import { member, organization as organizationTable, user as userTable } from "${schemaImport}";
+import {
+  invitation as invitationTable,
+  member,
+  organization as organizationTable,
+  user as userTable,
+} from "${schemaImport}";
 
 function newId(): string {
   return crypto.randomUUID().replaceAll("-", "");
@@ -1076,10 +1081,20 @@ export const auth = betterAuth({
             return { data: { ...session, activeOrganizationId: existing.organizationId } };
           }
           const [owner] = await db
-            .select({ name: userTable.name })
+            .select({ name: userTable.name, email: userTable.email })
             .from(userTable)
             .where(eq(userTable.id, session.userId))
             .limit(1);
+          if (owner?.email) {
+            const [pending] = await db
+              .select({ id: invitationTable.id })
+              .from(invitationTable)
+              .where(
+                and(eq(invitationTable.email, owner.email), eq(invitationTable.status, "pending")),
+              )
+              .limit(1);
+            if (pending) return;
+          }
           const orgId = newId();
           const now = new Date();
           await db.insert(organizationTable).values({
@@ -1104,7 +1119,7 @@ export const auth = betterAuth({
     organization({
       sendInvitationEmail: async (data) => {
         const base = process.env.BETTER_AUTH_URL ?? "http://localhost:3000";
-        console.info(\`Invite \${data.email}: \${base}/login?invitation=\${data.id}\`);
+        console.info(\`Invite \${data.email}: \${base}/accept-invitation?id=\${data.id}\`);
       },
     }),
     nextCookies(),
@@ -1119,14 +1134,37 @@ function betterAuthMiddleware(): string {
   return `import { NextRequest, NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
 
+const AUTH_PAGES = ["/login", "/signup", "/forgot-password"];
+
+function invitationOf(request: NextRequest): string | null {
+  const { pathname, searchParams } = request.nextUrl;
+  return (
+    searchParams.get("invitation") ??
+    (pathname === "/accept-invitation" ? searchParams.get("id") : null)
+  );
+}
+
 export function middleware(request: NextRequest) {
   const sessionCookie = getSessionCookie(request);
   const path = request.nextUrl.pathname;
-  const isAuthPage = path === "/login" || path === "/signup" || path === "/forgot-password";
+  const isAuthPage = AUTH_PAGES.includes(path);
+  const invitation = invitationOf(request);
+  if (!sessionCookie && path === "/accept-invitation") {
+    const url = new URL("/signup", request.url);
+    if (invitation) url.searchParams.set("invitation", invitation);
+    return NextResponse.redirect(url);
+  }
   if (!sessionCookie && !isAuthPage) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    const url = new URL("/login", request.url);
+    if (invitation) url.searchParams.set("invitation", invitation);
+    return NextResponse.redirect(url);
   }
   if (sessionCookie && isAuthPage) {
+    if (invitation) {
+      return NextResponse.redirect(
+        new URL(\`/accept-invitation?id=\${encodeURIComponent(invitation)}\`, request.url),
+      );
+    }
     return NextResponse.redirect(new URL("/", request.url));
   }
   return NextResponse.next();
@@ -1135,6 +1173,74 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: ["/((?!api/auth|_next/static|_next/image|favicon.ico|.*\\\\..*).*)"],
 };
+`;
+}
+
+function acceptInvitationPage(config: StackConfig): string {
+  const authClientImport = fromAppImport(config, "lib/auth-client");
+  return `"use client";
+
+import { Suspense, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { authClient } from "${authClientImport}";
+
+function AcceptInvitation() {
+  const router = useRouter();
+  const params = useSearchParams();
+  const id = params.get("id") ?? params.get("invitation");
+  const { data: session, isPending } = authClient.useSession();
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (isPending) return;
+    if (!id) {
+      setError("Invitation is missing.");
+      return;
+    }
+    if (!session) {
+      router.replace(\`/signup?invitation=\${encodeURIComponent(id)}\`);
+      return;
+    }
+    let cancelled = false;
+    void (async () => {
+      const { data, error: acceptError } = await authClient.organization.acceptInvitation({
+        invitationId: id,
+      });
+      if (cancelled) return;
+      if (acceptError) {
+        setError(acceptError.message || "Could not accept invitation.");
+        return;
+      }
+      const orgId = data?.invitation?.organizationId ?? data?.member?.organizationId;
+      if (orgId) {
+        await authClient.organization.setActive({ organizationId: orgId });
+      }
+      try {
+        sessionStorage.removeItem("cronus-invitation");
+      } catch {
+        // ignore
+      }
+      window.location.assign("/");
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [id, isPending, router, session]);
+
+  return (
+    <main>
+      {error ? <p role="alert">{error}</p> : <p>Accepting invitation…</p>}
+    </main>
+  );
+}
+
+export default function AcceptInvitationPage() {
+  return (
+    <Suspense fallback={<main><p>Accepting invitation…</p></main>}>
+      <AcceptInvitation />
+    </Suspense>
+  );
+}
 `;
 }
 
@@ -1293,6 +1399,7 @@ export function scaffoldStack(options: ScaffoldStackOptions): ScaffoldStackResul
         single(config, "structure") === "structure-root" ? "middleware.ts" : "src/middleware.ts",
         betterAuthMiddleware(),
       );
+      emit(`${app}/accept-invitation/page.tsx`, acceptInvitationPage(config));
     }
   } else {
     emit("src/index.ts", basicIndex(projectName));

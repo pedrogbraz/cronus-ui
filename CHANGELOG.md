@@ -17,6 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   default organization on signup, wire `WorkspaceSwitcher` and `InviteDialog`
   to Better-Auth, log invite URLs with `console.info`, and scope `items` to
   the active workspace. No new blocks.
+- **Invite accept loop.** Gold-path apps emit `/accept-invitation`, keep the
+  invite id across login/signup, and the generated chrome shows the session
+  user instead of demo-saas `USER`.
 
 ### Changed
 

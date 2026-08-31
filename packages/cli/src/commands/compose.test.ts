@@ -153,11 +153,13 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(result.generatedFiles).toContain("middleware.ts");
 
     const chrome = readFileSync(join(cwd, "components/blocks/app-shell-chrome.tsx"), "utf8");
-    expect(chrome).toContain('from "@/lib/demo-saas"');
     expect(chrome).not.toContain("../lib/demo-saas.js");
     expect(chrome).toContain("WorkspaceMenu");
     expect(chrome).toContain("InviteMember");
+    expect(chrome).toContain("SessionUser");
     expect(chrome).not.toContain("WORKSPACES");
+    expect(existsSync(join(cwd, "app/(bare)/accept-invitation/page.tsx"))).toBe(true);
+    expect(readFileSync(join(cwd, "lib/auth-adapter.ts"), "utf8")).toContain("cronus-invitation");
 
     expect(readFileSync(join(cwd, "db/schema.ts"), "utf8")).toContain("export const organization");
     expect(readFileSync(join(cwd, "lib/auth.ts"), "utf8")).toContain("sendInvitationEmail");
