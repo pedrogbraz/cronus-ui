@@ -265,6 +265,8 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
       /authClient|better-auth/,
     );
     expect(readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8")).toContain("ItemsPanel");
+    expect(readFileSync(join(cwd, "lib/items.ts"), "utf8")).toContain("createItem");
+    expect(readFileSync(join(cwd, "components/items-view.tsx"), "utf8")).toContain('name="title"');
 
     const pkg = JSON.parse(readFileSync(join(cwd, "package.json"), "utf8")) as {
       dependencies: Record<string, string>;
@@ -308,6 +310,7 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
       /authClient|better-auth/,
     );
     expect(readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8")).toContain("ItemsPanel");
+    expect(readFileSync(join(cwd, "lib/items.ts"), "utf8")).toContain("createItem");
   });
 
   it("composes the docs template into (site) chrome from content blocks, not landing-docs", async () => {

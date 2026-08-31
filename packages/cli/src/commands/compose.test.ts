@@ -149,6 +149,8 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     );
     const home = readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8");
     expect(home).toContain("ItemsPanel");
+    expect(readFileSync(join(cwd, "lib/items.ts"), "utf8")).toContain("createItem");
+    expect(readFileSync(join(cwd, "components/items-view.tsx"), "utf8")).toContain('name="title"');
     expect(result.generatedFiles).toContain("db/schema.ts");
     expect(result.generatedFiles).toContain("middleware.ts");
 
@@ -182,6 +184,7 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(existsSync(join(cwd, "middleware.ts"))).toBe(true);
     expect(readFileSync(join(cwd, "lib/auth-adapter.ts"), "utf8")).toContain("authClient");
     expect(readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8")).toContain("ItemsPanel");
+    expect(readFileSync(join(cwd, "lib/items.ts"), "utf8")).toContain("createItem");
   });
 
   it("composes the 9-page store template with all routes", async () => {

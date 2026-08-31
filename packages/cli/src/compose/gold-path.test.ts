@@ -205,6 +205,8 @@ describe("applyGoldPath", () => {
     expect(existsSync(join(cwd, "lib", "auth-client.ts"))).toBe(true);
     expect(existsSync(join(cwd, "app", "api", "auth", "[...all]", "route.ts"))).toBe(true);
     expect(existsSync(join(cwd, "components", "items-panel.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "components", "items-view.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "lib", "items.ts"))).toBe(true);
     expect(existsSync(join(cwd, "drizzle.config.ts"))).toBe(true);
     expect(readFileSync(join(cwd, "drizzle.config.ts"), "utf8")).toContain("mkdirSync");
 
@@ -252,9 +254,35 @@ describe("applyGoldPath", () => {
     expect(readFileSync(join(cwd, "components", "invite-member.tsx"), "utf8")).toContain(
       'role === "admin"',
     );
-    expect(readFileSync(join(cwd, "components", "items-panel.tsx"), "utf8")).toContain(
-      "workspaceId",
-    );
+    const actions = readFileSync(join(cwd, "lib", "items.ts"), "utf8");
+    expect(actions.startsWith('"use server"')).toBe(true);
+    expect(actions).toContain("export async function createItem");
+    expect(actions).toContain("export async function deleteItem");
+    expect(actions).toContain("export async function loadItems");
+    expect(actions).toContain("insert(items)");
+    expect(actions).toContain("delete(items)");
+    expect(actions).toContain("workspaceId: orgId");
+    expect(actions).toContain("eq(items.workspaceId, orgId)");
+    expect(actions).toContain("revalidatePath");
+    expect(actions).toContain("member.organizationId");
+    expect(actions).toContain("member.userId");
+
+    const panel = readFileSync(join(cwd, "components", "items-panel.tsx"), "utf8");
+    expect(panel).toContain("loadItems");
+    expect(panel).toContain("ItemsView");
+    expect(panel).toContain('from "@/lib/items"');
+
+    const view = readFileSync(join(cwd, "components", "items-view.tsx"), "utf8");
+    expect(view.startsWith('"use client"')).toBe(true);
+    expect(view).toContain("createItem");
+    expect(view).toContain("deleteItem");
+    expect(view).toContain('name="title"');
+    expect(view).toContain('id="item-title"');
+    expect(view).toContain('data-slot="items-panel"');
+    expect(view).toContain("No items yet.");
+    expect(view).toContain('from "@/lib/items"');
+    expect(view).toContain("Button");
+    expect(view).toContain("Input");
 
     const chrome = readFileSync(join(cwd, "components", "blocks", "app-shell-chrome.tsx"), "utf8");
     expect(chrome).toContain("WorkspaceMenu");
@@ -309,11 +337,15 @@ describe("applyGoldPath", () => {
     expect(existsSync(join(cwd, "db", "schema.ts"))).toBe(true);
   });
 
-  it("skips existing gold-path files without overwrite, except auth-adapter", async () => {
+  it("skips existing gold-path files without overwrite, except owned adapters", async () => {
     mkdirSync(join(cwd, "db"), { recursive: true });
     writeFileSync(join(cwd, "db", "schema.ts"), "// KEEP\n");
     mkdirSync(join(cwd, "lib"), { recursive: true });
     writeFileSync(join(cwd, "lib", "auth-adapter.ts"), "// DEMO\n");
+    writeFileSync(join(cwd, "lib", "items.ts"), "// KEEP\n");
+    mkdirSync(join(cwd, "components"), { recursive: true });
+    writeFileSync(join(cwd, "components", "items-panel.tsx"), "// KEEP\n");
+    writeFileSync(join(cwd, "components", "items-view.tsx"), "// KEEP\n");
 
     const result = await applyGoldPath({
       targetDir: cwd,
@@ -325,5 +357,9 @@ describe("applyGoldPath", () => {
     expect(result.skipped).toContain("db/schema.ts");
     expect(readFileSync(join(cwd, "db", "schema.ts"), "utf8")).toBe("// KEEP\n");
     expect(readFileSync(join(cwd, "lib", "auth-adapter.ts"), "utf8")).toContain("authClient");
+    expect(readFileSync(join(cwd, "lib", "items.ts"), "utf8")).toContain("createItem");
+    expect(readFileSync(join(cwd, "components", "items-view.tsx"), "utf8")).toContain(
+      'data-slot="items-panel"',
+    );
   });
 });

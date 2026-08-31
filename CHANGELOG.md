@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Items write on the gold path.** saas/admin home creates and deletes
+  workspace-scoped items through server actions. Members of the same org see
+  the same list; another workspace does not. No new blocks.
+
 ## [0.6.2] — 2026-08-31
 
 ### Added

@@ -50,6 +50,8 @@ const GITIGNORE_ENTRIES = ["*.db", "data/", "drizzle/"];
 
 const DATABASE_URL_FALLBACK = "file:./data/app.db";
 
+const TITLE_MAX = 200;
+
 export interface GoldPathLayout {
   libDir: string;
   dbDir: string;
@@ -477,37 +479,156 @@ export const config = {
 `;
 }
 
-function itemsPanelSource(authImport: string): string {
-  return `import { eq } from "drizzle-orm";
+function itemsActionsSource(authImport: string): string {
+  return `"use server";
+
+import { and, desc, eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { db } from "@/db";
 import { items, member, organization } from "@/db/schema";
 import { auth } from ${JSON.stringify(authImport)};
 
-export async function ItemsPanel() {
+const TITLE_MAX = ${TITLE_MAX};
+
+async function activeWorkspaceId(): Promise<string | null> {
   const session = await auth.api.getSession({ headers: await headers() });
-  let orgId = session?.session?.activeOrganizationId ?? null;
-  if (!orgId && session?.user?.id) {
-    const [row] = await db
+  const userId = session?.user?.id;
+  if (!userId) return null;
+  const hinted = session.session?.activeOrganizationId ?? null;
+  if (hinted) {
+    const [membership] = await db
       .select({ organizationId: member.organizationId })
       .from(member)
-      .where(eq(member.userId, session.user.id))
+      .where(and(eq(member.userId, userId), eq(member.organizationId, hinted)))
       .limit(1);
-    orgId = row?.organizationId ?? null;
+    if (membership?.organizationId) return membership.organizationId;
   }
-  const org = orgId
-    ? (await db.select().from(organization).where(eq(organization.id, orgId)).limit(1))[0]
-    : undefined;
-  const rows = orgId
-    ? await db.select().from(items).where(eq(items.workspaceId, orgId))
-    : [];
+  const [row] = await db
+    .select({ organizationId: member.organizationId })
+    .from(member)
+    .where(eq(member.userId, userId))
+    .limit(1);
+  return row?.organizationId ?? null;
+}
+
+export async function loadItems(): Promise<{
+  email: string;
+  workspace: string;
+  rows: { id: number; title: string }[];
+}> {
+  const session = await auth.api.getSession({ headers: await headers() });
   const email = session?.user?.email ?? "signed out";
-  const workspace = org?.name ?? "no workspace";
+  const orgId = await activeWorkspaceId();
+  if (!orgId) return { email, workspace: "no workspace", rows: [] };
+  const [org] = await db.select().from(organization).where(eq(organization.id, orgId)).limit(1);
+  const rows = await db
+    .select({ id: items.id, title: items.title })
+    .from(items)
+    .where(eq(items.workspaceId, orgId))
+    .orderBy(desc(items.id));
+  return { email, workspace: org?.name ?? "no workspace", rows };
+}
+
+export async function createItem(formData: FormData) {
+  const orgId = await activeWorkspaceId();
+  if (!orgId) return;
+  const title = String(formData.get("title") ?? "")
+    .trim()
+    .slice(0, TITLE_MAX);
+  if (!title) return;
+  await db.insert(items).values({ title, workspaceId: orgId });
+  revalidatePath("/");
+}
+
+export async function deleteItem(formData: FormData) {
+  const orgId = await activeWorkspaceId();
+  if (!orgId) return;
+  const id = Number(formData.get("id"));
+  if (!Number.isInteger(id) || id < 1) return;
+  await db.delete(items).where(and(eq(items.id, id), eq(items.workspaceId, orgId)));
+  revalidatePath("/");
+}
+`;
+}
+
+function itemsPanelSource(actionsImport: string, viewImport: string): string {
+  return `import { loadItems } from ${JSON.stringify(actionsImport)};
+import { ItemsView } from ${JSON.stringify(viewImport)};
+
+export async function ItemsPanel() {
+  const data = await loadItems();
+  return <ItemsView email={data.email} workspace={data.workspace} rows={data.rows} />;
+}
+`;
+}
+
+function itemsViewSource(actionsImport: string): string {
+  return `"use client";
+
+import { Button, Input } from "@cronus-ui/ui";
+import { createItem, deleteItem } from ${JSON.stringify(actionsImport)};
+
+export function ItemsView({
+  email,
+  workspace,
+  rows,
+}: {
+  email: string;
+  workspace: string;
+  rows: { id: number; title: string }[];
+}) {
   const count = String(rows.length);
   return (
-    <p className="px-6 pt-6 text-sm text-fg-tertiary">
-      {email} · {workspace} · {count} items
-    </p>
+    <section
+      data-slot="items-panel"
+      aria-labelledby="items-heading"
+      className="border-b border-border px-6 py-6"
+    >
+      <h2 id="items-heading" className="text-sm font-semibold text-fg">
+        Items
+      </h2>
+      <p className="mt-1 text-sm text-fg-tertiary">
+        {email} · {workspace} · {count} items
+      </p>
+      <form action={createItem} className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-end">
+        <div className="flex min-w-0 flex-1 flex-col gap-2">
+          <label htmlFor="item-title" className="text-sm font-medium text-fg">
+            Title
+          </label>
+          <Input
+            id="item-title"
+            name="title"
+            required
+            maxLength={${TITLE_MAX}}
+            autoComplete="off"
+            placeholder="New item"
+          />
+        </div>
+        <Button type="submit">Add</Button>
+      </form>
+      {rows.length === 0 ? (
+        <p className="mt-4 text-sm text-fg-tertiary">No items yet.</p>
+      ) : (
+        <ul className="mt-4">
+          {rows.map((row) => (
+            <li
+              key={row.id}
+              data-slot="item"
+              className="flex items-center justify-between gap-3 border-t border-border py-3"
+            >
+              <span className="min-w-0 truncate text-sm text-fg">{row.title}</span>
+              <form action={deleteItem}>
+                <input type="hidden" name="id" value={row.id} />
+                <Button type="submit" variant="ghost" size="sm" aria-label={"Delete " + row.title}>
+                  Delete
+                </Button>
+              </form>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
   );
 }
 `;
@@ -885,8 +1006,8 @@ async function writeRel(
 
 /**
  * Write sqlite + Drizzle + Better-Auth files into a composed saas/admin app.
- * Overwrites lib/auth-adapter.ts always (replaces the demo adapter). Patches
- * the shell home page only when compose wrote it this run.
+ * Overwrites lib/auth-adapter.ts and lib/items.ts always. Patches the shell
+ * home page only when compose wrote it this run.
  */
 export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<ApplyGoldPathResult> {
   const { targetDir, config, generatedFiles, overwrite } = options;
@@ -900,6 +1021,8 @@ export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<Appl
         : layout.middlewareRel;
   const authImport = `${config.aliases.lib}/auth`;
   const authClientImport = `${config.aliases.lib}/auth-client`;
+  const itemsActionsImport = `${config.aliases.lib}/items`;
+  const itemsViewImport = "@/components/items-view";
   const itemsImport = "@/components/items-panel";
   const workspaceImport = "@/components/workspace-menu";
   const inviteImport = "@/components/invite-member";
@@ -917,11 +1040,25 @@ export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<Appl
     { rel: `${layout.libDir}/auth-client.ts`, content: authClientSource() },
     { rel: `${layout.libDir}/auth-adapter.ts`, content: authAdapterSource(), always: true },
     {
+      rel: `${layout.libDir}/items.ts`,
+      content: itemsActionsSource(authImport),
+      always: true,
+    },
+    {
       rel: `${appDir}/api/auth/[...all]/route.ts`,
       content: authRouteSource(authImport),
     },
     { rel: middlewareRel, content: middlewareSource() },
-    { rel: `${layout.componentsDir}/items-panel.tsx`, content: itemsPanelSource(authImport) },
+    {
+      rel: `${layout.componentsDir}/items-panel.tsx`,
+      content: itemsPanelSource(itemsActionsImport, itemsViewImport),
+      always: true,
+    },
+    {
+      rel: `${layout.componentsDir}/items-view.tsx`,
+      content: itemsViewSource(itemsActionsImport),
+      always: true,
+    },
     {
       rel: `${layout.componentsDir}/workspace-menu.tsx`,
       content: workspaceMenuSource(authClientImport),
