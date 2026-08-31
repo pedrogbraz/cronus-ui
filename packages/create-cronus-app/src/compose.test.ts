@@ -267,6 +267,10 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     expect(readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8")).toContain("ItemsPanel");
     expect(readFileSync(join(cwd, "lib/items.ts"), "utf8")).toContain("createItem");
     expect(readFileSync(join(cwd, "components/items-view.tsx"), "utf8")).toContain('name="title"');
+    const teamPage = readFileSync(join(cwd, "app/(shell)/team/page.tsx"), "utf8");
+    expect(teamPage).toContain("MembersPanel");
+    expect(teamPage).not.toContain("TeamBlock");
+    expect(readFileSync(join(cwd, "lib/members.ts"), "utf8")).toContain("loadMembers");
 
     const pkg = JSON.parse(readFileSync(join(cwd, "package.json"), "utf8")) as {
       dependencies: Record<string, string>;

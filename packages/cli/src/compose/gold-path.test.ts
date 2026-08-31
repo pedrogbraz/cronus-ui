@@ -8,6 +8,7 @@ import {
   isGoldPathTemplate,
   patchChromeSource,
   patchHomePageSource,
+  patchTeamPageSource,
 } from "./gold-path.js";
 
 const HOME = `import { DashboardBlock } from "@/components/blocks/dashboard";
@@ -18,6 +19,19 @@ export default function HomePage() {
   return (
     <main className="flex min-h-svh flex-col">
       <DashboardBlock />
+    </main>
+  );
+}
+`;
+
+const TEAM = `import { TeamBlock } from "@/components/blocks/team";
+
+export const metadata = { title: "Team" };
+
+export default function TeamPage() {
+  return (
+    <main className="flex min-h-svh flex-col items-center justify-center">
+      <TeamBlock />
     </main>
   );
 }
@@ -152,6 +166,30 @@ describe("patchHomePageSource", () => {
   });
 });
 
+describe("patchTeamPageSource", () => {
+  it("replaces TeamBlock with MembersPanel and makes the page async", () => {
+    const out = patchTeamPageSource(TEAM, "@/components/members-panel");
+    expect(out).toBeDefined();
+    expect(out).toContain('import { MembersPanel } from "@/components/members-panel";');
+    expect(out).toContain("export default async function TeamPage()");
+    expect(out).toContain("<MembersPanel />");
+    expect(out).not.toContain("TeamBlock");
+    expect(out?.match(/<main\b/g)?.length).toBe(1);
+  });
+
+  it("is idempotent when MembersPanel is already wired", () => {
+    const once = patchTeamPageSource(TEAM, "@/components/members-panel");
+    expect(once).toBeDefined();
+    expect(patchTeamPageSource(once as string, "@/x")).toBe(once);
+  });
+
+  it("returns undefined when the page has no team surface", () => {
+    expect(patchTeamPageSource("export default function TeamPage() { return null; }", "@/x")).toBe(
+      undefined,
+    );
+  });
+});
+
 describe("applyGoldPath", () => {
   let root: string;
   let cwd: string;
@@ -180,6 +218,8 @@ describe("applyGoldPath", () => {
       `const nextConfig = {\n  reactStrictMode: true,\n};\n\nexport default nextConfig;\n`,
     );
     writeFileSync(join(cwd, "app", "(shell)", "page.tsx"), HOME);
+    mkdirSync(join(cwd, "app", "(shell)", "team"), { recursive: true });
+    writeFileSync(join(cwd, "app", "(shell)", "team", "page.tsx"), TEAM);
     mkdirSync(join(cwd, "components", "blocks"), { recursive: true });
     writeFileSync(join(cwd, "components", "blocks", "app-shell-chrome.tsx"), CHROME);
   });
@@ -192,7 +232,7 @@ describe("applyGoldPath", () => {
     const result = await applyGoldPath({
       targetDir: cwd,
       config: DEFAULT_CONFIG,
-      generatedFiles: ["app/(shell)/page.tsx"],
+      generatedFiles: ["app/(shell)/page.tsx", "app/(shell)/team/page.tsx"],
       overwrite: false,
       templateName: "saas",
     });
@@ -207,6 +247,9 @@ describe("applyGoldPath", () => {
     expect(existsSync(join(cwd, "components", "items-panel.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "components", "items-view.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "lib", "items.ts"))).toBe(true);
+    expect(existsSync(join(cwd, "lib", "members.ts"))).toBe(true);
+    expect(existsSync(join(cwd, "components", "members-panel.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "components", "members-view.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "drizzle.config.ts"))).toBe(true);
     expect(readFileSync(join(cwd, "drizzle.config.ts"), "utf8")).toContain("mkdirSync");
 
@@ -284,6 +327,26 @@ describe("applyGoldPath", () => {
     expect(view).toContain("Button");
     expect(view).toContain("Input");
 
+    const members = readFileSync(join(cwd, "lib", "members.ts"), "utf8");
+    expect(members.startsWith('"use server"')).toBe(true);
+    expect(members).toContain("export async function loadMembers");
+    expect(members).toContain("innerJoin(user");
+    expect(members).toContain("eq(member.organizationId, orgId)");
+    expect(members).toContain("member.userId");
+
+    const membersPanel = readFileSync(join(cwd, "components", "members-panel.tsx"), "utf8");
+    expect(membersPanel).toContain("loadMembers");
+    expect(membersPanel).toContain("MembersView");
+    expect(membersPanel).toContain('from "@/lib/members"');
+
+    const membersView = readFileSync(join(cwd, "components", "members-view.tsx"), "utf8");
+    expect(membersView.startsWith('"use client"')).toBe(true);
+    expect(membersView).toContain("InviteMember");
+    expect(membersView).toContain('data-slot="members-panel"');
+    expect(membersView).toContain('data-slot="member"');
+    expect(membersView).toContain("Avatar");
+    expect(membersView).toContain("Badge");
+
     const chrome = readFileSync(join(cwd, "components", "blocks", "app-shell-chrome.tsx"), "utf8");
     expect(chrome).toContain("WorkspaceMenu");
     expect(chrome).toContain("InviteMember");
@@ -298,6 +361,16 @@ describe("applyGoldPath", () => {
 
     const snap = readFileSync(join(cwd, ".cronus-ui/base/saas/app/(shell)/page.tsx"), "utf8");
     expect(snap).toBe(home);
+
+    const team = readFileSync(join(cwd, "app", "(shell)", "team", "page.tsx"), "utf8");
+    expect(team).toContain("MembersPanel");
+    expect(team).toContain("export default async function TeamPage()");
+    expect(team).not.toContain("TeamBlock");
+    const teamSnap = readFileSync(
+      join(cwd, ".cronus-ui/base/saas/app/(shell)/team/page.tsx"),
+      "utf8",
+    );
+    expect(teamSnap).toBe(team);
 
     const pkg = JSON.parse(readFileSync(join(cwd, "package.json"), "utf8")) as {
       dependencies: Record<string, string>;
@@ -334,6 +407,7 @@ describe("applyGoldPath", () => {
       overwrite: false,
     });
     expect(readFileSync(join(cwd, "app", "(shell)", "page.tsx"), "utf8")).toBe(HOME);
+    expect(readFileSync(join(cwd, "app", "(shell)", "team", "page.tsx"), "utf8")).toBe(TEAM);
     expect(existsSync(join(cwd, "db", "schema.ts"))).toBe(true);
   });
 
@@ -346,6 +420,9 @@ describe("applyGoldPath", () => {
     mkdirSync(join(cwd, "components"), { recursive: true });
     writeFileSync(join(cwd, "components", "items-panel.tsx"), "// KEEP\n");
     writeFileSync(join(cwd, "components", "items-view.tsx"), "// KEEP\n");
+    writeFileSync(join(cwd, "lib", "members.ts"), "// KEEP\n");
+    writeFileSync(join(cwd, "components", "members-panel.tsx"), "// KEEP\n");
+    writeFileSync(join(cwd, "components", "members-view.tsx"), "// KEEP\n");
 
     const result = await applyGoldPath({
       targetDir: cwd,
@@ -360,6 +437,10 @@ describe("applyGoldPath", () => {
     expect(readFileSync(join(cwd, "lib", "items.ts"), "utf8")).toContain("createItem");
     expect(readFileSync(join(cwd, "components", "items-view.tsx"), "utf8")).toContain(
       'data-slot="items-panel"',
+    );
+    expect(readFileSync(join(cwd, "lib", "members.ts"), "utf8")).toContain("loadMembers");
+    expect(readFileSync(join(cwd, "components", "members-view.tsx"), "utf8")).toContain(
+      'data-slot="members-panel"',
     );
   });
 });

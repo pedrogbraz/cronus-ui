@@ -120,6 +120,13 @@ function homePageRel(appDir: string, generatedFiles: string[]): string | undefin
   return any !== undefined ? posix(any) : undefined;
 }
 
+function teamPageRel(appDir: string, generatedFiles: string[]): string | undefined {
+  const match = generatedFiles.find((f) => posix(f) === `${appDir}/(shell)/team/page.tsx`);
+  if (match !== undefined) return posix(match);
+  const any = generatedFiles.find((f) => /(^|\/)\(shell\)\/team\/page\.tsx$/.test(posix(f)));
+  return any !== undefined ? posix(any) : undefined;
+}
+
 function drizzleConfigSource(dbDir: string): string {
   return `import { mkdirSync } from "node:fs";
 import { dirname } from "node:path";
@@ -634,6 +641,159 @@ export function ItemsView({
 `;
 }
 
+function membersActionsSource(authImport: string): string {
+  return `"use server";
+
+import { and, asc, eq } from "drizzle-orm";
+import { headers } from "next/headers";
+import { db } from "@/db";
+import { member, organization, user } from "@/db/schema";
+import { auth } from ${JSON.stringify(authImport)};
+
+async function activeWorkspaceId(): Promise<string | null> {
+  const session = await auth.api.getSession({ headers: await headers() });
+  const userId = session?.user?.id;
+  if (!userId) return null;
+  const hinted = session.session?.activeOrganizationId ?? null;
+  if (hinted) {
+    const [membership] = await db
+      .select({ organizationId: member.organizationId })
+      .from(member)
+      .where(and(eq(member.userId, userId), eq(member.organizationId, hinted)))
+      .limit(1);
+    if (membership?.organizationId) return membership.organizationId;
+  }
+  const [row] = await db
+    .select({ organizationId: member.organizationId })
+    .from(member)
+    .where(eq(member.userId, userId))
+    .limit(1);
+  return row?.organizationId ?? null;
+}
+
+export async function loadMembers(): Promise<{
+  workspace: string;
+  rows: { id: string; name: string; email: string; image: string | null; role: string }[];
+}> {
+  const orgId = await activeWorkspaceId();
+  if (!orgId) return { workspace: "no workspace", rows: [] };
+  const [org] = await db.select().from(organization).where(eq(organization.id, orgId)).limit(1);
+  const rows = await db
+    .select({
+      id: member.id,
+      name: user.name,
+      email: user.email,
+      image: user.image,
+      role: member.role,
+    })
+    .from(member)
+    .innerJoin(user, eq(member.userId, user.id))
+    .where(eq(member.organizationId, orgId))
+    .orderBy(asc(member.createdAt));
+  return { workspace: org?.name ?? "no workspace", rows };
+}
+`;
+}
+
+function membersPanelSource(actionsImport: string, viewImport: string): string {
+  return `import { loadMembers } from ${JSON.stringify(actionsImport)};
+import { MembersView } from ${JSON.stringify(viewImport)};
+
+export async function MembersPanel() {
+  const data = await loadMembers();
+  return <MembersView workspace={data.workspace} rows={data.rows} />;
+}
+`;
+}
+
+function membersViewSource(inviteImport: string): string {
+  return `"use client";
+
+import { Avatar, AvatarFallback, AvatarImage, Badge, Button } from "@cronus-ui/ui";
+import { InviteMember } from ${JSON.stringify(inviteImport)};
+
+function initialsOf(name: string, email: string): string {
+  const parts = name.trim().split(/\\s+/).filter(Boolean);
+  if (parts.length >= 2) {
+    return \`\${parts[0]?.[0] ?? ""}\${parts[1]?.[0] ?? ""}\`.toUpperCase();
+  }
+  if (parts[0]?.[0]) return parts[0][0].toUpperCase();
+  return email.slice(0, 2).toUpperCase();
+}
+
+function roleLabel(role: string): string {
+  if (role === "owner") return "Owner";
+  if (role === "admin") return "Admin";
+  if (role === "member") return "Member";
+  return role;
+}
+
+function roleVariant(role: string): "primary" | "info" | "secondary" {
+  if (role === "owner") return "primary";
+  if (role === "admin") return "info";
+  return "secondary";
+}
+
+export function MembersView({
+  workspace,
+  rows,
+}: {
+  workspace: string;
+  rows: { id: string; name: string; email: string; image: string | null; role: string }[];
+}) {
+  const count = String(rows.length);
+  return (
+    <section
+      data-slot="members-panel"
+      aria-labelledby="members-heading"
+      className="mx-auto w-full max-w-xl px-6 py-6"
+    >
+      <div className="flex items-end justify-between gap-3">
+        <div className="min-w-0">
+          <h1 id="members-heading" className="text-sm font-semibold text-fg">
+            Team
+          </h1>
+          <p className="mt-1 text-sm text-fg-tertiary">
+            {workspace} · {count} members
+          </p>
+        </div>
+        <InviteMember
+          trigger={
+            <Button type="button" size="sm">
+              Invite
+            </Button>
+          }
+        />
+      </div>
+      {rows.length === 0 ? (
+        <p className="mt-4 text-sm text-fg-tertiary">No members yet.</p>
+      ) : (
+        <ul className="mt-4">
+          {rows.map((row) => (
+            <li
+              key={row.id}
+              data-slot="member"
+              className="flex items-center gap-3 border-t border-border py-3"
+            >
+              <Avatar className="size-8">
+                {row.image ? <AvatarImage src={row.image} alt={row.name} /> : null}
+                <AvatarFallback>{initialsOf(row.name, row.email)}</AvatarFallback>
+              </Avatar>
+              <div className="flex min-w-0 flex-1 flex-col">
+                <span className="truncate text-sm text-fg">{row.name}</span>
+                <span className="truncate text-sm text-fg-tertiary">{row.email}</span>
+              </div>
+              <Badge variant={roleVariant(row.role)}>{roleLabel(row.role)}</Badge>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
+}
+`;
+}
+
 function workspaceMenuSource(authClientImport: string): string {
   return `"use client";
 
@@ -913,6 +1073,24 @@ export function patchHomePageSource(source: string, itemsImport: string): string
   return out;
 }
 
+/**
+ * Replace the catalog TeamBlock on a generated /team page with MembersPanel.
+ * Idempotent. Returns undefined when there is no TeamBlock and no MembersPanel.
+ */
+export function patchTeamPageSource(source: string, membersImport: string): string | undefined {
+  const hasPanel = /<MembersPanel\s*\/>/.test(source);
+  const hasTeam = /<TeamBlock\s*\/>/.test(source);
+  if (!hasPanel && !hasTeam) return undefined;
+  if (hasPanel) return source;
+  let out = source;
+  const importLine = `import { MembersPanel } from ${JSON.stringify(membersImport)};`;
+  out = insertImport(out, importLine);
+  out = out.replace(/import \{ TeamBlock \} from "[^"]+";\n/, "");
+  out = out.replace(/export default(?! async) function/, "export default async function");
+  out = out.replace(/<TeamBlock\s*\/>/, "<MembersPanel />");
+  return out;
+}
+
 function mergePackageJson(raw: string): string {
   const pkg = JSON.parse(raw) as {
     scripts?: Record<string, string>;
@@ -1006,8 +1184,8 @@ async function writeRel(
 
 /**
  * Write sqlite + Drizzle + Better-Auth files into a composed saas/admin app.
- * Overwrites lib/auth-adapter.ts and lib/items.ts always. Patches the shell
- * home page only when compose wrote it this run.
+ * Overwrites lib/auth-adapter.ts, lib/items.ts, and lib/members.ts always.
+ * Patches the shell home and /team pages only when compose wrote them this run.
  */
 export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<ApplyGoldPathResult> {
   const { targetDir, config, generatedFiles, overwrite } = options;
@@ -1024,6 +1202,9 @@ export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<Appl
   const itemsActionsImport = `${config.aliases.lib}/items`;
   const itemsViewImport = "@/components/items-view";
   const itemsImport = "@/components/items-panel";
+  const membersActionsImport = `${config.aliases.lib}/members`;
+  const membersViewImport = "@/components/members-view";
+  const membersImport = "@/components/members-panel";
   const workspaceImport = "@/components/workspace-menu";
   const inviteImport = "@/components/invite-member";
   const sessionImport = "@/components/session-user";
@@ -1057,6 +1238,21 @@ export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<Appl
     {
       rel: `${layout.componentsDir}/items-view.tsx`,
       content: itemsViewSource(itemsActionsImport),
+      always: true,
+    },
+    {
+      rel: `${layout.libDir}/members.ts`,
+      content: membersActionsSource(authImport),
+      always: true,
+    },
+    {
+      rel: `${layout.componentsDir}/members-panel.tsx`,
+      content: membersPanelSource(membersActionsImport, membersViewImport),
+      always: true,
+    },
+    {
+      rel: `${layout.componentsDir}/members-view.tsx`,
+      content: membersViewSource(inviteImport),
       always: true,
     },
     {
@@ -1104,6 +1300,23 @@ export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<Appl
       if (templateName !== undefined) {
         const snapDest = resolveSafeDest(targetDir, baseSnapshotDir(templateName), chromeRel);
         await writeFileEnsured(snapDest, patched);
+      }
+    }
+  }
+
+  const teamRel = teamPageRel(appDir, generatedFiles);
+  if (teamRel !== undefined) {
+    const dest = resolveSafeDest(targetDir, ".", teamRel);
+    if (existsSync(dest)) {
+      const current = await readFile(dest, "utf8");
+      const patched = patchTeamPageSource(current, membersImport);
+      if (patched !== undefined && patched !== current) {
+        await writeFileEnsured(dest, patched);
+        const templateName = options.templateName;
+        if (templateName !== undefined) {
+          const snapDest = resolveSafeDest(targetDir, baseSnapshotDir(templateName), teamRel);
+          await writeFileEnsured(snapDest, patched);
+        }
       }
     }
   }

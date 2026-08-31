@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Members list on the gold path.** saas `/team` lists Better-Auth org
+  members of the active workspace. After invite accept, the invitee appears
+  on the same list; another workspace does not. No new blocks.
+
 ## [0.6.3] — 2026-08-31
 
 ### Added
