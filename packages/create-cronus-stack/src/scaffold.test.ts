@@ -29,6 +29,7 @@ describe("scaffoldStack", () => {
     expect(existsSync(join(targetDir, "KICKOFF.md"))).toBe(true);
     expect(existsSync(join(targetDir, "stack.json"))).toBe(true);
     expect(existsSync(join(targetDir, "drizzle.config.ts"))).toBe(true);
+    expect(readFileSync(join(targetDir, "drizzle.config.ts"), "utf8")).toContain("mkdirSync");
     expect(existsSync(join(targetDir, "src", "db", "schema.ts"))).toBe(true);
     expect(existsSync(join(targetDir, "src", "lib", "auth.ts"))).toBe(true);
     expect(existsSync(join(targetDir, "src", "middleware.ts"))).toBe(true);
@@ -56,7 +57,18 @@ describe("scaffoldStack", () => {
     expect(page).toContain("auth.api.getSession");
     expect(page).toContain('from "@/db"');
     expect(page).toContain("items");
+    expect(page).toContain("workspaceId");
     expect(page).not.toContain('"use client"');
+
+    const schema = readFileSync(join(targetDir, "src", "db", "schema.ts"), "utf8");
+    expect(schema).toContain("export const organization");
+    expect(schema).toContain("activeOrganizationId");
+    expect(readFileSync(join(targetDir, "src", "lib", "auth.ts"), "utf8")).toContain(
+      "sendInvitationEmail",
+    );
+    expect(readFileSync(join(targetDir, "src", "lib", "auth-client.ts"), "utf8")).toContain(
+      "organizationClient",
+    );
 
     const auth = readFileSync(join(targetDir, "src", "lib", "auth.ts"), "utf8");
     expect(auth).toContain("nextCookies");
@@ -254,6 +266,7 @@ describe("scaffoldStack", () => {
     expect(existsSync(join(targetDir, "src", "db", "schema.ts"))).toBe(true);
     expect(existsSync(join(targetDir, "src", "db", "index.ts"))).toBe(true);
     expect(existsSync(join(targetDir, "drizzle.config.ts"))).toBe(true);
+    expect(readFileSync(join(targetDir, "drizzle.config.ts"), "utf8")).toContain("mkdirSync");
 
     const pkg = JSON.parse(readFileSync(join(targetDir, "package.json"), "utf8")) as {
       dependencies: Record<string, string>;
@@ -306,6 +319,7 @@ describe("scaffoldStack", () => {
     const drizzleConfig = readFileSync(join(targetDir, "drizzle.config.ts"), "utf8");
     expect(drizzleConfig).toContain("./db/schema.ts");
     expect(drizzleConfig).not.toContain("./src/db/schema.ts");
+    expect(drizzleConfig).toContain("mkdirSync");
   });
 
   it("emits Better-Auth on the Next + Drizzle + SQLite path", () => {

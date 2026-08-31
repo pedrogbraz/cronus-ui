@@ -3,7 +3,12 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { DEFAULT_CONFIG } from "../config.js";
-import { applyGoldPath, isGoldPathTemplate, patchHomePageSource } from "./gold-path.js";
+import {
+  applyGoldPath,
+  isGoldPathTemplate,
+  patchChromeSource,
+  patchHomePageSource,
+} from "./gold-path.js";
 
 const HOME = `import { DashboardBlock } from "@/components/blocks/dashboard";
 
@@ -27,6 +32,76 @@ describe("isGoldPathTemplate", () => {
     expect(isGoldPathTemplate("mail")).toBe(false);
     expect(isGoldPathTemplate("chat")).toBe(false);
     expect(isGoldPathTemplate("finance")).toBe(false);
+  });
+});
+
+const CHROME = `"use client";
+
+import {
+  Button,
+  InviteDialog,
+  WorkspaceSwitcher,
+} from "@cronus-ui/ui";
+import { type ReactNode, useState } from "react";
+
+const WORKSPACES = [
+  { id: "cronus", name: "Cronus", initials: "CR" },
+];
+
+export function AppShellChromeBlock({ children }: { children: ReactNode }) {
+  const [workspaceId, setWorkspaceId] = useState("cronus");
+  return (
+    <div>
+      <WorkspaceSwitcher
+        workspaces={WORKSPACES}
+        value={workspaceId}
+        onValueChange={setWorkspaceId}
+      />
+      <InviteDialog
+        trigger={
+          <Button variant="outline" size="sm">
+            Invite
+          </Button>
+        }
+      />
+      {children}
+    </div>
+  );
+}
+`;
+
+describe("patchChromeSource", () => {
+  it("replaces demo switcher and invite with live wrappers", () => {
+    const out = patchChromeSource(
+      CHROME,
+      "@/components/workspace-menu",
+      "@/components/invite-member",
+    );
+    expect(out).toBeDefined();
+    expect(out).toContain('import { WorkspaceMenu } from "@/components/workspace-menu";');
+    expect(out).toContain('import { InviteMember } from "@/components/invite-member";');
+    expect(out).toContain("<WorkspaceMenu />");
+    expect(out).toContain("<InviteMember");
+    expect(out).not.toContain("WorkspaceSwitcher");
+    expect(out).not.toContain("WORKSPACES");
+    expect(out).not.toContain("useState");
+    expect(out).not.toContain("InviteDialog");
+  });
+
+  it("is idempotent when WorkspaceMenu is already wired", () => {
+    const once = patchChromeSource(
+      CHROME,
+      "@/components/workspace-menu",
+      "@/components/invite-member",
+    );
+    expect(once).toBeDefined();
+    expect(patchChromeSource(once as string, "@/x", "@/y")).toBe(once);
+  });
+
+  it("returns undefined when the chrome has no switcher", () => {
+    expect(
+      patchChromeSource("export function AppShellChromeBlock() { return null; }", "@/a", "@/b"),
+    ).toBe(undefined);
   });
 });
 
@@ -76,6 +151,8 @@ describe("applyGoldPath", () => {
       `const nextConfig = {\n  reactStrictMode: true,\n};\n\nexport default nextConfig;\n`,
     );
     writeFileSync(join(cwd, "app", "(shell)", "page.tsx"), HOME);
+    mkdirSync(join(cwd, "components", "blocks"), { recursive: true });
+    writeFileSync(join(cwd, "components", "blocks", "app-shell-chrome.tsx"), CHROME);
   });
 
   afterEach(() => {
@@ -100,10 +177,16 @@ describe("applyGoldPath", () => {
     expect(existsSync(join(cwd, "app", "api", "auth", "[...all]", "route.ts"))).toBe(true);
     expect(existsSync(join(cwd, "components", "items-panel.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "drizzle.config.ts"))).toBe(true);
+    expect(readFileSync(join(cwd, "drizzle.config.ts"), "utf8")).toContain("mkdirSync");
 
     const schema = readFileSync(join(cwd, "db", "schema.ts"), "utf8");
     expect(schema).toContain("export const items");
     expect(schema).toContain("export const user");
+    expect(schema).toContain("export const organization");
+    expect(schema).toContain("export const member");
+    expect(schema).toContain("export const invitation");
+    expect(schema).toContain("workspaceId");
+    expect(schema).toContain("activeOrganizationId");
     expect(schema).toContain("issuer:");
 
     const adapter = readFileSync(join(cwd, "lib", "auth-adapter.ts"), "utf8");
@@ -114,6 +197,27 @@ describe("applyGoldPath", () => {
     expect(auth).toContain("nextCookies");
     expect(auth).toContain('provider: "sqlite"');
     expect(auth).toContain("sendResetPassword");
+    expect(auth).toContain("organization(");
+    expect(auth).toContain("sendInvitationEmail");
+    expect(auth).toContain("databaseHooks");
+    expect(auth).toContain("activeOrganizationId");
+
+    expect(readFileSync(join(cwd, "lib", "auth-client.ts"), "utf8")).toContain(
+      "organizationClient",
+    );
+    expect(existsSync(join(cwd, "components", "workspace-menu.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "components", "invite-member.tsx"))).toBe(true);
+    expect(readFileSync(join(cwd, "components", "invite-member.tsx"), "utf8")).toContain(
+      'role === "admin"',
+    );
+    expect(readFileSync(join(cwd, "components", "items-panel.tsx"), "utf8")).toContain(
+      "workspaceId",
+    );
+
+    const chrome = readFileSync(join(cwd, "components", "blocks", "app-shell-chrome.tsx"), "utf8");
+    expect(chrome).toContain("WorkspaceMenu");
+    expect(chrome).toContain("InviteMember");
+    expect(chrome).not.toContain("WORKSPACES");
 
     const home = readFileSync(join(cwd, "app", "(shell)", "page.tsx"), "utf8");
     expect(home).toContain("ItemsPanel");

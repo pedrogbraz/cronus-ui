@@ -119,24 +119,25 @@ function homePageRel(appDir: string, generatedFiles: string[]): string | undefin
 }
 
 function drizzleConfigSource(dbDir: string): string {
-  return `import { defineConfig } from "drizzle-kit";
+  return `import { mkdirSync } from "node:fs";
+import { dirname } from "node:path";
+import { defineConfig } from "drizzle-kit";
+
+const url = process.env.DATABASE_URL ?? "${DATABASE_URL_FALLBACK}";
+const fileFromUrl = url.startsWith("file:") ? url.slice("file:".length) : url;
+mkdirSync(dirname(fileFromUrl) || ".", { recursive: true });
 
 export default defineConfig({
   dialect: "sqlite",
   schema: "./${dbDir}/schema.ts",
   out: "./drizzle",
-  dbCredentials: { url: process.env.DATABASE_URL ?? "${DATABASE_URL_FALLBACK}" },
+  dbCredentials: { url },
 });
 `;
 }
 
 function dbSchemaSource(): string {
   return `import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-
-export const items = sqliteTable("items", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
-  title: text("title").notNull(),
-});
 
 export const user = sqliteTable("user", {
   id: text("id").primaryKey(),
@@ -156,6 +157,7 @@ export const session = sqliteTable("session", {
   updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
   ipAddress: text("ip_address"),
   userAgent: text("user_agent"),
+  activeOrganizationId: text("active_organization_id"),
   userId: text("user_id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
@@ -188,6 +190,48 @@ export const verification = sqliteTable("verification", {
   createdAt: integer("created_at", { mode: "timestamp" }),
   updatedAt: integer("updated_at", { mode: "timestamp" }),
 });
+
+export const organization = sqliteTable("organization", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  slug: text("slug").notNull().unique(),
+  logo: text("logo"),
+  metadata: text("metadata"),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+});
+
+export const member = sqliteTable("member", {
+  id: text("id").primaryKey(),
+  organizationId: text("organization_id")
+    .notNull()
+    .references(() => organization.id, { onDelete: "cascade" }),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  role: text("role").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+});
+
+export const invitation = sqliteTable("invitation", {
+  id: text("id").primaryKey(),
+  organizationId: text("organization_id")
+    .notNull()
+    .references(() => organization.id, { onDelete: "cascade" }),
+  email: text("email").notNull(),
+  role: text("role"),
+  status: text("status").notNull(),
+  expiresAt: integer("expires_at", { mode: "timestamp" }).notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+  inviterId: text("inviter_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+});
+
+export const items = sqliteTable("items", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  title: text("title").notNull(),
+  workspaceId: text("workspace_id").references(() => organization.id, { onDelete: "cascade" }),
+});
 `;
 }
 
@@ -211,8 +255,15 @@ function authServerSource(): string {
   return `import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
+import { organization } from "better-auth/plugins";
+import { eq } from "drizzle-orm";
 import { db } from "@/db";
 import * as schema from "@/db/schema";
+import { member, organization as organizationTable, user as userTable } from "@/db/schema";
+
+function newId(): string {
+  return crypto.randomUUID().replaceAll("-", "");
+}
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "sqlite", schema }),
@@ -222,17 +273,65 @@ export const auth = betterAuth({
       console.info(url);
     },
   },
+  databaseHooks: {
+    session: {
+      create: {
+        before: async (session) => {
+          const [existing] = await db
+            .select({ organizationId: member.organizationId })
+            .from(member)
+            .where(eq(member.userId, session.userId))
+            .limit(1);
+          if (existing?.organizationId) {
+            return { data: { ...session, activeOrganizationId: existing.organizationId } };
+          }
+          const [owner] = await db
+            .select({ name: userTable.name })
+            .from(userTable)
+            .where(eq(userTable.id, session.userId))
+            .limit(1);
+          const orgId = newId();
+          const now = new Date();
+          await db.insert(organizationTable).values({
+            id: orgId,
+            name: owner?.name.trim() || "Workspace",
+            slug: \`ws-\${session.userId.slice(0, 16)}\`,
+            createdAt: now,
+          });
+          await db.insert(member).values({
+            id: newId(),
+            organizationId: orgId,
+            userId: session.userId,
+            role: "owner",
+            createdAt: now,
+          });
+          return { data: { ...session, activeOrganizationId: orgId } };
+        },
+      },
+    },
+  },
   secret: process.env.BETTER_AUTH_SECRET,
   baseURL: process.env.BETTER_AUTH_URL,
-  plugins: [nextCookies()],
+  plugins: [
+    organization({
+      sendInvitationEmail: async (data) => {
+        const base = process.env.BETTER_AUTH_URL ?? "http://localhost:3000";
+        console.info(\`Invite \${data.email}: \${base}/login?invitation=\${data.id}\`);
+      },
+    }),
+    nextCookies(),
+  ],
 });
 `;
 }
 
 function authClientSource(): string {
-  return `import { createAuthClient } from "better-auth/react";
+  return `import { organizationClient } from "better-auth/client/plugins";
+import { createAuthClient } from "better-auth/react";
 
-export const authClient = createAuthClient();
+export const authClient = createAuthClient({
+  plugins: [organizationClient()],
+});
 `;
 }
 
@@ -316,23 +415,132 @@ export const config = {
 }
 
 function itemsPanelSource(authImport: string): string {
-  return `import { headers } from "next/headers";
+  return `import { eq } from "drizzle-orm";
+import { headers } from "next/headers";
 import { db } from "@/db";
-import { items } from "@/db/schema";
+import { items, member, organization } from "@/db/schema";
 import { auth } from ${JSON.stringify(authImport)};
 
 export async function ItemsPanel() {
   const session = await auth.api.getSession({ headers: await headers() });
-  const rows = await db.select().from(items);
+  let orgId = session?.session?.activeOrganizationId ?? null;
+  if (!orgId && session?.user?.id) {
+    const [row] = await db
+      .select({ organizationId: member.organizationId })
+      .from(member)
+      .where(eq(member.userId, session.user.id))
+      .limit(1);
+    orgId = row?.organizationId ?? null;
+  }
+  const org = orgId
+    ? (await db.select().from(organization).where(eq(organization.id, orgId)).limit(1))[0]
+    : undefined;
+  const rows = orgId
+    ? await db.select().from(items).where(eq(items.workspaceId, orgId))
+    : [];
   const email = session?.user?.email ?? "signed out";
+  const workspace = org?.name ?? "no workspace";
   const count = String(rows.length);
   return (
     <p className="px-6 pt-6 text-sm text-fg-tertiary">
-      {email} · {count} items
+      {email} · {workspace} · {count} items
     </p>
   );
 }
 `;
+}
+
+function workspaceMenuSource(authClientImport: string): string {
+  return `"use client";
+
+import { WorkspaceSwitcher } from "@cronus-ui/ui";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { authClient } from ${JSON.stringify(authClientImport)};
+
+export function WorkspaceMenu() {
+  const router = useRouter();
+  const { data: orgs } = authClient.useListOrganizations();
+  const { data: active } = authClient.useActiveOrganization();
+  const workspaces = (orgs ?? []).map((org) => ({ id: org.id, name: org.name }));
+  const firstId = workspaces[0]?.id;
+  useEffect(() => {
+    if (active || !firstId) return;
+    void authClient.organization.setActive({ organizationId: firstId }).then(() => {
+      router.refresh();
+    });
+  }, [active, firstId, router]);
+  return (
+    <WorkspaceSwitcher
+      workspaces={workspaces}
+      value={active?.id}
+      onValueChange={(id) => {
+        void authClient.organization.setActive({ organizationId: id }).then(() => {
+          router.refresh();
+        });
+      }}
+    />
+  );
+}
+`;
+}
+
+function inviteMemberSource(authClientImport: string): string {
+  return `"use client";
+
+import { InviteDialog } from "@cronus-ui/ui";
+import type { ReactNode } from "react";
+import { authClient } from ${JSON.stringify(authClientImport)};
+
+export function InviteMember({ trigger }: { trigger: ReactNode }) {
+  return (
+    <InviteDialog
+      trigger={trigger}
+      onInvite={async ({ email, role }) => {
+        const assigned = role === "admin" || role === "owner" ? role : "member";
+        const { error } = await authClient.organization.inviteMember({
+          email,
+          role: assigned,
+        });
+        if (error) throw new Error(error.message || "Invite failed");
+      }}
+    />
+  );
+}
+`;
+}
+
+/**
+ * Wire the installed app-shell-chrome copy to live Better-Auth orgs.
+ * Idempotent: a chrome that already imports WorkspaceMenu is left untouched.
+ * Returns undefined when the WorkspaceSwitcher / InviteDialog anchors are missing.
+ */
+export function patchChromeSource(
+  source: string,
+  workspaceImport: string,
+  inviteImport: string,
+): string | undefined {
+  if (source.includes("WorkspaceMenu")) return source;
+  if (!/<WorkspaceSwitcher[\s\S]*?\/>/.test(source) || !/<InviteDialog[\s\S]*?\/>/.test(source)) {
+    return undefined;
+  }
+  let out = source;
+  const workspaceLine = `import { WorkspaceMenu } from ${JSON.stringify(workspaceImport)};`;
+  const inviteLine = `import { InviteMember } from ${JSON.stringify(inviteImport)};`;
+  const firstImport = out.match(/^import .+$/m);
+  if (firstImport?.index !== undefined) {
+    out = `${out.slice(0, firstImport.index)}${workspaceLine}\n${inviteLine}\n${out.slice(firstImport.index)}`;
+  } else {
+    out = `${workspaceLine}\n${inviteLine}\n${out}`;
+  }
+  out = out.replace(/<WorkspaceSwitcher[\s\S]*?\/>/, "<WorkspaceMenu />");
+  out = out.replace(/<InviteDialog([\s\S]*?)\/>/, "<InviteMember$1/>");
+  out = out.replace(/\nconst WORKSPACES = \[[\s\S]*?\];\n/, "\n");
+  out = out.replace(/\s*const \[workspaceId, setWorkspaceId\] = useState\("[^"]*"\);\n/, "\n");
+  out = out.replace(/,\s*useState/, "");
+  out = out.replace(/\s*InviteDialog,\n/, "\n");
+  out = out.replace(/\s*WorkspaceSwitcher,\n/, "\n");
+  return out;
 }
 
 function nextConfigSource(): string {
@@ -472,7 +680,11 @@ export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<Appl
         ? "middleware.ts"
         : layout.middlewareRel;
   const authImport = `${config.aliases.lib}/auth`;
+  const authClientImport = `${config.aliases.lib}/auth-client`;
   const itemsImport = "@/components/items-panel";
+  const workspaceImport = "@/components/workspace-menu";
+  const inviteImport = "@/components/invite-member";
+  const chromeRel = `${posix(config.paths.blocks)}/app-shell-chrome.tsx`;
 
   const written: string[] = [];
   const skipped: string[] = [];
@@ -490,6 +702,16 @@ export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<Appl
     },
     { rel: middlewareRel, content: middlewareSource() },
     { rel: `${layout.componentsDir}/items-panel.tsx`, content: itemsPanelSource(authImport) },
+    {
+      rel: `${layout.componentsDir}/workspace-menu.tsx`,
+      content: workspaceMenuSource(authClientImport),
+      always: true,
+    },
+    {
+      rel: `${layout.componentsDir}/invite-member.tsx`,
+      content: inviteMemberSource(authClientImport),
+      always: true,
+    },
   ];
 
   for (const file of files) {
@@ -502,6 +724,21 @@ export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<Appl
       written,
       skipped,
     );
+  }
+
+  const chromeDest = resolveSafeDest(targetDir, ".", chromeRel);
+  if (existsSync(chromeDest)) {
+    const current = await readFile(chromeDest, "utf8");
+    const patched = patchChromeSource(current, workspaceImport, inviteImport);
+    if (patched !== undefined && patched !== current) {
+      await writeFileEnsured(chromeDest, patched);
+      if (!written.includes(chromeRel)) written.push(chromeRel);
+      const templateName = options.templateName;
+      if (templateName !== undefined) {
+        const snapDest = resolveSafeDest(targetDir, baseSnapshotDir(templateName), chromeRel);
+        await writeFileEnsured(snapDest, patched);
+      }
+    }
   }
 
   const homeRel = homePageRel(appDir, generatedFiles);

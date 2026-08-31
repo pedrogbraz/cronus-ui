@@ -13,12 +13,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Drizzle + Better-Auth. `create-cronus-app --template saas` (and `admin`)
   writes the data layer, login/signup/forgot-password talk to Better-Auth,
   middleware protects the shell, and the home page queries SQLite.
+- **Workspace gold path.** saas/admin (and the stack Better-Auth emit) create a
+  default organization on signup, wire `WorkspaceSwitcher` and `InviteDialog`
+  to Better-Auth, log invite URLs with `console.info`, and scope `items` to
+  the active workspace. No new blocks.
 
 ### Changed
 
 - **Auth blocks.** Login, signup, and forgot-password are real forms via the
   `auth-adapter` lib (demo success in the gallery; gold-path apps replace the
   adapter).
+- **Generated saas is installable.** Compose records registry npm pins
+  (`lucide-react@^0.577.0`, `recharts`, …) into package.json even with
+  `--no-install`. Chrome customization runs the F3 lib rewrite, so
+  `app-shell-chrome` imports `@/lib/demo-saas` instead of `../lib/demo-saas.js`.
+  Drizzle sqlite `db:push` creates the `data/` directory before opening the file.
 
 ## [0.6.1] — 2026-08-30
 

@@ -151,6 +151,24 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(home).toContain("ItemsPanel");
     expect(result.generatedFiles).toContain("db/schema.ts");
     expect(result.generatedFiles).toContain("middleware.ts");
+
+    const chrome = readFileSync(join(cwd, "components/blocks/app-shell-chrome.tsx"), "utf8");
+    expect(chrome).toContain('from "@/lib/demo-saas"');
+    expect(chrome).not.toContain("../lib/demo-saas.js");
+    expect(chrome).toContain("WorkspaceMenu");
+    expect(chrome).toContain("InviteMember");
+    expect(chrome).not.toContain("WORKSPACES");
+
+    expect(readFileSync(join(cwd, "db/schema.ts"), "utf8")).toContain("export const organization");
+    expect(readFileSync(join(cwd, "lib/auth.ts"), "utf8")).toContain("sendInvitationEmail");
+    expect(existsSync(join(cwd, "components/workspace-menu.tsx"))).toBe(true);
+
+    const pkg = JSON.parse(readFileSync(join(cwd, "package.json"), "utf8")) as {
+      dependencies: Record<string, string>;
+    };
+    expect(pkg.dependencies["lucide-react"]).toBe("^0.577.0");
+    expect(pkg.dependencies.recharts).toBe("^3.9.2");
+    expect(pkg.dependencies["drizzle-orm"]).toBe("^0.45.2");
   });
 
   it("composes the admin template with the sqlite gold path", async () => {
@@ -186,11 +204,15 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(bareLayout).toContain("return <>{children}</>;");
 
     // Store stays on the demo path — no drizzle / better-auth / middleware.
+    // Login/signup still install the DEMO auth-adapter (no authClient).
     expect(existsSync(join(cwd, "drizzle.config.ts"))).toBe(false);
     expect(existsSync(join(cwd, "db/schema.ts"))).toBe(false);
     expect(existsSync(join(cwd, "lib/auth.ts"))).toBe(false);
     expect(existsSync(join(cwd, "middleware.ts"))).toBe(false);
-    expect(existsSync(join(cwd, "lib/auth-adapter.ts"))).toBe(false);
+    expect(existsSync(join(cwd, "lib/auth-adapter.ts"))).toBe(true);
+    expect(readFileSync(join(cwd, "lib/auth-adapter.ts"), "utf8")).not.toMatch(
+      /authClient|better-auth/,
+    );
     expect(readFileSync(join(cwd, "app/(site)/page.tsx"), "utf8")).not.toContain("ItemsPanel");
   });
 

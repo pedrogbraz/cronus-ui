@@ -171,7 +171,10 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     expect(existsSync(join(cwd, "db/schema.ts"))).toBe(false);
     expect(existsSync(join(cwd, "lib/auth.ts"))).toBe(false);
     expect(existsSync(join(cwd, "middleware.ts"))).toBe(false);
-    expect(existsSync(join(cwd, "lib/auth-adapter.ts"))).toBe(false);
+    expect(existsSync(join(cwd, "lib/auth-adapter.ts"))).toBe(true);
+    expect(readFileSync(join(cwd, "lib/auth-adapter.ts"), "utf8")).not.toMatch(
+      /authClient|better-auth/,
+    );
   });
 
   it("composes the Pro mail pack into (shell)/(bare) from validated blocks", async () => {
@@ -240,6 +243,11 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     expect(shellBlock.startsWith('"use client"')).toBe(true);
 
     // One identity across chrome + stats: demo-saas USER, never the old Lena Park chrome.
+    expect(shellBlock).toContain('from "@/lib/demo-saas"');
+    expect(shellBlock).not.toContain("../lib/demo-saas.js");
+    expect(shellBlock).toContain("WorkspaceMenu");
+    expect(shellBlock).toContain("InviteMember");
+    expect(shellBlock).not.toContain("WORKSPACES");
     expect(shellBlock).toContain("demo-saas");
     expect(shellBlock).not.toContain("Lena Park");
     expect(shellBlock).not.toContain("lena@acme.dev");
@@ -257,6 +265,12 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
       /authClient|better-auth/,
     );
     expect(readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8")).toContain("ItemsPanel");
+
+    const pkg = JSON.parse(readFileSync(join(cwd, "package.json"), "utf8")) as {
+      dependencies: Record<string, string>;
+    };
+    expect(pkg.dependencies["lucide-react"]).toBe("^0.577.0");
+    expect(pkg.dependencies.recharts).toBe("^3.9.2");
   });
 
   it("composes the admin template into (shell)/(bare) with the admin-overview dashboard", async () => {

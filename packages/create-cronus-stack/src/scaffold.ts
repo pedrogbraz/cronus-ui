@@ -381,7 +381,7 @@ function pageStatusCopy(config: StackConfig): string {
   if (emitsBetterAuth(config) && emitsDrizzle(config)) {
     return `          {session ? (
             <p className="max-w-prose text-fg-secondary">
-              Signed in as {session.user?.email}. {itemCount} items in the database.
+              Signed in as {session.user?.email}. {itemCount} items in the active workspace.
             </p>
           ) : (
             <p className="max-w-prose text-fg-secondary">
@@ -405,25 +405,50 @@ function pageTsx(config: StackConfig): string {
   const withDrizzle = emitsDrizzle(config);
   const withAuth = emitsBetterAuth(config);
   const extraImports = [
-    withDrizzle ? 'import { count } from "drizzle-orm";' : undefined,
+    withDrizzle && withAuth
+      ? 'import { count, eq } from "drizzle-orm";'
+      : withDrizzle
+        ? 'import { count } from "drizzle-orm";'
+        : undefined,
     withAuth ? 'import { headers } from "next/headers";' : undefined,
     withDrizzle ? `import { db } from "${fromAppImport(config, "db")}";` : undefined,
-    withDrizzle ? `import { items } from "${fromAppImport(config, "db/schema")}";` : undefined,
+    withDrizzle && withAuth
+      ? `import { items, member } from "${fromAppImport(config, "db/schema")}";`
+      : withDrizzle
+        ? `import { items } from "${fromAppImport(config, "db/schema")}";`
+        : undefined,
     withAuth ? `import { auth } from "${fromAppImport(config, "lib/auth")}";` : undefined,
   ]
     .filter((line): line is string => line !== undefined)
     .join("\n");
   const asyncKw = withDrizzle || withAuth ? "async " : "";
   let loader = "";
-  if (withDrizzle) {
+  if (withDrizzle && withAuth) {
+    loader = `  const session = await auth.api.getSession({ headers: await headers() });
+  let orgId = session?.session?.activeOrganizationId ?? null;
+  if (!orgId && session?.user?.id) {
+    const [row] = await db
+      .select({ organizationId: member.organizationId })
+      .from(member)
+      .where(eq(member.userId, session.user.id))
+      .limit(1);
+    orgId = row?.organizationId ?? null;
+  }
+  const [itemRow] = orgId
+    ? await db.select({ value: count() }).from(items).where(eq(items.workspaceId, orgId))
+    : [{ value: 0 }];
+  const itemCount = new Intl.NumberFormat("en-US").format(Number(itemRow?.value ?? 0));
+
+`;
+  } else if (withDrizzle) {
     loader = `  const [itemRow] = await db.select({ value: count() }).from(items);
   const itemCount = new Intl.NumberFormat("en-US").format(Number(itemRow?.value ?? 0));
 
 `;
-  }
-  if (withAuth) {
+  } else if (withAuth) {
     loader = `  const session = await auth.api.getSession({ headers: await headers() });
-${loader}`;
+
+`;
   }
 
   return `import { Badge } from "@cronus-ui/ui/badge";
@@ -621,6 +646,23 @@ function kitSkillsFromConfig(config: StackConfig): readonly Skill[] | undefined 
 function drizzleConfig(config: StackConfig): string {
   const dialect = sqlDialect(config) ?? "sqlite";
   const fallback = defaultDatabaseUrl(config) ?? "file:./data/app.db";
+  if (dialect === "sqlite") {
+    return `import { mkdirSync } from "node:fs";
+import { dirname } from "node:path";
+import { defineConfig } from "drizzle-kit";
+
+const url = process.env.DATABASE_URL ?? "${fallback}";
+const fileFromUrl = url.startsWith("file:") ? url.slice("file:".length) : url;
+mkdirSync(dirname(fileFromUrl) || ".", { recursive: true });
+
+export default defineConfig({
+  dialect: "sqlite",
+  schema: "./${dbDir(config)}/schema.ts",
+  out: "./drizzle",
+  dbCredentials: { url },
+});
+`;
+  }
   return `import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
@@ -652,6 +694,7 @@ export const session = sqliteTable("session", {
   updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
   ipAddress: text("ip_address"),
   userAgent: text("user_agent"),
+  activeOrganizationId: text("active_organization_id"),
   userId: text("user_id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
@@ -684,6 +727,42 @@ export const verification = sqliteTable("verification", {
   createdAt: integer("created_at", { mode: "timestamp" }),
   updatedAt: integer("updated_at", { mode: "timestamp" }),
 });
+
+export const organization = sqliteTable("organization", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  slug: text("slug").notNull().unique(),
+  logo: text("logo"),
+  metadata: text("metadata"),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+});
+
+export const member = sqliteTable("member", {
+  id: text("id").primaryKey(),
+  organizationId: text("organization_id")
+    .notNull()
+    .references(() => organization.id, { onDelete: "cascade" }),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  role: text("role").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+});
+
+export const invitation = sqliteTable("invitation", {
+  id: text("id").primaryKey(),
+  organizationId: text("organization_id")
+    .notNull()
+    .references(() => organization.id, { onDelete: "cascade" }),
+  email: text("email").notNull(),
+  role: text("role"),
+  status: text("status").notNull(),
+  expiresAt: integer("expires_at", { mode: "timestamp" }).notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+  inviterId: text("inviter_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+});
 `;
 }
 
@@ -707,6 +786,7 @@ export const session = pgTable("session", {
   updatedAt: timestamp("updated_at").notNull(),
   ipAddress: text("ip_address"),
   userAgent: text("user_agent"),
+  activeOrganizationId: text("active_organization_id"),
   userId: text("user_id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
@@ -739,6 +819,42 @@ export const verification = pgTable("verification", {
   createdAt: timestamp("created_at"),
   updatedAt: timestamp("updated_at"),
 });
+
+export const organization = pgTable("organization", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  slug: text("slug").notNull().unique(),
+  logo: text("logo"),
+  metadata: text("metadata"),
+  createdAt: timestamp("created_at").notNull(),
+});
+
+export const member = pgTable("member", {
+  id: text("id").primaryKey(),
+  organizationId: text("organization_id")
+    .notNull()
+    .references(() => organization.id, { onDelete: "cascade" }),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  role: text("role").notNull(),
+  createdAt: timestamp("created_at").notNull(),
+});
+
+export const invitation = pgTable("invitation", {
+  id: text("id").primaryKey(),
+  organizationId: text("organization_id")
+    .notNull()
+    .references(() => organization.id, { onDelete: "cascade" }),
+  email: text("email").notNull(),
+  role: text("role"),
+  status: text("status").notNull(),
+  expiresAt: timestamp("expires_at").notNull(),
+  createdAt: timestamp("created_at").notNull(),
+  inviterId: text("inviter_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+});
 `;
 }
 
@@ -762,6 +878,7 @@ export const session = mysqlTable("session", {
   updatedAt: timestamp("updated_at").notNull(),
   ipAddress: text("ip_address"),
   userAgent: text("user_agent"),
+  activeOrganizationId: varchar("active_organization_id", { length: 36 }),
   userId: varchar("user_id", { length: 36 })
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
@@ -794,6 +911,42 @@ export const verification = mysqlTable("verification", {
   createdAt: timestamp("created_at"),
   updatedAt: timestamp("updated_at"),
 });
+
+export const organization = mysqlTable("organization", {
+  id: varchar("id", { length: 36 }).primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  slug: varchar("slug", { length: 255 }).notNull().unique(),
+  logo: text("logo"),
+  metadata: text("metadata"),
+  createdAt: timestamp("created_at").notNull(),
+});
+
+export const member = mysqlTable("member", {
+  id: varchar("id", { length: 36 }).primaryKey(),
+  organizationId: varchar("organization_id", { length: 36 })
+    .notNull()
+    .references(() => organization.id, { onDelete: "cascade" }),
+  userId: varchar("user_id", { length: 36 })
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  role: varchar("role", { length: 255 }).notNull(),
+  createdAt: timestamp("created_at").notNull(),
+});
+
+export const invitation = mysqlTable("invitation", {
+  id: varchar("id", { length: 36 }).primaryKey(),
+  organizationId: varchar("organization_id", { length: 36 })
+    .notNull()
+    .references(() => organization.id, { onDelete: "cascade" }),
+  email: varchar("email", { length: 255 }).notNull(),
+  role: varchar("role", { length: 255 }),
+  status: varchar("status", { length: 255 }).notNull(),
+  expiresAt: timestamp("expires_at").notNull(),
+  createdAt: timestamp("created_at").notNull(),
+  inviterId: varchar("inviter_id", { length: 36 })
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+});
 `;
 }
 
@@ -804,34 +957,44 @@ function drizzleSchema(config: StackConfig): string {
       const imports = withAuth
         ? 'import { boolean, integer, pgTable, text, timestamp } from "drizzle-orm/pg-core";'
         : 'import { integer, pgTable, text } from "drizzle-orm/pg-core";';
+      const workspaceCol = withAuth
+        ? `\n  workspaceId: text("workspace_id").references(() => organization.id, { onDelete: "cascade" }),`
+        : "";
       return `${imports}
-
+${withAuth ? pgAuthTables() : ""}
 export const items = pgTable("items", {
   id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
-  title: text("title").notNull(),
+  title: text("title").notNull(),${workspaceCol}
 });
-${withAuth ? pgAuthTables() : ""}`;
+`;
     }
     case "mysql": {
       const imports = withAuth
         ? 'import { boolean, int, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";'
         : 'import { int, mysqlTable, varchar } from "drizzle-orm/mysql-core";';
+      const workspaceCol = withAuth
+        ? `\n  workspaceId: varchar("workspace_id", { length: 36 }).references(() => organization.id, { onDelete: "cascade" }),`
+        : "";
       return `${imports}
-
+${withAuth ? mysqlAuthTables() : ""}
 export const items = mysqlTable("items", {
   id: int("id").autoincrement().primaryKey(),
-  title: varchar("title", { length: 255 }).notNull(),
+  title: varchar("title", { length: 255 }).notNull(),${workspaceCol}
 });
-${withAuth ? mysqlAuthTables() : ""}`;
+`;
     }
-    default:
+    default: {
+      const workspaceCol = withAuth
+        ? `\n  workspaceId: text("workspace_id").references(() => organization.id, { onDelete: "cascade" }),`
+        : "";
       return `import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-
+${withAuth ? sqliteAuthTables() : ""}
 export const items = sqliteTable("items", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  title: text("title").notNull(),
+  title: text("title").notNull(),${workspaceCol}
 });
-${withAuth ? sqliteAuthTables() : ""}`;
+`;
+    }
   }
 }
 
@@ -882,8 +1045,15 @@ function betterAuthServer(config: StackConfig): string {
   return `import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
+import { organization } from "better-auth/plugins";
+import { eq } from "drizzle-orm";
 import { db } from "${dbImport}";
 import * as schema from "${schemaImport}";
+import { member, organization as organizationTable, user as userTable } from "${schemaImport}";
+
+function newId(): string {
+  return crypto.randomUUID().replaceAll("-", "");
+}
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "${provider}", schema }),
@@ -893,7 +1063,52 @@ export const auth = betterAuth({
       console.info("Password reset URL:", url);
     },
   },
-  plugins: [nextCookies()],
+  databaseHooks: {
+    session: {
+      create: {
+        before: async (session) => {
+          const [existing] = await db
+            .select({ organizationId: member.organizationId })
+            .from(member)
+            .where(eq(member.userId, session.userId))
+            .limit(1);
+          if (existing?.organizationId) {
+            return { data: { ...session, activeOrganizationId: existing.organizationId } };
+          }
+          const [owner] = await db
+            .select({ name: userTable.name })
+            .from(userTable)
+            .where(eq(userTable.id, session.userId))
+            .limit(1);
+          const orgId = newId();
+          const now = new Date();
+          await db.insert(organizationTable).values({
+            id: orgId,
+            name: owner?.name.trim() || "Workspace",
+            slug: \`ws-\${session.userId.slice(0, 16)}\`,
+            createdAt: now,
+          });
+          await db.insert(member).values({
+            id: newId(),
+            organizationId: orgId,
+            userId: session.userId,
+            role: "owner",
+            createdAt: now,
+          });
+          return { data: { ...session, activeOrganizationId: orgId } };
+        },
+      },
+    },
+  },
+  plugins: [
+    organization({
+      sendInvitationEmail: async (data) => {
+        const base = process.env.BETTER_AUTH_URL ?? "http://localhost:3000";
+        console.info(\`Invite \${data.email}: \${base}/login?invitation=\${data.id}\`);
+      },
+    }),
+    nextCookies(),
+  ],
   secret: process.env.BETTER_AUTH_SECRET,
   baseURL: process.env.BETTER_AUTH_URL,
 });
@@ -924,9 +1139,12 @@ export const config = {
 }
 
 function betterAuthClient(): string {
-  return `import { createAuthClient } from "better-auth/react";
+  return `import { organizationClient } from "better-auth/client/plugins";
+import { createAuthClient } from "better-auth/react";
 
-export const authClient = createAuthClient();
+export const authClient = createAuthClient({
+  plugins: [organizationClient()],
+});
 `;
 }
 
