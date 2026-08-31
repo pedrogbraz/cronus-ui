@@ -39,6 +39,7 @@ const LIB_MODULES: ReadonlyArray<{ name: string; file: string }> = [
   { name: "cn", file: "cn.ts" },
   { name: "demo-store", file: "demo-store.ts" },
   { name: "demo-saas", file: "demo-saas.ts" },
+  { name: "auth-adapter", file: "auth-adapter.ts" },
 ];
 
 /** Every published `registry:lib` name, for `../lib/<name>.js` dependency detection. */

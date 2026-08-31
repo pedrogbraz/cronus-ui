@@ -21,6 +21,7 @@ import {
   Rating,
   Separator,
 } from "@cronus-ui/ui";
+import { requestPasswordReset, signInEmail, signUpEmail } from "@cronus-ui/ui/auth-adapter";
 import { USER } from "@cronus-ui/ui/demo-saas";
 import {
   Apple,
@@ -35,6 +36,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
+import { type FormEvent, useState } from "react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
 import { BlockViewBody } from "../../components/blocks/block-view-body";
 import { getBlockMeta } from "../blocks-index";
@@ -46,6 +48,25 @@ import type { BlockContentMap } from "./types";
  * ────────────────────────────────────────────────────────────────────────── */
 
 export function LoginBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const email = String(form.get("email") ?? "");
+    const password = String(form.get("password") ?? "");
+    setError(null);
+    setPending(true);
+    try {
+      await signInEmail({ email, password });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
     <div className="flex w-full items-center justify-center py-4">
       <Card className="w-full max-w-sm gap-6 shadow-lg">
@@ -60,45 +81,62 @@ export function LoginBlock() {
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="login-email">Email</Label>
-            <Input
-              id="login-email"
-              type="email"
-              placeholder="you@company.com"
-              autoComplete="email"
-            />
-          </div>
+          <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="login-email">Email</Label>
+              <Input
+                id="login-email"
+                name="email"
+                type="email"
+                placeholder="you@company.com"
+                autoComplete="email"
+              />
+            </div>
 
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="login-password">Password</Label>
-            <Input
-              id="login-password"
-              type="password"
-              placeholder="••••••••"
-              autoComplete="current-password"
-            />
-          </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="login-password">Password</Label>
+              <Input
+                id="login-password"
+                name="password"
+                type="password"
+                placeholder="••••••••"
+                autoComplete="current-password"
+              />
+            </div>
 
-          <div className="flex items-center justify-between">
-            <Label
-              htmlFor="login-remember"
-              className="flex items-center gap-2 font-normal text-fg-secondary"
+            <div className="flex items-center justify-between">
+              <Label
+                htmlFor="login-remember"
+                className="flex items-center gap-2 font-normal text-fg-secondary"
+              >
+                <Checkbox id="login-remember" defaultChecked />
+                Remember me
+              </Label>
+              <a
+                href="/forgot-password"
+                className="text-sm font-medium text-primary-strong underline-offset-4 hover:underline"
+              >
+                Forgot password?
+              </a>
+            </div>
+
+            {error ? (
+              <p role="alert" className="text-sm text-error-strong">
+                {error}
+              </p>
+            ) : null}
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              aria-busy={pending}
             >
-              <Checkbox id="login-remember" defaultChecked />
-              Remember me
-            </Label>
-            <a
-              href="#forgot"
-              className="text-sm font-medium text-primary-strong underline-offset-4 hover:underline"
-            >
-              Forgot password?
-            </a>
-          </div>
-
-          <Button variant="primary" size="lg" className="w-full">
-            Sign in
-          </Button>
+              {pending ? "Signing in…" : "Sign in"}
+            </Button>
+          </form>
 
           <div className="flex items-center gap-3">
             <Separator className="flex-1" />
@@ -107,11 +145,11 @@ export function LoginBlock() {
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <Button variant="outline">
+            <Button type="button" variant="outline">
               <Github className="size-4" aria-hidden="true" />
               GitHub
             </Button>
-            <Button variant="outline">
+            <Button type="button" variant="outline">
               <Chrome className="size-4" aria-hidden="true" />
               Google
             </Button>
@@ -122,7 +160,7 @@ export function LoginBlock() {
           <p className="text-sm text-fg-secondary">
             Don&apos;t have an account?{" "}
             <a
-              href="#signup"
+              href="/signup"
               className="font-medium text-primary-strong underline-offset-4 hover:underline"
             >
               Sign up
@@ -134,7 +172,9 @@ export function LoginBlock() {
   );
 }
 
-const loginCode = `import {
+const loginCode = `"use client";
+
+import {
   Button,
   Card,
   CardContent,
@@ -146,9 +186,30 @@ const loginCode = `import {
   Label,
   Separator,
 } from "@cronus-ui/ui";
+import { signInEmail } from "../lib/auth-adapter.js";
 import { ChartColumnIncreasing, Chrome, Github } from "lucide-react";
+import { type FormEvent, useState } from "react";
 
 export function LoginBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const email = String(form.get("email") ?? "");
+    const password = String(form.get("password") ?? "");
+    setError(null);
+    setPending(true);
+    try {
+      await signInEmail({ email, password });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
     <div className="flex w-full items-center justify-center py-4">
       <Card className="w-full max-w-sm gap-6 shadow-lg">
@@ -163,37 +224,62 @@ export function LoginBlock() {
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="login-email">Email</Label>
-            <Input id="login-email" type="email" placeholder="you@company.com" autoComplete="email" />
-          </div>
+          <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="login-email">Email</Label>
+              <Input
+                id="login-email"
+                name="email"
+                type="email"
+                placeholder="you@company.com"
+                autoComplete="email"
+              />
+            </div>
 
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="login-password">Password</Label>
-            <Input
-              id="login-password"
-              type="password"
-              placeholder="••••••••"
-              autoComplete="current-password"
-            />
-          </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="login-password">Password</Label>
+              <Input
+                id="login-password"
+                name="password"
+                type="password"
+                placeholder="••••••••"
+                autoComplete="current-password"
+              />
+            </div>
 
-          <div className="flex items-center justify-between">
-            <Label htmlFor="login-remember" className="flex items-center gap-2 font-normal text-fg-secondary">
-              <Checkbox id="login-remember" defaultChecked />
-              Remember me
-            </Label>
-            <a
-              href="#forgot"
-              className="text-sm font-medium text-primary-strong underline-offset-4 hover:underline"
+            <div className="flex items-center justify-between">
+              <Label
+                htmlFor="login-remember"
+                className="flex items-center gap-2 font-normal text-fg-secondary"
+              >
+                <Checkbox id="login-remember" defaultChecked />
+                Remember me
+              </Label>
+              <a
+                href="/forgot-password"
+                className="text-sm font-medium text-primary-strong underline-offset-4 hover:underline"
+              >
+                Forgot password?
+              </a>
+            </div>
+
+            {error ? (
+              <p role="alert" className="text-sm text-error-strong">
+                {error}
+              </p>
+            ) : null}
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              aria-busy={pending}
             >
-              Forgot password?
-            </a>
-          </div>
-
-          <Button variant="primary" size="lg" className="w-full">
-            Sign in
-          </Button>
+              {pending ? "Signing in…" : "Sign in"}
+            </Button>
+          </form>
 
           <div className="flex items-center gap-3">
             <Separator className="flex-1" />
@@ -202,11 +288,11 @@ export function LoginBlock() {
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <Button variant="outline">
+            <Button type="button" variant="outline">
               <Github className="size-4" aria-hidden="true" />
               GitHub
             </Button>
-            <Button variant="outline">
+            <Button type="button" variant="outline">
               <Chrome className="size-4" aria-hidden="true" />
               Google
             </Button>
@@ -217,7 +303,7 @@ export function LoginBlock() {
           <p className="text-sm text-fg-secondary">
             Don&apos;t have an account?{" "}
             <a
-              href="#signup"
+              href="/signup"
               className="font-medium text-primary-strong underline-offset-4 hover:underline"
             >
               Sign up
@@ -234,6 +320,25 @@ export function LoginBlock() {
  * ────────────────────────────────────────────────────────────────────────── */
 
 export function LoginSplitBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const email = String(form.get("email") ?? "");
+    const password = String(form.get("password") ?? "");
+    setError(null);
+    setPending(true);
+    try {
+      await signInEmail({ email, password });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
     <div className="flex w-full items-center justify-center py-4">
       <div className="grid w-full max-w-4xl overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-lg lg:grid-cols-2">
@@ -244,11 +349,12 @@ export function LoginSplitBlock() {
             <p className="text-sm text-fg-secondary">Sign in to your Cronus workspace.</p>
           </div>
 
-          <div className="flex flex-col gap-4">
+          <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
             <div className="flex flex-col gap-2">
               <Label htmlFor="login-split-email">Email</Label>
               <Input
                 id="login-split-email"
+                name="email"
                 type="email"
                 placeholder="you@company.com"
                 autoComplete="email"
@@ -259,7 +365,7 @@ export function LoginSplitBlock() {
               <div className="flex items-center justify-between">
                 <Label htmlFor="login-split-password">Password</Label>
                 <a
-                  href="#forgot"
+                  href="/forgot-password"
                   className="text-sm font-medium text-primary-strong underline-offset-4 hover:underline"
                 >
                   Forgot password?
@@ -267,21 +373,35 @@ export function LoginSplitBlock() {
               </div>
               <Input
                 id="login-split-password"
+                name="password"
                 type="password"
                 placeholder="••••••••"
                 autoComplete="current-password"
               />
             </div>
 
-            <Button variant="primary" size="lg" className="w-full">
-              Sign in
+            {error ? (
+              <p role="alert" className="text-sm text-error-strong">
+                {error}
+              </p>
+            ) : null}
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              aria-busy={pending}
+            >
+              {pending ? "Signing in…" : "Sign in"}
             </Button>
-          </div>
+          </form>
 
           <p className="text-sm text-fg-secondary">
             Don&apos;t have an account?{" "}
             <a
-              href="#signup"
+              href="/signup"
               className="font-medium text-primary-strong underline-offset-4 hover:underline"
             >
               Sign up
@@ -329,10 +449,33 @@ export function LoginSplitBlock() {
   );
 }
 
-const loginSplitCode = `import { Avatar, AvatarFallback, Button, Input, Label } from "@cronus-ui/ui";
+const loginSplitCode = `"use client";
+
+import { Avatar, AvatarFallback, Button, Input, Label } from "@cronus-ui/ui";
+import { signInEmail } from "../lib/auth-adapter.js";
 import { ChartColumnIncreasing, Quote } from "lucide-react";
+import { type FormEvent, useState } from "react";
 
 export function LoginSplitBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const email = String(form.get("email") ?? "");
+    const password = String(form.get("password") ?? "");
+    setError(null);
+    setPending(true);
+    try {
+      await signInEmail({ email, password });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
     <div className="flex w-full items-center justify-center py-4">
       <div className="grid w-full max-w-4xl overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-lg lg:grid-cols-2">
@@ -343,11 +486,12 @@ export function LoginSplitBlock() {
             <p className="text-sm text-fg-secondary">Sign in to your Cronus workspace.</p>
           </div>
 
-          <div className="flex flex-col gap-4">
+          <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
             <div className="flex flex-col gap-2">
               <Label htmlFor="login-split-email">Email</Label>
               <Input
                 id="login-split-email"
+                name="email"
                 type="email"
                 placeholder="you@company.com"
                 autoComplete="email"
@@ -358,7 +502,7 @@ export function LoginSplitBlock() {
               <div className="flex items-center justify-between">
                 <Label htmlFor="login-split-password">Password</Label>
                 <a
-                  href="#forgot"
+                  href="/forgot-password"
                   className="text-sm font-medium text-primary-strong underline-offset-4 hover:underline"
                 >
                   Forgot password?
@@ -366,21 +510,35 @@ export function LoginSplitBlock() {
               </div>
               <Input
                 id="login-split-password"
+                name="password"
                 type="password"
                 placeholder="••••••••"
                 autoComplete="current-password"
               />
             </div>
 
-            <Button variant="primary" size="lg" className="w-full">
-              Sign in
+            {error ? (
+              <p role="alert" className="text-sm text-error-strong">
+                {error}
+              </p>
+            ) : null}
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              aria-busy={pending}
+            >
+              {pending ? "Signing in…" : "Sign in"}
             </Button>
-          </div>
+          </form>
 
           <p className="text-sm text-fg-secondary">
             Don&apos;t have an account?{" "}
             <a
-              href="#signup"
+              href="/signup"
               className="font-medium text-primary-strong underline-offset-4 hover:underline"
             >
               Sign up
@@ -433,6 +591,25 @@ export function LoginSplitBlock() {
  * ────────────────────────────────────────────────────────────────────────── */
 
 export function LoginSocialFirstBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const email = String(form.get("email") ?? "");
+    const password = String(form.get("password") ?? "");
+    setError(null);
+    setPending(true);
+    try {
+      await signInEmail({ email, password });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
     <div className="flex w-full items-center justify-center py-4">
       <Card className="w-full max-w-sm gap-6 shadow-lg">
@@ -448,15 +625,15 @@ export function LoginSocialFirstBlock() {
 
         <CardContent className="flex flex-col gap-4">
           <div className="flex flex-col gap-3">
-            <Button variant="outline" size="lg" className="w-full">
+            <Button type="button" variant="outline" size="lg" className="w-full">
               <Chrome className="size-4" aria-hidden="true" />
               Continue with Google
             </Button>
-            <Button variant="outline" size="lg" className="w-full">
+            <Button type="button" variant="outline" size="lg" className="w-full">
               <Github className="size-4" aria-hidden="true" />
               Continue with GitHub
             </Button>
-            <Button variant="outline" size="lg" className="w-full">
+            <Button type="button" variant="outline" size="lg" className="w-full">
               <Apple className="size-4" aria-hidden="true" />
               Continue with Apple
             </Button>
@@ -468,44 +645,61 @@ export function LoginSocialFirstBlock() {
             <Separator className="flex-1" />
           </div>
 
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="login-social-email">Email</Label>
-            <Input
-              id="login-social-email"
-              type="email"
-              placeholder="you@company.com"
-              autoComplete="email"
-            />
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center justify-between">
-              <Label htmlFor="login-social-password">Password</Label>
-              <a
-                href="#forgot"
-                className="text-sm font-medium text-primary-strong underline-offset-4 hover:underline"
-              >
-                Forgot?
-              </a>
+          <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="login-social-email">Email</Label>
+              <Input
+                id="login-social-email"
+                name="email"
+                type="email"
+                placeholder="you@company.com"
+                autoComplete="email"
+              />
             </div>
-            <Input
-              id="login-social-password"
-              type="password"
-              placeholder="••••••••"
-              autoComplete="current-password"
-            />
-          </div>
 
-          <Button variant="primary" size="lg" className="w-full">
-            Sign in
-          </Button>
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="login-social-password">Password</Label>
+                <a
+                  href="/forgot-password"
+                  className="text-sm font-medium text-primary-strong underline-offset-4 hover:underline"
+                >
+                  Forgot?
+                </a>
+              </div>
+              <Input
+                id="login-social-password"
+                name="password"
+                type="password"
+                placeholder="••••••••"
+                autoComplete="current-password"
+              />
+            </div>
+
+            {error ? (
+              <p role="alert" className="text-sm text-error-strong">
+                {error}
+              </p>
+            ) : null}
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              aria-busy={pending}
+            >
+              {pending ? "Signing in…" : "Sign in"}
+            </Button>
+          </form>
         </CardContent>
 
         <CardFooter className="justify-center">
           <p className="text-sm text-fg-secondary">
             New to Cronus?{" "}
             <a
-              href="#signup"
+              href="/signup"
               className="font-medium text-primary-strong underline-offset-4 hover:underline"
             >
               Create an account
@@ -517,7 +711,9 @@ export function LoginSocialFirstBlock() {
   );
 }
 
-const loginSocialFirstCode = `import {
+const loginSocialFirstCode = `"use client";
+
+import {
   Button,
   Card,
   CardContent,
@@ -528,9 +724,30 @@ const loginSocialFirstCode = `import {
   Label,
   Separator,
 } from "@cronus-ui/ui";
+import { signInEmail } from "../lib/auth-adapter.js";
 import { Apple, ChartColumnIncreasing, Chrome, Github } from "lucide-react";
+import { type FormEvent, useState } from "react";
 
 export function LoginSocialFirstBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const email = String(form.get("email") ?? "");
+    const password = String(form.get("password") ?? "");
+    setError(null);
+    setPending(true);
+    try {
+      await signInEmail({ email, password });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
     <div className="flex w-full items-center justify-center py-4">
       <Card className="w-full max-w-sm gap-6 shadow-lg">
@@ -546,15 +763,15 @@ export function LoginSocialFirstBlock() {
 
         <CardContent className="flex flex-col gap-4">
           <div className="flex flex-col gap-3">
-            <Button variant="outline" size="lg" className="w-full">
+            <Button type="button" variant="outline" size="lg" className="w-full">
               <Chrome className="size-4" aria-hidden="true" />
               Continue with Google
             </Button>
-            <Button variant="outline" size="lg" className="w-full">
+            <Button type="button" variant="outline" size="lg" className="w-full">
               <Github className="size-4" aria-hidden="true" />
               Continue with GitHub
             </Button>
-            <Button variant="outline" size="lg" className="w-full">
+            <Button type="button" variant="outline" size="lg" className="w-full">
               <Apple className="size-4" aria-hidden="true" />
               Continue with Apple
             </Button>
@@ -566,44 +783,61 @@ export function LoginSocialFirstBlock() {
             <Separator className="flex-1" />
           </div>
 
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="login-social-email">Email</Label>
-            <Input
-              id="login-social-email"
-              type="email"
-              placeholder="you@company.com"
-              autoComplete="email"
-            />
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center justify-between">
-              <Label htmlFor="login-social-password">Password</Label>
-              <a
-                href="#forgot"
-                className="text-sm font-medium text-primary-strong underline-offset-4 hover:underline"
-              >
-                Forgot?
-              </a>
+          <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="login-social-email">Email</Label>
+              <Input
+                id="login-social-email"
+                name="email"
+                type="email"
+                placeholder="you@company.com"
+                autoComplete="email"
+              />
             </div>
-            <Input
-              id="login-social-password"
-              type="password"
-              placeholder="••••••••"
-              autoComplete="current-password"
-            />
-          </div>
 
-          <Button variant="primary" size="lg" className="w-full">
-            Sign in
-          </Button>
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="login-social-password">Password</Label>
+                <a
+                  href="/forgot-password"
+                  className="text-sm font-medium text-primary-strong underline-offset-4 hover:underline"
+                >
+                  Forgot?
+                </a>
+              </div>
+              <Input
+                id="login-social-password"
+                name="password"
+                type="password"
+                placeholder="••••••••"
+                autoComplete="current-password"
+              />
+            </div>
+
+            {error ? (
+              <p role="alert" className="text-sm text-error-strong">
+                {error}
+              </p>
+            ) : null}
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              aria-busy={pending}
+            >
+              {pending ? "Signing in…" : "Sign in"}
+            </Button>
+          </form>
         </CardContent>
 
         <CardFooter className="justify-center">
           <p className="text-sm text-fg-secondary">
             New to Cronus?{" "}
             <a
-              href="#signup"
+              href="/signup"
               className="font-medium text-primary-strong underline-offset-4 hover:underline"
             >
               Create an account
@@ -620,6 +854,25 @@ export function LoginSocialFirstBlock() {
  * ────────────────────────────────────────────────────────────────────────── */
 
 export function LoginMinimalBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const email = String(form.get("email") ?? "");
+    const password = String(form.get("password") ?? "");
+    setError(null);
+    setPending(true);
+    try {
+      await signInEmail({ email, password });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
     <div className="flex w-full items-center justify-center py-10">
       <div className="flex w-full max-w-xs flex-col items-center gap-7 text-center">
@@ -632,29 +885,49 @@ export function LoginMinimalBlock() {
           <p className="text-sm text-fg-secondary">Use your work email to continue.</p>
         </div>
 
-        <div className="flex w-full flex-col gap-3">
+        <form onSubmit={onSubmit} className="flex w-full flex-col gap-3" aria-busy={pending}>
           <Label htmlFor="login-minimal-email" className="sr-only">
             Email
           </Label>
           <Input
             id="login-minimal-email"
+            name="email"
             type="email"
             placeholder="you@company.com"
             autoComplete="email"
             className="h-11 text-center"
           />
-          <Button variant="primary" size="lg" className="w-full">
-            Continue
+          <Label htmlFor="login-minimal-password" className="sr-only">
+            Password
+          </Label>
+          <Input
+            id="login-minimal-password"
+            name="password"
+            type="password"
+            placeholder="••••••••"
+            autoComplete="current-password"
+            className="h-11 text-center"
+          />
+          {error ? (
+            <p role="alert" className="text-sm text-error-strong">
+              {error}
+            </p>
+          ) : null}
+          <Button
+            type="submit"
+            variant="primary"
+            size="lg"
+            className="w-full"
+            disabled={pending}
+            aria-busy={pending}
+          >
+            {pending ? "Signing in…" : "Continue"}
           </Button>
-        </div>
-
-        <p className="text-xs text-fg-tertiary">
-          No password needed — we&apos;ll email you a sign-in code.
-        </p>
+        </form>
 
         <div className="flex items-center gap-4 text-xs">
           <a
-            href="#create"
+            href="/signup"
             className="font-medium text-primary-strong underline-offset-4 hover:underline"
           >
             Create account
@@ -672,10 +945,33 @@ export function LoginMinimalBlock() {
   );
 }
 
-const loginMinimalCode = `import { Button, Input, Label, Separator } from "@cronus-ui/ui";
+const loginMinimalCode = `"use client";
+
+import { Button, Input, Label, Separator } from "@cronus-ui/ui";
+import { signInEmail } from "../lib/auth-adapter.js";
 import { ChartColumnIncreasing } from "lucide-react";
+import { type FormEvent, useState } from "react";
 
 export function LoginMinimalBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const email = String(form.get("email") ?? "");
+    const password = String(form.get("password") ?? "");
+    setError(null);
+    setPending(true);
+    try {
+      await signInEmail({ email, password });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
     <div className="flex w-full items-center justify-center py-10">
       <div className="flex w-full max-w-xs flex-col items-center gap-7 text-center">
@@ -688,29 +984,49 @@ export function LoginMinimalBlock() {
           <p className="text-sm text-fg-secondary">Use your work email to continue.</p>
         </div>
 
-        <div className="flex w-full flex-col gap-3">
+        <form onSubmit={onSubmit} className="flex w-full flex-col gap-3" aria-busy={pending}>
           <Label htmlFor="login-minimal-email" className="sr-only">
             Email
           </Label>
           <Input
             id="login-minimal-email"
+            name="email"
             type="email"
             placeholder="you@company.com"
             autoComplete="email"
             className="h-11 text-center"
           />
-          <Button variant="primary" size="lg" className="w-full">
-            Continue
+          <Label htmlFor="login-minimal-password" className="sr-only">
+            Password
+          </Label>
+          <Input
+            id="login-minimal-password"
+            name="password"
+            type="password"
+            placeholder="••••••••"
+            autoComplete="current-password"
+            className="h-11 text-center"
+          />
+          {error ? (
+            <p role="alert" className="text-sm text-error-strong">
+              {error}
+            </p>
+          ) : null}
+          <Button
+            type="submit"
+            variant="primary"
+            size="lg"
+            className="w-full"
+            disabled={pending}
+            aria-busy={pending}
+          >
+            {pending ? "Signing in…" : "Continue"}
           </Button>
-        </div>
-
-        <p className="text-xs text-fg-tertiary">
-          No password needed — we&apos;ll email you a sign-in code.
-        </p>
+        </form>
 
         <div className="flex items-center gap-4 text-xs">
           <a
-            href="#create"
+            href="/signup"
             className="font-medium text-primary-strong underline-offset-4 hover:underline"
           >
             Create account
@@ -733,6 +1049,26 @@ export function LoginMinimalBlock() {
  * ────────────────────────────────────────────────────────────────────────── */
 
 export function SignupBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const name = String(form.get("name") ?? "");
+    const email = String(form.get("email") ?? "");
+    const password = String(form.get("password") ?? "");
+    setError(null);
+    setPending(true);
+    try {
+      await signUpEmail({ email, password, name });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
     <div className="flex w-full items-center justify-center py-4">
       <Card className="w-full max-w-sm gap-6 shadow-lg">
@@ -747,42 +1083,59 @@ export function SignupBlock() {
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="signup-name">Full name</Label>
-            <Input id="signup-name" placeholder={USER.name} autoComplete="name" />
-          </div>
+          <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="signup-name">Full name</Label>
+              <Input id="signup-name" name="name" placeholder={USER.name} autoComplete="name" />
+            </div>
 
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="signup-email">Email</Label>
-            <Input
-              id="signup-email"
-              type="email"
-              placeholder="you@company.com"
-              autoComplete="email"
-            />
-          </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="signup-email">Email</Label>
+              <Input
+                id="signup-email"
+                name="email"
+                type="email"
+                placeholder="you@company.com"
+                autoComplete="email"
+              />
+            </div>
 
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="signup-password">Password</Label>
-            <Input
-              id="signup-password"
-              type="password"
-              placeholder="••••••••"
-              autoComplete="new-password"
-            />
-            <p className="text-xs text-fg-tertiary">Must be at least 8 characters.</p>
-          </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="signup-password">Password</Label>
+              <Input
+                id="signup-password"
+                name="password"
+                type="password"
+                placeholder="••••••••"
+                autoComplete="new-password"
+              />
+              <p className="text-xs text-fg-tertiary">Must be at least 8 characters.</p>
+            </div>
 
-          <Label
-            htmlFor="signup-terms"
-            className="flex items-start gap-2 font-normal text-fg-secondary"
-          >
-            <Checkbox id="signup-terms" defaultChecked />I agree to the Terms and Privacy Policy.
-          </Label>
+            <Label
+              htmlFor="signup-terms"
+              className="flex items-start gap-2 font-normal text-fg-secondary"
+            >
+              <Checkbox id="signup-terms" defaultChecked />I agree to the Terms and Privacy Policy.
+            </Label>
 
-          <Button variant="primary" size="lg" className="w-full">
-            Create account
-          </Button>
+            {error ? (
+              <p role="alert" className="text-sm text-error-strong">
+                {error}
+              </p>
+            ) : null}
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              aria-busy={pending}
+            >
+              {pending ? "Creating account…" : "Create account"}
+            </Button>
+          </form>
 
           <div className="flex items-center gap-3">
             <Separator className="flex-1" />
@@ -791,11 +1144,11 @@ export function SignupBlock() {
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <Button variant="outline">
+            <Button type="button" variant="outline">
               <Github className="size-4" aria-hidden="true" />
               GitHub
             </Button>
-            <Button variant="outline">
+            <Button type="button" variant="outline">
               <Chrome className="size-4" aria-hidden="true" />
               Google
             </Button>
@@ -806,7 +1159,7 @@ export function SignupBlock() {
           <p className="text-sm text-fg-secondary">
             Already have an account?{" "}
             <a
-              href="#signin"
+              href="/login"
               className="font-medium text-primary-strong underline-offset-4 hover:underline"
             >
               Sign in
@@ -818,7 +1171,9 @@ export function SignupBlock() {
   );
 }
 
-const signupCode = `import {
+const signupCode = `"use client";
+
+import {
   Button,
   Card,
   CardContent,
@@ -830,10 +1185,32 @@ const signupCode = `import {
   Label,
   Separator,
 } from "@cronus-ui/ui";
+import { signUpEmail } from "../lib/auth-adapter.js";
 import { USER } from "../lib/demo-saas.js";
 import { ChartColumnIncreasing, Chrome, Github } from "lucide-react";
+import { type FormEvent, useState } from "react";
 
 export function SignupBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const name = String(form.get("name") ?? "");
+    const email = String(form.get("email") ?? "");
+    const password = String(form.get("password") ?? "");
+    setError(null);
+    setPending(true);
+    try {
+      await signUpEmail({ email, password, name });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
     <div className="flex w-full items-center justify-center py-4">
       <Card className="w-full max-w-sm gap-6 shadow-lg">
@@ -848,37 +1225,59 @@ export function SignupBlock() {
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="signup-name">Full name</Label>
-            <Input id="signup-name" placeholder={USER.name} autoComplete="name" />
-          </div>
+          <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="signup-name">Full name</Label>
+              <Input id="signup-name" name="name" placeholder={USER.name} autoComplete="name" />
+            </div>
 
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="signup-email">Email</Label>
-            <Input id="signup-email" type="email" placeholder="you@company.com" autoComplete="email" />
-          </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="signup-email">Email</Label>
+              <Input
+                id="signup-email"
+                name="email"
+                type="email"
+                placeholder="you@company.com"
+                autoComplete="email"
+              />
+            </div>
 
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="signup-password">Password</Label>
-            <Input
-              id="signup-password"
-              type="password"
-              placeholder="••••••••"
-              autoComplete="new-password"
-            />
-            <p className="text-xs text-fg-tertiary">Must be at least 8 characters.</p>
-          </div>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="signup-password">Password</Label>
+              <Input
+                id="signup-password"
+                name="password"
+                type="password"
+                placeholder="••••••••"
+                autoComplete="new-password"
+              />
+              <p className="text-xs text-fg-tertiary">Must be at least 8 characters.</p>
+            </div>
 
-          <Label
-            htmlFor="signup-terms"
-            className="flex items-start gap-2 font-normal text-fg-secondary"
-          >
-            <Checkbox id="signup-terms" defaultChecked />I agree to the Terms and Privacy Policy.
-          </Label>
+            <Label
+              htmlFor="signup-terms"
+              className="flex items-start gap-2 font-normal text-fg-secondary"
+            >
+              <Checkbox id="signup-terms" defaultChecked />I agree to the Terms and Privacy Policy.
+            </Label>
 
-          <Button variant="primary" size="lg" className="w-full">
-            Create account
-          </Button>
+            {error ? (
+              <p role="alert" className="text-sm text-error-strong">
+                {error}
+              </p>
+            ) : null}
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              aria-busy={pending}
+            >
+              {pending ? "Creating account…" : "Create account"}
+            </Button>
+          </form>
 
           <div className="flex items-center gap-3">
             <Separator className="flex-1" />
@@ -887,11 +1286,11 @@ export function SignupBlock() {
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <Button variant="outline">
+            <Button type="button" variant="outline">
               <Github className="size-4" aria-hidden="true" />
               GitHub
             </Button>
-            <Button variant="outline">
+            <Button type="button" variant="outline">
               <Chrome className="size-4" aria-hidden="true" />
               Google
             </Button>
@@ -902,7 +1301,7 @@ export function SignupBlock() {
           <p className="text-sm text-fg-secondary">
             Already have an account?{" "}
             <a
-              href="#signin"
+              href="/login"
               className="font-medium text-primary-strong underline-offset-4 hover:underline"
             >
               Sign in
@@ -943,6 +1342,26 @@ const proofQuotes: ProofQuote[] = [
 ];
 
 export function SignupSplitProofBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const name = String(form.get("name") ?? "");
+    const email = String(form.get("email") ?? "");
+    const password = String(form.get("password") ?? "");
+    setError(null);
+    setPending(true);
+    try {
+      await signUpEmail({ email, password, name });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
     <div className="flex w-full items-center justify-center py-4">
       <div className="grid w-full max-w-4xl overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-lg lg:grid-cols-[1.1fr_1fr]">
@@ -953,16 +1372,22 @@ export function SignupSplitProofBlock() {
             <p className="text-sm text-fg-secondary">Free for 14 days. No credit card needed.</p>
           </div>
 
-          <div className="flex flex-col gap-4">
+          <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
             <div className="flex flex-col gap-2">
               <Label htmlFor="signup-proof-name">Full name</Label>
-              <Input id="signup-proof-name" placeholder={USER.name} autoComplete="name" />
+              <Input
+                id="signup-proof-name"
+                name="name"
+                placeholder={USER.name}
+                autoComplete="name"
+              />
             </div>
 
             <div className="flex flex-col gap-2">
               <Label htmlFor="signup-proof-email">Email</Label>
               <Input
                 id="signup-proof-email"
+                name="email"
                 type="email"
                 placeholder="you@company.com"
                 autoComplete="email"
@@ -973,6 +1398,7 @@ export function SignupSplitProofBlock() {
               <Label htmlFor="signup-proof-password">Password</Label>
               <Input
                 id="signup-proof-password"
+                name="password"
                 type="password"
                 placeholder="••••••••"
                 autoComplete="new-password"
@@ -986,15 +1412,28 @@ export function SignupSplitProofBlock() {
               <Checkbox id="signup-proof-terms" defaultChecked />I agree to the Terms of Service.
             </Label>
 
-            <Button variant="primary" size="lg" className="w-full">
-              Create account
+            {error ? (
+              <p role="alert" className="text-sm text-error-strong">
+                {error}
+              </p>
+            ) : null}
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              aria-busy={pending}
+            >
+              {pending ? "Creating account…" : "Create account"}
             </Button>
-          </div>
+          </form>
 
           <p className="text-sm text-fg-secondary">
             Already have an account?{" "}
             <a
-              href="#signin"
+              href="/login"
               className="font-medium text-primary-strong underline-offset-4 hover:underline"
             >
               Sign in
@@ -1053,7 +1492,9 @@ export function SignupSplitProofBlock() {
   );
 }
 
-const signupSplitProofCode = `import {
+const signupSplitProofCode = `"use client";
+
+import {
   Avatar,
   AvatarFallback,
   Button,
@@ -1062,7 +1503,9 @@ const signupSplitProofCode = `import {
   Label,
   Rating,
 } from "@cronus-ui/ui";
+import { signUpEmail } from "../lib/auth-adapter.js";
 import { USER } from "../lib/demo-saas.js";
+import { type FormEvent, useState } from "react";
 
 const proofBrands = ["Northwind", "Framelane", "Luma Labs", "Postbox"];
 
@@ -1089,6 +1532,26 @@ const proofQuotes: ProofQuote[] = [
 ];
 
 export function SignupSplitProofBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const name = String(form.get("name") ?? "");
+    const email = String(form.get("email") ?? "");
+    const password = String(form.get("password") ?? "");
+    setError(null);
+    setPending(true);
+    try {
+      await signUpEmail({ email, password, name });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
     <div className="flex w-full items-center justify-center py-4">
       <div className="grid w-full max-w-4xl overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-lg lg:grid-cols-[1.1fr_1fr]">
@@ -1099,16 +1562,22 @@ export function SignupSplitProofBlock() {
             <p className="text-sm text-fg-secondary">Free for 14 days. No credit card needed.</p>
           </div>
 
-          <div className="flex flex-col gap-4">
+          <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
             <div className="flex flex-col gap-2">
               <Label htmlFor="signup-proof-name">Full name</Label>
-              <Input id="signup-proof-name" placeholder={USER.name} autoComplete="name" />
+              <Input
+                id="signup-proof-name"
+                name="name"
+                placeholder={USER.name}
+                autoComplete="name"
+              />
             </div>
 
             <div className="flex flex-col gap-2">
               <Label htmlFor="signup-proof-email">Email</Label>
               <Input
                 id="signup-proof-email"
+                name="email"
                 type="email"
                 placeholder="you@company.com"
                 autoComplete="email"
@@ -1119,6 +1588,7 @@ export function SignupSplitProofBlock() {
               <Label htmlFor="signup-proof-password">Password</Label>
               <Input
                 id="signup-proof-password"
+                name="password"
                 type="password"
                 placeholder="••••••••"
                 autoComplete="new-password"
@@ -1132,15 +1602,28 @@ export function SignupSplitProofBlock() {
               <Checkbox id="signup-proof-terms" defaultChecked />I agree to the Terms of Service.
             </Label>
 
-            <Button variant="primary" size="lg" className="w-full">
-              Create account
+            {error ? (
+              <p role="alert" className="text-sm text-error-strong">
+                {error}
+              </p>
+            ) : null}
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              aria-busy={pending}
+            >
+              {pending ? "Creating account…" : "Create account"}
             </Button>
-          </div>
+          </form>
 
           <p className="text-sm text-fg-secondary">
             Already have an account?{" "}
             <a
-              href="#signin"
+              href="/login"
               className="font-medium text-primary-strong underline-offset-4 hover:underline"
             >
               Sign in
@@ -1211,6 +1694,26 @@ const growthPlanFeatures = [
 ];
 
 export function SignupWithPlanBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const name = String(form.get("name") ?? "");
+    const email = String(form.get("email") ?? "");
+    const password = String(form.get("password") ?? "");
+    setError(null);
+    setPending(true);
+    try {
+      await signUpEmail({ email, password, name });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
     <div className="flex w-full items-center justify-center py-4">
       <div className="grid w-full max-w-4xl gap-6 lg:grid-cols-[1.1fr_1fr]">
@@ -1222,49 +1725,71 @@ export function SignupWithPlanBlock() {
           </CardHeader>
 
           <CardContent className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="signup-plan-name">Full name</Label>
-              <Input id="signup-plan-name" placeholder={USER.name} autoComplete="name" />
-            </div>
+            <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="signup-plan-name">Full name</Label>
+                <Input
+                  id="signup-plan-name"
+                  name="name"
+                  placeholder={USER.name}
+                  autoComplete="name"
+                />
+              </div>
 
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="signup-plan-email">Work email</Label>
-              <Input
-                id="signup-plan-email"
-                type="email"
-                placeholder="you@company.com"
-                autoComplete="email"
-              />
-            </div>
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="signup-plan-email">Work email</Label>
+                <Input
+                  id="signup-plan-email"
+                  name="email"
+                  type="email"
+                  placeholder="you@company.com"
+                  autoComplete="email"
+                />
+              </div>
 
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="signup-plan-password">Password</Label>
-              <Input
-                id="signup-plan-password"
-                type="password"
-                placeholder="••••••••"
-                autoComplete="new-password"
-              />
-              <p className="text-xs text-fg-tertiary">Must be at least 8 characters.</p>
-            </div>
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="signup-plan-password">Password</Label>
+                <Input
+                  id="signup-plan-password"
+                  name="password"
+                  type="password"
+                  placeholder="••••••••"
+                  autoComplete="new-password"
+                />
+                <p className="text-xs text-fg-tertiary">Must be at least 8 characters.</p>
+              </div>
 
-            <Label
-              htmlFor="signup-plan-terms"
-              className="flex items-start gap-2 font-normal text-fg-secondary"
-            >
-              <Checkbox id="signup-plan-terms" defaultChecked />I agree to the Terms of Service.
-            </Label>
+              <Label
+                htmlFor="signup-plan-terms"
+                className="flex items-start gap-2 font-normal text-fg-secondary"
+              >
+                <Checkbox id="signup-plan-terms" defaultChecked />I agree to the Terms of Service.
+              </Label>
 
-            <Button variant="primary" size="lg" className="w-full">
-              Start free trial
-            </Button>
+              {error ? (
+                <p role="alert" className="text-sm text-error-strong">
+                  {error}
+                </p>
+              ) : null}
+
+              <Button
+                type="submit"
+                variant="primary"
+                size="lg"
+                className="w-full"
+                disabled={pending}
+                aria-busy={pending}
+              >
+                {pending ? "Creating account…" : "Start free trial"}
+              </Button>
+            </form>
           </CardContent>
 
           <CardFooter className="justify-center">
             <p className="text-sm text-fg-secondary">
               Already have an account?{" "}
               <a
-                href="#signin"
+                href="/login"
                 className="font-medium text-primary-strong underline-offset-4 hover:underline"
               >
                 Sign in
@@ -1337,7 +1862,9 @@ export function SignupWithPlanBlock() {
   );
 }
 
-const signupWithPlanCode = `import {
+const signupWithPlanCode = `"use client";
+
+import {
   Badge,
   Button,
   Card,
@@ -1352,8 +1879,10 @@ const signupWithPlanCode = `import {
   Label,
   Separator,
 } from "@cronus-ui/ui";
+import { signUpEmail } from "../lib/auth-adapter.js";
 import { USER } from "../lib/demo-saas.js";
 import { Check } from "lucide-react";
+import { type FormEvent, useState } from "react";
 
 const growthPlanFeatures = [
   "Unlimited products and checkouts",
@@ -1363,6 +1892,26 @@ const growthPlanFeatures = [
 ];
 
 export function SignupWithPlanBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const name = String(form.get("name") ?? "");
+    const email = String(form.get("email") ?? "");
+    const password = String(form.get("password") ?? "");
+    setError(null);
+    setPending(true);
+    try {
+      await signUpEmail({ email, password, name });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
     <div className="flex w-full items-center justify-center py-4">
       <div className="grid w-full max-w-4xl gap-6 lg:grid-cols-[1.1fr_1fr]">
@@ -1374,49 +1923,71 @@ export function SignupWithPlanBlock() {
           </CardHeader>
 
           <CardContent className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="signup-plan-name">Full name</Label>
-              <Input id="signup-plan-name" placeholder={USER.name} autoComplete="name" />
-            </div>
+            <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="signup-plan-name">Full name</Label>
+                <Input
+                  id="signup-plan-name"
+                  name="name"
+                  placeholder={USER.name}
+                  autoComplete="name"
+                />
+              </div>
 
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="signup-plan-email">Work email</Label>
-              <Input
-                id="signup-plan-email"
-                type="email"
-                placeholder="you@company.com"
-                autoComplete="email"
-              />
-            </div>
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="signup-plan-email">Work email</Label>
+                <Input
+                  id="signup-plan-email"
+                  name="email"
+                  type="email"
+                  placeholder="you@company.com"
+                  autoComplete="email"
+                />
+              </div>
 
-            <div className="flex flex-col gap-2">
-              <Label htmlFor="signup-plan-password">Password</Label>
-              <Input
-                id="signup-plan-password"
-                type="password"
-                placeholder="••••••••"
-                autoComplete="new-password"
-              />
-              <p className="text-xs text-fg-tertiary">Must be at least 8 characters.</p>
-            </div>
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="signup-plan-password">Password</Label>
+                <Input
+                  id="signup-plan-password"
+                  name="password"
+                  type="password"
+                  placeholder="••••••••"
+                  autoComplete="new-password"
+                />
+                <p className="text-xs text-fg-tertiary">Must be at least 8 characters.</p>
+              </div>
 
-            <Label
-              htmlFor="signup-plan-terms"
-              className="flex items-start gap-2 font-normal text-fg-secondary"
-            >
-              <Checkbox id="signup-plan-terms" defaultChecked />I agree to the Terms of Service.
-            </Label>
+              <Label
+                htmlFor="signup-plan-terms"
+                className="flex items-start gap-2 font-normal text-fg-secondary"
+              >
+                <Checkbox id="signup-plan-terms" defaultChecked />I agree to the Terms of Service.
+              </Label>
 
-            <Button variant="primary" size="lg" className="w-full">
-              Start free trial
-            </Button>
+              {error ? (
+                <p role="alert" className="text-sm text-error-strong">
+                  {error}
+                </p>
+              ) : null}
+
+              <Button
+                type="submit"
+                variant="primary"
+                size="lg"
+                className="w-full"
+                disabled={pending}
+                aria-busy={pending}
+              >
+                {pending ? "Creating account…" : "Start free trial"}
+              </Button>
+            </form>
           </CardContent>
 
           <CardFooter className="justify-center">
             <p className="text-sm text-fg-secondary">
               Already have an account?{" "}
               <a
-                href="#signin"
+                href="/login"
                 className="font-medium text-primary-strong underline-offset-4 hover:underline"
               >
                 Sign in
@@ -1494,6 +2065,24 @@ export function SignupWithPlanBlock() {
  * ────────────────────────────────────────────────────────────────────────── */
 
 export function ForgotPasswordBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const email = String(form.get("email") ?? "");
+    setError(null);
+    setPending(true);
+    try {
+      await requestPasswordReset({ email });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
     <div className="flex w-full items-center justify-center py-4">
       <Card className="w-full max-w-sm gap-6 shadow-lg">
@@ -1509,25 +2098,41 @@ export function ForgotPasswordBlock() {
           </div>
         </CardHeader>
 
-        <CardContent className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="forgot-email">Email</Label>
-            <Input
-              id="forgot-email"
-              type="email"
-              placeholder="you@company.com"
-              autoComplete="email"
-            />
-          </div>
+        <CardContent>
+          <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="forgot-email">Email</Label>
+              <Input
+                id="forgot-email"
+                name="email"
+                type="email"
+                placeholder="you@company.com"
+                autoComplete="email"
+              />
+            </div>
 
-          <Button variant="primary" size="lg" className="w-full">
-            Send reset link
-          </Button>
+            {error ? (
+              <p role="alert" className="text-sm text-error-strong">
+                {error}
+              </p>
+            ) : null}
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              aria-busy={pending}
+            >
+              {pending ? "Sending…" : "Send reset link"}
+            </Button>
+          </form>
         </CardContent>
 
         <CardFooter className="justify-center">
           <a
-            href="#signin"
+            href="/login"
             className="inline-flex items-center justify-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
           >
             <ArrowLeft className="size-4" aria-hidden="true" />
@@ -1539,7 +2144,9 @@ export function ForgotPasswordBlock() {
   );
 }
 
-const forgotPasswordCode = `import {
+const forgotPasswordCode = `"use client";
+
+import {
   Button,
   Card,
   CardContent,
@@ -1549,9 +2156,29 @@ const forgotPasswordCode = `import {
   Input,
   Label,
 } from "@cronus-ui/ui";
+import { requestPasswordReset } from "../lib/auth-adapter.js";
 import { ArrowLeft, KeyRound } from "lucide-react";
+import { type FormEvent, useState } from "react";
 
 export function ForgotPasswordBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const email = String(form.get("email") ?? "");
+    setError(null);
+    setPending(true);
+    try {
+      await requestPasswordReset({ email });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
     <div className="flex w-full items-center justify-center py-4">
       <Card className="w-full max-w-sm gap-6 shadow-lg">
@@ -1567,20 +2194,41 @@ export function ForgotPasswordBlock() {
           </div>
         </CardHeader>
 
-        <CardContent className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <Label htmlFor="forgot-email">Email</Label>
-            <Input id="forgot-email" type="email" placeholder="you@company.com" autoComplete="email" />
-          </div>
+        <CardContent>
+          <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="forgot-email">Email</Label>
+              <Input
+                id="forgot-email"
+                name="email"
+                type="email"
+                placeholder="you@company.com"
+                autoComplete="email"
+              />
+            </div>
 
-          <Button variant="primary" size="lg" className="w-full">
-            Send reset link
-          </Button>
+            {error ? (
+              <p role="alert" className="text-sm text-error-strong">
+                {error}
+              </p>
+            ) : null}
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              aria-busy={pending}
+            >
+              {pending ? "Sending…" : "Send reset link"}
+            </Button>
+          </form>
         </CardContent>
 
         <CardFooter className="justify-center">
           <a
-            href="#signin"
+            href="/login"
             className="inline-flex items-center justify-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
           >
             <ArrowLeft className="size-4" aria-hidden="true" />
@@ -1620,7 +2268,7 @@ export function ForgotPasswordSentBlock() {
 
         <CardFooter className="justify-center">
           <a
-            href="#signin"
+            href="/login"
             className="inline-flex items-center justify-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
           >
             <ArrowLeft className="size-4" aria-hidden="true" />
@@ -1670,7 +2318,7 @@ export function ForgotPasswordSentBlock() {
 
         <CardFooter className="justify-center">
           <a
-            href="#signin"
+            href="/login"
             className="inline-flex items-center justify-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
           >
             <ArrowLeft className="size-4" aria-hidden="true" />
@@ -1733,7 +2381,7 @@ export function OtpBlock() {
 
         <CardFooter className="justify-center">
           <a
-            href="#signin"
+            href="/login"
             className="inline-flex items-center justify-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
           >
             <ArrowLeft className="size-4" aria-hidden="true" />
@@ -1805,7 +2453,7 @@ export function OtpBlock() {
 
         <CardFooter className="justify-center">
           <a
-            href="#signin"
+            href="/login"
             className="inline-flex items-center justify-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
           >
             <ArrowLeft className="size-4" aria-hidden="true" />
@@ -1874,7 +2522,7 @@ export function MagicLinkBlock() {
           <p className="text-sm text-fg-secondary">
             Prefer a password?{" "}
             <a
-              href="#signin"
+              href="/login"
               className="font-medium text-primary-strong underline-offset-4 hover:underline"
             >
               Sign in
@@ -1947,7 +2595,7 @@ export function MagicLinkBlock() {
           <p className="text-sm text-fg-secondary">
             Prefer a password?{" "}
             <a
-              href="#signin"
+              href="/login"
               className="font-medium text-primary-strong underline-offset-4 hover:underline"
             >
               Sign in
@@ -1985,7 +2633,7 @@ export function MagicLinkSentBlock() {
 
         <CardFooter className="justify-center">
           <a
-            href="#signin"
+            href="/login"
             className="inline-flex items-center justify-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
           >
             <ArrowLeft className="size-4" aria-hidden="true" />
@@ -2033,7 +2681,7 @@ export function MagicLinkSentBlock() {
 
         <CardFooter className="justify-center">
           <a
-            href="#signin"
+            href="/login"
             className="inline-flex items-center justify-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
           >
             <ArrowLeft className="size-4" aria-hidden="true" />

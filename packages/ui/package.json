@@ -20,6 +20,10 @@
       "types": "./dist/lib/demo-saas.d.ts",
       "import": "./dist/lib/demo-saas.js"
     },
+    "./auth-adapter": {
+      "types": "./dist/lib/auth-adapter.d.ts",
+      "import": "./dist/lib/auth-adapter.js"
+    },
     "./testing": {
       "types": "./dist/testing/index.d.ts",
       "import": "./dist/testing/index.js"
