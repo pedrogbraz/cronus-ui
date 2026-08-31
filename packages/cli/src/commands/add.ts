@@ -11,6 +11,7 @@ import {
   collectDependencies,
   detectPackageManager,
   log,
+  recordDependencies,
   runInstall,
   writeItemFiles,
 } from "../utils.js";
@@ -127,6 +128,7 @@ export async function add(names: string[], options: AddOptions): Promise<void> {
   }
 
   const deps = collectDependencies(items);
+  await recordDependencies(cwd, deps);
   if (deps.length > 0 && !options.skipInstall) {
     const pm = detectPackageManager(cwd);
     log.step(`Installing ${deps.length} dependencies with ${pm}…`);

@@ -55,7 +55,9 @@ import {
   collectDependencies,
   detectPackageManager,
   log,
+  recordDependencies,
   resolveSafeDest,
+  rewriteImports,
   runInstall,
   writeFileEnsured,
   writeItemFiles,
@@ -391,7 +393,7 @@ export async function addPage(options: AddPageOptions): Promise<AddPageResult> {
       const dest = resolveSafeDest(targetDir, ".", rel);
       const source = plan.chromeSources[slug];
       if (source === undefined || !existsSync(dest)) continue;
-      const content = rewriteChromeBlock(slug, source, plan);
+      const content = rewriteImports(rewriteChromeBlock(slug, source, plan), config);
       await writeFileEnsured(dest, content);
       if (!generatedFiles.includes(rel)) generatedFiles.push(rel);
     }
@@ -416,16 +418,15 @@ export async function addPage(options: AddPageOptions): Promise<AddPageResult> {
   const composed = { ...config.composed, [appName]: nextRecord };
   await writeConfig(targetDir, { ...config, installed, composed });
 
-  // --- Install npm deps (best-effort) ---------------------------------------
-  if (resolvedItems.length > 0 && !(options.skipInstall ?? false)) {
-    const deps = collectDependencies(resolvedItems);
-    if (deps.length > 0) {
-      const pm = detectPackageManager(targetDir);
-      try {
-        await runInstall(pm, deps, targetDir);
-      } catch {
-        // Non-fatal.
-      }
+  // --- Record + install npm deps (best-effort) ------------------------------
+  const deps = resolvedItems.length > 0 ? collectDependencies(resolvedItems) : [];
+  await recordDependencies(targetDir, deps);
+  if (deps.length > 0 && !(options.skipInstall ?? false)) {
+    const pm = detectPackageManager(targetDir);
+    try {
+      await runInstall(pm, deps, targetDir);
+    } catch {
+      // Non-fatal.
     }
   }
 

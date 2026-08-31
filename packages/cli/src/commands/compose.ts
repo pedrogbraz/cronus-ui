@@ -33,7 +33,9 @@ import {
   collectDependencies,
   detectPackageManager,
   log,
+  recordDependencies,
   resolveSafeDest,
+  rewriteImports,
   runInstall,
   writeFileEnsured,
   writeItemFiles,
@@ -194,7 +196,7 @@ export async function composeApp(options: ComposeAppOptions): Promise<ComposeApp
       continue;
     }
     const dest = resolveSafeDest(targetDir, ".", rewrite.file);
-    await writeFileEnsured(dest, rewrite.content);
+    await writeFileEnsured(dest, rewriteImports(rewrite.content, config));
     generatedFiles.push(rewrite.file);
   }
 
@@ -254,10 +256,14 @@ export async function composeApp(options: ComposeAppOptions): Promise<ComposeApp
 
   writeDesignDocuments(targetDir, { theme: nextConfig.theme?.name });
 
-  // --- Install npm deps (best-effort, like add) -----------------------------
+  // --- Record + install npm deps --------------------------------------------
+  // Always pin registry specs into package.json (lucide-react, recharts, …)
+  // even when --no-install: a later `bun install` must match `pm add`.
+  const registryDeps = collectDependencies(items);
+  await recordDependencies(targetDir, registryDeps);
   const deps = isGoldPathTemplate(plan.templateName)
-    ? [...new Set([...collectDependencies(items), ...GOLD_PATH_DEPENDENCIES])].sort()
-    : collectDependencies(items);
+    ? [...new Set([...registryDeps, ...GOLD_PATH_DEPENDENCIES])].sort()
+    : registryDeps;
   if (deps.length > 0 && !(options.skipInstall ?? false)) {
     const pm = detectPackageManager(targetDir);
     try {

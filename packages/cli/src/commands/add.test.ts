@@ -44,6 +44,29 @@ describe("add records the install manifest", () => {
     writeFileSync(join(cwd, CONFIG_FILE), JSON.stringify({ ...DEFAULT_CONFIG, registry }, null, 2));
   }
 
+  it("records registry npm pins into package.json even with --no-install", async () => {
+    const registry = join(root, "registry");
+    writeRegistry(registry);
+    const itemPath = join(registry, "widget.json");
+    const item = JSON.parse(readFileSync(itemPath, "utf8")) as {
+      dependencies: string[];
+    };
+    item.dependencies = ["lucide-react@^0.577.0"];
+    writeFileSync(itemPath, JSON.stringify(item));
+    writeConfigFile(registry);
+    writeFileSync(
+      join(cwd, "package.json"),
+      JSON.stringify({ name: "app", version: "0.0.0", private: true, dependencies: {} }),
+    );
+
+    await add(["widget"], { cwd, skipInstall: true });
+
+    const pkg = JSON.parse(readFileSync(join(cwd, "package.json"), "utf8")) as {
+      dependencies: Record<string, string>;
+    };
+    expect(pkg.dependencies["lucide-react"]).toBe("^0.577.0");
+  });
+
   it("writes an installed entry with the version and file list", async () => {
     const registry = join(root, "registry"); // unversioned source → pins CLI_VERSION
     writeRegistry(registry);

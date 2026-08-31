@@ -259,11 +259,11 @@ async function main(): Promise<void> {
     `Created ${fileCount} files (${c.cyan(template)} template, ${c.cyan(theme)} theme, ${mode} mode).`,
   );
 
-  // Cronus Compose: store/landing scaffold the `default` base above, then generate
-  // their pages + chrome from validated registry blocks. The blocks pull npm deps
-  // (e.g. lucide-react) that the base package.json lacks, so let compose record +
-  // install them via `pm add` when installing is enabled; a following `--no-install`
-  // scaffold records nothing (matching `cronus-ui add --no-install`).
+  // Cronus Compose: store/landing/saas/admin scaffold the `default` base above,
+  // then generate pages + chrome from validated registry blocks. Blocks pull npm
+  // deps (e.g. lucide-react) the base package.json lacks; compose always records
+  // those pins into package.json, and still runs `pm add` when installing is on.
+  // `--no-install` skips the spawn so a later `bun install` picks the pins up.
   if (isComposedTemplate(template)) {
     log.step(`Composing the ${c.cyan(template)} app from validated blocks…`);
     const composed = await composeTemplate({
