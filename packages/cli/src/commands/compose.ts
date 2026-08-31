@@ -2,6 +2,7 @@ import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { writeDesignDocuments } from "@cronus-ui/ai-kit";
+import { applyGoldPath, GOLD_PATH_DEPENDENCIES, isGoldPathTemplate } from "../compose/gold-path.js";
 import { type AppManifest, type ManifestError, manifestFingerprint } from "../compose/manifest.js";
 import {
   buildComposePlan,
@@ -213,6 +214,19 @@ export async function composeApp(options: ComposeAppOptions): Promise<ComposeApp
     await writeFileEnsured(snapDest, file.content);
   }
 
+  // Authenticated gold path (saas/admin only): sqlite + drizzle + better-auth.
+  if (isGoldPathTemplate(plan.templateName)) {
+    const gold = await applyGoldPath({
+      targetDir,
+      config,
+      generatedFiles,
+      overwrite,
+      templateName: plan.templateName,
+    });
+    generatedFiles.push(...gold.written);
+    skippedFiles.push(...gold.skipped);
+  }
+
   // --- Record composed{} + installed{} --------------------------------------
   // Keyed by TEMPLATE name (not project name): a project can compose several
   // templates, and re-composing the same one updates its record in place.
@@ -241,7 +255,9 @@ export async function composeApp(options: ComposeAppOptions): Promise<ComposeApp
   writeDesignDocuments(targetDir, { theme: nextConfig.theme?.name });
 
   // --- Install npm deps (best-effort, like add) -----------------------------
-  const deps = collectDependencies(items);
+  const deps = isGoldPathTemplate(plan.templateName)
+    ? [...new Set([...collectDependencies(items), ...GOLD_PATH_DEPENDENCIES])].sort()
+    : collectDependencies(items);
   if (deps.length > 0 && !(options.skipInstall ?? false)) {
     const pm = detectPackageManager(targetDir);
     try {

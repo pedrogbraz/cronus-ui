@@ -21,6 +21,12 @@
     "registryDependencies": []
   },
   {
+    "name": "auth-adapter",
+    "type": "registry:lib",
+    "dependencies": [],
+    "registryDependencies": []
+  },
+  {
     "name": "accordion",
     "type": "registry:ui",
     "dependencies": [
@@ -1972,7 +1978,9 @@
       "@cronus-ui/ui@0.6.1",
       "lucide-react@^0.577.0"
     ],
-    "registryDependencies": []
+    "registryDependencies": [
+      "auth-adapter"
+    ]
   },
   {
     "name": "login--split",
@@ -1981,7 +1989,9 @@
       "@cronus-ui/ui@0.6.1",
       "lucide-react@^0.577.0"
     ],
-    "registryDependencies": []
+    "registryDependencies": [
+      "auth-adapter"
+    ]
   },
   {
     "name": "login--social-first",
@@ -1990,7 +2000,9 @@
       "@cronus-ui/ui@0.6.1",
       "lucide-react@^0.577.0"
     ],
-    "registryDependencies": []
+    "registryDependencies": [
+      "auth-adapter"
+    ]
   },
   {
     "name": "login--minimal",
@@ -1999,7 +2011,9 @@
       "@cronus-ui/ui@0.6.1",
       "lucide-react@^0.577.0"
     ],
-    "registryDependencies": []
+    "registryDependencies": [
+      "auth-adapter"
+    ]
   },
   {
     "name": "signup",
@@ -2009,6 +2023,7 @@
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
+      "auth-adapter",
       "demo-saas"
     ]
   },
@@ -2019,6 +2034,7 @@
       "@cronus-ui/ui@0.6.1"
     ],
     "registryDependencies": [
+      "auth-adapter",
       "demo-saas"
     ]
   },
@@ -2030,6 +2046,7 @@
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
+      "auth-adapter",
       "demo-saas"
     ]
   },
@@ -2040,7 +2057,9 @@
       "@cronus-ui/ui@0.6.1",
       "lucide-react@^0.577.0"
     ],
-    "registryDependencies": []
+    "registryDependencies": [
+      "auth-adapter"
+    ]
   },
   {
     "name": "forgot-password--sent",

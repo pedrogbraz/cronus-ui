@@ -166,6 +166,12 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     const navbar = readFileSync(join(cwd, "components/blocks/navbar.tsx"), "utf8");
     expect(navbar).toContain("loja");
     expect(result.files).toContain("app/(site)/page.tsx");
+
+    expect(existsSync(join(cwd, "drizzle.config.ts"))).toBe(false);
+    expect(existsSync(join(cwd, "db/schema.ts"))).toBe(false);
+    expect(existsSync(join(cwd, "lib/auth.ts"))).toBe(false);
+    expect(existsSync(join(cwd, "middleware.ts"))).toBe(false);
+    expect(existsSync(join(cwd, "lib/auth-adapter.ts"))).toBe(false);
   });
 
   it("composes the Pro mail pack into (shell)/(bare) from validated blocks", async () => {
@@ -243,6 +249,14 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     const dashboardBlock = readFileSync(join(cwd, "components/blocks/dashboard.tsx"), "utf8");
     expect(dashboardBlock).not.toContain("Lena Park");
     expect(dashboardBlock).toContain("demo-saas");
+
+    expect(existsSync(join(cwd, "db/schema.ts"))).toBe(true);
+    expect(existsSync(join(cwd, "lib/auth.ts"))).toBe(true);
+    expect(existsSync(join(cwd, "middleware.ts"))).toBe(true);
+    expect(readFileSync(join(cwd, "lib/auth-adapter.ts"), "utf8")).toMatch(
+      /authClient|better-auth/,
+    );
+    expect(readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8")).toContain("ItemsPanel");
   });
 
   it("composes the admin template into (shell)/(bare) with the admin-overview dashboard", async () => {
@@ -271,6 +285,14 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     expect(shellBlock).toContain('{ label: "Overview", href: "/" }');
     expect(shellBlock).toContain("Console");
     expect(shellBlock.startsWith('"use client"')).toBe(true);
+
+    expect(existsSync(join(cwd, "db/schema.ts"))).toBe(true);
+    expect(existsSync(join(cwd, "lib/auth.ts"))).toBe(true);
+    expect(existsSync(join(cwd, "middleware.ts"))).toBe(true);
+    expect(readFileSync(join(cwd, "lib/auth-adapter.ts"), "utf8")).toMatch(
+      /authClient|better-auth/,
+    );
+    expect(readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8")).toContain("ItemsPanel");
   });
 
   it("composes the docs template into (site) chrome from content blocks, not landing-docs", async () => {

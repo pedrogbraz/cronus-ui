@@ -296,4 +296,18 @@ describe("outroLines", () => {
     expect(joined("my-app", "yarn", false)).toMatch(/\byarn\b/);
     expect(joined("my-app", "npm", true)).toContain("npm run dev");
   });
+
+  it("for saas/admin, lists db:push before dev", () => {
+    for (const t of ["saas", "admin"] as const) {
+      const lines = outroLines("acme", "npm", true, t);
+      const pushIdx = lines.findIndex((l) => l.includes("db:push"));
+      const devIdx = lines.findIndex((l) => l.includes("npm run dev"));
+      expect(pushIdx, t).toBeGreaterThan(-1);
+      expect(devIdx, t).toBeGreaterThan(-1);
+      expect(pushIdx, t).toBeLessThan(devIdx);
+    }
+    expect(joined("acme", "bun", true, "saas")).toContain("bun run db:push");
+    expect(joined("acme", "npm", true, "store")).not.toContain("db:push");
+    expect(joined("acme", "npm", true, "landing")).not.toContain("db:push");
+  });
 });

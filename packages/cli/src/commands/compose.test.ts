@@ -140,6 +140,28 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(welcome).toContain("<WelcomeBlock />");
     const forgot = readFileSync(join(cwd, "app/(bare)/forgot-password/page.tsx"), "utf8");
     expect(forgot).toContain("<ForgotPasswordBlock />");
+
+    expect(existsSync(join(cwd, "db/schema.ts"))).toBe(true);
+    expect(existsSync(join(cwd, "lib/auth.ts"))).toBe(true);
+    expect(existsSync(join(cwd, "middleware.ts"))).toBe(true);
+    expect(readFileSync(join(cwd, "lib/auth-adapter.ts"), "utf8")).toMatch(
+      /authClient|better-auth/,
+    );
+    const home = readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8");
+    expect(home).toContain("ItemsPanel");
+    expect(result.generatedFiles).toContain("db/schema.ts");
+    expect(result.generatedFiles).toContain("middleware.ts");
+  });
+
+  it("composes the admin template with the sqlite gold path", async () => {
+    const result = await composeApp({ targetDir: cwd, template: "admin", skipInstall: true });
+    expect(result.templateName).toBe("admin");
+    expect(existsSync(join(cwd, "app/(shell)/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "db/schema.ts"))).toBe(true);
+    expect(existsSync(join(cwd, "lib/auth.ts"))).toBe(true);
+    expect(existsSync(join(cwd, "middleware.ts"))).toBe(true);
+    expect(readFileSync(join(cwd, "lib/auth-adapter.ts"), "utf8")).toContain("authClient");
+    expect(readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8")).toContain("ItemsPanel");
   });
 
   it("composes the 9-page store template with all routes", async () => {
@@ -162,6 +184,14 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     // The bare group has no chrome furniture (passthrough layout).
     const bareLayout = readFileSync(join(cwd, "app/(bare)/layout.tsx"), "utf8");
     expect(bareLayout).toContain("return <>{children}</>;");
+
+    // Store stays on the demo path — no drizzle / better-auth / middleware.
+    expect(existsSync(join(cwd, "drizzle.config.ts"))).toBe(false);
+    expect(existsSync(join(cwd, "db/schema.ts"))).toBe(false);
+    expect(existsSync(join(cwd, "lib/auth.ts"))).toBe(false);
+    expect(existsSync(join(cwd, "middleware.ts"))).toBe(false);
+    expect(existsSync(join(cwd, "lib/auth-adapter.ts"))).toBe(false);
+    expect(readFileSync(join(cwd, "app/(site)/page.tsx"), "utf8")).not.toContain("ItemsPanel");
   });
 
   it("is deterministic across two independent projects", async () => {

@@ -23,6 +23,7 @@ export const c = {
  * the copy without scraping stdout. `template` is optional for back-compat: omit
  * it (or pass a bundled template) to keep the component-add path; composed
  * templates (`saas`/`store`/`landing`) get add-page / theme / upgrade instead.
+ * saas/admin also get `db:push` before `dev` (sqlite gold path).
  */
 export function outroLines(
   name: string,
@@ -32,8 +33,10 @@ export function outroLines(
 ): string[] {
   const dev = pm === "npm" ? "npm run dev" : `${pm} dev`;
   const install = pm === "yarn" ? "yarn" : `${pm} install`;
+  const dbPush = pm === "npm" ? "npm run db:push" : `${pm} run db:push`;
   const dollar = c.dim("$");
   const composed = template !== undefined && isComposedTemplate(template);
+  const goldPath = template === "saas" || template === "admin";
   const grow = composed
     ? [
         "Grow the app anytime:",
@@ -52,6 +55,7 @@ export function outroLines(
     "Next steps:",
     `  ${dollar} cd ${name}`,
     ...(installed ? [] : [`  ${dollar} ${install}`]),
+    ...(goldPath ? [`  ${dollar} ${dbPush}`] : []),
     `  ${dollar} ${dev}`,
     "",
     `Then open ${c.cyan("http://localhost:3000")}.`,

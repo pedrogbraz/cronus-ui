@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Authenticated gold path.** The default stack is Next + Cronus + SQLite +
+  Drizzle + Better-Auth. `create-cronus-app --template saas` (and `admin`)
+  writes the data layer, login/signup/forgot-password talk to Better-Auth,
+  middleware protects the shell, and the home page queries SQLite.
+
+### Changed
+
+- **Auth blocks.** Login, signup, and forgot-password are real forms via the
+  `auth-adapter` lib (demo success in the gallery; gold-path apps replace the
+  adapter).
+
 ## [0.6.1] — 2026-08-30
 
 ### Added
