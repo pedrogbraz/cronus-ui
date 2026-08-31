@@ -2,7 +2,7 @@
   "name": "blog--list",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.2",
+    "@cronus-ui/ui@0.6.3",
     "lucide-react@^0.577.0"
   ],
   "registryDependencies": [],
