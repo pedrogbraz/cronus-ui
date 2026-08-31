@@ -19,13 +19,13 @@ export function isGoldPathTemplate(name: string): boolean {
 /** Production npm specs installed with the gold path (devDeps are merged into package.json). */
 export const GOLD_PATH_DEPENDENCIES = [
   "drizzle-orm@^0.45.2",
-  "better-sqlite3@^13.0.3",
+  "better-sqlite3@^12.0.0",
   "better-auth@^1.7.2",
 ] as const;
 
 const GOLD_PATH_PROD_DEPS: Record<string, string> = {
   "drizzle-orm": "^0.45.2",
-  "better-sqlite3": "^13.0.3",
+  "better-sqlite3": "^12.0.0",
   "better-auth": "^1.7.2",
 };
 

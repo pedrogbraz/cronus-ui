@@ -33,6 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `--no-install`. Chrome customization runs the F3 lib rewrite, so
   `app-shell-chrome` imports `@/lib/demo-saas` instead of `../lib/demo-saas.js`.
   Drizzle sqlite `db:push` creates the `data/` directory before opening the file.
+  Generated SQLite apps pin `better-sqlite3@^12` so `npm install` satisfies
+  Better-Auth's optional peer (13.x conflicts under npm 11).
 
 ## [0.6.1] — 2026-08-30
 

@@ -195,7 +195,7 @@ function packageJson(projectName: string, config: StackConfig): string {
     add(devDeps, "drizzle-kit", "^0.31.10");
     switch (single(config, "database")) {
       case "db-sqlite":
-        add(deps, "better-sqlite3", "^13.0.3");
+        add(deps, "better-sqlite3", "^12.0.0");
         add(devDeps, "@types/better-sqlite3", "^9.6.0");
         break;
       case "db-postgres":

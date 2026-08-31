@@ -278,7 +278,7 @@ describe("applyGoldPath", () => {
     };
     expect(pkg.dependencies.next).toBe("16.2.10");
     expect(pkg.dependencies["drizzle-orm"]).toBe("^0.45.2");
-    expect(pkg.dependencies["better-sqlite3"]).toBe("^13.0.3");
+    expect(pkg.dependencies["better-sqlite3"]).toBe("^12.0.0");
     expect(pkg.dependencies["better-auth"]).toBe("^1.7.2");
     expect(pkg.devDependencies["drizzle-kit"]).toBe("^0.31.10");
     expect(pkg.scripts["db:push"]).toBe("drizzle-kit push");
