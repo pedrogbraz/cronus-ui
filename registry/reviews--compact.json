@@ -2,7 +2,7 @@
   "name": "reviews--compact",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.3",
+    "@cronus-ui/ui@0.6.4",
     "lucide-react@^0.577.0"
   ],
   "registryDependencies": [],
