@@ -2,7 +2,7 @@
   "name": "sessions--table",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.1",
+    "@cronus-ui/ui@0.6.2",
     "lucide-react@^0.577.0"
   ],
   "registryDependencies": [],
