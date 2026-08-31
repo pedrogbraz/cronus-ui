@@ -298,6 +298,21 @@ export const ACCESSIBILITY_CHECKS = [
 
 export const CHANGELOG_ENTRIES = [
   {
+    date: "2026-08-31",
+    version: "v0.6.2",
+    status: "Released",
+    title: "Authenticated gold path",
+    summary:
+      "create-cronus-app --template saas signs up, creates a workspace, and accepts invites. SQLite + Drizzle + Better-Auth, chrome from the session.",
+    items: [
+      "saas and admin compose SQLite, Drizzle, Better-Auth, and protected shell",
+      "Login, signup, and forgot-password are real forms via auth-adapter",
+      "Signup creates a workspace; WorkspaceSwitcher and InviteDialog talk to Better-Auth",
+      "Invitee signs up from /accept-invitation and joins the same org",
+      "Compose records registry npm pins even with --no-install; drizzle-kit creates data/",
+    ],
+  },
+  {
     date: "2026-08-30",
     version: "v0.6.1",
     status: "Released",
