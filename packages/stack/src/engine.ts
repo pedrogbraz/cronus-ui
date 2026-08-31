@@ -530,8 +530,9 @@ export function toggleMulti(
 /**
  * The canonical default selection: every single category at its first option,
  * toggles per {@link TOGGLE_DEFAULTS_ON}, multis per {@link MULTI_DEFAULTS},
- * with `ui` nudged to Cronus UI (the product default) when a React web frontend
- * is present. Always valid.
+ * then product nudges (Next.js, Cronus UI, SQLite, Drizzle, Better-Auth, basic
+ * DB setup). Catalog first-options stay the cascade fallback (e.g. `db-none`).
+ * Always valid.
  */
 export function defaultSelection(catalog: Catalog = defaultCatalog): Selection {
   const seed: Selection = {};
@@ -545,9 +546,13 @@ export function defaultSelection(catalog: Catalog = defaultCatalog): Selection {
       seed[cat.id] = TOGGLE_DEFAULTS_ON.has(cat.id);
     }
   }
-  // Product defaults: Next.js + Cronus UI.
+  // Product defaults: Next.js + Cronus UI + signed-in SQLite path.
   seed.web = "web-next";
   seed.ui = "ui-cronus";
+  seed.database = "db-sqlite";
+  seed.orm = "orm-drizzle";
+  seed.auth = "auth-better-auth";
+  seed.dbSetup = "dbsetup-basic";
   return resolve(catalog, seed).selection;
 }
 

@@ -39,6 +39,17 @@ describe("catalog integrity", () => {
     expect(resolve(catalog, defaultSelection(catalog)).valid).toBe(true);
   });
 
+  it("nudges the product default to the signed-in SQLite gold path", () => {
+    const sel = defaultSelection(catalog);
+    expect(sel.web).toBe("web-next");
+    expect(sel.ui).toBe("ui-cronus");
+    expect(sel.database).toBe("db-sqlite");
+    expect(sel.orm).toBe("orm-drizzle");
+    expect(sel.auth).toBe("auth-better-auth");
+    expect(sel.dbSetup).toBe("dbsetup-basic");
+    expect(resolve(catalog, sel).valid).toBe(true);
+  });
+
   it("does not preselect skills so the generator keeps the full AI Kit", () => {
     expect(defaultSelection(catalog).skills).toEqual([]);
   });

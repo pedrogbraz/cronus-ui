@@ -427,6 +427,14 @@ export function generateKickoff(
       followUps.push(`Implement **${auth}** and protect mutating routes.`);
     }
   }
+  if (
+    isCronusUi &&
+    databaseId === "db-sqlite" &&
+    ormId === "orm-drizzle" &&
+    authId === "auth-better-auth"
+  ) {
+    followUps.push("Compose a product with `npx cronus-ui compose saas` (or admin).");
+  }
   if (payments) {
     followUps.push(
       `Implement **${payments}** webhooks server-side; never trust client-side amounts.`,

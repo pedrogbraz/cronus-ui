@@ -28,6 +28,13 @@ describe("scaffoldStack", () => {
     expect(existsSync(join(targetDir, "src", "app", "page.tsx"))).toBe(true);
     expect(existsSync(join(targetDir, "KICKOFF.md"))).toBe(true);
     expect(existsSync(join(targetDir, "stack.json"))).toBe(true);
+    expect(existsSync(join(targetDir, "drizzle.config.ts"))).toBe(true);
+    expect(existsSync(join(targetDir, "src", "db", "schema.ts"))).toBe(true);
+    expect(existsSync(join(targetDir, "src", "lib", "auth.ts"))).toBe(true);
+    expect(existsSync(join(targetDir, "src", "middleware.ts"))).toBe(true);
+    expect(existsSync(join(targetDir, "src", "app", "api", "auth", "[...all]", "route.ts"))).toBe(
+      true,
+    );
 
     const pkg = JSON.parse(readFileSync(join(targetDir, "package.json"), "utf8")) as {
       dependencies: Record<string, string>;
@@ -36,10 +43,34 @@ describe("scaffoldStack", () => {
     expect(pkg.dependencies["@cronus-ui/ui"]).toBe(`^${CREATE_STACK_VERSION}`);
     expect(pkg.dependencies["@cronus-ui/tokens"]).toBe(`^${CREATE_STACK_VERSION}`);
     expect(pkg.dependencies["@cronus-ui/theme"]).toBe(`^${CREATE_STACK_VERSION}`);
-    expect(pkg.dependencies["drizzle-orm"]).toBeUndefined();
+    expect(pkg.dependencies["drizzle-orm"]).toBe("^0.45.2");
+    expect(pkg.dependencies["better-sqlite3"]).toBe("^13.0.3");
+    expect(pkg.dependencies["better-auth"]).toBe("^1.7.2");
     expect(pkg.scripts.dev).toBe("next dev");
-    expect(existsSync(join(targetDir, "drizzle.config.ts"))).toBe(false);
-    expect(existsSync(join(targetDir, "src", "db", "schema.ts"))).toBe(false);
+    expect(pkg.scripts["db:push"]).toBe("drizzle-kit push");
+
+    const nextConfig = readFileSync(join(targetDir, "next.config.mjs"), "utf8");
+    expect(nextConfig).toContain("better-sqlite3");
+
+    const page = readFileSync(join(targetDir, "src", "app", "page.tsx"), "utf8");
+    expect(page).toContain("auth.api.getSession");
+    expect(page).toContain('from "@/db"');
+    expect(page).toContain("items");
+    expect(page).not.toContain('"use client"');
+
+    const auth = readFileSync(join(targetDir, "src", "lib", "auth.ts"), "utf8");
+    expect(auth).toContain("nextCookies");
+    expect(auth).toContain("sendResetPassword");
+    expect(auth).toContain("console.info");
+
+    const middleware = readFileSync(join(targetDir, "src", "middleware.ts"), "utf8");
+    expect(middleware).toContain('from "better-auth/cookies"');
+    expect(middleware).toContain("getSessionCookie");
+    expect(middleware).not.toContain('from "@/db"');
+    expect(middleware).not.toContain('from "@/lib/auth"');
+
+    expect(result.unsupported.join("\n")).not.toContain("Wire the selected database");
+    expect(result.unsupported.join("\n")).not.toContain("Implement the selected auth");
 
     const cronusUi = JSON.parse(readFileSync(join(targetDir, "cronus-ui.json"), "utf8")) as {
       paths: Record<"ui" | "lib" | "blocks", string>;
@@ -60,6 +91,9 @@ describe("scaffoldStack", () => {
     };
     expect(stack.name).toBe("my-app");
     expect(stack.stack.web).toBe("web-next");
+    expect(stack.stack.database).toBe("db-sqlite");
+    expect(stack.stack.orm).toBe("orm-drizzle");
+    expect(stack.stack.auth).toBe("auth-better-auth");
 
     for (const skill of SKILLS) {
       expect(existsSync(join(targetDir, `.claude/skills/${skill}/SKILL.md`))).toBe(true);
@@ -74,6 +108,10 @@ describe("scaffoldStack", () => {
     }).selection;
     scaffoldStack({ targetDir, projectName: "my-app", config, catalog });
     expect(existsSync(join(targetDir, "app", "page.tsx"))).toBe(true);
+    expect(existsSync(join(targetDir, "middleware.ts"))).toBe(true);
+    expect(existsSync(join(targetDir, "src", "middleware.ts"))).toBe(false);
+    expect(existsSync(join(targetDir, "db", "schema.ts"))).toBe(true);
+    expect(existsSync(join(targetDir, "src", "db", "schema.ts"))).toBe(false);
     const tsconfig = readFileSync(join(targetDir, "tsconfig.json"), "utf8");
     expect(tsconfig).toContain('"@/*"');
     expect(tsconfig).toContain('"./*"');
@@ -208,6 +246,7 @@ describe("scaffoldStack", () => {
       ...defaultSelection(catalog),
       database: "db-sqlite",
       orm: "orm-drizzle",
+      auth: "auth-none",
       install: false,
     }).selection;
     const result = scaffoldStack({ targetDir, projectName: "my-app", config, catalog });
@@ -246,6 +285,7 @@ describe("scaffoldStack", () => {
       "Wire the selected database/ORM/provider before running db:push.",
     );
     expect(existsSync(join(targetDir, "src", "lib", "auth.ts"))).toBe(false);
+    expect(existsSync(join(targetDir, "src", "middleware.ts"))).toBe(false);
   });
 
   it("emits Drizzle files at the repo root when structure-root is selected", () => {
@@ -253,6 +293,7 @@ describe("scaffoldStack", () => {
       ...defaultSelection(catalog),
       database: "db-sqlite",
       orm: "orm-drizzle",
+      auth: "auth-none",
       structure: "structure-root",
       install: false,
     }).selection;
@@ -294,8 +335,19 @@ describe("scaffoldStack", () => {
 
     const auth = readFileSync(join(targetDir, "src", "lib", "auth.ts"), "utf8");
     expect(auth).toContain("better-auth/adapters/drizzle");
+    expect(auth).toContain("nextCookies");
+    expect(auth).toContain("better-auth/next-js");
+    expect(auth).toContain("sendResetPassword");
+    expect(auth).toContain("console.info");
     expect(auth).toContain('from "@/db"');
     expect(auth).toContain('provider: "sqlite"');
+
+    const middleware = readFileSync(join(targetDir, "src", "middleware.ts"), "utf8");
+    expect(middleware).toContain("getSessionCookie");
+    expect(middleware).toContain('from "better-auth/cookies"');
+    expect(middleware).not.toContain("better-sqlite3");
+    expect(middleware).not.toContain('from "@/db"');
+    expect(middleware).not.toContain('from "@/lib/auth"');
 
     const env = readFileSync(join(targetDir, ".env.example"), "utf8");
     expect(env).toContain("BETTER_AUTH_SECRET");
@@ -321,6 +373,11 @@ describe("scaffoldStack", () => {
     expect(auth).toContain('from "../db"');
     expect(auth).toContain('from "../db/schema"');
     expect(auth).not.toContain('from "@/db"');
+
+    const page = readFileSync(join(targetDir, "src", "app", "page.tsx"), "utf8");
+    expect(page).toContain('from "../lib/auth"');
+    expect(page).toContain('from "../db"');
+    expect(page).not.toContain('from "@/lib/auth"');
 
     const route = readFileSync(
       join(targetDir, "src", "app", "api", "auth", "[...all]", "route.ts"),
@@ -367,6 +424,8 @@ describe("scaffoldStack", () => {
   it("keeps Better-Auth as kickoff-only without Drizzle", () => {
     const config = resolve(catalog, {
       ...defaultSelection(catalog),
+      database: "db-none",
+      orm: "orm-none",
       auth: "auth-better-auth",
       install: false,
     }).selection;

@@ -82,11 +82,7 @@ describe("kickoff — conventions & standards", () => {
   });
 
   it("tells the agent to run db:push when Drizzle is selected", () => {
-    const md = generateKickoff(
-      { ...config, database: "db-sqlite", orm: "orm-drizzle" },
-      "acme",
-      catalog,
-    );
+    const md = generateKickoff(config, "acme", catalog);
     expect(md).toContain("Run db:push — Drizzle schema is already in the repo.");
     expect(md).toContain("# sync the Drizzle schema already in the repo");
     expect(md).not.toContain("Wire **SQLite**");
@@ -94,15 +90,21 @@ describe("kickoff — conventions & standards", () => {
   });
 
   it("says Better-Auth is scaffolded when paired with Drizzle", () => {
-    const md = generateKickoff(
-      { ...config, database: "db-sqlite", orm: "orm-drizzle", auth: "auth-better-auth" },
-      "acme",
-      catalog,
-    );
+    const md = generateKickoff(config, "acme", catalog);
     expect(md).toContain(
       "Better-Auth is scaffolded — set BETTER_AUTH_SECRET and protect mutating routes.",
     );
     expect(md).not.toContain("Implement **Better-Auth**");
+  });
+
+  it("asks the default Cronus gold path to compose a product next", () => {
+    const md = generateKickoff(config, "acme", catalog);
+    expect(md).toContain("Compose a product with `npx cronus-ui compose saas` (or admin).");
+  });
+
+  it("does not suggest compose when Cronus UI is not selected", () => {
+    const md = generateKickoff({ ...config, ui: "ui-none" }, "acme", catalog);
+    expect(md).not.toContain("npx cronus-ui compose saas");
   });
 
   it("keeps Clerk as an implement follow-up", () => {

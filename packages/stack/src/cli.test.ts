@@ -48,4 +48,12 @@ describe("resolveStackFlags", () => {
     const config = resolveStackFlags({ ai: "none" }, { catalog });
     expect(config.assistants).toEqual(selected.assistants);
   });
+
+  it("default command selects the signed-in gold path", () => {
+    const command = generateCommand(defaultSelection(catalog), "acme");
+    expect(command).toContain("--database sqlite");
+    expect(command).toContain("--orm drizzle");
+    expect(command).toContain("--auth better-auth");
+    expect(command).toContain("--db-setup basic");
+  });
 });

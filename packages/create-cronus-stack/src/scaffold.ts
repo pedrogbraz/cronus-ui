@@ -373,19 +373,71 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 `;
 }
 
-function pageTsx(): string {
+function fromAppImport(config: StackConfig, target: string): string {
+  return usesImportAlias(config) ? `@/${target}` : `../${target}`;
+}
+
+function pageStatusCopy(config: StackConfig): string {
+  if (emitsBetterAuth(config) && emitsDrizzle(config)) {
+    return `          {session ? (
+            <p className="max-w-prose text-fg-secondary">
+              Signed in as {session.user?.email}. {itemCount} items in the database.
+            </p>
+          ) : (
+            <p className="max-w-prose text-fg-secondary">
+              Sign in required on this stack. Middleware redirects unsigned-in visitors to /login.
+            </p>
+          )}`;
+  }
+  if (emitsDrizzle(config)) {
+    return `          <p className="max-w-prose text-fg-secondary">
+            {itemCount} items in the database. Read KICKOFF.md before changing frameworks,
+            databases, auth, payments, or design-system rules.
+          </p>`;
+  }
+  return `          <p className="max-w-prose text-fg-secondary">
+            This app was scaffolded from the Cronus Stack Builder. Read KICKOFF.md before changing
+            frameworks, databases, auth, payments, or design-system rules.
+          </p>`;
+}
+
+function pageTsx(config: StackConfig): string {
+  const withDrizzle = emitsDrizzle(config);
+  const withAuth = emitsBetterAuth(config);
+  const extraImports = [
+    withDrizzle ? 'import { count } from "drizzle-orm";' : undefined,
+    withAuth ? 'import { headers } from "next/headers";' : undefined,
+    withDrizzle ? `import { db } from "${fromAppImport(config, "db")}";` : undefined,
+    withDrizzle ? `import { items } from "${fromAppImport(config, "db/schema")}";` : undefined,
+    withAuth ? `import { auth } from "${fromAppImport(config, "lib/auth")}";` : undefined,
+  ]
+    .filter((line): line is string => line !== undefined)
+    .join("\n");
+  const asyncKw = withDrizzle || withAuth ? "async " : "";
+  let loader = "";
+  if (withDrizzle) {
+    loader = `  const [itemRow] = await db.select({ value: count() }).from(items);
+  const itemCount = new Intl.NumberFormat("en-US").format(Number(itemRow?.value ?? 0));
+
+`;
+  }
+  if (withAuth) {
+    loader = `  const session = await auth.api.getSession({ headers: await headers() });
+${loader}`;
+  }
+
   return `import { Badge } from "@cronus-ui/ui/badge";
 import { Button } from "@cronus-ui/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@cronus-ui/ui/card";
-
+${extraImports ? `${extraImports}\n` : ""}
 const metrics = [
   { label: "Revenue", value: "R$ 48.2k" },
   { label: "Active users", value: "2,318" },
   { label: "NPS", value: "72" },
 ];
 
-export default function Page() {
-  return (
+export default ${asyncKw}function Page() {
+${loader}  return (
     <main className="mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-8 px-6 py-12">
       <header className="flex flex-col gap-4">
         <Badge variant="primary" className="w-fit">
@@ -393,10 +445,7 @@ export default function Page() {
         </Badge>
         <div className="flex flex-col gap-3">
           <h1 className="text-4xl font-semibold tracking-tight text-fg">Your stack is ready</h1>
-          <p className="max-w-prose text-fg-secondary">
-            This app was scaffolded from the Cronus Stack Builder. Read KICKOFF.md before changing
-            frameworks, databases, auth, payments, or design-system rules.
-          </p>
+${pageStatusCopy(config)}
         </div>
         <div className="flex flex-wrap gap-3">
           <Button variant="primary">Start building</Button>
@@ -832,15 +881,45 @@ function betterAuthServer(config: StackConfig): string {
   const schemaImport = dbModuleImport(config, "schema");
   return `import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { nextCookies } from "better-auth/next-js";
 import { db } from "${dbImport}";
 import * as schema from "${schemaImport}";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "${provider}", schema }),
-  emailAndPassword: { enabled: true },
+  emailAndPassword: {
+    enabled: true,
+    sendResetPassword: async ({ url }) => {
+      console.info("Password reset URL:", url);
+    },
+  },
+  plugins: [nextCookies()],
   secret: process.env.BETTER_AUTH_SECRET,
   baseURL: process.env.BETTER_AUTH_URL,
 });
+`;
+}
+
+function betterAuthMiddleware(): string {
+  return `import { NextRequest, NextResponse } from "next/server";
+import { getSessionCookie } from "better-auth/cookies";
+
+export function middleware(request: NextRequest) {
+  const sessionCookie = getSessionCookie(request);
+  const path = request.nextUrl.pathname;
+  const isAuthPage = path === "/login" || path === "/signup" || path === "/forgot-password";
+  if (!sessionCookie && !isAuthPage) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+  if (sessionCookie && isAuthPage) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ["/((?!api/auth|_next/static|_next/image|favicon.ico|.*\\\\..*).*)"],
+};
 `;
 }
 
@@ -963,7 +1042,7 @@ export function scaffoldStack(options: ScaffoldStackOptions): ScaffoldStackResul
       emit("postcss.config.mjs", 'export default { plugins: { "@tailwindcss/postcss": {} } };\n');
       emit(`${app}/globals.css`, globalsCss(config));
       emit(`${app}/layout.tsx`, layoutTsx(projectName));
-      emit(`${app}/page.tsx`, pageTsx());
+      emit(`${app}/page.tsx`, pageTsx(config));
       emit(
         "cronus-ui.json",
         `${JSON.stringify(
@@ -992,6 +1071,10 @@ export function scaffoldStack(options: ScaffoldStackOptions): ScaffoldStackResul
       emit(`${libDir(config)}/auth.ts`, betterAuthServer(config));
       emit(`${libDir(config)}/auth-client.ts`, betterAuthClient());
       emit(`${app}/api/auth/[...all]/route.ts`, betterAuthRoute(config));
+      emit(
+        single(config, "structure") === "structure-root" ? "middleware.ts" : "src/middleware.ts",
+        betterAuthMiddleware(),
+      );
     }
   } else {
     emit("src/index.ts", basicIndex(projectName));
