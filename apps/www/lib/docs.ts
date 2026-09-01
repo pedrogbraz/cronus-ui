@@ -299,6 +299,17 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-09-01",
+    version: "v0.6.12",
+    status: "Released",
+    title: "Home nav is Items",
+    summary:
+      "create-cronus-app --template saas (and admin) labels `/` as Items in the sidebar, matching the live ItemsPanel heading.",
+    items: [
+      "saas and admin nav for / is Items, not Dashboard/Overview",
+    ],
+  },
+  {
+    date: "2026-09-01",
     version: "v0.6.11",
     status: "Released",
     title: "Gold-path home is items",
