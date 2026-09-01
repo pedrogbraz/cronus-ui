@@ -2,7 +2,7 @@
   "name": "signup--split-proof",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.14"
+    "@cronus-ui/ui@0.6.15"
   ],
   "registryDependencies": [
     "auth-adapter",
