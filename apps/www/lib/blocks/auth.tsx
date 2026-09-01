@@ -41,7 +41,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
 import { BlockViewBody } from "../../components/blocks/block-view-body";
 import { getBlockMeta } from "../blocks-index";
@@ -1053,9 +1053,29 @@ export function LoginMinimalBlock() {
  * 2. Signup — create-account card
  * ────────────────────────────────────────────────────────────────────────── */
 
+const INVITE_STORAGE_KEY = "cronus-invitation";
+
+function readSignupInvitation(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const fromUrl = new URLSearchParams(window.location.search).get("invitation");
+    if (fromUrl) {
+      sessionStorage.setItem(INVITE_STORAGE_KEY, fromUrl);
+      return true;
+    }
+    return Boolean(sessionStorage.getItem(INVITE_STORAGE_KEY));
+  } catch {
+    return false;
+  }
+}
+
 export function SignupBlock() {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [joining, setJoining] = useState(false);
+  useEffect(() => {
+    setJoining(readSignupInvitation());
+  }, []);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -1082,8 +1102,14 @@ export function SignupBlock() {
             <ChartColumnIncreasing className="size-5" aria-hidden="true" />
           </span>
           <div className="flex flex-col gap-1">
-            <CardTitle className="font-display text-xl">Create your account</CardTitle>
-            <p className="text-sm text-fg-secondary">Start building with Cronus in minutes.</p>
+            <CardTitle className="font-display text-xl">
+              {joining ? "Join the workspace" : "Create your account"}
+            </CardTitle>
+            <p className="text-sm text-fg-secondary">
+              {joining
+                ? "Create your account to accept the invitation."
+                : "Start building with Cronus in minutes."}
+            </p>
           </div>
         </CardHeader>
 
@@ -1138,7 +1164,13 @@ export function SignupBlock() {
               disabled={pending}
               aria-busy={pending}
             >
-              {pending ? "Creating account…" : "Create account"}
+              {pending
+                ? joining
+                  ? "Joining…"
+                  : "Creating account…"
+                : joining
+                  ? "Join workspace"
+                  : "Create account"}
             </Button>
           </form>
 
@@ -1193,11 +1225,31 @@ import {
 import { signUpEmail } from "../lib/auth-adapter.js";
 import { USER } from "../lib/demo-saas.js";
 import { ChartColumnIncreasing, Chrome, Github } from "lucide-react";
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
+
+const INVITE_STORAGE_KEY = "cronus-invitation";
+
+function readSignupInvitation(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const fromUrl = new URLSearchParams(window.location.search).get("invitation");
+    if (fromUrl) {
+      sessionStorage.setItem(INVITE_STORAGE_KEY, fromUrl);
+      return true;
+    }
+    return Boolean(sessionStorage.getItem(INVITE_STORAGE_KEY));
+  } catch {
+    return false;
+  }
+}
 
 export function SignupBlock() {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [joining, setJoining] = useState(false);
+  useEffect(() => {
+    setJoining(readSignupInvitation());
+  }, []);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -1224,8 +1276,14 @@ export function SignupBlock() {
             <ChartColumnIncreasing className="size-5" aria-hidden="true" />
           </span>
           <div className="flex flex-col gap-1">
-            <CardTitle className="font-display text-xl">Create your account</CardTitle>
-            <p className="text-sm text-fg-secondary">Start building with Cronus in minutes.</p>
+            <CardTitle className="font-display text-xl">
+              {joining ? "Join the workspace" : "Create your account"}
+            </CardTitle>
+            <p className="text-sm text-fg-secondary">
+              {joining
+                ? "Create your account to accept the invitation."
+                : "Start building with Cronus in minutes."}
+            </p>
           </div>
         </CardHeader>
 
@@ -1280,7 +1338,13 @@ export function SignupBlock() {
               disabled={pending}
               aria-busy={pending}
             >
-              {pending ? "Creating account…" : "Create account"}
+              {pending
+                ? joining
+                  ? "Joining…"
+                  : "Creating account…"
+                : joining
+                  ? "Join workspace"
+                  : "Create account"}
             </Button>
           </form>
 
@@ -1325,6 +1389,10 @@ export function SignupBlock() {
 export function SignupSplitBlock() {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [joining, setJoining] = useState(false);
+  useEffect(() => {
+    setJoining(readSignupInvitation());
+  }, []);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -1349,8 +1417,14 @@ export function SignupSplitBlock() {
         {/* Create-account form */}
         <div className="flex flex-col justify-center gap-6 p-8 sm:p-10 lg:order-2">
           <div className="flex flex-col gap-1">
-            <h2 className="font-display text-xl font-semibold text-fg">Create your account</h2>
-            <p className="text-sm text-fg-secondary">Create your Cronus workspace.</p>
+            <h2 className="font-display text-xl font-semibold text-fg">
+              {joining ? "Join the workspace" : "Create your account"}
+            </h2>
+            <p className="text-sm text-fg-secondary">
+              {joining
+                ? "Create your account to accept the invitation."
+                : "Create your Cronus workspace."}
+            </p>
           </div>
 
           <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
@@ -1409,7 +1483,13 @@ export function SignupSplitBlock() {
               disabled={pending}
               aria-busy={pending}
             >
-              {pending ? "Creating account…" : "Create account"}
+              {pending
+                ? joining
+                  ? "Joining…"
+                  : "Creating account…"
+                : joining
+                  ? "Join workspace"
+                  : "Create account"}
             </Button>
           </form>
 
@@ -1469,11 +1549,31 @@ const signupSplitCode = `"use client";
 import { Avatar, AvatarFallback, Button, Checkbox, Input, Label } from "@cronus-ui/ui";
 import { signUpEmail } from "../lib/auth-adapter.js";
 import { ChartColumnIncreasing, Quote } from "lucide-react";
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
+
+const INVITE_STORAGE_KEY = "cronus-invitation";
+
+function readSignupInvitation(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const fromUrl = new URLSearchParams(window.location.search).get("invitation");
+    if (fromUrl) {
+      sessionStorage.setItem(INVITE_STORAGE_KEY, fromUrl);
+      return true;
+    }
+    return Boolean(sessionStorage.getItem(INVITE_STORAGE_KEY));
+  } catch {
+    return false;
+  }
+}
 
 export function SignupSplitBlock() {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [joining, setJoining] = useState(false);
+  useEffect(() => {
+    setJoining(readSignupInvitation());
+  }, []);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -1498,8 +1598,14 @@ export function SignupSplitBlock() {
         {/* Create-account form */}
         <div className="flex flex-col justify-center gap-6 p-8 sm:p-10 lg:order-2">
           <div className="flex flex-col gap-1">
-            <h2 className="font-display text-xl font-semibold text-fg">Create your account</h2>
-            <p className="text-sm text-fg-secondary">Create your Cronus workspace.</p>
+            <h2 className="font-display text-xl font-semibold text-fg">
+              {joining ? "Join the workspace" : "Create your account"}
+            </h2>
+            <p className="text-sm text-fg-secondary">
+              {joining
+                ? "Create your account to accept the invitation."
+                : "Create your Cronus workspace."}
+            </p>
           </div>
 
           <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
@@ -1558,7 +1664,13 @@ export function SignupSplitBlock() {
               disabled={pending}
               aria-busy={pending}
             >
-              {pending ? "Creating account…" : "Create account"}
+              {pending
+                ? joining
+                  ? "Joining…"
+                  : "Creating account…"
+                : joining
+                  ? "Join workspace"
+                  : "Create account"}
             </Button>
           </form>
 

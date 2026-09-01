@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Invite-aware signup copy.** `/signup?invitation=` (and a stored
+  `cronus-invitation`) shows "Join the workspace" on the classic and split
+  signup blocks. Default create copy is unchanged.
+
 ## [0.6.12] — 2026-09-01
 
 ### Changed

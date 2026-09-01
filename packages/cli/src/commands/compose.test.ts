@@ -161,6 +161,10 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(result.installedBlocks).toContain("signup--split");
     expect(result.installedBlocks).toContain("login--split");
     expect(existsSync(join(cwd, "components/blocks/signup-split.tsx"))).toBe(true);
+    const signupSplit = readFileSync(join(cwd, "components/blocks/signup-split.tsx"), "utf8");
+    expect(signupSplit).toContain("cronus-invitation");
+    expect(signupSplit).toContain("Join the workspace");
+    expect(signupSplit).toContain("Create your Cronus workspace.");
 
     expect(existsSync(join(cwd, "db/schema.ts"))).toBe(true);
     expect(existsSync(join(cwd, "lib/auth.ts"))).toBe(true);
@@ -246,6 +250,9 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
       "SignupSplitBlock",
     );
     expect(result.installedBlocks).toContain("signup--split");
+    expect(readFileSync(join(cwd, "components/blocks/signup-split.tsx"), "utf8")).toContain(
+      "Join the workspace",
+    );
   });
 
   it("composes the 9-page store template with all routes", async () => {

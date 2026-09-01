@@ -247,6 +247,12 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     const signup = readFileSync(join(cwd, "app/(bare)/signup/page.tsx"), "utf8");
     expect(signup).toContain("signup-split");
     expect(signup).toContain("SignupSplitBlock");
+    expect(readFileSync(join(cwd, "components/blocks/signup-split.tsx"), "utf8")).toContain(
+      "Join the workspace",
+    );
+    expect(readFileSync(join(cwd, "components/blocks/signup-split.tsx"), "utf8")).toContain(
+      "cronus-invitation",
+    );
 
     // The installed shell block copy carries the real sidebar nav + brand. Home
     // is the live items surface, so the nav label matches ItemsPanel.
@@ -326,6 +332,9 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     expect(existsSync(join(cwd, "app/(bare)/signup/page.tsx"))).toBe(true);
     expect(readFileSync(join(cwd, "app/(bare)/signup/page.tsx"), "utf8")).toContain(
       "SignupSplitBlock",
+    );
+    expect(readFileSync(join(cwd, "components/blocks/signup-split.tsx"), "utf8")).toContain(
+      "Join the workspace",
     );
     expect(existsSync(join(cwd, "app/(bare)/forgot-password/page.tsx"))).toBe(true);
     expect(readFileSync(join(cwd, "app/(bare)/forgot-password/page.tsx"), "utf8")).toContain(
