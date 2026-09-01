@@ -9,9 +9,9 @@
     "start": "next start"
   },
   "dependencies": {
-    "@cronus-ui/theme": "^0.6.7",
-    "@cronus-ui/tokens": "^0.6.7",
-    "@cronus-ui/ui": "^0.6.7",
+    "@cronus-ui/theme": "^0.6.8",
+    "@cronus-ui/tokens": "^0.6.8",
+    "@cronus-ui/ui": "^0.6.8",
     "@tanstack/react-table": "^8.21.3",
     "lucide-react": "^0.577.0",
     "next": "16.2.10",

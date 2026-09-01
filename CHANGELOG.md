@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.8] — 2026-08-31
+
 ### Added
 
 - **Sign out on the gold path.** saas/admin chrome `SessionUser` calls Better-Auth
@@ -540,7 +542,8 @@ as installable packages and as copy-paste registry items you own.
 - Added per-entry gzipped bundle budgets for the published `@cronus-ui/ui` so a
   dependency or code-size regression is caught at build time.
 
-[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.7...HEAD
+[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.8...HEAD
+[0.6.8]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.7...v0.6.8
 [0.6.7]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.6...v0.6.7
 [0.6.6]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.5...v0.6.6
 [0.6.5]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.4...v0.6.5

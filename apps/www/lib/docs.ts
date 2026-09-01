@@ -299,6 +299,18 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-08-31",
+    version: "v0.6.8",
+    status: "Released",
+    title: "Sign out on the gold path",
+    summary:
+      "create-cronus-app --template saas (and admin) signs out from the chrome: SessionUser calls Better-Auth signOut and sends the browser to /login.",
+    items: [
+      "Sidebar footer SessionUser has a Sign out action",
+      "Compact header gets the same action as an icon button",
+    ],
+  },
+  {
+    date: "2026-08-31",
     version: "v0.6.7",
     status: "Released",
     title: "Password reset gold path",
