@@ -298,6 +298,18 @@ export const ACCESSIBILITY_CHECKS = [
 
 export const CHANGELOG_ENTRIES = [
   {
+    date: "2026-09-01",
+    version: "v0.6.10",
+    status: "Released",
+    title: "Invite link and admin signup",
+    summary:
+      "create-cronus-app --template saas copies the invite URL in the dialog and lists pending invites on /team. admin compose installs signup--split so first-run and invite accept are not a 404.",
+    items: [
+      "InviteDialog stays open with a copyable URL when onInvite returns { url }",
+      "admin /signup uses signup--split; /users stays catalog demo",
+    ],
+  },
+  {
     date: "2026-08-31",
     version: "v0.6.9",
     status: "Released",

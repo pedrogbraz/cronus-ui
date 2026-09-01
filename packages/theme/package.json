@@ -1,6 +1,6 @@
 {
   "name": "@cronus-ui/theme",
-  "version": "0.6.9",
+  "version": "0.6.10",
   "description": "Cronus runtime theming engine — CronusUIProvider + useTheme (CSS-var only, no re-render).",
   "type": "module",
   "exports": {
