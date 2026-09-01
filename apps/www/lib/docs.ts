@@ -304,9 +304,7 @@ export const CHANGELOG_ENTRIES = [
     title: "Home nav is Items",
     summary:
       "create-cronus-app --template saas (and admin) labels `/` as Items in the sidebar, matching the live ItemsPanel heading.",
-    items: [
-      "saas and admin nav for / is Items, not Dashboard/Overview",
-    ],
+    items: ["saas and admin nav for / is Items, not Dashboard/Overview"],
   },
   {
     date: "2026-09-01",
