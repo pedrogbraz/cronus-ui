@@ -2,7 +2,7 @@
   "name": "empty-state--error",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.13",
+    "@cronus-ui/ui@0.6.14",
     "lucide-react@^0.577.0"
   ],
   "registryDependencies": [],
