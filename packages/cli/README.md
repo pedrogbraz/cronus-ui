@@ -49,7 +49,7 @@ Notes that match the commander surface:
   `packages/cli/scripts/build-registry.ts` — each item carries its source, its npm
   `dependencies`, and its `registryDependencies` (other components it imports),
   derived by parsing imports.
-- The default registry is pinned to the CLI package version (`v0.6.12` here), not
+- The default registry is pinned to the CLI package version (`v0.6.13` here), not
   mutable `main`, so a published CLI reads the registry snapshot it was released
   with. Use `-r, --registry ./registry` when testing local registry changes before
   a release tag exists.
@@ -80,7 +80,7 @@ Notes that match the commander surface:
     "lib": "lib",
     "blocks": "components/blocks"
   },
-  "registry": "https://raw.githubusercontent.com/pedrogbraz/cronus-ui/v0.6.12/registry"
+  "registry": "https://raw.githubusercontent.com/pedrogbraz/cronus-ui/v0.6.13/registry"
 }
 ```
 

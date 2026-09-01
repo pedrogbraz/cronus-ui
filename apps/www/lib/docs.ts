@@ -299,6 +299,15 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-09-01",
+    version: "v0.6.13",
+    status: "Released",
+    title: "Invite-aware signup copy",
+    summary:
+      "create-cronus-app --template saas (and admin) /signup?invitation= shows Join the workspace on classic and split signup. Default create copy is unchanged.",
+    items: ["signup classic and split show Join the workspace when ?invitation= is present"],
+  },
+  {
+    date: "2026-09-01",
     version: "v0.6.12",
     status: "Released",
     title: "Home nav is Items",
