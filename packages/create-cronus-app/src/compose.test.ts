@@ -261,6 +261,9 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     expect(shellBlock).toContain("WorkspaceMenu");
     expect(shellBlock).toContain("InviteMember");
     expect(shellBlock).toContain("SessionUser");
+    expect(readFileSync(join(cwd, "components/session-user.tsx"), "utf8")).toContain(
+      "authClient.signOut",
+    );
     expect(shellBlock).not.toContain("WORKSPACES");
     expect(shellBlock).not.toContain("demo-saas");
     expect(shellBlock).not.toContain("Lena Park");

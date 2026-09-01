@@ -888,7 +888,9 @@ export function InviteMember({ trigger }: { trigger: ReactNode }) {
 function sessionUserSource(authClientImport: string): string {
   return `"use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@cronus-ui/ui";
+import { Avatar, AvatarFallback, AvatarImage, Button } from "@cronus-ui/ui";
+import { LogOut } from "lucide-react";
+import { useState } from "react";
 import { authClient } from ${JSON.stringify(authClientImport)};
 
 function initialsOf(name: string, email: string): string {
@@ -902,6 +904,7 @@ function initialsOf(name: string, email: string): string {
 
 export function SessionUser({ compact = false }: { compact?: boolean }) {
   const { data } = authClient.useSession();
+  const [pending, setPending] = useState(false);
   const user = data?.user;
   if (!user) return null;
   const name = user.name || user.email || "Account";
@@ -913,14 +916,52 @@ export function SessionUser({ compact = false }: { compact?: boolean }) {
       <AvatarFallback>{initials}</AvatarFallback>
     </Avatar>
   );
-  if (compact) return avatar;
-  return (
-    <div className="flex items-center gap-2 rounded-lg px-2 py-1.5">
-      {avatar}
-      <div className="flex min-w-0 flex-col">
-        <span className="truncate text-sm font-medium text-fg">{name}</span>
-        <span className="truncate text-xs text-fg-tertiary">{email}</span>
+
+  async function onSignOut() {
+    setPending(true);
+    const { error } = await authClient.signOut();
+    if (error) {
+      setPending(false);
+      return;
+    }
+    window.location.assign("/login");
+  }
+
+  const signOutButton = (
+    <Button
+      type="button"
+      variant="ghost"
+      size={compact ? "icon-sm" : "sm"}
+      className={compact ? undefined : "w-full justify-start"}
+      disabled={pending}
+      aria-busy={pending}
+      aria-label="Sign out"
+      onClick={() => void onSignOut()}
+    >
+      <LogOut aria-hidden="true" />
+      {compact ? null : "Sign out"}
+    </Button>
+  );
+
+  if (compact) {
+    return (
+      <div className="flex items-center gap-1">
+        {avatar}
+        {signOutButton}
       </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-1">
+      <div className="flex items-center gap-2 rounded-lg px-2 py-1.5">
+        {avatar}
+        <div className="flex min-w-0 flex-col">
+          <span className="truncate text-sm font-medium text-fg">{name}</span>
+          <span className="truncate text-xs text-fg-tertiary">{email}</span>
+        </div>
+      </div>
+      {signOutButton}
     </div>
   );
 }

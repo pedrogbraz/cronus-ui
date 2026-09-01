@@ -179,6 +179,9 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(chrome).toContain("WorkspaceMenu");
     expect(chrome).toContain("InviteMember");
     expect(chrome).toContain("SessionUser");
+    expect(readFileSync(join(cwd, "components/session-user.tsx"), "utf8")).toContain(
+      "authClient.signOut",
+    );
     expect(chrome).not.toContain("WORKSPACES");
     expect(existsSync(join(cwd, "app/(bare)/accept-invitation/page.tsx"))).toBe(true);
     expect(readFileSync(join(cwd, "lib/auth-adapter.ts"), "utf8")).toContain("cronus-invitation");

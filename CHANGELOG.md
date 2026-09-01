@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Sign out on the gold path.** saas/admin chrome `SessionUser` calls Better-Auth
+  `signOut` and sends the browser to `/login`. Compact header gets the same
+  action as an icon button.
+
 ## [0.6.7] — 2026-08-31
 
 ### Added

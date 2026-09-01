@@ -344,6 +344,10 @@ describe("applyGoldPath", () => {
     expect(existsSync(join(cwd, "components", "workspace-menu.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "components", "invite-member.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "components", "session-user.tsx"))).toBe(true);
+    const sessionUser = readFileSync(join(cwd, "components", "session-user.tsx"), "utf8");
+    expect(sessionUser).toContain("authClient.signOut");
+    expect(sessionUser).toContain('aria-label="Sign out"');
+    expect(sessionUser).toContain('window.location.assign("/login")');
     expect(readFileSync(join(cwd, "components", "invite-member.tsx"), "utf8")).toContain(
       'role === "admin"',
     );
