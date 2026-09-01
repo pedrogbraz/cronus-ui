@@ -2,7 +2,7 @@
   "name": "navbar--centered",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.5",
+    "@cronus-ui/ui@0.6.6",
     "lucide-react@^0.577.0"
   ],
   "registryDependencies": [],
