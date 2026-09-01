@@ -2,7 +2,7 @@
   "name": "notification-preferences--simple",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.7"
+    "@cronus-ui/ui@0.6.8"
   ],
   "registryDependencies": [],
   "files": [
