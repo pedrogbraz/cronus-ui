@@ -2073,6 +2073,17 @@
     ]
   },
   {
+    "name": "forgot-password--split",
+    "type": "registry:block",
+    "dependencies": [
+      "@cronus-ui/ui@0.6.8",
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "auth-adapter"
+    ]
+  },
+  {
     "name": "forgot-password--sent",
     "type": "registry:block",
     "dependencies": [

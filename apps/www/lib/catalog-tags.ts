@@ -247,6 +247,7 @@ const VARIANT_OVERRIDES: Record<string, TagPatch> = {
   "signup::split-proof": { style: "editorial", motion: "none" },
   "signup::with-plan": { style: "operational", motion: "none" },
   "forgot-password::request": { style: "default", motion: "none" },
+  "forgot-password::split": { style: "editorial", palette: "aurora", motion: "smooth" },
   "forgot-password::sent": { style: "default", motion: "none" },
   "forgot-password::reset": { style: "default", motion: "none" },
   "hero::centered": { style: "editorial", motion: "none" },

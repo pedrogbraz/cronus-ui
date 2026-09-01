@@ -61,7 +61,7 @@ describe("compose templates", () => {
     expect(saas.manifest.pages.find((page) => page.route === "/forgot-password")).toMatchObject({
       title: "Reset password",
       chrome: "bare",
-      blocks: ["forgot-password"],
+      blocks: [{ block: "forgot-password", variant: "split" }],
     });
     expect(saas.manifest.pages.find((page) => page.route === "/reset-password")).toMatchObject({
       title: "Set new password",

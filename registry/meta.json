@@ -1041,6 +1041,20 @@
           ]
         },
         {
+          "id": "split",
+          "name": "Split panel",
+          "description": "Brand gradient panel with a customer testimonial beside the password-reset form.",
+          "item": "forgot-password--split",
+          "exportName": "ForgotPasswordSplitBlock",
+          "style": "editorial",
+          "palette": "aurora",
+          "motion": "smooth",
+          "intents": [
+            "auth",
+            "form"
+          ]
+        },
+        {
           "id": "sent",
           "name": "Link sent",
           "description": "Confirmation that a reset link was emailed, with a resend action.",

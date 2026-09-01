@@ -202,6 +202,7 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     file: "auth.tsx",
     constName: "forgotPasswordCode",
     variants: [
+      { id: "split", constName: "forgotPasswordSplitCode" },
       { id: "sent", constName: "forgotPasswordSentCode" },
       { id: "reset", constName: "forgotPasswordResetCode" },
     ],

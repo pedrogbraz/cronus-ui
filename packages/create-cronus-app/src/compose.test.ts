@@ -214,6 +214,9 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     // surface that create-cronus-app opens on, and it supersedes the base app/page.tsx.
     expect(existsSync(join(cwd, "app/(bare)/login/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(bare)/forgot-password/page.tsx"))).toBe(true);
+    const forgot = readFileSync(join(cwd, "app/(bare)/forgot-password/page.tsx"), "utf8");
+    expect(forgot).toContain("forgot-password-split");
+    expect(forgot).toContain("ForgotPasswordSplitBlock");
     expect(existsSync(join(cwd, "app/(bare)/reset-password/page.tsx"))).toBe(true);
     const reset = readFileSync(join(cwd, "app/(bare)/reset-password/page.tsx"), "utf8");
     expect(reset).toContain("forgot-password-reset");
@@ -310,6 +313,9 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     expect(existsSync(join(cwd, "app/(bare)/accept-invitation/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(bare)/login/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(bare)/forgot-password/page.tsx"))).toBe(true);
+    expect(readFileSync(join(cwd, "app/(bare)/forgot-password/page.tsx"), "utf8")).toContain(
+      "ForgotPasswordSplitBlock",
+    );
     expect(existsSync(join(cwd, "app/(bare)/reset-password/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(shell)/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(shell)/users/page.tsx"))).toBe(true);

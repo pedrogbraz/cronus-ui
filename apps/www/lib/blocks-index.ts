@@ -98,6 +98,12 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
             description: "Email entry that sends a one-time password reset link.",
           },
           {
+            id: "split",
+            name: "Split panel",
+            description:
+              "Brand gradient panel with a customer testimonial beside the password-reset form.",
+          },
+          {
             id: "sent",
             name: "Link sent",
             description: "Confirmation that a reset link was emailed, with a resend action.",

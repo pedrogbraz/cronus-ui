@@ -26,7 +26,7 @@
         "route": "/forgot-password",
         "title": "Reset password",
         "chrome": "bare",
-        "blocks": ["forgot-password"]
+        "blocks": [{ "block": "forgot-password", "variant": "split" }]
       },
       {
         "route": "/reset-password",

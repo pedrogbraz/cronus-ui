@@ -2673,6 +2673,353 @@ export function ForgotPasswordBlock() {
   );
 }`;
 
+/* ──────────────────────────────────────────────────────────────────────────
+ * 3b. Forgot password — split panel with testimonial
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function ForgotPasswordSplitBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [sentTo, setSentTo] = useState<string | null>(null);
+
+  async function sendTo(email: string) {
+    setError(null);
+    setPending(true);
+    try {
+      await requestPasswordReset({ email });
+      setSentTo(email);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    await sendTo(String(form.get("email") ?? ""));
+  }
+
+  return (
+    <div className="flex w-full items-center justify-center py-4">
+      <div className="grid w-full max-w-4xl overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-lg lg:grid-cols-2">
+        <div className="flex flex-col justify-center gap-6 p-8 sm:p-10 lg:order-2">
+          {sentTo ? (
+            <>
+              <div className="flex flex-col gap-1">
+                <h2 className="font-display text-xl font-semibold text-fg">Check your inbox</h2>
+                <p className="text-sm text-fg-secondary">
+                  We sent a password reset link to{" "}
+                  <span className="font-medium text-fg">{sentTo}</span>.
+                </p>
+              </div>
+
+              {error ? (
+                <p role="alert" className="text-sm text-error-strong">
+                  {error}
+                </p>
+              ) : (
+                <p className="text-sm text-fg-secondary">
+                  Didn&apos;t get it? Check your spam folder, or resend below.
+                </p>
+              )}
+
+              <Button
+                type="button"
+                variant="primary"
+                size="lg"
+                className="w-full"
+                disabled={pending}
+                aria-busy={pending}
+                onClick={() => void sendTo(sentTo)}
+              >
+                {pending ? "Sending…" : "Resend email"}
+              </Button>
+
+              <Button
+                type="button"
+                variant="ghost"
+                className="w-full"
+                onClick={() => setSentTo(null)}
+              >
+                Use a different email
+              </Button>
+
+              <p className="text-sm text-fg-secondary">
+                <a
+                  href="/login"
+                  className="inline-flex items-center justify-center gap-1.5 font-medium text-primary-strong underline-offset-4 hover:underline"
+                >
+                  <ArrowLeft className="size-4" aria-hidden="true" />
+                  Back to sign in
+                </a>
+              </p>
+            </>
+          ) : (
+            <>
+              <div className="flex flex-col gap-1">
+                <h2 className="font-display text-xl font-semibold text-fg">Reset your password</h2>
+                <p className="text-sm text-fg-secondary">Recover your Cronus workspace.</p>
+              </div>
+
+              <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
+                <div className="flex flex-col gap-2">
+                  <Label htmlFor="forgot-split-email">Email</Label>
+                  <Input
+                    id="forgot-split-email"
+                    name="email"
+                    type="email"
+                    placeholder="you@company.com"
+                    autoComplete="email"
+                  />
+                </div>
+
+                {error ? (
+                  <p role="alert" className="text-sm text-error-strong">
+                    {error}
+                  </p>
+                ) : null}
+
+                <Button
+                  type="submit"
+                  variant="primary"
+                  size="lg"
+                  className="w-full"
+                  disabled={pending}
+                  aria-busy={pending}
+                >
+                  {pending ? "Sending…" : "Send reset link"}
+                </Button>
+              </form>
+
+              <p className="text-sm text-fg-secondary">
+                Remembered it?{" "}
+                <a
+                  href="/login"
+                  className="font-medium text-primary-strong underline-offset-4 hover:underline"
+                >
+                  Sign in
+                </a>
+              </p>
+            </>
+          )}
+        </div>
+
+        <div className="relative overflow-hidden bg-gradient-primary-strong p-8 sm:p-10 lg:order-1">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-gradient-aurora opacity-20 blur-3xl"
+          />
+          <div className="relative flex h-full flex-col justify-between gap-12">
+            <div className="flex items-center gap-2.5">
+              <span className="inline-flex size-9 items-center justify-center rounded-xl bg-primary-foreground/15 text-primary-foreground">
+                <ChartColumnIncreasing className="size-4" aria-hidden="true" />
+              </span>
+              <span className="font-display text-lg font-semibold text-primary-foreground">
+                Cronus
+              </span>
+            </div>
+
+            <figure className="flex flex-col gap-5">
+              <Quote className="size-7 text-primary-foreground/50" aria-hidden="true" />
+              <blockquote className="font-display text-xl font-medium leading-snug text-primary-foreground">
+                “Cronus replaced four tools on day one — and our checkout conversion is up 23%.”
+              </blockquote>
+              <figcaption className="flex items-center gap-3">
+                <Avatar>
+                  <AvatarFallback>DR</AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col">
+                  <span className="text-sm font-medium text-primary-foreground">Dana Reyes</span>
+                  <span className="text-sm text-primary-foreground/75">
+                    Head of Growth, Northwind Labs
+                  </span>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const forgotPasswordSplitCode = `"use client";
+
+import { Avatar, AvatarFallback, Button, Input, Label } from "@cronus-ui/ui";
+import { requestPasswordReset } from "../lib/auth-adapter.js";
+import { ArrowLeft, ChartColumnIncreasing, Quote } from "lucide-react";
+import { type FormEvent, useState } from "react";
+
+export function ForgotPasswordSplitBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [sentTo, setSentTo] = useState<string | null>(null);
+
+  async function sendTo(email: string) {
+    setError(null);
+    setPending(true);
+    try {
+      await requestPasswordReset({ email });
+      setSentTo(email);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    await sendTo(String(form.get("email") ?? ""));
+  }
+
+  return (
+    <div className="flex w-full items-center justify-center py-4">
+      <div className="grid w-full max-w-4xl overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-lg lg:grid-cols-2">
+        <div className="flex flex-col justify-center gap-6 p-8 sm:p-10 lg:order-2">
+          {sentTo ? (
+            <>
+              <div className="flex flex-col gap-1">
+                <h2 className="font-display text-xl font-semibold text-fg">Check your inbox</h2>
+                <p className="text-sm text-fg-secondary">
+                  We sent a password reset link to{" "}
+                  <span className="font-medium text-fg">{sentTo}</span>.
+                </p>
+              </div>
+
+              {error ? (
+                <p role="alert" className="text-sm text-error-strong">
+                  {error}
+                </p>
+              ) : (
+                <p className="text-sm text-fg-secondary">
+                  Didn&apos;t get it? Check your spam folder, or resend below.
+                </p>
+              )}
+
+              <Button
+                type="button"
+                variant="primary"
+                size="lg"
+                className="w-full"
+                disabled={pending}
+                aria-busy={pending}
+                onClick={() => void sendTo(sentTo)}
+              >
+                {pending ? "Sending…" : "Resend email"}
+              </Button>
+
+              <Button
+                type="button"
+                variant="ghost"
+                className="w-full"
+                onClick={() => setSentTo(null)}
+              >
+                Use a different email
+              </Button>
+
+              <p className="text-sm text-fg-secondary">
+                <a
+                  href="/login"
+                  className="inline-flex items-center justify-center gap-1.5 font-medium text-primary-strong underline-offset-4 hover:underline"
+                >
+                  <ArrowLeft className="size-4" aria-hidden="true" />
+                  Back to sign in
+                </a>
+              </p>
+            </>
+          ) : (
+            <>
+              <div className="flex flex-col gap-1">
+                <h2 className="font-display text-xl font-semibold text-fg">Reset your password</h2>
+                <p className="text-sm text-fg-secondary">Recover your Cronus workspace.</p>
+              </div>
+
+              <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
+                <div className="flex flex-col gap-2">
+                  <Label htmlFor="forgot-split-email">Email</Label>
+                  <Input
+                    id="forgot-split-email"
+                    name="email"
+                    type="email"
+                    placeholder="you@company.com"
+                    autoComplete="email"
+                  />
+                </div>
+
+                {error ? (
+                  <p role="alert" className="text-sm text-error-strong">
+                    {error}
+                  </p>
+                ) : null}
+
+                <Button
+                  type="submit"
+                  variant="primary"
+                  size="lg"
+                  className="w-full"
+                  disabled={pending}
+                  aria-busy={pending}
+                >
+                  {pending ? "Sending…" : "Send reset link"}
+                </Button>
+              </form>
+
+              <p className="text-sm text-fg-secondary">
+                Remembered it?{" "}
+                <a
+                  href="/login"
+                  className="font-medium text-primary-strong underline-offset-4 hover:underline"
+                >
+                  Sign in
+                </a>
+              </p>
+            </>
+          )}
+        </div>
+
+        <div className="relative overflow-hidden bg-gradient-primary-strong p-8 sm:p-10 lg:order-1">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-gradient-aurora opacity-20 blur-3xl"
+          />
+          <div className="relative flex h-full flex-col justify-between gap-12">
+            <div className="flex items-center gap-2.5">
+              <span className="inline-flex size-9 items-center justify-center rounded-xl bg-primary-foreground/15 text-primary-foreground">
+                <ChartColumnIncreasing className="size-4" aria-hidden="true" />
+              </span>
+              <span className="font-display text-lg font-semibold text-primary-foreground">
+                Cronus
+              </span>
+            </div>
+
+            <figure className="flex flex-col gap-5">
+              <Quote className="size-7 text-primary-foreground/50" aria-hidden="true" />
+              <blockquote className="font-display text-xl font-medium leading-snug text-primary-foreground">
+                “Cronus replaced four tools on day one — and our checkout conversion is up 23%.”
+              </blockquote>
+              <figcaption className="flex items-center gap-3">
+                <Avatar>
+                  <AvatarFallback>DR</AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col">
+                  <span className="text-sm font-medium text-primary-foreground">Dana Reyes</span>
+                  <span className="text-sm text-primary-foreground/75">
+                    Head of Growth, Northwind Labs
+                  </span>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}`;
+
 export function ForgotPasswordSentBlock() {
   return (
     <div className="flex w-full items-center justify-center py-4">
@@ -3439,6 +3786,15 @@ export const authBlocks: BlockContentMap = {
         appearance: "dark",
         preview: <ForgotPasswordBlock />,
         code: forgotPasswordCode,
+      },
+      {
+        id: "split",
+        name: "Split panel",
+        description:
+          "Brand gradient panel with a customer testimonial beside the password-reset form.",
+        appearance: "dark",
+        preview: <ForgotPasswordSplitBlock />,
+        code: forgotPasswordSplitCode,
       },
       {
         id: "sent",

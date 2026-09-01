@@ -140,7 +140,12 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(welcome).toContain("<main");
     expect(welcome).toContain("<WelcomeBlock />");
     const forgot = readFileSync(join(cwd, "app/(bare)/forgot-password/page.tsx"), "utf8");
-    expect(forgot).toContain("<ForgotPasswordBlock />");
+    expect(forgot).toContain(
+      'import { ForgotPasswordSplitBlock } from "@/components/blocks/forgot-password-split";',
+    );
+    expect(forgot).toContain("<ForgotPasswordSplitBlock />");
+    expect(forgot).not.toContain("<ForgotPasswordBlock />");
+    expect(result.installedBlocks).toContain("forgot-password--split");
     const reset = readFileSync(join(cwd, "app/(bare)/reset-password/page.tsx"), "utf8");
     expect(reset).toContain(
       'import { ForgotPasswordResetBlock } from "@/components/blocks/forgot-password-reset";',
@@ -215,6 +220,9 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(existsSync(join(cwd, "app/(shell)/team/page.tsx"))).toBe(false);
     expect(readFileSync(join(cwd, "lib/members.ts"), "utf8")).toContain("loadMembers");
     expect(existsSync(join(cwd, "app/(bare)/forgot-password/page.tsx"))).toBe(true);
+    expect(readFileSync(join(cwd, "app/(bare)/forgot-password/page.tsx"), "utf8")).toContain(
+      "ForgotPasswordSplitBlock",
+    );
     expect(existsSync(join(cwd, "app/(bare)/reset-password/page.tsx"))).toBe(true);
   });
 

@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Forgot-password split.** Visual pair of `login--split` / `signup--split`:
+  two-column brand panel beside the reset form, workspace copy, sent state
+  with the typed email. saas and admin compose install it; `/reset-password`
+  stays the token form.
+
 ## [0.6.8] — 2026-08-31
 
 ### Added
