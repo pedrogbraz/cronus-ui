@@ -299,6 +299,19 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-08-31",
+    version: "v0.6.5",
+    status: "Released",
+    title: "First-run gold path",
+    summary:
+      "create-cronus-app --template saas signs up on whatever port Next prints. A stale session cookie no longer traps the shell.",
+    items: [
+      "Loopback on any port is a trusted Better-Auth origin",
+      "Shell layout redirects unsigned-in visitors after a real getSession",
+      "Middleware no longer bounces cookie-holders off /login",
+    ],
+  },
+  {
+    date: "2026-08-31",
     version: "v0.6.4",
     status: "Released",
     title: "Members list on the gold path",

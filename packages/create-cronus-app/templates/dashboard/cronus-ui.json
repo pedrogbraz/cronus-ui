@@ -9,7 +9,7 @@
     "lib": "lib",
     "blocks": "components/blocks"
   },
-  "registry": "https://raw.githubusercontent.com/pedrogbraz/cronus-ui/v0.6.4/registry",
+  "registry": "https://raw.githubusercontent.com/pedrogbraz/cronus-ui/v0.6.5/registry",
   "theme": {
     "name": "__THEME__",
     "mode": "__MODE__"

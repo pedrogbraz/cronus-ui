@@ -1,6 +1,6 @@
 {
   "name": "@cronus-ui/stack",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "description": "Cronus Stack Builder core — catalog, resolver, CLI flags, KICKOFF.md and stack.json artifacts.",
   "type": "module",
   "license": "MIT",
