@@ -16,6 +16,19 @@ export function isGoldPathTemplate(name: string): boolean {
   return GOLD_PATH_TEMPLATES.has(name);
 }
 
+/** Gold-path chrome identity — same strings compose writes into app-shell-chrome. */
+const GOLD_WORKSPACE_IMPORT = "@/components/workspace-menu";
+const GOLD_INVITE_IMPORT = "@/components/invite-member";
+const GOLD_SESSION_IMPORT = "@/components/session-user";
+
+/**
+ * Re-apply WorkspaceMenu / InviteMember / SessionUser onto catalog app-shell-chrome.
+ * Idempotent. Used by add-page --nav and upgrade so neither restores Mara.
+ */
+export function goldPatchAppShellChrome(source: string): string | undefined {
+  return patchChromeSource(source, GOLD_WORKSPACE_IMPORT, GOLD_INVITE_IMPORT, GOLD_SESSION_IMPORT);
+}
+
 /** Production npm specs installed with the gold path (devDeps are merged into package.json). */
 export const GOLD_PATH_DEPENDENCIES = [
   "drizzle-orm@^0.45.2",

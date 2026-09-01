@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createInterface } from "node:readline/promises";
 import pc from "picocolors";
+import { goldPatchAppShellChrome, isGoldPathTemplate } from "../compose/gold-path.js";
 import { buildComposePlan, type ComposeChoiceInput } from "../compose/plan.js";
 import {
   baseSnapshotDest,
@@ -599,6 +600,33 @@ function statusLabel(plan: FilePlan): string {
   }
 }
 
+/**
+ * saas/admin: upgrade 3-ways app-shell-chrome against the catalog item (Mara).
+ * After any write (or a catalog file already on disk), re-apply the gold-path
+ * chrome identity. Idempotent; skipped when conflict markers are present.
+ */
+async function repatchGoldPathChrome(
+  cwd: string,
+  config: CronusUIConfig,
+  composed: Record<string, ComposedRecord>,
+): Promise<void> {
+  if (!Object.keys(composed).some((key) => isGoldPathTemplate(key))) return;
+  const rel = join(config.paths.blocks, "app-shell-chrome.tsx");
+  let dest: string;
+  try {
+    dest = resolveSafeDest(cwd, ".", rel);
+  } catch {
+    return;
+  }
+  if (!existsSync(dest)) return;
+  const current = await readFile(dest, "utf8");
+  if (current.includes("<<<<<<<")) return;
+  const patched = goldPatchAppShellChrome(current);
+  if (patched === undefined || patched === current) return;
+  await writeFileEnsured(dest, patched);
+  log.ok(`gold-path ${rel}: re-applied WorkspaceMenu / InviteMember / SessionUser`);
+}
+
 /** Statuses that write the planned content to disk unconditionally. */
 const WRITE_STATUSES: ReadonlySet<FileStatus> = new Set(["fast-forward", "new-file", "merged"]);
 
@@ -1005,6 +1033,7 @@ export async function upgrade(names: string[], options: UpgradeOptions): Promise
   Object.assign(installed, newlyInstalled);
 
   const written = await applyPlans(itemPlans, options, confirm);
+  await repatchGoldPathChrome(cwd, config, composed);
   await refreshComposeSnapshots(itemPlans);
 
   // Manifest: record every item that now fully embodies the target release.

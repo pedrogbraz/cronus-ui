@@ -653,3 +653,67 @@ describe.skipIf(!HAS_REGISTRY)("upgrade --all — composed pages (F4)", () => {
     expect(snapFile("tiny")).toBe(snapBefore);
   });
 });
+
+describe.skipIf(!HAS_REGISTRY)("upgrade — gold-path chrome", () => {
+  let root: string;
+  let cwd: string;
+
+  beforeEach(() => {
+    root = mkdtempSync(join(tmpdir(), "cronus-ui-upgrade-gold-"));
+    cwd = join(root, "project");
+    seedComposeProject(cwd, "Painel");
+    vi.spyOn(console, "log").mockImplementation(() => {});
+    vi.spyOn(console, "error").mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    rmSync(root, { recursive: true, force: true });
+    vi.restoreAllMocks();
+    process.exitCode = undefined;
+  });
+
+  const chromeRel = "components/blocks/app-shell-chrome.tsx";
+  const chromeFile = (): string => readFileSync(join(cwd, chromeRel), "utf8");
+
+  it("upgrade --all on saas keeps WorkspaceMenu after a catalog chrome overwrite", async () => {
+    await composeApp({
+      targetDir: cwd,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+    expect(chromeFile()).toContain("WorkspaceMenu");
+    expect(chromeFile()).toContain("InviteMember");
+    expect(chromeFile()).toContain("SessionUser");
+
+    const catalog = JSON.parse(
+      readFileSync(join(REPO_REGISTRY, "app-shell-chrome.json"), "utf8"),
+    ) as { files: { content: string }[] };
+    const mara = catalog.files[0]?.content;
+    expect(mara).toBeDefined();
+    writeFileSync(join(cwd, chromeRel), mara as string);
+
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, yes: true });
+
+    const chrome = chromeFile();
+    expect(chrome).toContain("WorkspaceMenu");
+    expect(chrome).toContain("InviteMember");
+    expect(chrome).toContain("SessionUser");
+    expect(chrome).not.toContain("WORKSPACES");
+    expect(chrome).not.toContain("WorkspaceSwitcher");
+    expect(chrome).not.toContain("InviteDialog");
+  });
+
+  it("upgrade --all on saas is a no-op on already gold-patched chrome", async () => {
+    await composeApp({
+      targetDir: cwd,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+    const before = chromeFile();
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, yes: true });
+    expect(chromeFile()).toBe(before);
+    expect(chromeFile()).toContain("WorkspaceMenu");
+  });
+});

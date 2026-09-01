@@ -21,7 +21,7 @@
 
 import { existsSync } from "node:fs";
 import { rm } from "node:fs/promises";
-import { isGoldPathTemplate, patchChromeSource } from "../compose/gold-path.js";
+import { goldPatchAppShellChrome, isGoldPathTemplate } from "../compose/gold-path.js";
 import { type AppManifest, type BlockRef, blockRefParts } from "../compose/manifest.js";
 import {
   buildComposePlan,
@@ -401,12 +401,7 @@ export async function addPage(options: AddPageOptions): Promise<AddPageResult> {
       // restore Mara + WORKSPACES. Re-apply the same idempotent patch so --nav
       // grows the sidebar without undoing the authenticated shell.
       if (isGoldPathTemplate(appName) && slug === "app-shell-chrome") {
-        const patched = patchChromeSource(
-          content,
-          "@/components/workspace-menu",
-          "@/components/invite-member",
-          "@/components/session-user",
-        );
+        const patched = goldPatchAppShellChrome(content);
         if (patched !== undefined) content = patched;
       }
       await writeFileEnsured(dest, content);

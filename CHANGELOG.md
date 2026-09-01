@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **`upgrade` keeps the gold-path chrome.** On saas and admin, `cronus-ui
+  upgrade --all` no longer fast-forwards `app-shell-chrome` back to Mara /
+  `WORKSPACES` / a demo InviteDialog. The file is gold-patched again after
+  the merge (WorkspaceMenu, InviteMember, SessionUser).
+
 ## [0.6.15] — 2026-09-01
 
 ### Changed
