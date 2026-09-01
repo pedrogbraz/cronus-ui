@@ -69,7 +69,7 @@ export const TEMPLATE_CATALOG: readonly TemplateCatalogEntry[] = [
     name: "Admin",
     tagline: "Admin console",
     description:
-      "An admin console: split login, an (app) shell, overview, users, analytics, a sprint board and an audit trail — composed from validated blocks.",
+      "An admin console: split login/signup, password reset, an (app) shell, overview, users, analytics, a sprint board and an audit trail — composed from validated blocks.",
     command: cmd("admin"),
     kind: "product",
     theme: "midnight",
@@ -77,7 +77,7 @@ export const TEMPLATE_CATALOG: readonly TemplateCatalogEntry[] = [
     chrome: {},
     blocks: [{ block: "dashboard", variant: "admin-overview" }],
     inside: [
-      "Split login plus an (app) shell with sidebar nav",
+      "Split login/signup and forgot-password plus an (app) shell with sidebar nav",
       "Overview, users, analytics, sprint board, and audit log",
       "Admin-overview dashboard and engagement analytics variants",
       "Midnight theme, dark mode",

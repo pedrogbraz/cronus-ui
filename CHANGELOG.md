@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Invite link on the gold path.** `InviteDialog` stays open with a copyable
   URL when `onInvite` resolves `{ url }`. saas `/team` lists pending invitations
   with Copy; `InviteMember` returns `/accept-invitation?id=`.
+- **Admin signup.** admin compose installs `signup--split` at `/signup` so
+  first-run and the invite accept loop are not a 404. `/users` stays catalog
+  demo.
 
 ## [0.6.9] — 2026-08-31
 

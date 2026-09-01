@@ -93,6 +93,12 @@ describe("template catalog", () => {
     expect(saas.inside.some((line) => /welcome/.test(line) && /checklist/.test(line))).toBe(true);
   });
 
+  it("describes admin with split signup so first-run is not a 404", () => {
+    const admin = getTemplate("admin")!;
+    expect(admin.description).toMatch(/signup/);
+    expect(admin.inside.some((line) => /signup/.test(line))).toBe(true);
+  });
+
   it("lists admin and docs as OSS product apps, not landings", () => {
     for (const slug of ["admin", "docs"] as const) {
       const entry = getTemplate(slug)!;

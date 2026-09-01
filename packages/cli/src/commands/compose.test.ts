@@ -231,6 +231,11 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
       "ForgotPasswordSplitBlock",
     );
     expect(existsSync(join(cwd, "app/(bare)/reset-password/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(bare)/signup/page.tsx"))).toBe(true);
+    expect(readFileSync(join(cwd, "app/(bare)/signup/page.tsx"), "utf8")).toContain(
+      "SignupSplitBlock",
+    );
+    expect(result.installedBlocks).toContain("signup--split");
   });
 
   it("composes the 9-page store template with all routes", async () => {

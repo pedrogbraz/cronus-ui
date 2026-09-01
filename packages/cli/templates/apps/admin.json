@@ -4,7 +4,7 @@
   "planVersion": 1,
   "manifest": {
     "title": "Admin",
-    "description": "An admin console: split login, an (app) shell, overview, users, analytics, a sprint board and an audit trail — composed from validated blocks.",
+    "description": "An admin console: split login/signup, password reset, an (app) shell, overview, users, analytics, a sprint board and an audit trail — composed from validated blocks.",
     "chrome": {
       "shell": { "block": "app-shell-chrome" },
       "bare": {}
@@ -15,6 +15,12 @@
         "title": "Sign in",
         "chrome": "bare",
         "blocks": [{ "block": "login", "variant": "split" }]
+      },
+      {
+        "route": "/signup",
+        "title": "Create account",
+        "chrome": "bare",
+        "blocks": [{ "block": "signup", "variant": "split" }]
       },
       {
         "route": "/forgot-password",

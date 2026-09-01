@@ -87,4 +87,30 @@ describe("compose templates", () => {
     expect(saas.manifest.description).toMatch(/welcome|setup|checklist/i);
     expect(saas.manifest.description).toMatch(/password reset/i);
   });
+
+  it("admin ships split signup so login and invite accept are not a 404", async () => {
+    const admin = await loadTemplate("admin");
+    expect(admin.manifest.pages.map((page) => page.route)).toEqual([
+      "/login",
+      "/signup",
+      "/forgot-password",
+      "/reset-password",
+      "/",
+      "/users",
+      "/analytics",
+      "/board",
+      "/audit",
+    ]);
+    expect(admin.manifest.pages.find((page) => page.route === "/signup")).toMatchObject({
+      title: "Create account",
+      chrome: "bare",
+      blocks: [{ block: "signup", variant: "split" }],
+    });
+    expect(admin.manifest.pages.find((page) => page.route === "/login")).toMatchObject({
+      blocks: [{ block: "login", variant: "split" }],
+    });
+    expect(admin.manifest.pages.find((page) => page.route === "/users")).toMatchObject({
+      blocks: ["user-management"],
+    });
+  });
 });

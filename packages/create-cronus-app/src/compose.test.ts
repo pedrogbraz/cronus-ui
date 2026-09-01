@@ -316,9 +316,13 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     });
     expect(result.ok).toBe(true);
     if (!result.ok) return;
-    expect(result.pageCount).toBe(9);
+    expect(result.pageCount).toBe(10);
     expect(existsSync(join(cwd, "app/(bare)/accept-invitation/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(bare)/login/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(bare)/signup/page.tsx"))).toBe(true);
+    expect(readFileSync(join(cwd, "app/(bare)/signup/page.tsx"), "utf8")).toContain(
+      "SignupSplitBlock",
+    );
     expect(existsSync(join(cwd, "app/(bare)/forgot-password/page.tsx"))).toBe(true);
     expect(readFileSync(join(cwd, "app/(bare)/forgot-password/page.tsx"), "utf8")).toContain(
       "ForgotPasswordSplitBlock",
