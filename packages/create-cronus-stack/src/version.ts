@@ -1,1 +1,1 @@
-export const CREATE_STACK_VERSION = "0.6.14";
+export const CREATE_STACK_VERSION = "0.6.15";

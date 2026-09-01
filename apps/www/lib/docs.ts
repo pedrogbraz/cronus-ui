@@ -299,6 +299,15 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-09-01",
+    version: "v0.6.15",
+    status: "Released",
+    title: "Invite-aware login copy",
+    summary:
+      "create-cronus-app --template saas (and admin) /login?invitation= shows Join the workspace on classic and split login. Default welcome copy is unchanged.",
+    items: ["login classic and split show Join the workspace when ?invitation= is present"],
+  },
+  {
+    date: "2026-09-01",
     version: "v0.6.14",
     status: "Released",
     title: "add-page keeps gold-path chrome",
