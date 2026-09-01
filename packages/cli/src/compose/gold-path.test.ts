@@ -348,9 +348,11 @@ describe("applyGoldPath", () => {
     expect(sessionUser).toContain("authClient.signOut");
     expect(sessionUser).toContain('aria-label="Sign out"');
     expect(sessionUser).toContain('window.location.assign("/login")');
-    expect(readFileSync(join(cwd, "components", "invite-member.tsx"), "utf8")).toContain(
-      'role === "admin"',
-    );
+    const inviteMember = readFileSync(join(cwd, "components", "invite-member.tsx"), "utf8");
+    expect(inviteMember).toContain('role === "admin"');
+    expect(inviteMember).toContain("/accept-invitation?id=");
+    expect(inviteMember).toContain("router.refresh");
+    expect(inviteMember).toContain("data?.id");
     const actions = readFileSync(join(cwd, "lib", "items.ts"), "utf8");
     expect(actions.startsWith('"use server"')).toBe(true);
     expect(actions).toContain("export async function createItem");
@@ -387,17 +389,23 @@ describe("applyGoldPath", () => {
     expect(members).toContain("innerJoin(user");
     expect(members).toContain("eq(member.organizationId, orgId)");
     expect(members).toContain("member.userId");
+    expect(members).toContain("invitation");
+    expect(members).toContain('invitation.status, "pending"');
+    expect(members).toContain("pending");
 
     const membersPanel = readFileSync(join(cwd, "components", "members-panel.tsx"), "utf8");
     expect(membersPanel).toContain("loadMembers");
     expect(membersPanel).toContain("MembersView");
     expect(membersPanel).toContain('from "@/lib/members"');
+    expect(membersPanel).toContain("pending={data.pending}");
 
     const membersView = readFileSync(join(cwd, "components", "members-view.tsx"), "utf8");
     expect(membersView.startsWith('"use client"')).toBe(true);
     expect(membersView).toContain("InviteMember");
     expect(membersView).toContain('data-slot="members-panel"');
     expect(membersView).toContain('data-slot="member"');
+    expect(membersView).toContain('data-slot="pending-invite"');
+    expect(membersView).toContain("CopyButton");
     expect(membersView).toContain("Avatar");
     expect(membersView).toContain("Badge");
 

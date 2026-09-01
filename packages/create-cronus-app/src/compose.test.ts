@@ -291,6 +291,13 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     expect(teamPage).toContain("MembersPanel");
     expect(teamPage).not.toContain("TeamBlock");
     expect(readFileSync(join(cwd, "lib/members.ts"), "utf8")).toContain("loadMembers");
+    expect(readFileSync(join(cwd, "lib/members.ts"), "utf8")).toContain("pending");
+    expect(readFileSync(join(cwd, "components/members-view.tsx"), "utf8")).toContain(
+      "pending-invite",
+    );
+    expect(readFileSync(join(cwd, "components/invite-member.tsx"), "utf8")).toContain(
+      "/accept-invitation?id=",
+    );
 
     const pkg = JSON.parse(readFileSync(join(cwd, "package.json"), "utf8")) as {
       dependencies: Record<string, string>;

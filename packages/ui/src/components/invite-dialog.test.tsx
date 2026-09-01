@@ -1,4 +1,4 @@
-import { render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { render, screen, waitFor, waitForElementToBeRemoved } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import { axe } from "vitest-axe";
@@ -73,9 +73,47 @@ describe("InviteDialog", () => {
     expect(screen.getByText("Invite member")).toBeInTheDocument();
   });
 
+  it("stays open with a copyable link when onInvite resolves { url }", async () => {
+    const user = userEvent.setup();
+    const url = "http://localhost:3000/accept-invitation?id=inv_1";
+    const onInvite = vi.fn(() => Promise.resolve({ url }));
+
+    render(<InviteDialog defaultOpen onInvite={onInvite} />);
+
+    await user.type(screen.getByLabelText("Email"), "ada@example.com");
+    await user.click(screen.getByRole("button", { name: "Send invite" }));
+
+    expect(await screen.findByText("Invite sent")).toBeInTheDocument();
+    expect(document.querySelector('[data-slot="invite-dialog-success"]')).toBeInTheDocument();
+    expect(screen.getByDisplayValue(url)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Copy invite link" })).toBeInTheDocument();
+    expect(screen.getByRole("dialog")).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Done" }));
+    await waitFor(() => {
+      expect(screen.queryByText("Invite sent")).not.toBeInTheDocument();
+    });
+  });
+
   it("has no axe violations", async () => {
     render(<InviteDialog defaultOpen />);
 
+    expect(await axe(document.body)).toHaveNoViolations();
+  });
+
+  it("has no axe violations on the success surface", async () => {
+    const user = userEvent.setup();
+    render(
+      <InviteDialog
+        defaultOpen
+        onInvite={() =>
+          Promise.resolve({ url: "http://localhost:3000/accept-invitation?id=inv_1" })
+        }
+      />,
+    );
+    await user.type(screen.getByLabelText("Email"), "ada@example.com");
+    await user.click(screen.getByRole("button", { name: "Send invite" }));
+    expect(await screen.findByText("Invite sent")).toBeInTheDocument();
     expect(await axe(document.body)).toHaveNoViolations();
   });
 });

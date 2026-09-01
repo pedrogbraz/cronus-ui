@@ -444,21 +444,16 @@ function InviteDialogAsyncDemo() {
           setOpen(next);
         }}
         trigger={<Button>Invite member</Button>}
-        onInvite={() =>
-          new Promise<void>((resolve, reject) => {
-            attemptRef.current += 1;
-            window.setTimeout(() => {
-              if (attemptRef.current === 1) {
-                reject(
-                  new Error("Couldn’t reach the server. Check your connection and try again."),
-                );
-              } else {
-                setInvited(true);
-                resolve();
-              }
-            }, 1400);
-          })
-        }
+        onInvite={async () => {
+          attemptRef.current += 1;
+          await new Promise((resolve) => {
+            window.setTimeout(resolve, 1400);
+          });
+          if (attemptRef.current === 1) {
+            throw new Error("Couldn’t reach the server. Check your connection and try again.");
+          }
+          setInvited(true);
+        }}
       />
       <p className="text-xs text-fg-tertiary">
         {invited
@@ -583,7 +578,7 @@ export const overlaysExamples: ExampleMap = {
       id: "async",
       title: "Async invite",
       description:
-        "When `onInvite` returns a promise the send button shows a spinner and both actions lock until it settles — the dialog can’t be dismissed mid-flight. On reject it stays open and surfaces the error inline; on resolve it closes.",
+        "When `onInvite` returns a promise the send button shows a spinner and both actions lock until it settles — the dialog can’t be dismissed mid-flight. On reject it stays open and surfaces the error inline; on resolve it closes, unless the result is `{ url }` (copyable invite link).",
       code: `function InviteDialogAsyncDemo() {
   const [open, setOpen] = useState(false);
   const attemptRef = useRef(0);
@@ -601,19 +596,16 @@ export const overlaysExamples: ExampleMap = {
           setOpen(next);
         }}
         trigger={<Button>Invite member</Button>}
-        onInvite={() =>
-          new Promise<void>((resolve, reject) => {
-            attemptRef.current += 1;
-            window.setTimeout(() => {
-              if (attemptRef.current === 1) {
-                reject(new Error("Couldn’t reach the server. Check your connection and try again."));
-              } else {
-                setInvited(true);
-                resolve();
-              }
-            }, 1400);
-          })
-        }
+        onInvite={async () => {
+          attemptRef.current += 1;
+          await new Promise((resolve) => {
+            window.setTimeout(resolve, 1400);
+          });
+          if (attemptRef.current === 1) {
+            throw new Error("Couldn’t reach the server. Check your connection and try again.");
+          }
+          setInvited(true);
+        }}
       />
       <p className="text-xs text-fg-tertiary">
         {invited

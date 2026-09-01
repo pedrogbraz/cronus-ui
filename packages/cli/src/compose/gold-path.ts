@@ -678,7 +678,7 @@ function membersActionsSource(authImport: string): string {
 import { and, asc, eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import { db } from "@/db";
-import { member, organization, user } from "@/db/schema";
+import { invitation, member, organization, user } from "@/db/schema";
 import { auth } from ${JSON.stringify(authImport)};
 
 async function activeWorkspaceId(): Promise<string | null> {
@@ -705,9 +705,10 @@ async function activeWorkspaceId(): Promise<string | null> {
 export async function loadMembers(): Promise<{
   workspace: string;
   rows: { id: string; name: string; email: string; image: string | null; role: string }[];
+  pending: { id: string; email: string; role: string | null }[];
 }> {
   const orgId = await activeWorkspaceId();
-  if (!orgId) return { workspace: "no workspace", rows: [] };
+  if (!orgId) return { workspace: "no workspace", rows: [], pending: [] };
   const [org] = await db.select().from(organization).where(eq(organization.id, orgId)).limit(1);
   const rows = await db
     .select({
@@ -721,7 +722,16 @@ export async function loadMembers(): Promise<{
     .innerJoin(user, eq(member.userId, user.id))
     .where(eq(member.organizationId, orgId))
     .orderBy(asc(member.createdAt));
-  return { workspace: org?.name ?? "no workspace", rows };
+  const pending = await db
+    .select({
+      id: invitation.id,
+      email: invitation.email,
+      role: invitation.role,
+    })
+    .from(invitation)
+    .where(and(eq(invitation.organizationId, orgId), eq(invitation.status, "pending")))
+    .orderBy(asc(invitation.createdAt));
+  return { workspace: org?.name ?? "no workspace", rows, pending };
 }
 `;
 }
@@ -732,7 +742,7 @@ import { MembersView } from ${JSON.stringify(viewImport)};
 
 export async function MembersPanel() {
   const data = await loadMembers();
-  return <MembersView workspace={data.workspace} rows={data.rows} />;
+  return <MembersView workspace={data.workspace} rows={data.rows} pending={data.pending} />;
 }
 `;
 }
@@ -740,8 +750,9 @@ export async function MembersPanel() {
 function membersViewSource(inviteImport: string): string {
   return `"use client";
 
-import { Avatar, AvatarFallback, AvatarImage, Badge, Button } from "@cronus-ui/ui";
+import { Avatar, AvatarFallback, AvatarImage, Badge, Button, CopyButton } from "@cronus-ui/ui";
 import { InviteMember } from ${JSON.stringify(inviteImport)};
+import { useEffect, useState } from "react";
 
 function initialsOf(name: string, email: string): string {
   const parts = name.trim().split(/\\s+/).filter(Boolean);
@@ -765,13 +776,23 @@ function roleVariant(role: string): "primary" | "info" | "secondary" {
   return "secondary";
 }
 
+function inviteHref(origin: string, id: string): string {
+  return \`\${origin}/accept-invitation?id=\${encodeURIComponent(id)}\`;
+}
+
 export function MembersView({
   workspace,
   rows,
+  pending,
 }: {
   workspace: string;
   rows: { id: string; name: string; email: string; image: string | null; role: string }[];
+  pending: { id: string; email: string; role: string | null }[];
 }) {
+  const [origin, setOrigin] = useState("");
+  useEffect(() => {
+    setOrigin(window.location.origin);
+  }, []);
   const count = String(rows.length);
   return (
     <section
@@ -819,6 +840,33 @@ export function MembersView({
           ))}
         </ul>
       )}
+      {pending.length > 0 ? (
+        <>
+          <h2 className="mt-6 text-sm font-semibold text-fg">Pending</h2>
+          <ul>
+            {pending.map((row) => (
+              <li
+                key={row.id}
+                data-slot="pending-invite"
+                className="flex items-center gap-3 border-t border-border py-3"
+              >
+                <div className="flex min-w-0 flex-1 flex-col">
+                  <span className="truncate text-sm text-fg">{row.email}</span>
+                  <span className="truncate text-sm text-fg-tertiary">
+                    {roleLabel(row.role ?? "member")}
+                  </span>
+                </div>
+                <CopyButton
+                  value={inviteHref(origin, row.id)}
+                  copyLabel="Copy invite link"
+                  variant="outline"
+                  size="icon"
+                />
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : null}
     </section>
   );
 }
@@ -864,20 +912,33 @@ function inviteMemberSource(authClientImport: string): string {
   return `"use client";
 
 import { InviteDialog } from "@cronus-ui/ui";
-import type { ReactNode } from "react";
+import { useRouter } from "next/navigation";
+import { type ReactNode, useRef } from "react";
 import { authClient } from ${JSON.stringify(authClientImport)};
 
 export function InviteMember({ trigger }: { trigger: ReactNode }) {
+  const router = useRouter();
+  const sent = useRef(false);
   return (
     <InviteDialog
       trigger={trigger}
+      onOpenChange={(open) => {
+        if (!open && sent.current) {
+          sent.current = false;
+          router.refresh();
+        }
+      }}
       onInvite={async ({ email, role }) => {
         const assigned = role === "admin" || role === "owner" ? role : "member";
-        const { error } = await authClient.organization.inviteMember({
+        const { data, error } = await authClient.organization.inviteMember({
           email,
           role: assigned,
         });
         if (error) throw new Error(error.message || "Invite failed");
+        const id = data?.id ? String(data.id) : "";
+        if (!id) return;
+        sent.current = true;
+        return { url: \`\${window.location.origin}/accept-invitation?id=\${encodeURIComponent(id)}\` };
       }}
     />
   );

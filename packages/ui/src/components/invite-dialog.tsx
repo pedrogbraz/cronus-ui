@@ -14,6 +14,7 @@ import {
 } from "react";
 import { cn } from "../lib/cn.js";
 import { Button } from "./button.js";
+import { CopyButton } from "./copy-button.js";
 import {
   Dialog,
   DialogContent,
@@ -38,7 +39,21 @@ export interface InviteDialogLabels {
   cancel?: string;
   sending?: string;
   errorFallback?: string;
+  sentTitle?: string;
+  sentDescription?: string;
+  link?: string;
+  copy?: string;
+  copied?: string;
+  done?: string;
 }
+
+/** Returned from `onInvite` to keep the dialog open with a copyable invite URL. */
+export interface InviteResult {
+  url?: string;
+}
+
+// biome-ignore lint/suspicious/noConfusingVoidType: sync/async onInvite may return nothing or `{ url }`
+type InviteHandlerReturn = void | InviteResult | Promise<void | InviteResult>;
 
 export interface InviteRole {
   value: string;
@@ -55,6 +70,12 @@ const DEFAULT_LABELS: Required<InviteDialogLabels> = {
   cancel: "Cancel",
   sending: "Sending",
   errorFallback: "Something went wrong. Please try again.",
+  sentTitle: "Invite sent",
+  sentDescription: "Copy the link and send it to your teammate.",
+  link: "Invite link",
+  copy: "Copy invite link",
+  copied: "Copied",
+  done: "Done",
 };
 
 const DEFAULT_ROLES: readonly InviteRole[] = [
@@ -83,6 +104,14 @@ function resolveDefaultRole(roles: readonly InviteRole[], defaultRole?: string):
   return roles[0]?.value ?? "";
 }
 
+function inviteUrlOf(result: unknown): string | undefined {
+  if (!result || typeof result !== "object" || !("url" in result)) return undefined;
+  const url = (result as InviteResult).url;
+  if (typeof url !== "string") return undefined;
+  const trimmed = url.trim();
+  return trimmed ? trimmed : undefined;
+}
+
 export interface InviteDialogProps
   extends Omit<ComponentPropsWithoutRef<typeof DialogContent>, "title" | "children"> {
   /** Element that opens the dialog. Rendered inside a `DialogTrigger asChild`. Omit when driving the dialog purely via `open`. */
@@ -99,10 +128,11 @@ export interface InviteDialogProps
   defaultRole?: string;
   /**
    * Invoked with the submitted email and role. If it returns a promise, the send
-   * button shows a spinner and actions are disabled until it settles; on resolve
-   * the dialog closes, on reject it stays open and surfaces the error.
+   * button shows a spinner and actions are disabled until it settles. On reject
+   * the dialog stays open and surfaces the error. On resolve: a `{ url }` keeps
+   * the dialog open with a copyable link; otherwise the dialog closes.
    */
-  onInvite?: (payload: { email: string; role: string }) => void | Promise<void>;
+  onInvite?: (payload: { email: string; role: string }) => InviteHandlerReturn;
   /** Override any subset of the built-in English strings. */
   labels?: InviteDialogLabels;
   /** Forwarded to the dialog content surface. */
@@ -116,9 +146,10 @@ export interface InviteDialogProps
  * Behavior: `onInvite` may be async — while its promise is pending the send
  * button shows a `Spinner`, both actions are disabled, and the dialog cannot be
  * dismissed so the operation can't be interrupted mid-flight. On resolve the
- * dialog closes; on reject it stays open and renders the error in a
- * `role="alert"` region. Works controlled (`open`/`onOpenChange`) or
- * uncontrolled (`defaultOpen`).
+ * dialog closes, unless the result is `{ url }` — then it stays open on a
+ * success surface with a copyable link. On reject it stays open and renders
+ * the error in a `role="alert"` region. Works controlled (`open`/`onOpenChange`)
+ * or uncontrolled (`defaultOpen`).
  *
  * Performance/a11y: late promise settlements are ignored after unmount via a
  * mounted ref. The spinner is decorative (`aria-hidden`) with loading state
@@ -150,11 +181,13 @@ export function InviteDialog({
   const [role, setRole] = useState(initialRole);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [sentUrl, setSentUrl] = useState<string | null>(null);
 
   const loadingRef = useRef(false);
   const mountedRef = useRef(true);
   const emailId = useId();
   const roleId = useId();
+  const linkId = useId();
 
   useEffect(() => {
     mountedRef.current = true;
@@ -182,6 +215,7 @@ export function InviteDialog({
         setError(null);
         setEmail("");
         setRole(initialRole);
+        setSentUrl(null);
       }
       setOpen(next);
     },
@@ -210,17 +244,21 @@ export function InviteDialog({
       }
       const result = onInvite({ email: trimmed, role });
       if (!(result instanceof Promise)) {
-        setOpen(false);
+        const url = inviteUrlOf(result);
+        if (url) setSentUrl(url);
+        else setOpen(false);
         return;
       }
       beginLoading(true);
       try {
-        await result;
+        const settled = await result;
         if (!mountedRef.current) {
           return;
         }
         beginLoading(false);
-        setOpen(false);
+        const url = inviteUrlOf(settled);
+        if (url) setSentUrl(url);
+        else setOpen(false);
       } catch (err) {
         if (!mountedRef.current) {
           return;
@@ -241,77 +279,110 @@ export function InviteDialog({
         className={cn("max-w-md", className)}
         {...contentProps}
       >
-        <DialogHeader>
-          <DialogTitle>{resolvedLabels.title}</DialogTitle>
-          {resolvedLabels.description ? (
-            <DialogDescription>{resolvedLabels.description}</DialogDescription>
-          ) : null}
-        </DialogHeader>
+        {sentUrl ? (
+          <div data-slot="invite-dialog-success" className="flex flex-col gap-4">
+            <DialogHeader>
+              <DialogTitle>{resolvedLabels.sentTitle}</DialogTitle>
+              {resolvedLabels.sentDescription ? (
+                <DialogDescription>{resolvedLabels.sentDescription}</DialogDescription>
+              ) : null}
+            </DialogHeader>
 
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-          <Field>
-            <FieldLabel htmlFor={emailId}>{resolvedLabels.email}</FieldLabel>
-            <Input
-              id={emailId}
-              type="email"
-              name="email"
-              autoComplete="email"
-              required
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              placeholder={resolvedLabels.emailPlaceholder}
-              disabled={loading}
-            />
-          </Field>
+            <Field>
+              <FieldLabel htmlFor={linkId}>{resolvedLabels.link}</FieldLabel>
+              <div className="flex items-center gap-2">
+                <Input id={linkId} readOnly value={sentUrl} autoComplete="off" />
+                <CopyButton
+                  value={sentUrl}
+                  copyLabel={resolvedLabels.copy}
+                  copiedLabel={resolvedLabels.copied}
+                  variant="outline"
+                  size="icon"
+                />
+              </div>
+            </Field>
 
-          <Field>
-            <FieldLabel htmlFor={roleId}>{resolvedLabels.role}</FieldLabel>
-            <Select value={role} onValueChange={setRole} disabled={loading}>
-              <SelectTrigger id={roleId}>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {resolvedRoles.map((item) => (
-                  <SelectItem key={item.value} value={item.value}>
-                    {item.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </Field>
+            <DialogFooter>
+              <Button type="button" onClick={() => handleOpenChange(false)}>
+                {resolvedLabels.done}
+              </Button>
+            </DialogFooter>
+          </div>
+        ) : (
+          <>
+            <DialogHeader>
+              <DialogTitle>{resolvedLabels.title}</DialogTitle>
+              {resolvedLabels.description ? (
+                <DialogDescription>{resolvedLabels.description}</DialogDescription>
+              ) : null}
+            </DialogHeader>
 
-          {error ? (
-            <div
-              role="alert"
-              data-slot="invite-dialog-error"
-              className="flex items-start gap-2 rounded-lg border border-error/30 bg-error/10 px-3 py-2 text-start text-sm text-error-strong"
-            >
-              <CircleAlert aria-hidden className="mt-0.5 size-4 shrink-0" />
-              <span>{error}</span>
-            </div>
-          ) : null}
+            <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+              <Field>
+                <FieldLabel htmlFor={emailId}>{resolvedLabels.email}</FieldLabel>
+                <Input
+                  id={emailId}
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  required
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder={resolvedLabels.emailPlaceholder}
+                  disabled={loading}
+                />
+              </Field>
 
-          <DialogFooter>
-            <Button
-              type="button"
-              variant="outline"
-              disabled={loading}
-              onClick={() => handleOpenChange(false)}
-            >
-              {resolvedLabels.cancel}
-            </Button>
-            <Button
-              type="submit"
-              data-slot="invite-dialog-send"
-              disabled={loading}
-              aria-busy={loading}
-              className="min-w-24"
-            >
-              {loading ? <Spinner size="sm" aria-hidden /> : null}
-              {loading ? resolvedLabels.sending : resolvedLabels.send}
-            </Button>
-          </DialogFooter>
-        </form>
+              <Field>
+                <FieldLabel htmlFor={roleId}>{resolvedLabels.role}</FieldLabel>
+                <Select value={role} onValueChange={setRole} disabled={loading}>
+                  <SelectTrigger id={roleId}>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {resolvedRoles.map((item) => (
+                      <SelectItem key={item.value} value={item.value}>
+                        {item.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </Field>
+
+              {error ? (
+                <div
+                  role="alert"
+                  data-slot="invite-dialog-error"
+                  className="flex items-start gap-2 rounded-lg border border-error/30 bg-error/10 px-3 py-2 text-start text-sm text-error-strong"
+                >
+                  <CircleAlert aria-hidden className="mt-0.5 size-4 shrink-0" />
+                  <span>{error}</span>
+                </div>
+              ) : null}
+
+              <DialogFooter>
+                <Button
+                  type="button"
+                  variant="outline"
+                  disabled={loading}
+                  onClick={() => handleOpenChange(false)}
+                >
+                  {resolvedLabels.cancel}
+                </Button>
+                <Button
+                  type="submit"
+                  data-slot="invite-dialog-send"
+                  disabled={loading}
+                  aria-busy={loading}
+                  className="min-w-24"
+                >
+                  {loading ? <Spinner size="sm" aria-hidden /> : null}
+                  {loading ? resolvedLabels.sending : resolvedLabels.send}
+                </Button>
+              </DialogFooter>
+            </form>
+          </>
+        )}
       </DialogContent>
     </Dialog>
   );

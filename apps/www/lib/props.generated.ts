@@ -3174,10 +3174,10 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
         },
         {
           name: "onInvite",
-          type: "(payload: { email: string; role: string }) => void | Promise<void>",
+          type: "(payload: { email: string; role: string }) => InviteHandlerReturn",
           required: false,
           description:
-            "Invoked with the submitted email and role. If it returns a promise, the send button shows a spinner and actions are disabled until it settles; on resolve the dialog closes, on reject it stays open and surfaces the error.",
+            "Invoked with the submitted email and role. If it returns a promise, the send button shows a spinner and actions are disabled until it settles. On reject the dialog stays open and surfaces the error. On resolve: a `{ url }` keeps the dialog open with a copyable link; otherwise the dialog closes.",
         },
         {
           name: "labels",

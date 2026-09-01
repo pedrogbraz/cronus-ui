@@ -176,6 +176,13 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(teamPage).toContain("MembersPanel");
     expect(teamPage).not.toContain("TeamBlock");
     expect(readFileSync(join(cwd, "lib/members.ts"), "utf8")).toContain("loadMembers");
+    expect(readFileSync(join(cwd, "lib/members.ts"), "utf8")).toContain("pending");
+    expect(readFileSync(join(cwd, "components/members-view.tsx"), "utf8")).toContain(
+      "pending-invite",
+    );
+    expect(readFileSync(join(cwd, "components/invite-member.tsx"), "utf8")).toContain(
+      "/accept-invitation?id=",
+    );
     expect(result.generatedFiles).toContain("db/schema.ts");
     expect(result.generatedFiles).toContain("middleware.ts");
 

@@ -336,6 +336,7 @@ export {
 export type {
   InviteDialogLabels,
   InviteDialogProps,
+  InviteResult,
   InviteRole,
 } from "./components/invite-dialog.js";
 export { InviteDialog } from "./components/invite-dialog.js";

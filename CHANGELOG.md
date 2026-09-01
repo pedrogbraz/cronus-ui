@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Invite link on the gold path.** `InviteDialog` stays open with a copyable
+  URL when `onInvite` resolves `{ url }`. saas `/team` lists pending invitations
+  with Copy; `InviteMember` returns `/accept-invitation?id=`.
+
 ## [0.6.9] — 2026-08-31
 
 ### Added
