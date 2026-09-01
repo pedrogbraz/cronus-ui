@@ -201,7 +201,10 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     slug: "forgot-password",
     file: "auth.tsx",
     constName: "forgotPasswordCode",
-    variants: [{ id: "sent", constName: "forgotPasswordSentCode" }],
+    variants: [
+      { id: "sent", constName: "forgotPasswordSentCode" },
+      { id: "reset", constName: "forgotPasswordResetCode" },
+    ],
   },
   { slug: "otp", file: "auth.tsx", constName: "otpCode" },
   {

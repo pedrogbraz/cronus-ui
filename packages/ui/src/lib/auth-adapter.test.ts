@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { requestPasswordReset, signInEmail, signUpEmail } from "./auth-adapter.js";
+import { requestPasswordReset, resetPassword, signInEmail, signUpEmail } from "./auth-adapter.js";
 
 const valid = { email: "mara@cronus.io", password: "password1" };
 
@@ -49,5 +49,20 @@ describe("auth-adapter (demo)", () => {
       "Enter a valid email address.",
     );
     await expect(requestPasswordReset({ email: valid.email })).resolves.toBeUndefined();
+  });
+
+  it("resetPassword requires a token and an 8-character password", async () => {
+    await expect(resetPassword({ token: "", newPassword: valid.password })).rejects.toThrow(
+      "Reset link is missing or expired.",
+    );
+    await expect(resetPassword({ token: "   ", newPassword: valid.password })).rejects.toThrow(
+      "Reset link is missing or expired.",
+    );
+    await expect(resetPassword({ token: "tok", newPassword: "short" })).rejects.toThrow(
+      "Password must be at least 8 characters.",
+    );
+    await expect(
+      resetPassword({ token: "tok", newPassword: valid.password }),
+    ).resolves.toBeUndefined();
   });
 });

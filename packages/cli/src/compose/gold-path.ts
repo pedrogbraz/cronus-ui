@@ -303,8 +303,8 @@ export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "sqlite", schema }),
   emailAndPassword: {
     enabled: true,
-    sendResetPassword: async ({ url }) => {
-      console.info(url);
+    sendResetPassword: async ({ user, url }) => {
+      console.info(\`Reset \${user.email}: \${url}\`);
     },
   },
   databaseHooks: {
@@ -433,8 +433,23 @@ export async function signUpEmail({
 }
 
 export async function requestPasswordReset({ email }: { email: string }) {
-  const { error } = await authClient.requestPasswordReset({ email, redirectTo: "/login" });
+  const { error } = await authClient.requestPasswordReset({
+    email,
+    redirectTo: "/reset-password",
+  });
   if (error) throw new Error(error.message || "Reset failed");
+}
+
+export async function resetPassword({
+  token,
+  newPassword,
+}: {
+  token: string;
+  newPassword: string;
+}) {
+  const { error } = await authClient.resetPassword({ token, newPassword });
+  if (error) throw new Error(error.message || "Reset failed");
+  window.location.assign("/login");
 }
 `;
 }
@@ -452,7 +467,7 @@ function middlewareSource(): string {
 import { NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
 
-const AUTH_PAGES = ["/login", "/signup", "/forgot-password"];
+const AUTH_PAGES = ["/login", "/signup", "/forgot-password", "/reset-password"];
 
 function invitationOf(request: NextRequest): string | null {
   const { pathname, searchParams } = request.nextUrl;

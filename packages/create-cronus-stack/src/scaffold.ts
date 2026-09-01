@@ -1077,8 +1077,8 @@ export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "${provider}", schema }),
   emailAndPassword: {
     enabled: true,
-    sendResetPassword: async ({ url }) => {
-      console.info("Password reset URL:", url);
+    sendResetPassword: async ({ user, url }) => {
+      console.info(\`Reset \${user.email}: \${url}\`);
     },
   },
   databaseHooks: {
@@ -1146,7 +1146,7 @@ function betterAuthMiddleware(): string {
   return `import { NextRequest, NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
 
-const AUTH_PAGES = ["/login", "/signup", "/forgot-password"];
+const AUTH_PAGES = ["/login", "/signup", "/forgot-password", "/reset-password"];
 
 function invitationOf(request: NextRequest): string | null {
   const { pathname, searchParams } = request.nextUrl;

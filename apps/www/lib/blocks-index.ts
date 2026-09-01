@@ -89,7 +89,8 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
       {
         slug: "forgot-password",
         name: "Forgot Password",
-        description: "A password reset flow with an email request and a sent confirmation.",
+        description:
+          "A password reset flow with an email request, a sent confirmation, and a new-password form.",
         variants: [
           {
             id: "request",
@@ -100,6 +101,11 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
             id: "sent",
             name: "Link sent",
             description: "Confirmation that a reset link was emailed, with a resend action.",
+          },
+          {
+            id: "reset",
+            name: "Set new password",
+            description: "Tokenized new-password form that completes the reset link from email.",
           },
         ],
       },

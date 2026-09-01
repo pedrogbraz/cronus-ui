@@ -1019,7 +1019,7 @@
     },
     "forgot-password": {
       "title": "Forgot Password",
-      "description": "A password reset flow with an email request and a sent confirmation.",
+      "description": "A password reset flow with an email request, a sent confirmation, and a new-password form.",
       "category": "auth",
       "exportName": "ForgotPasswordBlock",
       "kind": "page",
@@ -1046,6 +1046,20 @@
           "description": "Confirmation that a reset link was emailed, with a resend action.",
           "item": "forgot-password--sent",
           "exportName": "ForgotPasswordSentBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "auth",
+            "form"
+          ]
+        },
+        {
+          "id": "reset",
+          "name": "Set new password",
+          "description": "Tokenized new-password form that completes the reset link from email.",
+          "item": "forgot-password--reset",
+          "exportName": "ForgotPasswordResetBlock",
           "style": "default",
           "palette": "semantic",
           "motion": "none",
@@ -4624,7 +4638,7 @@
     "admin": {
       "title": "Admin",
       "description": "An admin console: split login, an (app) shell, overview, users, analytics, a sprint board and an audit trail — composed from validated blocks.",
-      "pages": 6,
+      "pages": 8,
       "style": "operational",
       "palette": "midnight",
       "motion": "none",
@@ -4828,7 +4842,7 @@
     "saas": {
       "title": "SaaS",
       "description": "A complete multi-page SaaS app: split login/signup, password reset, a sidebar-shell dashboard, analytics, team, billing and settings, plus welcome, setup wizard and checklist — all from validated blocks.",
-      "pages": 11,
+      "pages": 12,
       "style": "operational",
       "palette": "aurora",
       "motion": "smooth",

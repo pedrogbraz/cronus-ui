@@ -73,12 +73,14 @@ describe("scaffoldStack", () => {
     const auth = readFileSync(join(targetDir, "src", "lib", "auth.ts"), "utf8");
     expect(auth).toContain("nextCookies");
     expect(auth).toContain("sendResetPassword");
+    expect(auth).toMatch(/Reset \$\{user\.email\}/);
     expect(auth).toContain("console.info");
 
     const middleware = readFileSync(join(targetDir, "src", "middleware.ts"), "utf8");
     expect(middleware).toContain('from "better-auth/cookies"');
     expect(middleware).toContain("getSessionCookie");
     expect(middleware).toContain("/accept-invitation");
+    expect(middleware).toContain("/reset-password");
     expect(middleware).not.toContain('from "@/db"');
     expect(middleware).not.toContain('from "@/lib/auth"');
     expect(existsSync(join(targetDir, "src", "app", "accept-invitation", "page.tsx"))).toBe(true);
@@ -359,6 +361,7 @@ describe("scaffoldStack", () => {
     expect(auth).toContain("authBaseURL");
     expect(auth).toContain("better-auth/next-js");
     expect(auth).toContain("sendResetPassword");
+    expect(auth).toMatch(/Reset \$\{user\.email\}/);
     expect(auth).toContain("console.info");
     expect(auth).toContain('from "@/db"');
     expect(auth).toContain('provider: "sqlite"');

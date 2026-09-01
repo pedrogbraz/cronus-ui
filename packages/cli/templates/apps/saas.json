@@ -29,6 +29,12 @@
         "blocks": ["forgot-password"]
       },
       {
+        "route": "/reset-password",
+        "title": "Set new password",
+        "chrome": "bare",
+        "blocks": [{ "block": "forgot-password", "variant": "reset" }]
+      },
+      {
         "route": "/",
         "title": "Dashboard",
         "nav": "Dashboard",

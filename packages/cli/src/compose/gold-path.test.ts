@@ -306,6 +306,8 @@ describe("applyGoldPath", () => {
     const adapter = readFileSync(join(cwd, "lib", "auth-adapter.ts"), "utf8");
     expect(adapter).toContain("authClient");
     expect(adapter).toContain("requestPasswordReset");
+    expect(adapter).toContain("resetPassword");
+    expect(adapter).toContain('redirectTo: "/reset-password"');
     expect(adapter).toContain("cronus-invitation");
     expect(adapter).toContain("/accept-invitation?id=");
 
@@ -313,6 +315,7 @@ describe("applyGoldPath", () => {
     expect(auth).toContain("nextCookies");
     expect(auth).toContain('provider: "sqlite"');
     expect(auth).toContain("sendResetPassword");
+    expect(auth).toMatch(/Reset \$\{user\.email\}/);
     expect(auth).toContain("organization(");
     expect(auth).toContain("sendInvitationEmail");
     expect(auth).toContain("databaseHooks");
@@ -323,6 +326,7 @@ describe("applyGoldPath", () => {
     expect(auth).toContain("authBaseURL");
     expect(auth).toContain('invitationTable.status, "pending"');
     const middleware = readFileSync(join(cwd, "middleware.ts"), "utf8");
+    expect(middleware).toContain("/reset-password");
     expect(middleware).toContain("/accept-invitation");
     expect(middleware).toContain("sessionCookie && isAuthPage && invitation");
     expect(middleware).not.toContain('new URL("/", request.url)');

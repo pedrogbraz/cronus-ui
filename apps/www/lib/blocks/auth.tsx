@@ -21,7 +21,12 @@ import {
   Rating,
   Separator,
 } from "@cronus-ui/ui";
-import { requestPasswordReset, signInEmail, signUpEmail } from "@cronus-ui/ui/auth-adapter";
+import {
+  requestPasswordReset,
+  resetPassword,
+  signInEmail,
+  signUpEmail,
+} from "@cronus-ui/ui/auth-adapter";
 import { USER } from "@cronus-ui/ui/demo-saas";
 import {
   Apple,
@@ -2362,20 +2367,89 @@ export function SignupWithPlanBlock() {
 export function ForgotPasswordBlock() {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [sentTo, setSentTo] = useState<string | null>(null);
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const email = String(form.get("email") ?? "");
+  async function sendTo(email: string) {
     setError(null);
     setPending(true);
     try {
       await requestPasswordReset({ email });
+      setSentTo(email);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
       setPending(false);
     }
+  }
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    await sendTo(String(form.get("email") ?? ""));
+  }
+
+  if (sentTo) {
+    return (
+      <div className="flex w-full items-center justify-center py-4">
+        <Card className="w-full max-w-sm gap-6 shadow-lg">
+          <CardHeader className="flex flex-col items-center gap-3 text-center">
+            <span className="inline-flex size-11 items-center justify-center rounded-xl bg-success/10 text-success">
+              <MailCheck className="size-5" aria-hidden="true" />
+            </span>
+            <div className="flex flex-col gap-1">
+              <CardTitle className="font-display text-xl">Check your inbox</CardTitle>
+              <p className="text-sm text-fg-secondary">
+                We sent a password reset link to{" "}
+                <span className="font-medium text-fg">{sentTo}</span>.
+              </p>
+            </div>
+          </CardHeader>
+
+          <CardContent className="flex flex-col gap-4">
+            {error ? (
+              <p role="alert" className="text-sm text-error-strong">
+                {error}
+              </p>
+            ) : (
+              <p className="text-center text-sm text-fg-secondary">
+                Didn&apos;t get it? Check your spam folder, or resend below.
+              </p>
+            )}
+
+            <Button
+              type="button"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              aria-busy={pending}
+              onClick={() => void sendTo(sentTo)}
+            >
+              {pending ? "Sending…" : "Resend email"}
+            </Button>
+
+            <Button
+              type="button"
+              variant="ghost"
+              className="w-full"
+              onClick={() => setSentTo(null)}
+            >
+              Use a different email
+            </Button>
+          </CardContent>
+
+          <CardFooter className="justify-center">
+            <a
+              href="/login"
+              className="inline-flex items-center justify-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
+            >
+              <ArrowLeft className="size-4" aria-hidden="true" />
+              Back to sign in
+            </a>
+          </CardFooter>
+        </Card>
+      </div>
+    );
   }
 
   return (
@@ -2452,26 +2526,90 @@ import {
   Label,
 } from "@cronus-ui/ui";
 import { requestPasswordReset } from "../lib/auth-adapter.js";
-import { ArrowLeft, KeyRound } from "lucide-react";
+import { ArrowLeft, KeyRound, MailCheck } from "lucide-react";
 import { type FormEvent, useState } from "react";
 
 export function ForgotPasswordBlock() {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [sentTo, setSentTo] = useState<string | null>(null);
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const email = String(form.get("email") ?? "");
+  async function sendTo(email: string) {
     setError(null);
     setPending(true);
     try {
       await requestPasswordReset({ email });
+      setSentTo(email);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {
       setPending(false);
     }
+  }
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    await sendTo(String(form.get("email") ?? ""));
+  }
+
+  if (sentTo) {
+    return (
+      <div className="flex w-full items-center justify-center py-4">
+        <Card className="w-full max-w-sm gap-6 shadow-lg">
+          <CardHeader className="flex flex-col items-center gap-3 text-center">
+            <span className="inline-flex size-11 items-center justify-center rounded-xl bg-success/10 text-success">
+              <MailCheck className="size-5" aria-hidden="true" />
+            </span>
+            <div className="flex flex-col gap-1">
+              <CardTitle className="font-display text-xl">Check your inbox</CardTitle>
+              <p className="text-sm text-fg-secondary">
+                We sent a password reset link to{" "}
+                <span className="font-medium text-fg">{sentTo}</span>.
+              </p>
+            </div>
+          </CardHeader>
+
+          <CardContent className="flex flex-col gap-4">
+            {error ? (
+              <p role="alert" className="text-sm text-error-strong">
+                {error}
+              </p>
+            ) : (
+              <p className="text-center text-sm text-fg-secondary">
+                Didn&apos;t get it? Check your spam folder, or resend below.
+              </p>
+            )}
+
+            <Button
+              type="button"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              aria-busy={pending}
+              onClick={() => void sendTo(sentTo)}
+            >
+              {pending ? "Sending…" : "Resend email"}
+            </Button>
+
+            <Button type="button" variant="ghost" className="w-full" onClick={() => setSentTo(null)}>
+              Use a different email
+            </Button>
+          </CardContent>
+
+          <CardFooter className="justify-center">
+            <a
+              href="/login"
+              className="inline-flex items-center justify-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
+            >
+              <ArrowLeft className="size-4" aria-hidden="true" />
+              Back to sign in
+            </a>
+          </CardFooter>
+        </Card>
+      </div>
+    );
   }
 
   return (
@@ -2546,7 +2684,7 @@ export function ForgotPasswordSentBlock() {
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Check your inbox</CardTitle>
             <p className="text-sm text-fg-secondary">
-              We sent a password reset link to mara@cronus.io.
+              We sent a password reset link to you@company.com.
             </p>
           </div>
         </CardHeader>
@@ -2596,7 +2734,7 @@ export function ForgotPasswordSentBlock() {
           <div className="flex flex-col gap-1">
             <CardTitle className="font-display text-xl">Check your inbox</CardTitle>
             <p className="text-sm text-fg-secondary">
-              We sent a password reset link to mara@cronus.io.
+              We sent a password reset link to you@company.com.
             </p>
           </div>
         </CardHeader>
@@ -2609,6 +2747,226 @@ export function ForgotPasswordSentBlock() {
           <Button variant="primary" size="lg" className="w-full">
             Resend email
           </Button>
+        </CardContent>
+
+        <CardFooter className="justify-center">
+          <a
+            href="/login"
+            className="inline-flex items-center justify-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
+          >
+            <ArrowLeft className="size-4" aria-hidden="true" />
+            Back to sign in
+          </a>
+        </CardFooter>
+      </Card>
+    </div>
+  );
+}`;
+
+/* ──────────────────────────────────────────────────────────────────────────
+ * 3c. Forgot password — set a new password
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function ForgotPasswordResetBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const password = String(form.get("password") ?? "");
+    const confirm = String(form.get("confirm") ?? "");
+    const token =
+      typeof window === "undefined"
+        ? ""
+        : (new URLSearchParams(window.location.search).get("token") ?? "");
+    setError(null);
+    if (password !== confirm) {
+      setError("Passwords do not match.");
+      return;
+    }
+    setPending(true);
+    try {
+      await resetPassword({ token, newPassword: password });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
+  return (
+    <div className="flex w-full items-center justify-center py-4">
+      <Card className="w-full max-w-sm gap-6 shadow-lg">
+        <CardHeader className="flex flex-col items-center gap-3 text-center">
+          <span className="inline-flex size-11 items-center justify-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
+            <KeyRound className="size-5" aria-hidden="true" />
+          </span>
+          <div className="flex flex-col gap-1">
+            <CardTitle className="font-display text-xl">Set a new password</CardTitle>
+            <p className="text-sm text-fg-secondary">
+              Choose a password for your Cronus workspace.
+            </p>
+          </div>
+        </CardHeader>
+
+        <CardContent>
+          <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="forgot-reset-password">New password</Label>
+              <Input
+                id="forgot-reset-password"
+                name="password"
+                type="password"
+                placeholder="••••••••"
+                autoComplete="new-password"
+              />
+              <p className="text-xs text-fg-tertiary">Must be at least 8 characters.</p>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="forgot-reset-confirm">Confirm password</Label>
+              <Input
+                id="forgot-reset-confirm"
+                name="confirm"
+                type="password"
+                placeholder="••••••••"
+                autoComplete="new-password"
+              />
+            </div>
+
+            {error ? (
+              <p role="alert" className="text-sm text-error-strong">
+                {error}
+              </p>
+            ) : null}
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              aria-busy={pending}
+            >
+              {pending ? "Updating…" : "Update password"}
+            </Button>
+          </form>
+        </CardContent>
+
+        <CardFooter className="justify-center">
+          <a
+            href="/login"
+            className="inline-flex items-center justify-center gap-1.5 text-sm font-medium text-fg-secondary transition-colors hover:text-fg"
+          >
+            <ArrowLeft className="size-4" aria-hidden="true" />
+            Back to sign in
+          </a>
+        </CardFooter>
+      </Card>
+    </div>
+  );
+}
+
+const forgotPasswordResetCode = `"use client";
+
+import {
+  Button,
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Input,
+  Label,
+} from "@cronus-ui/ui";
+import { resetPassword } from "../lib/auth-adapter.js";
+import { ArrowLeft, KeyRound } from "lucide-react";
+import { type FormEvent, useState } from "react";
+
+export function ForgotPasswordResetBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const password = String(form.get("password") ?? "");
+    const confirm = String(form.get("confirm") ?? "");
+    const token =
+      typeof window === "undefined"
+        ? ""
+        : (new URLSearchParams(window.location.search).get("token") ?? "");
+    setError(null);
+    if (password !== confirm) {
+      setError("Passwords do not match.");
+      return;
+    }
+    setPending(true);
+    try {
+      await resetPassword({ token, newPassword: password });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
+  return (
+    <div className="flex w-full items-center justify-center py-4">
+      <Card className="w-full max-w-sm gap-6 shadow-lg">
+        <CardHeader className="flex flex-col items-center gap-3 text-center">
+          <span className="inline-flex size-11 items-center justify-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow">
+            <KeyRound className="size-5" aria-hidden="true" />
+          </span>
+          <div className="flex flex-col gap-1">
+            <CardTitle className="font-display text-xl">Set a new password</CardTitle>
+            <p className="text-sm text-fg-secondary">Choose a password for your Cronus workspace.</p>
+          </div>
+        </CardHeader>
+
+        <CardContent>
+          <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="forgot-reset-password">New password</Label>
+              <Input
+                id="forgot-reset-password"
+                name="password"
+                type="password"
+                placeholder="••••••••"
+                autoComplete="new-password"
+              />
+              <p className="text-xs text-fg-tertiary">Must be at least 8 characters.</p>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="forgot-reset-confirm">Confirm password</Label>
+              <Input
+                id="forgot-reset-confirm"
+                name="confirm"
+                type="password"
+                placeholder="••••••••"
+                autoComplete="new-password"
+              />
+            </div>
+
+            {error ? (
+              <p role="alert" className="text-sm text-error-strong">
+                {error}
+              </p>
+            ) : null}
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              aria-busy={pending}
+            >
+              {pending ? "Updating…" : "Update password"}
+            </Button>
+          </form>
         </CardContent>
 
         <CardFooter className="justify-center">
@@ -3089,6 +3447,14 @@ export const authBlocks: BlockContentMap = {
         appearance: "light",
         preview: <ForgotPasswordSentBlock />,
         code: forgotPasswordSentCode,
+      },
+      {
+        id: "reset",
+        name: "Set new password",
+        description: "Tokenized new-password form that completes the reset link from email.",
+        appearance: "dark",
+        preview: <ForgotPasswordResetBlock />,
+        code: forgotPasswordResetCode,
       },
     ],
   },

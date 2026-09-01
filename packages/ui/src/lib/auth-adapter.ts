@@ -1,7 +1,7 @@
 /**
  * DEMO auth adapter. Gold-path apps replace `lib/auth-adapter.ts` with a
  * Better-Auth implementation that keeps the same named exports
- * (`signInEmail`, `signUpEmail`, `requestPasswordReset`).
+ * (`signInEmail`, `signUpEmail`, `requestPasswordReset`, `resetPassword`).
  *
  * PURE TS (zero React / hooks / DOM). Gallery and store demos fake success
  * after client-side validation — no network.
@@ -59,5 +59,14 @@ export async function signUpEmail(input: SignUpInput): Promise<void> {
 /** Demo password-reset request: validate email, wait briefly, resolve. No network. */
 export async function requestPasswordReset(input: { email: string }): Promise<void> {
   requireEmail(input.email);
+  await wait(DEMO_LATENCY_MS);
+}
+
+/** Demo password reset: require a token and a valid password, wait, resolve. */
+export async function resetPassword(input: { token: string; newPassword: string }): Promise<void> {
+  if (!input.token.trim()) {
+    throw new Error("Reset link is missing or expired.");
+  }
+  requirePassword(input.newPassword);
   await wait(DEMO_LATENCY_MS);
 }

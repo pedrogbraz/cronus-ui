@@ -17,6 +17,18 @@
         "blocks": [{ "block": "login", "variant": "split" }]
       },
       {
+        "route": "/forgot-password",
+        "title": "Reset password",
+        "chrome": "bare",
+        "blocks": ["forgot-password"]
+      },
+      {
+        "route": "/reset-password",
+        "title": "Set new password",
+        "chrome": "bare",
+        "blocks": [{ "block": "forgot-password", "variant": "reset" }]
+      },
+      {
         "route": "/",
         "title": "Overview",
         "nav": "Overview",

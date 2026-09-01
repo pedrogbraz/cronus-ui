@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Password reset gold path.** saas `/forgot-password` shows the sent state
+  with the email the user typed (not Mara). `/reset-password` sets a new
+  password from the Better-Auth token. `sendResetPassword` logs the URL like
+  invite. Admin gets the same two pages so the split-login link is not a 404.
+
 ## [0.6.6] — 2026-08-31
 
 ### Added

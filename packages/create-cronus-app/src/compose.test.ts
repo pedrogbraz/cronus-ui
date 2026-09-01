@@ -206,14 +206,22 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     });
     expect(result.ok).toBe(true);
     if (!result.ok) return;
-    // 11 manifest pages + gold-path accept-invitation.
-    expect(result.pageCount).toBe(12);
+    // 12 manifest pages + gold-path accept-invitation.
+    expect(result.pageCount).toBe(13);
     expect(existsSync(join(cwd, "app/(bare)/accept-invitation/page.tsx"))).toBe(true);
     // Bare auth pages + shell pages. The dashboard is the shell HOME at "/", so it
     // lives at app/(shell)/page.tsx (not /dashboard) — this is the polished landing
     // surface that create-cronus-app opens on, and it supersedes the base app/page.tsx.
     expect(existsSync(join(cwd, "app/(bare)/login/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(bare)/forgot-password/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(bare)/reset-password/page.tsx"))).toBe(true);
+    const reset = readFileSync(join(cwd, "app/(bare)/reset-password/page.tsx"), "utf8");
+    expect(reset).toContain("forgot-password-reset");
+    expect(reset).toContain("ForgotPasswordResetBlock");
+    expect(readFileSync(join(cwd, "lib/auth-adapter.ts"), "utf8")).toContain("resetPassword");
+    expect(readFileSync(join(cwd, "lib/auth-adapter.ts"), "utf8")).toContain(
+      'redirectTo: "/reset-password"',
+    );
     expect(existsSync(join(cwd, "app/(shell)/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(shell)/dashboard/page.tsx"))).toBe(false);
     expect(existsSync(join(cwd, "app/(shell)/settings/page.tsx"))).toBe(true);
@@ -295,9 +303,11 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     });
     expect(result.ok).toBe(true);
     if (!result.ok) return;
-    expect(result.pageCount).toBe(7);
+    expect(result.pageCount).toBe(9);
     expect(existsSync(join(cwd, "app/(bare)/accept-invitation/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(bare)/login/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(bare)/forgot-password/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(bare)/reset-password/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(shell)/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(shell)/users/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(shell)/analytics/page.tsx"))).toBe(true);
