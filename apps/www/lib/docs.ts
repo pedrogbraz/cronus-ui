@@ -299,6 +299,18 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-09-01",
+    version: "v0.6.11",
+    status: "Released",
+    title: "Gold-path home is items",
+    summary:
+      "create-cronus-app --template saas (and admin) opens on the live ItemsPanel after signup. Catalog dashboard and stats stay installed, not rendered on /.",
+    items: [
+      "saas/admin / renders ItemsPanel only",
+      "Dashboard and stats blocks remain in the project for the catalog",
+    ],
+  },
+  {
+    date: "2026-09-01",
     version: "v0.6.10",
     status: "Released",
     title: "Invite link and admin signup",

@@ -4,7 +4,7 @@ import { join } from "node:path";
 
 export const CONFIG_FILE = "cronus-ui.json";
 
-export const CLI_VERSION = "0.6.10";
+export const CLI_VERSION = "0.6.11";
 
 export const DEFAULT_REGISTRY = `https://raw.githubusercontent.com/pedrogbraz/cronus-ui/v${CLI_VERSION}/registry`;
 
