@@ -2,7 +2,7 @@
   "name": "notification-panel",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.10"
+    "@cronus-ui/ui@0.6.11"
   ],
   "registryDependencies": [],
   "files": [
