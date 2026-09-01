@@ -1,6 +1,6 @@
 {
   "name": "@cronus-ui/tokens",
-  "version": "0.6.15",
+  "version": "0.6.16",
   "description": "Cronus design tokens — source of truth (TS) + CSS variable bridge + Tailwind v4 preset.",
   "type": "module",
   "exports": {

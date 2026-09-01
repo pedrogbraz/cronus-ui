@@ -299,6 +299,15 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-09-01",
+    version: "v0.6.16",
+    status: "Released",
+    title: "upgrade keeps gold-path chrome",
+    summary:
+      "cronus-ui upgrade --all on saas and admin no longer restores Mara, WORKSPACES, or a demo InviteDialog on app-shell-chrome.",
+    items: ["saas/admin upgrade re-applies WorkspaceMenu, InviteMember, SessionUser"],
+  },
+  {
+    date: "2026-09-01",
     version: "v0.6.15",
     status: "Released",
     title: "Invite-aware login copy",
