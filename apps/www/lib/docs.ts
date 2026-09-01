@@ -299,6 +299,15 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-09-01",
+    version: "v0.6.14",
+    status: "Released",
+    title: "add-page keeps gold-path chrome",
+    summary:
+      "cronus-ui add-page --nav on saas and admin grows the sidebar without restoring Mara, WORKSPACES, or a demo InviteDialog.",
+    items: ["saas/admin add-page --nav re-applies WorkspaceMenu, InviteMember, SessionUser"],
+  },
+  {
+    date: "2026-09-01",
     version: "v0.6.13",
     status: "Released",
     title: "Invite-aware signup copy",
