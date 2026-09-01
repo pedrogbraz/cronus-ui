@@ -2,7 +2,7 @@
   "name": "email-verify",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.8"
+    "@cronus-ui/ui@0.6.9"
   ],
   "registryDependencies": [],
   "files": [
