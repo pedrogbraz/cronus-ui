@@ -2,7 +2,7 @@
   "name": "cta--banner",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.6",
+    "@cronus-ui/ui@0.6.7",
     "lucide-react@^0.577.0"
   ],
   "registryDependencies": [],
