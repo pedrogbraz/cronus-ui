@@ -299,6 +299,19 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-08-31",
+    version: "v0.6.6",
+    status: "Released",
+    title: "Signup split on saas",
+    summary:
+      "create-cronus-app --template saas ships /signup in the same split chrome as /login. Workspace copy, no Polar trial; store stays on the classic card.",
+    items: [
+      "New signup--split variant pairs login--split",
+      "saas compose installs the variant; store keeps classic signup",
+      "No social buttons, no 14-day trial copy",
+    ],
+  },
+  {
+    date: "2026-08-31",
     version: "v0.6.5",
     status: "Released",
     title: "First-run gold path",

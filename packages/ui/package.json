@@ -1,6 +1,6 @@
 {
   "name": "@cronus-ui/ui",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "description": "Cronus UI — themeable, accessible React components (Radix + CVA + Tailwind v4).",
   "type": "module",
   "exports": {
