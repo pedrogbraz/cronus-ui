@@ -244,6 +244,12 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     // The login/signup pages use the split variant (imported from the dash-named file).
     const login = readFileSync(join(cwd, "app/(bare)/login/page.tsx"), "utf8");
     expect(login).toContain("login-split");
+    expect(readFileSync(join(cwd, "components/blocks/login-split.tsx"), "utf8")).toContain(
+      "Join the workspace",
+    );
+    expect(readFileSync(join(cwd, "components/blocks/login-split.tsx"), "utf8")).toContain(
+      "cronus-invitation",
+    );
     const signup = readFileSync(join(cwd, "app/(bare)/signup/page.tsx"), "utf8");
     expect(signup).toContain("signup-split");
     expect(signup).toContain("SignupSplitBlock");
@@ -334,6 +340,9 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
       "SignupSplitBlock",
     );
     expect(readFileSync(join(cwd, "components/blocks/signup-split.tsx"), "utf8")).toContain(
+      "Join the workspace",
+    );
+    expect(readFileSync(join(cwd, "components/blocks/login-split.tsx"), "utf8")).toContain(
       "Join the workspace",
     );
     expect(existsSync(join(cwd, "app/(bare)/forgot-password/page.tsx"))).toBe(true);
