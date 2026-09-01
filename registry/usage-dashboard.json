@@ -2,7 +2,7 @@
   "name": "usage-dashboard",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.9"
+    "@cronus-ui/ui@0.6.10"
   ],
   "registryDependencies": [
     "demo-saas"

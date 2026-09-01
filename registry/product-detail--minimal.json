@@ -2,7 +2,7 @@
   "name": "product-detail--minimal",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.9",
+    "@cronus-ui/ui@0.6.10",
     "lucide-react@^0.577.0"
   ],
   "registryDependencies": [

@@ -4651,8 +4651,8 @@
   "apps": {
     "admin": {
       "title": "Admin",
-      "description": "An admin console: split login, an (app) shell, overview, users, analytics, a sprint board and an audit trail — composed from validated blocks.",
-      "pages": 8,
+      "description": "An admin console: split login/signup, password reset, an (app) shell, overview, users, analytics, a sprint board and an audit trail — composed from validated blocks.",
+      "pages": 9,
       "style": "operational",
       "palette": "midnight",
       "motion": "none",
