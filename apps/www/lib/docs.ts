@@ -299,6 +299,19 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-08-31",
+    version: "v0.6.7",
+    status: "Released",
+    title: "Password reset gold path",
+    summary:
+      "create-cronus-app --template saas (and admin) completes forgot-password: sent state uses the typed email, /reset-password sets a new password from the Better-Auth token.",
+    items: [
+      "Request form switches to sent with the email the user typed",
+      "forgot-password--reset reads the token and sets the new password",
+      "Admin gets /forgot-password and /reset-password so split-login is not a 404",
+    ],
+  },
+  {
+    date: "2026-08-31",
     version: "v0.6.6",
     status: "Released",
     title: "Signup split on saas",
