@@ -169,6 +169,10 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
 
     expect(readFileSync(join(cwd, "db/schema.ts"), "utf8")).toContain("export const organization");
     expect(readFileSync(join(cwd, "lib/auth.ts"), "utf8")).toContain("sendInvitationEmail");
+    expect(readFileSync(join(cwd, "lib/auth.ts"), "utf8")).toContain("localhost:*");
+    expect(readFileSync(join(cwd, "app/(shell)/layout.tsx"), "utf8")).toContain(
+      "auth.api.getSession",
+    );
     expect(existsSync(join(cwd, "components/workspace-menu.tsx"))).toBe(true);
 
     const pkg = JSON.parse(readFileSync(join(cwd, "package.json"), "utf8")) as {

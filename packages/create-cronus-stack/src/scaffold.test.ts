@@ -355,6 +355,8 @@ describe("scaffoldStack", () => {
     const auth = readFileSync(join(targetDir, "src", "lib", "auth.ts"), "utf8");
     expect(auth).toContain("better-auth/adapters/drizzle");
     expect(auth).toContain("nextCookies");
+    expect(auth).toContain("localhost:*");
+    expect(auth).toContain("authBaseURL");
     expect(auth).toContain("better-auth/next-js");
     expect(auth).toContain("sendResetPassword");
     expect(auth).toContain("console.info");

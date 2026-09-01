@@ -127,6 +127,13 @@ function teamPageRel(appDir: string, generatedFiles: string[]): string | undefin
   return any !== undefined ? posix(any) : undefined;
 }
 
+function shellLayoutRel(appDir: string, generatedFiles: string[]): string | undefined {
+  const match = generatedFiles.find((f) => posix(f) === `${appDir}/(shell)/layout.tsx`);
+  if (match !== undefined) return posix(match);
+  const any = generatedFiles.find((f) => /(^|\/)\(shell\)\/layout\.tsx$/.test(posix(f)));
+  return any !== undefined ? posix(any) : undefined;
+}
+
 function drizzleConfigSource(dbDir: string): string {
   return `import { mkdirSync } from "node:fs";
 import { dirname } from "node:path";
@@ -279,6 +286,19 @@ function newId(): string {
   return crypto.randomUUID().replaceAll("-", "");
 }
 
+function authBaseURL() {
+  const env = process.env.BETTER_AUTH_URL;
+  const hosts = ["localhost:*", "127.0.0.1:*"];
+  if (env) {
+    try {
+      hosts.push(new URL(env).host);
+    } catch {
+      // ignore invalid BETTER_AUTH_URL
+    }
+  }
+  return { allowedHosts: hosts, fallback: env || "http://localhost:3000" };
+}
+
 export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "sqlite", schema }),
   emailAndPassword: {
@@ -335,12 +355,11 @@ export const auth = betterAuth({
     },
   },
   secret: process.env.BETTER_AUTH_SECRET,
-  baseURL: process.env.BETTER_AUTH_URL,
+  baseURL: authBaseURL(),
   plugins: [
     organization({
       sendInvitationEmail: async (data) => {
-        const base = process.env.BETTER_AUTH_URL ?? "http://localhost:3000";
-        console.info(\`Invite \${data.email}: \${base}/accept-invitation?id=\${data.id}\`);
+        console.info(\`Invite \${data.email}: /accept-invitation?id=\${data.id}\`);
       },
     }),
     nextCookies(),
@@ -467,13 +486,10 @@ export function middleware(request: NextRequest) {
     if (invitation) url.searchParams.set("invitation", invitation);
     return NextResponse.redirect(url);
   }
-  if (sessionCookie && isAuthPage) {
-    if (invitation) {
-      return NextResponse.redirect(
-        new URL(\`/accept-invitation?id=\${encodeURIComponent(invitation)}\`, request.url),
-      );
-    }
-    return NextResponse.redirect(new URL("/", request.url));
+  if (sessionCookie && isAuthPage && invitation) {
+    return NextResponse.redirect(
+      new URL(\`/accept-invitation?id=\${encodeURIComponent(invitation)}\`, request.url),
+    );
   }
   return NextResponse.next();
 }
@@ -1091,6 +1107,32 @@ export function patchTeamPageSource(source: string, membersImport: string): stri
   return out;
 }
 
+/**
+ * Validate the session in the shell layout so a stale cookie cannot sit in the
+ * app chrome. Idempotent. Returns undefined when AppShellNav is missing.
+ */
+export function patchShellLayoutSource(source: string, authImport: string): string | undefined {
+  if (source.includes("auth.api.getSession") && source.includes('redirect("/login")')) {
+    return source;
+  }
+  if (!source.includes("AppShellNav") || !source.includes("{children}")) return undefined;
+  let out = source;
+  out = insertImport(out, `import { headers } from "next/headers";`);
+  out = insertImport(out, `import { redirect } from "next/navigation";`);
+  out = insertImport(out, `import { auth } from ${JSON.stringify(authImport)};`);
+  out = out.replace(/export default(?! async) function/, "export default async function");
+  if (!out.includes("auth.api.getSession")) {
+    out = out.replace(
+      /(\{ children \}: \{ children: ReactNode \}\) \{)\n/,
+      `$1
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) redirect("/login");
+`,
+    );
+  }
+  return out;
+}
+
 function mergePackageJson(raw: string): string {
   const pkg = JSON.parse(raw) as {
     scripts?: Record<string, string>;
@@ -1185,7 +1227,8 @@ async function writeRel(
 /**
  * Write sqlite + Drizzle + Better-Auth files into a composed saas/admin app.
  * Overwrites lib/auth-adapter.ts, lib/items.ts, and lib/members.ts always.
- * Patches the shell home and /team pages only when compose wrote them this run.
+ * Patches the shell home, /team, and shell layout only when compose wrote them
+ * this run.
  */
 export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<ApplyGoldPathResult> {
   const { targetDir, config, generatedFiles, overwrite } = options;
@@ -1300,6 +1343,23 @@ export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<Appl
       if (templateName !== undefined) {
         const snapDest = resolveSafeDest(targetDir, baseSnapshotDir(templateName), chromeRel);
         await writeFileEnsured(snapDest, patched);
+      }
+    }
+  }
+
+  const layoutRel = shellLayoutRel(appDir, generatedFiles);
+  if (layoutRel !== undefined) {
+    const dest = resolveSafeDest(targetDir, ".", layoutRel);
+    if (existsSync(dest)) {
+      const current = await readFile(dest, "utf8");
+      const patched = patchShellLayoutSource(current, authImport);
+      if (patched !== undefined && patched !== current) {
+        await writeFileEnsured(dest, patched);
+        const templateName = options.templateName;
+        if (templateName !== undefined) {
+          const snapDest = resolveSafeDest(targetDir, baseSnapshotDir(templateName), layoutRel);
+          await writeFileEnsured(snapDest, patched);
+        }
       }
     }
   }

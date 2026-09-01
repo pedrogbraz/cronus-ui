@@ -58,7 +58,7 @@ export function outroLines(
     ...(goldPath ? [`  ${dollar} ${dbPush}`] : []),
     `  ${dollar} ${dev}`,
     "",
-    `Then open ${c.cyan("http://localhost:3000")}.`,
+    `Then open the URL printed by ${c.cyan(dev)}.`,
     "",
     ...grow,
     "",

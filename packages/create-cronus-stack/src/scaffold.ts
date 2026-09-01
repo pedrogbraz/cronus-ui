@@ -1060,6 +1060,19 @@ function newId(): string {
   return crypto.randomUUID().replaceAll("-", "");
 }
 
+function authBaseURL() {
+  const env = process.env.BETTER_AUTH_URL;
+  const hosts = ["localhost:*", "127.0.0.1:*"];
+  if (env) {
+    try {
+      hosts.push(new URL(env).host);
+    } catch {
+      // ignore invalid BETTER_AUTH_URL
+    }
+  }
+  return { allowedHosts: hosts, fallback: env || "http://localhost:3000" };
+}
+
 export const auth = betterAuth({
   database: drizzleAdapter(db, { provider: "${provider}", schema }),
   emailAndPassword: {
@@ -1118,14 +1131,13 @@ export const auth = betterAuth({
   plugins: [
     organization({
       sendInvitationEmail: async (data) => {
-        const base = process.env.BETTER_AUTH_URL ?? "http://localhost:3000";
-        console.info(\`Invite \${data.email}: \${base}/accept-invitation?id=\${data.id}\`);
+        console.info(\`Invite \${data.email}: /accept-invitation?id=\${data.id}\`);
       },
     }),
     nextCookies(),
   ],
   secret: process.env.BETTER_AUTH_SECRET,
-  baseURL: process.env.BETTER_AUTH_URL,
+  baseURL: authBaseURL(),
 });
 `;
 }
@@ -1159,13 +1171,10 @@ export function middleware(request: NextRequest) {
     if (invitation) url.searchParams.set("invitation", invitation);
     return NextResponse.redirect(url);
   }
-  if (sessionCookie && isAuthPage) {
-    if (invitation) {
-      return NextResponse.redirect(
-        new URL(\`/accept-invitation?id=\${encodeURIComponent(invitation)}\`, request.url),
-      );
-    }
-    return NextResponse.redirect(new URL("/", request.url));
+  if (sessionCookie && isAuthPage && invitation) {
+    return NextResponse.redirect(
+      new URL(\`/accept-invitation?id=\${encodeURIComponent(invitation)}\`, request.url),
+    );
   }
   return NextResponse.next();
 }

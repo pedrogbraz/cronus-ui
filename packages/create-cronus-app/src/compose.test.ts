@@ -224,6 +224,9 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     // The (shell) layout is a thin AppShellNav wrapper (golden rule).
     const layout = readFileSync(join(cwd, "app/(shell)/layout.tsx"), "utf8");
     expect(layout).toContain("<AppShellNav>{children}</AppShellNav>");
+    expect(layout).toContain("auth.api.getSession");
+    expect(layout).toContain('redirect("/login")');
+    expect(readFileSync(join(cwd, "lib/auth.ts"), "utf8")).toContain("localhost:*");
     const wrapper = readFileSync(join(cwd, "components/blocks/chrome/app-shell.tsx"), "utf8");
     expect(wrapper).toContain("AppShellChromeBlock");
 

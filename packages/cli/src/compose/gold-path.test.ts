@@ -8,6 +8,7 @@ import {
   isGoldPathTemplate,
   patchChromeSource,
   patchHomePageSource,
+  patchShellLayoutSource,
   patchTeamPageSource,
 } from "./gold-path.js";
 
@@ -21,6 +22,14 @@ export default function HomePage() {
       <DashboardBlock />
     </main>
   );
+}
+`;
+
+const SHELL_LAYOUT = `import type { ReactNode } from "react";
+import { AppShellNav } from "@/components/blocks/chrome/app-shell";
+
+export default function ShellLayout({ children }: { children: ReactNode }) {
+  return <AppShellNav>{children}</AppShellNav>;
 }
 `;
 
@@ -190,6 +199,32 @@ describe("patchTeamPageSource", () => {
   });
 });
 
+describe("patchShellLayoutSource", () => {
+  it("makes the shell layout async and redirects unsigned-in visitors", () => {
+    const out = patchShellLayoutSource(SHELL_LAYOUT, "@/lib/auth");
+    expect(out).toBeDefined();
+    expect(out).toContain('import { auth } from "@/lib/auth";');
+    expect(out).toContain('from "next/headers"');
+    expect(out).toContain('from "next/navigation"');
+    expect(out).toContain("export default async function ShellLayout");
+    expect(out).toContain("auth.api.getSession");
+    expect(out).toContain('redirect("/login")');
+    expect(out).toContain("<AppShellNav>{children}</AppShellNav>");
+  });
+
+  it("is idempotent when the session gate is already wired", () => {
+    const once = patchShellLayoutSource(SHELL_LAYOUT, "@/lib/auth");
+    expect(once).toBeDefined();
+    expect(patchShellLayoutSource(once as string, "@/x")).toBe(once);
+  });
+
+  it("returns undefined when the layout is not the app shell", () => {
+    expect(patchShellLayoutSource("export default function Layout() { return null; }", "@/x")).toBe(
+      undefined,
+    );
+  });
+});
+
 describe("applyGoldPath", () => {
   let root: string;
   let cwd: string;
@@ -217,6 +252,7 @@ describe("applyGoldPath", () => {
       join(cwd, "next.config.mjs"),
       `const nextConfig = {\n  reactStrictMode: true,\n};\n\nexport default nextConfig;\n`,
     );
+    writeFileSync(join(cwd, "app", "(shell)", "layout.tsx"), SHELL_LAYOUT);
     writeFileSync(join(cwd, "app", "(shell)", "page.tsx"), HOME);
     mkdirSync(join(cwd, "app", "(shell)", "team"), { recursive: true });
     writeFileSync(join(cwd, "app", "(shell)", "team", "page.tsx"), TEAM);
@@ -232,7 +268,11 @@ describe("applyGoldPath", () => {
     const result = await applyGoldPath({
       targetDir: cwd,
       config: DEFAULT_CONFIG,
-      generatedFiles: ["app/(shell)/page.tsx", "app/(shell)/team/page.tsx"],
+      generatedFiles: [
+        "app/(shell)/layout.tsx",
+        "app/(shell)/page.tsx",
+        "app/(shell)/team/page.tsx",
+      ],
       overwrite: false,
       templateName: "saas",
     });
@@ -278,8 +318,14 @@ describe("applyGoldPath", () => {
     expect(auth).toContain("databaseHooks");
     expect(auth).toContain("activeOrganizationId");
     expect(auth).toContain("/accept-invitation?id=");
+    expect(auth).toContain("allowedHosts");
+    expect(auth).toContain("localhost:*");
+    expect(auth).toContain("authBaseURL");
     expect(auth).toContain('invitationTable.status, "pending"');
-    expect(readFileSync(join(cwd, "middleware.ts"), "utf8")).toContain("/accept-invitation");
+    const middleware = readFileSync(join(cwd, "middleware.ts"), "utf8");
+    expect(middleware).toContain("/accept-invitation");
+    expect(middleware).toContain("sessionCookie && isAuthPage && invitation");
+    expect(middleware).not.toContain('new URL("/", request.url)');
     expect(existsSync(join(cwd, "app", "(bare)", "accept-invitation", "page.tsx"))).toBe(true);
     const acceptPage = readFileSync(
       join(cwd, "app", "(bare)", "accept-invitation", "page.tsx"),
@@ -372,6 +418,16 @@ describe("applyGoldPath", () => {
     );
     expect(teamSnap).toBe(team);
 
+    const shellLayout = readFileSync(join(cwd, "app", "(shell)", "layout.tsx"), "utf8");
+    expect(shellLayout).toContain("auth.api.getSession");
+    expect(shellLayout).toContain('redirect("/login")');
+    expect(shellLayout).toContain("export default async function ShellLayout");
+    const layoutSnap = readFileSync(
+      join(cwd, ".cronus-ui/base/saas/app/(shell)/layout.tsx"),
+      "utf8",
+    );
+    expect(layoutSnap).toBe(shellLayout);
+
     const pkg = JSON.parse(readFileSync(join(cwd, "package.json"), "utf8")) as {
       dependencies: Record<string, string>;
       devDependencies: Record<string, string>;
@@ -408,6 +464,7 @@ describe("applyGoldPath", () => {
     });
     expect(readFileSync(join(cwd, "app", "(shell)", "page.tsx"), "utf8")).toBe(HOME);
     expect(readFileSync(join(cwd, "app", "(shell)", "team", "page.tsx"), "utf8")).toBe(TEAM);
+    expect(readFileSync(join(cwd, "app", "(shell)", "layout.tsx"), "utf8")).toBe(SHELL_LAYOUT);
     expect(existsSync(join(cwd, "db", "schema.ts"))).toBe(true);
   });
 

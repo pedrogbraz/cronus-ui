@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **First-run gold path.** Loopback on any port is a trusted Better-Auth
+  origin, so signup works when Next picks something other than `:3000`. A
+  stale session cookie no longer traps the shell: middleware stops bouncing
+  cookie-holders off `/login`, and the shell layout redirects unsigned-in
+  visitors after a real `getSession`.
+
 ## [0.6.4] — 2026-08-31
 
 ### Added
