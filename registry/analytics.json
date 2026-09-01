@@ -2,7 +2,7 @@
   "name": "analytics",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.15"
+    "@cronus-ui/ui@0.6.16"
   ],
   "registryDependencies": [
     "demo-saas"
