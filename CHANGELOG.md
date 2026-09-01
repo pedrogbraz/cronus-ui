@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **`add-page --nav` keeps the gold-path chrome.** On saas and admin, growing
+  the sidebar no longer regenerates Mara / `WORKSPACES` / a demo InviteDialog.
+  The rewritten `app-shell-chrome` is gold-patched again (WorkspaceMenu,
+  InviteMember, SessionUser).
+
 ## [0.6.13] — 2026-09-01
 
 ### Changed

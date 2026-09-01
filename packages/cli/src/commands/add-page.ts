@@ -21,6 +21,7 @@
 
 import { existsSync } from "node:fs";
 import { rm } from "node:fs/promises";
+import { isGoldPathTemplate, patchChromeSource } from "../compose/gold-path.js";
 import { type AppManifest, type BlockRef, blockRefParts } from "../compose/manifest.js";
 import {
   buildComposePlan,
@@ -386,6 +387,7 @@ export async function addPage(options: AddPageOptions): Promise<AddPageResult> {
   // pristine source re-applies BOTH the nav data-slot and the brand, yielding the
   // same bytes compose would. HONEST CUT: like compose's chrome customization,
   // this regenerates the chrome copy and does not preserve hand edits to it.
+  // saas/admin then gold-patch the rewritten app-shell-chrome (see below).
   const rewriteChrome = options.nav !== undefined || newChromeGroup;
   if (rewriteChrome && planChrome !== undefined) {
     for (const slug of chromeSlugsOfGroup(planChrome)) {
@@ -393,7 +395,20 @@ export async function addPage(options: AddPageOptions): Promise<AddPageResult> {
       const dest = resolveSafeDest(targetDir, ".", rel);
       const source = plan.chromeSources[slug];
       if (source === undefined || !existsSync(dest)) continue;
-      const content = rewriteImports(rewriteChromeBlock(slug, source, plan), config);
+      let content = rewriteImports(rewriteChromeBlock(slug, source, plan), config);
+      // saas/admin: compose gold-patches this chrome (WorkspaceMenu / InviteMember
+      // / SessionUser). Rewriting from the pristine registry would otherwise
+      // restore Mara + WORKSPACES. Re-apply the same idempotent patch so --nav
+      // grows the sidebar without undoing the authenticated shell.
+      if (isGoldPathTemplate(appName) && slug === "app-shell-chrome") {
+        const patched = patchChromeSource(
+          content,
+          "@/components/workspace-menu",
+          "@/components/invite-member",
+          "@/components/session-user",
+        );
+        if (patched !== undefined) content = patched;
+      }
       await writeFileEnsured(dest, content);
       if (!generatedFiles.includes(rel)) generatedFiles.push(rel);
     }

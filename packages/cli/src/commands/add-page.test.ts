@@ -748,6 +748,55 @@ describe.skipIf(!HAS_REGISTRY)("addPage — confirmed-defect fixes", () => {
     // The installed chrome block is predicted in wouldInstall (matches result).
     expect(preview.wouldInstall).toEqual(expect.arrayContaining(result.installedBlocks));
     expect([...preview.wouldInstall].sort()).toEqual([...result.installedBlocks].sort());
+    // New shell chrome is gold-patched, not left as catalog Mara.
+    const newShellChrome = readFileSync(
+      join(app, "components/blocks/app-shell-chrome.tsx"),
+      "utf8",
+    );
+    expect(newShellChrome).toContain("WorkspaceMenu");
+    expect(newShellChrome).toContain("InviteMember");
+    expect(newShellChrome).toContain("SessionUser");
+    expect(newShellChrome).not.toContain("WORKSPACES");
+    expect(newShellChrome).not.toContain("../lib/demo-saas.js");
+  });
+
+  it("add-page --nav on a composed saas app keeps gold-path chrome (WorkspaceMenu)", async () => {
+    const app = join(root, "saas-nav");
+    seedProject(app, "Painel");
+    await composeApp({
+      targetDir: app,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+    const chromeBefore = readFileSync(join(app, "components/blocks/app-shell-chrome.tsx"), "utf8");
+    expect(chromeBefore).toContain("WorkspaceMenu");
+    expect(chromeBefore).toContain("InviteMember");
+    expect(chromeBefore).toContain("SessionUser");
+
+    const result = await addPage({
+      targetDir: app,
+      route: "/faq",
+      blocks: ["faq"],
+      chrome: "shell",
+      nav: "FAQ",
+      app: "saas",
+      skipInstall: true,
+    });
+    expect(result.generatedFiles).toContain("app/(shell)/faq/page.tsx");
+    expect(result.generatedFiles).toContain("components/blocks/app-shell-chrome.tsx");
+
+    const chrome = readFileSync(join(app, "components/blocks/app-shell-chrome.tsx"), "utf8");
+    expect(chrome).toContain('{ label: "FAQ", href: "/faq" }');
+    expect(chrome).toContain('{ label: "Items", href: "/" }');
+    expect(chrome).toContain("WorkspaceMenu");
+    expect(chrome).toContain("InviteMember");
+    expect(chrome).toContain("SessionUser");
+    expect(chrome).toContain("Painel");
+    expect(chrome).not.toContain("WORKSPACES");
+    expect(chrome).not.toContain("WorkspaceSwitcher");
+    expect(chrome).not.toContain("InviteDialog");
+    expect(chrome).not.toContain("../lib/demo-saas.js");
   });
 
   it("--dry-run matches the apply path for a --nav add on an EXISTING group (P2)", async () => {
