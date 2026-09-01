@@ -36,8 +36,8 @@
       },
       {
         "route": "/",
-        "title": "Dashboard",
-        "nav": "Dashboard",
+        "title": "Items",
+        "nav": "Items",
         "chrome": "shell",
         "blocks": ["dashboard", "stats"]
       },

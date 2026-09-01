@@ -248,10 +248,10 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     expect(signup).toContain("signup-split");
     expect(signup).toContain("SignupSplitBlock");
 
-    // The installed shell block copy carries the real sidebar nav + brand. The
-    // Dashboard nav entry now points at "/" (the shell home), not "/dashboard".
+    // The installed shell block copy carries the real sidebar nav + brand. Home
+    // is the live items surface, so the nav label matches ItemsPanel.
     const shellBlock = readFileSync(join(cwd, "components/blocks/app-shell-chrome.tsx"), "utf8");
-    expect(shellBlock).toContain('{ label: "Dashboard", href: "/" }');
+    expect(shellBlock).toContain('{ label: "Items", href: "/" }');
     expect(shellBlock).toContain('{ label: "Setup", href: "/checklist" }');
     expect(shellBlock).not.toContain('href: "/welcome"');
     expect(shellBlock).not.toContain('href: "/setup"');
@@ -346,7 +346,7 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     expect(home).not.toContain("dashboard-admin-overview");
     expect(existsSync(join(cwd, "components/blocks/dashboard-admin-overview.tsx"))).toBe(true);
     const shellBlock = readFileSync(join(cwd, "components/blocks/app-shell-chrome.tsx"), "utf8");
-    expect(shellBlock).toContain('{ label: "Overview", href: "/" }');
+    expect(shellBlock).toContain('{ label: "Items", href: "/" }');
     expect(shellBlock).toContain("Console");
     expect(shellBlock.startsWith('"use client"')).toBe(true);
 

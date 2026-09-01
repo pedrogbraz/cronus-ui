@@ -68,6 +68,11 @@ describe("compose templates", () => {
       chrome: "bare",
       blocks: [{ block: "forgot-password", variant: "reset" }],
     });
+    expect(saas.manifest.pages.find((page) => page.route === "/")).toMatchObject({
+      title: "Items",
+      nav: "Items",
+      chrome: "shell",
+    });
     expect(saas.manifest.pages.find((page) => page.route === "/welcome")).toMatchObject({
       title: "Welcome",
       chrome: "shell",
@@ -108,6 +113,11 @@ describe("compose templates", () => {
     });
     expect(admin.manifest.pages.find((page) => page.route === "/login")).toMatchObject({
       blocks: [{ block: "login", variant: "split" }],
+    });
+    expect(admin.manifest.pages.find((page) => page.route === "/")).toMatchObject({
+      title: "Items",
+      nav: "Items",
+      chrome: "shell",
     });
     expect(admin.manifest.pages.find((page) => page.route === "/users")).toMatchObject({
       blocks: ["user-management"],

@@ -170,6 +170,7 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     );
     const home = readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8");
     expect(home).toContain("ItemsPanel");
+    expect(home).toContain('title: "Items"');
     expect(home).not.toContain("DashboardAnalyticsBlock");
     expect(home).not.toContain("StatsBlock");
     expect(existsSync(join(cwd, "components/blocks/dashboard.tsx"))).toBe(true);
@@ -227,6 +228,7 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(existsSync(join(cwd, "middleware.ts"))).toBe(true);
     expect(readFileSync(join(cwd, "lib/auth-adapter.ts"), "utf8")).toContain("authClient");
     expect(readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8")).toContain("ItemsPanel");
+    expect(readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8")).toContain('title: "Items"');
     expect(readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8")).not.toContain(
       "DashboardAdminOverviewBlock",
     );

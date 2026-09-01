@@ -58,7 +58,7 @@ export const TEMPLATE_CATALOG: readonly TemplateCatalogEntry[] = [
     blocks: ["dashboard", "stats"].map((block) => ({ block })),
     inside: [
       "Split login/signup and forgot-password plus an (app) shell with sidebar nav",
-      "Dashboard, analytics, team, billing, and settings routes",
+      "Items, analytics, team, billing, and settings routes",
       "Activation loop: welcome, setup wizard, and get-started checklist",
       "Aurora theme by default — `theme set` re-skins the tree",
       "Grow with `cronus-ui add-page`; upgrade keeps local edits",
@@ -78,7 +78,7 @@ export const TEMPLATE_CATALOG: readonly TemplateCatalogEntry[] = [
     blocks: [{ block: "dashboard", variant: "admin-overview" }],
     inside: [
       "Split login/signup and forgot-password plus an (app) shell with sidebar nav",
-      "Overview, users, analytics, sprint board, and audit log",
+      "Items, users, analytics, sprint board, and audit log",
       "Admin-overview dashboard and engagement analytics variants",
       "Midnight theme, dark mode",
       "Grow with `cronus-ui add-page`; upgrade keeps local edits",

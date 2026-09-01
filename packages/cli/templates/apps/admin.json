@@ -36,8 +36,8 @@
       },
       {
         "route": "/",
-        "title": "Overview",
-        "nav": "Overview",
+        "title": "Items",
+        "nav": "Items",
         "chrome": "shell",
         "blocks": [{ "block": "dashboard", "variant": "admin-overview" }]
       },

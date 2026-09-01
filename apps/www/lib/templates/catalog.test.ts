@@ -91,6 +91,7 @@ describe("template catalog", () => {
     expect(saas.description).toMatch(/checklist/);
     expect(saas.inside.some((line) => /forgot-password/.test(line))).toBe(true);
     expect(saas.inside.some((line) => /welcome/.test(line) && /checklist/.test(line))).toBe(true);
+    expect(saas.inside.some((line) => /^Items,/.test(line))).toBe(true);
   });
 
   it("describes admin with split signup so first-run is not a 404", () => {
