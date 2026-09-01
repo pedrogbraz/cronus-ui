@@ -285,6 +285,10 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
       /authClient|better-auth/,
     );
     expect(readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8")).toContain("ItemsPanel");
+    expect(readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8")).not.toContain(
+      "DashboardAnalyticsBlock",
+    );
+    expect(readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8")).not.toContain("StatsBlock");
     expect(readFileSync(join(cwd, "lib/items.ts"), "utf8")).toContain("createItem");
     expect(readFileSync(join(cwd, "components/items-view.tsx"), "utf8")).toContain('name="title"');
     const teamPage = readFileSync(join(cwd, "app/(shell)/team/page.tsx"), "utf8");
@@ -337,7 +341,10 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     const login = readFileSync(join(cwd, "app/(bare)/login/page.tsx"), "utf8");
     expect(login).toContain("login-split");
     const home = readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8");
-    expect(home).toMatch(/dashboard-admin-overview|admin-overview/);
+    expect(home).toContain("ItemsPanel");
+    expect(home).not.toContain("DashboardAdminOverviewBlock");
+    expect(home).not.toContain("dashboard-admin-overview");
+    expect(existsSync(join(cwd, "components/blocks/dashboard-admin-overview.tsx"))).toBe(true);
     const shellBlock = readFileSync(join(cwd, "components/blocks/app-shell-chrome.tsx"), "utf8");
     expect(shellBlock).toContain('{ label: "Overview", href: "/" }');
     expect(shellBlock).toContain("Console");

@@ -1186,22 +1186,29 @@ export default nextConfig;
 `;
 }
 
-/** Insert ItemsPanel into a generated home page. Returns undefined when there is no main. */
+/**
+ * Catalog demo surfaces that compose stacks on `/` for saas/admin. Gold path
+ * keeps the files installed but the live home is ItemsPanel only.
+ */
+const CATALOG_HOME_BLOCKS = [
+  "DashboardAnalyticsBlock",
+  "DashboardAdminOverviewBlock",
+  "StatsBlock",
+  "DashboardBlock",
+] as const;
+
+/** Insert ItemsPanel and drop catalog dashboard/stats from a generated home. */
 export function patchHomePageSource(source: string, itemsImport: string): string | undefined {
   if (!/<main\b/.test(source)) return undefined;
   let out = source;
-  const importLine = `import { ItemsPanel } from ${JSON.stringify(itemsImport)};`;
-  if (!out.includes(importLine)) {
-    const match = out.match(/^import .+$/m);
-    if (match?.index !== undefined) {
-      out = `${out.slice(0, match.index)}${importLine}\n${out.slice(match.index)}`;
-    } else {
-      out = `${importLine}\n${out}`;
-    }
-  }
+  out = insertImport(out, `import { ItemsPanel } from ${JSON.stringify(itemsImport)};`);
   out = out.replace(/export default(?! async) function/, "export default async function");
   if (!/<ItemsPanel\s*\/>/.test(out)) {
     out = out.replace(/(<main\b[^>]*>)/, "$1\n      <ItemsPanel />");
+  }
+  for (const name of CATALOG_HOME_BLOCKS) {
+    out = out.replace(new RegExp(`\\n\\s*<${name}\\s*/>`, "g"), "");
+    out = out.replace(new RegExp(`import \\{ ${name} \\} from "[^"]+";\\n`), "");
   }
   return out;
 }

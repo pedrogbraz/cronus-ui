@@ -12,14 +12,29 @@ import {
   patchTeamPageSource,
 } from "./gold-path.js";
 
-const HOME = `import { DashboardBlock } from "@/components/blocks/dashboard";
+const HOME = `import { DashboardAnalyticsBlock } from "@/components/blocks/dashboard";
+import { StatsBlock } from "@/components/blocks/stats";
 
 export const metadata = { title: "Dashboard" };
 
 export default function HomePage() {
   return (
     <main className="flex min-h-svh flex-col">
-      <DashboardBlock />
+      <DashboardAnalyticsBlock />
+      <StatsBlock />
+    </main>
+  );
+}
+`;
+
+const HOME_ADMIN = `import { DashboardAdminOverviewBlock } from "@/components/blocks/dashboard-admin-overview";
+
+export const metadata = { title: "Overview" };
+
+export default function HomePage() {
+  return (
+    <main className="flex min-h-svh flex-col">
+      <DashboardAdminOverviewBlock />
     </main>
   );
 }
@@ -158,14 +173,28 @@ describe("patchChromeSource", () => {
 });
 
 describe("patchHomePageSource", () => {
-  it("inserts ItemsPanel inside the existing main and makes the page async", () => {
+  it("inserts ItemsPanel and drops catalog dashboard/stats from the saas home", () => {
     const out = patchHomePageSource(HOME, "@/components/items-panel");
     expect(out).toBeDefined();
     expect(out).toContain('import { ItemsPanel } from "@/components/items-panel";');
     expect(out).toContain("export default async function HomePage()");
     expect(out).toContain("<ItemsPanel />");
-    expect(out).toContain("<DashboardBlock />");
+    expect(out).not.toContain("DashboardAnalyticsBlock");
+    expect(out).not.toContain("StatsBlock");
     expect(out?.match(/<main\b/g)?.length).toBe(1);
+  });
+
+  it("drops the admin-overview dashboard from the admin home", () => {
+    const out = patchHomePageSource(HOME_ADMIN, "@/components/items-panel");
+    expect(out).toContain("<ItemsPanel />");
+    expect(out).not.toContain("DashboardAdminOverviewBlock");
+    expect(out).not.toContain("dashboard-admin-overview");
+  });
+
+  it("is idempotent once the catalog blocks are gone", () => {
+    const once = patchHomePageSource(HOME, "@/components/items-panel");
+    expect(once).toBeDefined();
+    expect(patchHomePageSource(once as string, "@/components/items-panel")).toBe(once);
   });
 
   it("returns undefined when there is no main", () => {
@@ -418,6 +447,8 @@ describe("applyGoldPath", () => {
 
     const home = readFileSync(join(cwd, "app", "(shell)", "page.tsx"), "utf8");
     expect(home).toContain("ItemsPanel");
+    expect(home).not.toContain("DashboardAnalyticsBlock");
+    expect(home).not.toContain("StatsBlock");
     expect(home).toContain("export default async function HomePage()");
     expect(home.match(/<main\b/g)?.length).toBe(1);
 

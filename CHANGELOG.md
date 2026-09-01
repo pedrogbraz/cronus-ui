@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **Gold-path home is the live items surface.** saas/admin `/` keeps catalog
+  dashboard and stats *installed* but the composed page renders `ItemsPanel`
+  only — no Mara KPIs on first-run.
+
 ## [0.6.10] — 2026-09-01
 
 ### Added

@@ -170,6 +170,10 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     );
     const home = readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8");
     expect(home).toContain("ItemsPanel");
+    expect(home).not.toContain("DashboardAnalyticsBlock");
+    expect(home).not.toContain("StatsBlock");
+    expect(existsSync(join(cwd, "components/blocks/dashboard.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "components/blocks/stats.tsx"))).toBe(true);
     expect(readFileSync(join(cwd, "lib/items.ts"), "utf8")).toContain("createItem");
     expect(readFileSync(join(cwd, "components/items-view.tsx"), "utf8")).toContain('name="title"');
     const teamPage = readFileSync(join(cwd, "app/(shell)/team/page.tsx"), "utf8");
@@ -223,6 +227,10 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(existsSync(join(cwd, "middleware.ts"))).toBe(true);
     expect(readFileSync(join(cwd, "lib/auth-adapter.ts"), "utf8")).toContain("authClient");
     expect(readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8")).toContain("ItemsPanel");
+    expect(readFileSync(join(cwd, "app/(shell)/page.tsx"), "utf8")).not.toContain(
+      "DashboardAdminOverviewBlock",
+    );
+    expect(existsSync(join(cwd, "components/blocks/dashboard-admin-overview.tsx"))).toBe(true);
     expect(readFileSync(join(cwd, "lib/items.ts"), "utf8")).toContain("createItem");
     expect(existsSync(join(cwd, "app/(shell)/team/page.tsx"))).toBe(false);
     expect(readFileSync(join(cwd, "lib/members.ts"), "utf8")).toContain("loadMembers");
