@@ -2,7 +2,7 @@
   "name": "changelog",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.4"
+    "@cronus-ui/ui@0.6.5"
   ],
   "registryDependencies": [],
   "files": [

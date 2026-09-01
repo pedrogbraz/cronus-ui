@@ -2,7 +2,7 @@
   "name": "order-tracking",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.4",
+    "@cronus-ui/ui@0.6.5",
     "lucide-react@^0.577.0"
   ],
   "registryDependencies": [
