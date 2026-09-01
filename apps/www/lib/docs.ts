@@ -299,6 +299,18 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-08-31",
+    version: "v0.6.9",
+    status: "Released",
+    title: "Forgot-password split",
+    summary:
+      "create-cronus-app --template saas (and admin) installs forgot-password--split: brand panel beside the reset form, sent state with the typed email. /reset-password stays the token form.",
+    items: [
+      "saas and admin /forgot-password use the split variant",
+      "/reset-password stays the token form",
+    ],
+  },
+  {
+    date: "2026-08-31",
     version: "v0.6.8",
     status: "Released",
     title: "Sign out on the gold path",
