@@ -140,6 +140,15 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(welcome).toContain("<WelcomeBlock />");
     const forgot = readFileSync(join(cwd, "app/(bare)/forgot-password/page.tsx"), "utf8");
     expect(forgot).toContain("<ForgotPasswordBlock />");
+    const signup = readFileSync(join(cwd, "app/(bare)/signup/page.tsx"), "utf8");
+    expect(signup).toContain(
+      'import { SignupSplitBlock } from "@/components/blocks/signup-split";',
+    );
+    expect(signup).toContain("<SignupSplitBlock />");
+    expect(signup).not.toContain("<SignupBlock />");
+    expect(result.installedBlocks).toContain("signup--split");
+    expect(result.installedBlocks).toContain("login--split");
+    expect(existsSync(join(cwd, "components/blocks/signup-split.tsx"))).toBe(true);
 
     expect(existsSync(join(cwd, "db/schema.ts"))).toBe(true);
     expect(existsSync(join(cwd, "lib/auth.ts"))).toBe(true);

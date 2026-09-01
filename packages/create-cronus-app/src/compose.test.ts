@@ -230,9 +230,12 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     const wrapper = readFileSync(join(cwd, "components/blocks/chrome/app-shell.tsx"), "utf8");
     expect(wrapper).toContain("AppShellChromeBlock");
 
-    // The login page uses the split variant (imported from the dash-named file).
+    // The login/signup pages use the split variant (imported from the dash-named file).
     const login = readFileSync(join(cwd, "app/(bare)/login/page.tsx"), "utf8");
     expect(login).toContain("login-split");
+    const signup = readFileSync(join(cwd, "app/(bare)/signup/page.tsx"), "utf8");
+    expect(signup).toContain("signup-split");
+    expect(signup).toContain("SignupSplitBlock");
 
     // The installed shell block copy carries the real sidebar nav + brand. The
     // Dashboard nav entry now points at "/" (the shell home), not "/dashboard".

@@ -67,6 +67,12 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
             description: "Centered create-account card with social sign-up shortcuts.",
           },
           {
+            id: "split",
+            name: "Split panel",
+            description:
+              "Brand gradient panel with a customer testimonial beside the create-account form.",
+          },
+          {
             id: "split-proof",
             name: "Split with proof",
             description:

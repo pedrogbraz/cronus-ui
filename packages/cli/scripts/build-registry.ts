@@ -192,6 +192,7 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     file: "auth.tsx",
     constName: "signupCode",
     variants: [
+      { id: "split", constName: "signupSplitCode" },
       { id: "split-proof", constName: "signupSplitProofCode" },
       { id: "with-plan", constName: "signupWithPlanCode" },
     ],

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Signup split.** Visual pair of `login--split`: two-column brand panel
+  beside the create-account form, workspace copy, no social buttons, no
+  Polar trial. saas compose installs it; store stays on the classic card.
+
 ## [0.6.5] — 2026-08-31
 
 ### Fixed

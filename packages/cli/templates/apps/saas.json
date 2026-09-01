@@ -20,7 +20,7 @@
         "route": "/signup",
         "title": "Create account",
         "chrome": "bare",
-        "blocks": ["signup"]
+        "blocks": [{ "block": "signup", "variant": "split" }]
       },
       {
         "route": "/forgot-password",

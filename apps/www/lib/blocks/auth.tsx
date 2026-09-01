@@ -1314,7 +1314,302 @@ export function SignupBlock() {
 }`;
 
 /* ──────────────────────────────────────────────────────────────────────────
- * 2b. Signup — split with social proof
+ * 2b. Signup — split panel with testimonial
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function SignupSplitBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const name = String(form.get("name") ?? "");
+    const email = String(form.get("email") ?? "");
+    const password = String(form.get("password") ?? "");
+    setError(null);
+    setPending(true);
+    try {
+      await signUpEmail({ email, password, name });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
+  return (
+    <div className="flex w-full items-center justify-center py-4">
+      <div className="grid w-full max-w-4xl overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-lg lg:grid-cols-2">
+        {/* Create-account form */}
+        <div className="flex flex-col justify-center gap-6 p-8 sm:p-10 lg:order-2">
+          <div className="flex flex-col gap-1">
+            <h2 className="font-display text-xl font-semibold text-fg">Create your account</h2>
+            <p className="text-sm text-fg-secondary">Create your Cronus workspace.</p>
+          </div>
+
+          <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="signup-split-name">Full name</Label>
+              <Input
+                id="signup-split-name"
+                name="name"
+                placeholder="Ada Lovelace"
+                autoComplete="name"
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="signup-split-email">Email</Label>
+              <Input
+                id="signup-split-email"
+                name="email"
+                type="email"
+                placeholder="you@company.com"
+                autoComplete="email"
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="signup-split-password">Password</Label>
+              <Input
+                id="signup-split-password"
+                name="password"
+                type="password"
+                placeholder="••••••••"
+                autoComplete="new-password"
+              />
+              <p className="text-xs text-fg-tertiary">Must be at least 8 characters.</p>
+            </div>
+
+            <Label
+              htmlFor="signup-split-terms"
+              className="flex items-start gap-2 font-normal text-fg-secondary"
+            >
+              <Checkbox id="signup-split-terms" defaultChecked />I agree to the Terms and Privacy
+              Policy.
+            </Label>
+
+            {error ? (
+              <p role="alert" className="text-sm text-error-strong">
+                {error}
+              </p>
+            ) : null}
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              aria-busy={pending}
+            >
+              {pending ? "Creating account…" : "Create account"}
+            </Button>
+          </form>
+
+          <p className="text-sm text-fg-secondary">
+            Already have an account?{" "}
+            <a
+              href="/login"
+              className="font-medium text-primary-strong underline-offset-4 hover:underline"
+            >
+              Sign in
+            </a>
+          </p>
+        </div>
+
+        {/* Brand panel */}
+        <div className="relative overflow-hidden bg-gradient-primary-strong p-8 sm:p-10 lg:order-1">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-gradient-aurora opacity-20 blur-3xl"
+          />
+          <div className="relative flex h-full flex-col justify-between gap-12">
+            <div className="flex items-center gap-2.5">
+              <span className="inline-flex size-9 items-center justify-center rounded-xl bg-primary-foreground/15 text-primary-foreground">
+                <ChartColumnIncreasing className="size-4" aria-hidden="true" />
+              </span>
+              <span className="font-display text-lg font-semibold text-primary-foreground">
+                Cronus
+              </span>
+            </div>
+
+            <figure className="flex flex-col gap-5">
+              <Quote className="size-7 text-primary-foreground/50" aria-hidden="true" />
+              <blockquote className="font-display text-xl font-medium leading-snug text-primary-foreground">
+                “Cronus replaced four tools on day one — and our checkout conversion is up 23%.”
+              </blockquote>
+              <figcaption className="flex items-center gap-3">
+                <Avatar>
+                  <AvatarFallback>DR</AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col">
+                  <span className="text-sm font-medium text-primary-foreground">Dana Reyes</span>
+                  <span className="text-sm text-primary-foreground/75">
+                    Head of Growth, Northwind Labs
+                  </span>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const signupSplitCode = `"use client";
+
+import { Avatar, AvatarFallback, Button, Checkbox, Input, Label } from "@cronus-ui/ui";
+import { signUpEmail } from "../lib/auth-adapter.js";
+import { ChartColumnIncreasing, Quote } from "lucide-react";
+import { type FormEvent, useState } from "react";
+
+export function SignupSplitBlock() {
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const name = String(form.get("name") ?? "");
+    const email = String(form.get("email") ?? "");
+    const password = String(form.get("password") ?? "");
+    setError(null);
+    setPending(true);
+    try {
+      await signUpEmail({ email, password, name });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong.");
+    } finally {
+      setPending(false);
+    }
+  }
+
+  return (
+    <div className="flex w-full items-center justify-center py-4">
+      <div className="grid w-full max-w-4xl overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-lg lg:grid-cols-2">
+        {/* Create-account form */}
+        <div className="flex flex-col justify-center gap-6 p-8 sm:p-10 lg:order-2">
+          <div className="flex flex-col gap-1">
+            <h2 className="font-display text-xl font-semibold text-fg">Create your account</h2>
+            <p className="text-sm text-fg-secondary">Create your Cronus workspace.</p>
+          </div>
+
+          <form onSubmit={onSubmit} className="flex flex-col gap-4" aria-busy={pending}>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="signup-split-name">Full name</Label>
+              <Input
+                id="signup-split-name"
+                name="name"
+                placeholder="Ada Lovelace"
+                autoComplete="name"
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="signup-split-email">Email</Label>
+              <Input
+                id="signup-split-email"
+                name="email"
+                type="email"
+                placeholder="you@company.com"
+                autoComplete="email"
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="signup-split-password">Password</Label>
+              <Input
+                id="signup-split-password"
+                name="password"
+                type="password"
+                placeholder="••••••••"
+                autoComplete="new-password"
+              />
+              <p className="text-xs text-fg-tertiary">Must be at least 8 characters.</p>
+            </div>
+
+            <Label
+              htmlFor="signup-split-terms"
+              className="flex items-start gap-2 font-normal text-fg-secondary"
+            >
+              <Checkbox id="signup-split-terms" defaultChecked />I agree to the Terms and Privacy
+              Policy.
+            </Label>
+
+            {error ? (
+              <p role="alert" className="text-sm text-error-strong">
+                {error}
+              </p>
+            ) : null}
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              aria-busy={pending}
+            >
+              {pending ? "Creating account…" : "Create account"}
+            </Button>
+          </form>
+
+          <p className="text-sm text-fg-secondary">
+            Already have an account?{" "}
+            <a
+              href="/login"
+              className="font-medium text-primary-strong underline-offset-4 hover:underline"
+            >
+              Sign in
+            </a>
+          </p>
+        </div>
+
+        {/* Brand panel */}
+        <div className="relative overflow-hidden bg-gradient-primary-strong p-8 sm:p-10 lg:order-1">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-gradient-aurora opacity-20 blur-3xl"
+          />
+          <div className="relative flex h-full flex-col justify-between gap-12">
+            <div className="flex items-center gap-2.5">
+              <span className="inline-flex size-9 items-center justify-center rounded-xl bg-primary-foreground/15 text-primary-foreground">
+                <ChartColumnIncreasing className="size-4" aria-hidden="true" />
+              </span>
+              <span className="font-display text-lg font-semibold text-primary-foreground">
+                Cronus
+              </span>
+            </div>
+
+            <figure className="flex flex-col gap-5">
+              <Quote className="size-7 text-primary-foreground/50" aria-hidden="true" />
+              <blockquote className="font-display text-xl font-medium leading-snug text-primary-foreground">
+                “Cronus replaced four tools on day one — and our checkout conversion is up 23%.”
+              </blockquote>
+              <figcaption className="flex items-center gap-3">
+                <Avatar>
+                  <AvatarFallback>DR</AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col">
+                  <span className="text-sm font-medium text-primary-foreground">Dana Reyes</span>
+                  <span className="text-sm text-primary-foreground/75">
+                    Head of Growth, Northwind Labs
+                  </span>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}`;
+
+/* ──────────────────────────────────────────────────────────────────────────
+ * 2c. Signup — split with social proof
  * ────────────────────────────────────────────────────────────────────────── */
 
 const proofBrands = ["Northwind", "Framelane", "Luma Labs", "Postbox"];
@@ -1683,7 +1978,7 @@ export function SignupSplitProofBlock() {
 }`;
 
 /* ──────────────────────────────────────────────────────────────────────────
- * 2c. Signup — with plan summary
+ * 2d. Signup — with plan summary
  * ────────────────────────────────────────────────────────────────────────── */
 
 const growthPlanFeatures = [
@@ -2747,6 +3042,15 @@ export const authBlocks: BlockContentMap = {
         appearance: "dark",
         preview: <SignupBlock />,
         code: signupCode,
+      },
+      {
+        id: "split",
+        name: "Split panel",
+        description:
+          "Brand gradient panel with a customer testimonial beside the create-account form.",
+        appearance: "dark",
+        preview: <SignupSplitBlock />,
+        code: signupSplitCode,
       },
       {
         id: "split-proof",

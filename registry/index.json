@@ -2028,6 +2028,17 @@
     ]
   },
   {
+    "name": "signup--split",
+    "type": "registry:block",
+    "dependencies": [
+      "@cronus-ui/ui@0.6.5",
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "auth-adapter"
+    ]
+  },
+  {
     "name": "signup--split-proof",
     "type": "registry:block",
     "dependencies": [

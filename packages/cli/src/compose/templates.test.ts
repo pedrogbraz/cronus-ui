@@ -47,6 +47,16 @@ describe("compose templates", () => {
       "/setup",
       "/checklist",
     ]);
+    expect(saas.manifest.pages.find((page) => page.route === "/login")).toMatchObject({
+      title: "Sign in",
+      chrome: "bare",
+      blocks: [{ block: "login", variant: "split" }],
+    });
+    expect(saas.manifest.pages.find((page) => page.route === "/signup")).toMatchObject({
+      title: "Create account",
+      chrome: "bare",
+      blocks: [{ block: "signup", variant: "split" }],
+    });
     expect(saas.manifest.pages.find((page) => page.route === "/forgot-password")).toMatchObject({
       title: "Reset password",
       chrome: "bare",

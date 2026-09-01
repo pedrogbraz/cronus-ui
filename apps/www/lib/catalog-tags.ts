@@ -243,6 +243,7 @@ const VARIANT_OVERRIDES: Record<string, TagPatch> = {
   "login::social-first": { style: "default", motion: "snappy" },
   "login::minimal": { style: "editorial", motion: "none" },
   "signup::classic": { style: "default", motion: "none" },
+  "signup::split": { style: "editorial", palette: "aurora", motion: "smooth" },
   "signup::split-proof": { style: "editorial", motion: "none" },
   "signup::with-plan": { style: "operational", motion: "none" },
   "hero::centered": { style: "editorial", motion: "none" },

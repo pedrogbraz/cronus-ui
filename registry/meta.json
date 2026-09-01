@@ -2192,6 +2192,20 @@
           ]
         },
         {
+          "id": "split",
+          "name": "Split panel",
+          "description": "Brand gradient panel with a customer testimonial beside the create-account form.",
+          "item": "signup--split",
+          "exportName": "SignupSplitBlock",
+          "style": "editorial",
+          "palette": "aurora",
+          "motion": "smooth",
+          "intents": [
+            "signup",
+            "auth"
+          ]
+        },
+        {
           "id": "split-proof",
           "name": "Split with proof",
           "description": "Create-account form beside customer logos, a star rating, and short quotes.",
