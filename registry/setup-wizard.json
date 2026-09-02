@@ -2,7 +2,7 @@
   "name": "setup-wizard",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.17"
+    "@cronus-ui/ui@0.6.18"
   ],
   "registryDependencies": [],
   "files": [
