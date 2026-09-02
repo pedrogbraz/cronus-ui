@@ -298,6 +298,15 @@ export const ACCESSIBILITY_CHECKS = [
 
 export const CHANGELOG_ENTRIES = [
   {
+    date: "2026-09-02",
+    version: "v0.6.17",
+    status: "Released",
+    title: "upgrade keeps gold-path layout and team",
+    summary:
+      "cronus-ui upgrade --all on saas and admin no longer restores an unauthenticated catalog layout or TeamBlock on /team.",
+    items: ["saas/admin upgrade re-applies session gate and MembersPanel"],
+  },
+  {
     date: "2026-09-01",
     version: "v0.6.16",
     status: "Released",
