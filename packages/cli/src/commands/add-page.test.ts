@@ -807,6 +807,10 @@ describe.skipIf(!HAS_REGISTRY)("addPage — confirmed-defect fixes", () => {
     const team = readFileSync(join(app, "app/(shell)/team/page.tsx"), "utf8");
     expect(team).toContain("MembersPanel");
     expect(team).not.toContain("TeamBlock");
+    const home = readFileSync(join(app, "app/(shell)/page.tsx"), "utf8");
+    expect(home).toContain("ItemsPanel");
+    expect(home).not.toContain("DashboardAnalyticsBlock");
+    expect(home).not.toContain("StatsBlock");
   });
 
   it("add-page --overwrite /team on a composed saas app keeps MembersPanel", async () => {
@@ -835,6 +839,35 @@ describe.skipIf(!HAS_REGISTRY)("addPage — confirmed-defect fixes", () => {
     expect(team).toContain("MembersPanel");
     expect(team).toContain("export default async function");
     expect(team).not.toContain("TeamBlock");
+  });
+
+  it("add-page --overwrite / on a composed saas app keeps ItemsPanel", async () => {
+    const app = join(root, "saas-home");
+    seedProject(app, "Painel");
+    await composeApp({
+      targetDir: app,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+    expect(readFileSync(join(app, "app/(shell)/page.tsx"), "utf8")).toContain("ItemsPanel");
+
+    const result = await addPage({
+      targetDir: app,
+      route: "/",
+      blocks: ["dashboard", "stats"],
+      chrome: "shell",
+      overwrite: true,
+      app: "saas",
+      skipInstall: true,
+    });
+    expect(result.generatedFiles).toContain("app/(shell)/page.tsx");
+
+    const home = readFileSync(join(app, "app/(shell)/page.tsx"), "utf8");
+    expect(home).toContain("ItemsPanel");
+    expect(home).toContain("export default async function");
+    expect(home).not.toContain("DashboardAnalyticsBlock");
+    expect(home).not.toContain("StatsBlock");
   });
 
   it("--dry-run matches the apply path for a --nav add on an EXISTING group (P2)", async () => {

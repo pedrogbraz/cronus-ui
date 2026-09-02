@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **`upgrade` / `add-page` keep the gold-path home.** On saas and admin,
+  `cronus-ui upgrade --all` no longer fast-forwards `(shell)/page.tsx` back
+  to catalog dashboard/stats. ItemsPanel is re-applied after the merge.
+  `add-page --overwrite /` gold-patches the home the same way.
+
 ## [0.6.17] — 2026-09-02
 
 ### Fixed

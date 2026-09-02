@@ -7,6 +7,7 @@ import { createInterface } from "node:readline/promises";
 import pc from "picocolors";
 import {
   goldPatchAppShellChrome,
+  goldPatchHomePage,
   goldPatchShellLayout,
   goldPatchTeamPage,
   isGoldPathTemplate,
@@ -607,7 +608,7 @@ function statusLabel(plan: FilePlan): string {
 
 /**
  * saas/admin: upgrade 3-ways chrome against the catalog item (Mara) and
- * layout/team against the catalog compose render. After any write (or a
+ * layout/team/home against the catalog compose render. After any write (or a
  * catalog file already on disk), re-apply the gold-path identity. Idempotent;
  * skipped when conflict markers are present.
  */
@@ -642,6 +643,8 @@ function goldPathSurfaceRels(cwd: string, composed: Record<string, ComposedRecor
     "src/app/(shell)/layout.tsx",
     "app/(shell)/team/page.tsx",
     "src/app/(shell)/team/page.tsx",
+    "app/(shell)/page.tsx",
+    "src/app/(shell)/page.tsx",
   ]) {
     if (existsSync(join(cwd, rel))) rels.add(rel);
   }
@@ -672,6 +675,9 @@ async function repatchGoldPathSurfaces(
     }
     if (/(^|\/)\(shell\)\/team\/page\.tsx$/.test(rel)) {
       await repatchGoldPathFile(cwd, rel, goldPatchTeamPage, "MembersPanel");
+    }
+    if (/(^|\/)\(shell\)\/page\.tsx$/.test(rel)) {
+      await repatchGoldPathFile(cwd, rel, goldPatchHomePage, "ItemsPanel");
     }
   }
 }

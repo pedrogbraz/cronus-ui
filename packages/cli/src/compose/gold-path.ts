@@ -22,6 +22,7 @@ const GOLD_INVITE_IMPORT = "@/components/invite-member";
 const GOLD_SESSION_IMPORT = "@/components/session-user";
 const GOLD_AUTH_IMPORT = "@/lib/auth";
 const GOLD_MEMBERS_IMPORT = "@/components/members-panel";
+const GOLD_ITEMS_IMPORT = "@/components/items-panel";
 
 /**
  * Re-apply WorkspaceMenu / InviteMember / SessionUser onto catalog app-shell-chrome.
@@ -51,6 +52,17 @@ export function goldPatchTeamPage(
   membersImport = GOLD_MEMBERS_IMPORT,
 ): string | undefined {
   return patchTeamPageSource(source, membersImport);
+}
+
+/**
+ * Re-apply ItemsPanel onto a catalog saas/admin home (drop dashboard/stats).
+ * Idempotent. Used by add-page --overwrite / and upgrade.
+ */
+export function goldPatchHomePage(
+  source: string,
+  itemsImport = GOLD_ITEMS_IMPORT,
+): string | undefined {
+  return patchHomePageSource(source, itemsImport);
 }
 
 /** Production npm specs installed with the gold path (devDeps are merged into package.json). */

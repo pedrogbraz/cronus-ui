@@ -719,8 +719,10 @@ describe.skipIf(!HAS_REGISTRY)("upgrade — gold-path chrome", () => {
 
   const layoutRel = "app/(shell)/layout.tsx";
   const teamRel = "app/(shell)/team/page.tsx";
+  const homeRel = "app/(shell)/page.tsx";
   const layoutFile = (): string => readFileSync(join(cwd, layoutRel), "utf8");
   const teamFile = (): string => readFileSync(join(cwd, teamRel), "utf8");
+  const homeFile = (): string => readFileSync(join(cwd, homeRel), "utf8");
 
   it("upgrade --all on saas keeps the session gate and MembersPanel", async () => {
     await composeApp({
@@ -801,5 +803,71 @@ export default function TeamPage() {
     await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, yes: true });
     expect(layoutFile()).toBe(beforeLayout);
     expect(teamFile()).toBe(beforeTeam);
+  });
+
+  it("upgrade --all on saas keeps ItemsPanel on home", async () => {
+    await composeApp({
+      targetDir: cwd,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+    expect(homeFile()).toContain("ItemsPanel");
+    expect(homeFile()).not.toContain("DashboardAnalyticsBlock");
+    expect(homeFile()).not.toContain("StatsBlock");
+
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, yes: true });
+
+    expect(homeFile()).toContain("ItemsPanel");
+    expect(homeFile()).toContain("export default async function");
+    expect(homeFile()).not.toContain("DashboardAnalyticsBlock");
+    expect(homeFile()).not.toContain("StatsBlock");
+  });
+
+  it("upgrade --all on saas restores home after a catalog overwrite", async () => {
+    await composeApp({
+      targetDir: cwd,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+
+    writeFileSync(
+      join(cwd, homeRel),
+      `import { DashboardAnalyticsBlock } from "@/components/blocks/dashboard";
+import { StatsBlock } from "@/components/blocks/stats";
+
+export const metadata = { title: "Items" };
+
+export default function HomePage() {
+  return (
+    <main className="flex min-h-svh flex-col">
+      <DashboardAnalyticsBlock />
+      <StatsBlock />
+    </main>
+  );
+}
+`,
+    );
+
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, yes: true });
+
+    expect(homeFile()).toContain("ItemsPanel");
+    expect(homeFile()).toContain("export default async function");
+    expect(homeFile()).not.toContain("DashboardAnalyticsBlock");
+    expect(homeFile()).not.toContain("StatsBlock");
+  });
+
+  it("upgrade --all on saas is a no-op on already gold-patched home", async () => {
+    await composeApp({
+      targetDir: cwd,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+    const before = homeFile();
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, yes: true });
+    expect(homeFile()).toBe(before);
+    expect(homeFile()).toContain("ItemsPanel");
   });
 });

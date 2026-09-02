@@ -23,6 +23,7 @@ import { existsSync } from "node:fs";
 import { rm } from "node:fs/promises";
 import {
   goldPatchAppShellChrome,
+  goldPatchHomePage,
   goldPatchShellLayout,
   goldPatchTeamPage,
   isGoldPathTemplate,
@@ -348,11 +349,16 @@ export async function addPage(options: AddPageOptions): Promise<AddPageResult> {
     skippedFiles.push(pageRel);
   } else {
     let content = renderPage(planPage, config);
-    // saas/admin: compose gold-patches /team (MembersPanel). Writing the
-    // catalog TeamBlock would undo that — re-apply the same idempotent patch.
-    if (isGoldPathTemplate(appName) && planPage.route === "/team" && chromeGroup === "shell") {
-      const patched = goldPatchTeamPage(content);
-      if (patched !== undefined) content = patched;
+    // saas/admin: compose gold-patches / (ItemsPanel) and /team (MembersPanel).
+    // Writing the catalog dashboard/stats or TeamBlock would undo that.
+    if (isGoldPathTemplate(appName) && chromeGroup === "shell") {
+      if (planPage.route === "/") {
+        const patched = goldPatchHomePage(content);
+        if (patched !== undefined) content = patched;
+      } else if (planPage.route === "/team") {
+        const patched = goldPatchTeamPage(content);
+        if (patched !== undefined) content = patched;
+      }
     }
     await writeFileEnsured(pageDest, content);
     generatedFiles.push(pageRel);
