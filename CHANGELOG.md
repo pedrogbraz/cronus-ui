@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **`upgrade --all` re-emits gold-path owned files.** On saas and admin,
+  `cronus-ui upgrade --all` rewrites compose's `always: true` adapters and
+  panels (`items.ts`, `members.ts`, `auth-adapter.ts`, `invite-member.tsx`,
+  `session-user.tsx`, …) so CLI gold-path fixes reach apps composed on an
+  older release. `lib/auth.ts` and the Drizzle schema stay user-owned. Named
+  upgrades do not touch them.
+
 ## [0.6.18] — 2026-09-02
 
 ### Fixed

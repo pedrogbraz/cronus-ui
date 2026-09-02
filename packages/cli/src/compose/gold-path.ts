@@ -1398,8 +1398,88 @@ async function writeRel(
 }
 
 /**
+ * Gold-path files compose always overwrites (`always: true`). Scaffold files
+ * (auth.ts, schema, middleware) are not in this list — those stay user-owned
+ * after the first write.
+ */
+function goldPathOwnedFiles(
+  config: CronusUIConfig,
+  appDir: string,
+): Array<{ rel: string; content: string }> {
+  const layout = goldPathLayout(config);
+  const authImport = `${config.aliases.lib}/auth`;
+  const authClientImport = `${config.aliases.lib}/auth-client`;
+  const itemsActionsImport = `${config.aliases.lib}/items`;
+  const itemsViewImport = "@/components/items-view";
+  const membersActionsImport = `${config.aliases.lib}/members`;
+  const membersViewImport = "@/components/members-view";
+  const inviteImport = "@/components/invite-member";
+  return [
+    { rel: `${layout.libDir}/auth-adapter.ts`, content: authAdapterSource() },
+    { rel: `${layout.libDir}/items.ts`, content: itemsActionsSource(authImport) },
+    {
+      rel: `${layout.componentsDir}/items-panel.tsx`,
+      content: itemsPanelSource(itemsActionsImport, itemsViewImport),
+    },
+    {
+      rel: `${layout.componentsDir}/items-view.tsx`,
+      content: itemsViewSource(itemsActionsImport),
+    },
+    { rel: `${layout.libDir}/members.ts`, content: membersActionsSource(authImport) },
+    {
+      rel: `${layout.componentsDir}/members-panel.tsx`,
+      content: membersPanelSource(membersActionsImport, membersViewImport),
+    },
+    {
+      rel: `${layout.componentsDir}/members-view.tsx`,
+      content: membersViewSource(inviteImport),
+    },
+    {
+      rel: `${layout.componentsDir}/workspace-menu.tsx`,
+      content: workspaceMenuSource(authClientImport),
+    },
+    {
+      rel: `${layout.componentsDir}/invite-member.tsx`,
+      content: inviteMemberSource(authClientImport),
+    },
+    {
+      rel: `${layout.componentsDir}/session-user.tsx`,
+      content: sessionUserSource(authClientImport),
+    },
+    {
+      rel: `${appDir}/(bare)/accept-invitation/page.tsx`,
+      content: acceptInvitationPageSource(authClientImport),
+    },
+  ];
+}
+
+/**
+ * Re-emit compose's `always: true` gold-path files. Idempotent when bytes
+ * already match. Used by `upgrade --all` so CLI gold-path fixes reach apps
+ * composed on an older release without clobbering auth.ts / schema.
+ */
+export async function reemitGoldPathOwned(
+  targetDir: string,
+  config: CronusUIConfig,
+): Promise<string[]> {
+  const layout = goldPathLayout(config);
+  const appDir = resolveAppDir(targetDir, layout, []);
+  const written: string[] = [];
+  for (const file of goldPathOwnedFiles(config, appDir)) {
+    const dest = resolveSafeDest(targetDir, ".", file.rel);
+    if (existsSync(dest)) {
+      const current = await readFile(dest, "utf8");
+      if (current === file.content) continue;
+    }
+    await writeFileEnsured(dest, file.content);
+    written.push(file.rel);
+  }
+  return written;
+}
+
+/**
  * Write sqlite + Drizzle + Better-Auth files into a composed saas/admin app.
- * Overwrites lib/auth-adapter.ts, lib/items.ts, and lib/members.ts always.
+ * Overwrites owned adapters/panels always (`always: true`).
  * Patches the shell home, /team, and shell layout only when compose wrote them
  * this run.
  */
@@ -1414,12 +1494,7 @@ export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<Appl
         ? "middleware.ts"
         : layout.middlewareRel;
   const authImport = `${config.aliases.lib}/auth`;
-  const authClientImport = `${config.aliases.lib}/auth-client`;
-  const itemsActionsImport = `${config.aliases.lib}/items`;
-  const itemsViewImport = "@/components/items-view";
   const itemsImport = "@/components/items-panel";
-  const membersActionsImport = `${config.aliases.lib}/members`;
-  const membersViewImport = "@/components/members-view";
   const membersImport = "@/components/members-panel";
   const workspaceImport = "@/components/workspace-menu";
   const inviteImport = "@/components/invite-member";
@@ -1435,62 +1510,12 @@ export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<Appl
     { rel: `${layout.dbDir}/index.ts`, content: dbClientSource() },
     { rel: `${layout.libDir}/auth.ts`, content: authServerSource() },
     { rel: `${layout.libDir}/auth-client.ts`, content: authClientSource() },
-    { rel: `${layout.libDir}/auth-adapter.ts`, content: authAdapterSource(), always: true },
-    {
-      rel: `${layout.libDir}/items.ts`,
-      content: itemsActionsSource(authImport),
-      always: true,
-    },
     {
       rel: `${appDir}/api/auth/[...all]/route.ts`,
       content: authRouteSource(authImport),
     },
     { rel: middlewareRel, content: middlewareSource() },
-    {
-      rel: `${layout.componentsDir}/items-panel.tsx`,
-      content: itemsPanelSource(itemsActionsImport, itemsViewImport),
-      always: true,
-    },
-    {
-      rel: `${layout.componentsDir}/items-view.tsx`,
-      content: itemsViewSource(itemsActionsImport),
-      always: true,
-    },
-    {
-      rel: `${layout.libDir}/members.ts`,
-      content: membersActionsSource(authImport),
-      always: true,
-    },
-    {
-      rel: `${layout.componentsDir}/members-panel.tsx`,
-      content: membersPanelSource(membersActionsImport, membersViewImport),
-      always: true,
-    },
-    {
-      rel: `${layout.componentsDir}/members-view.tsx`,
-      content: membersViewSource(inviteImport),
-      always: true,
-    },
-    {
-      rel: `${layout.componentsDir}/workspace-menu.tsx`,
-      content: workspaceMenuSource(authClientImport),
-      always: true,
-    },
-    {
-      rel: `${layout.componentsDir}/invite-member.tsx`,
-      content: inviteMemberSource(authClientImport),
-      always: true,
-    },
-    {
-      rel: `${layout.componentsDir}/session-user.tsx`,
-      content: sessionUserSource(authClientImport),
-      always: true,
-    },
-    {
-      rel: `${appDir}/(bare)/accept-invitation/page.tsx`,
-      content: acceptInvitationPageSource(authClientImport),
-      always: true,
-    },
+    ...goldPathOwnedFiles(config, appDir).map((file) => ({ ...file, always: true })),
   ];
 
   for (const file of files) {

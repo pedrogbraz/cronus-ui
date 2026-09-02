@@ -11,6 +11,7 @@ import {
   goldPatchShellLayout,
   goldPatchTeamPage,
   isGoldPathTemplate,
+  reemitGoldPathOwned,
 } from "../compose/gold-path.js";
 import { buildComposePlan, type ComposeChoiceInput } from "../compose/plan.js";
 import {
@@ -651,6 +652,24 @@ function goldPathSurfaceRels(cwd: string, composed: Record<string, ComposedRecor
   return [...rels];
 }
 
+/**
+ * `--all` on saas/admin: re-emit compose's `always: true` gold-path files so
+ * CLI gold-path fixes reach apps composed on an older release. Named upgrades
+ * (e.g. `upgrade stats`) do not touch them. auth.ts / schema stay user-owned.
+ */
+async function reemitGoldPathOwnedOnUpgrade(
+  cwd: string,
+  config: CronusUIConfig,
+  composed: Record<string, ComposedRecord>,
+  upgradeComposed: boolean,
+): Promise<void> {
+  if (!upgradeComposed) return;
+  if (!Object.keys(composed).some((key) => isGoldPathTemplate(key))) return;
+  const written = await reemitGoldPathOwned(cwd, config);
+  if (written.length === 0) return;
+  log.ok(`gold-path owned: re-emitted ${written.join(", ")}`);
+}
+
 async function repatchGoldPathSurfaces(
   cwd: string,
   config: CronusUIConfig,
@@ -1088,6 +1107,7 @@ export async function upgrade(names: string[], options: UpgradeOptions): Promise
   Object.assign(installed, newlyInstalled);
 
   const written = await applyPlans(itemPlans, options, confirm);
+  await reemitGoldPathOwnedOnUpgrade(cwd, config, composed, upgradeComposed);
   await repatchGoldPathSurfaces(cwd, config, composed);
   await refreshComposeSnapshots(itemPlans);
 

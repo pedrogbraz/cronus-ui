@@ -10,6 +10,7 @@ import {
   patchHomePageSource,
   patchShellLayoutSource,
   patchTeamPageSource,
+  reemitGoldPathOwned,
 } from "./gold-path.js";
 
 const HOME = `import { DashboardAnalyticsBlock } from "@/components/blocks/dashboard";
@@ -546,5 +547,44 @@ describe("applyGoldPath", () => {
     expect(readFileSync(join(cwd, "components", "members-view.tsx"), "utf8")).toContain(
       'data-slot="members-panel"',
     );
+  });
+});
+
+describe("reemitGoldPathOwned", () => {
+  let root: string;
+  let cwd: string;
+
+  beforeEach(() => {
+    root = mkdtempSync(join(tmpdir(), "cronus-gold-owned-"));
+    cwd = join(root, "app");
+    mkdirSync(join(cwd, "lib"), { recursive: true });
+    mkdirSync(join(cwd, "components"), { recursive: true });
+    mkdirSync(join(cwd, "app", "(shell)"), { recursive: true });
+    writeFileSync(join(cwd, "app", "(shell)", "page.tsx"), HOME);
+    writeFileSync(join(cwd, "lib", "auth.ts"), "// KEEP AUTH\n");
+    writeFileSync(join(cwd, "lib", "items.ts"), "// STALE ITEMS\n");
+    writeFileSync(join(cwd, "components", "invite-member.tsx"), "// STALE INVITE\n");
+  });
+
+  afterEach(() => {
+    rmSync(root, { recursive: true, force: true });
+  });
+
+  it("overwrites owned adapters/panels and leaves auth.ts", async () => {
+    const written = await reemitGoldPathOwned(cwd, DEFAULT_CONFIG);
+    expect(written).toContain("lib/items.ts");
+    expect(written).toContain("components/invite-member.tsx");
+    expect(written).not.toContain("lib/auth.ts");
+    expect(readFileSync(join(cwd, "lib", "auth.ts"), "utf8")).toBe("// KEEP AUTH\n");
+    expect(readFileSync(join(cwd, "lib", "items.ts"), "utf8")).toContain("createItem");
+    expect(readFileSync(join(cwd, "components", "invite-member.tsx"), "utf8")).toContain(
+      "inviteMember",
+    );
+  });
+
+  it("is a no-op when owned files already match", async () => {
+    await reemitGoldPathOwned(cwd, DEFAULT_CONFIG);
+    const second = await reemitGoldPathOwned(cwd, DEFAULT_CONFIG);
+    expect(second).toEqual([]);
   });
 });

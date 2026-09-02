@@ -870,4 +870,66 @@ export default function HomePage() {
     expect(homeFile()).toBe(before);
     expect(homeFile()).toContain("ItemsPanel");
   });
+
+  it("upgrade --all on saas re-emits owned gold-path files", async () => {
+    await composeApp({
+      targetDir: cwd,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+    writeFileSync(join(cwd, "lib", "items.ts"), "// STALE\n");
+    writeFileSync(join(cwd, "lib", "members.ts"), "// STALE\n");
+    writeFileSync(join(cwd, "lib", "auth-adapter.ts"), "// STALE\n");
+    writeFileSync(join(cwd, "components", "invite-member.tsx"), "// STALE\n");
+    writeFileSync(join(cwd, "components", "session-user.tsx"), "// STALE\n");
+
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, yes: true });
+
+    expect(readFileSync(join(cwd, "lib", "items.ts"), "utf8")).toContain("createItem");
+    expect(readFileSync(join(cwd, "lib", "members.ts"), "utf8")).toContain("loadMembers");
+    expect(readFileSync(join(cwd, "lib", "auth-adapter.ts"), "utf8")).toContain("authClient");
+    expect(readFileSync(join(cwd, "components", "invite-member.tsx"), "utf8")).toContain(
+      "inviteMember",
+    );
+    expect(readFileSync(join(cwd, "components", "session-user.tsx"), "utf8")).toContain("signOut");
+  });
+
+  it("upgrade --all on saas does not overwrite lib/auth.ts", async () => {
+    await composeApp({
+      targetDir: cwd,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+    writeFileSync(join(cwd, "lib", "auth.ts"), "// KEEP AUTH\n");
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, yes: true });
+    expect(readFileSync(join(cwd, "lib", "auth.ts"), "utf8")).toBe("// KEEP AUTH\n");
+  });
+
+  it("upgrade --all on saas is a no-op on already gold owned files", async () => {
+    await composeApp({
+      targetDir: cwd,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+    const beforeItems = readFileSync(join(cwd, "lib", "items.ts"), "utf8");
+    const beforeInvite = readFileSync(join(cwd, "components", "invite-member.tsx"), "utf8");
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, yes: true });
+    expect(readFileSync(join(cwd, "lib", "items.ts"), "utf8")).toBe(beforeItems);
+    expect(readFileSync(join(cwd, "components", "invite-member.tsx"), "utf8")).toBe(beforeInvite);
+  });
+
+  it("named upgrade does not re-emit owned gold-path files", async () => {
+    await composeApp({
+      targetDir: cwd,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+    writeFileSync(join(cwd, "components", "invite-member.tsx"), "// STALE\n");
+    await upgrade(["stats"], { cwd, registry: REPO_REGISTRY, yes: true });
+    expect(readFileSync(join(cwd, "components", "invite-member.tsx"), "utf8")).toBe("// STALE\n");
+  });
 });
