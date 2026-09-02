@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.18] — 2026-09-02
+
 ### Fixed
 
 - **`upgrade` / `add-page` keep the gold-path home.** On saas and admin,
@@ -629,7 +631,8 @@ as installable packages and as copy-paste registry items you own.
 - Added per-entry gzipped bundle budgets for the published `@cronus-ui/ui` so a
   dependency or code-size regression is caught at build time.
 
-[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.17...HEAD
+[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.18...HEAD
+[0.6.18]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.17...v0.6.18
 [0.6.17]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.16...v0.6.17
 [0.6.16]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.15...v0.6.16
 [0.6.15]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.14...v0.6.15

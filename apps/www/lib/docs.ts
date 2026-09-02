@@ -299,6 +299,15 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-09-02",
+    version: "v0.6.18",
+    status: "Released",
+    title: "upgrade keeps gold-path home",
+    summary:
+      "cronus-ui upgrade --all on saas and admin no longer restores catalog dashboard/stats on the shell home.",
+    items: ["saas/admin upgrade re-applies ItemsPanel on (shell)/page.tsx"],
+  },
+  {
+    date: "2026-09-02",
     version: "v0.6.17",
     status: "Released",
     title: "upgrade keeps gold-path layout and team",
