@@ -758,6 +758,10 @@ describe.skipIf(!HAS_REGISTRY)("addPage — confirmed-defect fixes", () => {
     expect(newShellChrome).toContain("SessionUser");
     expect(newShellChrome).not.toContain("WORKSPACES");
     expect(newShellChrome).not.toContain("../lib/demo-saas.js");
+    const newShellLayout = readFileSync(join(app, "app/(shell)/layout.tsx"), "utf8");
+    expect(newShellLayout).toContain("auth.api.getSession");
+    expect(newShellLayout).toContain('redirect("/login")');
+    expect(newShellLayout).toContain('from "@/lib/auth"');
   });
 
   it("add-page --nav on a composed saas app keeps gold-path chrome (WorkspaceMenu)", async () => {
@@ -797,6 +801,40 @@ describe.skipIf(!HAS_REGISTRY)("addPage — confirmed-defect fixes", () => {
     expect(chrome).not.toContain("WorkspaceSwitcher");
     expect(chrome).not.toContain("InviteDialog");
     expect(chrome).not.toContain("../lib/demo-saas.js");
+    const layout = readFileSync(join(app, "app/(shell)/layout.tsx"), "utf8");
+    expect(layout).toContain("auth.api.getSession");
+    expect(layout).toContain('redirect("/login")');
+    const team = readFileSync(join(app, "app/(shell)/team/page.tsx"), "utf8");
+    expect(team).toContain("MembersPanel");
+    expect(team).not.toContain("TeamBlock");
+  });
+
+  it("add-page --overwrite /team on a composed saas app keeps MembersPanel", async () => {
+    const app = join(root, "saas-team");
+    seedProject(app, "Painel");
+    await composeApp({
+      targetDir: app,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+    expect(readFileSync(join(app, "app/(shell)/team/page.tsx"), "utf8")).toContain("MembersPanel");
+
+    const result = await addPage({
+      targetDir: app,
+      route: "/team",
+      blocks: ["team"],
+      chrome: "shell",
+      overwrite: true,
+      app: "saas",
+      skipInstall: true,
+    });
+    expect(result.generatedFiles).toContain("app/(shell)/team/page.tsx");
+
+    const team = readFileSync(join(app, "app/(shell)/team/page.tsx"), "utf8");
+    expect(team).toContain("MembersPanel");
+    expect(team).toContain("export default async function");
+    expect(team).not.toContain("TeamBlock");
   });
 
   it("--dry-run matches the apply path for a --nav add on an EXISTING group (P2)", async () => {

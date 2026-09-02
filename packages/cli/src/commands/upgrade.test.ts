@@ -716,4 +716,90 @@ describe.skipIf(!HAS_REGISTRY)("upgrade — gold-path chrome", () => {
     expect(chromeFile()).toBe(before);
     expect(chromeFile()).toContain("WorkspaceMenu");
   });
+
+  const layoutRel = "app/(shell)/layout.tsx";
+  const teamRel = "app/(shell)/team/page.tsx";
+  const layoutFile = (): string => readFileSync(join(cwd, layoutRel), "utf8");
+  const teamFile = (): string => readFileSync(join(cwd, teamRel), "utf8");
+
+  it("upgrade --all on saas keeps the session gate and MembersPanel", async () => {
+    await composeApp({
+      targetDir: cwd,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+    expect(layoutFile()).toContain("auth.api.getSession");
+    expect(layoutFile()).toContain('redirect("/login")');
+    expect(teamFile()).toContain("MembersPanel");
+    expect(teamFile()).not.toContain("TeamBlock");
+
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, yes: true });
+
+    expect(layoutFile()).toContain("auth.api.getSession");
+    expect(layoutFile()).toContain('redirect("/login")');
+    expect(layoutFile()).toContain('from "@/lib/auth"');
+    expect(teamFile()).toContain("MembersPanel");
+    expect(teamFile()).not.toContain("TeamBlock");
+  });
+
+  it("upgrade --all on saas restores layout and team after a catalog overwrite", async () => {
+    await composeApp({
+      targetDir: cwd,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+
+    writeFileSync(
+      join(cwd, layoutRel),
+      `import type { ReactNode } from "react";
+import { AppShellNav } from "@/components/blocks/chrome/app-shell";
+
+export default function ShellLayout({ children }: { children: ReactNode }) {
+  return <AppShellNav>{children}</AppShellNav>;
+}
+`,
+    );
+    writeFileSync(
+      join(cwd, teamRel),
+      `import { TeamBlock } from "@/components/blocks/team";
+
+export const metadata = { title: "Team" };
+
+export default function TeamPage() {
+  return (
+    <main className="flex min-h-svh flex-col">
+      <TeamBlock />
+    </main>
+  );
+}
+`,
+    );
+
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, yes: true });
+
+    expect(layoutFile()).toContain("auth.api.getSession");
+    expect(layoutFile()).toContain('redirect("/login")');
+    expect(layoutFile()).not.toMatch(
+      /export default function ShellLayout[\s\S]*return <AppShellNav>\{children\}<\/AppShellNav>/,
+    );
+    expect(teamFile()).toContain("MembersPanel");
+    expect(teamFile()).toContain("export default async function");
+    expect(teamFile()).not.toContain("TeamBlock");
+  });
+
+  it("upgrade --all on saas is a no-op on already gold-patched layout and team", async () => {
+    await composeApp({
+      targetDir: cwd,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+    const beforeLayout = layoutFile();
+    const beforeTeam = teamFile();
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, yes: true });
+    expect(layoutFile()).toBe(beforeLayout);
+    expect(teamFile()).toBe(beforeTeam);
+  });
 });

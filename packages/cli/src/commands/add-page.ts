@@ -21,7 +21,12 @@
 
 import { existsSync } from "node:fs";
 import { rm } from "node:fs/promises";
-import { goldPatchAppShellChrome, isGoldPathTemplate } from "../compose/gold-path.js";
+import {
+  goldPatchAppShellChrome,
+  goldPatchShellLayout,
+  goldPatchTeamPage,
+  isGoldPathTemplate,
+} from "../compose/gold-path.js";
 import { type AppManifest, type BlockRef, blockRefParts } from "../compose/manifest.js";
 import {
   buildComposePlan,
@@ -342,7 +347,13 @@ export async function addPage(options: AddPageOptions): Promise<AddPageResult> {
   if (existsSync(pageDest) && !overwrite) {
     skippedFiles.push(pageRel);
   } else {
-    const content = renderPage(planPage, config);
+    let content = renderPage(planPage, config);
+    // saas/admin: compose gold-patches /team (MembersPanel). Writing the
+    // catalog TeamBlock would undo that — re-apply the same idempotent patch.
+    if (isGoldPathTemplate(appName) && planPage.route === "/team" && chromeGroup === "shell") {
+      const patched = goldPatchTeamPage(content);
+      if (patched !== undefined) content = patched;
+    }
     await writeFileEnsured(pageDest, content);
     generatedFiles.push(pageRel);
     await writeFileEnsured(resolveSafeDest(targetDir, baseSnapshotDir(appName), pageRel), content);
@@ -543,7 +554,14 @@ async function ensureChromeScaffold(
       renderShellWrapper("AppShellNav", chrome.block, plan.shellExportName, config),
     );
   }
-  await write(layoutPath(chrome), renderLayout(chrome, config));
+  let layout = renderLayout(chrome, config);
+  // saas/admin: compose gold-patches the shell layout with a session gate.
+  // A brand-new group would otherwise ship the catalog passthrough.
+  if (isGoldPathTemplate(appName) && chrome.group === "shell") {
+    const patched = goldPatchShellLayout(layout, `${config.aliases.lib}/auth`);
+    if (patched !== undefined) layout = patched;
+  }
+  await write(layoutPath(chrome), layout);
 }
 
 /** CLI-facing options (flags parsed by commander in index.ts). */

@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **`upgrade` / `add-page` keep the gold-path layout and team.** On saas and
+  admin, `cronus-ui upgrade --all` no longer fast-forwards `(shell)/layout.tsx`
+  back to an unauthenticated catalog layout or `/team` back to `TeamBlock`.
+  The session gate and MembersPanel are re-applied after the merge. `add-page`
+  gold-patches a brand-new shell layout and an overwritten `/team` page the
+  same way.
+
 ## [0.6.16] — 2026-09-01
 
 ### Fixed

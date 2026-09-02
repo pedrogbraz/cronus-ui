@@ -16,10 +16,12 @@ export function isGoldPathTemplate(name: string): boolean {
   return GOLD_PATH_TEMPLATES.has(name);
 }
 
-/** Gold-path chrome identity — same strings compose writes into app-shell-chrome. */
+/** Gold-path identity — same strings compose writes into the authenticated shell. */
 const GOLD_WORKSPACE_IMPORT = "@/components/workspace-menu";
 const GOLD_INVITE_IMPORT = "@/components/invite-member";
 const GOLD_SESSION_IMPORT = "@/components/session-user";
+const GOLD_AUTH_IMPORT = "@/lib/auth";
+const GOLD_MEMBERS_IMPORT = "@/components/members-panel";
 
 /**
  * Re-apply WorkspaceMenu / InviteMember / SessionUser onto catalog app-shell-chrome.
@@ -27,6 +29,28 @@ const GOLD_SESSION_IMPORT = "@/components/session-user";
  */
 export function goldPatchAppShellChrome(source: string): string | undefined {
   return patchChromeSource(source, GOLD_WORKSPACE_IMPORT, GOLD_INVITE_IMPORT, GOLD_SESSION_IMPORT);
+}
+
+/**
+ * Re-apply the session gate onto a catalog shell layout.
+ * Idempotent. Used by add-page (new shell group) and upgrade.
+ */
+export function goldPatchShellLayout(
+  source: string,
+  authImport = GOLD_AUTH_IMPORT,
+): string | undefined {
+  return patchShellLayoutSource(source, authImport);
+}
+
+/**
+ * Re-apply MembersPanel onto a catalog /team page.
+ * Idempotent. Used by add-page --overwrite /team and upgrade.
+ */
+export function goldPatchTeamPage(
+  source: string,
+  membersImport = GOLD_MEMBERS_IMPORT,
+): string | undefined {
+  return patchTeamPageSource(source, membersImport);
 }
 
 /** Production npm specs installed with the gold path (devDeps are merged into package.json). */

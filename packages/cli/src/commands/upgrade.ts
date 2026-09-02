@@ -5,7 +5,12 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createInterface } from "node:readline/promises";
 import pc from "picocolors";
-import { goldPatchAppShellChrome, isGoldPathTemplate } from "../compose/gold-path.js";
+import {
+  goldPatchAppShellChrome,
+  goldPatchShellLayout,
+  goldPatchTeamPage,
+  isGoldPathTemplate,
+} from "../compose/gold-path.js";
 import { buildComposePlan, type ComposeChoiceInput } from "../compose/plan.js";
 import {
   baseSnapshotDest,
@@ -601,17 +606,17 @@ function statusLabel(plan: FilePlan): string {
 }
 
 /**
- * saas/admin: upgrade 3-ways app-shell-chrome against the catalog item (Mara).
- * After any write (or a catalog file already on disk), re-apply the gold-path
- * chrome identity. Idempotent; skipped when conflict markers are present.
+ * saas/admin: upgrade 3-ways chrome against the catalog item (Mara) and
+ * layout/team against the catalog compose render. After any write (or a
+ * catalog file already on disk), re-apply the gold-path identity. Idempotent;
+ * skipped when conflict markers are present.
  */
-async function repatchGoldPathChrome(
+async function repatchGoldPathFile(
   cwd: string,
-  config: CronusUIConfig,
-  composed: Record<string, ComposedRecord>,
+  rel: string,
+  patch: (source: string) => string | undefined,
+  label: string,
 ): Promise<void> {
-  if (!Object.keys(composed).some((key) => isGoldPathTemplate(key))) return;
-  const rel = join(config.paths.blocks, "app-shell-chrome.tsx");
   let dest: string;
   try {
     dest = resolveSafeDest(cwd, ".", rel);
@@ -621,10 +626,54 @@ async function repatchGoldPathChrome(
   if (!existsSync(dest)) return;
   const current = await readFile(dest, "utf8");
   if (current.includes("<<<<<<<")) return;
-  const patched = goldPatchAppShellChrome(current);
+  const patched = patch(current);
   if (patched === undefined || patched === current) return;
   await writeFileEnsured(dest, patched);
-  log.ok(`gold-path ${rel}: re-applied WorkspaceMenu / InviteMember / SessionUser`);
+  log.ok(`gold-path ${rel}: re-applied ${label}`);
+}
+
+function goldPathSurfaceRels(cwd: string, composed: Record<string, ComposedRecord>): string[] {
+  const rels = new Set<string>();
+  for (const rec of Object.values(composed)) {
+    for (const file of rec.files) rels.add(file.replaceAll("\\", "/"));
+  }
+  for (const rel of [
+    "app/(shell)/layout.tsx",
+    "src/app/(shell)/layout.tsx",
+    "app/(shell)/team/page.tsx",
+    "src/app/(shell)/team/page.tsx",
+  ]) {
+    if (existsSync(join(cwd, rel))) rels.add(rel);
+  }
+  return [...rels];
+}
+
+async function repatchGoldPathSurfaces(
+  cwd: string,
+  config: CronusUIConfig,
+  composed: Record<string, ComposedRecord>,
+): Promise<void> {
+  if (!Object.keys(composed).some((key) => isGoldPathTemplate(key))) return;
+  const authImport = `${config.aliases.lib}/auth`;
+  await repatchGoldPathFile(
+    cwd,
+    join(config.paths.blocks, "app-shell-chrome.tsx"),
+    goldPatchAppShellChrome,
+    "WorkspaceMenu / InviteMember / SessionUser",
+  );
+  for (const rel of goldPathSurfaceRels(cwd, composed)) {
+    if (/(^|\/)\(shell\)\/layout\.tsx$/.test(rel)) {
+      await repatchGoldPathFile(
+        cwd,
+        rel,
+        (source) => goldPatchShellLayout(source, authImport),
+        "session gate",
+      );
+    }
+    if (/(^|\/)\(shell\)\/team\/page\.tsx$/.test(rel)) {
+      await repatchGoldPathFile(cwd, rel, goldPatchTeamPage, "MembersPanel");
+    }
+  }
 }
 
 /** Statuses that write the planned content to disk unconditionally. */
@@ -1033,7 +1082,7 @@ export async function upgrade(names: string[], options: UpgradeOptions): Promise
   Object.assign(installed, newlyInstalled);
 
   const written = await applyPlans(itemPlans, options, confirm);
-  await repatchGoldPathChrome(cwd, config, composed);
+  await repatchGoldPathSurfaces(cwd, config, composed);
   await refreshComposeSnapshots(itemPlans);
 
   // Manifest: record every item that now fully embodies the target release.
