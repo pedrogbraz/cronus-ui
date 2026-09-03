@@ -2,7 +2,7 @@ import { existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { applyTokens, scaffold } from "./scaffold.js";
+import { applyTokens, DB_PUSH_ARGS, scaffold } from "./scaffold.js";
 import { CREATE_VERSION } from "./version.js";
 
 const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8")) as {
@@ -12,6 +12,12 @@ const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url),
 describe("create-cronus-app release version", () => {
   it("keeps the runtime version aligned with package.json", () => {
     expect(CREATE_VERSION).toBe(pkg.version);
+  });
+});
+
+describe("DB_PUSH_ARGS", () => {
+  it("passes --force through to drizzle-kit for a non-interactive first push", () => {
+    expect([...DB_PUSH_ARGS]).toEqual(["run", "db:push", "--", "--force"]);
   });
 });
 

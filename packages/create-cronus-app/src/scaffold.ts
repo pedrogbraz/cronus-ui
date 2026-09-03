@@ -168,3 +168,19 @@ export function runInstall(pm: PackageManager, cwd: string): void {
     throw new Error(`${pm} install exited with code ${result.status}`);
   }
 }
+
+/** `pm run db:push -- --force` — non-interactive first-run sqlite push. */
+export const DB_PUSH_ARGS = ["run", "db:push", "--", "--force"] as const;
+
+/** Push the gold-path sqlite schema. Throws if it exits non-zero. */
+export function runDbPush(pm: PackageManager, cwd: string): void {
+  const result = spawnSync(pm, [...DB_PUSH_ARGS], {
+    cwd,
+    stdio: "inherit",
+    shell: process.platform === "win32",
+  });
+  if (result.error) throw result.error;
+  if (typeof result.status === "number" && result.status !== 0) {
+    throw new Error(`${pm} db:push exited with code ${result.status}`);
+  }
+}

@@ -17,7 +17,7 @@ import {
   writeDesignDocuments,
 } from "@cronus-ui/ai-kit";
 import { composeTemplate } from "./compose.js";
-import { runInstall, scaffold } from "./scaffold.js";
+import { runDbPush, runInstall, scaffold } from "./scaffold.js";
 import {
   c,
   DEFAULT_MODE,
@@ -25,6 +25,7 @@ import {
   DEFAULT_THEME,
   dirNameFromProjectName,
   isComposedTemplate,
+  isGoldPathTemplate,
   isValidProjectName,
   log,
   MODES,
@@ -314,17 +315,35 @@ async function main(): Promise<void> {
 
   const pm = parsed.pm ?? detectPackageManager();
 
+  let installOk = false;
   if (parsed.install) {
     log.step(`Installing dependencies with ${c.cyan(pm)}…`);
     try {
       runInstall(pm, targetDir);
+      installOk = true;
       log.ok("Dependencies installed.");
     } catch (err) {
       log.warn(`Install failed (${(err as Error).message}). Install manually later.`);
     }
   }
 
-  log.outro(dirName, pm, parsed.install, template);
+  let dbPushed = false;
+  if (
+    installOk &&
+    isGoldPathTemplate(template) &&
+    existsSync(join(targetDir, "drizzle.config.ts"))
+  ) {
+    log.step("Pushing the sqlite schema…");
+    try {
+      runDbPush(pm, targetDir);
+      dbPushed = true;
+      log.ok("Database schema pushed.");
+    } catch (err) {
+      log.warn(`db:push failed (${(err as Error).message}). Run it manually later.`);
+    }
+  }
+
+  log.outro(dirName, pm, parsed.install, template, dbPushed);
 }
 
 /** True when this module is the process entry point (not imported by a test). */

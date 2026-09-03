@@ -5,6 +5,7 @@ import {
   DEFAULT_TEMPLATE,
   dirNameFromProjectName,
   isComposedTemplate,
+  isGoldPathTemplate,
   isValidProjectName,
   outroLines,
   TEMPLATE_HINTS,
@@ -103,6 +104,14 @@ describe("templates", () => {
         "store",
       ].sort(),
     );
+  });
+
+  it("classifies only saas and admin as gold-path templates", () => {
+    expect(isGoldPathTemplate("saas")).toBe(true);
+    expect(isGoldPathTemplate("admin")).toBe(true);
+    expect(isGoldPathTemplate("store")).toBe(false);
+    expect(isGoldPathTemplate("landing")).toBe(false);
+    expect(isGoldPathTemplate("default")).toBe(false);
   });
 
   it("maps composed templates to the default base dir, others to themselves", () => {
@@ -297,17 +306,22 @@ describe("outroLines", () => {
     expect(joined("my-app", "npm", true)).toContain("npm run dev");
   });
 
-  it("for saas/admin, lists db:push before dev", () => {
+  it("for saas/admin, lists db:push before dev when the schema was not pushed", () => {
     for (const t of ["saas", "admin"] as const) {
-      const lines = outroLines("acme", "npm", true, t);
+      const lines = outroLines("acme", "npm", true, t, false);
       const pushIdx = lines.findIndex((l) => l.includes("db:push"));
       const devIdx = lines.findIndex((l) => l.includes("npm run dev"));
       expect(pushIdx, t).toBeGreaterThan(-1);
       expect(devIdx, t).toBeGreaterThan(-1);
       expect(pushIdx, t).toBeLessThan(devIdx);
     }
-    expect(joined("acme", "bun", true, "saas")).toContain("bun run db:push");
+    expect(joined("acme", "bun", false, "saas")).toContain("bun run db:push");
     expect(joined("acme", "npm", true, "store")).not.toContain("db:push");
     expect(joined("acme", "npm", true, "landing")).not.toContain("db:push");
+  });
+
+  it("omits db:push when the gold-path schema was already pushed", () => {
+    expect(outroLines("acme", "bun", true, "saas", true).join("\n")).not.toContain("db:push");
+    expect(outroLines("acme", "npm", true, "admin", true).join("\n")).not.toContain("db:push");
   });
 });

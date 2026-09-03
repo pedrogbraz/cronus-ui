@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Gold-path first-run `db:push`.** `create-cronus-app --template saas` (and
+  admin) runs `db:push --force` after a successful install so sqlite has
+  tables before `bun dev`. `--no-install` still lists install + push in the
+  outro. `compose` on an existing app does not push.
+
 ## [0.6.20] — 2026-09-02
 
 ### Fixed

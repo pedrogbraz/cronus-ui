@@ -23,20 +23,25 @@ export const c = {
  * the copy without scraping stdout. `template` is optional for back-compat: omit
  * it (or pass a bundled template) to keep the component-add path; composed
  * templates (`saas`/`store`/`landing`) get add-page / theme / upgrade instead.
- * saas/admin also get `db:push` before `dev` (sqlite gold path).
+ * saas/admin list `db:push` before `dev` unless the scaffolder already ran it.
  */
+export function isGoldPathTemplate(name: string): boolean {
+  return name === "saas" || name === "admin";
+}
+
 export function outroLines(
   name: string,
   pm: PackageManager,
   installed: boolean,
   template?: TemplateName,
+  dbPushed = false,
 ): string[] {
   const dev = pm === "npm" ? "npm run dev" : `${pm} dev`;
   const install = pm === "yarn" ? "yarn" : `${pm} install`;
   const dbPush = pm === "npm" ? "npm run db:push" : `${pm} run db:push`;
   const dollar = c.dim("$");
   const composed = template !== undefined && isComposedTemplate(template);
-  const goldPath = template === "saas" || template === "admin";
+  const goldPath = template !== undefined && isGoldPathTemplate(template);
   const grow = composed
     ? [
         "Grow the app anytime:",
@@ -55,7 +60,7 @@ export function outroLines(
     "Next steps:",
     `  ${dollar} cd ${name}`,
     ...(installed ? [] : [`  ${dollar} ${install}`]),
-    ...(goldPath ? [`  ${dollar} ${dbPush}`] : []),
+    ...(goldPath && !dbPushed ? [`  ${dollar} ${dbPush}`] : []),
     `  ${dollar} ${dev}`,
     "",
     `Then open the URL printed by ${c.cyan(dev)}.`,
@@ -81,8 +86,14 @@ export const log = {
   error(msg: string): void {
     process.stderr.write(`${c.red("✗")} ${msg}\n`);
   },
-  outro(name: string, pm: PackageManager, installed: boolean, template?: TemplateName): void {
-    process.stdout.write(`${outroLines(name, pm, installed, template).join("\n")}\n`);
+  outro(
+    name: string,
+    pm: PackageManager,
+    installed: boolean,
+    template?: TemplateName,
+    dbPushed = false,
+  ): void {
+    process.stdout.write(`${outroLines(name, pm, installed, template, dbPushed).join("\n")}\n`);
   },
 };
 
