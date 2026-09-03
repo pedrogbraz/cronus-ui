@@ -2,7 +2,7 @@
   "name": "order-history--cards",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.18",
+    "@cronus-ui/ui@0.6.19",
     "lucide-react@^0.577.0"
   ],
   "registryDependencies": [],

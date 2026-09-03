@@ -2,7 +2,7 @@
   "name": "blog-post--with-sidebar",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.18"
+    "@cronus-ui/ui@0.6.19"
   ],
   "registryDependencies": [],
   "files": [
