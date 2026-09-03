@@ -2,7 +2,7 @@
   "name": "faq",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.6.20"
+    "@cronus-ui/ui@0.6.21"
   ],
   "registryDependencies": [],
   "files": [
