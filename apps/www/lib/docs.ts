@@ -299,6 +299,15 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-09-02",
+    version: "v0.6.20",
+    status: "Released",
+    title: "gold-path first-run .env",
+    summary:
+      "saas/admin compose writes .env when missing, with a generated BETTER_AUTH_SECRET, and gitignores .env. Existing .env is never overwritten.",
+    items: ["saas/admin compose writes .env with a generated Better Auth secret"],
+  },
+  {
+    date: "2026-09-02",
     version: "v0.6.19",
     status: "Released",
     title: "upgrade re-emits gold-path owned files",
