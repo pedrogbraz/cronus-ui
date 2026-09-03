@@ -702,6 +702,41 @@ describe.skipIf(!HAS_REGISTRY)("upgrade — gold-path chrome", () => {
     expect(chrome).not.toContain("WORKSPACES");
     expect(chrome).not.toContain("WorkspaceSwitcher");
     expect(chrome).not.toContain("InviteDialog");
+    expect(chrome).not.toContain('href: "/analytics"');
+    expect(chrome).not.toContain('href: "/billing"');
+    expect(chrome).not.toContain('href: "/settings"');
+  });
+
+  it("upgrade --all on saas strips catalog nav restored onto gold chrome", async () => {
+    await composeApp({
+      targetDir: cwd,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+    const gold = chromeFile();
+    expect(gold).not.toContain('href: "/analytics"');
+    writeFileSync(
+      join(cwd, chromeRel),
+      gold.replace(
+        /const APP_NAV = \[[\s\S]*?\];/,
+        `const APP_NAV = [
+  { label: "Items", href: "/" },
+  { label: "Analytics", href: "/analytics" },
+  { label: "Team", href: "/team" },
+  { label: "Billing", href: "/billing" },
+];`,
+      ),
+    );
+
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, yes: true });
+
+    const chrome = chromeFile();
+    expect(chrome).toContain("WorkspaceMenu");
+    expect(chrome).toContain('{ label: "Items", href: "/" }');
+    expect(chrome).toContain('{ label: "Team", href: "/team" }');
+    expect(chrome).not.toContain('href: "/analytics"');
+    expect(chrome).not.toContain('href: "/billing"');
   });
 
   it("upgrade --all on saas is a no-op on already gold-patched chrome", async () => {

@@ -7,6 +7,7 @@ import {
   applyGoldPath,
   isGoldPathTemplate,
   patchChromeSource,
+  patchGoldPathAppNav,
   patchHomePageSource,
   patchShellLayoutSource,
   patchTeamPageSource,
@@ -94,6 +95,15 @@ const WORKSPACES = [
   { id: "cronus", name: "Cronus", initials: "CR" },
 ];
 
+const APP_NAV = [
+  { label: "Items", href: "/" },
+  { label: "Analytics", href: "/analytics" },
+  { label: "Team", href: "/team" },
+  { label: "Billing", href: "/billing" },
+  { label: "Settings", href: "/settings" },
+  { label: "Setup", href: "/checklist" },
+];
+
 export function AppShellChromeBlock({ children }: { children: ReactNode }) {
   const [workspaceId, setWorkspaceId] = useState("cronus");
   return (
@@ -153,6 +163,12 @@ describe("patchChromeSource", () => {
     expect(out).toContain("<SessionUser compact />");
     expect(out).not.toContain("{USER.email}");
     expect(out).not.toContain("demo-saas");
+    expect(out).toContain('{ label: "Items", href: "/" }');
+    expect(out).toContain('{ label: "Team", href: "/team" }');
+    expect(out).not.toContain('href: "/analytics"');
+    expect(out).not.toContain('href: "/billing"');
+    expect(out).not.toContain('href: "/settings"');
+    expect(out).not.toContain('href: "/checklist"');
   });
 
   it("is idempotent when WorkspaceMenu is already wired", () => {
@@ -170,6 +186,84 @@ describe("patchChromeSource", () => {
     expect(
       patchChromeSource("export function AppShellChromeBlock() { return null; }", "@/a", "@/b"),
     ).toBe(undefined);
+  });
+
+  it("strips catalog nav on already-gold chrome (add-page / upgrade rewrite APP_NAV)", () => {
+    const gold = patchChromeSource(
+      CHROME,
+      "@/components/workspace-menu",
+      "@/components/invite-member",
+      "@/components/session-user",
+    );
+    expect(gold).toBeDefined();
+    const withCatalogNav = (gold as string).replace(
+      /const APP_NAV = \[[\s\S]*?\];/,
+      `const APP_NAV = [
+  { label: "Items", href: "/" },
+  { label: "Analytics", href: "/analytics" },
+  { label: "Team", href: "/team" },
+  { label: "FAQ", href: "/faq" },
+];`,
+    );
+    const out = patchChromeSource(
+      withCatalogNav,
+      "@/components/workspace-menu",
+      "@/components/invite-member",
+      "@/components/session-user",
+    );
+    expect(out).toContain('{ label: "Items", href: "/" }');
+    expect(out).toContain('{ label: "Team", href: "/team" }');
+    expect(out).toContain('{ label: "FAQ", href: "/faq" }');
+    expect(out).not.toContain('href: "/analytics"');
+    expect(out).toContain("WorkspaceMenu");
+  });
+});
+
+describe("patchGoldPathAppNav", () => {
+  it("drops catalog demo hrefs and keeps Items, Team, and user links", () => {
+    const source = `const APP_NAV = [
+  { label: "Items", href: "/" },
+  { label: "Analytics", href: "/analytics" },
+  { label: "Team", href: "/team" },
+  { label: "Billing", href: "/billing" },
+  { label: "Settings", href: "/settings" },
+  { label: "Setup", href: "/checklist" },
+  { label: "FAQ", href: "/faq" },
+];`;
+    const out = patchGoldPathAppNav(source);
+    expect(out).toBe(`const APP_NAV = [
+  { label: "Items", href: "/" },
+  { label: "Team", href: "/team" },
+  { label: "FAQ", href: "/faq" },
+];`);
+  });
+
+  it("strips admin catalog hrefs and keeps Items", () => {
+    const source = `const APP_NAV = [
+  { label: "Items", href: "/" },
+  { label: "Users", href: "/users" },
+  { label: "Analytics", href: "/analytics" },
+  { label: "Board", href: "/board" },
+  { label: "Audit", href: "/audit" },
+];`;
+    const out = patchGoldPathAppNav(source);
+    expect(out).toBe(`const APP_NAV = [
+  { label: "Items", href: "/" },
+];`);
+  });
+
+  it("is idempotent when the nav is already gold", () => {
+    const source = `const APP_NAV = [
+  { label: "Items", href: "/" },
+  { label: "Team", href: "/team" },
+];`;
+    expect(patchGoldPathAppNav(source)).toBe(source);
+  });
+
+  it("returns undefined when APP_NAV is missing", () => {
+    expect(patchGoldPathAppNav("export function AppShellChromeBlock() { return null; }")).toBe(
+      undefined,
+    );
   });
 });
 
@@ -445,6 +539,12 @@ describe("applyGoldPath", () => {
     expect(chrome).toContain("SessionUser");
     expect(chrome).not.toContain("WORKSPACES");
     expect(chrome).not.toContain("demo-saas");
+    expect(chrome).toContain('{ label: "Items", href: "/" }');
+    expect(chrome).toContain('{ label: "Team", href: "/team" }');
+    expect(chrome).not.toContain('href: "/analytics"');
+    expect(chrome).not.toContain('href: "/billing"');
+    expect(chrome).not.toContain('href: "/settings"');
+    expect(chrome).not.toContain('href: "/checklist"');
 
     const home = readFileSync(join(cwd, "app", "(shell)", "page.tsx"), "utf8");
     expect(home).toContain("ItemsPanel");

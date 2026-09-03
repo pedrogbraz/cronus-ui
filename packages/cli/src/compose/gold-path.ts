@@ -26,8 +26,9 @@ const GOLD_MEMBERS_IMPORT = "@/components/members-panel";
 const GOLD_ITEMS_IMPORT = "@/components/items-panel";
 
 /**
- * Re-apply WorkspaceMenu / InviteMember / SessionUser onto catalog app-shell-chrome.
- * Idempotent. Used by add-page --nav and upgrade so neither restores Mara.
+ * Re-apply WorkspaceMenu / InviteMember / SessionUser onto catalog app-shell-chrome
+ * and drop catalog demo routes from APP_NAV. Idempotent. Used by add-page --nav
+ * and upgrade so neither restores Mara nor Analytics/Billing/Settings in the nav.
  */
 export function goldPatchAppShellChrome(source: string): string | undefined {
   return patchChromeSource(source, GOLD_WORKSPACE_IMPORT, GOLD_INVITE_IMPORT, GOLD_SESSION_IMPORT);
@@ -1170,10 +1171,70 @@ function insertImport(source: string, line: string): string {
 }
 
 /**
- * Wire the installed app-shell-chrome copy to live Better-Auth orgs + session.
- * Idempotent: a chrome that already has WorkspaceMenu and SessionUser is left
- * untouched. Returns undefined when the WorkspaceSwitcher / InviteDialog
- * anchors are missing and nothing else can be patched.
+ * Catalog demo routes that must not appear in gold-path shell nav.
+ * The pages stay on disk (catalog / add-page); only the sidebar drops them.
+ * `/` (Items) and `/team` are live and stay. Unknown hrefs (add-page --nav) stay.
+ */
+const GOLD_PATH_CATALOG_NAV_HREFS = new Set([
+  "/analytics",
+  "/billing",
+  "/settings",
+  "/checklist",
+  "/welcome",
+  "/setup",
+  "/users",
+  "/board",
+  "/audit",
+]);
+
+const APP_NAV_CONST_RE = /const APP_NAV = \[([\s\S]*?)\](?:\s*as const)?;/;
+const APP_NAV_LINK_RE = /\{\s*label:\s*"((?:\\.|[^"\\])*)"\s*,\s*href:\s*"((?:\\.|[^"\\])*)"\s*\}/g;
+
+function serializeGoldPathAppNav(links: Array<{ label: string; href: string }>): string {
+  if (links.length === 0) return "const APP_NAV = [];";
+  const rows = links
+    .map(
+      (link) => `  { label: ${JSON.stringify(link.label)}, href: ${JSON.stringify(link.href)} },`,
+    )
+    .join("\n");
+  return `const APP_NAV = [\n${rows}\n];`;
+}
+
+/**
+ * Drop catalog demo hrefs from `const APP_NAV`. Idempotent. Keeps Items, Team,
+ * and any user-added link. Returns undefined when the const is missing.
+ */
+export function patchGoldPathAppNav(source: string): string | undefined {
+  const match = APP_NAV_CONST_RE.exec(source);
+  if (!match || match.index === undefined) return undefined;
+  const body = match[1] ?? "";
+  const links: Array<{ label: string; href: string }> = [];
+  APP_NAV_LINK_RE.lastIndex = 0;
+  for (const row of body.matchAll(APP_NAV_LINK_RE)) {
+    const label = row[1];
+    const href = row[2];
+    if (label === undefined || href === undefined) continue;
+    links.push({
+      label: JSON.parse(`"${label}"`) as string,
+      href: JSON.parse(`"${href}"`) as string,
+    });
+  }
+  if (links.length === 0 && body.trim().length > 0) return source;
+  const kept = links.filter((link) => !GOLD_PATH_CATALOG_NAV_HREFS.has(link.href));
+  if (kept.length === links.length) return source;
+  return (
+    source.slice(0, match.index) +
+    serializeGoldPathAppNav(kept) +
+    source.slice(match.index + match[0].length)
+  );
+}
+
+/**
+ * Wire the installed app-shell-chrome copy to live Better-Auth orgs + session,
+ * and drop catalog demo routes from the sidebar nav.
+ * Idempotent: already-gold widgets still re-strip nav (add-page / upgrade
+ * rewrite APP_NAV from the template). Returns undefined when neither the
+ * WorkspaceSwitcher / InviteDialog anchors nor an APP_NAV const are present.
  */
 export function patchChromeSource(
   source: string,
@@ -1183,7 +1244,7 @@ export function patchChromeSource(
 ): string | undefined {
   const hasMenu = source.includes("WorkspaceMenu");
   const hasSession = source.includes("SessionUser");
-  if (hasMenu && hasSession) return source;
+  const alreadyGoldWidgets = hasMenu && hasSession;
   const canPatchMenu =
     !hasMenu &&
     /<WorkspaceSwitcher[\s\S]*?\/>/.test(source) &&
@@ -1193,39 +1254,58 @@ export function patchChromeSource(
     !hasSession &&
     source.includes("{USER.email}") &&
     source.includes("<SidebarFooter>");
-  if (!canPatchMenu && !canPatchSession) {
-    return hasMenu ? source : undefined;
-  }
 
   let out = source;
-  if (canPatchMenu) {
-    out = insertImport(out, `import { WorkspaceMenu } from ${JSON.stringify(workspaceImport)};`);
-    out = insertImport(out, `import { InviteMember } from ${JSON.stringify(inviteImport)};`);
-    out = out.replace(/<WorkspaceSwitcher[\s\S]*?\/>/, "<WorkspaceMenu />");
-    out = out.replace(/<InviteDialog([\s\S]*?)\/>/, "<InviteMember$1/>");
-    out = out.replace(/\nconst WORKSPACES = \[[\s\S]*?\];\n/, "\n");
-    out = out.replace(/\s*const \[workspaceId, setWorkspaceId\] = useState\("[^"]*"\);\n/, "\n");
-    out = out.replace(/,\s*useState/, "");
-    out = out.replace(/\s*InviteDialog,\n/, "\n");
-    out = out.replace(/\s*WorkspaceSwitcher,\n/, "\n");
+  let widgetsTouched = alreadyGoldWidgets;
+  if (!alreadyGoldWidgets) {
+    if (!canPatchMenu && !canPatchSession) {
+      widgetsTouched = hasMenu;
+    } else {
+      widgetsTouched = true;
+      if (canPatchMenu) {
+        out = insertImport(
+          out,
+          `import { WorkspaceMenu } from ${JSON.stringify(workspaceImport)};`,
+        );
+        out = insertImport(out, `import { InviteMember } from ${JSON.stringify(inviteImport)};`);
+        out = out.replace(/<WorkspaceSwitcher[\s\S]*?\/>/, "<WorkspaceMenu />");
+        out = out.replace(/<InviteDialog([\s\S]*?)\/>/, "<InviteMember$1/>");
+        out = out.replace(/\nconst WORKSPACES = \[[\s\S]*?\];\n/, "\n");
+        out = out.replace(
+          /\s*const \[workspaceId, setWorkspaceId\] = useState\("[^"]*"\);\n/,
+          "\n",
+        );
+        out = out.replace(/,\s*useState/, "");
+        out = out.replace(/\s*InviteDialog,\n/, "\n");
+        out = out.replace(/\s*WorkspaceSwitcher,\n/, "\n");
+      }
+      if (canPatchSession && sessionImport !== undefined) {
+        out = insertImport(out, `import { SessionUser } from ${JSON.stringify(sessionImport)};`);
+        out = out.replace(
+          /<SidebarFooter>\s*<div className="flex items-center gap-2 rounded-lg px-2 py-1\.5">[\s\S]*?<\/SidebarFooter>/,
+          "<SidebarFooter>\n        <SessionUser />\n      </SidebarFooter>",
+        );
+        out = out.replace(
+          /<Avatar className="size-8">\s*\{OWNER\?\.avatar \? <AvatarImage src=\{OWNER\.avatar\} alt=\{USER\.name\} \/> : null\}\s*<AvatarFallback>\{USER\.initials\}<\/AvatarFallback>\s*<\/Avatar>/,
+          "<SessionUser compact />",
+        );
+        out = out.replace(/\nimport \{ TEAM, USER \} from "[^"]+";\n/, "\n");
+        out = out.replace(
+          /\nconst OWNER = TEAM\.find\(\(m\) => m\.email === USER\.email\);\n/,
+          "\n",
+        );
+        out = out.replace(/\s*Avatar,\n/, "\n");
+        out = out.replace(/\s*AvatarFallback,\n/, "\n");
+        out = out.replace(/\s*AvatarImage,\n/, "\n");
+      }
+    }
   }
-  if (canPatchSession && sessionImport !== undefined) {
-    out = insertImport(out, `import { SessionUser } from ${JSON.stringify(sessionImport)};`);
-    out = out.replace(
-      /<SidebarFooter>\s*<div className="flex items-center gap-2 rounded-lg px-2 py-1\.5">[\s\S]*?<\/SidebarFooter>/,
-      "<SidebarFooter>\n        <SessionUser />\n      </SidebarFooter>",
-    );
-    out = out.replace(
-      /<Avatar className="size-8">\s*\{OWNER\?\.avatar \? <AvatarImage src=\{OWNER\.avatar\} alt=\{USER\.name\} \/> : null\}\s*<AvatarFallback>\{USER\.initials\}<\/AvatarFallback>\s*<\/Avatar>/,
-      "<SessionUser compact />",
-    );
-    out = out.replace(/\nimport \{ TEAM, USER \} from "[^"]+";\n/, "\n");
-    out = out.replace(/\nconst OWNER = TEAM\.find\(\(m\) => m\.email === USER\.email\);\n/, "\n");
-    out = out.replace(/\s*Avatar,\n/, "\n");
-    out = out.replace(/\s*AvatarFallback,\n/, "\n");
-    out = out.replace(/\s*AvatarImage,\n/, "\n");
-  }
-  return out;
+
+  const navPatched = patchGoldPathAppNav(out);
+  if (navPatched !== undefined) out = navPatched;
+  if (out !== source) return out;
+  if (widgetsTouched || navPatched !== undefined) return source;
+  return undefined;
 }
 
 function nextConfigSource(): string {

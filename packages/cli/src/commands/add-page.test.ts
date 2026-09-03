@@ -793,6 +793,11 @@ describe.skipIf(!HAS_REGISTRY)("addPage — confirmed-defect fixes", () => {
     const chrome = readFileSync(join(app, "components/blocks/app-shell-chrome.tsx"), "utf8");
     expect(chrome).toContain('{ label: "FAQ", href: "/faq" }');
     expect(chrome).toContain('{ label: "Items", href: "/" }');
+    expect(chrome).toContain('{ label: "Team", href: "/team" }');
+    expect(chrome).not.toContain('href: "/analytics"');
+    expect(chrome).not.toContain('href: "/billing"');
+    expect(chrome).not.toContain('href: "/settings"');
+    expect(chrome).not.toContain('href: "/checklist"');
     expect(chrome).toContain("WorkspaceMenu");
     expect(chrome).toContain("InviteMember");
     expect(chrome).toContain("SessionUser");

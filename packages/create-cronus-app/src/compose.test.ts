@@ -261,10 +261,15 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     );
 
     // The installed shell block copy carries the real sidebar nav + brand. Home
-    // is the live items surface, so the nav label matches ItemsPanel.
+    // is the live items surface, so the nav label matches ItemsPanel. Catalog
+    // demo routes stay as pages, not as nav.
     const shellBlock = readFileSync(join(cwd, "components/blocks/app-shell-chrome.tsx"), "utf8");
     expect(shellBlock).toContain('{ label: "Items", href: "/" }');
-    expect(shellBlock).toContain('{ label: "Setup", href: "/checklist" }');
+    expect(shellBlock).toContain('{ label: "Team", href: "/team" }');
+    expect(shellBlock).not.toContain('href: "/analytics"');
+    expect(shellBlock).not.toContain('href: "/billing"');
+    expect(shellBlock).not.toContain('href: "/settings"');
+    expect(shellBlock).not.toContain('href: "/checklist"');
     expect(shellBlock).not.toContain('href: "/welcome"');
     expect(shellBlock).not.toContain('href: "/setup"');
     expect(shellBlock).toContain("Painel");
@@ -365,6 +370,10 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     expect(existsSync(join(cwd, "components/blocks/dashboard-admin-overview.tsx"))).toBe(true);
     const shellBlock = readFileSync(join(cwd, "components/blocks/app-shell-chrome.tsx"), "utf8");
     expect(shellBlock).toContain('{ label: "Items", href: "/" }');
+    expect(shellBlock).not.toContain('href: "/users"');
+    expect(shellBlock).not.toContain('href: "/analytics"');
+    expect(shellBlock).not.toContain('href: "/board"');
+    expect(shellBlock).not.toContain('href: "/audit"');
     expect(shellBlock).toContain("Console");
     expect(shellBlock.startsWith('"use client"')).toBe(true);
 

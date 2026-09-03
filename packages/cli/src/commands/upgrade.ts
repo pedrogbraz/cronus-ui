@@ -681,7 +681,7 @@ async function repatchGoldPathSurfaces(
     cwd,
     join(config.paths.blocks, "app-shell-chrome.tsx"),
     goldPatchAppShellChrome,
-    "WorkspaceMenu / InviteMember / SessionUser",
+    "WorkspaceMenu / InviteMember / SessionUser / nav",
   );
   for (const rel of goldPathSurfaceRels(cwd, composed)) {
     if (/(^|\/)\(shell\)\/layout\.tsx$/.test(rel)) {

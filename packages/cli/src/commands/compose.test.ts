@@ -204,6 +204,16 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(chrome).toContain("WorkspaceMenu");
     expect(chrome).toContain("InviteMember");
     expect(chrome).toContain("SessionUser");
+    expect(chrome).toContain('{ label: "Items", href: "/" }');
+    expect(chrome).toContain('{ label: "Team", href: "/team" }');
+    expect(chrome).not.toContain('href: "/analytics"');
+    expect(chrome).not.toContain('href: "/billing"');
+    expect(chrome).not.toContain('href: "/settings"');
+    expect(chrome).not.toContain('href: "/checklist"');
+    expect(existsSync(join(cwd, "app/(shell)/analytics/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(shell)/billing/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(shell)/settings/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(shell)/checklist/page.tsx"))).toBe(true);
     expect(readFileSync(join(cwd, "components/session-user.tsx"), "utf8")).toContain(
       "authClient.signOut",
     );
@@ -243,6 +253,14 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(existsSync(join(cwd, "components/blocks/dashboard-admin-overview.tsx"))).toBe(true);
     expect(readFileSync(join(cwd, "lib/items.ts"), "utf8")).toContain("createItem");
     expect(existsSync(join(cwd, "app/(shell)/team/page.tsx"))).toBe(false);
+    const adminChrome = readFileSync(join(cwd, "components/blocks/app-shell-chrome.tsx"), "utf8");
+    expect(adminChrome).toContain('{ label: "Items", href: "/" }');
+    expect(adminChrome).not.toContain('href: "/users"');
+    expect(adminChrome).not.toContain('href: "/analytics"');
+    expect(adminChrome).not.toContain('href: "/board"');
+    expect(adminChrome).not.toContain('href: "/audit"');
+    expect(existsSync(join(cwd, "app/(shell)/users/page.tsx"))).toBe(true);
+    expect(existsSync(join(cwd, "app/(shell)/analytics/page.tsx"))).toBe(true);
     expect(readFileSync(join(cwd, "lib/members.ts"), "utf8")).toContain("loadMembers");
     expect(existsSync(join(cwd, "app/(bare)/forgot-password/page.tsx"))).toBe(true);
     expect(readFileSync(join(cwd, "app/(bare)/forgot-password/page.tsx"), "utf8")).toContain(

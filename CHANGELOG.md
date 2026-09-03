@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Gold-path nav drops catalog demo routes.** saas/admin sidebar is Items and
+  Team (plus anything `add-page --nav` adds). Analytics, Billing, Settings,
+  Setup, Users, Board, and Audit stay as pages, not as nav. `upgrade --all`
+  and `add-page --nav` re-strip them so the template does not put Mara back
+  in the menu.
+
 ## [0.6.21] — 2026-09-02
 
 ### Fixed
