@@ -30,11 +30,10 @@ If the cronus-ui MCP server is connected, prefer its write tools (`compose_app`,
 
 ## 1. New app
 
-Default marketing / product CTA is **`saas`**. If the user does **not** name a
-template, pass `--template saas`. **Never** run `create-cronus-app` without
-`--template`: the CLI default is `default` (an empty starter), which is the
-wrong CTA. `--yes` / `-y` without `--template` also falls through to `default`,
-so `-y` must go **together** with `--template saas`.
+Default marketing / product CTA is **`saas`**. The CLI default is `saas`. If the
+user does **not** name a template, pass `--template saas` anyway so the command
+is explicit. `--yes` / `-y` without `--template` also scaffolds saas. Use
+`--template default` only when the user asked for a single-page starter.
 
 Other composed templates: `store`, `landing`. Bundled (non-composed) starters:
 `default`, `dashboard`, `marketing` — only when the user explicitly asks for a
@@ -73,9 +72,10 @@ npx cronus-ui compose landing --variant login=split --dry-run
 
 Real flags (do not invent others):
 
-- `-y` / `--yes` — non-interactive (pick the first template if none is given).
+- `-y` / `--yes` — non-interactive (pick saas if none is given).
   **Always pass `-y` as an agent.** This is `cronus-ui compose`, not
-  `create-cronus-app` — on scaffold, `-y` still needs `--template saas`.
+  `create-cronus-app` — on scaffold, `-y` already defaults to saas; still pass
+  `--template saas` as the canonical command.
 - `-b, --brand <name>` — brand wordmark baked into chrome/hero.
 - `--variant <slug>=<id>` — repeatable, e.g. `--variant login=split`.
 - `--pages <list>` — comma-separated route subset, e.g. `--pages /,pricing`.

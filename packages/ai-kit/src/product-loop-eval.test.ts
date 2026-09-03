@@ -62,10 +62,9 @@ describe("product-loop kit coverage (not a live agent score)", () => {
       expect(compose).toContain("--template landing --theme sunset");
     });
 
-    it("#4 never omit --template; -y only with --template saas", () => {
+    it("#4 CLI default is saas; pass --template saas as the canonical command", () => {
       expect(compose).toContain("pass `--template saas`");
-      expect(compose).toContain("without `--template`");
-      expect(compose).toContain("`-y` must go **together** with `--template saas`");
+      expect(compose).toContain("CLI default is `saas`");
       expect(compose).toContain("create-cronus-app <name> --template saas -y");
     });
 

@@ -33,8 +33,9 @@ If this project uses Cronus UI (`cronus-ui.json`, or compose / ui-add / theme sk
 under `.claude/skills/`), follow this loop — do not hand-roll screens or reach
 for another component kit:
 
-- New app: `npx create-cronus-app <name> --template saas`. Never omit `--template`
-  (CLI default is an empty starter). Other composed templates: `store`, `landing`.
+- New app: `npx create-cronus-app <name> --template saas` (CLI default is saas).
+  Other composed templates: `store`, `landing`. `--template default` only for a
+  single-page starter.
 - New route: `npx cronus-ui add-page` or MCP `add_page`. Pages are installed
   blocks stacked in `<main>` — do not hand-write a page of Cards.
 - One primitive: `npx cronus-ui add <slug>` (MCP `install_component`). Prefer the

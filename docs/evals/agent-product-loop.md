@@ -67,14 +67,14 @@ was not actually executed against a real agent.
 ## Holes closed
 
 The AI Kit skills and Cursor rule now encode the product-loop answers so an
-agent that reads them does not pick shadcn, the empty `default` starter, or
-`--yes` without a template. This is coverage of the rubric in the kit — not a
-run score.
+agent that reads them does not pick shadcn. The CLI default is `saas` (ADR
+0007); `--template default` is only the named single-page starter. This is
+coverage of the rubric in the kit — not a run score.
 
 | # | Hole | Now covered by |
 |---|---|---|
 | 3 | landing + sunset | compose: `npx create-cronus-app <name> --template landing --theme sunset` on the same scaffold command (`DEFAULT_MODE` is already dark) |
-| 4 | "Start a Cronus app" with no spec | compose: always `--template saas`; never omit `--template`; `-y` only together with `--template saas` |
+| 4 | "Start a Cronus app" with no spec | compose: pass `--template saas` (CLI default is already saas; `-y` without `--template` also scaffolds saas) |
 | 5 | files only, no install | compose: `--no-install` on `create-cronus-app`; `--skip-install` on `cronus-ui compose` / `add` / `add-page` — do not mix |
 | 8 | split login | compose + ui-add: `--variant login=split` / `login=split`, and registry item `login--split` via `cronus-ui add login--split` |
 | 14 | zinc-900 | theme, compose, ui-add, and `10-cronus-ui.mdc`: refuse `zinc-*` / `slate-*` / `gray-*`; offer `bg-surface-*` / `setOverrides` |

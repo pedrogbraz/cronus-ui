@@ -5,7 +5,7 @@ alwaysApply: true
 
 Cronus UI product loop for __APP_NAME__. See AGENTS.md at the repo root if present for the full doctrine. Read DESIGN.md before generating UI (taste: Aurora product, Neutral chrome, one primary fill).
 
-- New app: `npx create-cronus-app <name> --template saas`. Never omit `--template` (CLI default is an empty starter). Other composed templates: `store`, `landing`.
+- New app: `npx create-cronus-app <name> --template saas` (CLI default is saas). Other composed templates: `store`, `landing`. `--template default` only for a single-page starter.
 - New route: `npx cronus-ui add-page` or MCP `add_page`. Pages are installed blocks stacked in `<main>` — do not invent a parallel page architecture.
 - One primitive: `npx cronus-ui add <slug>` (MCP `install_component`).
 - Theme: palettes via `npx cronus-ui theme set` (`aurora` | `neutral` | `midnight` | `sunset` | `emerald`) / `useTheme`. Looks (`default` | `brutalist` | `glass`) are `data-cronus-look` on `<html>` or a subtree — not a theme name; there is no `theme set glass`. Never `bg-zinc-*` or palette utilities (`bg-zinc-900`).

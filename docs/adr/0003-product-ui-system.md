@@ -4,6 +4,9 @@
 - **Data:** 2026-08-25
 - **Decisor:** pedrogbraz
 - **Relacionada:** —
+- **Emenda:** 2026-09-03 — o default da CLI `create-cronus-app` passou a `saas`
+  (breaking, 0.7.0). Ver [ADR 0007](0007-create-cronus-app-default-saas.md).
+  O resto desta ADR permanece.
 
 ## Contexto
 
@@ -31,8 +34,8 @@ produto, não um catálogo.
 3. **Aurora** é o tema-bandeira do produto gerado. **Neutral** é o chrome das
    docs. Os dois convivem; não se misturam no discurso.
 4. **CTA canônico:** `npx create-cronus-app my-app --template saas`. O default
-   da CLI `create-cronus-app` pode permanecer `default` (não-breaking). Marketing
-   e docs usam `saas`.
+   da CLI era `default` até o breaking da [ADR 0007](0007-create-cronus-app-default-saas.md)
+   (0.7.0): agora o default da CLI também é `saas`.
 5. **Dual distribution permanece:** npm (`@cronus-ui/ui` + tokens + theme) e
    copy-in (`cronus-ui add` / `compose`). Uma fonte, dois modos de posse.
 6. **A golden rule do compose é doutrina de produto**, não detalhe de
@@ -64,8 +67,8 @@ discurso: um é o produto gerado, o outro é o chrome das docs.
 respondemos com orgulho. Quem chega procurando um clone de shadcn ou uma
 lib tipo MUI vai achar o CTA estranho. Aceitamos.
 
-**Aceitamos:** o default da CLI `create-cronus-app` permanece `default` até um
-breaking change deliberado. Docs e marketing não precisam esperar.
+**Aceitamos (emenda 2026-09-03):** o default da CLI `create-cronus-app` é `saas`.
+O starter `default` continua no picker, só com `--template default`.
 
 ## Revisitar quando
 

@@ -16,8 +16,8 @@ You get Next.js 16 (App Router) + React 19 + Tailwind v4 with
 and `@cronus-ui/theme` already wired — themeable, accessible components and an
 anti-flash theme script.
 
-The CLI default remains `--template default` (a single-page starter). Pass
-`--template saas` when you want the full product.
+The CLI default is `--template saas` (the gold path). Pass `--template default`
+for the single-page starter.
 
 ## Usage
 
@@ -32,7 +32,7 @@ Interactive runs also prompt for template, theme, mode, and the AI Kit.
 
 | Flag | Description |
 | --- | --- |
-| `--template <name>` | Starter template. CLI default: `default`. Bundled: `default`, `dashboard`, `marketing`. Composed: `store`, `landing`, `saas`, plus `landing-*` flavors (studio, ops, secure, care, shop, docs, premium, agents, coverage, broadcast, agency, glass). |
+| `--template <name>` | Starter template. CLI default: `saas`. Bundled: `default`, `dashboard`, `marketing`. Composed: `store`, `landing`, `saas`, plus `landing-*` flavors (studio, ops, secure, care, shop, docs, premium, agents, coverage, broadcast, agency, glass). |
 | `--theme <aurora\|neutral\|midnight\|sunset\|emerald>` | Theme preset to bake in (default: `aurora`). |
 | `--mode <dark\|light>` | Default color mode (default: `dark`). |
 | `--ai` / `--no-ai` | Include or skip the AI Kit (skills, rules & doctrine). |
@@ -59,12 +59,12 @@ saas/store/landing; the Pro pack is additive.
 
 | Template | What you get |
 | --- | --- |
-| `default` | Single-page starter — metrics, table & cards. The CLI default (`--yes` without `--template` lands here). |
+| `default` | Single-page starter — metrics, table & cards. Pass `--template default`. |
 | `dashboard` | Bundled multi-page app — sidebar shell, KPIs, chart, data table, settings. |
 | `marketing` | Bundled landing site — hero, features, pricing, testimonials, FAQ, waitlist. |
 | `store` | Composed storefront — 9 navigable pages, real nav, from validated blocks. |
 | `landing` | Composed marketing page — hero, features, pricing, testimonials, FAQ, CTA. |
-| `saas` | Composed SaaS product — split auth + sidebar-shell dashboard, analytics, team, billing, settings. **Recommended for a full product.** |
+| `saas` | Composed SaaS product — split auth, Items, Team. **CLI default. Recommended for a full product.** |
 | `landing-studio` | Dark AI studio — atmosphere hero, marquee, bento, stats, pricing. Midnight dark. |
 | `landing-ops` | Workflow product — split hero, logos, features, integrations. |
 | `landing-secure` | Infra/security — compact hero, metrics, usage pricing, split FAQ. Midnight dark. |

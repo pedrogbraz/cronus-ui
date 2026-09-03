@@ -37,8 +37,9 @@ Do not invent a parallel visual language. MCP: `get_design_context`.
 
 If this repo uses Cronus UI (`cronus-ui.json`):
 
-- **Start:** `npx create-cronus-app <name> --template saas`. Never omit `--template`
-  (CLI default is an empty starter). Other composed templates: `store`, `landing`.
+- **Start:** `npx create-cronus-app <name> --template saas` (CLI default is saas).
+  Other composed templates: `store`, `landing`. `--template default` only for a
+  single-page starter.
 - **Grow:** `npx cronus-ui add-page` — pages are installed blocks stacked in `<main>`.
 - **Theme:** palettes via `npx cronus-ui theme set` (`aurora` | `neutral` | `midnight` |
   `sunset` | `emerald`). Looks (`default` | `brutalist` | `glass`) are

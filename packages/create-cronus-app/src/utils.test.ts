@@ -52,8 +52,8 @@ describe("templates", () => {
     }
   });
 
-  it("keeps DEFAULT_TEMPLATE as default (saas is the documented gold path, not the CLI default)", () => {
-    expect(DEFAULT_TEMPLATE).toBe("default");
+  it("defaults the CLI to saas (gold path, breaking vs the old empty starter)", () => {
+    expect(DEFAULT_TEMPLATE).toBe("saas");
   });
 
   it("positions saas as the recommended full-product template", () => {
@@ -251,6 +251,7 @@ describe("parseCli", () => {
 
 describe("HELP", () => {
   it("leads examples with --template saas and documents composed landing flavors", () => {
+    expect(HELP).toContain(`Starter template (default: ${DEFAULT_TEMPLATE})`);
     expect(HELP).toContain("npx create-cronus-app my-app --template saas");
     expect(HELP).toContain("npx create-cronus-app my-app --template landing-studio");
     expect(HELP).toContain("npx create-cronus-app my-app --template mail");

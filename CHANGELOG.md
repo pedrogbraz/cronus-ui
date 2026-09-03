@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **`create-cronus-app` defaults to `saas`.** Omitting `--template`, the
+  interactive prompt, and `--yes` without `--template` scaffold the gold path.
+  `--template default` remains the single-page starter. Breaking: 0.7.0
+  ([ADR 0007](docs/adr/0007-create-cronus-app-default-saas.md)).
+
 ## [0.6.22] — 2026-09-03
 
 ### Fixed

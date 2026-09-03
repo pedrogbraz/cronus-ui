@@ -69,9 +69,8 @@ bun run lint        # biome
 npx create-cronus-app my-app --template saas
 ```
 
-That scaffolds a composed SaaS app (Aurora). The `create-cronus-app` CLI default
-template remains `default` so existing invocations do not break; marketing and
-these docs use `saas`.
+That scaffolds a composed SaaS app (Aurora). The CLI default is `saas` (ADR
+0007); pass `--template default` for the single-page starter.
 
 To consume the library without the scaffolder, install the three runtime
 packages from public npm (published under the `@cronus-ui` scope — see
@@ -231,13 +230,10 @@ keeps the library re-themeable.
 Waves 0–4 (foundation through premium/brand) are done. The CLI, registry,
 public npm packages, and compose generator have shipped.
 
-Shipped: compose as the default path (`--template saas` in marketing; the CLI
-default remains `default` until a breaking 0.6), add-page, 3-way upgrade of
-components and composed pages, agent kit + MCP, and a public compare against
-shadcn/ui, HeroUI, and Aceternity.
+Shipped: compose as the default path (`create-cronus-app` defaults to `saas`,
+ADR 0007), add-page, 3-way upgrade of components and composed pages, agent kit
++ MCP, and a public compare against shadcn/ui, HeroUI, and Aceternity.
 
 Still not this quarter: inflating component count.
 
-Reserved: `create-cronus-app` `DEFAULT_TEMPLATE` → `saas` is a breaking change
-for 0.6. A live Cursor/Claude 20-prompt eval is for a human — no score claimed
-here.
+A live Cursor/Claude 20-prompt eval is for a human — no score claimed here.
