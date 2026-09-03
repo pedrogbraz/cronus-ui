@@ -299,6 +299,15 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-09-02",
+    version: "v0.6.21",
+    status: "Released",
+    title: "gold-path first-run db:push",
+    summary:
+      "create-cronus-app --template saas (and admin) runs db:push after a successful install so sqlite has tables before bun dev.",
+    items: ["saas/admin create-cronus-app runs db:push --force after install"],
+  },
+  {
+    date: "2026-09-02",
     version: "v0.6.20",
     status: "Released",
     title: "gold-path first-run .env",

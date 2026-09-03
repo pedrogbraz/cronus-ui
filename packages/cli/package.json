@@ -1,6 +1,6 @@
 {
   "name": "cronus-ui",
-  "version": "0.6.20",
+  "version": "0.6.21",
   "description": "cronus-ui — add Cronus UI components to your project, shadcn-style (copy-paste registry).",
   "type": "module",
   "license": "MIT",
