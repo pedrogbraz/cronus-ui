@@ -299,6 +299,15 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-09-02",
+    version: "v0.6.19",
+    status: "Released",
+    title: "upgrade re-emits gold-path owned files",
+    summary:
+      "cronus-ui upgrade --all on saas and admin rewrites compose always-true adapters and panels so CLI gold-path fixes reach existing apps.",
+    items: ["saas/admin upgrade --all re-emits items, members, invite-member, session-user"],
+  },
+  {
+    date: "2026-09-02",
     version: "v0.6.18",
     status: "Released",
     title: "upgrade keeps gold-path home",
