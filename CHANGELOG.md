@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Gold-path first-run `.env`.** saas/admin compose writes `.env` when missing,
+  with a generated `BETTER_AUTH_SECRET` (32+ chars), and adds `.env` to
+  `.gitignore`. `.env.example` keeps the placeholder. Existing `.env` is never
+  overwritten (including on `--overwrite` / `upgrade`).
+
 ## [0.6.19] — 2026-09-02
 
 ### Fixed

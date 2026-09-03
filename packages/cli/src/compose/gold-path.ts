@@ -3,6 +3,7 @@
  * Always sqlite — postgres/mysql live in create-cronus-stack.
  */
 
+import { randomBytes } from "node:crypto";
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
@@ -89,13 +90,15 @@ const GOLD_PATH_SCRIPTS: Record<string, string> = {
   "db:studio": "drizzle-kit studio",
 };
 
+const ENV_EXAMPLE_SECRET = "change-me-to-a-32-character-secret";
+
 const ENV_VARS: Record<string, string> = {
   DATABASE_URL: "file:./data/app.db",
-  BETTER_AUTH_SECRET: "change-me-to-a-32-character-secret",
+  BETTER_AUTH_SECRET: ENV_EXAMPLE_SECRET,
   BETTER_AUTH_URL: "http://localhost:3000",
 };
 
-const GITIGNORE_ENTRIES = ["*.db", "data/", "drizzle/"];
+const GITIGNORE_ENTRIES = ["*.db", "data/", "drizzle/", ".env"];
 
 const DATABASE_URL_FALLBACK = "file:./data/app.db";
 
@@ -1353,6 +1356,23 @@ function mergeNextConfig(raw: string): string {
   return `${raw.trimEnd()}\n`;
 }
 
+function envFileBody(secret: string): string {
+  return `${Object.entries({ ...ENV_VARS, BETTER_AUTH_SECRET: secret })
+    .map(([key, value]) => `${key}=${value}`)
+    .join("\n")}\n`;
+}
+
+function newAuthSecret(): string {
+  return randomBytes(32).toString("hex");
+}
+
+/** Write `.env` once so first `bun dev` has a real Better Auth secret. Never overwrite. */
+async function writeDotEnvIfMissing(targetDir: string): Promise<void> {
+  const dest = resolveSafeDest(targetDir, ".", ".env");
+  if (existsSync(dest)) return;
+  await writeFileEnsured(dest, envFileBody(newAuthSecret()));
+}
+
 function mergeEnvExample(raw: string): string {
   const lines = raw.split(/\r?\n/);
   const keys = new Set(
@@ -1598,14 +1618,8 @@ export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<Appl
 
   await mergeTextFile(targetDir, "package.json", mergePackageJson);
   await mergeOrCreate(targetDir, "next.config.mjs", nextConfigSource(), mergeNextConfig);
-  await mergeOrCreate(
-    targetDir,
-    ".env.example",
-    `${Object.entries(ENV_VARS)
-      .map(([k, v]) => `${k}=${v}`)
-      .join("\n")}\n`,
-    mergeEnvExample,
-  );
+  await mergeOrCreate(targetDir, ".env.example", envFileBody(ENV_EXAMPLE_SECRET), mergeEnvExample);
+  await writeDotEnvIfMissing(targetDir);
   await mergeOrCreate(targetDir, ".gitignore", `${GITIGNORE_ENTRIES.join("\n")}\n`, mergeGitignore);
 
   return { written, skipped };

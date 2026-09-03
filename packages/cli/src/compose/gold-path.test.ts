@@ -492,15 +492,40 @@ describe("applyGoldPath", () => {
     expect(nextConfig).toContain('serverExternalPackages: ["better-sqlite3"]');
     expect(nextConfig).toContain("reactStrictMode: true");
 
-    const env = readFileSync(join(cwd, ".env.example"), "utf8");
+    const envExample = readFileSync(join(cwd, ".env.example"), "utf8");
+    expect(envExample).toContain("DATABASE_URL=file:./data/app.db");
+    expect(envExample).toContain("BETTER_AUTH_SECRET=change-me-to-a-32-character-secret");
+    expect(envExample).toContain("BETTER_AUTH_URL=");
+
+    const env = readFileSync(join(cwd, ".env"), "utf8");
     expect(env).toContain("DATABASE_URL=file:./data/app.db");
-    expect(env).toContain("BETTER_AUTH_SECRET=");
     expect(env).toContain("BETTER_AUTH_URL=");
+    const secret = env.match(/^BETTER_AUTH_SECRET=(.+)$/m)?.[1] ?? "";
+    expect(secret.length).toBeGreaterThanOrEqual(32);
+    expect(secret).not.toBe("change-me-to-a-32-character-secret");
 
     const gitignore = readFileSync(join(cwd, ".gitignore"), "utf8");
     expect(gitignore).toContain("*.db");
     expect(gitignore).toContain("data/");
     expect(gitignore).toContain("drizzle/");
+    expect(gitignore).toContain(".env");
+  });
+
+  it("does not overwrite an existing .env on a second gold-path apply", async () => {
+    await applyGoldPath({
+      targetDir: cwd,
+      config: DEFAULT_CONFIG,
+      generatedFiles: [],
+      overwrite: true,
+    });
+    const first = readFileSync(join(cwd, ".env"), "utf8");
+    await applyGoldPath({
+      targetDir: cwd,
+      config: DEFAULT_CONFIG,
+      generatedFiles: [],
+      overwrite: true,
+    });
+    expect(readFileSync(join(cwd, ".env"), "utf8")).toBe(first);
   });
 
   it("does not patch a home page that was not generated this run", async () => {
