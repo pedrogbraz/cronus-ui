@@ -299,6 +299,15 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-09-03",
+    version: "v0.7.0",
+    status: "Released",
+    title: "create-cronus-app defaults to saas",
+    summary:
+      "Omitting --template, the prompt, and --yes without --template scaffold the gold path. --template default remains the single-page starter.",
+    items: ["breaking: create-cronus-app DEFAULT_TEMPLATE is saas (ADR 0007)"],
+  },
+  {
+    date: "2026-09-03",
     version: "v0.6.22",
     status: "Released",
     title: "gold-path nav drops catalog demo routes",

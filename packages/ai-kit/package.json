@@ -1,6 +1,6 @@
 {
   "name": "@cronus-ui/ai-kit",
-  "version": "0.6.22",
+  "version": "0.7.0",
   "description": "The Cronus UI AI Kit — an engineering doctrine, skills, and per-assistant config, scaffolded into your project.",
   "type": "module",
   "license": "MIT",
