@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.22] — 2026-09-03
+
 ### Fixed
 
 - **Gold-path nav drops catalog demo routes.** saas/admin sidebar is Items and
@@ -668,7 +670,8 @@ as installable packages and as copy-paste registry items you own.
 - Added per-entry gzipped bundle budgets for the published `@cronus-ui/ui` so a
   dependency or code-size regression is caught at build time.
 
-[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.21...HEAD
+[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.22...HEAD
+[0.6.22]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.21...v0.6.22
 [0.6.21]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.20...v0.6.21
 [0.6.20]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.19...v0.6.20
 [0.6.19]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.18...v0.6.19

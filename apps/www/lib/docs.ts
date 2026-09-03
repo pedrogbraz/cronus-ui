@@ -298,6 +298,15 @@ export const ACCESSIBILITY_CHECKS = [
 
 export const CHANGELOG_ENTRIES = [
   {
+    date: "2026-09-03",
+    version: "v0.6.22",
+    status: "Released",
+    title: "gold-path nav drops catalog demo routes",
+    summary:
+      "saas/admin sidebar is Items and Team plus add-page --nav entries. Catalog demo pages stay on disk, not in the nav.",
+    items: ["saas/admin nav is Items and Team; upgrade and add-page re-strip catalog demo routes"],
+  },
+  {
     date: "2026-09-02",
     version: "v0.6.21",
     status: "Released",
