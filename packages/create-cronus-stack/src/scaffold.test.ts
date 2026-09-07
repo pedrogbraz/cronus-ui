@@ -63,6 +63,8 @@ describe("scaffoldStack", () => {
     const schema = readFileSync(join(targetDir, "src", "db", "schema.ts"), "utf8");
     expect(schema).toContain("export const organization");
     expect(schema).toContain("activeOrganizationId");
+    expect(schema).toContain('issuer: text("issuer")');
+    expect(schema).not.toContain('issuer: text("issuer").notNull()');
     expect(readFileSync(join(targetDir, "src", "lib", "auth.ts"), "utf8")).toContain(
       "sendInvitationEmail",
     );
@@ -433,6 +435,8 @@ describe("scaffoldStack", () => {
 
     const schema = readFileSync(join(targetDir, "src", "db", "schema.ts"), "utf8");
     expect(schema).toContain("drizzle-orm/pg-core");
+    expect(schema).toContain('issuer: text("issuer")');
+    expect(schema).not.toContain('issuer: text("issuer").notNull()');
 
     const drizzleConfig = readFileSync(join(targetDir, "drizzle.config.ts"), "utf8");
     expect(drizzleConfig).toContain('dialect: "postgresql"');

@@ -7,6 +7,7 @@ import {
   applyGoldPath,
   isGoldPathTemplate,
   patchChromeSource,
+  patchGoldPathAccountIssuer,
   patchGoldPathAppNav,
   patchGoldPathAuthSplit,
   patchGoldPathChromeNotifications,
@@ -334,6 +335,20 @@ describe("patchGoldPathAuthSplit", () => {
   });
 });
 
+describe("patchGoldPathAccountIssuer", () => {
+  it("drops .notNull() on sqlite and mysql issuer columns", () => {
+    const sqlite = `  issuer: text("issuer").notNull(),`;
+    expect(patchGoldPathAccountIssuer(sqlite)).toBe(`  issuer: text("issuer"),`);
+    const mysql = `  issuer: varchar("issuer", { length: 255 }).notNull(),`;
+    expect(patchGoldPathAccountIssuer(mysql)).toBe(`  issuer: varchar("issuer", { length: 255 }),`);
+  });
+
+  it("is a no-op when issuer is already nullable", () => {
+    expect(patchGoldPathAccountIssuer(`  issuer: text("issuer"),`)).toBeUndefined();
+    expect(patchGoldPathAccountIssuer("export const account = sqliteTable(")).toBeUndefined();
+  });
+});
+
 describe("patchGoldPathChromeNotifications", () => {
   it("removes the dead Notifications button", () => {
     const source = `import { Bell, Hexagon } from "lucide-react";
@@ -507,7 +522,8 @@ describe("applyGoldPath", () => {
     expect(schema).toContain("export const invitation");
     expect(schema).toContain("workspaceId");
     expect(schema).toContain("activeOrganizationId");
-    expect(schema).toContain("issuer:");
+    expect(schema).toContain('issuer: text("issuer")');
+    expect(schema).not.toContain('issuer: text("issuer").notNull()');
 
     const adapter = readFileSync(join(cwd, "lib", "auth-adapter.ts"), "utf8");
     expect(adapter).toContain("authClient");
@@ -756,6 +772,32 @@ describe("applyGoldPath", () => {
     expect(readFileSync(join(cwd, "components", "members-view.tsx"), "utf8")).toContain(
       'data-slot="members-panel"',
     );
+  });
+
+  it("drops account.issuer .notNull() on an existing schema without rewriting it", async () => {
+    mkdirSync(join(cwd, "db"), { recursive: true });
+    writeFileSync(
+      join(cwd, "db", "schema.ts"),
+      `// KEEP
+export const account = sqliteTable("account", {
+  issuer: text("issuer").notNull(),
+});
+`,
+    );
+
+    const result = await applyGoldPath({
+      targetDir: cwd,
+      config: DEFAULT_CONFIG,
+      generatedFiles: [],
+      overwrite: false,
+    });
+
+    const schema = readFileSync(join(cwd, "db", "schema.ts"), "utf8");
+    expect(schema).toContain("// KEEP");
+    expect(schema).toContain('issuer: text("issuer"),');
+    expect(schema).not.toContain('issuer: text("issuer").notNull()');
+    expect(result.written).toContain("db/schema.ts");
+    expect(result.skipped).not.toContain("db/schema.ts");
   });
 });
 

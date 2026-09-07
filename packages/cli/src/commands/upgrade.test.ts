@@ -932,6 +932,29 @@ export default function HomePage() {
     expect(readFileSync(join(cwd, "components", "session-user.tsx"), "utf8")).toContain("signOut");
   });
 
+  it("upgrade --all on saas drops account.issuer .notNull() without rewriting schema", async () => {
+    await composeApp({
+      targetDir: cwd,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+    const schemaPath = join(cwd, "db", "schema.ts");
+    writeFileSync(
+      schemaPath,
+      `// KEEP COMMENT
+${readFileSync(schemaPath, "utf8").replace(
+  'issuer: text("issuer")',
+  'issuer: text("issuer").notNull()',
+)}`,
+    );
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, yes: true });
+    const after = readFileSync(schemaPath, "utf8");
+    expect(after).toContain("// KEEP COMMENT");
+    expect(after).toContain('issuer: text("issuer")');
+    expect(after).not.toContain('issuer: text("issuer").notNull()');
+  });
+
   it("upgrade --all on saas does not overwrite lib/auth.ts", async () => {
     await composeApp({
       targetDir: cwd,

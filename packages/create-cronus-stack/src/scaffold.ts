@@ -702,7 +702,7 @@ export const session = sqliteTable("session", {
 
 export const account = sqliteTable("account", {
   id: text("id").primaryKey(),
-  issuer: text("issuer").notNull(),
+  issuer: text("issuer"),
   accountId: text("account_id").notNull(),
   providerId: text("provider_id").notNull(),
   userId: text("user_id")
@@ -794,7 +794,7 @@ export const session = pgTable("session", {
 
 export const account = pgTable("account", {
   id: text("id").primaryKey(),
-  issuer: text("issuer").notNull(),
+  issuer: text("issuer"),
   accountId: text("account_id").notNull(),
   providerId: text("provider_id").notNull(),
   userId: text("user_id")
@@ -886,7 +886,7 @@ export const session = mysqlTable("session", {
 
 export const account = mysqlTable("account", {
   id: varchar("id", { length: 36 }).primaryKey(),
-  issuer: varchar("issuer", { length: 255 }).notNull(),
+  issuer: varchar("issuer", { length: 255 }),
   accountId: varchar("account_id", { length: 255 }).notNull(),
   providerId: varchar("provider_id", { length: 255 }).notNull(),
   userId: varchar("user_id", { length: 36 })

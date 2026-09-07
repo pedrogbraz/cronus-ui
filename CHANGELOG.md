@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Gold-path sqlite schema matches Better Auth 1.7.3.** `account.issuer` is
+  nullable — Better Auth never writes it, and 1.7.3 refuses a required column.
+  `create-cronus-stack` sqlite/postgres/mysql schemas match. `upgrade --all`
+  and re-compose drop `.notNull()` on existing schemas without overwriting
+  the rest of the file.
+
 ## [0.7.1] — 2026-09-06
 
 ### Fixed

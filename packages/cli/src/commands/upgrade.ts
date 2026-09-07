@@ -11,7 +11,9 @@ import {
   goldPatchHomePage,
   goldPatchShellLayout,
   goldPatchTeamPage,
+  goldPathLayout,
   isGoldPathTemplate,
+  patchGoldPathAccountIssuer,
   patchGoldPathAuthSplit,
   reemitGoldPathOwned,
 } from "../compose/gold-path.js";
@@ -679,6 +681,13 @@ async function repatchGoldPathSurfaces(
 ): Promise<void> {
   if (!Object.keys(composed).some((key) => isGoldPathTemplate(key))) return;
   const authImport = `${config.aliases.lib}/auth`;
+  const layout = goldPathLayout(config);
+  await repatchGoldPathFile(
+    cwd,
+    `${layout.dbDir}/schema.ts`,
+    patchGoldPathAccountIssuer,
+    "account.issuer nullable",
+  );
   await repatchGoldPathFile(
     cwd,
     join(config.paths.blocks, "app-shell-chrome.tsx"),

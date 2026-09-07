@@ -242,7 +242,7 @@ export const session = sqliteTable("session", {
 
 export const account = sqliteTable("account", {
   id: text("id").primaryKey(),
-  issuer: text("issuer").notNull(),
+  issuer: text("issuer"),
   accountId: text("account_id").notNull(),
   providerId: text("provider_id").notNull(),
   userId: text("user_id")
@@ -1242,6 +1242,18 @@ export function patchGoldPathAuthSplit(source: string): string | undefined {
   return out;
 }
 
+/**
+ * Drop `.notNull()` on `account.issuer`. Better Auth 1.7.3 never writes the
+ * column and refuses a required one (`SCHEMA_MISMATCH`). Idempotent. Does not
+ * rewrite the rest of a user-owned schema — used by compose and `upgrade --all`
+ * so 0.7.1 apps pick up the fix without losing hand edits.
+ */
+export function patchGoldPathAccountIssuer(source: string): string | undefined {
+  const next = source.replace(/(issuer:\s*(?:text|varchar)\([^)]*\))\s*\.notNull\(\)/g, "$1");
+  if (next === source) return undefined;
+  return next;
+}
+
 /** Remove the no-op Notifications Bell from gold-path chrome. Idempotent. */
 export function patchGoldPathChromeNotifications(source: string): string | undefined {
   if (!source.includes('aria-label="Notifications"')) return undefined;
@@ -1702,6 +1714,19 @@ export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<Appl
       written,
       skipped,
     );
+  }
+
+  const schemaRel = `${layout.dbDir}/schema.ts`;
+  const schemaDest = resolveSafeDest(targetDir, ".", schemaRel);
+  if (existsSync(schemaDest)) {
+    const current = await readFile(schemaDest, "utf8");
+    const patched = patchGoldPathAccountIssuer(current);
+    if (patched !== undefined && patched !== current) {
+      await writeFileEnsured(schemaDest, patched);
+      if (!written.includes(schemaRel)) written.push(schemaRel);
+      const skipAt = skipped.indexOf(schemaRel);
+      if (skipAt >= 0) skipped.splice(skipAt, 1);
+    }
   }
 
   const chromeDest = resolveSafeDest(targetDir, ".", chromeRel);
