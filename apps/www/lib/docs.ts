@@ -298,6 +298,15 @@ export const ACCESSIBILITY_CHECKS = [
 
 export const CHANGELOG_ENTRIES = [
   {
+    date: "2026-09-06",
+    version: "v0.7.1",
+    status: "Released",
+    title: "gold-path auth and chrome are honest",
+    summary:
+      "saas/admin split login/signup drop Dana Reyes / Northwind. The shell drops the no-op Notifications bell. Docs describe Items and Team as the live nav.",
+    items: ["gold-path strips the Northwind testimonial and the dead Notifications bell"],
+  },
+  {
     date: "2026-09-03",
     version: "v0.7.0",
     status: "Released",
