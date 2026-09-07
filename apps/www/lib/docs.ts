@@ -298,6 +298,15 @@ export const ACCESSIBILITY_CHECKS = [
 
 export const CHANGELOG_ENTRIES = [
   {
+    date: "2026-09-07",
+    version: "v0.7.2",
+    status: "Released",
+    title: "gold-path sqlite schema matches Better Auth 1.7.3",
+    summary:
+      "account.issuer is nullable — Better Auth never writes it, and 1.7.3 refuses a required column. upgrade --all and re-compose patch existing schemas without overwriting the rest of the file.",
+    items: ["account.issuer is nullable; upgrade --all patches existing gold-path schemas"],
+  },
+  {
     date: "2026-09-06",
     version: "v0.7.1",
     status: "Released",
