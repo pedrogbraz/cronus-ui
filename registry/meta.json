@@ -4651,7 +4651,7 @@
   "apps": {
     "admin": {
       "title": "Admin",
-      "description": "An admin console: split login/signup, password reset, an (app) shell, overview, users, analytics, a sprint board and an audit trail — composed from validated blocks.",
+      "description": "Authenticated gold path: split login/signup, password reset, Items in a sidebar shell. Catalog demo pages (users, analytics, board, audit) ship as files, not in the nav — composed from validated blocks.",
       "pages": 9,
       "style": "operational",
       "palette": "midnight",
@@ -4855,7 +4855,7 @@
     },
     "saas": {
       "title": "SaaS",
-      "description": "A complete multi-page SaaS app: split login/signup, password reset, a sidebar-shell dashboard, analytics, team, billing and settings, plus welcome, setup wizard and checklist — all from validated blocks.",
+      "description": "Authenticated gold path: split login/signup, password reset, Items and Team in a sidebar shell. Catalog demo pages (analytics, billing, settings, welcome, setup wizard, checklist) ship as files, not in the nav — all from validated blocks.",
       "pages": 12,
       "style": "operational",
       "palette": "aurora",
