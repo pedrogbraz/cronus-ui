@@ -702,6 +702,8 @@ describe.skipIf(!HAS_REGISTRY)("upgrade — gold-path chrome", () => {
     expect(chrome).not.toContain("WORKSPACES");
     expect(chrome).not.toContain("WorkspaceSwitcher");
     expect(chrome).not.toContain("InviteDialog");
+    expect(chrome).not.toContain("Notifications");
+    expect(chrome).not.toContain("<Bell");
     expect(chrome).not.toContain('href: "/analytics"');
     expect(chrome).not.toContain('href: "/billing"');
     expect(chrome).not.toContain('href: "/settings"');

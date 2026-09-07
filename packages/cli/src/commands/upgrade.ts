@@ -6,11 +6,13 @@ import { join } from "node:path";
 import { createInterface } from "node:readline/promises";
 import pc from "picocolors";
 import {
+  GOLD_PATH_AUTH_SPLIT_FILES,
   goldPatchAppShellChrome,
   goldPatchHomePage,
   goldPatchShellLayout,
   goldPatchTeamPage,
   isGoldPathTemplate,
+  patchGoldPathAuthSplit,
   reemitGoldPathOwned,
 } from "../compose/gold-path.js";
 import { buildComposePlan, type ComposeChoiceInput } from "../compose/plan.js";
@@ -681,8 +683,16 @@ async function repatchGoldPathSurfaces(
     cwd,
     join(config.paths.blocks, "app-shell-chrome.tsx"),
     goldPatchAppShellChrome,
-    "WorkspaceMenu / InviteMember / SessionUser / nav",
+    "WorkspaceMenu / InviteMember / SessionUser / nav / notifications",
   );
+  for (const file of GOLD_PATH_AUTH_SPLIT_FILES) {
+    await repatchGoldPathFile(
+      cwd,
+      join(config.paths.blocks, file),
+      patchGoldPathAuthSplit,
+      "auth split without Dana Reyes",
+    );
+  }
   for (const rel of goldPathSurfaceRels(cwd, composed)) {
     if (/(^|\/)\(shell\)\/layout\.tsx$/.test(rel)) {
       await repatchGoldPathFile(

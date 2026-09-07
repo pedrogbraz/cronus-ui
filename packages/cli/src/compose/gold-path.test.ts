@@ -8,6 +8,8 @@ import {
   isGoldPathTemplate,
   patchChromeSource,
   patchGoldPathAppNav,
+  patchGoldPathAuthSplit,
+  patchGoldPathChromeNotifications,
   patchHomePageSource,
   patchShellLayoutSource,
   patchTeamPageSource,
@@ -87,6 +89,7 @@ import {
   WorkspaceSwitcher,
 } from "@cronus-ui/ui";
 import { TEAM, USER } from "@/lib/demo-saas";
+import { Bell } from "lucide-react";
 import { type ReactNode, useState } from "react";
 
 const OWNER = TEAM.find((m) => m.email === USER.email);
@@ -120,6 +123,9 @@ export function AppShellChromeBlock({ children }: { children: ReactNode }) {
           </Button>
         }
       />
+      <Button variant="ghost" size="icon-sm" aria-label="Notifications">
+        <Bell className="size-4" aria-hidden="true" />
+      </Button>
       <SidebarFooter>
         <div className="flex items-center gap-2 rounded-lg px-2 py-1.5">
           <Avatar className="size-8">
@@ -169,6 +175,8 @@ describe("patchChromeSource", () => {
     expect(out).not.toContain('href: "/billing"');
     expect(out).not.toContain('href: "/settings"');
     expect(out).not.toContain('href: "/checklist"');
+    expect(out).not.toContain("Notifications");
+    expect(out).not.toContain("<Bell");
   });
 
   it("is idempotent when WorkspaceMenu is already wired", () => {
@@ -264,6 +272,80 @@ describe("patchGoldPathAppNav", () => {
     expect(patchGoldPathAppNav("export function AppShellChromeBlock() { return null; }")).toBe(
       undefined,
     );
+  });
+});
+
+const LOGIN_SPLIT = `"use client";
+
+import { Avatar, AvatarFallback, Button, Input, Label } from "@cronus-ui/ui";
+import { ChartColumnIncreasing, Quote } from "lucide-react";
+
+export function LoginSplitBlock() {
+  return (
+    <div className="flex w-full items-center justify-center py-4">
+      <div className="grid w-full max-w-4xl overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-lg lg:grid-cols-2">
+        <div className="flex flex-col justify-center gap-6 p-8 sm:p-10 lg:order-2">
+          <p>Sign in to your Cronus workspace.</p>
+          <Button>Sign in</Button>
+        </div>
+
+        {/* Brand panel */}
+        <div className="relative overflow-hidden bg-gradient-primary-strong p-8 sm:p-10 lg:order-1">
+          <div className="relative flex h-full flex-col justify-between gap-12">
+            <span>Cronus</span>
+            <figure className="flex flex-col gap-5">
+              <Quote className="size-7" aria-hidden="true" />
+              <blockquote>Quote</blockquote>
+              <figcaption>
+                <Avatar>
+                  <AvatarFallback>DR</AvatarFallback>
+                </Avatar>
+                <span className="text-sm font-medium text-primary-foreground">Dana Reyes</span>
+                <span>Head of Growth, Northwind Labs</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+`;
+
+describe("patchGoldPathAuthSplit", () => {
+  it("drops Dana Reyes and the brand column, keeps the form", () => {
+    const out = patchGoldPathAuthSplit(LOGIN_SPLIT);
+    expect(out).toBeDefined();
+    expect(out).toContain("Sign in to your Cronus workspace.");
+    expect(out).toContain("max-w-md");
+    expect(out).not.toContain("Dana Reyes");
+    expect(out).not.toContain("Northwind Labs");
+    expect(out).not.toContain("lg:grid-cols-2");
+    expect(out).not.toContain("Brand panel");
+    expect(out).not.toContain("Quote");
+    expect(out).not.toContain("ChartColumnIncreasing");
+    expect(out).not.toContain("Avatar");
+  });
+
+  it("is idempotent once the quote is gone", () => {
+    const once = patchGoldPathAuthSplit(LOGIN_SPLIT);
+    expect(once).toBeDefined();
+    expect(patchGoldPathAuthSplit(once as string)).toBe(once);
+  });
+});
+
+describe("patchGoldPathChromeNotifications", () => {
+  it("removes the dead Notifications button", () => {
+    const source = `import { Bell, Hexagon } from "lucide-react";
+        <Button variant="ghost" size="icon-sm" aria-label="Notifications">
+          <Bell className="size-4" aria-hidden="true" />
+        </Button>
+        <Hexagon className="size-4" />`;
+    const out = patchGoldPathChromeNotifications(source);
+    expect(out).not.toContain("Notifications");
+    expect(out).not.toContain("<Bell");
+    expect(out).toContain("<Hexagon");
+    expect(out).toContain('import { Hexagon } from "lucide-react";');
   });
 });
 
@@ -545,6 +627,8 @@ describe("applyGoldPath", () => {
     expect(chrome).not.toContain('href: "/billing"');
     expect(chrome).not.toContain('href: "/settings"');
     expect(chrome).not.toContain('href: "/checklist"');
+    expect(chrome).not.toContain("Notifications");
+    expect(chrome).not.toContain("<Bell");
 
     const home = readFileSync(join(cwd, "app", "(shell)", "page.tsx"), "utf8");
     expect(home).toContain("ItemsPanel");

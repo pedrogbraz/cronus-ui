@@ -7,9 +7,9 @@ npx create-cronus-app my-app --template saas
 ```
 
 That is the gold path: a composed multi-page SaaS product — split login/signup,
-sidebar-shell dashboard, analytics, team, billing, and settings — built from
-validated registry blocks (the generator's golden rule: pages only import and
-stack installed blocks).
+Items and Team in a sidebar shell — built from validated registry blocks (the
+generator's golden rule: pages only import and stack installed blocks). Catalog
+demo pages (analytics, billing, settings) ship as files, not in the nav.
 
 You get Next.js 16 (App Router) + React 19 + Tailwind v4 with
 [`@cronus-ui/ui`](https://www.npmjs.com/package/@cronus-ui/ui), `@cronus-ui/tokens`,
@@ -122,7 +122,7 @@ my-app/
 │  ├─ layout.tsx            # <CronusUIProvider> + anti-flash <CronusThemeScript>
 │  ├─ (bare)/login          # split-variant sign-in
 │  ├─ (bare)/signup
-│  └─ (shell)/              # dashboard (/), analytics, team, billing, settings
+│  └─ (shell)/              # Items (/) and Team in the nav; catalog demo pages off-nav
 ├─ components/blocks/       # installed registry blocks; pages only stack them
 ├─ cronus-ui.json            # so `npx cronus-ui add` / add-page / compose work here
 ├─ next.config.mjs

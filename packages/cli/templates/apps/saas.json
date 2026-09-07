@@ -4,7 +4,7 @@
   "planVersion": 1,
   "manifest": {
     "title": "SaaS",
-    "description": "A complete multi-page SaaS app: split login/signup, password reset, a sidebar-shell dashboard, analytics, team, billing and settings, plus welcome, setup wizard and checklist — all from validated blocks.",
+    "description": "Authenticated gold path: split login/signup, password reset, Items and Team in a sidebar shell. Catalog demo pages (analytics, billing, settings, welcome, setup wizard, checklist) ship as files, not in the nav — all from validated blocks.",
     "chrome": {
       "shell": { "block": "app-shell-chrome" },
       "bare": {}

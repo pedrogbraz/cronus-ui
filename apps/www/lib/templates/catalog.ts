@@ -48,7 +48,7 @@ export const TEMPLATE_CATALOG: readonly TemplateCatalogEntry[] = [
     name: "SaaS",
     tagline: "Recommended",
     description:
-      "A full product: split auth plus forgot-password, a sidebar app shell, dashboard, analytics, team, billing, settings, and an activation loop (welcome, setup wizard, checklist) — composed from validated blocks, ready to re-theme.",
+      "Gold path: split auth plus forgot-password, Items and Team in a sidebar shell. Catalog demo pages (analytics, billing, settings, welcome, setup wizard, checklist) ship as files, not in the nav — composed from validated blocks, ready to re-theme.",
     command: cmd("saas"),
     recommended: true,
     kind: "product",
@@ -58,8 +58,8 @@ export const TEMPLATE_CATALOG: readonly TemplateCatalogEntry[] = [
     blocks: ["dashboard", "stats"].map((block) => ({ block })),
     inside: [
       "Split login/signup and forgot-password plus an (app) shell with sidebar nav",
-      "Items, analytics, team, billing, and settings routes",
-      "Activation loop: welcome, setup wizard, and get-started checklist",
+      "Live nav: Items and Team. Analytics, billing, and settings stay as files, off the nav",
+      "Catalog activation files: welcome, setup wizard, and get-started checklist",
       "Aurora theme by default — `theme set` re-skins the tree",
       "Grow with `cronus-ui add-page`; upgrade keeps local edits",
     ],
@@ -69,7 +69,7 @@ export const TEMPLATE_CATALOG: readonly TemplateCatalogEntry[] = [
     name: "Admin",
     tagline: "Admin console",
     description:
-      "An admin console: split login/signup, password reset, an (app) shell, overview, users, analytics, a sprint board and an audit trail — composed from validated blocks.",
+      "Gold path: split login/signup, password reset, Items in a sidebar shell. Catalog demo pages (users, analytics, board, audit) ship as files, not in the nav — composed from validated blocks.",
     command: cmd("admin"),
     kind: "product",
     theme: "midnight",
@@ -78,7 +78,7 @@ export const TEMPLATE_CATALOG: readonly TemplateCatalogEntry[] = [
     blocks: [{ block: "dashboard", variant: "admin-overview" }],
     inside: [
       "Split login/signup and forgot-password plus an (app) shell with sidebar nav",
-      "Items, users, analytics, sprint board, and audit log",
+      "Live nav: Items. Users, analytics, board, and audit stay as files, off the nav",
       "Admin-overview dashboard and engagement analytics variants",
       "Midnight theme, dark mode",
       "Grow with `cronus-ui add-page`; upgrade keeps local edits",

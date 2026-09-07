@@ -20,13 +20,15 @@
  */
 
 import { existsSync } from "node:fs";
-import { rm } from "node:fs/promises";
+import { readFile, rm } from "node:fs/promises";
 import {
+  GOLD_PATH_AUTH_SPLIT_FILES,
   goldPatchAppShellChrome,
   goldPatchHomePage,
   goldPatchShellLayout,
   goldPatchTeamPage,
   isGoldPathTemplate,
+  patchGoldPathAuthSplit,
 } from "../compose/gold-path.js";
 import { type AppManifest, type BlockRef, blockRefParts } from "../compose/manifest.js";
 import {
@@ -422,6 +424,19 @@ export async function addPage(options: AddPageOptions): Promise<AddPageResult> {
         if (patched !== undefined) content = patched;
       }
       await writeFileEnsured(dest, content);
+      if (!generatedFiles.includes(rel)) generatedFiles.push(rel);
+    }
+  }
+
+  if (isGoldPathTemplate(appName)) {
+    for (const file of GOLD_PATH_AUTH_SPLIT_FILES) {
+      const rel = `${config.paths.blocks}/${file}`;
+      const dest = resolveSafeDest(targetDir, ".", rel);
+      if (!existsSync(dest)) continue;
+      const current = await readFile(dest, "utf8");
+      const patched = patchGoldPathAuthSplit(current);
+      if (patched === undefined || patched === current) continue;
+      await writeFileEnsured(dest, patched);
       if (!generatedFiles.includes(rel)) generatedFiles.push(rel);
     }
   }

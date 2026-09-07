@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Gold-path auth and chrome are honest.** saas/admin split login/signup/forgot-password
+  drop the Dana Reyes / Northwind testimonial column. The shell no longer
+  ships a no-op Notifications bell. Docs describe Items and Team as the live
+  nav; analytics/billing/settings stay catalog files, off the menu.
+
 ## [0.7.0] — 2026-09-03
 
 ### Changed

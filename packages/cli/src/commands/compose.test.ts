@@ -169,6 +169,12 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(loginSplit).toContain("cronus-invitation");
     expect(loginSplit).toContain("Join the workspace");
     expect(loginSplit).toContain("Sign in to your Cronus workspace.");
+    expect(loginSplit).not.toContain("Dana Reyes");
+    expect(loginSplit).not.toContain("Northwind Labs");
+    expect(loginSplit).not.toContain("lg:grid-cols-2");
+    const signupNoQuote = readFileSync(join(cwd, "components/blocks/signup-split.tsx"), "utf8");
+    expect(signupNoQuote).not.toContain("Dana Reyes");
+    expect(signupNoQuote).not.toContain("Northwind Labs");
 
     expect(existsSync(join(cwd, "db/schema.ts"))).toBe(true);
     expect(existsSync(join(cwd, "lib/auth.ts"))).toBe(true);
@@ -210,6 +216,8 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(chrome).not.toContain('href: "/billing"');
     expect(chrome).not.toContain('href: "/settings"');
     expect(chrome).not.toContain('href: "/checklist"');
+    expect(chrome).not.toContain("Notifications");
+    expect(chrome).not.toContain("<Bell");
     expect(existsSync(join(cwd, "app/(shell)/analytics/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(shell)/billing/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(shell)/settings/page.tsx"))).toBe(true);

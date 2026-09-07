@@ -26,13 +26,21 @@ const GOLD_MEMBERS_IMPORT = "@/components/members-panel";
 const GOLD_ITEMS_IMPORT = "@/components/items-panel";
 
 /**
- * Re-apply WorkspaceMenu / InviteMember / SessionUser onto catalog app-shell-chrome
- * and drop catalog demo routes from APP_NAV. Idempotent. Used by add-page --nav
- * and upgrade so neither restores Mara nor Analytics/Billing/Settings in the nav.
+ * Re-apply WorkspaceMenu / InviteMember / SessionUser onto catalog app-shell-chrome,
+ * drop catalog demo routes from APP_NAV, and remove the dead Notifications button.
+ * Idempotent. Used by add-page --nav and upgrade so neither restores Mara,
+ * Analytics/Billing/Settings in the nav, nor a no-op Bell.
  */
 export function goldPatchAppShellChrome(source: string): string | undefined {
   return patchChromeSource(source, GOLD_WORKSPACE_IMPORT, GOLD_INVITE_IMPORT, GOLD_SESSION_IMPORT);
 }
+
+/** Installed split-auth copies compose writes for saas/admin. */
+export const GOLD_PATH_AUTH_SPLIT_FILES = [
+  "login-split.tsx",
+  "signup-split.tsx",
+  "forgot-password-split.tsx",
+] as const;
 
 /**
  * Re-apply the session gate onto a catalog shell layout.
@@ -1201,6 +1209,70 @@ function serializeGoldPathAppNav(links: Array<{ label: string; href: string }>):
 }
 
 /**
+ * Drop the catalog Dana Reyes / Northwind testimonial column from a split auth
+ * block. Idempotent. Returns undefined when the quote is missing and the file
+ * is not an already-stripped gold-path split.
+ */
+export function patchGoldPathAuthSplit(source: string): string | undefined {
+  const hasQuote = source.includes("Dana Reyes") || source.includes("Northwind Labs");
+  if (!hasQuote) {
+    if (source.includes("lg:grid-cols-2")) return undefined;
+    if (
+      source.includes("Sign in to your Cronus workspace") ||
+      source.includes("Create your Cronus workspace") ||
+      source.includes("Join the workspace") ||
+      source.includes("Check your inbox")
+    ) {
+      return source;
+    }
+    return undefined;
+  }
+
+  let out = source.replace(
+    /(?:\n\s*\{\/\* Brand panel \*\/\})?\s*<div className="relative overflow-hidden bg-gradient-primary-strong[\s\S]*?Head of Growth, Northwind Labs[\s\S]*?<\/figure>\s*<\/div>\s*<\/div>/,
+    "",
+  );
+  if (out === source) return undefined;
+  out = out.replace(" lg:grid-cols-2", "");
+  out = out.replace(" max-w-4xl", " max-w-md");
+  out = out.replace(" lg:order-2", "");
+  out = out.replace(" lg:order-1", "");
+  out = dropUnusedFromImport(out, "lucide-react");
+  out = dropUnusedFromImport(out, "@cronus-ui/ui");
+  return out;
+}
+
+/** Remove the no-op Notifications Bell from gold-path chrome. Idempotent. */
+export function patchGoldPathChromeNotifications(source: string): string | undefined {
+  if (!source.includes('aria-label="Notifications"')) return undefined;
+  let out = source.replace(
+    /\n\s*<Button variant="ghost" size="icon-sm" aria-label="Notifications">\s*<Bell className="size-4" aria-hidden="true" \/>\s*<\/Button>/,
+    "",
+  );
+  if (out === source) return undefined;
+  out = dropUnusedFromImport(out, "lucide-react");
+  return out;
+}
+
+function dropUnusedFromImport(source: string, fromModule: string): string {
+  const escaped = fromModule.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const re = new RegExp(`import \\{([^}]+)\\} from "${escaped}";\\n`);
+  const match = source.match(re);
+  if (!match || match.index === undefined) return source;
+  const names = (match[1] ?? "")
+    .split(",")
+    .map((part) => part.trim())
+    .filter(Boolean);
+  const rest = source.slice(0, match.index) + source.slice(match.index + match[0].length);
+  const kept = names.filter((name) => new RegExp(`(?:<|{)${name}\\b`).test(rest));
+  if (kept.length === names.length) return source;
+  if (kept.length === 0) {
+    return source.slice(0, match.index) + source.slice(match.index + match[0].length);
+  }
+  return `${source.slice(0, match.index)}import { ${kept.join(", ")} } from "${fromModule}";\n${source.slice(match.index + match[0].length)}`;
+}
+
+/**
  * Drop catalog demo hrefs from `const APP_NAV`. Idempotent. Keeps Items, Team,
  * and any user-added link. Returns undefined when the const is missing.
  */
@@ -1303,8 +1375,10 @@ export function patchChromeSource(
 
   const navPatched = patchGoldPathAppNav(out);
   if (navPatched !== undefined) out = navPatched;
+  const notifyPatched = patchGoldPathChromeNotifications(out);
+  if (notifyPatched !== undefined) out = notifyPatched;
   if (out !== source) return out;
-  if (widgetsTouched || navPatched !== undefined) return source;
+  if (widgetsTouched || (navPatched !== undefined && navPatched === source)) return source;
   return undefined;
 }
 
@@ -1643,6 +1717,18 @@ export async function applyGoldPath(options: ApplyGoldPathOptions): Promise<Appl
         await writeFileEnsured(snapDest, patched);
       }
     }
+  }
+
+  const blocksDir = posix(config.paths.blocks);
+  for (const file of GOLD_PATH_AUTH_SPLIT_FILES) {
+    const rel = `${blocksDir}/${file}`;
+    const dest = resolveSafeDest(targetDir, ".", rel);
+    if (!existsSync(dest)) continue;
+    const current = await readFile(dest, "utf8");
+    const patched = patchGoldPathAuthSplit(current);
+    if (patched === undefined || patched === current) continue;
+    await writeFileEnsured(dest, patched);
+    if (!written.includes(rel)) written.push(rel);
   }
 
   const layoutRel = shellLayoutRel(appDir, generatedFiles);

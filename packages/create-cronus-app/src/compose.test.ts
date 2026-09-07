@@ -272,7 +272,12 @@ describe.skipIf(!CAN_COMPOSE)("composeTemplate — integration (local repo regis
     expect(shellBlock).not.toContain('href: "/checklist"');
     expect(shellBlock).not.toContain('href: "/welcome"');
     expect(shellBlock).not.toContain('href: "/setup"');
+    expect(shellBlock).not.toContain("Notifications");
+    expect(shellBlock).not.toContain("<Bell");
     expect(shellBlock).toContain("Painel");
+    const loginSplit = readFileSync(join(cwd, "components/blocks/login-split.tsx"), "utf8");
+    expect(loginSplit).not.toContain("Dana Reyes");
+    expect(loginSplit).not.toContain("Northwind Labs");
     // It stays a client boundary (AppShell/Sidebar use hooks) for the RSC layout.
     expect(shellBlock.startsWith('"use client"')).toBe(true);
 
