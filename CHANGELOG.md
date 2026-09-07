@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **`settings--workspace`.** Account settings keep the profile card; the new
+  variant is workspace name, slug, language/timezone defaults, and a danger
+  zone. saas `/settings` stacks it. `add-page --blocks settings=workspace`.
+
 ## [0.7.2] — 2026-09-07
 
 ### Fixed

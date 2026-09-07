@@ -226,6 +226,7 @@ const SLUG_OVERRIDES: Record<string, TagPatch> = {
   footer: { intents: ["chrome", "marketing"] },
   "app-shell-chrome": { intents: ["chrome", "nav", "layout"] },
   dashboard: { style: "operational", intents: ["dashboard"] },
+  settings: { intents: ["settings", "account"] },
   analytics: { style: "operational", intents: ["dashboard", "data"] },
   checkout: { intents: ["commerce", "billing"] },
   cart: { intents: ["commerce"] },
@@ -263,6 +264,8 @@ const VARIANT_OVERRIDES: Record<string, TagPatch> = {
   "pricing::toggle": { style: "operational", motion: "snappy" },
   "pricing::usage": { style: "operational" },
   "logo-cloud::marquee": { motion: "smooth" },
+  "settings::account": { style: "operational", intents: ["settings", "account"] },
+  "settings::workspace": { style: "operational", intents: ["settings"] },
 };
 
 const APP_OVERRIDES: Record<string, TagPatch> = {

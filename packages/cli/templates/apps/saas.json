@@ -67,7 +67,7 @@
         "title": "Settings",
         "nav": "Settings",
         "chrome": "shell",
-        "blocks": ["settings", "account-security"]
+        "blocks": ["settings", { "block": "settings", "variant": "workspace" }, "account-security"]
       },
       {
         "route": "/welcome",

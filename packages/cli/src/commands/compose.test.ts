@@ -221,6 +221,9 @@ describe.skipIf(!HAS_REGISTRY)("composeApp — integration (local repo registry)
     expect(existsSync(join(cwd, "app/(shell)/analytics/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(shell)/billing/page.tsx"))).toBe(true);
     expect(existsSync(join(cwd, "app/(shell)/settings/page.tsx"))).toBe(true);
+    expect(readFileSync(join(cwd, "app/(shell)/settings/page.tsx"), "utf8")).toContain(
+      "SettingsWorkspaceBlock",
+    );
     expect(existsSync(join(cwd, "app/(shell)/checklist/page.tsx"))).toBe(true);
     expect(readFileSync(join(cwd, "components/session-user.tsx"), "utf8")).toContain(
       "authClient.signOut",

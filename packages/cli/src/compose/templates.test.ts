@@ -73,6 +73,12 @@ describe("compose templates", () => {
       nav: "Items",
       chrome: "shell",
     });
+    expect(saas.manifest.pages.find((page) => page.route === "/settings")).toMatchObject({
+      title: "Settings",
+      nav: "Settings",
+      chrome: "shell",
+      blocks: ["settings", { block: "settings", variant: "workspace" }, "account-security"],
+    });
     expect(saas.manifest.pages.find((page) => page.route === "/welcome")).toMatchObject({
       title: "Welcome",
       chrome: "shell",

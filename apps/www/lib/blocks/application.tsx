@@ -8,6 +8,7 @@ import {
   Button,
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -23,11 +24,24 @@ import {
   MetricDelta,
   MetricLabel,
   MetricValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
   Separator,
   Switch,
 } from "@cronus-ui/ui";
-import { KPIS, type Role, TEAM, USER } from "@cronus-ui/ui/demo-saas";
-import { Activity, DollarSign, MoreHorizontal, TrendingDown, UserMinus, Users } from "lucide-react";
+import { BRAND, KPIS, type Role, TEAM, USER } from "@cronus-ui/ui/demo-saas";
+import {
+  Activity,
+  DollarSign,
+  MoreHorizontal,
+  Trash2,
+  TrendingDown,
+  UserMinus,
+  Users,
+} from "lucide-react";
 import { useState } from "react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
 import { BlockViewBody } from "../../components/blocks/block-view-body";
@@ -553,6 +567,258 @@ export function SettingsBlock() {
 }`;
 
 /* ──────────────────────────────────────────────────────────────────────────
+ * 2b. Settings / workspace — name, slug, defaults, danger zone
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function SettingsWorkspaceBlock() {
+  return (
+    <section
+      aria-label="Workspace settings"
+      className="mx-auto flex w-full max-w-2xl flex-col gap-6"
+    >
+      <Card className="shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg">Workspace</CardTitle>
+          <CardDescription>Name, URL, and mark for this workspace.</CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="settings-workspace-name">Workspace name</Label>
+            <Input id="settings-workspace-name" defaultValue={BRAND} />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="settings-workspace-slug">URL</Label>
+            <div className="flex">
+              <span className="inline-flex items-center rounded-s-lg border border-e-0 border-border bg-surface-overlay px-3 text-sm text-fg-tertiary">
+                app.cronus.dev/
+              </span>
+              <Input
+                id="settings-workspace-slug"
+                className="rounded-s-none"
+                defaultValue={BRAND.toLowerCase()}
+                spellCheck={false}
+              />
+            </div>
+            <p className="text-sm text-fg-secondary">
+              Used in invite links and the workspace switcher.
+            </p>
+          </div>
+        </CardContent>
+        <CardFooter className="justify-end gap-3">
+          <Button variant="outline">Cancel</Button>
+          <Button variant="primary">Save changes</Button>
+        </CardFooter>
+      </Card>
+
+      <Card className="shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg">Defaults</CardTitle>
+          <CardDescription>Applied to everyone in this workspace.</CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4 sm:grid-cols-2">
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="settings-workspace-language">Language</Label>
+            <Select defaultValue="en">
+              <SelectTrigger id="settings-workspace-language" aria-label="Workspace language">
+                <SelectValue placeholder="Select a language" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="en">English</SelectItem>
+                <SelectItem value="pt">Português</SelectItem>
+                <SelectItem value="es">Español</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="settings-workspace-timezone">Timezone</Label>
+            <Select defaultValue="utc">
+              <SelectTrigger id="settings-workspace-timezone" aria-label="Workspace timezone">
+                <SelectValue placeholder="Select a timezone" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="utc">UTC</SelectItem>
+                <SelectItem value="sao-paulo">America/São Paulo</SelectItem>
+                <SelectItem value="new-york">America/New York</SelectItem>
+                <SelectItem value="london">Europe/London</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </CardContent>
+        <CardFooter className="justify-end gap-3">
+          <Button variant="outline">Cancel</Button>
+          <Button variant="primary">Save changes</Button>
+        </CardFooter>
+      </Card>
+
+      <Card className="border-error/30 shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg text-error-strong">Danger zone</CardTitle>
+          <CardDescription>These actions are permanent and cannot be undone.</CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-4">
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+              <span className="font-medium text-fg">Transfer ownership</span>
+              <p className="text-sm text-fg-secondary">
+                Hand this workspace to another owner. You become an admin.
+              </p>
+            </div>
+            <Button variant="outline">Transfer</Button>
+          </div>
+          <Separator />
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+              <span className="font-medium text-fg">Delete this workspace</span>
+              <p className="text-sm text-fg-secondary">
+                Removes members, items, and billing history for good.
+              </p>
+            </div>
+            <Button variant="destructive">
+              <Trash2 className="size-4" aria-hidden="true" />
+              Delete workspace
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </section>
+  );
+}
+
+const settingsWorkspaceCode = `"use client";
+
+import {
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Input,
+  Label,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Separator,
+} from "@cronus-ui/ui";
+import { BRAND } from "../lib/demo-saas.js";
+import { Trash2 } from "lucide-react";
+
+export function SettingsWorkspaceBlock() {
+  return (
+    <section
+      aria-label="Workspace settings"
+      className="mx-auto flex w-full max-w-2xl flex-col gap-6"
+    >
+      <Card className="shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg">Workspace</CardTitle>
+          <CardDescription>Name, URL, and mark for this workspace.</CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="settings-workspace-name">Workspace name</Label>
+            <Input id="settings-workspace-name" defaultValue={BRAND} />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="settings-workspace-slug">URL</Label>
+            <div className="flex">
+              <span className="inline-flex items-center rounded-s-lg border border-e-0 border-border bg-surface-overlay px-3 text-sm text-fg-tertiary">
+                app.cronus.dev/
+              </span>
+              <Input
+                id="settings-workspace-slug"
+                className="rounded-s-none"
+                defaultValue={BRAND.toLowerCase()}
+                spellCheck={false}
+              />
+            </div>
+            <p className="text-sm text-fg-secondary">Used in invite links and the workspace switcher.</p>
+          </div>
+        </CardContent>
+        <CardFooter className="justify-end gap-3">
+          <Button variant="outline">Cancel</Button>
+          <Button variant="primary">Save changes</Button>
+        </CardFooter>
+      </Card>
+
+      <Card className="shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg">Defaults</CardTitle>
+          <CardDescription>Applied to everyone in this workspace.</CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4 sm:grid-cols-2">
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="settings-workspace-language">Language</Label>
+            <Select defaultValue="en">
+              <SelectTrigger id="settings-workspace-language" aria-label="Workspace language">
+                <SelectValue placeholder="Select a language" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="en">English</SelectItem>
+                <SelectItem value="pt">Português</SelectItem>
+                <SelectItem value="es">Español</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="settings-workspace-timezone">Timezone</Label>
+            <Select defaultValue="utc">
+              <SelectTrigger id="settings-workspace-timezone" aria-label="Workspace timezone">
+                <SelectValue placeholder="Select a timezone" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="utc">UTC</SelectItem>
+                <SelectItem value="sao-paulo">America/São Paulo</SelectItem>
+                <SelectItem value="new-york">America/New York</SelectItem>
+                <SelectItem value="london">Europe/London</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </CardContent>
+        <CardFooter className="justify-end gap-3">
+          <Button variant="outline">Cancel</Button>
+          <Button variant="primary">Save changes</Button>
+        </CardFooter>
+      </Card>
+
+      <Card className="border-error/30 shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg text-error-strong">Danger zone</CardTitle>
+          <CardDescription>These actions are permanent and cannot be undone.</CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-4">
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+              <span className="font-medium text-fg">Transfer ownership</span>
+              <p className="text-sm text-fg-secondary">
+                Hand this workspace to another owner. You become an admin.
+              </p>
+            </div>
+            <Button variant="outline">Transfer</Button>
+          </div>
+          <Separator />
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+              <span className="font-medium text-fg">Delete this workspace</span>
+              <p className="text-sm text-fg-secondary">
+                Removes members, items, and billing history for good.
+              </p>
+            </div>
+            <Button variant="destructive">
+              <Trash2 className="size-4" aria-hidden="true" />
+              Delete workspace
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </section>
+  );
+}`;
+
+/* ──────────────────────────────────────────────────────────────────────────
  * 3. Team — team-members list
  * ────────────────────────────────────────────────────────────────────────── */
 
@@ -747,7 +1013,28 @@ export const applicationBlocks: BlockContentMap = {
       },
     ],
   },
-  settings: { preview: <SettingsBlock />, code: settingsCode },
+  settings: {
+    preview: <SettingsBlock />,
+    code: settingsCode,
+    variants: [
+      {
+        id: "account",
+        name: "Account",
+        description: "Profile photo, name, email, and notification preferences.",
+        appearance: "dark",
+        preview: <SettingsBlock />,
+        code: settingsCode,
+      },
+      {
+        id: "workspace",
+        name: "Workspace",
+        description: "Workspace name, slug, language and timezone defaults, and a danger zone.",
+        appearance: "dark",
+        preview: <SettingsWorkspaceBlock />,
+        code: settingsWorkspaceCode,
+      },
+    ],
+  },
   team: { preview: <TeamBlock />, code: teamCode },
 };
 

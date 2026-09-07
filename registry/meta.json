@@ -2150,18 +2150,47 @@
     },
     "settings": {
       "title": "Settings Panel",
-      "description": "An account settings form with switches and inputs.",
+      "description": "Account and workspace settings — profile and preferences, or name, slug, defaults, and a danger zone.",
       "category": "application",
       "exportName": "SettingsBlock",
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": [],
+      "variants": [
+        {
+          "id": "account",
+          "name": "Account",
+          "description": "Profile photo, name, email, and notification preferences.",
+          "item": "settings",
+          "exportName": "SettingsBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "settings",
+            "account"
+          ]
+        },
+        {
+          "id": "workspace",
+          "name": "Workspace",
+          "description": "Workspace name, URL slug, language and timezone defaults, and a danger zone.",
+          "item": "settings--workspace",
+          "exportName": "SettingsWorkspaceBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "settings"
+          ]
+        }
+      ],
       "style": "operational",
       "palette": "semantic",
       "motion": "none",
       "intents": [
-        "dashboard"
+        "settings",
+        "account"
       ]
     },
     "setup-checklist": {

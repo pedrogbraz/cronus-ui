@@ -96,6 +96,7 @@ npx cronus-ui add-page --route /pricing --blocks pricing,cta --nav Pricing
 npx cronus-ui add-page --route /faq --blocks faq,cta --title FAQ --chrome site --dry-run
 npx cronus-ui add-page --route /login --blocks login=split --nav Login
 npx cronus-ui add-page --route /settings --blocks settings,account-security --nav Settings
+npx cronus-ui add-page --route /settings/workspace --blocks settings=workspace --nav Workspace
 ```
 
 The registry item is also `login--split`: `npx cronus-ui add login--split`.

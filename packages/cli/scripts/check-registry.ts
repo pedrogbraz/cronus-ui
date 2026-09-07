@@ -263,6 +263,7 @@ export const MIGRATED_BLOCKS = [
   "app-shell-chrome",
   "dashboard",
   "settings",
+  "settings--workspace",
   "stats",
   "team",
   "dashboard--admin-overview",

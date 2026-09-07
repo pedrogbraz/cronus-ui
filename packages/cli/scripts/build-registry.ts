@@ -223,7 +223,12 @@ const BLOCK_MANIFEST: ReadonlyArray<{
       { id: "pipeline-funnel", constName: "statsPipelineCode" },
     ],
   },
-  { slug: "settings", file: "application.tsx", constName: "settingsCode" },
+  {
+    slug: "settings",
+    file: "application.tsx",
+    constName: "settingsCode",
+    variants: [{ id: "workspace", constName: "settingsWorkspaceCode" }],
+  },
   { slug: "team", file: "application.tsx", constName: "teamCode" },
   { slug: "welcome", file: "onboarding.tsx", constName: "welcomeCode" },
   { slug: "setup-wizard", file: "onboarding.tsx", constName: "setupWizardCode" },

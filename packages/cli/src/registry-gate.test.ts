@@ -720,6 +720,7 @@ describe("validateNoInlineMocks — anti-inline-mock gate (F3)", () => {
       "app-shell-chrome",
       "dashboard",
       "settings",
+      "settings--workspace",
       "stats",
       "team",
       "dashboard--admin-overview",

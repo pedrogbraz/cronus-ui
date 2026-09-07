@@ -514,7 +514,21 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
       {
         slug: "settings",
         name: "Settings Panel",
-        description: "An account settings form with switches and inputs.",
+        description:
+          "Account and workspace settings — profile and preferences, or name, slug, defaults, and a danger zone.",
+        variants: [
+          {
+            id: "account",
+            name: "Account",
+            description: "Profile photo, name, email, and notification preferences.",
+          },
+          {
+            id: "workspace",
+            name: "Workspace",
+            description:
+              "Workspace name, URL slug, language and timezone defaults, and a danger zone.",
+          },
+        ],
       },
       {
         slug: "team",
