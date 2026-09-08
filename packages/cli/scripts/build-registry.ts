@@ -402,7 +402,10 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     slug: "sessions",
     file: "account.tsx",
     constName: "sessionsListCode",
-    variants: [{ id: "table", constName: "sessionsTableCode" }],
+    variants: [
+      { id: "empty", constName: "sessionsEmptyCode" },
+      { id: "table", constName: "sessionsTableCode" },
+    ],
   },
   {
     slug: "api-keys",

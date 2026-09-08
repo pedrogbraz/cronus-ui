@@ -183,12 +183,18 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
       {
         slug: "sessions",
         name: "Sessions",
-        description: "Active device sessions with per-session and bulk revoke.",
+        description:
+          "Active device sessions with per-session and bulk revoke, plus an empty sessions list.",
         variants: [
           {
             id: "list",
             name: "Device list",
             description: "Signed-in devices with client, location, last activity, and revoke.",
+          },
+          {
+            id: "empty",
+            name: "Empty",
+            description: "The same sessions chrome with no devices signed in.",
           },
           {
             id: "table",

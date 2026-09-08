@@ -111,6 +111,7 @@ npx cronus-ui add-page --route /team --blocks team=empty
 npx cronus-ui add-page --route /users --blocks user-management=empty --nav Users
 npx cronus-ui add-page --route /board --blocks kanban-board=empty --nav Board
 npx cronus-ui add-page --route /audit --blocks audit-log=empty --nav Audit
+npx cronus-ui add-page --route /sessions --blocks sessions=empty --nav Sessions
 npx cronus-ui add-page --route /stats --blocks stats=empty --nav Stats
 ```
 

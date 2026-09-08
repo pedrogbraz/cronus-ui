@@ -852,6 +852,80 @@ export function SessionsListBlock() {
   );
 }`;
 
+/* ──────────────────────────────────────────────────────────────────────────
+ * 2b. Sessions / empty — same chrome, no devices signed in
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function SessionsEmptyBlock() {
+  return (
+    <Card className="mx-auto w-full max-w-2xl gap-0 pb-0 shadow-md">
+      <CardHeader>
+        <CardTitle className="font-display text-lg">Active sessions</CardTitle>
+        <CardDescription>Devices currently signed in to your account.</CardDescription>
+        <CardAction>
+          <Badge variant="secondary">0 devices</Badge>
+        </CardAction>
+      </CardHeader>
+      <CardContent className="flex flex-col items-center justify-center gap-2 py-12 text-center">
+        <p className="text-sm font-medium text-fg">No sessions yet.</p>
+        <p className="text-sm text-fg-secondary">Signed-in devices will show up here.</p>
+      </CardContent>
+      <Separator />
+      <CardFooter className="justify-between gap-3 py-5">
+        <span className="text-xs text-fg-tertiary">
+          Revoking a session signs that device out immediately.
+        </span>
+        <Button variant="outline" size="sm">
+          <LogOut className="size-3.5" aria-hidden="true" />
+          Sign out all other sessions
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+}
+
+const sessionsEmptyCode = `import {
+  Badge,
+  Button,
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Separator,
+} from "@cronus-ui/ui";
+import { LogOut } from "lucide-react";
+
+export function SessionsEmptyBlock() {
+  return (
+    <Card className="mx-auto w-full max-w-2xl gap-0 pb-0 shadow-md">
+      <CardHeader>
+        <CardTitle className="font-display text-lg">Active sessions</CardTitle>
+        <CardDescription>Devices currently signed in to your account.</CardDescription>
+        <CardAction>
+          <Badge variant="secondary">0 devices</Badge>
+        </CardAction>
+      </CardHeader>
+      <CardContent className="flex flex-col items-center justify-center gap-2 py-12 text-center">
+        <p className="text-sm font-medium text-fg">No sessions yet.</p>
+        <p className="text-sm text-fg-secondary">Signed-in devices will show up here.</p>
+      </CardContent>
+      <Separator />
+      <CardFooter className="justify-between gap-3 py-5">
+        <span className="text-xs text-fg-tertiary">
+          Revoking a session signs that device out immediately.
+        </span>
+        <Button variant="outline" size="sm">
+          <LogOut className="size-3.5" aria-hidden="true" />
+          Sign out all other sessions
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+}`;
+
 interface UserSession {
   id: string;
   device: string;
@@ -2229,6 +2303,14 @@ export const accountBlocks: BlockContentMap = {
         appearance: "dark",
         preview: <SessionsListBlock />,
         code: sessionsListCode,
+      },
+      {
+        id: "empty",
+        name: "Empty",
+        description: "The same sessions chrome with no devices signed in.",
+        appearance: "light",
+        preview: <SessionsEmptyBlock />,
+        code: sessionsEmptyCode,
       },
       {
         id: "table",

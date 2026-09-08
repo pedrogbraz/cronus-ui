@@ -48,6 +48,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`audit-log--empty`.** The day-grouped timeline stays the admin `/audit`
   default; the variant is the same chrome with no events yet.
   `add-page --blocks audit-log=empty`.
+- **`sessions--empty`.** The device list stays the sessions default; the variant
+  is the same chrome with no devices signed in.
+  `add-page --blocks sessions=empty`.
 
 ## [0.7.3] — 2026-09-07
 

@@ -1,0 +1,16 @@
+{
+  "name": "sessions--empty",
+  "type": "registry:block",
+  "dependencies": [
+    "@cronus-ui/ui@0.7.3",
+    "lucide-react@^0.577.0"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "sessions-empty.tsx",
+      "content": "import {\n  Badge,\n  Button,\n  Card,\n  CardAction,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n  Separator,\n} from \"@cronus-ui/ui\";\nimport { LogOut } from \"lucide-react\";\n\nexport function SessionsEmptyBlock() {\n  return (\n    <Card className=\"mx-auto w-full max-w-2xl gap-0 pb-0 shadow-md\">\n      <CardHeader>\n        <CardTitle className=\"font-display text-lg\">Active sessions</CardTitle>\n        <CardDescription>Devices currently signed in to your account.</CardDescription>\n        <CardAction>\n          <Badge variant=\"secondary\">0 devices</Badge>\n        </CardAction>\n      </CardHeader>\n      <CardContent className=\"flex flex-col items-center justify-center gap-2 py-12 text-center\">\n        <p className=\"text-sm font-medium text-fg\">No sessions yet.</p>\n        <p className=\"text-sm text-fg-secondary\">Signed-in devices will show up here.</p>\n      </CardContent>\n      <Separator />\n      <CardFooter className=\"justify-between gap-3 py-5\">\n        <span className=\"text-xs text-fg-tertiary\">\n          Revoking a session signs that device out immediately.\n        </span>\n        <Button variant=\"outline\" size=\"sm\">\n          <LogOut className=\"size-3.5\" aria-hidden=\"true\" />\n          Sign out all other sessions\n        </Button>\n      </CardFooter>\n    </Card>\n  );\n}",
+      "target": "block"
+    }
+  ]
+}

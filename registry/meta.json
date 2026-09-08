@@ -2214,7 +2214,7 @@
     },
     "sessions": {
       "title": "Sessions",
-      "description": "Active device sessions with per-session and bulk revoke.",
+      "description": "Active device sessions with per-session and bulk revoke, plus an empty sessions list.",
       "category": "account",
       "exportName": "SessionsListBlock",
       "kind": "section",
@@ -2228,6 +2228,20 @@
           "item": "sessions",
           "exportName": "SessionsListBlock",
           "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "account",
+            "settings"
+          ]
+        },
+        {
+          "id": "empty",
+          "name": "Empty",
+          "description": "The same sessions chrome with no devices signed in.",
+          "item": "sessions--empty",
+          "exportName": "SessionsEmptyBlock",
+          "style": "operational",
           "palette": "semantic",
           "motion": "none",
           "intents": [
