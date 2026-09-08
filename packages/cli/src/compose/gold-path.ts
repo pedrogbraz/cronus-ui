@@ -41,6 +41,7 @@ export const GOLD_PATH_AUTH_SPLIT_FILES = [
   "signup-split.tsx",
   "forgot-password-split.tsx",
   "otp-split.tsx",
+  "magic-link-split.tsx",
 ] as const;
 
 /**
@@ -1223,7 +1224,8 @@ export function patchGoldPathAuthSplit(source: string): string | undefined {
       source.includes("Create your Cronus workspace") ||
       source.includes("Join the workspace") ||
       source.includes("Check your inbox") ||
-      source.includes("Enter the code to continue in your Cronus workspace")
+      source.includes("Enter the code to continue in your Cronus workspace") ||
+      source.includes("Email a link to your Cronus workspace")
     ) {
       return source;
     }

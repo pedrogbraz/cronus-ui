@@ -217,7 +217,10 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     slug: "magic-link",
     file: "auth.tsx",
     constName: "magicLinkCode",
-    variants: [{ id: "sent", constName: "magicLinkSentCode" }],
+    variants: [
+      { id: "split", constName: "magicLinkSplitCode" },
+      { id: "sent", constName: "magicLinkSentCode" },
+    ],
   },
   {
     slug: "stats",

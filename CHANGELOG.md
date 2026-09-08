@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **`magic-link--split`.** Passwordless email request sits in the same split
+  chrome as login/signup/forgot-password/otp. Catalog keeps Dana Reyes;
+  gold-path `upgrade` / `add-page` strip it. `add-page --blocks magic-link=split`.
+
 ## [0.7.3] — 2026-09-07
 
 ### Added

@@ -335,6 +335,19 @@ describe("patchGoldPathAuthSplit", () => {
     expect(patchGoldPathAuthSplit(once as string)).toBe(once);
   });
 
+  it("covers magic-link-split and keeps the workspace copy after stripping Dana Reyes", () => {
+    expect(GOLD_PATH_AUTH_SPLIT_FILES).toContain("magic-link-split.tsx");
+    const source = LOGIN_SPLIT.replace(
+      "Sign in to your Cronus workspace.",
+      "Email a link to your Cronus workspace.",
+    );
+    const out = patchGoldPathAuthSplit(source);
+    expect(out).toBeDefined();
+    expect(out).toContain("Email a link to your Cronus workspace.");
+    expect(out).not.toContain("Dana Reyes");
+    expect(patchGoldPathAuthSplit(out as string)).toBe(out);
+  });
+
   it("covers otp-split and keeps the 2FA copy after stripping Dana Reyes", () => {
     expect(GOLD_PATH_AUTH_SPLIT_FILES).toContain("otp-split.tsx");
     const source = LOGIN_SPLIT.replace(

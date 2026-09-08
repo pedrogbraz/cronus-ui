@@ -1403,6 +1403,20 @@
           ]
         },
         {
+          "id": "split",
+          "name": "Split panel",
+          "description": "Brand gradient panel with a customer testimonial beside the magic-link email form.",
+          "item": "magic-link--split",
+          "exportName": "MagicLinkSplitBlock",
+          "style": "editorial",
+          "palette": "aurora",
+          "motion": "smooth",
+          "intents": [
+            "auth",
+            "form"
+          ]
+        },
+        {
           "id": "sent",
           "name": "Link sent",
           "description": "Confirmation that a magic sign-in link was emailed, with a resend action.",

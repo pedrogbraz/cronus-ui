@@ -254,6 +254,7 @@ const VARIANT_OVERRIDES: Record<string, TagPatch> = {
   "forgot-password::reset": { style: "default", motion: "none" },
   "otp::classic": { style: "default", motion: "none" },
   "otp::split": { style: "editorial", palette: "aurora", motion: "smooth" },
+  "magic-link::split": { style: "editorial", palette: "aurora", motion: "smooth" },
   "usage-dashboard::overview": { style: "operational", motion: "none" },
   "usage-dashboard::period": { style: "operational", motion: "snappy" },
   "hero::centered": { style: "editorial", motion: "none" },

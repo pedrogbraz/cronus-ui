@@ -4011,6 +4011,169 @@ export function MagicLinkBlock() {
   );
 }`;
 
+/* ──────────────────────────────────────────────────────────────────────────
+ * 5b. Magic link / split — brand panel beside the email request
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function MagicLinkSplitBlock() {
+  return (
+    <div className="flex w-full items-center justify-center py-4">
+      <div className="grid w-full max-w-4xl overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-lg lg:grid-cols-2">
+        <div className="flex flex-col justify-center gap-6 p-8 sm:p-10 lg:order-2">
+          <div className="flex flex-col gap-1">
+            <h2 className="font-display text-xl font-semibold text-fg">
+              Sign in with a magic link
+            </h2>
+            <p className="text-sm text-fg-secondary">Email a link to your Cronus workspace.</p>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="magic-split-email">Email</Label>
+              <Input
+                id="magic-split-email"
+                type="email"
+                placeholder="you@company.com"
+                autoComplete="email"
+              />
+            </div>
+            <Button variant="primary" size="lg" className="w-full">
+              Send magic link
+            </Button>
+          </div>
+
+          <p className="text-sm text-fg-secondary">
+            Prefer a password?{" "}
+            <a
+              href="/login"
+              className="font-medium text-primary-strong underline-offset-4 hover:underline"
+            >
+              Sign in
+            </a>
+          </p>
+        </div>
+
+        {/* Brand panel */}
+        <div className="relative overflow-hidden bg-gradient-primary-strong p-8 sm:p-10 lg:order-1">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-gradient-aurora opacity-20 blur-3xl"
+          />
+          <div className="relative flex h-full flex-col justify-between gap-12">
+            <div className="flex items-center gap-2.5">
+              <span className="inline-flex size-9 items-center justify-center rounded-xl bg-primary-foreground/15 text-primary-foreground">
+                <ChartColumnIncreasing className="size-4" aria-hidden="true" />
+              </span>
+              <span className="font-display text-lg font-semibold text-primary-foreground">
+                Cronus
+              </span>
+            </div>
+
+            <figure className="flex flex-col gap-5">
+              <Quote className="size-7 text-primary-foreground/50" aria-hidden="true" />
+              <blockquote className="font-display text-xl font-medium leading-snug text-primary-foreground">
+                “Cronus replaced four tools on day one — and our checkout conversion is up 23%.”
+              </blockquote>
+              <figcaption className="flex items-center gap-3">
+                <Avatar>
+                  <AvatarFallback>DR</AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col">
+                  <span className="text-sm font-medium text-primary-foreground">Dana Reyes</span>
+                  <span className="text-sm text-primary-foreground/75">
+                    Head of Growth, Northwind Labs
+                  </span>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const magicLinkSplitCode = `import { Avatar, AvatarFallback, Button, Input, Label } from "@cronus-ui/ui";
+import { ChartColumnIncreasing, Quote } from "lucide-react";
+
+export function MagicLinkSplitBlock() {
+  return (
+    <div className="flex w-full items-center justify-center py-4">
+      <div className="grid w-full max-w-4xl overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-lg lg:grid-cols-2">
+        <div className="flex flex-col justify-center gap-6 p-8 sm:p-10 lg:order-2">
+          <div className="flex flex-col gap-1">
+            <h2 className="font-display text-xl font-semibold text-fg">Sign in with a magic link</h2>
+            <p className="text-sm text-fg-secondary">
+              Email a link to your Cronus workspace.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="magic-split-email">Email</Label>
+              <Input
+                id="magic-split-email"
+                type="email"
+                placeholder="you@company.com"
+                autoComplete="email"
+              />
+            </div>
+            <Button variant="primary" size="lg" className="w-full">
+              Send magic link
+            </Button>
+          </div>
+
+          <p className="text-sm text-fg-secondary">
+            Prefer a password?{" "}
+            <a
+              href="/login"
+              className="font-medium text-primary-strong underline-offset-4 hover:underline"
+            >
+              Sign in
+            </a>
+          </p>
+        </div>
+
+        {/* Brand panel */}
+        <div className="relative overflow-hidden bg-gradient-primary-strong p-8 sm:p-10 lg:order-1">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-gradient-aurora opacity-20 blur-3xl"
+          />
+          <div className="relative flex h-full flex-col justify-between gap-12">
+            <div className="flex items-center gap-2.5">
+              <span className="inline-flex size-9 items-center justify-center rounded-xl bg-primary-foreground/15 text-primary-foreground">
+                <ChartColumnIncreasing className="size-4" aria-hidden="true" />
+              </span>
+              <span className="font-display text-lg font-semibold text-primary-foreground">
+                Cronus
+              </span>
+            </div>
+
+            <figure className="flex flex-col gap-5">
+              <Quote className="size-7 text-primary-foreground/50" aria-hidden="true" />
+              <blockquote className="font-display text-xl font-medium leading-snug text-primary-foreground">
+                “Cronus replaced four tools on day one — and our checkout conversion is up 23%.”
+              </blockquote>
+              <figcaption className="flex items-center gap-3">
+                <Avatar>
+                  <AvatarFallback>DR</AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col">
+                  <span className="text-sm font-medium text-primary-foreground">Dana Reyes</span>
+                  <span className="text-sm text-primary-foreground/75">
+                    Head of Growth, Northwind Labs
+                  </span>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}`;
+
 export function MagicLinkSentBlock() {
   return (
     <div className="flex w-full items-center justify-center py-4">
@@ -4252,6 +4415,15 @@ export const authBlocks: BlockContentMap = {
         appearance: "dark",
         preview: <MagicLinkBlock />,
         code: magicLinkCode,
+      },
+      {
+        id: "split",
+        name: "Split panel",
+        description:
+          "Brand gradient panel with a customer testimonial beside the magic-link email form.",
+        appearance: "dark",
+        preview: <MagicLinkSplitBlock />,
+        code: magicLinkSplitCode,
       },
       {
         id: "sent",

@@ -144,6 +144,12 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
             description: "Passwordless email entry that sends a single-use sign-in link.",
           },
           {
+            id: "split",
+            name: "Split panel",
+            description:
+              "Brand gradient panel with a customer testimonial beside the magic-link email form.",
+          },
+          {
             id: "sent",
             name: "Link sent",
             description:
