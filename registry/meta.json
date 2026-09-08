@@ -2500,12 +2500,45 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": [],
+      "variants": [
+        {
+          "id": "overview",
+          "name": "Overview",
+          "description": "Metric cards, quota meters, and a top-resources table for the current cycle.",
+          "item": "usage-dashboard",
+          "exportName": "UsageDashboardBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "billing",
+            "dashboard",
+            "data"
+          ]
+        },
+        {
+          "id": "period",
+          "name": "Period toggle",
+          "description": "Last 30 days versus this billing cycle, with a segmented period control.",
+          "item": "usage-dashboard--period",
+          "exportName": "UsageDashboardPeriodBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "snappy",
+          "intents": [
+            "billing",
+            "dashboard",
+            "data"
+          ]
+        }
+      ],
       "style": "default",
       "palette": "semantic",
       "motion": "none",
       "intents": [
-        "billing"
+        "billing",
+        "dashboard",
+        "data"
       ]
     },
     "user-management": {

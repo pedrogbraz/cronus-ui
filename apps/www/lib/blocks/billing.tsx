@@ -14,6 +14,8 @@ import {
   Progress,
   RadioGroup,
   RadioGroupItem,
+  SegmentedControl,
+  SegmentedControlItem,
   Separator,
   Sparkline,
   Switch,
@@ -959,6 +961,7 @@ export function PaymentMethodAddBlock() {
 
 // Sparkline chrome is presentational (not data): bind by index so labels stay in the lib.
 const METER_DELTAS = ["+12%", "+6%", "+3%"] as const;
+const PERIOD_DELTAS = ["+4%", "+2%", "+1%"] as const;
 const METER_TONES = ["success", "primary", "info"] as const;
 const METER_TRENDS = [
   [42, 48, 45, 53, 60, 58, 67, 74, 82],
@@ -1200,6 +1203,238 @@ export function UsageDashboardBlock() {
 }`;
 
 /* ──────────────────────────────────────────────────────────────────────────
+ * 5b. Usage dashboard / period — 30-day window vs billing cycle
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function UsageDashboardPeriodBlock() {
+  const [period, setPeriod] = useState("30d");
+  const cycle = period === "cycle";
+  const cards = USAGE_METERS.map((meter, i) => {
+    const used = cycle ? meter.used : Math.round(meter.used * 0.72);
+    const display = cycle
+      ? meter.display
+      : meter.id === "usage-storage"
+        ? `${used} GB / ${meter.limit} GB`
+        : meter.id === "usage-api"
+          ? `${Math.round(used / 1000)}K / ${meter.limit / 1_000_000}M`
+          : `${used} / ${meter.limit}`;
+    return {
+      ...meter,
+      used,
+      display,
+      delta: cycle ? (METER_DELTAS[i] ?? "") : (PERIOD_DELTAS[i] ?? ""),
+      trend: [...(METER_TRENDS[i] ?? [])],
+      tone: METER_TONES[i] ?? "primary",
+    };
+  });
+  const api = cards.find((meter) => meter.id === "usage-api");
+
+  return (
+    <section aria-label="Usage dashboard" className="mx-auto flex w-full max-w-3xl flex-col gap-6">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-1">
+          <h2 className="font-display text-lg text-fg">Usage</h2>
+          <p className="text-sm text-fg-secondary">
+            {cycle
+              ? `This billing cycle · resets Jul 1, 2026 · ${currentPlan?.name} plan quotas.`
+              : "Last 30 days · compared to the prior window."}
+          </p>
+        </div>
+        <SegmentedControl
+          value={period}
+          onValueChange={setPeriod}
+          size="sm"
+          aria-label="Usage period"
+        >
+          <SegmentedControlItem value="30d">Last 30 days</SegmentedControlItem>
+          <SegmentedControlItem value="cycle">This billing cycle</SegmentedControlItem>
+        </SegmentedControl>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-3">
+        {cards.map(({ id, label, display, delta, trend, tone }) => (
+          <Card key={id} className="gap-4 shadow-sm">
+            <CardContent className="flex flex-col gap-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-fg-secondary">{label}</span>
+                <Badge variant="success">{delta}</Badge>
+              </div>
+              <span className="font-display text-2xl font-semibold text-fg">{display}</span>
+              <Sparkline
+                data={trend}
+                tone={tone}
+                area
+                width={120}
+                height={36}
+                className="w-full"
+                aria-label={`${label} trend`}
+              />
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <div className="grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center">
+        <Card className="shadow-md">
+          <CardHeader>
+            <CardTitle className="font-display text-lg">Plan usage</CardTitle>
+            <p className="col-span-full text-sm text-fg-secondary">
+              {cycle ? "Quotas for this billing cycle." : "Consumption in the last 30 days."}
+            </p>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-5">
+            {cards.map(({ id, label, used, limit }) => (
+              <UsageMeterLinear key={id} label={label} value={used} max={limit} />
+            ))}
+          </CardContent>
+        </Card>
+        <Card className="shadow-md">
+          <CardContent className="flex items-center justify-center py-6">
+            {api ? (
+              <UsageMeterCircular
+                value={Math.round(api.used / 1000)}
+                max={Math.round(api.limit / 1000)}
+                label={api.label}
+                unit="K"
+                size={120}
+              />
+            ) : null}
+          </CardContent>
+        </Card>
+      </div>
+    </section>
+  );
+}
+
+const usageDashboardPeriodCode = `"use client";
+
+import {
+  Badge,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  SegmentedControl,
+  SegmentedControlItem,
+  Sparkline,
+  UsageMeterCircular,
+  UsageMeterLinear,
+} from "@cronus-ui/ui";
+import { CURRENT_PLAN_ID, planById, USAGE_METERS } from "../lib/demo-saas.js";
+import { useState } from "react";
+
+const METER_DELTAS = ["+12%", "+6%", "+3%"] as const;
+const PERIOD_DELTAS = ["+4%", "+2%", "+1%"] as const;
+const METER_TONES = ["success", "primary", "info"] as const;
+const METER_TRENDS = [
+  [42, 48, 45, 53, 60, 58, 67, 74, 82],
+  [60, 58, 62, 59, 64, 70, 68, 73, 78],
+  [70, 72, 69, 74, 73, 76, 75, 79, 81],
+] as const;
+
+const currentPlan = planById(CURRENT_PLAN_ID);
+
+export function UsageDashboardPeriodBlock() {
+  const [period, setPeriod] = useState("30d");
+  const cycle = period === "cycle";
+  const cards = USAGE_METERS.map((meter, i) => {
+    const used = cycle ? meter.used : Math.round(meter.used * 0.72);
+    const display = cycle
+      ? meter.display
+      : meter.id === "usage-storage"
+        ? used + " GB / " + meter.limit + " GB"
+        : meter.id === "usage-api"
+          ? Math.round(used / 1000) + "K / " + meter.limit / 1_000_000 + "M"
+          : used + " / " + meter.limit;
+    return {
+      ...meter,
+      used,
+      display,
+      delta: cycle ? (METER_DELTAS[i] ?? "") : (PERIOD_DELTAS[i] ?? ""),
+      trend: [...(METER_TRENDS[i] ?? [])],
+      tone: METER_TONES[i] ?? "primary",
+    };
+  });
+  const api = cards.find((meter) => meter.id === "usage-api");
+
+  return (
+    <section aria-label="Usage dashboard" className="mx-auto flex w-full max-w-3xl flex-col gap-6">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-1">
+          <h2 className="font-display text-lg text-fg">Usage</h2>
+          <p className="text-sm text-fg-secondary">
+            {cycle
+              ? "This billing cycle · resets Jul 1, 2026 · " + currentPlan?.name + " plan quotas."
+              : "Last 30 days · compared to the prior window."}
+          </p>
+        </div>
+        <SegmentedControl
+          value={period}
+          onValueChange={setPeriod}
+          size="sm"
+          aria-label="Usage period"
+        >
+          <SegmentedControlItem value="30d">Last 30 days</SegmentedControlItem>
+          <SegmentedControlItem value="cycle">This billing cycle</SegmentedControlItem>
+        </SegmentedControl>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-3">
+        {cards.map(({ id, label, display, delta, trend, tone }) => (
+          <Card key={id} className="gap-4 shadow-sm">
+            <CardContent className="flex flex-col gap-3">
+              <div className="flex items-center justify-between">
+                <span className="text-sm text-fg-secondary">{label}</span>
+                <Badge variant="success">{delta}</Badge>
+              </div>
+              <span className="font-display text-2xl font-semibold text-fg">{display}</span>
+              <Sparkline
+                data={trend}
+                tone={tone}
+                area
+                width={120}
+                height={36}
+                className="w-full"
+                aria-label={label + " trend"}
+              />
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <div className="grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center">
+        <Card className="shadow-md">
+          <CardHeader>
+            <CardTitle className="font-display text-lg">Plan usage</CardTitle>
+            <p className="col-span-full text-sm text-fg-secondary">
+              {cycle ? "Quotas for this billing cycle." : "Consumption in the last 30 days."}
+            </p>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-5">
+            {cards.map(({ id, label, used, limit }) => (
+              <UsageMeterLinear key={id} label={label} value={used} max={limit} />
+            ))}
+          </CardContent>
+        </Card>
+        <Card className="shadow-md">
+          <CardContent className="flex items-center justify-center py-6">
+            {api ? (
+              <UsageMeterCircular
+                value={Math.round(api.used / 1000)}
+                max={Math.round(api.limit / 1000)}
+                label={api.label}
+                unit="K"
+                size={120}
+              />
+            ) : null}
+          </CardContent>
+        </Card>
+      </div>
+    </section>
+  );
+}`;
+
+/* ──────────────────────────────────────────────────────────────────────────
  * 6. Cancel flow — retention survey with an offer to stay
  * ────────────────────────────────────────────────────────────────────────── */
 
@@ -1404,6 +1639,24 @@ export const billingBlocks: BlockContentMap = {
   "usage-dashboard": {
     preview: <UsageDashboardBlock />,
     code: usageDashboardCode,
+    variants: [
+      {
+        id: "overview",
+        name: "Overview",
+        description: "Metric cards, quota meters, and a top-resources table for the current cycle.",
+        appearance: "dark",
+        preview: <UsageDashboardBlock />,
+        code: usageDashboardCode,
+      },
+      {
+        id: "period",
+        name: "Period toggle",
+        description: "Last 30 days versus this billing cycle, with a segmented period control.",
+        appearance: "dark",
+        preview: <UsageDashboardPeriodBlock />,
+        code: usageDashboardPeriodCode,
+      },
+    ],
   },
   "cancel-flow": {
     preview: <CancelFlowBlock />,

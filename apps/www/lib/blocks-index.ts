@@ -756,6 +756,19 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
         name: "Usage Dashboard",
         description:
           "A usage analytics panel with metric cards, trend sparklines, quota meters, and a top-resources table.",
+        variants: [
+          {
+            id: "overview",
+            name: "Overview",
+            description:
+              "Metric cards, quota meters, and a top-resources table for the current cycle.",
+          },
+          {
+            id: "period",
+            name: "Period toggle",
+            description: "Last 30 days versus this billing cycle, with a segmented period control.",
+          },
+        ],
       },
       {
         slug: "cancel-flow",

@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`otp--split`.** Two-factor code sits in the same split chrome as
   login/signup/forgot-password. Catalog keeps Dana Reyes; gold-path
   `upgrade` / `add-page` strip it. `add-page --blocks otp=split`.
+- **`usage-dashboard--period`.** Last 30 days versus this billing cycle,
+  with a segmented period control. saas `/billing` keeps the overview.
+  `add-page --blocks usage-dashboard=period`.
 
 ## [0.7.2] — 2026-09-07
 

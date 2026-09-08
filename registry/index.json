@@ -2309,6 +2309,16 @@
     ]
   },
   {
+    "name": "usage-dashboard--period",
+    "type": "registry:block",
+    "dependencies": [
+      "@cronus-ui/ui@0.7.2"
+    ],
+    "registryDependencies": [
+      "demo-saas"
+    ]
+  },
+  {
     "name": "cancel-flow",
     "type": "registry:block",
     "dependencies": [

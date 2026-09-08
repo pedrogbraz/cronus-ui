@@ -257,7 +257,12 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     constName: "paymentMethodCode",
     variants: [{ id: "add-card", constName: "paymentMethodAddCode" }],
   },
-  { slug: "usage-dashboard", file: "billing.tsx", constName: "usageDashboardCode" },
+  {
+    slug: "usage-dashboard",
+    file: "billing.tsx",
+    constName: "usageDashboardCode",
+    variants: [{ id: "period", constName: "usageDashboardPeriodCode" }],
+  },
   { slug: "cancel-flow", file: "billing.tsx", constName: "cancelFlowCode" },
   {
     slug: "checkout",
