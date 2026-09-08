@@ -238,7 +238,12 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     variants: [{ id: "workspace", constName: "settingsWorkspaceCode" }],
   },
   { slug: "team", file: "application.tsx", constName: "teamCode" },
-  { slug: "welcome", file: "onboarding.tsx", constName: "welcomeCode" },
+  {
+    slug: "welcome",
+    file: "onboarding.tsx",
+    constName: "welcomeCode",
+    variants: [{ id: "complete", constName: "welcomeCompleteCode" }],
+  },
   {
     slug: "setup-wizard",
     file: "onboarding.tsx",

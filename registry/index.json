@@ -2219,6 +2219,15 @@
     "registryDependencies": []
   },
   {
+    "name": "welcome--complete",
+    "type": "registry:block",
+    "dependencies": [
+      "@cronus-ui/ui@0.7.3",
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": []
+  },
+  {
     "name": "setup-wizard",
     "type": "registry:block",
     "dependencies": [

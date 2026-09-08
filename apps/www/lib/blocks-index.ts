@@ -564,6 +564,19 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
         slug: "welcome",
         name: "Welcome",
         description: "A get-started welcome panel with quick-start actions.",
+        variants: [
+          {
+            id: "start",
+            name: "Get started",
+            description:
+              "Quick-start actions to create a project, invite teammates, and connect data.",
+          },
+          {
+            id: "complete",
+            name: "Complete",
+            description: "All quick-start actions done, with a go-to-dashboard action.",
+          },
+        ],
       },
       {
         slug: "setup-wizard",

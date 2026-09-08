@@ -209,6 +209,146 @@ export function WelcomeBlock() {
 }`;
 
 /* ──────────────────────────────────────────────────────────────────────────
+ * 1b. Welcome / complete — quick-start rows done, go to dashboard
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function WelcomeCompleteBlock() {
+  return (
+    <div className="flex w-full items-center justify-center py-4">
+      <Card className="w-full max-w-xl gap-6 shadow-lg">
+        <CardHeader className="flex flex-col items-center gap-3 text-center">
+          <span className="inline-flex size-11 items-center justify-center rounded-xl bg-success/10 text-success">
+            <Check className="size-5" aria-hidden="true" />
+          </span>
+          <div className="flex flex-col gap-1">
+            <CardTitle className="font-display text-2xl">Ready to go, Mara</CardTitle>
+            <p className="text-sm text-fg-secondary">
+              Your workspace is set up. Jump in whenever you want.
+            </p>
+          </div>
+        </CardHeader>
+
+        <CardContent className="flex flex-col gap-3">
+          <div className="flex items-center gap-4 rounded-xl border border-border p-4">
+            <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-success/15 text-success">
+              <FolderPlus className="size-5" aria-hidden="true" />
+            </span>
+            <div className="flex flex-1 flex-col gap-0.5">
+              <p className="text-sm font-medium text-fg-tertiary line-through">
+                Create your first project
+              </p>
+              <p className="text-sm text-fg-tertiary">
+                You created the project &ldquo;Atlas&rdquo;.
+              </p>
+            </div>
+            <Check className="size-4 shrink-0 text-success" aria-hidden="true" />
+          </div>
+
+          <div className="flex items-center gap-4 rounded-xl border border-border p-4">
+            <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-success/15 text-success">
+              <Users className="size-5" aria-hidden="true" />
+            </span>
+            <div className="flex flex-1 flex-col gap-0.5">
+              <p className="text-sm font-medium text-fg-tertiary line-through">Invite your team</p>
+              <p className="text-sm text-fg-tertiary">A teammate joined the workspace.</p>
+            </div>
+            <Check className="size-4 shrink-0 text-success" aria-hidden="true" />
+          </div>
+
+          <div className="flex items-center gap-4 rounded-xl border border-border p-4">
+            <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-success/15 text-success">
+              <Database className="size-5" aria-hidden="true" />
+            </span>
+            <div className="flex flex-1 flex-col gap-0.5">
+              <p className="text-sm font-medium text-fg-tertiary line-through">Connect your data</p>
+              <p className="text-sm text-fg-tertiary">A source is syncing.</p>
+            </div>
+            <Check className="size-4 shrink-0 text-success" aria-hidden="true" />
+          </div>
+        </CardContent>
+
+        <CardFooter className="justify-end">
+          <Button variant="primary">Go to dashboard</Button>
+        </CardFooter>
+      </Card>
+    </div>
+  );
+}
+
+const welcomeCompleteCode = `import {
+  Button,
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@cronus-ui/ui";
+import { Check, Database, FolderPlus, Users } from "lucide-react";
+
+export function WelcomeCompleteBlock() {
+  return (
+    <div className="flex w-full items-center justify-center py-4">
+      <Card className="w-full max-w-xl gap-6 shadow-lg">
+        <CardHeader className="flex flex-col items-center gap-3 text-center">
+          <span className="inline-flex size-11 items-center justify-center rounded-xl bg-success/10 text-success">
+            <Check className="size-5" aria-hidden="true" />
+          </span>
+          <div className="flex flex-col gap-1">
+            <CardTitle className="font-display text-2xl">Ready to go, Mara</CardTitle>
+            <p className="text-sm text-fg-secondary">
+              Your workspace is set up. Jump in whenever you want.
+            </p>
+          </div>
+        </CardHeader>
+
+        <CardContent className="flex flex-col gap-3">
+          <div className="flex items-center gap-4 rounded-xl border border-border p-4">
+            <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-success/15 text-success">
+              <FolderPlus className="size-5" aria-hidden="true" />
+            </span>
+            <div className="flex flex-1 flex-col gap-0.5">
+              <p className="text-sm font-medium text-fg-tertiary line-through">
+                Create your first project
+              </p>
+              <p className="text-sm text-fg-tertiary">
+                You created the project &ldquo;Atlas&rdquo;.
+              </p>
+            </div>
+            <Check className="size-4 shrink-0 text-success" aria-hidden="true" />
+          </div>
+
+          <div className="flex items-center gap-4 rounded-xl border border-border p-4">
+            <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-success/15 text-success">
+              <Users className="size-5" aria-hidden="true" />
+            </span>
+            <div className="flex flex-1 flex-col gap-0.5">
+              <p className="text-sm font-medium text-fg-tertiary line-through">Invite your team</p>
+              <p className="text-sm text-fg-tertiary">A teammate joined the workspace.</p>
+            </div>
+            <Check className="size-4 shrink-0 text-success" aria-hidden="true" />
+          </div>
+
+          <div className="flex items-center gap-4 rounded-xl border border-border p-4">
+            <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-success/15 text-success">
+              <Database className="size-5" aria-hidden="true" />
+            </span>
+            <div className="flex flex-1 flex-col gap-0.5">
+              <p className="text-sm font-medium text-fg-tertiary line-through">Connect your data</p>
+              <p className="text-sm text-fg-tertiary">A source is syncing.</p>
+            </div>
+            <Check className="size-4 shrink-0 text-success" aria-hidden="true" />
+          </div>
+        </CardContent>
+
+        <CardFooter className="justify-end">
+          <Button variant="primary">Go to dashboard</Button>
+        </CardFooter>
+      </Card>
+    </div>
+  );
+}`;
+
+/* ──────────────────────────────────────────────────────────────────────────
  * 2. Setup wizard — multi-step setup flow with a stepper + form panel
  * ────────────────────────────────────────────────────────────────────────── */
 
@@ -906,7 +1046,28 @@ export function SetupChecklistCompleteBlock() {
  * ────────────────────────────────────────────────────────────────────────── */
 
 export const onboardingBlocks: BlockContentMap = {
-  welcome: { preview: <WelcomeBlock />, code: welcomeCode },
+  welcome: {
+    preview: <WelcomeBlock />,
+    code: welcomeCode,
+    variants: [
+      {
+        id: "start",
+        name: "Get started",
+        description: "Quick-start actions to create a project, invite teammates, and connect data.",
+        appearance: "dark",
+        preview: <WelcomeBlock />,
+        code: welcomeCode,
+      },
+      {
+        id: "complete",
+        name: "Complete",
+        description: "All quick-start actions done, with a go-to-dashboard action.",
+        appearance: "light",
+        preview: <WelcomeCompleteBlock />,
+        code: welcomeCompleteCode,
+      },
+    ],
+  },
   "setup-wizard": {
     preview: <SetupWizardBlock />,
     code: setupWizardCode,

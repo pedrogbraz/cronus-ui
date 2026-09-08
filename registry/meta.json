@@ -2677,7 +2677,34 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": [],
+      "variants": [
+        {
+          "id": "start",
+          "name": "Get started",
+          "description": "Quick-start actions to create a project, invite teammates, and connect data.",
+          "item": "welcome",
+          "exportName": "WelcomeBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "onboarding"
+          ]
+        },
+        {
+          "id": "complete",
+          "name": "Complete",
+          "description": "All quick-start actions done, with a go-to-dashboard action.",
+          "item": "welcome--complete",
+          "exportName": "WelcomeCompleteBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "onboarding"
+          ]
+        }
+      ],
       "style": "default",
       "palette": "semantic",
       "motion": "none",

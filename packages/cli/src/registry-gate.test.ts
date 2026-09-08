@@ -259,8 +259,8 @@ describe("build-registry — variant items (F2)", () => {
   });
 
   it("never emits a variant item for a block with only its default variant", () => {
-    // welcome declares no variants → no welcome--* items exist.
-    expect(items.some((i) => i.name.startsWith("welcome--"))).toBe(false);
+    // team declares no variants → no team--* items exist.
+    expect(items.some((i) => i.name.startsWith("team--"))).toBe(false);
   });
 });
 

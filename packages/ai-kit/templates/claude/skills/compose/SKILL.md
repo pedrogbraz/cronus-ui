@@ -102,6 +102,7 @@ npx cronus-ui add-page --route /magic-link --blocks magic-link=split --chrome ba
 npx cronus-ui add-page --route /usage --blocks usage-dashboard=period --nav Usage
 npx cronus-ui add-page --route /checklist --blocks setup-checklist=complete
 npx cronus-ui add-page --route /setup --blocks setup-wizard=done
+npx cronus-ui add-page --route /welcome --blocks welcome=complete
 ```
 
 The registry item is also `login--split`: `npx cronus-ui add login--split`.

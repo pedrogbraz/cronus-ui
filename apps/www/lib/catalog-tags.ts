@@ -259,6 +259,8 @@ const VARIANT_OVERRIDES: Record<string, TagPatch> = {
   "setup-checklist::complete": { style: "operational", motion: "none" },
   "setup-wizard::workspace": { style: "default", motion: "none" },
   "setup-wizard::done": { style: "operational", motion: "none" },
+  "welcome::start": { style: "default", motion: "none" },
+  "welcome::complete": { style: "operational", motion: "none" },
   "usage-dashboard::overview": { style: "operational", motion: "none" },
   "usage-dashboard::period": { style: "operational", motion: "snappy" },
   "hero::centered": { style: "editorial", motion: "none" },

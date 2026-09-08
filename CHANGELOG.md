@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`setup-wizard--done`.** The workspace form stays the saas `/setup` default;
   the variant is the last stepper step, workspace ready, go to dashboard.
   `add-page --blocks setup-wizard=done`.
+- **`welcome--complete`.** The get-started panel stays the saas `/welcome`
+  default; the variant is all quick-start actions done, go to dashboard.
+  Catalog keeps Mara. `add-page --blocks welcome=complete`.
 
 ## [0.7.3] — 2026-09-07
 
