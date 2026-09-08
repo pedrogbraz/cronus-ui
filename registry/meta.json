@@ -1730,7 +1730,7 @@
     },
     "order-history": {
       "title": "Order history",
-      "description": "Customer purchase history as a dense table with row actions or stacked order cards with thumbnails and reorder.",
+      "description": "Customer purchase history as a dense table with row actions, an empty orders table, or stacked order cards with thumbnails and reorder.",
       "category": "store",
       "exportName": "OrderHistoryTableBlock",
       "kind": "section",
@@ -1744,6 +1744,19 @@
           "item": "order-history",
           "exportName": "OrderHistoryTableBlock",
           "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce"
+          ]
+        },
+        {
+          "id": "empty",
+          "name": "Empty",
+          "description": "The same orders table with no purchases yet.",
+          "item": "order-history--empty",
+          "exportName": "OrderHistoryEmptyBlock",
+          "style": "operational",
           "palette": "semantic",
           "motion": "none",
           "intents": [

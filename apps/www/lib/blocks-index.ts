@@ -1044,12 +1044,17 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
         slug: "order-history",
         name: "Order history",
         description:
-          "Customer purchase history as a dense table with row actions or stacked order cards with thumbnails and reorder.",
+          "Customer purchase history as a dense table with row actions, an empty orders table, or stacked order cards with thumbnails and reorder.",
         variants: [
           {
             id: "table",
             name: "Table",
             description: "Dense orders table with status badges and a per-row actions menu.",
+          },
+          {
+            id: "empty",
+            name: "Empty",
+            description: "The same orders table with no purchases yet.",
           },
           {
             id: "cards",

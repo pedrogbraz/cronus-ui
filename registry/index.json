@@ -2853,6 +2853,14 @@
     ]
   },
   {
+    "name": "order-history--empty",
+    "type": "registry:block",
+    "dependencies": [
+      "@cronus-ui/ui@0.7.3"
+    ],
+    "registryDependencies": []
+  },
+  {
     "name": "order-history--cards",
     "type": "registry:block",
     "dependencies": [

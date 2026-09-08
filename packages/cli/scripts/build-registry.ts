@@ -387,7 +387,10 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     slug: "order-history",
     file: "store.tsx",
     constName: "orderHistoryTableCode",
-    variants: [{ id: "cards", constName: "orderHistoryCardsCode" }],
+    variants: [
+      { id: "empty", constName: "orderHistoryEmptyCode" },
+      { id: "cards", constName: "orderHistoryCardsCode" },
+    ],
   },
   {
     slug: "reviews",

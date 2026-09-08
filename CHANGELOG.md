@@ -57,6 +57,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`cart--empty`.** The cart page stays the store `/cart` default; the variant
   is the same chrome with no line items.
   `add-page --blocks cart=empty`.
+- **`order-history--empty`.** The orders table stays the store `/account`
+  default; the variant is the same chrome with no purchases yet.
+  `add-page --blocks order-history=empty`.
 
 ## [0.7.3] — 2026-09-07
 

@@ -2203,6 +2203,103 @@ export function OrderHistoryTableBlock() {
   );
 }`;
 
+/* ──────────────────────────────────────────────────────────────────────────
+ * 4b. Order history / empty — same table chrome, no purchases yet
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function OrderHistoryEmptyBlock() {
+  return (
+    <Card
+      role="region"
+      aria-label="Order history"
+      className="mx-auto w-full max-w-4xl gap-0 pb-0 shadow-md"
+    >
+      <CardHeader>
+        <CardTitle className="font-display text-lg">Order history</CardTitle>
+        <p className="col-span-full text-sm text-fg-secondary">
+          Your purchases from the last 90 days.
+        </p>
+      </CardHeader>
+      <CardContent className="px-0 pt-2">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="ps-4 sm:ps-6">Order</TableHead>
+              <TableHead>Date</TableHead>
+              <TableHead className="hidden sm:table-cell">Items</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead className="text-end">Total</TableHead>
+              <TableHead className="pe-4 text-end sm:pe-6">
+                <span className="sr-only">Actions</span>
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell colSpan={6} className="py-8 text-center text-sm text-fg-tertiary">
+                No orders yet.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
+  );
+}
+
+const orderHistoryEmptyCode = `import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@cronus-ui/ui";
+
+export function OrderHistoryEmptyBlock() {
+  return (
+    <Card
+      role="region"
+      aria-label="Order history"
+      className="mx-auto w-full max-w-4xl gap-0 pb-0 shadow-md"
+    >
+      <CardHeader>
+        <CardTitle className="font-display text-lg">Order history</CardTitle>
+        <p className="col-span-full text-sm text-fg-secondary">
+          Your purchases from the last 90 days.
+        </p>
+      </CardHeader>
+      <CardContent className="px-0 pt-2">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="ps-4 sm:ps-6">Order</TableHead>
+              <TableHead>Date</TableHead>
+              <TableHead className="hidden sm:table-cell">Items</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead className="text-end">Total</TableHead>
+              <TableHead className="pe-4 text-end sm:pe-6">
+                <span className="sr-only">Actions</span>
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell colSpan={6} className="py-8 text-center text-sm text-fg-tertiary">
+                No orders yet.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
+  );
+}`;
+
 interface OrderCardData {
   id: string;
   date: string;
@@ -2959,6 +3056,14 @@ export const storeBlocks: BlockContentMap = {
         appearance: "dark",
         preview: <OrderHistoryTableBlock />,
         code: orderHistoryTableCode,
+      },
+      {
+        id: "empty",
+        name: "Empty",
+        description: "The same orders table with no purchases yet.",
+        appearance: "light",
+        preview: <OrderHistoryEmptyBlock />,
+        code: orderHistoryEmptyCode,
       },
       {
         id: "cards",
