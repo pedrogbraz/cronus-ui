@@ -269,7 +269,7 @@
     },
     "audit-log": {
       "title": "Audit log",
-      "description": "A security audit trail — a grouped-by-day timeline feed with actor avatars, emphasized actor/object names and severity badges, plus a filterable table variant with event-type badges, actors, IPs and expandable detail hints.",
+      "description": "A security audit trail — a grouped-by-day timeline feed with actor avatars, emphasized actor/object names and severity badges, plus an empty log and a filterable table variant with event-type badges, actors, IPs and expandable detail hints.",
       "category": "admin",
       "exportName": "AuditLogTimelineBlock",
       "kind": "section",
@@ -282,6 +282,19 @@
           "description": "A grouped-by-day security feed with actor avatars, emphasized names and severity badges.",
           "item": "audit-log",
           "exportName": "AuditLogTimelineBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "admin"
+          ]
+        },
+        {
+          "id": "empty",
+          "name": "Empty",
+          "description": "The same audit chrome with no events yet.",
+          "item": "audit-log--empty",
+          "exportName": "AuditLogEmptyBlock",
           "style": "operational",
           "palette": "semantic",
           "motion": "none",

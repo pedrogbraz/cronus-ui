@@ -3045,6 +3045,15 @@
     "registryDependencies": []
   },
   {
+    "name": "audit-log--empty",
+    "type": "registry:block",
+    "dependencies": [
+      "@cronus-ui/ui@0.7.3",
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": []
+  },
+  {
     "name": "audit-log--table",
     "type": "registry:block",
     "dependencies": [

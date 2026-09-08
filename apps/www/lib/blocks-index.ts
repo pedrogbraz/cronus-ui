@@ -766,13 +766,18 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
         slug: "audit-log",
         name: "Audit log",
         description:
-          "A security audit trail — a grouped-by-day timeline feed with actor avatars, emphasized actor/object names and severity badges, plus a filterable table variant with event-type badges, actors, IPs and expandable detail hints.",
+          "A security audit trail — a grouped-by-day timeline feed with actor avatars, emphasized actor/object names and severity badges, plus an empty log and a filterable table variant with event-type badges, actors, IPs and expandable detail hints.",
         variants: [
           {
             id: "timeline",
             name: "Day-grouped timeline",
             description:
               "A grouped-by-day security feed with actor avatars, emphasized names and severity badges.",
+          },
+          {
+            id: "empty",
+            name: "Empty",
+            description: "The same audit chrome with no events yet.",
           },
           {
             id: "table",

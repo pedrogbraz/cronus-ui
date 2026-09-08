@@ -3165,6 +3165,65 @@ export function AuditLogTimelineBlock() {
   );
 }`;
 
+/* ──────────────────────────────────────────────────────────────────────────
+ * 4b. Audit log / empty — same chrome, no events yet
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function AuditLogEmptyBlock() {
+  return (
+    <Card aria-label="Audit log" className="mx-auto w-full max-w-3xl gap-0 pb-0 shadow-md">
+      <CardHeader>
+        <CardTitle className="font-display text-lg">Audit log</CardTitle>
+        <CardDescription>Security-relevant activity across the Meridian workspace.</CardDescription>
+        <CardAction>
+          <Button variant="outline" size="sm">
+            <Download className="size-4" aria-hidden="true" />
+            Export
+          </Button>
+        </CardAction>
+      </CardHeader>
+
+      <CardContent className="flex flex-col items-center justify-center gap-2 py-12 text-center">
+        <p className="text-sm font-medium text-fg">No events yet.</p>
+        <p className="text-sm text-fg-secondary">Security-relevant activity will show up here.</p>
+      </CardContent>
+    </Card>
+  );
+}
+
+const auditLogEmptyCode = `import {
+  Button,
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@cronus-ui/ui";
+import { Download } from "lucide-react";
+
+export function AuditLogEmptyBlock() {
+  return (
+    <Card aria-label="Audit log" className="mx-auto w-full max-w-3xl gap-0 pb-0 shadow-md">
+      <CardHeader>
+        <CardTitle className="font-display text-lg">Audit log</CardTitle>
+        <CardDescription>Security-relevant activity across the Meridian workspace.</CardDescription>
+        <CardAction>
+          <Button variant="outline" size="sm">
+            <Download className="size-4" aria-hidden="true" />
+            Export
+          </Button>
+        </CardAction>
+      </CardHeader>
+
+      <CardContent className="flex flex-col items-center justify-center gap-2 py-12 text-center">
+        <p className="text-sm font-medium text-fg">No events yet.</p>
+        <p className="text-sm text-fg-secondary">Security-relevant activity will show up here.</p>
+      </CardContent>
+    </Card>
+  );
+}`;
+
 interface AuditRow {
   id: string;
   event: string;
@@ -3666,6 +3725,14 @@ export const adminBlocks: BlockContentMap = {
         appearance: "dark",
         preview: <AuditLogTimelineBlock />,
         code: auditLogTimelineCode,
+      },
+      {
+        id: "empty",
+        name: "Empty",
+        description: "The same audit chrome with no events yet.",
+        appearance: "light",
+        preview: <AuditLogEmptyBlock />,
+        code: auditLogEmptyCode,
       },
       {
         id: "table",

@@ -1,0 +1,16 @@
+{
+  "name": "audit-log--empty",
+  "type": "registry:block",
+  "dependencies": [
+    "@cronus-ui/ui@0.7.3",
+    "lucide-react@^0.577.0"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "audit-log-empty.tsx",
+      "content": "import {\n  Button,\n  Card,\n  CardAction,\n  CardContent,\n  CardDescription,\n  CardHeader,\n  CardTitle,\n} from \"@cronus-ui/ui\";\nimport { Download } from \"lucide-react\";\n\nexport function AuditLogEmptyBlock() {\n  return (\n    <Card aria-label=\"Audit log\" className=\"mx-auto w-full max-w-3xl gap-0 pb-0 shadow-md\">\n      <CardHeader>\n        <CardTitle className=\"font-display text-lg\">Audit log</CardTitle>\n        <CardDescription>Security-relevant activity across the Meridian workspace.</CardDescription>\n        <CardAction>\n          <Button variant=\"outline\" size=\"sm\">\n            <Download className=\"size-4\" aria-hidden=\"true\" />\n            Export\n          </Button>\n        </CardAction>\n      </CardHeader>\n\n      <CardContent className=\"flex flex-col items-center justify-center gap-2 py-12 text-center\">\n        <p className=\"text-sm font-medium text-fg\">No events yet.</p>\n        <p className=\"text-sm text-fg-secondary\">Security-relevant activity will show up here.</p>\n      </CardContent>\n    </Card>\n  );\n}",
+      "target": "block"
+    }
+  ]
+}

@@ -448,7 +448,10 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     slug: "audit-log",
     file: "admin.tsx",
     constName: "auditLogTimelineCode",
-    variants: [{ id: "table", constName: "auditLogTableCode" }],
+    variants: [
+      { id: "empty", constName: "auditLogEmptyCode" },
+      { id: "table", constName: "auditLogTableCode" },
+    ],
   },
   {
     slug: "blog",
