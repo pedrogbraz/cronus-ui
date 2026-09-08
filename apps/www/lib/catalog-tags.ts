@@ -261,6 +261,8 @@ const VARIANT_OVERRIDES: Record<string, TagPatch> = {
   "setup-wizard::done": { style: "operational", motion: "none" },
   "welcome::start": { style: "default", motion: "none" },
   "welcome::complete": { style: "operational", motion: "none" },
+  "team::list": { style: "operational", motion: "none" },
+  "team::empty": { style: "operational", motion: "none" },
   "usage-dashboard::overview": { style: "operational", motion: "none" },
   "usage-dashboard::period": { style: "operational", motion: "snappy" },
   "analytics::overview": { style: "operational", motion: "none" },

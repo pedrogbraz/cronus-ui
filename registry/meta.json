@@ -2507,7 +2507,34 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": [],
+      "variants": [
+        {
+          "id": "list",
+          "name": "Member list",
+          "description": "Avatars, roles, and a per-member action menu.",
+          "item": "team",
+          "exportName": "TeamBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "dashboard"
+          ]
+        },
+        {
+          "id": "empty",
+          "name": "Empty",
+          "description": "No teammates yet, with the same chrome and an Invite action.",
+          "item": "team--empty",
+          "exportName": "TeamEmptyBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "dashboard"
+          ]
+        }
+      ],
       "style": "operational",
       "palette": "semantic",
       "motion": "none",

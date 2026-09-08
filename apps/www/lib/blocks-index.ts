@@ -553,6 +553,18 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
         slug: "team",
         name: "Team Members",
         description: "A team list with avatars, roles and a menu.",
+        variants: [
+          {
+            id: "list",
+            name: "Member list",
+            description: "Avatars, roles, and a per-member action menu.",
+          },
+          {
+            id: "empty",
+            name: "Empty",
+            description: "No teammates yet, with the same chrome and an Invite action.",
+          },
+        ],
       },
     ],
   },

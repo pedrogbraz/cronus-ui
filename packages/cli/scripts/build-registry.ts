@@ -237,7 +237,12 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     constName: "settingsCode",
     variants: [{ id: "workspace", constName: "settingsWorkspaceCode" }],
   },
-  { slug: "team", file: "application.tsx", constName: "teamCode" },
+  {
+    slug: "team",
+    file: "application.tsx",
+    constName: "teamCode",
+    variants: [{ id: "empty", constName: "teamEmptyCode" }],
+  },
   {
     slug: "welcome",
     file: "onboarding.tsx",

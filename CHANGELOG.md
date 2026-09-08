@@ -24,6 +24,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`analytics--period`.** Traffic overview stays the saas `/analytics` default
   (the date select is static). The variant switches Last 7 / 30 / 90 days and
   updates the sparkline and breakdowns. `add-page --blocks analytics=period`.
+- **`team--empty`.** The member list stays the saas `/team` default; the variant
+  is an empty workspace with the same chrome and Invite. Not pending, not an
+  invite dialog. `add-page --blocks team=empty`.
 
 ## [0.7.3] — 2026-09-07
 

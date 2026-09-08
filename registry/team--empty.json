@@ -1,0 +1,16 @@
+{
+  "name": "team--empty",
+  "type": "registry:block",
+  "dependencies": [
+    "@cronus-ui/ui@0.7.3",
+    "lucide-react@^0.577.0"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "team-empty.tsx",
+      "content": "import { Button, Card, CardHeader, CardTitle, Separator } from \"@cronus-ui/ui\";\nimport { Users } from \"lucide-react\";\n\nexport function TeamEmptyBlock() {\n  return (\n    <Card className=\"mx-auto w-full max-w-xl gap-0 py-0 shadow-md\">\n      <CardHeader className=\"items-center px-6 py-5\">\n        <div className=\"flex flex-col gap-1\">\n          <CardTitle className=\"font-display text-lg\">Team members</CardTitle>\n          <p className=\"text-sm text-fg-secondary\">Invite and manage your workspace teammates.</p>\n        </div>\n        <Button variant=\"primary\" size=\"sm\" className=\"col-start-2 row-span-2 self-center\">\n          <Users className=\"size-4\" aria-hidden=\"true\" />\n          Invite\n        </Button>\n      </CardHeader>\n\n      <Separator />\n\n      <div className=\"flex flex-col items-center gap-3 px-6 py-12 text-center\">\n        <span className=\"inline-flex size-11 items-center justify-center rounded-xl bg-surface-overlay text-fg-secondary\">\n          <Users className=\"size-5\" aria-hidden=\"true\" />\n        </span>\n        <div className=\"flex flex-col gap-1\">\n          <p className=\"text-sm font-medium text-fg\">No teammates yet</p>\n          <p className=\"text-sm text-fg-secondary\">Invite someone to share this workspace.</p>\n        </div>\n      </div>\n    </Card>\n  );\n}",
+      "target": "block"
+    }
+  ]
+}

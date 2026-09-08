@@ -979,6 +979,71 @@ export function TeamBlock() {
 }`;
 
 /* ──────────────────────────────────────────────────────────────────────────
+ * 3b. Team / empty — no teammates yet, same chrome as the member list
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function TeamEmptyBlock() {
+  return (
+    <Card className="mx-auto w-full max-w-xl gap-0 py-0 shadow-md">
+      <CardHeader className="items-center px-6 py-5">
+        <div className="flex flex-col gap-1">
+          <CardTitle className="font-display text-lg">Team members</CardTitle>
+          <p className="text-sm text-fg-secondary">Invite and manage your workspace teammates.</p>
+        </div>
+        <Button variant="primary" size="sm" className="col-start-2 row-span-2 self-center">
+          <Users className="size-4" aria-hidden="true" />
+          Invite
+        </Button>
+      </CardHeader>
+
+      <Separator />
+
+      <div className="flex flex-col items-center gap-3 px-6 py-12 text-center">
+        <span className="inline-flex size-11 items-center justify-center rounded-xl bg-surface-overlay text-fg-secondary">
+          <Users className="size-5" aria-hidden="true" />
+        </span>
+        <div className="flex flex-col gap-1">
+          <p className="text-sm font-medium text-fg">No teammates yet</p>
+          <p className="text-sm text-fg-secondary">Invite someone to share this workspace.</p>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+const teamEmptyCode = `import { Button, Card, CardHeader, CardTitle, Separator } from "@cronus-ui/ui";
+import { Users } from "lucide-react";
+
+export function TeamEmptyBlock() {
+  return (
+    <Card className="mx-auto w-full max-w-xl gap-0 py-0 shadow-md">
+      <CardHeader className="items-center px-6 py-5">
+        <div className="flex flex-col gap-1">
+          <CardTitle className="font-display text-lg">Team members</CardTitle>
+          <p className="text-sm text-fg-secondary">Invite and manage your workspace teammates.</p>
+        </div>
+        <Button variant="primary" size="sm" className="col-start-2 row-span-2 self-center">
+          <Users className="size-4" aria-hidden="true" />
+          Invite
+        </Button>
+      </CardHeader>
+
+      <Separator />
+
+      <div className="flex flex-col items-center gap-3 px-6 py-12 text-center">
+        <span className="inline-flex size-11 items-center justify-center rounded-xl bg-surface-overlay text-fg-secondary">
+          <Users className="size-5" aria-hidden="true" />
+        </span>
+        <div className="flex flex-col gap-1">
+          <p className="text-sm font-medium text-fg">No teammates yet</p>
+          <p className="text-sm text-fg-secondary">Invite someone to share this workspace.</p>
+        </div>
+      </div>
+    </Card>
+  );
+}`;
+
+/* ──────────────────────────────────────────────────────────────────────────
  * Block map
  * ────────────────────────────────────────────────────────────────────────── */
 
@@ -1035,7 +1100,28 @@ export const applicationBlocks: BlockContentMap = {
       },
     ],
   },
-  team: { preview: <TeamBlock />, code: teamCode },
+  team: {
+    preview: <TeamBlock />,
+    code: teamCode,
+    variants: [
+      {
+        id: "list",
+        name: "Member list",
+        description: "Avatars, roles, and a per-member action menu.",
+        appearance: "dark",
+        preview: <TeamBlock />,
+        code: teamCode,
+      },
+      {
+        id: "empty",
+        name: "Empty",
+        description: "No teammates yet, with the same chrome and an Invite action.",
+        appearance: "light",
+        preview: <TeamEmptyBlock />,
+        code: teamEmptyCode,
+      },
+    ],
+  },
 };
 
 /* -------------------------------------------------------------------------- */
