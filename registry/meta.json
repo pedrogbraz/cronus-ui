@@ -2433,6 +2433,19 @@
           ]
         },
         {
+          "id": "empty",
+          "name": "Empty",
+          "description": "The same KPI grid with em dashes and no-data hints.",
+          "item": "stats--empty",
+          "exportName": "StatsEmptyBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "dashboard"
+          ]
+        },
+        {
           "id": "compact-summary",
           "name": "Compact summary",
           "description": "A single-card metric summary for dense dashboards and overview panels.",

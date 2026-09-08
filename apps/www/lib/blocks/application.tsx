@@ -128,6 +128,68 @@ export function StatsBlock() {
   );
 }`;
 
+/* ──────────────────────────────────────────────────────────────────────────
+ * 1b. Stats / empty — same KPI grid, no values yet
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function StatsEmptyBlock() {
+  const stats = KPIS.map((kpi, i) => ({
+    label: kpi.label,
+    icon: STAT_ICONS[i] ?? DollarSign,
+  }));
+
+  return (
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,13rem),1fr))] gap-4">
+      {stats.map(({ label, icon: Icon }) => (
+        <Card key={label} className="gap-4 py-5">
+          <CardContent className="flex flex-col gap-3">
+            <span className="inline-flex size-9 items-center justify-center rounded-lg bg-surface-overlay text-fg-secondary">
+              <Icon className="size-4" aria-hidden="true" />
+            </span>
+            <Metric className="gap-1.5">
+              <MetricLabel>{label}</MetricLabel>
+              <MetricValue className="text-3xl text-fg-tertiary">—</MetricValue>
+              <span className="text-xs text-fg-tertiary">No data yet</span>
+            </Metric>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+}
+
+const statsEmptyCode = `import { Card, CardContent, Metric, MetricLabel, MetricValue } from "@cronus-ui/ui";
+import { KPIS } from "../lib/demo-saas.js";
+import { Activity, DollarSign, TrendingDown, Users } from "lucide-react";
+
+const STAT_ICONS = [DollarSign, Users, Activity, TrendingDown] as const;
+
+export function StatsEmptyBlock() {
+  const stats = KPIS.map((kpi, i) => ({
+    label: kpi.label,
+    icon: STAT_ICONS[i] ?? DollarSign,
+  }));
+
+  return (
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,13rem),1fr))] gap-4">
+      {stats.map(({ label, icon: Icon }) => (
+        <Card key={label} className="gap-4 py-5">
+          <CardContent className="flex flex-col gap-3">
+            <span className="inline-flex size-9 items-center justify-center rounded-lg bg-surface-overlay text-fg-secondary">
+              <Icon className="size-4" aria-hidden="true" />
+            </span>
+            <Metric className="gap-1.5">
+              <MetricLabel>{label}</MetricLabel>
+              <MetricValue className="text-3xl text-fg-tertiary">—</MetricValue>
+              <span className="text-xs text-fg-tertiary">No data yet</span>
+            </Metric>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  );
+}`;
+
 export function StatsCompactBlock() {
   const stats = [
     { label: "Net revenue", value: "$128.4k", delta: "+18.2%", trend: "up" as const },
@@ -1059,6 +1121,14 @@ export const applicationBlocks: BlockContentMap = {
         appearance: "dark",
         preview: <StatsBlock />,
         code: statsCode,
+      },
+      {
+        id: "empty",
+        name: "Empty",
+        description: "The same KPI grid with em dashes and no-data hints.",
+        appearance: "light",
+        preview: <StatsEmptyBlock />,
+        code: statsEmptyCode,
       },
       {
         id: "compact-summary",

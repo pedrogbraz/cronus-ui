@@ -266,6 +266,7 @@ export const MIGRATED_BLOCKS = [
   "settings",
   "settings--workspace",
   "stats",
+  "stats--empty",
   "team",
   "dashboard--admin-overview",
   "analytics",

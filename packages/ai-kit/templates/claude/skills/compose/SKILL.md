@@ -105,6 +105,7 @@ npx cronus-ui add-page --route /checklist --blocks setup-checklist=complete
 npx cronus-ui add-page --route /setup --blocks setup-wizard=done
 npx cronus-ui add-page --route /welcome --blocks welcome=complete
 npx cronus-ui add-page --route /team --blocks team=empty
+npx cronus-ui add-page --route /stats --blocks stats=empty --nav Stats
 ```
 
 The registry item is also `login--split`: `npx cronus-ui add login--split`.

@@ -519,6 +519,11 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
             description: "Four-card dashboard metrics with icons, deltas, and contextual hints.",
           },
           {
+            id: "empty",
+            name: "Empty",
+            description: "The same KPI grid with em dashes and no-data hints.",
+          },
+          {
             id: "compact-summary",
             name: "Compact summary",
             description: "A single-card metric summary for dense dashboards and overview panels.",

@@ -27,6 +27,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`team--empty`.** The member list stays the saas `/team` default; the variant
   is an empty workspace with the same chrome and Invite. Not pending, not an
   invite dialog. `add-page --blocks team=empty`.
+- **`stats--empty`.** The KPI grid stays the saas `/` default; the variant is
+  the same four cards with em dashes and no-data hints.
+  `add-page --blocks stats=empty`.
 
 ## [0.7.3] — 2026-09-07
 

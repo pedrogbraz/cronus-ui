@@ -263,6 +263,8 @@ const VARIANT_OVERRIDES: Record<string, TagPatch> = {
   "welcome::complete": { style: "operational", motion: "none" },
   "team::list": { style: "operational", motion: "none" },
   "team::empty": { style: "operational", motion: "none" },
+  "stats::kpi-grid": { style: "operational", motion: "none" },
+  "stats::empty": { style: "operational", motion: "none" },
   "usage-dashboard::overview": { style: "operational", motion: "none" },
   "usage-dashboard::period": { style: "operational", motion: "snappy" },
   "analytics::overview": { style: "operational", motion: "none" },

@@ -723,6 +723,7 @@ describe("validateNoInlineMocks — anti-inline-mock gate (F3)", () => {
       "settings",
       "settings--workspace",
       "stats",
+      "stats--empty",
       "team",
       "dashboard--admin-overview",
       "analytics",

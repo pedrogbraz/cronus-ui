@@ -1,0 +1,18 @@
+{
+  "name": "stats--empty",
+  "type": "registry:block",
+  "dependencies": [
+    "@cronus-ui/ui@0.7.3",
+    "lucide-react@^0.577.0"
+  ],
+  "registryDependencies": [
+    "demo-saas"
+  ],
+  "files": [
+    {
+      "path": "stats-empty.tsx",
+      "content": "import { Card, CardContent, Metric, MetricLabel, MetricValue } from \"@cronus-ui/ui\";\nimport { KPIS } from \"../lib/demo-saas.js\";\nimport { Activity, DollarSign, TrendingDown, Users } from \"lucide-react\";\n\nconst STAT_ICONS = [DollarSign, Users, Activity, TrendingDown] as const;\n\nexport function StatsEmptyBlock() {\n  const stats = KPIS.map((kpi, i) => ({\n    label: kpi.label,\n    icon: STAT_ICONS[i] ?? DollarSign,\n  }));\n\n  return (\n    <div className=\"grid grid-cols-[repeat(auto-fit,minmax(min(100%,13rem),1fr))] gap-4\">\n      {stats.map(({ label, icon: Icon }) => (\n        <Card key={label} className=\"gap-4 py-5\">\n          <CardContent className=\"flex flex-col gap-3\">\n            <span className=\"inline-flex size-9 items-center justify-center rounded-lg bg-surface-overlay text-fg-secondary\">\n              <Icon className=\"size-4\" aria-hidden=\"true\" />\n            </span>\n            <Metric className=\"gap-1.5\">\n              <MetricLabel>{label}</MetricLabel>\n              <MetricValue className=\"text-3xl text-fg-tertiary\">—</MetricValue>\n              <span className=\"text-xs text-fg-tertiary\">No data yet</span>\n            </Metric>\n          </CardContent>\n        </Card>\n      ))}\n    </div>\n  );\n}",
+      "target": "block"
+    }
+  ]
+}

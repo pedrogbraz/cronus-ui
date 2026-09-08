@@ -227,6 +227,7 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     file: "application.tsx",
     constName: "statsCode",
     variants: [
+      { id: "empty", constName: "statsEmptyCode" },
       { id: "compact-summary", constName: "statsCompactCode" },
       { id: "pipeline-funnel", constName: "statsPipelineCode" },
     ],
