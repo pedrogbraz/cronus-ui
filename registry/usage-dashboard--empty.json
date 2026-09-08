@@ -1,0 +1,17 @@
+{
+  "name": "usage-dashboard--empty",
+  "type": "registry:block",
+  "dependencies": [
+    "@cronus-ui/ui@0.7.3"
+  ],
+  "registryDependencies": [
+    "demo-saas"
+  ],
+  "files": [
+    {
+      "path": "usage-dashboard-empty.tsx",
+      "content": "import {\n  Card,\n  CardContent,\n  CardHeader,\n  CardTitle,\n  Sparkline,\n  UsageMeterCircular,\n  UsageMeterLinear,\n} from \"@cronus-ui/ui\";\nimport { USAGE_METERS } from \"../lib/demo-saas.js\";\n\nconst METER_TONES = [\"success\", \"primary\", \"info\"] as const;\nconst EMPTY_TREND = [0, 0, 0, 0, 0, 0, 0, 0, 0];\n\nfunction emptyUsageDisplay(id: string, limit: number): string {\n  if (id === \"usage-storage\") return \"0 GB / \" + limit + \" GB\";\n  if (id === \"usage-api\") return \"0K / \" + limit / 1_000_000 + \"M\";\n  return \"0 / \" + limit;\n}\n\nexport function UsageDashboardEmptyBlock() {\n  const api = USAGE_METERS.find((meter) => meter.id === \"usage-api\");\n\n  return (\n    <section aria-label=\"Usage dashboard\" className=\"mx-auto flex w-full max-w-3xl flex-col gap-6\">\n      <div className=\"grid gap-4 sm:grid-cols-3\">\n        {USAGE_METERS.map((meter, i) => (\n          <Card key={meter.id} className=\"gap-4 shadow-sm\">\n            <CardContent className=\"flex flex-col gap-3\">\n              <span className=\"text-sm text-fg-secondary\">{meter.label}</span>\n              <span className=\"font-display text-2xl font-semibold text-fg-tertiary\">\n                {emptyUsageDisplay(meter.id, meter.limit)}\n              </span>\n              <Sparkline\n                data={EMPTY_TREND}\n                tone={METER_TONES[i] ?? \"primary\"}\n                area\n                width={120}\n                height={36}\n                className=\"w-full\"\n                aria-label={meter.label + \" trend\"}\n              />\n            </CardContent>\n          </Card>\n        ))}\n      </div>\n\n      <div className=\"grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center\">\n        <Card className=\"shadow-md\">\n          <CardHeader>\n            <CardTitle className=\"font-display text-lg\">Plan usage</CardTitle>\n            <p className=\"col-span-full text-sm text-fg-secondary\">No usage recorded yet.</p>\n          </CardHeader>\n          <CardContent className=\"flex flex-col gap-5\">\n            {USAGE_METERS.map(({ id, label, limit }) => (\n              <UsageMeterLinear key={id} label={label} value={0} max={limit} />\n            ))}\n          </CardContent>\n        </Card>\n        <Card className=\"shadow-md\">\n          <CardContent className=\"flex items-center justify-center py-6\">\n            {api ? (\n              <UsageMeterCircular\n                value={0}\n                max={Math.round(api.limit / 1000)}\n                label={api.label}\n                unit=\"K\"\n                size={120}\n              />\n            ) : null}\n          </CardContent>\n        </Card>\n      </div>\n    </section>\n  );\n}",
+      "target": "block"
+    }
+  ]
+}

@@ -2375,6 +2375,16 @@
     ]
   },
   {
+    "name": "usage-dashboard--empty",
+    "type": "registry:block",
+    "dependencies": [
+      "@cronus-ui/ui@0.7.3"
+    ],
+    "registryDependencies": [
+      "demo-saas"
+    ]
+  },
+  {
     "name": "cancel-flow",
     "type": "registry:block",
     "dependencies": [

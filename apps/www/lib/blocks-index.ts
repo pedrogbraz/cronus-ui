@@ -835,6 +835,11 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
             name: "Period toggle",
             description: "Last 30 days versus this billing cycle, with a segmented period control.",
           },
+          {
+            id: "empty",
+            name: "Empty",
+            description: "The same meters at zero, with no usage recorded yet.",
+          },
         ],
       },
       {

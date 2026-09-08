@@ -285,7 +285,10 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     slug: "usage-dashboard",
     file: "billing.tsx",
     constName: "usageDashboardCode",
-    variants: [{ id: "period", constName: "usageDashboardPeriodCode" }],
+    variants: [
+      { id: "period", constName: "usageDashboardPeriodCode" },
+      { id: "empty", constName: "usageDashboardEmptyCode" },
+    ],
   },
   { slug: "cancel-flow", file: "billing.tsx", constName: "cancelFlowCode" },
   {

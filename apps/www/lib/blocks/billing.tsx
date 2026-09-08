@@ -1435,6 +1435,152 @@ export function UsageDashboardPeriodBlock() {
 }`;
 
 /* ──────────────────────────────────────────────────────────────────────────
+ * 5c. Usage dashboard / empty — same meters, zero consumption
+ * ────────────────────────────────────────────────────────────────────────── */
+
+const EMPTY_TREND = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+function emptyUsageDisplay(id: string, limit: number): string {
+  if (id === "usage-storage") return "0 GB / " + limit + " GB";
+  if (id === "usage-api") return "0K / " + limit / 1_000_000 + "M";
+  return "0 / " + limit;
+}
+
+export function UsageDashboardEmptyBlock() {
+  const api = USAGE_METERS.find((meter) => meter.id === "usage-api");
+
+  return (
+    <section aria-label="Usage dashboard" className="mx-auto flex w-full max-w-3xl flex-col gap-6">
+      <div className="grid gap-4 sm:grid-cols-3">
+        {USAGE_METERS.map((meter, i) => (
+          <Card key={meter.id} className="gap-4 shadow-sm">
+            <CardContent className="flex flex-col gap-3">
+              <span className="text-sm text-fg-secondary">{meter.label}</span>
+              <span className="font-display text-2xl font-semibold text-fg-tertiary">
+                {emptyUsageDisplay(meter.id, meter.limit)}
+              </span>
+              <Sparkline
+                data={EMPTY_TREND}
+                tone={METER_TONES[i] ?? "primary"}
+                area
+                width={120}
+                height={36}
+                className="w-full"
+                aria-label={meter.label + " trend"}
+              />
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <div className="grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center">
+        <Card className="shadow-md">
+          <CardHeader>
+            <CardTitle className="font-display text-lg">Plan usage</CardTitle>
+            <p className="col-span-full text-sm text-fg-secondary">No usage recorded yet.</p>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-5">
+            {USAGE_METERS.map(({ id, label, limit }) => (
+              <UsageMeterLinear key={id} label={label} value={0} max={limit} />
+            ))}
+          </CardContent>
+        </Card>
+        <Card className="shadow-md">
+          <CardContent className="flex items-center justify-center py-6">
+            {api ? (
+              <UsageMeterCircular
+                value={0}
+                max={Math.round(api.limit / 1000)}
+                label={api.label}
+                unit="K"
+                size={120}
+              />
+            ) : null}
+          </CardContent>
+        </Card>
+      </div>
+    </section>
+  );
+}
+
+const usageDashboardEmptyCode = `import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Sparkline,
+  UsageMeterCircular,
+  UsageMeterLinear,
+} from "@cronus-ui/ui";
+import { USAGE_METERS } from "../lib/demo-saas.js";
+
+const METER_TONES = ["success", "primary", "info"] as const;
+const EMPTY_TREND = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+function emptyUsageDisplay(id: string, limit: number): string {
+  if (id === "usage-storage") return "0 GB / " + limit + " GB";
+  if (id === "usage-api") return "0K / " + limit / 1_000_000 + "M";
+  return "0 / " + limit;
+}
+
+export function UsageDashboardEmptyBlock() {
+  const api = USAGE_METERS.find((meter) => meter.id === "usage-api");
+
+  return (
+    <section aria-label="Usage dashboard" className="mx-auto flex w-full max-w-3xl flex-col gap-6">
+      <div className="grid gap-4 sm:grid-cols-3">
+        {USAGE_METERS.map((meter, i) => (
+          <Card key={meter.id} className="gap-4 shadow-sm">
+            <CardContent className="flex flex-col gap-3">
+              <span className="text-sm text-fg-secondary">{meter.label}</span>
+              <span className="font-display text-2xl font-semibold text-fg-tertiary">
+                {emptyUsageDisplay(meter.id, meter.limit)}
+              </span>
+              <Sparkline
+                data={EMPTY_TREND}
+                tone={METER_TONES[i] ?? "primary"}
+                area
+                width={120}
+                height={36}
+                className="w-full"
+                aria-label={meter.label + " trend"}
+              />
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <div className="grid gap-6 sm:grid-cols-[1fr_auto] sm:items-center">
+        <Card className="shadow-md">
+          <CardHeader>
+            <CardTitle className="font-display text-lg">Plan usage</CardTitle>
+            <p className="col-span-full text-sm text-fg-secondary">No usage recorded yet.</p>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-5">
+            {USAGE_METERS.map(({ id, label, limit }) => (
+              <UsageMeterLinear key={id} label={label} value={0} max={limit} />
+            ))}
+          </CardContent>
+        </Card>
+        <Card className="shadow-md">
+          <CardContent className="flex items-center justify-center py-6">
+            {api ? (
+              <UsageMeterCircular
+                value={0}
+                max={Math.round(api.limit / 1000)}
+                label={api.label}
+                unit="K"
+                size={120}
+              />
+            ) : null}
+          </CardContent>
+        </Card>
+      </div>
+    </section>
+  );
+}`;
+
+/* ──────────────────────────────────────────────────────────────────────────
  * 6. Cancel flow — retention survey with an offer to stay
  * ────────────────────────────────────────────────────────────────────────── */
 
@@ -1655,6 +1801,14 @@ export const billingBlocks: BlockContentMap = {
         appearance: "dark",
         preview: <UsageDashboardPeriodBlock />,
         code: usageDashboardPeriodCode,
+      },
+      {
+        id: "empty",
+        name: "Empty",
+        description: "The same meters at zero, with no usage recorded yet.",
+        appearance: "light",
+        preview: <UsageDashboardEmptyBlock />,
+        code: usageDashboardEmptyCode,
       },
     ],
   },

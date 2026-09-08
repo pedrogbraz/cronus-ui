@@ -2652,6 +2652,21 @@
             "dashboard",
             "data"
           ]
+        },
+        {
+          "id": "empty",
+          "name": "Empty",
+          "description": "The same meters at zero, with no usage recorded yet.",
+          "item": "usage-dashboard--empty",
+          "exportName": "UsageDashboardEmptyBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "billing",
+            "dashboard",
+            "data"
+          ]
         }
       ],
       "style": "default",

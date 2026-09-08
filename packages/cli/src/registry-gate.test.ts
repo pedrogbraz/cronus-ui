@@ -718,6 +718,7 @@ describe("validateNoInlineMocks — anti-inline-mock gate (F3)", () => {
       "billing--plans",
       "usage-dashboard",
       "usage-dashboard--period",
+      "usage-dashboard--empty",
       "app-shell-chrome",
       "dashboard",
       "settings",

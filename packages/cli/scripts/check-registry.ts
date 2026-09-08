@@ -261,6 +261,7 @@ export const MIGRATED_BLOCKS = [
   "billing--plans",
   "usage-dashboard",
   "usage-dashboard--period",
+  "usage-dashboard--empty",
   "app-shell-chrome",
   "dashboard",
   "settings",

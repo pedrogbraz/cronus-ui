@@ -30,6 +30,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`stats--empty`.** The KPI grid stays the saas `/` default; the variant is
   the same four cards with em dashes and no-data hints.
   `add-page --blocks stats=empty`.
+- **`usage-dashboard--empty`.** Overview stays the saas `/billing` stack; the
+  variant is the same meters at zero, with no usage recorded yet.
+  `add-page --blocks usage-dashboard=empty`.
 
 ## [0.7.3] — 2026-09-07
 
