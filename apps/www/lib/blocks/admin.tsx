@@ -480,6 +480,167 @@ export function UserManagementTableBlock() {
   );
 }`;
 
+/* ──────────────────────────────────────────────────────────────────────────
+ * 1b. User management / empty — same directory chrome, no members yet
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function UserManagementEmptyBlock() {
+  return (
+    <Card aria-label="User management" className="mx-auto w-full max-w-5xl gap-0 pb-0 shadow-md">
+      <CardHeader>
+        <CardTitle className="font-display text-lg">Team members</CardTitle>
+        <CardDescription>Manage roles and access for the Meridian workspace.</CardDescription>
+        <CardAction>
+          <Button variant="primary" size="sm">
+            <UserPlus className="size-4" aria-hidden="true" />
+            Invite member
+          </Button>
+        </CardAction>
+      </CardHeader>
+
+      <CardContent className="flex flex-col gap-3 pt-5 sm:flex-row sm:items-center">
+        <div className="relative flex-1">
+          <Search
+            className="pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2 text-fg-tertiary"
+            aria-hidden="true"
+          />
+          <Input
+            type="search"
+            placeholder="Search by name or email…"
+            aria-label="Search members"
+            className="ps-9"
+          />
+        </div>
+        <Select defaultValue="all">
+          <SelectTrigger className="w-full sm:w-40" aria-label="Filter by role">
+            <SelectValue placeholder="All roles" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All roles</SelectItem>
+            <SelectItem value="owner">Owner</SelectItem>
+            <SelectItem value="admin">Admin</SelectItem>
+            <SelectItem value="editor">Editor</SelectItem>
+            <SelectItem value="viewer">Viewer</SelectItem>
+          </SelectContent>
+        </Select>
+      </CardContent>
+
+      <CardContent className="px-0 pt-4">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="ps-4 sm:ps-6">Member</TableHead>
+              <TableHead>Role</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Last active</TableHead>
+              <TableHead className="pe-4 text-end sm:pe-6">
+                <span className="sr-only">Actions</span>
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell colSpan={5} className="py-8 text-center text-sm text-fg-tertiary">
+                No members yet.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
+  );
+}
+
+const userManagementEmptyCode = `import {
+  Button,
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Input,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@cronus-ui/ui";
+import { Search, UserPlus } from "lucide-react";
+
+export function UserManagementEmptyBlock() {
+  return (
+    <Card aria-label="User management" className="mx-auto w-full max-w-5xl gap-0 pb-0 shadow-md">
+      <CardHeader>
+        <CardTitle className="font-display text-lg">Team members</CardTitle>
+        <CardDescription>Manage roles and access for the Meridian workspace.</CardDescription>
+        <CardAction>
+          <Button variant="primary" size="sm">
+            <UserPlus className="size-4" aria-hidden="true" />
+            Invite member
+          </Button>
+        </CardAction>
+      </CardHeader>
+
+      <CardContent className="flex flex-col gap-3 pt-5 sm:flex-row sm:items-center">
+        <div className="relative flex-1">
+          <Search
+            className="pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2 text-fg-tertiary"
+            aria-hidden="true"
+          />
+          <Input
+            type="search"
+            placeholder="Search by name or email…"
+            aria-label="Search members"
+            className="ps-9"
+          />
+        </div>
+        <Select defaultValue="all">
+          <SelectTrigger className="w-full sm:w-40" aria-label="Filter by role">
+            <SelectValue placeholder="All roles" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All roles</SelectItem>
+            <SelectItem value="owner">Owner</SelectItem>
+            <SelectItem value="admin">Admin</SelectItem>
+            <SelectItem value="editor">Editor</SelectItem>
+            <SelectItem value="viewer">Viewer</SelectItem>
+          </SelectContent>
+        </Select>
+      </CardContent>
+
+      <CardContent className="px-0 pt-4">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="ps-4 sm:ps-6">Member</TableHead>
+              <TableHead>Role</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Last active</TableHead>
+              <TableHead className="pe-4 text-end sm:pe-6">
+                <span className="sr-only">Actions</span>
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell colSpan={5} className="py-8 text-center text-sm text-fg-tertiary">
+                No members yet.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
+  );
+}`;
+
 const smallTeam: TeamMember[] = [
   {
     id: "usr-11",
@@ -3314,6 +3475,14 @@ export const adminBlocks: BlockContentMap = {
         appearance: "dark",
         preview: <UserManagementTableBlock />,
         code: userManagementTableCode,
+      },
+      {
+        id: "empty",
+        name: "Empty",
+        description: "The same directory chrome with no members yet.",
+        appearance: "light",
+        preview: <UserManagementEmptyBlock />,
+        code: userManagementEmptyCode,
       },
       {
         id: "cards",

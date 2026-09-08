@@ -686,13 +686,18 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
         slug: "user-management",
         name: "User management",
         description:
-          "Team member administration for a B2B SaaS workspace — a searchable directory table with role filter, status badges, per-user action menus and pagination, plus a card-grid variant for small teams.",
+          "Team member administration for a B2B SaaS workspace — a searchable directory table with role filter, status badges, per-user action menus and pagination, plus an empty directory and a card-grid variant for small teams.",
         variants: [
           {
             id: "table",
             name: "Directory table",
             description:
               "A searchable member table with a role filter, status badges, row actions and pagination.",
+          },
+          {
+            id: "empty",
+            name: "Empty",
+            description: "The same directory chrome with no members yet.",
           },
           {
             id: "cards",

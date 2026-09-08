@@ -420,7 +420,10 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     slug: "user-management",
     file: "admin.tsx",
     constName: "userManagementTableCode",
-    variants: [{ id: "cards", constName: "userManagementCardsCode" }],
+    variants: [
+      { id: "empty", constName: "userManagementEmptyCode" },
+      { id: "cards", constName: "userManagementCardsCode" },
+    ],
   },
   {
     slug: "analytics",

@@ -1,0 +1,16 @@
+{
+  "name": "user-management--empty",
+  "type": "registry:block",
+  "dependencies": [
+    "@cronus-ui/ui@0.7.3",
+    "lucide-react@^0.577.0"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "user-management-empty.tsx",
+      "content": "import {\n  Button,\n  Card,\n  CardAction,\n  CardContent,\n  CardDescription,\n  CardHeader,\n  CardTitle,\n  Input,\n  Select,\n  SelectContent,\n  SelectItem,\n  SelectTrigger,\n  SelectValue,\n  Table,\n  TableBody,\n  TableCell,\n  TableHead,\n  TableHeader,\n  TableRow,\n} from \"@cronus-ui/ui\";\nimport { Search, UserPlus } from \"lucide-react\";\n\nexport function UserManagementEmptyBlock() {\n  return (\n    <Card aria-label=\"User management\" className=\"mx-auto w-full max-w-5xl gap-0 pb-0 shadow-md\">\n      <CardHeader>\n        <CardTitle className=\"font-display text-lg\">Team members</CardTitle>\n        <CardDescription>Manage roles and access for the Meridian workspace.</CardDescription>\n        <CardAction>\n          <Button variant=\"primary\" size=\"sm\">\n            <UserPlus className=\"size-4\" aria-hidden=\"true\" />\n            Invite member\n          </Button>\n        </CardAction>\n      </CardHeader>\n\n      <CardContent className=\"flex flex-col gap-3 pt-5 sm:flex-row sm:items-center\">\n        <div className=\"relative flex-1\">\n          <Search\n            className=\"pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2 text-fg-tertiary\"\n            aria-hidden=\"true\"\n          />\n          <Input\n            type=\"search\"\n            placeholder=\"Search by name or email…\"\n            aria-label=\"Search members\"\n            className=\"ps-9\"\n          />\n        </div>\n        <Select defaultValue=\"all\">\n          <SelectTrigger className=\"w-full sm:w-40\" aria-label=\"Filter by role\">\n            <SelectValue placeholder=\"All roles\" />\n          </SelectTrigger>\n          <SelectContent>\n            <SelectItem value=\"all\">All roles</SelectItem>\n            <SelectItem value=\"owner\">Owner</SelectItem>\n            <SelectItem value=\"admin\">Admin</SelectItem>\n            <SelectItem value=\"editor\">Editor</SelectItem>\n            <SelectItem value=\"viewer\">Viewer</SelectItem>\n          </SelectContent>\n        </Select>\n      </CardContent>\n\n      <CardContent className=\"px-0 pt-4\">\n        <Table>\n          <TableHeader>\n            <TableRow>\n              <TableHead className=\"ps-4 sm:ps-6\">Member</TableHead>\n              <TableHead>Role</TableHead>\n              <TableHead>Status</TableHead>\n              <TableHead>Last active</TableHead>\n              <TableHead className=\"pe-4 text-end sm:pe-6\">\n                <span className=\"sr-only\">Actions</span>\n              </TableHead>\n            </TableRow>\n          </TableHeader>\n          <TableBody>\n            <TableRow>\n              <TableCell colSpan={5} className=\"py-8 text-center text-sm text-fg-tertiary\">\n                No members yet.\n              </TableCell>\n            </TableRow>\n          </TableBody>\n        </Table>\n      </CardContent>\n    </Card>\n  );\n}",
+      "target": "block"
+    }
+  ]
+}

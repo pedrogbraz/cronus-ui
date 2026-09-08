@@ -2707,7 +2707,7 @@
     },
     "user-management": {
       "title": "User management",
-      "description": "Team member administration for a B2B SaaS workspace — a searchable directory table with role filter, status badges, per-user action menus and pagination, plus a card-grid variant for small teams.",
+      "description": "Team member administration for a B2B SaaS workspace — a searchable directory table with role filter, status badges, per-user action menus and pagination, plus an empty directory and a card-grid variant for small teams.",
       "category": "admin",
       "exportName": "UserManagementTableBlock",
       "kind": "section",
@@ -2720,6 +2720,19 @@
           "description": "A searchable member table with a role filter, status badges, row actions and pagination.",
           "item": "user-management",
           "exportName": "UserManagementTableBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "admin"
+          ]
+        },
+        {
+          "id": "empty",
+          "name": "Empty",
+          "description": "The same directory chrome with no members yet.",
+          "item": "user-management--empty",
+          "exportName": "UserManagementEmptyBlock",
           "style": "operational",
           "palette": "semantic",
           "motion": "none",

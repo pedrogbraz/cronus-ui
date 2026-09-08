@@ -39,6 +39,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`analytics--empty`.** Traffic overview stays the saas `/analytics` default;
   the variant is the same layout with no traffic recorded yet.
   `add-page --blocks analytics=empty`.
+- **`user-management--empty`.** The directory table stays the admin `/users`
+  default; the variant is the same chrome with no members yet.
+  `add-page --blocks user-management=empty`.
 
 ## [0.7.3] — 2026-09-07
 
