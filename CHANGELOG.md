@@ -60,6 +60,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`order-history--empty`.** The orders table stays the store `/account`
   default; the variant is the same chrome with no purchases yet.
   `add-page --blocks order-history=empty`.
+- **`reviews--empty`.** The rating summary stays the store product-page default;
+  the variant is the same chrome with no reviews yet.
+  `add-page --blocks reviews=empty`.
 
 ## [0.7.3] — 2026-09-07
 

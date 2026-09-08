@@ -1067,12 +1067,17 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
         slug: "reviews",
         name: "Reviews",
         description:
-          "Customer reviews: aggregate rating with distribution bars plus top reviews, or a dense compact grid of short reviews.",
+          "Customer reviews: aggregate rating with distribution bars plus top reviews, an empty reviews state, or a dense compact grid of short reviews.",
         variants: [
           {
             id: "summary",
             name: "Summary",
             description: "Aggregate rating with a distribution chart next to the top reviews.",
+          },
+          {
+            id: "empty",
+            name: "Empty",
+            description: "The same reviews chrome with no reviews yet.",
           },
           {
             id: "compact",

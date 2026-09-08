@@ -2211,7 +2211,7 @@
     },
     "reviews": {
       "title": "Reviews",
-      "description": "Customer reviews: aggregate rating with distribution bars plus top reviews, or a dense compact grid of short reviews.",
+      "description": "Customer reviews: aggregate rating with distribution bars plus top reviews, an empty reviews state, or a dense compact grid of short reviews.",
       "category": "store",
       "exportName": "ReviewsSummaryBlock",
       "kind": "section",
@@ -2225,6 +2225,19 @@
           "item": "reviews",
           "exportName": "ReviewsSummaryBlock",
           "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce"
+          ]
+        },
+        {
+          "id": "empty",
+          "name": "Empty",
+          "description": "The same reviews chrome with no reviews yet.",
+          "item": "reviews--empty",
+          "exportName": "ReviewsEmptyBlock",
+          "style": "operational",
           "palette": "semantic",
           "motion": "none",
           "intents": [

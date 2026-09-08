@@ -396,7 +396,10 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     slug: "reviews",
     file: "store.tsx",
     constName: "reviewsSummaryCode",
-    variants: [{ id: "compact", constName: "reviewsCompactCode" }],
+    variants: [
+      { id: "empty", constName: "reviewsEmptyCode" },
+      { id: "compact", constName: "reviewsCompactCode" },
+    ],
   },
   {
     slug: "account-security",

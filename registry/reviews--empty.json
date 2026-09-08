@@ -1,0 +1,16 @@
+{
+  "name": "reviews--empty",
+  "type": "registry:block",
+  "dependencies": [
+    "@cronus-ui/ui@0.7.3",
+    "lucide-react@^0.577.0"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "reviews-empty.tsx",
+      "content": "import { Button, Card, CardContent, CardHeader, CardTitle, Progress } from \"@cronus-ui/ui\";\nimport { Star } from \"lucide-react\";\n\nconst EMPTY_REVIEW_STARS = [5, 4, 3, 2, 1];\n\nexport function ReviewsEmptyBlock() {\n  return (\n    <section\n      aria-label=\"Customer reviews\"\n      className=\"mx-auto grid w-full max-w-4xl gap-6 lg:grid-cols-[300px_1fr]\"\n    >\n      <Card className=\"h-fit gap-0 shadow-md\">\n        <CardHeader>\n          <CardTitle className=\"font-display text-lg\">Customer reviews</CardTitle>\n        </CardHeader>\n        <CardContent className=\"flex flex-col gap-4 pt-2\">\n          <div className=\"flex items-end gap-3\">\n            <span className=\"font-display text-5xl font-semibold text-fg-tertiary\">—</span>\n            <div className=\"flex flex-col gap-1 pb-1\">\n              <span className=\"flex items-center gap-0.5\" role=\"img\" aria-label=\"No ratings yet\">\n                {[1, 2, 3, 4, 5].map((star) => (\n                  <Star key={star} className=\"size-3.5 text-fg-tertiary\" aria-hidden=\"true\" />\n                ))}\n              </span>\n              <span className=\"text-xs text-fg-tertiary\">No reviews yet.</span>\n            </div>\n          </div>\n          <div className=\"flex flex-col gap-2\">\n            {EMPTY_REVIEW_STARS.map((stars) => (\n              <div key={stars} className=\"flex items-center gap-3\">\n                <span className=\"w-3 text-sm text-fg-secondary\">{stars}</span>\n                <Star className=\"size-3.5 fill-warning text-warning\" aria-hidden=\"true\" />\n                <Progress value={0} aria-label={stars + \" star share\"} className=\"flex-1\" />\n                <span className=\"w-9 text-end text-sm text-fg-tertiary\">0%</span>\n              </div>\n            ))}\n          </div>\n          <Button variant=\"outline\" className=\"w-full\">\n            Write a review\n          </Button>\n        </CardContent>\n      </Card>\n\n      <Card className=\"flex flex-col items-center justify-center gap-2 py-12 text-center shadow-sm\">\n        <p className=\"text-sm font-medium text-fg\">No reviews yet.</p>\n        <p className=\"text-sm text-fg-secondary\">Be the first to share feedback.</p>\n      </Card>\n    </section>\n  );\n}",
+      "target": "block"
+    }
+  ]
+}

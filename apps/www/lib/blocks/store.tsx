@@ -2716,6 +2716,109 @@ export function ReviewsSummaryBlock() {
   );
 }`;
 
+/* ──────────────────────────────────────────────────────────────────────────
+ * 5b. Reviews / empty — same chrome, no reviews yet
+ * ────────────────────────────────────────────────────────────────────────── */
+
+const EMPTY_REVIEW_STARS = [5, 4, 3, 2, 1];
+
+export function ReviewsEmptyBlock() {
+  return (
+    <section
+      aria-label="Customer reviews"
+      className="mx-auto grid w-full max-w-4xl gap-6 lg:grid-cols-[300px_1fr]"
+    >
+      <Card className="h-fit gap-0 shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg">Customer reviews</CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-4 pt-2">
+          <div className="flex items-end gap-3">
+            <span className="font-display text-5xl font-semibold text-fg-tertiary">—</span>
+            <div className="flex flex-col gap-1 pb-1">
+              <span className="flex items-center gap-0.5" role="img" aria-label="No ratings yet">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star key={star} className="size-3.5 text-fg-tertiary" aria-hidden="true" />
+                ))}
+              </span>
+              <span className="text-xs text-fg-tertiary">No reviews yet.</span>
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            {EMPTY_REVIEW_STARS.map((stars) => (
+              <div key={stars} className="flex items-center gap-3">
+                <span className="w-3 text-sm text-fg-secondary">{stars}</span>
+                <Star className="size-3.5 fill-warning text-warning" aria-hidden="true" />
+                <Progress value={0} aria-label={stars + " star share"} className="flex-1" />
+                <span className="w-9 text-end text-sm text-fg-tertiary">0%</span>
+              </div>
+            ))}
+          </div>
+          <Button variant="outline" className="w-full">
+            Write a review
+          </Button>
+        </CardContent>
+      </Card>
+
+      <Card className="flex flex-col items-center justify-center gap-2 py-12 text-center shadow-sm">
+        <p className="text-sm font-medium text-fg">No reviews yet.</p>
+        <p className="text-sm text-fg-secondary">Be the first to share feedback.</p>
+      </Card>
+    </section>
+  );
+}
+
+const reviewsEmptyCode = `import { Button, Card, CardContent, CardHeader, CardTitle, Progress } from "@cronus-ui/ui";
+import { Star } from "lucide-react";
+
+const EMPTY_REVIEW_STARS = [5, 4, 3, 2, 1];
+
+export function ReviewsEmptyBlock() {
+  return (
+    <section
+      aria-label="Customer reviews"
+      className="mx-auto grid w-full max-w-4xl gap-6 lg:grid-cols-[300px_1fr]"
+    >
+      <Card className="h-fit gap-0 shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg">Customer reviews</CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-4 pt-2">
+          <div className="flex items-end gap-3">
+            <span className="font-display text-5xl font-semibold text-fg-tertiary">—</span>
+            <div className="flex flex-col gap-1 pb-1">
+              <span className="flex items-center gap-0.5" role="img" aria-label="No ratings yet">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star key={star} className="size-3.5 text-fg-tertiary" aria-hidden="true" />
+                ))}
+              </span>
+              <span className="text-xs text-fg-tertiary">No reviews yet.</span>
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            {EMPTY_REVIEW_STARS.map((stars) => (
+              <div key={stars} className="flex items-center gap-3">
+                <span className="w-3 text-sm text-fg-secondary">{stars}</span>
+                <Star className="size-3.5 fill-warning text-warning" aria-hidden="true" />
+                <Progress value={0} aria-label={stars + " star share"} className="flex-1" />
+                <span className="w-9 text-end text-sm text-fg-tertiary">0%</span>
+              </div>
+            ))}
+          </div>
+          <Button variant="outline" className="w-full">
+            Write a review
+          </Button>
+        </CardContent>
+      </Card>
+
+      <Card className="flex flex-col items-center justify-center gap-2 py-12 text-center shadow-sm">
+        <p className="text-sm font-medium text-fg">No reviews yet.</p>
+        <p className="text-sm text-fg-secondary">Be the first to share feedback.</p>
+      </Card>
+    </section>
+  );
+}`;
+
 interface CompactReview {
   id: string;
   name: string;
@@ -3086,6 +3189,14 @@ export const storeBlocks: BlockContentMap = {
         appearance: "dark",
         preview: <ReviewsSummaryBlock />,
         code: reviewsSummaryCode,
+      },
+      {
+        id: "empty",
+        name: "Empty",
+        description: "The same reviews chrome with no reviews yet.",
+        appearance: "light",
+        preview: <ReviewsEmptyBlock />,
+        code: reviewsEmptyCode,
       },
       {
         id: "compact",

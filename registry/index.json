@@ -2881,6 +2881,15 @@
     ]
   },
   {
+    "name": "reviews--empty",
+    "type": "registry:block",
+    "dependencies": [
+      "@cronus-ui/ui@0.7.3",
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": []
+  },
+  {
     "name": "reviews--compact",
     "type": "registry:block",
     "dependencies": [

@@ -280,6 +280,7 @@ const VARIANT_OVERRIDES: Record<string, TagPatch> = {
   "api-keys::empty": { style: "operational", motion: "none" },
   "cart::empty": { style: "operational", motion: "none" },
   "order-history::empty": { style: "operational", motion: "none" },
+  "reviews::empty": { style: "operational", motion: "none" },
   "analytics::engagement": { style: "operational", motion: "none" },
   "hero::centered": { style: "editorial", motion: "none" },
   "hero::split": { style: "operational", motion: "none" },
