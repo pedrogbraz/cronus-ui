@@ -277,6 +277,7 @@ const VARIANT_OVERRIDES: Record<string, TagPatch> = {
   "kanban-board::empty": { style: "operational", motion: "none" },
   "audit-log::empty": { style: "operational", motion: "none" },
   "sessions::empty": { style: "operational", motion: "none" },
+  "api-keys::empty": { style: "operational", motion: "none" },
   "analytics::engagement": { style: "operational", motion: "none" },
   "hero::centered": { style: "editorial", motion: "none" },
   "hero::split": { style: "operational", motion: "none" },

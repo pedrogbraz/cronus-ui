@@ -198,7 +198,7 @@
     },
     "api-keys": {
       "title": "API keys",
-      "description": "API key management with masked secrets, scopes, and a scoped create flow.",
+      "description": "API key management with masked secrets, scopes, a scoped create flow, and an empty keys list.",
       "category": "account",
       "exportName": "ApiKeysListBlock",
       "kind": "section",
@@ -212,6 +212,20 @@
           "item": "api-keys",
           "exportName": "ApiKeysListBlock",
           "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "account",
+            "settings"
+          ]
+        },
+        {
+          "id": "empty",
+          "name": "Empty",
+          "description": "The same API keys chrome with no keys yet.",
+          "item": "api-keys--empty",
+          "exportName": "ApiKeysEmptyBlock",
+          "style": "operational",
           "palette": "semantic",
           "motion": "none",
           "intents": [

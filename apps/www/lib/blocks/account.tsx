@@ -1440,6 +1440,75 @@ export function ApiKeysListBlock() {
   );
 }`;
 
+/* ──────────────────────────────────────────────────────────────────────────
+ * 3b. API keys / empty — same chrome, no keys yet
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function ApiKeysEmptyBlock() {
+  return (
+    <Card className="mx-auto w-full max-w-2xl gap-0 pb-0 shadow-md">
+      <CardHeader>
+        <CardTitle className="font-display text-lg">API keys</CardTitle>
+        <CardDescription>Programmatic access to your Cronus workspace.</CardDescription>
+        <CardAction>
+          <Button variant="primary" size="sm">
+            <Plus className="size-3.5" aria-hidden="true" />
+            Create key
+          </Button>
+        </CardAction>
+      </CardHeader>
+      <CardContent className="flex flex-col items-center justify-center gap-2 py-12 text-center">
+        <p className="text-sm font-medium text-fg">No keys yet.</p>
+        <p className="text-sm text-fg-secondary">Create a key to call the Cronus API.</p>
+      </CardContent>
+      <Separator />
+      <CardFooter className="justify-between gap-3 py-5">
+        <span className="text-xs text-fg-tertiary">0 active keys</span>
+        <span className="text-xs text-fg-tertiary">Rotate keys at least every 90 days.</span>
+      </CardFooter>
+    </Card>
+  );
+}
+
+const apiKeysEmptyCode = `import {
+  Button,
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Separator,
+} from "@cronus-ui/ui";
+import { Plus } from "lucide-react";
+
+export function ApiKeysEmptyBlock() {
+  return (
+    <Card className="mx-auto w-full max-w-2xl gap-0 pb-0 shadow-md">
+      <CardHeader>
+        <CardTitle className="font-display text-lg">API keys</CardTitle>
+        <CardDescription>Programmatic access to your Cronus workspace.</CardDescription>
+        <CardAction>
+          <Button variant="primary" size="sm">
+            <Plus className="size-3.5" aria-hidden="true" />
+            Create key
+          </Button>
+        </CardAction>
+      </CardHeader>
+      <CardContent className="flex flex-col items-center justify-center gap-2 py-12 text-center">
+        <p className="text-sm font-medium text-fg">No keys yet.</p>
+        <p className="text-sm text-fg-secondary">Create a key to call the Cronus API.</p>
+      </CardContent>
+      <Separator />
+      <CardFooter className="justify-between gap-3 py-5">
+        <span className="text-xs text-fg-tertiary">0 active keys</span>
+        <span className="text-xs text-fg-tertiary">Rotate keys at least every 90 days.</span>
+      </CardFooter>
+    </Card>
+  );
+}`;
+
 interface KeyScope {
   id: string;
   scope: string;
@@ -2333,6 +2402,14 @@ export const accountBlocks: BlockContentMap = {
         appearance: "dark",
         preview: <ApiKeysListBlock />,
         code: apiKeysListCode,
+      },
+      {
+        id: "empty",
+        name: "Empty",
+        description: "The same API keys chrome with no keys yet.",
+        appearance: "light",
+        preview: <ApiKeysEmptyBlock />,
+        code: apiKeysEmptyCode,
       },
       {
         id: "create",

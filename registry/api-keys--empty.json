@@ -1,0 +1,16 @@
+{
+  "name": "api-keys--empty",
+  "type": "registry:block",
+  "dependencies": [
+    "@cronus-ui/ui@0.7.3",
+    "lucide-react@^0.577.0"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "api-keys-empty.tsx",
+      "content": "import {\n  Button,\n  Card,\n  CardAction,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n  Separator,\n} from \"@cronus-ui/ui\";\nimport { Plus } from \"lucide-react\";\n\nexport function ApiKeysEmptyBlock() {\n  return (\n    <Card className=\"mx-auto w-full max-w-2xl gap-0 pb-0 shadow-md\">\n      <CardHeader>\n        <CardTitle className=\"font-display text-lg\">API keys</CardTitle>\n        <CardDescription>Programmatic access to your Cronus workspace.</CardDescription>\n        <CardAction>\n          <Button variant=\"primary\" size=\"sm\">\n            <Plus className=\"size-3.5\" aria-hidden=\"true\" />\n            Create key\n          </Button>\n        </CardAction>\n      </CardHeader>\n      <CardContent className=\"flex flex-col items-center justify-center gap-2 py-12 text-center\">\n        <p className=\"text-sm font-medium text-fg\">No keys yet.</p>\n        <p className=\"text-sm text-fg-secondary\">Create a key to call the Cronus API.</p>\n      </CardContent>\n      <Separator />\n      <CardFooter className=\"justify-between gap-3 py-5\">\n        <span className=\"text-xs text-fg-tertiary\">0 active keys</span>\n        <span className=\"text-xs text-fg-tertiary\">Rotate keys at least every 90 days.</span>\n      </CardFooter>\n    </Card>\n  );\n}",
+      "target": "block"
+    }
+  ]
+}

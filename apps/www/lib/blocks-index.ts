@@ -206,12 +206,18 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
       {
         slug: "api-keys",
         name: "API keys",
-        description: "API key management with masked secrets, scopes, and a scoped create flow.",
+        description:
+          "API key management with masked secrets, scopes, a scoped create flow, and an empty keys list.",
         variants: [
           {
             id: "list",
             name: "Key list",
             description: "Masked keys with reveal and copy, scope badges, and usage metadata.",
+          },
+          {
+            id: "empty",
+            name: "Empty",
+            description: "The same API keys chrome with no keys yet.",
           },
           {
             id: "create",

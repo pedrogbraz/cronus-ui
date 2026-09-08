@@ -51,6 +51,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`sessions--empty`.** The device list stays the sessions default; the variant
   is the same chrome with no devices signed in.
   `add-page --blocks sessions=empty`.
+- **`api-keys--empty`.** The key list stays the api-keys default; the variant is
+  the same chrome with no keys yet.
+  `add-page --blocks api-keys=empty`.
 
 ## [0.7.3] — 2026-09-07
 

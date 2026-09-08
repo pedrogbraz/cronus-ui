@@ -411,7 +411,10 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     slug: "api-keys",
     file: "account.tsx",
     constName: "apiKeysListCode",
-    variants: [{ id: "create", constName: "apiKeysCreateCode" }],
+    variants: [
+      { id: "empty", constName: "apiKeysEmptyCode" },
+      { id: "create", constName: "apiKeysCreateCode" },
+    ],
   },
   {
     slug: "notification-preferences",
