@@ -240,7 +240,12 @@ const BLOCK_MANIFEST: ReadonlyArray<{
   { slug: "team", file: "application.tsx", constName: "teamCode" },
   { slug: "welcome", file: "onboarding.tsx", constName: "welcomeCode" },
   { slug: "setup-wizard", file: "onboarding.tsx", constName: "setupWizardCode" },
-  { slug: "setup-checklist", file: "onboarding.tsx", constName: "setupChecklistCode" },
+  {
+    slug: "setup-checklist",
+    file: "onboarding.tsx",
+    constName: "setupChecklistCode",
+    variants: [{ id: "complete", constName: "setupChecklistCompleteCode" }],
+  },
   {
     slug: "dashboard",
     file: "dashboard.tsx",

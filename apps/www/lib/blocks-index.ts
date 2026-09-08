@@ -574,6 +574,19 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
         slug: "setup-checklist",
         name: "Setup Checklist",
         description: "A setup-progress checklist with a progress bar and per-item actions.",
+        variants: [
+          {
+            id: "progress",
+            name: "In progress",
+            description:
+              "Mid-setup checklist with a progress bar, completed items, and per-row Start actions.",
+          },
+          {
+            id: "complete",
+            name: "Complete",
+            description: "All setup items done, 100% progress, and a go-to-dashboard action.",
+          },
+        ],
       },
     ],
   },

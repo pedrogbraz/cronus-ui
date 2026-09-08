@@ -570,13 +570,239 @@ export function SetupChecklistBlock() {
 }`;
 
 /* ──────────────────────────────────────────────────────────────────────────
+ * 3b. Setup checklist / complete — 100% with a go-to-dashboard action
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function SetupChecklistCompleteBlock() {
+  return (
+    <div className="flex w-full items-center justify-center py-4">
+      <Card className="w-full max-w-xl gap-6 shadow-lg">
+        <CardHeader className="flex flex-row items-start justify-between gap-4">
+          <div className="flex flex-col gap-1">
+            <CardTitle className="font-display text-xl">Setup complete</CardTitle>
+            <p className="text-sm text-fg-secondary">
+              Every item on the list is done. Your workspace is ready.
+            </p>
+          </div>
+          <Badge variant="success">5 of 5</Badge>
+        </CardHeader>
+
+        <CardContent className="flex flex-col gap-5">
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center justify-between text-sm">
+              <span className="font-medium text-fg">100% complete</span>
+              <span className="text-fg-tertiary">5 of 5 complete</span>
+            </div>
+            <Progress value={100} aria-label="Setup progress: 5 of 5 complete" />
+          </div>
+
+          <ul className="flex flex-col gap-1">
+            <li className="flex items-center gap-3 rounded-xl border border-border p-3">
+              <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-success/15 text-success">
+                <Check className="size-3.5" aria-hidden="true" strokeWidth={2.5} />
+              </span>
+              <div className="flex flex-1 flex-col gap-0.5">
+                <p className="text-sm font-medium text-fg-tertiary line-through">
+                  Verify your email
+                </p>
+                <p className="text-sm text-fg-tertiary">Your email address is confirmed.</p>
+              </div>
+            </li>
+
+            <li className="flex items-center gap-3 rounded-xl border border-border p-3">
+              <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-success/15 text-success">
+                <Check className="size-3.5" aria-hidden="true" strokeWidth={2.5} />
+              </span>
+              <div className="flex flex-1 flex-col gap-0.5">
+                <p className="text-sm font-medium text-fg-tertiary line-through">
+                  Create your first project
+                </p>
+                <p className="text-sm text-fg-tertiary">
+                  You created the project &ldquo;Atlas&rdquo;.
+                </p>
+              </div>
+            </li>
+
+            <li className="flex items-center gap-3 rounded-xl border border-border p-3">
+              <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-success/15 text-success">
+                <Check className="size-3.5" aria-hidden="true" strokeWidth={2.5} />
+              </span>
+              <div className="flex flex-1 flex-col gap-0.5">
+                <p className="text-sm font-medium text-fg-tertiary line-through">
+                  Invite a teammate
+                </p>
+                <p className="text-sm text-fg-tertiary">A teammate joined the workspace.</p>
+              </div>
+            </li>
+
+            <li className="flex items-center gap-3 rounded-xl border border-border p-3">
+              <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-success/15 text-success">
+                <Check className="size-3.5" aria-hidden="true" strokeWidth={2.5} />
+              </span>
+              <div className="flex flex-1 flex-col gap-0.5">
+                <p className="text-sm font-medium text-fg-tertiary line-through">
+                  Add a payment method
+                </p>
+                <p className="text-sm text-fg-tertiary">A card is on file for the workspace.</p>
+              </div>
+            </li>
+
+            <li className="flex items-center gap-3 rounded-xl border border-border p-3">
+              <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-success/15 text-success">
+                <Check className="size-3.5" aria-hidden="true" strokeWidth={2.5} />
+              </span>
+              <div className="flex flex-1 flex-col gap-0.5">
+                <p className="text-sm font-medium text-fg-tertiary line-through">Install the CLI</p>
+                <p className="text-sm text-fg-tertiary">cronus-ui is on your PATH.</p>
+              </div>
+            </li>
+          </ul>
+        </CardContent>
+
+        <CardFooter className="justify-end">
+          <Button variant="primary">Go to dashboard</Button>
+        </CardFooter>
+      </Card>
+    </div>
+  );
+}
+
+const setupChecklistCompleteCode = `import {
+  Badge,
+  Button,
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Progress,
+} from "@cronus-ui/ui";
+import { Check } from "lucide-react";
+
+export function SetupChecklistCompleteBlock() {
+  return (
+    <div className="flex w-full items-center justify-center py-4">
+      <Card className="w-full max-w-xl gap-6 shadow-lg">
+        <CardHeader className="flex flex-row items-start justify-between gap-4">
+          <div className="flex flex-col gap-1">
+            <CardTitle className="font-display text-xl">Setup complete</CardTitle>
+            <p className="text-sm text-fg-secondary">
+              Every item on the list is done. Your workspace is ready.
+            </p>
+          </div>
+          <Badge variant="success">5 of 5</Badge>
+        </CardHeader>
+
+        <CardContent className="flex flex-col gap-5">
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center justify-between text-sm">
+              <span className="font-medium text-fg">100% complete</span>
+              <span className="text-fg-tertiary">5 of 5 complete</span>
+            </div>
+            <Progress value={100} aria-label="Setup progress: 5 of 5 complete" />
+          </div>
+
+          <ul className="flex flex-col gap-1">
+            <li className="flex items-center gap-3 rounded-xl border border-border p-3">
+              <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-success/15 text-success">
+                <Check className="size-3.5" aria-hidden="true" strokeWidth={2.5} />
+              </span>
+              <div className="flex flex-1 flex-col gap-0.5">
+                <p className="text-sm font-medium text-fg-tertiary line-through">
+                  Verify your email
+                </p>
+                <p className="text-sm text-fg-tertiary">Your email address is confirmed.</p>
+              </div>
+            </li>
+
+            <li className="flex items-center gap-3 rounded-xl border border-border p-3">
+              <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-success/15 text-success">
+                <Check className="size-3.5" aria-hidden="true" strokeWidth={2.5} />
+              </span>
+              <div className="flex flex-1 flex-col gap-0.5">
+                <p className="text-sm font-medium text-fg-tertiary line-through">
+                  Create your first project
+                </p>
+                <p className="text-sm text-fg-tertiary">
+                  You created the project &ldquo;Atlas&rdquo;.
+                </p>
+              </div>
+            </li>
+
+            <li className="flex items-center gap-3 rounded-xl border border-border p-3">
+              <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-success/15 text-success">
+                <Check className="size-3.5" aria-hidden="true" strokeWidth={2.5} />
+              </span>
+              <div className="flex flex-1 flex-col gap-0.5">
+                <p className="text-sm font-medium text-fg-tertiary line-through">
+                  Invite a teammate
+                </p>
+                <p className="text-sm text-fg-tertiary">A teammate joined the workspace.</p>
+              </div>
+            </li>
+
+            <li className="flex items-center gap-3 rounded-xl border border-border p-3">
+              <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-success/15 text-success">
+                <Check className="size-3.5" aria-hidden="true" strokeWidth={2.5} />
+              </span>
+              <div className="flex flex-1 flex-col gap-0.5">
+                <p className="text-sm font-medium text-fg-tertiary line-through">
+                  Add a payment method
+                </p>
+                <p className="text-sm text-fg-tertiary">A card is on file for the workspace.</p>
+              </div>
+            </li>
+
+            <li className="flex items-center gap-3 rounded-xl border border-border p-3">
+              <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-success/15 text-success">
+                <Check className="size-3.5" aria-hidden="true" strokeWidth={2.5} />
+              </span>
+              <div className="flex flex-1 flex-col gap-0.5">
+                <p className="text-sm font-medium text-fg-tertiary line-through">Install the CLI</p>
+                <p className="text-sm text-fg-tertiary">cronus-ui is on your PATH.</p>
+              </div>
+            </li>
+          </ul>
+        </CardContent>
+
+        <CardFooter className="justify-end">
+          <Button variant="primary">Go to dashboard</Button>
+        </CardFooter>
+      </Card>
+    </div>
+  );
+}`;
+
+/* ──────────────────────────────────────────────────────────────────────────
  * Block map
  * ────────────────────────────────────────────────────────────────────────── */
 
 export const onboardingBlocks: BlockContentMap = {
   welcome: { preview: <WelcomeBlock />, code: welcomeCode },
   "setup-wizard": { preview: <SetupWizardBlock />, code: setupWizardCode },
-  "setup-checklist": { preview: <SetupChecklistBlock />, code: setupChecklistCode },
+  "setup-checklist": {
+    preview: <SetupChecklistBlock />,
+    code: setupChecklistCode,
+    variants: [
+      {
+        id: "progress",
+        name: "In progress",
+        description:
+          "Mid-setup checklist with a progress bar, completed items, and per-row Start actions.",
+        appearance: "dark",
+        preview: <SetupChecklistBlock />,
+        code: setupChecklistCode,
+      },
+      {
+        id: "complete",
+        name: "Complete",
+        description: "All setup items done, 100% progress, and a go-to-dashboard action.",
+        appearance: "light",
+        preview: <SetupChecklistCompleteBlock />,
+        code: setupChecklistCompleteCode,
+      },
+    ],
+  },
 };
 
 /* -------------------------------------------------------------------------- */

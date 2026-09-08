@@ -2244,7 +2244,34 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": [],
+      "variants": [
+        {
+          "id": "progress",
+          "name": "In progress",
+          "description": "Mid-setup checklist with a progress bar, completed items, and per-row Start actions.",
+          "item": "setup-checklist",
+          "exportName": "SetupChecklistBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "onboarding"
+          ]
+        },
+        {
+          "id": "complete",
+          "name": "Complete",
+          "description": "All setup items done, 100% progress, and a go-to-dashboard action.",
+          "item": "setup-checklist--complete",
+          "exportName": "SetupChecklistCompleteBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "onboarding"
+          ]
+        }
+      ],
       "style": "default",
       "palette": "semantic",
       "motion": "none",

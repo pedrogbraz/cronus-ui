@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`magic-link--split`.** Passwordless email request sits in the same split
   chrome as login/signup/forgot-password/otp. Catalog keeps Dana Reyes;
   gold-path `upgrade` / `add-page` strip it. `add-page --blocks magic-link=split`.
+- **`setup-checklist--complete`.** The in-progress checklist stays the saas
+  `/checklist` default; the variant is 100% done with a go-to-dashboard action.
+  `add-page --blocks setup-checklist=complete`.
 
 ## [0.7.3] — 2026-09-07
 
