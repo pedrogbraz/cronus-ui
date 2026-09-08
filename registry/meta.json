@@ -146,6 +146,20 @@
           ]
         },
         {
+          "id": "period",
+          "name": "Period toggle",
+          "description": "Last 7, 30, or 90 days, with a segmented period control that updates traffic.",
+          "item": "analytics--period",
+          "exportName": "AnalyticsPeriodBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "snappy",
+          "intents": [
+            "dashboard",
+            "data"
+          ]
+        },
+        {
           "id": "engagement",
           "name": "Engagement cohorts",
           "description": "Retention stat cards plus a weekly cohort heat grid built from token-colored cells.",

@@ -414,7 +414,10 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     slug: "analytics",
     file: "admin.tsx",
     constName: "analyticsOverviewCode",
-    variants: [{ id: "engagement", constName: "analyticsEngagementCode" }],
+    variants: [
+      { id: "period", constName: "analyticsPeriodCode" },
+      { id: "engagement", constName: "analyticsEngagementCode" },
+    ],
   },
   {
     slug: "kanban-board",

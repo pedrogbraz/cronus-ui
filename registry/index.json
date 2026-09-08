@@ -2930,6 +2930,17 @@
     ]
   },
   {
+    "name": "analytics--period",
+    "type": "registry:block",
+    "dependencies": [
+      " + first + ",
+      "@cronus-ui/ui@0.7.3"
+    ],
+    "registryDependencies": [
+      "demo-saas"
+    ]
+  },
+  {
     "name": "analytics--engagement",
     "type": "registry:block",
     "dependencies": [

@@ -697,6 +697,12 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
               "KPI metrics with sparklines, a 30-day traffic trend and top pages and referrers breakdowns.",
           },
           {
+            id: "period",
+            name: "Period toggle",
+            description:
+              "Last 7, 30, or 90 days, with a segmented period control that updates traffic.",
+          },
+          {
             id: "engagement",
             name: "Engagement cohorts",
             description:

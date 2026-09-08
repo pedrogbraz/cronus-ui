@@ -21,6 +21,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`welcome--complete`.** The get-started panel stays the saas `/welcome`
   default; the variant is all quick-start actions done, go to dashboard.
   Catalog keeps Mara. `add-page --blocks welcome=complete`.
+- **`analytics--period`.** Traffic overview stays the saas `/analytics` default
+  (the date select is static). The variant switches Last 7 / 30 / 90 days and
+  updates the sparkline and breakdowns. `add-page --blocks analytics=period`.
 
 ## [0.7.3] — 2026-09-07
 

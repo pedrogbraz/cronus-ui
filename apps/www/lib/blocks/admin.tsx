@@ -30,6 +30,8 @@ import {
   PaginationNext,
   PaginationPrevious,
   Progress,
+  SegmentedControl,
+  SegmentedControlItem,
   Select,
   SelectContent,
   SelectItem,
@@ -55,6 +57,7 @@ import {
   Search,
   UserPlus,
 } from "lucide-react";
+import { useState } from "react";
 import { BlockGalleryBody } from "../../components/blocks/block-gallery-body";
 import { BlockViewBody } from "../../components/blocks/block-view-body";
 import { getBlockMeta } from "../blocks-index";
@@ -1028,6 +1031,387 @@ export function AnalyticsOverviewBlock() {
 
       <div className="grid gap-4 lg:grid-cols-2">
         {breakdownLists.map((list) => (
+          <Card key={list.id} className="gap-0">
+            <CardHeader>
+              <CardTitle className="font-display text-base">{list.title}</CardTitle>
+              <CardDescription>{list.caption}</CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-4 pt-5">
+              {list.rows.map((row) => (
+                <div key={row.id} className="flex flex-col gap-1.5">
+                  <div className="flex items-center justify-between gap-3 text-sm">
+                    <span className="truncate font-medium text-fg">{row.label}</span>
+                    <span className="shrink-0 tabular-nums text-fg-secondary">{row.value}</span>
+                  </div>
+                  <Progress
+                    value={row.share}
+                    aria-label={row.label + " share of traffic"}
+                    className="h-1.5"
+                  />
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </section>
+  );
+}`;
+
+/* ──────────────────────────────────────────────────────────────────────────
+ * 2b. Analytics / period — 7 / 30 / 90 days with a live segmented control
+ * ────────────────────────────────────────────────────────────────────────── */
+
+function scaleAnalyticsDisplay(value: string, factor: number): string {
+  if (factor === 1) return value;
+  const isMoney = value.startsWith("$");
+  const isPct = value.endsWith("%");
+  const n = Number(value.replace(/[$,%]/g, ""));
+  if (Number.isNaN(n)) return value;
+  if (isPct) return (Math.round(n * factor * 100) / 100).toFixed(2) + "%";
+  return (isMoney ? "$" : "") + new Intl.NumberFormat("en-US").format(Math.round(n * factor));
+}
+
+const ANALYTICS_PERIOD_FACTOR: Record<string, number> = { "7d": 0.32, "30d": 1, "90d": 2.4 };
+const ANALYTICS_PERIOD_AXIS: Record<string, readonly string[]> = {
+  "7d": ["Jul 7", "Jul 8", "Jul 9", "Jul 10", "Jul 11", "Jul 12", "Jul 13"],
+  "30d": ["Jun 14", "Jun 21", "Jun 28", "Jul 5", "Jul 13"],
+  "90d": ["Apr 15", "May 6", "May 27", "Jun 17", "Jul 13"],
+};
+const ANALYTICS_PERIOD_CAPTION: Record<string, string> = {
+  "7d": "Daily sessions · Jul 7 – Jul 13",
+  "30d": "Daily sessions · Jun 14 – Jul 13",
+  "90d": "Daily sessions · Apr 15 – Jul 13",
+};
+const ANALYTICS_PERIOD_RANGE: Record<string, string> = {
+  "7d": "last 7 days",
+  "30d": "last 30 days",
+  "90d": "last 90 days",
+};
+
+export function AnalyticsPeriodBlock() {
+  const [period, setPeriod] = useState("30d");
+  const factor = ANALYTICS_PERIOD_FACTOR[period] ?? 1;
+  const series = period === "7d" ? trafficSeries.slice(-7) : trafficSeries;
+  const axis = ANALYTICS_PERIOD_AXIS[period] ?? ["Jun 14", "Jun 21", "Jun 28", "Jul 5", "Jul 13"];
+  const caption = ANALYTICS_PERIOD_CAPTION[period] ?? ANALYTICS_PERIOD_CAPTION["30d"];
+  const rangeLabel = ANALYTICS_PERIOD_RANGE[period] ?? ANALYTICS_PERIOD_RANGE["30d"];
+  const first = new Intl.NumberFormat("en-US").format(series[0] ?? 0);
+  const last = new Intl.NumberFormat("en-US").format(series[series.length - 1] ?? 0);
+  const lists = [
+    {
+      id: "pages",
+      title: "Top pages",
+      caption: "By views",
+      rows: topPages.map((row) => ({ ...row, value: scaleAnalyticsDisplay(row.value, factor) })),
+    },
+    {
+      id: "referrers",
+      title: "Top referrers",
+      caption: "By sessions",
+      rows: topReferrers.map((row) => ({
+        ...row,
+        value: scaleAnalyticsDisplay(row.value, factor),
+      })),
+    },
+  ];
+
+  return (
+    <section
+      aria-label="Analytics overview"
+      className="mx-auto flex w-full max-w-6xl flex-col gap-4"
+    >
+      <header className="flex flex-wrap items-end justify-between gap-3">
+        <div className="flex flex-col gap-1">
+          <h2 className="font-display text-2xl font-semibold text-fg">Analytics</h2>
+          <p className="text-sm text-fg-secondary">
+            Product and marketing traffic across meridianhq.com.
+          </p>
+        </div>
+        <SegmentedControl
+          value={period}
+          onValueChange={setPeriod}
+          size="sm"
+          aria-label="Analytics period"
+        >
+          <SegmentedControlItem value="7d">Last 7 days</SegmentedControlItem>
+          <SegmentedControlItem value="30d">Last 30 days</SegmentedControlItem>
+          <SegmentedControlItem value="90d">Last 90 days</SegmentedControlItem>
+        </SegmentedControl>
+      </header>
+
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {overviewKpis.map((kpi) => (
+          <Card key={kpi.label} className="gap-0 py-5">
+            <CardContent className="flex items-end justify-between gap-3">
+              <Metric className="gap-1.5">
+                <MetricLabel>{kpi.label}</MetricLabel>
+                <MetricValue className="text-2xl">{kpi.value}</MetricValue>
+                <MetricDelta trend={kpi.trend}>{kpi.delta}</MetricDelta>
+              </Metric>
+              <Sparkline
+                data={kpi.series}
+                type="line"
+                area
+                tone={kpi.tone}
+                width={96}
+                height={40}
+                className="h-10 w-24 shrink-0"
+                aria-label={kpi.label + " trend over the last 10 weeks"}
+              />
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="font-display text-base">Traffic overview</CardTitle>
+          <CardDescription>{caption}</CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-2">
+          <Sparkline
+            data={series}
+            type="line"
+            area
+            tone="primary"
+            width={720}
+            height={176}
+            strokeWidth={2}
+            preserveAspectRatio="none"
+            className="h-44 w-full"
+            aria-label={"Daily sessions, " + rangeLabel + ", rising from " + first + " to " + last}
+          />
+          <div className="flex items-center justify-between text-xs text-fg-tertiary">
+            {axis.map((tick) => (
+              <span key={tick}>{tick}</span>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        {lists.map((list) => (
+          <Card key={list.id} className="gap-0">
+            <CardHeader>
+              <CardTitle className="font-display text-base">{list.title}</CardTitle>
+              <CardDescription>{list.caption}</CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-4 pt-5">
+              {list.rows.map((row) => (
+                <div key={row.id} className="flex flex-col gap-1.5">
+                  <div className="flex items-center justify-between gap-3 text-sm">
+                    <span className="truncate font-medium text-fg">{row.label}</span>
+                    <span className="shrink-0 tabular-nums text-fg-secondary">{row.value}</span>
+                  </div>
+                  <Progress
+                    value={row.share}
+                    aria-label={row.label + " share of traffic"}
+                    className="h-1.5"
+                  />
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+const analyticsPeriodCode = `"use client";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Metric,
+  MetricDelta,
+  MetricLabel,
+  MetricValue,
+  Progress,
+  SegmentedControl,
+  SegmentedControlItem,
+  Sparkline,
+} from "@cronus-ui/ui";
+import { KPIS } from "../lib/demo-saas.js";
+import { useState } from "react";
+
+interface BreakdownRow {
+  id: string;
+  label: string;
+  value: string;
+  share: number;
+}
+
+const KPI_TONES = ["primary", "info", "success", "warning"] as const;
+const KPI_SERIES = [
+  [86, 92, 88, 97, 104, 99, 112, 118, 115, 124],
+  [58, 61, 60, 64, 66, 63, 68, 70, 69, 72],
+  [238, 241, 246, 244, 252, 250, 258, 262, 266, 272],
+  [44, 43, 43, 42, 41, 42, 40, 39, 39, 38],
+];
+
+const overviewKpis = KPIS.map((kpi, i) => ({
+  ...kpi,
+  tone: KPI_TONES[i] ?? "primary",
+  series: KPI_SERIES[i] ?? [],
+}));
+
+const trafficSeries = [
+  24100, 25800, 24900, 26400, 27200, 26100, 28900, 30400, 29800, 31500, 30900, 32800,
+  34100, 33200, 35600, 34800, 36900, 38200, 37400, 39800, 38900, 41200, 40500, 42800,
+  41900, 44100, 43600, 45900, 46800, 47900,
+];
+
+const topPages: BreakdownRow[] = [
+  { id: "home", label: "/", value: "284,912", share: 100 },
+  { id: "pricing", label: "/pricing", value: "191,204", share: 67 },
+  { id: "docs", label: "/docs/getting-started", value: "121,880", share: 43 },
+  { id: "blog", label: "/blog/series-b", value: "98,414", share: 35 },
+  { id: "changelog", label: "/changelog", value: "64,206", share: 23 },
+];
+
+const topReferrers: BreakdownRow[] = [
+  { id: "google", label: "google.com", value: "142,310", share: 100 },
+  { id: "github", label: "github.com", value: "87,650", share: 62 },
+  { id: "twitter", label: "x.com", value: "56,982", share: 40 },
+  { id: "newsletter", label: "Newsletter", value: "41,225", share: 29 },
+  { id: "producthunt", label: "producthunt.com", value: "18,940", share: 13 },
+];
+
+function scaleAnalyticsDisplay(value: string, factor: number): string {
+  if (factor === 1) return value;
+  const isMoney = value.startsWith("$");
+  const isPct = value.endsWith("%");
+  const n = Number(value.replace(/[$,%]/g, ""));
+  if (Number.isNaN(n)) return value;
+  if (isPct) return (Math.round(n * factor * 100) / 100).toFixed(2) + "%";
+  return (isMoney ? "$" : "") + new Intl.NumberFormat("en-US").format(Math.round(n * factor));
+}
+
+const ANALYTICS_PERIOD_FACTOR: Record<string, number> = { "7d": 0.32, "30d": 1, "90d": 2.4 };
+const ANALYTICS_PERIOD_AXIS: Record<string, readonly string[]> = {
+  "7d": ["Jul 7", "Jul 8", "Jul 9", "Jul 10", "Jul 11", "Jul 12", "Jul 13"],
+  "30d": ["Jun 14", "Jun 21", "Jun 28", "Jul 5", "Jul 13"],
+  "90d": ["Apr 15", "May 6", "May 27", "Jun 17", "Jul 13"],
+};
+const ANALYTICS_PERIOD_CAPTION: Record<string, string> = {
+  "7d": "Daily sessions · Jul 7 – Jul 13",
+  "30d": "Daily sessions · Jun 14 – Jul 13",
+  "90d": "Daily sessions · Apr 15 – Jul 13",
+};
+const ANALYTICS_PERIOD_RANGE: Record<string, string> = {
+  "7d": "last 7 days",
+  "30d": "last 30 days",
+  "90d": "last 90 days",
+};
+
+export function AnalyticsPeriodBlock() {
+  const [period, setPeriod] = useState("30d");
+  const factor = ANALYTICS_PERIOD_FACTOR[period] ?? 1;
+  const series = period === "7d" ? trafficSeries.slice(-7) : trafficSeries;
+  const axis = ANALYTICS_PERIOD_AXIS[period] ?? ["Jun 14", "Jun 21", "Jun 28", "Jul 5", "Jul 13"];
+  const caption = ANALYTICS_PERIOD_CAPTION[period] ?? ANALYTICS_PERIOD_CAPTION["30d"];
+  const rangeLabel = ANALYTICS_PERIOD_RANGE[period] ?? ANALYTICS_PERIOD_RANGE["30d"];
+  const first = new Intl.NumberFormat("en-US").format(series[0] ?? 0);
+  const last = new Intl.NumberFormat("en-US").format(series[series.length - 1] ?? 0);
+  const lists = [
+    {
+      id: "pages",
+      title: "Top pages",
+      caption: "By views",
+      rows: topPages.map((row) => ({ ...row, value: scaleAnalyticsDisplay(row.value, factor) })),
+    },
+    {
+      id: "referrers",
+      title: "Top referrers",
+      caption: "By sessions",
+      rows: topReferrers.map((row) => ({
+        ...row,
+        value: scaleAnalyticsDisplay(row.value, factor),
+      })),
+    },
+  ];
+
+  return (
+    <section
+      aria-label="Analytics overview"
+      className="mx-auto flex w-full max-w-6xl flex-col gap-4"
+    >
+      <header className="flex flex-wrap items-end justify-between gap-3">
+        <div className="flex flex-col gap-1">
+          <h2 className="font-display text-2xl font-semibold text-fg">Analytics</h2>
+          <p className="text-sm text-fg-secondary">
+            Product and marketing traffic across meridianhq.com.
+          </p>
+        </div>
+        <SegmentedControl
+          value={period}
+          onValueChange={setPeriod}
+          size="sm"
+          aria-label="Analytics period"
+        >
+          <SegmentedControlItem value="7d">Last 7 days</SegmentedControlItem>
+          <SegmentedControlItem value="30d">Last 30 days</SegmentedControlItem>
+          <SegmentedControlItem value="90d">Last 90 days</SegmentedControlItem>
+        </SegmentedControl>
+      </header>
+
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {overviewKpis.map((kpi) => (
+          <Card key={kpi.label} className="gap-0 py-5">
+            <CardContent className="flex items-end justify-between gap-3">
+              <Metric className="gap-1.5">
+                <MetricLabel>{kpi.label}</MetricLabel>
+                <MetricValue className="text-2xl">{kpi.value}</MetricValue>
+                <MetricDelta trend={kpi.trend}>{kpi.delta}</MetricDelta>
+              </Metric>
+              <Sparkline
+                data={kpi.series}
+                type="line"
+                area
+                tone={kpi.tone}
+                width={96}
+                height={40}
+                className="h-10 w-24 shrink-0"
+                aria-label={kpi.label + " trend over the last 10 weeks"}
+              />
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="font-display text-base">Traffic overview</CardTitle>
+          <CardDescription>{caption}</CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-2">
+          <Sparkline
+            data={series}
+            type="line"
+            area
+            tone="primary"
+            width={720}
+            height={176}
+            strokeWidth={2}
+            preserveAspectRatio="none"
+            className="h-44 w-full"
+            aria-label={"Daily sessions, " + rangeLabel + ", rising from " + first + " to " + last}
+          />
+          <div className="flex items-center justify-between text-xs text-fg-tertiary">
+            {axis.map((tick) => (
+              <span key={tick}>{tick}</span>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        {lists.map((list) => (
           <Card key={list.id} className="gap-0">
             <CardHeader>
               <CardTitle className="font-display text-base">{list.title}</CardTitle>
@@ -2782,6 +3166,15 @@ export const adminBlocks: BlockContentMap = {
         appearance: "dark",
         preview: <AnalyticsOverviewBlock />,
         code: analyticsOverviewCode,
+      },
+      {
+        id: "period",
+        name: "Period toggle",
+        description:
+          "Last 7, 30, or 90 days, with a segmented period control that updates traffic.",
+        appearance: "dark",
+        preview: <AnalyticsPeriodBlock />,
+        code: analyticsPeriodCode,
       },
       {
         id: "engagement",

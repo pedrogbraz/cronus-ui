@@ -726,6 +726,7 @@ describe("validateNoInlineMocks — anti-inline-mock gate (F3)", () => {
       "team",
       "dashboard--admin-overview",
       "analytics",
+      "analytics--period",
       "product-detail",
       "product-detail--gallery",
       "product-detail--minimal",
