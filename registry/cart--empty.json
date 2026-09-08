@@ -1,0 +1,16 @@
+{
+  "name": "cart--empty",
+  "type": "registry:block",
+  "dependencies": [
+    "@cronus-ui/ui@0.7.3",
+    "lucide-react@^0.577.0"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "cart-empty.tsx",
+      "content": "import {\n  Button,\n  Card,\n  CardContent,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n  Input,\n  Label,\n  Separator,\n} from \"@cronus-ui/ui\";\nimport { ShieldCheck } from \"lucide-react\";\n\nexport function CartEmptyBlock() {\n  return (\n    <section\n      aria-label=\"Shopping cart\"\n      className=\"mx-auto grid w-full max-w-5xl gap-6 lg:grid-cols-[1.6fr_1fr]\"\n    >\n      <Card className=\"h-fit gap-0 shadow-md\">\n        <CardHeader>\n          <CardTitle className=\"font-display text-lg\">Your cart</CardTitle>\n          <p className=\"col-span-full text-sm text-fg-secondary\">0 items</p>\n        </CardHeader>\n        <CardContent className=\"flex flex-col items-center justify-center gap-2 py-12 text-center\">\n          <p className=\"text-sm font-medium text-fg\">Your cart is empty.</p>\n          <p className=\"text-sm text-fg-secondary\">Add items to continue.</p>\n        </CardContent>\n      </Card>\n\n      <Card className=\"h-fit gap-0 shadow-md\">\n        <CardHeader>\n          <CardTitle className=\"font-display text-lg\">Order summary</CardTitle>\n        </CardHeader>\n        <CardContent className=\"flex flex-col gap-2 pt-2\">\n          <div className=\"flex items-center justify-between text-sm text-fg-secondary\">\n            <span>Subtotal</span>\n            <span className=\"text-fg\">$0.00</span>\n          </div>\n          <div className=\"flex items-center justify-between text-sm text-fg-secondary\">\n            <span>Shipping</span>\n            <span className=\"text-fg\">Free</span>\n          </div>\n        </CardContent>\n        <CardContent className=\"pt-4\">\n          <div className=\"flex flex-col gap-2\">\n            <Label htmlFor=\"cart-empty-discount\">Discount code</Label>\n            <div className=\"flex gap-2\">\n              <Input id=\"cart-empty-discount\" placeholder=\"Enter code\" className=\"flex-1\" />\n              <Button variant=\"outline\">Apply</Button>\n            </div>\n          </div>\n        </CardContent>\n        <Separator className=\"my-4\" />\n        <CardFooter className=\"flex-col items-stretch gap-3\">\n          <div className=\"flex items-baseline justify-between\">\n            <span className=\"font-medium text-fg\">Total</span>\n            <span className=\"font-display text-2xl font-semibold text-fg\">$0.00</span>\n          </div>\n          <Button variant=\"primary\" size=\"lg\" className=\"w-full\">\n            Checkout\n          </Button>\n          <p className=\"flex items-center justify-center gap-2 text-xs text-fg-tertiary\">\n            <ShieldCheck className=\"size-3.5\" aria-hidden=\"true\" />\n            Secure checkout · Free returns within 60 days\n          </p>\n        </CardFooter>\n      </Card>\n    </section>\n  );\n}",
+      "target": "block"
+    }
+  ]
+}

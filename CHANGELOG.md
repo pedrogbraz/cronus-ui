@@ -54,6 +54,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`api-keys--empty`.** The key list stays the api-keys default; the variant is
   the same chrome with no keys yet.
   `add-page --blocks api-keys=empty`.
+- **`cart--empty`.** The cart page stays the store `/cart` default; the variant
+  is the same chrome with no line items.
+  `add-page --blocks cart=empty`.
 
 ## [0.7.3] — 2026-09-07
 

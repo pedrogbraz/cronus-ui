@@ -369,7 +369,10 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     slug: "cart",
     file: "store.tsx",
     constName: "cartPageCode",
-    variants: [{ id: "drawer", constName: "cartDrawerCode" }],
+    variants: [
+      { id: "empty", constName: "cartEmptyCode" },
+      { id: "drawer", constName: "cartDrawerCode" },
+    ],
   },
   {
     slug: "order-tracking",

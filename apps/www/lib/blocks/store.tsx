@@ -1059,6 +1059,141 @@ export function CartPageBlock() {
   );
 }`;
 
+/* ──────────────────────────────────────────────────────────────────────────
+ * Cart / empty — same two-column chrome, no line items
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function CartEmptyBlock() {
+  return (
+    <section
+      aria-label="Shopping cart"
+      className="mx-auto grid w-full max-w-5xl gap-6 lg:grid-cols-[1.6fr_1fr]"
+    >
+      <Card className="h-fit gap-0 shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg">Your cart</CardTitle>
+          <p className="col-span-full text-sm text-fg-secondary">0 items</p>
+        </CardHeader>
+        <CardContent className="flex flex-col items-center justify-center gap-2 py-12 text-center">
+          <p className="text-sm font-medium text-fg">Your cart is empty.</p>
+          <p className="text-sm text-fg-secondary">Add items to continue.</p>
+        </CardContent>
+      </Card>
+
+      <Card className="h-fit gap-0 shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg">Order summary</CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-2 pt-2">
+          <div className="flex items-center justify-between text-sm text-fg-secondary">
+            <span>Subtotal</span>
+            <span className="text-fg">$0.00</span>
+          </div>
+          <div className="flex items-center justify-between text-sm text-fg-secondary">
+            <span>Shipping</span>
+            <span className="text-fg">Free</span>
+          </div>
+        </CardContent>
+        <CardContent className="pt-4">
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="cart-empty-discount">Discount code</Label>
+            <div className="flex gap-2">
+              <Input id="cart-empty-discount" placeholder="Enter code" className="flex-1" />
+              <Button variant="outline">Apply</Button>
+            </div>
+          </div>
+        </CardContent>
+        <Separator className="my-4" />
+        <CardFooter className="flex-col items-stretch gap-3">
+          <div className="flex items-baseline justify-between">
+            <span className="font-medium text-fg">Total</span>
+            <span className="font-display text-2xl font-semibold text-fg">$0.00</span>
+          </div>
+          <Button variant="primary" size="lg" className="w-full">
+            Checkout
+          </Button>
+          <p className="flex items-center justify-center gap-2 text-xs text-fg-tertiary">
+            <ShieldCheck className="size-3.5" aria-hidden="true" />
+            Secure checkout · Free returns within 60 days
+          </p>
+        </CardFooter>
+      </Card>
+    </section>
+  );
+}
+
+const cartEmptyCode = `import {
+  Button,
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Input,
+  Label,
+  Separator,
+} from "@cronus-ui/ui";
+import { ShieldCheck } from "lucide-react";
+
+export function CartEmptyBlock() {
+  return (
+    <section
+      aria-label="Shopping cart"
+      className="mx-auto grid w-full max-w-5xl gap-6 lg:grid-cols-[1.6fr_1fr]"
+    >
+      <Card className="h-fit gap-0 shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg">Your cart</CardTitle>
+          <p className="col-span-full text-sm text-fg-secondary">0 items</p>
+        </CardHeader>
+        <CardContent className="flex flex-col items-center justify-center gap-2 py-12 text-center">
+          <p className="text-sm font-medium text-fg">Your cart is empty.</p>
+          <p className="text-sm text-fg-secondary">Add items to continue.</p>
+        </CardContent>
+      </Card>
+
+      <Card className="h-fit gap-0 shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg">Order summary</CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-2 pt-2">
+          <div className="flex items-center justify-between text-sm text-fg-secondary">
+            <span>Subtotal</span>
+            <span className="text-fg">$0.00</span>
+          </div>
+          <div className="flex items-center justify-between text-sm text-fg-secondary">
+            <span>Shipping</span>
+            <span className="text-fg">Free</span>
+          </div>
+        </CardContent>
+        <CardContent className="pt-4">
+          <div className="flex flex-col gap-2">
+            <Label htmlFor="cart-empty-discount">Discount code</Label>
+            <div className="flex gap-2">
+              <Input id="cart-empty-discount" placeholder="Enter code" className="flex-1" />
+              <Button variant="outline">Apply</Button>
+            </div>
+          </div>
+        </CardContent>
+        <Separator className="my-4" />
+        <CardFooter className="flex-col items-stretch gap-3">
+          <div className="flex items-baseline justify-between">
+            <span className="font-medium text-fg">Total</span>
+            <span className="font-display text-2xl font-semibold text-fg">$0.00</span>
+          </div>
+          <Button variant="primary" size="lg" className="w-full">
+            Checkout
+          </Button>
+          <p className="flex items-center justify-center gap-2 text-xs text-fg-tertiary">
+            <ShieldCheck className="size-3.5" aria-hidden="true" />
+            Secure checkout · Free returns within 60 days
+          </p>
+        </CardFooter>
+      </Card>
+    </section>
+  );
+}`;
+
 export function CartDrawerBlock() {
   return (
     <section
@@ -2764,6 +2899,14 @@ export const storeBlocks: BlockContentMap = {
         appearance: "dark",
         preview: <CartPageBlock />,
         code: cartPageCode,
+      },
+      {
+        id: "empty",
+        name: "Empty",
+        description: "The same cart chrome with no line items.",
+        appearance: "light",
+        preview: <CartEmptyBlock />,
+        code: cartEmptyCode,
       },
       {
         id: "drawer",

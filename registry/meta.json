@@ -497,7 +497,7 @@
     },
     "cart": {
       "title": "Cart",
-      "description": "Shopping cart surfaces: a full cart page with editable line items and order summary, and a static slide-over drawer composition.",
+      "description": "Shopping cart surfaces: a full cart page with editable line items and order summary, an empty cart, and a static slide-over drawer composition.",
       "category": "store",
       "exportName": "CartPageBlock",
       "kind": "page",
@@ -511,6 +511,19 @@
           "item": "cart",
           "exportName": "CartPageBlock",
           "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce"
+          ]
+        },
+        {
+          "id": "empty",
+          "name": "Empty",
+          "description": "The same cart chrome with no line items.",
+          "item": "cart--empty",
+          "exportName": "CartEmptyBlock",
+          "style": "operational",
           "palette": "semantic",
           "motion": "none",
           "intents": [

@@ -998,12 +998,17 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
         slug: "cart",
         name: "Cart",
         description:
-          "Shopping cart surfaces: a full cart page with editable line items and order summary, and a static slide-over drawer composition.",
+          "Shopping cart surfaces: a full cart page with editable line items and order summary, an empty cart, and a static slide-over drawer composition.",
         variants: [
           {
             id: "page",
             name: "Cart page",
             description: "Full cart page with editable line items and an order summary.",
+          },
+          {
+            id: "empty",
+            name: "Empty",
+            description: "The same cart chrome with no line items.",
           },
           {
             id: "drawer",
