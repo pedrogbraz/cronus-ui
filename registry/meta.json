@@ -1727,7 +1727,36 @@
       "kind": "page",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": [],
+      "variants": [
+        {
+          "id": "classic",
+          "name": "Classic card",
+          "description": "Centered 6-digit code card with a verify action and a resend link.",
+          "item": "otp",
+          "exportName": "OtpBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "auth",
+            "form"
+          ]
+        },
+        {
+          "id": "split",
+          "name": "Split panel",
+          "description": "Brand gradient panel with a customer testimonial beside the 6-digit code form.",
+          "item": "otp--split",
+          "exportName": "OtpSplitBlock",
+          "style": "editorial",
+          "palette": "aurora",
+          "motion": "smooth",
+          "intents": [
+            "auth",
+            "form"
+          ]
+        }
+      ],
       "style": "default",
       "palette": "semantic",
       "motion": "none",

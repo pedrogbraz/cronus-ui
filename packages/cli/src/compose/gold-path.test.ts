@@ -5,6 +5,7 @@ import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { DEFAULT_CONFIG } from "../config.js";
 import {
   applyGoldPath,
+  GOLD_PATH_AUTH_SPLIT_FILES,
   isGoldPathTemplate,
   patchChromeSource,
   patchGoldPathAccountIssuer,
@@ -332,6 +333,19 @@ describe("patchGoldPathAuthSplit", () => {
     const once = patchGoldPathAuthSplit(LOGIN_SPLIT);
     expect(once).toBeDefined();
     expect(patchGoldPathAuthSplit(once as string)).toBe(once);
+  });
+
+  it("covers otp-split and keeps the 2FA copy after stripping Dana Reyes", () => {
+    expect(GOLD_PATH_AUTH_SPLIT_FILES).toContain("otp-split.tsx");
+    const source = LOGIN_SPLIT.replace(
+      "Sign in to your Cronus workspace.",
+      "Enter the code to continue in your Cronus workspace.",
+    );
+    const out = patchGoldPathAuthSplit(source);
+    expect(out).toBeDefined();
+    expect(out).toContain("Enter the code to continue in your Cronus workspace.");
+    expect(out).not.toContain("Dana Reyes");
+    expect(patchGoldPathAuthSplit(out as string)).toBe(out);
   });
 });
 

@@ -207,7 +207,12 @@ const BLOCK_MANIFEST: ReadonlyArray<{
       { id: "reset", constName: "forgotPasswordResetCode" },
     ],
   },
-  { slug: "otp", file: "auth.tsx", constName: "otpCode" },
+  {
+    slug: "otp",
+    file: "auth.tsx",
+    constName: "otpCode",
+    variants: [{ id: "split", constName: "otpSplitCode" }],
+  },
   {
     slug: "magic-link",
     file: "auth.tsx",

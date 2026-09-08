@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`settings--workspace`.** Account settings keep the profile card; the new
   variant is workspace name, slug, language/timezone defaults, and a danger
   zone. saas `/settings` stacks it. `add-page --blocks settings=workspace`.
+- **`otp--split`.** Two-factor code sits in the same split chrome as
+  login/signup/forgot-password. Catalog keeps Dana Reyes; gold-path
+  `upgrade` / `add-page` strip it. `add-page --blocks otp=split`.
 
 ## [0.7.2] — 2026-09-07
 

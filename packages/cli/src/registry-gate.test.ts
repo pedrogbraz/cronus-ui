@@ -259,8 +259,8 @@ describe("build-registry — variant items (F2)", () => {
   });
 
   it("never emits a variant item for a block with only its default variant", () => {
-    // otp declares no variants → no otp--* items exist.
-    expect(items.some((i) => i.name.startsWith("otp--"))).toBe(false);
+    // welcome declares no variants → no welcome--* items exist.
+    expect(items.some((i) => i.name.startsWith("welcome--"))).toBe(false);
   });
 });
 

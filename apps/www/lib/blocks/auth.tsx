@@ -3670,6 +3670,206 @@ export function OtpBlock() {
 }`;
 
 /* ──────────────────────────────────────────────────────────────────────────
+ * 4b. OTP / split — brand panel beside the 6-digit code
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function OtpSplitBlock() {
+  return (
+    <div className="flex w-full items-center justify-center py-4">
+      <div className="grid w-full max-w-4xl overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-lg lg:grid-cols-2">
+        <div className="flex flex-col justify-center gap-6 p-8 sm:p-10 lg:order-2">
+          <div className="flex flex-col gap-1">
+            <h2 className="font-display text-xl font-semibold text-fg">
+              Two-factor authentication
+            </h2>
+            <p className="text-sm text-fg-secondary">
+              Enter the code to continue in your Cronus workspace.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <div className="flex justify-center lg:justify-start">
+              <InputOTP maxLength={6} aria-label="6-digit two-factor code">
+                <InputOTPGroup className="gap-2">
+                  <InputOTPSlot index={0} />
+                  <InputOTPSlot index={1} />
+                  <InputOTPSlot index={2} />
+                  <InputOTPSlot index={3} />
+                  <InputOTPSlot index={4} />
+                  <InputOTPSlot index={5} />
+                </InputOTPGroup>
+              </InputOTP>
+            </div>
+
+            <Button variant="primary" size="lg" className="w-full">
+              Verify
+            </Button>
+          </div>
+
+          <p className="text-sm text-fg-secondary">
+            Didn&apos;t receive a code?{" "}
+            <a
+              href="#resend"
+              className="font-medium text-primary-strong underline-offset-4 hover:underline"
+            >
+              Resend
+            </a>
+          </p>
+
+          <p className="text-sm text-fg-secondary">
+            <a
+              href="/login"
+              className="inline-flex items-center justify-center gap-1.5 font-medium text-primary-strong underline-offset-4 hover:underline"
+            >
+              <ArrowLeft className="size-4" aria-hidden="true" />
+              Back to sign in
+            </a>
+          </p>
+        </div>
+
+        {/* Brand panel */}
+        <div className="relative overflow-hidden bg-gradient-primary-strong p-8 sm:p-10 lg:order-1">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-gradient-aurora opacity-20 blur-3xl"
+          />
+          <div className="relative flex h-full flex-col justify-between gap-12">
+            <div className="flex items-center gap-2.5">
+              <span className="inline-flex size-9 items-center justify-center rounded-xl bg-primary-foreground/15 text-primary-foreground">
+                <ChartColumnIncreasing className="size-4" aria-hidden="true" />
+              </span>
+              <span className="font-display text-lg font-semibold text-primary-foreground">
+                Cronus
+              </span>
+            </div>
+
+            <figure className="flex flex-col gap-5">
+              <Quote className="size-7 text-primary-foreground/50" aria-hidden="true" />
+              <blockquote className="font-display text-xl font-medium leading-snug text-primary-foreground">
+                “Cronus replaced four tools on day one — and our checkout conversion is up 23%.”
+              </blockquote>
+              <figcaption className="flex items-center gap-3">
+                <Avatar>
+                  <AvatarFallback>DR</AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col">
+                  <span className="text-sm font-medium text-primary-foreground">Dana Reyes</span>
+                  <span className="text-sm text-primary-foreground/75">
+                    Head of Growth, Northwind Labs
+                  </span>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const otpSplitCode = `import {
+  Avatar,
+  AvatarFallback,
+  Button,
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@cronus-ui/ui";
+import { ArrowLeft, ChartColumnIncreasing, Quote } from "lucide-react";
+
+export function OtpSplitBlock() {
+  return (
+    <div className="flex w-full items-center justify-center py-4">
+      <div className="grid w-full max-w-4xl overflow-hidden rounded-2xl border border-border bg-surface-raised shadow-lg lg:grid-cols-2">
+        <div className="flex flex-col justify-center gap-6 p-8 sm:p-10 lg:order-2">
+          <div className="flex flex-col gap-1">
+            <h2 className="font-display text-xl font-semibold text-fg">Two-factor authentication</h2>
+            <p className="text-sm text-fg-secondary">
+              Enter the code to continue in your Cronus workspace.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <div className="flex justify-center lg:justify-start">
+              <InputOTP maxLength={6} aria-label="6-digit two-factor code">
+                <InputOTPGroup className="gap-2">
+                  <InputOTPSlot index={0} />
+                  <InputOTPSlot index={1} />
+                  <InputOTPSlot index={2} />
+                  <InputOTPSlot index={3} />
+                  <InputOTPSlot index={4} />
+                  <InputOTPSlot index={5} />
+                </InputOTPGroup>
+              </InputOTP>
+            </div>
+
+            <Button variant="primary" size="lg" className="w-full">
+              Verify
+            </Button>
+          </div>
+
+          <p className="text-sm text-fg-secondary">
+            Didn&apos;t receive a code?{" "}
+            <a
+              href="#resend"
+              className="font-medium text-primary-strong underline-offset-4 hover:underline"
+            >
+              Resend
+            </a>
+          </p>
+
+          <p className="text-sm text-fg-secondary">
+            <a
+              href="/login"
+              className="inline-flex items-center justify-center gap-1.5 font-medium text-primary-strong underline-offset-4 hover:underline"
+            >
+              <ArrowLeft className="size-4" aria-hidden="true" />
+              Back to sign in
+            </a>
+          </p>
+        </div>
+
+        {/* Brand panel */}
+        <div className="relative overflow-hidden bg-gradient-primary-strong p-8 sm:p-10 lg:order-1">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 bg-gradient-aurora opacity-20 blur-3xl"
+          />
+          <div className="relative flex h-full flex-col justify-between gap-12">
+            <div className="flex items-center gap-2.5">
+              <span className="inline-flex size-9 items-center justify-center rounded-xl bg-primary-foreground/15 text-primary-foreground">
+                <ChartColumnIncreasing className="size-4" aria-hidden="true" />
+              </span>
+              <span className="font-display text-lg font-semibold text-primary-foreground">
+                Cronus
+              </span>
+            </div>
+
+            <figure className="flex flex-col gap-5">
+              <Quote className="size-7 text-primary-foreground/50" aria-hidden="true" />
+              <blockquote className="font-display text-xl font-medium leading-snug text-primary-foreground">
+                “Cronus replaced four tools on day one — and our checkout conversion is up 23%.”
+              </blockquote>
+              <figcaption className="flex items-center gap-3">
+                <Avatar>
+                  <AvatarFallback>DR</AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col">
+                  <span className="text-sm font-medium text-primary-foreground">Dana Reyes</span>
+                  <span className="text-sm text-primary-foreground/75">
+                    Head of Growth, Northwind Labs
+                  </span>
+                </div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}`;
+
+/* ──────────────────────────────────────────────────────────────────────────
  * 5. Magic link — request + sent
  * ────────────────────────────────────────────────────────────────────────── */
 
@@ -4018,7 +4218,29 @@ export const authBlocks: BlockContentMap = {
       },
     ],
   },
-  otp: { preview: <OtpBlock />, code: otpCode },
+  otp: {
+    preview: <OtpBlock />,
+    code: otpCode,
+    variants: [
+      {
+        id: "classic",
+        name: "Classic card",
+        description: "Centered 6-digit code card with a verify action and a resend link.",
+        appearance: "dark",
+        preview: <OtpBlock />,
+        code: otpCode,
+      },
+      {
+        id: "split",
+        name: "Split panel",
+        description:
+          "Brand gradient panel with a customer testimonial beside the 6-digit code form.",
+        appearance: "dark",
+        preview: <OtpSplitBlock />,
+        code: otpSplitCode,
+      },
+    ],
+  },
   "magic-link": {
     preview: <MagicLinkBlock />,
     code: magicLinkCode,

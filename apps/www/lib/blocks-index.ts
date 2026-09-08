@@ -119,6 +119,19 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
         slug: "otp",
         name: "Two-Factor Code",
         description: "A two-factor authentication card with a six-digit one-time code entry.",
+        variants: [
+          {
+            id: "classic",
+            name: "Classic card",
+            description: "Centered 6-digit code card with a verify action and a resend link.",
+          },
+          {
+            id: "split",
+            name: "Split panel",
+            description:
+              "Brand gradient panel with a customer testimonial beside the 6-digit code form.",
+          },
+        ],
       },
       {
         slug: "magic-link",
