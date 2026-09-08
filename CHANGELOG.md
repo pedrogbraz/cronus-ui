@@ -42,6 +42,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`user-management--empty`.** The directory table stays the admin `/users`
   default; the variant is the same chrome with no members yet.
   `add-page --blocks user-management=empty`.
+- **`kanban-board--empty`.** The sprint board stays the admin `/board` default;
+  the variant is the same four columns with no cards yet.
+  `add-page --blocks kanban-board=empty`.
 
 ## [0.7.3] — 2026-09-07
 

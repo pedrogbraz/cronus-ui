@@ -1262,7 +1262,7 @@
     },
     "kanban-board": {
       "title": "Kanban board",
-      "description": "A sprint board with four columns of labeled cards — Badge labels, assignee avatar stacks, due dates and comment counts — plus a dense compact variant with per-column WIP limits and at-limit indicators.",
+      "description": "A sprint board with four columns of labeled cards — Badge labels, assignee avatar stacks, due dates and comment counts — plus an empty board and a dense compact variant with per-column WIP limits and at-limit indicators.",
       "category": "admin",
       "exportName": "KanbanBoardBlock",
       "kind": "section",
@@ -1275,6 +1275,19 @@
           "description": "Four columns of labeled cards with assignees, due dates, comment counts and add actions.",
           "item": "kanban-board",
           "exportName": "KanbanBoardBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "admin"
+          ]
+        },
+        {
+          "id": "empty",
+          "name": "Empty",
+          "description": "The same four columns with no cards yet.",
+          "item": "kanban-board--empty",
+          "exportName": "KanbanBoardEmptyBlock",
           "style": "operational",
           "palette": "semantic",
           "motion": "none",

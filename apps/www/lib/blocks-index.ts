@@ -741,13 +741,18 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
         slug: "kanban-board",
         name: "Kanban board",
         description:
-          "A sprint board with four columns of labeled cards — Badge labels, assignee avatar stacks, due dates and comment counts — plus a dense compact variant with per-column WIP limits and at-limit indicators.",
+          "A sprint board with four columns of labeled cards — Badge labels, assignee avatar stacks, due dates and comment counts — plus an empty board and a dense compact variant with per-column WIP limits and at-limit indicators.",
         variants: [
           {
             id: "default",
             name: "Sprint board",
             description:
               "Four columns of labeled cards with assignees, due dates, comment counts and add actions.",
+          },
+          {
+            id: "empty",
+            name: "Empty",
+            description: "The same four columns with no cards yet.",
           },
           {
             id: "compact",

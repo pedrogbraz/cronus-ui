@@ -439,7 +439,10 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     slug: "kanban-board",
     file: "admin.tsx",
     constName: "kanbanBoardCode",
-    variants: [{ id: "compact", constName: "kanbanBoardCompactCode" }],
+    variants: [
+      { id: "empty", constName: "kanbanBoardEmptyCode" },
+      { id: "compact", constName: "kanbanBoardCompactCode" },
+    ],
   },
   {
     slug: "audit-log",

@@ -3018,6 +3018,15 @@
     "registryDependencies": []
   },
   {
+    "name": "kanban-board--empty",
+    "type": "registry:block",
+    "dependencies": [
+      "@cronus-ui/ui@0.7.3",
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": []
+  },
+  {
     "name": "kanban-board--compact",
     "type": "registry:block",
     "dependencies": [

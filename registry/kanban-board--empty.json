@@ -1,0 +1,16 @@
+{
+  "name": "kanban-board--empty",
+  "type": "registry:block",
+  "dependencies": [
+    "@cronus-ui/ui@0.7.3",
+    "lucide-react@^0.577.0"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "kanban-board-empty.tsx",
+      "content": "import { Badge, Button } from \"@cronus-ui/ui\";\nimport { Plus } from \"lucide-react\";\n\nconst EMPTY_BOARD_COLUMNS = [\n  { id: \"backlog\", name: \"Backlog\" },\n  { id: \"in-progress\", name: \"In progress\" },\n  { id: \"in-review\", name: \"In review\" },\n  { id: \"done\", name: \"Done\" },\n];\n\nexport function KanbanBoardEmptyBlock() {\n  return (\n    <section aria-label=\"Sprint board\" className=\"mx-auto flex w-full max-w-6xl flex-col gap-4\">\n      <header className=\"flex flex-wrap items-center justify-between gap-3\">\n        <div className=\"flex flex-col gap-1\">\n          <h2 className=\"font-display text-lg font-semibold text-fg\">Sprint 24 · Growth squad</h2>\n          <p className=\"text-sm text-fg-secondary\">No tasks yet.</p>\n        </div>\n        <Button variant=\"primary\" size=\"sm\">\n          <Plus className=\"size-4\" aria-hidden=\"true\" />\n          New task\n        </Button>\n      </header>\n\n      <div className=\"grid gap-4 sm:grid-cols-2 xl:grid-cols-4\">\n        {EMPTY_BOARD_COLUMNS.map((column) => (\n          <div key={column.id} className=\"flex flex-col gap-3 rounded-2xl bg-surface-inset p-3\">\n            <div className=\"flex items-center gap-2 px-1\">\n              <h3 className=\"text-sm font-semibold text-fg\">{column.name}</h3>\n              <Badge variant=\"secondary\">0</Badge>\n              <Button variant=\"ghost\" size=\"icon-sm\" className=\"ms-auto\">\n                <Plus className=\"size-4\" aria-hidden=\"true\" />\n                <span className=\"sr-only\">{\"Add task to \" + column.name}</span>\n              </Button>\n            </div>\n            <p className=\"px-1 py-8 text-center text-sm text-fg-tertiary\">No cards yet.</p>\n          </div>\n        ))}\n      </div>\n    </section>\n  );\n}",
+      "target": "block"
+    }
+  ]
+}

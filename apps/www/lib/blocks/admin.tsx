@@ -2475,6 +2475,93 @@ export function KanbanBoardBlock() {
   );
 }`;
 
+/* ──────────────────────────────────────────────────────────────────────────
+ * 3b. Kanban / empty — same four columns, no cards yet
+ * ────────────────────────────────────────────────────────────────────────── */
+
+const EMPTY_BOARD_COLUMNS = [
+  { id: "backlog", name: "Backlog" },
+  { id: "in-progress", name: "In progress" },
+  { id: "in-review", name: "In review" },
+  { id: "done", name: "Done" },
+];
+
+export function KanbanBoardEmptyBlock() {
+  return (
+    <section aria-label="Sprint board" className="mx-auto flex w-full max-w-6xl flex-col gap-4">
+      <header className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-col gap-1">
+          <h2 className="font-display text-lg font-semibold text-fg">Sprint 24 · Growth squad</h2>
+          <p className="text-sm text-fg-secondary">No tasks yet.</p>
+        </div>
+        <Button variant="primary" size="sm">
+          <Plus className="size-4" aria-hidden="true" />
+          New task
+        </Button>
+      </header>
+
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {EMPTY_BOARD_COLUMNS.map((column) => (
+          <div key={column.id} className="flex flex-col gap-3 rounded-2xl bg-surface-inset p-3">
+            <div className="flex items-center gap-2 px-1">
+              <h3 className="text-sm font-semibold text-fg">{column.name}</h3>
+              <Badge variant="secondary">0</Badge>
+              <Button variant="ghost" size="icon-sm" className="ms-auto">
+                <Plus className="size-4" aria-hidden="true" />
+                <span className="sr-only">{"Add task to " + column.name}</span>
+              </Button>
+            </div>
+            <p className="px-1 py-8 text-center text-sm text-fg-tertiary">No cards yet.</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+const kanbanBoardEmptyCode = `import { Badge, Button } from "@cronus-ui/ui";
+import { Plus } from "lucide-react";
+
+const EMPTY_BOARD_COLUMNS = [
+  { id: "backlog", name: "Backlog" },
+  { id: "in-progress", name: "In progress" },
+  { id: "in-review", name: "In review" },
+  { id: "done", name: "Done" },
+];
+
+export function KanbanBoardEmptyBlock() {
+  return (
+    <section aria-label="Sprint board" className="mx-auto flex w-full max-w-6xl flex-col gap-4">
+      <header className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-col gap-1">
+          <h2 className="font-display text-lg font-semibold text-fg">Sprint 24 · Growth squad</h2>
+          <p className="text-sm text-fg-secondary">No tasks yet.</p>
+        </div>
+        <Button variant="primary" size="sm">
+          <Plus className="size-4" aria-hidden="true" />
+          New task
+        </Button>
+      </header>
+
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {EMPTY_BOARD_COLUMNS.map((column) => (
+          <div key={column.id} className="flex flex-col gap-3 rounded-2xl bg-surface-inset p-3">
+            <div className="flex items-center gap-2 px-1">
+              <h3 className="text-sm font-semibold text-fg">{column.name}</h3>
+              <Badge variant="secondary">0</Badge>
+              <Button variant="ghost" size="icon-sm" className="ms-auto">
+                <Plus className="size-4" aria-hidden="true" />
+                <span className="sr-only">{"Add task to " + column.name}</span>
+              </Button>
+            </div>
+            <p className="px-1 py-8 text-center text-sm text-fg-tertiary">No cards yet.</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}`;
+
 interface CompactTask {
   code: string;
   title: string;
@@ -3547,6 +3634,14 @@ export const adminBlocks: BlockContentMap = {
         appearance: "dark",
         preview: <KanbanBoardBlock />,
         code: kanbanBoardCode,
+      },
+      {
+        id: "empty",
+        name: "Empty",
+        description: "The same four columns with no cards yet.",
+        appearance: "light",
+        preview: <KanbanBoardEmptyBlock />,
+        code: kanbanBoardEmptyCode,
       },
       {
         id: "compact",
