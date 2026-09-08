@@ -368,6 +368,134 @@ export function SetupWizardBlock() {
 }`;
 
 /* ──────────────────────────────────────────────────────────────────────────
+ * 2b. Setup wizard / done — last step, workspace ready
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function SetupWizardDoneBlock() {
+  return (
+    <div className="flex w-full items-center justify-center py-4">
+      <Card className="w-full max-w-2xl gap-6 shadow-lg">
+        <CardHeader>
+          <Stepper value={3} orientation="horizontal">
+            <StepperList>
+              <StepperItem step={0}>
+                <StepperIndicator />
+                <StepperTitle>Account</StepperTitle>
+                <StepperSeparator />
+              </StepperItem>
+              <StepperItem step={1}>
+                <StepperIndicator />
+                <StepperTitle>Workspace</StepperTitle>
+                <StepperSeparator />
+              </StepperItem>
+              <StepperItem step={2}>
+                <StepperIndicator />
+                <StepperTitle>Team</StepperTitle>
+                <StepperSeparator />
+              </StepperItem>
+              <StepperItem step={3}>
+                <StepperIndicator />
+                <StepperTitle>Done</StepperTitle>
+              </StepperItem>
+            </StepperList>
+          </Stepper>
+        </CardHeader>
+
+        <CardContent className="flex flex-col items-center gap-4 py-4 text-center">
+          <span className="inline-flex size-11 items-center justify-center rounded-xl bg-success/10 text-success">
+            <Check className="size-5" aria-hidden="true" />
+          </span>
+          <div className="flex flex-col gap-1">
+            <CardTitle className="font-display text-xl">Workspace ready</CardTitle>
+            <p className="text-sm text-fg-secondary">
+              Your workspace is set up. You can change the name and URL later.
+            </p>
+          </div>
+        </CardContent>
+
+        <CardFooter className="flex items-center justify-between">
+          <Button variant="outline">Back</Button>
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-fg-tertiary">Step 4 of 4</span>
+            <Button variant="primary">Go to dashboard</Button>
+          </div>
+        </CardFooter>
+      </Card>
+    </div>
+  );
+}
+
+const setupWizardDoneCode = `import {
+  Button,
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Stepper,
+  StepperIndicator,
+  StepperItem,
+  StepperList,
+  StepperSeparator,
+  StepperTitle,
+} from "@cronus-ui/ui";
+import { Check } from "lucide-react";
+
+export function SetupWizardDoneBlock() {
+  return (
+    <div className="flex w-full items-center justify-center py-4">
+      <Card className="w-full max-w-2xl gap-6 shadow-lg">
+        <CardHeader>
+          <Stepper value={3} orientation="horizontal">
+            <StepperList>
+              <StepperItem step={0}>
+                <StepperIndicator />
+                <StepperTitle>Account</StepperTitle>
+                <StepperSeparator />
+              </StepperItem>
+              <StepperItem step={1}>
+                <StepperIndicator />
+                <StepperTitle>Workspace</StepperTitle>
+                <StepperSeparator />
+              </StepperItem>
+              <StepperItem step={2}>
+                <StepperIndicator />
+                <StepperTitle>Team</StepperTitle>
+                <StepperSeparator />
+              </StepperItem>
+              <StepperItem step={3}>
+                <StepperIndicator />
+                <StepperTitle>Done</StepperTitle>
+              </StepperItem>
+            </StepperList>
+          </Stepper>
+        </CardHeader>
+
+        <CardContent className="flex flex-col items-center gap-4 py-4 text-center">
+          <span className="inline-flex size-11 items-center justify-center rounded-xl bg-success/10 text-success">
+            <Check className="size-5" aria-hidden="true" />
+          </span>
+          <div className="flex flex-col gap-1">
+            <CardTitle className="font-display text-xl">Workspace ready</CardTitle>
+            <p className="text-sm text-fg-secondary">
+              Your workspace is set up. You can change the name and URL later.
+            </p>
+          </div>
+        </CardContent>
+
+        <CardFooter className="flex items-center justify-between">
+          <Button variant="outline">Back</Button>
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-fg-tertiary">Step 4 of 4</span>
+            <Button variant="primary">Go to dashboard</Button>
+          </div>
+        </CardFooter>
+      </Card>
+    </div>
+  );
+}`;
+
+/* ──────────────────────────────────────────────────────────────────────────
  * 3. Setup checklist — progress bar + per-item actions
  * ────────────────────────────────────────────────────────────────────────── */
 
@@ -779,7 +907,28 @@ export function SetupChecklistCompleteBlock() {
 
 export const onboardingBlocks: BlockContentMap = {
   welcome: { preview: <WelcomeBlock />, code: welcomeCode },
-  "setup-wizard": { preview: <SetupWizardBlock />, code: setupWizardCode },
+  "setup-wizard": {
+    preview: <SetupWizardBlock />,
+    code: setupWizardCode,
+    variants: [
+      {
+        id: "workspace",
+        name: "Workspace",
+        description: "Step 2 of 4 — name the workspace and choose its URL.",
+        appearance: "dark",
+        preview: <SetupWizardBlock />,
+        code: setupWizardCode,
+      },
+      {
+        id: "done",
+        name: "Done",
+        description: "Last step — workspace ready, with a go-to-dashboard action.",
+        appearance: "light",
+        preview: <SetupWizardDoneBlock />,
+        code: setupWizardDoneCode,
+      },
+    ],
+  },
   "setup-checklist": {
     preview: <SetupChecklistBlock />,
     code: setupChecklistCode,

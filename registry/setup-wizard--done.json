@@ -1,0 +1,16 @@
+{
+  "name": "setup-wizard--done",
+  "type": "registry:block",
+  "dependencies": [
+    "@cronus-ui/ui@0.7.3",
+    "lucide-react@^0.577.0"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "setup-wizard-done.tsx",
+      "content": "import {\n  Button,\n  Card,\n  CardContent,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n  Stepper,\n  StepperIndicator,\n  StepperItem,\n  StepperList,\n  StepperSeparator,\n  StepperTitle,\n} from \"@cronus-ui/ui\";\nimport { Check } from \"lucide-react\";\n\nexport function SetupWizardDoneBlock() {\n  return (\n    <div className=\"flex w-full items-center justify-center py-4\">\n      <Card className=\"w-full max-w-2xl gap-6 shadow-lg\">\n        <CardHeader>\n          <Stepper value={3} orientation=\"horizontal\">\n            <StepperList>\n              <StepperItem step={0}>\n                <StepperIndicator />\n                <StepperTitle>Account</StepperTitle>\n                <StepperSeparator />\n              </StepperItem>\n              <StepperItem step={1}>\n                <StepperIndicator />\n                <StepperTitle>Workspace</StepperTitle>\n                <StepperSeparator />\n              </StepperItem>\n              <StepperItem step={2}>\n                <StepperIndicator />\n                <StepperTitle>Team</StepperTitle>\n                <StepperSeparator />\n              </StepperItem>\n              <StepperItem step={3}>\n                <StepperIndicator />\n                <StepperTitle>Done</StepperTitle>\n              </StepperItem>\n            </StepperList>\n          </Stepper>\n        </CardHeader>\n\n        <CardContent className=\"flex flex-col items-center gap-4 py-4 text-center\">\n          <span className=\"inline-flex size-11 items-center justify-center rounded-xl bg-success/10 text-success\">\n            <Check className=\"size-5\" aria-hidden=\"true\" />\n          </span>\n          <div className=\"flex flex-col gap-1\">\n            <CardTitle className=\"font-display text-xl\">Workspace ready</CardTitle>\n            <p className=\"text-sm text-fg-secondary\">\n              Your workspace is set up. You can change the name and URL later.\n            </p>\n          </div>\n        </CardContent>\n\n        <CardFooter className=\"flex items-center justify-between\">\n          <Button variant=\"outline\">Back</Button>\n          <div className=\"flex items-center gap-3\">\n            <span className=\"text-sm text-fg-tertiary\">Step 4 of 4</span>\n            <Button variant=\"primary\">Go to dashboard</Button>\n          </div>\n        </CardFooter>\n      </Card>\n    </div>\n  );\n}",
+      "target": "block"
+    }
+  ]
+}

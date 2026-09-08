@@ -2287,7 +2287,34 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": [],
+      "variants": [
+        {
+          "id": "workspace",
+          "name": "Workspace",
+          "description": "Step 2 of 4 — name the workspace and choose its URL.",
+          "item": "setup-wizard",
+          "exportName": "SetupWizardBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "onboarding"
+          ]
+        },
+        {
+          "id": "done",
+          "name": "Done",
+          "description": "Last step — workspace ready, with a go-to-dashboard action.",
+          "item": "setup-wizard--done",
+          "exportName": "SetupWizardDoneBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "onboarding"
+          ]
+        }
+      ],
       "style": "default",
       "palette": "semantic",
       "motion": "none",

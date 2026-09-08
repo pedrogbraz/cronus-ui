@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`setup-checklist--complete`.** The in-progress checklist stays the saas
   `/checklist` default; the variant is 100% done with a go-to-dashboard action.
   `add-page --blocks setup-checklist=complete`.
+- **`setup-wizard--done`.** The workspace form stays the saas `/setup` default;
+  the variant is the last stepper step, workspace ready, go to dashboard.
+  `add-page --blocks setup-wizard=done`.
 
 ## [0.7.3] — 2026-09-07
 

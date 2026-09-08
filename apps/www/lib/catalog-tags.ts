@@ -257,6 +257,8 @@ const VARIANT_OVERRIDES: Record<string, TagPatch> = {
   "magic-link::split": { style: "editorial", palette: "aurora", motion: "smooth" },
   "setup-checklist::progress": { style: "default", motion: "none" },
   "setup-checklist::complete": { style: "operational", motion: "none" },
+  "setup-wizard::workspace": { style: "default", motion: "none" },
+  "setup-wizard::done": { style: "operational", motion: "none" },
   "usage-dashboard::overview": { style: "operational", motion: "none" },
   "usage-dashboard::period": { style: "operational", motion: "snappy" },
   "hero::centered": { style: "editorial", motion: "none" },

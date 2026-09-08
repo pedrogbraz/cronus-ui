@@ -569,6 +569,18 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
         slug: "setup-wizard",
         name: "Setup Wizard",
         description: "A multi-step setup flow with a stepper and a form panel.",
+        variants: [
+          {
+            id: "workspace",
+            name: "Workspace",
+            description: "Step 2 of 4 — name the workspace and choose its URL.",
+          },
+          {
+            id: "done",
+            name: "Done",
+            description: "Last step — workspace ready, with a go-to-dashboard action.",
+          },
+        ],
       },
       {
         slug: "setup-checklist",
