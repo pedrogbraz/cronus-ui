@@ -272,6 +272,7 @@ const VARIANT_OVERRIDES: Record<string, TagPatch> = {
   "billing::empty": { style: "operational", motion: "none" },
   "analytics::overview": { style: "operational", motion: "none" },
   "analytics::period": { style: "operational", motion: "snappy" },
+  "analytics::empty": { style: "operational", motion: "none" },
   "analytics::engagement": { style: "operational", motion: "none" },
   "hero::centered": { style: "editorial", motion: "none" },
   "hero::split": { style: "operational", motion: "none" },

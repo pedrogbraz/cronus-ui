@@ -428,6 +428,7 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     constName: "analyticsOverviewCode",
     variants: [
       { id: "period", constName: "analyticsPeriodCode" },
+      { id: "empty", constName: "analyticsEmptyCode" },
       { id: "engagement", constName: "analyticsEngagementCode" },
     ],
   },

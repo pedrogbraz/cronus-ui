@@ -1,0 +1,17 @@
+{
+  "name": "analytics--empty",
+  "type": "registry:block",
+  "dependencies": [
+    "@cronus-ui/ui@0.7.3"
+  ],
+  "registryDependencies": [
+    "demo-saas"
+  ],
+  "files": [
+    {
+      "path": "analytics-empty.tsx",
+      "content": "import {\n  Card,\n  CardContent,\n  CardDescription,\n  CardHeader,\n  CardTitle,\n  Metric,\n  MetricLabel,\n  MetricValue,\n  Sparkline,\n} from \"@cronus-ui/ui\";\nimport { KPIS } from \"../lib/demo-saas.js\";\n\nconst KPI_TONES = [\"primary\", \"info\", \"success\", \"warning\"] as const;\nconst ANALYTICS_EMPTY_TREND = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];\n\nconst overviewKpis = KPIS.map((kpi, i) => ({\n  ...kpi,\n  tone: KPI_TONES[i] ?? \"primary\",\n}));\n\nexport function AnalyticsEmptyBlock() {\n  return (\n    <section\n      aria-label=\"Analytics overview\"\n      className=\"mx-auto flex w-full max-w-6xl flex-col gap-4\"\n    >\n      <header className=\"flex flex-wrap items-end justify-between gap-3\">\n        <div className=\"flex flex-col gap-1\">\n          <h2 className=\"font-display text-2xl font-semibold text-fg\">Analytics</h2>\n          <p className=\"text-sm text-fg-secondary\">No traffic recorded yet.</p>\n        </div>\n      </header>\n\n      <div className=\"grid gap-4 sm:grid-cols-2 xl:grid-cols-4\">\n        {overviewKpis.map((kpi) => (\n          <Card key={kpi.label} className=\"gap-0 py-5\">\n            <CardContent className=\"flex items-end justify-between gap-3\">\n              <Metric className=\"gap-1.5\">\n                <MetricLabel>{kpi.label}</MetricLabel>\n                <MetricValue className=\"text-2xl text-fg-tertiary\">—</MetricValue>\n              </Metric>\n              <Sparkline\n                data={ANALYTICS_EMPTY_TREND}\n                type=\"line\"\n                area\n                tone={kpi.tone}\n                width={96}\n                height={40}\n                className=\"h-10 w-24 shrink-0\"\n                aria-label={kpi.label + \" trend\"}\n              />\n            </CardContent>\n          </Card>\n        ))}\n      </div>\n\n      <Card>\n        <CardHeader>\n          <CardTitle className=\"font-display text-base\">Traffic overview</CardTitle>\n          <CardDescription>No sessions yet.</CardDescription>\n        </CardHeader>\n        <CardContent className=\"flex flex-col items-center justify-center gap-2 py-12 text-center\">\n          <p className=\"text-sm text-fg-tertiary\">\n            Traffic will show up here after the first visit.\n          </p>\n        </CardContent>\n      </Card>\n\n      <div className=\"grid gap-4 lg:grid-cols-2\">\n        <Card className=\"gap-0\">\n          <CardHeader>\n            <CardTitle className=\"font-display text-base\">Top pages</CardTitle>\n            <CardDescription>By views</CardDescription>\n          </CardHeader>\n          <CardContent className=\"py-8 text-center text-sm text-fg-tertiary\">\n            No data yet.\n          </CardContent>\n        </Card>\n        <Card className=\"gap-0\">\n          <CardHeader>\n            <CardTitle className=\"font-display text-base\">Top referrers</CardTitle>\n            <CardDescription>By sessions</CardDescription>\n          </CardHeader>\n          <CardContent className=\"py-8 text-center text-sm text-fg-tertiary\">\n            No data yet.\n          </CardContent>\n        </Card>\n      </div>\n    </section>\n  );\n}",
+      "target": "block"
+    }
+  ]
+}

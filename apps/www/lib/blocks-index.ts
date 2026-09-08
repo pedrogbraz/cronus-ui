@@ -720,6 +720,11 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
               "Last 7, 30, or 90 days, with a segmented period control that updates traffic.",
           },
           {
+            id: "empty",
+            name: "Empty",
+            description: "The same analytics layout with no traffic recorded yet.",
+          },
+          {
             id: "engagement",
             name: "Engagement cohorts",
             description:

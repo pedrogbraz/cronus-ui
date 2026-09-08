@@ -103,6 +103,7 @@ npx cronus-ui add-page --route /usage --blocks usage-dashboard=period --nav Usag
 npx cronus-ui add-page --route /usage --blocks usage-dashboard=empty --nav Usage
 npx cronus-ui add-page --route /billing --blocks billing=empty
 npx cronus-ui add-page --route /analytics --blocks analytics=period --nav Analytics
+npx cronus-ui add-page --route /analytics --blocks analytics=empty --nav Analytics
 npx cronus-ui add-page --route /checklist --blocks setup-checklist=complete
 npx cronus-ui add-page --route /setup --blocks setup-wizard=done
 npx cronus-ui add-page --route /welcome --blocks welcome=complete

@@ -160,6 +160,20 @@
           ]
         },
         {
+          "id": "empty",
+          "name": "Empty",
+          "description": "The same analytics layout with no traffic recorded yet.",
+          "item": "analytics--empty",
+          "exportName": "AnalyticsEmptyBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "dashboard",
+            "data"
+          ]
+        },
+        {
           "id": "engagement",
           "name": "Engagement cohorts",
           "description": "Retention stat cards plus a weekly cohort heat grid built from token-colored cells.",

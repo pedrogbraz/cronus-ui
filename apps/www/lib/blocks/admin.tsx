@@ -1439,6 +1439,177 @@ export function AnalyticsPeriodBlock() {
   );
 }`;
 
+/* ──────────────────────────────────────────────────────────────────────────
+ * 2c. Analytics / empty — same layout, no traffic yet
+ * ────────────────────────────────────────────────────────────────────────── */
+
+const ANALYTICS_EMPTY_TREND = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+export function AnalyticsEmptyBlock() {
+  return (
+    <section
+      aria-label="Analytics overview"
+      className="mx-auto flex w-full max-w-6xl flex-col gap-4"
+    >
+      <header className="flex flex-wrap items-end justify-between gap-3">
+        <div className="flex flex-col gap-1">
+          <h2 className="font-display text-2xl font-semibold text-fg">Analytics</h2>
+          <p className="text-sm text-fg-secondary">No traffic recorded yet.</p>
+        </div>
+      </header>
+
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {overviewKpis.map((kpi) => (
+          <Card key={kpi.label} className="gap-0 py-5">
+            <CardContent className="flex items-end justify-between gap-3">
+              <Metric className="gap-1.5">
+                <MetricLabel>{kpi.label}</MetricLabel>
+                <MetricValue className="text-2xl text-fg-tertiary">—</MetricValue>
+              </Metric>
+              <Sparkline
+                data={ANALYTICS_EMPTY_TREND}
+                type="line"
+                area
+                tone={kpi.tone}
+                width={96}
+                height={40}
+                className="h-10 w-24 shrink-0"
+                aria-label={kpi.label + " trend"}
+              />
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="font-display text-base">Traffic overview</CardTitle>
+          <CardDescription>No sessions yet.</CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-col items-center justify-center gap-2 py-12 text-center">
+          <p className="text-sm text-fg-tertiary">
+            Traffic will show up here after the first visit.
+          </p>
+        </CardContent>
+      </Card>
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        <Card className="gap-0">
+          <CardHeader>
+            <CardTitle className="font-display text-base">Top pages</CardTitle>
+            <CardDescription>By views</CardDescription>
+          </CardHeader>
+          <CardContent className="py-8 text-center text-sm text-fg-tertiary">
+            No data yet.
+          </CardContent>
+        </Card>
+        <Card className="gap-0">
+          <CardHeader>
+            <CardTitle className="font-display text-base">Top referrers</CardTitle>
+            <CardDescription>By sessions</CardDescription>
+          </CardHeader>
+          <CardContent className="py-8 text-center text-sm text-fg-tertiary">
+            No data yet.
+          </CardContent>
+        </Card>
+      </div>
+    </section>
+  );
+}
+
+const analyticsEmptyCode = `import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Metric,
+  MetricLabel,
+  MetricValue,
+  Sparkline,
+} from "@cronus-ui/ui";
+import { KPIS } from "../lib/demo-saas.js";
+
+const KPI_TONES = ["primary", "info", "success", "warning"] as const;
+const ANALYTICS_EMPTY_TREND = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+const overviewKpis = KPIS.map((kpi, i) => ({
+  ...kpi,
+  tone: KPI_TONES[i] ?? "primary",
+}));
+
+export function AnalyticsEmptyBlock() {
+  return (
+    <section
+      aria-label="Analytics overview"
+      className="mx-auto flex w-full max-w-6xl flex-col gap-4"
+    >
+      <header className="flex flex-wrap items-end justify-between gap-3">
+        <div className="flex flex-col gap-1">
+          <h2 className="font-display text-2xl font-semibold text-fg">Analytics</h2>
+          <p className="text-sm text-fg-secondary">No traffic recorded yet.</p>
+        </div>
+      </header>
+
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        {overviewKpis.map((kpi) => (
+          <Card key={kpi.label} className="gap-0 py-5">
+            <CardContent className="flex items-end justify-between gap-3">
+              <Metric className="gap-1.5">
+                <MetricLabel>{kpi.label}</MetricLabel>
+                <MetricValue className="text-2xl text-fg-tertiary">—</MetricValue>
+              </Metric>
+              <Sparkline
+                data={ANALYTICS_EMPTY_TREND}
+                type="line"
+                area
+                tone={kpi.tone}
+                width={96}
+                height={40}
+                className="h-10 w-24 shrink-0"
+                aria-label={kpi.label + " trend"}
+              />
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="font-display text-base">Traffic overview</CardTitle>
+          <CardDescription>No sessions yet.</CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-col items-center justify-center gap-2 py-12 text-center">
+          <p className="text-sm text-fg-tertiary">
+            Traffic will show up here after the first visit.
+          </p>
+        </CardContent>
+      </Card>
+
+      <div className="grid gap-4 lg:grid-cols-2">
+        <Card className="gap-0">
+          <CardHeader>
+            <CardTitle className="font-display text-base">Top pages</CardTitle>
+            <CardDescription>By views</CardDescription>
+          </CardHeader>
+          <CardContent className="py-8 text-center text-sm text-fg-tertiary">
+            No data yet.
+          </CardContent>
+        </Card>
+        <Card className="gap-0">
+          <CardHeader>
+            <CardTitle className="font-display text-base">Top referrers</CardTitle>
+            <CardDescription>By sessions</CardDescription>
+          </CardHeader>
+          <CardContent className="py-8 text-center text-sm text-fg-tertiary">
+            No data yet.
+          </CardContent>
+        </Card>
+      </div>
+    </section>
+  );
+}`;
+
 interface RetentionStat {
   label: string;
   value: string;
@@ -3175,6 +3346,14 @@ export const adminBlocks: BlockContentMap = {
         appearance: "dark",
         preview: <AnalyticsPeriodBlock />,
         code: analyticsPeriodCode,
+      },
+      {
+        id: "empty",
+        name: "Empty",
+        description: "The same analytics layout with no traffic recorded yet.",
+        appearance: "light",
+        preview: <AnalyticsEmptyBlock />,
+        code: analyticsEmptyCode,
       },
       {
         id: "engagement",

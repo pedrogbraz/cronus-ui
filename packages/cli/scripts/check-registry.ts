@@ -273,6 +273,7 @@ export const MIGRATED_BLOCKS = [
   "dashboard--admin-overview",
   "analytics",
   "analytics--period",
+  "analytics--empty",
   "product-detail",
   "product-detail--gallery",
   "product-detail--minimal",
