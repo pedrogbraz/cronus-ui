@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.3] — 2026-09-07
+
 ### Added
 
 - **`settings--workspace`.** Account settings keep the profile card; the new
@@ -710,7 +712,8 @@ as installable packages and as copy-paste registry items you own.
 - Added per-entry gzipped bundle budgets for the published `@cronus-ui/ui` so a
   dependency or code-size regression is caught at build time.
 
-[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.2...HEAD
+[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.3...HEAD
+[0.7.3]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.2...v0.7.3
 [0.7.2]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.1...v0.7.2
 [0.7.1]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/pedrogbraz/cronus-ui/compare/v0.6.22...v0.7.0

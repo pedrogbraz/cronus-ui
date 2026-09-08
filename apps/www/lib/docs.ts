@@ -299,6 +299,15 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-09-07",
+    version: "v0.7.3",
+    status: "Released",
+    title: "settings workspace, otp split, usage period",
+    summary:
+      "settings--workspace, otp--split, and usage-dashboard--period. Gold-path add-page and upgrade strip Dana Reyes from otp-split. saas /settings stacks workspace; /billing keeps the usage overview.",
+    items: ["settings--workspace, otp--split, and usage-dashboard--period land in the catalog"],
+  },
+  {
+    date: "2026-09-07",
     version: "v0.7.2",
     status: "Released",
     title: "gold-path sqlite schema matches Better Auth 1.7.3",
