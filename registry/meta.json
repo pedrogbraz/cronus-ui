@@ -319,6 +319,19 @@
           ]
         },
         {
+          "id": "empty",
+          "name": "Empty",
+          "description": "Free trial, no payment method, and an empty invoice table.",
+          "item": "billing--empty",
+          "exportName": "BillingEmptyBlock",
+          "style": "operational",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "billing"
+          ]
+        },
+        {
           "id": "plans",
           "name": "Plan selector",
           "description": "Three-tier plan picker with a highlighted popular plan and a monthly/annual toggle.",

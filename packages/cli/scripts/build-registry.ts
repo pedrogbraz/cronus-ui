@@ -272,7 +272,10 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     slug: "billing",
     file: "billing.tsx",
     constName: "subscriptionCode",
-    variants: [{ id: "plans", constName: "plansCode" }],
+    variants: [
+      { id: "empty", constName: "billingEmptyCode" },
+      { id: "plans", constName: "plansCode" },
+    ],
   },
   { slug: "manage-subscription", file: "billing.tsx", constName: "manageSubscriptionCode" },
   {

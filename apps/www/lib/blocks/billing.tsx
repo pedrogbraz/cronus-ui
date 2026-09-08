@@ -313,6 +313,244 @@ export function SubscriptionBlock() {
 }`;
 
 /* ──────────────────────────────────────────────────────────────────────────
+ * 1b. Billing / empty — trial, no card, no invoices
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function BillingEmptyBlock() {
+  return (
+    <section
+      aria-label="Subscription and billing"
+      className="mx-auto flex w-full max-w-3xl flex-col gap-6"
+    >
+      <Card className="shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg">Current plan</CardTitle>
+          <p className="col-span-full text-sm text-fg-secondary">
+            Your workspace is on a free trial. Choose a plan to keep it after the trial.
+          </p>
+          <div className="col-start-2 row-span-2 row-start-1 self-start justify-self-end">
+            <Badge variant="warning">Trial</Badge>
+          </div>
+        </CardHeader>
+        <CardContent className="flex flex-wrap items-end justify-between gap-4">
+          <div className="flex flex-col gap-1">
+            <span className="font-display text-2xl font-semibold text-fg">Free trial</span>
+            <span className="text-sm text-fg-secondary">Ends Jul 1, 2026</span>
+          </div>
+          <div className="flex items-baseline gap-1">
+            <span className="font-display text-3xl font-semibold text-fg-tertiary">$0</span>
+            <span className="text-sm text-fg-tertiary">/ month</span>
+          </div>
+        </CardContent>
+        <Separator />
+        <CardFooter className="justify-end gap-3">
+          <Button variant="primary" size="sm">
+            Choose a plan
+          </Button>
+        </CardFooter>
+      </Card>
+
+      <Card className="shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg">Usage</CardTitle>
+          <p className="col-span-full text-sm text-fg-secondary">No usage recorded yet.</p>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-5">
+          {USAGE_METERS.map(({ id, label, limit }) => (
+            <div key={id} className="flex flex-col gap-2">
+              <div className="flex items-center justify-between text-sm">
+                <span className="font-medium text-fg">{label}</span>
+                <span className="text-fg-secondary">{emptyUsageDisplay(id, limit)}</span>
+              </div>
+              <Progress value={0} aria-label={label + " usage: " + emptyUsageDisplay(id, limit)} />
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+
+      <Card className="shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg">Payment method</CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="inline-flex size-10 items-center justify-center rounded-lg bg-surface-overlay text-fg-secondary">
+              <CreditCard className="size-5" aria-hidden="true" />
+            </span>
+            <div className="flex flex-col">
+              <span className="text-sm font-medium text-fg">No payment method</span>
+              <span className="text-sm text-fg-tertiary">Add a card to keep the workspace.</span>
+            </div>
+          </div>
+          <Button variant="outline" size="sm">
+            Add
+          </Button>
+        </CardContent>
+      </Card>
+
+      <Card className="gap-0 pb-0 shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg">Invoices</CardTitle>
+          <p className="col-span-full text-sm text-fg-secondary">No invoices yet.</p>
+        </CardHeader>
+        <CardContent className="px-0 pt-2">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="pl-4 sm:pl-6">Invoice</TableHead>
+                <TableHead>Date</TableHead>
+                <TableHead>Amount</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead className="pr-4 text-right sm:pr-6">
+                  <span className="sr-only">Download</span>
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell colSpan={5} className="py-8 text-center text-sm text-fg-tertiary">
+                  No invoices yet.
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+    </section>
+  );
+}
+
+const billingEmptyCode = `import {
+  Badge,
+  Button,
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Progress,
+  Separator,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@cronus-ui/ui";
+import { CreditCard } from "lucide-react";
+import { USAGE_METERS } from "../lib/demo-saas.js";
+
+function emptyUsageDisplay(id: string, limit: number): string {
+  if (id === "usage-storage") return "0 GB / " + limit + " GB";
+  if (id === "usage-api") return "0K / " + limit / 1_000_000 + "M";
+  return "0 / " + limit;
+}
+
+export function BillingEmptyBlock() {
+  return (
+    <section
+      aria-label="Subscription and billing"
+      className="mx-auto flex w-full max-w-3xl flex-col gap-6"
+    >
+      <Card className="shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg">Current plan</CardTitle>
+          <p className="col-span-full text-sm text-fg-secondary">
+            Your workspace is on a free trial. Choose a plan to keep it after the trial.
+          </p>
+          <div className="col-start-2 row-span-2 row-start-1 self-start justify-self-end">
+            <Badge variant="warning">Trial</Badge>
+          </div>
+        </CardHeader>
+        <CardContent className="flex flex-wrap items-end justify-between gap-4">
+          <div className="flex flex-col gap-1">
+            <span className="font-display text-2xl font-semibold text-fg">Free trial</span>
+            <span className="text-sm text-fg-secondary">Ends Jul 1, 2026</span>
+          </div>
+          <div className="flex items-baseline gap-1">
+            <span className="font-display text-3xl font-semibold text-fg-tertiary">$0</span>
+            <span className="text-sm text-fg-tertiary">/ month</span>
+          </div>
+        </CardContent>
+        <Separator />
+        <CardFooter className="justify-end gap-3">
+          <Button variant="primary" size="sm">
+            Choose a plan
+          </Button>
+        </CardFooter>
+      </Card>
+
+      <Card className="shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg">Usage</CardTitle>
+          <p className="col-span-full text-sm text-fg-secondary">No usage recorded yet.</p>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-5">
+          {USAGE_METERS.map(({ id, label, limit }) => (
+            <div key={id} className="flex flex-col gap-2">
+              <div className="flex items-center justify-between text-sm">
+                <span className="font-medium text-fg">{label}</span>
+                <span className="text-fg-secondary">{emptyUsageDisplay(id, limit)}</span>
+              </div>
+              <Progress value={0} aria-label={label + " usage: " + emptyUsageDisplay(id, limit)} />
+            </div>
+          ))}
+        </CardContent>
+      </Card>
+
+      <Card className="shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg">Payment method</CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="inline-flex size-10 items-center justify-center rounded-lg bg-surface-overlay text-fg-secondary">
+              <CreditCard className="size-5" aria-hidden="true" />
+            </span>
+            <div className="flex flex-col">
+              <span className="text-sm font-medium text-fg">No payment method</span>
+              <span className="text-sm text-fg-tertiary">Add a card to keep the workspace.</span>
+            </div>
+          </div>
+          <Button variant="outline" size="sm">
+            Add
+          </Button>
+        </CardContent>
+      </Card>
+
+      <Card className="gap-0 pb-0 shadow-md">
+        <CardHeader>
+          <CardTitle className="font-display text-lg">Invoices</CardTitle>
+          <p className="col-span-full text-sm text-fg-secondary">No invoices yet.</p>
+        </CardHeader>
+        <CardContent className="px-0 pt-2">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="pl-4 sm:pl-6">Invoice</TableHead>
+                <TableHead>Date</TableHead>
+                <TableHead>Amount</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead className="pr-4 text-right sm:pr-6">
+                  <span className="sr-only">Download</span>
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell colSpan={5} className="py-8 text-center text-sm text-fg-tertiary">
+                  No invoices yet.
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+    </section>
+  );
+}`;
+
+/* ──────────────────────────────────────────────────────────────────────────
  * 2. Plans — three-tier plan selector with monthly/annual toggle
  * ────────────────────────────────────────────────────────────────────────── */
 
@@ -1742,6 +1980,14 @@ export const billingBlocks: BlockContentMap = {
         appearance: "dark",
         preview: <SubscriptionBlock />,
         code: subscriptionCode,
+      },
+      {
+        id: "empty",
+        name: "Empty",
+        description: "Free trial, no payment method, and an empty invoice table.",
+        appearance: "light",
+        preview: <BillingEmptyBlock />,
+        code: billingEmptyCode,
       },
       {
         id: "plans",

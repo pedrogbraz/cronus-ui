@@ -33,6 +33,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`usage-dashboard--empty`.** Overview stays the saas `/billing` stack; the
   variant is the same meters at zero, with no usage recorded yet.
   `add-page --blocks usage-dashboard=empty`.
+- **`billing--empty`.** Subscription stays the saas `/billing` default; the
+  variant is a free trial with no card and no invoices.
+  `add-page --blocks billing=empty`.
 
 ## [0.7.3] — 2026-09-07
 

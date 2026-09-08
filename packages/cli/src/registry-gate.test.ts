@@ -716,6 +716,7 @@ describe("validateNoInlineMocks — anti-inline-mock gate (F3)", () => {
       "product-grid--with-filters",
       "billing",
       "billing--plans",
+      "billing--empty",
       "usage-dashboard",
       "usage-dashboard--period",
       "usage-dashboard--empty",

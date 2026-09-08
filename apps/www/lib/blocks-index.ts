@@ -785,6 +785,11 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
               "Current plan, usage meters, payment method, and a downloadable invoice history.",
           },
           {
+            id: "empty",
+            name: "Empty",
+            description: "Free trial, no payment method, and an empty invoice table.",
+          },
+          {
             id: "plans",
             name: "Plan selector",
             description:

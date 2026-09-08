@@ -259,6 +259,7 @@ export const MIGRATED_BLOCKS = [
   "product-grid--with-filters",
   "billing",
   "billing--plans",
+  "billing--empty",
   "usage-dashboard",
   "usage-dashboard--period",
   "usage-dashboard--empty",
