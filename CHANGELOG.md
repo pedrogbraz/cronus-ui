@@ -63,49 +63,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`reviews--empty`.** The rating summary stays the store product-page default;
   the variant is the same chrome with no reviews yet.
   `add-page --blocks reviews=empty`.
-
 - **`product-grid--empty`.** The storefront grid stays the store `/` and
   `/products` default; the variant is the same chrome with no listings yet.
   `add-page --blocks product-grid=empty`.
-
 - **`AnimatedCheckbox`.** Task checkbox with a spring-drawn check mark and a
   strike-through label. `npx cronus-ui add animated-checkbox`.
-
 - **`SlideUpText`.** Text that clips in from below with Spell's stagger
   (words, characters, or lines; from first, last, or center).
   `npx cronus-ui add slide-up-text`.
-
 - **`ImagesBadge`.** Folder badge that fans up to three preview images on
   hover. Same spring as Aceternity (`stiffness: 400`, `damping: 25`).
   `npx cronus-ui add images-badge`.
-
 - **`Globe3D`.** Textured 3D globe with avatar pins, atmosphere, and
   auto-rotate. Optional peers: `three`, `@react-three/fiber`, `@react-three/drei`.
   `npx cronus-ui add globe-3d`.
-
 - **`NumberFlow`.** Formatted number whose digits roll to each new value
   (prefix, suffix, locale, currency/percent/decimal). Distinct from
   `AnimatedNumber`, which tweens the count as one string.
   `npx cronus-ui add number-flow`.
-
 - **`ExploreNav`.** Apple product-page navbar: a 55px bar morphs into a
   family carousel (Explore → Plus/X, spring bounce 0.16).
   `npx cronus-ui add explore-nav`.
-
 - **`ScrollNav`.** Sticky sidebar that tracks the section in view. A 2px
   bar springs between rows (bounce 0.16); click jumps. `npx cronus-ui add scroll-nav`.
-
 - **`BouncyAccordion`.** Stacked rows that spring into a rounded card with a
   10px gap (bounce 0.32). Distinct from `Accordion`. `npx cronus-ui add bouncy-accordion`.
-
 - **`TokenSwap`.** Aave-style ETH → AAVE swap: overlay amount, USD readout
   that grows with the digits, Use → Using Max, over-balance error, receive
   via `NumberFlow`. `npx cronus-ui add token-swap`.
-
 - **`ReceiveButton`.** Family Receive pill that morphs into a confirmation
   card (fingerprint, Cancel, shared-layout Receive, backdrop blur).
   `npx cronus-ui add receive-button`.
-
 - **`FamilyWallet`.** Family sign-in drawer: Google/Discord/GitHub/Apple,
   Email/Phone/Passkey, OTP, a waiting-passkey orb, and a wallet list
   (Metamask, Phantom, …). Height tweens 270ms between views.

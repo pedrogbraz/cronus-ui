@@ -100,6 +100,7 @@ describe("catalog tags", () => {
     expect(tags.intents).toContain("action");
     expect(tags.intents).toContain("motion");
   });
+
   it("marks animated-checkbox as smooth form motion", () => {
     const tags = resolveCatalogTags({
       slug: "animated-checkbox",
@@ -110,40 +111,8 @@ describe("catalog tags", () => {
     expect(tags.intents).toContain("form");
     expect(tags.intents).toContain("motion");
   });
-  it('marks slide-up-text as smooth editorial motion', () => {
-    const tags = resolveCatalogTags({
-      slug: "slide-up-text",
-      category: "premium",
-      kind: "component",
-    });
-    expect(tags.motion).toBe("smooth");
-    expect(tags.style).toBe("editorial");
-    expect(tags.intents).toContain("motion");
-  });
 
-  it('marks number-flow as smooth data motion', () => {
-    const tags = resolveCatalogTags({
-      slug: "number-flow",
-      category: "premium",
-      kind: "component",
-    });
-    expect(tags.motion).toBe("smooth");
-    expect(tags.intents).toContain("data");
-    expect(tags.intents).toContain("motion");
-  });
-
-  it('marks explore-nav as snappy nav motion', () => {
-    const tags = resolveCatalogTags({
-      slug: "explore-nav",
-      category: "premium",
-      kind: "component",
-    });
-    expect(tags.motion).toBe("snappy");
-    expect(tags.intents).toContain("nav");
-    expect(tags.intents).toContain("motion");
-  });
-
-  it('marks scroll-nav as smooth content nav', () => {
+  it("marks scroll-nav as smooth content nav", () => {
     const tags = resolveCatalogTags({
       slug: "scroll-nav",
       category: "premium",
@@ -154,18 +123,30 @@ describe("catalog tags", () => {
     expect(tags.intents).toContain("content");
   });
 
-  it('marks bouncy-accordion as snappy content motion', () => {
+  it("marks family-wallet as snappy auth overlay", () => {
     const tags = resolveCatalogTags({
-      slug: "bouncy-accordion",
+      slug: "family-wallet",
       category: "premium",
       kind: "component",
     });
     expect(tags.motion).toBe("snappy");
-    expect(tags.intents).toContain("content");
+    expect(tags.intents).toContain("auth");
+    expect(tags.intents).toContain("overlay");
+  });
+
+  it("marks receive-button as snappy overlay motion", () => {
+    const tags = resolveCatalogTags({
+      slug: "receive-button",
+      category: "premium",
+      kind: "component",
+    });
+    expect(tags.motion).toBe("snappy");
+    expect(tags.intents).toContain("overlay");
+    expect(tags.intents).toContain("commerce");
     expect(tags.intents).toContain("motion");
   });
 
-  it('marks token-swap as snappy commerce motion', () => {
+  it("marks token-swap as snappy commerce motion", () => {
     const tags = resolveCatalogTags({
       slug: "token-swap",
       category: "premium",
@@ -178,27 +159,47 @@ describe("catalog tags", () => {
     expect(tags.intents).toContain("motion");
   });
 
-  it('marks receive-button as snappy overlay motion', () => {
+  it("marks bouncy-accordion as snappy content motion", () => {
     const tags = resolveCatalogTags({
-      slug: "receive-button",
+      slug: "bouncy-accordion",
       category: "premium",
       kind: "component",
     });
     expect(tags.motion).toBe("snappy");
-    expect(tags.intents).toContain("overlay");
-    expect(tags.intents).toContain("commerce");
+    expect(tags.intents).toContain("content");
     expect(tags.intents).toContain("motion");
   });
 
-  it('marks family-wallet as snappy auth overlay', () => {
+  it("marks explore-nav as snappy nav motion", () => {
     const tags = resolveCatalogTags({
-      slug: "family-wallet",
+      slug: "explore-nav",
       category: "premium",
       kind: "component",
     });
     expect(tags.motion).toBe("snappy");
-    expect(tags.intents).toContain("auth");
-    expect(tags.intents).toContain("overlay");
+    expect(tags.intents).toContain("nav");
+    expect(tags.intents).toContain("motion");
   });
 
+  it("marks number-flow as smooth data motion", () => {
+    const tags = resolveCatalogTags({
+      slug: "number-flow",
+      category: "premium",
+      kind: "component",
+    });
+    expect(tags.motion).toBe("smooth");
+    expect(tags.intents).toContain("data");
+    expect(tags.intents).toContain("motion");
+  });
+
+  it("marks slide-up-text as smooth editorial motion", () => {
+    const tags = resolveCatalogTags({
+      slug: "slide-up-text",
+      category: "premium",
+      kind: "component",
+    });
+    expect(tags.motion).toBe("smooth");
+    expect(tags.style).toBe("editorial");
+    expect(tags.intents).toContain("motion");
+  });
 });

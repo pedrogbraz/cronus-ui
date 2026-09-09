@@ -471,17 +471,17 @@ export type {
   NotificationListProps,
   NotificationRowProps,
 } from "./components/notification-center.js";
+export {
+  NotificationCenter,
+  NotificationList,
+  NotificationRow,
+} from "./components/notification-center.js";
 export type {
   NumberFlowFormat,
   NumberFlowLocale,
   NumberFlowProps,
 } from "./components/number-flow.js";
 export { NumberFlow, numberFlowVariants } from "./components/number-flow.js";
-export {
-  NotificationCenter,
-  NotificationList,
-  NotificationRow,
-} from "./components/notification-center.js";
 export type { NumberInputProps } from "./components/number-input.js";
 export { NumberInput } from "./components/number-input.js";
 export type { OrbitItemProps, OrbitProps, OrbitRingProps } from "./components/orbit.js";

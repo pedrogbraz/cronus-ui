@@ -260,18 +260,8 @@ const CASES: ReadonlyArray<{ label: string; node: ReactNode; min?: number }> = [
     min: 4,
   },
   {
-    label: "FamilyWallet",
-    node: h(FamilyWallet, null),
-    min: 4,
-  },
-  {
-    label: "ReceiveButton",
-    node: h(ReceiveButton, null),
-    min: 4,
-  },
-  {
-    label: "TokenSwap",
-    node: h(TokenSwap, null),
+    label: "NumberFlow",
+    node: h(NumberFlow, { value: 1234, locale: "en-US" }),
     min: 4,
   },
   {
@@ -282,8 +272,18 @@ const CASES: ReadonlyArray<{ label: string; node: ReactNode; min?: number }> = [
     min: 4,
   },
   {
-    label: "NumberFlow",
-    node: h(NumberFlow, { value: 1234, locale: "en-US" }),
+    label: "TokenSwap",
+    node: h(TokenSwap, null),
+    min: 4,
+  },
+  {
+    label: "ReceiveButton",
+    node: h(ReceiveButton, null),
+    min: 4,
+  },
+  {
+    label: "FamilyWallet",
+    node: h(FamilyWallet, null),
     min: 4,
   },
   {
@@ -298,6 +298,11 @@ const CASES: ReadonlyArray<{ label: string; node: ReactNode; min?: number }> = [
     min: 4,
   },
   {
+    label: "SlideUpText",
+    node: h(SlideUpText, null, "You can just ship things."),
+    min: 4,
+  },
+  {
     label: "ScrollNav",
     node: h(ScrollNav, {
       title: "Terms & Conditions",
@@ -309,11 +314,6 @@ const CASES: ReadonlyArray<{ label: string; node: ReactNode; min?: number }> = [
         },
       ],
     }),
-    min: 4,
-  },
-  {
-    label: "SlideUpText",
-    node: h(SlideUpText, null, "You can just ship things."),
     min: 4,
   },
   {
@@ -392,24 +392,6 @@ describe("SSR smoke (renderToString) — public components render on the server"
     expect(html).toContain("1,234");
   });
 
-  it("TextEffect exposes the full string to assistive tech in its SSR output", () => {
-    const html = renderCase(
-      "TextEffect label",
-      h(TextEffect, { trigger: "mount" }, "Cronus ships fast"),
-    );
-    // The split (animated) units are aria-hidden; the whole string is exposed
-    // once via a visually-hidden sr-only span, so AT reads clean text on the
-    // server-rendered DOM (no per-word chatter, no missing label).
-    expect(html).toContain('class="sr-only">Cronus ships fast<');
-    expect(html).toContain('aria-hidden="true"');
-  });
-
-  it("SlideUpText exposes the full string to assistive tech in its SSR output", () => {
-    const html = renderCase("SlideUpText label", h(SlideUpText, null, "You can just ship things."));
-    expect(html).toContain('class="sr-only">You can just ship things.<');
-    expect(html).toContain('aria-hidden="true"');
-  });
-
   it("NumberFlow exposes the formatted value as aria-label on the server", () => {
     const html = renderCase("NumberFlow initial", h(NumberFlow, { value: 1234, locale: "en-US" }));
     expect(html).toContain('aria-label="1,234"');
@@ -432,5 +414,23 @@ describe("SSR smoke (renderToString) — public components render on the server"
     const html = renderCase("FamilyWallet initial", h(FamilyWallet, null));
     expect(html).toContain("Sign In");
     expect(html).toContain('data-slot="family-wallet"');
+  });
+
+  it("TextEffect exposes the full string to assistive tech in its SSR output", () => {
+    const html = renderCase(
+      "TextEffect label",
+      h(TextEffect, { trigger: "mount" }, "Cronus ships fast"),
+    );
+    // The split (animated) units are aria-hidden; the whole string is exposed
+    // once via a visually-hidden sr-only span, so AT reads clean text on the
+    // server-rendered DOM (no per-word chatter, no missing label).
+    expect(html).toContain('class="sr-only">Cronus ships fast<');
+    expect(html).toContain('aria-hidden="true"');
+  });
+
+  it("SlideUpText exposes the full string to assistive tech in its SSR output", () => {
+    const html = renderCase("SlideUpText label", h(SlideUpText, null, "You can just ship things."));
+    expect(html).toContain('class="sr-only">You can just ship things.<');
+    expect(html).toContain('aria-hidden="true"');
   });
 });

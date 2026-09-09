@@ -1404,6 +1404,14 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
     case "spinning-text":
     case "scramble-text":
     case "images-badge":
+      return (
+        <Fill className="items-center justify-center p-12">
+          <div className="flex items-center gap-3 rounded-full border border-border bg-surface-raised px-4 py-2">
+            <span className="size-6 rounded-sm bg-warning" />
+            <span className="text-sm text-fg">Agenforce template</span>
+          </div>
+        </Fill>
+      );
     case "globe-3d":
       return (
         <Fill className="items-center justify-center">

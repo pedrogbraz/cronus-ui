@@ -86,7 +86,10 @@ import {
 import { Globe3D, type GlobeMarker } from "@cronus-ui/ui/globe-3d";
 import {
   ArrowRight,
+  Award,
   Bell,
+  BookOpen,
+  Calendar,
   Check,
   Copy,
   Gauge,
@@ -101,10 +104,13 @@ import {
   Settings,
   Share2,
   ShieldCheck,
+  ShoppingCart,
   Sparkles,
   Star,
   Trash2,
+  TriangleAlert,
   User,
+  Wallet,
   Wifi,
   Zap,
 } from "lucide-react";
@@ -121,6 +127,81 @@ import type { ExampleMap } from "./types";
  * container — never the whole docs page. The bar pins to the top of the box and
  * the ring mirrors the same `target` ref.
  */
+function ScrollNavDemo() {
+  const ref = useRef<HTMLElement>(null);
+  return (
+    <section
+      ref={ref}
+      aria-label="Terms, scrollable"
+      // biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable region must be keyboard-focusable (WCAG / axe scrollable-region-focusable)
+      tabIndex={0}
+      className="h-[28rem] w-full overflow-y-auto rounded-3xl border border-border bg-surface-inset outline-none focus-visible:ring-2 focus-visible:ring-ring"
+    >
+      <ScrollNav
+        viewportRef={ref}
+        title="Terms & Conditions"
+        terms={[
+          {
+            id: "acceptance-of-terms",
+            title: "Acceptance of Terms",
+            content: (
+              <>
+                <p>
+                  By accessing and using this product, you agree to be bound by these terms. If you
+                  do not agree, please do not use the product.
+                </p>
+                <p className="mt-3">
+                  Continued use after an update means you accept the revised terms.
+                </p>
+              </>
+            ),
+          },
+          {
+            id: "license-agreement",
+            title: "License Agreement",
+            content: (
+              <p>
+                The software is licensed, not sold. The license is non-exclusive, non-transferable,
+                and may be revoked if these terms are broken.
+              </p>
+            ),
+          },
+          {
+            id: "ownership",
+            title: "Ownership",
+            content: (
+              <p>
+                We retain all rights, title, and interest in the product, including intellectual
+                property. This license does not grant ownership.
+              </p>
+            ),
+          },
+          {
+            id: "updates-and-support",
+            title: "Updates and Support",
+            content: (
+              <p>
+                Updates may ship automatically. Support is provided on a best-effort basis through
+                official channels.
+              </p>
+            ),
+          },
+          {
+            id: "limitation-of-liability",
+            title: "Limitation of Liability",
+            content: (
+              <p>
+                In no event shall we be liable for indirect, incidental, or consequential damages
+                arising from your use of the product.
+              </p>
+            ),
+          },
+        ]}
+      />
+    </section>
+  );
+}
+
 function ScrollProgressDemo() {
   const ref = useRef<HTMLElement>(null);
   return (
@@ -446,6 +527,68 @@ const orbitOnCall = [
   { name: "Tom Costa", initials: "TC" },
 ];
 
+/** Currency NumberFlow whose ones place rolls on each increment. */
+function NumberFlowDemo() {
+  const [value, setValue] = useState(19348.43);
+  return (
+    <div className="flex w-full flex-col items-center gap-6">
+      <NumberFlow
+        value={value}
+        prefix="$"
+        format="currency"
+        reducedMotion="never"
+        className="font-display text-5xl tracking-[-0.03em] text-fg"
+      />
+      <Button size="sm" variant="outline" onClick={() => setValue((current) => current + 1)}>
+        Update value
+      </Button>
+    </div>
+  );
+}
+
+const NUMBER_FLOW_SAMPLES: Array<{
+  value: number;
+  format: NumberFlowFormat;
+  prefix?: string;
+  suffix?: string;
+  locale?: string;
+}> = [
+  { value: 12345, format: "number" },
+  { value: 19348.43, format: "currency", prefix: "$" },
+  { value: 0.42, format: "percentage" },
+  { value: 1234.5, format: "decimal" },
+  { value: 19348.43, format: "currency", prefix: "€", locale: "de-DE" },
+];
+
+function NumberFlowShuffleDemo() {
+  const [sample, setSample] = useState(0);
+  const current = NUMBER_FLOW_SAMPLES[sample] ?? {
+    value: 12345,
+    format: "number",
+  };
+  return (
+    <div className="flex w-full flex-col items-center gap-6">
+      <NumberFlow
+        value={current.value}
+        prefix={current.prefix}
+        suffix={current.suffix}
+        format={current.format}
+        locale={current.locale}
+        reducedMotion="never"
+        className="font-display text-5xl tracking-[-0.03em] text-fg"
+      />
+      <Button
+        size="sm"
+        variant="outline"
+        onClick={() => setSample((index) => (index + 1) % NUMBER_FLOW_SAMPLES.length)}
+      >
+        <RotateCw aria-hidden="true" className="size-4" />
+        Shuffle format
+      </Button>
+    </div>
+  );
+}
+
 /**
  * AnimatedNumber: a revenue tile whose value springs to each new total. Click
  * "Nova venda" to add a sale and watch it count up (reduced-motion snaps).
@@ -549,6 +692,102 @@ function SegmentedControlDemo() {
  * (slide). "Replay" remounts the block so the mount-triggered animation runs
  * again.
  */
+const GLOBE_3D_MARKERS: GlobeMarker[] = [
+  {
+    lat: 40.7128,
+    lng: -74.006,
+    src: "https://assets.aceternity.com/avatars/1.webp",
+    label: "New York",
+  },
+  {
+    lat: 51.5074,
+    lng: -0.1278,
+    src: "https://assets.aceternity.com/avatars/2.webp",
+    label: "London",
+  },
+  {
+    lat: 35.6762,
+    lng: 139.6503,
+    src: "https://assets.aceternity.com/avatars/3.webp",
+    label: "Tokyo",
+  },
+  {
+    lat: -33.8688,
+    lng: 151.2093,
+    src: "https://assets.aceternity.com/avatars/4.webp",
+    label: "Sydney",
+  },
+  {
+    lat: 48.8566,
+    lng: 2.3522,
+    src: "https://assets.aceternity.com/avatars/5.webp",
+    label: "Paris",
+  },
+  {
+    lat: 28.6139,
+    lng: 77.209,
+    src: "https://assets.aceternity.com/avatars/6.webp",
+    label: "New Delhi",
+  },
+  {
+    lat: 55.7558,
+    lng: 37.6173,
+    src: "https://assets.aceternity.com/avatars/7.webp",
+    label: "Moscow",
+  },
+  {
+    lat: -22.9068,
+    lng: -43.1729,
+    src: "https://assets.aceternity.com/avatars/8.webp",
+    label: "Rio de Janeiro",
+  },
+  {
+    lat: 31.2304,
+    lng: 121.4737,
+    src: "https://assets.aceternity.com/avatars/9.webp",
+    label: "Shanghai",
+  },
+  {
+    lat: 25.2048,
+    lng: 55.2708,
+    src: "https://assets.aceternity.com/avatars/10.webp",
+    label: "Dubai",
+  },
+  {
+    lat: -34.6037,
+    lng: -58.3816,
+    src: "https://assets.aceternity.com/avatars/11.webp",
+    label: "Buenos Aires",
+  },
+  {
+    lat: 1.3521,
+    lng: 103.8198,
+    src: "https://assets.aceternity.com/avatars/12.webp",
+    label: "Singapore",
+  },
+  {
+    lat: 37.5665,
+    lng: 126.978,
+    src: "https://assets.aceternity.com/avatars/13.webp",
+    label: "Seoul",
+  },
+];
+
+function Globe3DDemo() {
+  return (
+    <Globe3D
+      markers={GLOBE_3D_MARKERS}
+      config={{
+        atmosphereColor: "#4da6ff",
+        atmosphereIntensity: 20,
+        bumpScale: 5,
+        autoRotateSpeed: 0.3,
+      }}
+      className="h-[420px]"
+    />
+  );
+}
+
 function TextEffectDemo() {
   const [runId, setRunId] = useState(0);
   return (
@@ -804,6 +1043,22 @@ export const premiumExamples: ExampleMap = {
   );
 }`,
       preview: <ScrollProgressDemo />,
+    },
+  ],
+  "scroll-nav": [
+    {
+      id: "terms",
+      title: "Terms",
+      description:
+        "Sticky sidebar tracks the section in view. The 2px bar springs between rows (bounce 0.16); click a title to jump.",
+      code: `<ScrollNav
+  title="Terms & Conditions"
+  terms={[
+    { id: "acceptance-of-terms", title: "Acceptance of Terms", content: <p>…</p> },
+    { id: "license-agreement", title: "License Agreement", content: <p>…</p> },
+  ]}
+/>`,
+      preview: <ScrollNavDemo />,
     },
   ],
   "aurora-background": [
@@ -1251,6 +1506,39 @@ export const premiumExamples: ExampleMap = {
       preview: <AnimatedNumberDemo />,
     },
   ],
+  "number-flow": [
+    {
+      id: "flow",
+      title: "Digit flow",
+      description:
+        "Each digit rolls the short way to the next value — grouping, prefix and suffix stay put. Shuffle through number, currency, percent and decimal.",
+      code: `<NumberFlow value={12345} className="font-display text-5xl text-fg" />`,
+      preview: <NumberFlowShuffleDemo />,
+    },
+    {
+      id: "currency",
+      title: "Currency",
+      description:
+        "Two fraction digits, prefix for the symbol. Click to increment and watch the ones place roll.",
+      code: `function Revenue() {
+  const [value, setValue] = useState(19348.43);
+  return (
+    <div className="flex flex-col items-center gap-4">
+      <NumberFlow
+        value={value}
+        prefix="$"
+        format="currency"
+        className="font-display text-5xl text-fg"
+      />
+      <Button size="sm" variant="outline" onClick={() => setValue((n) => n + 1)}>
+        Update value
+      </Button>
+    </div>
+  );
+}`,
+      preview: <NumberFlowDemo />,
+    },
+  ],
   carousel: [
     {
       id: "slides",
@@ -1300,6 +1588,109 @@ export const premiumExamples: ExampleMap = {
   Ship premium by default
 </TextEffect>`,
       preview: <TextEffectDemo />,
+    },
+  ],
+  "images-badge": [
+    {
+      id: "folder",
+      title: "Folder",
+      description:
+        "A manila folder that fans up to three preview images on hover, then flattens the front. Same spring as Aceternity (`stiffness: 400`, `damping: 25`).",
+      code: `<ImagesBadge
+  text="Introducing Agenforce Marketing Template"
+  images={[
+    "https://assets.aceternity.com/pro/agenforce-1.webp",
+    "https://assets.aceternity.com/pro/agenforce-2.webp",
+    "https://assets.aceternity.com/pro/agenforce-3.webp",
+  ]}
+/>`,
+      preview: (
+        <div className="flex h-40 w-full items-center justify-center">
+          <ImagesBadge
+            text="Introducing Agenforce Marketing Template"
+            images={[
+              "https://assets.aceternity.com/pro/agenforce-1.webp",
+              "https://assets.aceternity.com/pro/agenforce-2.webp",
+              "https://assets.aceternity.com/pro/agenforce-3.webp",
+            ]}
+          />
+        </div>
+      ),
+    },
+  ],
+  "globe-3d": [
+    {
+      id: "team",
+      title: "Distributed team",
+      description:
+        "NASA Blue Marble globe with avatar pins, orbit drag, and a slow auto-rotate. Optional peers: three, @react-three/fiber, @react-three/drei.",
+      code: `<Globe3D
+  markers={markers}
+  config={{
+    atmosphereColor: "#4da6ff",
+    atmosphereIntensity: 20,
+    bumpScale: 5,
+    autoRotateSpeed: 0.3,
+  }}
+/>`,
+      preview: <Globe3DDemo />,
+    },
+  ],
+  "slide-up-text": [
+    {
+      id: "words",
+      title: "By words",
+      description:
+        "Each word clips up from below on a 0.5s tween, staggered from the first. The full string stays in the a11y tree via an sr-only copy.",
+      code: `<SlideUpText className="font-display text-3xl text-fg">
+  You can just ship things.
+</SlideUpText>`,
+      preview: (
+        <SlideUpText className="font-display text-3xl text-fg">
+          You can just ship things.
+        </SlideUpText>
+      ),
+    },
+    {
+      id: "characters",
+      title: "By characters",
+      description: "Same clip, staggered per grapheme so emoji and flags stay whole.",
+      code: `<SlideUpText split="characters" className="font-display text-3xl text-fg">
+  You just can ship things.
+</SlideUpText>`,
+      preview: (
+        <SlideUpText split="characters" className="font-display text-3xl text-fg">
+          You just can ship things.
+        </SlideUpText>
+      ),
+    },
+    {
+      id: "lines",
+      title: "By lines",
+      description: "Split on newlines and stack each line as its own clip.",
+      code: `<SlideUpText split="lines" className="font-display text-3xl text-fg">
+  First line
+  Second line
+  Third line
+</SlideUpText>`,
+      preview: (
+        <SlideUpText split="lines" className="font-display text-3xl text-fg">
+          {"First line\nSecond line\nThird line"}
+        </SlideUpText>
+      ),
+    },
+    {
+      id: "from-last",
+      title: "From last",
+      description: "Stagger runs from the last word back to the first.",
+      code: `<SlideUpText from="last" className="font-display text-3xl text-fg">
+  Animation from last word
+</SlideUpText>`,
+      preview: (
+        <SlideUpText from="last" className="font-display text-3xl text-fg">
+          Animation from last word
+        </SlideUpText>
+      ),
     },
   ],
   frame: [
@@ -2524,142 +2915,6 @@ export const premiumExamples: ExampleMap = {
       ),
     },
   ],
-  "slide-up-text": [
-    {
-      id: "words",
-      title: "By words",
-      description:
-        "Each word clips up from below on a 0.5s tween, staggered from the first. The full string stays in the a11y tree via an sr-only copy.",
-      code: `<SlideUpText className="font-display text-3xl text-fg">
-  You can just ship things.
-</SlideUpText>`,
-      preview: (
-        <SlideUpText className="font-display text-3xl text-fg">
-          You can just ship things.
-        </SlideUpText>
-      ),
-    },
-    {
-      id: "characters",
-      title: "By characters",
-      description: "Same clip, staggered per grapheme so emoji and flags stay whole.",
-      code: `<SlideUpText split="characters" className="font-display text-3xl text-fg">
-  You just can ship things.
-</SlideUpText>`,
-      preview: (
-        <SlideUpText split="characters" className="font-display text-3xl text-fg">
-          You just can ship things.
-        </SlideUpText>
-      ),
-    },
-    {
-      id: "lines",
-      title: "By lines",
-      description: "Split on newlines and stack each line as its own clip.",
-      code: `<SlideUpText split="lines" className="font-display text-3xl text-fg">
-  First line
-  Second line
-  Third line
-</SlideUpText>`,
-      preview: (
-        <SlideUpText split="lines" className="font-display text-3xl text-fg">
-          {"First line\nSecond line\nThird line"}
-        </SlideUpText>
-      ),
-    },
-    {
-      id: "from-last",
-      title: "From last",
-      description: "Stagger runs from the last word back to the first.",
-      code: `<SlideUpText from="last" className="font-display text-3xl text-fg">
-  Animation from last word
-</SlideUpText>`,
-      preview: (
-        <SlideUpText from="last" className="font-display text-3xl text-fg">
-          Animation from last word
-        </SlideUpText>
-      ),
-    },
-  ],
-  "images-badge": [
-    {
-      id: "folder",
-      title: "Folder",
-      description:
-        "A manila folder that fans up to three preview images on hover, then flattens the front. Same spring as Aceternity (`stiffness: 400`, `damping: 25`).",
-      code: `<ImagesBadge
-  text="Introducing Agenforce Marketing Template"
-  images={[
-    "https://assets.aceternity.com/pro/agenforce-1.webp",
-    "https://assets.aceternity.com/pro/agenforce-2.webp",
-    "https://assets.aceternity.com/pro/agenforce-3.webp",
-  ]}
-/>`,
-      preview: (
-        <div className="flex h-40 w-full items-center justify-center">
-          <ImagesBadge
-            text="Introducing Agenforce Marketing Template"
-            images={[
-              "https://assets.aceternity.com/pro/agenforce-1.webp",
-              "https://assets.aceternity.com/pro/agenforce-2.webp",
-              "https://assets.aceternity.com/pro/agenforce-3.webp",
-            ]}
-          />
-        </div>
-      ),
-    },
-  ],
-  "globe-3d": [
-    {
-      id: "team",
-      title: "Distributed team",
-      description:
-        "NASA Blue Marble globe with avatar pins, orbit drag, and a slow auto-rotate. Optional peers: three, @react-three/fiber, @react-three/drei.",
-      code: `<Globe3D
-  markers={markers}
-  config={{
-    atmosphereColor: "#4da6ff",
-    atmosphereIntensity: 20,
-    bumpScale: 5,
-    autoRotateSpeed: 0.3,
-  }}
-/>`,
-      preview: <Globe3DDemo />,
-    },
-  ],
-  "number-flow": [
-    {
-      id: "flow",
-      title: "Digit flow",
-      description:
-        "Each digit rolls the short way to the next value — grouping, prefix and suffix stay put. Shuffle through number, currency, percent and decimal.",
-      code: `<NumberFlow value={12345} className="font-display text-5xl text-fg" />`,
-      preview: <NumberFlowShuffleDemo />,
-    },
-    {
-      id: "currency",
-      title: "Currency",
-      description:
-        "Two fraction digits, prefix for the symbol. Click to increment and watch the ones place roll.",
-      code: `function Revenue() {
-  const [value, setValue] = useState(19348.43);
-  return (
-    <div className="flex flex-col items-center gap-4">
-      <NumberFlow
-        value={value}
-        prefix="$"
-        format="currency"
-        className="font-display text-5xl text-fg"
-      />
-      <Button size="sm" variant="outline" onClick={() => setValue((n) => n + 1)}>
-        Update value
-      </Button>
-    </div>
-  );
-}`,
-      preview: <NumberFlowDemo />,
-    },
-  ],
   "explore-nav": [
     {
       id: "family",
@@ -2740,20 +2995,46 @@ export const premiumExamples: ExampleMap = {
       ),
     },
   ],
-  "scroll-nav": [
+  "family-wallet": [
     {
-      id: "terms",
-      title: "Terms",
+      id: "sign-in",
+      title: "Sign in drawer",
       description:
-        "Sticky sidebar tracks the section in view. The 2px bar springs between rows (bounce 0.16); click a title to jump.",
-      code: `<ScrollNav
-  title="Terms & Conditions"
-  terms={[
-    { id: "acceptance-of-terms", title: "Acceptance of Terms", content: <p>…</p> },
-    { id: "license-agreement", title: "License Agreement", content: <p>…</p> },
-  ]}
-/>`,
-      preview: <ScrollNavDemo />,
+        "Sign In opens a rounded Family drawer. Socials, Email/Phone/Passkey, OTP after Continue, a waiting-passkey orb, and Connect Wallet. Views pop-layout while the shell height tweens.",
+      code: `<FamilyWallet />`,
+      preview: (
+        <div className="flex w-full justify-center overflow-hidden rounded-3xl">
+          <FamilyWallet />
+        </div>
+      ),
+    },
+  ],
+  "receive-button": [
+    {
+      id: "family",
+      title: "Family receive",
+      description:
+        "The sky pill morphs into a confirmation card. Receive, Cancel, the close X, Escape, or the blurred backdrop all collapse it back. The CTA keeps its layoutId so it flies into the dialog.",
+      code: `<ReceiveButton />`,
+      preview: (
+        <div className="flex w-full justify-center overflow-hidden rounded-3xl">
+          <ReceiveButton />
+        </div>
+      ),
+    },
+  ],
+  "token-swap": [
+    {
+      id: "aave",
+      title: "Aave swap",
+      description:
+        "Type an amount: digits fade in, the USD readout grows, Max morphs Use → Using, and the receive side rolls. Over the 111.82 ETH balance, the USD row becomes Not Enough ETH. Clear resets.",
+      code: `<TokenSwap />`,
+      preview: (
+        <div className="flex w-full justify-center overflow-hidden rounded-3xl">
+          <TokenSwap />
+        </div>
+      ),
     },
   ],
   "bouncy-accordion": [
@@ -2812,48 +3093,6 @@ export const premiumExamples: ExampleMap = {
               },
             ]}
           />
-        </div>
-      ),
-    },
-  ],
-  "token-swap": [
-    {
-      id: "aave",
-      title: "Aave swap",
-      description:
-        "Type an amount: digits fade in, the USD readout grows, Max morphs Use → Using, and the receive side rolls. Over the 111.82 ETH balance, the USD row becomes Not Enough ETH. Clear resets.",
-      code: `<TokenSwap />`,
-      preview: (
-        <div className="flex w-full justify-center overflow-hidden rounded-3xl">
-          <TokenSwap />
-        </div>
-      ),
-    },
-  ],
-  "receive-button": [
-    {
-      id: "family",
-      title: "Family receive",
-      description:
-        "The sky pill morphs into a confirmation card. Receive, Cancel, the close X, Escape, or the blurred backdrop all collapse it back. The CTA keeps its layoutId so it flies into the dialog.",
-      code: `<ReceiveButton />`,
-      preview: (
-        <div className="flex w-full justify-center overflow-hidden rounded-3xl">
-          <ReceiveButton />
-        </div>
-      ),
-    },
-  ],
-  "family-wallet": [
-    {
-      id: "sign-in",
-      title: "Sign in drawer",
-      description:
-        "Sign In opens a rounded Family drawer. Socials, Email/Phone/Passkey, OTP after Continue, a waiting-passkey orb, and Connect Wallet. Views pop-layout while the shell height tweens.",
-      code: `<FamilyWallet />`,
-      preview: (
-        <div className="flex w-full justify-center overflow-hidden rounded-3xl">
-          <FamilyWallet />
         </div>
       ),
     },
