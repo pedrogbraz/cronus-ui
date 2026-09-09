@@ -875,6 +875,12 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
           </div>
         </Fill>
       );
+    case "family-wallet":
+      return (
+        <Fill className="items-center justify-center p-10">
+          <span className="rounded-full bg-surface-overlay px-5 py-2 text-sm text-fg">Sign In</span>
+        </Fill>
+      );
     case "receive-button":
       return (
         <Fill className="items-end justify-center pb-16">

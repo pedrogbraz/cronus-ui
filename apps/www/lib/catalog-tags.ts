@@ -193,6 +193,10 @@ const SLUG_OVERRIDES: Record<string, TagPatch> = {
     motion: "snappy",
     intents: ["overlay", "commerce", "motion"],
   },
+  "family-wallet": {
+    motion: "snappy",
+    intents: ["auth", "overlay", "commerce", "motion"],
+  },
   "scroll-nav": { motion: "smooth", intents: ["nav", "content", "motion"] },
   "images-badge": { motion: "snappy", intents: ["marketing", "motion"] },
   "globe-3d": { motion: "cinematic", intents: ["marketing", "motion"] },

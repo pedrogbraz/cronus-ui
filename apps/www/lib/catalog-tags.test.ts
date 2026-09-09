@@ -190,4 +190,15 @@ describe("catalog tags", () => {
     expect(tags.intents).toContain("motion");
   });
 
+  it('marks family-wallet as snappy auth overlay', () => {
+    const tags = resolveCatalogTags({
+      slug: "family-wallet",
+      category: "premium",
+      kind: "component",
+    });
+    expect(tags.motion).toBe("snappy");
+    expect(tags.intents).toContain("auth");
+    expect(tags.intents).toContain("overlay");
+  });
+
 });

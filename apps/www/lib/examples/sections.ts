@@ -399,6 +399,7 @@ export const EXAMPLE_SECTIONS: Record<string, ExampleSectionMeta[]> = {
   "bouncy-accordion": [{ id: "stack", title: "Bouncy stack" }],
   "token-swap": [{ id: "aave", title: "Aave swap" }],
   "receive-button": [{ id: "family", title: "Family receive" }],
+  "family-wallet": [{ id: "sign-in", title: "Sign in drawer" }],
   "dynamic-island": [{ id: "live", title: "Live activity" }],
   confetti: [{ id: "burst", title: "Burst" }],
   particles: [{ id: "field", title: "Drifting field" }],

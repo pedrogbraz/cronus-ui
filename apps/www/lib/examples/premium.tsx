@@ -26,6 +26,7 @@ import {
   DynamicIsland,
   ExpandableTabs,
   ExploreNav,
+  FamilyWallet,
   FlickeringGrid,
   FlipCard,
   FlipCardBack,
@@ -2839,6 +2840,20 @@ export const premiumExamples: ExampleMap = {
       preview: (
         <div className="flex w-full justify-center overflow-hidden rounded-3xl">
           <ReceiveButton />
+        </div>
+      ),
+    },
+  ],
+  "family-wallet": [
+    {
+      id: "sign-in",
+      title: "Sign in drawer",
+      description:
+        "Sign In opens a rounded Family drawer. Socials, Email/Phone/Passkey, OTP after Continue, a waiting-passkey orb, and Connect Wallet. Views pop-layout while the shell height tweens.",
+      code: `<FamilyWallet />`,
+      preview: (
+        <div className="flex w-full justify-center overflow-hidden rounded-3xl">
+          <FamilyWallet />
         </div>
       ),
     },

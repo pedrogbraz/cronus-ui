@@ -276,6 +276,10 @@
       "types": "./dist/components/fab.d.ts",
       "import": "./dist/components/fab.js"
     },
+    "./family-wallet": {
+      "types": "./dist/components/family-wallet.d.ts",
+      "import": "./dist/components/family-wallet.js"
+    },
     "./field": {
       "types": "./dist/components/field.d.ts",
       "import": "./dist/components/field.js"

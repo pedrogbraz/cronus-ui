@@ -162,7 +162,7 @@ Calendar, DatePicker, DateRangePicker, Chart (Recharts), Empty, Metric, Kbd,
 CodeBlock, CopyButton, Carousel.
 
 Premium and brand — GlassCard, GradientBorder, GradientText, SpotlightCard,
-AuroraBackground, Shimmer, AnimatedButton, AnimatedNumber, Reveal, TextEffect,
+AuroraBackground, Shimmer, AnimatedButton, AnimatedNumber, NumberFlow, ExploreNav, ScrollNav, BouncyAccordion, TokenSwap, ReceiveButton, FamilyWallet, Reveal, TextEffect,
 LogoCarousel, and motion presets — the Aurora layer of glass, gradients, springs,
 and scroll reveals.
 

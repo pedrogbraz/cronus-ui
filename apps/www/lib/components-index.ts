@@ -1002,6 +1002,13 @@ export const CATEGORIES: ComponentCategory[] = [
         importName: "ReceiveButton",
       },
       {
+        slug: "family-wallet",
+        name: "FamilyWallet",
+        description:
+          "Family sign-in drawer: socials, email/phone/passkey, OTP, waiting orb, wallets.",
+        importName: "FamilyWallet",
+      },
+      {
         slug: "dynamic-island",
         name: "DynamicIsland",
         description: "A compact live-activity pill that morphs between views.",

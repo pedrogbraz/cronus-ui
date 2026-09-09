@@ -33,6 +33,7 @@ import {
   DialogTrigger,
 } from "./components/dialog.js";
 import { ExploreNav } from "./components/explore-nav.js";
+import { FamilyWallet } from "./components/family-wallet.js";
 import { Input } from "./components/input.js";
 import { Label } from "./components/label.js";
 import { Metric, MetricDelta, MetricLabel, MetricValue } from "./components/metric.js";
@@ -259,6 +260,11 @@ const CASES: ReadonlyArray<{ label: string; node: ReactNode; min?: number }> = [
     min: 4,
   },
   {
+    label: "FamilyWallet",
+    node: h(FamilyWallet, null),
+    min: 4,
+  },
+  {
     label: "ReceiveButton",
     node: h(ReceiveButton, null),
     min: 4,
@@ -420,5 +426,11 @@ describe("SSR smoke (renderToString) — public components render on the server"
     const html = renderCase("ReceiveButton initial", h(ReceiveButton, null));
     expect(html).toContain("Receive");
     expect(html).toContain('data-slot="receive-button"');
+  });
+
+  it("FamilyWallet exposes the Sign In trigger and data-slot on the server", () => {
+    const html = renderCase("FamilyWallet initial", h(FamilyWallet, null));
+    expect(html).toContain("Sign In");
+    expect(html).toContain('data-slot="family-wallet"');
   });
 });

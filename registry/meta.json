@@ -3690,6 +3690,21 @@
         "action"
       ]
     },
+    "family-wallet": {
+      "title": "FamilyWallet",
+      "category": "premium",
+      "description": "Family sign-in drawer: socials, email/phone/passkey, OTP, waiting orb, wallets.",
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "auth",
+        "overlay",
+        "commerce",
+        "motion"
+      ]
+    },
     "field": {
       "title": "Field",
       "category": "forms",

@@ -210,6 +210,7 @@ export const EXAMPLE_FAMILY_BY_SLUG: Record<string, ExampleFamily> = {
   "bouncy-accordion": "premium",
   "token-swap": "premium",
   "receive-button": "premium",
+  "family-wallet": "premium",
   "dynamic-island": "premium",
   confetti: "premium",
   particles: "premium",

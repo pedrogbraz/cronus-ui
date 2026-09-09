@@ -676,6 +676,20 @@
     ]
   },
   {
+    "name": "family-wallet",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1",
+      "lucide-react@^0.577.0",
+      "motion@^12.23.0",
+      "vaul@^1.1.2"
+    ],
+    "registryDependencies": [
+      "cn",
+      "input-otp"
+    ]
+  },
+  {
     "name": "field",
     "type": "registry:ui",
     "dependencies": [],

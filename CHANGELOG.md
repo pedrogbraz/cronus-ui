@@ -106,6 +106,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   card (fingerprint, Cancel, shared-layout Receive, backdrop blur).
   `npx cronus-ui add receive-button`.
 
+- **`FamilyWallet`.** Family sign-in drawer: Google/Discord/GitHub/Apple,
+  Email/Phone/Passkey, OTP, a waiting-passkey orb, and a wallet list
+  (Metamask, Phantom, …). Height tweens 270ms between views.
+  `npx cronus-ui add family-wallet`.
+
 ## [0.7.3] — 2026-09-07
 
 ### Added

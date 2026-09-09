@@ -6683,6 +6683,61 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  "family-wallet": [
+    {
+      interfaceName: "FamilyWalletProps",
+      extends:
+        'Extends Omit< ComponentPropsWithoutRef<"div">, "onAnimationStart" | "onAnimationEnd" | "onDrag" | "onDragStart" | "onDragEnd" >',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "open",
+          type: "boolean",
+          required: false,
+        },
+        {
+          name: "defaultOpen",
+          type: "boolean",
+          required: false,
+          default: "false",
+        },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean) => void",
+          required: false,
+        },
+        {
+          name: "onSocial",
+          type: "(id: FamilyWalletSocial) => void",
+          required: false,
+        },
+        {
+          name: "onContinue",
+          type: "(method: FamilyWalletMethod, value: string) => void",
+          required: false,
+        },
+        {
+          name: "onVerify",
+          type: "(code: string) => void",
+          required: false,
+        },
+        {
+          name: "onWallet",
+          type: "(id: FamilyWalletProvider) => void",
+          required: false,
+        },
+        {
+          name: "labels",
+          type: 'Partial<FamilyWalletLabels> & { wallets?: Partial<FamilyWalletLabels["wallets"]>; social?: Partial<FamilyWalletLabels["social"]>; }',
+          required: false,
+        },
+      ],
+    },
+  ],
   "dynamic-island": [
     {
       interfaceName: "DynamicIslandProps",

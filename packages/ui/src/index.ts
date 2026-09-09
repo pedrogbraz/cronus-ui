@@ -298,6 +298,15 @@ export type {
 export { ExploreNav, exploreNavVariants } from "./components/explore-nav.js";
 export type { FabAction, FabProps } from "./components/fab.js";
 export { Fab } from "./components/fab.js";
+export type {
+  FamilyWalletLabels,
+  FamilyWalletMethod,
+  FamilyWalletProps,
+  FamilyWalletProvider,
+  FamilyWalletSocial,
+  FamilyWalletView,
+} from "./components/family-wallet.js";
+export { FamilyWallet, familyWalletVariants } from "./components/family-wallet.js";
 export { Field, FieldDescription, FieldError, FieldLabel } from "./components/field.js";
 export type { FileDropzoneProps } from "./components/file-dropzone.js";
 export { FileDropzone } from "./components/file-dropzone.js";
