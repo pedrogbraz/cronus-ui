@@ -13,9 +13,9 @@
 #             promoted into the repo, and passes with a notice (see the
 #             "Visual regression" section of CONTRIBUTING.md).
 #
-# GitHub-hosted runners. The GitHub repo is private; npm packages stay
-# public. `npx cronus-ui add` hits raw.githubusercontent.com only after
-# a public tag (release preflight). Local: `-r ./registry`.
+# GitHub-hosted runners on the public repo (no billable minutes).
+# `npx cronus-ui add` hits raw.githubusercontent.com only after a public
+# tag (release preflight). Local: `-r ./registry`.
 name: CI
 
 on:

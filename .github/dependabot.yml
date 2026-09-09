@@ -1,31 +1,11 @@
-# Dependabot — weekly dependency updates.
-# Docs: https://docs.github.com/code-security/dependabot/dependabot-version-updates
+# Dependabot — GitHub Actions only.
+# npm is lockstep across the published packages; weekly PRs per workspace
+# folder were opening preview deploys on Vercel for every bump.
 version: 2
 updates:
-  # Keep future GitHub Actions dependencies visible; this repo currently has no active workflows.
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
     commit-message:
       prefix: ci
-
-  # JS dependencies across the workspace (root manifest + every package/app).
-  - package-ecosystem: npm
-    directories:
-      - /
-      - /packages/ui
-      - /packages/tokens
-      - /packages/theme
-      - /packages/cli
-      - /packages/stack
-      - /packages/ai-kit
-      - /packages/create-cronus-app
-      - /packages/create-cronus-stack
-      - /packages/mcp
-      - /apps/www
-    schedule:
-      interval: weekly
-    open-pull-requests-limit: 10
-    commit-message:
-      prefix: deps
