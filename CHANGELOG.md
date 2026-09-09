@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.4] — 2026-09-09
+
 ### Added
 
 - **Complete `/llms.txt` catalog.** The agent index now lists the site,
@@ -104,6 +106,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Email/Phone/Passkey, OTP, a waiting-passkey orb, and a wallet list
   (Metamask, Phantom, …). Height tweens 270ms between views.
   `npx cronus-ui add family-wallet`.
+- **Hosted Streamable HTTP MCP** at `/mcp` (read-only catalog) plus
+  `/docs/mcp` with per-client snippets. Local stdio (`npx -y cronus-ui-mcp`)
+  still runs the write tools. `cronus-ui-mcp` exports `./http`.
+
+### Fixed
+
+- Changelog docs shell: the sidebar stays pinned; only the timeline scrolls.
+- TokenSwap muted caption contrast on the painted Aave surface (`#7d7d7d` on
+  `#121212`, AA).
 
 ## [0.7.3] — 2026-09-07
 
@@ -810,7 +821,8 @@ as installable packages and as copy-paste registry items you own.
 - Added per-entry gzipped bundle budgets for the published `@cronus-ui/ui` so a
   dependency or code-size regression is caught at build time.
 
-[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.3...HEAD
+[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.4...HEAD
+[0.7.4]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.3...v0.7.4
 [0.7.3]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.2...v0.7.3
 [0.7.2]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.1...v0.7.2
 [0.7.1]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.0...v0.7.1

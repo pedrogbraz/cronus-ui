@@ -306,11 +306,11 @@ export const ACCESSIBILITY_CHECKS = [
 export const CHANGELOG_ENTRIES = [
   {
     date: "2026-09-09",
-    version: "Unreleased",
-    status: "In development",
-    title: "catalog empties, motion harvest, complete llms.txt",
+    version: "v0.7.4",
+    status: "Released",
+    title: "catalog empties, motion harvest, complete llms.txt, hosted MCP",
     summary:
-      "On main, not on npm yet. Gold-path and store empties/completes, eleven motion components, and a full /llms.txt catalog generated from the live indices. npm latest stays 0.7.3 until a lockstep publish.",
+      "Gold-path and store empties/completes, eleven motion components, a full /llms.txt catalog from the live indices, and a hosted Streamable HTTP MCP at /mcp. npm latest is 0.7.4.",
     items: [
       "magic-link--split, setup-checklist--complete, setup-wizard--done, welcome--complete, analytics--period",
       "team--empty, stats--empty, usage-dashboard--empty, billing--empty, analytics--empty",
