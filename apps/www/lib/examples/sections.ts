@@ -71,6 +71,12 @@ export const EXAMPLE_SECTIONS: Record<string, ExampleSectionMeta[]> = {
     { id: "default", title: "Default" },
     { id: "disabled", title: "Disabled" },
   ],
+  "radio-group":    { id: "disabled", title: "Disabled" },
+  ],
+  "animated-checkbox": [
+    { id: "default", title: "Default" },
+    { id: "disabled", title: "Disabled" },
+  ],
   "radio-group": [{ id: "options", title: "Options" }],
   switch: [{ id: "default", title: "Default" }],
   select: [{ id: "grouped", title: "Grouped" }],

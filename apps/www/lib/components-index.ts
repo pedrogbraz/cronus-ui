@@ -116,6 +116,12 @@ export const CATEGORIES: ComponentCategory[] = [
         rsc: true,
       },
       { slug: "checkbox", name: "Checkbox", description: "Binary choice with an indicator." },
+      {
+        slug: "animated-checkbox",
+        name: "AnimatedCheckbox",
+        description: "Checkbox with a spring check mark and a strike-through label.",
+        importName: "AnimatedCheckbox",
+      },
       { slug: "radio-group", name: "RadioGroup", description: "Single choice among options." },
       { slug: "switch", name: "Switch", description: "Toggle a setting on or off." },
       { slug: "select", name: "Select", description: "Composable dropdown with groups." },

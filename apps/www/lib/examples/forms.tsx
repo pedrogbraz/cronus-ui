@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  AnimatedCheckbox,
   Autocomplete,
   type AutocompleteOption,
   Badge,
@@ -99,6 +100,26 @@ const checkboxDemoCode = `function CheckboxDemo() {
         onCheckedChange={(value) => setChecked(value === true)}
       />
       <Label htmlFor="terms">Accept terms &amp; conditions</Label>
+    </div>
+  );
+}`;
+
+function AnimatedCheckboxDemo() {
+  return (
+    <div className="flex flex-col items-start gap-3">
+      <AnimatedCheckbox title="Implement Checkbox" />
+      <AnimatedCheckbox title="Write documentation" />
+      <AnimatedCheckbox title="Add tests" defaultChecked />
+    </div>
+  );
+}
+
+const animatedCheckboxDemoCode = `function AnimatedCheckboxDemo() {
+  return (
+    <div className="flex flex-col items-start gap-3">
+      <AnimatedCheckbox title="Implement Checkbox" />
+      <AnimatedCheckbox title="Write documentation" />
+      <AnimatedCheckbox title="Add tests" defaultChecked />
     </div>
   );
 }`;
@@ -1737,6 +1758,22 @@ export const formsExamples: ExampleMap = {
           <Label htmlFor="ex-disabled">Unavailable option</Label>
         </div>
       ),
+    },
+  ],
+  "animated-checkbox": [
+    {
+      id: "default",
+      title: "Default",
+      description: "Spring-drawn check mark with a strike-through label. Click a row to toggle.",
+      code: animatedCheckboxDemoCode,
+      preview: <AnimatedCheckboxDemo />,
+    },
+    {
+      id: "disabled",
+      title: "Disabled",
+      description: "A non-interactive animated checkbox.",
+      code: `<AnimatedCheckbox title="Unavailable option" disabled />`,
+      preview: <AnimatedCheckbox title="Unavailable option" disabled />,
     },
   ],
   "radio-group": [

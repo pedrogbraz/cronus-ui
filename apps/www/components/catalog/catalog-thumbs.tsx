@@ -1,5 +1,6 @@
 "use client";
 
+import { AnimatedCheckbox } from "@cronus-ui/ui/animated-checkbox";
 import { Avatar, AvatarFallback } from "@cronus-ui/ui/avatar";
 import { Badge } from "@cronus-ui/ui/badge";
 import { Button } from "@cronus-ui/ui/button";
@@ -671,6 +672,17 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
                 Comment
               </Button>
             </div>
+          </div>
+        </Fill>
+      );
+    case "animated-checkbox":
+      return (
+        <Fill className="items-center justify-center p-12">
+          <div className="flex w-[380px] flex-col items-start gap-4 rounded-2xl border border-border bg-surface-raised p-6">
+            <p className="font-display text-lg tracking-[-0.02em] text-fg">Checklist</p>
+            <AnimatedCheckbox title="Implement Checkbox" defaultChecked />
+            <AnimatedCheckbox title="Write documentation" />
+            <AnimatedCheckbox title="Add tests" />
           </div>
         </Fill>
       );

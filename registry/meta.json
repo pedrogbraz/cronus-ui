@@ -2979,6 +2979,19 @@
         "motion"
       ]
     },
+    "animated-checkbox": {
+      "title": "AnimatedCheckbox",
+      "category": "forms",
+      "description": "Checkbox with a spring check mark and a strike-through label.",
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "form",
+        "motion"
+      ]
+    },
     "animated-list": {
       "title": "AnimatedList",
       "category": "premium",

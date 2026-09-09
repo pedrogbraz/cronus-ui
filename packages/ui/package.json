@@ -44,6 +44,10 @@
       "types": "./dist/components/animated-button.d.ts",
       "import": "./dist/components/animated-button.js"
     },
+    "./animated-checkbox": {
+      "types": "./dist/components/animated-checkbox.d.ts",
+      "import": "./dist/components/animated-checkbox.js"
+    },
     "./animated-number": {
       "types": "./dist/components/animated-number.d.ts",
       "import": "./dist/components/animated-number.js"

@@ -366,6 +366,46 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  "animated-checkbox": [
+    {
+      interfaceName: "AnimatedCheckboxProps",
+      extends:
+        'Extends Omit<ComponentPropsWithoutRef<"input">, "type" | "onChange" | "title" | "size">',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLLabelElement>",
+          required: false,
+        },
+        {
+          name: "title",
+          type: "string",
+          required: false,
+          description: "Visible label drawn next to the box.",
+          default: '"Implement Checkbox"',
+        },
+        {
+          name: "defaultChecked",
+          type: "boolean",
+          required: false,
+          description: "Initial checked state for uncontrolled usage.",
+          default: "false",
+        },
+        {
+          name: "checked",
+          type: "boolean",
+          required: false,
+          description: "Controlled checked state. Pair with `onCheckedChange`.",
+        },
+        {
+          name: "onCheckedChange",
+          type: "(checked: boolean) => void",
+          required: false,
+          description: "Called with the next checked value whenever the control toggles.",
+        },
+      ],
+    },
+  ],
   combobox: [
     {
       interfaceName: "ComboboxProps",

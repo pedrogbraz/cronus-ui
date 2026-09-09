@@ -23,6 +23,12 @@ export {
 export type { AnimatedButtonProps } from "./components/animated-button.js";
 // ── Wave 4 — premium & brand ───────────────────────────────────────
 export { AnimatedButton } from "./components/animated-button.js";
+export type { AnimatedCheckboxProps } from "./components/animated-checkbox.js";
+export {
+  AnimatedCheckbox,
+  animatedCheckboxBoxVariants,
+  animatedCheckboxVariants,
+} from "./components/animated-checkbox.js";
 // ── Wave 6 — motion harvest ────────────────────────────────────────
 export type { AnimatedListProps } from "./components/animated-list.js";
 export { AnimatedList } from "./components/animated-list.js";

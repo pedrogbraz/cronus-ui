@@ -100,4 +100,14 @@ describe("catalog tags", () => {
     expect(tags.intents).toContain("action");
     expect(tags.intents).toContain("motion");
   });
+  it("marks animated-checkbox as smooth form motion", () => {
+    const tags = resolveCatalogTags({
+      slug: "animated-checkbox",
+      category: "forms",
+      kind: "component",
+    });
+    expect(tags.motion).toBe("smooth");
+    expect(tags.intents).toContain("form");
+    expect(tags.intents).toContain("motion");
+  });
 });

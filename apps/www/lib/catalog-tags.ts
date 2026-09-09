@@ -143,6 +143,7 @@ const FALLBACK: CatalogTags = {
 /** Per-slug overrides. Only the fields that differ from the category default. */
 const SLUG_OVERRIDES: Record<string, TagPatch> = {
   "animated-button": { motion: "smooth", intents: ["action", "motion"] },
+  "animated-checkbox": { motion: "smooth", intents: ["form", "motion"] },
   "mode-toggle": { motion: "smooth", intents: ["action", "settings"] },
   "copy-button": { motion: "snappy", intents: ["action"] },
   fab: { motion: "snappy", intents: ["action"] },

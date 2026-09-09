@@ -9,6 +9,7 @@ import {
   AccordionTrigger,
 } from "./components/accordion.js";
 import { Alert, AlertDescription, AlertTitle } from "./components/alert.js";
+import { AnimatedCheckbox } from "./components/animated-checkbox.js";
 import { AnimatedNumber } from "./components/animated-number.js";
 import { Avatar, AvatarFallback } from "./components/avatar.js";
 import { Badge } from "./components/badge.js";
@@ -248,6 +249,11 @@ const CASES: ReadonlyArray<{ label: string; node: ReactNode; min?: number }> = [
     label: "AnimatedNumber",
     node: h(AnimatedNumber, { value: 1234, locale: "en-US" }),
     // It must render its formatted initial value on the server (no flash).
+    min: 4,
+  },
+  {
+    label: "AnimatedCheckbox",
+    node: h(AnimatedCheckbox, { title: "Implement Checkbox" }),
     min: 4,
   },
   {

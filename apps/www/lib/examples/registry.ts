@@ -41,6 +41,7 @@ export const EXAMPLE_FAMILY_BY_SLUG: Record<string, ExampleFamily> = {
   textarea: "forms",
   label: "forms",
   checkbox: "forms",
+  "animated-checkbox": "forms",
   "radio-group": "forms",
   switch: "forms",
   select: "forms",

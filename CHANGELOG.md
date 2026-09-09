@@ -68,6 +68,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `/products` default; the variant is the same chrome with no listings yet.
   `add-page --blocks product-grid=empty`.
 
+- **`AnimatedCheckbox`.** Task checkbox with a spring-drawn check mark and a
+  strike-through label. `npx cronus-ui add animated-checkbox`.
+
 ## [0.7.3] — 2026-09-07
 
 ### Added
