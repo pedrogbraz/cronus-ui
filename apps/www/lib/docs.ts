@@ -317,11 +317,11 @@ export type ChangelogEntry = {
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
     date: "2026-09-09",
-    version: "Unreleased",
-    status: "In development",
+    version: "v0.7.5",
+    status: "Released",
     title: "mcp init and per-editor kit",
     summary:
-      "On main, not on npm yet. cronus-ui mcp init writes project MCP config for Claude, Cursor, VS Code, Codex, Grok, OpenCode, Gemini, and Zed. create-cronus-app and cronus-ui ai emit the same files. npm latest stays 0.7.4 until a lockstep publish.",
+      "cronus-ui mcp init writes project MCP config for Claude, Cursor, VS Code, Codex, Grok, OpenCode, Gemini, and Zed. create-cronus-app and cronus-ui ai emit the same files. npm latest is 0.7.5.",
     items: [
       "cronus-ui mcp init — one command, --client subset, --force overwrite",
       "AI kit writes .mcp.json, .cursor/mcp.json, .vscode/mcp.json (servers), .codex/config.toml, .grok/config.toml, opencode.json, .gemini/settings.json, .zed/settings.json",

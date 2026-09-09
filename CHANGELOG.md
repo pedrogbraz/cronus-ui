@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.5] — 2026-09-09
+
 ### Added
 
 - **`cronus-ui mcp init`.** Writes project MCP config per editor: Claude
@@ -829,7 +831,8 @@ as installable packages and as copy-paste registry items you own.
 - Added per-entry gzipped bundle budgets for the published `@cronus-ui/ui` so a
   dependency or code-size regression is caught at build time.
 
-[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.4...HEAD
+[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.5...HEAD
+[0.7.5]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.4...v0.7.5
 [0.7.4]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.3...v0.7.4
 [0.7.3]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.2...v0.7.3
 [0.7.2]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.1...v0.7.2
