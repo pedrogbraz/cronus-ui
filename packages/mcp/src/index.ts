@@ -5,10 +5,14 @@ import { RegistryClient, resolveRegistrySource, SourceRegistryLoader } from "./r
 import { createServer } from "./server.js";
 import { SERVER_VERSION } from "./version.js";
 
-const HELP = `cronus-ui-mcp — expose the Cronus UI registry through MCP.
+const HELP = `cronus-ui-mcp — expose the Cronus UI registry through MCP (stdio).
 
 Usage
   cronus-ui-mcp [options]
+
+This binary is the local stdio server (read + write). The hosted Streamable
+HTTP endpoint (read-only catalog) is https://aicronus.com/mcp — see
+https://aicronus.com/docs/mcp for every client snippet.
 
 Options
   -h, --help     Show this help

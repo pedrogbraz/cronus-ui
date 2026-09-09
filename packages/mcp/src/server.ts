@@ -82,6 +82,36 @@ const WRITES_PROJECT = {
   openWorldHint: false,
 } as const;
 
+/** Read-only catalog tools. The hosted HTTP server exposes only these. */
+export const READ_TOOL_NAMES = [
+  "list_components",
+  "list_blocks",
+  "list_catalog",
+  "match_catalog",
+  "search_registry",
+  "get_design_context",
+  "get_component",
+  "get_install_command",
+] as const;
+
+/** Write tools that spawn the pinned CLI. Omitted when `writes` is false. */
+export const WRITE_TOOL_NAMES = [
+  "install_component",
+  "upgrade_components",
+  "apply_theme",
+  "compose_app",
+  "add_page",
+  "set_theme",
+] as const;
+
+export interface CreateServerOptions {
+  /**
+   * When false, omit write tools that spawn the CLI. The hosted Streamable HTTP
+   * server is read-only — there is no project to write into. Default true.
+   */
+  writes?: boolean;
+}
+
 /**
  * Build the configured MCP server. Exposes the Cronus UI registry as a set of
  * read-only tools (and the index as a resource) plus write tools that compose
@@ -90,13 +120,15 @@ const WRITES_PROJECT = {
  *
  * `cliOptions` (cwd/env/launcher/timeout) is a seam for tests and embedding —
  * the stdio entry point passes nothing and the write tools then operate on
- * `process.cwd()`.
+ * `process.cwd()`. Pass `{ writes: false }` for the hosted HTTP surface.
  */
 export function createServer(
   client: RegistryClient,
   source: string,
   cliOptions: CliRunOptions = {},
+  serverOptions: CreateServerOptions = {},
 ): McpServer {
+  const writes = serverOptions.writes ?? true;
   const server = new McpServer({ name: SERVER_NAME, version: SERVER_VERSION });
 
   server.registerTool(
@@ -331,313 +363,319 @@ export function createServer(
     },
   );
 
-  server.registerTool(
-    "install_component",
-    {
-      title: "Install Cronus UI components into the project",
-      description:
-        "MODIFIES THE FILESYSTEM. Install one or more Cronus UI components/blocks into the " +
-        "current project by running the version-pinned `cronus-ui add` CLI at the detected " +
-        "project root (nearest directory with cronus-ui.json, else package.json). It writes the " +
-        "component source files, pulls in their registry dependencies, and installs their npm " +
-        "packages with the project's package manager. Use this — not a shell command — whenever " +
-        "the user asks to add/install a Cronus UI component or block. Existing files are " +
-        "skipped unless `overwrite` is true (overwrite discards local edits to those files). " +
-        "Requires a project initialised with `npx cronus-ui init`.",
-      inputSchema: {
-        names: z
-          .array(z.string())
-          .min(1)
-          .describe(
-            "Registry item names to install, e.g. ['button', 'card'] or ['pricing']. " +
-              "Registry dependencies are resolved automatically.",
-          ),
-        overwrite: z
-          .boolean()
-          .optional()
-          .describe(
-            "Overwrite files that already exist in the project (destroys local edits to " +
-              "those files). Default: existing files are skipped.",
-          ),
-        skipInstall: z
-          .boolean()
-          .optional()
-          .describe(
-            "Write the source files but skip the package-manager install of npm " +
-              "dependencies; the result then lists them as pending.",
-          ),
+  if (writes) {
+    server.registerTool(
+      "install_component",
+      {
+        title: "Install Cronus UI components into the project",
+        description:
+          "MODIFIES THE FILESYSTEM. Install one or more Cronus UI components/blocks into the " +
+          "current project by running the version-pinned `cronus-ui add` CLI at the detected " +
+          "project root (nearest directory with cronus-ui.json, else package.json). It writes the " +
+          "component source files, pulls in their registry dependencies, and installs their npm " +
+          "packages with the project's package manager. Use this — not a shell command — whenever " +
+          "the user asks to add/install a Cronus UI component or block. Existing files are " +
+          "skipped unless `overwrite` is true (overwrite discards local edits to those files). " +
+          "Requires a project initialised with `npx cronus-ui init`.",
+        inputSchema: {
+          names: z
+            .array(z.string())
+            .min(1)
+            .describe(
+              "Registry item names to install, e.g. ['button', 'card'] or ['pricing']. " +
+                "Registry dependencies are resolved automatically.",
+            ),
+          overwrite: z
+            .boolean()
+            .optional()
+            .describe(
+              "Overwrite files that already exist in the project (destroys local edits to " +
+                "those files). Default: existing files are skipped.",
+            ),
+          skipInstall: z
+            .boolean()
+            .optional()
+            .describe(
+              "Write the source files but skip the package-manager install of npm " +
+                "dependencies; the result then lists them as pending.",
+            ),
+        },
+        annotations: WRITES_PROJECT,
       },
-      annotations: WRITES_PROJECT,
-    },
-    async ({ names, overwrite, skipInstall }) => {
-      try {
-        return ranCli(await installComponent({ names, overwrite, skipInstall }, cliOptions));
-      } catch (error) {
-        return fail(error);
-      }
-    },
-  );
+      async ({ names, overwrite, skipInstall }) => {
+        try {
+          return ranCli(await installComponent({ names, overwrite, skipInstall }, cliOptions));
+        } catch (error) {
+          return fail(error);
+        }
+      },
+    );
 
-  server.registerTool(
-    "upgrade_components",
-    {
-      title: "Upgrade installed Cronus UI components and composed pages",
-      description:
-        "MODIFIES THE FILESYSTEM. Upgrade installed Cronus UI components and composed pages/layouts " +
-        "to the current registry release by running the version-pinned `cronus-ui upgrade` CLI at " +
-        "the detected project root. 3-way merge of installed items AND composed pages/layouts so " +
-        "local edits survive. Prefer this over install_component overwrite and over compose " +
-        "--overwrite. dryRun first is recommended. Defaults to `--all` when `names` is omitted " +
-        '(the usual "pull latest" request). Pass `manifest` for custom compose apps. Requires a ' +
-        "project initialised with `npx cronus-ui init`.",
-      inputSchema: {
-        names: z
-          .array(z.string())
-          .optional()
-          .describe(
-            "Registry item names to upgrade, e.g. ['button', 'card']. Omit (and leave `all` " +
-              "unset or true) to upgrade every installed component and composed pages/layouts. " +
-              "Named upgrades do not touch pages.",
-          ),
-        all: z
-          .boolean()
-          .optional()
-          .describe(
-            "Upgrade every installed component and composed pages/layouts (`--all`). Default " +
-              "when `names` is empty. Set false only when passing `names`.",
-          ),
-        dryRun: z
-          .boolean()
-          .optional()
-          .describe("Preview the per-file plan (fast-forward / merge / conflict) without writing."),
-        yes: z
-          .boolean()
-          .optional()
-          .describe(
-            "Pass `-y`: write conflict markers and confirmed overwrites without asking. " +
-              "Unlike compose_app, this does not default to true.",
-          ),
-        manifest: z
-          .string()
-          .optional()
-          .describe(
-            "Path to the compose manifest file (`--manifest`). Required when the app was " +
-              "composed from a custom `--manifest` whose name collides with a bundled template " +
-              "(or is not a bundled template).",
-          ),
+    server.registerTool(
+      "upgrade_components",
+      {
+        title: "Upgrade installed Cronus UI components and composed pages",
+        description:
+          "MODIFIES THE FILESYSTEM. Upgrade installed Cronus UI components and composed pages/layouts " +
+          "to the current registry release by running the version-pinned `cronus-ui upgrade` CLI at " +
+          "the detected project root. 3-way merge of installed items AND composed pages/layouts so " +
+          "local edits survive. Prefer this over install_component overwrite and over compose " +
+          "--overwrite. dryRun first is recommended. Defaults to `--all` when `names` is omitted " +
+          '(the usual "pull latest" request). Pass `manifest` for custom compose apps. Requires a ' +
+          "project initialised with `npx cronus-ui init`.",
+        inputSchema: {
+          names: z
+            .array(z.string())
+            .optional()
+            .describe(
+              "Registry item names to upgrade, e.g. ['button', 'card']. Omit (and leave `all` " +
+                "unset or true) to upgrade every installed component and composed pages/layouts. " +
+                "Named upgrades do not touch pages.",
+            ),
+          all: z
+            .boolean()
+            .optional()
+            .describe(
+              "Upgrade every installed component and composed pages/layouts (`--all`). Default " +
+                "when `names` is empty. Set false only when passing `names`.",
+            ),
+          dryRun: z
+            .boolean()
+            .optional()
+            .describe(
+              "Preview the per-file plan (fast-forward / merge / conflict) without writing.",
+            ),
+          yes: z
+            .boolean()
+            .optional()
+            .describe(
+              "Pass `-y`: write conflict markers and confirmed overwrites without asking. " +
+                "Unlike compose_app, this does not default to true.",
+            ),
+          manifest: z
+            .string()
+            .optional()
+            .describe(
+              "Path to the compose manifest file (`--manifest`). Required when the app was " +
+                "composed from a custom `--manifest` whose name collides with a bundled template " +
+                "(or is not a bundled template).",
+            ),
+        },
+        annotations: WRITES_PROJECT,
       },
-      annotations: WRITES_PROJECT,
-    },
-    async ({ names, all, dryRun, yes, manifest }) => {
-      try {
-        return ranCli(await upgradeComponents({ names, all, dryRun, yes, manifest }, cliOptions));
-      } catch (error) {
-        return fail(error);
-      }
-    },
-  );
+      async ({ names, all, dryRun, yes, manifest }) => {
+        try {
+          return ranCli(await upgradeComponents({ names, all, dryRun, yes, manifest }, cliOptions));
+        } catch (error) {
+          return fail(error);
+        }
+      },
+    );
 
-  server.registerTool(
-    "apply_theme",
-    {
-      title: "Apply a Cronus UI theme to the project",
-      description:
-        "MODIFIES THE FILESYSTEM. Apply a theme built in the Cronus UI Create Studio to the " +
-        "current project by running the version-pinned `cronus-ui theme add` CLI at the " +
-        "detected project root. It updates the app layout's theme attributes, writes the theme " +
-        "override block into the global stylesheet (replacing any previous one), and records " +
-        "the theme in cronus-ui.json. Use this when the user provides a Create Studio permalink " +
-        "or an exported theme JSON file and wants it applied. Set `dryRun` to preview the " +
-        "changes without writing anything.",
-      inputSchema: {
-        source: z
-          .string()
-          .describe(
-            "The theme to apply: a Create Studio permalink URL, a bare `c=` payload, or a " +
-              "path to an exported theme JSON file.",
-          ),
-        dryRun: z
-          .boolean()
-          .optional()
-          .describe("Preview what would change without writing any files."),
+    server.registerTool(
+      "apply_theme",
+      {
+        title: "Apply a Cronus UI theme to the project",
+        description:
+          "MODIFIES THE FILESYSTEM. Apply a theme built in the Cronus UI Create Studio to the " +
+          "current project by running the version-pinned `cronus-ui theme add` CLI at the " +
+          "detected project root. It updates the app layout's theme attributes, writes the theme " +
+          "override block into the global stylesheet (replacing any previous one), and records " +
+          "the theme in cronus-ui.json. Use this when the user provides a Create Studio permalink " +
+          "or an exported theme JSON file and wants it applied. Set `dryRun` to preview the " +
+          "changes without writing anything.",
+        inputSchema: {
+          source: z
+            .string()
+            .describe(
+              "The theme to apply: a Create Studio permalink URL, a bare `c=` payload, or a " +
+                "path to an exported theme JSON file.",
+            ),
+          dryRun: z
+            .boolean()
+            .optional()
+            .describe("Preview what would change without writing any files."),
+        },
+        annotations: WRITES_PROJECT,
       },
-      annotations: WRITES_PROJECT,
-    },
-    async ({ source: themeSource, dryRun }) => {
-      try {
-        return ranCli(await applyTheme({ source: themeSource, dryRun }, cliOptions));
-      } catch (error) {
-        return fail(error);
-      }
-    },
-  );
+      async ({ source: themeSource, dryRun }) => {
+        try {
+          return ranCli(await applyTheme({ source: themeSource, dryRun }, cliOptions));
+        } catch (error) {
+          return fail(error);
+        }
+      },
+    );
 
-  server.registerTool(
-    "compose_app",
-    {
-      title: "Compose a Cronus UI app from a template",
-      description:
-        "MODIFIES THE FILESYSTEM. Generate a full multi-page app from a validated Cronus UI " +
-        "template (saas, store, landing, landing-*, mail, chat, finance) by running the " +
-        "version-pinned `cronus-ui compose` CLI at the detected project root. Prefer this " +
-        "over hand-writing pages: it installs the template's blocks, writes route files " +
-        "that only stack those blocks in <main>, and records the app in cronus-ui.json. " +
-        "Use when the user wants a full product, not a single primitive. Set `dryRun` to " +
-        "preview without writing. Requires a project initialised with `npx cronus-ui init` " +
-        "— this does not scaffold a new app (use `npx create-cronus-app` for greenfield).",
-      inputSchema: {
-        template: z
-          .enum(COMPOSE_TEMPLATES)
-          .describe("Bundled app template (saas, store, landing, landing-*, mail, chat, finance)."),
-        brand: z
-          .string()
-          .optional()
-          .describe("Brand wordmark baked into chrome/hero. Ignored when empty."),
-        dryRun: z
-          .boolean()
-          .optional()
-          .describe("Preview the validated plan without writing any files."),
-        yes: z
-          .boolean()
-          .optional()
-          .describe("Pass `-y` (non-interactive). Defaults to true so agents never hang."),
-        skipInstall: z
-          .boolean()
-          .optional()
-          .describe("Write the files but skip the package-manager install of npm dependencies."),
-        overwrite: z
-          .boolean()
-          .optional()
-          .describe("Overwrite files that already exist (`--overwrite`)."),
-        variant: z
-          .array(z.string())
-          .optional()
-          .describe(
-            "Block variant selections as slug=id tokens, e.g. ['login=split']. Each becomes " +
-              "`--variant <token>`.",
-          ),
+    server.registerTool(
+      "compose_app",
+      {
+        title: "Compose a Cronus UI app from a template",
+        description:
+          "MODIFIES THE FILESYSTEM. Generate a full multi-page app from a validated Cronus UI " +
+          "template (saas, store, landing, landing-*, mail, chat, finance) by running the " +
+          "version-pinned `cronus-ui compose` CLI at the detected project root. Prefer this " +
+          "over hand-writing pages: it installs the template's blocks, writes route files " +
+          "that only stack those blocks in <main>, and records the app in cronus-ui.json. " +
+          "Use when the user wants a full product, not a single primitive. Set `dryRun` to " +
+          "preview without writing. Requires a project initialised with `npx cronus-ui init` " +
+          "— this does not scaffold a new app (use `npx create-cronus-app` for greenfield).",
+        inputSchema: {
+          template: z
+            .enum(COMPOSE_TEMPLATES)
+            .describe(
+              "Bundled app template (saas, store, landing, landing-*, mail, chat, finance).",
+            ),
+          brand: z
+            .string()
+            .optional()
+            .describe("Brand wordmark baked into chrome/hero. Ignored when empty."),
+          dryRun: z
+            .boolean()
+            .optional()
+            .describe("Preview the validated plan without writing any files."),
+          yes: z
+            .boolean()
+            .optional()
+            .describe("Pass `-y` (non-interactive). Defaults to true so agents never hang."),
+          skipInstall: z
+            .boolean()
+            .optional()
+            .describe("Write the files but skip the package-manager install of npm dependencies."),
+          overwrite: z
+            .boolean()
+            .optional()
+            .describe("Overwrite files that already exist (`--overwrite`)."),
+          variant: z
+            .array(z.string())
+            .optional()
+            .describe(
+              "Block variant selections as slug=id tokens, e.g. ['login=split']. Each becomes " +
+                "`--variant <token>`.",
+            ),
+        },
+        annotations: WRITES_PROJECT,
       },
-      annotations: WRITES_PROJECT,
-    },
-    async ({ template, brand, dryRun, yes, skipInstall, overwrite, variant }) => {
-      try {
-        return ranCli(
-          await composeApp(
-            { template, brand, dryRun, yes, skipInstall, overwrite, variant },
-            cliOptions,
-          ),
-        );
-      } catch (error) {
-        return fail(error);
-      }
-    },
-  );
+      async ({ template, brand, dryRun, yes, skipInstall, overwrite, variant }) => {
+        try {
+          return ranCli(
+            await composeApp(
+              { template, brand, dryRun, yes, skipInstall, overwrite, variant },
+              cliOptions,
+            ),
+          );
+        } catch (error) {
+          return fail(error);
+        }
+      },
+    );
 
-  server.registerTool(
-    "add_page",
-    {
-      title: "Add a page to a composed Cronus UI app",
-      description:
-        "MODIFIES THE FILESYSTEM. Grow an already-composed app by one page: install the " +
-        "named blocks, write a generated page that stacks them in <main>, and update the " +
-        "chrome nav + composed record. Runs the version-pinned `cronus-ui add-page` CLI at " +
-        "the detected project root. Use after `compose_app` when the user wants a new route. " +
-        "Set `dryRun` to preview without writing. Pass `app` (`--app`) when the project has " +
-        "more than one composed app. Pass `manifest` when the app was composed from a custom " +
-        "`--manifest`.",
-      inputSchema: {
-        route: z.string().describe("Route to add, starting with '/', e.g. '/pricing'."),
-        blocks: z
-          .string()
-          .describe(
-            "Comma-separated block slugs to stack, e.g. 'pricing,cta'. Variant syntax " +
-              "'login=split' is allowed.",
-          ),
-        nav: z.string().optional().describe("Nav label; adds the page to the chrome nav."),
-        title: z.string().optional().describe("Page <title> (default: title-cased route)."),
-        chrome: z
-          .string()
-          .optional()
-          .describe("Chrome group for the page (default: the app's first group)."),
-        app: z
-          .string()
-          .optional()
-          .describe(
-            "Composed app key (`--app`). Required when the project has more than one composed app.",
-          ),
-        dryRun: z.boolean().optional().describe("Preview the plan without writing any files."),
-        skipInstall: z
-          .boolean()
-          .optional()
-          .describe("Write the files but skip the package-manager install of npm dependencies."),
-        overwrite: z
-          .boolean()
-          .optional()
-          .describe("Replace the page if the route already exists (`--overwrite`)."),
-        manifest: z
-          .string()
-          .optional()
-          .describe(
-            "Path to the compose manifest file (`--manifest`). Required when the app was " +
-              "composed from a custom `--manifest` whose name collides with a bundled template " +
-              "(or is not a bundled template).",
-          ),
+    server.registerTool(
+      "add_page",
+      {
+        title: "Add a page to a composed Cronus UI app",
+        description:
+          "MODIFIES THE FILESYSTEM. Grow an already-composed app by one page: install the " +
+          "named blocks, write a generated page that stacks them in <main>, and update the " +
+          "chrome nav + composed record. Runs the version-pinned `cronus-ui add-page` CLI at " +
+          "the detected project root. Use after `compose_app` when the user wants a new route. " +
+          "Set `dryRun` to preview without writing. Pass `app` (`--app`) when the project has " +
+          "more than one composed app. Pass `manifest` when the app was composed from a custom " +
+          "`--manifest`.",
+        inputSchema: {
+          route: z.string().describe("Route to add, starting with '/', e.g. '/pricing'."),
+          blocks: z
+            .string()
+            .describe(
+              "Comma-separated block slugs to stack, e.g. 'pricing,cta'. Variant syntax " +
+                "'login=split' is allowed.",
+            ),
+          nav: z.string().optional().describe("Nav label; adds the page to the chrome nav."),
+          title: z.string().optional().describe("Page <title> (default: title-cased route)."),
+          chrome: z
+            .string()
+            .optional()
+            .describe("Chrome group for the page (default: the app's first group)."),
+          app: z
+            .string()
+            .optional()
+            .describe(
+              "Composed app key (`--app`). Required when the project has more than one composed app.",
+            ),
+          dryRun: z.boolean().optional().describe("Preview the plan without writing any files."),
+          skipInstall: z
+            .boolean()
+            .optional()
+            .describe("Write the files but skip the package-manager install of npm dependencies."),
+          overwrite: z
+            .boolean()
+            .optional()
+            .describe("Replace the page if the route already exists (`--overwrite`)."),
+          manifest: z
+            .string()
+            .optional()
+            .describe(
+              "Path to the compose manifest file (`--manifest`). Required when the app was " +
+                "composed from a custom `--manifest` whose name collides with a bundled template " +
+                "(or is not a bundled template).",
+            ),
+        },
+        annotations: WRITES_PROJECT,
       },
-      annotations: WRITES_PROJECT,
-    },
-    async ({
-      route,
-      blocks,
-      nav,
-      title,
-      chrome,
-      app,
-      dryRun,
-      skipInstall,
-      overwrite,
-      manifest,
-    }) => {
-      try {
-        return ranCli(
-          await addPage(
-            { route, blocks, nav, title, chrome, app, dryRun, skipInstall, overwrite, manifest },
-            cliOptions,
-          ),
-        );
-      } catch (error) {
-        return fail(error);
-      }
-    },
-  );
+      async ({
+        route,
+        blocks,
+        nav,
+        title,
+        chrome,
+        app,
+        dryRun,
+        skipInstall,
+        overwrite,
+        manifest,
+      }) => {
+        try {
+          return ranCli(
+            await addPage(
+              { route, blocks, nav, title, chrome, app, dryRun, skipInstall, overwrite, manifest },
+              cliOptions,
+            ),
+          );
+        } catch (error) {
+          return fail(error);
+        }
+      },
+    );
 
-  server.registerTool(
-    "set_theme",
-    {
-      title: "Set the Cronus UI theme preset",
-      description:
-        "MODIFIES THE FILESYSTEM. Switch the baked-in Cronus UI theme preset (and optionally " +
-        "the color mode) by running the version-pinned `cronus-ui theme set` CLI at the " +
-        "detected project root. Use this for aurora / neutral / midnight / sunset / emerald. " +
-        "For Create Studio permalinks or exported JSON, use `apply_theme` instead.",
-      inputSchema: {
-        name: z
-          .enum(THEME_PRESETS)
-          .describe("Baked-in preset: 'aurora', 'neutral', 'midnight', 'sunset', or 'emerald'."),
-        mode: z
-          .enum(THEME_MODES)
-          .optional()
-          .describe("Color mode to pin ('dark' or 'light'). Omitting leaves the current mode."),
+    server.registerTool(
+      "set_theme",
+      {
+        title: "Set the Cronus UI theme preset",
+        description:
+          "MODIFIES THE FILESYSTEM. Switch the baked-in Cronus UI theme preset (and optionally " +
+          "the color mode) by running the version-pinned `cronus-ui theme set` CLI at the " +
+          "detected project root. Use this for aurora / neutral / midnight / sunset / emerald. " +
+          "For Create Studio permalinks or exported JSON, use `apply_theme` instead.",
+        inputSchema: {
+          name: z
+            .enum(THEME_PRESETS)
+            .describe("Baked-in preset: 'aurora', 'neutral', 'midnight', 'sunset', or 'emerald'."),
+          mode: z
+            .enum(THEME_MODES)
+            .optional()
+            .describe("Color mode to pin ('dark' or 'light'). Omitting leaves the current mode."),
+        },
+        annotations: WRITES_PROJECT,
       },
-      annotations: WRITES_PROJECT,
-    },
-    async ({ name, mode }) => {
-      try {
-        return ranCli(await setTheme({ name, mode }, cliOptions));
-      } catch (error) {
-        return fail(error);
-      }
-    },
-  );
+      async ({ name, mode }) => {
+        try {
+          return ranCli(await setTheme({ name, mode }, cliOptions));
+        } catch (error) {
+          return fail(error);
+        }
+      },
+    );
+  }
 
   // Expose the registry index as a resource so agents can browse the full
   // catalog in one read.

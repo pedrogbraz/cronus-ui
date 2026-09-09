@@ -12,8 +12,14 @@ The MCP server does **not** scaffold a new app. Greenfield starts with
 `npx create-cronus-app`; write tools then operate inside that already-inited
 project.
 
-It speaks MCP over **stdio** and is the same registry the
+It speaks MCP over **stdio** (local IDEs, full read + write) and over
+**Streamable HTTP** at [`https://aicronus.com/mcp`](https://aicronus.com/mcp)
+(hosted, **read-only** catalog — cloud builders cannot spawn a local CLI).
+Both surfaces read the same registry the
 [`cronus-ui`](https://www.npmjs.com/package/cronus-ui) CLI installs from.
+
+Setup for every client (Claude Code, Cursor, VS Code, Codex, Grok, OpenCode,
+Zed, v0, Lovable, Bolt, …) lives at [aicronus.com/docs/mcp](https://aicronus.com/docs/mcp).
 
 ## What it exposes
 
@@ -75,12 +81,27 @@ repository.
 
 ## Setup
 
-The server runs with `npx` — no global install needed.
+Two transports. Pick one:
+
+| Transport | URL / command | Tools | Use when |
+| --- | --- | --- | --- |
+| **Streamable HTTP** (hosted) | `https://aicronus.com/mcp` | Read-only catalog | v0, Lovable, Replit, Bolt, Base44, or any client that takes a URL |
+| **stdio** (local) | `npx -y cronus-ui-mcp` | Read + write (compose, add-page, install, theme, upgrade) | Claude Code, Cursor, VS Code, Codex, Grok CLI, OpenCode, Zed |
+
+Snippets for every client: [aicronus.com/docs/mcp](https://aicronus.com/docs/mcp).
+
+The stdio server runs with `npx` — no global install needed.
 
 ### Claude Code
 
 ```sh
 claude mcp add cronus-ui -- npx -y cronus-ui-mcp
+```
+
+Hosted (read-only):
+
+```sh
+claude mcp add --transport http cronus-ui https://aicronus.com/mcp
 ```
 
 ### Cursor / Windsurf (and other clients that use an `mcpServers` JSON)
@@ -94,6 +115,18 @@ Add this to your MCP config (e.g. `~/.cursor/mcp.json`, or a project
     "cronus-ui": {
       "command": "npx",
       "args": ["-y", "cronus-ui-mcp"]
+    }
+  }
+}
+```
+
+Hosted (read-only):
+
+```json
+{
+  "mcpServers": {
+    "cronus-ui": {
+      "url": "https://aicronus.com/mcp"
     }
   }
 }
