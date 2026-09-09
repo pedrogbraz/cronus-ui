@@ -15,7 +15,9 @@ export default function ChangelogLayout({ children }: { children: ReactNode }) {
         <DocumentationSidebar />
         <main
           id="main-content"
-          className="flex min-h-0 min-w-0 flex-1 flex-col overflow-y-auto overscroll-contain"
+          // biome-ignore lint/a11y/noNoninteractiveTabindex: overflow-y-auto region must be keyboard-scrollable (axe scrollable-region-focusable).
+          tabIndex={0}
+          className="flex min-h-0 min-w-0 flex-1 flex-col overflow-y-auto overscroll-contain outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <div className="py-4 lg:hidden">
             <MobileDocumentationNav />
