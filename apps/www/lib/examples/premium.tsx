@@ -35,6 +35,7 @@ import {
   GradientText,
   GridPattern,
   Highlighter,
+  ImagesBadge,
   LightRays,
   LogoCarousel,
   Magnetic,
@@ -2568,6 +2569,34 @@ export const premiumExamples: ExampleMap = {
         <SlideUpText from="last" className="font-display text-3xl text-fg">
           Animation from last word
         </SlideUpText>
+      ),
+    },
+  ],
+  "images-badge": [
+    {
+      id: "folder",
+      title: "Folder",
+      description:
+        "A manila folder that fans up to three preview images on hover, then flattens the front. Same spring as Aceternity (`stiffness: 400`, `damping: 25`).",
+      code: `<ImagesBadge
+  text="Introducing Agenforce Marketing Template"
+  images={[
+    "https://assets.aceternity.com/pro/agenforce-1.webp",
+    "https://assets.aceternity.com/pro/agenforce-2.webp",
+    "https://assets.aceternity.com/pro/agenforce-3.webp",
+  ]}
+/>`,
+      preview: (
+        <div className="flex h-40 w-full items-center justify-center">
+          <ImagesBadge
+            text="Introducing Agenforce Marketing Template"
+            images={[
+              "https://assets.aceternity.com/pro/agenforce-1.webp",
+              "https://assets.aceternity.com/pro/agenforce-2.webp",
+              "https://assets.aceternity.com/pro/agenforce-3.webp",
+            ]}
+          />
+        </div>
       ),
     },
   ],

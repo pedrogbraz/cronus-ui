@@ -332,6 +332,7 @@ export const EXAMPLE_SECTIONS: Record<string, ExampleSectionMeta[]> = {
     { id: "lines", title: "By lines" },
     { id: "from-last", title: "From last" },
   ],
+  "images-badge": [{ id: "folder", title: "Folder" }],
   frame: [
     { id: "browser", title: "Browser chrome" },
     { id: "window", title: "Window chrome" },

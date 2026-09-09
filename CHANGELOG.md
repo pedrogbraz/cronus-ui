@@ -75,6 +75,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   (words, characters, or lines; from first, last, or center).
   `npx cronus-ui add slide-up-text`.
 
+- **`ImagesBadge`.** Folder badge that fans up to three preview images on
+  hover. Same spring as Aceternity (`stiffness: 400`, `damping: 25`).
+  `npx cronus-ui add images-badge`.
+
 ## [0.7.3] — 2026-09-07
 
 ### Added

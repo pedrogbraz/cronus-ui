@@ -828,6 +828,17 @@
     ]
   },
   {
+    "name": "images-badge",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1",
+      "motion@^12.23.0"
+    ],
+    "registryDependencies": [
+      "cn"
+    ]
+  },
+  {
     "name": "input-group",
     "type": "registry:ui",
     "dependencies": [],

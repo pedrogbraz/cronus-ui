@@ -3895,6 +3895,19 @@
         "media"
       ]
     },
+    "images-badge": {
+      "title": "ImagesBadge",
+      "category": "premium",
+      "description": "A folder badge that fans preview images on hover.",
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "marketing",
+        "motion"
+      ]
+    },
     "input": {
       "title": "Input",
       "category": "forms",

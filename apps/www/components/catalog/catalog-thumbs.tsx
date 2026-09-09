@@ -1364,6 +1364,7 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
     case "highlighter":
     case "spinning-text":
     case "scramble-text":
+    case "images-badge":
     case "text-effect":
     case "slide-up-text":
     case "typing-text":

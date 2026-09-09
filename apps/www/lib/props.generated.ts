@@ -5194,6 +5194,95 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  "images-badge": [
+    {
+      interfaceName: "ImagesBadgeProps",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLAnchorElement | HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "text",
+          type: "string",
+          required: true,
+          description: "Label drawn next to the folder.",
+        },
+        {
+          name: "images",
+          type: "string[]",
+          required: true,
+          description: "Image URLs. At most three are shown.",
+        },
+        {
+          name: "className",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "href",
+          type: "string",
+          required: false,
+          description: "Optional link. When set, the root renders as an anchor.",
+        },
+        {
+          name: "target",
+          type: "string",
+          required: false,
+          description: 'Anchor target. `noopener noreferrer` is added when this is `"_blank"`.',
+        },
+        {
+          name: "folderSize",
+          type: "{ width: number; height: number }",
+          required: false,
+          description: "Folder size in pixels.",
+          default: "{ width: 32, height: 24 }",
+        },
+        {
+          name: "teaserImageSize",
+          type: "{ width: number; height: number }",
+          required: false,
+          description: "Peeking image size in pixels.",
+          default: "{ width: 20, height: 14 }",
+        },
+        {
+          name: "hoverImageSize",
+          type: "{ width: number; height: number }",
+          required: false,
+          description: "Hovered image size in pixels.",
+          default: "{ width: 48, height: 32 }",
+        },
+        {
+          name: "hoverTranslateY",
+          type: "number",
+          required: false,
+          description: "How far images translate up on hover, in pixels.",
+          default: "-35",
+        },
+        {
+          name: "hoverSpread",
+          type: "number",
+          required: false,
+          description: "Horizontal fan spread on hover, in pixels.",
+          default: "20",
+        },
+        {
+          name: "hoverRotation",
+          type: "number",
+          required: false,
+          description: "Fan rotation on hover, in degrees.",
+          default: "15",
+        },
+        {
+          name: "imageAlts",
+          type: "string[]",
+          required: false,
+          description: "Accessible names for the preview images, in display order.",
+        },
+      ],
+    },
+  ],
   frame: [
     {
       interfaceName: "FrameProps",

@@ -329,6 +329,8 @@ export { Highlighter } from "./components/highlighter.js";
 export { HoverCard, HoverCardContent, HoverCardTrigger } from "./components/hover-card.js";
 export type { ImageZoomLabels, ImageZoomProps } from "./components/image-zoom.js";
 export { ImageZoom, imageZoomVariants } from "./components/image-zoom.js";
+export type { ImagesBadgeProps } from "./components/images-badge.js";
+export { ImagesBadge, imagesBadgeVariants } from "./components/images-badge.js";
 export type { InputProps } from "./components/input.js";
 export { Input } from "./components/input.js";
 export type { InputGroupAddonProps, InputGroupProps } from "./components/input-group.js";

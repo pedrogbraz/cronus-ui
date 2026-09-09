@@ -312,6 +312,10 @@
       "types": "./dist/components/image-zoom.d.ts",
       "import": "./dist/components/image-zoom.js"
     },
+    "./images-badge": {
+      "types": "./dist/components/images-badge.d.ts",
+      "import": "./dist/components/images-badge.js"
+    },
     "./input": {
       "types": "./dist/components/input.d.ts",
       "import": "./dist/components/input.js"

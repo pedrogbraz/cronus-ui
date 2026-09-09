@@ -751,6 +751,12 @@ export const CATEGORIES: ComponentCategory[] = [
         importName: "SlideUpText",
       },
       {
+        slug: "images-badge",
+        name: "ImagesBadge",
+        description: "A folder badge that fans preview images on hover.",
+        importName: "ImagesBadge",
+      },
+      {
         slug: "frame",
         name: "Frame",
         description: "Browser/window chrome that frames a screenshot or product mockup.",
