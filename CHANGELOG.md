@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.6] — 2026-09-09
+
+### Added
+
+- **Official MCP Registry listing.** `io.github.pedrogbraz/cronus-ui` on
+  registry.modelcontextprotocol.io: npm stdio (`cronus-ui-mcp`) plus the
+  hosted Streamable HTTP remote at `https://aicronus.com/mcp`. `mcpName` on
+  the npm package proves ownership.
+
 ## [0.7.5] — 2026-09-09
 
 ### Added
@@ -831,7 +840,8 @@ as installable packages and as copy-paste registry items you own.
 - Added per-entry gzipped bundle budgets for the published `@cronus-ui/ui` so a
   dependency or code-size regression is caught at build time.
 
-[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.5...HEAD
+[Unreleased]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.6...HEAD
+[0.7.6]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.5...v0.7.6
 [0.7.5]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.4...v0.7.5
 [0.7.4]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.3...v0.7.4
 [0.7.3]: https://github.com/pedrogbraz/cronus-ui/compare/v0.7.2...v0.7.3

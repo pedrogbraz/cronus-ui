@@ -590,6 +590,7 @@ function guideExtras(slug: string): string[] {
       const lines = [
         "## Transports",
         "",
+        `- Official registry: \`io.github.pedrogbraz/cronus-ui\`.`,
         `- Hosted Streamable HTTP (read-only catalog): \`${MCP_HTTP_URL}\`.`,
         `- Local stdio (read + write): \`${MCP_STDIO_COMMAND}\`.`,
         "",
@@ -794,7 +795,7 @@ export function buildLlmsTxt(): string {
     "",
     `- Hosted Streamable HTTP (read-only catalog): [\`${MCP_HTTP_URL}\`](${MCP_HTTP_URL}).`,
     `- Local stdio (read + write): [\`cronus-ui-mcp\`](https://www.npmjs.com/package/cronus-ui-mcp) (\`${MCP_STDIO_COMMAND}\`).`,
-    `- Setup: [${absoluteUrl("/docs/mcp")}](${absoluteUrl("/docs/mcp")}).`,
+    `- Setup: [${absoluteUrl("/docs/mcp")}](${absoluteUrl("/docs/mcp")}). Official registry: \`io.github.pedrogbraz/cronus-ui\`.`,
     "- Project files: `npx cronus-ui mcp init` writes Claude Code, Cursor, VS Code (`servers`), Codex, Grok, OpenCode, Gemini, and Zed configs. `create-cronus-app` and `cronus-ui ai` emit the same files.",
     "- Greenfield is not an MCP tool: scaffold with `npx create-cronus-app my-app --template saas`, then point the stdio server at that project.",
     "",

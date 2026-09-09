@@ -1,0 +1,48 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.pedrogbraz/cronus-ui",
+  "title": "Cronus UI",
+  "description": "Search, install, compose, add-page, and theme Cronus UI from the live registry.",
+  "websiteUrl": "https://aicronus.com/docs/mcp",
+  "repository": {
+    "url": "https://github.com/pedrogbraz/cronus-ui",
+    "source": "github",
+    "subfolder": "packages/mcp"
+  },
+  "version": "0.7.6",
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "cronus-ui-mcp",
+      "version": "0.7.6",
+      "runtimeHint": "npx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "CRONUS_UI_REGISTRY",
+          "description": "Override the registry source (URL or local directory).",
+          "isRequired": false
+        },
+        {
+          "name": "CRONUS_MCP_CLI_CMD",
+          "description": "Override the CLI launcher used by write tools.",
+          "isRequired": false
+        },
+        {
+          "name": "CRONUS_MCP_CLI_TIMEOUT_MS",
+          "description": "Per-run CLI timeout for write tools in milliseconds (default 120000).",
+          "isRequired": false
+        }
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://aicronus.com/mcp"
+    }
+  ]
+}

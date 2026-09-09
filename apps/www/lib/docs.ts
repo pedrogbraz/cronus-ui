@@ -317,6 +317,18 @@ export type ChangelogEntry = {
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
     date: "2026-09-09",
+    version: "v0.7.6",
+    status: "Released",
+    title: "official MCP Registry listing",
+    summary:
+      "io.github.pedrogbraz/cronus-ui is listed on the official MCP Registry: stdio via cronus-ui-mcp and Streamable HTTP at https://aicronus.com/mcp. npm latest is 0.7.6.",
+    items: [
+      "server.json + mcpName on cronus-ui-mcp for ownership verification",
+      "Official registry lists both stdio (npx) and the hosted /mcp remote",
+    ],
+  },
+  {
+    date: "2026-09-09",
     version: "v0.7.5",
     status: "Released",
     title: "mcp init and per-editor kit",

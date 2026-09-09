@@ -18,8 +18,9 @@ It speaks MCP over **stdio** (local IDEs, full read + write) and over
 Both surfaces read the same registry the
 [`cronus-ui`](https://www.npmjs.com/package/cronus-ui) CLI installs from.
 
-Setup for every client (Claude Code, Cursor, VS Code, Codex, Grok, OpenCode,
-Zed, v0, Lovable, Bolt, …) lives at [aicronus.com/docs/mcp](https://aicronus.com/docs/mcp).
+Official MCP Registry name: `io.github.pedrogbraz/cronus-ui` (stdio npm package
+plus the hosted remote). Setup for every client lives at
+[aicronus.com/docs/mcp](https://aicronus.com/docs/mcp).
 
 ## What it exposes
 

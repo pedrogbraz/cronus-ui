@@ -33,7 +33,7 @@ export default function McpDocsPage() {
       <DocsHeader
         eyebrow="Documentation"
         title="MCP server"
-        description="Coding agents search the live registry, fetch source, and — on a local project — compose, add pages, install, theme, and upgrade. Two transports: hosted HTTP for cloud builders, stdio for IDEs that can spawn a process."
+        description="Coding agents search the live registry, fetch source, and — on a local project — compose, add pages, install, theme, and upgrade. Listed as io.github.pedrogbraz/cronus-ui on the official MCP Registry. Two transports: hosted HTTP for cloud builders, stdio for IDEs that can spawn a process."
       >
         <PrimaryLink href="/mcp" native>
           Open /mcp
@@ -42,6 +42,14 @@ export default function McpDocsPage() {
           llms.txt
         </SecondaryLink>
       </DocsHeader>
+
+      <div className="mb-10">
+        <DocCallout title="Official MCP Registry">
+          Name: <InlineCode>io.github.pedrogbraz/cronus-ui</InlineCode>. Clients that browse the
+          registry get stdio (<InlineCode>npx -y cronus-ui-mcp</InlineCode>) and the hosted remote
+          at <InlineCode>{MCP_HTTP_URL}</InlineCode>.
+        </DocCallout>
+      </div>
 
       <DocsSection
         title="Pick a transport"

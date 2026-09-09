@@ -81,7 +81,7 @@
     },
     "packages/ai-kit": {
       "name": "@cronus-ui/ai-kit",
-      "version": "0.7.5",
+      "version": "0.7.6",
       "dependencies": {
         "@cronus-ui/tokens": "workspace:*",
       },
@@ -92,7 +92,7 @@
     },
     "packages/cli": {
       "name": "cronus-ui",
-      "version": "0.7.5",
+      "version": "0.7.6",
       "bin": {
         "cronus-ui": "./dist/index.js",
       },
@@ -108,7 +108,7 @@
     },
     "packages/create-cronus-app": {
       "name": "create-cronus-app",
-      "version": "0.7.5",
+      "version": "0.7.6",
       "bin": {
         "create-cronus-app": "./dist/index.js",
       },
@@ -123,7 +123,7 @@
     },
     "packages/create-cronus-stack": {
       "name": "create-cronus-stack",
-      "version": "0.7.5",
+      "version": "0.7.6",
       "bin": {
         "create-cronus-stack": "./dist/index.js",
         "cronus-stack": "./dist/index.js",
@@ -140,7 +140,7 @@
     },
     "packages/mcp": {
       "name": "cronus-ui-mcp",
-      "version": "0.7.5",
+      "version": "0.7.6",
       "bin": {
         "cronus-ui-mcp": "./dist/index.js",
       },
@@ -157,7 +157,7 @@
     },
     "packages/stack": {
       "name": "@cronus-ui/stack",
-      "version": "0.7.5",
+      "version": "0.7.6",
       "devDependencies": {
         "typescript": "^6.0.3",
         "vitest": "^4.1.9",
@@ -165,7 +165,7 @@
     },
     "packages/theme": {
       "name": "@cronus-ui/theme",
-      "version": "0.7.5",
+      "version": "0.7.6",
       "dependencies": {
         "@cronus-ui/tokens": "workspace:*",
       },
@@ -184,14 +184,14 @@
     },
     "packages/tokens": {
       "name": "@cronus-ui/tokens",
-      "version": "0.7.5",
+      "version": "0.7.6",
       "devDependencies": {
         "typescript": "^6.0.3",
       },
     },
     "packages/ui": {
       "name": "@cronus-ui/ui",
-      "version": "0.7.5",
+      "version": "0.7.6",
       "dependencies": {
         "@radix-ui/react-accordion": "^1.2.11",
         "@radix-ui/react-alert-dialog": "^1.1.14",

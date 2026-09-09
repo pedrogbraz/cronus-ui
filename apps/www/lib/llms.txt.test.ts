@@ -76,6 +76,7 @@ describe("llms.txt catalog", () => {
 
   it("documents stdio and hosted HTTP MCP setup", () => {
     expect(txt).toContain("npx cronus-ui mcp init");
+    expect(txt).toContain("io.github.pedrogbraz/cronus-ui");
     expect(txt).toContain("claude mcp add cronus-ui -- npx -y cronus-ui-mcp");
     expect(txt).toContain("https://aicronus.com/mcp");
     expect(txt).toContain("https://aicronus.com/docs/mcp");
