@@ -709,6 +709,8 @@ export {
 export type { ToggleProps } from "./components/toggle.js";
 export { Toggle, toggleVariants } from "./components/toggle.js";
 export { ToggleGroup, ToggleGroupItem } from "./components/toggle-group.js";
+export type { TokenSwapAsset, TokenSwapLabels, TokenSwapProps } from "./components/token-swap.js";
+export { TokenSwap, tokenSwapVariants } from "./components/token-swap.js";
 export type { ToolbarButtonProps, ToolbarProps } from "./components/toolbar.js";
 export { Toolbar, ToolbarButton, ToolbarGroup, ToolbarSeparator } from "./components/toolbar.js";
 export {

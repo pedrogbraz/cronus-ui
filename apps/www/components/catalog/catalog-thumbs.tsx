@@ -875,6 +875,28 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
           </div>
         </Fill>
       );
+    case "token-swap":
+      return (
+        <Fill className="items-center justify-center bg-[#131313] p-10">
+          {/* contract-ok: Aave swap chrome the catalog thumb paints */}
+          <div className="w-[280px] rounded-3xl border border-[#303030]/50 bg-[#121212] px-4 py-4 text-white">
+            {/* contract-ok: Aave swap chrome the catalog thumb paints */}
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-semibold">Ethereum</p>
+                <p className="text-xs text-[#7b7b7b]">111.82 ETH</p>
+                {/* contract-ok: Aave swap muted caption the catalog thumb paints */}
+              </div>
+              <span className="rounded-full bg-[#222] px-3 py-1 text-xs font-semibold">
+                {/* contract-ok: Aave swap chrome the catalog thumb paints */}
+                Use Max
+              </span>
+            </div>
+            <p className="mt-4 text-center text-4xl font-semibold tracking-tight">0</p>
+            <p className="mt-2 text-center text-sm font-semibold text-white/70">$0.00</p>
+          </div>
+        </Fill>
+      );
     case "metric":
     case "animated-number":
     case "number-flow":

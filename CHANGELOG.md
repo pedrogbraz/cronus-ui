@@ -98,6 +98,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`BouncyAccordion`.** Stacked rows that spring into a rounded card with a
   10px gap (bounce 0.32). Distinct from `Accordion`. `npx cronus-ui add bouncy-accordion`.
 
+- **`TokenSwap`.** Aave-style ETH → AAVE swap: overlay amount, USD readout
+  that grows with the digits, Use → Using Max, over-balance error, receive
+  via `NumberFlow`. `npx cronus-ui add token-swap`.
+
 ## [0.7.3] — 2026-09-07
 
 ### Added

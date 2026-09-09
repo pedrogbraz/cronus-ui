@@ -165,4 +165,17 @@ describe("catalog tags", () => {
     expect(tags.intents).toContain("motion");
   });
 
+  it('marks token-swap as snappy commerce motion', () => {
+    const tags = resolveCatalogTags({
+      slug: "token-swap",
+      category: "premium",
+      kind: "component",
+    });
+    expect(tags.motion).toBe("snappy");
+    expect(tags.palette).toBe("midnight");
+    expect(tags.intents).toContain("commerce");
+    expect(tags.intents).toContain("data");
+    expect(tags.intents).toContain("motion");
+  });
+
 });

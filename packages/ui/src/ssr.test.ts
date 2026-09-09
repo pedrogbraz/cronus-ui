@@ -67,6 +67,7 @@ import { Switch } from "./components/switch.js";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/tabs.js";
 import { TextEffect } from "./components/text-effect.js";
 import { Textarea } from "./components/textarea.js";
+import { TokenSwap } from "./components/token-swap.js";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./components/tooltip.js";
 
 /**
@@ -257,6 +258,11 @@ const CASES: ReadonlyArray<{ label: string; node: ReactNode; min?: number }> = [
     min: 4,
   },
   {
+    label: "TokenSwap",
+    node: h(TokenSwap, null),
+    min: 4,
+  },
+  {
     label: "BouncyAccordion",
     node: h(BouncyAccordion, {
       items: [{ id: "a", title: "Schedule", description: "Plan tasks." }],
@@ -396,5 +402,11 @@ describe("SSR smoke (renderToString) — public components render on the server"
     const html = renderCase("NumberFlow initial", h(NumberFlow, { value: 1234, locale: "en-US" }));
     expect(html).toContain('aria-label="1,234"');
     expect(html).toContain('data-slot="number-flow"');
+  });
+
+  it("TokenSwap exposes the from-asset and data-slot on the server", () => {
+    const html = renderCase("TokenSwap initial", h(TokenSwap, null));
+    expect(html).toContain("Ethereum");
+    expect(html).toContain('data-slot="token-swap"');
   });
 });

@@ -5058,6 +5058,20 @@
         "action"
       ]
     },
+    "token-swap": {
+      "title": "TokenSwap",
+      "category": "premium",
+      "description": "Aave-style swap: animated amount, USD conversion, Max and Clear.",
+      "rsc": false,
+      "style": "editorial",
+      "palette": "midnight",
+      "motion": "snappy",
+      "intents": [
+        "commerce",
+        "data",
+        "motion"
+      ]
+    },
     "toolbar": {
       "title": "Toolbar",
       "category": "navigation",

@@ -184,6 +184,11 @@ const SLUG_OVERRIDES: Record<string, TagPatch> = {
   "number-flow": { motion: "smooth", intents: ["data", "motion"] },
   "explore-nav": { motion: "snappy", intents: ["nav", "marketing", "motion"] },
   "bouncy-accordion": { motion: "snappy", intents: ["content", "motion"] },
+  "token-swap": {
+    motion: "snappy",
+    palette: "midnight",
+    intents: ["commerce", "data", "motion"],
+  },
   "scroll-nav": { motion: "smooth", intents: ["nav", "content", "motion"] },
   "images-badge": { motion: "snappy", intents: ["marketing", "motion"] },
   "globe-3d": { motion: "cinematic", intents: ["marketing", "motion"] },

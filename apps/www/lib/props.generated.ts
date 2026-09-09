@@ -6577,6 +6577,71 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  "token-swap": [
+    {
+      interfaceName: "TokenSwapProps",
+      extends:
+        'Extends Omit< ComponentPropsWithoutRef<"div">, "defaultValue" | "onAnimationStart" | "onAnimationEnd" | "onDrag" | "onDragStart" | "onDragEnd" >',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "from",
+          type: "TokenSwapAsset",
+          required: false,
+        },
+        {
+          name: "to",
+          type: "TokenSwapAsset",
+          required: false,
+        },
+        {
+          name: "usdPerFrom",
+          type: "number",
+          required: false,
+          description: "USD per 1 unit of the from-asset.",
+          default: "DEFAULT_USD_PER_FROM",
+        },
+        {
+          name: "toPerFrom",
+          type: "number",
+          required: false,
+          description: "To-asset units received per 1 unit of the from-asset.",
+          default: "DEFAULT_TO_PER_FROM",
+        },
+        {
+          name: "locale",
+          type: "string",
+          required: false,
+          default: '"en-US"',
+        },
+        {
+          name: "value",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "defaultValue",
+          type: "string",
+          required: false,
+          default: '""',
+        },
+        {
+          name: "onValueChange",
+          type: "(amount: string, parsed: number) => void",
+          required: false,
+        },
+        {
+          name: "labels",
+          type: "Partial<TokenSwapLabels>",
+          required: false,
+        },
+      ],
+    },
+  ],
   "dynamic-island": [
     {
       interfaceName: "DynamicIslandProps",

@@ -208,6 +208,7 @@ export const EXAMPLE_FAMILY_BY_SLUG: Record<string, ExampleFamily> = {
   "expandable-tabs": "premium",
   "explore-nav": "premium",
   "bouncy-accordion": "premium",
+  "token-swap": "premium",
   "dynamic-island": "premium",
   confetti: "premium",
   particles: "premium",

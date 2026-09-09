@@ -990,6 +990,12 @@ export const CATEGORIES: ComponentCategory[] = [
         importName: "BouncyAccordion",
       },
       {
+        slug: "token-swap",
+        name: "TokenSwap",
+        description: "Aave-style swap: animated amount, USD conversion, Max and Clear.",
+        importName: "TokenSwap",
+      },
+      {
         slug: "dynamic-island",
         name: "DynamicIsland",
         description: "A compact live-activity pill that morphs between views.",

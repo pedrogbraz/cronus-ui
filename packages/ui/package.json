@@ -572,6 +572,10 @@
       "types": "./dist/components/timeline.d.ts",
       "import": "./dist/components/timeline.js"
     },
+    "./token-swap": {
+      "types": "./dist/components/token-swap.d.ts",
+      "import": "./dist/components/token-swap.js"
+    },
     "./toggle": {
       "types": "./dist/components/toggle.d.ts",
       "import": "./dist/components/toggle.js"

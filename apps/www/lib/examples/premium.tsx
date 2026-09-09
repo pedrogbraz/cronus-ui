@@ -77,6 +77,7 @@ import {
   Terminal,
   TextEffect,
   TiltCard,
+  TokenSwap,
   TypingText,
   WordRotate,
 } from "@cronus-ui/ui";
@@ -2809,6 +2810,20 @@ export const premiumExamples: ExampleMap = {
               },
             ]}
           />
+        </div>
+      ),
+    },
+  ],
+  "token-swap": [
+    {
+      id: "aave",
+      title: "Aave swap",
+      description:
+        "Type an amount: digits fade in, the USD readout grows, Max morphs Use → Using, and the receive side rolls. Over the 111.82 ETH balance, the USD row becomes Not Enough ETH. Clear resets.",
+      code: `<TokenSwap />`,
+      preview: (
+        <div className="flex w-full justify-center overflow-hidden rounded-3xl">
+          <TokenSwap />
         </div>
       ),
     },
