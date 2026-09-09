@@ -132,6 +132,13 @@ const nextSteps = [
     href: "/components",
     action: "Browse components",
   },
+  {
+    title: "llms.txt",
+    description:
+      "Agent catalog: every component, block, template, and MCP setup. Drop the URL in a prompt.",
+    href: "/llms.txt",
+    action: "Open /llms.txt",
+  },
 ] as const;
 
 export default function GettingStartedPage() {
@@ -257,6 +264,7 @@ export default function GettingStartedPage() {
               description={step.description}
               href={step.href}
               action={step.action}
+              native={step.href.endsWith(".txt")}
             />
           ))}
         </DocsGrid>

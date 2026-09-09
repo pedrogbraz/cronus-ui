@@ -61,6 +61,7 @@ export function DocsCard({
   action,
   badge,
   children,
+  native,
 }: {
   title: string;
   description: string;
@@ -68,6 +69,8 @@ export function DocsCard({
   action?: string;
   badge?: string;
   children?: ReactNode;
+  /** Raw document (e.g. `/llms.txt`) — skip the Next client router. */
+  native?: boolean;
 }) {
   const body = (
     <div
@@ -101,11 +104,19 @@ export function DocsCard({
     return body;
   }
 
+  const wrapClass =
+    "block h-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base";
+
+  if (native) {
+    return (
+      <a href={href} className={wrapClass}>
+        {body}
+      </a>
+    );
+  }
+
   return (
-    <Link
-      href={href}
-      className="block h-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base"
-    >
+    <Link href={href} className={wrapClass}>
       {body}
     </Link>
   );
@@ -177,24 +188,52 @@ export function Checklist({ items }: { items: readonly string[] }) {
 const CTA_EASE = "duration-150 ease-[cubic-bezier(.22,1,.36,1)]";
 
 /** Filled pill — same chrome as the homepage Get started. */
-export function PrimaryLink({ href, children }: { href: string; children: ReactNode }) {
+export function PrimaryLink({
+  href,
+  children,
+  native,
+}: {
+  href: string;
+  children: ReactNode;
+  /** Raw document or API (e.g. `/mcp`) — skip the Next client router. */
+  native?: boolean;
+}) {
+  const className = `inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground outline-none transition-opacity ${CTA_EASE} hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring`;
+  if (native) {
+    return (
+      <a href={href} className={className}>
+        {children}
+      </a>
+    );
+  }
   return (
-    <Link
-      href={href}
-      className={`inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground outline-none transition-opacity ${CTA_EASE} hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring`}
-    >
+    <Link href={href} className={className}>
       {children}
     </Link>
   );
 }
 
 /** Outline pill — same chrome as the homepage View documentation. */
-export function SecondaryLink({ href, children }: { href: string; children: ReactNode }) {
+export function SecondaryLink({
+  href,
+  children,
+  native,
+}: {
+  href: string;
+  children: ReactNode;
+  /** Raw document (e.g. `/llms.txt`) — skip the Next client router. */
+  native?: boolean;
+}) {
+  const className = `inline-flex items-center rounded-full border border-border bg-surface-raised px-5 py-2.5 text-sm font-medium text-fg outline-none transition-colors ${CTA_EASE} hover:border-border-strong focus-visible:ring-2 focus-visible:ring-ring`;
+  if (native) {
+    return (
+      <a href={href} className={className}>
+        {children}
+      </a>
+    );
+  }
   return (
-    <Link
-      href={href}
-      className={`inline-flex items-center rounded-full border border-border bg-surface-raised px-5 py-2.5 text-sm font-medium text-fg outline-none transition-colors ${CTA_EASE} hover:border-border-strong focus-visible:ring-2 focus-visible:ring-ring`}
-    >
+    <Link href={href} className={className}>
       {children}
     </Link>
   );

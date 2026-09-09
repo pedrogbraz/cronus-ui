@@ -298,6 +298,33 @@ export const ACCESSIBILITY_CHECKS = [
 
 export const CHANGELOG_ENTRIES = [
   {
+    date: "2026-09-09",
+    version: "Unreleased",
+    status: "In development",
+    title: "catalog empties, motion harvest, complete llms.txt",
+    summary:
+      "On main, not on npm yet. Gold-path and store empties/completes, eleven motion components, and a full /llms.txt catalog generated from the live indices. npm latest stays 0.7.3 until a lockstep publish.",
+    items: [
+      "magic-link--split, setup-checklist--complete, setup-wizard--done, welcome--complete, analytics--period",
+      "team--empty, stats--empty, usage-dashboard--empty, billing--empty, analytics--empty",
+      "user-management--empty, kanban-board--empty, audit-log--empty",
+      "sessions--empty, api-keys--empty",
+      "cart--empty, order-history--empty, reviews--empty, product-grid--empty",
+      "AnimatedCheckbox — spring check and strike-through label",
+      "SlideUpText — Spell stagger by word, character, or line",
+      "ImagesBadge — folder badge that fans previews on hover",
+      "Globe3D — textured globe with pins (optional three / r3f / drei)",
+      "NumberFlow — digits that roll to each new value",
+      "ExploreNav — Apple product bar that morphs into a family carousel",
+      "ScrollNav — sticky sidebar that tracks the section in view",
+      "BouncyAccordion — stacked rows that spring into a gapped card",
+      "TokenSwap — Aave-style ETH → AAVE swap",
+      "ReceiveButton — Family Receive pill that morphs into a confirm card",
+      "FamilyWallet — Family sign-in drawer: socials, OTP, passkey, wallets",
+      "Complete /llms.txt catalog for coding agents — site, docs, components, blocks, templates, MCP",
+    ],
+  },
+  {
     date: "2026-09-07",
     version: "v0.7.3",
     status: "Released",
