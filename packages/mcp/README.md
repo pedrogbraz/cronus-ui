@@ -88,7 +88,14 @@ Two transports. Pick one:
 | **Streamable HTTP** (hosted) | `https://aicronus.com/mcp` | Read-only catalog | v0, Lovable, Replit, Bolt, Base44, or any client that takes a URL |
 | **stdio** (local) | `npx -y cronus-ui-mcp` | Read + write (compose, add-page, install, theme, upgrade) | Claude Code, Cursor, VS Code, Codex, Grok CLI, OpenCode, Zed |
 
-Snippets for every client: [aicronus.com/docs/mcp](https://aicronus.com/docs/mcp).
+One command writes every project file:
+
+```sh
+npx cronus-ui mcp init
+```
+
+`--client cursor,vscode` for a subset; `--force` overwrites. `create-cronus-app`
+and `cronus-ui ai` emit the same files. Snippets: [aicronus.com/docs/mcp](https://aicronus.com/docs/mcp).
 
 The stdio server runs with `npx` — no global install needed.
 

@@ -77,7 +77,7 @@ export const DOC_NAV_SECTIONS: { heading: string; items: DocNavItem[] }[] = [
       {
         label: "CLI",
         href: "/docs/cli",
-        description: "init, add, compose, add-page, diff, upgrade, theme, ai.",
+        description: "init, add, compose, add-page, diff, upgrade, theme, mcp init, ai.",
       },
       {
         label: "MCP",
@@ -315,6 +315,18 @@ export type ChangelogEntry = {
 };
 
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
+  {
+    date: "2026-09-09",
+    version: "Unreleased",
+    status: "In development",
+    title: "mcp init and per-editor kit",
+    summary:
+      "On main, not on npm yet. cronus-ui mcp init writes project MCP config for Claude, Cursor, VS Code, Codex, Grok, OpenCode, Gemini, and Zed. create-cronus-app and cronus-ui ai emit the same files. npm latest stays 0.7.4 until a lockstep publish.",
+    items: [
+      "cronus-ui mcp init — one command, --client subset, --force overwrite",
+      "AI kit writes .mcp.json, .cursor/mcp.json, .vscode/mcp.json (servers), .codex/config.toml, .grok/config.toml, opencode.json, .gemini/settings.json, .zed/settings.json",
+    ],
+  },
   {
     date: "2026-09-09",
     version: "v0.7.4",

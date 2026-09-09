@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **`cronus-ui mcp init`.** Writes project MCP config per editor: Claude
+  Code (`.mcp.json`), Cursor, VS Code (`servers` in `.vscode/mcp.json`),
+  Codex, Grok, OpenCode, Gemini, and Zed. `create-cronus-app` and
+  `cronus-ui ai` emit the same files. `--client` selects a subset;
+  `--force` overwrites. Cloud builders still paste `https://aicronus.com/mcp`.
+
 ## [0.7.4] — 2026-09-09
 
 ### Added

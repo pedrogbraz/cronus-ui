@@ -67,7 +67,7 @@ export const MCP_CLIENTS: readonly McpClientRow[] = [
     label: "Claude Code",
     transport: "both",
     config: "claude mcp add / .mcp.json",
-    notes: "create-cronus-app already writes .mcp.json (stdio).",
+    notes: "npx cronus-ui mcp init writes .mcp.json (stdio).",
   },
   {
     label: "Cursor",

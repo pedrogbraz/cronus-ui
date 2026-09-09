@@ -63,6 +63,12 @@ const cliCommands = [
     badge: "theme",
   },
   {
+    title: "mcp init",
+    description:
+      "Writes project MCP config for Claude Code, Cursor, VS Code, Codex, Grok, OpenCode, Gemini, and Zed. Flags: --cwd, --client, --force. create-cronus-app and cronus-ui ai emit the same files.",
+    badge: "agents",
+  },
+  {
     title: "ai",
     description:
       "Writes the AI Kit: AGENTS.md doctrine plus Claude / Cursor / Copilot / Windsurf / Gemini config. Flags: --assistants, --preset, --skills.",

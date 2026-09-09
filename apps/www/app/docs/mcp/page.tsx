@@ -128,6 +128,12 @@ export default function McpDocsPage() {
         title="Local stdio"
         description="Full surface: search, install, compose, add-page, theme, upgrade. The process runs on your machine, so it can write the project."
       >
+        <p className="mb-4 text-sm leading-6 text-fg-secondary">
+          One command writes every project file. Restart the agent afterwards.
+        </p>
+        <div className="mb-6">
+          <CodeBlock code="npx cronus-ui mcp init" language="bash" />
+        </div>
         <McpClientTabs snippets={MCP_STDIO_SNIPPETS} />
         <p className="mt-6 text-sm leading-6 text-fg-secondary">
           Conductor and Kilo Code inherit the agent they wrap. A repo-root{" "}
