@@ -45,6 +45,7 @@ import { NumberFlow } from "./components/number-flow.js";
 import { Popover, PopoverContent, PopoverTrigger } from "./components/popover.js";
 import { Progress } from "./components/progress.js";
 import { RadioGroup, RadioGroupItem } from "./components/radio-group.js";
+import { ReceiveButton } from "./components/receive-button.js";
 import { ScrollNav } from "./components/scroll-nav.js";
 import { SegmentedControl, SegmentedControlItem } from "./components/segmented-control.js";
 import {
@@ -258,6 +259,11 @@ const CASES: ReadonlyArray<{ label: string; node: ReactNode; min?: number }> = [
     min: 4,
   },
   {
+    label: "ReceiveButton",
+    node: h(ReceiveButton, null),
+    min: 4,
+  },
+  {
     label: "TokenSwap",
     node: h(TokenSwap, null),
     min: 4,
@@ -408,5 +414,11 @@ describe("SSR smoke (renderToString) — public components render on the server"
     const html = renderCase("TokenSwap initial", h(TokenSwap, null));
     expect(html).toContain("Ethereum");
     expect(html).toContain('data-slot="token-swap"');
+  });
+
+  it("ReceiveButton exposes the trigger and data-slot on the server", () => {
+    const html = renderCase("ReceiveButton initial", h(ReceiveButton, null));
+    expect(html).toContain("Receive");
+    expect(html).toContain('data-slot="receive-button"');
   });
 });

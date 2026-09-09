@@ -875,6 +875,14 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
           </div>
         </Fill>
       );
+    case "receive-button":
+      return (
+        <Fill className="items-end justify-center pb-16">
+          <span
+            className="h-10 w-64 rounded-full bg-[#0ea5e9]" // contract-ok: Family Receive fill the catalog thumb paints
+          />
+        </Fill>
+      );
     case "token-swap":
       return (
         <Fill className="items-center justify-center bg-[#131313] p-10">

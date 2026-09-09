@@ -189,6 +189,10 @@ const SLUG_OVERRIDES: Record<string, TagPatch> = {
     palette: "midnight",
     intents: ["commerce", "data", "motion"],
   },
+  "receive-button": {
+    motion: "snappy",
+    intents: ["overlay", "commerce", "motion"],
+  },
   "scroll-nav": { motion: "smooth", intents: ["nav", "content", "motion"] },
   "images-badge": { motion: "snappy", intents: ["marketing", "motion"] },
   "globe-3d": { motion: "cinematic", intents: ["marketing", "motion"] },

@@ -996,6 +996,12 @@ export const CATEGORIES: ComponentCategory[] = [
         importName: "TokenSwap",
       },
       {
+        slug: "receive-button",
+        name: "ReceiveButton",
+        description: "Family Receive pill that morphs into a confirmation card.",
+        importName: "ReceiveButton",
+      },
+      {
         slug: "dynamic-island",
         name: "DynamicIsland",
         description: "A compact live-activity pill that morphs between views.",

@@ -178,4 +178,16 @@ describe("catalog tags", () => {
     expect(tags.intents).toContain("motion");
   });
 
+  it('marks receive-button as snappy overlay motion', () => {
+    const tags = resolveCatalogTags({
+      slug: "receive-button",
+      category: "premium",
+      kind: "component",
+    });
+    expect(tags.motion).toBe("snappy");
+    expect(tags.intents).toContain("overlay");
+    expect(tags.intents).toContain("commerce");
+    expect(tags.intents).toContain("motion");
+  });
+
 });

@@ -6642,6 +6642,47 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  "receive-button": [
+    {
+      interfaceName: "ReceiveButtonProps",
+      extends:
+        'Extends Omit< ComponentPropsWithoutRef<"div">, "onAnimationStart" | "onAnimationEnd" | "onDrag" | "onDragStart" | "onDragEnd" >',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "open",
+          type: "boolean",
+          required: false,
+        },
+        {
+          name: "defaultOpen",
+          type: "boolean",
+          required: false,
+          default: "false",
+        },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean) => void",
+          required: false,
+        },
+        {
+          name: "onConfirm",
+          type: "() => void",
+          required: false,
+          description: "Fired when the dialog Receive action is pressed. The dialog then closes.",
+        },
+        {
+          name: "labels",
+          type: "Partial<ReceiveButtonLabels>",
+          required: false,
+        },
+      ],
+    },
+  ],
   "dynamic-island": [
     {
       interfaceName: "DynamicIslandProps",

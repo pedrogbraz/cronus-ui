@@ -1312,6 +1312,18 @@
     ]
   },
   {
+    "name": "receive-button",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1",
+      "lucide-react@^0.577.0",
+      "motion@^12.23.0"
+    ],
+    "registryDependencies": [
+      "cn"
+    ]
+  },
+  {
     "name": "resizable",
     "type": "registry:ui",
     "dependencies": [

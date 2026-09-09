@@ -508,6 +508,8 @@ export { RadarChart } from "./components/radar-chart.js";
 export { RadioGroup, RadioGroupItem } from "./components/radio-group.js";
 export type { RatingProps } from "./components/rating.js";
 export { Rating } from "./components/rating.js";
+export type { ReceiveButtonLabels, ReceiveButtonProps } from "./components/receive-button.js";
+export { ReceiveButton, receiveButtonVariants } from "./components/receive-button.js";
 export type { ResizableHandleProps } from "./components/resizable.js";
 export {
   ResizableHandle,

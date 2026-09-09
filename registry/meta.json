@@ -4468,6 +4468,20 @@
         "form"
       ]
     },
+    "receive-button": {
+      "title": "ReceiveButton",
+      "category": "premium",
+      "description": "Family Receive pill that morphs into a confirmation card.",
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "overlay",
+        "commerce",
+        "motion"
+      ]
+    },
     "resizable": {
       "title": "Resizable",
       "category": "navigation",

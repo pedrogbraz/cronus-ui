@@ -444,6 +444,10 @@
       "types": "./dist/components/rating.d.ts",
       "import": "./dist/components/rating.js"
     },
+    "./receive-button": {
+      "types": "./dist/components/receive-button.d.ts",
+      "import": "./dist/components/receive-button.js"
+    },
     "./resizable": {
       "types": "./dist/components/resizable.d.ts",
       "import": "./dist/components/resizable.js"

@@ -102,6 +102,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   that grows with the digits, Use → Using Max, over-balance error, receive
   via `NumberFlow`. `npx cronus-ui add token-swap`.
 
+- **`ReceiveButton`.** Family Receive pill that morphs into a confirmation
+  card (fingerprint, Cancel, shared-layout Receive, backdrop blur).
+  `npx cronus-ui add receive-button`.
+
 ## [0.7.3] — 2026-09-07
 
 ### Added
