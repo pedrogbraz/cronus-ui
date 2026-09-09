@@ -75,7 +75,8 @@ const strict = process.env.BUNDLE_CHECK_STRICT === "1";
 const ROUTE_BUDGETS = /** @type {Record<string, RouteBudget>} */ ({
   "/": { firstLoadUncompressedJsBytes: 1_070_000, firstLoadGzipJsBytes: 325_000 },
   "/stack": { firstLoadUncompressedJsBytes: 970_000, firstLoadGzipJsBytes: 300_000 },
-  "/docs": { firstLoadUncompressedJsBytes: 680_000, firstLoadGzipJsBytes: 205_000 },
+  // Coding-agents section + MCP/llms cards on the overview. CI 2026-09-09: 713/212 KiB.
+  "/docs": { firstLoadUncompressedJsBytes: 820_000, firstLoadGzipJsBytes: 245_000 },
   "/docs/installation": {
     firstLoadUncompressedJsBytes: 790_000,
     firstLoadGzipJsBytes: 240_000,
@@ -99,8 +100,9 @@ const ROUTE_BUDGETS = /** @type {Record<string, RouteBudget>} */ ({
     firstLoadGzipJsBytes: 270_000,
   },
   // Catalog thumbs (16/10 scaled miniatures) pull Button/Input/Badge/Avatar/
-  // Switch/Metric onto the overview. Measured 2026-08-28: 709/203 KiB.
-  "/components": { firstLoadUncompressedJsBytes: 820_000, firstLoadGzipJsBytes: 245_000 },
+  // Switch/Metric plus the motion-harvest previews onto the overview.
+  // CI 2026-09-09: 858/253 KiB.
+  "/components": { firstLoadUncompressedJsBytes: 990_000, firstLoadGzipJsBytes: 295_000 },
   // Headroom covers the /create icon-library preview (5 tree-shaken icon sets,
   // ~20 glyphs each — verified named imports) plus the preview's `motion/react`
   // spring hover-lift. motion is the only animation dep on this route, so it
@@ -108,8 +110,9 @@ const ROUTE_BUDGETS = /** @type {Record<string, RouteBudget>} */ ({
   // code-split (loaded async after hydration); only the `m` runtime lands in
   // first-load JS (~13 KiB gz). Bumped from 275/935 KiB to keep ~6% headroom.
   "/create": { firstLoadUncompressedJsBytes: 1_040_000, firstLoadGzipJsBytes: 305_000 },
-  // Same 16/10 thumbs as /components. Measured 2026-08-28: 731/210 KiB.
-  "/blocks": { firstLoadUncompressedJsBytes: 850_000, firstLoadGzipJsBytes: 250_000 },
+  // Same 16/10 thumbs as /components, including catalog empties.
+  // CI 2026-09-09: 883/261 KiB.
+  "/blocks": { firstLoadUncompressedJsBytes: 1_015_000, firstLoadGzipJsBytes: 305_000 },
   "/blocks/[slug]": { firstLoadUncompressedJsBytes: 690_000, firstLoadGzipJsBytes: 205_000 },
   "/blocks/[slug]/[variant]": {
     firstLoadUncompressedJsBytes: 700_000,
