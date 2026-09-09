@@ -116,6 +116,7 @@ npx cronus-ui add-page --route /api-keys --blocks api-keys=empty --nav Keys
 npx cronus-ui add-page --route /cart --blocks cart=empty --nav Cart
 npx cronus-ui add-page --route /orders --blocks order-history=empty --nav Orders
 npx cronus-ui add-page --route /reviews --blocks reviews=empty --nav Reviews
+npx cronus-ui add-page --route /catalog --blocks product-grid=empty --nav Catalog
 npx cronus-ui add-page --route /stats --blocks stats=empty --nav Stats
 ```
 

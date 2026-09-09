@@ -2118,7 +2118,7 @@
     },
     "product-grid": {
       "title": "Product Grid",
-      "description": "A digital-products storefront grid of product cards with prices and buy buttons.",
+      "description": "A digital-products storefront grid of product cards with prices and buy buttons, an empty catalog, a filter sidebar, or an editorial showcase.",
       "category": "commerce",
       "exportName": "ProductGridBlock",
       "kind": "section",
@@ -2132,6 +2132,20 @@
           "item": "product-grid",
           "exportName": "ProductGridBlock",
           "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "commerce",
+            "marketing"
+          ]
+        },
+        {
+          "id": "empty",
+          "name": "Empty",
+          "description": "The same storefront grid with no listings yet.",
+          "item": "product-grid--empty",
+          "exportName": "ProductGridEmptyBlock",
+          "style": "operational",
           "palette": "semantic",
           "motion": "none",
           "intents": [

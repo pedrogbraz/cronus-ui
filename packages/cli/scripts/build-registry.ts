@@ -309,6 +309,7 @@ const BLOCK_MANIFEST: ReadonlyArray<{
     file: "commerce.tsx",
     constName: "productGridCode",
     variants: [
+      { id: "empty", constName: "productGridEmptyCode" },
       { id: "with-filters", constName: "productGridWithFiltersCode" },
       { id: "showcase", constName: "productGridShowcaseCode" },
     ],

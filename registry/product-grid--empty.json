@@ -1,0 +1,15 @@
+{
+  "name": "product-grid--empty",
+  "type": "registry:block",
+  "dependencies": [
+    "@cronus-ui/ui@0.7.3"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "product-grid-empty.tsx",
+      "content": "import { Badge, Card } from \"@cronus-ui/ui\";\n\nexport function ProductGridEmptyBlock() {\n  return (\n    <section aria-label=\"Digital products\" className=\"flex w-full flex-col gap-6\">\n      <header className=\"flex flex-wrap items-end justify-between gap-3\">\n        <div className=\"flex flex-col gap-1\">\n          <h2 className=\"font-display text-2xl font-semibold text-fg\">Shop the store</h2>\n          <p className=\"text-sm text-fg-secondary\">Digital products from independent creators.</p>\n        </div>\n        <Badge variant=\"secondary\">0 products</Badge>\n      </header>\n\n      <Card className=\"flex flex-col items-center justify-center gap-2 py-16 text-center shadow-sm\">\n        <p className=\"text-sm font-medium text-fg\">No products yet.</p>\n        <p className=\"text-sm text-fg-secondary\">New listings will show up here.</p>\n      </Card>\n    </section>\n  );\n}",
+      "target": "block"
+    }
+  ]
+}

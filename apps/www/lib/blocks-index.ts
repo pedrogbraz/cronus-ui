@@ -925,12 +925,17 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
         slug: "product-grid",
         name: "Product Grid",
         description:
-          "A digital-products storefront grid of product cards with prices and buy buttons.",
+          "A digital-products storefront grid of product cards with prices and buy buttons, an empty catalog, a filter sidebar, or an editorial showcase.",
         variants: [
           {
             id: "classic",
             name: "Storefront grid",
             description: "Three-column storefront grid with product art, pricing, and buy actions.",
+          },
+          {
+            id: "empty",
+            name: "Empty",
+            description: "The same storefront grid with no listings yet.",
           },
           {
             id: "with-filters",

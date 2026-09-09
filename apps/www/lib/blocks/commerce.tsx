@@ -1522,6 +1522,50 @@ export function ProductGridBlock() {
 }`;
 
 /* ──────────────────────────────────────────────────────────────────────────
+ * 3a. Product grid / empty — same storefront chrome, no listings
+ * ────────────────────────────────────────────────────────────────────────── */
+
+export function ProductGridEmptyBlock() {
+  return (
+    <section aria-label="Digital products" className="flex w-full flex-col gap-6">
+      <header className="flex flex-wrap items-end justify-between gap-3">
+        <div className="flex flex-col gap-1">
+          <h2 className="font-display text-2xl font-semibold text-fg">Shop the store</h2>
+          <p className="text-sm text-fg-secondary">Digital products from independent creators.</p>
+        </div>
+        <Badge variant="secondary">0 products</Badge>
+      </header>
+
+      <Card className="flex flex-col items-center justify-center gap-2 py-16 text-center shadow-sm">
+        <p className="text-sm font-medium text-fg">No products yet.</p>
+        <p className="text-sm text-fg-secondary">New listings will show up here.</p>
+      </Card>
+    </section>
+  );
+}
+
+const productGridEmptyCode = `import { Badge, Card } from "@cronus-ui/ui";
+
+export function ProductGridEmptyBlock() {
+  return (
+    <section aria-label="Digital products" className="flex w-full flex-col gap-6">
+      <header className="flex flex-wrap items-end justify-between gap-3">
+        <div className="flex flex-col gap-1">
+          <h2 className="font-display text-2xl font-semibold text-fg">Shop the store</h2>
+          <p className="text-sm text-fg-secondary">Digital products from independent creators.</p>
+        </div>
+        <Badge variant="secondary">0 products</Badge>
+      </header>
+
+      <Card className="flex flex-col items-center justify-center gap-2 py-16 text-center shadow-sm">
+        <p className="text-sm font-medium text-fg">No products yet.</p>
+        <p className="text-sm text-fg-secondary">New listings will show up here.</p>
+      </Card>
+    </section>
+  );
+}`;
+
+/* ──────────────────────────────────────────────────────────────────────────
  * 3b. Product grid — catalog variation with a filter sidebar
  * ────────────────────────────────────────────────────────────────────────── */
 
@@ -2602,6 +2646,14 @@ export const commerceBlocks: BlockContentMap = {
         appearance: "dark",
         preview: <ProductGridBlock />,
         code: productGridCode,
+      },
+      {
+        id: "empty",
+        name: "Empty",
+        description: "The same storefront grid with no listings yet.",
+        appearance: "light",
+        preview: <ProductGridEmptyBlock />,
+        code: productGridEmptyCode,
       },
       {
         id: "with-filters",

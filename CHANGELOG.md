@@ -64,6 +64,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   the variant is the same chrome with no reviews yet.
   `add-page --blocks reviews=empty`.
 
+- **`product-grid--empty`.** The storefront grid stays the store `/` and
+  `/products` default; the variant is the same chrome with no listings yet.
+  `add-page --blocks product-grid=empty`.
+
 ## [0.7.3] — 2026-09-07
 
 ### Added
