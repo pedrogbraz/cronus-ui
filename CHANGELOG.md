@@ -88,6 +88,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `AnimatedNumber`, which tweens the count as one string.
   `npx cronus-ui add number-flow`.
 
+- **`ExploreNav`.** Apple product-page navbar: a 55px bar morphs into a
+  family carousel (Explore → Plus/X, spring bounce 0.16).
+  `npx cronus-ui add explore-nav`.
+
 ## [0.7.3] — 2026-09-07
 
 ### Added

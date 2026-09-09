@@ -972,6 +972,12 @@ export const CATEGORIES: ComponentCategory[] = [
         importName: "ExpandableTabs",
       },
       {
+        slug: "explore-nav",
+        name: "ExploreNav",
+        description: "Product navbar that morphs from a compact bar into a family carousel.",
+        importName: "ExploreNav",
+      },
+      {
         slug: "dynamic-island",
         name: "DynamicIsland",
         description: "A compact live-activity pill that morphs between views.",

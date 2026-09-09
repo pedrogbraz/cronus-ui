@@ -132,4 +132,15 @@ describe("catalog tags", () => {
     expect(tags.intents).toContain("motion");
   });
 
+  it('marks explore-nav as snappy nav motion', () => {
+    const tags = resolveCatalogTags({
+      slug: "explore-nav",
+      category: "premium",
+      kind: "component",
+    });
+    expect(tags.motion).toBe("snappy");
+    expect(tags.intents).toContain("nav");
+    expect(tags.intents).toContain("motion");
+  });
+
 });

@@ -620,6 +620,10 @@
       "types": "./dist/components/expandable-tabs.d.ts",
       "import": "./dist/components/expandable-tabs.js"
     },
+    "./explore-nav": {
+      "types": "./dist/components/explore-nav.d.ts",
+      "import": "./dist/components/explore-nav.js"
+    },
     "./flickering-grid": {
       "types": "./dist/components/flickering-grid.d.ts",
       "import": "./dist/components/flickering-grid.js"

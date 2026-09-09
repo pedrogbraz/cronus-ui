@@ -1407,6 +1407,7 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
     case "dock":
     case "pill-nav":
     case "dynamic-island":
+    case "explore-nav":
       return (
         <Fill className="items-end justify-center pb-10">
           <div className="flex gap-2 rounded-full border border-border bg-surface-raised p-2 shadow-sm">

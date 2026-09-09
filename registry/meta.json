@@ -3651,6 +3651,20 @@
         "nav"
       ]
     },
+    "explore-nav": {
+      "title": "ExploreNav",
+      "category": "premium",
+      "description": "Product navbar that morphs from a compact bar into a family carousel.",
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "nav",
+        "marketing",
+        "motion"
+      ]
+    },
     "fab": {
       "title": "Fab",
       "category": "buttons",

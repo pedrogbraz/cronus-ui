@@ -6418,6 +6418,86 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  "explore-nav": [
+    {
+      interfaceName: "ExploreNavProps",
+      extends:
+        'Extends Omit< ComponentPropsWithoutRef<"nav">, | "title" | "onAnimationStart" | "onAnimationEnd" | "onAnimationIteration" | "onDrag" | "onDragStart" | "onDragEnd" >',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLElement>",
+          required: false,
+        },
+        {
+          name: "title",
+          type: "string",
+          required: true,
+          description: "Product family title shown in the collapsed bar and expanded heading.",
+        },
+        {
+          name: "products",
+          type: "ExploreNavProduct[]",
+          required: true,
+        },
+        {
+          name: "links",
+          type: "ExploreNavLink[]",
+          required: false,
+          description: "Chip links under Overview.",
+          default: "[]",
+        },
+        {
+          name: "buyHref",
+          type: "string",
+          required: false,
+          description: "Buy control. Renders as an anchor when set.",
+        },
+        {
+          name: "onBuy",
+          type: "() => void",
+          required: false,
+        },
+        {
+          name: "defaultExpanded",
+          type: "boolean",
+          required: false,
+          default: "false",
+        },
+        {
+          name: "expanded",
+          type: "boolean",
+          required: false,
+        },
+        {
+          name: "onExpandedChange",
+          type: "(expanded: boolean) => void",
+          required: false,
+        },
+        {
+          name: "selectedId",
+          type: "string",
+          required: false,
+          description: "Controlled selected product id.",
+        },
+        {
+          name: "defaultSelectedId",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "onSelectedIdChange",
+          type: "(id: string) => void",
+          required: false,
+        },
+        {
+          name: "labels",
+          type: "Partial<ExploreNavLabels>",
+          required: false,
+        },
+      ],
+    },
+  ],
   "dynamic-island": [
     {
       interfaceName: "DynamicIslandProps",

@@ -31,6 +31,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./components/dialog.js";
+import { ExploreNav } from "./components/explore-nav.js";
 import { Input } from "./components/input.js";
 import { Label } from "./components/label.js";
 import { Metric, MetricDelta, MetricLabel, MetricValue } from "./components/metric.js";
@@ -272,6 +273,14 @@ const CASES: ReadonlyArray<{ label: string; node: ReactNode; min?: number }> = [
   {
     label: "SlideUpText",
     node: h(SlideUpText, null, "You can just ship things."),
+    min: 4,
+  },
+  {
+    label: "ExploreNav",
+    node: h(ExploreNav, {
+      title: "iPhone 17 Pro",
+      products: [{ id: "pro", name: "iPhone 17 Pro", image: "https://example.com/pro.png" }],
+    }),
     min: 4,
   },
   {

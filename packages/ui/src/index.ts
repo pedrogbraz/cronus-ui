@@ -283,6 +283,13 @@ export {
 } from "./components/empty.js";
 export type { ExpandableTab, ExpandableTabsProps } from "./components/expandable-tabs.js";
 export { ExpandableTabs } from "./components/expandable-tabs.js";
+export type {
+  ExploreNavLabels,
+  ExploreNavLink,
+  ExploreNavProduct,
+  ExploreNavProps,
+} from "./components/explore-nav.js";
+export { ExploreNav, exploreNavVariants } from "./components/explore-nav.js";
 export type { FabAction, FabProps } from "./components/fab.js";
 export { Fab } from "./components/fab.js";
 export { Field, FieldDescription, FieldError, FieldLabel } from "./components/field.js";

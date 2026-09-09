@@ -394,6 +394,7 @@ export const EXAMPLE_SECTIONS: Record<string, ExampleSectionMeta[]> = {
   "card-stack": [{ id: "fan", title: "Fanned stack" }],
   "pill-nav": [{ id: "pills", title: "Sliding pill" }],
   "expandable-tabs": [{ id: "icons", title: "Expanding tabs" }],
+  "explore-nav": [{ id: "family", title: "Product family" }],
   "dynamic-island": [{ id: "live", title: "Live activity" }],
   confetti: [{ id: "burst", title: "Burst" }],
   particles: [{ id: "field", title: "Drifting field" }],
