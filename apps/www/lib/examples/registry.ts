@@ -167,6 +167,7 @@ export const EXAMPLE_FAMILY_BY_SLUG: Record<string, ExampleFamily> = {
   shimmer: "premium",
   reveal: "premium",
   "animated-number": "premium",
+  "number-flow": "premium",
   carousel: "premium",
   "segmented-control": "premium",
   "text-effect": "premium",

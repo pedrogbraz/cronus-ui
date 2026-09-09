@@ -323,6 +323,10 @@ export const EXAMPLE_SECTIONS: Record<string, ExampleSectionMeta[]> = {
   shimmer: [{ id: "loading-sheen", title: "Loading sheen" }],
   reveal: [{ id: "scroll-reveal", title: "Scroll reveal" }],
   "animated-number": [{ id: "count-up", title: "Count up" }],
+  "number-flow": [
+    { id: "flow", title: "Digit flow" },
+    { id: "currency", title: "Currency" },
+  ],
   carousel: [{ id: "slides", title: "Slides" }],
   "segmented-control": [{ id: "single-select", title: "Single select" }],
   "text-effect": [{ id: "headline", title: "Headline" }],

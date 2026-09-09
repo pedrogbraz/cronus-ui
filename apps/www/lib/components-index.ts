@@ -727,6 +727,12 @@ export const CATEGORIES: ComponentCategory[] = [
         description: "Number that springs to its target — counts up or down.",
       },
       {
+        slug: "number-flow",
+        name: "NumberFlow",
+        description: "Formatted number whose digits roll to each new value.",
+        importName: "NumberFlow",
+      },
+      {
         slug: "carousel",
         name: "Carousel",
         description: "Scroll-snap slide gallery with prev/next, dots and keyboard nav.",

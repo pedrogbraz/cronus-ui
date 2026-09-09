@@ -449,6 +449,12 @@ export type {
   NotificationListProps,
   NotificationRowProps,
 } from "./components/notification-center.js";
+export type {
+  NumberFlowFormat,
+  NumberFlowLocale,
+  NumberFlowProps,
+} from "./components/number-flow.js";
+export { NumberFlow, numberFlowVariants } from "./components/number-flow.js";
 export {
   NotificationCenter,
   NotificationList,

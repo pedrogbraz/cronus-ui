@@ -400,6 +400,10 @@
       "types": "./dist/components/notification-center.d.ts",
       "import": "./dist/components/notification-center.js"
     },
+    "./number-flow": {
+      "types": "./dist/components/number-flow.d.ts",
+      "import": "./dist/components/number-flow.js"
+    },
     "./number-input": {
       "types": "./dist/components/number-input.d.ts",
       "import": "./dist/components/number-input.js"

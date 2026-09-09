@@ -49,6 +49,8 @@ import {
   MorphingPopoverFooter,
   MorphingPopoverTrigger,
   Noise,
+  NumberFlow,
+  type NumberFlowFormat,
   Orbit,
   OrbitItem,
   OrbitRing,
@@ -2617,6 +2619,39 @@ export const premiumExamples: ExampleMap = {
   }}
 />`,
       preview: <Globe3DDemo />,
+    },
+  ],
+  "number-flow": [
+    {
+      id: "flow",
+      title: "Digit flow",
+      description:
+        "Each digit rolls the short way to the next value — grouping, prefix and suffix stay put. Shuffle through number, currency, percent and decimal.",
+      code: `<NumberFlow value={12345} className="font-display text-5xl text-fg" />`,
+      preview: <NumberFlowShuffleDemo />,
+    },
+    {
+      id: "currency",
+      title: "Currency",
+      description:
+        "Two fraction digits, prefix for the symbol. Click to increment and watch the ones place roll.",
+      code: `function Revenue() {
+  const [value, setValue] = useState(19348.43);
+  return (
+    <div className="flex flex-col items-center gap-4">
+      <NumberFlow
+        value={value}
+        prefix="$"
+        format="currency"
+        className="font-display text-5xl text-fg"
+      />
+      <Button size="sm" variant="outline" onClick={() => setValue((n) => n + 1)}>
+        Update value
+      </Button>
+    </div>
+  );
+}`,
+      preview: <NumberFlowDemo />,
     },
   ],
   "dynamic-island": [

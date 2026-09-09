@@ -4879,6 +4879,74 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  "number-flow": [
+    {
+      interfaceName: "NumberFlowProps",
+      extends: 'Extends Omit<ComponentPropsWithoutRef<"span">, "children">',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLSpanElement>",
+          required: false,
+        },
+        {
+          name: "value",
+          type: "number",
+          required: true,
+          description: "Number to display. Non-finite values render as `0`.",
+        },
+        {
+          name: "prefix",
+          type: "string",
+          required: false,
+          description: "Text drawn before the formatted number.",
+          default: '""',
+        },
+        {
+          name: "suffix",
+          type: "string",
+          required: false,
+          description: "Text drawn after the formatted number.",
+          default: '""',
+        },
+        {
+          name: "format",
+          type: "NumberFlowFormat",
+          required: false,
+          description:
+            "How the number is formatted. `currency` and `decimal` default to 2 fraction digits (the currency symbol is `prefix`, not Intl). `percentage` uses `Intl` percent style (pass `0.42` for 42%).",
+          default: '"number"',
+        },
+        {
+          name: "locale",
+          type: "NumberFlowLocale",
+          required: false,
+          description: "Locale passed to `Intl.NumberFormat`.",
+          default: '"en-US"',
+        },
+        {
+          name: "minimumFractionDigits",
+          type: "number",
+          required: false,
+          description: "Minimum fraction digits. Overrides the format default when set.",
+        },
+        {
+          name: "maximumFractionDigits",
+          type: "number",
+          required: false,
+          description: "Maximum fraction digits. Overrides the format default when set.",
+        },
+        {
+          name: "reducedMotion",
+          type: '"user" | "always" | "never"',
+          required: false,
+          description:
+            'How `prefers-reduced-motion` is honoured. Defaults to `"user"` (snap). `"never"` always rolls digits — e.g. a showcase that must demonstrate it.',
+          default: '"user"',
+        },
+      ],
+    },
+  ],
   carousel: [
     {
       interfaceName: "CarouselProps",

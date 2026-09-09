@@ -876,6 +876,7 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
       );
     case "metric":
     case "animated-number":
+    case "number-flow":
       return (
         <Fill className="items-center justify-center p-10">
           <div className="grid w-full max-w-2xl grid-cols-3 gap-4">

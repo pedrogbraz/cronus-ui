@@ -39,6 +39,7 @@ import {
   MorphingPopoverContent,
   MorphingPopoverTrigger,
 } from "./components/morphing-popover.js";
+import { NumberFlow } from "./components/number-flow.js";
 import { Popover, PopoverContent, PopoverTrigger } from "./components/popover.js";
 import { Progress } from "./components/progress.js";
 import { RadioGroup, RadioGroupItem } from "./components/radio-group.js";
@@ -253,6 +254,11 @@ const CASES: ReadonlyArray<{ label: string; node: ReactNode; min?: number }> = [
     min: 4,
   },
   {
+    label: "NumberFlow",
+    node: h(NumberFlow, { value: 1234, locale: "en-US" }),
+    min: 4,
+  },
+  {
     label: "AnimatedCheckbox",
     node: h(AnimatedCheckbox, { title: "Implement Checkbox" }),
     min: 4,
@@ -352,5 +358,11 @@ describe("SSR smoke (renderToString) — public components render on the server"
     const html = renderCase("SlideUpText label", h(SlideUpText, null, "You can just ship things."));
     expect(html).toContain('class="sr-only">You can just ship things.<');
     expect(html).toContain('aria-hidden="true"');
+  });
+
+  it("NumberFlow exposes the formatted value as aria-label on the server", () => {
+    const html = renderCase("NumberFlow initial", h(NumberFlow, { value: 1234, locale: "en-US" }));
+    expect(html).toContain('aria-label="1,234"');
+    expect(html).toContain('data-slot="number-flow"');
   });
 });

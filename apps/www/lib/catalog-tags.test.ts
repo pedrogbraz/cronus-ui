@@ -121,4 +121,15 @@ describe("catalog tags", () => {
     expect(tags.intents).toContain("motion");
   });
 
+  it('marks number-flow as smooth data motion', () => {
+    const tags = resolveCatalogTags({
+      slug: "number-flow",
+      category: "premium",
+      kind: "component",
+    });
+    expect(tags.motion).toBe("smooth");
+    expect(tags.intents).toContain("data");
+    expect(tags.intents).toContain("motion");
+  });
+
 });

@@ -1121,6 +1121,17 @@
     ]
   },
   {
+    "name": "number-flow",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1",
+      "motion@^12.23.0"
+    ],
+    "registryDependencies": [
+      "cn"
+    ]
+  },
+  {
     "name": "number-input",
     "type": "registry:ui",
     "dependencies": [

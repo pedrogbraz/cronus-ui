@@ -83,6 +83,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   auto-rotate. Optional peers: `three`, `@react-three/fiber`, `@react-three/drei`.
   `npx cronus-ui add globe-3d`.
 
+- **`NumberFlow`.** Formatted number whose digits roll to each new value
+  (prefix, suffix, locale, currency/percent/decimal). Distinct from
+  `AnimatedNumber`, which tweens the count as one string.
+  `npx cronus-ui add number-flow`.
+
 ## [0.7.3] — 2026-09-07
 
 ### Added
