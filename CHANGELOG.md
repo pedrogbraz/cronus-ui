@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Complete `/llms.txt` catalog.** The agent index now lists the site,
+  docs, every component grouped by category (with example counts), every
+  block grouped by family (with variant ids), OSS templates, packages, and
+  MCP setup — generated from the live indices, not a hand-written list.
+  `/llms-full.txt` still inlines the corpus.
+
 - **`magic-link--split`.** Passwordless email request sits in the same split
   chrome as login/signup/forgot-password/otp. Catalog keeps Dana Reyes;
   gold-path `upgrade` / `add-page` strip it. `add-page --blocks magic-link=split`.

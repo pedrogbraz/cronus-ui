@@ -1,7 +1,7 @@
 /**
- * Builders for the AI-legible doc surface: /llms.txt, /llms-full.txt, and the
- * /llms/<section>/<slug>.md markdown mirrors of every component, block, and
- * guide page.
+ * Builders for the AI-legible doc surface: /llms.txt (complete catalog),
+ * /llms-full.txt (inlined corpus), and the /llms/<section>/<slug>.md markdown
+ * mirrors of every component, block, and guide page.
  *
  * Everything here runs at BUILD time (the routes are force-static). Example
  * code is lifted from `lib/examples/<family>.tsx` with the TypeScript compiler
@@ -15,7 +15,12 @@ import { designMarkdown } from "@cronus-ui/tokens";
 import ts from "typescript";
 import { ALL_BLOCKS, BLOCK_CATEGORIES, getBlockMeta } from "./blocks-index";
 import { getChartDocs } from "./charts-docs";
-import { ALL_COMPONENTS, getComponentDisplayName, getComponentMeta } from "./components-index";
+import {
+  ALL_COMPONENTS,
+  CATEGORIES,
+  getComponentDisplayName,
+  getComponentMeta,
+} from "./components-index";
 import {
   ACCESSIBILITY_CHECKS,
   CHANGELOG_ENTRIES,
@@ -24,8 +29,10 @@ import {
   INSTALL_OPTIONS,
   PACKAGE_MANAGERS,
 } from "./docs";
+import { getExampleSections } from "./examples/sections";
 import { COMPONENT_PROPS, type PropsDoc } from "./props.generated";
 import { absoluteUrl } from "./site-url";
+import { isProTemplate, TEMPLATE_CATALOG } from "./templates/catalog";
 
 /* -------------------------------------------------------------------------- */
 /*  Filesystem roots                                                          */
@@ -337,7 +344,10 @@ export function componentMarkdown(slug: string): string | undefined {
     "## Install",
     "",
     ...fencedCode(`npx cronus-ui add ${slug}`, "bash"),
-    ...fencedCode(`import { ${meta.importName ?? meta.name} } from "@cronus-ui/ui";`, "tsx"),
+    ...fencedCode(
+      `import { ${meta.importName ?? meta.name} } from "${componentImportModule(slug)}";`,
+      "tsx",
+    ),
     ...dependencyLines(readRegistryItem(slug)),
   ];
 
@@ -606,42 +616,132 @@ export function guideMarkdown(slug: string): string | undefined {
 /*  Top-level documents                                                       */
 /* -------------------------------------------------------------------------- */
 
-function summaryBlockquote(): string {
-  return `> Cronus UI is a product UI system: themeable, accessible React components, design tokens, a runtime theming engine (Radix + CVA + Tailwind v4), and a compose path that turns validated blocks into apps — grow with add-page, then \`upgrade --all\`. Install from npm (\`@cronus-ui/ui\`) or copy source with \`npx cronus-ui add <slug>\`. Canonical start: \`npx create-cronus-app my-app --template saas\`.`;
+/** Globe3D is a subpath export so three / r3f stay optional peers. */
+function componentImportModule(slug: string): string {
+  return slug === "globe-3d" ? "@cronus-ui/ui/globe-3d" : "@cronus-ui/ui";
 }
 
-/** The /llms.txt index, in the llms.txt spec format. */
+function countLabel(n: number): string {
+  return n > 0 ? ` (${n})` : "";
+}
+
+/** Live catalog sizes — never hand-written, so /llms.txt cannot drift. */
+export function getLlmsCatalogStats(): {
+  components: number;
+  componentCategories: number;
+  examples: number;
+  blocks: number;
+  blockCategories: number;
+  variants: number;
+  templates: number;
+} {
+  const ossTemplates = TEMPLATE_CATALOG.filter((entry) => !isProTemplate(entry));
+  return {
+    components: ALL_COMPONENTS.length,
+    componentCategories: CATEGORIES.length,
+    examples: ALL_COMPONENTS.reduce(
+      (sum, component) => sum + getExampleSections(component.slug).length,
+      0,
+    ),
+    blocks: ALL_BLOCKS.length,
+    blockCategories: BLOCK_CATEGORIES.length,
+    variants: ALL_BLOCKS.reduce((sum, block) => sum + (block.variants?.length ?? 1), 0),
+    templates: ossTemplates.length,
+  };
+}
+
+function summaryBlockquote(): string {
+  const stats = getLlmsCatalogStats();
+  return `> Cronus UI is a product UI system: ${stats.components} React components across ${stats.componentCategories} categories (${stats.examples} live examples), ${stats.blocks} composed blocks (${stats.variants} variants) across ${stats.blockCategories} families, and ${stats.templates} OSS app templates. Themeable tokens, a runtime theming engine (Radix + CVA + Tailwind v4), a shadcn-style registry, and a compose path that turns validated blocks into apps — grow with add-page, then \`upgrade --all\`. Install from npm (\`@cronus-ui/ui\`) or copy source with \`npx cronus-ui add <slug>\`. Canonical start: \`npx create-cronus-app my-app --template saas\`. An MCP server (\`npx -y cronus-ui-mcp\`) lets coding agents search, install, compose, add pages, and theme from the live registry.`;
+}
+
+/** The /llms.txt index — complete agent catalog, generated from committed indices. */
 export function buildLlmsTxt(): string {
+  const stats = getLlmsCatalogStats();
+  const ossTemplates = TEMPLATE_CATALOG.filter((entry) => !isProTemplate(entry));
   const lines: string[] = [
     "# Cronus UI",
     "",
     summaryBlockquote(),
     "",
-    `Every page below is mirrored as plain markdown at the linked \`.md\` URL. The whole corpus in one file: ${absoluteUrl("/llms-full.txt")}.`,
+    `Every page is also mirrored as plain markdown under ${absoluteUrl("/llms/")}. The whole corpus in one file: ${absoluteUrl("/llms-full.txt")}.`,
     "",
-    "## Docs",
+    "## Site",
+    "",
+    `- [Home](${absoluteUrl("/")}): Product overview and the compose loop.`,
+    `- [Components](${absoluteUrl("/components")}): ${stats.components} components across ${stats.componentCategories} categories.`,
+    `- [Blocks](${absoluteUrl("/blocks")}): ${stats.blocks} composed sections, ${stats.variants} variants.`,
+    `- [Templates](${absoluteUrl("/templates")}): ${stats.templates} OSS app templates for create-cronus-app.`,
+    `- [Themes](${absoluteUrl("/themes")}): Aurora, Neutral, Midnight, Sunset, Emerald — live token playground.`,
+    `- [Create](${absoluteUrl("/create")}): Visual preset builder; emits setup snippets.`,
+    `- [Stack Builder](${absoluteUrl("/stack")}): Pick web, data, auth, UI, AI, MCP, deploy; export a scaffold command.`,
+    `- [Changelog](${absoluteUrl("/changelog")}): Released, in-development, and planned changes.`,
+    `- [Sponsor](${absoluteUrl("/sponsor")}): Support the project.`,
+    `- [Full catalog](${absoluteUrl("/llms-full.txt")}): Every guide, component, and block doc inlined.`,
+    `- [shadcn registry](${absoluteUrl("/r/registry.json")}): Install with \`npx shadcn@latest add ${absoluteUrl("/r/button.json")}\`.`,
+    "",
+    "## Documentation",
     "",
   ];
 
-  for (const page of getGuidePages()) {
-    lines.push(
-      `- [${page.label}](${absoluteUrl(`/llms/docs/${page.slug}.md`)}): ${page.description}`,
-    );
+  for (const section of DOC_NAV_SECTIONS) {
+    for (const item of section.items) {
+      lines.push(`- [${item.label}](${absoluteUrl(item.href)}): ${item.description}`);
+    }
   }
 
-  lines.push("", "## Components", "");
-  for (const component of ALL_COMPONENTS) {
-    lines.push(
-      `- [${getComponentDisplayName(component.name)}](${absoluteUrl(
-        `/llms/components/${component.slug}.md`,
-      )}): ${component.description}`,
-    );
+  lines.push(
+    "",
+    `## Components (${stats.components})`,
+    "",
+    `${stats.components} installable components, ${stats.examples} documented examples. Each line is a catalog page; the number in parentheses is how many live examples it ships. Install with \`npx cronus-ui add <slug>\`. Markdown API: ${absoluteUrl("/llms/components/<slug>.md")}.`,
+    "",
+  );
+
+  for (const category of CATEGORIES) {
+    lines.push(`### ${category.name} (${category.items.length})`, "");
+    for (const item of category.items) {
+      const examples = getExampleSections(item.slug).length;
+      const name = getComponentDisplayName(item.name);
+      lines.push(
+        `- [${name}${countLabel(examples)}](${absoluteUrl(`/components/${item.slug}`)}): ${item.description}`,
+      );
+    }
+    lines.push("");
   }
 
-  lines.push("", "## Blocks", "");
-  for (const block of ALL_BLOCKS) {
+  lines.push(
+    `## Blocks (${stats.blocks})`,
+    "",
+    `${stats.blocks} composed sections, ${stats.variants} variants across ${stats.blockCategories} families. Install the default with \`npx cronus-ui add <slug>\`; a non-default look is \`npx cronus-ui add <slug>--<variant>\` or \`add-page --blocks <slug>=<variant>\`. Markdown API: ${absoluteUrl("/llms/blocks/<slug>.md")}.`,
+    "",
+  );
+
+  for (const category of BLOCK_CATEGORIES) {
+    lines.push(`### ${category.name} (${category.items.length})`, "");
+    for (const item of category.items) {
+      const variantCount = item.variants?.length ?? 1;
+      const variantNote =
+        item.variants && item.variants.length > 1
+          ? ` Variants: ${item.variants.map((variant) => `\`${variant.id}\``).join(", ")}.`
+          : "";
+      lines.push(
+        `- [${item.name}${countLabel(variantCount)}](${absoluteUrl(`/blocks/${item.slug}`)}): ${item.description}${variantNote}`,
+      );
+    }
+    lines.push("");
+  }
+
+  lines.push(
+    `## Templates (${stats.templates})`,
+    "",
+    `OSS app templates for \`npx create-cronus-app my-app --template <slug>\`. Gold path is **saas** and **admin**.`,
+    "",
+  );
+  for (const template of ossTemplates) {
+    const flag = template.slug === "default" ? "" : ` --template ${template.slug}`;
     lines.push(
-      `- [${block.name}](${absoluteUrl(`/llms/blocks/${block.slug}.md`)}): ${block.description}`,
+      `- [${template.name}](${absoluteUrl(`/templates/${template.slug}`)}): ${template.description} \`${`npx create-cronus-app my-app${flag}`}\`.`,
     );
   }
 
@@ -652,11 +752,44 @@ export function buildLlmsTxt(): string {
 
   lines.push(
     "",
+    "## MCP",
+    "",
+    "Cronus ships an MCP server over **stdio** so coding agents search the live registry, install real source, compose apps, add pages, and theme — instead of guessing APIs.",
+    "",
+    "- Package: [`cronus-ui-mcp`](https://www.npmjs.com/package/cronus-ui-mcp) (`npx -y cronus-ui-mcp`).",
+    "- Transport: stdio. Not a hosted HTTP MCP.",
+    "- Greenfield is not an MCP tool: scaffold with `npx create-cronus-app my-app --template saas`, then point the server at that project.",
+    "",
+    "Read-only tools: `list_components`, `list_blocks`, `list_catalog`, `match_catalog`, `search_registry`, `get_component`, `get_install_command`, `get_design_context`.",
+    "",
+    "Write tools (spawn the pinned `cronus-ui` CLI inside an inited project): `compose_app`, `add_page`, `set_theme`, `install_component`, `upgrade_components`, `apply_theme`.",
+    "",
+    "### Claude Code",
+    "",
+    ...fencedCode("claude mcp add cronus-ui -- npx -y cronus-ui-mcp", "sh"),
+    "### Cursor / Windsurf / other `mcpServers` JSON",
+    "",
+    ...fencedCode(
+      `{
+  "mcpServers": {
+    "cronus-ui": {
+      "command": "npx",
+      "args": ["-y", "cronus-ui-mcp"]
+    }
+  }
+}`,
+      "json",
+    ),
+    "## License",
+    "",
+    "MIT. Components, blocks, OSS templates, the registry, CLI, and MCP server are free for personal and commercial use.",
+    "",
     "## Optional",
     "",
     `- [llms-full.txt](${absoluteUrl("/llms-full.txt")}): every guide and component doc inlined in one file.`,
     `- [DESIGN.md](${absoluteUrl("/llms/docs/design.md")}): visual taste (Aurora/Neutral, looks, one primary CTA). Compact: ${absoluteUrl("/llms/design.compact.md")}.`,
-    `- [Interactive showcase](${absoluteUrl("/")}): the live site with previews, theming, and the stack builder.`,
+    `- [Component markdown](${absoluteUrl("/llms/components/button.md")}): per-component API, examples, and install command.`,
+    `- [Block markdown](${absoluteUrl("/llms/blocks/login.md")}): per-block variants and the source the CLI installs.`,
   );
   return `${lines.join("\n")}\n`;
 }
