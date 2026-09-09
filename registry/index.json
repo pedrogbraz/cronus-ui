@@ -1472,6 +1472,17 @@
     ]
   },
   {
+    "name": "slide-up-text",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1",
+      "motion@^12.23.0"
+    ],
+    "registryDependencies": [
+      "cn"
+    ]
+  },
+  {
     "name": "slider",
     "type": "registry:ui",
     "dependencies": [

@@ -180,6 +180,7 @@ const SLUG_OVERRIDES: Record<string, TagPatch> = {
   reveal: { motion: "smooth", intents: ["motion"] },
   carousel: { motion: "smooth", intents: ["media", "motion"] },
   "text-effect": { motion: "smooth", style: "editorial" },
+  "slide-up-text": { motion: "smooth", style: "editorial" },
   "border-beam": { motion: "smooth", palette: "aurora" },
   "flip-card": { motion: "smooth" },
   "tilt-card": { motion: "snappy" },

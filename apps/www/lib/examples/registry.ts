@@ -170,6 +170,7 @@ export const EXAMPLE_FAMILY_BY_SLUG: Record<string, ExampleFamily> = {
   carousel: "premium",
   "segmented-control": "premium",
   "text-effect": "premium",
+  "slide-up-text": "premium",
   frame: "premium",
   dock: "premium",
   "border-beam": "premium",

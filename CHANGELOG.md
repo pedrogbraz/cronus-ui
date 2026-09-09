@@ -71,6 +71,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`AnimatedCheckbox`.** Task checkbox with a spring-drawn check mark and a
   strike-through label. `npx cronus-ui add animated-checkbox`.
 
+- **`SlideUpText`.** Text that clips in from below with Spell's stagger
+  (words, characters, or lines; from first, last, or center).
+  `npx cronus-ui add slide-up-text`.
+
 ## [0.7.3] — 2026-09-07
 
 ### Added

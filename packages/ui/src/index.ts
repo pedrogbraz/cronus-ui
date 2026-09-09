@@ -588,6 +588,13 @@ export {
 export type { SignaturePadHandle, SignaturePadProps } from "./components/signature-pad.js";
 export { SignaturePad } from "./components/signature-pad.js";
 export { Skeleton } from "./components/skeleton.js";
+export type {
+  SlideUpTextFrom,
+  SlideUpTextProps,
+  SlideUpTextRef,
+  SlideUpTextSplit,
+} from "./components/slide-up-text.js";
+export { SlideUpText, slideUpTextVariants } from "./components/slide-up-text.js";
 export { Slider } from "./components/slider.js";
 export type { ToasterProps } from "./components/sonner.js";
 export { Toaster, toast } from "./components/sonner.js";

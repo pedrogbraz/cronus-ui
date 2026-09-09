@@ -110,4 +110,15 @@ describe("catalog tags", () => {
     expect(tags.intents).toContain("form");
     expect(tags.intents).toContain("motion");
   });
+  it('marks slide-up-text as smooth editorial motion', () => {
+    const tags = resolveCatalogTags({
+      slug: "slide-up-text",
+      category: "premium",
+      kind: "component",
+    });
+    expect(tags.motion).toBe("smooth");
+    expect(tags.style).toBe("editorial");
+    expect(tags.intents).toContain("motion");
+  });
+
 });

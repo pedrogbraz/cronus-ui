@@ -57,6 +57,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "./components/sheet.js";
+import { SlideUpText } from "./components/slide-up-text.js";
 import { Slider } from "./components/slider.js";
 import { Switch } from "./components/switch.js";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/tabs.js";
@@ -263,6 +264,11 @@ const CASES: ReadonlyArray<{ label: string; node: ReactNode; min?: number }> = [
     min: 4,
   },
   {
+    label: "SlideUpText",
+    node: h(SlideUpText, null, "You can just ship things."),
+    min: 4,
+  },
+  {
     label: "SegmentedControl",
     node: h(
       SegmentedControl,
@@ -339,6 +345,12 @@ describe("SSR smoke (renderToString) — public components render on the server"
     // once via a visually-hidden sr-only span, so AT reads clean text on the
     // server-rendered DOM (no per-word chatter, no missing label).
     expect(html).toContain('class="sr-only">Cronus ships fast<');
+    expect(html).toContain('aria-hidden="true"');
+  });
+
+  it("SlideUpText exposes the full string to assistive tech in its SSR output", () => {
+    const html = renderCase("SlideUpText label", h(SlideUpText, null, "You can just ship things."));
+    expect(html).toContain('class="sr-only">You can just ship things.<');
     expect(html).toContain('aria-hidden="true"');
   });
 });

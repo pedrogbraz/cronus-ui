@@ -4663,6 +4663,18 @@
         "data"
       ]
     },
+    "slide-up-text": {
+      "title": "SlideUpText",
+      "category": "premium",
+      "description": "Text that slides up from below, staggered by word, character, or line.",
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "motion"
+      ]
+    },
     "slider": {
       "title": "Slider",
       "category": "forms",

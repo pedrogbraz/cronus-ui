@@ -745,6 +745,12 @@ export const CATEGORIES: ComponentCategory[] = [
         description: "Reveal text by staggering words or characters (fade / blur / slide).",
       },
       {
+        slug: "slide-up-text",
+        name: "SlideUpText",
+        description: "Text that slides up from below, staggered by word, character, or line.",
+        importName: "SlideUpText",
+      },
+      {
         slug: "frame",
         name: "Frame",
         description: "Browser/window chrome that frames a screenshot or product mockup.",

@@ -326,6 +326,12 @@ export const EXAMPLE_SECTIONS: Record<string, ExampleSectionMeta[]> = {
   carousel: [{ id: "slides", title: "Slides" }],
   "segmented-control": [{ id: "single-select", title: "Single select" }],
   "text-effect": [{ id: "headline", title: "Headline" }],
+  "slide-up-text": [
+    { id: "words", title: "By words" },
+    { id: "characters", title: "By characters" },
+    { id: "lines", title: "By lines" },
+    { id: "from-last", title: "From last" },
+  ],
   frame: [
     { id: "browser", title: "Browser chrome" },
     { id: "window", title: "Window chrome" },

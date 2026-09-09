@@ -484,6 +484,10 @@
       "types": "./dist/components/skeleton.d.ts",
       "import": "./dist/components/skeleton.js"
     },
+    "./slide-up-text": {
+      "types": "./dist/components/slide-up-text.d.ts",
+      "import": "./dist/components/slide-up-text.js"
+    },
     "./slider": {
       "types": "./dist/components/slider.d.ts",
       "import": "./dist/components/slider.js"

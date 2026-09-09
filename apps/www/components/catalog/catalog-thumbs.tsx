@@ -1365,6 +1365,7 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
     case "spinning-text":
     case "scramble-text":
     case "text-effect":
+    case "slide-up-text":
     case "typing-text":
     case "word-rotate":
       return (

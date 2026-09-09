@@ -5088,6 +5088,112 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  "slide-up-text": [
+    {
+      interfaceName: "SlideUpTextProps",
+      extends:
+        'Extends Omit< ComponentPropsWithoutRef<"span">, | "children" | "onAnimationStart" | "onAnimationEnd" | "onAnimationIteration" | "onDrag" | "onDragStart" | "onDragEnd" >',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLSpanElement>",
+          required: false,
+        },
+        {
+          name: "animationRef",
+          type: "Ref<SlideUpTextRef>",
+          required: false,
+          description: "Imperative start / reset handle (Spell's `ref`).",
+        },
+        {
+          name: "children",
+          type: "string",
+          required: true,
+          description: "The phrase to reveal. Must be a plain string so it can be split.",
+        },
+        {
+          name: "split",
+          type: "SlideUpTextSplit",
+          required: false,
+          description: "How the string is broken before staggering.",
+          default: '"words"',
+        },
+        {
+          name: "delay",
+          type: "number",
+          required: false,
+          description: "Delay (seconds) before the first unit animates.",
+          default: "0",
+        },
+        {
+          name: "stagger",
+          type: "number",
+          required: false,
+          description: "Gap (seconds) between consecutive units.",
+          default: "0.1",
+        },
+        {
+          name: "from",
+          type: "SlideUpTextFrom",
+          required: false,
+          description: "Which end of the string the stagger starts from.",
+          default: '"first"',
+        },
+        {
+          name: "transition",
+          type: "AnimationOptions",
+          required: false,
+          description: "Motion transition for each unit. Defaults to Spell's 0.5s tween.",
+          default: "DEFAULT_TRANSITION",
+        },
+        {
+          name: "wordClass",
+          type: "string",
+          required: false,
+          description: "Extra classes on each word (or line) clip.",
+        },
+        {
+          name: "charClass",
+          type: "string",
+          required: false,
+          description: "Extra classes on each character clip.",
+        },
+        {
+          name: "autoStart",
+          type: "boolean",
+          required: false,
+          description: "Play on mount when `inView` is false.",
+          default: "true",
+        },
+        {
+          name: "onStart",
+          type: "() => void",
+          required: false,
+          description: "Called when the reveal starts.",
+        },
+        {
+          name: "onComplete",
+          type: "() => void",
+          required: false,
+          description: "Called when the last unit finishes.",
+        },
+        {
+          name: "inView",
+          type: "boolean",
+          required: false,
+          description: "Start when the node enters the viewport instead of on mount.",
+          default: "false",
+        },
+        {
+          name: "once",
+          type: "boolean",
+          required: false,
+          description: "When `inView` is true, play only the first time it enters.",
+          default: "true",
+        },
+      ],
+    },
+  ],
   frame: [
     {
       interfaceName: "FrameProps",
