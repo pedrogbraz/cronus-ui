@@ -43,8 +43,19 @@ function addDays(base: Date, days: number) {
 
 function CalendarDemo() {
   // Fixed initial date so server and client render identically (no hydration drift).
+  // `defaultMonth` + `fixedWeeks` keep the gallery at six rows so visual
+  // snapshots don't drift when the real "today" sits in a 5-row month.
   const [date, setDate] = useState<Date | undefined>(() => new Date(2026, 5, 21));
-  return <Calendar mode="single" selected={date} onSelect={setDate} className="rounded-md" />;
+  return (
+    <Calendar
+      mode="single"
+      selected={date}
+      onSelect={setDate}
+      defaultMonth={new Date(2026, 5, 1)}
+      fixedWeeks
+      className="rounded-md"
+    />
+  );
 }
 
 function CountdownDemo() {
@@ -192,7 +203,14 @@ export const dateTimeExamples: ExampleMap = {
 const [date, setDate] = useState<Date | undefined>(() => new Date(2026, 5, 21));
 
 return (
-  <Calendar mode="single" selected={date} onSelect={setDate} className="rounded-md" />
+  <Calendar
+    mode="single"
+    selected={date}
+    onSelect={setDate}
+    defaultMonth={new Date(2026, 5, 1)}
+    fixedWeeks
+    className="rounded-md"
+  />
 );`,
       preview: <CalendarDemo />,
     },

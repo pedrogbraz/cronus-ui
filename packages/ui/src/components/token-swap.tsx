@@ -307,7 +307,7 @@ export function TokenSwap({
             <div>
               <h2 className="text-base font-semibold">{from.name}</h2>
               <p
-                className="text-sm whitespace-nowrap text-[#7b7b7b]" // contract-ok: Aave swap muted caption the component paints
+                className="text-sm whitespace-nowrap text-[#7d7d7d]" // contract-ok: Aave swap muted caption, AA on #121212
               >
                 {` ${formatFixed(balance, locale, 0, 2)} ${from.symbol}`}
               </p>
@@ -433,7 +433,7 @@ export function TokenSwap({
             <div>
               <h2 className="text-base font-semibold">{to.name}</h2>
               <p
-                className="text-sm whitespace-nowrap text-[#7b7b7b]" // contract-ok: Aave swap muted caption the component paints
+                className="text-sm whitespace-nowrap text-[#7d7d7d]" // contract-ok: Aave swap muted caption, AA on #121212
               >
                 {` ${fillTemplate(labels.receive, to.symbol)}`}
               </p>

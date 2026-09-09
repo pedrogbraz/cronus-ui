@@ -898,8 +898,8 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-semibold">Ethereum</p>
-                <p className="text-xs text-[#7b7b7b]">111.82 ETH</p>
-                {/* contract-ok: Aave swap muted caption the catalog thumb paints */}
+                <p className="text-xs text-[#7d7d7d]">111.82 ETH</p>{" "}
+                {/* contract-ok: Aave swap muted caption, AA on #121212 */}
               </div>
               <span className="rounded-full bg-[#222] px-3 py-1 text-xs font-semibold">
                 {/* contract-ok: Aave swap chrome the catalog thumb paints */}

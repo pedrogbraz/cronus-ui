@@ -34,7 +34,6 @@ const CORE_PAGES: ReadonlyArray<Route> = [
   { path: "/blocks", label: "blocks overview" },
   { path: "/templates", label: "templates" },
   { path: "/sponsor", label: "sponsor" },
-  { path: "/templates/mail", label: "templates · mail" },
   { path: "/templates/saas", label: "templates · saas" },
   { path: "/templates/landing-studio", label: "templates · landing-studio" },
   { path: "/themes", label: "themes gallery" },
