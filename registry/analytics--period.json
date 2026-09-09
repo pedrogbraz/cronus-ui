@@ -3,7 +3,7 @@
   "type": "registry:block",
   "dependencies": [
     " + first + ",
-    "@cronus-ui/ui@0.7.4"
+    "@cronus-ui/ui@0.7.5"
   ],
   "registryDependencies": [
     "demo-saas"

@@ -2,7 +2,7 @@
   "name": "nps-survey",
   "type": "registry:block",
   "dependencies": [
-    "@cronus-ui/ui@0.7.4"
+    "@cronus-ui/ui@0.7.5"
   ],
   "registryDependencies": [],
   "files": [
