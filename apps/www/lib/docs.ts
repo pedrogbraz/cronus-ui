@@ -303,7 +303,18 @@ export const ACCESSIBILITY_CHECKS = [
   },
 ] as const;
 
-export const CHANGELOG_ENTRIES = [
+export type ChangelogStatus = "Released" | "In development" | "Planned";
+
+export type ChangelogEntry = {
+  date: string;
+  version: string;
+  status: ChangelogStatus;
+  title: string;
+  summary: string;
+  items: readonly string[];
+};
+
+export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
     date: "2026-09-09",
     version: "v0.7.4",

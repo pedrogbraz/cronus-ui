@@ -67,8 +67,10 @@ const llmsFetchCode = `curl -s https://aicronus.com/llms.txt
 
 export default function DocsOverviewPage() {
   const onMain = CHANGELOG_ENTRIES.find((entry) => entry.status === "In development");
-  const latest =
-    CHANGELOG_ENTRIES.find((entry) => entry.status === "Released") ?? CHANGELOG_ENTRIES[0];
+  const latest = CHANGELOG_ENTRIES.find((entry) => entry.status === "Released");
+  if (latest === undefined) {
+    throw new Error("CHANGELOG_ENTRIES must include a Released entry");
+  }
 
   return (
     <div className="py-10">
