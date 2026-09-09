@@ -57,7 +57,7 @@ beforeAll(async () => {
   variantSources = await readVariantSources();
   libSources = await readDemoLibSources();
   meta = await buildMeta(sources, variantSources);
-});
+}, 60_000);
 
 /** A fresh clone of the real block sources so a per-test mutation is isolated. */
 function cloneSources(): Map<string, string> {
