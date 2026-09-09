@@ -13,6 +13,7 @@ npx cronus-ui upgrade --all --dry-run
 npx cronus-ui list
 npx cronus-ui diff
 npx cronus-ui ai
+npx cronus-ui mcp init
 ```
 
 The canonical product start is `npx create-cronus-app my-app --template saas`,
@@ -32,6 +33,7 @@ you keep using after.
 | `upgrade` | `[components...]` | `-c, --cwd <dir>` · `-r, --registry <source>` · `-a, --all` · `--dry-run` · `-y, --yes` · `-o, --overwrite` |
 | `theme set` | `<name>` | `-m, --mode <mode>` · `-c, --cwd <dir>` |
 | `theme add` | `<source>` | `-c, --cwd <dir>` · `--css <file>` · `--dry-run` |
+| `mcp init` | — | `-c, --cwd <dir>` · `--client <list>` · `-f, --force` |
 | `ai` | — | `-c, --cwd <dir>` · `-a, --assistants <list>` · `-p, --preset <name>` · `-s, --skills <list>` |
 
 Notes that match the commander surface:
@@ -42,6 +44,7 @@ Notes that match the commander surface:
 - `theme add <source>` — a Create Studio permalink, a bare `c=` payload, or a path to an exported theme JSON file.
 - `upgrade` 3-way merges each installed file against the release recorded in `cronus-ui.json`. `-a, --all` upgrades every recorded component and 3-way-merges composed pages/layouts against `.cronus-ui/base`. `-o, --overwrite` replaces files installed before the manifest existed. Unresolved files get a prompt in `CRONUS-UPGRADE.md`.
 - `ai --assistants` is comma-separated `claude`, `cursor`, `copilot`, `windsurf`, `gemini` (or `all` / `none`). `--preset` is `standard` (default), `fintech`, `saas`, `oss`, `agency`, or `none`. `--skills` is comma-separated Claude Code skills (or `all` / `none`).
+- `mcp init` writes project MCP config for Claude Code (`.mcp.json`), Cursor, VS Code (`servers` in `.vscode/mcp.json`), Codex, Grok, OpenCode, Gemini, and Zed. `--client` is comma-separated (or `all`). `--force` overwrites. `create-cronus-app` and `cronus-ui ai` emit the same files. Cloud builders paste `https://aicronus.com/mcp`.
 
 ## How it works
 

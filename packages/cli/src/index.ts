@@ -7,6 +7,7 @@ import { compose } from "./commands/compose.js";
 import { diff } from "./commands/diff.js";
 import { init } from "./commands/init.js";
 import { list } from "./commands/list.js";
+import { mcpInit } from "./commands/mcp.js";
 import { themeAdd, themeSet } from "./commands/theme.js";
 import { upgrade } from "./commands/upgrade.js";
 import { CLI_VERSION } from "./config.js";
@@ -211,6 +212,28 @@ theme
   .action((source, opts) =>
     themeAdd({ source, cwd: opts.cwd, css: opts.css, dryRun: opts.dryRun }),
   );
+
+const mcp = program
+  .command("mcp")
+  .description("Wire the Cronus UI MCP server into coding agents (project config files).");
+mcp
+  .command("init")
+  .description(
+    "Write stdio MCP config for Claude Code, Cursor, VS Code, Codex, Grok, OpenCode, Gemini, and Zed.",
+  )
+  .option("-c, --cwd <dir>", "working directory", process.cwd())
+  .option(
+    "--client <list>",
+    "comma-separated: claude, cursor, vscode, codex, grok, opencode, gemini, zed (or 'all')",
+  )
+  .option("-f, --force", "overwrite existing MCP config files")
+  .addHelpText(
+    "after",
+    `
+Cloud builders (v0, Lovable, Replit, Bolt, Base44) cannot spawn npx — paste
+https://aicronus.com/mcp instead. See https://aicronus.com/docs/mcp.`,
+  )
+  .action((opts) => mcpInit({ cwd: opts.cwd, client: opts.client, force: opts.force }));
 
 program
   .command("ai")

@@ -44,6 +44,7 @@ export default defineConfig({
         },
       },
       {
+        resolve: { alias: workspaceAliases },
         test: {
           name: "cli",
           root: "./packages/cli",
