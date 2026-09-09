@@ -160,6 +160,7 @@ export const EXAMPLE_FAMILY_BY_SLUG: Record<string, ExampleFamily> = {
   "gradient-text": "premium",
   "spotlight-card": "premium",
   "scroll-progress": "premium",
+  "scroll-nav": "premium",
   "aurora-background": "premium",
   "logo-carousel": "premium",
   marquee: "premium",

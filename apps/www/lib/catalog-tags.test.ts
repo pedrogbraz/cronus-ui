@@ -143,4 +143,15 @@ describe("catalog tags", () => {
     expect(tags.intents).toContain("motion");
   });
 
+  it('marks scroll-nav as smooth content nav', () => {
+    const tags = resolveCatalogTags({
+      slug: "scroll-nav",
+      category: "premium",
+      kind: "component",
+    });
+    expect(tags.motion).toBe("smooth");
+    expect(tags.intents).toContain("nav");
+    expect(tags.intents).toContain("content");
+  });
+
 });

@@ -4520,6 +4520,44 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  "scroll-nav": [
+    {
+      interfaceName: "ScrollNavProps",
+      extends:
+        'Extends Omit< ComponentPropsWithoutRef<"div">, "title" | "onAnimationStart" | "onAnimationEnd" | "onDrag" | "onDragStart" | "onDragEnd" >',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "title",
+          type: "string",
+          required: false,
+          description: "Page heading.",
+          default: '"Terms & Conditions"',
+        },
+        {
+          name: "terms",
+          type: "ScrollNavTerm[]",
+          required: true,
+        },
+        {
+          name: "viewportRef",
+          type: "RefObject<HTMLElement | null>",
+          required: false,
+          description:
+            "Scroll container. When set, the spy observes this box instead of the viewport — needed when the nav lives inside a nested scroller (docs preview).",
+        },
+        {
+          name: "labels",
+          type: "Partial<ScrollNavLabels>",
+          required: false,
+        },
+      ],
+    },
+  ],
   "logo-carousel": [
     {
       interfaceName: "LogoCarouselProps",

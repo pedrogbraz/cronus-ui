@@ -534,6 +534,8 @@ export type {
 } from "./components/scramble-text.js";
 export { ScrambleText } from "./components/scramble-text.js";
 export { ScrollArea, ScrollBar } from "./components/scroll-area.js";
+export type { ScrollNavLabels, ScrollNavProps, ScrollNavTerm } from "./components/scroll-nav.js";
+export { ScrollNav, scrollNavVariants } from "./components/scroll-nav.js";
 export type { ScrollProgressProps } from "./components/scroll-progress.js";
 export { ScrollProgress } from "./components/scroll-progress.js";
 export type {

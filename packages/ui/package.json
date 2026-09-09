@@ -460,6 +460,10 @@
       "types": "./dist/components/scroll-area.d.ts",
       "import": "./dist/components/scroll-area.js"
     },
+    "./scroll-nav": {
+      "types": "./dist/components/scroll-nav.d.ts",
+      "import": "./dist/components/scroll-nav.js"
+    },
     "./scroll-progress": {
       "types": "./dist/components/scroll-progress.d.ts",
       "import": "./dist/components/scroll-progress.js"

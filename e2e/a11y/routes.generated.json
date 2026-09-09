@@ -133,6 +133,7 @@
     "scheduler",
     "scramble-text",
     "scroll-area",
+    "scroll-nav",
     "scroll-progress",
     "segmented-control",
     "select",

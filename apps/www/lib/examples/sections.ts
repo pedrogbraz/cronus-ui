@@ -310,6 +310,7 @@ export const EXAMPLE_SECTIONS: Record<string, ExampleSectionMeta[]> = {
   "gradient-text": [{ id: "headline", title: "Headline" }],
   "spotlight-card": [{ id: "hover-spotlight", title: "Hover spotlight" }],
   "scroll-progress": [{ id: "reading-bar", title: "Reading bar & ring" }],
+  "scroll-nav": [{ id: "terms", title: "Terms" }],
   "aurora-background": [{ id: "animated-backdrop", title: "Animated backdrop" }],
   "logo-carousel": [{ id: "hero-lockup", title: "Hero lockup" }],
   marquee: [

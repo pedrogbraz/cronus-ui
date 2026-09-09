@@ -810,6 +810,7 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
     case "progress":
     case "usage-meter":
     case "scroll-progress":
+    case "scroll-nav":
       return (
         <Fill className="items-center justify-center p-12">
           <div className="w-[440px] rounded-2xl border border-border bg-surface-raised p-6">

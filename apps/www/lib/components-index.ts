@@ -696,6 +696,12 @@ export const CATEGORIES: ComponentCategory[] = [
         importName: "ScrollProgress",
       },
       {
+        slug: "scroll-nav",
+        name: "ScrollNav",
+        description: "Sticky sidebar that highlights the section in view as you scroll.",
+        importName: "ScrollNav",
+      },
+      {
         slug: "aurora-background",
         name: "AuroraBackground",
         description: "Animated aurora backdrop.",

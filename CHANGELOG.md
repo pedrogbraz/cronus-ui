@@ -92,6 +92,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   family carousel (Explore → Plus/X, spring bounce 0.16).
   `npx cronus-ui add explore-nav`.
 
+- **`ScrollNav`.** Sticky sidebar that tracks the section in view. A 2px
+  bar springs between rows (bounce 0.16); click jumps. `npx cronus-ui add scroll-nav`.
+
 ## [0.7.3] — 2026-09-07
 
 ### Added

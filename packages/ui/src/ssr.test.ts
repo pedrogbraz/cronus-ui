@@ -44,6 +44,7 @@ import { NumberFlow } from "./components/number-flow.js";
 import { Popover, PopoverContent, PopoverTrigger } from "./components/popover.js";
 import { Progress } from "./components/progress.js";
 import { RadioGroup, RadioGroupItem } from "./components/radio-group.js";
+import { ScrollNav } from "./components/scroll-nav.js";
 import { SegmentedControl, SegmentedControlItem } from "./components/segmented-control.js";
 import {
   Select,
@@ -268,6 +269,20 @@ const CASES: ReadonlyArray<{ label: string; node: ReactNode; min?: number }> = [
     label: "TextEffect (mount trigger)",
     node: h(TextEffect, { trigger: "mount", per: "word" }, "Ship it"),
     // aria-label carries the whole string even when units are split.
+    min: 4,
+  },
+  {
+    label: "ScrollNav",
+    node: h(ScrollNav, {
+      title: "Terms & Conditions",
+      terms: [
+        {
+          id: "acceptance",
+          title: "Acceptance of Terms",
+          content: "By using this site you agree.",
+        },
+      ],
+    }),
     min: 4,
   },
   {

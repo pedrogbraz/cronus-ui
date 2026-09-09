@@ -4591,6 +4591,20 @@
         "data"
       ]
     },
+    "scroll-nav": {
+      "title": "ScrollNav",
+      "category": "premium",
+      "description": "Sticky sidebar that highlights the section in view as you scroll.",
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "smooth",
+      "intents": [
+        "nav",
+        "content",
+        "motion"
+      ]
+    },
     "scroll-progress": {
       "title": "ScrollProgress",
       "category": "premium",

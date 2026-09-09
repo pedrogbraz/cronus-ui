@@ -62,6 +62,7 @@ import {
   Reveal,
   Ripple,
   ScrambleText,
+  ScrollNav,
   ScrollProgress,
   SegmentedControl,
   SegmentedControlItem,
@@ -2733,6 +2734,22 @@ export const premiumExamples: ExampleMap = {
           />
         </div>
       ),
+    },
+  ],
+  "scroll-nav": [
+    {
+      id: "terms",
+      title: "Terms",
+      description:
+        "Sticky sidebar tracks the section in view. The 2px bar springs between rows (bounce 0.16); click a title to jump.",
+      code: `<ScrollNav
+  title="Terms & Conditions"
+  terms={[
+    { id: "acceptance-of-terms", title: "Acceptance of Terms", content: <p>…</p> },
+    { id: "license-agreement", title: "License Agreement", content: <p>…</p> },
+  ]}
+/>`,
+      preview: <ScrollNavDemo />,
     },
   ],
   "dynamic-island": [
