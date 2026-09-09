@@ -33,6 +33,13 @@ describe("writeAiKit", () => {
     expect(existsSync(join(dir, "AGENTS.md"))).toBe(true);
     expect(existsSync(join(dir, "CLAUDE.md"))).toBe(true);
     expect(existsSync(join(dir, ".mcp.json"))).toBe(true);
+    expect(existsSync(join(dir, ".cursor/mcp.json"))).toBe(true);
+    expect(existsSync(join(dir, ".vscode/mcp.json"))).toBe(true);
+    expect(existsSync(join(dir, ".codex/config.toml"))).toBe(true);
+    expect(existsSync(join(dir, ".grok/config.toml"))).toBe(true);
+    expect(existsSync(join(dir, "opencode.json"))).toBe(true);
+    expect(existsSync(join(dir, ".gemini/settings.json"))).toBe(true);
+    expect(existsSync(join(dir, ".zed/settings.json"))).toBe(true);
     expect(existsSync(join(dir, ".claude/settings.json"))).toBe(true);
     expect(existsSync(join(dir, ".claude/agents/code-reviewer.md"))).toBe(true);
     for (const s of SKILLS) {
@@ -76,7 +83,8 @@ describe("writeAiKit", () => {
   it("respects the assistants selection (claude only → no cursor/github/windsurf/gemini)", () => {
     writeAiKit({ targetDir: dir, name: "acme", assistants: ["claude"] });
     expect(existsSync(join(dir, ".claude/settings.json"))).toBe(true);
-    expect(existsSync(join(dir, ".cursor"))).toBe(false);
+    expect(existsSync(join(dir, ".cursor/mcp.json"))).toBe(true);
+    expect(existsSync(join(dir, ".cursor/rules"))).toBe(false);
     expect(existsSync(join(dir, ".github/copilot-instructions.md"))).toBe(false);
     expect(existsSync(join(dir, ".windsurf"))).toBe(false);
     expect(existsSync(join(dir, "GEMINI.md"))).toBe(false);
@@ -154,6 +162,7 @@ describe("writeAiKit", () => {
     });
 
     expect(existsSync(join(dir, ".mcp.json"))).toBe(true);
+    expect(existsSync(join(dir, ".cursor/mcp.json"))).toBe(true);
     expect(existsSync(join(dir, ".cursor/rules/10-cronus-ui.mdc"))).toBe(true);
     expect(existsSync(join(dir, ".claude/settings.json"))).toBe(false);
   });

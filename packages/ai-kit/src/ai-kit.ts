@@ -2,6 +2,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { designMarkdown, isLookName, isThemeName } from "@cronus-ui/tokens";
+import { writeMcpConfigs } from "./mcp-configs.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 
@@ -50,8 +51,9 @@ export interface AiKitOptions {
   /** Whether to emit Cronus UI-specific rules/skills. @default true */
   includeCronusUi?: boolean;
   /**
-   * Whether to emit the cronus-ui MCP config. Defaults to the legacy Claude
-   * behavior unless explicitly selected by a stack scaffold.
+   * Whether to emit project MCP config files (Claude, Cursor, VS Code, Codex,
+   * Grok, OpenCode, Gemini, Zed). Defaults to on whenever Cronus UI rules
+   * ship (`includeCronusUi`).
    */
   cronusUiMcp?: boolean;
   /** Palette baked into DESIGN.md. Unknown names fall back to Aurora. */
@@ -114,7 +116,7 @@ export function writeAiKit(options: AiKitOptions): AiKitResult {
 
   const withDoctrine = preset !== "none";
   const wants = (a: Assistant) => assistants.includes(a);
-  const wantsCronusUiMcp = options.cronusUiMcp ?? (includeCronusUi && wants("claude"));
+  const wantsCronusUiMcp = options.cronusUiMcp ?? includeCronusUi;
   const enabledSkills = includeCronusUi
     ? skills
     : skills.filter((skill) => !CRONUS_UI_SKILLS.has(skill));
@@ -152,7 +154,9 @@ export function writeAiKit(options: AiKitOptions): AiKitResult {
   }
 
   if (wantsCronusUiMcp) {
-    emitTemplate("mcp.json", ".mcp.json");
+    const mcp = writeMcpConfigs({ targetDir });
+    written.push(...mcp.written);
+    skipped.push(...mcp.skipped);
   }
 
   // Claude Code — the doctrine-referencing CLAUDE.md only ships with a doctrine.

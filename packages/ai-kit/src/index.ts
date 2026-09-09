@@ -21,3 +21,10 @@ export {
   writeAiKit,
   writeDesignDocuments,
 } from "./ai-kit.js";
+export type { McpEditor, McpEditorFile, WriteMcpConfigsOptions } from "./mcp-configs.js";
+export {
+  DEFAULT_MCP_EDITORS,
+  MCP_EDITOR_FILES,
+  MCP_EDITORS,
+  writeMcpConfigs,
+} from "./mcp-configs.js";
