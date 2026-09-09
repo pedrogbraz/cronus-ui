@@ -95,6 +95,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`ScrollNav`.** Sticky sidebar that tracks the section in view. A 2px
   bar springs between rows (bounce 0.16); click jumps. `npx cronus-ui add scroll-nav`.
 
+- **`BouncyAccordion`.** Stacked rows that spring into a rounded card with a
+  10px gap (bounce 0.32). Distinct from `Accordion`. `npx cronus-ui add bouncy-accordion`.
+
 ## [0.7.3] — 2026-09-07
 
 ### Added

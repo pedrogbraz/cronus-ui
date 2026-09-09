@@ -984,6 +984,12 @@ export const CATEGORIES: ComponentCategory[] = [
         importName: "ExploreNav",
       },
       {
+        slug: "bouncy-accordion",
+        name: "BouncyAccordion",
+        description: "Stacked accordion that springs open with a gap and rounded card.",
+        importName: "BouncyAccordion",
+      },
+      {
         slug: "dynamic-island",
         name: "DynamicIsland",
         description: "A compact live-activity pill that morphs between views.",

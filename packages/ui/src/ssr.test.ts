@@ -13,6 +13,7 @@ import { AnimatedCheckbox } from "./components/animated-checkbox.js";
 import { AnimatedNumber } from "./components/animated-number.js";
 import { Avatar, AvatarFallback } from "./components/avatar.js";
 import { Badge } from "./components/badge.js";
+import { BouncyAccordion } from "./components/bouncy-accordion.js";
 import { Button } from "./components/button.js";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./components/card.js";
 import {
@@ -253,6 +254,13 @@ const CASES: ReadonlyArray<{ label: string; node: ReactNode; min?: number }> = [
     label: "AnimatedNumber",
     node: h(AnimatedNumber, { value: 1234, locale: "en-US" }),
     // It must render its formatted initial value on the server (no flash).
+    min: 4,
+  },
+  {
+    label: "BouncyAccordion",
+    node: h(BouncyAccordion, {
+      items: [{ id: "a", title: "Schedule", description: "Plan tasks." }],
+    }),
     min: 4,
   },
   {

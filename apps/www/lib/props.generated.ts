@@ -6536,6 +6536,47 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  "bouncy-accordion": [
+    {
+      interfaceName: "BouncyAccordionProps",
+      extends:
+        'Extends Omit< ComponentPropsWithoutRef<"div">, "defaultValue" | "onAnimationStart" | "onAnimationEnd" | "onDrag" | "onDragStart" | "onDragEnd" >',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "items",
+          type: "BouncyAccordionItem[]",
+          required: true,
+        },
+        {
+          name: "value",
+          type: "string | null",
+          required: false,
+          description: "Controlled open item. `null` collapses all.",
+        },
+        {
+          name: "defaultValue",
+          type: "string | null",
+          required: false,
+          default: "null",
+        },
+        {
+          name: "onValueChange",
+          type: "(id: string | null) => void",
+          required: false,
+        },
+        {
+          name: "labels",
+          type: "Partial<BouncyAccordionLabels>",
+          required: false,
+        },
+      ],
+    },
+  ],
   "dynamic-island": [
     {
       interfaceName: "DynamicIslandProps",

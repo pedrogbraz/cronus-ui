@@ -61,6 +61,12 @@ export type { BarChartProps } from "./components/bar-chart.js";
 export { BarChart } from "./components/bar-chart.js";
 export type { BorderBeamProps } from "./components/border-beam.js";
 export { BorderBeam } from "./components/border-beam.js";
+export type {
+  BouncyAccordionItem,
+  BouncyAccordionLabels,
+  BouncyAccordionProps,
+} from "./components/bouncy-accordion.js";
+export { BouncyAccordion, bouncyAccordionVariants } from "./components/bouncy-accordion.js";
 export type { BreadcrumbLinkProps } from "./components/breadcrumb.js";
 export {
   Breadcrumb,

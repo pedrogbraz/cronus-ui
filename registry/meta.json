@@ -3153,6 +3153,19 @@
         "motion"
       ]
     },
+    "bouncy-accordion": {
+      "title": "BouncyAccordion",
+      "category": "premium",
+      "description": "Stacked accordion that springs open with a gap and rounded card.",
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "content",
+        "motion"
+      ]
+    },
     "breadcrumb": {
       "title": "Breadcrumb",
       "category": "navigation",

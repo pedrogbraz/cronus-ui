@@ -84,6 +84,10 @@
       "types": "./dist/components/banner.d.ts",
       "import": "./dist/components/banner.js"
     },
+    "./bouncy-accordion": {
+      "types": "./dist/components/bouncy-accordion.d.ts",
+      "import": "./dist/components/bouncy-accordion.js"
+    },
     "./breadcrumb": {
       "types": "./dist/components/breadcrumb.d.ts",
       "import": "./dist/components/breadcrumb.js"

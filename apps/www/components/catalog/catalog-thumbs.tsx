@@ -1119,6 +1119,7 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
       );
     case "tabs":
     case "accordion":
+    case "bouncy-accordion":
     case "collapsible":
     case "code-tabs":
       return (

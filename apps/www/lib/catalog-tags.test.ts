@@ -154,4 +154,15 @@ describe("catalog tags", () => {
     expect(tags.intents).toContain("content");
   });
 
+  it('marks bouncy-accordion as snappy content motion', () => {
+    const tags = resolveCatalogTags({
+      slug: "bouncy-accordion",
+      category: "premium",
+      kind: "component",
+    });
+    expect(tags.motion).toBe("snappy");
+    expect(tags.intents).toContain("content");
+    expect(tags.intents).toContain("motion");
+  });
+
 });
