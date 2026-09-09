@@ -757,6 +757,12 @@ export const CATEGORIES: ComponentCategory[] = [
         importName: "ImagesBadge",
       },
       {
+        slug: "globe-3d",
+        name: "3D Globe",
+        description: "A textured 3D globe with avatar pins, orbit, and auto-rotate.",
+        importName: "Globe3D",
+      },
+      {
         slug: "frame",
         name: "Frame",
         description: "Browser/window chrome that frames a screenshot or product mockup.",

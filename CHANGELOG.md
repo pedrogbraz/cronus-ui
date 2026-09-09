@@ -79,6 +79,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   hover. Same spring as Aceternity (`stiffness: 400`, `damping: 25`).
   `npx cronus-ui add images-badge`.
 
+- **`Globe3D`.** Textured 3D globe with avatar pins, atmosphere, and
+  auto-rotate. Optional peers: `three`, `@react-three/fiber`, `@react-three/drei`.
+  `npx cronus-ui add globe-3d`.
+
 ## [0.7.3] — 2026-09-07
 
 ### Added

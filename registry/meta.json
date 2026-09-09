@@ -3798,6 +3798,19 @@
         "motion"
       ]
     },
+    "globe-3d": {
+      "title": "3D Globe",
+      "category": "premium",
+      "description": "A textured 3D globe with avatar pins, orbit, and auto-rotate.",
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "cinematic",
+      "intents": [
+        "marketing",
+        "motion"
+      ]
+    },
     "gradient-border": {
       "title": "GradientBorder",
       "category": "premium",

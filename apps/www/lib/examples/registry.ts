@@ -172,6 +172,7 @@ export const EXAMPLE_FAMILY_BY_SLUG: Record<string, ExampleFamily> = {
   "text-effect": "premium",
   "slide-up-text": "premium",
   "images-badge": "premium",
+  "globe-3d": "premium",
   frame: "premium",
   dock: "premium",
   "border-beam": "premium",

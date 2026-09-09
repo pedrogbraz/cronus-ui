@@ -333,6 +333,7 @@ export const EXAMPLE_SECTIONS: Record<string, ExampleSectionMeta[]> = {
     { id: "from-last", title: "From last" },
   ],
   "images-badge": [{ id: "folder", title: "Folder" }],
+  "globe-3d": [{ id: "team", title: "Distributed team" }],
   frame: [
     { id: "browser", title: "Browser chrome" },
     { id: "window", title: "Window chrome" },

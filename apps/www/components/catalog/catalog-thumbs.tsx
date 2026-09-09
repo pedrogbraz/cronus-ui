@@ -1365,6 +1365,12 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
     case "spinning-text":
     case "scramble-text":
     case "images-badge":
+    case "globe-3d":
+      return (
+        <Fill className="items-center justify-center">
+          <div className="size-40 rounded-full bg-[radial-gradient(circle_at_30%_30%,var(--cronus-info),var(--cronus-surface-inset))] shadow-lg" />
+        </Fill>
+      );
     case "text-effect":
     case "slide-up-text":
     case "typing-text":

@@ -182,6 +182,7 @@ const SLUG_OVERRIDES: Record<string, TagPatch> = {
   "text-effect": { motion: "smooth", style: "editorial" },
   "slide-up-text": { motion: "smooth", style: "editorial" },
   "images-badge": { motion: "snappy", intents: ["marketing", "motion"] },
+  "globe-3d": { motion: "cinematic", intents: ["marketing", "motion"] },
   "border-beam": { motion: "smooth", palette: "aurora" },
   "flip-card": { motion: "smooth" },
   "tilt-card": { motion: "snappy" },

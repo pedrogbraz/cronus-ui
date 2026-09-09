@@ -292,6 +292,10 @@
       "types": "./dist/components/glass-card.d.ts",
       "import": "./dist/components/glass-card.js"
     },
+    "./globe-3d": {
+      "types": "./dist/components/globe-3d.d.ts",
+      "import": "./dist/components/globe-3d.js"
+    },
     "./gradient-border": {
       "types": "./dist/components/gradient-border.d.ts",
       "import": "./dist/components/gradient-border.js"
@@ -726,8 +730,8 @@
     "!dist/**/*.map"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig.globe.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.globe.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "prepublishOnly": "tsc -p tsconfig.json"
@@ -808,7 +812,10 @@
     "d3-sankey": "0.12.3",
     "d3-scale": "4.0.2",
     "d3-shape": "3.2.0",
-    "react-use-measure": "2.1.7"
+    "react-use-measure": "2.1.7",
+    "three": "^0.186.0",
+    "@react-three/fiber": "^9.7.0",
+    "@react-three/drei": "^10.7.8"
   },
   "peerDependenciesMeta": {
     "@dnd-kit/core": {
@@ -912,6 +919,15 @@
     },
     "react-use-measure": {
       "optional": true
+    },
+    "three": {
+      "optional": true
+    },
+    "@react-three/fiber": {
+      "optional": true
+    },
+    "@react-three/drei": {
+      "optional": true
     }
   },
   "devDependencies": {
@@ -957,6 +973,10 @@
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.54.2",
     "react-use-measure": "2.1.7",
+    "three": "^0.186.0",
+    "@react-three/fiber": "^9.7.0",
+    "@react-three/drei": "^10.7.8",
+    "@types/three": "^0.185.4",
     "recharts": "^3.9.2",
     "typescript": "^6.0.3",
     "vitest": "^4.1.9",

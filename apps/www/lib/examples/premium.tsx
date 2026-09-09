@@ -75,6 +75,7 @@ import {
   TypingText,
   WordRotate,
 } from "@cronus-ui/ui";
+import { Globe3D, type GlobeMarker } from "@cronus-ui/ui/globe-3d";
 import {
   ArrowRight,
   Bell,
@@ -2598,6 +2599,24 @@ export const premiumExamples: ExampleMap = {
           />
         </div>
       ),
+    },
+  ],
+  "globe-3d": [
+    {
+      id: "team",
+      title: "Distributed team",
+      description:
+        "NASA Blue Marble globe with avatar pins, orbit drag, and a slow auto-rotate. Optional peers: three, @react-three/fiber, @react-three/drei.",
+      code: `<Globe3D
+  markers={markers}
+  config={{
+    atmosphereColor: "#4da6ff",
+    atmosphereIntensity: 20,
+    bumpScale: 5,
+    autoRotateSpeed: 0.3,
+  }}
+/>`,
+      preview: <Globe3DDemo />,
     },
   ],
   "dynamic-island": [

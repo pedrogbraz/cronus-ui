@@ -5283,6 +5283,56 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  "globe-3d": [
+    {
+      interfaceName: "Globe3DProps",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "markers",
+          type: "GlobeMarker[]",
+          required: false,
+          description: "Array of markers to display on the globe",
+          default: "[]",
+        },
+        {
+          name: "config",
+          type: "Globe3DConfig",
+          required: false,
+          description: "Globe configuration",
+          default: "{}",
+        },
+        {
+          name: "className",
+          type: "string",
+          required: false,
+          description: "Additional CSS classes",
+        },
+        {
+          name: "onMarkerClick",
+          type: "(marker: GlobeMarker) => void",
+          required: false,
+          description: "Callback when a marker is clicked",
+        },
+        {
+          name: "onMarkerHover",
+          type: "(marker: GlobeMarker | null) => void",
+          required: false,
+          description: "Callback when a marker is hovered",
+        },
+        {
+          name: "labels",
+          type: "Partial<Globe3DLabels>",
+          required: false,
+          description: "Accessible copy.",
+        },
+      ],
+    },
+  ],
   frame: [
     {
       interfaceName: "FrameProps",
