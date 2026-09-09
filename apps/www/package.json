@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@cronus-ui/stack": "workspace:*",
+    "cronus-ui-mcp": "workspace:*",
     "@cronus-ui/theme": "workspace:*",
     "@cronus-ui/tokens": "workspace:*",
     "@cronus-ui/ui": "workspace:*",

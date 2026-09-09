@@ -52,6 +52,14 @@ const agentSurfaces = [
     action: "Open /llms-full.txt",
     native: true,
   },
+  {
+    title: "MCP server",
+    description:
+      "Hosted Streamable HTTP at /mcp (read-only catalog) or npx -y cronus-ui-mcp over stdio (read + write). Snippets for Claude, Cursor, VS Code, Codex, Grok, v0, Lovable, Bolt.",
+    href: "/docs/mcp",
+    action: "Wire the MCP server",
+    native: false,
+  },
 ] as const;
 
 const llmsFetchCode = `curl -s https://aicronus.com/llms.txt

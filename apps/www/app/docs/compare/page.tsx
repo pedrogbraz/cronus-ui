@@ -45,7 +45,8 @@ const rows = [
   },
   {
     dimension: "AI",
-    cronus: "AI Kit + MCP that composes apps, adds pages, installs, and themes",
+    cronus:
+      "AI Kit + MCP (hosted HTTP catalog at /mcp, stdio writes) that composes apps, adds pages, installs, and themes",
     shadcn: "Official MCP",
     heroui: "MCP + llms.txt",
     aceternity: "Copy-prompt on components, not compose/add-page/theme",

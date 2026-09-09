@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   transpilePackages: ["@cronus-ui/ui", "@cronus-ui/theme", "@cronus-ui/tokens", "@cronus-ui/stack"],
+  serverExternalPackages: ["cronus-ui-mcp", "@modelcontextprotocol/sdk"],
   async redirects() {
     return [
       {

@@ -30,6 +30,15 @@ import {
   PACKAGE_MANAGERS,
 } from "./docs";
 import { getExampleSections } from "./examples/sections";
+import {
+  MCP_CLIENTS,
+  MCP_HTTP_SNIPPETS,
+  MCP_HTTP_URL,
+  MCP_READ_TOOLS,
+  MCP_STDIO_COMMAND,
+  MCP_STDIO_SNIPPETS,
+  MCP_WRITE_TOOLS,
+} from "./mcp";
 import { COMPONENT_PROPS, type PropsDoc } from "./props.generated";
 import { absoluteUrl } from "./site-url";
 import { isProTemplate, TEMPLATE_CATALOG } from "./templates/catalog";
@@ -577,6 +586,32 @@ function guideExtras(slug: string): string[] {
       }
       return lines;
     }
+    case "mcp": {
+      const lines = [
+        "## Transports",
+        "",
+        `- Hosted Streamable HTTP (read-only catalog): \`${MCP_HTTP_URL}\`.`,
+        `- Local stdio (read + write): \`${MCP_STDIO_COMMAND}\`.`,
+        "",
+        "Greenfield is not an MCP tool. Scaffold with `npx create-cronus-app my-app --template saas`.",
+        "",
+        "## Hosted HTTP",
+        "",
+      ];
+      for (const snippet of MCP_HTTP_SNIPPETS) {
+        lines.push(`### ${snippet.label}`, "", ...fencedCode(snippet.code, snippet.language));
+      }
+      lines.push("## Local stdio", "");
+      for (const snippet of MCP_STDIO_SNIPPETS) {
+        lines.push(`### ${snippet.label}`, "", ...fencedCode(snippet.code, snippet.language));
+      }
+      lines.push("## Clients", "");
+      for (const row of MCP_CLIENTS) {
+        lines.push(`- ${row.label} (${row.transport}): ${row.config}. ${row.notes}`);
+      }
+      lines.push("");
+      return lines;
+    }
     case "blocks": {
       const lines = ["## Block families", ""];
       for (const category of BLOCK_CATEGORIES) {
@@ -652,7 +687,7 @@ export function getLlmsCatalogStats(): {
 
 function summaryBlockquote(): string {
   const stats = getLlmsCatalogStats();
-  return `> Cronus UI is a product UI system: ${stats.components} React components across ${stats.componentCategories} categories (${stats.examples} live examples), ${stats.blocks} composed blocks (${stats.variants} variants) across ${stats.blockCategories} families, and ${stats.templates} OSS app templates. Themeable tokens, a runtime theming engine (Radix + CVA + Tailwind v4), a shadcn-style registry, and a compose path that turns validated blocks into apps — grow with add-page, then \`upgrade --all\`. Install from npm (\`@cronus-ui/ui\`) or copy source with \`npx cronus-ui add <slug>\`. Canonical start: \`npx create-cronus-app my-app --template saas\`. An MCP server (\`npx -y cronus-ui-mcp\`) lets coding agents search, install, compose, add pages, and theme from the live registry.`;
+  return `> Cronus UI is a product UI system: ${stats.components} React components across ${stats.componentCategories} categories (${stats.examples} live examples), ${stats.blocks} composed blocks (${stats.variants} variants) across ${stats.blockCategories} families, and ${stats.templates} OSS app templates. Themeable tokens, a runtime theming engine (Radix + CVA + Tailwind v4), a shadcn-style registry, and a compose path that turns validated blocks into apps — grow with add-page, then \`upgrade --all\`. Install from npm (\`@cronus-ui/ui\`) or copy source with \`npx cronus-ui add <slug>\`. Canonical start: \`npx create-cronus-app my-app --template saas\`. An MCP server (\`${MCP_STDIO_COMMAND}\` over stdio, or Streamable HTTP at ${MCP_HTTP_URL}) lets coding agents search the live registry — and, on stdio, install, compose, add pages, and theme.`;
 }
 
 /** The /llms.txt index — complete agent catalog, generated from committed indices. */
@@ -754,32 +789,28 @@ export function buildLlmsTxt(): string {
     "",
     "## MCP",
     "",
-    "Cronus ships an MCP server over **stdio** so coding agents search the live registry, install real source, compose apps, add pages, and theme — instead of guessing APIs.",
+    "Cronus ships an MCP server so coding agents search the live registry instead of guessing APIs. Two transports:",
     "",
-    "- Package: [`cronus-ui-mcp`](https://www.npmjs.com/package/cronus-ui-mcp) (`npx -y cronus-ui-mcp`).",
-    "- Transport: stdio. Not a hosted HTTP MCP.",
-    "- Greenfield is not an MCP tool: scaffold with `npx create-cronus-app my-app --template saas`, then point the server at that project.",
+    `- Hosted Streamable HTTP (read-only catalog): [\`${MCP_HTTP_URL}\`](${MCP_HTTP_URL}).`,
+    `- Local stdio (read + write): [\`cronus-ui-mcp\`](https://www.npmjs.com/package/cronus-ui-mcp) (\`${MCP_STDIO_COMMAND}\`).`,
+    `- Setup: [${absoluteUrl("/docs/mcp")}](${absoluteUrl("/docs/mcp")}).`,
+    "- Greenfield is not an MCP tool: scaffold with `npx create-cronus-app my-app --template saas`, then point the stdio server at that project.",
     "",
-    "Read-only tools: `list_components`, `list_blocks`, `list_catalog`, `match_catalog`, `search_registry`, `get_component`, `get_install_command`, `get_design_context`.",
+    `Read-only tools: ${MCP_READ_TOOLS.map((name) => `\`${name}\``).join(", ")}.`,
     "",
-    "Write tools (spawn the pinned `cronus-ui` CLI inside an inited project): `compose_app`, `add_page`, `set_theme`, `install_component`, `upgrade_components`, `apply_theme`.",
+    `Write tools (stdio only; spawn the pinned \`cronus-ui\` CLI inside an inited project): ${MCP_WRITE_TOOLS.map((name) => `\`${name}\``).join(", ")}.`,
     "",
-    "### Claude Code",
+    "### Hosted HTTP",
     "",
-    ...fencedCode("claude mcp add cronus-ui -- npx -y cronus-ui-mcp", "sh"),
-    "### Cursor / Windsurf / other `mcpServers` JSON",
-    "",
-    ...fencedCode(
-      `{
-  "mcpServers": {
-    "cronus-ui": {
-      "command": "npx",
-      "args": ["-y", "cronus-ui-mcp"]
-    }
+  );
+  for (const snippet of MCP_HTTP_SNIPPETS) {
+    lines.push(`#### ${snippet.label}`, "", ...fencedCode(snippet.code, snippet.language));
   }
-}`,
-      "json",
-    ),
+  lines.push("### Local stdio", "");
+  for (const snippet of MCP_STDIO_SNIPPETS) {
+    lines.push(`#### ${snippet.label}`, "", ...fencedCode(snippet.code, snippet.language));
+  }
+  lines.push(
     "## License",
     "",
     "MIT. Components, blocks, OSS templates, the registry, CLI, and MCP server are free for personal and commercial use.",

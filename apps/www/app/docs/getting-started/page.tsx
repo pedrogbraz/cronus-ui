@@ -139,6 +139,13 @@ const nextSteps = [
     href: "/llms.txt",
     action: "Open /llms.txt",
   },
+  {
+    title: "MCP",
+    description:
+      "Hosted /mcp for cloud builders, or npx -y cronus-ui-mcp in Claude, Cursor, VS Code, Codex, Grok.",
+    href: "/docs/mcp",
+    action: "Wire the MCP server",
+  },
 ] as const;
 
 export default function GettingStartedPage() {

@@ -80,6 +80,13 @@ export const DOC_NAV_SECTIONS: { heading: string; items: DocNavItem[] }[] = [
         description: "init, add, compose, add-page, diff, upgrade, theme, ai.",
       },
       {
+        label: "MCP",
+        href: "/docs/mcp",
+        description:
+          "Hosted Streamable HTTP at /mcp plus local stdio. Snippets for Claude, Cursor, VS Code, Codex, Grok, OpenCode, Zed, v0, Lovable, Bolt.",
+        status: "new",
+      },
+      {
         label: "Stack Builder",
         href: "/docs/stack-builder",
         description:
@@ -322,6 +329,7 @@ export const CHANGELOG_ENTRIES = [
       "ReceiveButton — Family Receive pill that morphs into a confirm card",
       "FamilyWallet — Family sign-in drawer: socials, OTP, passkey, wallets",
       "Complete /llms.txt catalog for coding agents — site, docs, components, blocks, templates, MCP",
+      "Hosted Streamable HTTP MCP at /mcp (read-only catalog) and /docs/mcp client snippets",
     ],
   },
   {

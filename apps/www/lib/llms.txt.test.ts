@@ -74,12 +74,15 @@ describe("llms.txt catalog", () => {
     expect(txt).not.toContain("/docs/grok");
   });
 
-  it("documents stdio MCP setup, not a hosted HTTP endpoint", () => {
+  it("documents stdio and hosted HTTP MCP setup", () => {
     expect(txt).toContain("claude mcp add cronus-ui -- npx -y cronus-ui-mcp");
+    expect(txt).toContain("https://aicronus.com/mcp");
+    expect(txt).toContain("https://aicronus.com/docs/mcp");
     expect(txt).toContain('"cronus-ui-mcp"');
+    expect(txt).toContain('"servers"');
     expect(txt).toContain("match_catalog");
     expect(txt).toContain("compose_app");
-    expect(txt).toContain("Not a hosted HTTP MCP");
+    expect(txt).not.toContain("Not a hosted HTTP MCP");
   });
 
   it("keeps llms-full.txt as the inlined corpus", () => {
