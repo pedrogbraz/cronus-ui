@@ -41,8 +41,7 @@ const WHITE_ON_PRIMARY: ReadonlySet<ThemeName> = new Set(["aurora", "sunset", "e
  * Mix the fill the button controls toward black until the pair clears 4.5:1 —
  * same exception as `Button` destructive.
  */
-const ON_BRAND_PRIMARY =
-  "bg-[color-mix(in_oklch,var(--cronus-primary),black_30%)] text-white";
+const ON_BRAND_PRIMARY = "bg-[color-mix(in_oklch,var(--cronus-primary),black_30%)] text-white";
 
 /**
  * Signature section. Theme chips recolor the catalog inside the pane.
