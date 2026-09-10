@@ -1030,13 +1030,21 @@ function libDependencyOf(spec: string): string | undefined {
 }
 
 function parseImports(content: string): string[] {
+  const sourceFile = ts.createSourceFile(
+    "mod.tsx",
+    content,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TSX,
+  );
   const specs: string[] = [];
-  const re = /(?:from|import)\s+["']([^"']+)["']/g;
-  let m: RegExpExecArray | null = re.exec(content);
-  while (m !== null) {
-    if (m[1]) specs.push(m[1]);
-    m = re.exec(content);
-  }
+  const visit = (node: ts.Node): void => {
+    if (ts.isImportDeclaration(node) && ts.isStringLiteral(node.moduleSpecifier)) {
+      specs.push(node.moduleSpecifier.text);
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(sourceFile);
   return specs;
 }
 

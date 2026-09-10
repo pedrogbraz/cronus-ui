@@ -3540,7 +3540,6 @@
     "name": "analytics--period",
     "type": "registry:block",
     "dependencies": [
-      " + first + ",
       "@cronus-ui/ui@0.7.6"
     ],
     "registryDependencies": [
