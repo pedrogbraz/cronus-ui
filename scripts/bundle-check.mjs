@@ -150,7 +150,7 @@ const SHARED_CHUNK_BUDGETS = /** @type {SharedChunkBudgets} */ ({
  * legitimately grows.
  *
  *   entry                     current gz   budget gz
- *   index.js (barrel)              3,646      4,700   (re-measured 2026-09-09 after the motion-harvest exports)
+ *   index.js (barrel)              4,748      6,100   (re-measured 2026-09-10 after GoalCard/TodoItem/preview tooltips)
  *   data-table.js                  7,359      9,400
  *   chart.js                       4,200      4,500
  *   calendar.js                    1,540      1,950   (re-measured 2026-07-10: the rdp v10 DayButton wrapper + classNames map)
@@ -177,7 +177,7 @@ const SHARED_CHUNK_BUDGETS = /** @type {SharedChunkBudgets} */ ({
  *   toolbar.js                     1,602      2,050
  */
 const PACKAGE_ENTRY_GZIP_BUDGETS = /** @type {Record<string, number>} */ ({
-  "index.js": 4_700,
+  "index.js": 6_100,
   "components/data-table.js": 9_400,
   "components/chart.js": 4_500,
   "components/calendar.js": 1_950,
