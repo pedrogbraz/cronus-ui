@@ -120,6 +120,12 @@ export type { AspectRatioProps } from "./components/aspect-ratio.js";
 export { AspectRatio } from "./components/aspect-ratio.js";
 export type { AuroraBackgroundProps } from "./components/aurora-background.js";
 export { AuroraBackground } from "./components/aurora-background.js";
+export type {
+  Author,
+  AuthorTooltipLabels,
+  AuthorTooltipProps,
+} from "./components/author-tooltip.js";
+export { AuthorTooltip, authorTooltipAvatarVariants } from "./components/author-tooltip.js";
 export type { AutocompleteOption, AutocompleteProps } from "./components/autocomplete.js";
 export { Autocomplete } from "./components/autocomplete.js";
 // ── Wave 3 — data & display ────────────────────────────────────────
@@ -300,6 +306,14 @@ export {
 } from "./components/command.js";
 export type { ComparisonSliderProps } from "./components/comparison-slider.js";
 export { ComparisonSlider } from "./components/comparison-slider.js";
+export type {
+  ComponentPreviewTooltipLabels,
+  ComponentPreviewTooltipProps,
+} from "./components/component-preview-tooltip.js";
+export {
+  ComponentPreviewTooltip,
+  componentPreviewTooltipVariants,
+} from "./components/component-preview-tooltip.js";
 export type { ComposedChartProps, ComposedChartSeries } from "./components/composed-chart.js";
 export { ComposedChart } from "./components/composed-chart.js";
 export type { ConfettiProps } from "./components/confetti.js";
@@ -586,6 +600,14 @@ export type { GlareHoverProps } from "./components/glare-hover.js";
 export { GlareHover } from "./components/glare-hover.js";
 export type { GlassCardProps } from "./components/glass-card.js";
 export { GlassCard } from "./components/glass-card.js";
+export type {
+  GoalCardLabels,
+  GoalCardProps,
+  GoalRoadmap,
+  GoalStatus,
+  GoalStep,
+} from "./components/goal-card.js";
+export { GoalCard, goalCardVariants, goalStatusVariants } from "./components/goal-card.js";
 export type { GradientBorderProps } from "./components/gradient-border.js";
 export { GradientBorder } from "./components/gradient-border.js";
 export type { GradientTextProps } from "./components/gradient-text.js";
@@ -678,6 +700,18 @@ export type { LightboxImage, LightboxProps } from "./components/lightbox.js";
 export { Lightbox } from "./components/lightbox.js";
 export type { LineChartProps } from "./components/line-chart.js";
 export { LineChart } from "./components/line-chart.js";
+export type {
+  LinkPreviewLabels,
+  LinkPreviewMetadata,
+  LinkPreviewProps,
+} from "./components/link-preview.js";
+export {
+  clearLinkPreviewCache,
+  fetchLinkPreviewMetadata,
+  isValidHttpUrl,
+  LinkPreview,
+  linkPreviewVariants,
+} from "./components/link-preview.js";
 export type { LiveLineChartProps, LiveLinePoint } from "./components/live-line-chart.js";
 export { LiveLineChart } from "./components/live-line-chart.js";
 export type { LoaderLabels, LoaderProps } from "./components/loader.js";
@@ -1335,6 +1369,15 @@ export {
   TimelineTitle,
   timelineDotVariants,
 } from "./components/timeline.js";
+export type {
+  TodoItemLabels,
+  TodoItemProps,
+  TodoLabel,
+  TodoPriority,
+  TodoProject,
+  TodoSubtask,
+} from "./components/todo-item.js";
+export { TodoItem, todoItemVariants, todoPriorityVariants } from "./components/todo-item.js";
 export type { ToggleProps } from "./components/toggle.js";
 export { Toggle, toggleVariants } from "./components/toggle.js";
 export type { ToggleGroupItemProps, ToggleGroupProps } from "./components/toggle-group.js";
