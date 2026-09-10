@@ -5185,6 +5185,19 @@
         "motion"
       ]
     },
+    "words-preloader": {
+      "title": "WordsPreloader",
+      "category": "preloaders",
+      "description": "Multilingual greeting preloader with a curved lip that flattens as the panel slides up.",
+      "rsc": false,
+      "style": "default",
+      "palette": "midnight",
+      "motion": "cinematic",
+      "intents": [
+        "marketing",
+        "motion"
+      ]
+    },
     "workspace-switcher": {
       "title": "WorkspaceSwitcher",
       "category": "navigation",
