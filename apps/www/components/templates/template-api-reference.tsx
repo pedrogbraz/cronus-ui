@@ -92,7 +92,7 @@ export function TemplateApiReference({ entry }: { entry: TemplateCatalogEntry })
 
         <div>
           <h3 className="font-display text-lg font-normal tracking-[-0.02em] text-fg">
-            Block stack
+            Catalog stack
           </h3>
           <p className="mt-2 max-w-2xl text-sm text-fg-secondary">
             Navbar, page blocks, and footer in the order the composed home page stacks them.

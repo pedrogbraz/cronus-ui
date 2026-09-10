@@ -29,7 +29,7 @@ test.describe("template live preview", () => {
     await expect(page.getByRole("link", { name: "Open Preview" })).toBeVisible();
 
     await tablist.getByRole("tab", { name: "Code" }).click();
-    await expect(page.getByRole("heading", { name: "Block stack" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Block stack", level: 2 })).toBeVisible();
     await expect(page.getByRole("link", { name: "hero--atmosphere" })).toBeVisible();
 
     const previewPromise = page.waitForEvent("popup");
