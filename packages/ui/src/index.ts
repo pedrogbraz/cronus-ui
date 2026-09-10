@@ -741,6 +741,15 @@ export { VideoPlayer, videoPlayerVariants } from "./components/video-player.js";
 export type { WordRotateProps } from "./components/word-rotate.js";
 export { WordRotate } from "./components/word-rotate.js";
 export type {
+  WordsPreloaderLabels,
+  WordsPreloaderProps,
+} from "./components/words-preloader.js";
+export {
+  DEFAULT_PRELOADER_WORDS,
+  WordsPreloader,
+  wordsPreloaderVariants,
+} from "./components/words-preloader.js";
+export type {
   WorkspaceItem,
   WorkspaceSwitcherLabels,
   WorkspaceSwitcherProps,
