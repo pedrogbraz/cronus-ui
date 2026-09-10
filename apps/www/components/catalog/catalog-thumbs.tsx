@@ -469,13 +469,13 @@ function ChatScene() {
         <span className="text-sm font-medium text-fg">Cronus assistant</span>
       </header>
       <div className="flex flex-1 flex-col gap-3 p-5">
-        <div className="max-w-[70%] rounded-2xl rounded-es-md bg-surface-overlay px-4 py-2.5 text-sm text-fg">
+        <div className="ms-auto max-w-[70%] rounded-2xl rounded-ee-md bg-primary px-4 py-2.5 text-sm text-primary-foreground">
           How do I theme a new product surface?
         </div>
-        <div className="ms-auto max-w-[75%] rounded-2xl rounded-ee-md bg-primary px-4 py-2.5 text-sm text-primary-foreground">
+        <div className="max-w-[75%] rounded-2xl rounded-es-md bg-surface-overlay px-4 py-2.5 text-sm text-fg">
           Use semantic tokens and compose from primitives — never a palette scale.
         </div>
-        <div className="max-w-[65%] rounded-2xl rounded-es-md bg-surface-overlay px-4 py-2.5 text-sm text-fg">
+        <div className="ms-auto max-w-[65%] rounded-2xl rounded-ee-md bg-primary px-4 py-2.5 text-sm text-primary-foreground">
           Show me a login card next.
         </div>
       </div>
@@ -1426,6 +1426,12 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
           <div className="size-40 rounded-full bg-[radial-gradient(circle_at_30%_30%,var(--cronus-info),var(--cronus-surface-inset))] shadow-lg" />
         </Fill>
       );
+    case "globe-wireframe":
+      return (
+        <Fill className="items-center justify-center">
+          <div className="size-40 rounded-full border border-fg/25 bg-[radial-gradient(circle_at_30%_28%,transparent_42%,var(--cronus-border))]" />
+        </Fill>
+      );
     case "text-effect":
     case "slide-up-text":
     case "typing-text":
@@ -1723,6 +1729,8 @@ function categoryScene(categorySlug: string, slug: string): ReactNode {
           <p className="relative font-display text-4xl tracking-[-0.03em] text-fg">Premium</p>
         </Fill>
       );
+    case "ai-elements":
+      return <ChatScene />;
     default:
       return (
         <Fill className="items-center justify-center p-12">
@@ -2215,7 +2223,6 @@ function blockScene(slug: string, categorySlug: string): ReactNode {
       );
     case "nps-survey":
     case "feedback-form":
-    case "contact-form":
       return (
         <Fill className="items-center justify-center p-10">
           <div className="w-[440px] rounded-2xl border border-border bg-surface-raised p-6">
@@ -2236,6 +2243,22 @@ function blockScene(slug: string, categorySlug: string): ReactNode {
                   {score + 1}
                 </span>
               ))}
+            </div>
+          </div>
+        </Fill>
+      );
+    case "contact-form":
+      return (
+        <Fill className="items-center justify-center p-8">
+          <div className="flex w-[480px] items-start gap-6">
+            <div className="flex flex-1 flex-col gap-3">
+              <p className="font-display text-xl tracking-[-0.02em] text-fg">Contact us</p>
+              <div className="size-24 rounded-full border border-fg/20 bg-[radial-gradient(circle_at_30%_28%,transparent_42%,var(--cronus-border))]" />
+            </div>
+            <div className="flex flex-1 flex-col gap-2 rounded-2xl border border-border bg-surface-raised p-4">
+              <div className="h-8 rounded-lg bg-surface-inset" />
+              <div className="h-8 rounded-lg bg-surface-inset" />
+              <div className="mt-1 h-8 w-20 rounded-lg bg-primary" />
             </div>
           </div>
         </Fill>

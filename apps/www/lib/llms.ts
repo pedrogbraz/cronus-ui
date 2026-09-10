@@ -87,6 +87,8 @@ const EXAMPLE_FAMILIES = [
   "date-time",
   "charts",
   "premium",
+  "preloaders",
+  "ai-elements",
 ] as const;
 
 function propertyKey(name: ts.PropertyName): string | undefined {
@@ -653,9 +655,11 @@ export function guideMarkdown(slug: string): string | undefined {
 /*  Top-level documents                                                       */
 /* -------------------------------------------------------------------------- */
 
-/** Globe3D is a subpath export so three / r3f stay optional peers. */
+/** Heavy optional-peer components ship as subpath exports, not the barrel. */
 function componentImportModule(slug: string): string {
-  return slug === "globe-3d" ? "@cronus-ui/ui/globe-3d" : "@cronus-ui/ui";
+  if (slug === "globe-3d") return "@cronus-ui/ui/globe-3d";
+  if (slug === "globe-wireframe") return "@cronus-ui/ui/globe-wireframe";
+  return "@cronus-ui/ui";
 }
 
 function countLabel(n: number): string {

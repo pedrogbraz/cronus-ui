@@ -101,7 +101,7 @@ function DatePickerDemo() {
     <div className="flex flex-col gap-3">
       <DatePicker value={date} onChange={setDate} placeholder="Pick a date" />
       <span className="text-sm text-fg-tertiary">
-        {date ? `Selected: ${date.toLocaleDateString()}` : "No date selected yet."}
+        {date ? `Selected: ${date.toLocaleDateString("en-US")}` : "No date selected yet."}
       </span>
     </div>
   );
@@ -270,7 +270,7 @@ return (
   <div className="flex flex-col gap-3">
     <DatePicker value={date} onChange={setDate} placeholder="Pick a date" />
     <span className="text-sm text-fg-tertiary">
-      {date ? \`Selected: \${date.toLocaleDateString()}\` : "No date selected yet."}
+      {date ? \`Selected: \${date.toLocaleDateString("en-US")}\` : "No date selected yet."}
     </span>
   </div>
 );`,

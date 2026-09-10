@@ -84,6 +84,7 @@ import {
   WordRotate,
 } from "@cronus-ui/ui";
 import { Globe3D, type GlobeMarker } from "@cronus-ui/ui/globe-3d";
+import { GlobeWireframe } from "@cronus-ui/ui/globe-wireframe";
 import {
   ArrowRight,
   Award,
@@ -784,6 +785,18 @@ function Globe3DDemo() {
         autoRotateSpeed: 0.3,
       }}
       className="h-[420px]"
+    />
+  );
+}
+
+function GlobeWireframeDemo() {
+  return (
+    <GlobeWireframe
+      className="mx-auto h-[28rem] w-full max-w-md"
+      variant="wireframesolid"
+      autoRotate
+      autoRotateSpeed={0.45}
+      strokeWidth={0.6}
     />
   );
 }
@@ -1634,6 +1647,21 @@ export const premiumExamples: ExampleMap = {
   }}
 />`,
       preview: <Globe3DDemo />,
+    },
+  ],
+  "globe-wireframe": [
+    {
+      id: "wireframe",
+      title: "Wireframe solid",
+      description:
+        "Orthographic SVG globe with country strokes, drag, and a slow auto-rotate. Optional peer: d3-geo. Land outlines load from Natural Earth (world-atlas 110m).",
+      code: `<GlobeWireframe
+  variant="wireframesolid"
+  autoRotate
+  autoRotateSpeed={0.45}
+  strokeWidth={0.6}
+/>`,
+      preview: <GlobeWireframeDemo />,
     },
   ],
   "slide-up-text": [

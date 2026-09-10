@@ -20,7 +20,8 @@ export type ExampleFamily =
   | "date-time"
   | "charts"
   | "premium"
-  | "preloaders";
+  | "preloaders"
+  | "ai-elements";
 
 /** slug → the family module that owns its examples. */
 export const EXAMPLE_FAMILY_BY_SLUG: Record<string, ExampleFamily> = {
@@ -176,6 +177,7 @@ export const EXAMPLE_FAMILY_BY_SLUG: Record<string, ExampleFamily> = {
   "slide-up-text": "premium",
   "images-badge": "premium",
   "globe-3d": "premium",
+  "globe-wireframe": "premium",
   frame: "premium",
   dock: "premium",
   "border-beam": "premium",
@@ -213,6 +215,29 @@ export const EXAMPLE_FAMILY_BY_SLUG: Record<string, ExampleFamily> = {
   "receive-button": "premium",
   "family-wallet": "premium",
   "words-preloader": "preloaders",
+  actions: "ai-elements",
+  artifact: "ai-elements",
+  branch: "ai-elements",
+  "chain-of-thought": "ai-elements",
+  "ai-code-block": "ai-elements",
+  context: "ai-elements",
+  conversation: "ai-elements",
+  "ai-image": "ai-elements",
+  "inline-citation": "ai-elements",
+  loader: "ai-elements",
+  message: "ai-elements",
+  "open-in-chat": "ai-elements",
+  plan: "ai-elements",
+  "prompt-input": "ai-elements",
+  queue: "ai-elements",
+  reasoning: "ai-elements",
+  response: "ai-elements",
+  sources: "ai-elements",
+  suggestion: "ai-elements",
+  task: "ai-elements",
+  "text-shimmer": "ai-elements",
+  tool: "ai-elements",
+  "web-preview": "ai-elements",
   "dynamic-island": "premium",
   confetti: "premium",
   particles: "premium",

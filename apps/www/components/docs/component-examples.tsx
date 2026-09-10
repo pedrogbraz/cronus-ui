@@ -50,6 +50,9 @@ const FAMILY_VIEWS: Record<ExampleFamily, FamilyView> = {
   charts: dynamic(() => import("../../lib/examples/charts"), { loading: ExamplesSkeleton }),
   premium: dynamic(() => import("../../lib/examples/premium"), { loading: ExamplesSkeleton }),
   preloaders: dynamic(() => import("../../lib/examples/preloaders"), { loading: ExamplesSkeleton }),
+  "ai-elements": dynamic(() => import("../../lib/examples/ai-elements"), {
+    loading: ExamplesSkeleton,
+  }),
 };
 
 type GalleryView = ComponentType<{ slug: string; displayName: string }>;
@@ -255,6 +258,26 @@ const FAMILY_GALLERY_VIEWS: Record<ExampleFamily, GalleryView> = {
           return (
             <ComponentVariantsGallery
               examples={m.preloadersExamples[slug] ?? []}
+              displayName={displayName}
+            />
+          );
+        },
+      })),
+    { loading: ExamplesSkeleton },
+  ),
+  "ai-elements": dynamic(
+    () =>
+      import("../../lib/examples/ai-elements").then((m) => ({
+        default: function AiElementsGallery({
+          slug,
+          displayName,
+        }: {
+          slug: string;
+          displayName: string;
+        }) {
+          return (
+            <ComponentVariantsGallery
+              examples={m.aiElementsExamples[slug] ?? []}
               displayName={displayName}
             />
           );

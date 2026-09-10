@@ -65,7 +65,7 @@ export function ComponentDocView({ slug }: { slug: string }) {
             <h2 className="font-display text-xl font-medium tracking-[-0.02em] text-fg">Import</h2>
             <div className="mt-4 flex flex-col gap-3">
               <CodeBlock
-                code={`import { ${meta.importName ?? meta.name} } from "${slug === "globe-3d" ? "@cronus-ui/ui/globe-3d" : "@cronus-ui/ui"}";`}
+                code={`import { ${meta.importName ?? meta.name} } from "${slug === "globe-3d" ? "@cronus-ui/ui/globe-3d" : slug === "globe-wireframe" ? "@cronus-ui/ui/globe-wireframe" : "@cronus-ui/ui"}";`}
               />
               <CodeBlock code={`npx cronus-ui add ${slug}`} language="bash" />
             </div>

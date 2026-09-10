@@ -1274,6 +1274,20 @@ export const BLOCK_CATEGORIES: BlockCategory[] = [
         name: "Contact Form",
         description:
           "A two-column contact section pairing contact methods with a name, email, and message form.",
+        variants: [
+          {
+            id: "classic",
+            name: "Classic",
+            description:
+              "A two-column contact section pairing contact methods with a name, email, and message form.",
+          },
+          {
+            id: "globe",
+            name: "With globe",
+            description:
+              "Staggered contact section with a rotating wireframe globe, channel links, and a message form.",
+          },
+        ],
       },
     ],
   },
