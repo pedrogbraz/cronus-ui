@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Eyebrow } from "../../../components/showcase-ui";
 import { CommandChip } from "../../../components/templates/command-chip";
+import { TemplateApiReference } from "../../../components/templates/template-api-reference";
 import { TemplateDetail } from "../../../components/templates/template-detail";
 import {
   appearanceLabel,
@@ -92,7 +93,9 @@ export default async function TemplateDetailPage({
         <TemplateDetail entry={entry} />
       </div>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <TemplateApiReference entry={entry} />
+
+      <section className="mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:px-8">
         <div className="rounded-2xl border border-border bg-surface-raised p-6">
           <h2 className="text-xs font-medium uppercase tracking-widest text-fg-tertiary">
             What's inside

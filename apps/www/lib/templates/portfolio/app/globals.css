@@ -1,0 +1,241 @@
+@import "tailwindcss";
+@import "@cronus-ui/tokens/styles.css";
+
+@source "../node_modules/@cronus-ui/ui/dist/**/*.js";
+@source "./**/*.{ts,tsx}";
+
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-shake-smooth: shake-smooth 0.5s ease-in-out;
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+  @keyframes shake-smooth {
+    0% {
+      transform: translateX(0);
+    }
+    10% {
+      transform: translateX(-12px);
+    }
+    20% {
+      transform: translateX(12px);
+    }
+    30% {
+      transform: translateX(-10px);
+    }
+    40% {
+      transform: translateX(10px);
+    }
+    50% {
+      transform: translateX(-6px);
+    }
+    60% {
+      transform: translateX(6px);
+    }
+    70% {
+      transform: translateX(-3px);
+    }
+    80% {
+      transform: translateX(3px);
+    }
+    90% {
+      transform: translateX(-1px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  @keyframes shine {
+    0% {
+      background-position: 100%;
+    }
+    100% {
+      background-position: -100%;
+    }
+  }
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.18 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  ::-webkit-scrollbar {
+    width: 7px;
+    height: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 2px;
+  }
+
+  .shiki,
+  .shiki span {
+    color: var(--shiki-light);
+    background-color: transparent;
+  }
+  .dark .shiki,
+  .dark .shiki span {
+    color: var(--shiki-dark);
+    background-color: transparent;
+  }
+
+  .prose pre {
+    @apply leading-relaxed bg-transparent! font-mono!;
+  }
+  .prose code {
+    @apply m-0! mx-1! border rounded-md! px-1.5 py-0.5 bg-muted/60 dark:bg-muted/40 text-[13px]! font-mono text-foreground/90!;
+  }
+  .prose code::before,
+  .prose code::after {
+    @apply content-none!;
+  }
+  .prose h1 {
+    @apply text-2xl! font-semibold! tracking-tight! leading-tight!;
+  }
+  .prose h2 {
+    @apply text-xl! font-semibold! tracking-tight! leading-tight!;
+  }
+  .prose h3 {
+    @apply text-lg! font-semibold! tracking-tight! leading-tight!;
+  }
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply text-base! font-medium! tracking-tight! leading-tight!;
+  }
+  .prose a {
+    @apply text-primary underline underline-offset-4;
+  }
+  .prose blockquote {
+    @apply border-l-4 border-amber-500! pl-4 italic bg-muted/50 p-4 rounded-md rounded-l-none;
+  }
+  .prose blockquote p {
+    @apply m-0!;
+  }
+  .prose :where(ul.contains-task-list):not(:where([class~="not-prose"] *)) {
+    @apply list-none! pl-0!;
+  }
+  .prose :where(li.task-list-item):not(:where([class~="not-prose"] *)) {
+    @apply pl-0!;
+  }
+  .prose :where(table):not(:where([class~="not-prose"]) *) {
+    @apply w-full min-w-full;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  .prose :where(th):not(:where([class~="not-prose"] *)),
+  .prose :where(td):not(:where([class~="not-prose"] *)) {
+    @apply px-6 py-4 align-middle m-0 whitespace-nowrap;
+  }
+  .prose tr {
+    @apply hover:bg-accent/50! transition-colors! cursor-pointer! h-10!;
+  }
+  .prose :where(th):not(:where([class~="not-prose"] *)) {
+    @apply text-left font-semibold text-foreground border-b border-border m-0! bg-muted/50 p-3! py-2!;
+  }
+  .prose :where(td):not(:where([class~="not-prose"] *)) {
+    @apply text-muted-foreground border-b border-border text-sm! p-2!;
+  }
+  .prose :where(th:not(:last-child)):not(:where([class~="not-prose"] *)),
+  .prose :where(td:not(:last-child)):not(:where([class~="not-prose"] *)) {
+    @apply border-r border-border;
+  }
+  .prose :where(tbody tr:last-child td):not(:where([class~="not-prose"] *)) {
+    @apply border-b-0;
+  }
+}
+
+@layer utilities {
+  .animate-shine {
+    animation: shine 5s linear infinite;
+  }
+}

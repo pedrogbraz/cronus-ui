@@ -48,10 +48,15 @@ export default async function TemplatePreviewPage({
       <script
         // biome-ignore lint/security/noDangerouslySetInnerHtml: theme/mode/embed are JSON.stringify-encoded literals from the catalog.
         dangerouslySetInnerHTML={{
-          __html: previewThemeInlineScript(entry.theme, entry.mode, isEmbed),
+          __html: previewThemeInlineScript(entry.theme, entry.mode, isEmbed, entry.customStage),
         }}
       />
-      <PreviewThemeLock theme={entry.theme} mode={entry.mode} embed={isEmbed} />
+      <PreviewThemeLock
+        theme={entry.theme}
+        mode={entry.mode}
+        embed={isEmbed}
+        isolate={entry.customStage}
+      />
       {isEmbed ? null : <PreviewChrome entry={entry} />}
       <main id="main-content" aria-label={`${entry.name} live preview`}>
         <TemplateStage entry={entry} />

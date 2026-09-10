@@ -165,7 +165,7 @@ function AppShellChrome({ children }: { children: ReactNode }) {
 
 function AppShellChromeBlock() {
   return (
-    <div className={SHELL_HOST_CLASS}>
+    <div className={SHELL_HOST_CLASS} data-slot="block-shell-host">
       <AppShellChrome>
         <main className="flex flex-col gap-4 p-6">
           <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">Dashboard</h1>

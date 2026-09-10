@@ -1,0 +1,200 @@
+/* Shadcn-shaped tokens used by the Gontify / portfolio template stages.
+   Fallbacks keep the rest of the docs site on Cronus surfaces.
+
+   Two layers, both required:
+   1. @theme inline — emit `bg-background` / `text-foreground` / `bg-card`
+      (Cronus tokens do not define `--color-background` or `--color-card`).
+   2. Runtime aliases on `[data-template-stage]` — `--color-*` and `--cronus-*`
+      so utilities inherit from the stage even when Cronus `@theme inline`
+      inlines `var(--cronus-fg)` instead of `var(--color-foreground)`. */
+
+@keyframes gontify-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+/* Flowing logos + kinetic testimonials use `animation: marquee …` inline. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes gontify-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes gontify-shimmer {
+  from {
+    background-position: -200% center;
+  }
+  to {
+    background-position: 200% center;
+  }
+}
+
+@theme inline {
+  --animate-marquee: gontify-marquee 28s linear infinite;
+  --animate-float: gontify-float 6s ease-in-out infinite;
+  --animate-shimmer: gontify-shimmer 3s linear infinite;
+  --color-background: var(--background, var(--cronus-surface-base));
+  --color-foreground: var(--foreground, var(--cronus-fg));
+  --color-card: var(--card, var(--cronus-surface-raised));
+  --color-card-foreground: var(--card-foreground, var(--cronus-fg));
+  --color-popover: var(--popover, var(--cronus-surface-overlay));
+  --color-popover-foreground: var(--popover-foreground, var(--cronus-fg));
+  --color-primary: var(--primary, var(--cronus-primary));
+  --color-primary-foreground: var(--primary-foreground, var(--cronus-primary-foreground));
+  --color-secondary: var(--secondary, var(--cronus-surface-overlay));
+  --color-secondary-foreground: var(--secondary-foreground, var(--cronus-fg));
+  --color-muted: var(--muted, var(--cronus-surface-overlay));
+  --color-muted-foreground: var(--muted-foreground, var(--cronus-fg-secondary));
+  --color-accent: var(--accent, var(--cronus-surface-overlay));
+  --color-accent-foreground: var(--accent-foreground, var(--cronus-fg));
+  --color-destructive: var(--destructive, var(--cronus-error));
+  --color-input: var(--input, var(--cronus-border));
+  --color-border: var(--border, var(--cronus-border));
+  --color-ring: var(--ring, var(--cronus-ring));
+}
+
+[data-template-stage="gontify"] {
+  color-scheme: dark;
+  --radius: 0.625rem;
+  --background: oklch(0.06 0 0);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.09 0 0);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.09 0 0);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.98 0 0);
+  --primary-foreground: oklch(0.09 0 0);
+  --secondary: oklch(0.13 0 0);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.13 0 0);
+  --muted-foreground: oklch(0.55 0 0);
+  --accent: oklch(0.13 0 0);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(0.18 0 0);
+  --input: oklch(0.18 0 0);
+  --ring: oklch(0.55 0 0);
+}
+
+[data-template-stage="gontify"]:not(.dark) {
+  color-scheme: light;
+  --background: oklch(0.985 0 0);
+  --foreground: oklch(0.09 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.09 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.09 0 0);
+  --primary: oklch(0.09 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.96 0 0);
+  --secondary-foreground: oklch(0.09 0 0);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.96 0 0);
+  --accent-foreground: oklch(0.09 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.9 0 0);
+  --ring: oklch(0.09 0 0);
+}
+
+[data-template-stage="portfolio"] {
+  color-scheme: light;
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+}
+
+[data-template-stage="portfolio"].dark {
+  color-scheme: dark;
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+}
+
+[data-template-stage] {
+  background-color: var(--background);
+  color: var(--foreground);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --cronus-surface-base: var(--background);
+  --cronus-surface-inset: var(--muted);
+  --cronus-surface-raised: var(--card);
+  --cronus-surface-overlay: var(--muted);
+  --cronus-surface-elevated: var(--card);
+  --cronus-surface-floating: var(--card);
+  --cronus-fg: var(--foreground);
+  --cronus-fg-secondary: var(--muted-foreground);
+  --cronus-fg-tertiary: var(--muted-foreground);
+  --cronus-fg-muted: var(--muted-foreground);
+  --cronus-fg-inverse: var(--background);
+  --cronus-border: var(--border);
+  --cronus-border-strong: var(--border);
+  --cronus-border-soft: var(--border);
+  --cronus-primary: var(--primary);
+  --cronus-primary-foreground: var(--primary-foreground);
+  --cronus-accent: var(--accent);
+  --cronus-accent-foreground: var(--accent-foreground);
+  --cronus-ring: var(--ring);
+}

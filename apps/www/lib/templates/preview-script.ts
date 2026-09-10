@@ -5,10 +5,11 @@ export function previewThemeInlineScript(
   theme: TemplateTheme,
   mode: TemplateMode,
   embed: boolean,
+  isolate = false,
 ): string {
   return `(function(){var d=document.documentElement;d.dataset.cronusTheme=${JSON.stringify(
     theme,
   )};d.dataset.cronusMode=${JSON.stringify(mode)};d.classList.toggle("dark",${
-    mode === "dark"
+    isolate ? "false" : String(mode === "dark")
   });${embed ? 'd.dataset.cronusPreviewEmbed="1";' : "delete d.dataset.cronusPreviewEmbed;"}})();`;
 }

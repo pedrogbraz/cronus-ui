@@ -96,6 +96,8 @@ const CATEGORY_DEFAULTS: Record<string, CatalogTags> = {
     intents: ["chart", "data"],
   },
   premium: { style: "editorial", palette: "semantic", motion: "smooth", intents: ["motion"] },
+  "ai-elements": { style: "default", palette: "semantic", motion: "snappy", intents: ["ai"] },
+  preloaders: { style: "editorial", palette: "semantic", motion: "smooth", intents: ["motion"] },
   auth: { style: "default", palette: "semantic", motion: "none", intents: ["auth"] },
   account: {
     style: "default",
@@ -205,6 +207,7 @@ const SLUG_OVERRIDES: Record<string, TagPatch> = {
   "scroll-nav": { motion: "smooth", intents: ["nav", "content", "motion"] },
   "images-badge": { motion: "snappy", intents: ["marketing", "motion"] },
   "globe-3d": { motion: "cinematic", intents: ["marketing", "motion"] },
+  "globe-wireframe": { motion: "cinematic", intents: ["marketing", "motion"] },
   "border-beam": { motion: "smooth", palette: "aurora" },
   "flip-card": { motion: "smooth" },
   "tilt-card": { motion: "snappy" },
@@ -251,6 +254,8 @@ const SLUG_OVERRIDES: Record<string, TagPatch> = {
   navbar: { intents: ["nav", "chrome"] },
   footer: { intents: ["chrome", "marketing"] },
   "app-shell-chrome": { intents: ["chrome", "nav", "layout"] },
+  gontify: { style: "editorial", motion: "cinematic", intents: ["marketing", "motion"] },
+  portfolio: { style: "editorial", motion: "smooth", intents: ["marketing", "content"] },
   dashboard: { style: "operational", intents: ["dashboard"] },
   settings: { intents: ["settings", "account"] },
   analytics: { style: "operational", intents: ["dashboard", "data"] },
@@ -266,6 +271,8 @@ const SLUG_OVERRIDES: Record<string, TagPatch> = {
 
 /** Variant-level overrides (`slug::variantId`). Inherit the family tags first. */
 const VARIANT_OVERRIDES: Record<string, TagPatch> = {
+  "contact-form::classic": { style: "default", motion: "none" },
+  "contact-form::globe": { style: "editorial", motion: "smooth" },
   "login::classic": { style: "default", motion: "none" },
   "login::split": { style: "editorial", palette: "aurora", motion: "smooth" },
   "login::social-first": { style: "default", motion: "snappy" },

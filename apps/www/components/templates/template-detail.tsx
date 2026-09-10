@@ -16,6 +16,7 @@ import {
 } from "../../lib/templates/catalog";
 import { CodeBlock } from "../docs/code-block";
 import { CommandChip } from "./command-chip";
+import { TemplateBlockStackTable } from "./template-block-stack-table";
 
 type Device = "desktop" | "tablet" | "mobile";
 
@@ -150,6 +151,13 @@ export function TemplateDetail({ entry }: { entry: TemplateCatalogEntry }) {
                 </li>
               ))}
             </ul>
+            <div className="mt-6">
+              <TemplateBlockStackTable
+                id="code-block-stack"
+                label={`${entry.name} composed stack`}
+                stack={stack}
+              />
+            </div>
             <div className="mt-6">
               <CodeBlock
                 code={`npx cronus-ui add ${stack.map(blockLabel).join(" ")}`}

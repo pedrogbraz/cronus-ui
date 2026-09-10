@@ -31,6 +31,8 @@ export interface TemplateCatalogEntry {
   chrome: { navbar?: string; footer?: string };
   /** Home-page stack used by `/preview/t/[slug]`. Empty = no live stage. */
   blocks: TemplateBlockRef[];
+  /** Full custom stage (bundled landing), not a stack of catalog blocks. */
+  customStage?: boolean;
   inside: string[];
 }
 
@@ -515,6 +517,46 @@ export const TEMPLATE_CATALOG: readonly TemplateCatalogEntry[] = [
       "Waitlist CTA (the only client island) + footer",
     ],
   },
+  {
+    slug: "gontify",
+    name: "Gontify",
+    tagline: "AI SaaS landing",
+    description:
+      "A full AI product marketing site: column-line hero, flowing logos, bento features, how-it-works, pricing, kinetic testimonials, FAQ, and CTA.",
+    command: cmd("gontify"),
+    kind: "starter",
+    theme: "neutral",
+    mode: "dark",
+    chrome: {},
+    blocks: [],
+    customStage: true,
+    inside: [
+      "Column-line hero with announcement chip and product mock",
+      "Flowing logo cloud, bento features, how-it-works stats",
+      "Pricing, kinetic testimonials, FAQ, and a Vercel-style CTA",
+      "Neutral theme, dark mode — `config/site.ts` is the brand file",
+    ],
+  },
+  {
+    slug: "portfolio",
+    name: "Portfolio",
+    tagline: "Personal site",
+    description:
+      "Pedro Gontijo’s portfolio: Cooud, work, FIAP, GitHub projects, and contact, with pixel theme transition and 8-bit sound.",
+    command: cmd("portfolio"),
+    kind: "starter",
+    theme: "neutral",
+    mode: "light",
+    chrome: {},
+    blocks: [],
+    customStage: true,
+    inside: [
+      "Single config file at `data/resume.tsx`",
+      "Work, education, skills, projects, community, contact",
+      "Pixel wave theme toggle (press D) and optional 8-bit sounds",
+      "Neutral theme, light mode",
+    ],
+  },
 ];
 
 export const TEMPLATE_SLUGS = TEMPLATE_CATALOG.map((entry) => entry.slug);
@@ -540,7 +582,7 @@ export function templatesPro(): TemplateCatalogEntry[] {
 }
 
 export function hasLivePreview(entry: TemplateCatalogEntry): boolean {
-  return entry.blocks.length > 0 || entry.chrome.navbar !== undefined;
+  return entry.customStage === true || entry.blocks.length > 0 || entry.chrome.navbar !== undefined;
 }
 
 export function previewPath(slug: string, embed = false): string {
@@ -598,6 +640,8 @@ export const TEMPLATE_MOOD_BY_SLUG: Record<string, TemplateMood> = {
   "landing-care": "editorial",
   "landing-agents": "editorial",
   marketing: "editorial",
+  gontify: "saas",
+  portfolio: "editorial",
   default: "editorial",
   "landing-ops": "operational",
   "landing-secure": "operational",

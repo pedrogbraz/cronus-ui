@@ -5,11 +5,11 @@ import type { TemplateCatalogEntry } from "../../lib/templates/catalog";
 
 /**
  * Compact overlay for the full-page live stage. Hidden in `?embed=1` thumbs.
- * Sits top-left so centered marketing heroes stay clear.
+ * Sits top-end so sticky template logos at the start edge stay clickable.
  */
 export function PreviewChrome({ entry }: { entry: TemplateCatalogEntry }) {
   return (
-    <div className="pointer-events-none fixed left-3 top-3 z-50 sm:left-4 sm:top-4">
+    <div className="pointer-events-none fixed end-3 top-3 z-50 sm:end-4 sm:top-4">
       <div className="pointer-events-auto flex max-w-[calc(100vw-1.5rem)] items-center gap-1 rounded-full border border-border bg-surface-raised/85 p-1 shadow-sm backdrop-blur">
         <Link
           href={`/templates/${entry.slug}`}

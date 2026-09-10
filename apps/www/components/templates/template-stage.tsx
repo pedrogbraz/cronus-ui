@@ -20,6 +20,8 @@ import {
   type TemplateBlockRef,
   type TemplateCatalogEntry,
 } from "../../lib/templates/catalog";
+import { GontifyStage } from "../../lib/templates/gontify-stage";
+import { PortfolioStage } from "../../lib/templates/portfolio-stage";
 
 /**
  * Family maps needed to render every catalog stage. Keep this list in sync
@@ -51,17 +53,24 @@ function previewFor(ref: TemplateBlockRef) {
  * embed thumbs) — live Cronus blocks, not screenshots.
  */
 export function TemplateStage({ entry }: { entry: TemplateCatalogEntry }) {
+  if (entry.slug === "gontify") return <GontifyStage />;
+  if (entry.slug === "portfolio") return <PortfolioStage />;
+
   const refs = stageRefs(entry);
 
   return (
     <div
       data-slot="template-stage"
       data-template={entry.slug}
+      data-template-stage={entry.slug}
       data-cronus-theme={entry.theme}
       data-cronus-mode={entry.mode}
       className={cn(
         "min-h-svh bg-surface-base text-fg",
         entry.mode === "dark" ? "dark" : undefined,
+        // Gallery shells cap at 40rem + rounded card. On a live template stage
+        // they should fill the preview like an app.
+        "[&_[data-slot=block-shell-host]]:h-svh [&_[data-slot=block-shell-host]]:min-h-svh [&_[data-slot=block-shell-host]]:rounded-none [&_[data-slot=block-shell-host]]:border-0",
       )}
     >
       {refs.map((ref) => {

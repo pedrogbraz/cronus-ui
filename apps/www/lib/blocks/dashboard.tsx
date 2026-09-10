@@ -80,6 +80,9 @@ import type { BlockContentMap } from "./types";
  * heights blow out the frame, so we render the whole shell inside a host with
  * an EXPLICIT height (h-[40rem]) and neutralize the internal svh via targeted
  * data-slot overrides — no svh leaks into the block itself.
+ *
+ * Template stages mark this host with `data-slot=block-shell-host` and override
+ * it to `min-h-svh` so `/preview/t/*` fills like an app, not a gallery tile.
  * ────────────────────────────────────────────────────────────────────────── */
 
 const SHELL_HOST_CLASS =
@@ -231,7 +234,7 @@ export function DashboardAnalyticsBlock() {
   );
 
   return (
-    <div className={SHELL_HOST_CLASS}>
+    <div className={SHELL_HOST_CLASS} data-slot="block-shell-host">
       <AppShell
         sidebar={sidebar}
         header={header}
@@ -779,7 +782,7 @@ export function DashboardAdminOverviewBlock() {
   );
 
   return (
-    <div className={SHELL_HOST_CLASS}>
+    <div className={SHELL_HOST_CLASS} data-slot="block-shell-host">
       <AppShell
         sidebar={sidebar}
         header={header}

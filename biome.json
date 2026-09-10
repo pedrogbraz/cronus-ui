@@ -35,6 +35,32 @@
           "style": { "noNonNullAssertion": "off" }
         }
       }
+    },
+    {
+      "includes": [
+        "apps/www/lib/templates/gontify/**",
+        "apps/www/lib/templates/portfolio/**",
+        "packages/create-cronus-app/templates/gontify/**",
+        "packages/create-cronus-app/templates/portfolio/**"
+      ],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "noSvgWithoutTitle": "off",
+            "useValidAnchor": "off"
+          },
+          "suspicious": {
+            "noArrayIndexKey": "off",
+            "noExplicitAny": "off"
+          },
+          "correctness": {
+            "useExhaustiveDependencies": "off"
+          },
+          "performance": {
+            "noImgElement": "off"
+          }
+        }
+      }
     }
   ]
 }

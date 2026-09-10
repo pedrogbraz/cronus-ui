@@ -11,15 +11,22 @@ import type { TemplateMode, TemplateTheme } from "../../lib/templates/catalog";
  * keeps a MutationObserver on the root so the provider cannot win after paint.
  * Cleanup restores the previous attributes so leaving the preview does not
  * leak the template theme into the rest of the showcase.
+ *
+ * `isolate` (custom stages): keep Cronus tokens on `<html>` for the preview
+ * chrome, but never put `.dark` on the document. Tailwind `dark:` would
+ * otherwise leak from the docs `html.dark` into a light stage (portfolio
+ * heading) and `toggleMode()` would be reverted by this observer.
  */
 export function PreviewThemeLock({
   theme,
   mode,
   embed = false,
+  isolate = false,
 }: {
   theme: TemplateTheme;
   mode: TemplateMode;
   embed?: boolean;
+  isolate?: boolean;
 }) {
   useLayoutEffect(() => {
     const el = document.documentElement;
@@ -34,7 +41,7 @@ export function PreviewThemeLock({
     const apply = () => {
       if (el.dataset.cronusTheme !== theme) el.dataset.cronusTheme = theme;
       if (el.dataset.cronusMode !== mode) el.dataset.cronusMode = mode;
-      const wantDark = mode === "dark";
+      const wantDark = isolate ? false : mode === "dark";
       if (el.classList.contains("dark") !== wantDark) {
         el.classList.toggle("dark", wantDark);
       }
@@ -73,7 +80,7 @@ export function PreviewThemeLock({
       if (prev.forceMotion !== undefined) el.dataset.forceMotion = prev.forceMotion;
       else delete el.dataset.forceMotion;
     };
-  }, [theme, mode, embed]);
+  }, [theme, mode, embed, isolate]);
 
   return null;
 }

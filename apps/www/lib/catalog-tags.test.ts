@@ -146,6 +146,17 @@ describe("catalog tags", () => {
     expect(tags.intents).toContain("motion");
   });
 
+  it("marks globe-wireframe as cinematic marketing motion", () => {
+    const tags = resolveCatalogTags({
+      slug: "globe-wireframe",
+      category: "premium",
+      kind: "component",
+    });
+    expect(tags.motion).toBe("cinematic");
+    expect(tags.intents).toContain("marketing");
+    expect(tags.intents).toContain("motion");
+  });
+
   it("marks words-preloader as cinematic neutral motion", () => {
     const tags = resolveCatalogTags({
       slug: "words-preloader",

@@ -1,10 +1,40 @@
 @import "tailwindcss";
 @import "@cronus-ui/tokens/styles.css";
+@import "../lib/templates/preview-tokens.css";
+
+/* Class-based dark so template `dark:` follows `[data-template-stage].dark`
+   (and the docs `html.dark`) instead of the OS `prefers-color-scheme`. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Shadcn color names used by Gontify / portfolio. Must live in this file —
+   `@theme` inside a JS-imported CSS module is not compiled. Fallbacks keep
+   the rest of the docs site on Cronus surfaces. */
+@theme inline {
+  --color-background: var(--background, var(--cronus-surface-base));
+  --color-foreground: var(--foreground, var(--cronus-fg));
+  --color-card: var(--card, var(--cronus-surface-raised));
+  --color-card-foreground: var(--card-foreground, var(--cronus-fg));
+  --color-popover: var(--popover, var(--cronus-surface-overlay));
+  --color-popover-foreground: var(--popover-foreground, var(--cronus-fg));
+  --color-primary: var(--primary, var(--cronus-primary));
+  --color-primary-foreground: var(--primary-foreground, var(--cronus-primary-foreground));
+  --color-secondary: var(--secondary, var(--cronus-surface-overlay));
+  --color-secondary-foreground: var(--secondary-foreground, var(--cronus-fg));
+  --color-muted: var(--muted, var(--cronus-surface-overlay));
+  --color-muted-foreground: var(--muted-foreground, var(--cronus-fg-secondary));
+  --color-accent: var(--accent, var(--cronus-surface-overlay));
+  --color-accent-foreground: var(--accent-foreground, var(--cronus-fg));
+  --color-destructive: var(--destructive, var(--cronus-error));
+  --color-border: var(--border, var(--cronus-border));
+  --color-input: var(--input, var(--cronus-border));
+  --color-ring: var(--ring, var(--cronus-ring));
+}
 
 /* Scan the UI package source + this app so utilities used in components emit. */
 @source "../../../packages/ui/src/**/*.{ts,tsx}";
 @source "../app/**/*.{ts,tsx}";
 @source "../components/**/*.{ts,tsx}";
+@source "../lib/templates/**/*.{ts,tsx}";
 
 /* Syntax-highlight palette for the docs code viewer (components/docs/code-block.tsx).
    The code sample always sits on `surface-inset`, so the token colors must adapt
