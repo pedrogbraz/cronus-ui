@@ -9,9 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **WordsPreloader.** Skiper 8 words preloader — multilingual greetings then a
-  curved lip that flattens as the panel slides up. New Preloaders category in
-  the catalog.
+- **WordsPreloader.** Themeable line preloader — aggressive English product
+  lines via `SlideUpText`, optional last-beat mark, then a curved lip that
+  flattens as the panel slides up. Tokens (`surface-raised` / `fg`) and the
+  Cronus motion curve. New Preloaders category. aicronus.com plays it on
+  the homepage first visit and every reload
+  (`npx cronus-ui add words-preloader`).
 
 ### Changed
 

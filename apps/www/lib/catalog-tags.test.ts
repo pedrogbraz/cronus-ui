@@ -146,14 +146,14 @@ describe("catalog tags", () => {
     expect(tags.intents).toContain("motion");
   });
 
-  it("marks words-preloader as cinematic midnight motion", () => {
+  it("marks words-preloader as cinematic neutral motion", () => {
     const tags = resolveCatalogTags({
       slug: "words-preloader",
       category: "preloaders",
       kind: "component",
     });
     expect(tags.motion).toBe("cinematic");
-    expect(tags.palette).toBe("midnight");
+    expect(tags.palette).toBe("neutral");
     expect(tags.intents).toContain("marketing");
     expect(tags.intents).toContain("motion");
   });

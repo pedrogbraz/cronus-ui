@@ -1036,7 +1036,7 @@ export const CATEGORIES: ComponentCategory[] = [
         slug: "words-preloader",
         name: "WordsPreloader",
         description:
-          "Multilingual greeting preloader with a curved lip that flattens as the panel slides up.",
+          "Themeable line preloader — product lines clip up with SlideUpText, optional last-beat mark, then a curved lip flattens as the panel slides up.",
         importName: "WordsPreloader",
       },
     ],

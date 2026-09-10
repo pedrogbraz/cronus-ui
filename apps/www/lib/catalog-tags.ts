@@ -199,7 +199,7 @@ const SLUG_OVERRIDES: Record<string, TagPatch> = {
   },
   "words-preloader": {
     motion: "cinematic",
-    palette: "midnight",
+    palette: "neutral",
     intents: ["marketing", "motion"],
   },
   "scroll-nav": { motion: "smooth", intents: ["nav", "content", "motion"] },

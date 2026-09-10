@@ -321,9 +321,10 @@ export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
     status: "In development",
     title: "WordsPreloader and Preloaders catalog",
     summary:
-      "On main, not on npm yet. Skiper 8 words preloader plus a dedicated Preloaders category for the next loaders. npm latest stays 0.7.6 until a lockstep publish.",
+      "On main, not on npm yet. Themeable words preloader plus a dedicated Preloaders category for the next loaders. npm latest stays 0.7.6 until a lockstep publish.",
     items: [
-      "WordsPreloader — multilingual greetings, curved SVG lip, panel slide-up",
+      "WordsPreloader — SlideUpText product lines, optional last-beat mark, curved SVG lip, panel slide-up",
+      "Homepage on aicronus.com plays it on first visit and every reload",
       "New /components Preloaders category",
     ],
   },

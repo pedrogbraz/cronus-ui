@@ -891,10 +891,9 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
       );
     case "words-preloader":
       return (
-        <Fill className="items-center justify-center bg-white">
-          <p className="flex items-center text-3xl text-black/75">
-            <span className="me-2.5 inline-block size-2.5 rounded-full bg-black" />
-            Hello
+        <Fill className="items-center justify-center bg-surface-raised px-6">
+          <p className="text-center font-display text-2xl tracking-[-0.02em] text-fg text-balance">
+            The innovation of interfaces.
           </p>
         </Fill>
       );
