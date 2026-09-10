@@ -12,7 +12,7 @@ const SPRING = { type: "spring" as const, bounce: 0.16, duration: 0.55 };
 const FOCUS =
   "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base";
 
-const CTA = "h-10 w-full max-w-[300px] cursor-pointer rounded-full text-white bg-[#0ea5e9]"; // contract-ok: Family Receive fill the component paints
+const CTA = "h-10 w-full max-w-[300px] cursor-pointer rounded-full text-black bg-[#0ea5e9]"; // contract-ok: Family Receive fill the component paints; black type for AA on sky-500
 
 export const receiveButtonVariants = cva(
   "relative flex min-h-[28rem] w-full flex-col items-center justify-end p-5 [overflow-anchor:none]",
