@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { BlockApiReference } from "../../../components/blocks/block-api-reference";
 import { BlockVariantsGallery } from "../../../components/blocks/block-variants-gallery";
 import { BLOCK_SLUGS, getBlockMeta } from "../../../lib/blocks-index";
 
@@ -19,6 +20,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function BlockPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  if (!getBlockMeta(slug)) notFound();
-  return <BlockVariantsGallery slug={slug} />;
+  const meta = getBlockMeta(slug);
+  if (!meta) notFound();
+
+  return (
+    <>
+      <BlockVariantsGallery slug={slug} />
+      <BlockApiReference meta={meta} />
+    </>
+  );
 }

@@ -1,6 +1,7 @@
 // GENERATED FILE — do not edit; run `bun run props` to regenerate.
 //
-// Props/API tables extracted from the exported `*Props` interfaces of every
+// Props/API tables extracted from exported `*Props` / `*Labels` types, plus
+// inferred forwardRef / function / re-export props, of every
 // @cronus-ui/ui component via the TypeScript compiler API (no module execution),
 // so the documented API can never drift from the source.
 
@@ -29,18 +30,22 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "asChild",
           type: "boolean",
           required: false,
+          description: "Render as the child element via Slot.",
           default: "false",
         },
         {
           name: "variant",
           type: '"primary" | "secondary" | "outline" | "ghost" | "destructive" | "link"',
           required: false,
+          description:
+            'One of "primary" | "secondary" | "outline" | "ghost" | "destructive" | "link".',
           default: '"primary"',
         },
         {
           name: "size",
           type: '"sm" | "md" | "lg" | "icon" | "icon-sm"',
           required: false,
+          description: 'One of "sm" | "md" | "lg" | "icon" | "icon-sm".',
           default: '"md"',
         },
       ],
@@ -63,15 +68,29 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "variant",
           type: '"default" | "outline"',
           required: false,
+          description: 'One of "default" | "outline".',
           default: '"default"',
         },
         {
           name: "size",
           type: '"sm" | "md" | "lg"',
           required: false,
+          description: 'One of "sm" | "md" | "lg".',
           default: '"md"',
         },
       ],
+    },
+  ],
+  "toggle-group": [
+    {
+      interfaceName: "ToggleGroupProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root>",
+      props: [],
+    },
+    {
+      interfaceName: "ToggleGroupItemProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item>",
+      props: [],
     },
   ],
   "copy-button": [
@@ -306,6 +325,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "invalid",
           type: "boolean",
           required: false,
+          description: "Marks the control invalid and applies the error ring.",
           default: "false",
         },
       ],
@@ -341,6 +361,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "invalid",
           type: "boolean",
           required: false,
+          description: "Marks the control invalid and applies the error ring.",
         },
         {
           name: "showStrength",
@@ -361,9 +382,24 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "invalid",
           type: "boolean",
           required: false,
+          description: "Marks the control invalid and applies the error ring.",
           default: "false",
         },
       ],
+    },
+  ],
+  label: [
+    {
+      interfaceName: "LabelProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof LabelPrimitive.Root>",
+      props: [],
+    },
+  ],
+  checkbox: [
+    {
+      interfaceName: "CheckboxProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>",
+      props: [],
     },
   ],
   "animated-checkbox": [
@@ -376,6 +412,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLLabelElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "title",
@@ -404,6 +441,77 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           description: "Called with the next checked value whenever the control toggles.",
         },
       ],
+    },
+  ],
+  "radio-group": [
+    {
+      interfaceName: "RadioGroupProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>",
+      props: [],
+    },
+    {
+      interfaceName: "RadioGroupItemProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>",
+      props: [],
+    },
+  ],
+  switch: [
+    {
+      interfaceName: "SwitchProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof SwitchPrimitive.Root>",
+      props: [],
+    },
+  ],
+  select: [
+    {
+      interfaceName: "SelectProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof SelectPrimitive.Root>",
+      props: [],
+    },
+    {
+      interfaceName: "SelectGroupProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof SelectPrimitive.Group>",
+      props: [],
+    },
+    {
+      interfaceName: "SelectValueProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof SelectPrimitive.Value>",
+      props: [],
+    },
+    {
+      interfaceName: "SelectTriggerProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>",
+      props: [],
+    },
+    {
+      interfaceName: "SelectScrollUpButtonProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof SelectPrimitive.ScrollUpButton >",
+      props: [],
+    },
+    {
+      interfaceName: "SelectScrollDownButtonProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof SelectPrimitive.ScrollDownButton >",
+      props: [],
+    },
+    {
+      interfaceName: "SelectContentProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof SelectPrimitive.Content>",
+      props: [],
+    },
+    {
+      interfaceName: "SelectLabelProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof SelectPrimitive.Label>",
+      props: [],
+    },
+    {
+      interfaceName: "SelectItemProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof SelectPrimitive.Item>",
+      props: [],
+    },
+    {
+      interfaceName: "SelectSeparatorProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof SelectPrimitive.Separator>",
+      props: [],
     },
   ],
   combobox: [
@@ -719,7 +827,121 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  slider: [
+    {
+      interfaceName: "SliderProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof SliderPrimitive.Root>",
+      props: [],
+    },
+  ],
+  field: [
+    {
+      interfaceName: "FieldProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "FieldLabelProps",
+      extends: "Extends LabelHTMLAttributes<HTMLLabelElement>",
+      props: [],
+    },
+    {
+      interfaceName: "FieldDescriptionProps",
+      extends: "Extends HTMLAttributes<HTMLParagraphElement>",
+      props: [],
+    },
+    {
+      interfaceName: "FieldErrorProps",
+      extends: "Extends HTMLAttributes<HTMLParagraphElement>",
+      props: [],
+    },
+  ],
+  form: [
+    {
+      interfaceName: "FormProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof FormProvider>",
+      props: [],
+    },
+    {
+      interfaceName: "FormFieldProps",
+      extends: "Extends ControllerProps<TFieldValues, TName>",
+      props: [],
+    },
+    {
+      interfaceName: "FormItemProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "FormLabelProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof Label>",
+      props: [],
+    },
+    {
+      interfaceName: "FormControlProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof Slot>",
+      props: [],
+    },
+    {
+      interfaceName: "FormDescriptionProps",
+      extends: "Extends HTMLAttributes<HTMLParagraphElement>",
+      props: [],
+    },
+    {
+      interfaceName: "FormMessageProps",
+      extends: "Extends HTMLAttributes<HTMLParagraphElement>",
+      props: [],
+    },
+  ],
+  "input-otp": [
+    {
+      interfaceName: "InputOTPProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof OTPInput>",
+      props: [],
+    },
+    {
+      interfaceName: "InputOTPGroupProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "InputOTPSlotProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "index",
+          type: "number",
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "InputOTPSeparatorProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+  ],
   "file-dropzone": [
+    {
+      interfaceName: "FileDropzoneLabels",
+      props: [
+        {
+          name: "upload",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "drop",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "browse",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
     {
       interfaceName: "FileDropzoneProps",
       props: [
@@ -743,17 +965,20 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "disabled",
           type: "boolean",
           required: false,
+          description: "Disables pointer and keyboard interaction.",
           default: "false",
         },
         {
           name: "className",
           type: "string",
           required: false,
+          description: "Additional class names merged onto the root.",
         },
         {
           name: "children",
           type: "ReactNode",
           required: false,
+          description: "Contents of the component.",
         },
         {
           name: "aria-label",
@@ -767,6 +992,12 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           type: "string",
           required: false,
           description: "IDs of element(s) that describe the dropzone (e.g. accepted types).",
+        },
+        {
+          name: "labels",
+          type: "Partial<FileDropzoneLabels>",
+          required: false,
+          description: "Override the default English strings.",
         },
       ],
     },
@@ -1007,6 +1238,29 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
   ],
   stepper: [
     {
+      interfaceName: "StepperLabels",
+      props: [
+        {
+          name: "completed",
+          type: "string",
+          required: true,
+          description: "Announced after a completed step.",
+        },
+        {
+          name: "current",
+          type: "string",
+          required: true,
+          description: "Announced after the active step.",
+        },
+        {
+          name: "upcoming",
+          type: "string",
+          required: true,
+          description: "Announced after a step that has not started yet.",
+        },
+      ],
+    },
+    {
       interfaceName: "StepperProps",
       extends: 'Extends Omit<HTMLAttributes<HTMLDivElement>, "onChange">',
       props: [
@@ -1087,6 +1341,26 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
     {
       interfaceName: "StepperTriggerProps",
       extends: "Extends ButtonHTMLAttributes<HTMLButtonElement>",
+      props: [],
+    },
+    {
+      interfaceName: "StepperListProps",
+      extends: "Extends OlHTMLAttributes<HTMLOListElement>",
+      props: [],
+    },
+    {
+      interfaceName: "StepperSeparatorProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "StepperTitleProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "StepperDescriptionProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
       props: [],
     },
   ],
@@ -1593,6 +1867,19 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
   ],
   chip: [
     {
+      interfaceName: "ChipLabels",
+      props: [
+        {
+          name: "remove",
+          type: "string",
+          required: true,
+          description:
+            "Screen-reader string for the remove affordance: the accessible name of the remove button on a non-interactive chip, and the Delete/Backspace removal hint (exposed as the chip's accessible description) on an interactive one.",
+          default: '"Remove"',
+        },
+      ],
+    },
+    {
       interfaceName: "ChipProps",
       extends:
         'Extends Omit<HTMLAttributes<HTMLElement>, "color">, Omit<VariantProps<typeof chipVariants>, "interactive" | "selected">',
@@ -1674,6 +1961,23 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  avatar: [
+    {
+      interfaceName: "AvatarProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>",
+      props: [],
+    },
+    {
+      interfaceName: "AvatarImageProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>",
+      props: [],
+    },
+    {
+      interfaceName: "AvatarFallbackProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>",
+      props: [],
+    },
+  ],
   "avatar-group": [
     {
       interfaceName: "AvatarGroupProps",
@@ -1705,6 +2009,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "size",
           type: '"sm" | "md" | "lg"',
           required: false,
+          description: 'One of "sm" | "md" | "lg".',
           default: '"md"',
         },
       ],
@@ -1719,9 +2024,90 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "variant",
           type: '"default" | "primary" | "secondary" | "outline" | "success" | "warning" | "destructive" | "error" | "info"',
           required: false,
+          description:
+            'One of "default" | "primary" | "secondary" | "outline" | "success" | "warning" | "destructive" | "error" | "info".',
           default: '"default"',
         },
       ],
+    },
+  ],
+  card: [
+    {
+      interfaceName: "CardProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "CardHeaderProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "CardTitleProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "CardDescriptionProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "CardActionProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "CardContentProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "CardFooterProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+  ],
+  table: [
+    {
+      interfaceName: "TableProps",
+      extends: "Extends HTMLAttributes<HTMLTableElement>",
+      props: [],
+    },
+    {
+      interfaceName: "TableHeaderProps",
+      extends: "Extends HTMLAttributes<HTMLTableSectionElement>",
+      props: [],
+    },
+    {
+      interfaceName: "TableBodyProps",
+      extends: "Extends HTMLAttributes<HTMLTableSectionElement>",
+      props: [],
+    },
+    {
+      interfaceName: "TableFooterProps",
+      extends: "Extends HTMLAttributes<HTMLTableSectionElement>",
+      props: [],
+    },
+    {
+      interfaceName: "TableRowProps",
+      extends: "Extends HTMLAttributes<HTMLTableRowElement>",
+      props: [],
+    },
+    {
+      interfaceName: "TableHeadProps",
+      extends: "Extends ThHTMLAttributes<HTMLTableCellElement>",
+      props: [],
+    },
+    {
+      interfaceName: "TableCellProps",
+      extends: "Extends TdHTMLAttributes<HTMLTableCellElement>",
+      props: [],
+    },
+    {
+      interfaceName: "TableCaptionProps",
+      extends: "Extends HTMLAttributes<HTMLTableCaptionElement>",
+      props: [],
     },
   ],
   "data-table": [
@@ -2005,6 +2391,172 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
     {
+      interfaceName: "DataTableLabels",
+      props: [
+        {
+          name: "selectAllRows",
+          type: "string",
+          required: true,
+          description: "`aria-label` of the header select-all checkbox.",
+        },
+        {
+          name: "selectRow",
+          type: "(rowIndex: number) => string",
+          required: true,
+          description: "`aria-label` of a row checkbox. Receives the zero-based row index.",
+        },
+        {
+          name: "reset",
+          type: "string",
+          required: true,
+          description: "Toolbar button that clears all active filters.",
+        },
+        {
+          name: "densityComfortable",
+          type: "string",
+          required: true,
+          description: "Density toggle caption while compact (activating restores comfortable).",
+        },
+        {
+          name: "densityCompact",
+          type: "string",
+          required: true,
+          description: "Density toggle caption while comfortable (activating switches to compact).",
+        },
+        {
+          name: "exportCsv",
+          type: "string",
+          required: true,
+          description: "Toolbar CSV export button.",
+        },
+        {
+          name: "view",
+          type: "string",
+          required: true,
+          description: "Column-visibility menu trigger.",
+        },
+        {
+          name: "toggleColumns",
+          type: "string",
+          required: true,
+          description: "Column-visibility menu heading.",
+        },
+        {
+          name: "clearFilter",
+          type: "string",
+          required: true,
+          description: "Faceted-filter menu item that clears that filter.",
+        },
+        {
+          name: "bulkActions",
+          type: "string",
+          required: true,
+          description: "`aria-label` of the bulk-actions bar.",
+        },
+        {
+          name: "selectedCount",
+          type: "(count: number) => string",
+          required: true,
+          description: 'Bulk-bar summary, e.g. "3 selected".',
+        },
+        {
+          name: "selectedOfTotal",
+          type: "(selected: number, total: number) => string",
+          required: true,
+          description: 'Selection summary under the table, e.g. "1 of 3 row(s) selected."',
+        },
+        {
+          name: "rowsPerPage",
+          type: "string",
+          required: true,
+          description: "Label of the page-size select.",
+        },
+        {
+          name: "rowRange",
+          type: "(first: number, last: number, total: number) => string",
+          required: true,
+          description: 'Visible row range, e.g. "1–10 of 42".',
+        },
+        {
+          name: "pageOf",
+          type: "(page: number, pageCount: number) => string",
+          required: true,
+          description: 'Page position, e.g. "Page 2 of 5".',
+        },
+        {
+          name: "pagination",
+          type: "string",
+          required: true,
+          description: "`aria-label` of the pagination nav.",
+        },
+        {
+          name: "firstPage",
+          type: "string",
+          required: true,
+          description: "`aria-label` of the first-page button.",
+        },
+        {
+          name: "previousPage",
+          type: "string",
+          required: true,
+          description: "`aria-label` of the previous-page button.",
+        },
+        {
+          name: "nextPage",
+          type: "string",
+          required: true,
+          description: "`aria-label` of the next-page button.",
+        },
+        {
+          name: "lastPage",
+          type: "string",
+          required: true,
+          description: "`aria-label` of the last-page button.",
+        },
+        {
+          name: "noResults",
+          type: "string",
+          required: true,
+          description: "Default empty-state message (a custom `emptyState` node wins).",
+        },
+        {
+          name: "retry",
+          type: "string",
+          required: true,
+          description: "Error-state retry button.",
+        },
+        {
+          name: "loadingRows",
+          type: "string",
+          required: true,
+          description: "Polite screen-reader announcement while `loading`.",
+        },
+      ],
+    },
+    {
+      interfaceName: "DataTableColumnHeaderLabels",
+      props: [
+        {
+          name: "sort",
+          type: "(title: string) => string",
+          required: true,
+          description: "Unsorted — activation sorts ascending.",
+        },
+        {
+          name: "sortedAscending",
+          type: "(title: string) => string",
+          required: true,
+          description: "Sorted ascending — activation sorts descending.",
+        },
+        {
+          name: "sortedDescending",
+          type: "(title: string) => string",
+          required: true,
+          description: "Sorted descending — activation re-sorts ascending (never clears).",
+        },
+      ],
+    },
+    {
       interfaceName: "DataTableColumnHeaderProps",
       props: [
         {
@@ -2021,6 +2573,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "className",
           type: "string",
           required: false,
+          description: "Additional class names merged onto the root.",
         },
         {
           name: "labels",
@@ -2043,6 +2596,21 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           default: '"neutral"',
         },
       ],
+    },
+    {
+      interfaceName: "MetricProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "MetricLabelProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "MetricValueProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
     },
   ],
   sparkline: [
@@ -2199,6 +2767,54 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  kbd: [
+    {
+      interfaceName: "KbdProps",
+      extends: "Extends HTMLAttributes<HTMLElement>",
+      props: [],
+    },
+  ],
+  empty: [
+    {
+      interfaceName: "EmptyProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "EmptyIconProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "EmptyTitleProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "EmptyDescriptionProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "EmptyContentProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+  ],
+  separator: [
+    {
+      interfaceName: "SeparatorProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root>",
+      props: [],
+    },
+  ],
+  skeleton: [
+    {
+      interfaceName: "SkeletonProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+  ],
   "scroll-area": [
     {
       interfaceName: "ScrollAreaProps",
@@ -2212,6 +2828,11 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
             'Accessible name for the scrollable viewport. Supply this when the content warrants a distinct name (e.g. "Release notes"); the viewport is always keyboard-focusable so it can be scrolled with the arrow keys regardless.',
         },
       ],
+    },
+    {
+      interfaceName: "ScrollBarProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>",
+      props: [],
     },
   ],
   "code-block": [
@@ -2280,6 +2901,23 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           description: "Called with the newly selected label on user-initiated changes.",
         },
       ],
+    },
+  ],
+  collapsible: [
+    {
+      interfaceName: "CollapsibleProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof CollapsiblePrimitive.Root>",
+      props: [],
+    },
+    {
+      interfaceName: "CollapsibleTriggerProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof CollapsiblePrimitive.CollapsibleTrigger >",
+      props: [],
+    },
+    {
+      interfaceName: "CollapsibleContentProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof CollapsiblePrimitive.CollapsibleContent >",
+      props: [],
     },
   ],
   "aspect-ratio": [
@@ -2382,6 +3020,36 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
             "Optional glyph (e.g. a `lucide-react` icon) rendered inside the dot. When present the dot becomes a ring-bordered chip sized to hold it; otherwise it is a small solid disc.",
         },
       ],
+    },
+    {
+      interfaceName: "TimelineProps",
+      extends: "Extends OlHTMLAttributes<HTMLOListElement>",
+      props: [],
+    },
+    {
+      interfaceName: "TimelineConnectorProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "TimelineContentProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "TimelineTitleProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "TimelineTimeProps",
+      extends: "Extends TimeHTMLAttributes<HTMLTimeElement>",
+      props: [],
+    },
+    {
+      interfaceName: "TimelineDescriptionProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
     },
   ],
   kanban: [
@@ -2500,6 +3168,18 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
   ],
   "image-zoom": [
     {
+      interfaceName: "ImageZoomLabels",
+      props: [
+        {
+          name: "zoom",
+          type: "string",
+          required: true,
+          description: "Action part of the toggle's accessible name; `alt` is appended when set.",
+          default: "2",
+        },
+      ],
+    },
+    {
       interfaceName: "ImageZoomProps",
       extends:
         "Extends ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof imageZoomVariants>",
@@ -2574,6 +3254,65 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
     },
   ],
   "video-player": [
+    {
+      interfaceName: "VideoPlayerLabels",
+      props: [
+        {
+          name: "play",
+          type: "string",
+          required: true,
+          description: "Accessible name for the play buttons (center overlay + control bar).",
+        },
+        {
+          name: "pause",
+          type: "string",
+          required: true,
+          description: "Accessible name for the pause button.",
+        },
+        {
+          name: "mute",
+          type: "string",
+          required: true,
+          description: "Accessible name for the mute button while audio is audible.",
+        },
+        {
+          name: "unmute",
+          type: "string",
+          required: true,
+          description: "Accessible name for the unmute button while audio is muted.",
+        },
+        {
+          name: "seek",
+          type: "string",
+          required: true,
+          description: "Accessible name for the seek slider.",
+        },
+        {
+          name: "volume",
+          type: "string",
+          required: true,
+          description: "Accessible name for the volume slider.",
+        },
+        {
+          name: "settings",
+          type: "string",
+          required: true,
+          description: "Accessible name for the playback-rate cycle button.",
+        },
+        {
+          name: "fullscreen",
+          type: "string",
+          required: true,
+          description: "Accessible name for the fullscreen button while windowed.",
+        },
+        {
+          name: "exitFullscreen",
+          type: "string",
+          required: true,
+          description: "Accessible name for the fullscreen button while fullscreen.",
+        },
+      ],
+    },
     {
       interfaceName: "VideoPlayerProps",
       extends: "Extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof videoPlayerVariants>",
@@ -2698,6 +3437,16 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
         },
       ],
     },
+    {
+      interfaceName: "DescriptionTermProps",
+      extends: "Extends HTMLAttributes<HTMLElement>",
+      props: [],
+    },
+    {
+      interfaceName: "DescriptionDetailsProps",
+      extends: "Extends HTMLAttributes<HTMLElement>",
+      props: [],
+    },
   ],
   alert: [
     {
@@ -2708,9 +3457,20 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "variant",
           type: '"default" | "info" | "success" | "warning" | "destructive"',
           required: false,
+          description: 'One of "default" | "info" | "success" | "warning" | "destructive".',
           default: '"default"',
         },
       ],
+    },
+    {
+      interfaceName: "AlertTitleProps",
+      extends: "Extends HTMLAttributes<HTMLParagraphElement>",
+      props: [],
+    },
+    {
+      interfaceName: "AlertDescriptionProps",
+      extends: "Extends HTMLAttributes<HTMLParagraphElement>",
+      props: [],
     },
   ],
   banner: [
@@ -2741,7 +3501,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "action",
           type: "ReactNode",
           required: false,
-          description: "Right-aligned call to action (a , link, etc.).",
+          description: "End-aligned call to action (a , link, etc.).",
         },
         {
           name: "dismissible",
@@ -2777,6 +3537,13 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           default: '"Announcement"',
         },
         {
+          name: "labels",
+          type: "{ dismiss?: string }",
+          required: false,
+          description:
+            'Override the dismiss button\'s accessible name. Defaults to `{ dismiss: "Dismiss" }`.',
+        },
+        {
           name: "children",
           type: "ReactNode",
           required: false,
@@ -2786,12 +3553,14 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "variant",
           type: '"default" | "brand" | "info" | "success" | "warning" | "error"',
           required: false,
+          description: 'One of "default" | "brand" | "info" | "success" | "warning" | "error".',
           default: '"default"',
         },
         {
           name: "align",
           type: '"start" | "center"',
           required: false,
+          description: 'One of "start" | "center".',
           default: '"center"',
         },
       ],
@@ -2806,9 +3575,17 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "size",
           type: '"sm" | "md" | "lg"',
           required: false,
+          description: 'One of "sm" | "md" | "lg".',
           default: '"md"',
         },
       ],
+    },
+  ],
+  progress: [
+    {
+      interfaceName: "ProgressProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>",
+      props: [],
     },
   ],
   "usage-meter": [
@@ -2876,11 +3653,68 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
         },
       ],
     },
+    {
+      interfaceName: "UsageMeterLinearProps",
+      extends: 'Extends Omit<UsageMeterProps, "variant">',
+      props: [],
+    },
+    {
+      interfaceName: "UsageMeterCircularProps",
+      extends: 'Extends Omit<UsageMeterProps, "variant">',
+      props: [],
+    },
   ],
   sonner: [
     {
       interfaceName: "ToasterProps",
       extends: "Extends React.ComponentProps<typeof Sonner>",
+      props: [],
+    },
+  ],
+  "alert-dialog": [
+    {
+      interfaceName: "AlertDialogProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Root>",
+      props: [],
+    },
+    {
+      interfaceName: "AlertDialogTriggerProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Trigger>",
+      props: [],
+    },
+    {
+      interfaceName: "AlertDialogContentProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>",
+      props: [],
+    },
+    {
+      interfaceName: "AlertDialogHeaderProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "AlertDialogFooterProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "AlertDialogTitleProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>",
+      props: [],
+    },
+    {
+      interfaceName: "AlertDialogDescriptionProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof AlertDialogPrimitive.Description >",
+      props: [],
+    },
+    {
+      interfaceName: "AlertDialogActionProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action>",
+      props: [],
+    },
+    {
+      interfaceName: "AlertDialogCancelProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Cancel>",
       props: [],
     },
   ],
@@ -2897,7 +3731,59 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
             "Render the built-in top-right close button. Set `false` when the content supplies its own close affordance (e.g. a full-bleed gallery header).",
           default: "true",
         },
+        {
+          name: "labels",
+          type: "{ close?: string }",
+          required: false,
+          description:
+            'Override the built-in close button\'s accessible name. Defaults to `"Close"`.',
+        },
       ],
+    },
+    {
+      interfaceName: "DialogProps",
+      extends: "Extends ComponentProps<typeof DialogPrimitive.Root>",
+      props: [],
+    },
+    {
+      interfaceName: "DialogTriggerProps",
+      extends: "Extends ComponentProps<typeof DialogPrimitive.Trigger>",
+      props: [],
+    },
+    {
+      interfaceName: "DialogPortalProps",
+      extends: "Extends ComponentProps<typeof DialogPrimitive.Portal>",
+      props: [],
+    },
+    {
+      interfaceName: "DialogCloseProps",
+      extends: "Extends ComponentProps<typeof DialogPrimitive.Close>",
+      props: [],
+    },
+    {
+      interfaceName: "DialogOverlayProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>",
+      props: [],
+    },
+    {
+      interfaceName: "DialogHeaderProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "DialogFooterProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "DialogTitleProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof DialogPrimitive.Title>",
+      props: [],
+    },
+    {
+      interfaceName: "DialogDescriptionProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof DialogPrimitive.Description>",
+      props: [],
     },
   ],
   sheet: [
@@ -2912,7 +3798,123 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           required: false,
           default: '"right"',
         },
+        {
+          name: "labels",
+          type: "{ close?: string }",
+          required: false,
+          description:
+            'Override the built-in close button\'s accessible name. Defaults to `"Close"`.',
+        },
       ],
+    },
+    {
+      interfaceName: "SheetProps",
+      extends: "Extends ComponentProps<typeof SheetPrimitive.Root>",
+      props: [],
+    },
+    {
+      interfaceName: "SheetTriggerProps",
+      extends: "Extends ComponentProps<typeof SheetPrimitive.Trigger>",
+      props: [],
+    },
+    {
+      interfaceName: "SheetCloseProps",
+      extends: "Extends ComponentProps<typeof SheetPrimitive.Close>",
+      props: [],
+    },
+    {
+      interfaceName: "SheetHeaderProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "SheetFooterProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "SheetTitleProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof SheetPrimitive.Title>",
+      props: [],
+    },
+    {
+      interfaceName: "SheetDescriptionProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof SheetPrimitive.Description>",
+      props: [],
+    },
+  ],
+  drawer: [
+    {
+      interfaceName: "DrawerProps",
+      extends: "Extends ComponentProps<typeof DrawerPrimitive.Root>",
+      props: [],
+    },
+    {
+      interfaceName: "DrawerTriggerProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof DrawerPrimitive.Trigger>",
+      props: [],
+    },
+    {
+      interfaceName: "DrawerPortalProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof DrawerPrimitive.Portal>",
+      props: [],
+    },
+    {
+      interfaceName: "DrawerCloseProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof DrawerPrimitive.Close>",
+      props: [],
+    },
+    {
+      interfaceName: "DrawerOverlayProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>",
+      props: [],
+    },
+    {
+      interfaceName: "DrawerContentProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>",
+      props: [],
+    },
+    {
+      interfaceName: "DrawerHeaderProps",
+      extends: 'Extends ComponentProps<"div">',
+      props: [],
+    },
+    {
+      interfaceName: "DrawerFooterProps",
+      extends: 'Extends ComponentProps<"div">',
+      props: [],
+    },
+    {
+      interfaceName: "DrawerTitleProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>",
+      props: [],
+    },
+    {
+      interfaceName: "DrawerDescriptionProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>",
+      props: [],
+    },
+  ],
+  popover: [
+    {
+      interfaceName: "PopoverProps",
+      extends: "Extends ComponentProps<typeof PopoverPrimitive.Root>",
+      props: [],
+    },
+    {
+      interfaceName: "PopoverTriggerProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof PopoverPrimitive.Trigger>",
+      props: [],
+    },
+    {
+      interfaceName: "PopoverAnchorProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof PopoverPrimitive.Anchor>",
+      props: [],
+    },
+    {
+      interfaceName: "PopoverContentProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>",
+      props: [],
     },
   ],
   "notification-center": [
@@ -3008,6 +4010,235 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  "hover-card": [
+    {
+      interfaceName: "HoverCardProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof HoverCardPrimitive.Root>",
+      props: [],
+    },
+    {
+      interfaceName: "HoverCardTriggerProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof HoverCardPrimitive.Trigger>",
+      props: [],
+    },
+    {
+      interfaceName: "HoverCardContentProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>",
+      props: [],
+    },
+  ],
+  tooltip: [
+    {
+      interfaceName: "TooltipProviderProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof TooltipPrimitive.Provider>",
+      props: [],
+    },
+    {
+      interfaceName: "TooltipProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof TooltipPrimitive.Root>",
+      props: [],
+    },
+    {
+      interfaceName: "TooltipTriggerProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof TooltipPrimitive.Trigger>",
+      props: [],
+    },
+    {
+      interfaceName: "TooltipContentProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>",
+      props: [],
+    },
+  ],
+  "dropdown-menu": [
+    {
+      interfaceName: "DropdownMenuProps",
+      extends: "Extends ComponentProps<typeof DropdownMenuPrimitive.Root>",
+      props: [],
+    },
+    {
+      interfaceName: "DropdownMenuTriggerProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof DropdownMenuPrimitive.Trigger >",
+      props: [],
+    },
+    {
+      interfaceName: "DropdownMenuGroupProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Group>",
+      props: [],
+    },
+    {
+      interfaceName: "DropdownMenuPortalProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Portal>",
+      props: [],
+    },
+    {
+      interfaceName: "DropdownMenuSubProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Sub>",
+      props: [],
+    },
+    {
+      interfaceName: "DropdownMenuRadioGroupProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof DropdownMenuPrimitive.RadioGroup >",
+      props: [],
+    },
+    {
+      interfaceName: "DropdownMenuSubTriggerProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof DropdownMenuPrimitive.SubTrigger >",
+      props: [
+        {
+          name: "inset",
+          type: "boolean",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "DropdownMenuSubContentProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof DropdownMenuPrimitive.SubContent >",
+      props: [],
+    },
+    {
+      interfaceName: "DropdownMenuContentProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof DropdownMenuPrimitive.Content >",
+      props: [],
+    },
+    {
+      interfaceName: "DropdownMenuItemProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Item>",
+      props: [
+        {
+          name: "inset",
+          type: "boolean",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "DropdownMenuCheckboxItemProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof DropdownMenuPrimitive.CheckboxItem >",
+      props: [],
+    },
+    {
+      interfaceName: "DropdownMenuRadioItemProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof DropdownMenuPrimitive.RadioItem >",
+      props: [],
+    },
+    {
+      interfaceName: "DropdownMenuLabelProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof DropdownMenuPrimitive.Label >",
+      props: [
+        {
+          name: "inset",
+          type: "boolean",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "DropdownMenuSeparatorProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof DropdownMenuPrimitive.Separator >",
+      props: [],
+    },
+    {
+      interfaceName: "DropdownMenuShortcutProps",
+      extends: "Extends HTMLAttributes<HTMLSpanElement>",
+      props: [],
+    },
+  ],
+  "context-menu": [
+    {
+      interfaceName: "ContextMenuProps",
+      extends: "Extends ComponentProps<typeof ContextMenuPrimitive.Root>",
+      props: [],
+    },
+    {
+      interfaceName: "ContextMenuTriggerProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Trigger>",
+      props: [],
+    },
+    {
+      interfaceName: "ContextMenuGroupProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Group>",
+      props: [],
+    },
+    {
+      interfaceName: "ContextMenuPortalProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Portal>",
+      props: [],
+    },
+    {
+      interfaceName: "ContextMenuSubProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Sub>",
+      props: [],
+    },
+    {
+      interfaceName: "ContextMenuRadioGroupProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof ContextMenuPrimitive.RadioGroup >",
+      props: [],
+    },
+    {
+      interfaceName: "ContextMenuSubTriggerProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof ContextMenuPrimitive.SubTrigger >",
+      props: [
+        {
+          name: "inset",
+          type: "boolean",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "ContextMenuSubContentProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof ContextMenuPrimitive.SubContent >",
+      props: [],
+    },
+    {
+      interfaceName: "ContextMenuContentProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content>",
+      props: [],
+    },
+    {
+      interfaceName: "ContextMenuItemProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Item>",
+      props: [
+        {
+          name: "inset",
+          type: "boolean",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "ContextMenuCheckboxItemProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof ContextMenuPrimitive.CheckboxItem >",
+      props: [],
+    },
+    {
+      interfaceName: "ContextMenuRadioItemProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof ContextMenuPrimitive.RadioItem >",
+      props: [],
+    },
+    {
+      interfaceName: "ContextMenuLabelProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Label>",
+      props: [
+        {
+          name: "inset",
+          type: "boolean",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "ContextMenuSeparatorProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof ContextMenuPrimitive.Separator >",
+      props: [],
+    },
+    {
+      interfaceName: "ContextMenuShortcutProps",
+      extends: "Extends HTMLAttributes<HTMLSpanElement>",
+      props: [],
+    },
+  ],
   command: [
     {
       interfaceName: "CommandDialogProps",
@@ -3026,6 +4257,46 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           default: '"Search for a command to run..."',
         },
       ],
+    },
+    {
+      interfaceName: "CommandProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof CommandPrimitive>",
+      props: [],
+    },
+    {
+      interfaceName: "CommandInputProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof CommandPrimitive.Input>",
+      props: [],
+    },
+    {
+      interfaceName: "CommandListProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof CommandPrimitive.List>",
+      props: [],
+    },
+    {
+      interfaceName: "CommandEmptyProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>",
+      props: [],
+    },
+    {
+      interfaceName: "CommandGroupProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof CommandPrimitive.Group>",
+      props: [],
+    },
+    {
+      interfaceName: "CommandItemProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof CommandPrimitive.Item>",
+      props: [],
+    },
+    {
+      interfaceName: "CommandShortcutProps",
+      extends: 'Extends ComponentProps<"span">',
+      props: [],
+    },
+    {
+      interfaceName: "CommandSeparatorProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof CommandPrimitive.Separator>",
+      props: [],
     },
   ],
   lightbox: [
@@ -3169,8 +4440,89 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
   ],
   "invite-dialog": [
     {
+      interfaceName: "InviteDialogLabels",
+      props: [
+        {
+          name: "title",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "description",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "email",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "emailPlaceholder",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "role",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "send",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "cancel",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "sending",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "errorFallback",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "sentTitle",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "sentDescription",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "link",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "copy",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "copied",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "done",
+          type: "string",
+          required: false,
+        },
+      ],
+    },
+    {
       interfaceName: "InviteDialogProps",
-      extends: 'Extends Omit<ComponentPropsWithoutRef<typeof DialogContent>, "title" | "children">',
+      extends:
+        'Extends Omit<ComponentPropsWithoutRef<typeof DialogContent>, "title" | "children" | "labels">',
       props: [
         {
           name: "trigger",
@@ -3234,6 +4586,50 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  tabs: [
+    {
+      interfaceName: "TabsProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof TabsPrimitive.Root>",
+      props: [],
+    },
+    {
+      interfaceName: "TabsListProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof TabsPrimitive.List>",
+      props: [],
+    },
+    {
+      interfaceName: "TabsTriggerProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>",
+      props: [],
+    },
+    {
+      interfaceName: "TabsContentProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof TabsPrimitive.Content>",
+      props: [],
+    },
+  ],
+  accordion: [
+    {
+      interfaceName: "AccordionProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>",
+      props: [],
+    },
+    {
+      interfaceName: "AccordionItemProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>",
+      props: [],
+    },
+    {
+      interfaceName: "AccordionTriggerProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>",
+      props: [],
+    },
+    {
+      interfaceName: "AccordionContentProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>",
+      props: [],
+    },
+  ],
   breadcrumb: [
     {
       interfaceName: "BreadcrumbLinkProps",
@@ -3243,9 +4639,40 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "asChild",
           type: "boolean",
           required: false,
+          description: "Render as the child element via Slot.",
           default: "false",
         },
       ],
+    },
+    {
+      interfaceName: "BreadcrumbProps",
+      extends: "Extends HTMLAttributes<HTMLElement>",
+      props: [],
+    },
+    {
+      interfaceName: "BreadcrumbListProps",
+      extends: "Extends OlHTMLAttributes<HTMLOListElement>",
+      props: [],
+    },
+    {
+      interfaceName: "BreadcrumbItemProps",
+      extends: "Extends LiHTMLAttributes<HTMLLIElement>",
+      props: [],
+    },
+    {
+      interfaceName: "BreadcrumbPageProps",
+      extends: "Extends HTMLAttributes<HTMLSpanElement>",
+      props: [],
+    },
+    {
+      interfaceName: "BreadcrumbSeparatorProps",
+      extends: "Extends LiHTMLAttributes<HTMLLIElement>",
+      props: [],
+    },
+    {
+      interfaceName: "BreadcrumbEllipsisProps",
+      extends: "Extends HTMLAttributes<HTMLSpanElement>",
+      props: [],
     },
   ],
   pagination: [
@@ -3262,8 +4689,181 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "size",
           type: "PaginationLinkSize",
           required: false,
+          description: "Control size.",
         },
       ],
+    },
+    {
+      interfaceName: "PaginationProps",
+      extends: "Extends HTMLAttributes<HTMLElement>",
+      props: [],
+    },
+    {
+      interfaceName: "PaginationContentProps",
+      extends: "Extends HTMLAttributes<HTMLUListElement>",
+      props: [],
+    },
+    {
+      interfaceName: "PaginationItemProps",
+      extends: "Extends HTMLAttributes<HTMLLIElement>",
+      props: [],
+    },
+    {
+      interfaceName: "PaginationPreviousProps",
+      extends: "Extends ComponentProps<typeof PaginationLink>",
+      props: [],
+    },
+    {
+      interfaceName: "PaginationNextProps",
+      extends: "Extends ComponentProps<typeof PaginationLink>",
+      props: [],
+    },
+    {
+      interfaceName: "PaginationEllipsisProps",
+      extends: "Extends HTMLAttributes<HTMLSpanElement>",
+      props: [],
+    },
+  ],
+  "navigation-menu": [
+    {
+      interfaceName: "NavigationMenuProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Root>",
+      props: [],
+    },
+    {
+      interfaceName: "NavigationMenuListProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.List>",
+      props: [],
+    },
+    {
+      interfaceName: "NavigationMenuItemProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Item>",
+      props: [],
+    },
+    {
+      interfaceName: "NavigationMenuTriggerProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof NavigationMenuPrimitive.Trigger >",
+      props: [],
+    },
+    {
+      interfaceName: "NavigationMenuContentProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof NavigationMenuPrimitive.Content >",
+      props: [],
+    },
+    {
+      interfaceName: "NavigationMenuLinkProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Link>",
+      props: [],
+    },
+    {
+      interfaceName: "NavigationMenuIndicatorProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof NavigationMenuPrimitive.Indicator >",
+      props: [],
+    },
+    {
+      interfaceName: "NavigationMenuViewportProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof NavigationMenuPrimitive.Viewport >",
+      props: [],
+    },
+  ],
+  menubar: [
+    {
+      interfaceName: "MenubarMenuProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof MenubarPrimitive.Menu>",
+      props: [],
+    },
+    {
+      interfaceName: "MenubarGroupProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof MenubarPrimitive.Group>",
+      props: [],
+    },
+    {
+      interfaceName: "MenubarPortalProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof MenubarPrimitive.Portal>",
+      props: [],
+    },
+    {
+      interfaceName: "MenubarSubProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof MenubarPrimitive.Sub>",
+      props: [],
+    },
+    {
+      interfaceName: "MenubarRadioGroupProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof MenubarPrimitive.RadioGroup>",
+      props: [],
+    },
+    {
+      interfaceName: "MenubarProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof MenubarPrimitive.Root>",
+      props: [],
+    },
+    {
+      interfaceName: "MenubarTriggerProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof MenubarPrimitive.Trigger>",
+      props: [],
+    },
+    {
+      interfaceName: "MenubarSubTriggerProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof MenubarPrimitive.SubTrigger >",
+      props: [
+        {
+          name: "inset",
+          type: "boolean",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "MenubarSubContentProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof MenubarPrimitive.SubContent>",
+      props: [],
+    },
+    {
+      interfaceName: "MenubarContentProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof MenubarPrimitive.Content>",
+      props: [],
+    },
+    {
+      interfaceName: "MenubarItemProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof MenubarPrimitive.Item>",
+      props: [
+        {
+          name: "inset",
+          type: "boolean",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "MenubarCheckboxItemProps",
+      extends: "Extends ComponentPropsWithoutRef< typeof MenubarPrimitive.CheckboxItem >",
+      props: [],
+    },
+    {
+      interfaceName: "MenubarRadioItemProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof MenubarPrimitive.RadioItem>",
+      props: [],
+    },
+    {
+      interfaceName: "MenubarLabelProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof MenubarPrimitive.Label>",
+      props: [
+        {
+          name: "inset",
+          type: "boolean",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "MenubarSeparatorProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof MenubarPrimitive.Separator>",
+      props: [],
+    },
+    {
+      interfaceName: "MenubarShortcutProps",
+      extends: "Extends HTMLAttributes<HTMLSpanElement>",
+      props: [],
     },
   ],
   sidebar: [
@@ -3288,6 +4888,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "onOpenChange",
           type: "(open: boolean) => void",
           required: false,
+          description: "Called when the open state changes.",
         },
         {
           name: "enableKeyboardShortcut",
@@ -3312,6 +4913,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "variant",
           type: '"sidebar" | "floating" | "inset"',
           required: false,
+          description: "Visual variant.",
           default: '"sidebar"',
         },
         {
@@ -3349,6 +4951,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "asChild",
           type: "boolean",
           required: false,
+          description: "Render as the child element via Slot.",
           default: "false",
         },
       ],
@@ -3362,6 +4965,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "asChild",
           type: "boolean",
           required: false,
+          description: "Render as the child element via Slot.",
           default: "false",
         },
         {
@@ -3381,6 +4985,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "size",
           type: '"sm" | "md" | "lg"',
           required: false,
+          description: 'One of "sm" | "md" | "lg".',
           default: '"md"',
         },
       ],
@@ -3393,6 +4998,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "asChild",
           type: "boolean",
           required: false,
+          description: "Render as the child element via Slot.",
           default: "false",
         },
         {
@@ -3405,9 +5011,70 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "size",
           type: '"sm" | "md"',
           required: false,
+          description: "Control size.",
           default: '"md"',
         },
       ],
+    },
+    {
+      interfaceName: "SidebarRailProps",
+      extends: "Extends ButtonHTMLAttributes<HTMLButtonElement>",
+      props: [],
+    },
+    {
+      interfaceName: "SidebarInsetProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "SidebarHeaderProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "SidebarFooterProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "SidebarContentProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "SidebarSeparatorProps",
+      extends: "Extends ComponentPropsWithoutRef<typeof Separator>",
+      props: [],
+    },
+    {
+      interfaceName: "SidebarGroupProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "SidebarGroupContentProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "SidebarMenuProps",
+      extends: "Extends HTMLAttributes<HTMLUListElement>",
+      props: [],
+    },
+    {
+      interfaceName: "SidebarMenuItemProps",
+      extends: "Extends HTMLAttributes<HTMLLIElement>",
+      props: [],
+    },
+    {
+      interfaceName: "SidebarMenuSubProps",
+      extends: "Extends HTMLAttributes<HTMLUListElement>",
+      props: [],
+    },
+    {
+      interfaceName: "SidebarMenuSubItemProps",
+      extends: "Extends HTMLAttributes<HTMLLIElement>",
+      props: [],
     },
   ],
   "app-shell": [
@@ -3460,6 +5127,18 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
   ],
   "workspace-switcher": [
     {
+      interfaceName: "WorkspaceSwitcherLabels",
+      props: [
+        {
+          name: "label",
+          type: "string",
+          required: false,
+          description: "Accessible name for the trigger.",
+          default: '"Switch workspace"',
+        },
+      ],
+    },
+    {
       interfaceName: "WorkspaceSwitcherProps",
       props: [
         {
@@ -3495,6 +5174,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "className",
           type: "string",
           required: false,
+          description: "Additional class names merged onto the root.",
         },
         {
           name: "ref",
@@ -3518,6 +5198,16 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           default: "false",
         },
       ],
+    },
+    {
+      interfaceName: "ResizablePanelGroupProps",
+      extends: "Extends ComponentProps<typeof ResizablePrimitivePanelGroup>",
+      props: [],
+    },
+    {
+      interfaceName: "ResizablePanelProps",
+      extends: "Extends ComponentProps<typeof ResizablePrimitivePanel>",
+      props: [],
     },
   ],
   toolbar: [
@@ -3545,6 +5235,16 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           description: "Toggle-button pressed state; reflected as aria-pressed.",
         },
       ],
+    },
+    {
+      interfaceName: "ToolbarSeparatorProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "ToolbarGroupProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
     },
   ],
   "table-of-contents": [
@@ -3585,7 +5285,39 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  calendar: [
+    {
+      interfaceName: "CalendarProps",
+      extends: "Extends React.ComponentProps<typeof DayPicker>",
+      props: [],
+    },
+  ],
   countdown: [
+    {
+      interfaceName: "CountdownLabels",
+      props: [
+        {
+          name: "days",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "hours",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "minutes",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "seconds",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
     {
       interfaceName: "CountdownProps",
       extends: 'Extends Omit<HTMLAttributes<HTMLDivElement>, "children">',
@@ -4284,6 +6016,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "value",
           type: "number",
           required: true,
+          description: "Controlled value.",
         },
         {
           name: "label",
@@ -4451,6 +6184,13 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       props: [],
     },
   ],
+  "glass-card": [
+    {
+      interfaceName: "GlassCardProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+  ],
   "gradient-border": [
     {
       interfaceName: "GradientBorderProps",
@@ -4479,9 +6219,17 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "asChild",
           type: "boolean",
           required: false,
+          description: "Render as the child element via Slot.",
           default: "false",
         },
       ],
+    },
+  ],
+  "spotlight-card": [
+    {
+      interfaceName: "SpotlightCardProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
     },
   ],
   "scroll-progress": [
@@ -4522,6 +6270,17 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
   ],
   "scroll-nav": [
     {
+      interfaceName: "ScrollNavLabels",
+      props: [
+        {
+          name: "nav",
+          type: "string",
+          required: true,
+          description: "Accessible name for the sticky section list.",
+        },
+      ],
+    },
+    {
       interfaceName: "ScrollNavProps",
       extends:
         'Extends Omit< ComponentPropsWithoutRef<"div">, "title" | "onAnimationStart" | "onAnimationEnd" | "onDrag" | "onDragStart" | "onDragEnd" >',
@@ -4530,6 +6289,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "title",
@@ -4554,8 +6314,16 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "labels",
           type: "Partial<ScrollNavLabels>",
           required: false,
+          description: "Override default English strings.",
         },
       ],
+    },
+  ],
+  "aurora-background": [
+    {
+      interfaceName: "AuroraBackgroundProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
     },
   ],
   "logo-carousel": [
@@ -4607,12 +6375,14 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "variant",
           type: "LogoCarouselVariant",
           required: false,
+          description: "Visual variant.",
           default: '"ghost"',
         },
         {
           name: "size",
           type: "LogoCarouselSize",
           required: false,
+          description: "Control size.",
           default: '"lg"',
         },
         {
@@ -4761,6 +6531,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "children",
           type: "ReactNode",
           required: false,
+          description: "Contents of the component.",
         },
       ],
     },
@@ -4773,6 +6544,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "children",
           type: "ReactNode",
           required: false,
+          description: "Contents of the component.",
         },
         {
           name: "onClick",
@@ -4791,6 +6563,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "children",
           type: "ReactNode",
           required: false,
+          description: "Contents of the component.",
         },
         {
           name: "aria-label",
@@ -4829,6 +6602,13 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
     {
       interfaceName: "MorphingPopoverButtonProps",
       extends: "Extends ButtonHTMLAttributes<HTMLButtonElement>",
+      props: [],
+    },
+  ],
+  shimmer: [
+    {
+      interfaceName: "ShimmerProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
       props: [],
     },
   ],
@@ -4875,6 +6655,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           required: false,
           description:
             "Locale passed to the default `Intl.NumberFormat` formatter (ignored if `format` is set).",
+          default: '"en-US"',
         },
         {
           name: "formatOptions",
@@ -4926,6 +6707,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLSpanElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "value",
@@ -5000,6 +6782,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "children",
           type: "ReactNode",
           required: false,
+          description: "Contents of the component.",
         },
       ],
     },
@@ -5011,6 +6794,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "children",
           type: "ReactNode",
           required: false,
+          description: "Contents of the component.",
         },
       ],
     },
@@ -5022,6 +6806,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "children",
           type: "ReactNode",
           required: false,
+          description: "Contents of the component.",
         },
       ],
     },
@@ -5091,6 +6876,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "children",
           type: "ReactNode",
           required: false,
+          description: "Contents of the component.",
         },
       ],
     },
@@ -5204,6 +6990,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLSpanElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "animationRef",
@@ -5308,6 +7095,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLAnchorElement | HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "text",
@@ -5325,6 +7113,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "className",
           type: "string",
           required: false,
+          description: "Additional class names merged onto the root.",
         },
         {
           name: "href",
@@ -5391,12 +7180,32 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
   ],
   "globe-3d": [
     {
+      interfaceName: "Globe3DLabels",
+      props: [
+        {
+          name: "globe",
+          type: "string",
+          required: true,
+          description: "Accessible name for the globe canvas.",
+          default: '"Globe"',
+        },
+        {
+          name: "loading",
+          type: "string",
+          required: true,
+          description: "Loading copy shown while textures resolve.",
+          default: '"Loading globe..."',
+        },
+      ],
+    },
+    {
       interfaceName: "Globe3DProps",
       props: [
         {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "markers",
@@ -5435,6 +7244,140 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           type: "Partial<Globe3DLabels>",
           required: false,
           description: "Accessible copy.",
+        },
+      ],
+    },
+  ],
+  "globe-wireframe": [
+    {
+      interfaceName: "GlobeWireframeLabels",
+      props: [
+        {
+          name: "globe",
+          type: "string",
+          required: true,
+          description: "Accessible name for the globe.",
+          default: '"Globe"',
+        },
+      ],
+    },
+    {
+      interfaceName: "GlobeWireframeProps",
+      extends: "Extends VariantProps<typeof globeWireframeVariants>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "className",
+          type: "string",
+          required: false,
+          description: "Additional class names merged onto the root.",
+        },
+        {
+          name: "width",
+          type: "number",
+          required: false,
+        },
+        {
+          name: "height",
+          type: "number",
+          required: false,
+        },
+        {
+          name: "strokeColor",
+          type: "string",
+          required: false,
+          description: "Country / graticule / outline stroke.",
+          default: '"currentColor"',
+        },
+        {
+          name: "strokeWidth",
+          type: "number",
+          required: false,
+          default: "1",
+        },
+        {
+          name: "graticuleColor",
+          type: "string",
+          required: false,
+          default: '"currentColor"',
+        },
+        {
+          name: "graticuleOpacity",
+          type: "number",
+          required: false,
+          default: "0.2",
+        },
+        {
+          name: "sphereOutlineColor",
+          type: "string",
+          required: false,
+          default: '"currentColor"',
+        },
+        {
+          name: "sphereOutlineWidth",
+          type: "number",
+          required: false,
+          default: "1",
+        },
+        {
+          name: "autoRotate",
+          type: "boolean",
+          required: false,
+          default: "true",
+        },
+        {
+          name: "autoRotateSpeed",
+          type: "number",
+          required: false,
+          description: "Degrees per animation frame.",
+          default: "0.5",
+        },
+        {
+          name: "initialRotation",
+          type: "[number, number]",
+          required: false,
+          default: "[0, 0]",
+        },
+        {
+          name: "enableInteraction",
+          type: "boolean",
+          required: false,
+          default: "true",
+        },
+        {
+          name: "showGraticule",
+          type: "boolean",
+          required: false,
+          default: "true",
+        },
+        {
+          name: "scale",
+          type: "number",
+          required: false,
+          default: "1",
+        },
+        {
+          name: "countryFillColor",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "labels",
+          type: "Partial<GlobeWireframeLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+        {
+          name: "variant",
+          type: '"wireframe" | "wireframesolid" | "solid"',
+          required: false,
+          description: 'One of "wireframe" | "wireframesolid" | "solid".',
+          default: '"wireframe"',
         },
       ],
     },
@@ -5609,6 +7552,16 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
             'Accessible name for the flip control. Strongly recommended for `trigger="click"`, where the whole card is a single button.',
         },
       ],
+    },
+    {
+      interfaceName: "FlipCardFrontProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "FlipCardBackProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
     },
   ],
   "tilt-card": [
@@ -5810,6 +7763,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "count",
@@ -5837,6 +7791,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "count",
@@ -5857,6 +7812,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "gap",
@@ -5884,6 +7840,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "size",
@@ -5911,6 +7868,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "duration",
@@ -5938,6 +7896,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "opacity",
@@ -5958,6 +7917,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "duration",
@@ -5979,6 +7939,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "height",
@@ -5991,6 +7952,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "side",
           type: '"top" | "bottom"',
           required: false,
+          description: 'One of "top" | "bottom".',
           default: '"bottom"',
         },
       ],
@@ -6005,6 +7967,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "columns",
@@ -6032,6 +7995,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "duration",
@@ -6052,11 +8016,13 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLSpanElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "asChild",
           type: "boolean",
           required: false,
+          description: "Render as the child element via Slot.",
           default: "false",
         },
         {
@@ -6078,6 +8044,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLSpanElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "duration",
@@ -6098,6 +8065,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "children",
@@ -6138,6 +8106,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLSpanElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "count",
@@ -6158,6 +8127,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLSpanElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "text",
@@ -6214,6 +8184,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLSpanElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "words",
@@ -6264,6 +8235,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLSpanElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "children",
@@ -6312,6 +8284,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
       ],
     },
@@ -6325,6 +8298,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "sparkCount",
@@ -6345,6 +8319,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLUListElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "stagger",
@@ -6373,6 +8348,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "items",
@@ -6397,6 +8373,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "items",
@@ -6419,6 +8396,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "onValueChange",
           type: "(value: string) => void",
           required: false,
+          description: "Called when the value changes.",
         },
       ],
     },
@@ -6432,6 +8410,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "items",
@@ -6442,21 +8421,64 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "value",
           type: "string",
           required: false,
+          description: "Controlled value.",
         },
         {
           name: "defaultValue",
           type: "string",
           required: false,
+          description: "Uncontrolled initial value.",
         },
         {
           name: "onValueChange",
           type: "(value: string) => void",
           required: false,
+          description: "Called when the value changes.",
         },
       ],
     },
   ],
   "explore-nav": [
+    {
+      interfaceName: "ExploreNavLabels",
+      props: [
+        {
+          name: "explore",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "close",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "buy",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "overview",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "previousSlide",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "nextSlide",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "currentlyViewing",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
     {
       interfaceName: "ExploreNavProps",
       extends:
@@ -6466,6 +8488,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "title",
@@ -6532,11 +8555,23 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "labels",
           type: "Partial<ExploreNavLabels>",
           required: false,
+          description: "Override default English strings.",
         },
       ],
     },
   ],
   "bouncy-accordion": [
+    {
+      interfaceName: "BouncyAccordionLabels",
+      props: [
+        {
+          name: "hint",
+          type: "string",
+          required: true,
+          description: "Hint drawn above the stack.",
+        },
+      ],
+    },
     {
       interfaceName: "BouncyAccordionProps",
       extends:
@@ -6546,6 +8581,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "items",
@@ -6562,22 +8598,67 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "defaultValue",
           type: "string | null",
           required: false,
+          description: "Uncontrolled initial value.",
           default: "null",
         },
         {
           name: "onValueChange",
           type: "(id: string | null) => void",
           required: false,
+          description: "Called when the value changes.",
         },
         {
           name: "labels",
           type: "Partial<BouncyAccordionLabels>",
           required: false,
+          description: "Override default English strings.",
         },
       ],
     },
   ],
   "token-swap": [
+    {
+      interfaceName: "TokenSwapLabels",
+      props: [
+        {
+          name: "use",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "using",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "max",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "clear",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "amount",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "notEnough",
+          type: "string",
+          required: true,
+          description: "`{symbol}` is replaced with the from-asset symbol.",
+        },
+        {
+          name: "receive",
+          type: "string",
+          required: true,
+          description: "`{symbol}` is replaced with the to-asset symbol.",
+        },
+      ],
+    },
     {
       interfaceName: "TokenSwapProps",
       extends:
@@ -6587,6 +8668,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "from",
@@ -6622,27 +8704,66 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "value",
           type: "string",
           required: false,
+          description: "Controlled value.",
         },
         {
           name: "defaultValue",
           type: "string",
           required: false,
+          description: "Uncontrolled initial value.",
           default: '""',
         },
         {
           name: "onValueChange",
           type: "(amount: string, parsed: number) => void",
           required: false,
+          description: "Called when the value changes.",
         },
         {
           name: "labels",
           type: "Partial<TokenSwapLabels>",
           required: false,
+          description: "Override default English strings.",
         },
       ],
     },
   ],
   "receive-button": [
+    {
+      interfaceName: "ReceiveButtonLabels",
+      props: [
+        {
+          name: "receive",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "confirm",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "description",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "cancel",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "close",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "hint",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
     {
       interfaceName: "ReceiveButtonProps",
       extends:
@@ -6652,22 +8773,26 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "open",
           type: "boolean",
           required: false,
+          description: "Controlled open state.",
         },
         {
           name: "defaultOpen",
           type: "boolean",
           required: false,
+          description: "Uncontrolled initial open state.",
           default: "false",
         },
         {
           name: "onOpenChange",
           type: "(open: boolean) => void",
           required: false,
+          description: "Called when the open state changes.",
         },
         {
           name: "onConfirm",
@@ -6679,11 +8804,147 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "labels",
           type: "Partial<ReceiveButtonLabels>",
           required: false,
+          description: "Override default English strings.",
         },
       ],
     },
   ],
   "family-wallet": [
+    {
+      interfaceName: "FamilyWalletLabels",
+      props: [
+        {
+          name: "hint",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "trigger",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "signIn",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "close",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "back",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "email",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "phone",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "passkey",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "passkeyAction",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "passkeyWaiting",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "passkeyPrompt",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "continue",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "or",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "connectWallet",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "confirmEmail",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "confirmPhone",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "otpHint",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "verify",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "otp",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "noWallet",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "otherWallets",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "otherCount",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "emailPlaceholder",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "phonePlaceholder",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "wallets",
+          type: "Record<FamilyWalletProvider, string>",
+          required: true,
+        },
+        {
+          name: "social",
+          type: "Record<FamilyWalletSocial, string>",
+          required: true,
+        },
+      ],
+    },
     {
       interfaceName: "FamilyWalletProps",
       extends:
@@ -6693,22 +8954,26 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "open",
           type: "boolean",
           required: false,
+          description: "Controlled open state.",
         },
         {
           name: "defaultOpen",
           type: "boolean",
           required: false,
+          description: "Uncontrolled initial open state.",
           default: "false",
         },
         {
           name: "onOpenChange",
           type: "(open: boolean) => void",
           required: false,
+          description: "Called when the open state changes.",
         },
         {
           name: "onSocial",
@@ -6734,6 +8999,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "labels",
           type: 'Partial<FamilyWalletLabels> & { wallets?: Partial<FamilyWalletLabels["wallets"]>; social?: Partial<FamilyWalletLabels["social"]>; }',
           required: false,
+          description: "Override default English strings.",
         },
       ],
     },
@@ -6747,6 +9013,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "views",
@@ -6763,11 +9030,13 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "defaultValue",
           type: "string",
           required: false,
+          description: "Uncontrolled initial value.",
         },
         {
           name: "onValueChange",
           type: "(id: string) => void",
           required: false,
+          description: "Called when the value changes.",
         },
       ],
     },
@@ -6781,6 +9050,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "count",
@@ -6808,6 +9078,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "count",
@@ -6819,7 +9090,2350 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  actions: [
+    {
+      interfaceName: "ActionsProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "ActionProps",
+      extends: "Extends ButtonProps",
+      props: [
+        {
+          name: "tooltip",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "label",
+          type: "string",
+          required: false,
+        },
+      ],
+    },
+  ],
+  artifact: [
+    {
+      interfaceName: "ArtifactProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "ArtifactHeaderProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "ArtifactCloseLabels",
+      props: [
+        {
+          name: "close",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "ArtifactCloseProps",
+      extends: "Extends ButtonHTMLAttributes<HTMLButtonElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLButtonElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "labels",
+          type: "Partial<ArtifactCloseLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+        {
+          name: "variant",
+          type: '"ghost" | "outline" | "primary" | "secondary" | "destructive" | "link"',
+          required: false,
+          description: "Visual variant.",
+          default: '"ghost"',
+        },
+        {
+          name: "size",
+          type: '"sm" | "md" | "lg" | "icon" | "icon-sm"',
+          required: false,
+          description: "Control size.",
+          default: '"icon-sm"',
+        },
+      ],
+    },
+    {
+      interfaceName: "ArtifactTitleProps",
+      extends: "Extends HTMLAttributes<HTMLParagraphElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLParagraphElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "ArtifactDescriptionProps",
+      extends: "Extends HTMLAttributes<HTMLParagraphElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLParagraphElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "ArtifactActionsProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "ArtifactActionProps",
+      extends: "Extends ButtonHTMLAttributes<HTMLButtonElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLButtonElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "tooltip",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "label",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "icon",
+          type: "LucideIcon",
+          required: false,
+        },
+        {
+          name: "variant",
+          type: '"ghost" | "outline" | "primary" | "secondary" | "destructive" | "link"',
+          required: false,
+          description: "Visual variant.",
+          default: '"ghost"',
+        },
+        {
+          name: "size",
+          type: '"sm" | "md" | "lg" | "icon" | "icon-sm"',
+          required: false,
+          description: "Control size.",
+          default: '"icon-sm"',
+        },
+        {
+          name: "children",
+          type: "ReactNode",
+          required: false,
+          description: "Contents of the component.",
+        },
+      ],
+    },
+    {
+      interfaceName: "ArtifactContentProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+  ],
+  branch: [
+    {
+      interfaceName: "BranchLabels",
+      props: [
+        {
+          name: "previous",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "next",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "page",
+          type: "string",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "BranchProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "defaultBranch",
+          type: "number",
+          required: false,
+          default: "0",
+        },
+        {
+          name: "onBranchChange",
+          type: "(branchIndex: number) => void",
+          required: false,
+        },
+        {
+          name: "labels",
+          type: "BranchLabels",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+    {
+      interfaceName: "BranchMessagesProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "BranchSelectorProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "from",
+          type: "BranchRole",
+          required: false,
+          default: '"assistant"',
+        },
+      ],
+    },
+    {
+      interfaceName: "BranchPreviousProps",
+      extends: "Extends ComponentProps<typeof Button>",
+      props: [],
+    },
+    {
+      interfaceName: "BranchNextProps",
+      extends: "Extends ComponentProps<typeof Button>",
+      props: [],
+    },
+    {
+      interfaceName: "BranchPageProps",
+      extends: "Extends HTMLAttributes<HTMLSpanElement>",
+      props: [],
+    },
+  ],
+  "chain-of-thought": [
+    {
+      interfaceName: "ChainOfThoughtLabels",
+      props: [
+        {
+          name: "header",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "ChainOfThoughtProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "open",
+          type: "boolean",
+          required: false,
+          description: "Controlled open state.",
+        },
+        {
+          name: "defaultOpen",
+          type: "boolean",
+          required: false,
+          description: "Uncontrolled initial open state.",
+          default: "false",
+        },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean) => void",
+          required: false,
+          description: "Called when the open state changes.",
+        },
+        {
+          name: "labels",
+          type: "Partial<ChainOfThoughtLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+    {
+      interfaceName: "ChainOfThoughtHeaderProps",
+      extends: "Extends ComponentProps<typeof CollapsibleTrigger>",
+      props: [],
+    },
+    {
+      interfaceName: "ChainOfThoughtStepProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "icon",
+          type: "LucideIcon",
+          required: false,
+        },
+        {
+          name: "label",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "description",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "status",
+          type: '"complete" | "active" | "pending"',
+          required: false,
+          default: '"complete"',
+        },
+      ],
+    },
+    {
+      interfaceName: "ChainOfThoughtSearchResultsProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "ChainOfThoughtSearchResultProps",
+      extends: "Extends ComponentProps<typeof Badge>",
+      props: [],
+    },
+    {
+      interfaceName: "ChainOfThoughtContentProps",
+      extends: "Extends ComponentProps<typeof CollapsibleContent>",
+      props: [],
+    },
+    {
+      interfaceName: "ChainOfThoughtImageProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "caption",
+          type: "string",
+          required: false,
+        },
+      ],
+    },
+  ],
+  "ai-code-block": [
+    {
+      interfaceName: "AiCodeBlockLabels",
+      props: [
+        {
+          name: "copy",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "copied",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "selectFile",
+          type: "string",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "AiCodeBlockProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "defaultValue",
+          type: "string",
+          required: false,
+          description: "Uncontrolled initial value.",
+        },
+        {
+          name: "value",
+          type: "string",
+          required: false,
+          description: "Controlled value.",
+        },
+        {
+          name: "onValueChange",
+          type: "(value: string) => void",
+          required: false,
+          description: "Called when the value changes.",
+        },
+        {
+          name: "data",
+          type: "AiCodeBlockData[]",
+          required: true,
+        },
+        {
+          name: "labels",
+          type: "AiCodeBlockLabels",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+    {
+      interfaceName: "AiCodeBlockHeaderProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "AiCodeBlockFilesProps",
+      extends: 'Extends Omit<HTMLAttributes<HTMLDivElement>, "children">',
+      props: [
+        {
+          name: "children",
+          type: "AiCodeBlockChildren",
+          required: true,
+          description: "Contents of the component.",
+        },
+      ],
+    },
+    {
+      interfaceName: "AiCodeBlockFilenameProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "value",
+          type: "string",
+          required: false,
+          description: "Controlled value.",
+        },
+      ],
+    },
+    {
+      interfaceName: "AiCodeBlockSelectProps",
+      extends: "Extends ComponentProps<typeof Select>",
+      props: [
+        {
+          name: "children",
+          type: "AiCodeBlockChildren",
+          required: true,
+          description: "Contents of the component.",
+        },
+        {
+          name: "className",
+          type: "string",
+          required: false,
+          description: "Additional class names merged onto the root.",
+        },
+      ],
+    },
+    {
+      interfaceName: "AiCodeBlockSelectItemProps",
+      extends: "Extends ComponentProps<typeof SelectItem>",
+      props: [],
+    },
+    {
+      interfaceName: "AiCodeBlockCopyButtonProps",
+      extends: "Extends ComponentProps<typeof Button>",
+      props: [
+        {
+          name: "onCopy",
+          type: "() => void",
+          required: false,
+        },
+        {
+          name: "onError",
+          type: "(error: Error) => void",
+          required: false,
+        },
+        {
+          name: "timeout",
+          type: "number",
+          required: false,
+          default: "2000",
+        },
+        {
+          name: "code",
+          type: "string",
+          required: false,
+          description: "Explicit payload. Defaults to the active file in `AiCodeBlock` data.",
+        },
+      ],
+    },
+    {
+      interfaceName: "AiCodeBlockBodyProps",
+      extends: 'Extends Omit<HTMLAttributes<HTMLDivElement>, "children">',
+      props: [
+        {
+          name: "children",
+          type: "AiCodeBlockChildren",
+          required: true,
+          description: "Contents of the component.",
+        },
+      ],
+    },
+    {
+      interfaceName: "AiCodeBlockItemProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "value",
+          type: "string",
+          required: true,
+          description: "Controlled value.",
+        },
+        {
+          name: "lineNumbers",
+          type: "boolean",
+          required: false,
+          default: "false",
+        },
+      ],
+    },
+    {
+      interfaceName: "AiCodeBlockContentProps",
+      extends: "Extends HTMLAttributes<HTMLPreElement>",
+      props: [
+        {
+          name: "language",
+          type: "BundledLanguage",
+          required: false,
+        },
+        {
+          name: "children",
+          type: "string",
+          required: true,
+          description: "Contents of the component.",
+        },
+      ],
+    },
+  ],
+  context: [
+    {
+      interfaceName: "ContextLabels",
+      props: [
+        {
+          name: "input",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "output",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "reasoning",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "cache",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "totalCost",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "usage",
+          type: "string",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "ContextProps",
+      extends: 'Extends ComponentProps<typeof HoverCard>, Omit<ContextSchema, "labels">',
+      props: [
+        {
+          name: "labels",
+          type: "ContextLabels",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+    {
+      interfaceName: "ContextTriggerProps",
+      extends: "Extends ComponentProps<typeof Button>",
+      props: [],
+    },
+    {
+      interfaceName: "ContextContentProps",
+      extends: "Extends ComponentProps<typeof HoverCardContent>",
+      props: [],
+    },
+    {
+      interfaceName: "ContextContentHeaderProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "ContextContentBodyProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "ContextContentFooterProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "ContextInputUsageProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "ContextOutputUsageProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "ContextReasoningUsageProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "ContextCacheUsageProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+  ],
+  conversation: [
+    {
+      interfaceName: "ConversationProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "ConversationContentProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "ConversationEmptyStateLabels",
+      props: [
+        {
+          name: "title",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "description",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "ConversationEmptyStateProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "title",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "description",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "icon",
+          type: "ReactNode",
+          required: false,
+        },
+        {
+          name: "labels",
+          type: "Partial<ConversationEmptyStateLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+    {
+      interfaceName: "ConversationScrollButtonLabels",
+      props: [
+        {
+          name: "scrollToBottom",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "ConversationScrollButtonProps",
+      extends: "Extends ButtonProps",
+      props: [
+        {
+          name: "labels",
+          type: "Partial<ConversationScrollButtonLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+  ],
+  "ai-image": [
+    {
+      interfaceName: "GeneratedImageProps",
+      extends: 'Extends Omit<ImgHTMLAttributes<HTMLImageElement>, "src" | "alt">',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLImageElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "base64",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "mediaType",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "uint8Array",
+          type: "Uint8Array",
+          required: false,
+          description:
+            "Accepted for API parity with AI SDK generated images; unused at render time.",
+        },
+        {
+          name: "alt",
+          type: "string",
+          required: false,
+        },
+      ],
+    },
+  ],
+  "inline-citation": [
+    {
+      interfaceName: "InlineCitationLabels",
+      props: [
+        {
+          name: "previous",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "next",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "unknown",
+          type: "string",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "InlineCitationProps",
+      extends: "Extends HTMLAttributes<HTMLSpanElement>",
+      props: [],
+    },
+    {
+      interfaceName: "InlineCitationTextProps",
+      extends: "Extends HTMLAttributes<HTMLSpanElement>",
+      props: [],
+    },
+    {
+      interfaceName: "InlineCitationCardProps",
+      extends: "Extends ComponentProps<typeof HoverCard>",
+      props: [],
+    },
+    {
+      interfaceName: "InlineCitationCardTriggerProps",
+      extends: "Extends ComponentProps<typeof Badge>",
+      props: [
+        {
+          name: "sources",
+          type: "string[]",
+          required: true,
+        },
+        {
+          name: "labels",
+          type: 'Pick<InlineCitationLabels, "unknown">',
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+    {
+      interfaceName: "InlineCitationCardBodyProps",
+      extends: "Extends ComponentProps<typeof HoverCardContent>",
+      props: [],
+    },
+    {
+      interfaceName: "InlineCitationCarouselProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "labels",
+          type: "InlineCitationLabels",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+    {
+      interfaceName: "InlineCitationCarouselContentProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "InlineCitationCarouselItemProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "InlineCitationCarouselHeaderProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "InlineCitationCarouselIndexProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "InlineCitationCarouselPrevProps",
+      extends: "Extends HTMLAttributes<HTMLButtonElement>",
+      props: [],
+    },
+    {
+      interfaceName: "InlineCitationCarouselNextProps",
+      extends: "Extends HTMLAttributes<HTMLButtonElement>",
+      props: [],
+    },
+    {
+      interfaceName: "InlineCitationSourceProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "title",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "url",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "description",
+          type: "string",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "InlineCitationQuoteProps",
+      extends: "Extends HTMLAttributes<HTMLQuoteElement>",
+      props: [],
+    },
+  ],
+  loader: [
+    {
+      interfaceName: "LoaderLabels",
+      props: [
+        {
+          name: "loading",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "LoaderProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "size",
+          type: "number",
+          required: false,
+          description: "Pixel size of the spinner glyph.",
+          default: "16",
+        },
+        {
+          name: "labels",
+          type: "Partial<LoaderLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+  ],
+  message: [
+    {
+      interfaceName: "MessageProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "from",
+          type: '"user" | "assistant" | "system"',
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "MessageContentProps",
+      extends:
+        "Extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof messageContentVariants>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "variant",
+          type: '"contained" | "flat"',
+          required: false,
+          description: 'One of "contained" | "flat".',
+          default: '"contained"',
+        },
+      ],
+    },
+    {
+      interfaceName: "MessageAvatarLabels",
+      props: [
+        {
+          name: "me",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "MessageAvatarProps",
+      extends: "Extends ComponentProps<typeof Avatar>",
+      props: [
+        {
+          name: "src",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "name",
+          type: "string",
+          required: false,
+          description: "Submitted name when used in a form.",
+        },
+        {
+          name: "labels",
+          type: "Partial<MessageAvatarLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+  ],
+  "open-in-chat": [
+    {
+      interfaceName: "OpenInLabels",
+      props: [
+        {
+          name: "trigger",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "scira",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "chatgpt",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "claude",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "t3",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "v0",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "cursor",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "OpenInProps",
+      extends: "Extends ComponentProps<typeof DropdownMenu>",
+      props: [
+        {
+          name: "query",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "labels",
+          type: "Partial<OpenInLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+    {
+      interfaceName: "OpenInContentProps",
+      extends: "Extends ComponentProps<typeof DropdownMenuContent>",
+      props: [],
+    },
+    {
+      interfaceName: "OpenInItemProps",
+      extends: "Extends ComponentProps<typeof DropdownMenuItem>",
+      props: [],
+    },
+    {
+      interfaceName: "OpenInLabelProps",
+      extends: "Extends ComponentProps<typeof DropdownMenuLabel>",
+      props: [],
+    },
+    {
+      interfaceName: "OpenInSeparatorProps",
+      extends: "Extends ComponentProps<typeof DropdownMenuSeparator>",
+      props: [],
+    },
+    {
+      interfaceName: "OpenInTriggerProps",
+      extends: "Extends ButtonProps",
+      props: [
+        {
+          name: "labels",
+          type: 'Partial<Pick<OpenInLabels, "trigger">>',
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+    {
+      interfaceName: "OpenInChatGPTProps",
+      props: [],
+    },
+    {
+      interfaceName: "OpenInClaudeProps",
+      props: [],
+    },
+    {
+      interfaceName: "OpenInT3Props",
+      props: [],
+    },
+    {
+      interfaceName: "OpenInSciraProps",
+      props: [],
+    },
+    {
+      interfaceName: "OpenInv0Props",
+      props: [],
+    },
+    {
+      interfaceName: "OpenInCursorProps",
+      props: [],
+    },
+  ],
+  plan: [
+    {
+      interfaceName: "PlanProps",
+      extends: "Extends ComponentProps<typeof Collapsible>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "isStreaming",
+          type: "boolean",
+          required: false,
+          default: "false",
+        },
+      ],
+    },
+    {
+      interfaceName: "PlanHeaderProps",
+      extends: "Extends ComponentProps<typeof CardHeader>",
+      props: [],
+    },
+    {
+      interfaceName: "PlanTitleProps",
+      extends: 'Extends Omit<ComponentProps<typeof CardTitle>, "children">',
+      props: [
+        {
+          name: "children",
+          type: "string",
+          required: true,
+          description: "Contents of the component.",
+        },
+      ],
+    },
+    {
+      interfaceName: "PlanDescriptionProps",
+      extends: 'Extends Omit<ComponentProps<typeof CardDescription>, "children">',
+      props: [
+        {
+          name: "children",
+          type: "string",
+          required: true,
+          description: "Contents of the component.",
+        },
+      ],
+    },
+    {
+      interfaceName: "PlanActionProps",
+      extends: "Extends ComponentProps<typeof CardAction>",
+      props: [],
+    },
+    {
+      interfaceName: "PlanContentProps",
+      extends: "Extends ComponentProps<typeof CardContent>",
+      props: [],
+    },
+    {
+      interfaceName: "PlanFooterProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "PlanTriggerLabels",
+      props: [
+        {
+          name: "toggle",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "PlanTriggerProps",
+      extends: "Extends ComponentProps<typeof Button>",
+      props: [
+        {
+          name: "labels",
+          type: "Partial<PlanTriggerLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+  ],
+  "prompt-input": [
+    {
+      interfaceName: "PromptInputLabels",
+      props: [
+        {
+          name: "upload",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "removeAttachment",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "unknownFile",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "addAttachments",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "submit",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "stop",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "placeholder",
+          type: "string",
+          required: false,
+          description: "Placeholder shown when the value is empty.",
+        },
+        {
+          name: "speech",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "speechStop",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "errorAccept",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "errorMaxFileSize",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "errorMaxFiles",
+          type: "string",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "PromptInputControllerProps",
+      props: [
+        {
+          name: "textInput",
+          type: "TextInputContext",
+          required: true,
+        },
+        {
+          name: "attachments",
+          type: "AttachmentsContext",
+          required: true,
+        },
+        {
+          name: "__registerFileInput",
+          type: "(ref: RefObject<HTMLInputElement | null>, open: () => void) => void",
+          required: true,
+          description: 'INTERNAL: Allows PromptInput to register its file input + "open" callback',
+        },
+      ],
+    },
+    {
+      interfaceName: "PromptInputProviderProps",
+      extends: "Extends PropsWithChildren<{ initialInput?: string; }>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputAttachmentProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "data",
+          type: "FileUIPart & { id: string }",
+          required: true,
+        },
+        {
+          name: "className",
+          type: "string",
+          required: false,
+          description: "Additional class names merged onto the root.",
+        },
+      ],
+    },
+    {
+      interfaceName: "PromptInputAttachmentsProps",
+      extends: 'Extends Omit<HTMLAttributes<HTMLDivElement>, "children">',
+      props: [
+        {
+          name: "children",
+          type: "(attachment: FileUIPart & { id: string }) => ReactNode",
+          required: true,
+          description: "Contents of the component.",
+        },
+      ],
+    },
+    {
+      interfaceName: "PromptInputActionAddAttachmentsProps",
+      extends: "Extends ComponentProps<typeof DropdownMenuItem>",
+      props: [
+        {
+          name: "label",
+          type: "string",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "PromptInputProps",
+      extends: 'Extends Omit<HTMLAttributes<HTMLFormElement>, "onSubmit" | "onError">',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLFormElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "accept",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "multiple",
+          type: "boolean",
+          required: false,
+        },
+        {
+          name: "globalDrop",
+          type: "boolean",
+          required: false,
+        },
+        {
+          name: "syncHiddenInput",
+          type: "boolean",
+          required: false,
+        },
+        {
+          name: "maxFiles",
+          type: "number",
+          required: false,
+        },
+        {
+          name: "maxFileSize",
+          type: "number",
+          required: false,
+        },
+        {
+          name: "onError",
+          type: '(err: { code: "max_files" | "max_file_size" | "accept"; message: string }) => void',
+          required: false,
+        },
+        {
+          name: "onSubmit",
+          type: "( message: PromptInputMessage, event: FormEvent<HTMLFormElement>, ) => void | Promise<void>",
+          required: true,
+        },
+        {
+          name: "labels",
+          type: "PromptInputLabels",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+    {
+      interfaceName: "PromptInputBodyProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputTextareaProps",
+      extends: "Extends ComponentProps<typeof Textarea>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputHeaderProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputFooterProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputToolsProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputButtonProps",
+      extends: "Extends ComponentProps<typeof Button>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputActionMenuProps",
+      extends: "Extends ComponentProps<typeof DropdownMenu>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputActionMenuTriggerProps",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputActionMenuContentProps",
+      extends: "Extends ComponentProps<typeof DropdownMenuContent>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputActionMenuItemProps",
+      extends: "Extends ComponentProps<typeof DropdownMenuItem>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputSubmitProps",
+      extends: "Extends ComponentProps<typeof Button>",
+      props: [
+        {
+          name: "status",
+          type: "ChatStatus",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "PromptInputSpeechButtonProps",
+      extends: "Extends ComponentProps<typeof PromptInputButton>",
+      props: [
+        {
+          name: "textareaRef",
+          type: "RefObject<HTMLTextAreaElement | null>",
+          required: false,
+        },
+        {
+          name: "onTranscriptionChange",
+          type: "(text: string) => void",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "PromptInputModelSelectProps",
+      extends: "Extends ComponentProps<typeof Select>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputModelSelectTriggerProps",
+      extends: "Extends ComponentProps<typeof SelectTrigger>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputModelSelectValueProps",
+      extends: "Extends ComponentProps<typeof SelectValue>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputModelSelectContentProps",
+      extends: "Extends ComponentProps<typeof SelectContent>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputModelSelectItemProps",
+      extends: "Extends ComponentProps<typeof SelectItem>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputHoverCardProps",
+      extends: "Extends ComponentProps<typeof HoverCard>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputHoverCardTriggerProps",
+      extends: "Extends ComponentProps<typeof HoverCardTrigger>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputHoverCardContentProps",
+      extends: "Extends ComponentProps<typeof HoverCardContent>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputTabsListProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputTabProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputTabLabelProps",
+      extends: "Extends HTMLAttributes<HTMLHeadingElement>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputTabBodyProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputTabItemProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputCommandProps",
+      extends: "Extends ComponentProps<typeof Command>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputCommandInputProps",
+      extends: "Extends ComponentProps<typeof CommandInput>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputCommandListProps",
+      extends: "Extends ComponentProps<typeof CommandList>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputCommandEmptyProps",
+      extends: "Extends ComponentProps<typeof CommandEmpty>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputCommandGroupProps",
+      extends: "Extends ComponentProps<typeof CommandGroup>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputCommandItemProps",
+      extends: "Extends ComponentProps<typeof CommandItem>",
+      props: [],
+    },
+    {
+      interfaceName: "PromptInputCommandSeparatorProps",
+      extends: "Extends ComponentProps<typeof CommandSeparator>",
+      props: [],
+    },
+  ],
+  queue: [
+    {
+      interfaceName: "QueueItemProps",
+      extends: "Extends LiHTMLAttributes<HTMLLIElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLLIElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "QueueItemIndicatorProps",
+      extends: "Extends HTMLAttributes<HTMLSpanElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLSpanElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "completed",
+          type: "boolean",
+          required: false,
+          default: "false",
+        },
+      ],
+    },
+    {
+      interfaceName: "QueueItemContentProps",
+      extends: "Extends HTMLAttributes<HTMLSpanElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLSpanElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "completed",
+          type: "boolean",
+          required: false,
+          default: "false",
+        },
+      ],
+    },
+    {
+      interfaceName: "QueueItemDescriptionProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "completed",
+          type: "boolean",
+          required: false,
+          default: "false",
+        },
+      ],
+    },
+    {
+      interfaceName: "QueueItemActionsProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "QueueItemActionProps",
+      extends: 'Extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "size">',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLButtonElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "QueueItemAttachmentProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "QueueItemImageProps",
+      extends: "Extends ImgHTMLAttributes<HTMLImageElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLImageElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "QueueItemFileProps",
+      extends: "Extends HTMLAttributes<HTMLSpanElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLSpanElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "QueueListProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "QueueSectionProps",
+      extends: "Extends ComponentProps<typeof Collapsible>",
+      props: [
+        {
+          name: "defaultExpanded",
+          type: "boolean",
+          required: false,
+          description: "Taki alias for `defaultOpen`.",
+          default: "true",
+        },
+      ],
+    },
+    {
+      interfaceName: "QueueSectionTriggerProps",
+      extends: "Extends ComponentProps<typeof CollapsibleTrigger>",
+      props: [],
+    },
+    {
+      interfaceName: "QueueSectionLabelProps",
+      extends: "Extends HTMLAttributes<HTMLSpanElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLSpanElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "count",
+          type: "number",
+          required: false,
+        },
+        {
+          name: "label",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "icon",
+          type: "ReactNode",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "QueueSectionContentProps",
+      extends: "Extends ComponentProps<typeof CollapsibleContent>",
+      props: [],
+    },
+    {
+      interfaceName: "QueueProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+  ],
+  reasoning: [
+    {
+      interfaceName: "ReasoningLabels",
+      props: [
+        {
+          name: "thinking",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "thoughtForFew",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "thoughtFor",
+          type: "string",
+          required: true,
+          description: "Use `{duration}` as the seconds placeholder.",
+        },
+      ],
+    },
+    {
+      interfaceName: "ReasoningProps",
+      extends: "Extends ComponentProps<typeof Collapsible>",
+      props: [
+        {
+          name: "isStreaming",
+          type: "boolean",
+          required: false,
+          default: "false",
+        },
+        {
+          name: "open",
+          type: "boolean",
+          required: false,
+          description: "Controlled open state.",
+        },
+        {
+          name: "defaultOpen",
+          type: "boolean",
+          required: false,
+          description: "Uncontrolled initial open state.",
+          default: "true",
+        },
+        {
+          name: "onOpenChange",
+          type: "(open: boolean) => void",
+          required: false,
+          description: "Called when the open state changes.",
+        },
+        {
+          name: "duration",
+          type: "number",
+          required: false,
+        },
+        {
+          name: "labels",
+          type: "Partial<ReasoningLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+    {
+      interfaceName: "ReasoningTriggerProps",
+      extends: "Extends ComponentProps<typeof CollapsibleTrigger>",
+      props: [],
+    },
+    {
+      interfaceName: "ReasoningContentProps",
+      extends: "Extends ComponentProps<typeof CollapsibleContent>",
+      props: [],
+    },
+  ],
+  response: [
+    {
+      interfaceName: "ResponseProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "children",
+          type: "ReactNode",
+          required: false,
+          description: "Contents of the component.",
+        },
+      ],
+    },
+  ],
+  sources: [
+    {
+      interfaceName: "SourcesProps",
+      extends: "Extends ComponentProps<typeof Collapsible>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "SourcesTriggerLabels",
+      props: [
+        {
+          name: "usedSources",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "SourcesTriggerProps",
+      extends: "Extends ComponentProps<typeof CollapsibleTrigger>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLButtonElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "count",
+          type: "number",
+          required: true,
+        },
+        {
+          name: "labels",
+          type: "Partial<SourcesTriggerLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+    {
+      interfaceName: "SourcesContentProps",
+      extends: "Extends ComponentProps<typeof CollapsibleContent>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "SourceProps",
+      extends: 'Extends ComponentProps<"a">',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLAnchorElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+  ],
+  suggestion: [
+    {
+      interfaceName: "SuggestionsLabels",
+      props: [
+        {
+          name: "suggestions",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "SuggestionsProps",
+      extends: "Extends HTMLAttributes<HTMLElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "labels",
+          type: "Partial<SuggestionsLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+    {
+      interfaceName: "SuggestionProps",
+      extends: 'Extends Omit<ButtonProps, "onClick">',
+      props: [
+        {
+          name: "suggestion",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "onClick",
+          type: "(suggestion: string) => void",
+          required: false,
+        },
+      ],
+    },
+  ],
+  task: [
+    {
+      interfaceName: "TaskItemFileProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "TaskItemProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "TaskProps",
+      extends: "Extends ComponentProps<typeof Collapsible>",
+      props: [],
+    },
+    {
+      interfaceName: "TaskTriggerProps",
+      extends: "Extends ComponentProps<typeof CollapsibleTrigger>",
+      props: [
+        {
+          name: "title",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "icon",
+          type: "LucideIcon",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "TaskContentProps",
+      extends: "Extends ComponentProps<typeof CollapsibleContent>",
+      props: [],
+    },
+  ],
+  "text-shimmer": [
+    {
+      interfaceName: "TextShimmerProps",
+      props: [
+        {
+          name: "children",
+          type: "string",
+          required: true,
+          description: "Contents of the component.",
+        },
+        {
+          name: "as",
+          type: "ElementType",
+          required: false,
+        },
+        {
+          name: "className",
+          type: "string",
+          required: false,
+          description: "Additional class names merged onto the root.",
+        },
+        {
+          name: "duration",
+          type: "number",
+          required: false,
+          default: "2",
+        },
+        {
+          name: "spread",
+          type: "number",
+          required: false,
+          default: "2",
+        },
+      ],
+    },
+  ],
+  tool: [
+    {
+      interfaceName: "ToolLabels",
+      props: [
+        {
+          name: "pending",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "running",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "completed",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "error",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "parameters",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "result",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "errorHeading",
+          type: "string",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "ToolProps",
+      extends: "Extends ComponentProps<typeof Collapsible>",
+      props: [],
+    },
+    {
+      interfaceName: "ToolHeaderProps",
+      extends: "Extends HTMLAttributes<HTMLButtonElement>",
+      props: [
+        {
+          name: "title",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "type",
+          type: 'ToolUIPart["type"]',
+          required: true,
+        },
+        {
+          name: "state",
+          type: 'ToolUIPart["state"]',
+          required: true,
+        },
+        {
+          name: "labels",
+          type: "ToolLabels",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+    {
+      interfaceName: "ToolContentProps",
+      extends: "Extends ComponentProps<typeof CollapsibleContent>",
+      props: [],
+    },
+    {
+      interfaceName: "ToolInputProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "input",
+          type: 'ToolUIPart["input"]',
+          required: true,
+        },
+        {
+          name: "labels",
+          type: 'Pick<ToolLabels, "parameters">',
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+    {
+      interfaceName: "ToolOutputProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "output",
+          type: 'ToolUIPart["output"]',
+          required: true,
+        },
+        {
+          name: "errorText",
+          type: 'ToolUIPart["errorText"]',
+          required: false,
+        },
+        {
+          name: "labels",
+          type: 'Pick<ToolLabels, "result" | "errorHeading">',
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+  ],
+  "web-preview": [
+    {
+      interfaceName: "WebPreviewLabels",
+      props: [
+        {
+          name: "urlPlaceholder",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "preview",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "console",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "consoleEmpty",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "WebPreviewProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "defaultUrl",
+          type: "string",
+          required: false,
+          default: '""',
+        },
+        {
+          name: "onUrlChange",
+          type: "(url: string) => void",
+          required: false,
+        },
+        {
+          name: "labels",
+          type: "Partial<WebPreviewLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+    {
+      interfaceName: "WebPreviewNavigationProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+      ],
+    },
+    {
+      interfaceName: "WebPreviewNavigationButtonProps",
+      extends: "Extends ButtonProps",
+      props: [
+        {
+          name: "tooltip",
+          type: "string",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "WebPreviewUrlProps",
+      extends: "Extends InputProps",
+      props: [],
+    },
+    {
+      interfaceName: "WebPreviewBodyProps",
+      extends: 'Extends ComponentProps<"iframe">',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLIFrameElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "loading",
+          type: "ReactNode",
+          required: false,
+        },
+      ],
+    },
+    {
+      interfaceName: "WebPreviewConsoleProps",
+      extends: "Extends HTMLAttributes<HTMLDivElement>",
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "logs",
+          type: "WebPreviewConsoleLog[]",
+          required: false,
+          default: "[]",
+        },
+      ],
+    },
+  ],
   "words-preloader": [
+    {
+      interfaceName: "WordsPreloaderLabels",
+      props: [
+        {
+          name: "status",
+          type: "string",
+          required: true,
+          description: "Accessible name for the loading status.",
+        },
+      ],
+    },
     {
       interfaceName: "WordsPreloaderProps",
       extends:
@@ -6829,6 +11443,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "ref",
           type: "Ref<HTMLDivElement>",
           required: false,
+          description: "Ref forwarded to the underlying DOM node.",
         },
         {
           name: "words",
@@ -6873,11 +11488,13 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           name: "labels",
           type: "Partial<WordsPreloaderLabels>",
           required: false,
+          description: "Override default English strings.",
         },
         {
           name: "layout",
           type: '"page" | "contained"',
           required: false,
+          description: 'One of "page" | "contained".',
           default: '"page"',
         },
       ],

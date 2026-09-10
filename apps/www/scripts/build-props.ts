@@ -4,7 +4,8 @@
  * For each slug in `CATEGORIES`, it reads the real @cronus-ui/ui component source at
  * `packages/ui/src/components/<slug>.tsx`, parses it with the TypeScript compiler
  * API (NEVER importing/executing the module — same technique the registry block
- * extractor uses), and extracts every exported `*Props` interface and its members.
+ * extractor uses), and extracts every exported `*Props` interface or type alias
+ * and its members.
  * The result is written to `apps/www/lib/props.generated.ts` as a typed,
  * server-safe map so the rendered API tables can never drift from the code.
  *
@@ -248,6 +249,311 @@ function isExportedPropsInterface(node: ts.Node): node is ts.InterfaceDeclaratio
   return (modifiers & ts.ModifierFlags.Export) !== 0;
 }
 
+function isExported(node: ts.Node): boolean {
+  return (ts.getCombinedModifierFlags(node) & ts.ModifierFlags.Export) !== 0;
+}
+
+/** Is this top-level statement an exported `type …Props = …`? */
+function isExportedPropsTypeAlias(node: ts.Node): node is ts.TypeAliasDeclaration {
+  return ts.isTypeAliasDeclaration(node) && isExported(node) && node.name.text.endsWith("Props");
+}
+
+function isExportedLabelsType(
+  node: ts.Node,
+): node is ts.TypeAliasDeclaration | ts.InterfaceDeclaration {
+  if (!isExported(node)) return false;
+  if (ts.isTypeAliasDeclaration(node) || ts.isInterfaceDeclaration(node)) {
+    return node.name.text.endsWith("Labels");
+  }
+  return false;
+}
+
+const COMMON_PROP_DOCS: Record<string, string> = {
+  asChild: "Render as the child element via Slot.",
+  children: "Contents of the component.",
+  className: "Additional class names merged onto the root.",
+  defaultOpen: "Uncontrolled initial open state.",
+  defaultValue: "Uncontrolled initial value.",
+  disabled: "Disables pointer and keyboard interaction.",
+  invalid: "Marks the control invalid and applies the error ring.",
+  labels: "Override default English strings.",
+  name: "Submitted name when used in a form.",
+  onChange: "Called when the value changes.",
+  onOpenChange: "Called when the open state changes.",
+  onValueChange: "Called when the value changes.",
+  open: "Controlled open state.",
+  placeholder: "Placeholder shown when the value is empty.",
+  ref: "Ref forwarded to the underlying DOM node.",
+  required: "Marks the control as required.",
+  size: "Control size.",
+  value: "Controlled value.",
+  variant: "Visual variant.",
+};
+
+function describeProp(name: string, explicit?: string): string | undefined {
+  if (explicit && explicit.length > 0) return explicit;
+  return COMMON_PROP_DOCS[name];
+}
+
+function variantPropsFromTypeNode(
+  type: ts.TypeNode,
+  cva: Map<string, Map<string, CvaVariant>>,
+  sourceFile: ts.SourceFile,
+): Map<string, CvaVariant> | undefined {
+  if (!ts.isTypeReferenceNode(type)) return undefined;
+  if (!ts.isIdentifier(type.typeName) || type.typeName.text !== "VariantProps") return undefined;
+  const arg = type.typeArguments?.[0];
+  if (arg === undefined || !ts.isTypeQueryNode(arg)) return undefined;
+  return cva.get(arg.exprName.getText(sourceFile));
+}
+
+function pushCvaAxes(
+  axes: Map<string, CvaVariant> | undefined,
+  props: PropDef[],
+  seen: Set<string>,
+): void {
+  if (!axes) return;
+  for (const [axisName, axis] of axes) {
+    if (seen.has(axisName)) continue;
+    seen.add(axisName);
+    props.push({
+      name: axisName,
+      type: unionOf(axis.options),
+      required: false,
+      description: describeProp(axisName, `One of ${unionOf(axis.options)}.`),
+      ...(axis.default ? { default: axis.default } : {}),
+    });
+  }
+}
+
+type LocalType = ts.InterfaceDeclaration | ts.TypeAliasDeclaration;
+
+function collectLocalTypes(sourceFile: ts.SourceFile): Map<string, LocalType> {
+  const map = new Map<string, LocalType>();
+  for (const statement of sourceFile.statements) {
+    if (ts.isInterfaceDeclaration(statement) || ts.isTypeAliasDeclaration(statement)) {
+      map.set(statement.name.text, statement);
+    }
+  }
+  return map;
+}
+
+/** Flatten TypeLiteral, intersections, and same-file type references into signatures. */
+function membersFromType(
+  type: ts.TypeNode,
+  sourceFile: ts.SourceFile,
+  locals: Map<string, LocalType>,
+  seenTypes: Set<string>,
+  cva: Map<string, Map<string, CvaVariant>>,
+  cvaSink: PropDef[],
+  seenProps: Set<string>,
+): ts.PropertySignature[] {
+  if (ts.isTypeLiteralNode(type)) {
+    return type.members.filter(ts.isPropertySignature);
+  }
+  if (ts.isParenthesizedTypeNode(type)) {
+    return membersFromType(type.type, sourceFile, locals, seenTypes, cva, cvaSink, seenProps);
+  }
+  if (ts.isIntersectionTypeNode(type) || ts.isUnionTypeNode(type)) {
+    // Unions of props are rare; flatten both sides so docs still list members.
+    return type.types.flatMap((inner) =>
+      membersFromType(inner, sourceFile, locals, seenTypes, cva, cvaSink, seenProps),
+    );
+  }
+  if (ts.isTypeOperatorNode(type) && type.operator === ts.SyntaxKind.ReadonlyKeyword) {
+    return membersFromType(type.type, sourceFile, locals, seenTypes, cva, cvaSink, seenProps);
+  }
+  const axes = variantPropsFromTypeNode(type, cva, sourceFile);
+  if (axes) {
+    pushCvaAxes(axes, cvaSink, seenProps);
+    return [];
+  }
+  if (ts.isTypeReferenceNode(type) && ts.isIdentifier(type.typeName)) {
+    const name = type.typeName.text;
+    if (seenTypes.has(name)) return [];
+    const local = locals.get(name);
+    if (!local) return [];
+    seenTypes.add(name);
+    if (ts.isInterfaceDeclaration(local)) {
+      return local.members.filter(ts.isPropertySignature);
+    }
+    return membersFromType(local.type, sourceFile, locals, seenTypes, cva, cvaSink, seenProps);
+  }
+  return [];
+}
+
+/** Non-literal constituents of a type-alias intersection, for the Extends note. */
+function typeAliasExtendsNote(
+  type: ts.TypeNode,
+  locals: Map<string, LocalType>,
+): string | undefined {
+  const parts: string[] = [];
+  const walk = (node: ts.TypeNode) => {
+    if (ts.isTypeLiteralNode(node)) return;
+    if (ts.isParenthesizedTypeNode(node)) {
+      walk(node.type);
+      return;
+    }
+    if (ts.isIntersectionTypeNode(node)) {
+      for (const inner of node.types) walk(inner);
+      return;
+    }
+    if (
+      ts.isTypeReferenceNode(node) &&
+      ts.isIdentifier(node.typeName) &&
+      locals.has(node.typeName.text)
+    ) {
+      return;
+    }
+    if (ts.isTypeReferenceNode(node) && ts.isIdentifier(node.typeName)) {
+      if (node.typeName.text === "VariantProps") return;
+    }
+    const text = node.getText().replace(/\s+/g, " ").trim();
+    if (text.length > 0) parts.push(text);
+  };
+  walk(type);
+  if (parts.length === 0) return undefined;
+  return `Extends ${parts.join(", ")}`;
+}
+
+function propsFromSignatures(
+  members: readonly ts.TypeElement[],
+  sourceFile: ts.SourceFile,
+  defaults: Map<string, string>,
+  seen: Set<string>,
+): PropDef[] {
+  const props: PropDef[] = [];
+  for (const member of members) {
+    if (!ts.isPropertySignature(member) || member.name === undefined) continue;
+
+    const name = ts.isStringLiteral(member.name)
+      ? member.name.text
+      : member.name.getText(sourceFile);
+
+    const type = member.type
+      ? member.type.getText(sourceFile).replace(/\s+/g, " ").trim()
+      : "unknown";
+    const required = member.questionToken === undefined;
+    const description = describeProp(name, jsDocDescription(member));
+    const fallbackDefault = jsDocDefault(member);
+    const derivedDefault = defaults.get(name);
+    const defaultValue = derivedDefault ?? fallbackDefault;
+
+    seen.add(name);
+    props.push({
+      name,
+      type,
+      required,
+      ...(description ? { description } : {}),
+      ...(defaultValue ? { default: defaultValue } : {}),
+    });
+  }
+  return props;
+}
+
+function unwrapExpression(expr: ts.Expression): ts.Expression {
+  let current = expr;
+  while (
+    ts.isAsExpression(current) ||
+    ts.isParenthesizedExpression(current) ||
+    ts.isSatisfiesExpression(current)
+  ) {
+    current = current.expression;
+  }
+  return current;
+}
+
+function isForwardRefCall(expr: ts.Expression): expr is ts.CallExpression {
+  const inner = unwrapExpression(expr);
+  if (!ts.isCallExpression(inner)) return false;
+  const callee = inner.expression;
+  if (ts.isIdentifier(callee) && callee.text === "forwardRef") return true;
+  if (ts.isPropertyAccessExpression(callee) && callee.name.text === "forwardRef") return true;
+  return false;
+}
+
+function inferFromForwardRef(
+  name: string,
+  initializer: ts.Expression,
+  sourceFile: ts.SourceFile,
+  locals: Map<string, LocalType>,
+  cva: Map<string, Map<string, CvaVariant>>,
+  defaults: Map<string, string>,
+): PropsDoc | undefined {
+  const call = unwrapExpression(initializer);
+  if (!ts.isCallExpression(call) || !isForwardRefCall(call)) return undefined;
+  const propsType = call.typeArguments?.[1];
+  if (propsType === undefined) {
+    // Infer from the render callback's first parameter type if present.
+    const render = call.arguments[0];
+    if (
+      render &&
+      (ts.isArrowFunction(render) || ts.isFunctionExpression(render)) &&
+      render.parameters[0]?.type
+    ) {
+      return docFromTypeNode(
+        `${name}Props`,
+        render.parameters[0].type,
+        sourceFile,
+        locals,
+        cva,
+        defaults,
+      );
+    }
+    return undefined;
+  }
+  return docFromTypeNode(`${name}Props`, propsType, sourceFile, locals, cva, defaults);
+}
+
+function inferFromFunction(
+  name: string,
+  fn: ts.FunctionDeclaration | ts.ArrowFunction | ts.FunctionExpression,
+  sourceFile: ts.SourceFile,
+  locals: Map<string, LocalType>,
+  cva: Map<string, Map<string, CvaVariant>>,
+  defaults: Map<string, string>,
+): PropsDoc | undefined {
+  const param = fn.parameters[0];
+  if (!param?.type) return undefined;
+  return docFromTypeNode(`${name}Props`, param.type, sourceFile, locals, cva, defaults);
+}
+
+function inferFromReexport(name: string, initializer: ts.Expression): PropsDoc | undefined {
+  const inner = unwrapExpression(initializer);
+  if (ts.isPropertyAccessExpression(inner) || ts.isIdentifier(inner)) {
+    const text = inner.getText().replace(/\s+/g, " ").trim();
+    return {
+      interfaceName: `${name}Props`,
+      extends: `Extends ComponentProps<typeof ${text}>`,
+      props: [],
+    };
+  }
+  return undefined;
+}
+
+function docFromTypeNode(
+  interfaceName: string,
+  type: ts.TypeNode,
+  sourceFile: ts.SourceFile,
+  locals: Map<string, LocalType>,
+  cva: Map<string, Map<string, CvaVariant>>,
+  defaults: Map<string, string>,
+): PropsDoc {
+  const seen = new Set<string>();
+  const props: PropDef[] = [];
+  const members = membersFromType(type, sourceFile, locals, new Set(), cva, props, seen);
+  props.push(...propsFromSignatures(members, sourceFile, defaults, seen));
+  return {
+    interfaceName,
+    ...(typeAliasExtendsNote(type, locals) ? { extends: typeAliasExtendsNote(type, locals) } : {}),
+    props,
+  };
+}
+
+function hasDocNamed(docs: PropsDoc[], name: string): boolean {
+  return docs.some((doc) => doc.interfaceName === name);
+}
+
 /** Extract the documented props of one component source file. */
 function extractPropsDocs(filePath: string, fileText: string): PropsDoc[] {
   const sourceFile = ts.createSourceFile(
@@ -260,72 +566,76 @@ function extractPropsDocs(filePath: string, fileText: string): PropsDoc[] {
 
   const defaults = collectDefaults(sourceFile);
   const cva = collectCvaVariants(sourceFile);
+  const locals = collectLocalTypes(sourceFile);
   const docs: PropsDoc[] = [];
 
   for (const statement of sourceFile.statements) {
-    if (!isExportedPropsInterface(statement)) continue;
+    if (isExportedPropsInterface(statement)) {
+      const seen = new Set<string>();
+      const props = propsFromSignatures(statement.members, sourceFile, defaults, seen);
 
-    const props: PropDef[] = [];
-    const seen = new Set<string>();
-    for (const member of statement.members) {
-      // Only document plain property signatures (skip index/call/method members).
-      if (!ts.isPropertySignature(member) || member.name === undefined) continue;
-
-      // Property name: `name.text` for identifiers, the literal text for string
-      // names like `"aria-label"` (so quoted prop keys survive).
-      const name = ts.isStringLiteral(member.name)
-        ? member.name.text
-        : member.name.getText(sourceFile);
-
-      const type = member.type
-        ? member.type.getText(sourceFile).replace(/\s+/g, " ").trim()
-        : "unknown";
-      const required = member.questionToken === undefined;
-      const description = jsDocDescription(member);
-      const fallbackDefault = jsDocDefault(member);
-      const derivedDefault = defaults.get(name);
-      const defaultValue = derivedDefault ?? fallbackDefault;
-
-      seen.add(name);
-      props.push({
-        name,
-        type,
-        required,
-        ...(description ? { description } : {}),
-        ...(defaultValue ? { default: defaultValue } : {}),
-      });
-    }
-
-    // Expand `extends VariantProps<typeof someVariants>` into the real CVA axes
-    // (variant / size …) so the docs show those props even though they are not
-    // literal interface members. A literal member of the same name wins.
-    const extendsClauses = statement.heritageClauses?.filter(
-      (clause) => clause.token === ts.SyntaxKind.ExtendsKeyword,
-    );
-    for (const clause of extendsClauses ?? []) {
-      for (const type of clause.types) {
-        const axes = variantPropsFor(type, cva, sourceFile);
-        if (axes === undefined) continue;
-        for (const [axisName, axis] of axes) {
-          if (seen.has(axisName)) continue;
-          seen.add(axisName);
-          // CVA-derived props are always optional (the variant has a default or
-          // gracefully omits). Default comes from `defaultVariants`.
-          props.push({
-            name: axisName,
-            type: unionOf(axis.options),
-            required: false,
-            ...(axis.default ? { default: axis.default } : {}),
-          });
+      const extendsClauses = statement.heritageClauses?.filter(
+        (clause) => clause.token === ts.SyntaxKind.ExtendsKeyword,
+      );
+      for (const clause of extendsClauses ?? []) {
+        for (const type of clause.types) {
+          pushCvaAxes(variantPropsFor(type, cva, sourceFile), props, seen);
+          if (ts.isIdentifier(type.expression)) {
+            const local = locals.get(type.expression.text);
+            if (local && ts.isInterfaceDeclaration(local)) {
+              props.push(...propsFromSignatures(local.members, sourceFile, defaults, seen));
+            }
+          }
         }
       }
+
+      docs.push({
+        interfaceName: statement.name.text,
+        ...(extendsNote(statement) ? { extends: extendsNote(statement) } : {}),
+        props,
+      });
+      continue;
     }
 
-    docs.push({
-      interfaceName: statement.name.text,
-      ...(extendsNote(statement) ? { extends: extendsNote(statement) } : {}),
-      props,
-    });
+    if (isExportedPropsTypeAlias(statement) || isExportedLabelsType(statement)) {
+      if (ts.isInterfaceDeclaration(statement)) {
+        const seen = new Set<string>();
+        docs.push({
+          interfaceName: statement.name.text,
+          ...(extendsNote(statement) ? { extends: extendsNote(statement) } : {}),
+          props: propsFromSignatures(statement.members, sourceFile, defaults, seen),
+        });
+        continue;
+      }
+      docs.push(
+        docFromTypeNode(statement.name.text, statement.type, sourceFile, locals, cva, defaults),
+      );
+    }
+  }
+
+  for (const statement of sourceFile.statements) {
+    if (ts.isFunctionDeclaration(statement) && isExported(statement) && statement.name) {
+      const name = statement.name.text;
+      if (!/^[A-Z]/.test(name)) continue;
+      const inferred = inferFromFunction(name, statement, sourceFile, locals, cva, defaults);
+      if (inferred && !hasDocNamed(docs, inferred.interfaceName)) docs.push(inferred);
+      continue;
+    }
+
+    if (!ts.isVariableStatement(statement) || !isExported(statement)) continue;
+    for (const decl of statement.declarationList.declarations) {
+      if (!ts.isIdentifier(decl.name) || !decl.initializer) continue;
+      const name = decl.name.text;
+      if (!/^[A-Z]/.test(name)) continue;
+      if (hasDocNamed(docs, `${name}Props`)) continue;
+      const init = unwrapExpression(decl.initializer);
+      const inferred =
+        inferFromForwardRef(name, init, sourceFile, locals, cva, defaults) ??
+        (ts.isArrowFunction(init) || ts.isFunctionExpression(init)
+          ? inferFromFunction(name, init, sourceFile, locals, cva, defaults)
+          : inferFromReexport(name, init));
+      if (inferred) docs.push(inferred);
+    }
   }
 
   return docs;
@@ -403,7 +713,8 @@ export function serializePropsModule(map: Record<string, PropsDoc[]>): string {
   const header = [
     "// GENERATED FILE — do not edit; run `bun run props` to regenerate.",
     "//",
-    "// Props/API tables extracted from the exported `*Props` interfaces of every",
+    "// Props/API tables extracted from exported `*Props` / `*Labels` types, plus",
+    "// inferred forwardRef / function / re-export props, of every",
     "// @cronus-ui/ui component via the TypeScript compiler API (no module execution),",
     "// so the documented API can never drift from the source.",
     "",
