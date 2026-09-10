@@ -1902,7 +1902,8 @@
       "motion@^12.23.0"
     ],
     "registryDependencies": [
-      "cn"
+      "cn",
+      "slide-up-text"
     ]
   },
   {
