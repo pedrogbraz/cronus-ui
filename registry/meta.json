@@ -3143,6 +3143,18 @@
         "marketing"
       ]
     },
+    "author-tooltip": {
+      "title": "AuthorTooltip",
+      "category": "overlays",
+      "description": "Hover an avatar to see name, role, and profile links.",
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "overlay"
+      ]
+    },
     "autocomplete": {
       "title": "Autocomplete",
       "category": "forms",
@@ -3510,6 +3522,18 @@
       "motion": "none",
       "intents": [
         "data"
+      ]
+    },
+    "component-preview-tooltip": {
+      "title": "ComponentPreviewTooltip",
+      "category": "overlays",
+      "description": "Hover a name to show a live miniature of a component.",
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "overlay"
       ]
     },
     "composed-chart": {
@@ -3989,6 +4013,19 @@
         "motion"
       ]
     },
+    "goal-card": {
+      "title": "GoalCard",
+      "category": "data-display",
+      "description": "Objective card with progress, status, steps, and a due date.",
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data",
+        "dashboard"
+      ]
+    },
     "gradient-border": {
       "title": "GradientBorder",
       "category": "premium",
@@ -4244,6 +4281,19 @@
       "intents": [
         "chart",
         "data"
+      ]
+    },
+    "link-preview": {
+      "title": "LinkPreview",
+      "category": "overlays",
+      "description": "Hover a URL to unfurl title, description, and thumbnail.",
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "overlay",
+        "content"
       ]
     },
     "live-line-chart": {
@@ -5353,6 +5403,19 @@
       "motion": "none",
       "intents": [
         "data"
+      ]
+    },
+    "todo-item": {
+      "title": "TodoItem",
+      "category": "data-display",
+      "description": "Interactive todo row with priority, due date, labels, and subtasks.",
+      "rsc": true,
+      "style": "operational",
+      "palette": "semantic",
+      "motion": "none",
+      "intents": [
+        "data",
+        "dashboard"
       ]
     },
     "toggle": {

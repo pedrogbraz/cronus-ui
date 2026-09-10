@@ -183,6 +183,19 @@
     ]
   },
   {
+    "name": "author-tooltip",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1",
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "avatar",
+      "cn",
+      "tooltip"
+    ]
+  },
+  {
     "name": "autocomplete",
     "type": "registry:ui",
     "dependencies": [
@@ -501,6 +514,18 @@
     ],
     "registryDependencies": [
       "cn"
+    ]
+  },
+  {
+    "name": "component-preview-tooltip",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1"
+    ],
+    "registryDependencies": [
+      "cn",
+      "spinner",
+      "tooltip"
     ]
   },
   {
@@ -910,6 +935,20 @@
     ]
   },
   {
+    "name": "goal-card",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1",
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "badge",
+      "button",
+      "cn",
+      "progress"
+    ]
+  },
+  {
     "name": "gradient-border",
     "type": "registry:ui",
     "dependencies": [],
@@ -1119,6 +1158,19 @@
     "registryDependencies": [
       "chart",
       "cn"
+    ]
+  },
+  {
+    "name": "link-preview",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1",
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "cn",
+      "skeleton",
+      "tooltip"
     ]
   },
   {
@@ -2049,6 +2101,19 @@
       "class-variance-authority@^0.7.1"
     ],
     "registryDependencies": [
+      "cn"
+    ]
+  },
+  {
+    "name": "todo-item",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1",
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "badge",
+      "checkbox",
       "cn"
     ]
   },
