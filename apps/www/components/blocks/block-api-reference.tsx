@@ -1,7 +1,6 @@
 import { type BlockMeta, getBlockVariantMetas } from "../../lib/blocks-index";
 import { formatTsLiteral } from "../../lib/format-ts-literal";
 import { ApiCode, ApiFieldTable, ApiTable } from "../docs/api-table";
-import { CodeBlock } from "../docs/code-block";
 
 const VARIANT_TYPE = "{ id: string; name: string; description: string }[]";
 
@@ -24,7 +23,9 @@ export function BlockApiReference({ meta }: { meta: BlockMeta }) {
           </p>
         </div>
 
-        <CodeBlock code={`npx cronus-ui add ${meta.slug}`} language="bash" />
+        <pre className="overflow-x-auto rounded-xl border border-border bg-surface-inset/80 p-4 font-mono text-[0.8rem] leading-relaxed text-fg">
+          <code>{`npx cronus-ui add ${meta.slug}`}</code>
+        </pre>
 
         <ApiFieldTable
           label={`${meta.name} fields`}
