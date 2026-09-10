@@ -834,9 +834,7 @@
   box-shadow: none;
 }
 
-/* Radius lock stays off the live-theming stage so the radius slider still
-   drives --cronus-radius / rounded-* on the specimen. */
-[data-cronus-look="glass"]:not([data-slot="theme-stage"]) {
+[data-cronus-look="glass"] {
   --cronus-radius: 22px;
   --radius-sm: 10px;
   --radius-md: 14px;
@@ -997,42 +995,6 @@
   [data-slot="button"][data-variant="secondary"] {
   background-color: color-mix(in oklab, var(--cronus-fg-inverse) 72%, transparent);
   border-color: color-mix(in oklab, var(--cronus-fg) 16%, transparent);
-}
-
-/* Live theming pane is chrome glass (Neutral page tokens). Primary stays
-   off the fill — the nested theme only recolors catalog inside. */
-[data-slot="theme-stage"][data-cronus-look="glass"][data-cronus-mode="dark"] [data-slot="card"] {
-  background-color: color-mix(in oklab, var(--cronus-fg) 11%, transparent);
-  border-color: color-mix(in oklab, var(--cronus-fg) 20%, transparent);
-  box-shadow:
-    inset 0 1px 0 color-mix(in oklab, var(--cronus-fg) 38%, transparent),
-    inset 0 -1px 0 color-mix(in oklab, var(--cronus-fg) 5%, transparent),
-    0 1px 0 color-mix(in oklab, var(--cronus-fg) 6%, transparent),
-    0 18px 40px color-mix(in oklab, black 22%, transparent);
-}
-
-[data-slot="theme-stage"][data-cronus-look="glass"][data-cronus-mode="light"] [data-slot="card"] {
-  background-color: color-mix(in oklab, var(--cronus-fg-inverse) 62%, transparent);
-  border-color: color-mix(in oklab, var(--cronus-fg) 11%, transparent);
-  box-shadow:
-    inset 0 1px 0 color-mix(in oklab, var(--cronus-fg-inverse) 90%, transparent),
-    0 14px 36px color-mix(in oklab, var(--cronus-fg) 6%, transparent);
-}
-
-[data-slot="theme-stage"] [data-slot="card"]::before {
-  background: linear-gradient(
-    180deg,
-    color-mix(in oklab, var(--cronus-fg) 16%, transparent),
-    transparent 26%
-  );
-}
-
-[data-slot="theme-stage"][data-cronus-mode="light"] [data-slot="card"]::before {
-  background: linear-gradient(
-    180deg,
-    color-mix(in oklab, var(--cronus-fg-inverse) 52%, transparent),
-    transparent 28%
-  );
 }
 
 @media (prefers-reduced-transparency: reduce) {

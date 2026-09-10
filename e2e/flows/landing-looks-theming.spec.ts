@@ -54,9 +54,8 @@ test.describe("landing looks and theming", () => {
     );
 
     await expect(stage).not.toHaveAttribute("data-cronus-theme", "sunset");
-    await expect(stage).toHaveAttribute("data-cronus-look", "glass");
-    const chromeMode = await page.locator("html").getAttribute("data-cronus-mode");
-    await expect(stage).toHaveAttribute("data-cronus-mode", chromeMode ?? "");
+    await expect(stage).not.toHaveAttribute("data-cronus-look");
+    await expect(stage).not.toHaveAttribute("data-cronus-mode");
 
     await expect(page.locator("html")).toHaveAttribute("data-cronus-theme", "neutral");
   });

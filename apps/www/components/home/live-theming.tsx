@@ -33,16 +33,28 @@ const THEMES = [
 /** Static bar heights for the preview chart (percent) — stable across renders. */
 const BARS = [38, 62, 45, 78, 56, 90, 68];
 
+/** Chromatic presets whose raw primary is too light for white type. */
+const WHITE_ON_PRIMARY: ReadonlySet<ThemeName> = new Set(["aurora", "sunset", "emerald"]);
+
+/**
+ * `text-white` on the raw aurora/sunset/emerald primary fails AA (≤2.6:1).
+ * Mix the fill the button controls toward black until the pair clears 4.5:1 —
+ * same exception as `Button` destructive.
+ */
+const ON_BRAND_PRIMARY =
+  "bg-[color-mix(in_oklch,var(--cronus-primary),black_30%)] text-white";
+
 /**
  * Signature section. Theme chips recolor the catalog inside the pane.
- * Light/dark is the landing mode — the glass samples the page. A nested
- * opposite mode puts light type on dark glass (or a solid plate on light).
+ * The pane stays Neutral chrome (`surface-raised`) so it matches the
+ * rest of the landing. A nested provider re-themes only the specimen.
  */
 export function LiveTheming() {
   const { mode: chromeMode, toggleMode } = useTheme();
   const [theme, setTheme] = useState<ThemeName>("aurora");
   const [radius, setRadius] = useState(14);
   const isDark = chromeMode === "dark";
+  const onBrandPrimary = WHITE_ON_PRIMARY.has(theme) ? ON_BRAND_PRIMARY : undefined;
 
   return (
     <section id="theming" className="relative scroll-mt-20">
@@ -124,17 +136,12 @@ export function LiveTheming() {
           </div>
         </div>
 
-        {/* Pane is Neutral chrome glass — theme/mode of the page. The
-            nested provider re-themes only the catalog inside. */}
-        <div
-          data-slot="theme-stage"
-          data-cronus-look="glass"
-          data-cronus-mode={chromeMode}
-          className="mt-8 text-fg"
-        >
+        {/* Pane is Neutral chrome — same raised surface as landing cards.
+            The nested provider re-themes only the specimen. */}
+        <div data-slot="theme-stage" className="mt-8 text-fg">
           <div
             data-slot="card"
-            className="relative rounded-2xl border text-fg backdrop-blur-[40px] backdrop-saturate-150"
+            className="relative rounded-2xl border border-border bg-surface-raised text-fg"
           >
             <CronusUIProvider
               defaultThemeName={theme}
@@ -196,7 +203,7 @@ export function LiveTheming() {
                     </div>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <Button size="sm" className="w-full">
+                    <Button size="sm" className={cn("w-full", onBrandPrimary)}>
                       Deploy
                     </Button>
                     <div className="flex gap-2">
@@ -222,7 +229,9 @@ export function LiveTheming() {
                         Notify me
                       </Label>
                     </div>
-                    <Button size="md">Subscribe</Button>
+                    <Button size="md" className={onBrandPrimary}>
+                      Subscribe
+                    </Button>
                   </div>
                 </div>
               </div>
