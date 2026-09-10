@@ -1,7 +1,6 @@
 import { CronusThemeScript, CronusUIProvider } from "@cronus-ui/theme";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { SitePreloader } from "../components/site-preloader";
 import { SITE_URL } from "../lib/site-url";
 import "./globals.css";
 
@@ -31,6 +30,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           defaultThemeName="neutral"
           defaultModeName="dark"
         />
+        <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: static pre-paint cover on `/`; no interpolated input
+          dangerouslySetInnerHTML={{
+            __html: `if(location.pathname==="/"&&!navigator.webdriver)document.documentElement.setAttribute("data-cronus-splash","");`,
+          }}
+        />
       </head>
       <body>
         <a
@@ -45,7 +50,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           defaultModeName="dark"
           storageKey="cronus-ui-theme-v2"
         >
-          <SitePreloader />
           {children}
         </CronusUIProvider>
       </body>

@@ -37,6 +37,17 @@ body {
   min-height: 100%;
 }
 
+/* First-paint cover on `/` until WordsPreloader mounts. Set by an inline
+   head script; cleared when the splash starts its exit. Same token as the
+   preloader panel so the handoff is invisible. */
+html[data-cronus-splash] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background-color: var(--cronus-surface-raised);
+}
+
 /* Accidental horizontal overflow (a too-wide nav, a 100vw + scrollbar)
    must not widen the document: trackpads then axis-lock to X and vertical
    scroll feels broken. clip (not hidden) keeps overflow-y visible.

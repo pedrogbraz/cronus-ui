@@ -11,6 +11,7 @@ import { SignalStats } from "../components/home/signal-stats";
 import { SiteFooter } from "../components/home/site-footer";
 import { SponsorBand } from "../components/home/sponsor-band";
 import { SiteNav } from "../components/site-nav";
+import { SitePreloader } from "../components/site-preloader";
 
 /** Geometric grotesk — closest OFL stand-in for x.ai's Universal Sans Display. */
 const display = Geist({
@@ -21,6 +22,7 @@ const display = Geist({
 export default function Page() {
   return (
     <div className="min-h-screen bg-surface-base text-fg">
+      <SitePreloader />
       <ChromeThemeLock />
       <SiteNav />
       <main id="main-content">

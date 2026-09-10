@@ -1,40 +1,40 @@
 "use client";
 
+import { WordsPreloader } from "@cronus-ui/ui/words-preloader";
 import { AnimatePresence } from "motion/react";
-import dynamic from "next/dynamic";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CronusMark } from "./brand/cronus-mark";
 
 /**
- * WordsPreloader lives behind `next/dynamic` on the subpath export so the
- * root layout does not pull `@cronus-ui/ui` into every first-load route.
+ * Survives client navigations (the page remounts, this module does not) so
+ * the splash does not replay when returning to `/`. A full reload resets it.
  */
-const WordsPreloader = dynamic(
-  () =>
-    import("@cronus-ui/ui/words-preloader").then((mod) => ({
-      default: mod.WordsPreloader,
-    })),
-  { ssr: false },
-);
+let splashPlayed = false;
+
+function clearSplashCover() {
+  document.documentElement.removeAttribute("data-cronus-splash");
+}
 
 /**
- * Full-document splash on `/` — first visit and every reload. Client
- * navigations keep the root layout mounted, so the sequence does not replay.
+ * Full-document splash on `/` — first visit and every reload. Mounted only
+ * from the homepage so other routes do not pay for WordsPreloader. The first
+ * paint cover is `data-cronus-splash` from the root layout script.
  * Playwright sets `navigator.webdriver`; skip there so flows are not blocked.
  */
 export function SitePreloader() {
-  const pathname = usePathname();
-  const onHome = pathname === "/";
-  const [show, setShow] = useState(onHome);
+  const [show, setShow] = useState(() => {
+    if (typeof navigator !== "undefined" && navigator.webdriver) return false;
+    if (splashPlayed) return false;
+    splashPlayed = true;
+    return true;
+  });
 
   useEffect(() => {
     if (typeof navigator !== "undefined" && navigator.webdriver) {
+      clearSplashCover();
       setShow(false);
     }
   }, []);
-
-  if (!onHome) return null;
 
   return (
     <AnimatePresence>
@@ -47,7 +47,10 @@ export function SitePreloader() {
               className="h-16 w-32 text-fg sm:h-20 sm:w-40 lg:h-24 lg:w-48"
             />
           }
-          onComplete={() => setShow(false)}
+          onComplete={() => {
+            clearSplashCover();
+            setShow(false);
+          }}
         />
       ) : null}
     </AnimatePresence>
