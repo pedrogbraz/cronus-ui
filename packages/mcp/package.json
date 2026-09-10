@@ -4,7 +4,7 @@
   "mcpName": "io.github.pedrogbraz/cronus-ui",
   "description": "Model Context Protocol server for Cronus UI — lets MCP-compatible AI agents discover and fetch Cronus UI components and blocks from the registry.",
   "type": "module",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "author": "Cronus",
   "repository": {
     "type": "git",

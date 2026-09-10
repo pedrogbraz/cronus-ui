@@ -148,5 +148,5 @@ issue.
 
 ## License
 
-By contributing you agree that your contributions are licensed under the
-repository's [MIT License](./LICENSE).
+By contributing you agree that your contributions are assigned to the
+copyright holder under the repository's [proprietary license](./LICENSE).

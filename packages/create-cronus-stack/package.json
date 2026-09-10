@@ -3,7 +3,7 @@
   "version": "0.7.6",
   "description": "Scaffold a Cronus stack from the Cronus Stack Builder contract: app files, stack.json, KICKOFF.md, and optional AI Kit.",
   "type": "module",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "author": "Cronus",
   "repository": {
     "type": "git",

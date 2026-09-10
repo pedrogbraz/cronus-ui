@@ -3,7 +3,7 @@
   "version": "0.7.6",
   "description": "Scaffold a Next.js + Cronus UI app: npx create-cronus-app my-app --template saas.",
   "type": "module",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "author": "Cronus",
   "repository": {
     "type": "git",

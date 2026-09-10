@@ -3,7 +3,7 @@
   "version": "0.7.6",
   "description": "Cronus Stack Builder core — catalog, resolver, CLI flags, KICKOFF.md and stack.json artifacts.",
   "type": "module",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "author": "Cronus",
   "repository": {
     "type": "git",

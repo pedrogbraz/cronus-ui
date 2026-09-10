@@ -22,7 +22,7 @@
   "sideEffects": [
     "./styles/tokens.css"
   ],
-  "license": "MIT",
+  "license": "UNLICENSED",
   "author": "Cronus",
   "repository": {
     "type": "git",

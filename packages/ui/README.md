@@ -259,4 +259,4 @@ Both distribution modes share one source of truth. See the
 
 ## License
 
-MIT
+Proprietary. See [LICENSE](../../LICENSE).

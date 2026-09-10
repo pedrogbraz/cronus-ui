@@ -220,4 +220,4 @@ bun run test       # vitest (tool logic, no network)
 
 ## License
 
-MIT
+Proprietary. See [LICENSE](../../LICENSE).

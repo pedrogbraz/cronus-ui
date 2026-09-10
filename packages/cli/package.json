@@ -3,7 +3,7 @@
   "version": "0.7.6",
   "description": "cronus-ui — add Cronus UI components to your project, shadcn-style (copy-paste registry).",
   "type": "module",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "author": "Cronus",
   "repository": {
     "type": "git",

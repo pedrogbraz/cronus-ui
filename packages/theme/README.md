@@ -187,4 +187,4 @@ subtree with no React re-render of the components it contains.
 
 ## License
 
-MIT
+Proprietary. See [LICENSE](../../LICENSE).
