@@ -1,6 +1,7 @@
 import { CronusThemeScript, CronusUIProvider } from "@cronus-ui/theme";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { SitePreloader } from "../components/site-preloader";
 import { SITE_URL } from "../lib/site-url";
 import "./globals.css";
 
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           defaultModeName="dark"
           storageKey="cronus-ui-theme-v2"
         >
+          <SitePreloader />
           {children}
         </CronusUIProvider>
       </body>
