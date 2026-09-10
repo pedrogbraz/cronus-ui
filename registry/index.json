@@ -38,6 +38,38 @@
     ]
   },
   {
+    "name": "actions",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1"
+    ],
+    "registryDependencies": [
+      "button",
+      "cn",
+      "tooltip"
+    ]
+  },
+  {
+    "name": "ai-code-block",
+    "type": "registry:ui",
+    "dependencies": [
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "button",
+      "cn",
+      "select"
+    ]
+  },
+  {
+    "name": "ai-image",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [
+      "cn"
+    ]
+  },
+  {
     "name": "alert-dialog",
     "type": "registry:ui",
     "dependencies": [
@@ -119,6 +151,19 @@
     "registryDependencies": [
       "chart",
       "cn"
+    ]
+  },
+  {
+    "name": "artifact",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1",
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "button",
+      "cn",
+      "tooltip"
     ]
   },
   {
@@ -226,6 +271,17 @@
     ]
   },
   {
+    "name": "branch",
+    "type": "registry:ui",
+    "dependencies": [
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "button",
+      "cn"
+    ]
+  },
+  {
     "name": "breadcrumb",
     "type": "registry:ui",
     "dependencies": [
@@ -305,6 +361,21 @@
     "registryDependencies": [
       "button",
       "cn"
+    ]
+  },
+  {
+    "name": "chain-of-thought",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1",
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "badge",
+      "cn",
+      "collapsible",
+      "response",
+      "text-shimmer"
     ]
   },
   {
@@ -472,6 +543,28 @@
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
+      "cn"
+    ]
+  },
+  {
+    "name": "context",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [
+      "button",
+      "cn",
+      "hover-card",
+      "progress"
+    ]
+  },
+  {
+    "name": "conversation",
+    "type": "registry:ui",
+    "dependencies": [
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "button",
       "cn"
     ]
   },
@@ -806,6 +899,17 @@
     ]
   },
   {
+    "name": "globe-wireframe",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1",
+      "d3-geo@3.1.0"
+    ],
+    "registryDependencies": [
+      "cn"
+    ]
+  },
+  {
     "name": "gradient-border",
     "type": "registry:ui",
     "dependencies": [],
@@ -886,6 +990,18 @@
     ],
     "registryDependencies": [
       "cn"
+    ]
+  },
+  {
+    "name": "inline-citation",
+    "type": "registry:ui",
+    "dependencies": [
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "badge",
+      "cn",
+      "hover-card"
     ]
   },
   {
@@ -1017,6 +1133,14 @@
     ]
   },
   {
+    "name": "loader",
+    "type": "registry:ui",
+    "dependencies": [],
+    "registryDependencies": [
+      "cn"
+    ]
+  },
+  {
     "name": "logo-carousel",
     "type": "registry:ui",
     "dependencies": [
@@ -1061,6 +1185,17 @@
       "lucide-react@^0.577.0"
     ],
     "registryDependencies": [
+      "cn"
+    ]
+  },
+  {
+    "name": "message",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1"
+    ],
+    "registryDependencies": [
+      "avatar",
       "cn"
     ]
   },
@@ -1181,6 +1316,18 @@
     ]
   },
   {
+    "name": "open-in-chat",
+    "type": "registry:ui",
+    "dependencies": [
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "button",
+      "cn",
+      "dropdown-menu"
+    ]
+  },
+  {
     "name": "orbit",
     "type": "registry:ui",
     "dependencies": [],
@@ -1252,6 +1399,21 @@
     ]
   },
   {
+    "name": "plan",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1",
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "button",
+      "card",
+      "cn",
+      "collapsible",
+      "text-shimmer"
+    ]
+  },
+  {
     "name": "popover",
     "type": "registry:ui",
     "dependencies": [
@@ -1293,6 +1455,36 @@
     ]
   },
   {
+    "name": "prompt-input",
+    "type": "registry:ui",
+    "dependencies": [
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "button",
+      "cn",
+      "command",
+      "dropdown-menu",
+      "hover-card",
+      "select",
+      "textarea",
+      "tooltip"
+    ]
+  },
+  {
+    "name": "queue",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1",
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "button",
+      "cn",
+      "collapsible"
+    ]
+  },
+  {
     "name": "radar-chart",
     "type": "registry:ui",
     "dependencies": [
@@ -1326,6 +1518,20 @@
     ]
   },
   {
+    "name": "reasoning",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1",
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "cn",
+      "collapsible",
+      "response",
+      "text-shimmer"
+    ]
+  },
+  {
     "name": "receive-button",
     "type": "registry:ui",
     "dependencies": [
@@ -1344,6 +1550,14 @@
       "lucide-react@^0.577.0",
       "react-resizable-panels@^2.1.9"
     ],
+    "registryDependencies": [
+      "cn"
+    ]
+  },
+  {
+    "name": "response",
+    "type": "registry:ui",
+    "dependencies": [],
     "registryDependencies": [
       "cn"
     ]
@@ -1597,6 +1811,18 @@
     "registryDependencies": []
   },
   {
+    "name": "sources",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1",
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "cn",
+      "collapsible"
+    ]
+  },
+  {
     "name": "sparkles-text",
     "type": "registry:ui",
     "dependencies": [],
@@ -1682,6 +1908,17 @@
     ]
   },
   {
+    "name": "suggestion",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1"
+    ],
+    "registryDependencies": [
+      "button",
+      "cn"
+    ]
+  },
+  {
     "name": "sunburst-chart",
     "type": "registry:ui",
     "dependencies": [],
@@ -1737,6 +1974,18 @@
     ]
   },
   {
+    "name": "task",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1",
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "cn",
+      "collapsible"
+    ]
+  },
+  {
     "name": "terminal",
     "type": "registry:ui",
     "dependencies": [],
@@ -1747,6 +1996,16 @@
   },
   {
     "name": "text-effect",
+    "type": "registry:ui",
+    "dependencies": [
+      "motion@^12.23.0"
+    ],
+    "registryDependencies": [
+      "cn"
+    ]
+  },
+  {
+    "name": "text-shimmer",
     "type": "registry:ui",
     "dependencies": [
       "motion@^12.23.0"
@@ -1830,6 +2089,20 @@
     ]
   },
   {
+    "name": "tool",
+    "type": "registry:ui",
+    "dependencies": [
+      "class-variance-authority@^0.7.1",
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "ai-code-block",
+      "badge",
+      "cn",
+      "collapsible"
+    ]
+  },
+  {
     "name": "toolbar",
     "type": "registry:ui",
     "dependencies": [],
@@ -1882,6 +2155,21 @@
     ],
     "registryDependencies": [
       "cn"
+    ]
+  },
+  {
+    "name": "web-preview",
+    "type": "registry:ui",
+    "dependencies": [
+      "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": [
+      "badge",
+      "button",
+      "cn",
+      "collapsible",
+      "input",
+      "tooltip"
     ]
   },
   {
@@ -2832,6 +3120,16 @@
     "dependencies": [
       "@cronus-ui/ui@0.7.6",
       "lucide-react@^0.577.0"
+    ],
+    "registryDependencies": []
+  },
+  {
+    "name": "contact-form--globe",
+    "type": "registry:block",
+    "dependencies": [
+      "@cronus-ui/ui@0.7.6",
+      "lucide-react@^0.577.0",
+      "motion@^12.23.0"
     ],
     "registryDependencies": []
   },

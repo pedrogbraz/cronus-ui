@@ -1,0 +1,19 @@
+{
+  "name": "sources",
+  "type": "registry:ui",
+  "dependencies": [
+    "class-variance-authority@^0.7.1",
+    "lucide-react@^0.577.0"
+  ],
+  "registryDependencies": [
+    "cn",
+    "collapsible"
+  ],
+  "files": [
+    {
+      "path": "sources.tsx",
+      "content": "import { cva } from \"class-variance-authority\";\nimport { Book, ChevronDown } from \"lucide-react\";\nimport type { ComponentProps, Ref } from \"react\";\nimport { cn } from \"../lib/cn.js\";\nimport { Collapsible, CollapsibleContent, CollapsibleTrigger } from \"./collapsible.js\";\n\nexport const sourcesVariants = cva(\"not-prose mb-4 text-xs text-primary-strong\");\n\nexport interface SourcesProps extends ComponentProps<typeof Collapsible> {\n  ref?: Ref<HTMLDivElement>;\n}\n\nexport function Sources({ className, ref, ...props }: SourcesProps) {\n  return (\n    <Collapsible\n      ref={ref}\n      data-slot=\"sources\"\n      className={cn(sourcesVariants(), className)}\n      {...props}\n    />\n  );\n}\n\nexport interface SourcesTriggerLabels {\n  usedSources: string;\n}\n\nexport interface SourcesTriggerProps extends ComponentProps<typeof CollapsibleTrigger> {\n  ref?: Ref<HTMLButtonElement>;\n  count: number;\n  labels?: Partial<SourcesTriggerLabels>;\n}\n\nexport function SourcesTrigger({\n  className,\n  count,\n  children,\n  labels: labelsProp,\n  ref,\n  ...props\n}: SourcesTriggerProps) {\n  const usedSources = (labelsProp?.usedSources ?? \"Used {count} sources\").replace(\n    \"{count}\",\n    String(count),\n  );\n\n  return (\n    <CollapsibleTrigger\n      ref={ref}\n      data-slot=\"sources-trigger\"\n      className={cn(\n        \"flex items-center gap-2 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base\",\n        className,\n      )}\n      {...props}\n    >\n      {children ?? (\n        <>\n          <p className=\"font-medium\">{usedSources}</p>\n          <ChevronDown className=\"size-4\" aria-hidden=\"true\" />\n        </>\n      )}\n    </CollapsibleTrigger>\n  );\n}\n\nexport interface SourcesContentProps extends ComponentProps<typeof CollapsibleContent> {\n  ref?: Ref<HTMLDivElement>;\n}\n\nexport function SourcesContent({ className, ref, ...props }: SourcesContentProps) {\n  return (\n    <CollapsibleContent\n      ref={ref}\n      data-slot=\"sources-content\"\n      className={cn(\"mt-3 flex w-fit flex-col gap-2\", className)}\n      {...props}\n    />\n  );\n}\n\nexport interface SourceProps extends ComponentProps<\"a\"> {\n  ref?: Ref<HTMLAnchorElement>;\n}\n\nexport function Source({ href, title, children, className, ref, ...props }: SourceProps) {\n  return (\n    <a\n      ref={ref}\n      data-slot=\"source\"\n      className={cn(\"flex items-center gap-2\", className)}\n      href={href}\n      rel=\"noreferrer\"\n      target=\"_blank\"\n      {...props}\n    >\n      {children ?? (\n        <>\n          <Book className=\"size-4\" aria-hidden=\"true\" />\n          <span className=\"block font-medium\">{title}</span>\n        </>\n      )}\n    </a>\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}

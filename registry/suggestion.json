@@ -1,0 +1,18 @@
+{
+  "name": "suggestion",
+  "type": "registry:ui",
+  "dependencies": [
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "button",
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "suggestion.tsx",
+      "content": "import { cva } from \"class-variance-authority\";\nimport type { HTMLAttributes, Ref } from \"react\";\nimport { cn } from \"../lib/cn.js\";\nimport { Button, type ButtonProps } from \"./button.js\";\n\nexport const suggestionVariants = cva(\"rounded-full px-4\");\n\nexport interface SuggestionsLabels {\n  suggestions: string;\n}\n\nconst DEFAULT_LABELS: SuggestionsLabels = {\n  suggestions: \"Suggestions\",\n};\n\nexport interface SuggestionsProps extends HTMLAttributes<HTMLElement> {\n  ref?: Ref<HTMLElement>;\n  labels?: Partial<SuggestionsLabels>;\n}\n\nexport function Suggestions({\n  className,\n  children,\n  ref,\n  labels,\n  \"aria-label\": ariaLabel,\n  ...props\n}: SuggestionsProps) {\n  const regionLabel = ariaLabel ?? labels?.suggestions ?? DEFAULT_LABELS.suggestions;\n  return (\n    <section\n      ref={ref}\n      data-slot=\"suggestions\"\n      // biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable region is intentionally focusable so keyboard users can scroll it.\n      tabIndex={0}\n      aria-label={regionLabel}\n      className=\"w-full overflow-x-auto whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base\"\n      {...props}\n    >\n      <div className={cn(\"flex w-max flex-nowrap items-center gap-2\", className)}>{children}</div>\n    </section>\n  );\n}\n\nexport interface SuggestionProps extends Omit<ButtonProps, \"onClick\"> {\n  suggestion: string;\n  onClick?: (suggestion: string) => void;\n}\n\nexport function Suggestion({\n  suggestion,\n  onClick,\n  className,\n  variant = \"outline\",\n  size = \"sm\",\n  children,\n  ref,\n  ...props\n}: SuggestionProps & { ref?: Ref<HTMLButtonElement> }) {\n  return (\n    <Button\n      ref={ref}\n      data-slot=\"suggestion\"\n      type=\"button\"\n      variant={variant}\n      size={size}\n      className={cn(suggestionVariants(), className)}\n      onClick={() => onClick?.(suggestion)}\n      {...props}\n    >\n      {children ?? suggestion}\n    </Button>\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}

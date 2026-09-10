@@ -8,7 +8,7 @@
   "files": [
     {
       "path": "shimmer.tsx",
-      "content": "import { forwardRef, type HTMLAttributes } from \"react\";\nimport { cn } from \"../lib/cn.js\";\n\nexport const Shimmer = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(\n  ({ className, children, ...props }, ref) => {\n    return (\n      <div\n        ref={ref}\n        data-slot=\"shimmer\"\n        aria-hidden\n        className={cn(\"relative overflow-hidden rounded-md bg-surface-overlay\", className)}\n        {...props}\n      >\n        <div className=\"absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-fg/10 to-transparent\" />\n        {children}\n      </div>\n    );\n  },\n);\nShimmer.displayName = \"Shimmer\";\n",
+      "content": "import { forwardRef, type HTMLAttributes } from \"react\";\nimport { cn } from \"../lib/cn.js\";\n\n/** Props for {@link Shimmer}. */\nexport type ShimmerProps = HTMLAttributes<HTMLDivElement>;\n\nexport const Shimmer = forwardRef<HTMLDivElement, ShimmerProps>(\n  ({ className, children, ...props }, ref) => {\n    return (\n      <div\n        ref={ref}\n        data-slot=\"shimmer\"\n        aria-hidden\n        className={cn(\"relative overflow-hidden rounded-md bg-surface-overlay\", className)}\n        {...props}\n      >\n        <div className=\"absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-fg/10 to-transparent motion-reduce:hidden\" />\n        {children}\n      </div>\n    );\n  },\n);\nShimmer.displayName = \"Shimmer\";\n",
       "target": "ui"
     }
   ]

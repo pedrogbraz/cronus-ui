@@ -1,0 +1,15 @@
+{
+  "name": "ai-image",
+  "type": "registry:ui",
+  "dependencies": [],
+  "registryDependencies": [
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "ai-image.tsx",
+      "content": "import type { ImgHTMLAttributes, Ref } from \"react\";\nimport { cn } from \"../lib/cn.js\";\n\nexport interface GeneratedImageProps\n  extends Omit<ImgHTMLAttributes<HTMLImageElement>, \"src\" | \"alt\"> {\n  ref?: Ref<HTMLImageElement>;\n  base64: string;\n  mediaType: string;\n  /** Accepted for API parity with AI SDK generated images; unused at render time. */\n  uint8Array?: Uint8Array;\n  alt?: string;\n}\n\nexport function GeneratedImage({\n  base64,\n  mediaType,\n  uint8Array: _uint8Array,\n  alt,\n  className,\n  ref,\n  ...props\n}: GeneratedImageProps) {\n  void _uint8Array;\n  return (\n    <img\n      ref={ref}\n      data-slot=\"generated-image\"\n      alt={alt ?? \"Generated image\"}\n      className={cn(\"h-auto max-w-full overflow-hidden rounded-md\", className)}\n      src={`data:${mediaType};base64,${base64}`}\n      {...props}\n    />\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}

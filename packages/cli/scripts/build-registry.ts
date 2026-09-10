@@ -349,7 +349,12 @@ const BLOCK_MANIFEST: ReadonlyArray<{
   { slug: "toast-stack", file: "notifications.tsx", constName: "toastStackCode" },
   { slug: "nps-survey", file: "survey.tsx", constName: "npsSurveyCode" },
   { slug: "feedback-form", file: "survey.tsx", constName: "feedbackFormCode" },
-  { slug: "contact-form", file: "survey.tsx", constName: "contactFormCode" },
+  {
+    slug: "contact-form",
+    file: "survey.tsx",
+    constName: "contactFormCode",
+    variants: [{ id: "globe", constName: "contactWithGlobeCode" }],
+  },
   { slug: "post-card", file: "social.tsx", constName: "postCardCode" },
   { slug: "comment-thread", file: "social.tsx", constName: "commentThreadCode" },
   { slug: "profile-card", file: "social.tsx", constName: "profileCardCode" },

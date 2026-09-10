@@ -8,7 +8,7 @@
   "files": [
     {
       "path": "kbd.tsx",
-      "content": "import { forwardRef, type HTMLAttributes } from \"react\";\nimport { cn } from \"../lib/cn.js\";\n\nexport const Kbd = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(\n  ({ className, ...props }, ref) => {\n    return (\n      <kbd\n        ref={ref}\n        data-slot=\"kbd\"\n        className={cn(\n          \"inline-flex h-5 min-w-5 items-center justify-center gap-1 rounded-md border border-border bg-surface-overlay px-1.5 font-mono text-[0.7rem] font-medium text-fg-secondary\",\n          className,\n        )}\n        {...props}\n      />\n    );\n  },\n);\nKbd.displayName = \"Kbd\";\n",
+      "content": "import { forwardRef, type HTMLAttributes } from \"react\";\nimport { cn } from \"../lib/cn.js\";\n\n/** Props for {@link Kbd}. */\nexport type KbdProps = HTMLAttributes<HTMLElement>;\n\nexport const Kbd = forwardRef<HTMLElement, KbdProps>(({ className, ...props }, ref) => {\n  return (\n    <kbd\n      ref={ref}\n      data-slot=\"kbd\"\n      className={cn(\n        \"inline-flex h-5 min-w-5 items-center justify-center gap-1 rounded-md border border-border bg-surface-overlay px-1.5 font-mono text-[0.7rem] font-medium text-fg-secondary\",\n        className,\n      )}\n      {...props}\n    />\n  );\n});\nKbd.displayName = \"Kbd\";\n",
       "target": "ui"
     }
   ]

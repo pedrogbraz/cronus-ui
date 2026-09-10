@@ -668,7 +668,34 @@
       "kind": "section",
       "dataSlots": [],
       "brandTokens": [],
-      "variants": [],
+      "variants": [
+        {
+          "id": "classic",
+          "name": "Classic",
+          "description": "A two-column contact section pairing contact methods with a name, email, and message form.",
+          "item": "contact-form",
+          "exportName": "ContactFormBlock",
+          "style": "default",
+          "palette": "semantic",
+          "motion": "none",
+          "intents": [
+            "form"
+          ]
+        },
+        {
+          "id": "globe",
+          "name": "With globe",
+          "description": "Staggered contact section with a rotating wireframe globe, channel links, and a message form.",
+          "item": "contact-form--globe",
+          "exportName": "ContactFormGlobeBlock",
+          "style": "editorial",
+          "palette": "semantic",
+          "motion": "smooth",
+          "intents": [
+            "form"
+          ]
+        }
+      ],
       "style": "default",
       "palette": "semantic",
       "motion": "none",
@@ -2942,6 +2969,42 @@
         "nav"
       ]
     },
+    "actions": {
+      "title": "Actions",
+      "category": "ai-elements",
+      "description": "Icon actions for an assistant message — copy, retry, share.",
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
+      ]
+    },
+    "ai-code-block": {
+      "title": "AiCodeBlock",
+      "category": "ai-elements",
+      "description": "Compound code surface for tool output and streamed files.",
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
+      ]
+    },
+    "ai-image": {
+      "title": "GeneratedImage",
+      "category": "ai-elements",
+      "description": "Renders a model-generated image from base64.",
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
+      ]
+    },
     "alert": {
       "title": "Alert",
       "category": "feedback",
@@ -3041,6 +3104,18 @@
       "intents": [
         "chart",
         "data"
+      ]
+    },
+    "artifact": {
+      "title": "Artifact",
+      "category": "ai-elements",
+      "description": "A framed canvas for generated files, code, or previews.",
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
       ]
     },
     "aspect-ratio": {
@@ -3166,6 +3241,18 @@
         "motion"
       ]
     },
+    "branch": {
+      "title": "Branch",
+      "category": "ai-elements",
+      "description": "Step through alternative assistant generations.",
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
+      ]
+    },
     "breadcrumb": {
       "title": "Breadcrumb",
       "category": "navigation",
@@ -3263,6 +3350,18 @@
       "intents": [
         "media",
         "motion"
+      ]
+    },
+    "chain-of-thought": {
+      "title": "ChainOfThought",
+      "category": "ai-elements",
+      "description": "A collapsible trail of model reasoning steps.",
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
       ]
     },
     "chart": {
@@ -3451,6 +3550,18 @@
         "overlay"
       ]
     },
+    "context": {
+      "title": "Context",
+      "category": "ai-elements",
+      "description": "Hover card for language-model token usage.",
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
+      ]
+    },
     "context-menu": {
       "title": "ContextMenu",
       "category": "overlays",
@@ -3461,6 +3572,18 @@
       "motion": "snappy",
       "intents": [
         "overlay"
+      ]
+    },
+    "conversation": {
+      "title": "Conversation",
+      "category": "ai-elements",
+      "description": "Auto-scrolling chat log with an empty state and jump-to-latest.",
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
       ]
     },
     "copy-button": {
@@ -3853,6 +3976,19 @@
         "motion"
       ]
     },
+    "globe-wireframe": {
+      "title": "GlobeWireframe",
+      "category": "premium",
+      "description": "An orthographic SVG globe with country strokes, drag, and a slow auto-rotate.",
+      "rsc": false,
+      "style": "editorial",
+      "palette": "semantic",
+      "motion": "cinematic",
+      "intents": [
+        "marketing",
+        "motion"
+      ]
+    },
     "gradient-border": {
       "title": "GradientBorder",
       "category": "premium",
@@ -3961,6 +4097,18 @@
       "intents": [
         "marketing",
         "motion"
+      ]
+    },
+    "inline-citation": {
+      "title": "InlineCitation",
+      "category": "ai-elements",
+      "description": "Inline source badge with a hover card of citations.",
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
       ]
     },
     "input": {
@@ -4111,6 +4259,18 @@
         "data"
       ]
     },
+    "loader": {
+      "title": "Loader",
+      "category": "ai-elements",
+      "description": "Spinning glyph for in-flight generation.",
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
+      ]
+    },
     "logo-carousel": {
       "title": "LogoCarousel",
       "category": "premium",
@@ -4171,6 +4331,18 @@
       "motion": "none",
       "intents": [
         "nav"
+      ]
+    },
+    "message": {
+      "title": "Message",
+      "category": "ai-elements",
+      "description": "User and assistant bubbles with optional avatars.",
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
       ]
     },
     "meteors": {
@@ -4310,6 +4482,18 @@
         "form"
       ]
     },
+    "open-in-chat": {
+      "title": "OpenIn",
+      "category": "ai-elements",
+      "description": "Open a prompt in ChatGPT, Claude, Cursor, and other chats.",
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
+      ]
+    },
     "orbit": {
       "title": "Orbit",
       "category": "premium",
@@ -4397,6 +4581,18 @@
         "nav"
       ]
     },
+    "plan": {
+      "title": "Plan",
+      "category": "ai-elements",
+      "description": "Collapsible plan card the model can stream into.",
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
+      ]
+    },
     "popover": {
       "title": "Popover",
       "category": "overlays",
@@ -4446,6 +4642,30 @@
         "motion"
       ]
     },
+    "prompt-input": {
+      "title": "PromptInput",
+      "category": "ai-elements",
+      "description": "Composer with attachments, tools, speech, and submit/stop.",
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
+      ]
+    },
+    "queue": {
+      "title": "Queue",
+      "category": "ai-elements",
+      "description": "Pending messages and todos waiting to run.",
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
+      ]
+    },
     "radar-chart": {
       "title": "RadarChart",
       "category": "charts",
@@ -4483,6 +4703,18 @@
         "form"
       ]
     },
+    "reasoning": {
+      "title": "Reasoning",
+      "category": "ai-elements",
+      "description": "Collapsible thinking block that follows streaming.",
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
+      ]
+    },
     "receive-button": {
       "title": "ReceiveButton",
       "category": "premium",
@@ -4507,6 +4739,18 @@
       "motion": "none",
       "intents": [
         "nav"
+      ]
+    },
+    "response": {
+      "title": "Response",
+      "category": "ai-elements",
+      "description": "Streaming-friendly host for assistant markdown.",
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
       ]
     },
     "retro-grid": {
@@ -4808,6 +5052,18 @@
         "feedback"
       ]
     },
+    "sources": {
+      "title": "Sources",
+      "category": "ai-elements",
+      "description": "Expandable list of sources the model used.",
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
+      ]
+    },
     "sparkles-text": {
       "title": "SparklesText",
       "category": "premium",
@@ -4917,6 +5173,18 @@
         "form"
       ]
     },
+    "suggestion": {
+      "title": "Suggestions",
+      "category": "ai-elements",
+      "description": "Horizontal row of prompt suggestion chips.",
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
+      ]
+    },
     "sunburst-chart": {
       "title": "SunburstChart",
       "category": "charts",
@@ -4990,6 +5258,18 @@
         "form"
       ]
     },
+    "task": {
+      "title": "Task",
+      "category": "ai-elements",
+      "description": "Collapsible checklist of agent work.",
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
+      ]
+    },
     "terminal": {
       "title": "Terminal",
       "category": "premium",
@@ -5012,6 +5292,18 @@
       "motion": "smooth",
       "intents": [
         "motion"
+      ]
+    },
+    "text-shimmer": {
+      "title": "TextShimmer",
+      "category": "ai-elements",
+      "description": "Shimmering placeholder text while a token stream starts.",
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
       ]
     },
     "textarea": {
@@ -5101,6 +5393,18 @@
         "motion"
       ]
     },
+    "tool": {
+      "title": "Tool",
+      "category": "ai-elements",
+      "description": "Collapsible tool-call panel with input, output, and status.",
+      "rsc": true,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
+      ]
+    },
     "toolbar": {
       "title": "Toolbar",
       "category": "navigation",
@@ -5173,6 +5477,18 @@
         "media"
       ]
     },
+    "web-preview": {
+      "title": "WebPreview",
+      "category": "ai-elements",
+      "description": "Sandboxed iframe preview with URL chrome and a console.",
+      "rsc": false,
+      "style": "default",
+      "palette": "semantic",
+      "motion": "snappy",
+      "intents": [
+        "ai"
+      ]
+    },
     "word-rotate": {
       "title": "WordRotate",
       "category": "premium",
@@ -5190,7 +5506,7 @@
       "category": "preloaders",
       "description": "Themeable line preloader — product lines clip up with SlideUpText, optional last-beat mark, then a curved lip flattens as the panel slides up.",
       "rsc": false,
-      "style": "default",
+      "style": "editorial",
       "palette": "neutral",
       "motion": "cinematic",
       "intents": [

@@ -1,0 +1,18 @@
+{
+  "name": "message",
+  "type": "registry:ui",
+  "dependencies": [
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "avatar",
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "message.tsx",
+      "content": "import { cva, type VariantProps } from \"class-variance-authority\";\nimport type { ComponentProps, HTMLAttributes, Ref } from \"react\";\nimport { cn } from \"../lib/cn.js\";\nimport { Avatar, AvatarFallback, AvatarImage } from \"./avatar.js\";\n\nexport interface MessageProps extends HTMLAttributes<HTMLDivElement> {\n  ref?: Ref<HTMLDivElement>;\n  from: \"user\" | \"assistant\" | \"system\";\n}\n\nexport function Message({ className, from, ref, ...props }: MessageProps) {\n  return (\n    <div\n      ref={ref}\n      data-slot=\"message\"\n      data-from={from}\n      className={cn(\n        \"group flex w-full flex-col gap-2\",\n        from === \"user\" ? \"items-end\" : \"items-start\",\n        className,\n      )}\n      {...props}\n    />\n  );\n}\n\nexport const messageContentVariants = cva(\n  \"flex flex-col gap-2 overflow-hidden rounded-lg text-sm\",\n  {\n    variants: {\n      variant: {\n        contained: [\n          \"max-w-[80%] px-4 py-3\",\n          \"group-data-[from=user]:bg-primary group-data-[from=user]:text-primary-foreground\",\n          \"group-data-[from=assistant]:w-full group-data-[from=assistant]:max-w-full\",\n        ],\n        flat: [\n          \"group-data-[from=user]:max-w-[80%] group-data-[from=user]:bg-surface-overlay group-data-[from=user]:px-4 group-data-[from=user]:py-3 group-data-[from=user]:text-fg\",\n          \"group-data-[from=assistant]:w-full group-data-[from=assistant]:max-w-full\",\n        ],\n      },\n    },\n    defaultVariants: { variant: \"contained\" },\n  },\n);\n\nexport interface MessageContentProps\n  extends HTMLAttributes<HTMLDivElement>,\n    VariantProps<typeof messageContentVariants> {\n  ref?: Ref<HTMLDivElement>;\n}\n\nexport function MessageContent({\n  children,\n  className,\n  variant,\n  ref,\n  ...props\n}: MessageContentProps) {\n  return (\n    <div\n      ref={ref}\n      data-slot=\"message-content\"\n      className={cn(messageContentVariants({ variant }), className)}\n      {...props}\n    >\n      {children}\n    </div>\n  );\n}\n\nexport interface MessageAvatarLabels {\n  me: string;\n}\n\nexport interface MessageAvatarProps extends ComponentProps<typeof Avatar> {\n  src: string;\n  name?: string;\n  labels?: Partial<MessageAvatarLabels>;\n}\n\nconst DEFAULT_AVATAR_LABELS: MessageAvatarLabels = {\n  me: \"ME\",\n};\n\nexport function MessageAvatar({\n  src,\n  name,\n  className,\n  labels: labelsProp,\n  ...props\n}: MessageAvatarProps) {\n  const labels = { ...DEFAULT_AVATAR_LABELS, ...labelsProp };\n  const fallback = name?.slice(0, 2) || labels.me;\n\n  return (\n    <Avatar\n      data-slot=\"message-avatar\"\n      className={cn(\"size-8 ring-1 ring-border\", className)}\n      {...props}\n    >\n      <AvatarImage alt={name ?? labels.me} className=\"mt-0 mb-0\" src={src} />\n      <AvatarFallback>{fallback}</AvatarFallback>\n    </Avatar>\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}

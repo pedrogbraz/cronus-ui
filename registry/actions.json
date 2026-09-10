@@ -1,0 +1,19 @@
+{
+  "name": "actions",
+  "type": "registry:ui",
+  "dependencies": [
+    "class-variance-authority@^0.7.1"
+  ],
+  "registryDependencies": [
+    "button",
+    "cn",
+    "tooltip"
+  ],
+  "files": [
+    {
+      "path": "actions.tsx",
+      "content": "import { cva } from \"class-variance-authority\";\nimport type { HTMLAttributes, Ref } from \"react\";\nimport { cn } from \"../lib/cn.js\";\nimport { Button, type ButtonProps } from \"./button.js\";\nimport { Tooltip, TooltipContent, TooltipTrigger } from \"./tooltip.js\";\n\nexport const actionVariants = cva(\"relative text-fg-tertiary hover:text-fg\");\n\nexport interface ActionsProps extends HTMLAttributes<HTMLDivElement> {\n  ref?: Ref<HTMLDivElement>;\n}\n\nexport function Actions({ className, ref, ...props }: ActionsProps) {\n  return (\n    <div\n      ref={ref}\n      data-slot=\"actions\"\n      className={cn(\"flex items-center gap-1\", className)}\n      {...props}\n    />\n  );\n}\n\nexport interface ActionProps extends ButtonProps {\n  tooltip?: string;\n  label?: string;\n}\n\nexport function Action({\n  tooltip,\n  children,\n  label,\n  className,\n  variant = \"ghost\",\n  size = \"icon-sm\",\n  ref,\n  \"aria-label\": ariaLabel,\n  ...props\n}: ActionProps & { ref?: Ref<HTMLButtonElement> }) {\n  const accessibleName = ariaLabel ?? label ?? tooltip;\n  const button = (\n    <Button\n      ref={ref}\n      data-slot=\"action\"\n      type=\"button\"\n      variant={variant}\n      size={size}\n      aria-label={accessibleName}\n      className={cn(actionVariants(), className)}\n      {...props}\n    >\n      {children}\n    </Button>\n  );\n\n  if (!tooltip) {\n    return button;\n  }\n\n  return (\n    <Tooltip>\n      <TooltipTrigger asChild>{button}</TooltipTrigger>\n      <TooltipContent>{tooltip}</TooltipContent>\n    </Tooltip>\n  );\n}\n",
+      "target": "ui"
+    }
+  ]
+}

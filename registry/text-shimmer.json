@@ -1,0 +1,17 @@
+{
+  "name": "text-shimmer",
+  "type": "registry:ui",
+  "dependencies": [
+    "motion@^12.23.0"
+  ],
+  "registryDependencies": [
+    "cn"
+  ],
+  "files": [
+    {
+      "path": "text-shimmer.tsx",
+      "content": "\"use client\";\n\nimport { motion, useReducedMotion } from \"motion/react\";\nimport { type CSSProperties, type ElementType, type JSX, memo, useMemo } from \"react\";\nimport { cn } from \"../lib/cn.js\";\n\nexport type TextShimmerProps = {\n  children: string;\n  as?: ElementType;\n  className?: string;\n  duration?: number;\n  spread?: number;\n};\n\nfunction TextShimmerComponent({\n  children,\n  as: Component = \"p\",\n  className,\n  duration = 2,\n  spread = 2,\n}: TextShimmerProps) {\n  const reduceMotion = useReducedMotion();\n  const MotionComponent = useMemo(\n    () => motion.create(Component as keyof JSX.IntrinsicElements),\n    [Component],\n  );\n\n  const dynamicSpread = useMemo(() => (children?.length ?? 0) * spread, [children, spread]);\n\n  return (\n    <MotionComponent\n      data-slot=\"text-shimmer\"\n      animate={reduceMotion ? undefined : { backgroundPosition: \"0% center\" }}\n      className={cn(\n        \"relative inline-block bg-[length:250%_100%,auto] bg-clip-text text-transparent\",\n        \"[background-repeat:no-repeat,padding-box] [--bg:linear-gradient(90deg,transparent_calc(50%-var(--spread)),var(--cronus-surface-base),transparent_calc(50%+var(--spread)))]\",\n        className,\n      )}\n      initial={reduceMotion ? false : { backgroundPosition: \"100% center\" }}\n      style={\n        {\n          \"--spread\": `${dynamicSpread}px`,\n          backgroundImage:\n            \"var(--bg), linear-gradient(var(--cronus-fg-tertiary), var(--cronus-fg-tertiary))\",\n        } as CSSProperties\n      }\n      transition={\n        reduceMotion\n          ? undefined\n          : {\n              repeat: Number.POSITIVE_INFINITY,\n              duration,\n              ease: \"linear\",\n            }\n      }\n    >\n      {children}\n    </MotionComponent>\n  );\n}\n\nexport const TextShimmer = memo(TextShimmerComponent);\nTextShimmer.displayName = \"TextShimmer\";\n",
+      "target": "ui"
+    }
+  ]
+}
