@@ -1,10 +1,22 @@
 "use client";
 
-import { WordsPreloader } from "@cronus-ui/ui";
 import { AnimatePresence } from "motion/react";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CronusMark } from "./brand/cronus-mark";
+
+/**
+ * WordsPreloader lives behind `next/dynamic` on the subpath export so the
+ * root layout does not pull `@cronus-ui/ui` into every first-load route.
+ */
+const WordsPreloader = dynamic(
+  () =>
+    import("@cronus-ui/ui/words-preloader").then((mod) => ({
+      default: mod.WordsPreloader,
+    })),
+  { ssr: false },
+);
 
 /**
  * Full-document splash on `/` — first visit and every reload. Client
