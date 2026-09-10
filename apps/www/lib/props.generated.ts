@@ -6819,4 +6819,50 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  "words-preloader": [
+    {
+      interfaceName: "WordsPreloaderProps",
+      extends:
+        'Extends Omit< ComponentPropsWithoutRef<"div">, "children" | "onAnimationStart" | "onAnimationEnd" | "onDrag" | "onDragStart" | "onDragEnd" >, VariantProps<typeof wordsPreloaderVariants>',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLDivElement>",
+          required: false,
+        },
+        {
+          name: "words",
+          type: "readonly string[]",
+          required: false,
+          description: "Greetings cycled before the curve exits. Defaults to the Skiper 8 set.",
+          default: "DEFAULT_PRELOADER_WORDS",
+        },
+        {
+          name: "firstDelayMs",
+          type: "number",
+          required: false,
+          description: "Hold on the first word, in ms. Original is 1000.",
+          default: "FIRST_DELAY_MS",
+        },
+        {
+          name: "stepDelayMs",
+          type: "number",
+          required: false,
+          description: "Hold on each following word, in ms. Original is 150.",
+          default: "STEP_DELAY_MS",
+        },
+        {
+          name: "labels",
+          type: "Partial<WordsPreloaderLabels>",
+          required: false,
+        },
+        {
+          name: "layout",
+          type: '"page" | "contained"',
+          required: false,
+          default: '"page"',
+        },
+      ],
+    },
+  ],
 };

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **WordsPreloader.** Skiper 8 words preloader — multilingual greetings then a
+  curved lip that flattens as the panel slides up. New Preloaders category in
+  the catalog.
+
 ### Changed
 
 - **`bun run release --publish` publishes the official MCP Registry listing**

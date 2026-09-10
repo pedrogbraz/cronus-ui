@@ -181,6 +181,7 @@
     "usage-meter",
     "video-player",
     "word-rotate",
+    "words-preloader",
     "workspace-switcher"
   ],
   "blocks": [

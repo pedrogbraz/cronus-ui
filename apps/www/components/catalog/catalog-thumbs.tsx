@@ -889,6 +889,15 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
           />
         </Fill>
       );
+    case "words-preloader":
+      return (
+        <Fill className="items-center justify-center bg-white">
+          <p className="flex items-center text-3xl text-black/75">
+            <span className="me-2.5 inline-block size-2.5 rounded-full bg-black" />
+            Hello
+          </p>
+        </Fill>
+      );
     case "token-swap":
       return (
         <Fill className="items-center justify-center bg-[#131313] p-10">

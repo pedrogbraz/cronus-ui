@@ -1028,6 +1028,19 @@ export const CATEGORIES: ComponentCategory[] = [
       },
     ],
   },
+  {
+    slug: "preloaders",
+    name: "Preloaders",
+    items: [
+      {
+        slug: "words-preloader",
+        name: "WordsPreloader",
+        description:
+          "Multilingual greeting preloader with a curved lip that flattens as the panel slides up.",
+        importName: "WordsPreloader",
+      },
+    ],
+  },
 ];
 
 export const ALL_COMPONENTS: (ComponentMeta & { category: string })[] = CATEGORIES.flatMap((c) =>

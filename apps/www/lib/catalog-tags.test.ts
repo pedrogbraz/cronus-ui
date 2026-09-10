@@ -146,6 +146,18 @@ describe("catalog tags", () => {
     expect(tags.intents).toContain("motion");
   });
 
+  it("marks words-preloader as cinematic midnight motion", () => {
+    const tags = resolveCatalogTags({
+      slug: "words-preloader",
+      category: "preloaders",
+      kind: "component",
+    });
+    expect(tags.motion).toBe("cinematic");
+    expect(tags.palette).toBe("midnight");
+    expect(tags.intents).toContain("marketing");
+    expect(tags.intents).toContain("motion");
+  });
+
   it("marks token-swap as snappy commerce motion", () => {
     const tags = resolveCatalogTags({
       slug: "token-swap",

@@ -19,7 +19,8 @@ export type ExampleFamily =
   | "navigation"
   | "date-time"
   | "charts"
-  | "premium";
+  | "premium"
+  | "preloaders";
 
 /** slug → the family module that owns its examples. */
 export const EXAMPLE_FAMILY_BY_SLUG: Record<string, ExampleFamily> = {
@@ -211,6 +212,7 @@ export const EXAMPLE_FAMILY_BY_SLUG: Record<string, ExampleFamily> = {
   "token-swap": "premium",
   "receive-button": "premium",
   "family-wallet": "premium",
+  "words-preloader": "preloaders",
   "dynamic-island": "premium",
   confetti: "premium",
   particles: "premium",

@@ -316,6 +316,18 @@ export type ChangelogEntry = {
 
 export const CHANGELOG_ENTRIES: ChangelogEntry[] = [
   {
+    date: "2026-09-10",
+    version: "Unreleased",
+    status: "In development",
+    title: "WordsPreloader and Preloaders catalog",
+    summary:
+      "On main, not on npm yet. Skiper 8 words preloader plus a dedicated Preloaders category for the next loaders. npm latest stays 0.7.6 until a lockstep publish.",
+    items: [
+      "WordsPreloader — multilingual greetings, curved SVG lip, panel slide-up",
+      "New /components Preloaders category",
+    ],
+  },
+  {
     date: "2026-09-09",
     version: "v0.7.6",
     status: "Released",
