@@ -1,23 +1,16 @@
 {
   "$comment": "Dívida conhecida do CONTRACT.md. O gate barra qualquer violação acima destes números; quando cair, rode `bun run contract:check --baseline` para travar o ganho. Nunca suba um número à mão.",
-  "generated": "2026-08-27",
-  "total": 143,
+  "generated": "2026-09-10",
+  "total": 123,
   "accepted": {
     "accordion.tsx": {
       "9": 1
     },
     "alert-dialog.tsx": {
-      "9": 1,
-      "10": 1
-    },
-    "aurora-background.tsx": {
-      "10": 3
+      "9": 1
     },
     "autocomplete.tsx": {
       "10": 2
-    },
-    "banner.tsx": {
-      "10": 5
     },
     "border-beam.tsx": {
       "1b": 2
@@ -66,8 +59,7 @@
       "9": 1
     },
     "drawer.tsx": {
-      "9": 1,
-      "10": 1
+      "9": 1
     },
     "dropdown-menu.tsx": {
       "9": 1
@@ -89,9 +81,6 @@
     },
     "json-viewer.tsx": {
       "10": 3
-    },
-    "lightbox.tsx": {
-      "10": 2
     },
     "marquee.tsx": {
       "1b": 4
@@ -132,7 +121,7 @@
       "10": 2
     },
     "rich-text-editor.tsx": {
-      "10": 5
+      "10": 4
     },
     "scheduler.tsx": {
       "10": 3
@@ -143,10 +132,6 @@
     },
     "select.tsx": {
       "9": 1
-    },
-    "sheet.tsx": {
-      "9": 1,
-      "10": 6
     },
     "sidebar.tsx": {
       "10": 10

@@ -17,9 +17,13 @@ const ToggleGroupContext = createContext<VariantProps<typeof toggleVariants>>({
   size: "md",
 });
 
+/** Props for {@link ToggleGroup}. */
+export type ToggleGroupProps = ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &
+  VariantProps<typeof toggleVariants>;
+
 export const ToggleGroup = forwardRef<
   ComponentRef<typeof ToggleGroupPrimitive.Root>,
-  ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> & VariantProps<typeof toggleVariants>
+  ToggleGroupProps
 >(({ className, variant, size, children, ...props }, ref) => {
   return (
     <ToggleGroupPrimitive.Root
@@ -36,9 +40,13 @@ export const ToggleGroup = forwardRef<
 });
 ToggleGroup.displayName = "ToggleGroup";
 
+/** Props for {@link ToggleGroupItem}. */
+export type ToggleGroupItemProps = ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> &
+  VariantProps<typeof toggleVariants>;
+
 export const ToggleGroupItem = forwardRef<
   ComponentRef<typeof ToggleGroupPrimitive.Item>,
-  ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Item> & VariantProps<typeof toggleVariants>
+  ToggleGroupItemProps
 >(({ className, variant, size, ...props }, ref) => {
   const context = useContext(ToggleGroupContext);
 

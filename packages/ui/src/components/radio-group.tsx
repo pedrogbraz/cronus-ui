@@ -5,9 +5,12 @@ import { Circle } from "lucide-react";
 import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from "react";
 import { cn } from "../lib/cn.js";
 
+/** Props for {@link RadioGroup}. */
+export type RadioGroupProps = ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>;
+
 export const RadioGroup = forwardRef<
   ComponentRef<typeof RadioGroupPrimitive.Root>,
-  ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
+  RadioGroupProps
 >(({ className, ...props }, ref) => {
   return (
     <RadioGroupPrimitive.Root
@@ -20,9 +23,12 @@ export const RadioGroup = forwardRef<
 });
 RadioGroup.displayName = "RadioGroup";
 
+/** Props for {@link RadioGroupItem}. */
+export type RadioGroupItemProps = ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>;
+
 export const RadioGroupItem = forwardRef<
   ComponentRef<typeof RadioGroupPrimitive.Item>,
-  ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
+  RadioGroupItemProps
 >(({ className, ...props }, ref) => {
   return (
     <RadioGroupPrimitive.Item

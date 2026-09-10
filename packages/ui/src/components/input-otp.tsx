@@ -11,6 +11,9 @@ import {
 } from "react";
 import { cn } from "../lib/cn.js";
 
+/** Props for {@link InputOTP}. */
+export type InputOTPProps = ComponentPropsWithoutRef<typeof OTPInput>;
+
 /**
  * A segmented one-time-passcode field. The visible slots are decorative; a
  * single hidden `<input autocomplete="one-time-code">` holds the real value and
@@ -21,10 +24,7 @@ import { cn } from "../lib/cn.js";
  * being entered; when neither is provided it falls back to a generic
  * `"One-time passcode"` so the field is never nameless.
  */
-export const InputOTP = forwardRef<
-  ComponentRef<typeof OTPInput>,
-  ComponentPropsWithoutRef<typeof OTPInput>
->(
+export const InputOTP = forwardRef<ComponentRef<typeof OTPInput>, InputOTPProps>(
   (
     {
       className,
@@ -55,7 +55,10 @@ export const InputOTP = forwardRef<
 );
 InputOTP.displayName = "InputOTP";
 
-export const InputOTPGroup = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+/** Props for {@link InputOTPGroup}. */
+export type InputOTPGroupProps = HTMLAttributes<HTMLDivElement>;
+
+export const InputOTPGroup = forwardRef<HTMLDivElement, InputOTPGroupProps>(
   ({ className, ...props }, ref) => {
     return (
       <div
@@ -69,39 +72,44 @@ export const InputOTPGroup = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEl
 );
 InputOTPGroup.displayName = "InputOTPGroup";
 
-export const InputOTPSlot = forwardRef<
-  HTMLDivElement,
-  HTMLAttributes<HTMLDivElement> & { index: number }
->(({ index, className, ...props }, ref) => {
-  const inputOTPContext = useContext(OTPInputContext);
-  const slot = inputOTPContext?.slots[index];
-  const char = slot?.char;
-  const hasFakeCaret = slot?.hasFakeCaret;
-  const isActive = slot?.isActive;
+/** Props for {@link InputOTPSlot}. */
+export type InputOTPSlotProps = HTMLAttributes<HTMLDivElement> & { index: number };
 
-  return (
-    <div
-      ref={ref}
-      data-slot="input-otp-slot"
-      data-active={isActive}
-      className={cn(
-        "relative flex h-10 w-10 items-center justify-center border-y border-r border-border text-sm transition-all first:rounded-l-lg first:border-l last:rounded-r-lg data-[active=true]:border-ring data-[active=true]:ring-2 data-[active=true]:ring-ring",
-        className,
-      )}
-      {...props}
-    >
-      {char}
-      {hasFakeCaret && (
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <div className="h-4 w-px animate-caret-blink bg-fg duration-1000" />
-        </div>
-      )}
-    </div>
-  );
-});
+export const InputOTPSlot = forwardRef<HTMLDivElement, InputOTPSlotProps>(
+  ({ index, className, ...props }, ref) => {
+    const inputOTPContext = useContext(OTPInputContext);
+    const slot = inputOTPContext?.slots[index];
+    const char = slot?.char;
+    const hasFakeCaret = slot?.hasFakeCaret;
+    const isActive = slot?.isActive;
+
+    return (
+      <div
+        ref={ref}
+        data-slot="input-otp-slot"
+        data-active={isActive}
+        className={cn(
+          "relative flex h-10 w-10 items-center justify-center border-y border-r border-border text-sm transition-all first:rounded-l-lg first:border-l last:rounded-r-lg data-[active=true]:border-ring data-[active=true]:ring-2 data-[active=true]:ring-ring",
+          className,
+        )}
+        {...props}
+      >
+        {char}
+        {hasFakeCaret && (
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+            <div className="h-4 w-px animate-caret-blink bg-fg duration-1000" />
+          </div>
+        )}
+      </div>
+    );
+  },
+);
 InputOTPSlot.displayName = "InputOTPSlot";
 
-export const InputOTPSeparator = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+/** Props for {@link InputOTPSeparator}. */
+export type InputOTPSeparatorProps = HTMLAttributes<HTMLDivElement>;
+
+export const InputOTPSeparator = forwardRef<HTMLDivElement, InputOTPSeparatorProps>(
   ({ className, ...props }, ref) => {
     return (
       <div

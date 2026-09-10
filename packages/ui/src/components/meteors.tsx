@@ -21,7 +21,10 @@ export interface MeteorsProps extends HTMLAttributes<HTMLDivElement> {
  * Travel is along the meteor's local X after `--meteor-angle`. The animation
  * must set `rotate(...)` itself — a class `-rotate-45` is overwritten by
  * `@keyframes { transform }` and the streak then slides sideways as a
- * horizontal dash.
+ * horizontal dash. `animation-fill-mode: backwards` applies the 0% frame
+ * (rotated + opacity 0) during `--meteor-delay`; without it the delayed
+ * streaks sit on screen as unrotated horizontal dashes until their clock
+ * starts.
  */
 const METEOR_KEYFRAMES =
   "@keyframes cronus-meteor{0%{transform:rotate(var(--meteor-angle)) translate3d(0,0,0);opacity:0}7%{opacity:1}78%{opacity:1;transform:rotate(var(--meteor-angle)) translate3d(calc(var(--meteor-travel)*0.86),0,0)}88%{opacity:0.55;transform:rotate(var(--meteor-angle)) translate3d(var(--meteor-travel),0,0) scale(1.85)}100%{transform:rotate(var(--meteor-angle)) translate3d(var(--meteor-travel),0,0) scale(0.12);opacity:0}}";
@@ -59,12 +62,15 @@ export function Meteors({ ref, className, children, count = 20, style, ...props 
             "--meteor-duration": `${1.8 + ((index * 7) % 22) / 10}s`,
             "--meteor-travel": `${340 + ((index * 29) % 220)}px`,
             "--meteor-angle": `${122 + ((index * 11) % 16)}deg`,
+            // Hold the 0% pose until the delay elapses (see fill-mode below).
+            opacity: 0,
+            transform: "rotate(var(--meteor-angle))",
           };
           return (
             <span
               // biome-ignore lint/suspicious/noArrayIndexKey: meteors are positional and never reorder.
               key={index}
-              className="absolute h-px w-16 origin-left [animation-delay:var(--meteor-delay)] [animation-duration:var(--meteor-duration)] [animation-iteration-count:infinite] [animation-name:cronus-meteor] [animation-timing-function:linear]"
+              className="absolute h-px w-16 origin-left [animation-delay:var(--meteor-delay)] [animation-duration:var(--meteor-duration)] [animation-fill-mode:backwards] [animation-iteration-count:infinite] [animation-name:cronus-meteor] [animation-timing-function:linear]"
               style={{
                 ...meteorStyle,
                 background:

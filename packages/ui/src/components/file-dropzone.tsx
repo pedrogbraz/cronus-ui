@@ -4,6 +4,18 @@ import { UploadCloud } from "lucide-react";
 import { type DragEvent, forwardRef, type ReactNode, useState } from "react";
 import { cn } from "../lib/cn.js";
 
+export interface FileDropzoneLabels {
+  upload: string;
+  drop: string;
+  browse: string;
+}
+
+const DEFAULT_LABELS: FileDropzoneLabels = {
+  upload: "Upload files",
+  drop: "Drag & drop or",
+  browse: "browse",
+};
+
 export interface FileDropzoneProps {
   onFiles: (files: File[]) => void;
   accept?: string;
@@ -18,6 +30,8 @@ export interface FileDropzoneProps {
   "aria-label"?: string;
   /** IDs of element(s) that describe the dropzone (e.g. accepted types). */
   "aria-describedby"?: string;
+  /** Override the default English strings. */
+  labels?: Partial<FileDropzoneLabels>;
 }
 
 /**
@@ -39,11 +53,14 @@ export const FileDropzone = forwardRef<HTMLLabelElement, FileDropzoneProps>(
       disabled = false,
       className,
       children,
-      "aria-label": ariaLabel = "Upload files",
+      "aria-label": ariaLabel,
       "aria-describedby": ariaDescribedBy,
+      labels: labelsProp,
     },
     ref,
   ) => {
+    const labels = { ...DEFAULT_LABELS, ...labelsProp };
+    const inputLabel = ariaLabel ?? labels.upload;
     const [dragging, setDragging] = useState(false);
 
     const emit = (fileList: FileList | null) => {
@@ -103,7 +120,7 @@ export const FileDropzone = forwardRef<HTMLLabelElement, FileDropzoneProps>(
           accept={accept}
           multiple={multiple}
           disabled={disabled}
-          aria-label={ariaLabel}
+          aria-label={inputLabel}
           aria-describedby={ariaDescribedBy}
           className="sr-only"
           onChange={(event) => {
@@ -115,7 +132,7 @@ export const FileDropzone = forwardRef<HTMLLabelElement, FileDropzoneProps>(
           <>
             <UploadCloud className="size-6 text-fg-muted" aria-hidden />
             <span>
-              Drag &amp; drop or <span className="font-medium text-fg">browse</span>
+              {labels.drop} <span className="font-medium text-fg">{labels.browse}</span>
             </span>
           </>
         )}

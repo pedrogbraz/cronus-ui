@@ -1,24 +1,28 @@
 import { forwardRef, type HTMLAttributes } from "react";
 import { cn } from "../lib/cn.js";
 
-export const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        data-slot="card"
-        className={cn(
-          "flex w-full min-w-0 flex-col gap-6 rounded-xl border border-border bg-surface-raised py-6 text-fg shadow-sm",
-          className,
-        )}
-        {...props}
-      />
-    );
-  },
-);
+/** Props for {@link Card}. */
+export type CardProps = HTMLAttributes<HTMLDivElement>;
+
+export const Card = forwardRef<HTMLDivElement, CardProps>(({ className, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      data-slot="card"
+      className={cn(
+        "flex w-full min-w-0 flex-col gap-6 rounded-xl border border-border bg-surface-raised py-6 text-fg shadow-sm",
+        className,
+      )}
+      {...props}
+    />
+  );
+});
 Card.displayName = "Card";
 
-export const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+/** Props for {@link CardHeader}. */
+export type CardHeaderProps = HTMLAttributes<HTMLDivElement>;
+
+export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
   ({ className, ...props }, ref) => {
     return (
       <div
@@ -35,7 +39,10 @@ export const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEleme
 );
 CardHeader.displayName = "CardHeader";
 
-export const CardTitle = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+/** Props for {@link CardTitle}. */
+export type CardTitleProps = HTMLAttributes<HTMLDivElement>;
+
+export const CardTitle = forwardRef<HTMLDivElement, CardTitleProps>(
   ({ className, ...props }, ref) => {
     return (
       <div
@@ -52,7 +59,10 @@ export const CardTitle = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElemen
 );
 CardTitle.displayName = "CardTitle";
 
-export const CardDescription = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+/** Props for {@link CardDescription}. */
+export type CardDescriptionProps = HTMLAttributes<HTMLDivElement>;
+
+export const CardDescription = forwardRef<HTMLDivElement, CardDescriptionProps>(
   ({ className, ...props }, ref) => {
     return (
       <div
@@ -66,7 +76,10 @@ export const CardDescription = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDiv
 );
 CardDescription.displayName = "CardDescription";
 
-export const CardAction = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+/** Props for {@link CardAction}. */
+export type CardActionProps = HTMLAttributes<HTMLDivElement>;
+
+export const CardAction = forwardRef<HTMLDivElement, CardActionProps>(
   ({ className, ...props }, ref) => {
     return (
       <div
@@ -80,7 +93,10 @@ export const CardAction = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEleme
 );
 CardAction.displayName = "CardAction";
 
-export const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+/** Props for {@link CardContent}. */
+export type CardContentProps = HTMLAttributes<HTMLDivElement>;
+
+export const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
   ({ className, ...props }, ref) => {
     return (
       <div
@@ -94,7 +110,10 @@ export const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElem
 );
 CardContent.displayName = "CardContent";
 
-export const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+/** Props for {@link CardFooter}. */
+export type CardFooterProps = HTMLAttributes<HTMLDivElement>;
+
+export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
   ({ className, ...props }, ref) => {
     return (
       <div

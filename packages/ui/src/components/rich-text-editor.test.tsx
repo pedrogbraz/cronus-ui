@@ -85,4 +85,25 @@ describe("RichTextEditor", () => {
     );
     expect(await axe(container)).toHaveNoViolations();
   });
+
+  it("gives each editor a unique content id wired to its toolbar", async () => {
+    const { container } = render(
+      <>
+        <RichTextEditor defaultValue="<p>One</p>" />
+        <RichTextEditor defaultValue="<p>Two</p>" />
+      </>,
+    );
+    const toolbars = container.querySelectorAll('[role="toolbar"]');
+    const controls = [...toolbars].map((toolbar) => toolbar.getAttribute("aria-controls"));
+    expect(controls[0]).toBeTruthy();
+    expect(controls[1]).toBeTruthy();
+    expect(controls[0]).not.toBe(controls[1]);
+    expect(controls[0]).not.toBe("rich-text-editor-content");
+
+    await waitFor(() => {
+      expect(container.querySelectorAll(".ProseMirror")).toHaveLength(2);
+    });
+    const ids = [...container.querySelectorAll(".ProseMirror")].map((node) => node.id);
+    expect(ids).toEqual(controls);
+  });
 });

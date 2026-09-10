@@ -1,7 +1,7 @@
 {
   "name": "@cronus-ui/ui",
   "version": "0.7.6",
-  "description": "Cronus UI — themeable, accessible React components (Radix + CVA + Tailwind v4).",
+  "description": "Cronus UI \u2014 themeable, accessible React components (Radix + CVA + Tailwind v4).",
   "type": "module",
   "exports": {
     ".": {
@@ -32,6 +32,18 @@
       "types": "./dist/components/accordion.d.ts",
       "import": "./dist/components/accordion.js"
     },
+    "./actions": {
+      "types": "./dist/components/actions.d.ts",
+      "import": "./dist/components/actions.js"
+    },
+    "./ai-code-block": {
+      "types": "./dist/components/ai-code-block.d.ts",
+      "import": "./dist/components/ai-code-block.js"
+    },
+    "./ai-image": {
+      "types": "./dist/components/ai-image.d.ts",
+      "import": "./dist/components/ai-image.js"
+    },
     "./alert": {
       "types": "./dist/components/alert.d.ts",
       "import": "./dist/components/alert.js"
@@ -48,6 +60,10 @@
       "types": "./dist/components/animated-checkbox.d.ts",
       "import": "./dist/components/animated-checkbox.js"
     },
+    "./animated-list": {
+      "types": "./dist/components/animated-list.d.ts",
+      "import": "./dist/components/animated-list.js"
+    },
     "./animated-number": {
       "types": "./dist/components/animated-number.d.ts",
       "import": "./dist/components/animated-number.js"
@@ -55,6 +71,14 @@
     "./app-shell": {
       "types": "./dist/components/app-shell.d.ts",
       "import": "./dist/components/app-shell.js"
+    },
+    "./area-chart": {
+      "types": "./dist/components/area-chart.d.ts",
+      "import": "./dist/components/area-chart.js"
+    },
+    "./artifact": {
+      "types": "./dist/components/artifact.d.ts",
+      "import": "./dist/components/artifact.js"
     },
     "./aspect-ratio": {
       "types": "./dist/components/aspect-ratio.d.ts",
@@ -84,9 +108,17 @@
       "types": "./dist/components/banner.d.ts",
       "import": "./dist/components/banner.js"
     },
+    "./bar-chart": {
+      "types": "./dist/components/bar-chart.d.ts",
+      "import": "./dist/components/bar-chart.js"
+    },
     "./bouncy-accordion": {
       "types": "./dist/components/bouncy-accordion.d.ts",
       "import": "./dist/components/bouncy-accordion.js"
+    },
+    "./branch": {
+      "types": "./dist/components/branch.d.ts",
+      "import": "./dist/components/branch.js"
     },
     "./breadcrumb": {
       "types": "./dist/components/breadcrumb.d.ts",
@@ -104,13 +136,25 @@
       "types": "./dist/components/calendar.d.ts",
       "import": "./dist/components/calendar.js"
     },
-    "./carousel": {
-      "types": "./dist/components/carousel.d.ts",
-      "import": "./dist/components/carousel.js"
+    "./candlestick-chart": {
+      "types": "./dist/components/candlestick-chart.d.ts",
+      "import": "./dist/components/candlestick-chart.js"
     },
     "./card": {
       "types": "./dist/components/card.d.ts",
       "import": "./dist/components/card.js"
+    },
+    "./card-stack": {
+      "types": "./dist/components/card-stack.d.ts",
+      "import": "./dist/components/card-stack.js"
+    },
+    "./carousel": {
+      "types": "./dist/components/carousel.d.ts",
+      "import": "./dist/components/carousel.js"
+    },
+    "./chain-of-thought": {
+      "types": "./dist/components/chain-of-thought.d.ts",
+      "import": "./dist/components/chain-of-thought.js"
     },
     "./chart": {
       "types": "./dist/components/chart.d.ts",
@@ -120,74 +164,6 @@
       "types": "./dist/charts/index.d.ts",
       "import": "./dist/charts/index.js"
     },
-    "./area-chart": {
-      "types": "./dist/components/area-chart.d.ts",
-      "import": "./dist/components/area-chart.js"
-    },
-    "./bar-chart": {
-      "types": "./dist/components/bar-chart.d.ts",
-      "import": "./dist/components/bar-chart.js"
-    },
-    "./line-chart": {
-      "types": "./dist/components/line-chart.d.ts",
-      "import": "./dist/components/line-chart.js"
-    },
-    "./live-line-chart": {
-      "types": "./dist/components/live-line-chart.d.ts",
-      "import": "./dist/components/live-line-chart.js"
-    },
-    "./composed-chart": {
-      "types": "./dist/components/composed-chart.d.ts",
-      "import": "./dist/components/composed-chart.js"
-    },
-    "./candlestick-chart": {
-      "types": "./dist/components/candlestick-chart.d.ts",
-      "import": "./dist/components/candlestick-chart.js"
-    },
-    "./funnel-chart": {
-      "types": "./dist/components/funnel-chart.d.ts",
-      "import": "./dist/components/funnel-chart.js"
-    },
-    "./gauge-chart": {
-      "types": "./dist/components/gauge-chart.d.ts",
-      "import": "./dist/components/gauge-chart.js"
-    },
-    "./pie-chart": {
-      "types": "./dist/components/pie-chart.d.ts",
-      "import": "./dist/components/pie-chart.js"
-    },
-    "./ring-chart": {
-      "types": "./dist/components/ring-chart.d.ts",
-      "import": "./dist/components/ring-chart.js"
-    },
-    "./radar-chart": {
-      "types": "./dist/components/radar-chart.d.ts",
-      "import": "./dist/components/radar-chart.js"
-    },
-    "./scatter-chart": {
-      "types": "./dist/components/scatter-chart.d.ts",
-      "import": "./dist/components/scatter-chart.js"
-    },
-    "./sankey-chart": {
-      "types": "./dist/components/sankey-chart.d.ts",
-      "import": "./dist/components/sankey-chart.js"
-    },
-    "./profit-loss-chart": {
-      "types": "./dist/components/profit-loss-chart.d.ts",
-      "import": "./dist/components/profit-loss-chart.js"
-    },
-    "./choropleth-chart": {
-      "types": "./dist/components/choropleth-chart.d.ts",
-      "import": "./dist/components/choropleth-chart.js"
-    },
-    "./sunburst-chart": {
-      "types": "./dist/components/sunburst-chart.d.ts",
-      "import": "./dist/components/sunburst-chart.js"
-    },
-    "./heatmap-chart": {
-      "types": "./dist/components/heatmap-chart.d.ts",
-      "import": "./dist/components/heatmap-chart.js"
-    },
     "./checkbox": {
       "types": "./dist/components/checkbox.d.ts",
       "import": "./dist/components/checkbox.js"
@@ -195,6 +171,14 @@
     "./chip": {
       "types": "./dist/components/chip.d.ts",
       "import": "./dist/components/chip.js"
+    },
+    "./choropleth-chart": {
+      "types": "./dist/components/choropleth-chart.d.ts",
+      "import": "./dist/components/choropleth-chart.js"
+    },
+    "./click-spark": {
+      "types": "./dist/components/click-spark.d.ts",
+      "import": "./dist/components/click-spark.js"
     },
     "./code-block": {
       "types": "./dist/components/code-block.d.ts",
@@ -224,9 +208,25 @@
       "types": "./dist/components/comparison-slider.d.ts",
       "import": "./dist/components/comparison-slider.js"
     },
+    "./composed-chart": {
+      "types": "./dist/components/composed-chart.d.ts",
+      "import": "./dist/components/composed-chart.js"
+    },
+    "./confetti": {
+      "types": "./dist/components/confetti.d.ts",
+      "import": "./dist/components/confetti.js"
+    },
+    "./context": {
+      "types": "./dist/components/context.d.ts",
+      "import": "./dist/components/context.js"
+    },
     "./context-menu": {
       "types": "./dist/components/context-menu.d.ts",
       "import": "./dist/components/context-menu.js"
+    },
+    "./conversation": {
+      "types": "./dist/components/conversation.d.ts",
+      "import": "./dist/components/conversation.js"
     },
     "./copy-button": {
       "types": "./dist/components/copy-button.d.ts",
@@ -260,6 +260,10 @@
       "types": "./dist/components/dock.d.ts",
       "import": "./dist/components/dock.js"
     },
+    "./dot-pattern": {
+      "types": "./dist/components/dot-pattern.d.ts",
+      "import": "./dist/components/dot-pattern.js"
+    },
     "./drawer": {
       "types": "./dist/components/drawer.d.ts",
       "import": "./dist/components/drawer.js"
@@ -268,9 +272,21 @@
       "types": "./dist/components/dropdown-menu.d.ts",
       "import": "./dist/components/dropdown-menu.js"
     },
+    "./dynamic-island": {
+      "types": "./dist/components/dynamic-island.d.ts",
+      "import": "./dist/components/dynamic-island.js"
+    },
     "./empty": {
       "types": "./dist/components/empty.d.ts",
       "import": "./dist/components/empty.js"
+    },
+    "./expandable-tabs": {
+      "types": "./dist/components/expandable-tabs.d.ts",
+      "import": "./dist/components/expandable-tabs.js"
+    },
+    "./explore-nav": {
+      "types": "./dist/components/explore-nav.d.ts",
+      "import": "./dist/components/explore-nav.js"
     },
     "./fab": {
       "types": "./dist/components/fab.d.ts",
@@ -288,6 +304,10 @@
       "types": "./dist/components/file-dropzone.d.ts",
       "import": "./dist/components/file-dropzone.js"
     },
+    "./flickering-grid": {
+      "types": "./dist/components/flickering-grid.d.ts",
+      "import": "./dist/components/flickering-grid.js"
+    },
     "./form": {
       "types": "./dist/components/form.d.ts",
       "import": "./dist/components/form.js"
@@ -295,6 +315,18 @@
     "./frame": {
       "types": "./dist/components/frame.d.ts",
       "import": "./dist/components/frame.js"
+    },
+    "./funnel-chart": {
+      "types": "./dist/components/funnel-chart.d.ts",
+      "import": "./dist/components/funnel-chart.js"
+    },
+    "./gauge-chart": {
+      "types": "./dist/components/gauge-chart.d.ts",
+      "import": "./dist/components/gauge-chart.js"
+    },
+    "./glare-hover": {
+      "types": "./dist/components/glare-hover.d.ts",
+      "import": "./dist/components/glare-hover.js"
     },
     "./glass-card": {
       "types": "./dist/components/glass-card.d.ts",
@@ -304,6 +336,10 @@
       "types": "./dist/components/globe-3d.d.ts",
       "import": "./dist/components/globe-3d.js"
     },
+    "./globe-wireframe": {
+      "types": "./dist/components/globe-wireframe.d.ts",
+      "import": "./dist/components/globe-wireframe.js"
+    },
     "./gradient-border": {
       "types": "./dist/components/gradient-border.d.ts",
       "import": "./dist/components/gradient-border.js"
@@ -312,9 +348,21 @@
       "types": "./dist/components/gradient-text.d.ts",
       "import": "./dist/components/gradient-text.js"
     },
+    "./grid-pattern": {
+      "types": "./dist/components/grid-pattern.d.ts",
+      "import": "./dist/components/grid-pattern.js"
+    },
     "./heatmap": {
       "types": "./dist/components/heatmap.d.ts",
       "import": "./dist/components/heatmap.js"
+    },
+    "./heatmap-chart": {
+      "types": "./dist/components/heatmap-chart.d.ts",
+      "import": "./dist/components/heatmap-chart.js"
+    },
+    "./highlighter": {
+      "types": "./dist/components/highlighter.d.ts",
+      "import": "./dist/components/highlighter.js"
     },
     "./hover-card": {
       "types": "./dist/components/hover-card.d.ts",
@@ -327,6 +375,10 @@
     "./images-badge": {
       "types": "./dist/components/images-badge.d.ts",
       "import": "./dist/components/images-badge.js"
+    },
+    "./inline-citation": {
+      "types": "./dist/components/inline-citation.d.ts",
+      "import": "./dist/components/inline-citation.js"
     },
     "./input": {
       "types": "./dist/components/input.d.ts",
@@ -360,9 +412,25 @@
       "types": "./dist/components/label.d.ts",
       "import": "./dist/components/label.js"
     },
+    "./light-rays": {
+      "types": "./dist/components/light-rays.d.ts",
+      "import": "./dist/components/light-rays.js"
+    },
     "./lightbox": {
       "types": "./dist/components/lightbox.d.ts",
       "import": "./dist/components/lightbox.js"
+    },
+    "./line-chart": {
+      "types": "./dist/components/line-chart.d.ts",
+      "import": "./dist/components/line-chart.js"
+    },
+    "./live-line-chart": {
+      "types": "./dist/components/live-line-chart.d.ts",
+      "import": "./dist/components/live-line-chart.js"
+    },
+    "./loader": {
+      "types": "./dist/components/loader.d.ts",
+      "import": "./dist/components/loader.js"
     },
     "./logo-carousel": {
       "types": "./dist/components/logo-carousel.d.ts",
@@ -384,6 +452,14 @@
       "types": "./dist/components/menubar.d.ts",
       "import": "./dist/components/menubar.js"
     },
+    "./message": {
+      "types": "./dist/components/message.d.ts",
+      "import": "./dist/components/message.js"
+    },
+    "./meteors": {
+      "types": "./dist/components/meteors.d.ts",
+      "import": "./dist/components/meteors.js"
+    },
     "./metric": {
       "types": "./dist/components/metric.d.ts",
       "import": "./dist/components/metric.js"
@@ -391,6 +467,10 @@
     "./mode-toggle": {
       "types": "./dist/components/mode-toggle.d.ts",
       "import": "./dist/components/mode-toggle.js"
+    },
+    "./morphing-popover": {
+      "types": "./dist/components/morphing-popover.d.ts",
+      "import": "./dist/components/morphing-popover.js"
     },
     "./motion-presets": {
       "types": "./dist/components/motion-presets.d.ts",
@@ -404,6 +484,10 @@
       "types": "./dist/components/navigation-menu.d.ts",
       "import": "./dist/components/navigation-menu.js"
     },
+    "./noise": {
+      "types": "./dist/components/noise.d.ts",
+      "import": "./dist/components/noise.js"
+    },
     "./notification-center": {
       "types": "./dist/components/notification-center.d.ts",
       "import": "./dist/components/notification-center.js"
@@ -416,6 +500,10 @@
       "types": "./dist/components/number-input.d.ts",
       "import": "./dist/components/number-input.js"
     },
+    "./open-in-chat": {
+      "types": "./dist/components/open-in-chat.d.ts",
+      "import": "./dist/components/open-in-chat.js"
+    },
     "./orbit": {
       "types": "./dist/components/orbit.d.ts",
       "import": "./dist/components/orbit.js"
@@ -424,21 +512,53 @@
       "types": "./dist/components/pagination.d.ts",
       "import": "./dist/components/pagination.js"
     },
+    "./particles": {
+      "types": "./dist/components/particles.d.ts",
+      "import": "./dist/components/particles.js"
+    },
     "./password-input": {
       "types": "./dist/components/password-input.d.ts",
       "import": "./dist/components/password-input.js"
+    },
+    "./pie-chart": {
+      "types": "./dist/components/pie-chart.d.ts",
+      "import": "./dist/components/pie-chart.js"
+    },
+    "./pill-nav": {
+      "types": "./dist/components/pill-nav.d.ts",
+      "import": "./dist/components/pill-nav.js"
+    },
+    "./plan": {
+      "types": "./dist/components/plan.d.ts",
+      "import": "./dist/components/plan.js"
     },
     "./popover": {
       "types": "./dist/components/popover.d.ts",
       "import": "./dist/components/popover.js"
     },
-    "./morphing-popover": {
-      "types": "./dist/components/morphing-popover.d.ts",
-      "import": "./dist/components/morphing-popover.js"
+    "./profit-loss-chart": {
+      "types": "./dist/components/profit-loss-chart.d.ts",
+      "import": "./dist/components/profit-loss-chart.js"
     },
     "./progress": {
       "types": "./dist/components/progress.d.ts",
       "import": "./dist/components/progress.js"
+    },
+    "./progressive-blur": {
+      "types": "./dist/components/progressive-blur.d.ts",
+      "import": "./dist/components/progressive-blur.js"
+    },
+    "./prompt-input": {
+      "types": "./dist/components/prompt-input.d.ts",
+      "import": "./dist/components/prompt-input.js"
+    },
+    "./queue": {
+      "types": "./dist/components/queue.d.ts",
+      "import": "./dist/components/queue.js"
+    },
+    "./radar-chart": {
+      "types": "./dist/components/radar-chart.d.ts",
+      "import": "./dist/components/radar-chart.js"
     },
     "./radio-group": {
       "types": "./dist/components/radio-group.d.ts",
@@ -448,6 +568,10 @@
       "types": "./dist/components/rating.d.ts",
       "import": "./dist/components/rating.js"
     },
+    "./reasoning": {
+      "types": "./dist/components/reasoning.d.ts",
+      "import": "./dist/components/reasoning.js"
+    },
     "./receive-button": {
       "types": "./dist/components/receive-button.d.ts",
       "import": "./dist/components/receive-button.js"
@@ -455,6 +579,14 @@
     "./resizable": {
       "types": "./dist/components/resizable.d.ts",
       "import": "./dist/components/resizable.js"
+    },
+    "./response": {
+      "types": "./dist/components/response.d.ts",
+      "import": "./dist/components/response.js"
+    },
+    "./retro-grid": {
+      "types": "./dist/components/retro-grid.d.ts",
+      "import": "./dist/components/retro-grid.js"
     },
     "./reveal": {
       "types": "./dist/components/reveal.d.ts",
@@ -464,9 +596,29 @@
       "types": "./dist/components/rich-text-editor.d.ts",
       "import": "./dist/components/rich-text-editor.js"
     },
+    "./ring-chart": {
+      "types": "./dist/components/ring-chart.d.ts",
+      "import": "./dist/components/ring-chart.js"
+    },
+    "./ripple": {
+      "types": "./dist/components/ripple.d.ts",
+      "import": "./dist/components/ripple.js"
+    },
+    "./sankey-chart": {
+      "types": "./dist/components/sankey-chart.d.ts",
+      "import": "./dist/components/sankey-chart.js"
+    },
+    "./scatter-chart": {
+      "types": "./dist/components/scatter-chart.d.ts",
+      "import": "./dist/components/scatter-chart.js"
+    },
     "./scheduler": {
       "types": "./dist/components/scheduler.d.ts",
       "import": "./dist/components/scheduler.js"
+    },
+    "./scramble-text": {
+      "types": "./dist/components/scramble-text.d.ts",
+      "import": "./dist/components/scramble-text.js"
     },
     "./scroll-area": {
       "types": "./dist/components/scroll-area.d.ts",
@@ -500,6 +652,10 @@
       "types": "./dist/components/shimmer.d.ts",
       "import": "./dist/components/shimmer.js"
     },
+    "./shiny-text": {
+      "types": "./dist/components/shiny-text.d.ts",
+      "import": "./dist/components/shiny-text.js"
+    },
     "./sidebar": {
       "types": "./dist/components/sidebar.d.ts",
       "import": "./dist/components/sidebar.js"
@@ -524,6 +680,14 @@
       "types": "./dist/components/sonner.d.ts",
       "import": "./dist/components/sonner.js"
     },
+    "./sources": {
+      "types": "./dist/components/sources.d.ts",
+      "import": "./dist/components/sources.js"
+    },
+    "./sparkles-text": {
+      "types": "./dist/components/sparkles-text.d.ts",
+      "import": "./dist/components/sparkles-text.js"
+    },
     "./sparkline": {
       "types": "./dist/components/sparkline.d.ts",
       "import": "./dist/components/sparkline.js"
@@ -532,9 +696,17 @@
       "types": "./dist/components/spinner.d.ts",
       "import": "./dist/components/spinner.js"
     },
+    "./spinning-text": {
+      "types": "./dist/components/spinning-text.d.ts",
+      "import": "./dist/components/spinning-text.js"
+    },
     "./spotlight-card": {
       "types": "./dist/components/spotlight-card.d.ts",
       "import": "./dist/components/spotlight-card.js"
+    },
+    "./star-border": {
+      "types": "./dist/components/star-border.d.ts",
+      "import": "./dist/components/star-border.js"
     },
     "./status-dot": {
       "types": "./dist/components/status-dot.d.ts",
@@ -543,6 +715,14 @@
     "./stepper": {
       "types": "./dist/components/stepper.d.ts",
       "import": "./dist/components/stepper.js"
+    },
+    "./suggestion": {
+      "types": "./dist/components/suggestion.d.ts",
+      "import": "./dist/components/suggestion.js"
+    },
+    "./sunburst-chart": {
+      "types": "./dist/components/sunburst-chart.d.ts",
+      "import": "./dist/components/sunburst-chart.js"
     },
     "./switch": {
       "types": "./dist/components/switch.d.ts",
@@ -564,25 +744,29 @@
       "types": "./dist/components/tags-input.d.ts",
       "import": "./dist/components/tags-input.js"
     },
+    "./task": {
+      "types": "./dist/components/task.d.ts",
+      "import": "./dist/components/task.js"
+    },
     "./terminal": {
       "types": "./dist/components/terminal.d.ts",
       "import": "./dist/components/terminal.js"
-    },
-    "./textarea": {
-      "types": "./dist/components/textarea.d.ts",
-      "import": "./dist/components/textarea.js"
     },
     "./text-effect": {
       "types": "./dist/components/text-effect.d.ts",
       "import": "./dist/components/text-effect.js"
     },
+    "./text-shimmer": {
+      "types": "./dist/components/text-shimmer.d.ts",
+      "import": "./dist/components/text-shimmer.js"
+    },
+    "./textarea": {
+      "types": "./dist/components/textarea.d.ts",
+      "import": "./dist/components/textarea.js"
+    },
     "./timeline": {
       "types": "./dist/components/timeline.d.ts",
       "import": "./dist/components/timeline.js"
-    },
-    "./token-swap": {
-      "types": "./dist/components/token-swap.d.ts",
-      "import": "./dist/components/token-swap.js"
     },
     "./toggle": {
       "types": "./dist/components/toggle.d.ts",
@@ -591,6 +775,14 @@
     "./toggle-group": {
       "types": "./dist/components/toggle-group.d.ts",
       "import": "./dist/components/toggle-group.js"
+    },
+    "./token-swap": {
+      "types": "./dist/components/token-swap.d.ts",
+      "import": "./dist/components/token-swap.js"
+    },
+    "./tool": {
+      "types": "./dist/components/tool.d.ts",
+      "import": "./dist/components/tool.js"
     },
     "./toolbar": {
       "types": "./dist/components/toolbar.d.ts",
@@ -604,6 +796,10 @@
       "types": "./dist/components/tree-view.d.ts",
       "import": "./dist/components/tree-view.js"
     },
+    "./typing-text": {
+      "types": "./dist/components/typing-text.d.ts",
+      "import": "./dist/components/typing-text.js"
+    },
     "./usage-meter": {
       "types": "./dist/components/usage-meter.d.ts",
       "import": "./dist/components/usage-meter.js"
@@ -612,109 +808,9 @@
       "types": "./dist/components/video-player.d.ts",
       "import": "./dist/components/video-player.js"
     },
-    "./animated-list": {
-      "types": "./dist/components/animated-list.d.ts",
-      "import": "./dist/components/animated-list.js"
-    },
-    "./card-stack": {
-      "types": "./dist/components/card-stack.d.ts",
-      "import": "./dist/components/card-stack.js"
-    },
-    "./click-spark": {
-      "types": "./dist/components/click-spark.d.ts",
-      "import": "./dist/components/click-spark.js"
-    },
-    "./confetti": {
-      "types": "./dist/components/confetti.d.ts",
-      "import": "./dist/components/confetti.js"
-    },
-    "./dot-pattern": {
-      "types": "./dist/components/dot-pattern.d.ts",
-      "import": "./dist/components/dot-pattern.js"
-    },
-    "./dynamic-island": {
-      "types": "./dist/components/dynamic-island.d.ts",
-      "import": "./dist/components/dynamic-island.js"
-    },
-    "./expandable-tabs": {
-      "types": "./dist/components/expandable-tabs.d.ts",
-      "import": "./dist/components/expandable-tabs.js"
-    },
-    "./explore-nav": {
-      "types": "./dist/components/explore-nav.d.ts",
-      "import": "./dist/components/explore-nav.js"
-    },
-    "./flickering-grid": {
-      "types": "./dist/components/flickering-grid.d.ts",
-      "import": "./dist/components/flickering-grid.js"
-    },
-    "./glare-hover": {
-      "types": "./dist/components/glare-hover.d.ts",
-      "import": "./dist/components/glare-hover.js"
-    },
-    "./grid-pattern": {
-      "types": "./dist/components/grid-pattern.d.ts",
-      "import": "./dist/components/grid-pattern.js"
-    },
-    "./highlighter": {
-      "types": "./dist/components/highlighter.d.ts",
-      "import": "./dist/components/highlighter.js"
-    },
-    "./light-rays": {
-      "types": "./dist/components/light-rays.d.ts",
-      "import": "./dist/components/light-rays.js"
-    },
-    "./meteors": {
-      "types": "./dist/components/meteors.d.ts",
-      "import": "./dist/components/meteors.js"
-    },
-    "./noise": {
-      "types": "./dist/components/noise.d.ts",
-      "import": "./dist/components/noise.js"
-    },
-    "./particles": {
-      "types": "./dist/components/particles.d.ts",
-      "import": "./dist/components/particles.js"
-    },
-    "./pill-nav": {
-      "types": "./dist/components/pill-nav.d.ts",
-      "import": "./dist/components/pill-nav.js"
-    },
-    "./progressive-blur": {
-      "types": "./dist/components/progressive-blur.d.ts",
-      "import": "./dist/components/progressive-blur.js"
-    },
-    "./retro-grid": {
-      "types": "./dist/components/retro-grid.d.ts",
-      "import": "./dist/components/retro-grid.js"
-    },
-    "./ripple": {
-      "types": "./dist/components/ripple.d.ts",
-      "import": "./dist/components/ripple.js"
-    },
-    "./scramble-text": {
-      "types": "./dist/components/scramble-text.d.ts",
-      "import": "./dist/components/scramble-text.js"
-    },
-    "./shiny-text": {
-      "types": "./dist/components/shiny-text.d.ts",
-      "import": "./dist/components/shiny-text.js"
-    },
-    "./sparkles-text": {
-      "types": "./dist/components/sparkles-text.d.ts",
-      "import": "./dist/components/sparkles-text.js"
-    },
-    "./spinning-text": {
-      "types": "./dist/components/spinning-text.d.ts",
-      "import": "./dist/components/spinning-text.js"
-    },
-    "./star-border": {
-      "types": "./dist/components/star-border.d.ts",
-      "import": "./dist/components/star-border.js"
-    },
-    "./typing-text": {
-      "types": "./dist/components/typing-text.d.ts",
-      "import": "./dist/components/typing-text.js"
+    "./web-preview": {
+      "types": "./dist/components/web-preview.d.ts",
+      "import": "./dist/components/web-preview.js"
     },
     "./word-rotate": {
       "types": "./dist/components/word-rotate.d.ts",
@@ -733,7 +829,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "sideEffects": false,
-  "license": "MIT",
+  "license": "UNLICENSED",
   "author": "Cronus",
   "repository": {
     "type": "git",

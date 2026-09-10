@@ -1,14 +1,62 @@
 // Utilities
 
 // ── Wave 2 — overlays & navigation ─────────────────────────────────
+export type {
+  AccordionContentProps,
+  AccordionItemProps,
+  AccordionProps,
+  AccordionTriggerProps,
+} from "./components/accordion.js";
 export {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "./components/accordion.js";
+// ── AI Elements ────────────────────────────────────────────────────
+export type { ActionProps, ActionsProps } from "./components/actions.js";
+export { Action, Actions, actionVariants } from "./components/actions.js";
+export type {
+  AiCodeBlockBodyProps,
+  AiCodeBlockContentProps,
+  AiCodeBlockCopyButtonProps,
+  AiCodeBlockFilenameProps,
+  AiCodeBlockFilesProps,
+  AiCodeBlockHeaderProps,
+  AiCodeBlockItemProps,
+  AiCodeBlockLabels,
+  AiCodeBlockProps,
+  AiCodeBlockSelectItemProps,
+  AiCodeBlockSelectProps,
+  BundledLanguage,
+} from "./components/ai-code-block.js";
+export {
+  AiCodeBlock,
+  AiCodeBlockBody,
+  AiCodeBlockContent,
+  AiCodeBlockCopyButton,
+  AiCodeBlockFilename,
+  AiCodeBlockFiles,
+  AiCodeBlockHeader,
+  AiCodeBlockItem,
+  AiCodeBlockSelect,
+  AiCodeBlockSelectItem,
+} from "./components/ai-code-block.js";
+export type { GeneratedImageProps } from "./components/ai-image.js";
+export { GeneratedImage } from "./components/ai-image.js";
 export type { AlertProps } from "./components/alert.js";
 export { Alert, AlertDescription, AlertTitle, alertVariants } from "./components/alert.js";
+export type {
+  AlertDialogActionProps,
+  AlertDialogCancelProps,
+  AlertDialogContentProps,
+  AlertDialogDescriptionProps,
+  AlertDialogFooterProps,
+  AlertDialogHeaderProps,
+  AlertDialogProps,
+  AlertDialogTitleProps,
+  AlertDialogTriggerProps,
+} from "./components/alert-dialog.js";
 export {
   AlertDialog,
   AlertDialogAction,
@@ -39,12 +87,47 @@ export type { AppShellProps } from "./components/app-shell.js";
 export { AppShell } from "./components/app-shell.js";
 export type { AreaChartProps } from "./components/area-chart.js";
 export { AreaChart } from "./components/area-chart.js";
+export type {
+  ArtifactActionProps,
+  ArtifactActionsProps,
+  ArtifactCloseLabels,
+  ArtifactCloseProps,
+  ArtifactContentProps,
+  ArtifactDescriptionProps,
+  ArtifactHeaderProps,
+  ArtifactProps,
+  ArtifactTitleProps,
+} from "./components/artifact.js";
+export {
+  Artifact,
+  ArtifactAction,
+  ArtifactActions,
+  ArtifactClose,
+  ArtifactContent,
+  ArtifactDescription,
+  ArtifactHeader,
+  ArtifactTitle,
+  artifactActionsVariants,
+  artifactActionVariants,
+  artifactCloseVariants,
+  artifactContentVariants,
+  artifactDescriptionVariants,
+  artifactHeaderVariants,
+  artifactTitleVariants,
+  artifactVariants,
+} from "./components/artifact.js";
 export type { AspectRatioProps } from "./components/aspect-ratio.js";
 export { AspectRatio } from "./components/aspect-ratio.js";
+export type { AuroraBackgroundProps } from "./components/aurora-background.js";
 export { AuroraBackground } from "./components/aurora-background.js";
 export type { AutocompleteOption, AutocompleteProps } from "./components/autocomplete.js";
 export { Autocomplete } from "./components/autocomplete.js";
 // ── Wave 3 — data & display ────────────────────────────────────────
+export type {
+  AvatarFallbackProps,
+  AvatarImageProps,
+  AvatarProps,
+} from "./components/avatar.js";
 export { Avatar, AvatarFallback, AvatarImage } from "./components/avatar.js";
 export type { AvatarGroupAvatar, AvatarGroupProps } from "./components/avatar-group.js";
 export {
@@ -67,6 +150,24 @@ export type {
   BouncyAccordionProps,
 } from "./components/bouncy-accordion.js";
 export { BouncyAccordion, bouncyAccordionVariants } from "./components/bouncy-accordion.js";
+export type {
+  BranchLabels,
+  BranchMessagesProps,
+  BranchNextProps,
+  BranchPageProps,
+  BranchPreviousProps,
+  BranchProps,
+  BranchRole,
+  BranchSelectorProps,
+} from "./components/branch.js";
+export {
+  Branch,
+  BranchMessages,
+  BranchNext,
+  BranchPage,
+  BranchPrevious,
+  BranchSelector,
+} from "./components/branch.js";
 export type { BreadcrumbLinkProps } from "./components/breadcrumb.js";
 export {
   Breadcrumb,
@@ -85,6 +186,15 @@ export type { CalendarProps } from "./components/calendar.js";
 export { Calendar } from "./components/calendar.js";
 export type { CandlestickChartProps, CandlestickPoint } from "./components/candlestick-chart.js";
 export { CandlestickChart } from "./components/candlestick-chart.js";
+export type {
+  CardActionProps,
+  CardContentProps,
+  CardDescriptionProps,
+  CardFooterProps,
+  CardHeaderProps,
+  CardProps,
+  CardTitleProps,
+} from "./components/card.js";
 export {
   Card,
   CardAction,
@@ -114,6 +224,30 @@ export {
   CarouselNext,
   CarouselPrevious,
 } from "./components/carousel.js";
+export type {
+  ChainOfThoughtContentProps,
+  ChainOfThoughtHeaderProps,
+  ChainOfThoughtImageProps,
+  ChainOfThoughtLabels,
+  ChainOfThoughtProps,
+  ChainOfThoughtSearchResultProps,
+  ChainOfThoughtSearchResultsProps,
+  ChainOfThoughtStepProps,
+} from "./components/chain-of-thought.js";
+export {
+  ChainOfThought,
+  ChainOfThoughtContent,
+  ChainOfThoughtHeader,
+  ChainOfThoughtImage,
+  ChainOfThoughtSearchResult,
+  ChainOfThoughtSearchResults,
+  ChainOfThoughtStep,
+  chainOfThoughtHeaderVariants,
+  chainOfThoughtImageVariants,
+  chainOfThoughtSearchResultVariants,
+  chainOfThoughtStepVariants,
+  chainOfThoughtVariants,
+} from "./components/chain-of-thought.js";
 export type { ChartConfig, ChartCursorProps, ChartSeries } from "./components/chart.js";
 export {
   ChartContainer,
@@ -126,6 +260,7 @@ export {
   chartSeriesConfig,
 } from "./components/chart.js";
 // ── Wave 1 — forms ─────────────────────────────────────────────────
+export type { CheckboxProps } from "./components/checkbox.js";
 export { Checkbox } from "./components/checkbox.js";
 export type { ChipGroupProps, ChipLabels, ChipProps } from "./components/chip.js";
 export { Chip, ChipGroup, chipVariants } from "./components/chip.js";
@@ -137,6 +272,11 @@ export type { CodeBlockProps } from "./components/code-block.js";
 export { CodeBlock } from "./components/code-block.js";
 export type { CodeTabsItem, CodeTabsProps } from "./components/code-tabs.js";
 export { CodeTabs } from "./components/code-tabs.js";
+export type {
+  CollapsibleContentProps,
+  CollapsibleProps,
+  CollapsibleTriggerProps,
+} from "./components/collapsible.js";
 export {
   Collapsible,
   CollapsibleContent,
@@ -166,6 +306,49 @@ export type { ConfettiProps } from "./components/confetti.js";
 export { Confetti } from "./components/confetti.js";
 export type { ConfirmationDialogProps } from "./components/confirmation-dialog.js";
 export { ConfirmationDialog } from "./components/confirmation-dialog.js";
+export type {
+  ContextCacheUsageProps,
+  ContextContentBodyProps,
+  ContextContentFooterProps,
+  ContextContentHeaderProps,
+  ContextContentProps,
+  ContextInputUsageProps,
+  ContextLabels,
+  ContextOutputUsageProps,
+  ContextProps,
+  ContextReasoningUsageProps,
+  ContextTriggerProps,
+  LanguageModelUsage,
+} from "./components/context.js";
+export {
+  Context,
+  ContextCacheUsage,
+  ContextContent,
+  ContextContentBody,
+  ContextContentFooter,
+  ContextContentHeader,
+  ContextInputUsage,
+  ContextOutputUsage,
+  ContextReasoningUsage,
+  ContextTrigger,
+} from "./components/context.js";
+export type {
+  ContextMenuCheckboxItemProps,
+  ContextMenuContentProps,
+  ContextMenuGroupProps,
+  ContextMenuItemProps,
+  ContextMenuLabelProps,
+  ContextMenuPortalProps,
+  ContextMenuProps,
+  ContextMenuRadioGroupProps,
+  ContextMenuRadioItemProps,
+  ContextMenuSeparatorProps,
+  ContextMenuShortcutProps,
+  ContextMenuSubContentProps,
+  ContextMenuSubProps,
+  ContextMenuSubTriggerProps,
+  ContextMenuTriggerProps,
+} from "./components/context-menu.js";
 export {
   ContextMenu,
   ContextMenuCheckboxItem,
@@ -182,6 +365,21 @@ export {
   ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from "./components/context-menu.js";
+export type {
+  ConversationContentProps,
+  ConversationEmptyStateLabels,
+  ConversationEmptyStateProps,
+  ConversationProps,
+  ConversationScrollButtonLabels,
+  ConversationScrollButtonProps,
+  ConversationStickContextValue,
+} from "./components/conversation.js";
+export {
+  Conversation,
+  ConversationContent,
+  ConversationEmptyState,
+  ConversationScrollButton,
+} from "./components/conversation.js";
 export type { CopyButtonProps } from "./components/copy-button.js";
 export { CopyButton } from "./components/copy-button.js";
 export type { CountdownLabels, CountdownProps } from "./components/countdown.js";
@@ -249,6 +447,18 @@ export type { DockItem, DockProps } from "./components/dock.js";
 export { Dock } from "./components/dock.js";
 export type { DotPatternProps } from "./components/dot-pattern.js";
 export { DotPattern } from "./components/dot-pattern.js";
+export type {
+  DrawerCloseProps,
+  DrawerContentProps,
+  DrawerDescriptionProps,
+  DrawerFooterProps,
+  DrawerHeaderProps,
+  DrawerOverlayProps,
+  DrawerPortalProps,
+  DrawerProps,
+  DrawerTitleProps,
+  DrawerTriggerProps,
+} from "./components/drawer.js";
 export {
   Drawer,
   DrawerClose,
@@ -261,6 +471,23 @@ export {
   DrawerTitle,
   DrawerTrigger,
 } from "./components/drawer.js";
+export type {
+  DropdownMenuCheckboxItemProps,
+  DropdownMenuContentProps,
+  DropdownMenuGroupProps,
+  DropdownMenuItemProps,
+  DropdownMenuLabelProps,
+  DropdownMenuPortalProps,
+  DropdownMenuProps,
+  DropdownMenuRadioGroupProps,
+  DropdownMenuRadioItemProps,
+  DropdownMenuSeparatorProps,
+  DropdownMenuShortcutProps,
+  DropdownMenuSubContentProps,
+  DropdownMenuSubProps,
+  DropdownMenuSubTriggerProps,
+  DropdownMenuTriggerProps,
+} from "./components/dropdown-menu.js";
 export {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -280,6 +507,13 @@ export {
 } from "./components/dropdown-menu.js";
 export type { DynamicIslandProps, DynamicIslandView } from "./components/dynamic-island.js";
 export { DynamicIsland } from "./components/dynamic-island.js";
+export type {
+  EmptyContentProps,
+  EmptyDescriptionProps,
+  EmptyIconProps,
+  EmptyProps,
+  EmptyTitleProps,
+} from "./components/empty.js";
 export {
   Empty,
   EmptyContent,
@@ -307,8 +541,14 @@ export type {
   FamilyWalletView,
 } from "./components/family-wallet.js";
 export { FamilyWallet, familyWalletVariants } from "./components/family-wallet.js";
+export type {
+  FieldDescriptionProps,
+  FieldErrorProps,
+  FieldLabelProps,
+  FieldProps,
+} from "./components/field.js";
 export { Field, FieldDescription, FieldError, FieldLabel } from "./components/field.js";
-export type { FileDropzoneProps } from "./components/file-dropzone.js";
+export type { FileDropzoneLabels, FileDropzoneProps } from "./components/file-dropzone.js";
 export { FileDropzone } from "./components/file-dropzone.js";
 export type { FlickeringGridProps } from "./components/flickering-grid.js";
 export { FlickeringGrid } from "./components/flickering-grid.js";
@@ -316,6 +556,15 @@ export type { FlipCardAxis, FlipCardProps, FlipCardTrigger } from "./components/
 export { FlipCard, FlipCardBack, FlipCardFront } from "./components/flip-card.js";
 export type { FloatingLabelInputProps } from "./components/floating-label-input.js";
 export { FloatingLabelInput } from "./components/floating-label-input.js";
+export type {
+  FormControlProps,
+  FormDescriptionProps,
+  FormFieldProps,
+  FormItemProps,
+  FormLabelProps,
+  FormMessageProps,
+  FormProps,
+} from "./components/form.js";
 export {
   Form,
   FormControl,
@@ -335,6 +584,7 @@ export type { GaugeChartProps } from "./components/gauge-chart.js";
 export { GaugeChart } from "./components/gauge-chart.js";
 export type { GlareHoverProps } from "./components/glare-hover.js";
 export { GlareHover } from "./components/glare-hover.js";
+export type { GlassCardProps } from "./components/glass-card.js";
 export { GlassCard } from "./components/glass-card.js";
 export type { GradientBorderProps } from "./components/gradient-border.js";
 export { GradientBorder } from "./components/gradient-border.js";
@@ -348,15 +598,59 @@ export type { HeatmapChartProps } from "./components/heatmap-chart.js";
 export { HeatmapChart } from "./components/heatmap-chart.js";
 export type { HighlighterProps } from "./components/highlighter.js";
 export { Highlighter } from "./components/highlighter.js";
+export type {
+  HoverCardContentProps,
+  HoverCardProps,
+  HoverCardTriggerProps,
+} from "./components/hover-card.js";
 export { HoverCard, HoverCardContent, HoverCardTrigger } from "./components/hover-card.js";
 export type { ImageZoomLabels, ImageZoomProps } from "./components/image-zoom.js";
 export { ImageZoom, imageZoomVariants } from "./components/image-zoom.js";
 export type { ImagesBadgeProps } from "./components/images-badge.js";
 export { ImagesBadge, imagesBadgeVariants } from "./components/images-badge.js";
+export type {
+  InlineCitationCardBodyProps,
+  InlineCitationCardProps,
+  InlineCitationCardTriggerProps,
+  InlineCitationCarouselContentProps,
+  InlineCitationCarouselHeaderProps,
+  InlineCitationCarouselIndexProps,
+  InlineCitationCarouselItemProps,
+  InlineCitationCarouselNextProps,
+  InlineCitationCarouselPrevProps,
+  InlineCitationCarouselProps,
+  InlineCitationLabels,
+  InlineCitationProps,
+  InlineCitationQuoteProps,
+  InlineCitationSourceProps,
+  InlineCitationTextProps,
+} from "./components/inline-citation.js";
+export {
+  InlineCitation,
+  InlineCitationCard,
+  InlineCitationCardBody,
+  InlineCitationCardTrigger,
+  InlineCitationCarousel,
+  InlineCitationCarouselContent,
+  InlineCitationCarouselHeader,
+  InlineCitationCarouselIndex,
+  InlineCitationCarouselItem,
+  InlineCitationCarouselNext,
+  InlineCitationCarouselPrev,
+  InlineCitationQuote,
+  InlineCitationSource,
+  InlineCitationText,
+} from "./components/inline-citation.js";
 export type { InputProps } from "./components/input.js";
 export { Input } from "./components/input.js";
 export type { InputGroupAddonProps, InputGroupProps } from "./components/input-group.js";
 export { InputGroup, InputGroupAddon } from "./components/input-group.js";
+export type {
+  InputOTPGroupProps,
+  InputOTPProps,
+  InputOTPSeparatorProps,
+  InputOTPSlotProps,
+} from "./components/input-otp.js";
 export {
   InputOTP,
   InputOTPGroup,
@@ -374,7 +668,9 @@ export type { JsonViewerProps } from "./components/json-viewer.js";
 export { JsonViewer } from "./components/json-viewer.js";
 export type { KanbanColumn, KanbanItem, KanbanProps } from "./components/kanban.js";
 export { Kanban } from "./components/kanban.js";
+export type { KbdProps } from "./components/kbd.js";
 export { Kbd } from "./components/kbd.js";
+export type { LabelProps } from "./components/label.js";
 export { Label } from "./components/label.js";
 export type { LightRaysProps } from "./components/light-rays.js";
 export { LightRays } from "./components/light-rays.js";
@@ -384,6 +680,8 @@ export type { LineChartProps } from "./components/line-chart.js";
 export { LineChart } from "./components/line-chart.js";
 export type { LiveLineChartProps, LiveLinePoint } from "./components/live-line-chart.js";
 export { LiveLineChart } from "./components/live-line-chart.js";
+export type { LoaderLabels, LoaderProps } from "./components/loader.js";
+export { Loader } from "./components/loader.js";
 export type {
   LogoCarouselItem,
   LogoCarouselMotionPreference,
@@ -398,6 +696,24 @@ export type { MarqueeMotionPreference, MarqueeProps } from "./components/marquee
 export { Marquee } from "./components/marquee.js";
 export type { MasonryColumns, MasonryProps } from "./components/masonry.js";
 export { Masonry } from "./components/masonry.js";
+export type {
+  MenubarCheckboxItemProps,
+  MenubarContentProps,
+  MenubarGroupProps,
+  MenubarItemProps,
+  MenubarLabelProps,
+  MenubarMenuProps,
+  MenubarPortalProps,
+  MenubarProps,
+  MenubarRadioGroupProps,
+  MenubarRadioItemProps,
+  MenubarSeparatorProps,
+  MenubarShortcutProps,
+  MenubarSubContentProps,
+  MenubarSubProps,
+  MenubarSubTriggerProps,
+  MenubarTriggerProps,
+} from "./components/menubar.js";
 export {
   Menubar,
   MenubarCheckboxItem,
@@ -415,6 +731,18 @@ export {
   MenubarSubTrigger,
   MenubarTrigger,
 } from "./components/menubar.js";
+export type {
+  MessageAvatarLabels,
+  MessageAvatarProps,
+  MessageContentProps,
+  MessageProps,
+} from "./components/message.js";
+export {
+  Message,
+  MessageAvatar,
+  MessageContent,
+  messageContentVariants,
+} from "./components/message.js";
 export type { MeteorsProps } from "./components/meteors.js";
 export { Meteors } from "./components/meteors.js";
 export type { MetricDeltaProps } from "./components/metric.js";
@@ -452,6 +780,16 @@ export {
 } from "./components/motion-presets.js";
 export type { MultiSelectOption, MultiSelectProps } from "./components/multi-select.js";
 export { MultiSelect } from "./components/multi-select.js";
+export type {
+  NavigationMenuContentProps,
+  NavigationMenuIndicatorProps,
+  NavigationMenuItemProps,
+  NavigationMenuLinkProps,
+  NavigationMenuListProps,
+  NavigationMenuProps,
+  NavigationMenuTriggerProps,
+  NavigationMenuViewportProps,
+} from "./components/navigation-menu.js";
 export {
   NavigationMenu,
   NavigationMenuContent,
@@ -484,6 +822,35 @@ export type {
 export { NumberFlow, numberFlowVariants } from "./components/number-flow.js";
 export type { NumberInputProps } from "./components/number-input.js";
 export { NumberInput } from "./components/number-input.js";
+export type {
+  OpenInChatGPTProps,
+  OpenInClaudeProps,
+  OpenInContentProps,
+  OpenInCursorProps,
+  OpenInItemProps,
+  OpenInLabelProps,
+  OpenInLabels,
+  OpenInProps,
+  OpenInSciraProps,
+  OpenInSeparatorProps,
+  OpenInT3Props,
+  OpenInTriggerProps,
+  OpenInv0Props,
+} from "./components/open-in-chat.js";
+export {
+  OpenIn,
+  OpenInChatGPT,
+  OpenInClaude,
+  OpenInContent,
+  OpenInCursor,
+  OpenInItem,
+  OpenInLabel,
+  OpenInScira,
+  OpenInSeparator,
+  OpenInT3,
+  OpenInTrigger,
+  OpenInv0,
+} from "./components/open-in-chat.js";
 export type { OrbitItemProps, OrbitProps, OrbitRingProps } from "./components/orbit.js";
 export { Orbit, OrbitItem, OrbitRing } from "./components/orbit.js";
 export type { PaginationLinkProps } from "./components/pagination.js";
@@ -506,17 +873,193 @@ export type { PieChartItem, PieChartProps } from "./components/pie-chart.js";
 export { PieChart } from "./components/pie-chart.js";
 export type { PillNavItem, PillNavProps } from "./components/pill-nav.js";
 export { PillNav } from "./components/pill-nav.js";
+export type {
+  PlanActionProps,
+  PlanContentProps,
+  PlanDescriptionProps,
+  PlanFooterProps,
+  PlanHeaderProps,
+  PlanProps,
+  PlanTitleProps,
+  PlanTriggerLabels,
+  PlanTriggerProps,
+} from "./components/plan.js";
+export {
+  Plan,
+  PlanAction,
+  PlanContent,
+  PlanDescription,
+  PlanFooter,
+  PlanHeader,
+  PlanTitle,
+  PlanTrigger,
+  planVariants,
+} from "./components/plan.js";
+export type {
+  PopoverAnchorProps,
+  PopoverContentProps,
+  PopoverProps,
+  PopoverTriggerProps,
+} from "./components/popover.js";
 export { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from "./components/popover.js";
 export type { ProfitLossChartProps, ProfitLossPoint } from "./components/profit-loss-chart.js";
 export { ProfitLossChart } from "./components/profit-loss-chart.js";
+export type { ProgressProps } from "./components/progress.js";
 export { Progress } from "./components/progress.js";
 export type { ProgressiveBlurProps } from "./components/progressive-blur.js";
 export { ProgressiveBlur, progressiveBlurVariants } from "./components/progressive-blur.js";
+export type {
+  AttachmentsContext,
+  ChatStatus,
+  FileUIPart,
+  PromptInputActionAddAttachmentsProps,
+  PromptInputActionMenuContentProps,
+  PromptInputActionMenuItemProps,
+  PromptInputActionMenuProps,
+  PromptInputActionMenuTriggerProps,
+  PromptInputAttachmentProps,
+  PromptInputAttachmentsProps,
+  PromptInputBodyProps,
+  PromptInputButtonProps,
+  PromptInputCommandEmptyProps,
+  PromptInputCommandGroupProps,
+  PromptInputCommandInputProps,
+  PromptInputCommandItemProps,
+  PromptInputCommandListProps,
+  PromptInputCommandProps,
+  PromptInputCommandSeparatorProps,
+  PromptInputControllerProps,
+  PromptInputFooterProps,
+  PromptInputHeaderProps,
+  PromptInputHoverCardContentProps,
+  PromptInputHoverCardProps,
+  PromptInputHoverCardTriggerProps,
+  PromptInputLabels,
+  PromptInputMessage,
+  PromptInputModelSelectContentProps,
+  PromptInputModelSelectItemProps,
+  PromptInputModelSelectProps,
+  PromptInputModelSelectTriggerProps,
+  PromptInputModelSelectValueProps,
+  PromptInputProps,
+  PromptInputProviderProps,
+  PromptInputSpeechButtonProps,
+  PromptInputSubmitProps,
+  PromptInputTabBodyProps,
+  PromptInputTabItemProps,
+  PromptInputTabLabelProps,
+  PromptInputTabProps,
+  PromptInputTabsListProps,
+  PromptInputTextareaProps,
+  PromptInputToolsProps,
+  TextInputContext,
+} from "./components/prompt-input.js";
+export {
+  PromptInput,
+  PromptInputActionAddAttachments,
+  PromptInputActionMenu,
+  PromptInputActionMenuContent,
+  PromptInputActionMenuItem,
+  PromptInputActionMenuTrigger,
+  PromptInputAttachment,
+  PromptInputAttachments,
+  PromptInputBody,
+  PromptInputButton,
+  PromptInputCommand,
+  PromptInputCommandEmpty,
+  PromptInputCommandGroup,
+  PromptInputCommandInput,
+  PromptInputCommandItem,
+  PromptInputCommandList,
+  PromptInputCommandSeparator,
+  PromptInputFooter,
+  PromptInputHeader,
+  PromptInputHoverCard,
+  PromptInputHoverCardContent,
+  PromptInputHoverCardTrigger,
+  PromptInputModelSelect,
+  PromptInputModelSelectContent,
+  PromptInputModelSelectItem,
+  PromptInputModelSelectTrigger,
+  PromptInputModelSelectValue,
+  PromptInputProvider,
+  PromptInputSpeechButton,
+  PromptInputSubmit,
+  PromptInputTab,
+  PromptInputTabBody,
+  PromptInputTabItem,
+  PromptInputTabLabel,
+  PromptInputTabsList,
+  PromptInputTextarea,
+  PromptInputTools,
+  usePromptInputAttachments,
+  usePromptInputController,
+  useProviderAttachments,
+} from "./components/prompt-input.js";
+export type {
+  QueueItemActionProps,
+  QueueItemActionsProps,
+  QueueItemAttachmentProps,
+  QueueItemContentProps,
+  QueueItemDescriptionProps,
+  QueueItemFileProps,
+  QueueItemImageProps,
+  QueueItemIndicatorProps,
+  QueueItemProps,
+  QueueListProps,
+  QueueMessage,
+  QueueMessagePart,
+  QueueProps,
+  QueueSectionContentProps,
+  QueueSectionLabelProps,
+  QueueSectionProps,
+  QueueSectionTriggerProps,
+  QueueTodo,
+} from "./components/queue.js";
+export {
+  Queue,
+  QueueItem,
+  QueueItemAction,
+  QueueItemActions,
+  QueueItemAttachment,
+  QueueItemContent,
+  QueueItemDescription,
+  QueueItemFile,
+  QueueItemImage,
+  QueueItemIndicator,
+  QueueList,
+  QueueSection,
+  QueueSectionContent,
+  QueueSectionLabel,
+  QueueSectionTrigger,
+  queueItemContentVariants,
+  queueItemDescriptionVariants,
+  queueItemFileVariants,
+  queueItemIndicatorVariants,
+  queueItemVariants,
+  queueSectionTriggerVariants,
+  queueVariants,
+} from "./components/queue.js";
 export type { RadarChartProps } from "./components/radar-chart.js";
 export { RadarChart } from "./components/radar-chart.js";
+export type { RadioGroupItemProps, RadioGroupProps } from "./components/radio-group.js";
 export { RadioGroup, RadioGroupItem } from "./components/radio-group.js";
 export type { RatingProps } from "./components/rating.js";
 export { Rating } from "./components/rating.js";
+export type {
+  ReasoningContentProps,
+  ReasoningLabels,
+  ReasoningProps,
+  ReasoningTriggerProps,
+} from "./components/reasoning.js";
+export {
+  Reasoning,
+  ReasoningContent,
+  ReasoningTrigger,
+  reasoningContentVariants,
+  reasoningTriggerVariants,
+  reasoningVariants,
+} from "./components/reasoning.js";
 export type { ReceiveButtonLabels, ReceiveButtonProps } from "./components/receive-button.js";
 export { ReceiveButton, receiveButtonVariants } from "./components/receive-button.js";
 export type { ResizableHandleProps } from "./components/resizable.js";
@@ -525,6 +1068,8 @@ export {
   ResizablePanel,
   ResizablePanelGroup,
 } from "./components/resizable.js";
+export type { ResponseProps } from "./components/response.js";
+export { Response } from "./components/response.js";
 export type { RetroGridProps } from "./components/retro-grid.js";
 export { RetroGrid } from "./components/retro-grid.js";
 export type { RevealProps } from "./components/reveal.js";
@@ -560,6 +1105,18 @@ export type {
   SegmentedControlProps,
 } from "./components/segmented-control.js";
 export { SegmentedControl, SegmentedControlItem } from "./components/segmented-control.js";
+export type {
+  SelectContentProps,
+  SelectGroupProps,
+  SelectItemProps,
+  SelectLabelProps,
+  SelectProps,
+  SelectScrollDownButtonProps,
+  SelectScrollUpButtonProps,
+  SelectSeparatorProps,
+  SelectTriggerProps,
+  SelectValueProps,
+} from "./components/select.js";
 export {
   Select,
   SelectContent,
@@ -572,6 +1129,7 @@ export {
   SelectTrigger,
   SelectValue,
 } from "./components/select.js";
+export type { SeparatorProps } from "./components/separator.js";
 export { Separator } from "./components/separator.js";
 export type { SheetContentProps } from "./components/sheet.js";
 export {
@@ -585,6 +1143,7 @@ export {
   SheetTrigger,
   sheetVariants,
 } from "./components/sheet.js";
+export type { ShimmerProps } from "./components/shimmer.js";
 export { Shimmer } from "./components/shimmer.js";
 export type { ShinyTextProps } from "./components/shiny-text.js";
 export { ShinyText } from "./components/shiny-text.js";
@@ -621,6 +1180,7 @@ export {
 } from "./components/sidebar.js";
 export type { SignaturePadHandle, SignaturePadProps } from "./components/signature-pad.js";
 export { SignaturePad } from "./components/signature-pad.js";
+export type { SkeletonProps } from "./components/skeleton.js";
 export { Skeleton } from "./components/skeleton.js";
 export type {
   SlideUpTextFrom,
@@ -629,9 +1189,24 @@ export type {
   SlideUpTextSplit,
 } from "./components/slide-up-text.js";
 export { SlideUpText, slideUpTextVariants } from "./components/slide-up-text.js";
+export type { SliderProps } from "./components/slider.js";
 export { Slider } from "./components/slider.js";
 export type { ToasterProps } from "./components/sonner.js";
 export { Toaster, toast } from "./components/sonner.js";
+export type {
+  SourceProps,
+  SourcesContentProps,
+  SourcesProps,
+  SourcesTriggerLabels,
+  SourcesTriggerProps,
+} from "./components/sources.js";
+export {
+  Source,
+  Sources,
+  SourcesContent,
+  SourcesTrigger,
+  sourcesVariants,
+} from "./components/sources.js";
 export type { SparklesTextProps } from "./components/sparkles-text.js";
 export { SparklesText } from "./components/sparkles-text.js";
 export type { SparklineProps } from "./components/sparkline.js";
@@ -642,6 +1217,7 @@ export type { SpinningTextProps } from "./components/spinning-text.js";
 export { SpinningText } from "./components/spinning-text.js";
 export type { SplitButtonItem, SplitButtonProps } from "./components/split-button.js";
 export { SplitButton } from "./components/split-button.js";
+export type { SpotlightCardProps } from "./components/spotlight-card.js";
 export { SpotlightCard } from "./components/spotlight-card.js";
 export type { StarBorderProps } from "./components/star-border.js";
 export { StarBorder } from "./components/star-border.js";
@@ -665,9 +1241,26 @@ export {
   StepperTrigger,
   stepperIndicatorVariants,
 } from "./components/stepper.js";
+export type {
+  SuggestionProps,
+  SuggestionsLabels,
+  SuggestionsProps,
+} from "./components/suggestion.js";
+export { Suggestion, Suggestions, suggestionVariants } from "./components/suggestion.js";
 export type { SunburstChartProps, SunburstNode } from "./components/sunburst-chart.js";
 export { SunburstChart } from "./components/sunburst-chart.js";
+export type { SwitchProps } from "./components/switch.js";
 export { Switch } from "./components/switch.js";
+export type {
+  TableBodyProps,
+  TableCaptionProps,
+  TableCellProps,
+  TableFooterProps,
+  TableHeaderProps,
+  TableHeadProps,
+  TableProps,
+  TableRowProps,
+} from "./components/table.js";
 export {
   Table,
   TableBody,
@@ -683,9 +1276,32 @@ export type {
   TableOfContentsProps,
 } from "./components/table-of-contents.js";
 export { TableOfContents } from "./components/table-of-contents.js";
+export type {
+  TabsContentProps,
+  TabsListProps,
+  TabsProps,
+  TabsTriggerProps,
+} from "./components/tabs.js";
 export { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/tabs.js";
 export type { TagsInputProps } from "./components/tags-input.js";
 export { TagsInput } from "./components/tags-input.js";
+export type {
+  TaskContentProps,
+  TaskItemFileProps,
+  TaskItemProps,
+  TaskProps,
+  TaskTriggerProps,
+} from "./components/task.js";
+export {
+  Task,
+  TaskContent,
+  TaskItem,
+  TaskItemFile,
+  TaskTrigger,
+  taskContentVariants,
+  taskItemFileVariants,
+  taskItemVariants,
+} from "./components/task.js";
 export type {
   TerminalLine,
   TerminalMotionPreference,
@@ -699,6 +1315,8 @@ export type {
   TextEffectTrigger,
 } from "./components/text-effect.js";
 export { TextEffect } from "./components/text-effect.js";
+export type { TextShimmerProps } from "./components/text-shimmer.js";
+export { TextShimmer } from "./components/text-shimmer.js";
 export type { TextareaProps } from "./components/textarea.js";
 export { Textarea } from "./components/textarea.js";
 export type { TiltCardProps } from "./components/tilt-card.js";
@@ -719,11 +1337,36 @@ export {
 } from "./components/timeline.js";
 export type { ToggleProps } from "./components/toggle.js";
 export { Toggle, toggleVariants } from "./components/toggle.js";
+export type { ToggleGroupItemProps, ToggleGroupProps } from "./components/toggle-group.js";
 export { ToggleGroup, ToggleGroupItem } from "./components/toggle-group.js";
 export type { TokenSwapAsset, TokenSwapLabels, TokenSwapProps } from "./components/token-swap.js";
 export { TokenSwap, tokenSwapVariants } from "./components/token-swap.js";
+export type {
+  ToolContentProps,
+  ToolHeaderProps,
+  ToolInputProps,
+  ToolLabels,
+  ToolOutputProps,
+  ToolProps,
+  ToolUIPart,
+  ToolUIPartState,
+} from "./components/tool.js";
+export {
+  Tool,
+  ToolContent,
+  ToolHeader,
+  ToolInput,
+  ToolOutput,
+  toolStatusBadgeVariants,
+} from "./components/tool.js";
 export type { ToolbarButtonProps, ToolbarProps } from "./components/toolbar.js";
 export { Toolbar, ToolbarButton, ToolbarGroup, ToolbarSeparator } from "./components/toolbar.js";
+export type {
+  TooltipContentProps,
+  TooltipProps,
+  TooltipProviderProps,
+  TooltipTriggerProps,
+} from "./components/tooltip.js";
 export {
   Tooltip,
   TooltipContent,
@@ -738,6 +1381,25 @@ export type { UsageMeterProps } from "./components/usage-meter.js";
 export { UsageMeter, UsageMeterCircular, UsageMeterLinear } from "./components/usage-meter.js";
 export type { VideoPlayerLabels, VideoPlayerProps } from "./components/video-player.js";
 export { VideoPlayer, videoPlayerVariants } from "./components/video-player.js";
+export type {
+  WebPreviewBodyProps,
+  WebPreviewConsoleLog,
+  WebPreviewConsoleProps,
+  WebPreviewContextValue,
+  WebPreviewLabels,
+  WebPreviewNavigationButtonProps,
+  WebPreviewNavigationProps,
+  WebPreviewProps,
+  WebPreviewUrlProps,
+} from "./components/web-preview.js";
+export {
+  WebPreview,
+  WebPreviewBody,
+  WebPreviewConsole,
+  WebPreviewNavigation,
+  WebPreviewNavigationButton,
+  WebPreviewUrl,
+} from "./components/web-preview.js";
 export type { WordRotateProps } from "./components/word-rotate.js";
 export { WordRotate } from "./components/word-rotate.js";
 export type {
@@ -755,4 +1417,5 @@ export type {
   WorkspaceSwitcherProps,
 } from "./components/workspace-switcher.js";
 export { WorkspaceSwitcher } from "./components/workspace-switcher.js";
+
 export { cn } from "./lib/cn.js";

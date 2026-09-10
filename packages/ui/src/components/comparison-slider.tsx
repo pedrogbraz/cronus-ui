@@ -8,6 +8,7 @@ import {
   type PointerEvent,
   type ReactNode,
   useCallback,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -15,6 +16,15 @@ import { cn } from "../lib/cn.js";
 
 function clamp(value: number): number {
   return Math.min(100, Math.max(0, value));
+}
+
+function isRtl(node: HTMLElement | null): boolean {
+  if (!node) return false;
+  const nearest = node.closest("[dir]");
+  if (nearest) {
+    return nearest.getAttribute("dir")?.toLowerCase() === "rtl";
+  }
+  return typeof window !== "undefined" && getComputedStyle(node).direction === "rtl";
 }
 
 export interface ComparisonSliderProps extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
@@ -49,9 +59,14 @@ export const ComparisonSlider = forwardRef<HTMLDivElement, ComparisonSliderProps
     const containerRef = useRef<HTMLDivElement | null>(null);
     const draggingRef = useRef(false);
     const [internalPosition, setInternalPosition] = useState(() => clamp(defaultPosition));
+    const [rtl, setRtl] = useState(false);
 
     const isControlled = controlledPosition != null;
     const pos = clamp(isControlled ? controlledPosition : internalPosition);
+
+    useLayoutEffect(() => {
+      setRtl(isRtl(containerRef.current));
+    }, []);
 
     const setPosition = useCallback(
       (next: number) => {
@@ -70,7 +85,8 @@ export const ComparisonSlider = forwardRef<HTMLDivElement, ComparisonSliderProps
         if (!node) return;
         const rect = node.getBoundingClientRect();
         if (rect.width === 0) return;
-        setPosition(((clientX - rect.left) / rect.width) * 100);
+        const physical = ((clientX - rect.left) / rect.width) * 100;
+        setPosition(isRtl(node) ? 100 - physical : physical);
       },
       [setPosition],
     );
@@ -93,13 +109,20 @@ export const ComparisonSlider = forwardRef<HTMLDivElement, ComparisonSliderProps
 
     const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
       const step = event.shiftKey ? 10 : 1;
+      const rtlNow = isRtl(event.currentTarget);
       switch (event.key) {
         case "ArrowLeft":
+          event.preventDefault();
+          setPosition(pos + (rtlNow ? step : -step));
+          break;
         case "ArrowDown":
           event.preventDefault();
           setPosition(pos - step);
           break;
         case "ArrowRight":
+          event.preventDefault();
+          setPosition(pos + (rtlNow ? -step : step));
+          break;
         case "ArrowUp":
           event.preventDefault();
           setPosition(pos + step);
@@ -147,14 +170,18 @@ export const ComparisonSlider = forwardRef<HTMLDivElement, ComparisonSliderProps
         <div
           data-slot="comparison-before"
           className="absolute inset-0 size-full [&_img]:pointer-events-none [&_img]:select-none"
-          style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
+          // clip-path inset() is physical (top/right/bottom/left); flip the
+          // inline axis in RTL so "before" still reveals from inline-start.
+          style={{
+            clipPath: rtl ? `inset(0 0 0 ${100 - pos}%)` : `inset(0 ${100 - pos}% 0 0)`,
+          }}
         >
           {before}
         </div>
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 z-10 w-0.5 -translate-x-1/2 bg-surface-base/90 shadow-sm"
-          style={{ left: `${pos}%` }}
+          className="pointer-events-none absolute inset-y-0 z-10 w-0.5 -translate-x-1/2 bg-surface-base/90 shadow-sm rtl:translate-x-1/2"
+          style={{ insetInlineStart: `${pos}%` }}
         />
         <div
           role="slider"
@@ -165,8 +192,8 @@ export const ComparisonSlider = forwardRef<HTMLDivElement, ComparisonSliderProps
           aria-valuenow={Math.round(pos)}
           aria-orientation="horizontal"
           onKeyDown={handleKeyDown}
-          className="absolute top-1/2 z-20 flex size-9 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full border border-border bg-surface-raised text-fg shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base"
-          style={{ left: `${pos}%` }}
+          className="absolute top-1/2 z-20 flex size-9 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full border border-border bg-surface-raised text-fg shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base rtl:translate-x-1/2"
+          style={{ insetInlineStart: `${pos}%` }}
         >
           <ChevronsLeftRight aria-hidden className="size-4 text-fg-secondary" />
         </div>

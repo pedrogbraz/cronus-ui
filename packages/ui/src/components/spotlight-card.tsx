@@ -3,6 +3,9 @@
 import { forwardRef, type HTMLAttributes, useCallback, useRef } from "react";
 import { cn } from "../lib/cn.js";
 
+/** Props for {@link SpotlightCard}. */
+export type SpotlightCardProps = HTMLAttributes<HTMLDivElement>;
+
 /**
  * A card with a pointer-following radial spotlight. The spotlight position is
  * written straight to the DOM via CSS custom properties (`--spot-x` / `--spot-y`)
@@ -11,7 +14,7 @@ import { cn } from "../lib/cn.js";
  * opacity is toggled with a `data-` attribute (also CSS-driven). The whole effect
  * is suppressed under `prefers-reduced-motion: reduce`.
  */
-export const SpotlightCard = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+export const SpotlightCard = forwardRef<HTMLDivElement, SpotlightCardProps>(
   ({ className, children, onMouseMove, onMouseEnter, onMouseLeave, ...props }, ref) => {
     const localRef = useRef<HTMLDivElement | null>(null);
     const frameRef = useRef<number | null>(null);

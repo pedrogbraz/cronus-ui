@@ -168,7 +168,7 @@ export const DateRangePicker = forwardRef<HTMLButtonElement, DateRangePickerProp
             data-slot="date-range-picker-trigger"
             className={cn(
               "w-[300px] justify-start gap-2 font-normal",
-              !hasSelection(value) && "text-fg-muted",
+              !hasSelection(value) && "text-fg-tertiary",
               className,
             )}
             {...props}

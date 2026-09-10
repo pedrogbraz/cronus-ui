@@ -1,9 +1,23 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { axe } from "vitest-axe";
 import { AnimatedCheckbox } from "./animated-checkbox.js";
+
+const reducedMotion = vi.hoisted(() => ({ current: false }));
+
+vi.mock("motion/react", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("motion/react")>();
+  return {
+    ...actual,
+    useReducedMotion: () => reducedMotion.current,
+  };
+});
+
+afterEach(() => {
+  reducedMotion.current = false;
+});
 
 describe("AnimatedCheckbox", () => {
   it("renders a checkbox named by its title", () => {
@@ -59,5 +73,14 @@ describe("AnimatedCheckbox", () => {
   it("has no axe violations", async () => {
     const { container } = render(<AnimatedCheckbox title="Accept" />);
     expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it("snaps to the checked pose under prefers-reduced-motion", async () => {
+    reducedMotion.current = true;
+    render(<AnimatedCheckbox title="Already done" defaultChecked />);
+    const checkbox = screen.getByRole("checkbox", { name: "Already done" });
+    expect(checkbox).toBeChecked();
+    await userEvent.click(checkbox);
+    expect(checkbox).not.toBeChecked();
   });
 });

@@ -11,24 +11,46 @@ import {
 } from "react";
 import { cn } from "../lib/cn.js";
 
+/** Props for {@link ContextMenu}. */
+export type ContextMenuProps = ComponentProps<typeof ContextMenuPrimitive.Root>;
+
 /** Non-modal by default — same scroll-lock trap as {@link DropdownMenu}. */
-export function ContextMenu({
-  modal = false,
-  ...props
-}: ComponentProps<typeof ContextMenuPrimitive.Root>) {
+export function ContextMenu({ modal = false, ...props }: ContextMenuProps) {
   return <ContextMenuPrimitive.Root modal={modal} {...props} />;
 }
+
+/** Props for {@link ContextMenuTrigger}. */
+export type ContextMenuTriggerProps = ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Trigger>;
 export const ContextMenuTrigger = ContextMenuPrimitive.Trigger;
+
+/** Props for {@link ContextMenuGroup}. */
+export type ContextMenuGroupProps = ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Group>;
 export const ContextMenuGroup = ContextMenuPrimitive.Group;
+
+/** Props for {@link ContextMenuPortal}. */
+export type ContextMenuPortalProps = ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Portal>;
 export const ContextMenuPortal = ContextMenuPrimitive.Portal;
+
+/** Props for {@link ContextMenuSub}. */
+export type ContextMenuSubProps = ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Sub>;
 export const ContextMenuSub = ContextMenuPrimitive.Sub;
+
+/** Props for {@link ContextMenuRadioGroup}. */
+export type ContextMenuRadioGroupProps = ComponentPropsWithoutRef<
+  typeof ContextMenuPrimitive.RadioGroup
+>;
 export const ContextMenuRadioGroup = ContextMenuPrimitive.RadioGroup;
+
+/** Props for {@link ContextMenuSubTrigger}. */
+export type ContextMenuSubTriggerProps = ComponentPropsWithoutRef<
+  typeof ContextMenuPrimitive.SubTrigger
+> & {
+  inset?: boolean;
+};
 
 export const ContextMenuSubTrigger = forwardRef<
   ComponentRef<typeof ContextMenuPrimitive.SubTrigger>,
-  ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubTrigger> & {
-    inset?: boolean;
-  }
+  ContextMenuSubTriggerProps
 >(({ className, inset, children, ...props }, ref) => {
   return (
     <ContextMenuPrimitive.SubTrigger
@@ -48,9 +70,14 @@ export const ContextMenuSubTrigger = forwardRef<
 });
 ContextMenuSubTrigger.displayName = "ContextMenuSubTrigger";
 
+/** Props for {@link ContextMenuSubContent}. */
+export type ContextMenuSubContentProps = ComponentPropsWithoutRef<
+  typeof ContextMenuPrimitive.SubContent
+>;
+
 export const ContextMenuSubContent = forwardRef<
   ComponentRef<typeof ContextMenuPrimitive.SubContent>,
-  ComponentPropsWithoutRef<typeof ContextMenuPrimitive.SubContent>
+  ContextMenuSubContentProps
 >(({ className, ...props }, ref) => {
   return (
     <ContextMenuPrimitive.SubContent
@@ -66,9 +93,12 @@ export const ContextMenuSubContent = forwardRef<
 });
 ContextMenuSubContent.displayName = "ContextMenuSubContent";
 
+/** Props for {@link ContextMenuContent}. */
+export type ContextMenuContentProps = ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content>;
+
 export const ContextMenuContent = forwardRef<
   ComponentRef<typeof ContextMenuPrimitive.Content>,
-  ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content>
+  ContextMenuContentProps
 >(({ className, ...props }, ref) => {
   return (
     <ContextMenuPrimitive.Portal>
@@ -86,11 +116,14 @@ export const ContextMenuContent = forwardRef<
 });
 ContextMenuContent.displayName = "ContextMenuContent";
 
+/** Props for {@link ContextMenuItem}. */
+export type ContextMenuItemProps = ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Item> & {
+  inset?: boolean;
+};
+
 export const ContextMenuItem = forwardRef<
   ComponentRef<typeof ContextMenuPrimitive.Item>,
-  ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Item> & {
-    inset?: boolean;
-  }
+  ContextMenuItemProps
 >(({ className, inset, ...props }, ref) => {
   return (
     <ContextMenuPrimitive.Item
@@ -107,9 +140,14 @@ export const ContextMenuItem = forwardRef<
 });
 ContextMenuItem.displayName = "ContextMenuItem";
 
+/** Props for {@link ContextMenuCheckboxItem}. */
+export type ContextMenuCheckboxItemProps = ComponentPropsWithoutRef<
+  typeof ContextMenuPrimitive.CheckboxItem
+>;
+
 export const ContextMenuCheckboxItem = forwardRef<
   ComponentRef<typeof ContextMenuPrimitive.CheckboxItem>,
-  ComponentPropsWithoutRef<typeof ContextMenuPrimitive.CheckboxItem>
+  ContextMenuCheckboxItemProps
 >(({ className, children, checked, ...props }, ref) => {
   return (
     <ContextMenuPrimitive.CheckboxItem
@@ -133,9 +171,14 @@ export const ContextMenuCheckboxItem = forwardRef<
 });
 ContextMenuCheckboxItem.displayName = "ContextMenuCheckboxItem";
 
+/** Props for {@link ContextMenuRadioItem}. */
+export type ContextMenuRadioItemProps = ComponentPropsWithoutRef<
+  typeof ContextMenuPrimitive.RadioItem
+>;
+
 export const ContextMenuRadioItem = forwardRef<
   ComponentRef<typeof ContextMenuPrimitive.RadioItem>,
-  ComponentPropsWithoutRef<typeof ContextMenuPrimitive.RadioItem>
+  ContextMenuRadioItemProps
 >(({ className, children, ...props }, ref) => {
   return (
     <ContextMenuPrimitive.RadioItem
@@ -158,11 +201,14 @@ export const ContextMenuRadioItem = forwardRef<
 });
 ContextMenuRadioItem.displayName = "ContextMenuRadioItem";
 
+/** Props for {@link ContextMenuLabel}. */
+export type ContextMenuLabelProps = ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Label> & {
+  inset?: boolean;
+};
+
 export const ContextMenuLabel = forwardRef<
   ComponentRef<typeof ContextMenuPrimitive.Label>,
-  ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Label> & {
-    inset?: boolean;
-  }
+  ContextMenuLabelProps
 >(({ className, inset, ...props }, ref) => {
   return (
     <ContextMenuPrimitive.Label
@@ -175,9 +221,14 @@ export const ContextMenuLabel = forwardRef<
 });
 ContextMenuLabel.displayName = "ContextMenuLabel";
 
+/** Props for {@link ContextMenuSeparator}. */
+export type ContextMenuSeparatorProps = ComponentPropsWithoutRef<
+  typeof ContextMenuPrimitive.Separator
+>;
+
 export const ContextMenuSeparator = forwardRef<
   ComponentRef<typeof ContextMenuPrimitive.Separator>,
-  ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Separator>
+  ContextMenuSeparatorProps
 >(({ className, ...props }, ref) => {
   return (
     <ContextMenuPrimitive.Separator
@@ -190,7 +241,10 @@ export const ContextMenuSeparator = forwardRef<
 });
 ContextMenuSeparator.displayName = "ContextMenuSeparator";
 
-export const ContextMenuShortcut = ({ className, ...props }: HTMLAttributes<HTMLSpanElement>) => {
+/** Props for {@link ContextMenuShortcut}. */
+export type ContextMenuShortcutProps = HTMLAttributes<HTMLSpanElement>;
+
+export const ContextMenuShortcut = ({ className, ...props }: ContextMenuShortcutProps) => {
   return (
     <span
       data-slot="context-menu-shortcut"

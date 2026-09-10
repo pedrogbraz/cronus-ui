@@ -1,7 +1,7 @@
 "use client";
 
 import { cva } from "class-variance-authority";
-import { type AnimationOptions, motion } from "motion/react";
+import { type AnimationOptions, motion, useReducedMotion } from "motion/react";
 import {
   type ComponentPropsWithoutRef,
   type Ref,
@@ -139,6 +139,7 @@ export function SlideUpText({
   ...props
 }: SlideUpTextProps) {
   const text = children;
+  const reduceMotion = !!useReducedMotion();
   const [isAnimating, setIsAnimating] = useState(false);
 
   const words = useMemo((): WordObject[] => {
@@ -190,16 +191,18 @@ export function SlideUpText({
   }, [autoStart, inView, startAnimation]);
 
   const variants = {
-    hidden: { y: "100%" },
+    hidden: { y: reduceMotion ? 0 : "100%" },
     visible: (index: number) => ({
       y: 0,
-      transition: {
-        ...transition,
-        delay:
-          delay +
-          (typeof transition.delay === "number" ? transition.delay : 0) +
-          getStaggerDelay(index),
-      },
+      transition: reduceMotion
+        ? { duration: 0, delay: 0 }
+        : {
+            ...transition,
+            delay:
+              delay +
+              (typeof transition.delay === "number" ? transition.delay : 0) +
+              getStaggerDelay(index),
+          },
     }),
   };
 
@@ -208,7 +211,7 @@ export function SlideUpText({
       ref={ref}
       data-slot="slide-up-text"
       className={cn(className, slideUpTextVariants({ split }))}
-      initial="hidden"
+      initial={reduceMotion ? false : "hidden"}
       whileInView={inView ? "visible" : undefined}
       animate={inView ? undefined : isAnimating ? "visible" : "hidden"}
       viewport={{ once }}
@@ -243,7 +246,7 @@ export function SlideUpText({
               >
                 <motion.span
                   custom={previousCharsCount + charIndex}
-                  initial="hidden"
+                  initial={reduceMotion ? false : "hidden"}
                   animate={isAnimating ? "visible" : "hidden"}
                   variants={variants}
                   onAnimationComplete={
@@ -259,7 +262,7 @@ export function SlideUpText({
               <span className="relative overflow-hidden">
                 <motion.span
                   custom={previousCharsCount + word.characters.length}
-                  initial="hidden"
+                  initial={reduceMotion ? false : "hidden"}
                   animate={isAnimating ? "visible" : "hidden"}
                   variants={variants}
                   className="inline-block"

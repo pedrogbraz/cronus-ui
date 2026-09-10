@@ -179,7 +179,7 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
             className={cn(
               "w-[240px] justify-start gap-2 font-normal",
               "aria-invalid:border-error aria-invalid:ring-2 aria-invalid:ring-error/30",
-              !value && "text-fg-muted",
+              !value && "text-fg-tertiary",
               className,
             )}
             {...props}

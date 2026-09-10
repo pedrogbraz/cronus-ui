@@ -9,10 +9,10 @@ import {
 import { Drawer as DrawerPrimitive } from "vaul";
 import { cn } from "../lib/cn.js";
 
-export const Drawer = ({
-  shouldScaleBackground = true,
-  ...props
-}: ComponentProps<typeof DrawerPrimitive.Root>) => {
+/** Props for {@link Drawer}. */
+export type DrawerProps = ComponentProps<typeof DrawerPrimitive.Root>;
+
+export const Drawer = ({ shouldScaleBackground = true, ...props }: DrawerProps) => {
   return (
     <DrawerPrimitive.Root
       data-slot="drawer"
@@ -23,13 +23,24 @@ export const Drawer = ({
 };
 Drawer.displayName = "Drawer";
 
+/** Props for {@link DrawerTrigger}. */
+export type DrawerTriggerProps = ComponentPropsWithoutRef<typeof DrawerPrimitive.Trigger>;
 export const DrawerTrigger = DrawerPrimitive.Trigger;
+
+/** Props for {@link DrawerPortal}. */
+export type DrawerPortalProps = ComponentPropsWithoutRef<typeof DrawerPrimitive.Portal>;
 export const DrawerPortal = DrawerPrimitive.Portal;
+
+/** Props for {@link DrawerClose}. */
+export type DrawerCloseProps = ComponentPropsWithoutRef<typeof DrawerPrimitive.Close>;
 export const DrawerClose = DrawerPrimitive.Close;
+
+/** Props for {@link DrawerOverlay}. */
+export type DrawerOverlayProps = ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>;
 
 export const DrawerOverlay = forwardRef<
   ComponentRef<typeof DrawerPrimitive.Overlay>,
-  ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>
+  DrawerOverlayProps
 >(({ className, ...props }, ref) => {
   return (
     <DrawerPrimitive.Overlay
@@ -42,9 +53,12 @@ export const DrawerOverlay = forwardRef<
 });
 DrawerOverlay.displayName = "DrawerOverlay";
 
+/** Props for {@link DrawerContent}. */
+export type DrawerContentProps = ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>;
+
 export const DrawerContent = forwardRef<
   ComponentRef<typeof DrawerPrimitive.Content>,
-  ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
+  DrawerContentProps
 >(({ className, children, ...props }, ref) => {
   return (
     <DrawerPortal>
@@ -66,18 +80,24 @@ export const DrawerContent = forwardRef<
 });
 DrawerContent.displayName = "DrawerContent";
 
-export const DrawerHeader = ({ className, ...props }: ComponentProps<"div">) => {
+/** Props for {@link DrawerHeader}. */
+export type DrawerHeaderProps = ComponentProps<"div">;
+
+export const DrawerHeader = ({ className, ...props }: DrawerHeaderProps) => {
   return (
     <div
       data-slot="drawer-header"
-      className={cn("grid gap-1.5 p-4 text-center sm:text-left", className)}
+      className={cn("grid gap-1.5 p-4 text-center sm:text-start", className)}
       {...props}
     />
   );
 };
 DrawerHeader.displayName = "DrawerHeader";
 
-export const DrawerFooter = ({ className, ...props }: ComponentProps<"div">) => {
+/** Props for {@link DrawerFooter}. */
+export type DrawerFooterProps = ComponentProps<"div">;
+
+export const DrawerFooter = ({ className, ...props }: DrawerFooterProps) => {
   return (
     <div
       data-slot="drawer-footer"
@@ -88,24 +108,29 @@ export const DrawerFooter = ({ className, ...props }: ComponentProps<"div">) => 
 };
 DrawerFooter.displayName = "DrawerFooter";
 
-export const DrawerTitle = forwardRef<
-  ComponentRef<typeof DrawerPrimitive.Title>,
-  ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>
->(({ className, ...props }, ref) => {
-  return (
-    <DrawerPrimitive.Title
-      ref={ref}
-      data-slot="drawer-title"
-      className={cn("font-display text-lg font-semibold text-fg", className)}
-      {...props}
-    />
-  );
-});
+/** Props for {@link DrawerTitle}. */
+export type DrawerTitleProps = ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>;
+
+export const DrawerTitle = forwardRef<ComponentRef<typeof DrawerPrimitive.Title>, DrawerTitleProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <DrawerPrimitive.Title
+        ref={ref}
+        data-slot="drawer-title"
+        className={cn("font-display text-lg font-semibold text-fg", className)}
+        {...props}
+      />
+    );
+  },
+);
 DrawerTitle.displayName = "DrawerTitle";
+
+/** Props for {@link DrawerDescription}. */
+export type DrawerDescriptionProps = ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>;
 
 export const DrawerDescription = forwardRef<
   ComponentRef<typeof DrawerPrimitive.Description>,
-  ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>
+  DrawerDescriptionProps
 >(({ className, ...props }, ref) => {
   return (
     <DrawerPrimitive.Description

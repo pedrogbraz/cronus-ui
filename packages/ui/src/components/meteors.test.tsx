@@ -25,6 +25,8 @@ describe("Meteors", () => {
     expect(keyframes).toContain("rotate(var(--meteor-angle))");
     const streak = container.querySelector("[data-slot='meteors'] [aria-hidden] span");
     expect(streak?.getAttribute("style") ?? "").toContain("--meteor-angle: 122deg");
+    expect(streak?.getAttribute("style") ?? "").toContain("rotate(var(--meteor-angle))");
+    expect(streak?.className).toContain("[animation-fill-mode:backwards]");
   });
 
   it("has no axe violations", async () => {

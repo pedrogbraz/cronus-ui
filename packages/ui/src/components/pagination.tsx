@@ -83,7 +83,7 @@ export const PaginationPrevious = forwardRef<
       className={cn("gap-1 px-2.5", className)}
       {...props}
     >
-      <ChevronLeft />
+      <ChevronLeft className="rtl:rotate-180" aria-hidden />
       <span>Previous</span>
     </PaginationLink>
   );
@@ -102,7 +102,7 @@ export const PaginationNext = forwardRef<HTMLAnchorElement, ComponentProps<typeo
         {...props}
       >
         <span>Next</span>
-        <ChevronRight />
+        <ChevronRight className="rtl:rotate-180" aria-hidden />
       </PaginationLink>
     );
   },

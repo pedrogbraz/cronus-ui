@@ -1,7 +1,10 @@
 import { forwardRef, type HTMLAttributes } from "react";
 import { cn } from "../lib/cn.js";
 
-export const Shimmer = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+/** Props for {@link Shimmer}. */
+export type ShimmerProps = HTMLAttributes<HTMLDivElement>;
+
+export const Shimmer = forwardRef<HTMLDivElement, ShimmerProps>(
   ({ className, children, ...props }, ref) => {
     return (
       <div
@@ -11,7 +14,7 @@ export const Shimmer = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>
         className={cn("relative overflow-hidden rounded-md bg-surface-overlay", className)}
         {...props}
       >
-        <div className="absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-fg/10 to-transparent" />
+        <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-fg/10 to-transparent motion-reduce:hidden" />
         {children}
       </div>
     );

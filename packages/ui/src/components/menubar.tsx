@@ -10,33 +10,52 @@ import {
 } from "react";
 import { cn } from "../lib/cn.js";
 
+/** Props for {@link MenubarMenu}. */
+export type MenubarMenuProps = ComponentPropsWithoutRef<typeof MenubarPrimitive.Menu>;
 export const MenubarMenu = MenubarPrimitive.Menu;
+
+/** Props for {@link MenubarGroup}. */
+export type MenubarGroupProps = ComponentPropsWithoutRef<typeof MenubarPrimitive.Group>;
 export const MenubarGroup = MenubarPrimitive.Group;
+
+/** Props for {@link MenubarPortal}. */
+export type MenubarPortalProps = ComponentPropsWithoutRef<typeof MenubarPrimitive.Portal>;
 export const MenubarPortal = MenubarPrimitive.Portal;
+
+/** Props for {@link MenubarSub}. */
+export type MenubarSubProps = ComponentPropsWithoutRef<typeof MenubarPrimitive.Sub>;
 export const MenubarSub = MenubarPrimitive.Sub;
+
+/** Props for {@link MenubarRadioGroup}. */
+export type MenubarRadioGroupProps = ComponentPropsWithoutRef<typeof MenubarPrimitive.RadioGroup>;
 export const MenubarRadioGroup = MenubarPrimitive.RadioGroup;
 
-export const Menubar = forwardRef<
-  ComponentRef<typeof MenubarPrimitive.Root>,
-  ComponentPropsWithoutRef<typeof MenubarPrimitive.Root>
->(({ className, ...props }, ref) => {
-  return (
-    <MenubarPrimitive.Root
-      ref={ref}
-      data-slot="menubar"
-      className={cn(
-        "flex items-center gap-1 rounded-md border border-border bg-surface-floating p-1 shadow-xs",
-        className,
-      )}
-      {...props}
-    />
-  );
-});
+/** Props for {@link Menubar}. */
+export type MenubarProps = ComponentPropsWithoutRef<typeof MenubarPrimitive.Root>;
+
+export const Menubar = forwardRef<ComponentRef<typeof MenubarPrimitive.Root>, MenubarProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <MenubarPrimitive.Root
+        ref={ref}
+        data-slot="menubar"
+        className={cn(
+          "flex items-center gap-1 rounded-md border border-border bg-surface-floating p-1 shadow-xs",
+          className,
+        )}
+        {...props}
+      />
+    );
+  },
+);
 Menubar.displayName = "Menubar";
+
+/** Props for {@link MenubarTrigger}. */
+export type MenubarTriggerProps = ComponentPropsWithoutRef<typeof MenubarPrimitive.Trigger>;
 
 export const MenubarTrigger = forwardRef<
   ComponentRef<typeof MenubarPrimitive.Trigger>,
-  ComponentPropsWithoutRef<typeof MenubarPrimitive.Trigger>
+  MenubarTriggerProps
 >(({ className, ...props }, ref) => {
   return (
     <MenubarPrimitive.Trigger
@@ -52,11 +71,16 @@ export const MenubarTrigger = forwardRef<
 });
 MenubarTrigger.displayName = "MenubarTrigger";
 
+/** Props for {@link MenubarSubTrigger}. */
+export type MenubarSubTriggerProps = ComponentPropsWithoutRef<
+  typeof MenubarPrimitive.SubTrigger
+> & {
+  inset?: boolean;
+};
+
 export const MenubarSubTrigger = forwardRef<
   ComponentRef<typeof MenubarPrimitive.SubTrigger>,
-  ComponentPropsWithoutRef<typeof MenubarPrimitive.SubTrigger> & {
-    inset?: boolean;
-  }
+  MenubarSubTriggerProps
 >(({ className, inset, children, ...props }, ref) => {
   return (
     <MenubarPrimitive.SubTrigger
@@ -76,9 +100,12 @@ export const MenubarSubTrigger = forwardRef<
 });
 MenubarSubTrigger.displayName = "MenubarSubTrigger";
 
+/** Props for {@link MenubarSubContent}. */
+export type MenubarSubContentProps = ComponentPropsWithoutRef<typeof MenubarPrimitive.SubContent>;
+
 export const MenubarSubContent = forwardRef<
   ComponentRef<typeof MenubarPrimitive.SubContent>,
-  ComponentPropsWithoutRef<typeof MenubarPrimitive.SubContent>
+  MenubarSubContentProps
 >(({ className, ...props }, ref) => {
   return (
     <MenubarPrimitive.SubContent
@@ -94,9 +121,12 @@ export const MenubarSubContent = forwardRef<
 });
 MenubarSubContent.displayName = "MenubarSubContent";
 
+/** Props for {@link MenubarContent}. */
+export type MenubarContentProps = ComponentPropsWithoutRef<typeof MenubarPrimitive.Content>;
+
 export const MenubarContent = forwardRef<
   ComponentRef<typeof MenubarPrimitive.Content>,
-  ComponentPropsWithoutRef<typeof MenubarPrimitive.Content>
+  MenubarContentProps
 >(({ className, align = "start", alignOffset = -4, sideOffset = 8, ...props }, ref) => {
   return (
     <MenubarPrimitive.Portal>
@@ -117,30 +147,37 @@ export const MenubarContent = forwardRef<
 });
 MenubarContent.displayName = "MenubarContent";
 
-export const MenubarItem = forwardRef<
-  ComponentRef<typeof MenubarPrimitive.Item>,
-  ComponentPropsWithoutRef<typeof MenubarPrimitive.Item> & {
-    inset?: boolean;
-  }
->(({ className, inset, ...props }, ref) => {
-  return (
-    <MenubarPrimitive.Item
-      ref={ref}
-      data-slot="menubar-item"
-      className={cn(
-        "relative flex cursor-default select-none items-center gap-2 rounded-md px-2 py-1.5 text-sm outline-none transition-colors focus:bg-surface-overlay focus:text-fg data-[disabled]:opacity-50 data-[disabled]:pointer-events-none [&_svg]:size-4",
-        inset && "ps-8",
-        className,
-      )}
-      {...props}
-    />
-  );
-});
+/** Props for {@link MenubarItem}. */
+export type MenubarItemProps = ComponentPropsWithoutRef<typeof MenubarPrimitive.Item> & {
+  inset?: boolean;
+};
+
+export const MenubarItem = forwardRef<ComponentRef<typeof MenubarPrimitive.Item>, MenubarItemProps>(
+  ({ className, inset, ...props }, ref) => {
+    return (
+      <MenubarPrimitive.Item
+        ref={ref}
+        data-slot="menubar-item"
+        className={cn(
+          "relative flex cursor-default select-none items-center gap-2 rounded-md px-2 py-1.5 text-sm outline-none transition-colors focus:bg-surface-overlay focus:text-fg data-[disabled]:opacity-50 data-[disabled]:pointer-events-none [&_svg]:size-4",
+          inset && "ps-8",
+          className,
+        )}
+        {...props}
+      />
+    );
+  },
+);
 MenubarItem.displayName = "MenubarItem";
+
+/** Props for {@link MenubarCheckboxItem}. */
+export type MenubarCheckboxItemProps = ComponentPropsWithoutRef<
+  typeof MenubarPrimitive.CheckboxItem
+>;
 
 export const MenubarCheckboxItem = forwardRef<
   ComponentRef<typeof MenubarPrimitive.CheckboxItem>,
-  ComponentPropsWithoutRef<typeof MenubarPrimitive.CheckboxItem>
+  MenubarCheckboxItemProps
 >(({ className, children, checked, ...props }, ref) => {
   return (
     <MenubarPrimitive.CheckboxItem
@@ -164,9 +201,12 @@ export const MenubarCheckboxItem = forwardRef<
 });
 MenubarCheckboxItem.displayName = "MenubarCheckboxItem";
 
+/** Props for {@link MenubarRadioItem}. */
+export type MenubarRadioItemProps = ComponentPropsWithoutRef<typeof MenubarPrimitive.RadioItem>;
+
 export const MenubarRadioItem = forwardRef<
   ComponentRef<typeof MenubarPrimitive.RadioItem>,
-  ComponentPropsWithoutRef<typeof MenubarPrimitive.RadioItem>
+  MenubarRadioItemProps
 >(({ className, children, ...props }, ref) => {
   return (
     <MenubarPrimitive.RadioItem
@@ -189,11 +229,14 @@ export const MenubarRadioItem = forwardRef<
 });
 MenubarRadioItem.displayName = "MenubarRadioItem";
 
+/** Props for {@link MenubarLabel}. */
+export type MenubarLabelProps = ComponentPropsWithoutRef<typeof MenubarPrimitive.Label> & {
+  inset?: boolean;
+};
+
 export const MenubarLabel = forwardRef<
   ComponentRef<typeof MenubarPrimitive.Label>,
-  ComponentPropsWithoutRef<typeof MenubarPrimitive.Label> & {
-    inset?: boolean;
-  }
+  MenubarLabelProps
 >(({ className, inset, ...props }, ref) => {
   return (
     <MenubarPrimitive.Label
@@ -206,9 +249,12 @@ export const MenubarLabel = forwardRef<
 });
 MenubarLabel.displayName = "MenubarLabel";
 
+/** Props for {@link MenubarSeparator}. */
+export type MenubarSeparatorProps = ComponentPropsWithoutRef<typeof MenubarPrimitive.Separator>;
+
 export const MenubarSeparator = forwardRef<
   ComponentRef<typeof MenubarPrimitive.Separator>,
-  ComponentPropsWithoutRef<typeof MenubarPrimitive.Separator>
+  MenubarSeparatorProps
 >(({ className, ...props }, ref) => {
   return (
     <MenubarPrimitive.Separator
@@ -221,7 +267,10 @@ export const MenubarSeparator = forwardRef<
 });
 MenubarSeparator.displayName = "MenubarSeparator";
 
-export const MenubarShortcut = ({ className, ...props }: HTMLAttributes<HTMLSpanElement>) => {
+/** Props for {@link MenubarShortcut}. */
+export type MenubarShortcutProps = HTMLAttributes<HTMLSpanElement>;
+
+export const MenubarShortcut = ({ className, ...props }: MenubarShortcutProps) => {
   return (
     <span
       data-slot="menubar-shortcut"

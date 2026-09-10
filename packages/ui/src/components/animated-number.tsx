@@ -93,7 +93,7 @@ export const AnimatedNumber = forwardRef<HTMLSpanElement, AnimatedNumberProps>(
     {
       value,
       format,
-      locale,
+      locale = "en-US",
       formatOptions,
       duration = 0.8,
       spring,

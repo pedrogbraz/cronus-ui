@@ -6,77 +6,87 @@ import {
 } from "react";
 import { cn } from "../lib/cn.js";
 
-export const Table = forwardRef<HTMLTableElement, HTMLAttributes<HTMLTableElement>>(
+/** Props for {@link Table}. */
+export type TableProps = HTMLAttributes<HTMLTableElement>;
+
+export const Table = forwardRef<HTMLTableElement, TableProps>(({ className, ...props }, ref) => {
+  return (
+    // The horizontal-scroll container is keyboard-reachable so users who can't
+    // swipe/drag can still scroll wide tables (axe `scrollable-region-focusable`,
+    // WCAG 2.1.1). A focusable <section> (native region) + `aria-label` names it.
+    <section
+      data-slot="table-container"
+      // biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable region is intentionally focusable so keyboard users can scroll it.
+      tabIndex={0}
+      aria-label="Table"
+      className="relative w-full overflow-x-auto outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+    >
+      <table
+        ref={ref}
+        data-slot="table"
+        className={cn("w-full caption-bottom text-sm text-fg", className)}
+        {...props}
+      />
+    </section>
+  );
+});
+Table.displayName = "Table";
+
+/** Props for {@link TableHeader}. */
+export type TableHeaderProps = HTMLAttributes<HTMLTableSectionElement>;
+
+export const TableHeader = forwardRef<HTMLTableSectionElement, TableHeaderProps>(
   ({ className, ...props }, ref) => {
     return (
-      // The horizontal-scroll container is keyboard-reachable so users who can't
-      // swipe/drag can still scroll wide tables (axe `scrollable-region-focusable`,
-      // WCAG 2.1.1). A focusable <section> (native region) + `aria-label` names it.
-      <section
-        data-slot="table-container"
-        // biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable region is intentionally focusable so keyboard users can scroll it.
-        tabIndex={0}
-        aria-label="Table"
-        className="relative w-full overflow-x-auto outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
-      >
-        <table
-          ref={ref}
-          data-slot="table"
-          className={cn("w-full caption-bottom text-sm text-fg", className)}
-          {...props}
-        />
-      </section>
+      <thead
+        ref={ref}
+        data-slot="table-header"
+        className={cn("[&_tr]:border-b [&_tr]:border-border", className)}
+        {...props}
+      />
     );
   },
 );
-Table.displayName = "Table";
-
-export const TableHeader = forwardRef<
-  HTMLTableSectionElement,
-  HTMLAttributes<HTMLTableSectionElement>
->(({ className, ...props }, ref) => {
-  return (
-    <thead
-      ref={ref}
-      data-slot="table-header"
-      className={cn("[&_tr]:border-b [&_tr]:border-border", className)}
-      {...props}
-    />
-  );
-});
 TableHeader.displayName = "TableHeader";
 
-export const TableBody = forwardRef<
-  HTMLTableSectionElement,
-  HTMLAttributes<HTMLTableSectionElement>
->(({ className, ...props }, ref) => {
-  return (
-    <tbody
-      ref={ref}
-      data-slot="table-body"
-      className={cn("[&_tr:last-child]:border-0", className)}
-      {...props}
-    />
-  );
-});
+/** Props for {@link TableBody}. */
+export type TableBodyProps = HTMLAttributes<HTMLTableSectionElement>;
+
+export const TableBody = forwardRef<HTMLTableSectionElement, TableBodyProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <tbody
+        ref={ref}
+        data-slot="table-body"
+        className={cn("[&_tr:last-child]:border-0", className)}
+        {...props}
+      />
+    );
+  },
+);
 TableBody.displayName = "TableBody";
 
-export const TableFooter = forwardRef<
-  HTMLTableSectionElement,
-  HTMLAttributes<HTMLTableSectionElement>
->(({ className, ...props }, ref) => {
-  return (
-    <tfoot
-      ref={ref}
-      data-slot="table-footer"
-      className={cn("border-t border-border bg-surface-inset/50 font-medium", className)}
-      {...props}
-    />
-  );
-});
+/** Props for {@link TableFooter}. */
+export type TableFooterProps = HTMLAttributes<HTMLTableSectionElement>;
+
+export const TableFooter = forwardRef<HTMLTableSectionElement, TableFooterProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <tfoot
+        ref={ref}
+        data-slot="table-footer"
+        className={cn("border-t border-border bg-surface-inset/50 font-medium", className)}
+        {...props}
+      />
+    );
+  },
+);
 TableFooter.displayName = "TableFooter";
 
-export const TableRow = forwardRef<HTMLTableRowElement, HTMLAttributes<HTMLTableRowElement>>(
+/** Props for {@link TableRow}. */
+export type TableRowProps = HTMLAttributes<HTMLTableRowElement>;
+
+export const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
   ({ className, ...props }, ref) => {
     return (
       <tr
@@ -93,7 +103,10 @@ export const TableRow = forwardRef<HTMLTableRowElement, HTMLAttributes<HTMLTable
 );
 TableRow.displayName = "TableRow";
 
-export const TableHead = forwardRef<HTMLTableCellElement, ThHTMLAttributes<HTMLTableCellElement>>(
+/** Props for {@link TableHead}. */
+export type TableHeadProps = ThHTMLAttributes<HTMLTableCellElement>;
+
+export const TableHead = forwardRef<HTMLTableCellElement, TableHeadProps>(
   ({ className, ...props }, ref) => {
     return (
       <th
@@ -110,7 +123,10 @@ export const TableHead = forwardRef<HTMLTableCellElement, ThHTMLAttributes<HTMLT
 );
 TableHead.displayName = "TableHead";
 
-export const TableCell = forwardRef<HTMLTableCellElement, TdHTMLAttributes<HTMLTableCellElement>>(
+/** Props for {@link TableCell}. */
+export type TableCellProps = TdHTMLAttributes<HTMLTableCellElement>;
+
+export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(
   ({ className, ...props }, ref) => {
     return (
       <td
@@ -124,17 +140,19 @@ export const TableCell = forwardRef<HTMLTableCellElement, TdHTMLAttributes<HTMLT
 );
 TableCell.displayName = "TableCell";
 
-export const TableCaption = forwardRef<
-  HTMLTableCaptionElement,
-  HTMLAttributes<HTMLTableCaptionElement>
->(({ className, ...props }, ref) => {
-  return (
-    <caption
-      ref={ref}
-      data-slot="table-caption"
-      className={cn("mt-4 text-sm text-fg-tertiary", className)}
-      {...props}
-    />
-  );
-});
+/** Props for {@link TableCaption}. */
+export type TableCaptionProps = HTMLAttributes<HTMLTableCaptionElement>;
+
+export const TableCaption = forwardRef<HTMLTableCaptionElement, TableCaptionProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <caption
+        ref={ref}
+        data-slot="table-caption"
+        className={cn("mt-4 text-sm text-fg-tertiary", className)}
+        {...props}
+      />
+    );
+  },
+);
 TableCaption.displayName = "TableCaption";

@@ -18,7 +18,7 @@ import {
   Strikethrough,
   Undo2,
 } from "lucide-react";
-import { forwardRef, type ReactNode, useCallback, useEffect, useState } from "react";
+import { forwardRef, type ReactNode, useCallback, useEffect, useId, useState } from "react";
 import { cn } from "../lib/cn.js";
 import { Separator } from "./separator.js";
 import { Toggle } from "./toggle.js";
@@ -75,7 +75,7 @@ function ToolbarButton({
 }
 
 /** The formatting toolbar. Rendered disabled until the editor instance exists. */
-function Toolbar({ editor }: { editor: Editor | null }) {
+function Toolbar({ editor, contentId }: { editor: Editor | null; contentId: string }) {
   // Re-render the toolbar on every editor transaction so active/disabled states
   // stay in sync with the current selection.
   const [, forceRender] = useState(0);
@@ -95,7 +95,7 @@ function Toolbar({ editor }: { editor: Editor | null }) {
       data-slot="rich-text-editor-toolbar"
       role="toolbar"
       aria-label="Text formatting"
-      aria-controls="rich-text-editor-content"
+      aria-controls={contentId}
       className="flex flex-wrap items-center gap-0.5 border-border border-b bg-surface-overlay/40 p-1.5"
     >
       <ToolbarButton
@@ -229,6 +229,7 @@ export const RichTextEditor = forwardRef<HTMLDivElement, RichTextEditorProps>(
     },
     ref,
   ) => {
+    const contentId = useId();
     const handleUpdate = useCallback(
       ({ editor }: { editor: Editor }) => {
         onChange?.(editor.getHTML());
@@ -245,7 +246,7 @@ export const RichTextEditor = forwardRef<HTMLDivElement, RichTextEditorProps>(
       onUpdate: handleUpdate,
       editorProps: {
         attributes: {
-          id: "rich-text-editor-content",
+          id: contentId,
           role: "textbox",
           "aria-multiline": "true",
           ...(ariaLabel ? { "aria-label": ariaLabel } : {}),
@@ -297,13 +298,13 @@ export const RichTextEditor = forwardRef<HTMLDivElement, RichTextEditorProps>(
           className,
         )}
       >
-        <Toolbar editor={editor} />
+        <Toolbar editor={editor} contentId={contentId} />
         <div data-slot="rich-text-editor-content-wrapper" className="relative">
           {showPlaceholder ? (
             <p
               aria-hidden="true"
               data-slot="rich-text-editor-placeholder"
-              className="pointer-events-none absolute top-3 left-4 select-none text-fg-muted"
+              className="pointer-events-none absolute start-4 top-3 select-none text-fg-tertiary"
             >
               {placeholder}
             </p>

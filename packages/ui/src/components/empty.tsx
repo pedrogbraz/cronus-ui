@@ -1,24 +1,28 @@
 import { forwardRef, type HTMLAttributes } from "react";
 import { cn } from "../lib/cn.js";
 
-export const Empty = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        data-slot="empty"
-        className={cn(
-          "flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-border bg-surface-inset/40 px-6 py-12 text-center",
-          className,
-        )}
-        {...props}
-      />
-    );
-  },
-);
+/** Props for {@link Empty}. */
+export type EmptyProps = HTMLAttributes<HTMLDivElement>;
+
+export const Empty = forwardRef<HTMLDivElement, EmptyProps>(({ className, ...props }, ref) => {
+  return (
+    <div
+      ref={ref}
+      data-slot="empty"
+      className={cn(
+        "flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-border bg-surface-inset/40 px-6 py-12 text-center",
+        className,
+      )}
+      {...props}
+    />
+  );
+});
 Empty.displayName = "Empty";
 
-export const EmptyIcon = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+/** Props for {@link EmptyIcon}. */
+export type EmptyIconProps = HTMLAttributes<HTMLDivElement>;
+
+export const EmptyIcon = forwardRef<HTMLDivElement, EmptyIconProps>(
   ({ className, ...props }, ref) => {
     return (
       <div
@@ -35,7 +39,10 @@ export const EmptyIcon = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElemen
 );
 EmptyIcon.displayName = "EmptyIcon";
 
-export const EmptyTitle = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+/** Props for {@link EmptyTitle}. */
+export type EmptyTitleProps = HTMLAttributes<HTMLDivElement>;
+
+export const EmptyTitle = forwardRef<HTMLDivElement, EmptyTitleProps>(
   ({ className, ...props }, ref) => {
     return (
       <div
@@ -49,7 +56,10 @@ export const EmptyTitle = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEleme
 );
 EmptyTitle.displayName = "EmptyTitle";
 
-export const EmptyDescription = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+/** Props for {@link EmptyDescription}. */
+export type EmptyDescriptionProps = HTMLAttributes<HTMLDivElement>;
+
+export const EmptyDescription = forwardRef<HTMLDivElement, EmptyDescriptionProps>(
   ({ className, ...props }, ref) => {
     return (
       <div
@@ -63,7 +73,10 @@ export const EmptyDescription = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDi
 );
 EmptyDescription.displayName = "EmptyDescription";
 
-export const EmptyContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+/** Props for {@link EmptyContent}. */
+export type EmptyContentProps = HTMLAttributes<HTMLDivElement>;
+
+export const EmptyContent = forwardRef<HTMLDivElement, EmptyContentProps>(
   ({ className, ...props }, ref) => {
     return (
       <div

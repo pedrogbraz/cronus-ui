@@ -1,8 +1,18 @@
 import { render, screen } from "@testing-library/react";
 import { createRef } from "react";
-import { beforeAll, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeAll, describe, expect, it, vi } from "vitest";
 import { axe } from "vitest-axe";
 import { SlideUpText, type SlideUpTextRef } from "./slide-up-text.js";
+
+const reducedMotion = vi.hoisted(() => ({ current: false }));
+
+vi.mock("motion/react", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("motion/react")>();
+  return {
+    ...actual,
+    useReducedMotion: () => reducedMotion.current,
+  };
+});
 
 beforeAll(() => {
   if (!("IntersectionObserver" in globalThis)) {
@@ -17,6 +27,10 @@ beforeAll(() => {
     (globalThis as { IntersectionObserver?: unknown }).IntersectionObserver =
       IntersectionObserverStub;
   }
+});
+
+afterEach(() => {
+  reducedMotion.current = false;
 });
 
 describe("SlideUpText", () => {
@@ -75,5 +89,18 @@ describe("SlideUpText", () => {
   it("has no axe violations", async () => {
     const { container } = render(<SlideUpText>You can just ship things.</SlideUpText>);
     expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it("keeps the sr-only string and skips the clip-in under prefers-reduced-motion", () => {
+    reducedMotion.current = true;
+    const text = "You can just ship things.";
+    const { container } = render(<SlideUpText>{text}</SlideUpText>);
+    expect(screen.getByText(text)).toHaveClass("sr-only");
+    const pieces = container.querySelectorAll('[aria-hidden="true"] .inline-block');
+    expect(pieces.length).toBeGreaterThan(0);
+    for (const piece of pieces) {
+      const transform = (piece as HTMLElement).style.transform;
+      expect(transform === "" || transform === "none" || !transform.includes("100%")).toBe(true);
+    }
   });
 });

@@ -22,7 +22,7 @@ export interface RippleProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const RIPPLE_KEYFRAMES =
-  "@keyframes cronus-ripple{from{transform:scale(0);opacity:var(--ripple-opacity,0.35)}to{transform:scale(1);opacity:0}}";
+  "@keyframes cronus-ripple{from{transform:translate(-50%,-50%) scale(0);opacity:var(--ripple-opacity,0.35)}to{transform:translate(-50%,-50%) scale(1);opacity:0}}";
 
 function finiteOr(value: number, fallback: number) {
   return Number.isFinite(value) ? value : fallback;
@@ -61,12 +61,17 @@ export function Ripple({
             "--ripple-duration": `${cycle}s`,
             "--ripple-delay": `${(index * cycle) / ringCount}s`,
             "--ripple-opacity": "0.35",
+            // Hold the 0% pose until the stagger delay elapses. Keyframes own
+            // `transform` (scale + centering translate) — a class translate
+            // would be overwritten and the ring would expand off-centre.
+            opacity: 0,
+            transform: "translate(-50%, -50%) scale(0)",
           };
           return (
             <span
               // biome-ignore lint/suspicious/noArrayIndexKey: rings are positional and never reorder.
               key={index}
-              className="absolute start-1/2 top-1/2 aspect-square w-[220%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/40 [animation-delay:var(--ripple-delay)] [animation-duration:var(--ripple-duration)] [animation-iteration-count:infinite] [animation-name:cronus-ripple] [animation-timing-function:ease-out]"
+              className="absolute start-1/2 top-1/2 aspect-square w-[220%] rounded-full border border-primary/40 [animation-delay:var(--ripple-delay)] [animation-duration:var(--ripple-duration)] [animation-fill-mode:backwards] [animation-iteration-count:infinite] [animation-name:cronus-ripple] [animation-timing-function:ease-out]"
               style={ringStyle}
             />
           );

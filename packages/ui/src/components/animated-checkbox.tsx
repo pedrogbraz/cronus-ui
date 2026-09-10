@@ -1,7 +1,7 @@
 "use client";
 
 import { cva } from "class-variance-authority";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { type ComponentPropsWithoutRef, type Ref, useState } from "react";
 import { cn } from "../lib/cn.js";
 
@@ -57,6 +57,7 @@ export function AnimatedCheckbox({
   disabled,
   ...props
 }: AnimatedCheckboxProps) {
+  const reduce = !!useReducedMotion();
   const [uncontrolled, setUncontrolled] = useState(defaultChecked);
   const isControlled = checkedProp !== undefined;
   const checked = isControlled ? checkedProp : uncontrolled;
@@ -91,18 +92,26 @@ export function AnimatedCheckbox({
             strokeLinecap="round"
             strokeLinejoin="round"
             transform="translate(5 6)"
-            initial={{
-              pathLength: initialChecked ? 1 : 0,
-              opacity: initialChecked ? 1 : 0,
-            }}
+            initial={
+              reduce
+                ? false
+                : {
+                    pathLength: initialChecked ? 1 : 0,
+                    opacity: initialChecked ? 1 : 0,
+                  }
+            }
             animate={{
               pathLength: checked ? 1 : 0,
               opacity: checked ? 1 : 0,
             }}
-            transition={{
-              pathLength: { ease: "easeOut", duration: 0.3 },
-              opacity: { duration: 0 },
-            }}
+            transition={
+              reduce
+                ? { duration: 0 }
+                : {
+                    pathLength: { ease: "easeOut", duration: 0.3 },
+                    opacity: { duration: 0 },
+                  }
+            }
           />
         </svg>
       </span>
@@ -117,15 +126,19 @@ export function AnimatedCheckbox({
         </span>
         <motion.div
           className="absolute start-0 top-1/2 h-[1.5px] -translate-y-1/2 bg-fg-tertiary"
-          initial={{
-            width: initialChecked ? "100%" : 0,
-            opacity: initialChecked ? 1 : 0,
-          }}
+          initial={
+            reduce
+              ? false
+              : {
+                  width: initialChecked ? "100%" : 0,
+                  opacity: initialChecked ? 1 : 0,
+                }
+          }
           animate={{
             width: checked ? "100%" : 0,
             opacity: checked ? 1 : 0,
           }}
-          transition={springTransition}
+          transition={reduce ? { duration: 0 } : springTransition}
         />
       </span>
     </label>

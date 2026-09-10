@@ -113,7 +113,7 @@ function inviteUrlOf(result: unknown): string | undefined {
 }
 
 export interface InviteDialogProps
-  extends Omit<ComponentPropsWithoutRef<typeof DialogContent>, "title" | "children"> {
+  extends Omit<ComponentPropsWithoutRef<typeof DialogContent>, "title" | "children" | "labels"> {
   /** Element that opens the dialog. Rendered inside a `DialogTrigger asChild`. Omit when driving the dialog purely via `open`. */
   trigger?: ReactNode;
   /** Controlled open state. Provide alongside `onOpenChange` to control the dialog externally. */

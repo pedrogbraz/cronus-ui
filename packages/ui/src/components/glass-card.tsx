@@ -1,7 +1,10 @@
 import { forwardRef, type HTMLAttributes } from "react";
 import { cn } from "../lib/cn.js";
 
-export const GlassCard = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+/** Props for {@link GlassCard}. */
+export type GlassCardProps = HTMLAttributes<HTMLDivElement>;
+
+export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
   ({ className, children, ...props }, ref) => {
     return (
       <div

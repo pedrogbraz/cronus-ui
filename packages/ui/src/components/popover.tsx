@@ -9,15 +9,27 @@ import {
 } from "react";
 import { cn } from "../lib/cn.js";
 
-export function Popover({ modal = false, ...props }: ComponentProps<typeof PopoverPrimitive.Root>) {
+/** Props for {@link Popover}. */
+export type PopoverProps = ComponentProps<typeof PopoverPrimitive.Root>;
+
+export function Popover({ modal = false, ...props }: PopoverProps) {
   return <PopoverPrimitive.Root modal={modal} {...props} />;
 }
+
+/** Props for {@link PopoverTrigger}. */
+export type PopoverTriggerProps = ComponentPropsWithoutRef<typeof PopoverPrimitive.Trigger>;
 export const PopoverTrigger = PopoverPrimitive.Trigger;
+
+/** Props for {@link PopoverAnchor}. */
+export type PopoverAnchorProps = ComponentPropsWithoutRef<typeof PopoverPrimitive.Anchor>;
 export const PopoverAnchor = PopoverPrimitive.Anchor;
+
+/** Props for {@link PopoverContent}. */
+export type PopoverContentProps = ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>;
 
 export const PopoverContent = forwardRef<
   ComponentRef<typeof PopoverPrimitive.Content>,
-  ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
+  PopoverContentProps
 >(({ className, align = "center", sideOffset = 4, ...props }, ref) => {
   return (
     <PopoverPrimitive.Portal>

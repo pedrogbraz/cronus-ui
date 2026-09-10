@@ -21,6 +21,9 @@ const DEFAULT_DELAY_DURATION = 200;
  */
 const HasTooltipProviderContext = createContext(false);
 
+/** Props for {@link TooltipProvider}. */
+export type TooltipProviderProps = ComponentPropsWithoutRef<typeof TooltipPrimitive.Provider>;
+
 /**
  * App-level tooltip config — `delayDuration` (default 200ms),
  * `skipDelayDuration`, and `disableHoverableContent` — shared by every
@@ -32,7 +35,7 @@ const HasTooltipProviderContext = createContext(false);
 export const TooltipProvider = ({
   delayDuration = DEFAULT_DELAY_DURATION,
   ...props
-}: ComponentPropsWithoutRef<typeof TooltipPrimitive.Provider>) => {
+}: TooltipProviderProps) => {
   return (
     <HasTooltipProviderContext.Provider value={true}>
       <TooltipPrimitive.Provider
@@ -45,6 +48,9 @@ export const TooltipProvider = ({
 };
 TooltipProvider.displayName = "TooltipProvider";
 
+/** Props for {@link Tooltip}. */
+export type TooltipProps = ComponentPropsWithoutRef<typeof TooltipPrimitive.Root>;
+
 /**
  * Radix Tooltip.Root with Cronus defaults. Under a <TooltipProvider> it renders
  * bare, so the provider's config genuinely applies; per-tooltip
@@ -53,7 +59,7 @@ TooltipProvider.displayName = "TooltipProvider";
  * (200ms delay) so standalone usage still works — but standalone tooltips
  * cannot share skip-delay, so prefer one app-level <TooltipProvider>.
  */
-export const Tooltip = (props: ComponentPropsWithoutRef<typeof TooltipPrimitive.Root>) => {
+export const Tooltip = (props: TooltipProps) => {
   const hasProvider = useContext(HasTooltipProviderContext);
   const root = <TooltipPrimitive.Root data-slot="tooltip" {...props} />;
   if (hasProvider) return root;
@@ -65,11 +71,16 @@ export const Tooltip = (props: ComponentPropsWithoutRef<typeof TooltipPrimitive.
 };
 Tooltip.displayName = "Tooltip";
 
+/** Props for {@link TooltipTrigger}. */
+export type TooltipTriggerProps = ComponentPropsWithoutRef<typeof TooltipPrimitive.Trigger>;
 export const TooltipTrigger = TooltipPrimitive.Trigger;
+
+/** Props for {@link TooltipContent}. */
+export type TooltipContentProps = ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>;
 
 export const TooltipContent = forwardRef<
   ComponentRef<typeof TooltipPrimitive.Content>,
-  ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
+  TooltipContentProps
 >(({ className, sideOffset = 4, ...props }, ref) => {
   return (
     <TooltipPrimitive.Portal>

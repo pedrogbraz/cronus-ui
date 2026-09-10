@@ -10,7 +10,12 @@ import {
 import { cn } from "../lib/cn.js";
 import { buttonVariants } from "./button.js";
 
+/** Props for {@link AlertDialog}. */
+export type AlertDialogProps = ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Root>;
 export const AlertDialog = AlertDialogPrimitive.Root;
+
+/** Props for {@link AlertDialogTrigger}. */
+export type AlertDialogTriggerProps = ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Trigger>;
 export const AlertDialogTrigger = AlertDialogPrimitive.Trigger;
 
 const AlertDialogOverlay = forwardRef<
@@ -31,9 +36,12 @@ const AlertDialogOverlay = forwardRef<
 });
 AlertDialogOverlay.displayName = "AlertDialogOverlay";
 
+/** Props for {@link AlertDialogContent}. */
+export type AlertDialogContentProps = ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>;
+
 export const AlertDialogContent = forwardRef<
   ComponentRef<typeof AlertDialogPrimitive.Content>,
-  ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>
+  AlertDialogContentProps
 >(({ className, ...props }, ref) => {
   return (
     <AlertDialogPrimitive.Portal>
@@ -52,18 +60,24 @@ export const AlertDialogContent = forwardRef<
 });
 AlertDialogContent.displayName = "AlertDialogContent";
 
-export const AlertDialogHeader = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => {
+/** Props for {@link AlertDialogHeader}. */
+export type AlertDialogHeaderProps = HTMLAttributes<HTMLDivElement>;
+
+export const AlertDialogHeader = ({ className, ...props }: AlertDialogHeaderProps) => {
   return (
     <div
       data-slot="alert-dialog-header"
-      className={cn("flex flex-col gap-1.5 text-center sm:text-left", className)}
+      className={cn("flex flex-col gap-1.5 text-center sm:text-start", className)}
       {...props}
     />
   );
 };
 AlertDialogHeader.displayName = "AlertDialogHeader";
 
-export const AlertDialogFooter = ({ className, ...props }: HTMLAttributes<HTMLDivElement>) => {
+/** Props for {@link AlertDialogFooter}. */
+export type AlertDialogFooterProps = HTMLAttributes<HTMLDivElement>;
+
+export const AlertDialogFooter = ({ className, ...props }: AlertDialogFooterProps) => {
   return (
     <div
       data-slot="alert-dialog-footer"
@@ -74,9 +88,12 @@ export const AlertDialogFooter = ({ className, ...props }: HTMLAttributes<HTMLDi
 };
 AlertDialogFooter.displayName = "AlertDialogFooter";
 
+/** Props for {@link AlertDialogTitle}. */
+export type AlertDialogTitleProps = ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>;
+
 export const AlertDialogTitle = forwardRef<
   ComponentRef<typeof AlertDialogPrimitive.Title>,
-  ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>
+  AlertDialogTitleProps
 >(({ className, ...props }, ref) => {
   return (
     <AlertDialogPrimitive.Title
@@ -89,9 +106,14 @@ export const AlertDialogTitle = forwardRef<
 });
 AlertDialogTitle.displayName = "AlertDialogTitle";
 
+/** Props for {@link AlertDialogDescription}. */
+export type AlertDialogDescriptionProps = ComponentPropsWithoutRef<
+  typeof AlertDialogPrimitive.Description
+>;
+
 export const AlertDialogDescription = forwardRef<
   ComponentRef<typeof AlertDialogPrimitive.Description>,
-  ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Description>
+  AlertDialogDescriptionProps
 >(({ className, ...props }, ref) => {
   return (
     <AlertDialogPrimitive.Description
@@ -104,9 +126,12 @@ export const AlertDialogDescription = forwardRef<
 });
 AlertDialogDescription.displayName = "AlertDialogDescription";
 
+/** Props for {@link AlertDialogAction}. */
+export type AlertDialogActionProps = ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action>;
+
 export const AlertDialogAction = forwardRef<
   ComponentRef<typeof AlertDialogPrimitive.Action>,
-  ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action>
+  AlertDialogActionProps
 >(({ className, ...props }, ref) => {
   return (
     <AlertDialogPrimitive.Action
@@ -119,9 +144,12 @@ export const AlertDialogAction = forwardRef<
 });
 AlertDialogAction.displayName = "AlertDialogAction";
 
+/** Props for {@link AlertDialogCancel}. */
+export type AlertDialogCancelProps = ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Cancel>;
+
 export const AlertDialogCancel = forwardRef<
   ComponentRef<typeof AlertDialogPrimitive.Cancel>,
-  ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Cancel>
+  AlertDialogCancelProps
 >(({ className, ...props }, ref) => {
   return (
     <AlertDialogPrimitive.Cancel

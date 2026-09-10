@@ -129,9 +129,9 @@ export const Lightbox = forwardRef<HTMLDivElement, LightboxProps>(
                 aria-label="Previous image"
                 onClick={goPrev}
                 disabled={atStart}
-                className="absolute left-2 z-10 rounded-full bg-black/40 p-2 text-white/80 outline-none transition-colors hover:bg-black/60 hover:text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset disabled:pointer-events-none disabled:opacity-40"
+                className="absolute start-2 z-10 rounded-full bg-black/40 p-2 text-white/80 outline-none transition-colors hover:bg-black/60 hover:text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset disabled:pointer-events-none disabled:opacity-40"
               >
-                <ChevronLeft className="size-6" />
+                <ChevronLeft className="size-6 rtl:rotate-180" aria-hidden />
               </button>
 
               {current ? (
@@ -148,9 +148,9 @@ export const Lightbox = forwardRef<HTMLDivElement, LightboxProps>(
                 aria-label="Next image"
                 onClick={goNext}
                 disabled={atEnd}
-                className="absolute right-2 z-10 rounded-full bg-black/40 p-2 text-white/80 outline-none transition-colors hover:bg-black/60 hover:text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset disabled:pointer-events-none disabled:opacity-40"
+                className="absolute end-2 z-10 rounded-full bg-black/40 p-2 text-white/80 outline-none transition-colors hover:bg-black/60 hover:text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset disabled:pointer-events-none disabled:opacity-40"
               >
-                <ChevronRight className="size-6" />
+                <ChevronRight className="size-6 rtl:rotate-180" aria-hidden />
               </button>
             </div>
 

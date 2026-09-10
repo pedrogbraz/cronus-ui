@@ -60,12 +60,14 @@ export function SparklesText({ ref, className, children, count = 4, ...props }: 
             insetInlineStart: slot?.start,
             "--sparkle-delay": `${(index * 0.35) % 1.6}s`,
             "--sparkle-duration": `${1.4 + (index % 3) * 0.25}s`,
+            opacity: 0,
+            transform: "scale(0)",
           };
           return (
             <span
               // biome-ignore lint/suspicious/noArrayIndexKey: sparkles are positional and never reorder.
               key={index}
-              className="absolute size-2 text-primary [animation-delay:var(--sparkle-delay)] [animation-duration:var(--sparkle-duration)] [animation-iteration-count:infinite] [animation-name:cronus-sparkle]"
+              className="absolute size-2 text-primary [animation-delay:var(--sparkle-delay)] [animation-duration:var(--sparkle-duration)] [animation-fill-mode:backwards] [animation-iteration-count:infinite] [animation-name:cronus-sparkle]"
               style={sparkleStyle}
             >
               <svg viewBox="0 0 16 16" className="size-full fill-current" aria-hidden="true">

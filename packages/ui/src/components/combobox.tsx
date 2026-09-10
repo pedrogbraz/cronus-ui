@@ -99,7 +99,7 @@ export const Combobox = forwardRef<HTMLButtonElement, ComboboxProps>(
             className={cn(
               "w-full justify-between font-normal",
               "aria-invalid:border-error aria-invalid:ring-2 aria-invalid:ring-error/30",
-              !selectedOption && "text-fg-muted",
+              !selectedOption && "text-fg-tertiary",
               className,
             )}
             {...props}

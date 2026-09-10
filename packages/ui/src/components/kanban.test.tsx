@@ -69,7 +69,7 @@ describe("Kanban", () => {
   it("exposes a drag handle per card", () => {
     render(<Kanban columns={COLUMNS} onColumnsChange={() => {}} />);
     // 2 + 1 cards, each with a reorder handle.
-    expect(screen.getAllByRole("button", { name: /reordenar/i })).toHaveLength(3);
+    expect(screen.getAllByRole("button", { name: /reorder card/i })).toHaveLength(3);
   });
 
   it("renders an empty column without cards", () => {
@@ -77,7 +77,7 @@ describe("Kanban", () => {
     render(<Kanban columns={cols} onColumnsChange={() => {}} />);
     const done = column("Concluído");
     expect(within(done).getByText("0")).toBeInTheDocument();
-    expect(within(done).queryByRole("button", { name: /reordenar/i })).not.toBeInTheDocument();
+    expect(within(done).queryByRole("button", { name: /reorder card/i })).not.toBeInTheDocument();
   });
 
   it("has no axe violations", async () => {

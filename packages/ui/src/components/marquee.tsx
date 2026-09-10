@@ -280,7 +280,9 @@ export const Marquee = forwardRef<HTMLDivElement, MarqueeProps>(
               // it must scroll regardless of the OS setting.
               motionPreference !== "always" && "motion-reduce:[animation:none]",
               vertical ? "min-h-max flex-col" : "min-w-max flex-row",
-              pauseOnHover && "group-hover:[animation-play-state:paused]",
+              pauseOnHover &&
+                "group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]",
+              copySize === 0 && "[animation-play-state:paused]",
               groupClassName,
             )}
             style={

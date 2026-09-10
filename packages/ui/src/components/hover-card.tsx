@@ -4,12 +4,20 @@ import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
 import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from "react";
 import { cn } from "../lib/cn.js";
 
+/** Props for {@link HoverCard}. */
+export type HoverCardProps = ComponentPropsWithoutRef<typeof HoverCardPrimitive.Root>;
 export const HoverCard = HoverCardPrimitive.Root;
+
+/** Props for {@link HoverCardTrigger}. */
+export type HoverCardTriggerProps = ComponentPropsWithoutRef<typeof HoverCardPrimitive.Trigger>;
 export const HoverCardTrigger = HoverCardPrimitive.Trigger;
+
+/** Props for {@link HoverCardContent}. */
+export type HoverCardContentProps = ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>;
 
 export const HoverCardContent = forwardRef<
   ComponentRef<typeof HoverCardPrimitive.Content>,
-  ComponentPropsWithoutRef<typeof HoverCardPrimitive.Content>
+  HoverCardContentProps
 >(({ className, align = "center", sideOffset = 4, ...props }, ref) => {
   return (
     <HoverCardPrimitive.Portal>

@@ -40,12 +40,14 @@ export interface DialogContentProps
    * supplies its own close affordance (e.g. a full-bleed gallery header).
    */
   showCloseButton?: boolean;
+  /** Override the built-in close button's accessible name. Defaults to `"Close"`. */
+  labels?: { close?: string };
 }
 
 export const DialogContent = forwardRef<
   ComponentRef<typeof DialogPrimitive.Content>,
   DialogContentProps
->(({ className, children, showCloseButton = true, ...props }, ref) => {
+>(({ className, children, showCloseButton = true, labels, ...props }, ref) => {
   return (
     <DialogPortal>
       <DialogOverlay />
@@ -65,7 +67,7 @@ export const DialogContent = forwardRef<
             className="absolute end-4 top-4 rounded-md text-fg-tertiary outline-none transition-opacity hover:text-fg focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base disabled:pointer-events-none"
           >
             <X className="size-4" />
-            <span className="sr-only">Close</span>
+            <span className="sr-only">{labels?.close ?? "Close"}</span>
           </DialogPrimitive.Close>
         ) : null}
       </DialogPrimitive.Content>

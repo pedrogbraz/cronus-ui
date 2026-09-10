@@ -184,7 +184,7 @@ function KanbanCard({ item, render }: KanbanCardProps) {
           "mt-0.5 shrink-0 cursor-grab touch-none rounded-md p-0.5 text-fg-muted",
           "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-raised active:cursor-grabbing hover:text-fg [&_svg]:size-4",
         )}
-        aria-label="Reordenar cartão"
+        aria-label="Reorder card"
         {...attributes}
         {...listeners}
       >

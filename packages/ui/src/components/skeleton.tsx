@@ -1,7 +1,10 @@
 import { forwardRef, type HTMLAttributes } from "react";
 import { cn } from "../lib/cn.js";
 
-export const Skeleton = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+/** Props for {@link Skeleton}. */
+export type SkeletonProps = HTMLAttributes<HTMLDivElement>;
+
+export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
   ({ className, ...props }, ref) => {
     return (
       <div

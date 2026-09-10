@@ -6,9 +6,12 @@ import { ChevronDown } from "lucide-react";
 import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from "react";
 import { cn } from "../lib/cn.js";
 
+/** Props for {@link NavigationMenu}. */
+export type NavigationMenuProps = ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Root>;
+
 export const NavigationMenu = forwardRef<
   ComponentRef<typeof NavigationMenuPrimitive.Root>,
-  ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Root>
+  NavigationMenuProps
 >(({ className, children, ...props }, ref) => {
   return (
     <NavigationMenuPrimitive.Root
@@ -24,9 +27,12 @@ export const NavigationMenu = forwardRef<
 });
 NavigationMenu.displayName = "NavigationMenu";
 
+/** Props for {@link NavigationMenuList}. */
+export type NavigationMenuListProps = ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.List>;
+
 export const NavigationMenuList = forwardRef<
   ComponentRef<typeof NavigationMenuPrimitive.List>,
-  ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.List>
+  NavigationMenuListProps
 >(({ className, ...props }, ref) => {
   return (
     <NavigationMenuPrimitive.List
@@ -39,9 +45,12 @@ export const NavigationMenuList = forwardRef<
 });
 NavigationMenuList.displayName = "NavigationMenuList";
 
+/** Props for {@link NavigationMenuItem}. */
+export type NavigationMenuItemProps = ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Item>;
+
 export const NavigationMenuItem = forwardRef<
   ComponentRef<typeof NavigationMenuPrimitive.Item>,
-  ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Item>
+  NavigationMenuItemProps
 >(({ className, ...props }, ref) => {
   return (
     <NavigationMenuPrimitive.Item
@@ -58,9 +67,14 @@ const navigationMenuTriggerStyle = cva(
   "group inline-flex h-9 w-max items-center justify-center gap-1 rounded-lg bg-transparent px-4 py-2 text-sm font-medium text-fg-secondary transition-[background,color,box-shadow] duration-150 ease-[var(--ease-out-quart)] outline-none hover:bg-surface-overlay hover:text-fg focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base disabled:opacity-50 disabled:pointer-events-none data-[state=open]:bg-surface-overlay data-[state=open]:text-fg data-[active]:bg-surface-overlay data-[active]:text-fg",
 );
 
+/** Props for {@link NavigationMenuTrigger}. */
+export type NavigationMenuTriggerProps = ComponentPropsWithoutRef<
+  typeof NavigationMenuPrimitive.Trigger
+>;
+
 export const NavigationMenuTrigger = forwardRef<
   ComponentRef<typeof NavigationMenuPrimitive.Trigger>,
-  ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Trigger>
+  NavigationMenuTriggerProps
 >(({ className, children, ...props }, ref) => {
   return (
     <NavigationMenuPrimitive.Trigger
@@ -79,9 +93,14 @@ export const NavigationMenuTrigger = forwardRef<
 });
 NavigationMenuTrigger.displayName = "NavigationMenuTrigger";
 
+/** Props for {@link NavigationMenuContent}. */
+export type NavigationMenuContentProps = ComponentPropsWithoutRef<
+  typeof NavigationMenuPrimitive.Content
+>;
+
 export const NavigationMenuContent = forwardRef<
   ComponentRef<typeof NavigationMenuPrimitive.Content>,
-  ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Content>
+  NavigationMenuContentProps
 >(({ className, ...props }, ref) => {
   return (
     <NavigationMenuPrimitive.Content
@@ -101,9 +120,12 @@ export const NavigationMenuContent = forwardRef<
 });
 NavigationMenuContent.displayName = "NavigationMenuContent";
 
+/** Props for {@link NavigationMenuLink}. */
+export type NavigationMenuLinkProps = ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Link>;
+
 export const NavigationMenuLink = forwardRef<
   ComponentRef<typeof NavigationMenuPrimitive.Link>,
-  ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Link>
+  NavigationMenuLinkProps
 >(({ className, ...props }, ref) => {
   return (
     <NavigationMenuPrimitive.Link
@@ -119,9 +141,14 @@ export const NavigationMenuLink = forwardRef<
 });
 NavigationMenuLink.displayName = "NavigationMenuLink";
 
+/** Props for {@link NavigationMenuIndicator}. */
+export type NavigationMenuIndicatorProps = ComponentPropsWithoutRef<
+  typeof NavigationMenuPrimitive.Indicator
+>;
+
 export const NavigationMenuIndicator = forwardRef<
   ComponentRef<typeof NavigationMenuPrimitive.Indicator>,
-  ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Indicator>
+  NavigationMenuIndicatorProps
 >(({ className, ...props }, ref) => {
   return (
     <NavigationMenuPrimitive.Indicator
@@ -139,9 +166,14 @@ export const NavigationMenuIndicator = forwardRef<
 });
 NavigationMenuIndicator.displayName = "NavigationMenuIndicator";
 
+/** Props for {@link NavigationMenuViewport}. */
+export type NavigationMenuViewportProps = ComponentPropsWithoutRef<
+  typeof NavigationMenuPrimitive.Viewport
+>;
+
 export const NavigationMenuViewport = forwardRef<
   ComponentRef<typeof NavigationMenuPrimitive.Viewport>,
-  ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Viewport>
+  NavigationMenuViewportProps
 >(({ className, ...props }, ref) => {
   return (
     <div className="absolute left-0 top-full flex w-max justify-center">

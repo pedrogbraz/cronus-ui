@@ -5,11 +5,17 @@ import { ChevronDown } from "lucide-react";
 import { type ComponentPropsWithoutRef, type ComponentRef, forwardRef } from "react";
 import { cn } from "../lib/cn.js";
 
+/** Props for {@link Accordion}. */
+export type AccordionProps = ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>;
+
 export const Accordion = AccordionPrimitive.Root;
+
+/** Props for {@link AccordionItem}. */
+export type AccordionItemProps = ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>;
 
 export const AccordionItem = forwardRef<
   ComponentRef<typeof AccordionPrimitive.Item>,
-  ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
+  AccordionItemProps
 >(({ className, ...props }, ref) => {
   return (
     <AccordionPrimitive.Item
@@ -22,9 +28,12 @@ export const AccordionItem = forwardRef<
 });
 AccordionItem.displayName = "AccordionItem";
 
+/** Props for {@link AccordionTrigger}. */
+export type AccordionTriggerProps = ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>;
+
 export const AccordionTrigger = forwardRef<
   ComponentRef<typeof AccordionPrimitive.Trigger>,
-  ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
+  AccordionTriggerProps
 >(({ className, children, ...props }, ref) => {
   return (
     <AccordionPrimitive.Header className="flex">
@@ -45,9 +54,12 @@ export const AccordionTrigger = forwardRef<
 });
 AccordionTrigger.displayName = "AccordionTrigger";
 
+/** Props for {@link AccordionContent}. */
+export type AccordionContentProps = ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>;
+
 export const AccordionContent = forwardRef<
   ComponentRef<typeof AccordionPrimitive.Content>,
-  ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
+  AccordionContentProps
 >(({ className, children, ...props }, ref) => {
   return (
     <AccordionPrimitive.Content

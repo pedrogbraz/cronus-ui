@@ -184,7 +184,7 @@ export const OrbitRing = forwardRef<HTMLDivElement, OrbitRingProps>(
                 "absolute inset-0 [animation-name:cronus-orbit-spin] [will-change:transform]",
                 "[animation-duration:var(--orbit-duration)] [animation-timing-function:linear]",
                 "[animation-iteration-count:infinite] [animation-direction:var(--orbit-spin-direction)]",
-                "group-hover/orbit:[animation-play-state:paused] motion-reduce:[animation-name:none]",
+                "group-hover/orbit:[animation-play-state:paused] group-focus-within/orbit:[animation-play-state:paused] motion-reduce:[animation-name:none]",
               )}
               style={positionerStyle}
             >
@@ -223,7 +223,7 @@ export const OrbitItem = forwardRef<HTMLDivElement, OrbitItemProps>(
         "pointer-events-auto flex items-center justify-center [animation-name:cronus-orbit-spin]",
         "[animation-duration:var(--orbit-duration,24s)] [animation-timing-function:linear]",
         "[animation-iteration-count:infinite] [animation-direction:var(--orbit-counter-direction,reverse)]",
-        "group-hover/orbit:[animation-play-state:paused] motion-reduce:[animation-name:none]",
+        "group-hover/orbit:[animation-play-state:paused] group-focus-within/orbit:[animation-play-state:paused] motion-reduce:[animation-name:none]",
         className,
       )}
       style={{ rotate: "calc(var(--orbit-angle, 0deg) * -1)", ...style }}

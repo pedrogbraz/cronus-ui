@@ -72,7 +72,7 @@ export function FlickeringGrid({
             <span
               // biome-ignore lint/suspicious/noArrayIndexKey: cells are positional and never reorder.
               key={index}
-              className="rounded-[1px] bg-fg [animation-delay:var(--flicker-delay)] [animation-duration:var(--flicker-duration)] [animation-iteration-count:infinite] [animation-name:cronus-flicker] motion-reduce:[animation-name:none]"
+              className="rounded-[1px] bg-fg opacity-[0.08] [animation-delay:var(--flicker-delay)] [animation-duration:var(--flicker-duration)] [animation-fill-mode:backwards] [animation-iteration-count:infinite] [animation-name:cronus-flicker] motion-reduce:[animation-name:none]"
               style={cellStyle}
             />
           );

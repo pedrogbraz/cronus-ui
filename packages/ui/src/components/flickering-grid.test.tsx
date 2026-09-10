@@ -15,6 +15,17 @@ describe("FlickeringGrid", () => {
     expect(root?.querySelector('[aria-hidden="true"]')).not.toBeNull();
   });
 
+  it("does not flash cells at full opacity before the flicker delay", () => {
+    const { container } = render(
+      <FlickeringGrid columns={2} rows={2}>
+        <span>Signal</span>
+      </FlickeringGrid>,
+    );
+    const cell = container.querySelector("[data-slot='flickering-grid'] [aria-hidden] span");
+    expect(cell?.className).toContain("[animation-fill-mode:backwards]");
+    expect(cell?.className).toContain("opacity-[0.08]");
+  });
+
   it("has no axe violations", async () => {
     const { container } = render(
       <FlickeringGrid>

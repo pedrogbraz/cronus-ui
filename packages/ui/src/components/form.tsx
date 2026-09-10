@@ -24,6 +24,9 @@ import { Label } from "./label.js";
 
 export { useFormContext };
 
+/** Props for {@link Form}. */
+export type FormProps = ComponentPropsWithoutRef<typeof FormProvider>;
+
 export const Form = FormProvider;
 
 type FormFieldContextValue<
@@ -35,11 +38,17 @@ type FormFieldContextValue<
 
 const FormFieldContext = createContext<FormFieldContextValue | null>(null);
 
+/** Props for {@link FormField}. */
+export type FormFieldProps<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+> = ControllerProps<TFieldValues, TName>;
+
 export const FormField = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >(
-  props: ControllerProps<TFieldValues, TName>,
+  props: FormFieldProps<TFieldValues, TName>,
 ) => {
   return (
     <FormFieldContext.Provider value={{ name: props.name }}>
@@ -85,7 +94,10 @@ export const useFormField = () => {
   };
 };
 
-export const FormItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+/** Props for {@link FormItem}. */
+export type FormItemProps = HTMLAttributes<HTMLDivElement>;
+
+export const FormItem = forwardRef<HTMLDivElement, FormItemProps>(
   ({ className, ...props }, ref) => {
     const id = useId();
     return (
@@ -102,60 +114,69 @@ export const FormItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement
 );
 FormItem.displayName = "FormItem";
 
-export const FormLabel = forwardRef<
-  ComponentRef<typeof Label>,
-  ComponentPropsWithoutRef<typeof Label>
->(({ className, ...props }, ref) => {
-  const { error, formItemId } = useFormField();
-  return (
-    <Label
-      ref={ref}
-      data-slot="form-label"
-      data-error={!!error}
-      htmlFor={formItemId}
-      className={cn(error && "text-error-strong", className)}
-      {...props}
-    />
-  );
-});
+/** Props for {@link FormLabel}. */
+export type FormLabelProps = ComponentPropsWithoutRef<typeof Label>;
+
+export const FormLabel = forwardRef<ComponentRef<typeof Label>, FormLabelProps>(
+  ({ className, ...props }, ref) => {
+    const { error, formItemId } = useFormField();
+    return (
+      <Label
+        ref={ref}
+        data-slot="form-label"
+        data-error={!!error}
+        htmlFor={formItemId}
+        className={cn(error && "text-error-strong", className)}
+        {...props}
+      />
+    );
+  },
+);
 FormLabel.displayName = "FormLabel";
 
-export const FormControl = forwardRef<
-  ComponentRef<typeof Slot>,
-  ComponentPropsWithoutRef<typeof Slot>
->(({ ...props }, ref) => {
-  const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
-  return (
-    <Slot
-      ref={ref}
-      data-slot="form-control"
-      id={formItemId}
-      aria-describedby={error ? `${formDescriptionId} ${formMessageId}` : formDescriptionId}
-      aria-invalid={!!error}
-      {...props}
-    />
-  );
-});
+/** Props for {@link FormControl}. */
+export type FormControlProps = ComponentPropsWithoutRef<typeof Slot>;
+
+export const FormControl = forwardRef<ComponentRef<typeof Slot>, FormControlProps>(
+  ({ ...props }, ref) => {
+    const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
+    return (
+      <Slot
+        ref={ref}
+        data-slot="form-control"
+        id={formItemId}
+        aria-describedby={error ? `${formDescriptionId} ${formMessageId}` : formDescriptionId}
+        aria-invalid={!!error}
+        {...props}
+      />
+    );
+  },
+);
 FormControl.displayName = "FormControl";
 
-export const FormDescription = forwardRef<
-  HTMLParagraphElement,
-  HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => {
-  const { formDescriptionId } = useFormField();
-  return (
-    <p
-      ref={ref}
-      data-slot="form-description"
-      id={formDescriptionId}
-      className={cn("text-xs text-fg-secondary", className)}
-      {...props}
-    />
-  );
-});
+/** Props for {@link FormDescription}. */
+export type FormDescriptionProps = HTMLAttributes<HTMLParagraphElement>;
+
+export const FormDescription = forwardRef<HTMLParagraphElement, FormDescriptionProps>(
+  ({ className, ...props }, ref) => {
+    const { formDescriptionId } = useFormField();
+    return (
+      <p
+        ref={ref}
+        data-slot="form-description"
+        id={formDescriptionId}
+        className={cn("text-xs text-fg-secondary", className)}
+        {...props}
+      />
+    );
+  },
+);
 FormDescription.displayName = "FormDescription";
 
-export const FormMessage = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(
+/** Props for {@link FormMessage}. */
+export type FormMessageProps = HTMLAttributes<HTMLParagraphElement>;
+
+export const FormMessage = forwardRef<HTMLParagraphElement, FormMessageProps>(
   ({ className, children, ...props }, ref) => {
     const { error, formMessageId } = useFormField();
     const body = error ? String(error?.message ?? "") : children;

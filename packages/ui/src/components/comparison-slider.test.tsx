@@ -26,10 +26,15 @@ describe("ComparisonSlider", () => {
   });
 
   it("starts at defaultPosition", () => {
-    render(
+    const { container } = render(
       <ComparisonSlider aria-label="Compare" defaultPosition={30} before={<i />} after={<i />} />,
     );
-    expect(screen.getByRole("slider")).toHaveAttribute("aria-valuenow", "30");
+    const handle = screen.getByRole("slider");
+    expect(handle).toHaveAttribute("aria-valuenow", "30");
+    expect(handle).toHaveStyle({ insetInlineStart: "30%" });
+    expect(container.querySelector("[data-slot='comparison-before']")).toHaveStyle({
+      clipPath: "inset(0 70% 0 0)",
+    });
   });
 
   it("increases aria-valuenow on ArrowRight", () => {
@@ -97,5 +102,24 @@ describe("ComparisonSlider", () => {
       />,
     );
     expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it("inverts clip and horizontal arrows under dir=rtl", () => {
+    const { container } = render(
+      <div dir="rtl">
+        <ComparisonSlider aria-label="Compare" defaultPosition={40} before={<i />} after={<i />} />
+      </div>,
+    );
+    const handle = screen.getByRole("slider");
+    expect(handle).toHaveAttribute("aria-valuenow", "40");
+    expect(handle).toHaveStyle({ insetInlineStart: "40%" });
+    expect(container.querySelector("[data-slot='comparison-before']")).toHaveStyle({
+      clipPath: "inset(0 0 0 60%)",
+    });
+
+    fireEvent.keyDown(handle, { key: "ArrowLeft" });
+    expect(handle).toHaveAttribute("aria-valuenow", "41");
+    fireEvent.keyDown(handle, { key: "ArrowRight" });
+    expect(handle).toHaveAttribute("aria-valuenow", "40");
   });
 });

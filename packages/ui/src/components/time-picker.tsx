@@ -416,7 +416,7 @@ export const TimePicker = forwardRef<HTMLButtonElement, TimePickerProps>(
             className={cn("w-[240px] justify-start gap-2 font-normal", className)}
           >
             <Clock className="size-4 shrink-0 text-fg-tertiary" />
-            <span className={cn("tabular-nums", !isSet && "text-fg-muted")}>
+            <span className={cn("tabular-nums", !isSet && "text-fg-tertiary")}>
               {isSet ? display : placeholder}
             </span>
           </Button>

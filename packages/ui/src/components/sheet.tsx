@@ -41,9 +41,9 @@ const sheetVariants = cva(
         top: "inset-x-0 top-0 border-b w-full data-[state=open]:animate-[cronus-slide-in-top_320ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[cronus-slide-out-top_260ms_var(--ease-out-quart)_both]",
         bottom:
           "inset-x-0 bottom-0 border-t w-full data-[state=open]:animate-[cronus-slide-in-bottom_320ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[cronus-slide-out-bottom_260ms_var(--ease-out-quart)_both]",
-        left: "inset-y-0 left-0 border-r h-full w-3/4 max-w-sm data-[state=open]:animate-[cronus-slide-in-left_320ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[cronus-slide-out-left_260ms_var(--ease-out-quart)_both]",
+        left: "inset-y-0 left-0 border-r h-full w-3/4 max-w-sm data-[state=open]:animate-[cronus-slide-in-left_320ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[cronus-slide-out-left_260ms_var(--ease-out-quart)_both]", // contract-ok: physical `side` prop pins the sheet to a screen edge
         right:
-          "inset-y-0 right-0 border-l h-full w-3/4 max-w-sm data-[state=open]:animate-[cronus-slide-in-right_320ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[cronus-slide-out-right_260ms_var(--ease-out-quart)_both]",
+          "inset-y-0 right-0 border-l h-full w-3/4 max-w-sm data-[state=open]:animate-[cronus-slide-in-right_320ms_var(--ease-out-quart)_both] data-[state=closed]:animate-[cronus-slide-out-right_260ms_var(--ease-out-quart)_both]", // contract-ok: physical `side` prop pins the sheet to a screen edge
       },
     },
     defaultVariants: { side: "right" },
@@ -54,12 +54,14 @@ export interface SheetContentProps
   extends ComponentPropsWithoutRef<typeof SheetPrimitive.Content>,
     VariantProps<typeof sheetVariants> {
   side?: "top" | "right" | "bottom" | "left";
+  /** Override the built-in close button's accessible name. Defaults to `"Close"`. */
+  labels?: { close?: string };
 }
 
 export const SheetContent = forwardRef<
   ComponentRef<typeof SheetPrimitive.Content>,
   SheetContentProps
->(({ className, children, side = "right", ...props }, ref) => {
+>(({ className, children, side = "right", labels, ...props }, ref) => {
   return (
     <SheetPrimitive.Portal>
       <SheetOverlay />
@@ -72,10 +74,10 @@ export const SheetContent = forwardRef<
         {children}
         <SheetPrimitive.Close
           data-slot="sheet-close"
-          className="absolute right-4 top-4 rounded-md text-fg-tertiary outline-none transition-opacity hover:text-fg focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base disabled:pointer-events-none"
+          className="absolute end-4 top-4 rounded-md text-fg-tertiary outline-none transition-opacity hover:text-fg focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base disabled:pointer-events-none"
         >
           <X className="size-4" />
-          <span className="sr-only">Close</span>
+          <span className="sr-only">{labels?.close ?? "Close"}</span>
         </SheetPrimitive.Close>
       </SheetPrimitive.Content>
     </SheetPrimitive.Portal>
@@ -87,7 +89,7 @@ export const SheetHeader = ({ className, ...props }: HTMLAttributes<HTMLDivEleme
   return (
     <div
       data-slot="sheet-header"
-      className={cn("flex flex-col gap-1.5 text-center sm:text-left", className)}
+      className={cn("flex flex-col gap-1.5 text-center sm:text-start", className)}
       {...props}
     />
   );

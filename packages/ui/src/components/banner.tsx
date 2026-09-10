@@ -11,7 +11,7 @@ import { Button } from "./button.js";
  * Dismissible announcement / promo bar — a full-width horizontal strip pinned
  * to the top of a page or section (the "Top Banner" of a billing SDK). Renders
  * an optional leading icon, the message (a `title` + optional `description`, or
- * free-form `children`), an optional right-aligned `action` (a CTA Button or
+ * free-form `children`), an optional end-aligned `action` (a CTA Button or
  * link), and — when `dismissible` — a trailing close button.
  *
  * Colour strategy mirrors {@link Alert}: semantic variants tint the surface
@@ -36,9 +36,9 @@ const bannerVariants = cva(
         error: "bg-error/10 text-fg border-error/30 [&>svg]:text-error",
       },
       align: {
-        start: "text-left",
+        start: "text-start",
         // Centre the message block; the action + close are still pinned to the
-        // far right via `ml-auto`, so "centre" balances the message in the gap.
+        // inline end via `ms-auto`, so "centre" balances the message in the gap.
         center: "text-center",
       },
     },
@@ -55,7 +55,7 @@ export interface BannerProps
   description?: ReactNode;
   /** Leading glyph rendered before the message (e.g. a lucide icon). */
   icon?: ReactNode;
-  /** Right-aligned call to action (a {@link Button}, link, etc.). */
+  /** End-aligned call to action (a {@link Button}, link, etc.). */
   action?: ReactNode;
   /** Render a trailing close button. Defaults to `true`. */
   dismissible?: boolean;
@@ -67,6 +67,8 @@ export interface BannerProps
   defaultOpen?: boolean;
   /** Accessible label for the announcement region. Defaults to "Announcement". */
   label?: string;
+  /** Override the dismiss button's accessible name. Defaults to `{ dismiss: "Dismiss" }`. */
+  labels?: { dismiss?: string };
   /** Free-form message body, used when `title`/`description` are not supplied. */
   children?: ReactNode;
 }
@@ -96,6 +98,7 @@ export const Banner = forwardRef<HTMLElement, BannerProps>(
       open: openProp,
       defaultOpen = true,
       label = "Announcement",
+      labels,
       children,
       ...props
     },
@@ -162,7 +165,7 @@ export const Banner = forwardRef<HTMLElement, BannerProps>(
               </div>
 
               {action ? (
-                <div data-slot="banner-action" className="ml-auto flex shrink-0 items-center gap-2">
+                <div data-slot="banner-action" className="ms-auto flex shrink-0 items-center gap-2">
                   {action}
                 </div>
               ) : null}
@@ -172,14 +175,14 @@ export const Banner = forwardRef<HTMLElement, BannerProps>(
                   type="button"
                   variant="ghost"
                   size="icon-sm"
-                  aria-label="Dismiss"
+                  aria-label={labels?.dismiss ?? "Dismiss"}
                   data-slot="banner-dismiss"
                   onClick={handleDismiss}
                   className={cn(
                     "shrink-0",
                     // Without an `action`, the close button absorbs the auto margin
-                    // so it still sits flush right.
-                    !action && "ml-auto",
+                    // so it still sits flush at the inline end.
+                    !action && "ms-auto",
                     onBrand &&
                       "text-primary-foreground hover:bg-primary-foreground/15 hover:text-primary-foreground",
                   )}
