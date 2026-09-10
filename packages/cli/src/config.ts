@@ -31,6 +31,11 @@ export interface ComposedChoices {
   brand: string;
   /** Aesthetic PRNG seed (only present when the caller passed `--seed`). */
   seed?: number;
+  /**
+   * Per-route block stacks grafted by `add-page`. Wins over the bundled
+   * template page on `upgrade --all` so empty/period/complete variants survive.
+   */
+  pageBlocks?: Record<string, Array<string | { block: string; variant?: string }>>;
 }
 
 /**

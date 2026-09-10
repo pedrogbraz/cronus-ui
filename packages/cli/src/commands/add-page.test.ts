@@ -846,6 +846,129 @@ describe.skipIf(!HAS_REGISTRY)("addPage — confirmed-defect fixes", () => {
     expect(team).not.toContain("TeamBlock");
   });
 
+  it("add-page --overwrite /users user-management=empty on admin records the variant", async () => {
+    const app = join(root, "admin-users");
+    seedProject(app, "Painel");
+    await composeApp({
+      targetDir: app,
+      template: "admin",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+
+    await addPage({
+      targetDir: app,
+      route: "/users",
+      blocks: [{ block: "user-management", variant: "empty" }],
+      chrome: "shell",
+      overwrite: true,
+      app: "admin",
+      skipInstall: true,
+    });
+
+    const page = readFileSync(join(app, "app/(shell)/users/page.tsx"), "utf8");
+    expect(page).toContain("UserManagementEmptyBlock");
+    const config = await readConfig(app);
+    expect(config.composed?.admin?.choices.pageBlocks?.["/users"]).toEqual([
+      { block: "user-management", variant: "empty" },
+    ]);
+  });
+
+  it("add-page --overwrite /welcome welcome=complete records the variant", async () => {
+    const app = join(root, "saas-welcome");
+    seedProject(app, "Painel");
+    await composeApp({
+      targetDir: app,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+    const before = readFileSync(join(app, "app/(shell)/welcome/page.tsx"), "utf8");
+    expect(before).toContain("WelcomeBlock");
+    expect(before).not.toContain("WelcomeCompleteBlock");
+
+    const result = await addPage({
+      targetDir: app,
+      route: "/welcome",
+      blocks: [{ block: "welcome", variant: "complete" }],
+      chrome: "shell",
+      overwrite: true,
+      app: "saas",
+      skipInstall: true,
+    });
+    expect(result.generatedFiles).toContain("app/(shell)/welcome/page.tsx");
+
+    const page = readFileSync(join(app, "app/(shell)/welcome/page.tsx"), "utf8");
+    expect(page).toContain("WelcomeCompleteBlock");
+    expect(page).not.toContain("WelcomeBlock");
+    const config = await readConfig(app);
+    expect(config.composed?.saas?.choices.pageBlocks?.["/welcome"]).toEqual([
+      { block: "welcome", variant: "complete" },
+    ]);
+  });
+
+  it("add-page --overwrite /analytics analytics=period records the variant", async () => {
+    const app = join(root, "saas-analytics");
+    seedProject(app, "Painel");
+    await composeApp({
+      targetDir: app,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+
+    await addPage({
+      targetDir: app,
+      route: "/analytics",
+      blocks: [{ block: "analytics", variant: "period" }],
+      chrome: "shell",
+      overwrite: true,
+      app: "saas",
+      skipInstall: true,
+    });
+
+    const page = readFileSync(join(app, "app/(shell)/analytics/page.tsx"), "utf8");
+    expect(page).toContain("AnalyticsPeriodBlock");
+    expect(page).not.toContain("AnalyticsOverviewBlock");
+    const config = await readConfig(app);
+    expect(config.composed?.saas?.choices.pageBlocks?.["/analytics"]).toEqual([
+      { block: "analytics", variant: "period" },
+    ]);
+  });
+
+  it("add-page --overwrite /billing empty variants records both families", async () => {
+    const app = join(root, "saas-billing");
+    seedProject(app, "Painel");
+    await composeApp({
+      targetDir: app,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+
+    await addPage({
+      targetDir: app,
+      route: "/billing",
+      blocks: [
+        { block: "billing", variant: "empty" },
+        { block: "usage-dashboard", variant: "empty" },
+      ],
+      chrome: "shell",
+      overwrite: true,
+      app: "saas",
+      skipInstall: true,
+    });
+
+    const page = readFileSync(join(app, "app/(shell)/billing/page.tsx"), "utf8");
+    expect(page).toContain("BillingEmptyBlock");
+    expect(page).toContain("UsageDashboardEmptyBlock");
+    const config = await readConfig(app);
+    expect(config.composed?.saas?.choices.pageBlocks?.["/billing"]).toEqual([
+      { block: "billing", variant: "empty" },
+      { block: "usage-dashboard", variant: "empty" },
+    ]);
+  });
+
   it("add-page --overwrite / on a composed saas app keeps ItemsPanel", async () => {
     const app = join(root, "saas-home");
     seedProject(app, "Painel");

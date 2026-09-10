@@ -861,6 +861,69 @@ export default function TeamPage() {
     expect(homeFile()).not.toContain("StatsBlock");
   });
 
+  it("upgrade --all on saas keeps add-page empty/period/complete variants", async () => {
+    await composeApp({
+      targetDir: cwd,
+      template: "saas",
+      choices: { brand: "Painel" },
+      skipInstall: true,
+    });
+
+    await addPage({
+      targetDir: cwd,
+      route: "/welcome",
+      blocks: [{ block: "welcome", variant: "complete" }],
+      chrome: "shell",
+      overwrite: true,
+      app: "saas",
+      skipInstall: true,
+    });
+    await addPage({
+      targetDir: cwd,
+      route: "/analytics",
+      blocks: [{ block: "analytics", variant: "period" }],
+      chrome: "shell",
+      overwrite: true,
+      app: "saas",
+      skipInstall: true,
+    });
+    await addPage({
+      targetDir: cwd,
+      route: "/checklist",
+      blocks: [{ block: "setup-checklist", variant: "complete" }],
+      chrome: "shell",
+      overwrite: true,
+      app: "saas",
+      skipInstall: true,
+    });
+
+    const welcome = () => readFileSync(join(cwd, "app/(shell)/welcome/page.tsx"), "utf8");
+    const analytics = () => readFileSync(join(cwd, "app/(shell)/analytics/page.tsx"), "utf8");
+    const checklist = () => readFileSync(join(cwd, "app/(shell)/checklist/page.tsx"), "utf8");
+    expect(welcome()).toContain("WelcomeCompleteBlock");
+    expect(analytics()).toContain("AnalyticsPeriodBlock");
+    expect(checklist()).toContain("SetupChecklistCompleteBlock");
+
+    await upgrade([], { cwd, all: true, registry: REPO_REGISTRY, yes: true });
+
+    expect(welcome()).toContain("WelcomeCompleteBlock");
+    expect(welcome()).not.toContain("<WelcomeBlock />");
+    expect(analytics()).toContain("AnalyticsPeriodBlock");
+    expect(analytics()).not.toContain("AnalyticsOverviewBlock");
+    expect(checklist()).toContain("SetupChecklistCompleteBlock");
+    expect(checklist()).not.toContain("<SetupChecklistBlock />");
+    const config = await readConfig(cwd);
+    expect(config.composed?.saas?.choices.pageBlocks?.["/welcome"]).toEqual([
+      { block: "welcome", variant: "complete" },
+    ]);
+    expect(config.composed?.saas?.choices.pageBlocks?.["/analytics"]).toEqual([
+      { block: "analytics", variant: "period" },
+    ]);
+    expect(config.composed?.saas?.choices.pageBlocks?.["/checklist"]).toEqual([
+      { block: "setup-checklist", variant: "complete" },
+    ]);
+  });
+
   it("upgrade --all on saas restores home after a catalog overwrite", async () => {
     await composeApp({
       targetDir: cwd,

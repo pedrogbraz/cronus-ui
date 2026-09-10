@@ -153,6 +153,12 @@ export function filterManifestToComposedPages(
   composed: ComposedRecord,
 ): AppManifest {
   const composedRoutes = new Set(composed.choices.pages);
-  const pages = base.manifest.pages.filter((p) => composedRoutes.has(p.route));
+  const grafted = composed.choices.pageBlocks ?? {};
+  const pages = base.manifest.pages
+    .filter((p) => composedRoutes.has(p.route))
+    .map((p) => {
+      const blocks = grafted[p.route];
+      return blocks !== undefined ? { ...p, blocks } : p;
+    });
   return { ...base, manifest: { ...base.manifest, pages } };
 }

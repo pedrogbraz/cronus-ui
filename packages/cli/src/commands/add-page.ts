@@ -199,6 +199,20 @@ function synthesizeManifest(
   return { manifest, alreadyPresent };
 }
 
+function recordPageBlocks(
+  recorded: Record<string, BlockRef[]> | undefined,
+  route: string,
+  blocks: BlockRef[],
+): Record<string, BlockRef[]> {
+  const next = { ...recorded, [route]: blocks };
+  const sorted: Record<string, BlockRef[]> = {};
+  for (const key of Object.keys(next).sort()) {
+    const value = next[key];
+    if (value !== undefined) sorted[key] = value;
+  }
+  return sorted;
+}
+
 /**
  * The variant overrides to feed the re-plan. The recorded `choices.variants` are
  * the app's stale FAMILY-WIDE defaults from a prior compose; they exist only so
@@ -445,7 +459,11 @@ export async function addPage(options: AddPageOptions): Promise<AddPageResult> {
   const nextPages = [...new Set([...composedRecord.choices.pages, options.route])];
   // Preserve manifest order of the routes the app actually has.
   const orderedRoutes = plan.pages.map((p) => p.route).filter((r) => nextPages.includes(r));
-  const nextChoices = { ...composedRecord.choices, pages: orderedRoutes };
+  const nextChoices = {
+    ...composedRecord.choices,
+    pages: orderedRoutes,
+    pageBlocks: recordPageBlocks(composedRecord.choices.pageBlocks, options.route, options.blocks),
+  };
   // Drop the moved-away old page path from the tracked set (it was just deleted).
   const priorFiles =
     removedOldPage !== undefined
