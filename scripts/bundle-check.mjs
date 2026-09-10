@@ -129,7 +129,8 @@ const SHARED_CHUNK_BUDGETS = /** @type {SharedChunkBudgets} */ ({
   commonUncompressedJsBytes: 640_000,
   commonGzipJsBytes: 190_000,
   sharedUncompressedJsBytes: 1_120_000,
-  sharedGzipJsBytes: 335_000,
+  // CI 2026-09-10: 328 KiB after AI Elements catalog thumbs. ~10% headroom.
+  sharedGzipJsBytes: 370_000,
 });
 
 /**
