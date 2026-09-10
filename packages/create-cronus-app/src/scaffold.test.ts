@@ -224,6 +224,43 @@ describe("scaffold (into a temp dir, no install)", () => {
     expect(layout).toContain('defaultModeName="light"');
   });
 
+  it("scaffolds the gontify AI SaaS landing", () => {
+    scaffold({ targetDir, name, template: "gontify", theme: "neutral", mode: "dark" });
+    for (const file of [
+      ["app", "page.tsx"],
+      ["components", "sections", "hero.tsx"],
+      ["config", "site.ts"],
+      ["cronus-ui.json"],
+    ]) {
+      expect(existsSync(join(targetDir, ...file)), file.join("/")).toBe(true);
+    }
+    const site = readFileSync(join(targetDir, "config", "site.ts"), "utf8");
+    expect(site).toContain("Gontify");
+    expect(site).not.toContain("Nexus");
+    const layout = readFileSync(join(targetDir, "app", "layout.tsx"), "utf8");
+    expect(layout).toContain('defaultThemeName="neutral"');
+    expect(layout).toContain('defaultModeName="dark"');
+  });
+
+  it("scaffolds the portfolio template as Pedro Gontijo", () => {
+    scaffold({ targetDir, name, template: "portfolio", theme: "neutral", mode: "light" });
+    expect(existsSync(join(targetDir, "data", "resume.tsx"))).toBe(true);
+    expect(existsSync(join(targetDir, "public", "banner.gif"))).toBe(true);
+    const resume = readFileSync(join(targetDir, "data", "resume.tsx"), "utf8");
+    expect(resume).toContain("Pedro Gontijo");
+    expect(resume).toContain("https://github.com/pedrogbraz.png");
+    expect(resume).toContain("São Paulo, SP");
+    expect(resume).toContain("Cooud");
+    expect(resume).toContain("FIAP");
+    expect(resume).not.toContain("Karilyn");
+    expect(resume).not.toContain("New York");
+    expect(resume).not.toContain("Vercel");
+    expect(resume).not.toContain("hackathons");
+    const layout = readFileSync(join(targetDir, "app", "layout.tsx"), "utf8");
+    expect(layout).toContain('defaultThemeName="neutral"');
+    expect(layout).toContain('defaultModeName="light"');
+  });
+
   it("throws a friendly error when a template directory cannot be found", () => {
     expect(() =>
       scaffold({ targetDir, name, template: "missing" as unknown as "default" }),

@@ -51,7 +51,7 @@ ${c.bold("Usage")}
 
 ${c.bold("Options")}
   --template <name>          Starter template (default: ${DEFAULT_TEMPLATE}).
-                             Bundled: default, dashboard, marketing.
+                             Bundled: default, dashboard, marketing, gontify, portfolio.
                              Composed: store, landing, saas, landing-* flavors, and Pro pack (mail, chat, finance).
   --theme <${THEMES.join("|")}>
                              Theme preset to bake in (default: ${DEFAULT_THEME})

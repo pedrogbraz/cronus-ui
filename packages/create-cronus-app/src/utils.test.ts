@@ -8,6 +8,7 @@ import {
   isGoldPathTemplate,
   isValidProjectName,
   outroLines,
+  TEMPLATE_APPEARANCE,
   TEMPLATE_HINTS,
   TEMPLATES,
   THEME_HINTS,
@@ -44,6 +45,10 @@ describe("templates", () => {
     expect(TEMPLATES).toContain("default");
     expect(TEMPLATES).toContain("dashboard");
     expect(TEMPLATES).toContain("marketing");
+    expect(TEMPLATES).toContain("gontify");
+    expect(TEMPLATES).toContain("portfolio");
+    expect(TEMPLATE_APPEARANCE.gontify).toEqual({ theme: "neutral", mode: "dark" });
+    expect(TEMPLATE_APPEARANCE.portfolio).toEqual({ theme: "neutral", mode: "light" });
   });
 
   it("has a one-line hint for every template", () => {
@@ -80,6 +85,8 @@ describe("templates", () => {
     expect(isComposedTemplate("default")).toBe(false);
     expect(isComposedTemplate("dashboard")).toBe(false);
     expect(isComposedTemplate("marketing")).toBe(false);
+    expect(isComposedTemplate("gontify")).toBe(false);
+    expect(isComposedTemplate("portfolio")).toBe(false);
     expect(Object.keys(COMPOSED_TEMPLATES).sort()).toEqual(
       [
         "admin",
@@ -281,7 +288,7 @@ describe("outroLines", () => {
   });
 
   it("for default/dashboard/marketing, keeps add + a compose hint", () => {
-    for (const t of ["default", "dashboard", "marketing"] as const) {
+    for (const t of ["default", "dashboard", "marketing", "gontify", "portfolio"] as const) {
       const text = joined("my-app", "npm", true, t);
       expect(text, t).toContain("npx cronus-ui add dialog table tabs");
       expect(text, t).toContain("npx cronus-ui compose saas");

@@ -136,6 +136,8 @@ export const TEMPLATES = [
   "default",
   "dashboard",
   "marketing",
+  "gontify",
+  "portfolio",
   "store",
   "landing",
   "saas",
@@ -197,6 +199,8 @@ export const TEMPLATE_HINTS: Record<TemplateName, string> = {
   default: "single-page starter — metrics, table & cards (default)",
   dashboard: "multi-page app — sidebar shell, KPIs, chart, data table, settings",
   marketing: "landing site — hero, features, pricing, testimonials, FAQ, waitlist",
+  gontify: "AI SaaS landing — column-line hero, flowing logos, kinetic testimonials",
+  portfolio: "personal portfolio — work, projects, community, pixel theme toggle",
   store: "generated storefront — 9 navigable pages, real nav, from validated blocks",
   landing: "generated landing page — hero, features, pricing, testimonials, FAQ, CTA",
   saas: "recommended for a full product — split auth + shell dashboard, team, billing, settings",
@@ -259,6 +263,8 @@ export const TEMPLATE_APPEARANCE: Partial<Record<TemplateName, { theme: Theme; m
     finance: { theme: "emerald", mode: "light" },
     admin: { theme: "midnight", mode: "dark" },
     docs: { theme: "neutral", mode: "light" },
+    gontify: { theme: "neutral", mode: "dark" },
+    portfolio: { theme: "neutral", mode: "light" },
   };
 
 /**
