@@ -25,6 +25,11 @@
  *                          `access: public` from the tarball's embedded
  *                          `publishConfig`, while the registry is pinned here so
  *                          machine-level npm config cannot redirect a release.
+ *   (f) mcp-registry — after `cronus-ui-mcp` is on npm (ownership via mcpName),
+ *                     `mcp-publisher publish packages/mcp/server.json` so
+ *                     io.github.pedrogbraz/cronus-ui stays in lockstep. Dry-run
+ *                     validates the file. `--skip-mcp-registry` if that version
+ *                     is already live and npm needs a recovery re-run.
  *
  * SAFETY: dry-run by DEFAULT. Without `--publish` it runs (a)-(c), then runs
  * the tag and publish plan plus `npm publish --dry-run` for (e).
@@ -35,7 +40,9 @@
  *   node scripts/release.mjs --publish  # really push tag + publish
  *   node scripts/release.mjs --publish --skip-tag
  *     # tag already exists (registry is live); only (re)publish packages
- *   bun run release [--publish] [--skip-tag]
+ *   node scripts/release.mjs --publish --skip-mcp-registry
+ *     # npm already shipped; skip official MCP Registry publish
+ *   bun run release [--publish] [--skip-tag] [--skip-mcp-registry]
  *
  * Offline/auth notes: all packages publish to public npm and require a valid npm
  * login / `NPM_TOKEN`. `--publish` only runs from a local `main` that exactly
@@ -45,6 +52,7 @@
 
 import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -53,6 +61,7 @@ const ROOT = resolve(__dirname, "..");
 
 const PUBLISH = process.argv.includes("--publish");
 const SKIP_TAG = process.argv.includes("--skip-tag");
+const SKIP_MCP_REGISTRY = process.argv.includes("--skip-mcp-registry");
 
 /* ------------------------------------------------------------------ *
  * logging
@@ -114,6 +123,10 @@ const PACKAGE_ORDER_LABEL = PACKAGES.map((pkg) => pkg.name).join(" → ");
 const PUBLISHABLE_PACKAGE_NAMES = new Set(PACKAGES.map((pkg) => pkg.name));
 const NPM_REGISTRY = "https://registry.npmjs.org/";
 const GITHUB_REPO = "pedrogbraz/cronus-ui";
+const MCP_SERVER_JSON = "packages/mcp/server.json";
+const MCP_REGISTRY_NAME = "io.github.pedrogbraz/cronus-ui";
+const MCP_HTTP_URL = "https://aicronus.com/mcp";
+const MCP_PUBLISHER_TOKEN = join(homedir(), ".config/mcp-publisher/token.json");
 
 /* ------------------------------------------------------------------ *
  * (a) preflight — clean tree + lockstep versions
@@ -209,6 +222,115 @@ process.stdout.write(json.full_name || repo);
   }
 }
 
+function commandOnPath(name) {
+  try {
+    run("which", [name], { capture: true });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function readMcpServerJson() {
+  const path = join(ROOT, MCP_SERVER_JSON);
+  if (!existsSync(path)) fatal(`${MCP_SERVER_JSON} is missing.`);
+  try {
+    return JSON.parse(readFileSync(path, "utf8"));
+  } catch (err) {
+    fatal(`could not parse ${MCP_SERVER_JSON}.`, err);
+  }
+}
+
+function preflightMcpRegistry(version) {
+  const mcpPkg = readPkg("packages/mcp");
+  const server = readMcpServerJson();
+  const npmPkg = server.packages?.[0];
+  const remote = server.remotes?.[0];
+
+  if (mcpPkg.mcpName !== MCP_REGISTRY_NAME) {
+    fatal(
+      `packages/mcp/package.json mcpName must be ${MCP_REGISTRY_NAME} (got ${mcpPkg.mcpName ?? "(missing)"}).`,
+    );
+  }
+  if (server.name !== MCP_REGISTRY_NAME) {
+    fatal(`${MCP_SERVER_JSON} name must be ${MCP_REGISTRY_NAME} (got ${server.name}).`);
+  }
+  if (server.version !== version || npmPkg?.version !== version) {
+    fatal(
+      `${MCP_SERVER_JSON} version (${server.version}) and packages[0].version (${npmPkg?.version}) must match lockstep ${version}.`,
+    );
+  }
+  if (npmPkg?.identifier !== "cronus-ui-mcp" || npmPkg?.registryType !== "npm") {
+    fatal(`${MCP_SERVER_JSON} packages[0] must be npm identifier cronus-ui-mcp.`);
+  }
+  if (remote?.type !== "streamable-http" || remote?.url !== MCP_HTTP_URL) {
+    fatal(`${MCP_SERVER_JSON} remotes[0] must be streamable-http ${MCP_HTTP_URL}.`);
+  }
+  ok(`${MCP_SERVER_JSON} matches lockstep ${version} (${MCP_REGISTRY_NAME})`);
+
+  if (!commandOnPath("mcp-publisher")) {
+    fatal(
+      "mcp-publisher is not on PATH. Install with `brew install mcp-publisher` " +
+        "(https://github.com/modelcontextprotocol/registry/releases).",
+    );
+  }
+  ok("mcp-publisher is on PATH");
+
+  info(`mcp-publisher validate ${MCP_SERVER_JSON}`);
+  try {
+    run("mcp-publisher", ["validate", MCP_SERVER_JSON]);
+  } catch (err) {
+    fatal(`${MCP_SERVER_JSON} failed mcp-publisher validate.`, err);
+  }
+  ok("mcp-publisher validate passed");
+
+  if (PUBLISH && !SKIP_MCP_REGISTRY) {
+    if (!existsSync(MCP_PUBLISHER_TOKEN)) {
+      fatal(
+        "mcp-publisher is not logged in (missing ~/.config/mcp-publisher/token.json). " +
+          "Run `mcp-publisher login github` before --publish.",
+      );
+    }
+    ok("mcp-publisher login token is present");
+  }
+}
+
+function publishMcpRegistry(version) {
+  if (SKIP_MCP_REGISTRY) {
+    group("mcp-registry — skipped (--skip-mcp-registry)");
+    ok(`not publishing ${MCP_REGISTRY_NAME}@${version}`);
+    return;
+  }
+
+  group(
+    PUBLISH
+      ? `mcp-registry (${MCP_REGISTRY_NAME}@${version})`
+      : "mcp-registry — DRY-RUN (validate only)",
+  );
+
+  if (!PUBLISH) {
+    plan(
+      `would publish ${c.bold(`${MCP_REGISTRY_NAME}@${version}`)} after cronus-ui-mcp is on npm`,
+    );
+    info(`(mcp-publisher publish ${MCP_SERVER_JSON})`);
+    return;
+  }
+
+  info(`mcp-publisher publish ${MCP_SERVER_JSON}`);
+  try {
+    run("mcp-publisher", ["publish", MCP_SERVER_JSON]);
+  } catch (err) {
+    fatal(
+      `official MCP Registry publish failed for ${MCP_REGISTRY_NAME}@${version}. ` +
+        `npm packages may already be live. Recover with: ` +
+        `mcp-publisher publish ${MCP_SERVER_JSON} ` +
+        `(or re-run the rest of a broken release with --skip-mcp-registry if this version is already listed).`,
+      err,
+    );
+  }
+  ok(`published ${MCP_REGISTRY_NAME}@${version}  →  https://registry.modelcontextprotocol.io`);
+}
+
 function preflight() {
   group("preflight");
 
@@ -287,6 +409,8 @@ function preflight() {
     }
     ok(`${pkg.name}@${version} is free on npm`);
   }
+
+  preflightMcpRegistry(version);
 
   return { version, tag };
 }
@@ -485,6 +609,13 @@ function summary({ version, tag, published }) {
   for (const p of published) {
     log(`    ${PUBLISH ? c.green("✓") : c.yellow("◦")} ${p.name}@${version}  →  ${p.registry}`);
   }
+  if (SKIP_MCP_REGISTRY) {
+    log(`    ${c.dim("·")} ${MCP_REGISTRY_NAME}@${version} skipped (--skip-mcp-registry)`);
+  } else {
+    log(
+      `    ${PUBLISH ? c.green("✓") : c.yellow("◦")} ${MCP_REGISTRY_NAME}@${version}  →  registry.modelcontextprotocol.io`,
+    );
+  }
 
   log(`\n${c.bold("Preflight checks this script DID run:")}`);
   log(
@@ -528,6 +659,7 @@ function main() {
   smoke();
   tagAndPush(tag);
   const published = publishAll(version);
+  publishMcpRegistry(version);
   summary({ version, tag, published });
 }
 

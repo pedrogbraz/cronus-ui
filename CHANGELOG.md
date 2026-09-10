@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- **`bun run release --publish` publishes the official MCP Registry listing**
+  after npm (`mcp-publisher publish packages/mcp/server.json`). Preflight
+  checks `server.json` lockstep, `mcpName`, and login. `--skip-mcp-registry`
+  skips that step.
+
 ## [0.7.6] — 2026-09-09
 
 ### Added

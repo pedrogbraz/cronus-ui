@@ -34,6 +34,8 @@ explicit `--publish` flag to actually push the tag and publish.
 bun run release                      # DRY-RUN (default): prints exactly what it would tag + publish
 bun run release --publish            # really push the tag and publish the tarballs
 bun run release --publish --skip-tag # tag already on origin; only publish packages
+bun run release --publish --skip-mcp-registry
+  # npm already shipped; skip official MCP Registry publish
 ```
 
 In order, the script:
@@ -70,6 +72,10 @@ In order, the script:
    In a dry-run this step runs `npm publish --dry-run` (validates the tarball and
    prints the target registry) and leaves the packed tarballs in
    `.release-tarballs/` for inspection. With `--publish` it publishes for real.
+
+6. **Official MCP Registry** — after npm, `mcp-publisher publish
+   packages/mcp/server.json`. A dry-run runs `mcp-publisher validate`.
+   `--skip-mcp-registry` skips this.
 
 > **Why `bun pm pack` and not a plain `npm publish` from each package dir?** In
 > this Bun workspace `npm pack`/`npm publish` ship `workspace:*` dependency
@@ -115,7 +121,10 @@ follow-up version and deprecate the bad version only if needed.
    `SERVER_VERSION` in [`packages/mcp/src/version.ts`](packages/mcp/src/version.ts)
    to the same value — the CLI and MCP default registries are pinned to their own
    tag (`https://raw.githubusercontent.com/pedrogbraz/cronus-ui/vX.Y.Z/registry`),
-   and tests fail if either runtime version drifts from `package.json`.
+   and tests fail if either runtime version drifts from `package.json`. Keep
+   [`packages/mcp/server.json`](packages/mcp/server.json) `version` and
+   `packages[0].version` on the same lockstep, and `mcpName` /
+   `server.json` `name` as `io.github.pedrogbraz/cronus-ui`.
 2. **Build:** `bun run build`.
 3. **Gate + smoke (dry-run preflight):** `bun run release` — this runs the full
    gate, light `package:smoke`, and a publish/tag dry-run. Confirm the printed
@@ -131,6 +140,12 @@ follow-up version and deprecate the bad version only if needed.
    `@cronus-ui/tokens` → `@cronus-ui/theme` → `@cronus-ui/ui` →
    `@cronus-ui/stack` → `@cronus-ui/ai-kit` → `cronus-ui` →
    `create-cronus-app` → `create-cronus-stack` → `cronus-ui-mcp`.
+   After `cronus-ui-mcp` is on npm, it runs `mcp-publisher publish
+   packages/mcp/server.json` so `io.github.pedrogbraz/cronus-ui` tracks the
+   same version on the official MCP Registry. Requires `mcp-publisher` on
+   PATH (`brew install mcp-publisher`) and `mcp-publisher login github`.
+   If npm published and that step fails, recover with
+   `mcp-publisher publish packages/mcp/server.json`.
 
    > `v0.1.0` already exists, so the stack-generator release line starts at
    > `v0.2.0`: all nine publishable packages must share `0.2.0`, and the
