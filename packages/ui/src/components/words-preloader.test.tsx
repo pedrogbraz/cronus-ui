@@ -1,4 +1,4 @@
-import { act, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { AnimatePresence } from "motion/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { axe } from "vitest-axe";
@@ -51,21 +51,30 @@ describe("WordsPreloader", () => {
     vi.unstubAllGlobals();
   });
 
-  it("starts on the first greeting and steps through the set", () => {
+  it("starts on the first word and steps through the set", async () => {
+    vi.useRealTimers();
     render(
       <AnimatePresence>
-        <WordsPreloader layout="contained" />
+        <WordsPreloader
+          layout="contained"
+          words={["Compose", "Theme"]}
+          firstDelayMs={50}
+          stepDelayMs={50}
+        />
       </AnimatePresence>,
     );
-    expect(screen.getByText("Hello")).toBeInTheDocument();
-    act(() => {
-      vi.advanceTimersByTime(1000);
-    });
-    expect(screen.getByText("Bonjour")).toBeInTheDocument();
-    act(() => {
-      vi.advanceTimersByTime(150);
-    });
-    expect(screen.getByText("Ciao")).toBeInTheDocument();
+    expect(document.querySelector('[data-slot="slide-up-text"]')).toBeInTheDocument();
+    expect(document.querySelector('[data-slot="slide-up-text"] .sr-only')?.textContent).toBe(
+      "Compose",
+    );
+    await vi.waitFor(
+      () => {
+        expect(document.querySelector('[data-slot="slide-up-text"] .sr-only')?.textContent).toBe(
+          "Theme",
+        );
+      },
+      { timeout: 2000 },
+    );
   });
 
   it("exposes a busy status region", () => {
@@ -77,9 +86,52 @@ describe("WordsPreloader", () => {
 
   it("accepts a custom word list", () => {
     render(<WordsPreloader layout="contained" words={["Oi", "Hey"]} />);
-    expect(screen.getByText("Oi")).toBeInTheDocument();
-    expect(DEFAULT_PRELOADER_WORDS[0]).toBe("Hello");
-    expect(DEFAULT_PRELOADER_WORDS).toContain("ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ ਜੀ");
+    expect(document.querySelector('[data-slot="slide-up-text"] .sr-only')?.textContent).toBe("Oi");
+    expect(DEFAULT_PRELOADER_WORDS).toEqual([
+      "The innovation of interfaces.",
+      "One system. The whole product follows.",
+    ]);
+  });
+
+  it("renders the end mark after the last line", async () => {
+    vi.useRealTimers();
+    render(
+      <WordsPreloader
+        layout="contained"
+        words={["Compose"]}
+        firstDelayMs={40}
+        lastHoldMs={400}
+        end={<span>Mark</span>}
+      />,
+    );
+    expect(document.querySelector('[data-slot="slide-up-text"] .sr-only')?.textContent).toBe(
+      "Compose",
+    );
+    expect(await screen.findByText("Mark", {}, { timeout: 2500 })).toBeInTheDocument();
+  });
+
+  it("calls onComplete after the last word is held", async () => {
+    vi.useRealTimers();
+    const onComplete = vi.fn();
+    render(
+      <WordsPreloader
+        layout="contained"
+        words={["Oi", "Hey"]}
+        firstDelayMs={80}
+        stepDelayMs={80}
+        lastHoldMs={60}
+        onComplete={onComplete}
+      />,
+    );
+    await vi.waitFor(
+      () => {
+        expect(document.querySelector('[data-slot="slide-up-text"] .sr-only')?.textContent).toBe(
+          "Hey",
+        );
+      },
+      { timeout: 2000 },
+    );
+    await vi.waitFor(() => expect(onComplete).toHaveBeenCalledTimes(1), { timeout: 2000 });
   });
 
   it("has no axe violations", async () => {
