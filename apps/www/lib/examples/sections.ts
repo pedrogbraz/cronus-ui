@@ -222,6 +222,14 @@ export const EXAMPLE_SECTIONS: Record<string, ExampleSectionMeta[]> = {
   masonry: [{ id: "responsive-cards", title: "Responsive cards" }],
   heatmap: [{ id: "contributions", title: "Contributions" }],
   "comparison-slider": [{ id: "before-after", title: "Before & after" }],
+  "goal-card": [
+    { id: "progress", title: "Progress" },
+    { id: "statuses", title: "Statuses" },
+  ],
+  "todo-item": [
+    { id: "interactive", title: "Interactive" },
+    { id: "priorities", title: "Priority levels" },
+  ],
   alert: [
     { id: "default", title: "Default" },
     { id: "variants", title: "Variants" },
@@ -259,6 +267,12 @@ export const EXAMPLE_SECTIONS: Record<string, ExampleSectionMeta[]> = {
   "context-menu": [{ id: "on-a-surface", title: "On a surface" }],
   command: [{ id: "command-palette", title: "Command palette" }],
   lightbox: [{ id: "gallery", title: "Gallery" }],
+  "author-tooltip": [
+    { id: "profile", title: "Profile" },
+    { id: "sizes", title: "Sizes" },
+  ],
+  "component-preview-tooltip": [{ id: "preview", title: "Live preview" }],
+  "link-preview": [{ id: "unfurl", title: "Unfurl" }],
   tabs: [{ id: "three-tabs", title: "Three tabs" }],
   accordion: [{ id: "faq", title: "FAQ" }],
   breadcrumb: [{ id: "trail", title: "Trail" }],

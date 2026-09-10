@@ -852,6 +852,38 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
           </div>
         </Fill>
       );
+    case "goal-card":
+      return (
+        <Fill className="items-center justify-center p-12">
+          <div className="w-[380px] rounded-3xl border border-border bg-surface-raised p-5 shadow-sm">
+            <p className="font-display text-lg tracking-[-0.02em] text-fg">Launch MVP</p>
+            <div className="mt-4 flex items-center gap-3">
+              <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-surface-overlay">
+                <div className="h-full w-3/4 rounded-full bg-primary" />
+              </div>
+              <span className="text-sm text-fg-tertiary">75%</span>
+            </div>
+            <div className="mt-3 flex items-center gap-2">
+              <span className="rounded-full bg-info/15 px-2.5 py-1 text-xs text-info-strong">
+                In progress
+              </span>
+              <span className="text-xs text-fg-tertiary">3/4 steps</span>
+            </div>
+          </div>
+        </Fill>
+      );
+    case "todo-item":
+      return (
+        <Fill className="items-center justify-center p-12">
+          <div className="flex w-[400px] gap-3 rounded-2xl border border-border bg-surface-raised p-4">
+            <span className="mt-1 size-4 rounded-sm border border-border bg-surface-inset" />
+            <div className="flex-1">
+              <p className="text-sm text-fg">Review pull requests</p>
+              <p className="mt-1 text-xs text-fg-tertiary">High · 1/2 subtasks</p>
+            </div>
+          </div>
+        </Fill>
+      );
     case "card":
     case "glass-card":
     case "spotlight-card":
@@ -1336,6 +1368,46 @@ function componentScene(slug: string, categorySlug: string): ReactNode {
             </Button>
           </div>
         </AppShell>
+      );
+    case "author-tooltip":
+      return (
+        <Fill className="items-center justify-center">
+          <div className="relative">
+            <span className="grid size-10 place-items-center rounded-full border-2 border-border bg-surface-overlay text-xs text-fg">
+              A
+            </span>
+            <span className="absolute start-12 top-0 w-40 rounded-xl border border-border bg-surface-floating p-3 text-xs shadow-md">
+              <span className="block font-medium text-fg">Aryan</span>
+              <span className="text-fg-tertiary">Founder & CEO</span>
+            </span>
+          </div>
+        </Fill>
+      );
+    case "component-preview-tooltip":
+      return (
+        <Fill className="items-center justify-center">
+          <div className="relative">
+            <span className="rounded-md border border-border bg-surface-raised px-3 py-1.5 text-sm text-fg">
+              Goal Card
+            </span>
+            <span className="absolute -top-16 start-1/2 w-40 -translate-x-1/2 rounded-2xl border border-border bg-surface-floating p-3 shadow-md">
+              <span className="block text-xs text-fg">Launch MVP</span>
+              <span className="mt-2 block h-1.5 overflow-hidden rounded-full bg-surface-overlay">
+                <span className="block h-full w-3/4 rounded-full bg-primary" />
+              </span>
+            </span>
+          </div>
+        </Fill>
+      );
+    case "link-preview":
+      return (
+        <Fill className="items-center justify-center p-10">
+          <div className="w-[280px] rounded-xl border border-border bg-surface-floating p-3 shadow-md">
+            <div className="aspect-video rounded-lg bg-surface-inset" />
+            <p className="mt-2 text-sm font-medium text-fg">Cronus UI</p>
+            <p className="mt-1 text-xs text-fg-tertiary">github.com/pedrogbraz/cronus-ui</p>
+          </div>
+        </Fill>
       );
     case "tooltip":
     case "hover-card":

@@ -232,7 +232,7 @@ export const CATEGORIES: ComponentCategory[] = [
   },
   {
     slug: "data-display",
-    name: "Data Display",
+    name: "Display",
     items: [
       { slug: "avatar", name: "Avatar", description: "User image with a fallback.", rsc: true },
       {
@@ -247,6 +247,13 @@ export const CATEGORIES: ComponentCategory[] = [
         slug: "card",
         name: "Card",
         description: "Surface that groups related content.",
+        rsc: true,
+      },
+      {
+        slug: "goal-card",
+        name: "GoalCard",
+        description: "Objective card with progress, status, steps, and a due date.",
+        importName: "GoalCard",
         rsc: true,
       },
       { slug: "table", name: "Table", description: "Styled semantic table primitives.", rsc: true },
@@ -342,6 +349,13 @@ export const CATEGORIES: ComponentCategory[] = [
         description: "Drag-and-drop board with cards that reorder and move across columns.",
       },
       {
+        slug: "todo-item",
+        name: "TodoItem",
+        description: "Interactive todo row with priority, due date, labels, and subtasks.",
+        importName: "TodoItem",
+        rsc: true,
+      },
+      {
         slug: "json-viewer",
         name: "JsonViewer",
         description: "Collapsible JSON tree with type-colored values and per-row copy.",
@@ -416,7 +430,7 @@ export const CATEGORIES: ComponentCategory[] = [
   },
   {
     slug: "overlays",
-    name: "Overlays",
+    name: "Overlays & Tooltips",
     items: [
       { slug: "dialog", name: "Dialog", description: "Modal dialog with header and footer." },
       { slug: "sheet", name: "Sheet", description: "Side-anchored panel." },
@@ -429,7 +443,26 @@ export const CATEGORIES: ComponentCategory[] = [
         importName: "NotificationCenter, NotificationList, NotificationRow",
       },
       { slug: "hover-card", name: "HoverCard", description: "Preview content on hover." },
+      {
+        slug: "author-tooltip",
+        name: "AuthorTooltip",
+        description: "Hover an avatar to see name, role, and profile links.",
+        importName: "AuthorTooltip",
+        rsc: true,
+      },
       { slug: "tooltip", name: "Tooltip", description: "Short hint on hover or focus." },
+      {
+        slug: "component-preview-tooltip",
+        name: "ComponentPreviewTooltip",
+        description: "Hover a name to show a live miniature of a component.",
+        importName: "ComponentPreviewTooltip",
+      },
+      {
+        slug: "link-preview",
+        name: "LinkPreview",
+        description: "Hover a URL to unfurl title, description, and thumbnail.",
+        importName: "LinkPreview",
+      },
       { slug: "dropdown-menu", name: "DropdownMenu", description: "Actions menu with submenus." },
       {
         slug: "context-menu",
@@ -461,7 +494,7 @@ export const CATEGORIES: ComponentCategory[] = [
   },
   {
     slug: "navigation",
-    name: "Navigation",
+    name: "Menus & Navigation",
     items: [
       { slug: "tabs", name: "Tabs", description: "Switch between panels." },
       { slug: "accordion", name: "Accordion", description: "Collapsible content sections." },
@@ -1037,7 +1070,7 @@ export const CATEGORIES: ComponentCategory[] = [
   },
   {
     slug: "ai-elements",
-    name: "AI Elements",
+    name: "Chat & AI",
     items: [
       {
         slug: "actions",

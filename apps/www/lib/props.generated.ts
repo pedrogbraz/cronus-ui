@@ -2068,6 +2068,138 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       props: [],
     },
   ],
+  "goal-card": [
+    {
+      interfaceName: "GoalCardLabels",
+      props: [
+        {
+          name: "notStarted",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "inProgress",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "completed",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "atRisk",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "steps",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "viewGoal",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "deleteGoal",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "progress",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "GoalCardProps",
+      extends:
+        'Extends Omit<HTMLAttributes<HTMLElement>, "title" | "onClick" | "id">, VariantProps<typeof goalCardVariants>',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "id",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "title",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "description",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "progress",
+          type: "number",
+          required: false,
+        },
+        {
+          name: "status",
+          type: "GoalStatus",
+          required: false,
+        },
+        {
+          name: "steps",
+          type: "GoalStep[]",
+          required: false,
+        },
+        {
+          name: "roadmap",
+          type: "GoalRoadmap",
+          required: false,
+        },
+        {
+          name: "dueDate",
+          type: "string | Date",
+          required: false,
+        },
+        {
+          name: "createdAt",
+          type: "string | Date",
+          required: false,
+        },
+        {
+          name: "onClick",
+          type: "(id: string) => void",
+          required: false,
+        },
+        {
+          name: "onDelete",
+          type: "(id: string) => void",
+          required: false,
+        },
+        {
+          name: "locale",
+          type: "string",
+          required: false,
+          default: '"en-US"',
+        },
+        {
+          name: "labels",
+          type: "Partial<GoalCardLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+        {
+          name: "footer",
+          type: "ReactNode",
+          required: false,
+        },
+      ],
+    },
+  ],
   table: [
     {
       interfaceName: "TableProps",
@@ -3080,6 +3212,122 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       ],
     },
   ],
+  "todo-item": [
+    {
+      interfaceName: "TodoItemLabels",
+      props: [
+        {
+          name: "complete",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "subtasks",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "TodoItemProps",
+      extends:
+        'Extends Omit<HTMLAttributes<HTMLElement>, "title" | "onClick" | "id">, VariantProps<typeof todoItemVariants>',
+      props: [
+        {
+          name: "ref",
+          type: "Ref<HTMLElement>",
+          required: false,
+          description: "Ref forwarded to the underlying DOM node.",
+        },
+        {
+          name: "id",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "title",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "description",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "completed",
+          type: "boolean",
+          required: true,
+        },
+        {
+          name: "priority",
+          type: "TodoPriority",
+          required: false,
+          default: '"none"',
+        },
+        {
+          name: "dueDate",
+          type: "string | Date",
+          required: false,
+        },
+        {
+          name: "labels",
+          type: "TodoLabel[]",
+          required: false,
+          description: "Override default English strings.",
+        },
+        {
+          name: "subtasks",
+          type: "TodoSubtask[]",
+          required: false,
+        },
+        {
+          name: "project",
+          type: "TodoProject",
+          required: false,
+        },
+        {
+          name: "onToggleComplete",
+          type: "(id: string, completed: boolean) => void",
+          required: false,
+        },
+        {
+          name: "onClick",
+          type: "(id: string) => void",
+          required: false,
+        },
+        {
+          name: "isSelected",
+          type: "boolean",
+          required: false,
+          default: "false",
+        },
+        {
+          name: "locale",
+          type: "string",
+          required: false,
+          default: '"en-US"',
+        },
+        {
+          name: "now",
+          type: "Date",
+          required: false,
+        },
+        {
+          name: "copy",
+          type: "Partial<TodoItemLabels>",
+          required: false,
+        },
+        {
+          name: "selected",
+          type: '"true" | "false"',
+          required: false,
+          description: 'One of "true" | "false".',
+          default: "false",
+        },
+      ],
+    },
+  ],
   "json-viewer": [
     {
       interfaceName: "JsonViewerProps",
@@ -4027,6 +4275,73 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       props: [],
     },
   ],
+  "author-tooltip": [
+    {
+      interfaceName: "AuthorTooltipLabels",
+      props: [
+        {
+          name: "github",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "twitter",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "linkedin",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "AuthorTooltipProps",
+      extends: "Extends VariantProps<typeof authorTooltipAvatarVariants>",
+      props: [
+        {
+          name: "author",
+          type: "Author",
+          required: true,
+        },
+        {
+          name: "avatarSize",
+          type: '"sm" | "md" | "lg" | "xl"',
+          required: false,
+        },
+        {
+          name: "avatarClassName",
+          type: "string",
+          required: false,
+        },
+        {
+          name: "trigger",
+          type: "ReactNode",
+          required: false,
+        },
+        {
+          name: "children",
+          type: "ReactNode",
+          required: false,
+          description: "Contents of the component.",
+        },
+        {
+          name: "labels",
+          type: "Partial<AuthorTooltipLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+        {
+          name: "size",
+          type: '"sm" | "md" | "lg" | "xl"',
+          required: false,
+          description: 'One of "sm" | "md" | "lg" | "xl".',
+          default: '"sm"',
+        },
+      ],
+    },
+  ],
   tooltip: [
     {
       interfaceName: "TooltipProviderProps",
@@ -4047,6 +4362,168 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
       interfaceName: "TooltipContentProps",
       extends: "Extends ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>",
       props: [],
+    },
+  ],
+  "component-preview-tooltip": [
+    {
+      interfaceName: "ComponentPreviewTooltipLabels",
+      props: [
+        {
+          name: "loading",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "notFound",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "preview",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "ComponentPreviewTooltipProps",
+      extends: "Extends VariantProps<typeof componentPreviewTooltipVariants>",
+      props: [
+        {
+          name: "children",
+          type: "ReactNode",
+          required: true,
+          description: "Contents of the component.",
+        },
+        {
+          name: "componentName",
+          type: "string",
+          required: false,
+          description: "Accessible name for the preview surface.",
+        },
+        {
+          name: "preview",
+          type: "ReactNode",
+          required: false,
+          description: "Ready-to-render preview. Preferred over `loadPreview`.",
+        },
+        {
+          name: "loadPreview",
+          type: "() => Promise<{ default: ComponentType } | ComponentType>",
+          required: false,
+          description: "Lazy-load a preview module when the tooltip opens.",
+        },
+        {
+          name: "width",
+          type: "number",
+          required: false,
+          default: "300",
+        },
+        {
+          name: "height",
+          type: "number",
+          required: false,
+          default: "200",
+        },
+        {
+          name: "scale",
+          type: "number",
+          required: false,
+          default: "0.8",
+        },
+        {
+          name: "side",
+          type: '"top" | "right" | "bottom" | "left"',
+          required: false,
+          default: '"right"',
+        },
+        {
+          name: "className",
+          type: "string",
+          required: false,
+          description: "Additional class names merged onto the root.",
+        },
+        {
+          name: "labels",
+          type: "Partial<ComponentPreviewTooltipLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+  ],
+  "link-preview": [
+    {
+      interfaceName: "LinkPreviewLabels",
+      props: [
+        {
+          name: "invalidUrl",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "failed",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "unavailable",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "preview",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "favicon",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "LinkPreviewProps",
+      props: [
+        {
+          name: "href",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "children",
+          type: "ReactNode",
+          required: true,
+          description: "Contents of the component.",
+        },
+        {
+          name: "className",
+          type: "string",
+          required: false,
+          description: "Additional class names merged onto the root.",
+        },
+        {
+          name: "endpoint",
+          type: "string",
+          required: false,
+          description:
+            "Endpoint that returns URL metadata as JSON. Receives the target URL as a `url` query param and must return microlink.io shape (`{ title, description, image, logo, publisher }` or `{ data: … }`).",
+          default: '"https://api.microlink.io"',
+        },
+        {
+          name: "fetcher",
+          type: "(href: string, endpoint: string) => Promise<LinkPreviewMetadata>",
+          required: false,
+          default: "fetchLinkPreviewMetadata",
+        },
+        {
+          name: "labels",
+          type: "Partial<LinkPreviewLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
     },
   ],
   "dropdown-menu": [

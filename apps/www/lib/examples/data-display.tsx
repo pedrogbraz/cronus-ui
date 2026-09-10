@@ -34,6 +34,7 @@ import {
   EmptyDescription,
   EmptyIcon,
   EmptyTitle,
+  GoalCard,
   Heatmap,
   type HeatmapDay,
   ImageZoom,
@@ -67,6 +68,7 @@ import {
   TimelineItem,
   TimelineTime,
   TimelineTitle,
+  TodoItem,
   type TreeNode,
   TreeView,
   VideoPlayer,
@@ -922,6 +924,30 @@ const descriptionListGridDemoCode = `<DescriptionList layout="grid" size="sm">
   <DescriptionItem term="TLS">Auto-managed</DescriptionItem>
   <DescriptionItem term="Deploy hook">Enabled</DescriptionItem>
 </DescriptionList>`;
+
+function TodoItemInteractiveDemo() {
+  const [completed, setCompleted] = useState(false);
+  return (
+    <TodoItem
+      id="1"
+      title="Complete project documentation"
+      description="Write comprehensive docs for the new API"
+      completed={completed}
+      priority="high"
+      dueDate={new Date()}
+      project={{ id: "cronus", name: "Cronus UI" }}
+      labels={[
+        { id: "docs", name: "Documentation" },
+        { id: "api", name: "API" },
+      ]}
+      subtasks={[
+        { id: "s1", title: "Outline", completed: true },
+        { id: "s2", title: "Draft", completed: false },
+      ]}
+      onToggleComplete={(_id, next) => setCompleted(next)}
+    />
+  );
+}
 
 export const dataDisplayExamples: ExampleMap = {
   "status-dot": [
@@ -2463,6 +2489,111 @@ return <JsonViewer data={payload} defaultExpandedDepth={2} />;`,
             </div>
           }
         />
+      ),
+    },
+  ],
+  "goal-card": [
+    {
+      id: "progress",
+      title: "Progress",
+      description:
+        "A goal with a progress bar, status chip, completed/total steps, and a due date. Status can be passed in or derived from progress.",
+      code: `<GoalCard
+  id="mvp"
+  title="Launch MVP by end of quarter"
+  progress={75}
+  status="in_progress"
+  dueDate="2025-12-08"
+  steps={[
+    { id: "1", title: "Design", completed: true },
+    { id: "2", title: "Develop", completed: true },
+    { id: "3", title: "Ship", completed: false },
+    { id: "4", title: "Announce", completed: false },
+  ]}
+/>`,
+      preview: (
+        <GoalCard
+          id="mvp"
+          title="Launch MVP by end of quarter"
+          progress={75}
+          status="in_progress"
+          dueDate="2025-12-08"
+          steps={[
+            { id: "1", title: "Design", completed: true },
+            { id: "2", title: "Develop", completed: true },
+            { id: "3", title: "Ship", completed: false },
+            { id: "4", title: "Announce", completed: false },
+          ]}
+        />
+      ),
+    },
+    {
+      id: "statuses",
+      title: "Statuses",
+      description:
+        "`not_started`, `in_progress`, `completed`, and `at_risk` map onto warning, info, success, and error chips.",
+      code: `<div className="flex w-full max-w-lg flex-col gap-3">
+  <GoalCard id="a" title="Kickoff research" progress={0} status="not_started" />
+  <GoalCard id="b" title="Launch MVP" progress={75} status="in_progress" />
+  <GoalCard id="c" title="Complete onboarding" progress={100} status="completed" />
+  <GoalCard id="d" title="Fix performance" progress={30} status="at_risk" />
+</div>`,
+      preview: (
+        <div className="flex w-full max-w-lg flex-col gap-3">
+          <GoalCard id="a" title="Kickoff research" progress={0} status="not_started" />
+          <GoalCard id="b" title="Launch MVP" progress={75} status="in_progress" />
+          <GoalCard id="c" title="Complete onboarding" progress={100} status="completed" />
+          <GoalCard id="d" title="Fix performance" progress={30} status="at_risk" />
+        </div>
+      ),
+    },
+  ],
+  "todo-item": [
+    {
+      id: "interactive",
+      title: "Interactive",
+      description:
+        "Checkbox, priority, due date, project, labels, and a subtask count. Toggle completion from the checkbox.",
+      code: `<TodoItem
+  id="1"
+  title="Complete project documentation"
+  description="Write comprehensive docs for the new API"
+  completed={false}
+  priority="high"
+  dueDate={new Date()}
+  project={{ id: "cronus", name: "Cronus UI" }}
+  labels={[{ id: "docs", name: "Documentation" }]}
+  subtasks={[
+    { id: "s1", title: "Outline", completed: true },
+    { id: "s2", title: "Draft", completed: false },
+  ]}
+  onToggleComplete={(id, completed) => console.log(id, completed)}
+/>`,
+      preview: <TodoItemInteractiveDemo />,
+    },
+    {
+      id: "priorities",
+      title: "Priority levels",
+      description:
+        "High, medium, and low use error, warning, and info tokens. `none` hides the chip.",
+      code: `<div className="flex w-full max-w-lg flex-col gap-3">
+  <TodoItem id="h" title="Fix critical bug in production" completed={false} priority="high" />
+  <TodoItem id="m" title="Update documentation" completed={false} priority="medium" />
+  <TodoItem id="l" title="Refactor legacy code" completed={false} priority="low" />
+  <TodoItem id="n" title="Review team submissions" completed={false} priority="none" />
+</div>`,
+      preview: (
+        <div className="flex w-full max-w-lg flex-col gap-3">
+          <TodoItem
+            id="h"
+            title="Fix critical bug in production"
+            completed={false}
+            priority="high"
+          />
+          <TodoItem id="m" title="Update documentation" completed={false} priority="medium" />
+          <TodoItem id="l" title="Refactor legacy code" completed={false} priority="low" />
+          <TodoItem id="n" title="Review team submissions" completed={false} priority="none" />
+        </div>
       ),
     },
   ],

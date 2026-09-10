@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  AuthorTooltip,
   Badge,
   Button,
   CommandDialog,
@@ -11,6 +12,7 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
+  ComponentPreviewTooltip,
   ConfirmationDialog,
   ContextMenu,
   ContextMenuCheckboxItem,
@@ -61,6 +63,7 @@ import {
   Label,
   Lightbox,
   type LightboxImage,
+  LinkPreview,
   NotificationCenter,
   type NotificationItem,
   Popover,
@@ -1294,6 +1297,147 @@ function NotificationCenterDemo() {
   );
 }`,
       preview: <LightboxDemo />,
+    },
+  ],
+  "author-tooltip": [
+    {
+      id: "profile",
+      title: "Profile",
+      description:
+        "Hover the avatar to see name, role, and profile links. Pass `trigger` to wrap any element.",
+      code: `<AuthorTooltip
+  author={{
+    name: "Aryan",
+    avatar: "https://github.com/aryanranderiya.png",
+    role: "Founder & CEO",
+    github: "https://github.com/aryanranderiya",
+    twitter: "https://twitter.com/aryanranderiya",
+    linkedin: "https://linkedin.com/in/aryanranderiya",
+  }}
+/>`,
+      preview: (
+        <AuthorTooltip
+          author={{
+            name: "Aryan",
+            avatar: "https://github.com/aryanranderiya.png",
+            role: "Founder & CEO",
+            github: "https://github.com/aryanranderiya",
+            twitter: "https://twitter.com/aryanranderiya",
+            linkedin: "https://linkedin.com/in/aryanranderiya",
+          }}
+        />
+      ),
+    },
+    {
+      id: "sizes",
+      title: "Sizes",
+      description: "`sm`, `md`, `lg`, and `xl` size the trigger avatar.",
+      code: `<div className="flex items-center gap-3">
+  <AuthorTooltip author={author} avatarSize="sm" />
+  <AuthorTooltip author={author} avatarSize="md" />
+  <AuthorTooltip author={author} avatarSize="lg" />
+</div>`,
+      preview: (
+        <div className="flex items-center gap-3">
+          <AuthorTooltip
+            author={{
+              name: "Aryan",
+              avatar: "https://github.com/aryanranderiya.png",
+              role: "Founder & CEO",
+            }}
+            avatarSize="sm"
+          />
+          <AuthorTooltip
+            author={{
+              name: "Aryan",
+              avatar: "https://github.com/aryanranderiya.png",
+              role: "Founder & CEO",
+            }}
+            avatarSize="md"
+          />
+          <AuthorTooltip
+            author={{
+              name: "Aryan",
+              avatar: "https://github.com/aryanranderiya.png",
+              role: "Founder & CEO",
+            }}
+            avatarSize="lg"
+          />
+        </div>
+      ),
+    },
+  ],
+  "component-preview-tooltip": [
+    {
+      id: "preview",
+      title: "Live preview",
+      description:
+        "Pass a `preview` node (or `loadPreview` for a lazy module). The original Gaia version imported from a docs-only path — here the preview is explicit so the library stays framework-agnostic.",
+      code: `<ComponentPreviewTooltip
+  componentName="goal-card"
+  preview={
+    <div className="w-56 rounded-2xl border border-border bg-surface-raised p-4">
+      <p className="text-sm text-fg">Launch MVP</p>
+      <div className="mt-3 h-2 rounded-full bg-surface-overlay">
+        <div className="h-2 w-3/4 rounded-full bg-primary" />
+      </div>
+    </div>
+  }
+>
+  <Button variant="outline">Hover me: Goal Card</Button>
+</ComponentPreviewTooltip>`,
+      preview: (
+        <div className="flex flex-wrap gap-3">
+          <ComponentPreviewTooltip
+            componentName="goal-card"
+            preview={
+              <div className="w-56 rounded-2xl border border-border bg-surface-raised p-4">
+                <p className="text-sm text-fg">Launch MVP</p>
+                <div className="mt-3 h-2 rounded-full bg-surface-overlay">
+                  <div className="h-2 w-3/4 rounded-full bg-primary" />
+                </div>
+              </div>
+            }
+          >
+            <Button variant="outline">Hover me: Goal Card</Button>
+          </ComponentPreviewTooltip>
+          <ComponentPreviewTooltip
+            componentName="todo-item"
+            preview={
+              <div className="w-56 rounded-2xl border border-border bg-surface-raised p-4">
+                <p className="text-sm text-fg">Review pull requests</p>
+                <p className="mt-1 text-xs text-fg-tertiary">High · 1/2 subtasks</p>
+              </div>
+            }
+          >
+            <Button variant="outline">Hover me: Todo Item</Button>
+          </ComponentPreviewTooltip>
+        </div>
+      ),
+    },
+  ],
+  "link-preview": [
+    {
+      id: "unfurl",
+      title: "Unfurl",
+      description:
+        "Hover a link to fetch title, description, and a thumbnail. Metadata comes from `endpoint` (microlink.io by default) or an injected `fetcher`.",
+      code: `<p className="max-w-prose text-fg-secondary">
+  Check out the{" "}
+  <LinkPreview href="https://github.com/pedrogbraz/cronus-ui">
+    Cronus UI repository
+  </LinkPreview>{" "}
+  to browse the catalog.
+</p>`,
+      preview: (
+        <p className="max-w-prose text-fg-secondary">
+          Check out the{" "}
+          <LinkPreview href="https://github.com/pedrogbraz/cronus-ui">
+            Cronus UI repository
+          </LinkPreview>{" "}
+          to browse the catalog.
+        </p>
+      ),
     },
   ],
 };
