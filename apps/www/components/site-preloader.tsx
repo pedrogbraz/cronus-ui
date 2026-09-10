@@ -23,14 +23,13 @@ function clearSplashCover() {
  */
 export function SitePreloader() {
   const [show, setShow] = useState(() => {
-    if (typeof navigator !== "undefined" && navigator.webdriver) return false;
     if (splashPlayed) return false;
     splashPlayed = true;
     return true;
   });
 
   useEffect(() => {
-    if (typeof navigator !== "undefined" && navigator.webdriver) {
+    if (navigator.webdriver) {
       clearSplashCover();
       setShow(false);
     }
