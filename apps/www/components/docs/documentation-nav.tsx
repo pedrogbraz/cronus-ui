@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import { DOC_NAV_SECTIONS, type DocNavItem } from "../../lib/docs";
+import { SidebarGroup } from "./sidebar-group";
 
 export function DocumentationSidebar() {
   return (
@@ -24,27 +25,27 @@ export function DocumentationNavList({ onNavigate }: { onNavigate?: () => void }
 
   return (
     <>
-      {DOC_NAV_SECTIONS.map((section) => (
-        <div key={section.heading} className="first:mt-0 mt-6">
-          <p className="px-3 pb-2 text-xs font-medium uppercase tracking-wider text-fg-tertiary">
-            {section.heading}
-          </p>
-          <ul>
-            {section.items.map((item) => (
-              <li key={item.href}>
-                <DocumentationSidebarLink
-                  href={item.href}
-                  active={isActive(pathname, item)}
-                  onNavigate={onNavigate}
-                  indicator={item.indicator}
-                >
-                  {item.label}
-                </DocumentationSidebarLink>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      {DOC_NAV_SECTIONS.map((section) => {
+        const headingId = `docs-nav-${section.heading.toLowerCase().replace(/\s+/g, "-")}`;
+        return (
+          <SidebarGroup key={section.heading} id={headingId} title={section.heading}>
+            <ul aria-labelledby={headingId}>
+              {section.items.map((item) => (
+                <li key={item.href}>
+                  <DocumentationSidebarLink
+                    href={item.href}
+                    active={isActive(pathname, item)}
+                    onNavigate={onNavigate}
+                    indicator={item.indicator}
+                  >
+                    {item.label}
+                  </DocumentationSidebarLink>
+                </li>
+              ))}
+            </ul>
+          </SidebarGroup>
+        );
+      })}
     </>
   );
 }
@@ -102,7 +103,7 @@ function DocumentationSidebarLink({
       onClick={onNavigate}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "flex items-center justify-between gap-2 rounded-lg px-3 py-1.5 outline-none transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] focus-visible:ring-2 focus-visible:ring-ring",
+        "flex items-center justify-between gap-2 rounded-md px-3 py-1 outline-none transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] focus-visible:ring-2 focus-visible:ring-ring",
         active
           ? "bg-surface-overlay font-medium text-fg"
           : "text-fg-secondary hover:bg-surface-overlay/60 hover:text-fg",

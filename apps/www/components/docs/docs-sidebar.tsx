@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import { CATEGORIES, getComponentDisplayName } from "../../lib/components-index";
+import { SidebarGroup } from "./sidebar-group";
 
 export function DocsSidebar() {
   return (
@@ -29,19 +30,23 @@ export function ComponentNavList({ onNavigate }: { onNavigate?: () => void }) {
 
   return (
     <>
-      <p className="px-3 pb-2 text-xs font-medium uppercase tracking-widest text-fg-tertiary">
-        Overview
-      </p>
-      <SidebarLink href="/components" active={pathname === "/components"} onNavigate={onNavigate}>
-        All Components
-      </SidebarLink>
+      <SidebarGroup id="sidebar-overview" title="Overview">
+        <ul aria-labelledby="sidebar-overview">
+          <li>
+            <SidebarLink
+              href="/components"
+              active={pathname === "/components"}
+              onNavigate={onNavigate}
+            >
+              All Components
+            </SidebarLink>
+          </li>
+        </ul>
+      </SidebarGroup>
 
       {CATEGORIES.map((category) => (
-        <div key={category.slug} className="mt-6">
-          <p className="px-3 pb-2 text-xs font-medium uppercase tracking-widest text-fg-tertiary">
-            {category.name}
-          </p>
-          <ul>
+        <SidebarGroup key={category.slug} id={`sidebar-${category.slug}`} title={category.name}>
+          <ul aria-labelledby={`sidebar-${category.slug}`}>
             {category.items.map((item) => {
               const href = `/components/${item.slug}`;
               return (
@@ -53,7 +58,7 @@ export function ComponentNavList({ onNavigate }: { onNavigate?: () => void }) {
               );
             })}
           </ul>
-        </div>
+        </SidebarGroup>
       ))}
     </>
   );
@@ -76,7 +81,7 @@ function SidebarLink({
       onClick={onNavigate}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "block rounded-lg px-3 py-1.5 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
+        "block rounded-md px-3 py-1 outline-none transition-colors duration-200 ease-[cubic-bezier(.22,1,.36,1)] focus-visible:ring-2 focus-visible:ring-ring",
         active
           ? "bg-surface-overlay font-medium text-fg"
           : "text-fg-secondary hover:bg-surface-overlay/60 hover:text-fg",
