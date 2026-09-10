@@ -716,10 +716,6 @@
       "types": "./dist/components/typing-text.d.ts",
       "import": "./dist/components/typing-text.js"
     },
-    "./words-preloader": {
-      "types": "./dist/components/words-preloader.d.ts",
-      "import": "./dist/components/words-preloader.js"
-    },
     "./word-rotate": {
       "types": "./dist/components/word-rotate.d.ts",
       "import": "./dist/components/word-rotate.js"
