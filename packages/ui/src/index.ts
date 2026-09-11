@@ -217,6 +217,7 @@ export type {
   CarouselContentProps,
   CarouselDotsProps,
   CarouselItemProps,
+  CarouselLabels,
   CarouselNextProps,
   CarouselOptions,
   CarouselPreviousProps,
@@ -400,6 +401,7 @@ export type { CountdownLabels, CountdownProps } from "./components/countdown.js"
 export { Countdown } from "./components/countdown.js";
 export type {
   CardBrand,
+  CreditCardInputLabels,
   CreditCardInputProps,
   CreditCardValue,
 } from "./components/credit-card-input.js";
@@ -854,7 +856,7 @@ export type {
   NumberFlowProps,
 } from "./components/number-flow.js";
 export { NumberFlow, numberFlowVariants } from "./components/number-flow.js";
-export type { NumberInputProps } from "./components/number-input.js";
+export type { NumberInputLabels, NumberInputProps } from "./components/number-input.js";
 export { NumberInput } from "./components/number-input.js";
 export type {
   OpenInChatGPTProps,

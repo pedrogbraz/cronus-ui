@@ -15,6 +15,21 @@ describe("CreditCardInput", () => {
     expect(screen.getByRole("textbox", { name: /Security code/ })).toBeInTheDocument();
   });
 
+  it("overrides field copy through labels", () => {
+    render(
+      <CreditCardInput
+        labels={{
+          number: "Número do cartão",
+          expiry: "Validade",
+          cvc: (digits) => `CVC, ${digits} dígitos`,
+        }}
+      />,
+    );
+    expect(screen.getByRole("textbox", { name: "Número do cartão" })).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: "Validade" })).toBeInTheDocument();
+    expect(screen.getByRole("textbox", { name: /CVC/ })).toBeInTheDocument();
+  });
+
   it("formats, detects the brand, and validates a full card via onChange", async () => {
     const onChange = vi.fn<(value: CreditCardValue) => void>();
     render(<CreditCardInput onChange={onChange} />);

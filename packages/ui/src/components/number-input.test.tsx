@@ -22,6 +22,17 @@ describe("NumberInput", () => {
     expect(screen.getByRole("button", { name: "Decrement" })).toBeInTheDocument();
   });
 
+  it("overrides stepper copy through labels", () => {
+    render(
+      <NumberInput
+        aria-label="Quantity"
+        labels={{ increment: "Aumentar", decrement: "Diminuir" }}
+      />,
+    );
+    expect(screen.getByRole("button", { name: "Aumentar" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Diminuir" })).toBeInTheDocument();
+  });
+
   it("increments via the stepper button (uncontrolled)", async () => {
     const onValueChange = vi.fn();
     render(<NumberInput aria-label="Quantity" defaultValue={2} onValueChange={onValueChange} />);

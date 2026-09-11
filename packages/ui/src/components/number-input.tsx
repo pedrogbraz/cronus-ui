@@ -56,7 +56,18 @@ export interface NumberInputProps {
   name?: string;
   /** Called when the input loses focus. */
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
+  labels?: Partial<NumberInputLabels>;
 }
+
+export interface NumberInputLabels {
+  decrement: string;
+  increment: string;
+}
+
+const DEFAULT_LABELS: NumberInputLabels = {
+  decrement: "Decrement",
+  increment: "Increment",
+};
 
 /** Round to the configured precision, avoiding float drift (e.g. 0.1 + 0.2). */
 function roundTo(value: number, precision?: number): number {
@@ -95,10 +106,12 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
       id,
       name,
       onBlur,
+      labels: labelsProp,
       ...props
     },
     ref,
   ) => {
+    const labels = { ...DEFAULT_LABELS, ...labelsProp };
     const isControlled = valueProp !== undefined;
     const [uncontrolledValue, setUncontrolledValue] = useState<number | null>(defaultValue);
     const value = isControlled ? valueProp : uncontrolledValue;
@@ -258,7 +271,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           size="icon"
           tabIndex={-1}
           disabled={disabled || atMin}
-          aria-label="Decrement"
+          aria-label={labels.decrement}
           data-slot="number-input-decrement"
           className="shrink-0"
           onClick={() => applyStep(-step)}
@@ -298,7 +311,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           size="icon"
           tabIndex={-1}
           disabled={disabled || atMax}
-          aria-label="Increment"
+          aria-label={labels.increment}
           data-slot="number-input-increment"
           className="shrink-0"
           onClick={() => applyStep(step)}
@@ -310,3 +323,5 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
   },
 );
 NumberInput.displayName = "NumberInput";
+
+export { DEFAULT_LABELS as numberInputDefaultLabels };

@@ -27,6 +27,18 @@ import { Button } from "./button.js";
  */
 export type CarouselAlign = "start" | "center";
 
+export interface CarouselLabels {
+  previous: string;
+  next: string;
+  goToSlide: (index: number) => string;
+}
+
+const DEFAULT_LABELS: CarouselLabels = {
+  previous: "Previous slide",
+  next: "Next slide",
+  goToSlide: (index) => `Go to slide ${index}`,
+};
+
 export interface CarouselOptions {
   /** Where each slide snaps relative to the viewport. Defaults to `"start"`. */
   align?: CarouselAlign;
@@ -61,6 +73,7 @@ interface CarouselContextValue {
   opts: Required<CarouselOptions>;
   /** Stable id used to wire `aria-roledescription` regions together. */
   carouselId: string;
+  labels: CarouselLabels;
 }
 
 const CarouselContext = createContext<CarouselContextValue | null>(null);
@@ -92,6 +105,7 @@ export interface CarouselProps extends Omit<HTMLAttributes<HTMLDivElement>, "onS
   /** Tuning for snap alignment and looping. */
   opts?: CarouselOptions;
   children?: ReactNode;
+  labels?: Partial<CarouselLabels>;
 }
 
 /**
@@ -107,7 +121,8 @@ export interface CarouselProps extends Omit<HTMLAttributes<HTMLDivElement>, "onS
  * wires ArrowLeft / ArrowRight on the region to scroll prev / next.
  */
 export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
-  ({ opts, className, children, onKeyDown, ...props }, ref) => {
+  ({ opts, className, children, onKeyDown, labels: labelsProp, ...props }, ref) => {
+    const labels = useMemo(() => ({ ...DEFAULT_LABELS, ...labelsProp }), [labelsProp]);
     const viewportRef = useRef<HTMLDivElement | null>(null);
     const carouselId = useId();
     // Synchronously-tracked navigation target. Driven by prev/next (incremented
@@ -226,6 +241,7 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
         setTargetIndex,
         opts: resolvedOpts,
         carouselId,
+        labels,
       }),
       [
         selectedIndex,
@@ -238,6 +254,7 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
         setTargetIndex,
         resolvedOpts,
         carouselId,
+        labels,
       ],
     );
 
@@ -449,14 +466,14 @@ export interface CarouselPreviousProps extends ButtonHTMLAttributes<HTMLButtonEl
  */
 export const CarouselPrevious = forwardRef<HTMLButtonElement, CarouselPreviousProps>(
   ({ className, onClick, disabled, children, ...props }, ref) => {
-    const { scrollPrev, canScrollPrev, carouselId } = useCarousel("CarouselPrevious");
+    const { scrollPrev, canScrollPrev, carouselId, labels } = useCarousel("CarouselPrevious");
     return (
       <Button
         ref={ref}
         data-slot="carousel-previous"
         variant="outline"
         size="icon"
-        aria-label="Previous slide"
+        aria-label={labels.previous}
         aria-controls={`${carouselId}-viewport`}
         disabled={disabled ?? !canScrollPrev}
         onClick={(event) => {
@@ -466,7 +483,7 @@ export const CarouselPrevious = forwardRef<HTMLButtonElement, CarouselPreviousPr
         className={cn("rounded-full", className)}
         {...props}
       >
-        {children ?? <ChevronLeft />}
+        {children ?? <ChevronLeft aria-hidden />}
       </Button>
     );
   },
@@ -482,14 +499,14 @@ export interface CarouselNextProps extends ButtonHTMLAttributes<HTMLButtonElemen
  */
 export const CarouselNext = forwardRef<HTMLButtonElement, CarouselNextProps>(
   ({ className, onClick, disabled, children, ...props }, ref) => {
-    const { scrollNext, canScrollNext, carouselId } = useCarousel("CarouselNext");
+    const { scrollNext, canScrollNext, carouselId, labels } = useCarousel("CarouselNext");
     return (
       <Button
         ref={ref}
         data-slot="carousel-next"
         variant="outline"
         size="icon"
-        aria-label="Next slide"
+        aria-label={labels.next}
         aria-controls={`${carouselId}-viewport`}
         disabled={disabled ?? !canScrollNext}
         onClick={(event) => {
@@ -499,7 +516,7 @@ export const CarouselNext = forwardRef<HTMLButtonElement, CarouselNextProps>(
         className={cn("rounded-full", className)}
         {...props}
       >
-        {children ?? <ChevronRight />}
+        {children ?? <ChevronRight aria-hidden />}
       </Button>
     );
   },
@@ -515,7 +532,7 @@ export interface CarouselDotsProps extends HTMLAttributes<HTMLDivElement> {}
  */
 export const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
   ({ className, ...props }, ref) => {
-    const { itemCount, selectedIndex, scrollTo } = useCarousel("CarouselDots");
+    const { itemCount, selectedIndex, scrollTo, labels } = useCarousel("CarouselDots");
     return (
       <div
         ref={ref}
@@ -532,7 +549,7 @@ export const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
               type="button"
               data-slot="carousel-dot"
               data-active={active || undefined}
-              aria-label={`Go to slide ${index + 1}`}
+              aria-label={labels.goToSlide(index + 1)}
               aria-current={active || undefined}
               onClick={() => scrollTo(index)}
               className={cn(
@@ -548,3 +565,5 @@ export const CarouselDots = forwardRef<HTMLDivElement, CarouselDotsProps>(
   },
 );
 CarouselDots.displayName = "CarouselDots";
+
+export { DEFAULT_LABELS as carouselDefaultLabels };

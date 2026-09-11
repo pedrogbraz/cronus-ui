@@ -265,7 +265,22 @@ export interface CreditCardInputProps extends Omit<HTMLAttributes<HTMLDivElement
   disabled?: boolean;
   /** Optional error message rendered under the group with `role="alert"`. */
   error?: string;
+  labels?: Partial<CreditCardInputLabels>;
 }
+
+export interface CreditCardInputLabels {
+  number: string;
+  expiry: string;
+  cvc: (digits: number) => string;
+  brand: (name: string) => string;
+}
+
+const DEFAULT_LABELS: CreditCardInputLabels = {
+  number: "Card number",
+  expiry: "Expiration date, M M slash Y Y",
+  cvc: (digits) => `Security code, ${digits} digits`,
+  brand: (name) => `${name} card`,
+};
 
 export const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
   (
@@ -277,10 +292,12 @@ export const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
       invalid = false,
       disabled = false,
       error,
+      labels: labelsProp,
       ...props
     },
     ref,
   ) => {
+    const labels = { ...DEFAULT_LABELS, ...labelsProp };
     const [numberDigits, setNumberDigits] = useState(() =>
       (defaultNumber ?? "").replace(/\D/g, "").slice(0, 19),
     );
@@ -368,7 +385,7 @@ export const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
 
     const fieldClass =
       "bg-transparent tabular-nums text-fg outline-none placeholder:text-fg-tertiary disabled:cursor-not-allowed";
-    const brandAnnounce = cardType.brand === "unknown" ? "" : `${cardType.label} card`;
+    const brandAnnounce = cardType.brand === "unknown" ? "" : labels.brand(cardType.label);
 
     return (
       <div
@@ -402,7 +419,7 @@ export const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
             autoComplete="off"
             autoCorrect="off"
             spellCheck={false}
-            aria-label="Card number"
+            aria-label={labels.number}
             aria-invalid={isInvalid || undefined}
             aria-describedby={error ? errorId : undefined}
             placeholder={cardType.brand === "amex" ? "0000 000000 00000" : "0000 0000 0000 0000"}
@@ -417,7 +434,7 @@ export const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
             autoComplete="off"
             autoCorrect="off"
             spellCheck={false}
-            aria-label="Expiration date, M M slash Y Y"
+            aria-label={labels.expiry}
             aria-invalid={isInvalid || undefined}
             placeholder="MM/YY"
             value={formatExpiry(expiryDigits)}
@@ -431,7 +448,7 @@ export const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
             autoComplete="off"
             autoCorrect="off"
             spellCheck={false}
-            aria-label={`Security code, ${maxCvc} digits`}
+            aria-label={labels.cvc(maxCvc)}
             aria-invalid={isInvalid || undefined}
             placeholder={maxCvc === 4 ? "CVV" : "CVC"}
             value={cvcDigits}
@@ -456,3 +473,5 @@ export const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
   },
 );
 CreditCardInput.displayName = "CreditCardInput";
+
+export { DEFAULT_LABELS as creditCardInputDefaultLabels };

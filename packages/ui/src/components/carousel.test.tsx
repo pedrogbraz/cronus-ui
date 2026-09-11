@@ -82,6 +82,21 @@ describe("Carousel", () => {
     expect(dots[1]).not.toHaveAttribute("aria-current");
   });
 
+  it("overrides user-facing copy through labels", () => {
+    render(
+      <Gallery
+        labels={{
+          previous: "Slide anterior",
+          next: "Próximo slide",
+          goToSlide: (index) => `Ir ao slide ${index}`,
+        }}
+      />,
+    );
+    expect(screen.getByRole("button", { name: "Slide anterior" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Próximo slide" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Ir ao slide 1" })).toBeInTheDocument();
+  });
+
   it("wires Next/Previous to the viewport via aria-controls", () => {
     render(<Gallery />);
     const next = screen.getByRole("button", { name: "Next slide" });
