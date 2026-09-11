@@ -373,7 +373,6 @@ export const SidebarTrigger = forwardRef<HTMLButtonElement, SidebarTriggerProps>
         {...props}
       >
         {children ?? <SidebarTriggerIcon />}
-        <span className="sr-only">Toggle sidebar</span>
       </Button>
     );
   },
