@@ -506,7 +506,7 @@ export function DataTableColumnHeader<TData, TValue>({
             ? mergedLabels.sortedDescending(title)
             : mergedLabels.sort(title)
       }
-      className="-ml-3 h-8 text-fg-secondary data-[state=open]:bg-surface-overlay"
+      className="-ms-3 h-8 text-fg-secondary data-[state=open]:bg-surface-overlay"
     >
       <span>{title}</span>
       {sorted === "asc" ? (
@@ -581,7 +581,7 @@ function DataTableFacetedFilterControl<TData>({
               {Icon ? <Icon className="size-4 text-fg-tertiary" /> : null}
               <span>{option.label}</span>
               {facets?.get(option.value) ? (
-                <span className="ml-auto text-xs text-fg-tertiary">{facets.get(option.value)}</span>
+                <span className="ms-auto text-xs text-fg-tertiary">{facets.get(option.value)}</span>
               ) : null}
             </DropdownMenuCheckboxItem>
           );
@@ -666,7 +666,7 @@ function DataTableToolbar<TData>({
         <div className="relative w-full max-w-[16rem]">
           <Search
             aria-hidden
-            className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-fg-muted"
+            className="pointer-events-none absolute start-3 top-1/2 size-4 -translate-y-1/2 text-fg-muted"
           />
           <label htmlFor={searchId} className="sr-only">
             {searchPlaceholder}
@@ -677,7 +677,7 @@ function DataTableToolbar<TData>({
             value={globalFilter}
             onChange={(event) => onGlobalFilterChange(event.target.value)}
             placeholder={searchPlaceholder}
-            className="h-9 pl-9"
+            className="h-9 ps-9"
           />
         </div>
       ) : null}
@@ -706,7 +706,7 @@ function DataTableToolbar<TData>({
         </Button>
       ) : null}
 
-      <div className="ml-auto flex items-center gap-2">
+      <div className="ms-auto flex items-center gap-2">
         {toolbarEnd}
 
         {enableDensityToggle ? (
@@ -1093,7 +1093,7 @@ export function DataTable<TData, TValue>(props: DataTableProps<TData, TValue>) {
           <span className="text-sm text-fg-secondary" aria-live="polite">
             {labels.selectedCount(selectedRows.length)}
           </span>
-          <div className="ml-auto flex items-center gap-2">{bulkActions(selectedRows)}</div>
+          <div className="ms-auto flex items-center gap-2">{bulkActions(selectedRows)}</div>
         </section>
       ) : null}
 
@@ -1204,7 +1204,7 @@ export function DataTable<TData, TValue>(props: DataTableProps<TData, TValue>) {
           ) : (
             <span />
           )}
-          <div className="ml-auto">
+          <div className="ms-auto">
             <DataTablePagination table={table} pageSizeOptions={pageSizeOptions} labels={labels} />
           </div>
         </div>

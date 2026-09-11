@@ -370,7 +370,7 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
               disabled={disabled}
               data-slot="phone-input-country"
               className={cn(
-                "flex h-full shrink-0 items-center gap-1.5 rounded-l-lg pr-2 pl-3 text-sm outline-none",
+                "flex h-full shrink-0 items-center gap-1.5 rounded-s-lg pe-2 ps-3 text-sm outline-none",
                 "text-fg-secondary transition-colors duration-150 ease-[var(--ease-out-quart)] motion-reduce:transition-none",
                 "hover:bg-surface-overlay focus-visible:bg-surface-overlay disabled:pointer-events-none",
               )}
