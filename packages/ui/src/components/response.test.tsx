@@ -15,6 +15,23 @@ describe("Response", () => {
     expect(paragraph.closest('[data-slot="response"]')).toBeTruthy();
   });
 
+  it("applies a new className when children stay the same", () => {
+    const { rerender } = render(
+      <Response className="first">
+        <p>Answer goes here</p>
+      </Response>,
+    );
+    const root = screen.getByText("Answer goes here").closest("[data-slot=response]");
+    expect(root).toHaveClass("first");
+    rerender(
+      <Response className="second">
+        <p>Answer goes here</p>
+      </Response>,
+    );
+    expect(root).toHaveClass("second");
+    expect(root).not.toHaveClass("first");
+  });
+
   it("has no axe violations", async () => {
     const { container } = render(
       <Response>

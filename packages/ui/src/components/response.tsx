@@ -22,8 +22,5 @@ function ResponseComponent({ className, ref, children, ...props }: ResponseProps
   );
 }
 
-export const Response = memo(
-  ResponseComponent,
-  (prevProps, nextProps) => prevProps.children === nextProps.children,
-);
+export const Response = memo(ResponseComponent);
 Response.displayName = "Response";
