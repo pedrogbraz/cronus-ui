@@ -354,6 +354,41 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
   ],
   "password-input": [
     {
+      interfaceName: "PasswordInputLabels",
+      props: [
+        {
+          name: "show",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "hide",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "weak",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "fair",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "good",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "strong",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
+    {
       interfaceName: "PasswordInputProps",
       extends: 'Extends Omit<InputHTMLAttributes<HTMLInputElement>, "type">',
       props: [
@@ -369,6 +404,12 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           required: false,
           description: "Show a 4-segment strength meter + label below the field.",
           default: "false",
+        },
+        {
+          name: "labels",
+          type: "Partial<PasswordInputLabels>",
+          required: false,
+          description: "Override default English strings.",
         },
       ],
     },
@@ -4778,6 +4819,41 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
   ],
   lightbox: [
     {
+      interfaceName: "LightboxLabels",
+      props: [
+        {
+          name: "gallery",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "close",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "previous",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "next",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "viewImage",
+          type: "(index: number) => string",
+          required: true,
+        },
+        {
+          name: "counter",
+          type: "(current: number, total: number) => string",
+          required: true,
+        },
+      ],
+    },
+    {
       interfaceName: "LightboxProps",
       extends: "Extends HTMLAttributes<HTMLDivElement>",
       props: [
@@ -4824,6 +4900,12 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           required: false,
           description: "Uncontrolled initial index.",
           default: "0",
+        },
+        {
+          name: "labels",
+          type: "Partial<LightboxLabels>",
+          required: false,
+          description: "Override default English strings.",
         },
       ],
     },
@@ -5154,6 +5236,54 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
   ],
   pagination: [
     {
+      interfaceName: "PaginationLabels",
+      props: [
+        {
+          name: "nav",
+          type: "string",
+          required: true,
+          description: "Accessible name of the pagination landmark.",
+        },
+        {
+          name: "previous",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "previousAria",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "next",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "nextAria",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "morePages",
+          type: "string",
+          required: true,
+        },
+      ],
+    },
+    {
+      interfaceName: "PaginationProps",
+      extends: "Extends HTMLAttributes<HTMLElement>",
+      props: [
+        {
+          name: "labels",
+          type: "Partial<PaginationLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+    {
       interfaceName: "PaginationLinkProps",
       extends: "Extends AnchorHTMLAttributes<HTMLAnchorElement>",
       props: [
@@ -5169,11 +5299,6 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           description: "Control size.",
         },
       ],
-    },
-    {
-      interfaceName: "PaginationProps",
-      extends: "Extends HTMLAttributes<HTMLElement>",
-      props: [],
     },
     {
       interfaceName: "PaginationContentProps",

@@ -1,7 +1,7 @@
 {
   "$comment": "Dívida conhecida do CONTRACT.md. O gate barra qualquer violação acima destes números; quando cair, rode `bun run contract:check --baseline` para travar o ganho. Nunca suba um número à mão.",
-  "generated": "2026-09-10",
-  "total": 123,
+  "generated": "2026-09-11",
+  "total": 111,
   "accepted": {
     "accordion.tsx": {
       "9": 1
@@ -52,9 +52,6 @@
     "context-menu.tsx": {
       "9": 1
     },
-    "data-table.tsx": {
-      "10": 6
-    },
     "dialog.tsx": {
       "9": 1
     },
@@ -104,12 +101,6 @@
     },
     "orbit.tsx": {
       "10": 2
-    },
-    "password-input.tsx": {
-      "10": 3
-    },
-    "phone-input.tsx": {
-      "10": 3
     },
     "popover.tsx": {
       "9": 1
