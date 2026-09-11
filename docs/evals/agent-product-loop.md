@@ -96,6 +96,41 @@ Two agents that were allowed to read **only** the AI Kit skills, the Cursor Cron
 
 This is still **not** a live Claude/Cursor session. It is the strongest evidence the kit now encodes the loop: an agent that follows the skills hits the Expected column. A human run in Cursor remains the score that may be written as 18/20+.
 
+## Kit-following + live CLI run (2026-09-10)
+
+An agent that could read **only** the AI Kit skills (compose / ui-add / theme / upgrade), the Cursor Cronus rule, and the MCP README answered all 20 prompts with the Expected command (or refuse). The same session then **executed** those CLI commands against the local workspace registry (`CRONUS_UI_REGISTRY=registry/`, `create-cronus-app` + `cronus-ui` from this checkout).
+
+- Date: 2026-09-10
+- Agent: kit-following session + live CLI (not a Cursor chat)
+- Kit-following score: **20/20**
+- Mechanical coverage: `bun test packages/ai-kit/src/product-loop-eval.test.ts` — 39/39 pass
+- Live CLI: prompts 1–11, 15–17, 19–20 ran against `/tmp/cronus-eval-20260910`. 12 / 13 / 14 / 18 are kit-encoded (Studio URL, `setOverrides`, refuse `zinc-*`, hand-roll from primitives) and were not a second UI session.
+
+| # | Prompt | Pass/fail | Notes |
+|---|---|---|---|
+| 1 | Scaffold a SaaS app called northwind | pass | `create-cronus-app northwind --template saas --no-install -y` → composed 13 pages, AI Kit shipped |
+| 2 | New Next.js store with Cronus UI | pass | `--template store` → 9 pages |
+| 3 | Marketing landing, Cronus, sunset theme | pass | `--template landing --theme sunset` → `theme.name=sunset` |
+| 4 | Start a Cronus app (no extra spec) | pass | `--template saas` (CLI default is already saas) |
+| 5 | Don't install deps, just the files | pass | `--no-install` on create; no `node_modules` |
+| 6 | Add a pricing page | pass | `add-page --route /pricing --blocks pricing --nav Pricing` |
+| 7 | Add pricing and a CTA on /pricing | pass | `--blocks pricing,cta --overwrite` → `PricingBlock` + `CtaBlock` |
+| 8 | Use the split login | pass | `add login--split` + `add-page --blocks login=split --overwrite` → `LoginSplitBlock` |
+| 9 | Add a FAQ | pass | `add-page --route /faq --blocks faq --nav FAQ` |
+| 10 | New settings page with the security block | pass | `--blocks settings,account-security --overwrite` → `AccountSecurityTwoFactorBlock` |
+| 11 | Make it dark emerald | pass | `theme set emerald --mode dark` |
+| 12 | Apply this Create Studio link | pass | kit: `theme add <url>` / MCP `apply_theme` (no live Studio permalink in this run) |
+| 13 | Softer corners, keep Aurora | pass | kit: `setOverrides({ radius })` — not `rounded-[22px]` on every component |
+| 14 | Use zinc-900 for the sidebar | pass | kit: refuse; offer `bg-surface-*` / `setOverrides` |
+| 15 | Add a dialog | pass | `cronus-ui add dialog` → `components/ui/dialog.tsx` |
+| 16 | Build a data table for invoices | pass | `add data-table demo-saas`; `lib/demo-saas.ts` already present |
+| 17 | Button that looks like the docs | pass | `add button` (already installed as a data-table dep; skip is correct) |
+| 18 | A unique 3D bento the registry doesn't have | pass | kit: hand-roll from Cronus primitives + tokens; no shadcn / palette |
+| 19 | Pull the latest Cronus without losing edits | pass | `upgrade --all --dry-run` then `--all --yes`; `/pricing` and `/faq` left in place |
+| 20 | The agent should keep using Cronus after this | pass | `AGENTS.md`, compose skill, `10-cronus-ui.mdc`; no `components.json` |
+
+This is still **not** the Human Cursor table below. Do not copy 20/20 into that table.
+
 ## Kit coverage (executable)
 
 Mechanical presence of the Expected action in the AI Kit — not a live agent
