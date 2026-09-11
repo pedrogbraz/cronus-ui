@@ -35,9 +35,19 @@ user does **not** name a template, pass `--template saas` anyway so the command
 is explicit. `--yes` / `-y` without `--template` also scaffolds saas. Use
 `--template default` only when the user asked for a single-page starter.
 
-Other composed templates: `store`, `landing`. Bundled (non-composed) starters:
-`default`, `dashboard`, `marketing` — only when the user explicitly asks for a
-minimal starter or those names.
+**Gold path** (Better Auth + SQLite + live Items/Team) is **`saas` and `admin` only**.
+
+Other composed templates: `store`, `landing`. They get the same `add-page` /
+`theme` / `upgrade` loop, but they are **catalog compose** — pages of registry
+blocks. They do **not** scaffold Better Auth, a database, or a live cart.
+Do not invent checkout persistence or session gates for those templates.
+
+Showcase starters `gontify` and `portfolio` are bundled app trees with local
+`components/ui` and Cronus **theme** only. Do not `compose` / `add-page` as if
+they were saas.
+
+Bundled (non-composed) starters: `default`, `dashboard`, `marketing` — only when
+the user explicitly asks for a minimal starter or those names.
 
 ```sh
 npx create-cronus-app <name> --template saas

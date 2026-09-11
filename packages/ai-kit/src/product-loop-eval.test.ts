@@ -58,6 +58,14 @@ describe("product-loop kit coverage (not a live agent score)", () => {
       expect(compose).toContain("--template store");
     });
 
+    it("gold path is saas/admin; store/landing are catalog compose", () => {
+      expect(compose).toContain("**`saas` and `admin` only**");
+      expect(compose).toContain("catalog compose");
+      expect(compose).toContain("do **not** scaffold Better Auth");
+      expect(compose).toContain("gontify");
+      expect(compose).toContain("portfolio");
+    });
+
     it("#3 landing + sunset on the same scaffold command", () => {
       expect(compose).toContain("--template landing --theme sunset");
     });
