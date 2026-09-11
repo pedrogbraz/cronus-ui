@@ -2459,6 +2459,27 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           required: false,
           description: "Called when the input loses focus.",
         },
+        {
+          name: "labels",
+          type: "Partial<NumberInputLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+      ],
+    },
+    {
+      interfaceName: "NumberInputLabels",
+      props: [
+        {
+          name: "decrement",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "increment",
+          type: "string",
+          required: true,
+        },
       ],
     },
   ],
@@ -3358,6 +3379,12 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           description: 'Optional error message rendered under the group with `role="alert"`.',
         },
         {
+          name: "labels",
+          type: "Partial<CreditCardInputLabels>",
+          required: false,
+          description: "Override default English strings.",
+        },
+        {
           name: "className",
           type: "string",
           required: false,
@@ -3374,6 +3401,31 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           type: "string",
           required: false,
           description: "DOM id of the root element.",
+        },
+      ],
+    },
+    {
+      interfaceName: "CreditCardInputLabels",
+      props: [
+        {
+          name: "number",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "expiry",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "cvc",
+          type: "(digits: number) => string",
+          required: true,
+        },
+        {
+          name: "brand",
+          type: "(name: string) => string",
+          required: true,
         },
       ],
     },
@@ -15083,6 +15135,26 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
   ],
   carousel: [
     {
+      interfaceName: "CarouselLabels",
+      props: [
+        {
+          name: "previous",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "next",
+          type: "string",
+          required: true,
+        },
+        {
+          name: "goToSlide",
+          type: "(index: number) => string",
+          required: true,
+        },
+      ],
+    },
+    {
       interfaceName: "CarouselProps",
       extends: 'Extends Omit<HTMLAttributes<HTMLDivElement>, "onScroll">',
       props: [
@@ -15097,6 +15169,12 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           type: "ReactNode",
           required: false,
           description: "Contents of the component.",
+        },
+        {
+          name: "labels",
+          type: "Partial<CarouselLabels>",
+          required: false,
+          description: "Override default English strings.",
         },
         {
           name: "className",
