@@ -66,16 +66,20 @@ export default function BlocksPage() {
         description="Blocks are grouped into families by the surface they serve. Counts come from the live index, not a hand-written list."
       >
         <DocsGrid columns={2}>
-          {BLOCK_CATEGORIES.map((family) => (
-            <DocsCard
-              key={family.slug}
-              title={family.name}
-              description={familyPreview(family.items.map((item) => item.name))}
-              badge={`${family.items.length} ${family.items.length === 1 ? "block" : "blocks"}`}
-              href={`/blocks/${family.items[0].slug}`}
-              action="Preview"
-            />
-          ))}
+          {BLOCK_CATEGORIES.map((family) => {
+            const first = family.items[0];
+            if (!first) return null;
+            return (
+              <DocsCard
+                key={family.slug}
+                title={family.name}
+                description={familyPreview(family.items.map((item) => item.name))}
+                badge={`${family.items.length} ${family.items.length === 1 ? "block" : "blocks"}`}
+                href={`/blocks/${first.slug}`}
+                action="Preview"
+              />
+            );
+          })}
         </DocsGrid>
       </DocsSection>
 
