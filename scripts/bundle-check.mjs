@@ -164,7 +164,7 @@ const SHARED_CHUNK_BUDGETS = /** @type {SharedChunkBudgets} */ ({
  *   text-effect.js                 3,739      4,800
  *   kanban.js                      3,043      3,900
  *   rich-text-editor.js            2,646      3,400
- *   password-input.js              1,325      1,700
+ *   password-input.js              1,496      1,950   (re-measured 2026-09-11 after labels)
  *   masonry.js                       787      1,000
  *   input-group.js                   647        850
  *   button-group.js                  539        700
@@ -174,7 +174,7 @@ const SHARED_CHUNK_BUDGETS = /** @type {SharedChunkBudgets} */ ({
  *   frame.js                         574        740
  *   heatmap.js                     1,187      1,520
  *   scroll-progress.js             1,639      2,100
- *   lightbox.js                    1,695      2,170
+ *   lightbox.js                    2,259      2,900   (re-measured 2026-09-11 after labels + RTL arrows)
  *   toolbar.js                     1,602      2,050
  */
 const PACKAGE_ENTRY_GZIP_BUDGETS = /** @type {Record<string, number>} */ ({
@@ -191,7 +191,7 @@ const PACKAGE_ENTRY_GZIP_BUDGETS = /** @type {Record<string, number>} */ ({
   "components/text-effect.js": 4_800,
   "components/kanban.js": 3_900,
   "components/rich-text-editor.js": 3_400,
-  "components/password-input.js": 1_700,
+  "components/password-input.js": 1_950,
   "components/masonry.js": 1_000,
   "components/input-group.js": 850,
   "components/button-group.js": 700,
@@ -201,7 +201,7 @@ const PACKAGE_ENTRY_GZIP_BUDGETS = /** @type {Record<string, number>} */ ({
   "components/frame.js": 740,
   "components/heatmap.js": 1_520,
   "components/scroll-progress.js": 2_100,
-  "components/lightbox.js": 2_170,
+  "components/lightbox.js": 2_900,
   "components/toolbar.js": 2_050,
 });
 
