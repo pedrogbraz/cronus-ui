@@ -9,75 +9,7 @@ import {
   InlineCode,
   PrimaryLink,
 } from "../../../components/docs/documentation";
-
-const families = [
-  {
-    title: "Auth",
-    count: 5,
-    description: "Login, sign-up, forgot-password, two-factor code, and magic-link flows.",
-  },
-  {
-    title: "Marketing",
-    count: 8,
-    description:
-      "Hero, pricing, feature grid, CTA, testimonials, FAQ, footer, and navbar sections.",
-  },
-  {
-    title: "Application",
-    count: 3,
-    description: "Stat cards, a settings panel, and a team-members list for app shells.",
-  },
-  {
-    title: "Onboarding",
-    count: 3,
-    description: "A welcome panel, a setup wizard, and a setup checklist.",
-  },
-  {
-    title: "Dashboard",
-    count: 1,
-    description: "A full application shell with sidebar nav, KPI cards, a chart, and a table.",
-  },
-  {
-    title: "Billing",
-    count: 5,
-    description: "Subscription, plan selection, payment methods, usage, and a cancel flow.",
-  },
-  {
-    title: "Commerce",
-    count: 4,
-    description: "Checkout, creator payouts, a product grid, and an invoice receipt.",
-  },
-  {
-    title: "AI & Chat",
-    count: 3,
-    description: "A chat thread, a prompt box, and a formatted AI response card.",
-  },
-  {
-    title: "Notifications",
-    count: 3,
-    description: "A notification panel, an activity feed, and a toast stack.",
-  },
-  {
-    title: "Email",
-    count: 3,
-    description: "Branded welcome, receipt, and verify email templates.",
-  },
-  {
-    title: "States",
-    count: 4,
-    description: "Not-found, error, success, and maintenance full-page states.",
-  },
-  {
-    title: "Feedback",
-    count: 3,
-    description: "An NPS survey, a feedback form, and a contact form.",
-  },
-  {
-    title: "Page sections",
-    count: 3,
-    description: "A page header, a filter bar, and empty/error states.",
-  },
-] as const;
+import { ALL_BLOCKS, BLOCK_CATEGORIES } from "../../../lib/blocks-index";
 
 const installCode = `npx cronus-ui add login`;
 
@@ -95,7 +27,16 @@ export default function SignInPage() {
   );
 }`;
 
+function familyPreview(names: string[]): string {
+  const shown = names.slice(0, 5);
+  const rest = names.length - shown.length;
+  return rest > 0 ? `${shown.join(", ")}, and ${rest} more.` : `${shown.join(", ")}.`;
+}
+
 export default function BlocksPage() {
+  const familyCount = BLOCK_CATEGORIES.length;
+  const blockCount = ALL_BLOCKS.length;
+
   return (
     <div className="py-10">
       <DocsHeader
@@ -111,9 +52,9 @@ export default function BlocksPage() {
         description="A component is a single primitive — a Button, an Input, a Card. A block is a larger, opinionated section composed from those primitives: a centered login card, a KPI dashboard, a three-tier pricing grid. Blocks import the @cronus-ui/ui package directly, so you get a working section in one command instead of wiring primitives together by hand."
       >
         <p className="text-sm leading-6 text-fg-secondary">
-          There are 13 families covering roughly 48 blocks today, from auth and marketing to
-          billing, commerce, and AI. Preview each one — with its variants and source — in the live
-          catalog.
+          There are {familyCount} families covering {blockCount} blocks, from auth and marketing to
+          billing, commerce, admin, and store. Preview each one — with its variants and source — in
+          the live catalog.
         </p>
         <div className="mt-4">
           <PrimaryLink href="/blocks">Browse blocks</PrimaryLink>
@@ -122,15 +63,17 @@ export default function BlocksPage() {
 
       <DocsSection
         title="Families"
-        description="Blocks are grouped into families by the surface they serve. Each family ships a handful of blocks, many with multiple variants."
+        description="Blocks are grouped into families by the surface they serve. Counts come from the live index, not a hand-written list."
       >
         <DocsGrid columns={2}>
-          {families.map((family) => (
+          {BLOCK_CATEGORIES.map((family) => (
             <DocsCard
-              key={family.title}
-              title={family.title}
-              description={family.description}
-              badge={`${family.count} blocks`}
+              key={family.slug}
+              title={family.name}
+              description={familyPreview(family.items.map((item) => item.name))}
+              badge={`${family.items.length} ${family.items.length === 1 ? "block" : "blocks"}`}
+              href={`/blocks/${family.items[0].slug}`}
+              action="Preview"
             />
           ))}
         </DocsGrid>
