@@ -54,6 +54,11 @@ describe("PasswordInput", () => {
     expect(screen.getByLabelText("Password")).toHaveValue("hunter2");
   });
 
+  it("overrides the toggle copy through labels", () => {
+    render(<PasswordInput aria-label="Password" labels={{ show: "Mostrar senha" }} />);
+    expect(screen.getByRole("button", { name: "Mostrar senha" })).toBeInTheDocument();
+  });
+
   it("has no axe violations", async () => {
     const { container } = render(<PasswordInput aria-label="Password" showStrength />);
     expect(await axe(container)).toHaveNoViolations();

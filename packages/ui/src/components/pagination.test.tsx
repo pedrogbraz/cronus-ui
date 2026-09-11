@@ -40,12 +40,12 @@ function Pager({ page = 2, onNavigate }: { page?: number; onNavigate?: () => voi
 describe("Pagination", () => {
   it("renders inside a labelled pagination landmark", () => {
     render(<Pager />);
-    expect(screen.getByRole("navigation", { name: "pagination" })).toBeInTheDocument();
+    expect(screen.getByRole("navigation", { name: "Pagination" })).toBeInTheDocument();
   });
 
   it("renders previous, page, and next links", () => {
     render(<Pager />);
-    const nav = screen.getByRole("navigation", { name: "pagination" });
+    const nav = screen.getByRole("navigation", { name: "Pagination" });
     expect(within(nav).getByRole("link", { name: "Go to previous page" })).toBeInTheDocument();
     expect(within(nav).getByRole("link", { name: "Go to next page" })).toBeInTheDocument();
     expect(within(nav).getByRole("link", { name: "1" })).toHaveAttribute("href", "#1");
@@ -78,6 +78,23 @@ describe("Pagination", () => {
     const ellipsis = container.querySelector('[data-slot="pagination-ellipsis"]');
     expect(ellipsis).toHaveAttribute("aria-hidden");
     expect(screen.getByText("More pages")).toBeInTheDocument();
+  });
+
+  it("overrides user-facing copy through labels", () => {
+    render(
+      <Pagination
+        labels={{ nav: "Páginas", previous: "Anterior", previousAria: "Página anterior" }}
+      >
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious href="#prev" />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>,
+    );
+    expect(screen.getByRole("navigation", { name: "Páginas" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Página anterior" })).toBeInTheDocument();
+    expect(screen.getByText("Anterior")).toBeInTheDocument();
   });
 
   it("has no axe violations", async () => {

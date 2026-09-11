@@ -696,7 +696,7 @@ export type { LabelProps } from "./components/label.js";
 export { Label } from "./components/label.js";
 export type { LightRaysProps } from "./components/light-rays.js";
 export { LightRays } from "./components/light-rays.js";
-export type { LightboxImage, LightboxProps } from "./components/lightbox.js";
+export type { LightboxImage, LightboxLabels, LightboxProps } from "./components/lightbox.js";
 export { Lightbox } from "./components/lightbox.js";
 export type { LineChartProps } from "./components/line-chart.js";
 export { LineChart } from "./components/line-chart.js";
@@ -887,7 +887,11 @@ export {
 } from "./components/open-in-chat.js";
 export type { OrbitItemProps, OrbitProps, OrbitRingProps } from "./components/orbit.js";
 export { Orbit, OrbitItem, OrbitRing } from "./components/orbit.js";
-export type { PaginationLinkProps } from "./components/pagination.js";
+export type {
+  PaginationLabels,
+  PaginationLinkProps,
+  PaginationProps,
+} from "./components/pagination.js";
 export {
   Pagination,
   PaginationContent,
@@ -899,7 +903,7 @@ export {
 } from "./components/pagination.js";
 export type { ParticlesProps } from "./components/particles.js";
 export { Particles } from "./components/particles.js";
-export type { PasswordInputProps } from "./components/password-input.js";
+export type { PasswordInputLabels, PasswordInputProps } from "./components/password-input.js";
 export { getPasswordStrength, PasswordInput } from "./components/password-input.js";
 export type { PhoneCountry, PhoneInputProps } from "./components/phone-input.js";
 export { DEFAULT_PHONE_COUNTRIES, PhoneInput } from "./components/phone-input.js";

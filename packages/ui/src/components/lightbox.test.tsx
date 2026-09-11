@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { axe } from "vitest-axe";
 import { Lightbox } from "./lightbox.js";
 
@@ -11,6 +11,10 @@ const images = [
 ];
 
 describe("Lightbox", () => {
+  afterEach(() => {
+    document.documentElement.dir = "ltr";
+  });
+
   it("shows the current image's alt", () => {
     render(<Lightbox open images={images} index={0} />);
     expect(screen.getByAltText("First image")).toBeInTheDocument();
@@ -53,6 +57,28 @@ describe("Lightbox", () => {
   it("disables Previous at the first image", () => {
     render(<Lightbox open images={images} index={0} />);
     expect(screen.getByRole("button", { name: "Previous image" })).toBeDisabled();
+  });
+
+  it("overrides user-facing copy through labels", () => {
+    render(
+      <Lightbox
+        open
+        images={images}
+        index={0}
+        labels={{ close: "Fechar", next: "Próxima", previous: "Anterior" }}
+      />,
+    );
+    expect(screen.getByRole("button", { name: "Fechar" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Próxima" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Anterior" })).toBeInTheDocument();
+  });
+
+  it("swaps arrow keys when the document direction is rtl", async () => {
+    document.documentElement.dir = "rtl";
+    render(<Lightbox open images={images} defaultIndex={1} />);
+    await userEvent.keyboard("{ArrowLeft}");
+    expect(screen.getByText("3 / 3")).toBeInTheDocument();
+    document.documentElement.dir = "ltr";
   });
 
   it("has no axe violations when open", async () => {

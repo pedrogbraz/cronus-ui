@@ -27,20 +27,53 @@ export function getPasswordStrength(value: string): {
   points += variety >= 3 ? 2 : variety >= 2 ? 1 : 0;
 
   const score = (Math.min(points, 4) || 1) as 0 | 1 | 2 | 3 | 4;
-  const label = (["Weak", "Weak", "Fair", "Good", "Strong"] as const)[score];
+  const label = (["Weak", "Weak", "Fair", "Good", "Strong"] as const)[score] ?? "Weak";
   return { score, label };
 }
 
 const SEGMENT_COLORS = ["bg-error", "bg-error", "bg-warning", "bg-warning", "bg-success"] as const;
 
+export interface PasswordInputLabels {
+  show: string;
+  hide: string;
+  weak: string;
+  fair: string;
+  good: string;
+  strong: string;
+}
+
+const DEFAULT_LABELS: PasswordInputLabels = {
+  show: "Show password",
+  hide: "Hide password",
+  weak: "Weak",
+  fair: "Fair",
+  good: "Good",
+  strong: "Strong",
+};
+
+const STRENGTH_KEYS = ["weak", "weak", "fair", "good", "strong"] as const;
+
 export interface PasswordInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
   invalid?: boolean;
   /** Show a 4-segment strength meter + label below the field. */
   showStrength?: boolean;
+  labels?: Partial<PasswordInputLabels>;
 }
 
 export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
-  ({ className, showStrength = false, value, defaultValue, onChange, ...props }, ref) => {
+  (
+    {
+      className,
+      showStrength = false,
+      value,
+      defaultValue,
+      onChange,
+      labels: labelsProp,
+      ...props
+    },
+    ref,
+  ) => {
+    const labels = { ...DEFAULT_LABELS, ...labelsProp };
     const [visible, setVisible] = useState(false);
     const [internalValue, setInternalValue] = useState(
       defaultValue != null ? String(defaultValue) : "",
@@ -49,6 +82,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
     const isControlled = value !== undefined;
     const currentValue = isControlled ? String(value ?? "") : internalValue;
     const strength = getPasswordStrength(currentValue);
+    const strengthCopy = labels[STRENGTH_KEYS[strength.score] ?? "weak"];
 
     return (
       <div data-slot="password-input" className={cn("w-full", className)}>
@@ -56,7 +90,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
           <Input
             ref={ref}
             type={visible ? "text" : "password"}
-            className="pr-10"
+            className="pe-10"
             value={value}
             defaultValue={defaultValue}
             onChange={(event) => {
@@ -69,10 +103,10 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
             type="button"
             data-slot="password-input-toggle"
             onClick={() => setVisible((v) => !v)}
-            aria-label={visible ? "Hide password" : "Show password"}
+            aria-label={visible ? labels.hide : labels.show}
             aria-pressed={visible}
             className={cn(
-              "absolute inset-y-0 right-0 flex w-10 items-center justify-center rounded-r-lg text-fg-tertiary",
+              "absolute inset-y-0 end-0 flex w-10 items-center justify-center rounded-e-lg text-fg-tertiary",
               "transition-colors hover:text-fg outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
               "disabled:opacity-50 disabled:pointer-events-none [&_svg]:size-4",
             )}
@@ -96,7 +130,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
                 />
               ))}
             </div>
-            <span className="text-xs text-fg-tertiary">{strength.label}</span>
+            <span className="text-xs text-fg-tertiary">{strengthCopy}</span>
           </div>
         )}
       </div>
@@ -104,3 +138,5 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
   },
 );
 PasswordInput.displayName = "PasswordInput";
+
+export { DEFAULT_LABELS as passwordInputDefaultLabels };

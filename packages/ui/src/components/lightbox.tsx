@@ -11,6 +11,24 @@ export interface LightboxImage {
   caption?: string;
 }
 
+export interface LightboxLabels {
+  gallery: string;
+  close: string;
+  previous: string;
+  next: string;
+  viewImage: (index: number) => string;
+  counter: (current: number, total: number) => string;
+}
+
+const DEFAULT_LABELS: LightboxLabels = {
+  gallery: "Image gallery",
+  close: "Close",
+  previous: "Previous image",
+  next: "Next image",
+  viewImage: (index) => `View image ${index}`,
+  counter: (current, total) => `${current} / ${total}`,
+};
+
 export interface LightboxProps extends HTMLAttributes<HTMLDivElement> {
   /** The images to display in the gallery. */
   images: LightboxImage[];
@@ -26,6 +44,7 @@ export interface LightboxProps extends HTMLAttributes<HTMLDivElement> {
   onIndexChange?: (index: number) => void;
   /** Uncontrolled initial index. */
   defaultIndex?: number;
+  labels?: Partial<LightboxLabels>;
 }
 
 export const Lightbox = forwardRef<HTMLDivElement, LightboxProps>(
@@ -39,10 +58,12 @@ export const Lightbox = forwardRef<HTMLDivElement, LightboxProps>(
       index,
       onIndexChange,
       defaultIndex = 0,
+      labels: labelsProp,
       ...props
     },
     ref,
   ) => {
+    const labels = { ...DEFAULT_LABELS, ...labelsProp };
     const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen);
     const isOpenControlled = open !== undefined;
     const isOpen = isOpenControlled ? open : uncontrolledOpen;
@@ -80,13 +101,14 @@ export const Lightbox = forwardRef<HTMLDivElement, LightboxProps>(
     useEffect(() => {
       if (!isOpen) return;
       const handler = (event: KeyboardEvent) => {
-        if (event.key === "ArrowLeft") {
-          event.preventDefault();
-          goPrev();
-        } else if (event.key === "ArrowRight") {
-          event.preventDefault();
-          goNext();
-        }
+        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+        event.preventDefault();
+        const rtl =
+          document.documentElement.dir === "rtl" ||
+          getComputedStyle(document.documentElement).direction === "rtl";
+        const goBack = event.key === "ArrowLeft" ? !rtl : rtl;
+        if (goBack) goPrev();
+        else goNext();
       };
       document.addEventListener("keydown", handler);
       return () => document.removeEventListener("keydown", handler);
@@ -102,7 +124,7 @@ export const Lightbox = forwardRef<HTMLDivElement, LightboxProps>(
           // dialog's default light-theme one.
           showCloseButton={false}
           className="inset-0 h-full max-w-full rounded-none border-none bg-black/95 p-0 text-white"
-          aria-label="Image gallery"
+          aria-label={labels.gallery}
         >
           <div
             ref={ref}
@@ -112,11 +134,11 @@ export const Lightbox = forwardRef<HTMLDivElement, LightboxProps>(
           >
             <div className="flex items-center justify-between gap-2 p-4">
               <span data-slot="lightbox-counter" className="text-sm text-white/70">
-                {count > 0 ? `${clampedIndex + 1} / ${count}` : "0 / 0"}
+                {labels.counter(count > 0 ? clampedIndex + 1 : 0, count)}
               </span>
               <DialogClose
                 data-slot="lightbox-close"
-                aria-label="Close"
+                aria-label={labels.close}
                 className="rounded-md p-1.5 text-white/70 outline-none transition-colors hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
               >
                 <X className="size-5" />
@@ -126,7 +148,7 @@ export const Lightbox = forwardRef<HTMLDivElement, LightboxProps>(
             <div className="relative flex min-h-0 flex-1 items-center justify-center px-2">
               <button
                 type="button"
-                aria-label="Previous image"
+                aria-label={labels.previous}
                 onClick={goPrev}
                 disabled={atStart}
                 className="absolute start-2 z-10 rounded-full bg-black/40 p-2 text-white/80 outline-none transition-colors hover:bg-black/60 hover:text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset disabled:pointer-events-none disabled:opacity-40"
@@ -145,7 +167,7 @@ export const Lightbox = forwardRef<HTMLDivElement, LightboxProps>(
 
               <button
                 type="button"
-                aria-label="Next image"
+                aria-label={labels.next}
                 onClick={goNext}
                 disabled={atEnd}
                 className="absolute end-2 z-10 rounded-full bg-black/40 p-2 text-white/80 outline-none transition-colors hover:bg-black/60 hover:text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset disabled:pointer-events-none disabled:opacity-40"
@@ -173,7 +195,7 @@ export const Lightbox = forwardRef<HTMLDivElement, LightboxProps>(
                     // biome-ignore lint/suspicious/noArrayIndexKey: src may repeat, index disambiguates
                     key={`${image.src}-${i}`}
                     type="button"
-                    aria-label={`View image ${i + 1}`}
+                    aria-label={labels.viewImage(i + 1)}
                     aria-current={i === clampedIndex}
                     onClick={() => setIndex(i)}
                     className={cn(
@@ -202,3 +224,5 @@ export const Lightbox = forwardRef<HTMLDivElement, LightboxProps>(
   },
 );
 Lightbox.displayName = "Lightbox";
+
+export { DEFAULT_LABELS as lightboxDefaultLabels };
