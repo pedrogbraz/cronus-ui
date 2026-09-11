@@ -8,7 +8,7 @@
   "files": [
     {
       "path": "response.tsx",
-      "content": "import { type HTMLAttributes, memo, type ReactNode, type Ref } from \"react\";\nimport { cn } from \"../lib/cn.js\";\n\nexport type ResponseProps = HTMLAttributes<HTMLDivElement> & {\n  ref?: Ref<HTMLDivElement>;\n  children?: ReactNode;\n};\n\nfunction ResponseComponent({ className, ref, children, ...props }: ResponseProps) {\n  return (\n    <div\n      ref={ref}\n      data-slot=\"response\"\n      className={cn(\n        \"size-full text-sm text-fg [&>*:first-child]:mt-0 [&>*:last-child]:mb-0\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n    </div>\n  );\n}\n\nexport const Response = memo(\n  ResponseComponent,\n  (prevProps, nextProps) => prevProps.children === nextProps.children,\n);\nResponse.displayName = \"Response\";\n",
+      "content": "import { type HTMLAttributes, memo, type ReactNode, type Ref } from \"react\";\nimport { cn } from \"../lib/cn.js\";\n\nexport type ResponseProps = HTMLAttributes<HTMLDivElement> & {\n  ref?: Ref<HTMLDivElement>;\n  children?: ReactNode;\n};\n\nfunction ResponseComponent({ className, ref, children, ...props }: ResponseProps) {\n  return (\n    <div\n      ref={ref}\n      data-slot=\"response\"\n      className={cn(\n        \"size-full text-sm text-fg [&>*:first-child]:mt-0 [&>*:last-child]:mb-0\",\n        className,\n      )}\n      {...props}\n    >\n      {children}\n    </div>\n  );\n}\n\nexport const Response = memo(ResponseComponent);\nResponse.displayName = \"Response\";\n",
       "target": "ui"
     }
   ]
