@@ -15,6 +15,7 @@ import {
   TEMPLATE_MOOD_BY_SLUG,
   TEMPLATE_SLUGS,
   templateMood,
+  templatePath,
   templatesPro,
 } from "./catalog";
 
@@ -109,6 +110,15 @@ describe("template catalog", () => {
     }
     expect(templateMood(getTemplate("admin")!)).toBe("saas");
     expect(templateMood(getTemplate("docs")!)).toBe("editorial");
+  });
+
+  it("marks saas/admin as gold path and gontify/portfolio as showcase", () => {
+    expect(templatePath(getTemplate("saas")!)).toBe("gold");
+    expect(templatePath(getTemplate("admin")!)).toBe("gold");
+    expect(templatePath(getTemplate("store")!)).toBe("compose");
+    expect(templatePath(getTemplate("landing")!)).toBe("compose");
+    expect(templatePath(getTemplate("gontify")!)).toBe("showcase");
+    expect(templatePath(getTemplate("portfolio")!)).toBe("showcase");
   });
 
   it("keeps saas/store/landing OSS and lists mail/chat/finance as additive Pro", () => {

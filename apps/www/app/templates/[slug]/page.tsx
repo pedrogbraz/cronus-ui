@@ -12,8 +12,10 @@ import {
   isProTemplate,
   similarTemplates,
   TEMPLATE_MOOD_LABELS,
+  TEMPLATE_PATH_LABELS,
   TEMPLATE_SLUGS,
   templateMood,
+  templatePath,
 } from "../../../lib/templates/catalog";
 
 export const dynamicParams = false;
@@ -65,7 +67,7 @@ export default async function TemplateDetailPage({
             <span className="text-fg-secondary">{entry.name}</span>
           </nav>
 
-          <Eyebrow className="mt-8">{entry.kind === "landing" ? "Landing" : entry.kind}</Eyebrow>
+          <Eyebrow className="mt-8">{TEMPLATE_PATH_LABELS[templatePath(entry)]}</Eyebrow>
           <div className="mt-3 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <div className="flex flex-wrap items-center gap-3">

@@ -1,5 +1,5 @@
 import { formatTsLiteral } from "../../lib/format-ts-literal";
-import { stageRefs, type TemplateCatalogEntry } from "../../lib/templates/catalog";
+import { stageRefs, type TemplateCatalogEntry, templatePath } from "../../lib/templates/catalog";
 import { ApiFieldTable } from "../docs/api-table";
 import { TemplateBlockStackTable } from "./template-block-stack-table";
 
@@ -44,6 +44,14 @@ export function TemplateApiReference({ entry }: { entry: TemplateCatalogEntry })
               required: true,
               defaultValue: formatTsLiteral(entry.kind),
               description: "Product app, marketing landing, or starter.",
+            },
+            {
+              name: "path",
+              type: '"gold" | "compose" | "showcase"',
+              required: true,
+              defaultValue: formatTsLiteral(templatePath(entry)),
+              description:
+                "Gold path (saas/admin) vs composed catalog vs bundled showcase. Not a scaffold flag.",
             },
             {
               name: "theme",

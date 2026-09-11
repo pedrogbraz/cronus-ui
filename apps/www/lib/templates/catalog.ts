@@ -6,6 +6,8 @@
 export type TemplateTheme = "aurora" | "neutral" | "midnight" | "sunset" | "emerald";
 export type TemplateMode = "dark" | "light";
 export type TemplateKind = "product" | "landing" | "starter";
+/** How the template is produced — gold path vs catalog compose vs bundled showcase. */
+export type TemplatePath = "gold" | "compose" | "showcase";
 /** Visual job — chips on /templates, "more like this" on the detail page. */
 export type TemplateMood = "saas" | "editorial" | "operational" | "storefront" | "glass";
 
@@ -522,7 +524,7 @@ export const TEMPLATE_CATALOG: readonly TemplateCatalogEntry[] = [
     name: "Gontify",
     tagline: "AI SaaS landing",
     description:
-      "A full AI product marketing site: column-line hero, flowing logos, bento features, how-it-works, pricing, kinetic testimonials, FAQ, and CTA.",
+      "Showcase starter — bundled marketing tree with local UI, not the compose gold path. Column-line hero, logos, bento features, pricing, testimonials, FAQ, and CTA. Cronus theme only; do not `compose` / `add-page` as if it were saas.",
     command: cmd("gontify"),
     kind: "starter",
     theme: "neutral",
@@ -542,7 +544,7 @@ export const TEMPLATE_CATALOG: readonly TemplateCatalogEntry[] = [
     name: "Portfolio",
     tagline: "Personal site",
     description:
-      "Pedro Gontijo’s portfolio: Cooud, work, FIAP, GitHub projects, and contact, with pixel theme transition and 8-bit sound.",
+      "Showcase starter — Pedro Gontijo’s portfolio (Cooud, work, FIAP, GitHub, contact) with pixel theme transition and 8-bit sound. Bundled tree, Cronus theme only; not Items/Team/auth compose.",
     command: cmd("portfolio"),
     kind: "starter",
     theme: "neutral",
@@ -576,6 +578,19 @@ export function isProTemplate(entry: TemplateCatalogEntry): boolean {
 export function templatesOssOfKind(kind: TemplateKind): TemplateCatalogEntry[] {
   return templatesOfKind(kind).filter((entry) => !isProTemplate(entry));
 }
+
+/** saas + admin ship Better Auth, SQLite, and live Items/Team. Everything else does not. */
+export function templatePath(entry: TemplateCatalogEntry): TemplatePath {
+  if (entry.slug === "saas" || entry.slug === "admin") return "gold";
+  if (entry.customStage) return "showcase";
+  return "compose";
+}
+
+export const TEMPLATE_PATH_LABELS: Record<TemplatePath, string> = {
+  gold: "Gold path",
+  compose: "Composed catalog",
+  showcase: "Showcase",
+};
 
 export function templatesPro(): TemplateCatalogEntry[] {
   return TEMPLATE_CATALOG.filter(isProTemplate);

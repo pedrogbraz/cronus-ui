@@ -9,8 +9,10 @@ import {
   isTemplateMood,
   TEMPLATE_MOOD_LABELS,
   TEMPLATE_MOODS,
+  TEMPLATE_PATH_LABELS,
   type TemplateCatalogEntry,
   templateMood,
+  templatePath,
   templatesOssOfKind,
 } from "../../lib/templates/catalog";
 
@@ -43,8 +45,9 @@ export default async function TemplatesPage({
                 Start from a real app
               </h1>
               <p className="mt-4 max-w-2xl text-lg text-fg-secondary">
-                Live previews of composed Cronus blocks — themed, scrollable, the same stack install
-                writes. Open a card, then Open Preview for the full site.
+                Gold path is saas and admin — auth, SQLite, Items and Team. Store and landings are
+                composed catalog (same add-page / upgrade loop, no live auth). Gontify and Portfolio
+                are showcase starters.
               </p>
             </div>
             <div className="inline-flex max-w-full items-center gap-3 overflow-hidden rounded-xl border border-border bg-surface-raised px-4 py-2.5 font-mono text-sm text-fg-secondary shadow-xs">
@@ -88,19 +91,19 @@ export default async function TemplatesPage({
 
       <TemplateGrid
         heading="Generated products"
-        description="Default base plus compose: every page is installed blocks stacked in a main. This is the product loop."
+        description="Gold path: saas and admin. Store and the rest of this row compose catalog blocks — grow with add-page, no Better Auth or database."
         templates={filter(templatesOssOfKind("product"))}
       />
 
       <TemplateGrid
         heading="Landing pages"
-        description="Named marketing looks composed from the same blocks as landing — swap the stack, keep the upgrade path. Click a card to open the live site."
+        description="Named marketing looks composed from the same blocks as landing — catalog compose, not the saas gold path. Swap the stack, keep the upgrade path."
         templates={filter(templatesOssOfKind("landing"))}
       />
 
       <TemplateGrid
         heading="Starters"
-        description="Bundled directories when you want a smaller surface and will add pieces yourself."
+        description="Bundled trees. Gontify and Portfolio are showcase (local UI, Cronus theme only) — not compose, not Items/Team."
         templates={filter(templatesOssOfKind("starter"))}
       />
 
@@ -226,6 +229,9 @@ function TemplateGrid({
                     {template.tagline}
                   </span>
                 </div>
+                <p className="mt-1.5 text-xs font-medium text-fg-tertiary">
+                  {TEMPLATE_PATH_LABELS[templatePath(template)]}
+                </p>
                 <p className="mt-1 text-xs text-fg-tertiary">{appearanceLabel(template)}</p>
                 <p className="mt-2 text-sm leading-6 text-fg-secondary">{template.description}</p>
               </div>
