@@ -71,7 +71,7 @@ function PropsInterfaceTable({
 
       {doc.props.length === 0 ? (
         <p className="mt-3 text-sm text-fg-tertiary">
-          No own props — see the extended type above for available props.
+          No additional props beyond the extended type.
         </p>
       ) : (
         <>
