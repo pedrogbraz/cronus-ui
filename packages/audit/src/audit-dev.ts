@@ -2,7 +2,7 @@
  * Human UX: next dev :4747 + `cronus run --audit-canvas 5176`.
  * Pixel SoT does not use this script — see playwright.audit.config.ts.
  */
-import { type ChildProcess, spawn } from "node:child_process";
+import { type ChildProcess, spawn, spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { dirname, join } from "node:path";
@@ -67,6 +67,11 @@ process.on("SIGTERM", () => {
   shutdown();
   process.exit(0);
 });
+
+const built = spawnSync("bun", ["run", "build"], { cwd: pkgRoot, stdio: "inherit" });
+if (built.status !== 0) {
+  process.exit(built.status ?? 1);
+}
 
 const fixturesDir = emitFixtures();
 const bin = cronusBin();
