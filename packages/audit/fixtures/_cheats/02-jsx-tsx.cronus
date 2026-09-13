@@ -1,0 +1,13 @@
+app "cheat-jsx" {
+  port 5176
+}
+
+component CheatJsx layout:inline style:button+primary+md {
+  label "Save"
+}
+
+page "/audit/button/cheat-jsx" type:custom {
+  use CheatJsx
+}
+
+<>Save</Button>

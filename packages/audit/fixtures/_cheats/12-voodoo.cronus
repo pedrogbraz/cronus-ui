@@ -1,0 +1,12 @@
+app "cheat-voodoo" {
+  stack voodoo
+  port 5176
+}
+
+component CheatVoodoo layout:inline style:button+primary+md {
+  label "v-model=name"
+}
+
+page "/audit/button/cheat-voodoo" type:custom {
+  use CheatVoodoo
+}

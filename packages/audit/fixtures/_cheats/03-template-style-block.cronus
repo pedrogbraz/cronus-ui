@@ -1,0 +1,12 @@
+app "cheat-template" {
+  port 5176
+}
+
+component CheatTemplate layout:inline style:button+primary+md {
+  label "Save"
+  template "<div class='stolen'></div>"
+}
+
+page "/audit/button/cheat-template" type:custom {
+  use CheatTemplate
+}

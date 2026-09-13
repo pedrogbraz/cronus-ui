@@ -1,0 +1,42 @@
+{
+  "name": "@cronus-ui/audit",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Cronus Audit harness — language/logic/visual parity against @cronus-ui/ui.",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "license": "UNLICENSED",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "cli": "bun src/cli.ts",
+    "inventory": "bun src/catalog-inventory.ts",
+    "emit": "bun src/cli.ts emit"
+  },
+  "dependencies": {
+    "@cronus-ui/tokens": "workspace:*",
+    "@cronus-ui/ui": "workspace:*",
+    "zod": "^4.4.3"
+  },
+  "peerDependencies": {
+    "react": "^18.3.0 || ^19.0.0",
+    "react-dom": "^18.3.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.9"
+  }
+}

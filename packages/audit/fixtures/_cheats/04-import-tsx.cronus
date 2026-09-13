@@ -1,0 +1,13 @@
+import Stolen from "./stolen.tsx"
+
+app "cheat-import" {
+  port 5176
+}
+
+component CheatImport layout:inline style:button+primary+md {
+  label "Save"
+}
+
+page "/audit/button/cheat-import" type:custom {
+  use CheatImport
+}
