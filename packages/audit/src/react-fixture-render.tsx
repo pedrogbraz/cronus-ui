@@ -28,7 +28,7 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from "@cronus-ui/ui/input-otp";
 import { Kbd } from "@cronus-ui/ui/kbd";
 import { Label } from "@cronus-ui/ui/label";
 import { Metric, MetricLabel, MetricValue } from "@cronus-ui/ui/metric";
-import { ModeToggle } from "@cronus-ui/ui/mode-toggle";
+import { ModeToggleFixture } from "./mode-toggle-fixture.js";
 import { Popover, PopoverContent, PopoverTrigger } from "@cronus-ui/ui/popover";
 import { Progress } from "@cronus-ui/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@cronus-ui/ui/radio-group";
@@ -737,22 +737,14 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
     );
   }
   if (fixture.family === "mode-toggle") {
-    const {
-      mode,
-      onModeChange: _onModeChange,
-      "aria-label": ariaLabel,
-      ...rest
-    } = fixture.props as {
+    const { mode, "aria-label": ariaLabel } = fixture.props as {
       mode?: string;
-      onModeChange?: unknown;
       "aria-label"?: string;
     };
     return (
-      <ModeToggle
-        mode={mode === "dark" ? "dark" : "light"}
-        onModeChange={() => {}}
+      <ModeToggleFixture
+        mode={mode}
         aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
-        {...rest}
       />
     );
   }
