@@ -2,7 +2,10 @@
 
 import { AreaChart } from "@cronus-ui/ui/area-chart";
 import { BarChart } from "@cronus-ui/ui/bar-chart";
+import { CandlestickChart } from "@cronus-ui/ui/candlestick-chart";
 import { ChoroplethChart } from "@cronus-ui/ui/choropleth-chart";
+import { FunnelChart } from "@cronus-ui/ui/funnel-chart";
+import { GaugeChart } from "@cronus-ui/ui/gauge-chart";
 import { LineChart } from "@cronus-ui/ui/line-chart";
 import { LiveLineChart } from "@cronus-ui/ui/live-line-chart";
 import { PieChart } from "@cronus-ui/ui/pie-chart";
@@ -105,10 +108,27 @@ const PNL_DATA = [
   { month: "Mar", pnl: 2 },
 ];
 
+const FALLBACK_FUNNEL = ["Visit", "Signup"];
+
+/** Nested `{date, open, high, low, close}` cannot round-trip through emit. */
+const OHLC_DATA = [
+  { date: "Mon", open: 4, high: 8, low: 2, close: 6 },
+  { date: "Tue", open: 6, high: 9, low: 5, close: 5 },
+  { date: "Wed", open: 5, high: 7, low: 3, close: 4 },
+];
+
 function numberList(value: unknown): number[] {
   return Array.isArray(value)
     ? value.filter((item): item is number => typeof item === "number" && Number.isFinite(item))
     : [];
+}
+
+function slugKey(value: string): string {
+  const slug = value
+    .toLowerCase()
+    .replaceAll(/[^a-z0-9]+/g, "-")
+    .replaceAll(/(^-|-$)/g, "");
+  return slug.length > 0 ? slug : "stage";
 }
 
 export function AreaChartFixture() {
@@ -170,4 +190,24 @@ export function ChoroplethChartFixture() {
 /** Nested `{month, pnl}` cannot round-trip through emit. */
 export function ProfitLossChartFixture() {
   return <ProfitLossChart data={PNL_DATA} />;
+}
+
+export function GaugeChartFixture({ value, label }: { value?: number; label?: string }) {
+  return <GaugeChart value={typeof value === "number" ? value : 72} label={label ?? "Score"} />;
+}
+
+/** Nested `{stage, value, key}` cannot round-trip through emit. */
+export function FunnelChartFixture({ items }: { items?: string[] }) {
+  const stages = items && items.length > 0 ? items : FALLBACK_FUNNEL;
+  const data = stages.map((stage, index) => ({
+    stage,
+    value: Math.max(1, (stages.length - index) * 4),
+    key: slugKey(stage),
+  }));
+  return <FunnelChart data={data} />;
+}
+
+/** Nested `{date, open, high, low, close}` cannot round-trip through emit. */
+export function CandlestickChartFixture() {
+  return <CandlestickChart data={OHLC_DATA} />;
 }

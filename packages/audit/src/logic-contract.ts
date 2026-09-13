@@ -129,6 +129,15 @@ const FAMILY_TAGS: Record<string, string> = {
   marquee: "div",
   "gradient-text": "span",
   "shiny-text": "span",
+  "aspect-ratio": "div",
+  frame: "div",
+  "flip-card": "div",
+  countdown: "div",
+  "animated-button": "button",
+  "card-stack": "section",
+  "gauge-chart": "div",
+  "funnel-chart": "div",
+  "candlestick-chart": "div",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */

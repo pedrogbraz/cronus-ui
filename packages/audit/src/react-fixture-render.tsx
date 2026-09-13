@@ -2,6 +2,9 @@ import {
   ConfirmationDialog,
   CreditCardInput,
   CurrencyInput,
+  FlipCard,
+  FlipCardBack,
+  FlipCardFront,
   FloatingLabelInput,
   PhoneInput,
   SplitButton,
@@ -15,8 +18,10 @@ import {
   AlertDialogContent,
   AlertDialogTitle,
 } from "@cronus-ui/ui/alert-dialog";
+import { AnimatedButton } from "@cronus-ui/ui/animated-button";
 import { AnimatedList } from "@cronus-ui/ui/animated-list";
 import { AnimatedNumber } from "@cronus-ui/ui/animated-number";
+import { AspectRatio } from "@cronus-ui/ui/aspect-ratio";
 import { Avatar, AvatarFallback } from "@cronus-ui/ui/avatar";
 import { AvatarGroup } from "@cronus-ui/ui/avatar-group";
 import { Badge } from "@cronus-ui/ui/badge";
@@ -25,6 +30,7 @@ import { BouncyAccordion } from "@cronus-ui/ui/bouncy-accordion";
 import { Button } from "@cronus-ui/ui/button";
 import { ButtonGroup } from "@cronus-ui/ui/button-group";
 import { Card, CardDescription, CardHeader, CardTitle } from "@cronus-ui/ui/card";
+import { CardStack } from "@cronus-ui/ui/card-stack";
 import {
   Carousel,
   CarouselContent,
@@ -46,6 +52,7 @@ import {
   ContextMenuTrigger,
 } from "@cronus-ui/ui/context-menu";
 import { CopyButton } from "@cronus-ui/ui/copy-button";
+import { Countdown } from "@cronus-ui/ui/countdown";
 import { DateRangePicker } from "@cronus-ui/ui/date-range-picker";
 import { DescriptionItem, DescriptionList } from "@cronus-ui/ui/description-list";
 import {
@@ -66,6 +73,7 @@ import { Fab } from "@cronus-ui/ui/fab";
 import { Field, FieldDescription, FieldLabel } from "@cronus-ui/ui/field";
 import { FileDropzone } from "@cronus-ui/ui/file-dropzone";
 import { FormItem } from "@cronus-ui/ui/form";
+import { Frame } from "@cronus-ui/ui/frame";
 import { GlassCard } from "@cronus-ui/ui/glass-card";
 import { GradientText } from "@cronus-ui/ui/gradient-text";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@cronus-ui/ui/hover-card";
@@ -157,7 +165,10 @@ import { CalendarFixture } from "./calendar-fixture.js";
 import {
   AreaChartFixture,
   BarChartFixture,
+  CandlestickChartFixture,
   ChoroplethChartFixture,
+  FunnelChartFixture,
+  GaugeChartFixture,
   LineChartFixture,
   LiveLineChartFixture,
   PieChartFixture,
@@ -2507,6 +2518,167 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
   if (fixture.family === "shiny-text") {
     const { children, ...rest } = fixture.props as { children?: string };
     return <ShinyText {...rest}>{typeof children === "string" ? children : fixture.id}</ShinyText>;
+  }
+  if (fixture.family === "aspect-ratio") {
+    const { children, ratio, className, ...rest } = fixture.props as {
+      children?: string;
+      ratio?: number;
+      className?: string;
+    };
+    return (
+      <AspectRatio
+        ratio={typeof ratio === "number" ? ratio : undefined}
+        className={typeof className === "string" ? className : "w-72"}
+        {...rest}
+      >
+        {typeof children === "string" ? children : fixture.id}
+      </AspectRatio>
+    );
+  }
+  if (fixture.family === "frame") {
+    const { children, url, variant, className, ...rest } = fixture.props as {
+      children?: string;
+      url?: string;
+      variant?: "browser" | "window";
+      className?: string;
+    };
+    return (
+      <Frame
+        url={typeof url === "string" ? url : undefined}
+        variant={variant}
+        className={typeof className === "string" ? className : "w-72"}
+        {...rest}
+      >
+        {typeof children === "string" ? children : fixture.id}
+      </Frame>
+    );
+  }
+  if (fixture.family === "flip-card") {
+    const {
+      children,
+      items,
+      options,
+      onFlippedChange: _onFlippedChange,
+      className,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      items?: unknown;
+      options?: unknown;
+      onFlippedChange?: unknown;
+      className?: string;
+      "aria-label"?: string;
+    };
+    const faces = stringList(items ?? options);
+    const front = faces[0] ?? (typeof children === "string" ? children : "Front");
+    const back = faces[1] ?? "Back";
+    return (
+      <FlipCard
+        className={typeof className === "string" ? className : "w-72"}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "Plan"}
+        {...rest}
+      >
+        <FlipCardFront>{front}</FlipCardFront>
+        <FlipCardBack>{back}</FlipCardBack>
+      </FlipCard>
+    );
+  }
+  if (fixture.family === "countdown") {
+    const {
+      target,
+      onComplete: _onComplete,
+      labels: _labels,
+      ...rest
+    } = fixture.props as {
+      target?: string | number;
+      onComplete?: unknown;
+      labels?: unknown;
+    };
+    const deadline =
+      typeof target === "string" || typeof target === "number"
+        ? target
+        : "2000-01-01T00:00:00.000Z";
+    return <Countdown target={deadline} {...rest} />;
+  }
+  if (fixture.family === "animated-button") {
+    const {
+      children,
+      asChild: _asChild,
+      onDrag: _onDrag,
+      onDragStart: _onDragStart,
+      onDragEnd: _onDragEnd,
+      onAnimationStart: _onAnimationStart,
+      variant,
+      size,
+      disabled,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      asChild?: boolean;
+      onDrag?: unknown;
+      onDragStart?: unknown;
+      onDragEnd?: unknown;
+      onAnimationStart?: unknown;
+      variant?: "primary" | "secondary" | "outline" | "ghost" | "destructive" | "link";
+      size?: "sm" | "md" | "lg" | "icon" | "icon-sm";
+      disabled?: boolean;
+    };
+    return (
+      <AnimatedButton variant={variant} size={size} disabled={disabled} {...rest}>
+        {typeof children === "string" ? children : fixture.id}
+      </AnimatedButton>
+    );
+  }
+  if (fixture.family === "card-stack") {
+    const {
+      items,
+      options,
+      labels: _labels,
+      children: _children,
+      className,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      labels?: unknown;
+      children?: string;
+      className?: string;
+    };
+    const titles = stringList(items ?? options);
+    const cards = (titles.length > 0 ? titles : ["One", "Two"]).map((item) => ({
+      id: item,
+      content: item,
+    }));
+    return (
+      <CardStack
+        items={cards}
+        className={typeof className === "string" ? className : "w-72"}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "gauge-chart") {
+    const { value, label } = fixture.props as {
+      value?: number;
+      label?: string;
+    };
+    return (
+      <GaugeChartFixture
+        value={typeof value === "number" ? value : undefined}
+        label={typeof label === "string" ? label : undefined}
+      />
+    );
+  }
+  if (fixture.family === "funnel-chart") {
+    const { items, options } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+    };
+    return <FunnelChartFixture items={stringList(items ?? options)} />;
+  }
+  if (fixture.family === "candlestick-chart") {
+    return <CandlestickChartFixture />;
   }
   throw new Error(`renderReactFixture: unported family ${fixture.family}`);
 }

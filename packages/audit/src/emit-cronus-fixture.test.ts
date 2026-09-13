@@ -916,6 +916,83 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("shiny-text", "default"))).toBe("span");
   });
 
+  it("emits wave 1o labels, items, and values without source", () => {
+    const src = emitCronusApp([
+      getFixture("aspect-ratio", "default"),
+      getFixture("frame", "default"),
+      getFixture("flip-card", "default"),
+      getFixture("countdown", "default"),
+      getFixture("animated-button", "default"),
+      getFixture("card-stack", "default"),
+      getFixture("gauge-chart", "default"),
+      getFixture("funnel-chart", "default"),
+      getFixture("candlestick-chart", "default"),
+    ]);
+    expect(src).toContain("component AspectRatioDefault layout:inline style:aspect-ratio {");
+    expect(src).toContain('label "Framed"');
+    expect(src).toContain("component FrameDefault layout:inline style:frame {");
+    expect(src).toContain('label "Checkout"');
+    expect(src).toContain("component FlipCardDefault layout:inline style:flip-card {");
+    expect(src).toContain('label "Plan"');
+    expect(src).toContain('  text "Front"');
+    expect(src).toContain('  text "Back"');
+    expect(src).toContain("component CountdownDefault layout:inline style:countdown {");
+    expect(src).toContain('label "Launch"');
+    expect(src).toContain("component AnimatedButtonDefault layout:inline style:animated-button {");
+    expect(src).toContain('label "Get started"');
+    expect(src).toContain("component CardStackDefault layout:inline style:card-stack {");
+    expect(src).toContain('label "Stack"');
+    expect(src).toContain('  text "One"');
+    expect(src).toContain('  text "Two"');
+    expect(src).toContain("component GaugeChartDefault layout:inline style:gauge-chart {");
+    expect(src).toContain('label "Score"');
+    expect(src).toContain("  value:72");
+    expect(src).toContain("component FunnelChartDefault layout:inline style:funnel-chart {");
+    expect(src).toContain('label "Pipeline"');
+    expect(src).toContain('  text "Visit"');
+    expect(src).toContain('  text "Signup"');
+    expect(src).toContain(
+      "component CandlestickChartDefault layout:inline style:candlestick-chart {",
+    );
+    expect(src).toContain('label "OHLC"');
+    expect(src).toContain('  text "Mon"');
+    expect(src).toContain('  text "Tue"');
+    expect(src).toContain('  text "Wed"');
+    expect(src).toContain("use AspectRatioDefault");
+    expect(src).toContain("use FrameDefault");
+    expect(src).toContain("use FlipCardDefault");
+    expect(src).toContain("use CountdownDefault");
+    expect(src).toContain("use AnimatedButtonDefault");
+    expect(src).toContain("use CardStackDefault");
+    expect(src).toContain("use GaugeChartDefault");
+    expect(src).toContain("use FunnelChartDefault");
+    expect(src).toContain("use CandlestickChartDefault");
+    expect(src).toContain('page "/audit/aspect-ratio/default" type:custom');
+    expect(src).toContain('page "/audit/frame/default" type:custom');
+    expect(src).toContain('page "/audit/flip-card/default" type:custom');
+    expect(src).toContain('page "/audit/countdown/default" type:custom');
+    expect(src).toContain('page "/audit/animated-button/default" type:custom');
+    expect(src).toContain('page "/audit/card-stack/default" type:custom');
+    expect(src).toContain('page "/audit/gauge-chart/default" type:custom');
+    expect(src).toContain('page "/audit/funnel-chart/default" type:custom');
+    expect(src).toContain('page "/audit/candlestick-chart/default" type:custom');
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for wave 1o families", () => {
+    expect(expectedTag(getFixture("aspect-ratio", "default"))).toBe("div");
+    expect(expectedTag(getFixture("frame", "default"))).toBe("div");
+    expect(expectedTag(getFixture("flip-card", "default"))).toBe("div");
+    expect(expectedTag(getFixture("countdown", "default"))).toBe("div");
+    expect(expectedTag(getFixture("animated-button", "default"))).toBe("button");
+    expect(expectedTag(getFixture("card-stack", "default"))).toBe("section");
+    expect(expectedTag(getFixture("gauge-chart", "default"))).toBe("div");
+    expect(expectedTag(getFixture("funnel-chart", "default"))).toBe("div");
+    expect(expectedTag(getFixture("candlestick-chart", "default"))).toBe("div");
+  });
+
   it("drops data-size from expect.attrs", () => {
     const parsed = parseParityFixture({
       id: "x",

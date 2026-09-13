@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "funnel-chart",
+  "props": {
+    "label": "Pipeline",
+    "items": ["Visit", "Signup"]
+  },
+  "expect": {
+    "slot": "funnel-chart",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "funnel-chart"
+    }
+  }
+}

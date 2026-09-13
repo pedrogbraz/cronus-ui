@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "candlestick-chart",
+  "props": {
+    "label": "OHLC",
+    "items": ["Mon", "Tue", "Wed"]
+  },
+  "expect": {
+    "slot": "candlestick-chart",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "candlestick-chart"
+    }
+  }
+}

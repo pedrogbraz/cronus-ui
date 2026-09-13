@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "aspect-ratio",
+  "props": {
+    "children": "Framed",
+    "className": "w-72"
+  },
+  "expect": {
+    "slot": "aspect-ratio",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "aspect-ratio"
+    }
+  }
+}

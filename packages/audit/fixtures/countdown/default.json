@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "countdown",
+  "props": {
+    "target": "2000-01-01T00:00:00.000Z",
+    "aria-label": "Launch"
+  },
+  "expect": {
+    "slot": "countdown",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "countdown"
+    }
+  }
+}

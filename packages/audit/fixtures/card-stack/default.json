@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "card-stack",
+  "props": {
+    "items": ["One", "Two"],
+    "className": "w-72",
+    "aria-label": "Stack"
+  },
+  "expect": {
+    "slot": "card-stack",
+    "tag": "section",
+    "attrs": {
+      "data-slot": "card-stack"
+    }
+  }
+}

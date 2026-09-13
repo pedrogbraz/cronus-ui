@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "gauge-chart",
+  "props": {
+    "value": 72,
+    "label": "Score"
+  },
+  "expect": {
+    "slot": "gauge-chart",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "gauge-chart"
+    }
+  }
+}
