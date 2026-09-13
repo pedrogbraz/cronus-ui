@@ -1,7 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@cronus-ui/ui", "@cronus-ui/theme", "@cronus-ui/tokens", "@cronus-ui/stack"],
+  transpilePackages: [
+    "@cronus-ui/ui",
+    "@cronus-ui/theme",
+    "@cronus-ui/tokens",
+    "@cronus-ui/stack",
+    "@cronus-ui/audit",
+  ],
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },

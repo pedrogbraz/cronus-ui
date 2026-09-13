@@ -9,7 +9,7 @@ export {
   reactPreviewPath,
 } from "./dual-preview-url.js";
 export { emitCronusApp, emitCronusPage } from "./emit-cronus-fixture.js";
-export { getFixture, listFixtures } from "./fixture-catalog.js";
+export { fixturesForFamily, getFixture, listFixtures } from "./fixture-catalog.js";
 export { compareLayoutBox, type LayoutBox, type LayoutBoxDelta } from "./layout-box.js";
 export { expectedReactAttrs, expectedTag } from "./logic-contract.js";
 export { type ParityFixture, ParityFixtureSchema, parseParityFixture } from "./parity-fixture.js";

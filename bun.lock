@@ -44,6 +44,7 @@
       "name": "@cronus-ui/www",
       "version": "0.2.0",
       "dependencies": {
+        "@cronus-ui/audit": "workspace:*",
         "@cronus-ui/stack": "workspace:*",
         "@cronus-ui/theme": "workspace:*",
         "@cronus-ui/tokens": "workspace:*",
