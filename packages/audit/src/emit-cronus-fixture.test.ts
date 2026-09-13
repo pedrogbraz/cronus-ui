@@ -97,6 +97,55 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("empty", "default"))).toBe("div");
   });
 
+  it("emits items as extra text lines and numeric value without source", () => {
+    const src = emitCronusApp([
+      getFixture("rating", "default"),
+      getFixture("toggle-group", "default"),
+      getFixture("button-group", "default"),
+      getFixture("avatar-group", "default"),
+      getFixture("copy-button", "default"),
+      getFixture("metric", "default"),
+      getFixture("fab", "default"),
+      getFixture("field", "default"),
+      getFixture("input-group", "default"),
+    ]);
+    expect(src).toContain("component RatingDefault layout:inline style:rating {");
+    expect(src).toContain("  value:3");
+    expect(src).toContain("component ToggleGroupDefault layout:inline style:toggle-group {");
+    expect(src).toContain('  text "Day"');
+    expect(src).toContain('  text "Week"');
+    expect(src).toContain('  value:"Day"');
+    expect(src).toContain('  text "Save"');
+    expect(src).toContain('  text "Cancel"');
+    expect(src).toContain('  text "AL"');
+    expect(src).toContain('  text "JB"');
+    expect(src).toContain('  value:"cronus-ui"');
+    expect(src).toContain('  value:"1,240"');
+    expect(src).toContain('label "Create"');
+    expect(src).toContain('label "Email"');
+    expect(src).toContain('  text "$"');
+    expect(src).toContain("use RatingDefault");
+    expect(src).toContain("use ToggleGroupDefault");
+    expect(src).toContain("use FabDefault");
+    expect(src).toContain("use FieldDefault");
+    expect(src).toContain("use InputGroupDefault");
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for wave 1c families", () => {
+    expect(expectedTag(getFixture("field", "default"))).toBe("div");
+    expect(expectedTag(getFixture("input-group", "default"))).toBe("div");
+    expect(expectedTag(getFixture("rating", "default"))).toBe("div");
+    expect(expectedTag(getFixture("copy-button", "default"))).toBe("button");
+    expect(expectedTag(getFixture("fab", "default"))).toBe("div");
+    expect(expectedTag(getFixture("toggle-group", "default"))).toBe("div");
+    expect(expectedTag(getFixture("metric", "default"))).toBe("div");
+    expect(expectedTag(getFixture("avatar-group", "default"))).toBe("div");
+    expect(expectedTag(getFixture("button-group", "default"))).toBe("div");
+  });
+
   it("drops data-size from expect.attrs", () => {
     const parsed = parseParityFixture({
       id: "x",

@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "button-group",
+  "props": {
+    "aria-label": "Actions",
+    "items": ["Save", "Cancel"]
+  },
+  "expect": {
+    "slot": "button-group",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "button-group",
+      "role": "group"
+    }
+  }
+}

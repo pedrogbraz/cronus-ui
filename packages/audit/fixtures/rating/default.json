@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "rating",
+  "props": {
+    "value": 3,
+    "aria-label": "Quality"
+  },
+  "expect": {
+    "slot": "rating",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "rating",
+      "role": "slider"
+    }
+  }
+}

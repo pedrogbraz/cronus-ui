@@ -1,0 +1,18 @@
+{
+  "id": "default",
+  "family": "input-group",
+  "props": {
+    "label": "Amount",
+    "addon": "$",
+    "placeholder": "0.00",
+    "aria-label": "Amount",
+    "items": ["$"]
+  },
+  "expect": {
+    "slot": "input-group",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "input-group"
+    }
+  }
+}

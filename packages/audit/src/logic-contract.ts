@@ -21,6 +21,15 @@ const FAMILY_TAGS: Record<string, string> = {
   avatar: "span",
   card: "div",
   empty: "div",
+  field: "div",
+  "input-group": "div",
+  rating: "div",
+  "copy-button": "button",
+  fab: "div",
+  "toggle-group": "div",
+  metric: "div",
+  "avatar-group": "div",
+  "button-group": "div",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */

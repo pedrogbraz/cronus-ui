@@ -300,6 +300,122 @@ test.describe("logic parity", () => {
     await expect(cronusFrame(page).locator('[data-slot="empty-control"]')).toHaveCount(0);
   });
 
+  test("field is a div, not field-control", async ({ page }) => {
+    await page.goto("/audit/field?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="field"]');
+    const cronus = cronusFrame(page).locator('[data-slot="field"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="field-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="field-control"]')).toHaveCount(0);
+  });
+
+  test("input-group is a div, not a label wrapper or *-control", async ({ page }) => {
+    await page.goto("/audit/input-group?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="input-group"]');
+    const cronus = cronusFrame(page).locator('[data-slot="input-group"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] [data-slot$="-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot$="-control"]')).toHaveCount(0);
+  });
+
+  test("rating is a div slider, not a radiogroup", async ({ page }) => {
+    await page.goto("/audit/rating?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="rating"]');
+    const cronus = cronusFrame(page).locator('[data-slot="rating"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(react).toHaveAttribute("role", "slider");
+    await expect(cronus).toHaveAttribute("role", "slider");
+    await expect(page.locator('[data-audit-side="react"] [role="radiogroup"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[role="radiogroup"]')).toHaveCount(0);
+    await expect(page.locator('[data-audit-side="react"] input[type="radio"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('input[type="radio"]')).toHaveCount(0);
+    await expect(page.locator('[data-slot="rating-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="rating-control"]')).toHaveCount(0);
+  });
+
+  test("copy-button is a button, not copy-button-control", async ({ page }) => {
+    await page.goto("/audit/copy-button?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="copy-button"]');
+    const cronus = cronusFrame(page).locator('[data-slot="copy-button"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("BUTTON");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("BUTTON");
+    await expect(page.locator('[data-slot="copy-button-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="copy-button-control"]')).toHaveCount(0);
+  });
+
+  test("fab is a div, not fab-control", async ({ page }) => {
+    await page.goto("/audit/fab?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="fab"]');
+    const cronus = cronusFrame(page).locator('[data-slot="fab"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="fab-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="fab-control"]')).toHaveCount(0);
+  });
+
+  test("toggle-group is a div, not toggle-group-control", async ({ page }) => {
+    await page.goto("/audit/toggle-group?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="toggle-group"]');
+    const cronus = cronusFrame(page).locator('[data-slot="toggle-group"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="toggle-group-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="toggle-group-control"]')).toHaveCount(0);
+  });
+
+  test("metric is a div, not metric-control", async ({ page }) => {
+    await page.goto("/audit/metric?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="metric"]');
+    const cronus = cronusFrame(page).locator('[data-slot="metric"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="metric-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="metric-control"]')).toHaveCount(0);
+  });
+
+  test("avatar-group is a div, not avatar-group-control", async ({ page }) => {
+    await page.goto("/audit/avatar-group?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="avatar-group"]');
+    const cronus = cronusFrame(page).locator('[data-slot="avatar-group"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="avatar-group-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="avatar-group-control"]')).toHaveCount(0);
+  });
+
+  test("button-group is a div group, not button-group-control", async ({ page }) => {
+    await page.goto("/audit/button-group?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="button-group"]');
+    const cronus = cronusFrame(page).locator('[data-slot="button-group"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(react).toHaveAttribute("role", "group");
+    await expect(cronus).toHaveAttribute("role", "group");
+    await expect(page.locator('[data-slot="button-group-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="button-group-control"]')).toHaveCount(0);
+  });
+
   test("root data-slot boxes match within 2px", async ({ page }) => {
     await page.goto("/audit/button?fixture=primary-md&preset=aurora&mode=dark");
     const reactBox = await page

@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "toggle-group",
+  "props": {
+    "value": "Day",
+    "aria-label": "Range",
+    "items": ["Day", "Week"]
+  },
+  "expect": {
+    "slot": "toggle-group",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "toggle-group"
+    }
+  }
+}

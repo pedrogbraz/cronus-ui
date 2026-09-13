@@ -1,17 +1,25 @@
 import { Alert, AlertDescription, AlertTitle } from "@cronus-ui/ui/alert";
 import { Avatar, AvatarFallback } from "@cronus-ui/ui/avatar";
+import { AvatarGroup } from "@cronus-ui/ui/avatar-group";
 import { Badge } from "@cronus-ui/ui/badge";
 import { Banner } from "@cronus-ui/ui/banner";
 import { Button } from "@cronus-ui/ui/button";
+import { ButtonGroup } from "@cronus-ui/ui/button-group";
 import { Card, CardDescription, CardHeader, CardTitle } from "@cronus-ui/ui/card";
 import { Checkbox } from "@cronus-ui/ui/checkbox";
 import { Chip } from "@cronus-ui/ui/chip";
+import { CopyButton } from "@cronus-ui/ui/copy-button";
 import { Empty, EmptyTitle } from "@cronus-ui/ui/empty";
+import { Fab } from "@cronus-ui/ui/fab";
+import { Field, FieldDescription, FieldLabel } from "@cronus-ui/ui/field";
 import { Input } from "@cronus-ui/ui/input";
+import { InputGroup, InputGroupAddon } from "@cronus-ui/ui/input-group";
 import { Kbd } from "@cronus-ui/ui/kbd";
 import { Label } from "@cronus-ui/ui/label";
+import { Metric, MetricLabel, MetricValue } from "@cronus-ui/ui/metric";
 import { Progress } from "@cronus-ui/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@cronus-ui/ui/radio-group";
+import { Rating } from "@cronus-ui/ui/rating";
 import { Separator } from "@cronus-ui/ui/separator";
 import { Skeleton } from "@cronus-ui/ui/skeleton";
 import { Slider } from "@cronus-ui/ui/slider";
@@ -19,8 +27,15 @@ import { Spinner } from "@cronus-ui/ui/spinner";
 import { Switch } from "@cronus-ui/ui/switch";
 import { Textarea } from "@cronus-ui/ui/textarea";
 import { Toggle } from "@cronus-ui/ui/toggle";
+import { ToggleGroup, ToggleGroupItem } from "@cronus-ui/ui/toggle-group";
 import type { ReactElement } from "react";
 import type { ParityFixture } from "./parity-fixture.js";
+
+function stringList(value: unknown): string[] {
+  return Array.isArray(value)
+    ? value.filter((item): item is string => typeof item === "string")
+    : [];
+}
 
 export function renderReactFixture(fixture: ParityFixture): ReactElement {
   if (fixture.family === "button") {
@@ -311,6 +326,194 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
       <Empty {...rest}>
         <EmptyTitle>{heading}</EmptyTitle>
       </Empty>
+    );
+  }
+  if (fixture.family === "field") {
+    const { label, description, ...rest } = fixture.props as {
+      label?: string;
+      description?: string;
+    };
+    return (
+      <Field {...rest}>
+        <FieldLabel>{typeof label === "string" ? label : fixture.id}</FieldLabel>
+        {typeof description === "string" ? (
+          <FieldDescription>{description}</FieldDescription>
+        ) : null}
+      </Field>
+    );
+  }
+  if (fixture.family === "input-group") {
+    const {
+      addon,
+      placeholder,
+      label: _label,
+      items: _items,
+      options: _options,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      addon?: string;
+      placeholder?: string;
+      label?: string;
+      items?: unknown;
+      options?: unknown;
+      "aria-label"?: string;
+    };
+    return (
+      <InputGroup {...rest}>
+        {typeof addon === "string" ? <InputGroupAddon>{addon}</InputGroupAddon> : null}
+        <Input
+          placeholder={placeholder}
+          aria-label={typeof ariaLabel === "string" ? ariaLabel : "audit-input-group"}
+        />
+      </InputGroup>
+    );
+  }
+  if (fixture.family === "rating") {
+    const {
+      value,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      value?: number;
+      "aria-label"?: string;
+    };
+    return (
+      <Rating
+        value={typeof value === "number" ? value : 0}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "audit-rating"}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "copy-button") {
+    const {
+      value,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      value?: string;
+      "aria-label"?: string;
+    };
+    return (
+      <CopyButton
+        value={typeof value === "string" ? value : fixture.id}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "Copy"}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "fab") {
+    const { label, ...rest } = fixture.props as { label?: string };
+    return (
+      <Fab
+        icon={
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            aria-hidden="true"
+          >
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+        }
+        label={typeof label === "string" ? label : fixture.id}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "toggle-group") {
+    const {
+      value,
+      items,
+      options,
+      type: _type,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      value?: string;
+      items?: unknown;
+      options?: unknown;
+      type?: string;
+      "aria-label"?: string;
+    };
+    const labels = stringList(items ?? options);
+    return (
+      <ToggleGroup
+        type="single"
+        value={typeof value === "string" ? value : undefined}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "audit-toggle-group"}
+        {...rest}
+      >
+        {labels.map((item) => (
+          <ToggleGroupItem key={item} value={item}>
+            {item}
+          </ToggleGroupItem>
+        ))}
+      </ToggleGroup>
+    );
+  }
+  if (fixture.family === "metric") {
+    const { label, value, ...rest } = fixture.props as {
+      label?: string;
+      value?: string | number;
+    };
+    const display =
+      typeof value === "string" || typeof value === "number" ? String(value) : fixture.id;
+    return (
+      <Metric {...rest}>
+        <MetricLabel>{typeof label === "string" ? label : fixture.id}</MetricLabel>
+        <MetricValue>{display}</MetricValue>
+      </Metric>
+    );
+  }
+  if (fixture.family === "avatar-group") {
+    const {
+      items,
+      options,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      "aria-label"?: string;
+    };
+    const initials = stringList(items ?? options);
+    return (
+      <AvatarGroup
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "Avatar group"}
+        {...rest}
+      >
+        {initials.map((item) => (
+          <Avatar key={item}>
+            <AvatarFallback>{item}</AvatarFallback>
+          </Avatar>
+        ))}
+      </AvatarGroup>
+    );
+  }
+  if (fixture.family === "button-group") {
+    const {
+      items,
+      options,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      "aria-label"?: string;
+    };
+    const labels = stringList(items ?? options);
+    return (
+      <ButtonGroup
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "audit-button-group"}
+        {...rest}
+      >
+        {labels.map((item) => (
+          <Button key={item}>{item}</Button>
+        ))}
+      </ButtonGroup>
     );
   }
   throw new Error(`renderReactFixture: unported family ${fixture.family}`);
