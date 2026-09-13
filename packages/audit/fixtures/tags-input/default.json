@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "tags-input",
+  "props": {
+    "placeholder": "Add a tag",
+    "aria-label": "Tags",
+    "items": ["Design", "System"]
+  },
+  "expect": {
+    "slot": "tags-input",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "tags-input"
+    }
+  }
+}

@@ -884,6 +884,128 @@ test.describe("logic parity", () => {
     await expect(cronusFrame(page).locator('[data-slot="button-group-control"]')).toHaveCount(0);
   });
 
+  test("tags-input is a div, not a native select", async ({ page }) => {
+    await page.goto("/audit/tags-input?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="tags-input"]');
+    const cronus = cronusFrame(page).locator('[data-slot="tags-input"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] select')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("select")).toHaveCount(0);
+    await expect(page.locator('[data-slot="tags-input-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="tags-input-control"]')).toHaveCount(0);
+  });
+
+  test("autocomplete is a div, not a native select", async ({ page }) => {
+    await page.goto("/audit/autocomplete?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="autocomplete"]');
+    const cronus = cronusFrame(page).locator('[data-slot="autocomplete"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] select')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("select")).toHaveCount(0);
+    await expect(page.locator('[data-slot="autocomplete-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="autocomplete-control"]')).toHaveCount(0);
+  });
+
+  test("multi-select trigger is a div, not a native select", async ({ page }) => {
+    await page.goto("/audit/multi-select?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="multi-select-trigger"]');
+    const cronus = cronusFrame(page).locator('[data-slot="multi-select-trigger"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] select')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("select")).toHaveCount(0);
+    await expect(page.locator('[data-slot="multi-select-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="multi-select-control"]')).toHaveCount(0);
+  });
+
+  test("credit-card-input is a div, not credit-card-input-control", async ({ page }) => {
+    await page.goto("/audit/credit-card-input?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="credit-card-input"]');
+    const cronus = cronusFrame(page).locator('[data-slot="credit-card-input"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="credit-card-input-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="credit-card-input-control"]')).toHaveCount(
+      0,
+    );
+  });
+
+  test("floating-label-input is a div, not floating-label-input-control", async ({ page }) => {
+    await page.goto("/audit/floating-label-input?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="floating-label-input"]');
+    const cronus = cronusFrame(page).locator('[data-slot="floating-label-input"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="floating-label-input-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="floating-label-input-control"]')).toHaveCount(
+      0,
+    );
+  });
+
+  test("split-button is a div group, not split-button-control", async ({ page }) => {
+    await page.goto("/audit/split-button?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="split-button"]');
+    const cronus = cronusFrame(page).locator('[data-slot="split-button"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(react).toHaveAttribute("role", "group");
+    await expect(cronus).toHaveAttribute("role", "group");
+    await expect(page.locator('[data-slot="split-button-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="split-button-control"]')).toHaveCount(0);
+  });
+
+  test("pill-nav is a nav, not pill-nav-control", async ({ page }) => {
+    await page.goto("/audit/pill-nav?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="pill-nav"]');
+    const cronus = cronusFrame(page).locator('[data-slot="pill-nav"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("NAV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("NAV");
+    await expect(page.locator('[data-slot="pill-nav-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="pill-nav-control"]')).toHaveCount(0);
+  });
+
+  test("dock is a div, not dock-control", async ({ page }) => {
+    await page.goto("/audit/dock?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="dock"]');
+    const cronus = cronusFrame(page).locator('[data-slot="dock"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="dock-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="dock-control"]')).toHaveCount(0);
+  });
+
+  test("workspace-switcher is a button, not workspace-switcher-control", async ({ page }) => {
+    await page.goto("/audit/workspace-switcher?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="workspace-switcher"]');
+    const cronus = cronusFrame(page).locator('[data-slot="workspace-switcher"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("BUTTON");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("BUTTON");
+    await expect(page.locator('[data-slot="workspace-switcher-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="workspace-switcher-control"]')).toHaveCount(
+      0,
+    );
+  });
+
   test("root data-slot boxes match within 2px", async ({ page }) => {
     await page.goto("/audit/button?fixture=primary-md&preset=aurora&mode=dark");
     const reactBox = await page

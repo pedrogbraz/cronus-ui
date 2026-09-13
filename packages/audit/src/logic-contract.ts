@@ -66,6 +66,15 @@ const FAMILY_TAGS: Record<string, string> = {
   "scroll-area": "div",
   toolbar: "div",
   "status-dot": "span",
+  "tags-input": "div",
+  autocomplete: "div",
+  "multi-select": "div",
+  "credit-card-input": "div",
+  "floating-label-input": "div",
+  "split-button": "div",
+  "pill-nav": "nav",
+  dock: "div",
+  "workspace-switcher": "button",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */

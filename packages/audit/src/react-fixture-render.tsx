@@ -1,4 +1,11 @@
-import { CurrencyInput, PhoneInput, TimePicker } from "@cronus-ui/ui";
+import {
+  CreditCardInput,
+  CurrencyInput,
+  FloatingLabelInput,
+  PhoneInput,
+  SplitButton,
+  TimePicker,
+} from "@cronus-ui/ui";
 import { Alert, AlertDescription, AlertTitle } from "@cronus-ui/ui/alert";
 import { Avatar, AvatarFallback } from "@cronus-ui/ui/avatar";
 import { AvatarGroup } from "@cronus-ui/ui/avatar-group";
@@ -51,12 +58,14 @@ import {
   MenubarTrigger,
 } from "@cronus-ui/ui/menubar";
 import { Metric, MetricLabel, MetricValue } from "@cronus-ui/ui/metric";
+import { MultiSelect } from "@cronus-ui/ui/multi-select";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@cronus-ui/ui/navigation-menu";
+import { PillNav } from "@cronus-ui/ui/pill-nav";
 import { Popover, PopoverContent, PopoverTrigger } from "@cronus-ui/ui/popover";
 import { Progress } from "@cronus-ui/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@cronus-ui/ui/radio-group";
@@ -83,11 +92,13 @@ import {
   StepperTitle,
 } from "@cronus-ui/ui/stepper";
 import { Switch } from "@cronus-ui/ui/switch";
+import { TagsInput } from "@cronus-ui/ui/tags-input";
 import { Textarea } from "@cronus-ui/ui/textarea";
 import { Toggle } from "@cronus-ui/ui/toggle";
 import { ToggleGroup, ToggleGroupItem } from "@cronus-ui/ui/toggle-group";
 import { Toolbar, ToolbarButton } from "@cronus-ui/ui/toolbar";
 import type { ReactElement } from "react";
+import { AutocompleteFixture } from "./autocomplete-fixture.js";
 import { CalendarFixture } from "./calendar-fixture.js";
 import {
   AreaChartFixture,
@@ -102,9 +113,11 @@ import {
 import { ColorPickerFixture } from "./color-picker-fixture.js";
 import { DataTableFixture } from "./data-table-fixture.js";
 import { DatePickerFixture } from "./date-picker-fixture.js";
+import { DockFixture } from "./dock-fixture.js";
 import { ModeToggleFixture } from "./mode-toggle-fixture.js";
 import type { ParityFixture } from "./parity-fixture.js";
 import { SidebarFixture } from "./sidebar-fixture.js";
+import { WorkspaceSwitcherFixture } from "./workspace-switcher-fixture.js";
 
 function stringList(value: unknown): string[] {
   return Array.isArray(value)
@@ -1241,6 +1254,201 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
         | "neutral";
     };
     return <StatusDot status={status ?? "online"} {...rest} />;
+  }
+  if (fixture.family === "tags-input") {
+    const {
+      items,
+      options,
+      value,
+      placeholder,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      value?: unknown;
+      placeholder?: string;
+      "aria-label"?: string;
+    };
+    const tags = stringList(items ?? options ?? (Array.isArray(value) ? value : undefined));
+    return (
+      <TagsInput
+        defaultValue={tags}
+        placeholder={placeholder}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "Tags"}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "autocomplete") {
+    const {
+      options,
+      items,
+      placeholder,
+      value,
+      open: _open,
+      defaultOpen: _defaultOpen,
+      "aria-label": ariaLabel,
+    } = fixture.props as {
+      options?: unknown;
+      items?: unknown;
+      placeholder?: string;
+      value?: string;
+      open?: boolean;
+      defaultOpen?: boolean;
+      "aria-label"?: string;
+    };
+    return (
+      <AutocompleteFixture
+        options={stringList(options ?? items)}
+        placeholder={placeholder}
+        defaultValue={typeof value === "string" ? value : undefined}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+      />
+    );
+  }
+  if (fixture.family === "multi-select") {
+    const {
+      options,
+      items,
+      placeholder,
+      defaultOpen: _defaultOpen,
+      open: _open,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      options?: unknown;
+      items?: unknown;
+      placeholder?: string;
+      defaultOpen?: boolean;
+      open?: boolean;
+      "aria-label"?: string;
+    };
+    const labels = stringList(options ?? items);
+    return (
+      <MultiSelect
+        options={labels.map((item) => ({ label: item, value: item }))}
+        placeholder={placeholder}
+        defaultOpen
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "audit-multi-select"}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "credit-card-input") {
+    const {
+      value,
+      label,
+      onChange: _onChange,
+      items: _items,
+      options: _options,
+      ...rest
+    } = fixture.props as {
+      value?: string;
+      label?: string;
+      onChange?: unknown;
+      items?: unknown;
+      options?: unknown;
+    };
+    return (
+      <CreditCardInput
+        defaultNumber={typeof value === "string" ? value : undefined}
+        label={typeof label === "string" ? label : "Credit card"}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "floating-label-input") {
+    const {
+      label,
+      value,
+      items: _items,
+      options: _options,
+      ...rest
+    } = fixture.props as {
+      label?: string;
+      value?: string;
+      items?: unknown;
+      options?: unknown;
+    };
+    return (
+      <FloatingLabelInput
+        label={typeof label === "string" ? label : fixture.id}
+        defaultValue={typeof value === "string" ? value : undefined}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "split-button") {
+    const {
+      children,
+      items,
+      options,
+      defaultOpen: _defaultOpen,
+      onClick: _onClick,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      items?: unknown;
+      options?: unknown;
+      defaultOpen?: boolean;
+      onClick?: unknown;
+      "aria-label"?: string;
+    };
+    const labels = stringList(items ?? options);
+    return (
+      <SplitButton
+        defaultOpen
+        items={labels.map((item) => ({ id: item, label: item }))}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+        {...rest}
+      >
+        {typeof children === "string" ? children : "Save"}
+      </SplitButton>
+    );
+  }
+  if (fixture.family === "pill-nav") {
+    const {
+      items,
+      options,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      "aria-label"?: string;
+    };
+    const labels = stringList(items ?? options);
+    const entries = labels.length > 0 ? labels : ["Home", "Work"];
+    return (
+      <PillNav
+        items={entries.map((item) => ({ value: item, label: item }))}
+        defaultValue={entries[0]}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "audit-pill-nav"}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "dock") {
+    const { items, options, "aria-label": ariaLabel } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      "aria-label"?: string;
+    };
+    return (
+      <DockFixture
+        items={stringList(items ?? options)}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+      />
+    );
+  }
+  if (fixture.family === "workspace-switcher") {
+    const { items, options } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+    };
+    return <WorkspaceSwitcherFixture items={stringList(items ?? options)} />;
   }
   throw new Error(`renderReactFixture: unported family ${fixture.family}`);
 }

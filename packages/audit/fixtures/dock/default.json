@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "dock",
+  "props": {
+    "aria-label": "App dock",
+    "items": ["Home", "Search"]
+  },
+  "expect": {
+    "slot": "dock",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "dock"
+    }
+  }
+}

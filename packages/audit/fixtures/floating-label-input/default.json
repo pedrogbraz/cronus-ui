@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "floating-label-input",
+  "props": {
+    "label": "Email",
+    "value": "ada@cronus.dev"
+  },
+  "expect": {
+    "slot": "floating-label-input",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "floating-label-input"
+    }
+  }
+}

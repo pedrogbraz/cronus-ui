@@ -1,0 +1,18 @@
+{
+  "id": "default",
+  "family": "multi-select",
+  "props": {
+    "placeholder": "Select frameworks",
+    "aria-label": "Stack",
+    "defaultOpen": true,
+    "options": ["React", "Vue"]
+  },
+  "expect": {
+    "slot": "multi-select-trigger",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "multi-select-trigger",
+      "role": "combobox"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "pill-nav",
+  "props": {
+    "aria-label": "Sections",
+    "items": ["Home", "Work"]
+  },
+  "expect": {
+    "slot": "pill-nav",
+    "tag": "nav",
+    "attrs": {
+      "data-slot": "pill-nav"
+    }
+  }
+}

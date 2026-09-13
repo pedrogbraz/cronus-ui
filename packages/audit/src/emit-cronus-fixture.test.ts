@@ -379,6 +379,79 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("status-dot", "default"))).toBe("span");
   });
 
+  it("emits wave 1h labels, items, and values without source", () => {
+    const src = emitCronusApp([
+      getFixture("tags-input", "default"),
+      getFixture("autocomplete", "default"),
+      getFixture("multi-select", "default"),
+      getFixture("credit-card-input", "default"),
+      getFixture("floating-label-input", "default"),
+      getFixture("split-button", "default"),
+      getFixture("pill-nav", "default"),
+      getFixture("dock", "default"),
+      getFixture("workspace-switcher", "default"),
+    ]);
+    expect(src).toContain("component TagsInputDefault layout:inline style:tags-input {");
+    expect(src).toContain('label "Add a tag"');
+    expect(src).toContain('  text "Design"');
+    expect(src).toContain('  text "System"');
+    expect(src).toContain("component AutocompleteDefault layout:inline style:autocomplete {");
+    expect(src).toContain('  text "Lisbon"');
+    expect(src).toContain('  text "Lima"');
+    expect(src).toContain('  text "London"');
+    expect(src).toContain('  value:"L"');
+    expect(src).toContain("component MultiSelectDefault layout:inline style:multi-select {");
+    expect(src).toContain('  text "React"');
+    expect(src).toContain('  text "Vue"');
+    expect(src).toContain("component CreditCardInputDefault layout:inline style:credit-card-input {");
+    expect(src).toContain('label "Credit card"');
+    expect(src).toContain('  value:"4242424242424242"');
+    expect(src).toContain(
+      "component FloatingLabelInputDefault layout:inline style:floating-label-input {",
+    );
+    expect(src).toContain('label "Email"');
+    expect(src).toContain('  value:"ada@cronus.dev"');
+    expect(src).toContain("component SplitButtonDefault layout:inline style:split-button {");
+    expect(src).toContain('label "Save"');
+    expect(src).toContain('  text "Duplicate"');
+    expect(src).toContain('  text "Archive"');
+    expect(src).toContain("component PillNavDefault layout:inline style:pill-nav {");
+    expect(src).toContain('  text "Home"');
+    expect(src).toContain('  text "Work"');
+    expect(src).toContain("component DockDefault layout:inline style:dock {");
+    expect(src).toContain("component WorkspaceSwitcherDefault layout:inline style:workspace-switcher {");
+    expect(src).toContain('  text "Cronus"');
+    expect(src).toContain('  text "Northwind"');
+    expect(src).toContain("use TagsInputDefault");
+    expect(src).toContain("use AutocompleteDefault");
+    expect(src).toContain("use MultiSelectDefault");
+    expect(src).toContain("use CreditCardInputDefault");
+    expect(src).toContain("use FloatingLabelInputDefault");
+    expect(src).toContain("use SplitButtonDefault");
+    expect(src).toContain("use PillNavDefault");
+    expect(src).toContain("use DockDefault");
+    expect(src).toContain("use WorkspaceSwitcherDefault");
+    expect(src).toContain('page "/audit/tags-input/default" type:custom');
+    expect(src).toContain('page "/audit/autocomplete/default" type:custom');
+    expect(src).toContain('page "/audit/multi-select/default" type:custom');
+    expect(src).toContain('page "/audit/workspace-switcher/default" type:custom');
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for wave 1h families", () => {
+    expect(expectedTag(getFixture("tags-input", "default"))).toBe("div");
+    expect(expectedTag(getFixture("autocomplete", "default"))).toBe("div");
+    expect(expectedTag(getFixture("multi-select", "default"))).toBe("div");
+    expect(expectedTag(getFixture("credit-card-input", "default"))).toBe("div");
+    expect(expectedTag(getFixture("floating-label-input", "default"))).toBe("div");
+    expect(expectedTag(getFixture("split-button", "default"))).toBe("div");
+    expect(expectedTag(getFixture("pill-nav", "default"))).toBe("nav");
+    expect(expectedTag(getFixture("dock", "default"))).toBe("div");
+    expect(expectedTag(getFixture("workspace-switcher", "default"))).toBe("button");
+  });
+
   it("drops data-size from expect.attrs", () => {
     const parsed = parseParityFixture({
       id: "x",
