@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { emitCronusApp } from "./emit-cronus-fixture.js";
-import { getFixture } from "./fixture-catalog.js";
+import { componentNameOf, getFixture, listFixtures } from "./fixture-catalog.js";
+import { expectedTag } from "./logic-contract.js";
 import { parseParityFixture } from "./parity-fixture.js";
 
 describe("emitCronusApp", () => {
@@ -15,6 +16,56 @@ describe("emitCronusApp", () => {
     expect(src).not.toMatch(/\bsource\b/);
     expect(src).not.toContain("stack react");
     expect(src).not.toContain("template ");
+  });
+
+  it("emits checked, pressed, and value colon-pairs without source", () => {
+    const src = emitCronusApp([
+      getFixture("checkbox", "on"),
+      getFixture("switch", "on"),
+      getFixture("toggle", "on"),
+      getFixture("progress", "half"),
+    ]);
+    expect(src).toContain("component CheckboxOn layout:inline style:checkbox {");
+    expect(src).toContain("  checked:true");
+    expect(src).toContain("component SwitchOn layout:inline style:switch {");
+    expect(src).toContain("component ToggleOn layout:inline style:toggle {");
+    expect(src).toContain("  pressed:true");
+    expect(src).toContain("component ProgressHalf layout:inline style:progress {");
+    expect(src).toContain("  value:50");
+    expect(src).toContain("use CheckboxOn");
+    expect(src).toContain("use SwitchOn");
+    expect(src).toContain("use ToggleOn");
+    expect(src).toContain("use ProgressHalf");
+    expect(src).toContain('page "/audit/checkbox/on" type:custom');
+    expect(src).toContain('page "/audit/progress/half" type:custom');
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+  });
+
+  it("emits every catalog fixture as component + page use", () => {
+    const fixtures = listFixtures();
+    const src = emitCronusApp(fixtures);
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+    expect(src).not.toContain("<");
+    for (const fixture of fixtures) {
+      const name = componentNameOf(fixture);
+      expect(src).toContain(`component ${name} `);
+      expect(src).toContain(`use ${name}`);
+      expect(src).toContain(`page "/audit/${fixture.family}/${fixture.id}" type:custom`);
+    }
+  });
+
+  it("maps expected tags for wave 1a families", () => {
+    expect(expectedTag(getFixture("label", "default"))).toBe("label");
+    expect(expectedTag(getFixture("textarea", "empty"))).toBe("textarea");
+    expect(expectedTag(getFixture("checkbox", "off"))).toBe("button");
+    expect(expectedTag(getFixture("switch", "off"))).toBe("button");
+    expect(expectedTag(getFixture("spinner", "default"))).toBe("svg");
+    expect(expectedTag(getFixture("separator", "horizontal"))).toBe("div");
+    expect(expectedTag(getFixture("kbd", "default"))).toBe("kbd");
+    expect(expectedTag(getFixture("toggle", "off"))).toBe("button");
+    expect(expectedTag(getFixture("progress", "half"))).toBe("div");
   });
 
   it("drops data-size from expect.attrs", () => {

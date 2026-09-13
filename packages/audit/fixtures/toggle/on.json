@@ -1,0 +1,15 @@
+{
+  "id": "on",
+  "family": "toggle",
+  "props": {
+    "children": "Bold",
+    "pressed": true
+  },
+  "expect": {
+    "slot": "toggle",
+    "tag": "button",
+    "attrs": {
+      "data-slot": "toggle"
+    }
+  }
+}

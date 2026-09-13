@@ -1,0 +1,15 @@
+{
+  "id": "empty",
+  "family": "textarea",
+  "props": {
+    "placeholder": "Write a bio",
+    "aria-label": "Bio"
+  },
+  "expect": {
+    "slot": "textarea",
+    "tag": "textarea",
+    "attrs": {
+      "data-slot": "textarea"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "label",
+  "props": {
+    "children": "Email"
+  },
+  "expect": {
+    "slot": "label",
+    "tag": "label",
+    "attrs": {
+      "data-slot": "label"
+    }
+  }
+}

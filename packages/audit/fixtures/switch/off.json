@@ -1,0 +1,14 @@
+{
+  "id": "off",
+  "family": "switch",
+  "props": {
+    "aria-label": "Airplane mode"
+  },
+  "expect": {
+    "slot": "switch",
+    "tag": "button",
+    "attrs": {
+      "data-slot": "switch"
+    }
+  }
+}

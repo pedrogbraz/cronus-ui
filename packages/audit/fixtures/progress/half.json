@@ -1,0 +1,15 @@
+{
+  "id": "half",
+  "family": "progress",
+  "props": {
+    "value": 50,
+    "aria-label": "Upload progress"
+  },
+  "expect": {
+    "slot": "progress",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "progress"
+    }
+  }
+}

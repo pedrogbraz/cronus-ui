@@ -46,6 +46,17 @@ export function emitCronusComponent(fixture: ParityFixture): string {
   if (fixture.props.invalid === true) {
     lines.push("  invalid:true");
   }
+  if (fixture.props.checked === true) {
+    lines.push("  checked:true");
+  }
+  if (fixture.props.pressed === true) {
+    lines.push("  pressed:true");
+  }
+  if (typeof fixture.props.value === "number") {
+    lines.push(`  value:${fixture.props.value}`);
+  } else if (typeof fixture.props.value === "string") {
+    lines.push(`  value:"${cronusEscape(fixture.props.value)}"`);
+  }
   if (typeof fixture.props["aria-label"] === "string") {
     lines.push(`  aria-label:"${cronusEscape(fixture.props["aria-label"])}"`);
   }

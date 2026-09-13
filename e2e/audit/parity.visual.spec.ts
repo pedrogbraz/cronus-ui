@@ -113,4 +113,76 @@ test.describe("visual parity", () => {
       SCREENSHOT_OPTIONS,
     );
   });
+
+  test("label default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "label", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "label-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("textarea empty aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "textarea", "empty", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "textarea-empty-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("checkbox off aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "checkbox", "off", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "checkbox-off-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("switch off aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "switch", "off", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "switch-off-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("spinner default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "spinner", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "spinner-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("separator horizontal aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "separator", "horizontal", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "separator-horizontal-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("kbd default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "kbd", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "kbd-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("toggle off aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "toggle", "off", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "toggle-off-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("progress half aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "progress", "half", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "progress-half-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
 });

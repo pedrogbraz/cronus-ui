@@ -1,5 +1,19 @@
 import type { ParityFixture } from "./parity-fixture.js";
 
+const FAMILY_TAGS: Record<string, string> = {
+  badge: "span",
+  input: "input",
+  label: "label",
+  textarea: "textarea",
+  checkbox: "button",
+  switch: "button",
+  spinner: "svg",
+  separator: "div",
+  kbd: "kbd",
+  toggle: "button",
+  progress: "div",
+};
+
 /** Attrs the React component actually emits. Never require `data-size`. */
 export function expectedReactAttrs(fixture: ParityFixture): Record<string, string> {
   const attrs: Record<string, string> = { ...(fixture.expect.attrs ?? {}) };
@@ -22,7 +36,5 @@ export function expectedTag(fixture: ParityFixture): string {
   if (fixture.family === "button") {
     return typeof fixture.props.href === "string" ? "a" : "button";
   }
-  if (fixture.family === "badge") return "span";
-  if (fixture.family === "input") return "input";
-  return "div";
+  return FAMILY_TAGS[fixture.family] ?? "div";
 }
