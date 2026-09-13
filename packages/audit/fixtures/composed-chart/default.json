@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "composed-chart",
+  "props": {
+    "label": "Mix",
+    "items": ["Jan", "Feb", "Mar"]
+  },
+  "expect": {
+    "slot": "composed-chart",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "composed-chart"
+    }
+  }
+}

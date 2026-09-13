@@ -1799,6 +1799,122 @@ test.describe("logic parity", () => {
     );
   });
 
+  test("logo-carousel is a ul, not logo-carousel-control", async ({ page }) => {
+    await page.goto("/audit/logo-carousel?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="logo-carousel"]');
+    const cronus = cronusFrame(page).locator('[data-slot="logo-carousel"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("UL");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("UL");
+    await expect(page.locator('[data-slot="logo-carousel-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="logo-carousel-control"]')).toHaveCount(0);
+  });
+
+  test("dynamic-island is a div, not dynamic-island-control", async ({ page }) => {
+    await page.goto("/audit/dynamic-island?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="dynamic-island"]');
+    const cronus = cronusFrame(page).locator('[data-slot="dynamic-island"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="dynamic-island-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="dynamic-island-control"]')).toHaveCount(0);
+  });
+
+  test("image-zoom is a button, not image-zoom-control", async ({ page }) => {
+    await page.goto("/audit/image-zoom?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="image-zoom"]');
+    const cronus = cronusFrame(page).locator('[data-slot="image-zoom"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("BUTTON");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("BUTTON");
+    await expect(page.locator('[data-slot="image-zoom-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="image-zoom-control"]')).toHaveCount(0);
+  });
+
+  test("aurora-background is a div, not aurora-background-control", async ({ page }) => {
+    await page.goto("/audit/aurora-background?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="aurora-background"]');
+    const cronus = cronusFrame(page).locator('[data-slot="aurora-background"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="aurora-background-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="aurora-background-control"]')).toHaveCount(
+      0,
+    );
+  });
+
+  test("border-beam is a div, not border-beam-control", async ({ page }) => {
+    await page.goto("/audit/border-beam?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="border-beam"]');
+    const cronus = cronusFrame(page).locator('[data-slot="border-beam"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="border-beam-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="border-beam-control"]')).toHaveCount(0);
+  });
+
+  test("confetti is a div, not confetti-control", async ({ page }) => {
+    await page.goto("/audit/confetti?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="confetti"]');
+    const cronus = cronusFrame(page).locator('[data-slot="confetti"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="confetti-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="confetti-control"]')).toHaveCount(0);
+  });
+
+  test("composed-chart is a div with data-slot, not a figure", async ({ page }) => {
+    await page.goto("/audit/composed-chart?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="composed-chart"]');
+    const cronus = cronusFrame(page).locator('[data-slot="composed-chart"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] figure')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("figure")).toHaveCount(0);
+    await expect(page.locator('[data-slot="composed-chart-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="composed-chart-control"]')).toHaveCount(0);
+  });
+
+  test("heatmap-chart is a div with data-slot, not a figure", async ({ page }) => {
+    await page.goto("/audit/heatmap-chart?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="heatmap-chart"]');
+    const cronus = cronusFrame(page).locator('[data-slot="heatmap-chart"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] figure')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("figure")).toHaveCount(0);
+    await expect(page.locator('[data-slot="heatmap-chart-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="heatmap-chart-control"]')).toHaveCount(0);
+  });
+
+  test("chart is a div with data-slot, not a figure", async ({ page }) => {
+    await page.goto("/audit/chart?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="chart"]');
+    const cronus = cronusFrame(page).locator('[data-slot="chart"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] figure')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("figure")).toHaveCount(0);
+    await expect(page.locator('[data-slot="chart-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="chart-control"]')).toHaveCount(0);
+  });
+
   test("toast is a visible div with data-slot toast, not toaster-only empty", async ({ page }) => {
     await page.goto("/audit/toast?fixture=default&preset=aurora&mode=dark");
     const react = page.locator('[data-audit-side="react"] [data-slot="toast"]');

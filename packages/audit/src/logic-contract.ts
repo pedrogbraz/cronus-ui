@@ -138,6 +138,15 @@ const FAMILY_TAGS: Record<string, string> = {
   "gauge-chart": "div",
   "funnel-chart": "div",
   "candlestick-chart": "div",
+  "logo-carousel": "ul",
+  "dynamic-island": "div",
+  "image-zoom": "button",
+  "aurora-background": "div",
+  "border-beam": "div",
+  confetti: "div",
+  "composed-chart": "div",
+  "heatmap-chart": "div",
+  chart: "div",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */

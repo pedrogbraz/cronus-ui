@@ -25,6 +25,7 @@
   "dependencies": {
     "@cronus-ui/tokens": "workspace:*",
     "@cronus-ui/ui": "workspace:*",
+    "recharts": "^3.9.2",
     "zod": "^4.4.3"
   },
   "peerDependencies": {

@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "heatmap-chart",
+  "props": {
+    "label": "Activity",
+    "items": ["1", "3", "5", "2"]
+  },
+  "expect": {
+    "slot": "heatmap-chart",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "heatmap-chart"
+    }
+  }
+}

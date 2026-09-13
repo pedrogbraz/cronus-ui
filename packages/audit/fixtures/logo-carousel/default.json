@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "logo-carousel",
+  "props": {
+    "items": ["Acme", "Globex"],
+    "className": "w-72",
+    "aria-label": "Logos"
+  },
+  "expect": {
+    "slot": "logo-carousel",
+    "tag": "ul",
+    "attrs": {
+      "data-slot": "logo-carousel"
+    }
+  }
+}

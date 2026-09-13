@@ -993,6 +993,86 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("candlestick-chart", "default"))).toBe("div");
   });
 
+  it("emits wave 1p labels, items, and values without source", () => {
+    const src = emitCronusApp([
+      getFixture("logo-carousel", "default"),
+      getFixture("dynamic-island", "default"),
+      getFixture("image-zoom", "default"),
+      getFixture("aurora-background", "default"),
+      getFixture("border-beam", "default"),
+      getFixture("confetti", "default"),
+      getFixture("composed-chart", "default"),
+      getFixture("heatmap-chart", "default"),
+      getFixture("chart", "default"),
+    ]);
+    expect(src).toContain("component LogoCarouselDefault layout:inline style:logo-carousel {");
+    expect(src).toContain('label "Logos"');
+    expect(src).toContain('  text "Acme"');
+    expect(src).toContain('  text "Globex"');
+    expect(src).toContain("component DynamicIslandDefault layout:inline style:dynamic-island {");
+    expect(src).toContain('  text "Idle"');
+    expect(src).toContain('  text "Active"');
+    expect(src).toContain("component ImageZoomDefault layout:inline style:image-zoom {");
+    expect(src).toContain('label "Zoom"');
+    expect(src).toContain(
+      "component AuroraBackgroundDefault layout:inline style:aurora-background {",
+    );
+    expect(src).toContain('label "Aurora"');
+    expect(src).toContain("component BorderBeamDefault layout:inline style:border-beam {");
+    expect(src).toContain('label "Beam"');
+    expect(src).toContain("component ConfettiDefault layout:inline style:confetti {");
+    expect(src).toContain('label "Celebrate"');
+    expect(src).toContain("component ComposedChartDefault layout:inline style:composed-chart {");
+    expect(src).toContain('label "Mix"');
+    expect(src).toContain('  text "Jan"');
+    expect(src).toContain('  text "Feb"');
+    expect(src).toContain('  text "Mar"');
+    expect(src).toContain("component HeatmapChartDefault layout:inline style:heatmap-chart {");
+    expect(src).toContain('label "Activity"');
+    expect(src).toContain('  text "1"');
+    expect(src).toContain('  text "3"');
+    expect(src).toContain('  text "5"');
+    expect(src).toContain('  text "2"');
+    expect(src).toContain("component ChartDefault layout:inline style:chart {");
+    expect(src).toContain('label "Series"');
+    expect(src).toContain('  text "4"');
+    expect(src).toContain('  text "8"');
+    expect(src).toContain('  text "6"');
+    expect(src).toContain("use LogoCarouselDefault");
+    expect(src).toContain("use DynamicIslandDefault");
+    expect(src).toContain("use ImageZoomDefault");
+    expect(src).toContain("use AuroraBackgroundDefault");
+    expect(src).toContain("use BorderBeamDefault");
+    expect(src).toContain("use ConfettiDefault");
+    expect(src).toContain("use ComposedChartDefault");
+    expect(src).toContain("use HeatmapChartDefault");
+    expect(src).toContain("use ChartDefault");
+    expect(src).toContain('page "/audit/logo-carousel/default" type:custom');
+    expect(src).toContain('page "/audit/dynamic-island/default" type:custom');
+    expect(src).toContain('page "/audit/image-zoom/default" type:custom');
+    expect(src).toContain('page "/audit/aurora-background/default" type:custom');
+    expect(src).toContain('page "/audit/border-beam/default" type:custom');
+    expect(src).toContain('page "/audit/confetti/default" type:custom');
+    expect(src).toContain('page "/audit/composed-chart/default" type:custom');
+    expect(src).toContain('page "/audit/heatmap-chart/default" type:custom');
+    expect(src).toContain('page "/audit/chart/default" type:custom');
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for wave 1p families", () => {
+    expect(expectedTag(getFixture("logo-carousel", "default"))).toBe("ul");
+    expect(expectedTag(getFixture("dynamic-island", "default"))).toBe("div");
+    expect(expectedTag(getFixture("image-zoom", "default"))).toBe("button");
+    expect(expectedTag(getFixture("aurora-background", "default"))).toBe("div");
+    expect(expectedTag(getFixture("border-beam", "default"))).toBe("div");
+    expect(expectedTag(getFixture("confetti", "default"))).toBe("div");
+    expect(expectedTag(getFixture("composed-chart", "default"))).toBe("div");
+    expect(expectedTag(getFixture("heatmap-chart", "default"))).toBe("div");
+    expect(expectedTag(getFixture("chart", "default"))).toBe("div");
+  });
+
   it("drops data-size from expect.attrs", () => {
     const parsed = parseParityFixture({
       id: "x",

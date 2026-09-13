@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "border-beam",
+  "props": {
+    "children": "Beam",
+    "className": "w-72 p-6"
+  },
+  "expect": {
+    "slot": "border-beam",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "border-beam"
+    }
+  }
+}

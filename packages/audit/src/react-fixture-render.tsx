@@ -1,4 +1,5 @@
 import {
+  BorderBeam,
   ConfirmationDialog,
   CreditCardInput,
   CurrencyInput,
@@ -22,6 +23,7 @@ import { AnimatedButton } from "@cronus-ui/ui/animated-button";
 import { AnimatedList } from "@cronus-ui/ui/animated-list";
 import { AnimatedNumber } from "@cronus-ui/ui/animated-number";
 import { AspectRatio } from "@cronus-ui/ui/aspect-ratio";
+import { AuroraBackground } from "@cronus-ui/ui/aurora-background";
 import { Avatar, AvatarFallback } from "@cronus-ui/ui/avatar";
 import { AvatarGroup } from "@cronus-ui/ui/avatar-group";
 import { Badge } from "@cronus-ui/ui/badge";
@@ -45,6 +47,7 @@ import { CodeTabs } from "@cronus-ui/ui/code-tabs";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@cronus-ui/ui/collapsible";
 import { Combobox } from "@cronus-ui/ui/combobox";
 import { Command, CommandInput, CommandItem, CommandList } from "@cronus-ui/ui/command";
+import { Confetti } from "@cronus-ui/ui/confetti";
 import {
   ContextMenu,
   ContextMenuContent,
@@ -68,6 +71,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@cronus-ui/ui/dropdown-menu";
+import { DynamicIsland } from "@cronus-ui/ui/dynamic-island";
 import { Empty, EmptyTitle } from "@cronus-ui/ui/empty";
 import { Fab } from "@cronus-ui/ui/fab";
 import { Field, FieldDescription, FieldLabel } from "@cronus-ui/ui/field";
@@ -77,6 +81,7 @@ import { Frame } from "@cronus-ui/ui/frame";
 import { GlassCard } from "@cronus-ui/ui/glass-card";
 import { GradientText } from "@cronus-ui/ui/gradient-text";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@cronus-ui/ui/hover-card";
+import { ImageZoom } from "@cronus-ui/ui/image-zoom";
 import { Input } from "@cronus-ui/ui/input";
 import { InputGroup, InputGroupAddon } from "@cronus-ui/ui/input-group";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@cronus-ui/ui/input-otp";
@@ -84,6 +89,7 @@ import { InviteDialog } from "@cronus-ui/ui/invite-dialog";
 import { JsonViewer } from "@cronus-ui/ui/json-viewer";
 import { Kbd } from "@cronus-ui/ui/kbd";
 import { Label } from "@cronus-ui/ui/label";
+import { LogoCarousel } from "@cronus-ui/ui/logo-carousel";
 import { Marquee } from "@cronus-ui/ui/marquee";
 import { Masonry } from "@cronus-ui/ui/masonry";
 import {
@@ -166,9 +172,12 @@ import {
   AreaChartFixture,
   BarChartFixture,
   CandlestickChartFixture,
+  ChartFixture,
   ChoroplethChartFixture,
+  ComposedChartFixture,
   FunnelChartFixture,
   GaugeChartFixture,
+  HeatmapChartFixture,
   LineChartFixture,
   LiveLineChartFixture,
   PieChartFixture,
@@ -2679,6 +2688,145 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
   }
   if (fixture.family === "candlestick-chart") {
     return <CandlestickChartFixture />;
+  }
+  if (fixture.family === "logo-carousel") {
+    const {
+      items,
+      options,
+      motionPreference: _motionPreference,
+      className,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      motionPreference?: unknown;
+      className?: string;
+      "aria-label"?: string;
+    };
+    const labels = stringList(items ?? options);
+    const logos = (labels.length > 0 ? labels : ["Acme", "Globex"]).map((item) => ({
+      id: item,
+      label: item,
+    }));
+    return (
+      <LogoCarousel
+        items={logos}
+        className={typeof className === "string" ? className : "w-72"}
+        ariaLabel={typeof ariaLabel === "string" ? ariaLabel : "Logos"}
+        motionPreference="never"
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "dynamic-island") {
+    const {
+      items,
+      options,
+      onValueChange: _onValueChange,
+      children: _children,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      onValueChange?: unknown;
+      children?: string;
+    };
+    const labels = stringList(items ?? options);
+    const views = (labels.length > 0 ? labels : ["Idle", "Active"]).map((item) => ({
+      id: item,
+      label: item,
+      content: item,
+    }));
+    return <DynamicIsland views={views} defaultValue={views[0]?.id} {...rest} />;
+  }
+  if (fixture.family === "image-zoom") {
+    const {
+      children,
+      onZoomChange: _onZoomChange,
+      labels: _labels,
+      className,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      onZoomChange?: unknown;
+      labels?: unknown;
+      className?: string;
+    };
+    return (
+      <ImageZoom className={typeof className === "string" ? className : "w-72"} {...rest}>
+        {typeof children === "string" ? children : fixture.id}
+      </ImageZoom>
+    );
+  }
+  if (fixture.family === "aurora-background") {
+    const { children, className, ...rest } = fixture.props as {
+      children?: string;
+      className?: string;
+    };
+    return (
+      <AuroraBackground
+        className={typeof className === "string" ? className : "w-72 min-h-32"}
+        {...rest}
+      >
+        {typeof children === "string" ? children : fixture.id}
+      </AuroraBackground>
+    );
+  }
+  if (fixture.family === "border-beam") {
+    const { children, className, ...rest } = fixture.props as {
+      children?: string;
+      className?: string;
+    };
+    return (
+      <BorderBeam className={typeof className === "string" ? className : "w-72 p-6"} {...rest}>
+        {typeof children === "string" ? children : fixture.id}
+      </BorderBeam>
+    );
+  }
+  if (fixture.family === "confetti") {
+    const {
+      children,
+      className,
+      onPointerDown: _onPointerDown,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      className?: string;
+      onPointerDown?: unknown;
+    };
+    return (
+      <Confetti className={typeof className === "string" ? className : "w-72 min-h-32"} {...rest}>
+        {typeof children === "string" ? children : fixture.id}
+      </Confetti>
+    );
+  }
+  if (fixture.family === "composed-chart") {
+    const { items, options } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+    };
+    return <ComposedChartFixture items={stringList(items ?? options)} />;
+  }
+  if (fixture.family === "heatmap-chart") {
+    const { items, options, label } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      label?: string;
+    };
+    return (
+      <HeatmapChartFixture
+        items={stringList(items ?? options)}
+        label={typeof label === "string" ? label : undefined}
+      />
+    );
+  }
+  if (fixture.family === "chart") {
+    const { items, options } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+    };
+    return <ChartFixture items={stringList(items ?? options)} />;
   }
   throw new Error(`renderReactFixture: unported family ${fixture.family}`);
 }

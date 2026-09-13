@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "aurora-background",
+  "props": {
+    "children": "Aurora",
+    "className": "w-72 min-h-32"
+  },
+  "expect": {
+    "slot": "aurora-background",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "aurora-background"
+    }
+  }
+}

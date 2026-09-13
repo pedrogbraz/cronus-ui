@@ -3,9 +3,12 @@
 import { AreaChart } from "@cronus-ui/ui/area-chart";
 import { BarChart } from "@cronus-ui/ui/bar-chart";
 import { CandlestickChart } from "@cronus-ui/ui/candlestick-chart";
+import { ChartContainer, chartSeriesConfig } from "@cronus-ui/ui/chart";
 import { ChoroplethChart } from "@cronus-ui/ui/choropleth-chart";
+import { ComposedChart } from "@cronus-ui/ui/composed-chart";
 import { FunnelChart } from "@cronus-ui/ui/funnel-chart";
 import { GaugeChart } from "@cronus-ui/ui/gauge-chart";
+import { HeatmapChart } from "@cronus-ui/ui/heatmap-chart";
 import { LineChart } from "@cronus-ui/ui/line-chart";
 import { LiveLineChart } from "@cronus-ui/ui/live-line-chart";
 import { PieChart } from "@cronus-ui/ui/pie-chart";
@@ -15,6 +18,7 @@ import { RingChart } from "@cronus-ui/ui/ring-chart";
 import { ScatterChart } from "@cronus-ui/ui/scatter-chart";
 import { Sparkline } from "@cronus-ui/ui/sparkline";
 import { SunburstChart } from "@cronus-ui/ui/sunburst-chart";
+import { Bar, BarChart as RechartsBarChart, XAxis } from "recharts";
 
 /** Tiny static series — nested objects cannot round-trip through emit. */
 const AREA_DATA = [
@@ -109,6 +113,19 @@ const PNL_DATA = [
 ];
 
 const FALLBACK_FUNNEL = ["Visit", "Signup"];
+
+const FALLBACK_COMPOSED = ["Jan", "Feb", "Mar"];
+
+const FALLBACK_HEATMAP = ["1", "3", "5", "2"];
+
+const FALLBACK_CHART = ["4", "8", "6"];
+
+const COMPOSED_SERIES = [
+  { key: "desktop", label: "Desktop", type: "area" as const },
+  { key: "mobile", label: "Mobile", type: "bar" as const },
+];
+
+const CHART_SERIES = [{ key: "desktop", label: "Desktop" }];
 
 /** Nested `{date, open, high, low, close}` cannot round-trip through emit. */
 const OHLC_DATA = [
@@ -210,4 +227,42 @@ export function FunnelChartFixture({ items }: { items?: string[] }) {
 /** Nested `{date, open, high, low, close}` cannot round-trip through emit. */
 export function CandlestickChartFixture() {
   return <CandlestickChart data={OHLC_DATA} />;
+}
+
+/** Nested `{date, desktop, mobile}` + series types cannot round-trip through emit. */
+export function ComposedChartFixture({ items }: { items?: string[] }) {
+  const labels = items && items.length > 0 ? items : FALLBACK_COMPOSED;
+  const data = labels.map((date, index) => ({
+    date,
+    desktop: Math.max(1, (labels.length - index) * 4),
+    mobile: Math.max(1, (index + 1) * 2),
+  }));
+  return <ComposedChart data={data} series={COMPOSED_SERIES} />;
+}
+
+/** Nested `{date, value}` cannot round-trip through emit. */
+export function HeatmapChartFixture({ items, label }: { items?: string[]; label?: string }) {
+  const cells = items && items.length > 0 ? items : FALLBACK_HEATMAP;
+  const data = cells.map((item, index) => ({
+    date: `2026-06-${String(index + 1).padStart(2, "0")}`,
+    value: Number.parseFloat(item) || 0,
+  }));
+  return <HeatmapChart data={data} aria-label={label ?? "Activity"} />;
+}
+
+/** Nested chart `config` + Recharts children cannot round-trip through emit. */
+export function ChartFixture({ items }: { items?: string[] }) {
+  const values = items && items.length > 0 ? items : FALLBACK_CHART;
+  const data = values.map((item, index) => ({
+    date: String(index + 1),
+    desktop: Number.parseFloat(item) || 0,
+  }));
+  return (
+    <ChartContainer config={chartSeriesConfig(CHART_SERIES)} className="h-64 w-full">
+      <RechartsBarChart accessibilityLayer data={data} margin={{ left: 8, right: 8, top: 8 }}>
+        <XAxis dataKey="date" tickLine={false} axisLine={false} tickMargin={12} />
+        <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
+      </RechartsBarChart>
+    </ChartContainer>
+  );
 }
