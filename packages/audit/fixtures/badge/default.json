@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "badge",
+  "props": {
+    "children": "New"
+  },
+  "expect": {
+    "slot": "badge",
+    "tag": "span",
+    "attrs": {
+      "data-slot": "badge",
+      "data-variant": "default"
+    }
+  }
+}

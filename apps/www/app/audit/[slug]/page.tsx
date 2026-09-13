@@ -16,7 +16,12 @@ export default async function AuditSlugPage({
   const query = await searchParams;
   const fixtures = fixturesForFamily(slug);
   if (fixtures.length === 0) notFound();
-  const fixture = fixtures.find((f) => f.id === query.fixture) ?? fixtures[0];
+  const fixture =
+    fixtures.find((f) => f.id === query.fixture) ??
+    fixtures.find((f) => f.id === "primary-md") ??
+    fixtures.find((f) => f.id === "default") ??
+    fixtures.find((f) => f.id === "empty") ??
+    fixtures[0];
   if (!fixture) notFound();
   const preset = parsePreset(query.preset);
   const mode = parseMode(query.mode);

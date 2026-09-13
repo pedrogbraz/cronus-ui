@@ -36,7 +36,30 @@ export function cssColorToHex(input: string): string {
   if (oklch) {
     throw new Error(`cssColorToHex: oklch must be resolved by the browser first: ${input}`);
   }
+  const lab = value.match(/^lab\(/);
+  if (lab) {
+    throw new Error(`cssColorToHex: lab() must be resolved to rgb first: ${input}`);
+  }
   throw new Error(`cssColorToHex: unsupported color ${input}`);
+}
+
+/** Browser-only: force any CSS color (lab/oklch/rgb) through a canvas to rgb(). */
+export function cssColorToRgbString(color: string, doc: Document): string {
+  const canvas = doc.createElement("canvas");
+  canvas.width = 1;
+  canvas.height = 1;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return color;
+  ctx.fillStyle = color;
+  ctx.fillRect(0, 0, 1, 1);
+  const data = ctx.getImageData(0, 0, 1, 1).data;
+  const r = data[0] ?? 0;
+  const g = data[1] ?? 0;
+  const b = data[2] ?? 0;
+  const a = data[3] ?? 255;
+  if (a === 0) return "rgba(0, 0, 0, 0)";
+  if (a < 255) return `rgba(${r}, ${g}, ${b}, ${a / 255})`;
+  return `rgb(${r}, ${g}, ${b})`;
 }
 
 function parseAlpha(raw: string): number {

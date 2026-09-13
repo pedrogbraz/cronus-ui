@@ -1,5 +1,5 @@
 export { type AuditReport, type AuditReportRow, formatAuditReport } from "./audit-report.js";
-export { cssColorToHex } from "./css-color-to-hex.js";
+export { cssColorToHex, cssColorToRgbString } from "./css-color-to-hex.js";
 export {
   auditPagePath,
   cronusPreviewPath,

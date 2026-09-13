@@ -1,0 +1,18 @@
+{
+  "id": "disabled",
+  "family": "button",
+  "props": {
+    "variant": "primary",
+    "size": "md",
+    "children": "Save profile",
+    "disabled": true
+  },
+  "expect": {
+    "slot": "button",
+    "tag": "button",
+    "attrs": {
+      "data-slot": "button",
+      "data-variant": "primary"
+    }
+  }
+}

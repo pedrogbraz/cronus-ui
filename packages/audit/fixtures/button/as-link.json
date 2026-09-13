@@ -1,0 +1,18 @@
+{
+  "id": "as-link",
+  "family": "button",
+  "props": {
+    "variant": "link",
+    "size": "md",
+    "children": "Docs",
+    "href": "/docs"
+  },
+  "expect": {
+    "slot": "button",
+    "tag": "a",
+    "attrs": {
+      "data-slot": "button",
+      "data-variant": "link"
+    }
+  }
+}
