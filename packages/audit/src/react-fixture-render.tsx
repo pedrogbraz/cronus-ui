@@ -6,6 +6,12 @@ import {
   SplitButton,
   TimePicker,
 } from "@cronus-ui/ui";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogTitle,
+} from "@cronus-ui/ui/alert-dialog";
 import { Alert, AlertDescription, AlertTitle } from "@cronus-ui/ui/alert";
 import { Avatar, AvatarFallback } from "@cronus-ui/ui/avatar";
 import { AvatarGroup } from "@cronus-ui/ui/avatar-group";
@@ -44,6 +50,7 @@ import { Empty, EmptyTitle } from "@cronus-ui/ui/empty";
 import { Fab } from "@cronus-ui/ui/fab";
 import { Field, FieldDescription, FieldLabel } from "@cronus-ui/ui/field";
 import { FileDropzone } from "@cronus-ui/ui/file-dropzone";
+import { FormItem } from "@cronus-ui/ui/form";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@cronus-ui/ui/hover-card";
 import { Input } from "@cronus-ui/ui/input";
 import { InputGroup, InputGroupAddon } from "@cronus-ui/ui/input-group";
@@ -69,9 +76,11 @@ import { PillNav } from "@cronus-ui/ui/pill-nav";
 import { Popover, PopoverContent, PopoverTrigger } from "@cronus-ui/ui/popover";
 import { Progress } from "@cronus-ui/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@cronus-ui/ui/radio-group";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@cronus-ui/ui/resizable";
 import { Rating } from "@cronus-ui/ui/rating";
 import { ScrollArea } from "@cronus-ui/ui/scroll-area";
 import { Separator } from "@cronus-ui/ui/separator";
+import { SignaturePad } from "@cronus-ui/ui/signature-pad";
 import {
   Sheet,
   SheetContent,
@@ -92,12 +101,14 @@ import {
   StepperTitle,
 } from "@cronus-ui/ui/stepper";
 import { Switch } from "@cronus-ui/ui/switch";
+import { TableOfContents } from "@cronus-ui/ui/table-of-contents";
 import { TagsInput } from "@cronus-ui/ui/tags-input";
 import { Textarea } from "@cronus-ui/ui/textarea";
 import { Toggle } from "@cronus-ui/ui/toggle";
 import { ToggleGroup, ToggleGroupItem } from "@cronus-ui/ui/toggle-group";
 import { Toolbar, ToolbarButton } from "@cronus-ui/ui/toolbar";
 import type { ReactElement } from "react";
+import { AppShellFixture } from "./app-shell-fixture.js";
 import { AutocompleteFixture } from "./autocomplete-fixture.js";
 import { CalendarFixture } from "./calendar-fixture.js";
 import {
@@ -114,8 +125,11 @@ import { ColorPickerFixture } from "./color-picker-fixture.js";
 import { DataTableFixture } from "./data-table-fixture.js";
 import { DatePickerFixture } from "./date-picker-fixture.js";
 import { DockFixture } from "./dock-fixture.js";
+import { LightboxFixture } from "./lightbox-fixture.js";
 import { ModeToggleFixture } from "./mode-toggle-fixture.js";
+import { NotificationCenterFixture } from "./notification-center-fixture.js";
 import type { ParityFixture } from "./parity-fixture.js";
+import { SchedulerFixture } from "./scheduler-fixture.js";
 import { SidebarFixture } from "./sidebar-fixture.js";
 import { WorkspaceSwitcherFixture } from "./workspace-switcher-fixture.js";
 
@@ -1449,6 +1463,171 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
       options?: unknown;
     };
     return <WorkspaceSwitcherFixture items={stringList(items ?? options)} />;
+  }
+  if (fixture.family === "app-shell") {
+    const { items, options, title } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      title?: string;
+    };
+    return (
+      <AppShellFixture
+        items={stringList(items ?? options)}
+        title={typeof title === "string" ? title : undefined}
+      />
+    );
+  }
+  if (fixture.family === "table-of-contents") {
+    const {
+      items,
+      options,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      "aria-label"?: string;
+    };
+    const labels = stringList(items ?? options);
+    const entries = labels.length > 0 ? labels : ["Overview", "Usage"];
+    return (
+      <TableOfContents
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "On this page"}
+        items={entries.map((label) => ({
+          id: label.toLowerCase().replaceAll(/\s+/g, "-"),
+          label,
+        }))}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "form") {
+    const {
+      label,
+      placeholder,
+      items: _items,
+      options: _options,
+    } = fixture.props as {
+      label?: string;
+      placeholder?: string;
+      items?: unknown;
+      options?: unknown;
+    };
+    const heading = typeof label === "string" ? label : fixture.id;
+    return (
+      <form data-slot="form">
+        <FormItem>
+          <Label htmlFor="audit-form-control">{heading}</Label>
+          <Input id="audit-form-control" placeholder={placeholder} />
+        </FormItem>
+      </form>
+    );
+  }
+  if (fixture.family === "signature-pad") {
+    const {
+      onChange: _onChange,
+      "aria-label": ariaLabel,
+      items: _items,
+      options: _options,
+      ...rest
+    } = fixture.props as {
+      onChange?: unknown;
+      "aria-label"?: string;
+      items?: unknown;
+      options?: unknown;
+    };
+    return (
+      <SignaturePad
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "Signature pad"}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "resizable") {
+    const {
+      items,
+      options,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      "aria-label"?: string;
+    };
+    const labels = stringList(items ?? options);
+    const panes = labels.length >= 2 ? labels : ["One", "Two"];
+    return (
+      <ResizablePanelGroup
+        direction="horizontal"
+        className="h-32 w-72"
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "Panels"}
+        {...rest}
+      >
+        <ResizablePanel defaultSize={50}>{panes[0]}</ResizablePanel>
+        <ResizableHandle />
+        <ResizablePanel defaultSize={50}>{panes[1]}</ResizablePanel>
+      </ResizablePanelGroup>
+    );
+  }
+  if (fixture.family === "scheduler") {
+    const { items, options, defaultMonth } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      defaultMonth?: string;
+    };
+    return (
+      <SchedulerFixture
+        items={stringList(items ?? options)}
+        defaultMonth={typeof defaultMonth === "string" ? defaultMonth : undefined}
+      />
+    );
+  }
+  if (fixture.family === "alert-dialog") {
+    const {
+      title,
+      children,
+      items,
+      options,
+      defaultOpen: _defaultOpen,
+      ...rest
+    } = fixture.props as {
+      title?: string;
+      children?: string;
+      items?: unknown;
+      options?: unknown;
+      defaultOpen?: boolean;
+    };
+    const heading = typeof title === "string" ? title : fixture.id;
+    const action =
+      stringList(items ?? options)[0] ?? (typeof children === "string" ? children : "Confirm");
+    return (
+      <AlertDialog {...rest} defaultOpen>
+        <AlertDialogContent>
+          <AlertDialogTitle>{heading}</AlertDialogTitle>
+          <AlertDialogAction>{action}</AlertDialogAction>
+        </AlertDialogContent>
+      </AlertDialog>
+    );
+  }
+  if (fixture.family === "lightbox") {
+    const { items, options } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+    };
+    return <LightboxFixture items={stringList(items ?? options)} />;
+  }
+  if (fixture.family === "notification-center") {
+    const { items, options, title } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      title?: string;
+    };
+    return (
+      <NotificationCenterFixture
+        items={stringList(items ?? options)}
+        title={typeof title === "string" ? title : undefined}
+      />
+    );
   }
   throw new Error(`renderReactFixture: unported family ${fixture.family}`);
 }

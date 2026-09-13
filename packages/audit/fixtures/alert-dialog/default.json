@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "alert-dialog",
+  "props": {
+    "defaultOpen": true,
+    "title": "Delete account",
+    "items": ["Confirm"]
+  },
+  "expect": {
+    "slot": "alert-dialog-content",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "alert-dialog-content"
+    }
+  }
+}

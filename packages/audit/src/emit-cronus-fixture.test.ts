@@ -452,6 +452,86 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("workspace-switcher", "default"))).toBe("button");
   });
 
+  it("emits wave 1i labels and items without source", () => {
+    const src = emitCronusApp([
+      getFixture("app-shell", "default"),
+      getFixture("table-of-contents", "default"),
+      getFixture("form", "default"),
+      getFixture("signature-pad", "default"),
+      getFixture("resizable", "default"),
+      getFixture("scheduler", "default"),
+      getFixture("alert-dialog", "default"),
+      getFixture("lightbox", "default"),
+      getFixture("notification-center", "default"),
+    ]);
+    expect(src).toContain("component AppShellDefault layout:inline style:app-shell {");
+    expect(src).toContain('label "Acme"');
+    expect(src).toContain('  text "Home"');
+    expect(src).toContain('  text "Inbox"');
+    expect(src).toContain(
+      "component TableOfContentsDefault layout:inline style:table-of-contents {",
+    );
+    expect(src).toContain('  text "Overview"');
+    expect(src).toContain('  text "Usage"');
+    expect(src).toContain("component FormDefault layout:inline style:form {");
+    expect(src).toContain('label "Email"');
+    expect(src).toContain('  text "ada@cronus.dev"');
+    expect(src).toContain("component SignaturePadDefault layout:inline style:signature-pad {");
+    expect(src).toContain('label "Signature pad"');
+    expect(src).toContain("component ResizableDefault layout:inline style:resizable {");
+    expect(src).toContain('  text "One"');
+    expect(src).toContain('  text "Two"');
+    expect(src).toContain("component SchedulerDefault layout:inline style:scheduler {");
+    expect(src).toContain('label "June 2026"');
+    expect(src).toContain('  text "Launch call"');
+    expect(src).toContain('  text "Webinar"');
+    expect(src).toContain("component AlertDialogDefault layout:inline style:alert-dialog {");
+    expect(src).toContain('label "Delete account"');
+    expect(src).toContain('  text "Confirm"');
+    expect(src).toContain("component LightboxDefault layout:inline style:lightbox {");
+    expect(src).toContain('  text "First image"');
+    expect(src).toContain('  text "Second image"');
+    expect(src).toContain(
+      "component NotificationCenterDefault layout:inline style:notification-center {",
+    );
+    expect(src).toContain('label "Notifications"');
+    expect(src).toContain('  text "New comment"');
+    expect(src).toContain('  text "Payout sent"');
+    expect(src).toContain("use AppShellDefault");
+    expect(src).toContain("use TableOfContentsDefault");
+    expect(src).toContain("use FormDefault");
+    expect(src).toContain("use SignaturePadDefault");
+    expect(src).toContain("use ResizableDefault");
+    expect(src).toContain("use SchedulerDefault");
+    expect(src).toContain("use AlertDialogDefault");
+    expect(src).toContain("use LightboxDefault");
+    expect(src).toContain("use NotificationCenterDefault");
+    expect(src).toContain('page "/audit/app-shell/default" type:custom');
+    expect(src).toContain('page "/audit/table-of-contents/default" type:custom');
+    expect(src).toContain('page "/audit/form/default" type:custom');
+    expect(src).toContain('page "/audit/signature-pad/default" type:custom');
+    expect(src).toContain('page "/audit/resizable/default" type:custom');
+    expect(src).toContain('page "/audit/scheduler/default" type:custom');
+    expect(src).toContain('page "/audit/alert-dialog/default" type:custom');
+    expect(src).toContain('page "/audit/lightbox/default" type:custom');
+    expect(src).toContain('page "/audit/notification-center/default" type:custom');
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for wave 1i families", () => {
+    expect(expectedTag(getFixture("app-shell", "default"))).toBe("div");
+    expect(expectedTag(getFixture("table-of-contents", "default"))).toBe("nav");
+    expect(expectedTag(getFixture("form", "default"))).toBe("div");
+    expect(expectedTag(getFixture("signature-pad", "default"))).toBe("div");
+    expect(expectedTag(getFixture("resizable", "default"))).toBe("div");
+    expect(expectedTag(getFixture("scheduler", "default"))).toBe("div");
+    expect(expectedTag(getFixture("alert-dialog", "default"))).toBe("div");
+    expect(expectedTag(getFixture("lightbox", "default"))).toBe("div");
+    expect(expectedTag(getFixture("notification-center", "default"))).toBe("div");
+  });
+
   it("drops data-size from expect.attrs", () => {
     const parsed = parseParityFixture({
       id: "x",

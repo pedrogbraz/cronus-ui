@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "app-shell",
+  "props": {
+    "title": "Acme",
+    "aria-label": "App",
+    "items": ["Home", "Inbox"]
+  },
+  "expect": {
+    "slot": "app-shell-content",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "app-shell-content"
+    }
+  }
+}

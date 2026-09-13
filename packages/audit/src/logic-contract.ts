@@ -75,6 +75,15 @@ const FAMILY_TAGS: Record<string, string> = {
   "pill-nav": "nav",
   dock: "div",
   "workspace-switcher": "button",
+  "app-shell": "div",
+  "table-of-contents": "nav",
+  form: "div",
+  "signature-pad": "div",
+  resizable: "div",
+  scheduler: "div",
+  "alert-dialog": "div",
+  lightbox: "div",
+  "notification-center": "div",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */

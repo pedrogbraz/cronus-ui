@@ -992,6 +992,123 @@ test.describe("logic parity", () => {
     await expect(cronusFrame(page).locator('[data-slot="dock-control"]')).toHaveCount(0);
   });
 
+  test("app-shell-content is a div, not app-shell-control", async ({ page }) => {
+    await page.goto("/audit/app-shell?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="app-shell-content"]');
+    const cronus = cronusFrame(page).locator('[data-slot="app-shell-content"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="app-shell-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="app-shell-control"]')).toHaveCount(0);
+  });
+
+  test("table-of-contents is a nav, not table-of-contents-control", async ({ page }) => {
+    await page.goto("/audit/table-of-contents?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="table-of-contents"]');
+    const cronus = cronusFrame(page).locator('[data-slot="table-of-contents"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("NAV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("NAV");
+    await expect(page.locator('[data-slot="table-of-contents-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="table-of-contents-control"]')).toHaveCount(
+      0,
+    );
+  });
+
+  test("form-item is a div inside a form, not form-item-control", async ({ page }) => {
+    await page.goto("/audit/form?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="form-item"]');
+    const cronus = cronusFrame(page).locator('[data-slot="form-item"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] form')).toHaveCount(1);
+    await expect(page.locator('[data-slot="form-item-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="form-item-control"]')).toHaveCount(0);
+  });
+
+  test("signature-pad is a div, not signature-pad-control", async ({ page }) => {
+    await page.goto("/audit/signature-pad?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="signature-pad"]');
+    const cronus = cronusFrame(page).locator('[data-slot="signature-pad"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="signature-pad-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="signature-pad-control"]')).toHaveCount(0);
+  });
+
+  test("resizable-panel-group is a div, not resizable-control", async ({ page }) => {
+    await page.goto("/audit/resizable?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="resizable-panel-group"]');
+    const cronus = cronusFrame(page).locator('[data-slot="resizable-panel-group"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="resizable-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="resizable-control"]')).toHaveCount(0);
+  });
+
+  test("scheduler is a div, not scheduler-control", async ({ page }) => {
+    await page.goto("/audit/scheduler?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="scheduler"]');
+    const cronus = cronusFrame(page).locator('[data-slot="scheduler"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="scheduler-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="scheduler-control"]')).toHaveCount(0);
+  });
+
+  test("alert-dialog content is a div, not a native dialog", async ({ page }) => {
+    await page.goto("/audit/alert-dialog?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-slot="alert-dialog-content"]');
+    const cronus = cronusFrame(page).locator('[data-slot="alert-dialog-content"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] dialog')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("dialog")).toHaveCount(0);
+    await expect(page.locator('[data-slot="alert-dialog-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="alert-dialog-control"]')).toHaveCount(0);
+  });
+
+  test("lightbox is a div, not a native dialog", async ({ page }) => {
+    await page.goto("/audit/lightbox?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-slot="lightbox"]');
+    const cronus = cronusFrame(page).locator('[data-slot="lightbox"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] dialog')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("dialog")).toHaveCount(0);
+    await expect(page.locator('[data-slot="lightbox-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="lightbox-control"]')).toHaveCount(0);
+  });
+
+  test("notification-center is a div, not notification-center-control", async ({ page }) => {
+    await page.goto("/audit/notification-center?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-slot="notification-center"]');
+    const cronus = cronusFrame(page).locator('[data-slot="notification-center"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="notification-center-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="notification-center-control"]')).toHaveCount(
+      0,
+    );
+  });
+
   test("workspace-switcher is a button, not workspace-switcher-control", async ({ page }) => {
     await page.goto("/audit/workspace-switcher?fixture=default&preset=aurora&mode=dark");
     const react = page.locator('[data-audit-side="react"] [data-slot="workspace-switcher"]');

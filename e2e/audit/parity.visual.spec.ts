@@ -689,4 +689,76 @@ test.describe("visual parity", () => {
       SCREENSHOT_OPTIONS,
     );
   });
+
+  test("app-shell default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "app-shell", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "app-shell-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("table-of-contents default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "table-of-contents", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "table-of-contents-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("form default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "form", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "form-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("signature-pad default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "signature-pad", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "signature-pad-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("resizable default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "resizable", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "resizable-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("scheduler default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "scheduler", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "scheduler-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("alert-dialog default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "alert-dialog", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "alert-dialog-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("lightbox default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "lightbox", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "lightbox-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("notification-center default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "notification-center", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "notification-center-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
 });

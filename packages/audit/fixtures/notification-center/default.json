@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "notification-center",
+  "props": {
+    "open": true,
+    "title": "Notifications",
+    "items": ["New comment", "Payout sent"]
+  },
+  "expect": {
+    "slot": "notification-center",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "notification-center"
+    }
+  }
+}
