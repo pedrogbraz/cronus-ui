@@ -17,6 +17,7 @@ import { DocumentationNavList } from "./docs/documentation-nav";
 const navLinks = [
   { label: "Docs", href: "/docs" },
   { label: "Components", href: "/components" },
+  { label: "Language", href: "/language" },
   { label: "Blocks", href: "/blocks" },
   { label: "Templates", href: "/templates" },
   { label: "Create", href: "/create" },

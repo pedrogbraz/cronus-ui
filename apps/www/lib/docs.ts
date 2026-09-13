@@ -48,6 +48,12 @@ export const DOC_NAV_SECTIONS: { heading: string; items: DocNavItem[] }[] = [
         description: "Browse the production component catalog.",
       },
       {
+        label: "Language",
+        href: "/language",
+        description: "Native .cronus catalog — kernel HTML, tokens, and motion. No JSX in source.",
+        status: "new",
+      },
+      {
         label: "Blocks",
         href: "/docs/blocks",
         description: "Copy-paste composed sections, the families, and the add flow.",
