@@ -401,4 +401,76 @@ test.describe("visual parity", () => {
       SCREENSHOT_OPTIONS,
     );
   });
+
+  test("command default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "command", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "command-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("menubar default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "menubar", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "menubar-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("context-menu default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "context-menu", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "context-menu-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("drawer default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "drawer", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "drawer-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("sheet default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "sheet", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "sheet-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("calendar default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "calendar", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "calendar-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("date-picker default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "date-picker", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "date-picker-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("time-picker default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "time-picker", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "time-picker-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("date-range-picker default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "date-range-picker", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "date-range-picker-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
 });

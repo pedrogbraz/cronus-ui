@@ -500,6 +500,124 @@ test.describe("logic parity", () => {
     await expect(cronusFrame(page).locator('[data-slot="collapsible-control"]')).toHaveCount(0);
   });
 
+  test("command is a div, not command-control", async ({ page }) => {
+    await page.goto("/audit/command?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="command"]');
+    const cronus = cronusFrame(page).locator('[data-slot="command"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="command-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="command-control"]')).toHaveCount(0);
+  });
+
+  test("menubar is a div, not menubar-control", async ({ page }) => {
+    await page.goto("/audit/menubar?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="menubar"]');
+    const cronus = cronusFrame(page).locator('[data-slot="menubar"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="menubar-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="menubar-control"]')).toHaveCount(0);
+  });
+
+  test("context-menu content is a div, not context-menu-control", async ({ page }) => {
+    await page.goto("/audit/context-menu?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-slot="context-menu-content"]');
+    const cronus = cronusFrame(page).locator('[data-slot="context-menu-content"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="context-menu-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="context-menu-control"]')).toHaveCount(0);
+  });
+
+  test("drawer content is a div, not a native dialog", async ({ page }) => {
+    await page.goto("/audit/drawer?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-slot="drawer-content"]');
+    const cronus = cronusFrame(page).locator('[data-slot="drawer-content"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] dialog')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("dialog")).toHaveCount(0);
+    await expect(page.locator('[data-slot="drawer-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="drawer-control"]')).toHaveCount(0);
+  });
+
+  test("sheet content is a div, not a native dialog", async ({ page }) => {
+    await page.goto("/audit/sheet?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-slot="sheet-content"]');
+    const cronus = cronusFrame(page).locator('[data-slot="sheet-content"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] dialog')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("dialog")).toHaveCount(0);
+    await expect(page.locator('[data-slot="sheet-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="sheet-control"]')).toHaveCount(0);
+  });
+
+  test("calendar is a wrapper div, not calendar-control", async ({ page }) => {
+    await page.goto("/audit/calendar?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="calendar"]');
+    const cronus = cronusFrame(page).locator('[data-slot="calendar"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="calendar-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="calendar-control"]')).toHaveCount(0);
+  });
+
+  test("date-picker trigger is a button, not input[type=date]", async ({ page }) => {
+    await page.goto("/audit/date-picker?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="date-picker-trigger"]');
+    const cronus = cronusFrame(page).locator('[data-slot="date-picker-trigger"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("BUTTON");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("BUTTON");
+    await expect(page.locator('[data-audit-side="react"] input[type="date"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('input[type="date"]')).toHaveCount(0);
+    await expect(page.locator('[data-slot="date-picker-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="date-picker-control"]')).toHaveCount(0);
+  });
+
+  test("time-picker is a button, not time-picker-control", async ({ page }) => {
+    await page.goto("/audit/time-picker?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="time-picker"]');
+    const cronus = cronusFrame(page).locator('[data-slot="time-picker"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("BUTTON");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("BUTTON");
+    await expect(page.locator('[data-slot="time-picker-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="time-picker-control"]')).toHaveCount(0);
+  });
+
+  test("date-range-picker trigger is a button, not input[type=date]", async ({ page }) => {
+    await page.goto("/audit/date-range-picker?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="date-range-picker-trigger"]');
+    const cronus = cronusFrame(page).locator('[data-slot="date-range-picker-trigger"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("BUTTON");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("BUTTON");
+    await expect(page.locator('[data-audit-side="react"] input[type="date"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('input[type="date"]')).toHaveCount(0);
+    await expect(page.locator('[data-slot="date-range-picker-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="date-range-picker-control"]')).toHaveCount(
+      0,
+    );
+  });
+
   test("mode-toggle is a button, not mode-toggle-control", async ({ page }) => {
     await page.goto("/audit/mode-toggle?fixture=default&preset=aurora&mode=dark");
     const react = page.locator('[data-audit-side="react"] [data-slot="mode-toggle"]');

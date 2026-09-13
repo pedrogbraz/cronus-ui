@@ -195,6 +195,58 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("mode-toggle", "default"))).toBe("button");
   });
 
+  it("emits command/menu items as extra text without source", () => {
+    const src = emitCronusApp([
+      getFixture("command", "default"),
+      getFixture("menubar", "default"),
+      getFixture("context-menu", "default"),
+      getFixture("drawer", "default"),
+      getFixture("sheet", "default"),
+      getFixture("calendar", "default"),
+      getFixture("date-picker", "default"),
+      getFixture("time-picker", "default"),
+      getFixture("date-range-picker", "default"),
+    ]);
+    expect(src).toContain("component CommandDefault layout:inline style:command {");
+    expect(src).toContain('  text "Calendar"');
+    expect(src).toContain('  text "Search"');
+    expect(src).toContain('  text "New Tab"');
+    expect(src).toContain('  text "Open"');
+    expect(src).toContain('  text "Back"');
+    expect(src).toContain('  text "Reload"');
+    expect(src).toContain('label "Filters"');
+    expect(src).toContain('label "Edit profile"');
+    expect(src).toContain('label "June 2026"');
+    expect(src).toContain('  text "Pick a date"');
+    expect(src).toContain('  value:"2026-06-15"');
+    expect(src).toContain('  value:"09:30"');
+    expect(src).toContain('  text "Pick a date range"');
+    expect(src).toContain("use CommandDefault");
+    expect(src).toContain("use MenubarDefault");
+    expect(src).toContain("use ContextMenuDefault");
+    expect(src).toContain("use DrawerDefault");
+    expect(src).toContain("use SheetDefault");
+    expect(src).toContain("use CalendarDefault");
+    expect(src).toContain("use DatePickerDefault");
+    expect(src).toContain("use TimePickerDefault");
+    expect(src).toContain("use DateRangePickerDefault");
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for wave 1e families", () => {
+    expect(expectedTag(getFixture("command", "default"))).toBe("div");
+    expect(expectedTag(getFixture("menubar", "default"))).toBe("div");
+    expect(expectedTag(getFixture("context-menu", "default"))).toBe("div");
+    expect(expectedTag(getFixture("drawer", "default"))).toBe("div");
+    expect(expectedTag(getFixture("sheet", "default"))).toBe("div");
+    expect(expectedTag(getFixture("calendar", "default"))).toBe("div");
+    expect(expectedTag(getFixture("date-picker", "default"))).toBe("button");
+    expect(expectedTag(getFixture("time-picker", "default"))).toBe("button");
+    expect(expectedTag(getFixture("date-range-picker", "default"))).toBe("button");
+  });
+
   it("drops data-size from expect.attrs", () => {
     const parsed = parseParityFixture({
       id: "x",

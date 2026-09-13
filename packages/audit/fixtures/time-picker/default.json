@@ -1,0 +1,17 @@
+{
+  "id": "default",
+  "family": "time-picker",
+  "props": {
+    "placeholder": "Select time",
+    "value": "09:30",
+    "aria-label": "Meeting time",
+    "hourCycle": 24
+  },
+  "expect": {
+    "slot": "time-picker",
+    "tag": "button",
+    "attrs": {
+      "data-slot": "time-picker"
+    }
+  }
+}

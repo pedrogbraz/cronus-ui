@@ -39,6 +39,15 @@ const FAMILY_TAGS: Record<string, string> = {
   "dropdown-menu": "div",
   collapsible: "div",
   "mode-toggle": "button",
+  command: "div",
+  menubar: "div",
+  "context-menu": "div",
+  drawer: "div",
+  sheet: "div",
+  calendar: "div",
+  "date-picker": "button",
+  "time-picker": "button",
+  "date-range-picker": "button",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */

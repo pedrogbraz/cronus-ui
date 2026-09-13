@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "command",
+  "props": {
+    "label": "Command menu",
+    "placeholder": "Type a command…",
+    "items": ["Calendar", "Search"]
+  },
+  "expect": {
+    "slot": "command",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "command"
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import { TimePicker } from "@cronus-ui/ui";
 import { Alert, AlertDescription, AlertTitle } from "@cronus-ui/ui/alert";
 import { Avatar, AvatarFallback } from "@cronus-ui/ui/avatar";
 import { AvatarGroup } from "@cronus-ui/ui/avatar-group";
@@ -10,7 +11,22 @@ import { Checkbox } from "@cronus-ui/ui/checkbox";
 import { Chip } from "@cronus-ui/ui/chip";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@cronus-ui/ui/collapsible";
 import { Combobox } from "@cronus-ui/ui/combobox";
+import { Command, CommandInput, CommandItem, CommandList } from "@cronus-ui/ui/command";
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@cronus-ui/ui/context-menu";
 import { CopyButton } from "@cronus-ui/ui/copy-button";
+import { DateRangePicker } from "@cronus-ui/ui/date-range-picker";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+} from "@cronus-ui/ui/drawer";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,13 +43,26 @@ import { InputGroup, InputGroupAddon } from "@cronus-ui/ui/input-group";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@cronus-ui/ui/input-otp";
 import { Kbd } from "@cronus-ui/ui/kbd";
 import { Label } from "@cronus-ui/ui/label";
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarTrigger,
+} from "@cronus-ui/ui/menubar";
 import { Metric, MetricLabel, MetricValue } from "@cronus-ui/ui/metric";
-import { ModeToggleFixture } from "./mode-toggle-fixture.js";
 import { Popover, PopoverContent, PopoverTrigger } from "@cronus-ui/ui/popover";
 import { Progress } from "@cronus-ui/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@cronus-ui/ui/radio-group";
 import { Rating } from "@cronus-ui/ui/rating";
 import { Separator } from "@cronus-ui/ui/separator";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "@cronus-ui/ui/sheet";
 import { Skeleton } from "@cronus-ui/ui/skeleton";
 import { Slider } from "@cronus-ui/ui/slider";
 import { Spinner } from "@cronus-ui/ui/spinner";
@@ -49,6 +78,9 @@ import { Textarea } from "@cronus-ui/ui/textarea";
 import { Toggle } from "@cronus-ui/ui/toggle";
 import { ToggleGroup, ToggleGroupItem } from "@cronus-ui/ui/toggle-group";
 import type { ReactElement } from "react";
+import { CalendarFixture } from "./calendar-fixture.js";
+import { DatePickerFixture } from "./date-picker-fixture.js";
+import { ModeToggleFixture } from "./mode-toggle-fixture.js";
 import type { ParityFixture } from "./parity-fixture.js";
 
 function stringList(value: unknown): string[] {
@@ -745,6 +777,235 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
       <ModeToggleFixture
         mode={mode}
         aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+      />
+    );
+  }
+  if (fixture.family === "command") {
+    const {
+      placeholder,
+      items,
+      options,
+      label,
+      className,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      placeholder?: string;
+      items?: unknown;
+      options?: unknown;
+      label?: string;
+      className?: string;
+      "aria-label"?: string;
+    };
+    const entries = stringList(items ?? options);
+    const accessible =
+      typeof label === "string" ? label : typeof ariaLabel === "string" ? ariaLabel : undefined;
+    return (
+      <Command
+        {...rest}
+        className={typeof className === "string" ? className : "h-48 w-72"}
+        label={accessible}
+      >
+        <CommandInput placeholder={placeholder} />
+        <CommandList>
+          {entries.map((item) => (
+            <CommandItem key={item}>{item}</CommandItem>
+          ))}
+        </CommandList>
+      </Command>
+    );
+  }
+  if (fixture.family === "menubar") {
+    const {
+      children,
+      items,
+      options,
+      defaultOpen: _defaultOpen,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      items?: unknown;
+      options?: unknown;
+      defaultOpen?: boolean;
+    };
+    const trigger = typeof children === "string" ? children : "File";
+    const entries = stringList(items ?? options);
+    return (
+      <Menubar {...rest} defaultValue="file">
+        <MenubarMenu value="file">
+          <MenubarTrigger>{trigger}</MenubarTrigger>
+          <MenubarContent>
+            {entries.map((item) => (
+              <MenubarItem key={item}>{item}</MenubarItem>
+            ))}
+          </MenubarContent>
+        </MenubarMenu>
+      </Menubar>
+    );
+  }
+  if (fixture.family === "context-menu") {
+    const {
+      children,
+      items,
+      options,
+      open: _open,
+      defaultOpen: _defaultOpen,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      items?: unknown;
+      options?: unknown;
+      open?: boolean;
+      defaultOpen?: boolean;
+    };
+    const trigger = typeof children === "string" ? children : "Right click";
+    const entries = stringList(items ?? options);
+    return (
+      <ContextMenu {...rest} open>
+        <ContextMenuTrigger>{trigger}</ContextMenuTrigger>
+        <ContextMenuContent>
+          {entries.map((item) => (
+            <ContextMenuItem key={item}>{item}</ContextMenuItem>
+          ))}
+        </ContextMenuContent>
+      </ContextMenu>
+    );
+  }
+  if (fixture.family === "drawer") {
+    const {
+      title,
+      description,
+      children,
+      defaultOpen: _defaultOpen,
+      items: _items,
+      options: _options,
+      ...rest
+    } = fixture.props as {
+      title?: string;
+      description?: string;
+      children?: string;
+      defaultOpen?: boolean;
+      items?: unknown;
+      options?: unknown;
+    };
+    const heading =
+      typeof title === "string" ? title : typeof children === "string" ? children : fixture.id;
+    return (
+      <Drawer {...rest} defaultOpen shouldScaleBackground={false}>
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>{heading}</DrawerTitle>
+            {typeof description === "string" ? (
+              <DrawerDescription>{description}</DrawerDescription>
+            ) : null}
+          </DrawerHeader>
+        </DrawerContent>
+      </Drawer>
+    );
+  }
+  if (fixture.family === "sheet") {
+    const {
+      title,
+      description,
+      children,
+      defaultOpen: _defaultOpen,
+      items: _items,
+      options: _options,
+      ...rest
+    } = fixture.props as {
+      title?: string;
+      description?: string;
+      children?: string;
+      defaultOpen?: boolean;
+      items?: unknown;
+      options?: unknown;
+    };
+    const heading =
+      typeof title === "string" ? title : typeof children === "string" ? children : fixture.id;
+    return (
+      <Sheet {...rest} defaultOpen>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>{heading}</SheetTitle>
+            {typeof description === "string" ? (
+              <SheetDescription>{description}</SheetDescription>
+            ) : null}
+          </SheetHeader>
+        </SheetContent>
+      </Sheet>
+    );
+  }
+  if (fixture.family === "calendar") {
+    const { defaultMonth } = fixture.props as { defaultMonth?: string };
+    return <CalendarFixture defaultMonth={defaultMonth} />;
+  }
+  if (fixture.family === "date-picker") {
+    const {
+      placeholder,
+      value,
+      "aria-label": ariaLabel,
+    } = fixture.props as {
+      placeholder?: string;
+      value?: string;
+      "aria-label"?: string;
+    };
+    return (
+      <DatePickerFixture
+        placeholder={placeholder}
+        value={typeof value === "string" ? value : undefined}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+      />
+    );
+  }
+  if (fixture.family === "time-picker") {
+    const {
+      value,
+      placeholder,
+      hourCycle,
+      "aria-label": ariaLabel,
+      items: _items,
+      options: _options,
+      ...rest
+    } = fixture.props as {
+      value?: string;
+      placeholder?: string;
+      hourCycle?: 12 | 24;
+      "aria-label"?: string;
+      items?: unknown;
+      options?: unknown;
+    };
+    return (
+      <TimePicker
+        value={typeof value === "string" ? value : undefined}
+        placeholder={placeholder}
+        hourCycle={hourCycle === 24 ? 24 : hourCycle === 12 ? 12 : undefined}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "date-range-picker") {
+    const {
+      placeholder,
+      "aria-label": ariaLabel,
+      items: _items,
+      options: _options,
+      value: _value,
+      defaultValue: _defaultValue,
+      ...rest
+    } = fixture.props as {
+      placeholder?: string;
+      "aria-label"?: string;
+      items?: unknown;
+      options?: unknown;
+      value?: unknown;
+      defaultValue?: unknown;
+    };
+    return (
+      <DateRangePicker
+        placeholder={placeholder}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+        {...rest}
       />
     );
   }
