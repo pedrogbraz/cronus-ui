@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "card",
+  "props": {
+    "title": "Subscription",
+    "description": "Monthly plan"
+  },
+  "expect": {
+    "slot": "card",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "card"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "half",
+  "family": "slider",
+  "props": {
+    "value": 50,
+    "aria-label": "Volume"
+  },
+  "expect": {
+    "slot": "slider",
+    "tag": "span",
+    "attrs": {
+      "data-slot": "slider"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "empty",
+  "props": {
+    "title": "No results"
+  },
+  "expect": {
+    "slot": "empty",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "empty"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "chip",
+  "props": {
+    "children": "Design"
+  },
+  "expect": {
+    "slot": "chip",
+    "tag": "span",
+    "attrs": {
+      "data-slot": "chip"
+    }
+  }
+}

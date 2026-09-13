@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "banner",
+  "props": {
+    "title": "New pricing",
+    "dismissible": false
+  },
+  "expect": {
+    "slot": "banner",
+    "tag": "section",
+    "attrs": {
+      "data-slot": "banner"
+    }
+  }
+}

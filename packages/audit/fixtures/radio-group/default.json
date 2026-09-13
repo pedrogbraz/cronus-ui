@@ -1,0 +1,17 @@
+{
+  "id": "default",
+  "family": "radio-group",
+  "props": {
+    "value": "Pro",
+    "aria-label": "Plan",
+    "options": ["Free", "Pro"]
+  },
+  "expect": {
+    "slot": "radio-group",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "radio-group",
+      "role": "radiogroup"
+    }
+  }
+}

@@ -180,6 +180,126 @@ test.describe("logic parity", () => {
     await expect(cronusFrame(page).locator('[data-slot="progress-control"]')).toHaveCount(0);
   });
 
+  test("alert is a div without data-variant", async ({ page }) => {
+    await page.goto("/audit/alert?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="alert"]');
+    const cronus = cronusFrame(page).locator('[data-slot="alert"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(react).toHaveAttribute("role", "status");
+    await expect(cronus).toHaveAttribute("role", "status");
+    await expect(react).not.toHaveAttribute("data-variant");
+    await expect(cronus).not.toHaveAttribute("data-variant");
+    await expect(page.locator('[data-slot="alert-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="alert-control"]')).toHaveCount(0);
+  });
+
+  test("skeleton is a div, not skeleton-control", async ({ page }) => {
+    await page.goto("/audit/skeleton?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="skeleton"]');
+    const cronus = cronusFrame(page).locator('[data-slot="skeleton"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(react).toHaveAttribute("aria-hidden", "true");
+    await expect(cronus).toHaveAttribute("aria-hidden", "true");
+    await expect(page.locator('[data-slot="skeleton-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="skeleton-control"]')).toHaveCount(0);
+  });
+
+  test("banner is a section, not banner-control", async ({ page }) => {
+    await page.goto("/audit/banner?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="banner"]');
+    const cronus = cronusFrame(page).locator('[data-slot="banner"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("SECTION");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("SECTION");
+    await expect(page.locator('[data-slot="banner-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="banner-control"]')).toHaveCount(0);
+  });
+
+  test("slider is a span, not input range or slider-control", async ({ page }) => {
+    await page.goto("/audit/slider?fixture=half&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="slider"]');
+    const cronus = cronusFrame(page).locator('[data-slot="slider"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("SPAN");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("SPAN");
+    await expect(page.locator('[data-audit-side="react"] input[type="range"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('input[type="range"]')).toHaveCount(0);
+    await expect(page.locator('[data-slot="slider-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="slider-control"]')).toHaveCount(0);
+  });
+
+  test("radio-group is a div radiogroup, not radio-group-control", async ({ page }) => {
+    await page.goto("/audit/radio-group?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="radio-group"]');
+    const cronus = cronusFrame(page).locator('[data-slot="radio-group"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(react).toHaveAttribute("role", "radiogroup");
+    await expect(cronus).toHaveAttribute("role", "radiogroup");
+    await expect(page.locator('[data-slot="radio-group-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="radio-group-control"]')).toHaveCount(0);
+  });
+
+  test("chip is a span without data-size, not chip-control", async ({ page }) => {
+    await page.goto("/audit/chip?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="chip"]');
+    const cronus = cronusFrame(page).locator('[data-slot="chip"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("SPAN");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("SPAN");
+    await expect(react).not.toHaveAttribute("data-size");
+    await expect(cronus).not.toHaveAttribute("data-size");
+    await expect(page.locator('[data-slot="chip-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="chip-control"]')).toHaveCount(0);
+  });
+
+  test("avatar is a span, not avatar-control", async ({ page }) => {
+    await page.goto("/audit/avatar?fixture=fallback&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="avatar"]');
+    const cronus = cronusFrame(page).locator('[data-slot="avatar"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("SPAN");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("SPAN");
+    await expect(page.locator('[data-slot="avatar-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="avatar-control"]')).toHaveCount(0);
+  });
+
+  test("card is a div, not card-control", async ({ page }) => {
+    await page.goto("/audit/card?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="card"]');
+    const cronus = cronusFrame(page).locator('[data-slot="card"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="card-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="card-control"]')).toHaveCount(0);
+  });
+
+  test("empty is a div, not empty-control", async ({ page }) => {
+    await page.goto("/audit/empty?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="empty"]');
+    const cronus = cronusFrame(page).locator('[data-slot="empty"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="empty-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="empty-control"]')).toHaveCount(0);
+  });
+
   test("root data-slot boxes match within 2px", async ({ page }) => {
     await page.goto("/audit/button?fixture=primary-md&preset=aurora&mode=dark");
     const reactBox = await page

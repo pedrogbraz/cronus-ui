@@ -24,6 +24,7 @@ describe("emitCronusApp", () => {
       getFixture("switch", "on"),
       getFixture("toggle", "on"),
       getFixture("progress", "half"),
+      getFixture("slider", "half"),
     ]);
     expect(src).toContain("component CheckboxOn layout:inline style:checkbox {");
     expect(src).toContain("  checked:true");
@@ -32,14 +33,30 @@ describe("emitCronusApp", () => {
     expect(src).toContain("  pressed:true");
     expect(src).toContain("component ProgressHalf layout:inline style:progress {");
     expect(src).toContain("  value:50");
+    expect(src).toContain("component SliderHalf layout:inline style:slider {");
     expect(src).toContain("use CheckboxOn");
     expect(src).toContain("use SwitchOn");
     expect(src).toContain("use ToggleOn");
     expect(src).toContain("use ProgressHalf");
+    expect(src).toContain("use SliderHalf");
     expect(src).toContain('page "/audit/checkbox/on" type:custom');
     expect(src).toContain('page "/audit/progress/half" type:custom');
+    expect(src).toContain('page "/audit/slider/half" type:custom');
     expect(src).not.toMatch(/\bsource\b/);
     expect(src).not.toContain("stack react");
+  });
+
+  it("emits radio-group options as extra text lines without source", () => {
+    const src = emitCronusApp([getFixture("radio-group", "default")]);
+    expect(src).toContain("component RadioGroupDefault layout:inline style:radio-group {");
+    expect(src).toContain('  text "Free"');
+    expect(src).toContain('  text "Pro"');
+    expect(src).toContain('  value:"Pro"');
+    expect(src).toContain('page "/audit/radio-group/default" type:custom');
+    expect(src).toContain("use RadioGroupDefault");
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+    expect(src).not.toContain("<");
   });
 
   it("emits every catalog fixture as component + page use", () => {
@@ -66,6 +83,18 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("kbd", "default"))).toBe("kbd");
     expect(expectedTag(getFixture("toggle", "off"))).toBe("button");
     expect(expectedTag(getFixture("progress", "half"))).toBe("div");
+  });
+
+  it("maps expected tags for wave 1b families", () => {
+    expect(expectedTag(getFixture("alert", "default"))).toBe("div");
+    expect(expectedTag(getFixture("skeleton", "default"))).toBe("div");
+    expect(expectedTag(getFixture("banner", "default"))).toBe("section");
+    expect(expectedTag(getFixture("slider", "half"))).toBe("span");
+    expect(expectedTag(getFixture("radio-group", "default"))).toBe("div");
+    expect(expectedTag(getFixture("chip", "default"))).toBe("span");
+    expect(expectedTag(getFixture("avatar", "fallback"))).toBe("span");
+    expect(expectedTag(getFixture("card", "default"))).toBe("div");
+    expect(expectedTag(getFixture("empty", "default"))).toBe("div");
   });
 
   it("drops data-size from expect.attrs", () => {

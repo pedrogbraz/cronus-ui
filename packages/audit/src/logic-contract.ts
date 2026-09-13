@@ -12,6 +12,15 @@ const FAMILY_TAGS: Record<string, string> = {
   kbd: "kbd",
   toggle: "button",
   progress: "div",
+  alert: "div",
+  skeleton: "div",
+  banner: "section",
+  slider: "span",
+  "radio-group": "div",
+  chip: "span",
+  avatar: "span",
+  card: "div",
+  empty: "div",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */
