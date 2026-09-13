@@ -84,6 +84,15 @@ const FAMILY_TAGS: Record<string, string> = {
   "alert-dialog": "div",
   lightbox: "div",
   "notification-center": "div",
+  "segmented-control": "div",
+  "usage-meter": "div",
+  masonry: "div",
+  heatmap: "div",
+  "comparison-slider": "div",
+  "code-tabs": "div",
+  "expandable-tabs": "div",
+  "live-line-chart": "div",
+  "sunburst-chart": "div",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */

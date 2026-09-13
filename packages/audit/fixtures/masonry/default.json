@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "masonry",
+  "props": {
+    "aria-label": "Gallery",
+    "items": ["Alpha", "Beta", "Gamma", "Delta"]
+  },
+  "expect": {
+    "slot": "masonry",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "masonry"
+    }
+  }
+}

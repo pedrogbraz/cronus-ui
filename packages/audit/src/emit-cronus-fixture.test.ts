@@ -532,6 +532,86 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("notification-center", "default"))).toBe("div");
   });
 
+  it("emits wave 1j labels, items, and values without source", () => {
+    const src = emitCronusApp([
+      getFixture("segmented-control", "default"),
+      getFixture("usage-meter", "default"),
+      getFixture("masonry", "default"),
+      getFixture("heatmap", "default"),
+      getFixture("comparison-slider", "default"),
+      getFixture("code-tabs", "default"),
+      getFixture("expandable-tabs", "default"),
+      getFixture("live-line-chart", "default"),
+      getFixture("sunburst-chart", "default"),
+    ]);
+    expect(src).toContain(
+      "component SegmentedControlDefault layout:inline style:segmented-control {",
+    );
+    expect(src).toContain('  text "Day"');
+    expect(src).toContain('  text "Week"');
+    expect(src).toContain('  value:"Day"');
+    expect(src).toContain("component UsageMeterDefault layout:inline style:usage-meter {");
+    expect(src).toContain('label "Tokens"');
+    expect(src).toContain("  value:40");
+    expect(src).toContain("component MasonryDefault layout:inline style:masonry {");
+    expect(src).toContain('  text "Alpha"');
+    expect(src).toContain('  text "Delta"');
+    expect(src).toContain("component HeatmapDefault layout:inline style:heatmap {");
+    expect(src).toContain('label "Activity"');
+    expect(src).toContain(
+      "component ComparisonSliderDefault layout:inline style:comparison-slider {",
+    );
+    expect(src).toContain('  text "Before"');
+    expect(src).toContain('  text "After"');
+    expect(src).toContain("component CodeTabsDefault layout:inline style:code-tabs {");
+    expect(src).toContain('  text "bun"');
+    expect(src).toContain('  text "npm"');
+    expect(src).toContain("component ExpandableTabsDefault layout:inline style:expandable-tabs {");
+    expect(src).toContain('  text "Home"');
+    expect(src).toContain('  text "Search"');
+    expect(src).toContain("component LiveLineChartDefault layout:inline style:live-line-chart {");
+    expect(src).toContain('label "Live"');
+    expect(src).toContain('  text "0"');
+    expect(src).toContain('  text "1"');
+    expect(src).toContain("component SunburstChartDefault layout:inline style:sunburst-chart {");
+    expect(src).toContain('label "Traffic"');
+    expect(src).toContain('  text "Desktop"');
+    expect(src).toContain('  text "Mobile"');
+    expect(src).toContain("use SegmentedControlDefault");
+    expect(src).toContain("use UsageMeterDefault");
+    expect(src).toContain("use MasonryDefault");
+    expect(src).toContain("use HeatmapDefault");
+    expect(src).toContain("use ComparisonSliderDefault");
+    expect(src).toContain("use CodeTabsDefault");
+    expect(src).toContain("use ExpandableTabsDefault");
+    expect(src).toContain("use LiveLineChartDefault");
+    expect(src).toContain("use SunburstChartDefault");
+    expect(src).toContain('page "/audit/segmented-control/default" type:custom');
+    expect(src).toContain('page "/audit/usage-meter/default" type:custom');
+    expect(src).toContain('page "/audit/masonry/default" type:custom');
+    expect(src).toContain('page "/audit/heatmap/default" type:custom');
+    expect(src).toContain('page "/audit/comparison-slider/default" type:custom');
+    expect(src).toContain('page "/audit/code-tabs/default" type:custom');
+    expect(src).toContain('page "/audit/expandable-tabs/default" type:custom');
+    expect(src).toContain('page "/audit/live-line-chart/default" type:custom');
+    expect(src).toContain('page "/audit/sunburst-chart/default" type:custom');
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for wave 1j families", () => {
+    expect(expectedTag(getFixture("segmented-control", "default"))).toBe("div");
+    expect(expectedTag(getFixture("usage-meter", "default"))).toBe("div");
+    expect(expectedTag(getFixture("masonry", "default"))).toBe("div");
+    expect(expectedTag(getFixture("heatmap", "default"))).toBe("div");
+    expect(expectedTag(getFixture("comparison-slider", "default"))).toBe("div");
+    expect(expectedTag(getFixture("code-tabs", "default"))).toBe("div");
+    expect(expectedTag(getFixture("expandable-tabs", "default"))).toBe("div");
+    expect(expectedTag(getFixture("live-line-chart", "default"))).toBe("div");
+    expect(expectedTag(getFixture("sunburst-chart", "default"))).toBe("div");
+  });
+
   it("drops data-size from expect.attrs", () => {
     const parsed = parseParityFixture({
       id: "x",

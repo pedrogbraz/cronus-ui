@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "sunburst-chart",
+  "props": {
+    "label": "Traffic",
+    "items": ["Desktop", "Mobile"]
+  },
+  "expect": {
+    "slot": "sunburst-chart",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "sunburst-chart"
+    }
+  }
+}

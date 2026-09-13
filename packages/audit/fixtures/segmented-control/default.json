@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "segmented-control",
+  "props": {
+    "value": "Day",
+    "aria-label": "Range",
+    "items": ["Day", "Week"]
+  },
+  "expect": {
+    "slot": "segmented-control",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "segmented-control"
+    }
+  }
+}

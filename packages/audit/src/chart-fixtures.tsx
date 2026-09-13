@@ -3,11 +3,13 @@
 import { AreaChart } from "@cronus-ui/ui/area-chart";
 import { BarChart } from "@cronus-ui/ui/bar-chart";
 import { LineChart } from "@cronus-ui/ui/line-chart";
+import { LiveLineChart } from "@cronus-ui/ui/live-line-chart";
 import { PieChart } from "@cronus-ui/ui/pie-chart";
 import { RadarChart } from "@cronus-ui/ui/radar-chart";
 import { RingChart } from "@cronus-ui/ui/ring-chart";
 import { ScatterChart } from "@cronus-ui/ui/scatter-chart";
 import { Sparkline } from "@cronus-ui/ui/sparkline";
+import { SunburstChart } from "@cronus-ui/ui/sunburst-chart";
 
 /** Tiny static series — nested objects cannot round-trip through emit. */
 const AREA_DATA = [
@@ -64,6 +66,28 @@ const RING_SERIES = [
   { key: "mobile", label: "Mobile" },
 ];
 
+const LIVE_DATA = [
+  { tick: 0, value: 4 },
+  { tick: 1, value: 8 },
+  { tick: 2, value: 6 },
+];
+
+const SUNBURST_DATA = [
+  {
+    name: "Desktop",
+    value: 8,
+    children: [
+      { name: "Chrome", value: 5 },
+      { name: "Safari", value: 3 },
+    ],
+  },
+  {
+    name: "Mobile",
+    value: 4,
+    children: [{ name: "iOS", value: 4 }],
+  },
+];
+
 function numberList(value: unknown): number[] {
   return Array.isArray(value)
     ? value.filter((item): item is number => typeof item === "number" && Number.isFinite(item))
@@ -109,4 +133,14 @@ export function ScatterChartFixture() {
 
 export function RingChartFixture() {
   return <RingChart data={RING_DATA} series={RING_SERIES} />;
+}
+
+/** Tiny static series — nested objects cannot round-trip through emit. */
+export function LiveLineChartFixture() {
+  return <LiveLineChart data={LIVE_DATA} interval={86_400_000} maxPoints={3} />;
+}
+
+/** Nested `{name, value, children}` cannot round-trip through emit. */
+export function SunburstChartFixture() {
+  return <SunburstChart data={SUNBURST_DATA} />;
 }
