@@ -1,0 +1,3956 @@
+{
+  "generated": "2026-09-13",
+  "repo": "cooud-ui",
+  "sdd": "docs/sdd/SDD-CRONUS-AUDIT-V1.md",
+  "portedClaim": false,
+  "classification": {
+    "kernelRenderer": "live dispatch: interact wins before widgets match; button is button_ex; remaining FAMILIES are chart|fx stubs; else missing",
+    "deadWidgetsArm": "pill|field|overlay|nav|display exist only as unreachable widgets.rs arms for families interact already handles"
+  },
+  "totals": {
+    "components": 212,
+    "chartsInComponents": 18,
+    "blocks": 74,
+    "templates": 25,
+    "items": 311,
+    "waves": {
+      "0": 3,
+      "1": 73,
+      "2": 34,
+      "3": 18,
+      "4": 60,
+      "5": 24,
+      "6": 74,
+      "7": 25
+    },
+    "kernelRendererOnComponents": {
+      "button_ex": 1,
+      "interact": 112,
+      "fx": 38,
+      "chart": 20,
+      "pill": 0,
+      "field": 0,
+      "overlay": 0,
+      "nav": 0,
+      "display": 0,
+      "missing": 41
+    },
+    "families": 173,
+    "interactUnique": 113,
+    "reactMissingFromFamilies": 41,
+    "kernelExtras": [
+      "toast",
+      "motion-presets"
+    ]
+  },
+  "deltasVsSdd": {
+    "categoriesWaves": "none — 73/34/18/60/24/74/25 match CATEGORIES after removing button/input/badge",
+    "interactUnique": {
+      "sdd": 112,
+      "source": 113,
+      "delta": 1,
+      "note": "toast is in interact match"
+    },
+    "outsideInteract": {
+      "sdd": 61,
+      "source": 60,
+      "delta": -1
+    }
+  },
+  "reactMissingFromFamilies": [
+    "animated-checkbox",
+    "goal-card",
+    "todo-item",
+    "author-tooltip",
+    "component-preview-tooltip",
+    "link-preview",
+    "scroll-nav",
+    "number-flow",
+    "slide-up-text",
+    "images-badge",
+    "globe-3d",
+    "globe-wireframe",
+    "explore-nav",
+    "bouncy-accordion",
+    "token-swap",
+    "receive-button",
+    "family-wallet",
+    "actions",
+    "artifact",
+    "branch",
+    "chain-of-thought",
+    "ai-code-block",
+    "context",
+    "conversation",
+    "ai-image",
+    "inline-citation",
+    "loader",
+    "message",
+    "open-in-chat",
+    "plan",
+    "prompt-input",
+    "queue",
+    "reasoning",
+    "response",
+    "sources",
+    "suggestion",
+    "task",
+    "text-shimmer",
+    "tool",
+    "web-preview",
+    "words-preloader"
+  ],
+  "items": [
+    {
+      "slug": "button",
+      "kind": "component",
+      "category": "buttons",
+      "reactFiles": [
+        "packages/ui/src/components/button.tsx"
+      ],
+      "kernelFamily": "button",
+      "kernelRenderer": "button_ex",
+      "wave": 0,
+      "notes": "DOM: <button|Slot data-slot=button data-variant> no data-size; asChild → <a>; live button_from; interact does not match"
+    },
+    {
+      "slug": "badge",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/badge.tsx"
+      ],
+      "kernelFamily": "badge",
+      "kernelRenderer": "interact",
+      "wave": 0,
+      "notes": "DOM: <span data-slot=badge data-variant> default variant default; live interact pill(); deadWidgetsArm=pill"
+    },
+    {
+      "slug": "input",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/input.tsx"
+      ],
+      "kernelFamily": "input",
+      "kernelRenderer": "interact",
+      "wave": 0,
+      "notes": "DOM: native <input data-slot=input aria-invalid> NO label wrapper; h-10 w-full; interact is <label data-slot=input><input data-slot=input-control>; deadWidgetsArm=field"
+    },
+    {
+      "slug": "animated-button",
+      "kind": "component",
+      "category": "buttons",
+      "reactFiles": [
+        "packages/ui/src/components/animated-button.tsx"
+      ],
+      "kernelFamily": "animated-button",
+      "kernelRenderer": "fx",
+      "wave": 1,
+      "notes": "live widgets stub fx(); not in interact"
+    },
+    {
+      "slug": "toggle",
+      "kind": "component",
+      "category": "buttons",
+      "reactFiles": [
+        "packages/ui/src/components/toggle.tsx"
+      ],
+      "kernelFamily": "toggle",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "data-slot=toggle; CVA size but no data-size attr; deadWidgetsArm=pill"
+    },
+    {
+      "slug": "toggle-group",
+      "kind": "component",
+      "category": "buttons",
+      "reactFiles": [
+        "packages/ui/src/components/toggle-group.tsx"
+      ],
+      "kernelFamily": "toggle-group",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=pill"
+    },
+    {
+      "slug": "copy-button",
+      "kind": "component",
+      "category": "buttons",
+      "reactFiles": [
+        "packages/ui/src/components/copy-button.tsx"
+      ],
+      "kernelFamily": "copy-button",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=pill"
+    },
+    {
+      "slug": "button-group",
+      "kind": "component",
+      "category": "buttons",
+      "reactFiles": [
+        "packages/ui/src/components/button-group.tsx"
+      ],
+      "kernelFamily": "button-group",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=nav"
+    },
+    {
+      "slug": "fab",
+      "kind": "component",
+      "category": "buttons",
+      "reactFiles": [
+        "packages/ui/src/components/fab.tsx"
+      ],
+      "kernelFamily": "fab",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=pill"
+    },
+    {
+      "slug": "split-button",
+      "kind": "component",
+      "category": "buttons",
+      "reactFiles": [
+        "packages/ui/src/components/split-button.tsx"
+      ],
+      "kernelFamily": "split-button",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=nav"
+    },
+    {
+      "slug": "mode-toggle",
+      "kind": "component",
+      "category": "buttons",
+      "reactFiles": [
+        "packages/ui/src/components/mode-toggle.tsx"
+      ],
+      "kernelFamily": "mode-toggle",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=nav"
+    },
+    {
+      "slug": "input-group",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/input-group.tsx"
+      ],
+      "kernelFamily": "input-group",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "interact input() label+control; deadWidgetsArm=field"
+    },
+    {
+      "slug": "password-input",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/password-input.tsx"
+      ],
+      "kernelFamily": "password-input",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "interact input(password); deadWidgetsArm=field"
+    },
+    {
+      "slug": "textarea",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/textarea.tsx"
+      ],
+      "kernelFamily": "textarea",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "data-slot=textarea native; deadWidgetsArm=field"
+    },
+    {
+      "slug": "label",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/label.tsx"
+      ],
+      "kernelFamily": "label",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "data-slot=label; deadWidgetsArm=pill"
+    },
+    {
+      "slug": "checkbox",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/checkbox.tsx"
+      ],
+      "kernelFamily": "checkbox",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "data-slot=checkbox; deadWidgetsArm=pill"
+    },
+    {
+      "slug": "animated-checkbox",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/animated-checkbox.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 1,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "radio-group",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/radio-group.tsx"
+      ],
+      "kernelFamily": "radio-group",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=pill"
+    },
+    {
+      "slug": "switch",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/switch.tsx"
+      ],
+      "kernelFamily": "switch",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "data-slot=switch; deadWidgetsArm=pill"
+    },
+    {
+      "slug": "select",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/select.tsx"
+      ],
+      "kernelFamily": "select",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "compound slots select-trigger/content/item; no root data-slot=select; deadWidgetsArm=field"
+    },
+    {
+      "slug": "combobox",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/combobox.tsx"
+      ],
+      "kernelFamily": "combobox",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=field"
+    },
+    {
+      "slug": "multi-select",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/multi-select.tsx"
+      ],
+      "kernelFamily": "multi-select",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=field"
+    },
+    {
+      "slug": "tags-input",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/tags-input.tsx"
+      ],
+      "kernelFamily": "tags-input",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=field"
+    },
+    {
+      "slug": "slider",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/slider.tsx"
+      ],
+      "kernelFamily": "slider",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=pill"
+    },
+    {
+      "slug": "field",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/field.tsx"
+      ],
+      "kernelFamily": "field",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "slots field/field-label/field-description/field-error; deadWidgetsArm=field"
+    },
+    {
+      "slug": "form",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/form.tsx"
+      ],
+      "kernelFamily": "form",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "rhf+zod; deadWidgetsArm=field"
+    },
+    {
+      "slug": "input-otp",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/input-otp.tsx"
+      ],
+      "kernelFamily": "input-otp",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=field"
+    },
+    {
+      "slug": "file-dropzone",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/file-dropzone.tsx"
+      ],
+      "kernelFamily": "file-dropzone",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "interact input(file); deadWidgetsArm=field"
+    },
+    {
+      "slug": "number-input",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/number-input.tsx"
+      ],
+      "kernelFamily": "number-input",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=field"
+    },
+    {
+      "slug": "autocomplete",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/autocomplete.tsx"
+      ],
+      "kernelFamily": "autocomplete",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=field"
+    },
+    {
+      "slug": "stepper",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/stepper.tsx"
+      ],
+      "kernelFamily": "stepper",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "compound; deadWidgetsArm=nav"
+    },
+    {
+      "slug": "rich-text-editor",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/rich-text-editor.tsx"
+      ],
+      "kernelFamily": "rich-text-editor",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "Tiptap; interact textarea(); deadWidgetsArm=field"
+    },
+    {
+      "slug": "rating",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/rating.tsx"
+      ],
+      "kernelFamily": "rating",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=pill"
+    },
+    {
+      "slug": "color-picker",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/color-picker.tsx"
+      ],
+      "kernelFamily": "color-picker",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "interact input(color); deadWidgetsArm=field"
+    },
+    {
+      "slug": "currency-input",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/currency-input.tsx"
+      ],
+      "kernelFamily": "currency-input",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=field"
+    },
+    {
+      "slug": "phone-input",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/phone-input.tsx"
+      ],
+      "kernelFamily": "phone-input",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=field"
+    },
+    {
+      "slug": "credit-card-input",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/credit-card-input.tsx"
+      ],
+      "kernelFamily": "credit-card-input",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=field"
+    },
+    {
+      "slug": "floating-label-input",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/floating-label-input.tsx"
+      ],
+      "kernelFamily": "floating-label-input",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "interact input(); deadWidgetsArm=field"
+    },
+    {
+      "slug": "signature-pad",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/signature-pad.tsx"
+      ],
+      "kernelFamily": "signature-pad",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "canvas; deadWidgetsArm=field"
+    },
+    {
+      "slug": "chip",
+      "kind": "component",
+      "category": "forms",
+      "reactFiles": [
+        "packages/ui/src/components/chip.tsx"
+      ],
+      "kernelFamily": "chip",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=pill"
+    },
+    {
+      "slug": "avatar",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/avatar.tsx"
+      ],
+      "kernelFamily": "avatar",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "avatar-group",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/avatar-group.tsx"
+      ],
+      "kernelFamily": "avatar-group",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "card",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/card.tsx"
+      ],
+      "kernelFamily": "card",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "goal-card",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/goal-card.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 1,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "table",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/table.tsx"
+      ],
+      "kernelFamily": "table",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "data-table",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/data-table.tsx"
+      ],
+      "kernelFamily": "data-table",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "TanStack; deadWidgetsArm=display"
+    },
+    {
+      "slug": "metric",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/metric.tsx"
+      ],
+      "kernelFamily": "metric",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "sparkline",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/sparkline.tsx"
+      ],
+      "kernelFamily": "sparkline",
+      "kernelRenderer": "chart",
+      "wave": 1,
+      "notes": "data-slot=sparkline; live widgets chart() stub; not in interact"
+    },
+    {
+      "slug": "masonry",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/masonry.tsx"
+      ],
+      "kernelFamily": "masonry",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "comparison-slider",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/comparison-slider.tsx"
+      ],
+      "kernelFamily": "comparison-slider",
+      "kernelRenderer": "fx",
+      "wave": 1,
+      "notes": "live fx(); not in interact"
+    },
+    {
+      "slug": "heatmap",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/heatmap.tsx"
+      ],
+      "kernelFamily": "heatmap",
+      "kernelRenderer": "chart",
+      "wave": 1,
+      "notes": "calendar contribution heatmap data-slot=heatmap; kernel treats as chart() stub; not interact"
+    },
+    {
+      "slug": "kbd",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/kbd.tsx"
+      ],
+      "kernelFamily": "kbd",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=pill"
+    },
+    {
+      "slug": "empty",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/empty.tsx"
+      ],
+      "kernelFamily": "empty",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "separator",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/separator.tsx"
+      ],
+      "kernelFamily": "separator",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "interact <hr>; deadWidgetsArm=pill"
+    },
+    {
+      "slug": "skeleton",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/skeleton.tsx"
+      ],
+      "kernelFamily": "skeleton",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=pill"
+    },
+    {
+      "slug": "scroll-area",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/scroll-area.tsx"
+      ],
+      "kernelFamily": "scroll-area",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "code-block",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/code-block.tsx"
+      ],
+      "kernelFamily": "code-block",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "code-tabs",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/code-tabs.tsx"
+      ],
+      "kernelFamily": "code-tabs",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "interact tabs(); deadWidgetsArm=display"
+    },
+    {
+      "slug": "collapsible",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/collapsible.tsx"
+      ],
+      "kernelFamily": "collapsible",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=nav"
+    },
+    {
+      "slug": "aspect-ratio",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/aspect-ratio.tsx"
+      ],
+      "kernelFamily": "aspect-ratio",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "tree-view",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/tree-view.tsx"
+      ],
+      "kernelFamily": "tree-view",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "timeline",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/timeline.tsx"
+      ],
+      "kernelFamily": "timeline",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "kanban",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/kanban.tsx"
+      ],
+      "kernelFamily": "kanban",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "todo-item",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/todo-item.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 1,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "json-viewer",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/json-viewer.tsx"
+      ],
+      "kernelFamily": "json-viewer",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "status-dot",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/status-dot.tsx"
+      ],
+      "kernelFamily": "status-dot",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=pill"
+    },
+    {
+      "slug": "image-zoom",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/image-zoom.tsx"
+      ],
+      "kernelFamily": "image-zoom",
+      "kernelRenderer": "fx",
+      "wave": 1,
+      "notes": "live fx(); not in interact"
+    },
+    {
+      "slug": "video-player",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/video-player.tsx"
+      ],
+      "kernelFamily": "video-player",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "description-list",
+      "kind": "component",
+      "category": "data-display",
+      "reactFiles": [
+        "packages/ui/src/components/description-list.tsx"
+      ],
+      "kernelFamily": "description-list",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "alert",
+      "kind": "component",
+      "category": "feedback",
+      "reactFiles": [
+        "packages/ui/src/components/alert.tsx"
+      ],
+      "kernelFamily": "alert",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "data-slot=alert role alert|status; deadWidgetsArm=display"
+    },
+    {
+      "slug": "banner",
+      "kind": "component",
+      "category": "feedback",
+      "reactFiles": [
+        "packages/ui/src/components/banner.tsx"
+      ],
+      "kernelFamily": "banner",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "spinner",
+      "kind": "component",
+      "category": "feedback",
+      "reactFiles": [
+        "packages/ui/src/components/spinner.tsx"
+      ],
+      "kernelFamily": "spinner",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "data-slot=spinner; deadWidgetsArm=pill"
+    },
+    {
+      "slug": "progress",
+      "kind": "component",
+      "category": "feedback",
+      "reactFiles": [
+        "packages/ui/src/components/progress.tsx"
+      ],
+      "kernelFamily": "progress",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "data-slot=progress; deadWidgetsArm=pill"
+    },
+    {
+      "slug": "usage-meter",
+      "kind": "component",
+      "category": "feedback",
+      "reactFiles": [
+        "packages/ui/src/components/usage-meter.tsx"
+      ],
+      "kernelFamily": "usage-meter",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "interact progress(); deadWidgetsArm=display"
+    },
+    {
+      "slug": "sonner",
+      "kind": "component",
+      "category": "feedback",
+      "reactFiles": [
+        "packages/ui/src/components/sonner.tsx"
+      ],
+      "kernelFamily": "sonner",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "data-slot=toaster not toast; kernel also has extra family toast (interact); deadWidgetsArm=overlay"
+    },
+    {
+      "slug": "alert-dialog",
+      "kind": "component",
+      "category": "feedback",
+      "reactFiles": [
+        "packages/ui/src/components/alert-dialog.tsx"
+      ],
+      "kernelFamily": "alert-dialog",
+      "kernelRenderer": "interact",
+      "wave": 1,
+      "notes": "interact dialog(); deadWidgetsArm=overlay"
+    },
+    {
+      "slug": "dialog",
+      "kind": "component",
+      "category": "overlays",
+      "reactFiles": [
+        "packages/ui/src/components/dialog.tsx"
+      ],
+      "kernelFamily": "dialog",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "Root has no data-slot; overlay/content/close/header/footer/title/description do; open state not v1; deadWidgetsArm=overlay"
+    },
+    {
+      "slug": "sheet",
+      "kind": "component",
+      "category": "overlays",
+      "reactFiles": [
+        "packages/ui/src/components/sheet.tsx"
+      ],
+      "kernelFamily": "sheet",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "deadWidgetsArm=overlay"
+    },
+    {
+      "slug": "drawer",
+      "kind": "component",
+      "category": "overlays",
+      "reactFiles": [
+        "packages/ui/src/components/drawer.tsx"
+      ],
+      "kernelFamily": "drawer",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "vaul; deadWidgetsArm=overlay"
+    },
+    {
+      "slug": "popover",
+      "kind": "component",
+      "category": "overlays",
+      "reactFiles": [
+        "packages/ui/src/components/popover.tsx"
+      ],
+      "kernelFamily": "popover",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "deadWidgetsArm=overlay"
+    },
+    {
+      "slug": "notification-center",
+      "kind": "component",
+      "category": "overlays",
+      "reactFiles": [
+        "packages/ui/src/components/notification-center.tsx"
+      ],
+      "kernelFamily": "notification-center",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "deadWidgetsArm=overlay"
+    },
+    {
+      "slug": "hover-card",
+      "kind": "component",
+      "category": "overlays",
+      "reactFiles": [
+        "packages/ui/src/components/hover-card.tsx"
+      ],
+      "kernelFamily": "hover-card",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "deadWidgetsArm=overlay"
+    },
+    {
+      "slug": "author-tooltip",
+      "kind": "component",
+      "category": "overlays",
+      "reactFiles": [
+        "packages/ui/src/components/author-tooltip.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 2,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "tooltip",
+      "kind": "component",
+      "category": "overlays",
+      "reactFiles": [
+        "packages/ui/src/components/tooltip.tsx"
+      ],
+      "kernelFamily": "tooltip",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "deadWidgetsArm=overlay"
+    },
+    {
+      "slug": "component-preview-tooltip",
+      "kind": "component",
+      "category": "overlays",
+      "reactFiles": [
+        "packages/ui/src/components/component-preview-tooltip.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 2,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "link-preview",
+      "kind": "component",
+      "category": "overlays",
+      "reactFiles": [
+        "packages/ui/src/components/link-preview.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 2,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "dropdown-menu",
+      "kind": "component",
+      "category": "overlays",
+      "reactFiles": [
+        "packages/ui/src/components/dropdown-menu.tsx"
+      ],
+      "kernelFamily": "dropdown-menu",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "deadWidgetsArm=overlay"
+    },
+    {
+      "slug": "context-menu",
+      "kind": "component",
+      "category": "overlays",
+      "reactFiles": [
+        "packages/ui/src/components/context-menu.tsx"
+      ],
+      "kernelFamily": "context-menu",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "deadWidgetsArm=overlay"
+    },
+    {
+      "slug": "command",
+      "kind": "component",
+      "category": "overlays",
+      "reactFiles": [
+        "packages/ui/src/components/command.tsx"
+      ],
+      "kernelFamily": "command",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "cmdk; deadWidgetsArm=overlay"
+    },
+    {
+      "slug": "lightbox",
+      "kind": "component",
+      "category": "overlays",
+      "reactFiles": [
+        "packages/ui/src/components/lightbox.tsx"
+      ],
+      "kernelFamily": "lightbox",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "interact dialog(); deadWidgetsArm=overlay"
+    },
+    {
+      "slug": "confirmation-dialog",
+      "kind": "component",
+      "category": "overlays",
+      "reactFiles": [
+        "packages/ui/src/components/confirmation-dialog.tsx"
+      ],
+      "kernelFamily": "confirmation-dialog",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "deadWidgetsArm=overlay"
+    },
+    {
+      "slug": "invite-dialog",
+      "kind": "component",
+      "category": "overlays",
+      "reactFiles": [
+        "packages/ui/src/components/invite-dialog.tsx"
+      ],
+      "kernelFamily": "invite-dialog",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "deadWidgetsArm=overlay"
+    },
+    {
+      "slug": "tabs",
+      "kind": "component",
+      "category": "navigation",
+      "reactFiles": [
+        "packages/ui/src/components/tabs.tsx"
+      ],
+      "kernelFamily": "tabs",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "slots tabs/list/trigger/content; deadWidgetsArm=nav"
+    },
+    {
+      "slug": "accordion",
+      "kind": "component",
+      "category": "navigation",
+      "reactFiles": [
+        "packages/ui/src/components/accordion.tsx"
+      ],
+      "kernelFamily": "accordion",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "slots on item/trigger/content not root; deadWidgetsArm=nav"
+    },
+    {
+      "slug": "breadcrumb",
+      "kind": "component",
+      "category": "navigation",
+      "reactFiles": [
+        "packages/ui/src/components/breadcrumb.tsx"
+      ],
+      "kernelFamily": "breadcrumb",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "deadWidgetsArm=nav"
+    },
+    {
+      "slug": "pagination",
+      "kind": "component",
+      "category": "navigation",
+      "reactFiles": [
+        "packages/ui/src/components/pagination.tsx"
+      ],
+      "kernelFamily": "pagination",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "deadWidgetsArm=nav"
+    },
+    {
+      "slug": "navigation-menu",
+      "kind": "component",
+      "category": "navigation",
+      "reactFiles": [
+        "packages/ui/src/components/navigation-menu.tsx"
+      ],
+      "kernelFamily": "navigation-menu",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "deadWidgetsArm=nav"
+    },
+    {
+      "slug": "menubar",
+      "kind": "component",
+      "category": "navigation",
+      "reactFiles": [
+        "packages/ui/src/components/menubar.tsx"
+      ],
+      "kernelFamily": "menubar",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "interact popover(); deadWidgetsArm=overlay"
+    },
+    {
+      "slug": "sidebar",
+      "kind": "component",
+      "category": "navigation",
+      "reactFiles": [
+        "packages/ui/src/components/sidebar.tsx"
+      ],
+      "kernelFamily": "sidebar",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "deadWidgetsArm=nav"
+    },
+    {
+      "slug": "app-shell",
+      "kind": "component",
+      "category": "navigation",
+      "reactFiles": [
+        "packages/ui/src/components/app-shell.tsx"
+      ],
+      "kernelFamily": "app-shell",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "deadWidgetsArm=nav"
+    },
+    {
+      "slug": "workspace-switcher",
+      "kind": "component",
+      "category": "navigation",
+      "reactFiles": [
+        "packages/ui/src/components/workspace-switcher.tsx"
+      ],
+      "kernelFamily": "workspace-switcher",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "deadWidgetsArm=nav"
+    },
+    {
+      "slug": "resizable",
+      "kind": "component",
+      "category": "navigation",
+      "reactFiles": [
+        "packages/ui/src/components/resizable.tsx"
+      ],
+      "kernelFamily": "resizable",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "interact scroll(); deadWidgetsArm=display"
+    },
+    {
+      "slug": "toolbar",
+      "kind": "component",
+      "category": "navigation",
+      "reactFiles": [
+        "packages/ui/src/components/toolbar.tsx"
+      ],
+      "kernelFamily": "toolbar",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "deadWidgetsArm=nav"
+    },
+    {
+      "slug": "table-of-contents",
+      "kind": "component",
+      "category": "navigation",
+      "reactFiles": [
+        "packages/ui/src/components/table-of-contents.tsx"
+      ],
+      "kernelFamily": "table-of-contents",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "deadWidgetsArm=nav"
+    },
+    {
+      "slug": "calendar",
+      "kind": "component",
+      "category": "date-time",
+      "reactFiles": [
+        "packages/ui/src/components/calendar.tsx"
+      ],
+      "kernelFamily": "calendar",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "react-day-picker; deadWidgetsArm=display"
+    },
+    {
+      "slug": "countdown",
+      "kind": "component",
+      "category": "date-time",
+      "reactFiles": [
+        "packages/ui/src/components/countdown.tsx"
+      ],
+      "kernelFamily": "countdown",
+      "kernelRenderer": "fx",
+      "wave": 2,
+      "notes": "live fx(); not in interact"
+    },
+    {
+      "slug": "date-picker",
+      "kind": "component",
+      "category": "date-time",
+      "reactFiles": [
+        "packages/ui/src/components/date-picker.tsx"
+      ],
+      "kernelFamily": "date-picker",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "interact input(date); deadWidgetsArm=field"
+    },
+    {
+      "slug": "date-range-picker",
+      "kind": "component",
+      "category": "date-time",
+      "reactFiles": [
+        "packages/ui/src/components/date-range-picker.tsx"
+      ],
+      "kernelFamily": "date-range-picker",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "deadWidgetsArm=field"
+    },
+    {
+      "slug": "scheduler",
+      "kind": "component",
+      "category": "date-time",
+      "reactFiles": [
+        "packages/ui/src/components/scheduler.tsx"
+      ],
+      "kernelFamily": "scheduler",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "interact calendar(); deadWidgetsArm=display"
+    },
+    {
+      "slug": "time-picker",
+      "kind": "component",
+      "category": "date-time",
+      "reactFiles": [
+        "packages/ui/src/components/time-picker.tsx"
+      ],
+      "kernelFamily": "time-picker",
+      "kernelRenderer": "interact",
+      "wave": 2,
+      "notes": "interact input(time); deadWidgetsArm=field"
+    },
+    {
+      "slug": "chart",
+      "kind": "chart",
+      "category": "charts",
+      "reactFiles": [
+        "packages/ui/src/components/chart.tsx",
+        "packages/ui/src/charts/index.ts"
+      ],
+      "kernelFamily": "chart",
+      "kernelRenderer": "chart",
+      "wave": 3,
+      "notes": "data-slot=chart ChartContainer; public API is recharts wrapper; visx engine is packages/ui/src/charts; live chart() stub"
+    },
+    {
+      "slug": "area-chart",
+      "kind": "chart",
+      "category": "charts",
+      "reactFiles": [
+        "packages/ui/src/components/area-chart.tsx",
+        "packages/ui/src/charts/area-chart.tsx"
+      ],
+      "kernelFamily": "area-chart",
+      "kernelRenderer": "chart",
+      "wave": 3,
+      "notes": "data-slot=area-chart; harness stub-fail target; live chart() stub"
+    },
+    {
+      "slug": "line-chart",
+      "kind": "chart",
+      "category": "charts",
+      "reactFiles": [
+        "packages/ui/src/components/line-chart.tsx",
+        "packages/ui/src/charts/line-chart.tsx"
+      ],
+      "kernelFamily": "line-chart",
+      "kernelRenderer": "chart",
+      "wave": 3,
+      "notes": "live chart() stub"
+    },
+    {
+      "slug": "live-line-chart",
+      "kind": "chart",
+      "category": "charts",
+      "reactFiles": [
+        "packages/ui/src/components/live-line-chart.tsx",
+        "packages/ui/src/charts/live-line-chart.tsx"
+      ],
+      "kernelFamily": "live-line-chart",
+      "kernelRenderer": "chart",
+      "wave": 3,
+      "notes": "live chart() stub"
+    },
+    {
+      "slug": "bar-chart",
+      "kind": "chart",
+      "category": "charts",
+      "reactFiles": [
+        "packages/ui/src/components/bar-chart.tsx",
+        "packages/ui/src/charts/bar-chart.tsx"
+      ],
+      "kernelFamily": "bar-chart",
+      "kernelRenderer": "chart",
+      "wave": 3,
+      "notes": "live chart() stub"
+    },
+    {
+      "slug": "composed-chart",
+      "kind": "chart",
+      "category": "charts",
+      "reactFiles": [
+        "packages/ui/src/components/composed-chart.tsx",
+        "packages/ui/src/charts/composed-chart.tsx"
+      ],
+      "kernelFamily": "composed-chart",
+      "kernelRenderer": "chart",
+      "wave": 3,
+      "notes": "live chart() stub"
+    },
+    {
+      "slug": "candlestick-chart",
+      "kind": "chart",
+      "category": "charts",
+      "reactFiles": [
+        "packages/ui/src/components/candlestick-chart.tsx",
+        "packages/ui/src/charts/candlestick-chart.tsx"
+      ],
+      "kernelFamily": "candlestick-chart",
+      "kernelRenderer": "chart",
+      "wave": 3,
+      "notes": "live chart() stub"
+    },
+    {
+      "slug": "funnel-chart",
+      "kind": "chart",
+      "category": "charts",
+      "reactFiles": [
+        "packages/ui/src/components/funnel-chart.tsx",
+        "packages/ui/src/charts/funnel-chart.tsx"
+      ],
+      "kernelFamily": "funnel-chart",
+      "kernelRenderer": "chart",
+      "wave": 3,
+      "notes": "live chart() stub"
+    },
+    {
+      "slug": "gauge-chart",
+      "kind": "chart",
+      "category": "charts",
+      "reactFiles": [
+        "packages/ui/src/components/gauge-chart.tsx",
+        "packages/ui/src/charts/gauge.tsx"
+      ],
+      "kernelFamily": "gauge-chart",
+      "kernelRenderer": "chart",
+      "wave": 3,
+      "notes": "engine export is Gauge not GaugeChart; live chart() stub"
+    },
+    {
+      "slug": "pie-chart",
+      "kind": "chart",
+      "category": "charts",
+      "reactFiles": [
+        "packages/ui/src/components/pie-chart.tsx",
+        "packages/ui/src/charts/pie-chart.tsx"
+      ],
+      "kernelFamily": "pie-chart",
+      "kernelRenderer": "chart",
+      "wave": 3,
+      "notes": "live chart() stub"
+    },
+    {
+      "slug": "ring-chart",
+      "kind": "chart",
+      "category": "charts",
+      "reactFiles": [
+        "packages/ui/src/components/ring-chart.tsx",
+        "packages/ui/src/charts/ring-chart.tsx"
+      ],
+      "kernelFamily": "ring-chart",
+      "kernelRenderer": "chart",
+      "wave": 3,
+      "notes": "live chart() stub"
+    },
+    {
+      "slug": "radar-chart",
+      "kind": "chart",
+      "category": "charts",
+      "reactFiles": [
+        "packages/ui/src/components/radar-chart.tsx",
+        "packages/ui/src/charts/radar-chart.tsx"
+      ],
+      "kernelFamily": "radar-chart",
+      "kernelRenderer": "chart",
+      "wave": 3,
+      "notes": "live chart() stub"
+    },
+    {
+      "slug": "scatter-chart",
+      "kind": "chart",
+      "category": "charts",
+      "reactFiles": [
+        "packages/ui/src/components/scatter-chart.tsx",
+        "packages/ui/src/charts/scatter-chart.tsx"
+      ],
+      "kernelFamily": "scatter-chart",
+      "kernelRenderer": "chart",
+      "wave": 3,
+      "notes": "live chart() stub"
+    },
+    {
+      "slug": "sankey-chart",
+      "kind": "chart",
+      "category": "charts",
+      "reactFiles": [
+        "packages/ui/src/components/sankey-chart.tsx",
+        "packages/ui/src/charts/sankey/sankey-chart.tsx"
+      ],
+      "kernelFamily": "sankey-chart",
+      "kernelRenderer": "chart",
+      "wave": 3,
+      "notes": "live chart() stub"
+    },
+    {
+      "slug": "profit-loss-chart",
+      "kind": "chart",
+      "category": "charts",
+      "reactFiles": [
+        "packages/ui/src/components/profit-loss-chart.tsx",
+        "packages/ui/src/charts/profit-loss-line.tsx"
+      ],
+      "kernelFamily": "profit-loss-chart",
+      "kernelRenderer": "chart",
+      "wave": 3,
+      "notes": "live chart() stub"
+    },
+    {
+      "slug": "choropleth-chart",
+      "kind": "chart",
+      "category": "charts",
+      "reactFiles": [
+        "packages/ui/src/components/choropleth-chart.tsx",
+        "packages/ui/src/charts/choropleth/choropleth-chart.tsx"
+      ],
+      "kernelFamily": "choropleth-chart",
+      "kernelRenderer": "chart",
+      "wave": 3,
+      "notes": "docs wrapper is SVG cells; Motion engine in charts/choropleth; live chart() stub"
+    },
+    {
+      "slug": "sunburst-chart",
+      "kind": "chart",
+      "category": "charts",
+      "reactFiles": [
+        "packages/ui/src/components/sunburst-chart.tsx",
+        "packages/ui/src/charts/sunburst-chart.tsx"
+      ],
+      "kernelFamily": "sunburst-chart",
+      "kernelRenderer": "chart",
+      "wave": 3,
+      "notes": "live chart() stub"
+    },
+    {
+      "slug": "heatmap-chart",
+      "kind": "chart",
+      "category": "charts",
+      "reactFiles": [
+        "packages/ui/src/components/heatmap-chart.tsx",
+        "packages/ui/src/components/heatmap.tsx",
+        "packages/ui/src/charts/heatmap/heatmap-chart.tsx"
+      ],
+      "kernelFamily": "heatmap-chart",
+      "kernelRenderer": "chart",
+      "wave": 3,
+      "notes": "catalog alias wraps Heatmap; data-slot=heatmap-chart; Motion at @cronus-ui/ui/charts; live chart() stub"
+    },
+    {
+      "slug": "glass-card",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/glass-card.tsx"
+      ],
+      "kernelFamily": "glass-card",
+      "kernelRenderer": "interact",
+      "wave": 4,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "gradient-border",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/gradient-border.tsx"
+      ],
+      "kernelFamily": "gradient-border",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "gradient-text",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/gradient-text.tsx"
+      ],
+      "kernelFamily": "gradient-text",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "spotlight-card",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/spotlight-card.tsx"
+      ],
+      "kernelFamily": "spotlight-card",
+      "kernelRenderer": "interact",
+      "wave": 4,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "scroll-progress",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/scroll-progress.tsx"
+      ],
+      "kernelFamily": "scroll-progress",
+      "kernelRenderer": "interact",
+      "wave": 4,
+      "notes": "interact progress(); deadWidgetsArm=fx"
+    },
+    {
+      "slug": "scroll-nav",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/scroll-nav.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 4,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "aurora-background",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/aurora-background.tsx"
+      ],
+      "kernelFamily": "aurora-background",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "logo-carousel",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/logo-carousel.tsx"
+      ],
+      "kernelFamily": "logo-carousel",
+      "kernelRenderer": "interact",
+      "wave": 4,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "marquee",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/marquee.tsx"
+      ],
+      "kernelFamily": "marquee",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "morphing-popover",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/morphing-popover.tsx"
+      ],
+      "kernelFamily": "morphing-popover",
+      "kernelRenderer": "interact",
+      "wave": 4,
+      "notes": "deadWidgetsArm=overlay"
+    },
+    {
+      "slug": "shimmer",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/shimmer.tsx"
+      ],
+      "kernelFamily": "shimmer",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "reveal",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/reveal.tsx"
+      ],
+      "kernelFamily": "reveal",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "animated-number",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/animated-number.tsx"
+      ],
+      "kernelFamily": "animated-number",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "number-flow",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/number-flow.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 4,
+      "notes": "not in FAMILIES; canvas/digit roll — wave 4b"
+    },
+    {
+      "slug": "carousel",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/carousel.tsx"
+      ],
+      "kernelFamily": "carousel",
+      "kernelRenderer": "interact",
+      "wave": 4,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "segmented-control",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/segmented-control.tsx"
+      ],
+      "kernelFamily": "segmented-control",
+      "kernelRenderer": "interact",
+      "wave": 4,
+      "notes": "deadWidgetsArm=pill"
+    },
+    {
+      "slug": "text-effect",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/text-effect.tsx"
+      ],
+      "kernelFamily": "text-effect",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "slide-up-text",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/slide-up-text.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 4,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "images-badge",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/images-badge.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 4,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "globe-3d",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/globe-3d.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 4,
+      "notes": "not in FAMILIES; WebGL/canvas — wave 4b"
+    },
+    {
+      "slug": "globe-wireframe",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/globe-wireframe.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 4,
+      "notes": "not in FAMILIES; wave 4b"
+    },
+    {
+      "slug": "frame",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/frame.tsx"
+      ],
+      "kernelFamily": "frame",
+      "kernelRenderer": "interact",
+      "wave": 4,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "dock",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/dock.tsx"
+      ],
+      "kernelFamily": "dock",
+      "kernelRenderer": "interact",
+      "wave": 4,
+      "notes": "deadWidgetsArm=nav"
+    },
+    {
+      "slug": "border-beam",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/border-beam.tsx"
+      ],
+      "kernelFamily": "border-beam",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "flip-card",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/flip-card.tsx"
+      ],
+      "kernelFamily": "flip-card",
+      "kernelRenderer": "interact",
+      "wave": 4,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "tilt-card",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/tilt-card.tsx"
+      ],
+      "kernelFamily": "tilt-card",
+      "kernelRenderer": "interact",
+      "wave": 4,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "magnetic",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/magnetic.tsx"
+      ],
+      "kernelFamily": "magnetic",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "orbit",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/orbit.tsx"
+      ],
+      "kernelFamily": "orbit",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "terminal",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/terminal.tsx"
+      ],
+      "kernelFamily": "terminal",
+      "kernelRenderer": "interact",
+      "wave": 4,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "ripple",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/ripple.tsx"
+      ],
+      "kernelFamily": "ripple",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "meteors",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/meteors.tsx"
+      ],
+      "kernelFamily": "meteors",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx(); harness stub-fail target with area-chart"
+    },
+    {
+      "slug": "dot-pattern",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/dot-pattern.tsx"
+      ],
+      "kernelFamily": "dot-pattern",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "grid-pattern",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/grid-pattern.tsx"
+      ],
+      "kernelFamily": "grid-pattern",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "retro-grid",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/retro-grid.tsx"
+      ],
+      "kernelFamily": "retro-grid",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "noise",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/noise.tsx"
+      ],
+      "kernelFamily": "noise",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "light-rays",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/light-rays.tsx"
+      ],
+      "kernelFamily": "light-rays",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "progressive-blur",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/progressive-blur.tsx"
+      ],
+      "kernelFamily": "progressive-blur",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "flickering-grid",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/flickering-grid.tsx"
+      ],
+      "kernelFamily": "flickering-grid",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "star-border",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/star-border.tsx"
+      ],
+      "kernelFamily": "star-border",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "shiny-text",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/shiny-text.tsx"
+      ],
+      "kernelFamily": "shiny-text",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "highlighter",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/highlighter.tsx"
+      ],
+      "kernelFamily": "highlighter",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "spinning-text",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/spinning-text.tsx"
+      ],
+      "kernelFamily": "spinning-text",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "sparkles-text",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/sparkles-text.tsx"
+      ],
+      "kernelFamily": "sparkles-text",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "typing-text",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/typing-text.tsx"
+      ],
+      "kernelFamily": "typing-text",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "word-rotate",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/word-rotate.tsx"
+      ],
+      "kernelFamily": "word-rotate",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "scramble-text",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/scramble-text.tsx"
+      ],
+      "kernelFamily": "scramble-text",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "glare-hover",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/glare-hover.tsx"
+      ],
+      "kernelFamily": "glare-hover",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "click-spark",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/click-spark.tsx"
+      ],
+      "kernelFamily": "click-spark",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "animated-list",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/animated-list.tsx"
+      ],
+      "kernelFamily": "animated-list",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "card-stack",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/card-stack.tsx"
+      ],
+      "kernelFamily": "card-stack",
+      "kernelRenderer": "interact",
+      "wave": 4,
+      "notes": "deadWidgetsArm=display"
+    },
+    {
+      "slug": "pill-nav",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/pill-nav.tsx"
+      ],
+      "kernelFamily": "pill-nav",
+      "kernelRenderer": "interact",
+      "wave": 4,
+      "notes": "deadWidgetsArm=nav"
+    },
+    {
+      "slug": "expandable-tabs",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/expandable-tabs.tsx"
+      ],
+      "kernelFamily": "expandable-tabs",
+      "kernelRenderer": "interact",
+      "wave": 4,
+      "notes": "interact tabs(); deadWidgetsArm=nav"
+    },
+    {
+      "slug": "explore-nav",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/explore-nav.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 4,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "bouncy-accordion",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/bouncy-accordion.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 4,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "token-swap",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/token-swap.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 4,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "receive-button",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/receive-button.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 4,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "family-wallet",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/family-wallet.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 4,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "dynamic-island",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/dynamic-island.tsx"
+      ],
+      "kernelFamily": "dynamic-island",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "confetti",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/confetti.tsx"
+      ],
+      "kernelFamily": "confetti",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "canvas; live fx()"
+    },
+    {
+      "slug": "particles",
+      "kind": "component",
+      "category": "premium",
+      "reactFiles": [
+        "packages/ui/src/components/particles.tsx"
+      ],
+      "kernelFamily": "particles",
+      "kernelRenderer": "fx",
+      "wave": 4,
+      "notes": "live fx()"
+    },
+    {
+      "slug": "actions",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/actions.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "artifact",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/artifact.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "branch",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/branch.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "chain-of-thought",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/chain-of-thought.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "ai-code-block",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/ai-code-block.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "context",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/context.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "conversation",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/conversation.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "ai-image",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/ai-image.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "inline-citation",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/inline-citation.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "loader",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/loader.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "message",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/message.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "open-in-chat",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/open-in-chat.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "plan",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/plan.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "prompt-input",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/prompt-input.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "queue",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/queue.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "reasoning",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/reasoning.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "response",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/response.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "sources",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/sources.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "suggestion",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/suggestion.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "task",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/task.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "text-shimmer",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/text-shimmer.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "tool",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/tool.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "web-preview",
+      "kind": "component",
+      "category": "ai-elements",
+      "reactFiles": [
+        "packages/ui/src/components/web-preview.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "words-preloader",
+      "kind": "component",
+      "category": "preloaders",
+      "reactFiles": [
+        "packages/ui/src/components/words-preloader.tsx"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 5,
+      "notes": "not in FAMILIES"
+    },
+    {
+      "slug": "login",
+      "kind": "block",
+      "category": "auth",
+      "reactFiles": [
+        "apps/www/lib/blocks/auth.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016 children must be ported"
+    },
+    {
+      "slug": "signup",
+      "kind": "block",
+      "category": "auth",
+      "reactFiles": [
+        "apps/www/lib/blocks/auth.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "forgot-password",
+      "kind": "block",
+      "category": "auth",
+      "reactFiles": [
+        "apps/www/lib/blocks/auth.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "otp",
+      "kind": "block",
+      "category": "auth",
+      "reactFiles": [
+        "apps/www/lib/blocks/auth.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "magic-link",
+      "kind": "block",
+      "category": "auth",
+      "reactFiles": [
+        "apps/www/lib/blocks/auth.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "hero",
+      "kind": "block",
+      "category": "marketing",
+      "reactFiles": [
+        "apps/www/lib/blocks/marketing.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "pricing",
+      "kind": "block",
+      "category": "marketing",
+      "reactFiles": [
+        "apps/www/lib/blocks/marketing.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "feature-grid",
+      "kind": "block",
+      "category": "marketing",
+      "reactFiles": [
+        "apps/www/lib/blocks/marketing.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "cta",
+      "kind": "block",
+      "category": "marketing",
+      "reactFiles": [
+        "apps/www/lib/blocks/marketing.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "testimonials",
+      "kind": "block",
+      "category": "marketing",
+      "reactFiles": [
+        "apps/www/lib/blocks/marketing.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "faq",
+      "kind": "block",
+      "category": "marketing",
+      "reactFiles": [
+        "apps/www/lib/blocks/marketing.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "footer",
+      "kind": "block",
+      "category": "marketing",
+      "reactFiles": [
+        "apps/www/lib/blocks/marketing.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "navbar",
+      "kind": "block",
+      "category": "marketing",
+      "reactFiles": [
+        "apps/www/lib/blocks/marketing.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "stats",
+      "kind": "block",
+      "category": "application",
+      "reactFiles": [
+        "apps/www/lib/blocks/application.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "settings",
+      "kind": "block",
+      "category": "application",
+      "reactFiles": [
+        "apps/www/lib/blocks/application.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "team",
+      "kind": "block",
+      "category": "application",
+      "reactFiles": [
+        "apps/www/lib/blocks/application.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "welcome",
+      "kind": "block",
+      "category": "onboarding",
+      "reactFiles": [
+        "apps/www/lib/blocks/onboarding.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "setup-wizard",
+      "kind": "block",
+      "category": "onboarding",
+      "reactFiles": [
+        "apps/www/lib/blocks/onboarding.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "setup-checklist",
+      "kind": "block",
+      "category": "onboarding",
+      "reactFiles": [
+        "apps/www/lib/blocks/onboarding.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "dashboard",
+      "kind": "block",
+      "category": "dashboard",
+      "reactFiles": [
+        "apps/www/lib/blocks/dashboard.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "billing",
+      "kind": "block",
+      "category": "billing",
+      "reactFiles": [
+        "apps/www/lib/blocks/billing.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "manage-subscription",
+      "kind": "block",
+      "category": "billing",
+      "reactFiles": [
+        "apps/www/lib/blocks/billing.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "payment-method",
+      "kind": "block",
+      "category": "billing",
+      "reactFiles": [
+        "apps/www/lib/blocks/billing.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "usage-dashboard",
+      "kind": "block",
+      "category": "billing",
+      "reactFiles": [
+        "apps/www/lib/blocks/billing.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "cancel-flow",
+      "kind": "block",
+      "category": "billing",
+      "reactFiles": [
+        "apps/www/lib/blocks/billing.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "checkout",
+      "kind": "block",
+      "category": "commerce",
+      "reactFiles": [
+        "apps/www/lib/blocks/commerce.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "payouts",
+      "kind": "block",
+      "category": "commerce",
+      "reactFiles": [
+        "apps/www/lib/blocks/commerce.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "product-grid",
+      "kind": "block",
+      "category": "commerce",
+      "reactFiles": [
+        "apps/www/lib/blocks/commerce.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "invoice",
+      "kind": "block",
+      "category": "commerce",
+      "reactFiles": [
+        "apps/www/lib/blocks/commerce.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "page-header",
+      "kind": "block",
+      "category": "page",
+      "reactFiles": [
+        "apps/www/lib/blocks/page-sections.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "filter-bar",
+      "kind": "block",
+      "category": "page",
+      "reactFiles": [
+        "apps/www/lib/blocks/page-sections.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "empty-state",
+      "kind": "block",
+      "category": "page",
+      "reactFiles": [
+        "apps/www/lib/blocks/page-sections.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "status-page",
+      "kind": "block",
+      "category": "page",
+      "reactFiles": [
+        "apps/www/lib/blocks/status-page.tsx",
+        "apps/www/lib/blocks/page-sections.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "family page; implementation in status-page.tsx re-exported by page-sections"
+    },
+    {
+      "slug": "chat-thread",
+      "kind": "block",
+      "category": "ai",
+      "reactFiles": [
+        "apps/www/lib/blocks/ai.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "prompt-box",
+      "kind": "block",
+      "category": "ai",
+      "reactFiles": [
+        "apps/www/lib/blocks/ai.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "ai-response",
+      "kind": "block",
+      "category": "ai",
+      "reactFiles": [
+        "apps/www/lib/blocks/ai.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "not-found",
+      "kind": "block",
+      "category": "states",
+      "reactFiles": [
+        "apps/www/lib/blocks/states.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "error-state",
+      "kind": "block",
+      "category": "states",
+      "reactFiles": [
+        "apps/www/lib/blocks/states.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "success-state",
+      "kind": "block",
+      "category": "states",
+      "reactFiles": [
+        "apps/www/lib/blocks/states.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "maintenance",
+      "kind": "block",
+      "category": "states",
+      "reactFiles": [
+        "apps/www/lib/blocks/states.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "email-welcome",
+      "kind": "block",
+      "category": "email",
+      "reactFiles": [
+        "apps/www/lib/blocks/email.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "email-receipt",
+      "kind": "block",
+      "category": "email",
+      "reactFiles": [
+        "apps/www/lib/blocks/email.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "email-verify",
+      "kind": "block",
+      "category": "email",
+      "reactFiles": [
+        "apps/www/lib/blocks/email.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "notification-panel",
+      "kind": "block",
+      "category": "notifications",
+      "reactFiles": [
+        "apps/www/lib/blocks/notifications.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "activity-feed",
+      "kind": "block",
+      "category": "notifications",
+      "reactFiles": [
+        "apps/www/lib/blocks/notifications.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "toast-stack",
+      "kind": "block",
+      "category": "notifications",
+      "reactFiles": [
+        "apps/www/lib/blocks/notifications.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "nps-survey",
+      "kind": "block",
+      "category": "survey",
+      "reactFiles": [
+        "apps/www/lib/blocks/survey.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "feedback-form",
+      "kind": "block",
+      "category": "survey",
+      "reactFiles": [
+        "apps/www/lib/blocks/survey.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "contact-form",
+      "kind": "block",
+      "category": "survey",
+      "reactFiles": [
+        "apps/www/lib/blocks/survey.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "post-card",
+      "kind": "block",
+      "category": "social",
+      "reactFiles": [
+        "apps/www/lib/blocks/social.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "comment-thread",
+      "kind": "block",
+      "category": "social",
+      "reactFiles": [
+        "apps/www/lib/blocks/social.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "profile-card",
+      "kind": "block",
+      "category": "social",
+      "reactFiles": [
+        "apps/www/lib/blocks/social.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "changelog",
+      "kind": "block",
+      "category": "changelog",
+      "reactFiles": [
+        "apps/www/lib/blocks/changelog.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "integrations",
+      "kind": "block",
+      "category": "integrations",
+      "reactFiles": [
+        "apps/www/lib/blocks/integrations.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "waitlist",
+      "kind": "block",
+      "category": "waitlist",
+      "reactFiles": [
+        "apps/www/lib/blocks/waitlist.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "feature-matrix",
+      "kind": "block",
+      "category": "feature-matrix",
+      "reactFiles": [
+        "apps/www/lib/blocks/feature-matrix.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "product-detail",
+      "kind": "block",
+      "category": "store",
+      "reactFiles": [
+        "apps/www/lib/blocks/store.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "cart",
+      "kind": "block",
+      "category": "store",
+      "reactFiles": [
+        "apps/www/lib/blocks/store.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "order-tracking",
+      "kind": "block",
+      "category": "store",
+      "reactFiles": [
+        "apps/www/lib/blocks/store.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "order-history",
+      "kind": "block",
+      "category": "store",
+      "reactFiles": [
+        "apps/www/lib/blocks/store.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "reviews",
+      "kind": "block",
+      "category": "store",
+      "reactFiles": [
+        "apps/www/lib/blocks/store.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "account-security",
+      "kind": "block",
+      "category": "account",
+      "reactFiles": [
+        "apps/www/lib/blocks/account.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "sessions",
+      "kind": "block",
+      "category": "account",
+      "reactFiles": [
+        "apps/www/lib/blocks/account.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "api-keys",
+      "kind": "block",
+      "category": "account",
+      "reactFiles": [
+        "apps/www/lib/blocks/account.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "notification-preferences",
+      "kind": "block",
+      "category": "account",
+      "reactFiles": [
+        "apps/www/lib/blocks/account.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "user-management",
+      "kind": "block",
+      "category": "admin",
+      "reactFiles": [
+        "apps/www/lib/blocks/admin.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "analytics",
+      "kind": "block",
+      "category": "admin",
+      "reactFiles": [
+        "apps/www/lib/blocks/admin.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "kanban-board",
+      "kind": "block",
+      "category": "admin",
+      "reactFiles": [
+        "apps/www/lib/blocks/admin.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "audit-log",
+      "kind": "block",
+      "category": "admin",
+      "reactFiles": [
+        "apps/www/lib/blocks/admin.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "blog",
+      "kind": "block",
+      "category": "content",
+      "reactFiles": [
+        "apps/www/lib/blocks/content.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "blog-post",
+      "kind": "block",
+      "category": "content",
+      "reactFiles": [
+        "apps/www/lib/blocks/content.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "logo-cloud",
+      "kind": "block",
+      "category": "content",
+      "reactFiles": [
+        "apps/www/lib/blocks/content.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "about",
+      "kind": "block",
+      "category": "content",
+      "reactFiles": [
+        "apps/www/lib/blocks/content.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "app-shell-chrome",
+      "kind": "block",
+      "category": "shell",
+      "reactFiles": [
+        "apps/www/lib/blocks/shell.tsx",
+        "apps/www/lib/blocks/registry.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 6,
+      "notes": "SPEC-016"
+    },
+    {
+      "slug": "saas",
+      "kind": "template",
+      "category": "product",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "gold path; compose from blocks dashboard+stats"
+    },
+    {
+      "slug": "admin",
+      "kind": "template",
+      "category": "product",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "gold path; dashboard--admin-overview"
+    },
+    {
+      "slug": "docs",
+      "kind": "template",
+      "category": "product",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "compose changelog + site chrome"
+    },
+    {
+      "slug": "store",
+      "kind": "template",
+      "category": "product",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "compose hero/product-grid/testimonials/cta"
+    },
+    {
+      "slug": "landing",
+      "kind": "template",
+      "category": "product",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "compose marketing stack"
+    },
+    {
+      "slug": "landing-studio",
+      "kind": "template",
+      "category": "landing",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "compose"
+    },
+    {
+      "slug": "landing-ops",
+      "kind": "template",
+      "category": "landing",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "compose"
+    },
+    {
+      "slug": "landing-secure",
+      "kind": "template",
+      "category": "landing",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "compose"
+    },
+    {
+      "slug": "landing-care",
+      "kind": "template",
+      "category": "landing",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "compose"
+    },
+    {
+      "slug": "landing-shop",
+      "kind": "template",
+      "category": "landing",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "compose"
+    },
+    {
+      "slug": "landing-docs",
+      "kind": "template",
+      "category": "landing",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "compose"
+    },
+    {
+      "slug": "landing-premium",
+      "kind": "template",
+      "category": "landing",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "compose"
+    },
+    {
+      "slug": "landing-agents",
+      "kind": "template",
+      "category": "landing",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "compose"
+    },
+    {
+      "slug": "landing-coverage",
+      "kind": "template",
+      "category": "landing",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "compose"
+    },
+    {
+      "slug": "landing-broadcast",
+      "kind": "template",
+      "category": "landing",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "compose"
+    },
+    {
+      "slug": "landing-agency",
+      "kind": "template",
+      "category": "landing",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "compose"
+    },
+    {
+      "slug": "landing-glass",
+      "kind": "template",
+      "category": "landing",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "compose"
+    },
+    {
+      "slug": "mail",
+      "kind": "template",
+      "category": "product",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "pro pack; notification-panel+activity-feed"
+    },
+    {
+      "slug": "chat",
+      "kind": "template",
+      "category": "product",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "pro pack; chat-thread+prompt-box"
+    },
+    {
+      "slug": "finance",
+      "kind": "template",
+      "category": "product",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/src/compose.ts"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "pro pack; payouts+invoice"
+    },
+    {
+      "slug": "default",
+      "kind": "template",
+      "category": "starter",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/templates/default"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "bundled; blocks=[]"
+    },
+    {
+      "slug": "dashboard",
+      "kind": "template",
+      "category": "starter",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/templates/dashboard"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "bundled"
+    },
+    {
+      "slug": "marketing",
+      "kind": "template",
+      "category": "starter",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/templates/marketing"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "bundled"
+    },
+    {
+      "slug": "gontify",
+      "kind": "template",
+      "category": "starter",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/templates/gontify"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "customStage:true; last"
+    },
+    {
+      "slug": "portfolio",
+      "kind": "template",
+      "category": "starter",
+      "reactFiles": [
+        "apps/www/lib/templates/catalog.ts",
+        "packages/create-cronus-app/templates/portfolio"
+      ],
+      "kernelFamily": null,
+      "kernelRenderer": "missing",
+      "wave": 7,
+      "notes": "customStage:true; last"
+    }
+  ]
+}
