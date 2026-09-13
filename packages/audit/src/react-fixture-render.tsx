@@ -1,4 +1,4 @@
-import { TimePicker } from "@cronus-ui/ui";
+import { CurrencyInput, PhoneInput, TimePicker } from "@cronus-ui/ui";
 import { Alert, AlertDescription, AlertTitle } from "@cronus-ui/ui/alert";
 import { Avatar, AvatarFallback } from "@cronus-ui/ui/avatar";
 import { AvatarGroup } from "@cronus-ui/ui/avatar-group";
@@ -61,6 +61,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@cronus-ui/ui/popover";
 import { Progress } from "@cronus-ui/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@cronus-ui/ui/radio-group";
 import { Rating } from "@cronus-ui/ui/rating";
+import { ScrollArea } from "@cronus-ui/ui/scroll-area";
 import { Separator } from "@cronus-ui/ui/separator";
 import {
   Sheet,
@@ -73,6 +74,7 @@ import { Skeleton } from "@cronus-ui/ui/skeleton";
 import { Slider } from "@cronus-ui/ui/slider";
 import { Toaster } from "@cronus-ui/ui/sonner";
 import { Spinner } from "@cronus-ui/ui/spinner";
+import { StatusDot } from "@cronus-ui/ui/status-dot";
 import {
   Stepper,
   StepperIndicator,
@@ -84,6 +86,7 @@ import { Switch } from "@cronus-ui/ui/switch";
 import { Textarea } from "@cronus-ui/ui/textarea";
 import { Toggle } from "@cronus-ui/ui/toggle";
 import { ToggleGroup, ToggleGroupItem } from "@cronus-ui/ui/toggle-group";
+import { Toolbar, ToolbarButton } from "@cronus-ui/ui/toolbar";
 import type { ReactElement } from "react";
 import { CalendarFixture } from "./calendar-fixture.js";
 import {
@@ -91,8 +94,12 @@ import {
   BarChartFixture,
   LineChartFixture,
   PieChartFixture,
+  RadarChartFixture,
+  RingChartFixture,
+  ScatterChartFixture,
   SparklineFixture,
 } from "./chart-fixtures.js";
+import { ColorPickerFixture } from "./color-picker-fixture.js";
 import { DataTableFixture } from "./data-table-fixture.js";
 import { DatePickerFixture } from "./date-picker-fixture.js";
 import { ModeToggleFixture } from "./mode-toggle-fixture.js";
@@ -104,6 +111,21 @@ function stringList(value: unknown): string[] {
     ? value.filter((item): item is string => typeof item === "string")
     : [];
 }
+
+const FALLBACK_SCROLL_ITEMS = [
+  "v1.2.0-beta.12",
+  "v1.2.0-beta.11",
+  "v1.2.0-beta.10",
+  "v1.2.0-beta.9",
+  "v1.2.0-beta.8",
+  "v1.2.0-beta.7",
+  "v1.2.0-beta.6",
+  "v1.2.0-beta.5",
+  "v1.2.0-beta.4",
+  "v1.2.0-beta.3",
+  "v1.2.0-beta.2",
+  "v1.2.0-beta.1",
+];
 
 export function renderReactFixture(fixture: ParityFixture): ReactElement {
   if (fixture.family === "button") {
@@ -1091,6 +1113,134 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
         </NavigationMenuList>
       </NavigationMenu>
     );
+  }
+  if (fixture.family === "radar-chart") {
+    return <RadarChartFixture />;
+  }
+  if (fixture.family === "scatter-chart") {
+    return <ScatterChartFixture />;
+  }
+  if (fixture.family === "ring-chart") {
+    return <RingChartFixture />;
+  }
+  if (fixture.family === "phone-input") {
+    const {
+      value,
+      "aria-label": ariaLabel,
+      items: _items,
+      options: _options,
+      ...rest
+    } = fixture.props as {
+      value?: string;
+      "aria-label"?: string;
+      items?: unknown;
+      options?: unknown;
+    };
+    return (
+      <PhoneInput
+        defaultValue={typeof value === "string" ? value : undefined}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "Phone number"}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "currency-input") {
+    const {
+      value,
+      "aria-label": ariaLabel,
+      items: _items,
+      options: _options,
+      ...rest
+    } = fixture.props as {
+      value?: number;
+      "aria-label"?: string;
+      items?: unknown;
+      options?: unknown;
+    };
+    return (
+      <CurrencyInput
+        defaultValue={typeof value === "number" ? value : undefined}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "Amount"}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "color-picker") {
+    const { value, "aria-label": ariaLabel } = fixture.props as {
+      value?: string;
+      "aria-label"?: string;
+    };
+    return (
+      <ColorPickerFixture
+        defaultValue={typeof value === "string" ? value : undefined}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+      />
+    );
+  }
+  if (fixture.family === "scroll-area") {
+    const {
+      items,
+      options,
+      className,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      className?: string;
+      "aria-label"?: string;
+    };
+    const labels = stringList(items ?? options);
+    const rows = labels.length >= 8 ? labels : FALLBACK_SCROLL_ITEMS;
+    return (
+      <ScrollArea
+        className={typeof className === "string" ? className : "h-32 w-48"}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "audit-scroll-area"}
+        {...rest}
+      >
+        <div className="flex flex-col gap-1 p-2">
+          {rows.map((item) => (
+            <div key={item}>{item}</div>
+          ))}
+        </div>
+      </ScrollArea>
+    );
+  }
+  if (fixture.family === "toolbar") {
+    const {
+      items,
+      options,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      "aria-label"?: string;
+    };
+    const labels = stringList(items ?? options);
+    const buttons = labels.length > 0 ? labels : ["Bold", "Italic"];
+    return (
+      <Toolbar aria-label={typeof ariaLabel === "string" ? ariaLabel : "audit-toolbar"} {...rest}>
+        {buttons.map((item) => (
+          <ToolbarButton key={item}>{item}</ToolbarButton>
+        ))}
+      </Toolbar>
+    );
+  }
+  if (fixture.family === "status-dot") {
+    const { status, ...rest } = fixture.props as {
+      status?:
+        | "online"
+        | "offline"
+        | "busy"
+        | "away"
+        | "success"
+        | "warning"
+        | "error"
+        | "info"
+        | "neutral";
+    };
+    return <StatusDot status={status ?? "online"} {...rest} />;
   }
   throw new Error(`renderReactFixture: unported family ${fixture.family}`);
 }

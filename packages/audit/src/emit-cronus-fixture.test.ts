@@ -312,6 +312,73 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("navigation-menu", "default"))).toBe("nav");
   });
 
+  it("emits wave 1g labels, items, and values without source", () => {
+    const src = emitCronusApp([
+      getFixture("radar-chart", "default"),
+      getFixture("scatter-chart", "default"),
+      getFixture("ring-chart", "default"),
+      getFixture("phone-input", "default"),
+      getFixture("currency-input", "default"),
+      getFixture("color-picker", "default"),
+      getFixture("scroll-area", "default"),
+      getFixture("toolbar", "default"),
+      getFixture("status-dot", "default"),
+    ]);
+    expect(src).toContain("component RadarChartDefault layout:inline style:radar-chart {");
+    expect(src).toContain('label "Metrics"');
+    expect(src).toContain('  text "Speed"');
+    expect(src).toContain('  text "Reliability"');
+    expect(src).toContain("component ScatterChartDefault layout:inline style:scatter-chart {");
+    expect(src).toContain('label "Reach"');
+    expect(src).toContain('  text "A"');
+    expect(src).toContain("component RingChartDefault layout:inline style:ring-chart {");
+    expect(src).toContain('  text "Desktop"');
+    expect(src).toContain('  text "Mobile"');
+    expect(src).toContain("component PhoneInputDefault layout:inline style:phone-input {");
+    expect(src).toContain('label "Phone number"');
+    expect(src).toContain('  value:"+5511987654321"');
+    expect(src).toContain("component CurrencyInputDefault layout:inline style:currency-input {");
+    expect(src).toContain('label "Amount"');
+    expect(src).toContain("  value:12345");
+    expect(src).toContain("component ColorPickerDefault layout:inline style:color-picker {");
+    expect(src).toContain('label "Color"');
+    expect(src).toContain('  value:"oklch(0.62 0.21 256)"');
+    expect(src).toContain("component ScrollAreaDefault layout:inline style:scroll-area {");
+    expect(src).toContain('  text "v1.2.0-beta.12"');
+    expect(src).toContain('  text "v1.2.0-beta.1"');
+    expect(src).toContain("component ToolbarDefault layout:inline style:toolbar {");
+    expect(src).toContain('  text "Bold"');
+    expect(src).toContain('  text "Italic"');
+    expect(src).toContain("component StatusDotDefault layout:inline style:status-dot {");
+    expect(src).toContain("use RadarChartDefault");
+    expect(src).toContain("use ScatterChartDefault");
+    expect(src).toContain("use RingChartDefault");
+    expect(src).toContain("use PhoneInputDefault");
+    expect(src).toContain("use CurrencyInputDefault");
+    expect(src).toContain("use ColorPickerDefault");
+    expect(src).toContain("use ScrollAreaDefault");
+    expect(src).toContain("use ToolbarDefault");
+    expect(src).toContain("use StatusDotDefault");
+    expect(src).toContain('page "/audit/radar-chart/default" type:custom');
+    expect(src).toContain('page "/audit/phone-input/default" type:custom');
+    expect(src).toContain('page "/audit/color-picker/default" type:custom');
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for wave 1g families", () => {
+    expect(expectedTag(getFixture("radar-chart", "default"))).toBe("div");
+    expect(expectedTag(getFixture("scatter-chart", "default"))).toBe("div");
+    expect(expectedTag(getFixture("ring-chart", "default"))).toBe("div");
+    expect(expectedTag(getFixture("phone-input", "default"))).toBe("div");
+    expect(expectedTag(getFixture("currency-input", "default"))).toBe("div");
+    expect(expectedTag(getFixture("color-picker", "default"))).toBe("button");
+    expect(expectedTag(getFixture("scroll-area", "default"))).toBe("div");
+    expect(expectedTag(getFixture("toolbar", "default"))).toBe("div");
+    expect(expectedTag(getFixture("status-dot", "default"))).toBe("span");
+  });
+
   it("drops data-size from expect.attrs", () => {
     const parsed = parseParityFixture({
       id: "x",

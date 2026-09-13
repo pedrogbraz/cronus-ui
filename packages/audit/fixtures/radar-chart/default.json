@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "radar-chart",
+  "props": {
+    "label": "Metrics",
+    "items": ["Speed", "Reliability", "Comfort"]
+  },
+  "expect": {
+    "slot": "radar-chart",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "radar-chart"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "toolbar",
+  "props": {
+    "aria-label": "Formatting",
+    "items": ["Bold", "Italic"]
+  },
+  "expect": {
+    "slot": "toolbar",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "toolbar",
+      "role": "toolbar"
+    }
+  }
+}

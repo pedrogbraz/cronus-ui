@@ -57,6 +57,15 @@ const FAMILY_TAGS: Record<string, string> = {
   sidebar: "aside",
   sonner: "div",
   "navigation-menu": "nav",
+  "radar-chart": "div",
+  "scatter-chart": "div",
+  "ring-chart": "div",
+  "phone-input": "div",
+  "currency-input": "div",
+  "color-picker": "button",
+  "scroll-area": "div",
+  toolbar: "div",
+  "status-dot": "span",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */

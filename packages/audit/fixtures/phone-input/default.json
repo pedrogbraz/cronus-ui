@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "phone-input",
+  "props": {
+    "value": "+5511987654321",
+    "aria-label": "Phone number"
+  },
+  "expect": {
+    "slot": "phone-input",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "phone-input",
+      "role": "group"
+    }
+  }
+}

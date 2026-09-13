@@ -1,0 +1,28 @@
+{
+  "id": "default",
+  "family": "scroll-area",
+  "props": {
+    "aria-label": "Release notes",
+    "items": [
+      "v1.2.0-beta.12",
+      "v1.2.0-beta.11",
+      "v1.2.0-beta.10",
+      "v1.2.0-beta.9",
+      "v1.2.0-beta.8",
+      "v1.2.0-beta.7",
+      "v1.2.0-beta.6",
+      "v1.2.0-beta.5",
+      "v1.2.0-beta.4",
+      "v1.2.0-beta.3",
+      "v1.2.0-beta.2",
+      "v1.2.0-beta.1"
+    ]
+  },
+  "expect": {
+    "slot": "scroll-area",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "scroll-area"
+    }
+  }
+}

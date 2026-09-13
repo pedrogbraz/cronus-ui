@@ -4,6 +4,9 @@ import { AreaChart } from "@cronus-ui/ui/area-chart";
 import { BarChart } from "@cronus-ui/ui/bar-chart";
 import { LineChart } from "@cronus-ui/ui/line-chart";
 import { PieChart } from "@cronus-ui/ui/pie-chart";
+import { RadarChart } from "@cronus-ui/ui/radar-chart";
+import { RingChart } from "@cronus-ui/ui/ring-chart";
+import { ScatterChart } from "@cronus-ui/ui/scatter-chart";
 import { Sparkline } from "@cronus-ui/ui/sparkline";
 
 /** Tiny static series — nested objects cannot round-trip through emit. */
@@ -32,6 +35,34 @@ const PIE_SERIES = [
 ];
 
 const FALLBACK_SPARKLINE = [4, 8, 6, 10, 7];
+
+const RADAR_DATA = [
+  { metric: "Speed", desktop: 4 },
+  { metric: "Reliability", desktop: 8 },
+  { metric: "Comfort", desktop: 6 },
+];
+
+const SCATTER_SERIES = [
+  {
+    key: "desktop",
+    label: "Desktop",
+    data: [
+      { x: 1, y: 4 },
+      { x: 2, y: 8 },
+      { x: 3, y: 6 },
+    ],
+  },
+];
+
+const RING_DATA = [
+  { key: "desktop", value: 4 },
+  { key: "mobile", value: 8 },
+];
+
+const RING_SERIES = [
+  { key: "desktop", label: "Desktop" },
+  { key: "mobile", label: "Mobile" },
+];
 
 function numberList(value: unknown): number[] {
   return Array.isArray(value)
@@ -66,4 +97,16 @@ export function SparklineFixture({
   return (
     <Sparkline data={series.length > 0 ? series : FALLBACK_SPARKLINE} aria-label={ariaLabel} />
   );
+}
+
+export function RadarChartFixture() {
+  return <RadarChart data={RADAR_DATA} series={SERIES} />;
+}
+
+export function ScatterChartFixture() {
+  return <ScatterChart series={SCATTER_SERIES} />;
+}
+
+export function RingChartFixture() {
+  return <RingChart data={RING_DATA} series={RING_SERIES} />;
 }

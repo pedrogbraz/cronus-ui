@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "scatter-chart",
+  "props": {
+    "label": "Reach",
+    "items": ["A", "B", "C"]
+  },
+  "expect": {
+    "slot": "scatter-chart",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "scatter-chart"
+    }
+  }
+}
