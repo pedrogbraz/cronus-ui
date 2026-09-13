@@ -763,6 +763,74 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("tree-view", "default"))).toBe("div");
   });
 
+  it("emits wave 1m labels and items without source", () => {
+    const src = emitCronusApp([
+      getFixture("tilt-card", "default"),
+      getFixture("star-border", "default"),
+      getFixture("glass-card", "default"),
+      getFixture("terminal", "default"),
+      getFixture("video-player", "default"),
+      getFixture("text-effect", "default"),
+      getFixture("spotlight-card", "default"),
+      getFixture("animated-list", "default"),
+      getFixture("toast", "default"),
+    ]);
+    expect(src).toContain("component TiltCardDefault layout:inline style:tilt-card {");
+    expect(src).toContain('label "Hover me"');
+    expect(src).toContain("component StarBorderDefault layout:inline style:star-border {");
+    expect(src).toContain('label "Twinkle"');
+    expect(src).toContain("component GlassCardDefault layout:inline style:glass-card {");
+    expect(src).toContain('label "Frosted"');
+    expect(src).toContain("component TerminalDefault layout:inline style:terminal {");
+    expect(src).toContain('label "zsh"');
+    expect(src).toContain('  text "bunx cronus-ui add button"');
+    expect(src).toContain('  text "added button"');
+    expect(src).toContain("component VideoPlayerDefault layout:inline style:video-player {");
+    expect(src).toContain('label "Launch video"');
+    expect(src).toContain("component TextEffectDefault layout:inline style:text-effect {");
+    expect(src).toContain('label "Headline"');
+    expect(src).toContain("component SpotlightCardDefault layout:inline style:spotlight-card {");
+    expect(src).toContain('label "Spotlight"');
+    expect(src).toContain("component AnimatedListDefault layout:inline style:animated-list {");
+    expect(src).toContain('  text "Alpha"');
+    expect(src).toContain('  text "Beta"');
+    expect(src).toContain("component ToastDefault layout:inline style:toast {");
+    expect(src).toContain('label "Saved"');
+    expect(src).toContain("use TiltCardDefault");
+    expect(src).toContain("use StarBorderDefault");
+    expect(src).toContain("use GlassCardDefault");
+    expect(src).toContain("use TerminalDefault");
+    expect(src).toContain("use VideoPlayerDefault");
+    expect(src).toContain("use TextEffectDefault");
+    expect(src).toContain("use SpotlightCardDefault");
+    expect(src).toContain("use AnimatedListDefault");
+    expect(src).toContain("use ToastDefault");
+    expect(src).toContain('page "/audit/tilt-card/default" type:custom');
+    expect(src).toContain('page "/audit/star-border/default" type:custom');
+    expect(src).toContain('page "/audit/glass-card/default" type:custom');
+    expect(src).toContain('page "/audit/terminal/default" type:custom');
+    expect(src).toContain('page "/audit/video-player/default" type:custom');
+    expect(src).toContain('page "/audit/text-effect/default" type:custom');
+    expect(src).toContain('page "/audit/spotlight-card/default" type:custom');
+    expect(src).toContain('page "/audit/animated-list/default" type:custom');
+    expect(src).toContain('page "/audit/toast/default" type:custom');
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for wave 1m families", () => {
+    expect(expectedTag(getFixture("tilt-card", "default"))).toBe("div");
+    expect(expectedTag(getFixture("star-border", "default"))).toBe("div");
+    expect(expectedTag(getFixture("glass-card", "default"))).toBe("div");
+    expect(expectedTag(getFixture("terminal", "default"))).toBe("div");
+    expect(expectedTag(getFixture("video-player", "default"))).toBe("div");
+    expect(expectedTag(getFixture("text-effect", "default"))).toBe("p");
+    expect(expectedTag(getFixture("spotlight-card", "default"))).toBe("div");
+    expect(expectedTag(getFixture("animated-list", "default"))).toBe("ul");
+    expect(expectedTag(getFixture("toast", "default"))).toBe("div");
+  });
+
   it("drops data-size from expect.attrs", () => {
     const parsed = parseParityFixture({
       id: "x",

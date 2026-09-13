@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "glass-card",
+  "props": {
+    "children": "Frosted",
+    "className": "w-72"
+  },
+  "expect": {
+    "slot": "glass-card",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "glass-card"
+    }
+  }
+}

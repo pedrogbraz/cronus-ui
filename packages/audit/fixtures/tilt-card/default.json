@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "tilt-card",
+  "props": {
+    "children": "Hover me",
+    "className": "w-72"
+  },
+  "expect": {
+    "slot": "tilt-card",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "tilt-card"
+    }
+  }
+}

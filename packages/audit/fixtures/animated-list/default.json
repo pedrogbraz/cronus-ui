@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "animated-list",
+  "props": {
+    "items": ["Alpha", "Beta"]
+  },
+  "expect": {
+    "slot": "animated-list",
+    "tag": "ul",
+    "attrs": {
+      "data-slot": "animated-list"
+    }
+  }
+}

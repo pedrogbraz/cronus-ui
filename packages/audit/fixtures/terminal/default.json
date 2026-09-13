@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "terminal",
+  "props": {
+    "title": "zsh",
+    "items": ["bunx cronus-ui add button", "added button"]
+  },
+  "expect": {
+    "slot": "terminal",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "terminal"
+    }
+  }
+}

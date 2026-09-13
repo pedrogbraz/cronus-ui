@@ -111,6 +111,15 @@ const FAMILY_TAGS: Record<string, string> = {
   "word-rotate": "span",
   timeline: "ol",
   "tree-view": "div",
+  "tilt-card": "div",
+  "star-border": "div",
+  "glass-card": "div",
+  terminal: "div",
+  "video-player": "div",
+  "text-effect": "p",
+  "spotlight-card": "div",
+  "animated-list": "ul",
+  toast: "div",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */

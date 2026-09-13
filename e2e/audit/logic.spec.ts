@@ -1465,6 +1465,118 @@ test.describe("logic parity", () => {
     await expect(cronusFrame(page).locator('[data-slot="tree-view-control"]')).toHaveCount(0);
   });
 
+  test("tilt-card is a div, not tilt-card-control", async ({ page }) => {
+    await page.goto("/audit/tilt-card?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="tilt-card"]');
+    const cronus = cronusFrame(page).locator('[data-slot="tilt-card"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="tilt-card-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="tilt-card-control"]')).toHaveCount(0);
+  });
+
+  test("star-border is a div, not star-border-control", async ({ page }) => {
+    await page.goto("/audit/star-border?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="star-border"]');
+    const cronus = cronusFrame(page).locator('[data-slot="star-border"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="star-border-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="star-border-control"]')).toHaveCount(0);
+  });
+
+  test("glass-card is a div, not glass-card-control", async ({ page }) => {
+    await page.goto("/audit/glass-card?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="glass-card"]');
+    const cronus = cronusFrame(page).locator('[data-slot="glass-card"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="glass-card-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="glass-card-control"]')).toHaveCount(0);
+  });
+
+  test("terminal exposes terminal or terminal-screen, not terminal-control", async ({ page }) => {
+    await page.goto("/audit/terminal?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="terminal"]');
+    const reactScreen = page.locator('[data-audit-side="react"] [data-slot="terminal-screen"]');
+    const cronus = cronusFrame(page).locator('[data-slot="terminal"]');
+    const cronusScreen = cronusFrame(page).locator('[data-slot="terminal-screen"]');
+    await expect(react).toHaveCount(1);
+    await expect(reactScreen).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect((await cronus.count()) + (await cronusScreen.count())).toBeGreaterThan(0);
+    await expect(page.locator('[data-slot="terminal-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="terminal-control"]')).toHaveCount(0);
+  });
+
+  test("video-player is a div, not video-player-control", async ({ page }) => {
+    await page.goto("/audit/video-player?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="video-player"]');
+    const cronus = cronusFrame(page).locator('[data-slot="video-player"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="video-player-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="video-player-control"]')).toHaveCount(0);
+  });
+
+  test("text-effect is a p, not text-effect-control", async ({ page }) => {
+    await page.goto("/audit/text-effect?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="text-effect"]');
+    const cronus = cronusFrame(page).locator('[data-slot="text-effect"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("P");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("P");
+    await expect(page.locator('[data-slot="text-effect-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="text-effect-control"]')).toHaveCount(0);
+  });
+
+  test("spotlight-card is a div, not spotlight-card-control", async ({ page }) => {
+    await page.goto("/audit/spotlight-card?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="spotlight-card"]');
+    const cronus = cronusFrame(page).locator('[data-slot="spotlight-card"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="spotlight-card-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="spotlight-card-control"]')).toHaveCount(0);
+  });
+
+  test("animated-list is a ul, not animated-list-control", async ({ page }) => {
+    await page.goto("/audit/animated-list?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="animated-list"]');
+    const cronus = cronusFrame(page).locator('[data-slot="animated-list"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("UL");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("UL");
+    await expect(page.locator('[data-slot="animated-list-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="animated-list-control"]')).toHaveCount(0);
+  });
+
+  test("toast is a visible div with data-slot toast, not toaster-only empty", async ({ page }) => {
+    await page.goto("/audit/toast?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="toast"]');
+    const cronus = cronusFrame(page).locator('[data-slot="toast"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(react).toBeVisible();
+    await expect(cronus).toBeVisible();
+    await expect(page.locator('[data-slot="toast-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="toast-control"]')).toHaveCount(0);
+  });
+
   test("workspace-switcher is a button, not workspace-switcher-control", async ({ page }) => {
     await page.goto("/audit/workspace-switcher?fixture=default&preset=aurora&mode=dark");
     const react = page.locator('[data-audit-side="react"] [data-slot="workspace-switcher"]');

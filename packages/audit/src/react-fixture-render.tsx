@@ -5,15 +5,17 @@ import {
   FloatingLabelInput,
   PhoneInput,
   SplitButton,
+  TiltCard,
   TimePicker,
 } from "@cronus-ui/ui";
+import { Alert, AlertDescription, AlertTitle } from "@cronus-ui/ui/alert";
 import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
   AlertDialogTitle,
 } from "@cronus-ui/ui/alert-dialog";
-import { Alert, AlertDescription, AlertTitle } from "@cronus-ui/ui/alert";
+import { AnimatedList } from "@cronus-ui/ui/animated-list";
 import { Avatar, AvatarFallback } from "@cronus-ui/ui/avatar";
 import { AvatarGroup } from "@cronus-ui/ui/avatar-group";
 import { Badge } from "@cronus-ui/ui/badge";
@@ -54,6 +56,7 @@ import { Fab } from "@cronus-ui/ui/fab";
 import { Field, FieldDescription, FieldLabel } from "@cronus-ui/ui/field";
 import { FileDropzone } from "@cronus-ui/ui/file-dropzone";
 import { FormItem } from "@cronus-ui/ui/form";
+import { GlassCard } from "@cronus-ui/ui/glass-card";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@cronus-ui/ui/hover-card";
 import { Input } from "@cronus-ui/ui/input";
 import { InputGroup, InputGroupAddon } from "@cronus-ui/ui/input-group";
@@ -88,14 +91,13 @@ import { PillNav } from "@cronus-ui/ui/pill-nav";
 import { Popover, PopoverContent, PopoverTrigger } from "@cronus-ui/ui/popover";
 import { Progress } from "@cronus-ui/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@cronus-ui/ui/radio-group";
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@cronus-ui/ui/resizable";
 import { Rating } from "@cronus-ui/ui/rating";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@cronus-ui/ui/resizable";
 import { Reveal } from "@cronus-ui/ui/reveal";
 import { RichTextEditor } from "@cronus-ui/ui/rich-text-editor";
 import { ScrollArea } from "@cronus-ui/ui/scroll-area";
 import { SegmentedControl, SegmentedControlItem } from "@cronus-ui/ui/segmented-control";
 import { Separator } from "@cronus-ui/ui/separator";
-import { SignaturePad } from "@cronus-ui/ui/signature-pad";
 import {
   Sheet,
   SheetContent,
@@ -104,11 +106,14 @@ import {
   SheetTitle,
 } from "@cronus-ui/ui/sheet";
 import { Shimmer } from "@cronus-ui/ui/shimmer";
+import { SignaturePad } from "@cronus-ui/ui/signature-pad";
 import { Skeleton } from "@cronus-ui/ui/skeleton";
 import { Slider } from "@cronus-ui/ui/slider";
 import { Toaster } from "@cronus-ui/ui/sonner";
 import { SparklesText } from "@cronus-ui/ui/sparkles-text";
 import { Spinner } from "@cronus-ui/ui/spinner";
+import { SpotlightCard } from "@cronus-ui/ui/spotlight-card";
+import { StarBorder } from "@cronus-ui/ui/star-border";
 import { StatusDot } from "@cronus-ui/ui/status-dot";
 import {
   Stepper,
@@ -120,14 +125,16 @@ import {
 import { Switch } from "@cronus-ui/ui/switch";
 import { TableOfContents } from "@cronus-ui/ui/table-of-contents";
 import { TagsInput } from "@cronus-ui/ui/tags-input";
-import { Textarea } from "@cronus-ui/ui/textarea";
+import { TextEffect } from "@cronus-ui/ui/text-effect";
 import { TextShimmer } from "@cronus-ui/ui/text-shimmer";
+import { Textarea } from "@cronus-ui/ui/textarea";
 import { Timeline, TimelineContent, TimelineItem, TimelineTitle } from "@cronus-ui/ui/timeline";
 import { Toggle } from "@cronus-ui/ui/toggle";
 import { ToggleGroup, ToggleGroupItem } from "@cronus-ui/ui/toggle-group";
 import { Toolbar, ToolbarButton } from "@cronus-ui/ui/toolbar";
 import { TypingText } from "@cronus-ui/ui/typing-text";
 import { UsageMeter } from "@cronus-ui/ui/usage-meter";
+import { VideoPlayer } from "@cronus-ui/ui/video-player";
 import { WordRotate } from "@cronus-ui/ui/word-rotate";
 import type { ReactElement } from "react";
 import { AppShellFixture } from "./app-shell-fixture.js";
@@ -161,6 +168,8 @@ import type { ParityFixture } from "./parity-fixture.js";
 import { SchedulerFixture } from "./scheduler-fixture.js";
 import { ScrollProgressFixture } from "./scroll-progress-fixture.js";
 import { SidebarFixture } from "./sidebar-fixture.js";
+import { TerminalFixture } from "./terminal-fixture.js";
+import { ToastFixture } from "./toast-fixture.js";
 import { TreeViewFixture } from "./tree-view-fixture.js";
 import { WorkspaceSwitcherFixture } from "./workspace-switcher-fixture.js";
 
@@ -1476,7 +1485,11 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
     );
   }
   if (fixture.family === "dock") {
-    const { items, options, "aria-label": ariaLabel } = fixture.props as {
+    const {
+      items,
+      options,
+      "aria-label": ariaLabel,
+    } = fixture.props as {
       items?: unknown;
       options?: unknown;
       "aria-label"?: string;
@@ -2122,6 +2135,129 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
         aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
       />
     );
+  }
+  if (fixture.family === "tilt-card") {
+    const {
+      children,
+      onMouseMove: _onMouseMove,
+      onMouseEnter: _onMouseEnter,
+      onMouseLeave: _onMouseLeave,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      onMouseMove?: unknown;
+      onMouseEnter?: unknown;
+      onMouseLeave?: unknown;
+    };
+    return <TiltCard {...rest}>{typeof children === "string" ? children : fixture.id}</TiltCard>;
+  }
+  if (fixture.family === "star-border") {
+    const { children, ...rest } = fixture.props as { children?: string };
+    return (
+      <StarBorder {...rest}>{typeof children === "string" ? children : fixture.id}</StarBorder>
+    );
+  }
+  if (fixture.family === "glass-card") {
+    const { children, ...rest } = fixture.props as { children?: string };
+    return <GlassCard {...rest}>{typeof children === "string" ? children : fixture.id}</GlassCard>;
+  }
+  if (fixture.family === "terminal") {
+    const {
+      items,
+      options,
+      title,
+      children: _children,
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      title?: string;
+      children?: string;
+    };
+    return (
+      <TerminalFixture
+        items={stringList(items ?? options)}
+        title={typeof title === "string" ? title : undefined}
+      />
+    );
+  }
+  if (fixture.family === "video-player") {
+    const {
+      src,
+      poster,
+      children: _children,
+      items: _items,
+      options: _options,
+      onPlay: _onPlay,
+      onPause: _onPause,
+      ...rest
+    } = fixture.props as {
+      src?: string;
+      poster?: string;
+      children?: string;
+      items?: unknown;
+      options?: unknown;
+      onPlay?: unknown;
+      onPause?: unknown;
+    };
+    return (
+      <VideoPlayer
+        src={typeof src === "string" ? src : "/audit-video.mp4"}
+        poster={typeof poster === "string" ? poster : undefined}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "text-effect") {
+    const { children, ...rest } = fixture.props as { children?: string };
+    return (
+      <TextEffect {...rest} trigger="mount" reducedMotion="always">
+        {typeof children === "string" ? children : fixture.id}
+      </TextEffect>
+    );
+  }
+  if (fixture.family === "spotlight-card") {
+    const {
+      children,
+      onMouseMove: _onMouseMove,
+      onMouseEnter: _onMouseEnter,
+      onMouseLeave: _onMouseLeave,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      onMouseMove?: unknown;
+      onMouseEnter?: unknown;
+      onMouseLeave?: unknown;
+    };
+    return (
+      <SpotlightCard {...rest}>
+        {typeof children === "string" ? children : fixture.id}
+      </SpotlightCard>
+    );
+  }
+  if (fixture.family === "animated-list") {
+    const {
+      items,
+      options,
+      children: _children,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      children?: string;
+    };
+    const labels = stringList(items ?? options);
+    const entries = labels.length > 0 ? labels : ["Alpha", "Beta"];
+    return (
+      <AnimatedList {...rest} reducedMotion="always">
+        {entries.map((item) => (
+          <span key={item}>{item}</span>
+        ))}
+      </AnimatedList>
+    );
+  }
+  if (fixture.family === "toast") {
+    const { children } = fixture.props as { children?: string };
+    return <ToastFixture>{typeof children === "string" ? children : "Saved"}</ToastFixture>;
   }
   throw new Error(`renderReactFixture: unported family ${fixture.family}`);
 }

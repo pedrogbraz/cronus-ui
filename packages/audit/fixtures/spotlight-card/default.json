@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "spotlight-card",
+  "props": {
+    "children": "Spotlight",
+    "className": "w-72"
+  },
+  "expect": {
+    "slot": "spotlight-card",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "spotlight-card"
+    }
+  }
+}

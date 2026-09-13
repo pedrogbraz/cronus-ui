@@ -977,4 +977,76 @@ test.describe("visual parity", () => {
       SCREENSHOT_OPTIONS,
     );
   });
+
+  test("tilt-card default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "tilt-card", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "tilt-card-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("star-border default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "star-border", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "star-border-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("glass-card default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "glass-card", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "glass-card-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("terminal default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "terminal", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "terminal-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("video-player default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "video-player", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "video-player-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("text-effect default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "text-effect", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "text-effect-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("spotlight-card default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "spotlight-card", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "spotlight-card-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("animated-list default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "animated-list", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "animated-list-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("toast default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "toast", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "toast-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
 });
