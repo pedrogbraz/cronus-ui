@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "sparkles-text",
+  "props": {
+    "children": "Launch"
+  },
+  "expect": {
+    "slot": "sparkles-text",
+    "tag": "span",
+    "attrs": {
+      "data-slot": "sparkles-text"
+    }
+  }
+}

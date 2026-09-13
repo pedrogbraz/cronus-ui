@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "bouncy-accordion",
+  "props": {
+    "items": ["Type", "Schedule"],
+    "defaultValue": "Type"
+  },
+  "expect": {
+    "slot": "bouncy-accordion",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "bouncy-accordion"
+    }
+  }
+}

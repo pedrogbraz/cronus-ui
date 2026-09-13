@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "noise",
+  "props": {
+    "children": "Grain",
+    "className": "h-32 w-72"
+  },
+  "expect": {
+    "slot": "noise",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "noise"
+    }
+  }
+}

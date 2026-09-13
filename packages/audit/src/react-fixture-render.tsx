@@ -18,6 +18,7 @@ import { Avatar, AvatarFallback } from "@cronus-ui/ui/avatar";
 import { AvatarGroup } from "@cronus-ui/ui/avatar-group";
 import { Badge } from "@cronus-ui/ui/badge";
 import { Banner } from "@cronus-ui/ui/banner";
+import { BouncyAccordion } from "@cronus-ui/ui/bouncy-accordion";
 import { Button } from "@cronus-ui/ui/button";
 import { ButtonGroup } from "@cronus-ui/ui/button-group";
 import { Card, CardDescription, CardHeader, CardTitle } from "@cronus-ui/ui/card";
@@ -69,6 +70,11 @@ import {
   MenubarTrigger,
 } from "@cronus-ui/ui/menubar";
 import { Metric, MetricLabel, MetricValue } from "@cronus-ui/ui/metric";
+import {
+  MorphingPopover,
+  MorphingPopoverContent,
+  MorphingPopoverTrigger,
+} from "@cronus-ui/ui/morphing-popover";
 import { MultiSelect } from "@cronus-ui/ui/multi-select";
 import {
   NavigationMenu,
@@ -76,6 +82,8 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@cronus-ui/ui/navigation-menu";
+import { Noise } from "@cronus-ui/ui/noise";
+import { Particles } from "@cronus-ui/ui/particles";
 import { PillNav } from "@cronus-ui/ui/pill-nav";
 import { Popover, PopoverContent, PopoverTrigger } from "@cronus-ui/ui/popover";
 import { Progress } from "@cronus-ui/ui/progress";
@@ -99,6 +107,7 @@ import { Shimmer } from "@cronus-ui/ui/shimmer";
 import { Skeleton } from "@cronus-ui/ui/skeleton";
 import { Slider } from "@cronus-ui/ui/slider";
 import { Toaster } from "@cronus-ui/ui/sonner";
+import { SparklesText } from "@cronus-ui/ui/sparkles-text";
 import { Spinner } from "@cronus-ui/ui/spinner";
 import { StatusDot } from "@cronus-ui/ui/status-dot";
 import {
@@ -113,10 +122,13 @@ import { TableOfContents } from "@cronus-ui/ui/table-of-contents";
 import { TagsInput } from "@cronus-ui/ui/tags-input";
 import { Textarea } from "@cronus-ui/ui/textarea";
 import { TextShimmer } from "@cronus-ui/ui/text-shimmer";
+import { Timeline, TimelineContent, TimelineItem, TimelineTitle } from "@cronus-ui/ui/timeline";
 import { Toggle } from "@cronus-ui/ui/toggle";
 import { ToggleGroup, ToggleGroupItem } from "@cronus-ui/ui/toggle-group";
 import { Toolbar, ToolbarButton } from "@cronus-ui/ui/toolbar";
+import { TypingText } from "@cronus-ui/ui/typing-text";
 import { UsageMeter } from "@cronus-ui/ui/usage-meter";
+import { WordRotate } from "@cronus-ui/ui/word-rotate";
 import type { ReactElement } from "react";
 import { AppShellFixture } from "./app-shell-fixture.js";
 import { AutocompleteFixture } from "./autocomplete-fixture.js";
@@ -149,6 +161,7 @@ import type { ParityFixture } from "./parity-fixture.js";
 import { SchedulerFixture } from "./scheduler-fixture.js";
 import { ScrollProgressFixture } from "./scroll-progress-fixture.js";
 import { SidebarFixture } from "./sidebar-fixture.js";
+import { TreeViewFixture } from "./tree-view-fixture.js";
 import { WorkspaceSwitcherFixture } from "./workspace-switcher-fixture.js";
 
 function stringList(value: unknown): string[] {
@@ -1949,6 +1962,165 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
     const { children, ...rest } = fixture.props as { children?: string };
     return (
       <TextShimmer {...rest}>{typeof children === "string" ? children : fixture.id}</TextShimmer>
+    );
+  }
+  if (fixture.family === "particles") {
+    const { children, className, ...rest } = fixture.props as {
+      children?: string;
+      className?: string;
+    };
+    return (
+      <Particles className={typeof className === "string" ? className : "h-32 w-72"} {...rest}>
+        {typeof children === "string" ? children : fixture.id}
+      </Particles>
+    );
+  }
+  if (fixture.family === "sparkles-text") {
+    const { children, ...rest } = fixture.props as { children?: string };
+    return (
+      <SparklesText {...rest}>{typeof children === "string" ? children : fixture.id}</SparklesText>
+    );
+  }
+  if (fixture.family === "noise") {
+    const { children, className, ...rest } = fixture.props as {
+      children?: string;
+      className?: string;
+    };
+    return (
+      <Noise className={typeof className === "string" ? className : "h-32 w-72"} {...rest}>
+        {typeof children === "string" ? children : fixture.id}
+      </Noise>
+    );
+  }
+  if (fixture.family === "morphing-popover") {
+    const {
+      children,
+      options,
+      items,
+      defaultOpen: _defaultOpen,
+      open: _open,
+      onOpenChange: _onOpenChange,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      options?: unknown;
+      items?: unknown;
+      defaultOpen?: boolean;
+      open?: boolean;
+      onOpenChange?: unknown;
+      "aria-label"?: string;
+    };
+    const trigger = typeof children === "string" ? children : "Open";
+    const body = stringList(options ?? items)[0] ?? trigger;
+    return (
+      <MorphingPopover {...rest} open>
+        <MorphingPopoverTrigger>{trigger}</MorphingPopoverTrigger>
+        <MorphingPopoverContent aria-label={typeof ariaLabel === "string" ? ariaLabel : "Details"}>
+          {body}
+        </MorphingPopoverContent>
+      </MorphingPopover>
+    );
+  }
+  if (fixture.family === "bouncy-accordion") {
+    const {
+      items,
+      options,
+      defaultValue,
+      onValueChange: _onValueChange,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      defaultValue?: string | null;
+      onValueChange?: unknown;
+    };
+    const labels = stringList(items ?? options);
+    const entries = labels.length > 0 ? labels : ["Type", "Schedule"];
+    const selected = typeof defaultValue === "string" ? defaultValue : entries[0];
+    return (
+      <BouncyAccordion
+        items={entries.map((title) => ({ id: title, title, description: title }))}
+        defaultValue={selected}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "typing-text") {
+    const { text, children, items, options, ...rest } = fixture.props as {
+      text?: string | string[];
+      children?: string;
+      items?: unknown;
+      options?: unknown;
+    };
+    const phrases = Array.isArray(text)
+      ? text.filter((phrase): phrase is string => typeof phrase === "string")
+      : typeof text === "string"
+        ? [text]
+        : stringList(items ?? options);
+    const phrase = phrases[0] ?? (typeof children === "string" ? children : "Shipping");
+    return <TypingText {...rest} text={phrase} reducedMotion="never" />;
+  }
+  if (fixture.family === "word-rotate") {
+    const {
+      words,
+      items,
+      options,
+      children: _children,
+      ...rest
+    } = fixture.props as {
+      words?: unknown;
+      items?: unknown;
+      options?: unknown;
+      children?: string;
+    };
+    const list = stringList(words ?? items ?? options);
+    return <WordRotate words={list.length > 0 ? list : ["Design", "System"]} {...rest} />;
+  }
+  if (fixture.family === "timeline") {
+    const {
+      items,
+      options,
+      children: _children,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      children?: string;
+    };
+    const labels = stringList(items ?? options);
+    const entries = labels.length > 0 ? labels : ["Order placed", "Order shipped"];
+    return (
+      <Timeline {...rest}>
+        {entries.map((item) => (
+          <TimelineItem key={item}>
+            <TimelineContent>
+              <TimelineTitle>{item}</TimelineTitle>
+            </TimelineContent>
+          </TimelineItem>
+        ))}
+      </Timeline>
+    );
+  }
+  if (fixture.family === "tree-view") {
+    const {
+      items,
+      options,
+      onValueChange: _onValueChange,
+      onExpandedChange: _onExpandedChange,
+      "aria-label": ariaLabel,
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      onValueChange?: unknown;
+      onExpandedChange?: unknown;
+      "aria-label"?: string;
+    };
+    return (
+      <TreeViewFixture
+        items={stringList(items ?? options)}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+      />
     );
   }
   throw new Error(`renderReactFixture: unported family ${fixture.family}`);

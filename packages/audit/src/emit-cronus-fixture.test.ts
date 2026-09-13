@@ -687,6 +687,82 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("text-shimmer", "default"))).toBe("p");
   });
 
+  it("emits wave 1l labels, items, and words without source", () => {
+    const src = emitCronusApp([
+      getFixture("particles", "default"),
+      getFixture("sparkles-text", "default"),
+      getFixture("noise", "default"),
+      getFixture("morphing-popover", "default"),
+      getFixture("bouncy-accordion", "default"),
+      getFixture("typing-text", "default"),
+      getFixture("word-rotate", "default"),
+      getFixture("timeline", "default"),
+      getFixture("tree-view", "default"),
+    ]);
+    expect(src).toContain("component ParticlesDefault layout:inline style:particles {");
+    expect(src).toContain('label "Field"');
+    expect(src).toContain("component SparklesTextDefault layout:inline style:sparkles-text {");
+    expect(src).toContain('label "Launch"');
+    expect(src).toContain("component NoiseDefault layout:inline style:noise {");
+    expect(src).toContain('label "Grain"');
+    expect(src).toContain(
+      "component MorphingPopoverDefault layout:inline style:morphing-popover {",
+    );
+    expect(src).toContain('label "Open"');
+    expect(src).toContain('  text "Popover body"');
+    expect(src).toContain(
+      "component BouncyAccordionDefault layout:inline style:bouncy-accordion {",
+    );
+    expect(src).toContain('  text "Type"');
+    expect(src).toContain('  text "Schedule"');
+    expect(src).toContain("component TypingTextDefault layout:inline style:typing-text {");
+    expect(src).toContain('label "Shipping"');
+    expect(src).toContain("component WordRotateDefault layout:inline style:word-rotate {");
+    expect(src).toContain('label "Design"');
+    expect(src).toContain('  text "Design"');
+    expect(src).toContain('  text "System"');
+    expect(src).toContain("component TimelineDefault layout:inline style:timeline {");
+    expect(src).toContain('label "Order history"');
+    expect(src).toContain('  text "Order placed"');
+    expect(src).toContain('  text "Order shipped"');
+    expect(src).toContain("component TreeViewDefault layout:inline style:tree-view {");
+    expect(src).toContain('  text "src"');
+    expect(src).toContain('  text "README.md"');
+    expect(src).toContain("use ParticlesDefault");
+    expect(src).toContain("use SparklesTextDefault");
+    expect(src).toContain("use NoiseDefault");
+    expect(src).toContain("use MorphingPopoverDefault");
+    expect(src).toContain("use BouncyAccordionDefault");
+    expect(src).toContain("use TypingTextDefault");
+    expect(src).toContain("use WordRotateDefault");
+    expect(src).toContain("use TimelineDefault");
+    expect(src).toContain("use TreeViewDefault");
+    expect(src).toContain('page "/audit/particles/default" type:custom');
+    expect(src).toContain('page "/audit/sparkles-text/default" type:custom');
+    expect(src).toContain('page "/audit/noise/default" type:custom');
+    expect(src).toContain('page "/audit/morphing-popover/default" type:custom');
+    expect(src).toContain('page "/audit/bouncy-accordion/default" type:custom');
+    expect(src).toContain('page "/audit/typing-text/default" type:custom');
+    expect(src).toContain('page "/audit/word-rotate/default" type:custom');
+    expect(src).toContain('page "/audit/timeline/default" type:custom');
+    expect(src).toContain('page "/audit/tree-view/default" type:custom');
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for wave 1l families", () => {
+    expect(expectedTag(getFixture("particles", "default"))).toBe("div");
+    expect(expectedTag(getFixture("sparkles-text", "default"))).toBe("span");
+    expect(expectedTag(getFixture("noise", "default"))).toBe("div");
+    expect(expectedTag(getFixture("morphing-popover", "default"))).toBe("div");
+    expect(expectedTag(getFixture("bouncy-accordion", "default"))).toBe("div");
+    expect(expectedTag(getFixture("typing-text", "default"))).toBe("span");
+    expect(expectedTag(getFixture("word-rotate", "default"))).toBe("span");
+    expect(expectedTag(getFixture("timeline", "default"))).toBe("ol");
+    expect(expectedTag(getFixture("tree-view", "default"))).toBe("div");
+  });
+
   it("drops data-size from expect.attrs", () => {
     const parsed = parseParityFixture({
       id: "x",

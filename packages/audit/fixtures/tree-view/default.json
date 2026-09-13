@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "tree-view",
+  "props": {
+    "items": ["src", "README.md"],
+    "aria-label": "Files"
+  },
+  "expect": {
+    "slot": "tree-view",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "tree-view"
+    }
+  }
+}

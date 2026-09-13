@@ -20,6 +20,9 @@ function labelOf(fixture: ParityFixture): string {
   if (typeof fixture.props.title === "string") return fixture.props.title;
   if (typeof fixture.props.label === "string") return fixture.props.label;
   if (typeof fixture.props.placeholder === "string") return fixture.props.placeholder;
+  if (typeof fixture.props.text === "string") return fixture.props.text;
+  const words = fixture.props.words;
+  if (Array.isArray(words) && typeof words[0] === "string") return words[0];
   if (typeof fixture.props["aria-label"] === "string") return fixture.props["aria-label"];
   return fixture.id;
 }
@@ -56,6 +59,14 @@ export function emitCronusComponent(fixture: ParityFixture): string {
     for (const item of items) {
       if (typeof item === "string") {
         lines.push(`  text "${cronusEscape(item)}"`);
+      }
+    }
+  }
+  const words = fixture.props.words;
+  if (Array.isArray(words)) {
+    for (const word of words) {
+      if (typeof word === "string") {
+        lines.push(`  text "${cronusEscape(word)}"`);
       }
     }
   }

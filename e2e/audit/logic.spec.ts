@@ -1353,6 +1353,118 @@ test.describe("logic parity", () => {
     await expect(cronusFrame(page).locator('[data-slot="text-shimmer-control"]')).toHaveCount(0);
   });
 
+  test("particles is a div with children, not a SURF-only fx layer", async ({ page }) => {
+    await page.goto("/audit/particles?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="particles"]');
+    const cronus = cronusFrame(page).locator('[data-slot="particles"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(react).toContainText("Field");
+    await expect(cronus).toContainText("Field");
+    await expect(page.locator('[data-slot="particles-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="particles-control"]')).toHaveCount(0);
+  });
+
+  test("sparkles-text is a span, not sparkles-text-control", async ({ page }) => {
+    await page.goto("/audit/sparkles-text?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="sparkles-text"]');
+    const cronus = cronusFrame(page).locator('[data-slot="sparkles-text"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("SPAN");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("SPAN");
+    await expect(page.locator('[data-slot="sparkles-text-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="sparkles-text-control"]')).toHaveCount(0);
+  });
+
+  test("noise is a div, not noise-control", async ({ page }) => {
+    await page.goto("/audit/noise?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="noise"]');
+    const cronus = cronusFrame(page).locator('[data-slot="noise"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="noise-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="noise-control"]')).toHaveCount(0);
+  });
+
+  test("morphing-popover content is a div, not a details element", async ({ page }) => {
+    await page.goto("/audit/morphing-popover?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="morphing-popover-content"]');
+    const cronus = cronusFrame(page).locator('[data-slot="morphing-popover-content"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] details')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("details")).toHaveCount(0);
+    await expect(page.locator('[data-slot="morphing-popover-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="morphing-popover-control"]')).toHaveCount(0);
+  });
+
+  test("bouncy-accordion is a div, not bouncy-accordion-control", async ({ page }) => {
+    await page.goto("/audit/bouncy-accordion?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="bouncy-accordion"]');
+    const cronus = cronusFrame(page).locator('[data-slot="bouncy-accordion"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="bouncy-accordion-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="bouncy-accordion-control"]')).toHaveCount(0);
+  });
+
+  test("typing-text is a span, not typing-text-control", async ({ page }) => {
+    await page.goto("/audit/typing-text?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="typing-text"]');
+    const cronus = cronusFrame(page).locator('[data-slot="typing-text"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("SPAN");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("SPAN");
+    await expect(page.locator('[data-slot="typing-text-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="typing-text-control"]')).toHaveCount(0);
+  });
+
+  test("word-rotate is a span, not word-rotate-control", async ({ page }) => {
+    await page.goto("/audit/word-rotate?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="word-rotate"]');
+    const cronus = cronusFrame(page).locator('[data-slot="word-rotate"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("SPAN");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("SPAN");
+    await expect(page.locator('[data-slot="word-rotate-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="word-rotate-control"]')).toHaveCount(0);
+  });
+
+  test("timeline is an ol, not timeline-control", async ({ page }) => {
+    await page.goto("/audit/timeline?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="timeline"]');
+    const cronus = cronusFrame(page).locator('[data-slot="timeline"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("OL");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("OL");
+    await expect(page.locator('[data-slot="timeline-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="timeline-control"]')).toHaveCount(0);
+  });
+
+  test("tree-view is a div, not tree-view-control", async ({ page }) => {
+    await page.goto("/audit/tree-view?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="tree-view"]');
+    const cronus = cronusFrame(page).locator('[data-slot="tree-view"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="tree-view-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="tree-view-control"]')).toHaveCount(0);
+  });
+
   test("workspace-switcher is a button, not workspace-switcher-control", async ({ page }) => {
     await page.goto("/audit/workspace-switcher?fixture=default&preset=aurora&mode=dark");
     const react = page.locator('[data-audit-side="react"] [data-slot="workspace-switcher"]');

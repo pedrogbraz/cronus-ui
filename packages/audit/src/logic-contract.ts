@@ -102,6 +102,15 @@ const FAMILY_TAGS: Record<string, string> = {
   shimmer: "div",
   reveal: "div",
   "text-shimmer": "p",
+  particles: "div",
+  "sparkles-text": "span",
+  noise: "div",
+  "morphing-popover": "div",
+  "bouncy-accordion": "div",
+  "typing-text": "span",
+  "word-rotate": "span",
+  timeline: "ol",
+  "tree-view": "div",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */
