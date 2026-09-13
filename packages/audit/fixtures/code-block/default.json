@@ -1,0 +1,17 @@
+{
+  "id": "default",
+  "family": "code-block",
+  "props": {
+    "code": "const n = 1;",
+    "language": "ts",
+    "filename": "index.ts",
+    "className": "w-72"
+  },
+  "expect": {
+    "slot": "code-block",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "code-block"
+    }
+  }
+}

@@ -120,6 +120,15 @@ const FAMILY_TAGS: Record<string, string> = {
   "spotlight-card": "div",
   "animated-list": "ul",
   toast: "div",
+  carousel: "div",
+  "code-block": "div",
+  "description-list": "dl",
+  kanban: "div",
+  "json-viewer": "div",
+  "animated-number": "span",
+  marquee: "div",
+  "gradient-text": "span",
+  "shiny-text": "span",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */

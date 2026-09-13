@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "description-list",
+  "props": {
+    "items": ["Name", "Ada", "Status", "Paid"],
+    "aria-label": "Details"
+  },
+  "expect": {
+    "slot": "description-list",
+    "tag": "dl",
+    "attrs": {
+      "data-slot": "description-list"
+    }
+  }
+}

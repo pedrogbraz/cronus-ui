@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "animated-number",
+  "props": {
+    "value": 1234,
+    "aria-label": "Count"
+  },
+  "expect": {
+    "slot": "animated-number",
+    "tag": "span",
+    "attrs": {
+      "data-slot": "animated-number"
+    }
+  }
+}

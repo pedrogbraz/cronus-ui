@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "carousel",
+  "props": {
+    "items": ["One", "Two"],
+    "aria-label": "Slides",
+    "className": "w-72"
+  },
+  "expect": {
+    "slot": "carousel",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "carousel"
+    }
+  }
+}

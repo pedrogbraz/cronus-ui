@@ -403,7 +403,9 @@ describe("emitCronusApp", () => {
     expect(src).toContain("component MultiSelectDefault layout:inline style:multi-select {");
     expect(src).toContain('  text "React"');
     expect(src).toContain('  text "Vue"');
-    expect(src).toContain("component CreditCardInputDefault layout:inline style:credit-card-input {");
+    expect(src).toContain(
+      "component CreditCardInputDefault layout:inline style:credit-card-input {",
+    );
     expect(src).toContain('label "Credit card"');
     expect(src).toContain('  value:"4242424242424242"');
     expect(src).toContain(
@@ -419,7 +421,9 @@ describe("emitCronusApp", () => {
     expect(src).toContain('  text "Home"');
     expect(src).toContain('  text "Work"');
     expect(src).toContain("component DockDefault layout:inline style:dock {");
-    expect(src).toContain("component WorkspaceSwitcherDefault layout:inline style:workspace-switcher {");
+    expect(src).toContain(
+      "component WorkspaceSwitcherDefault layout:inline style:workspace-switcher {",
+    );
     expect(src).toContain('  text "Cronus"');
     expect(src).toContain('  text "Northwind"');
     expect(src).toContain("use TagsInputDefault");
@@ -624,20 +628,22 @@ describe("emitCronusApp", () => {
       getFixture("reveal", "default"),
       getFixture("text-shimmer", "default"),
     ]);
-    expect(src).toContain("component ChoroplethChartDefault layout:inline style:choropleth-chart {");
+    expect(src).toContain(
+      "component ChoroplethChartDefault layout:inline style:choropleth-chart {",
+    );
     expect(src).toContain('label "Regions"');
     expect(src).toContain('  text "Northwest"');
     expect(src).toContain('  text "Southeast"');
-    expect(src).toContain("component ProfitLossChartDefault layout:inline style:profit-loss-chart {");
+    expect(src).toContain(
+      "component ProfitLossChartDefault layout:inline style:profit-loss-chart {",
+    );
     expect(src).toContain('label "P/L"');
     expect(src).toContain('  text "Jan"');
     expect(src).toContain('  text "Mar"');
     expect(src).toContain("component ScrollProgressDefault layout:inline style:scroll-progress {");
     expect(src).toContain("  value:40");
     expect(src).toContain('  aria-label:"Scroll progress"');
-    expect(src).toContain(
-      "component RichTextEditorDefault layout:inline style:rich-text-editor {",
-    );
+    expect(src).toContain("component RichTextEditorDefault layout:inline style:rich-text-editor {");
     expect(src).toContain('label "Write something…"');
     expect(src).toContain('  text "Write something…"');
     expect(src).toContain('  aria-label:"Post body"');
@@ -829,6 +835,85 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("spotlight-card", "default"))).toBe("div");
     expect(expectedTag(getFixture("animated-list", "default"))).toBe("ul");
     expect(expectedTag(getFixture("toast", "default"))).toBe("div");
+  });
+
+  it("emits wave 1n labels, items, code, and values without source", () => {
+    const src = emitCronusApp([
+      getFixture("carousel", "default"),
+      getFixture("code-block", "default"),
+      getFixture("description-list", "default"),
+      getFixture("kanban", "default"),
+      getFixture("json-viewer", "default"),
+      getFixture("animated-number", "default"),
+      getFixture("marquee", "default"),
+      getFixture("gradient-text", "default"),
+      getFixture("shiny-text", "default"),
+    ]);
+    expect(src).toContain("component CarouselDefault layout:inline style:carousel {");
+    expect(src).toContain('  text "One"');
+    expect(src).toContain('  text "Two"');
+    expect(src).toContain("component CodeBlockDefault layout:inline style:code-block {");
+    expect(src).toContain('label "const n = 1;"');
+    expect(src).toContain('  text "const n = 1;"');
+    expect(src).toContain(
+      "component DescriptionListDefault layout:inline style:description-list {",
+    );
+    expect(src).toContain('  text "Name"');
+    expect(src).toContain('  text "Ada"');
+    expect(src).toContain('  text "Status"');
+    expect(src).toContain('  text "Paid"');
+    expect(src).toContain("component KanbanDefault layout:inline style:kanban {");
+    expect(src).toContain('label "Board"');
+    expect(src).toContain('  text "Todo"');
+    expect(src).toContain('  text "Ship"');
+    expect(src).toContain('  text "Doing"');
+    expect(src).toContain('  text "Review"');
+    expect(src).toContain("component JsonViewerDefault layout:inline style:json-viewer {");
+    expect(src).toContain('label "Payload"');
+    expect(src).toContain("component AnimatedNumberDefault layout:inline style:animated-number {");
+    expect(src).toContain('label "Count"');
+    expect(src).toContain("  value:1234");
+    expect(src).toContain("component MarqueeDefault layout:inline style:marquee {");
+    expect(src).toContain('label "Logos"');
+    expect(src).toContain('  text "Acme"');
+    expect(src).toContain('  text "Globex"');
+    expect(src).toContain("component GradientTextDefault layout:inline style:gradient-text {");
+    expect(src).toContain('label "Aurora"');
+    expect(src).toContain("component ShinyTextDefault layout:inline style:shiny-text {");
+    expect(src).toContain('label "Sheen"');
+    expect(src).toContain("use CarouselDefault");
+    expect(src).toContain("use CodeBlockDefault");
+    expect(src).toContain("use DescriptionListDefault");
+    expect(src).toContain("use KanbanDefault");
+    expect(src).toContain("use JsonViewerDefault");
+    expect(src).toContain("use AnimatedNumberDefault");
+    expect(src).toContain("use MarqueeDefault");
+    expect(src).toContain("use GradientTextDefault");
+    expect(src).toContain("use ShinyTextDefault");
+    expect(src).toContain('page "/audit/carousel/default" type:custom');
+    expect(src).toContain('page "/audit/code-block/default" type:custom');
+    expect(src).toContain('page "/audit/description-list/default" type:custom');
+    expect(src).toContain('page "/audit/kanban/default" type:custom');
+    expect(src).toContain('page "/audit/json-viewer/default" type:custom');
+    expect(src).toContain('page "/audit/animated-number/default" type:custom');
+    expect(src).toContain('page "/audit/marquee/default" type:custom');
+    expect(src).toContain('page "/audit/gradient-text/default" type:custom');
+    expect(src).toContain('page "/audit/shiny-text/default" type:custom');
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for wave 1n families", () => {
+    expect(expectedTag(getFixture("carousel", "default"))).toBe("div");
+    expect(expectedTag(getFixture("code-block", "default"))).toBe("div");
+    expect(expectedTag(getFixture("description-list", "default"))).toBe("dl");
+    expect(expectedTag(getFixture("kanban", "default"))).toBe("div");
+    expect(expectedTag(getFixture("json-viewer", "default"))).toBe("div");
+    expect(expectedTag(getFixture("animated-number", "default"))).toBe("span");
+    expect(expectedTag(getFixture("marquee", "default"))).toBe("div");
+    expect(expectedTag(getFixture("gradient-text", "default"))).toBe("span");
+    expect(expectedTag(getFixture("shiny-text", "default"))).toBe("span");
   });
 
   it("drops data-size from expect.attrs", () => {

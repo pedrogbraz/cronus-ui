@@ -16,6 +16,7 @@ import {
   AlertDialogTitle,
 } from "@cronus-ui/ui/alert-dialog";
 import { AnimatedList } from "@cronus-ui/ui/animated-list";
+import { AnimatedNumber } from "@cronus-ui/ui/animated-number";
 import { Avatar, AvatarFallback } from "@cronus-ui/ui/avatar";
 import { AvatarGroup } from "@cronus-ui/ui/avatar-group";
 import { Badge } from "@cronus-ui/ui/badge";
@@ -24,8 +25,16 @@ import { BouncyAccordion } from "@cronus-ui/ui/bouncy-accordion";
 import { Button } from "@cronus-ui/ui/button";
 import { ButtonGroup } from "@cronus-ui/ui/button-group";
 import { Card, CardDescription, CardHeader, CardTitle } from "@cronus-ui/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@cronus-ui/ui/carousel";
 import { Checkbox } from "@cronus-ui/ui/checkbox";
 import { Chip } from "@cronus-ui/ui/chip";
+import { CodeBlock } from "@cronus-ui/ui/code-block";
 import { CodeTabs } from "@cronus-ui/ui/code-tabs";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@cronus-ui/ui/collapsible";
 import { Combobox } from "@cronus-ui/ui/combobox";
@@ -38,6 +47,7 @@ import {
 } from "@cronus-ui/ui/context-menu";
 import { CopyButton } from "@cronus-ui/ui/copy-button";
 import { DateRangePicker } from "@cronus-ui/ui/date-range-picker";
+import { DescriptionItem, DescriptionList } from "@cronus-ui/ui/description-list";
 import {
   Drawer,
   DrawerContent,
@@ -57,13 +67,16 @@ import { Field, FieldDescription, FieldLabel } from "@cronus-ui/ui/field";
 import { FileDropzone } from "@cronus-ui/ui/file-dropzone";
 import { FormItem } from "@cronus-ui/ui/form";
 import { GlassCard } from "@cronus-ui/ui/glass-card";
+import { GradientText } from "@cronus-ui/ui/gradient-text";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@cronus-ui/ui/hover-card";
 import { Input } from "@cronus-ui/ui/input";
 import { InputGroup, InputGroupAddon } from "@cronus-ui/ui/input-group";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@cronus-ui/ui/input-otp";
 import { InviteDialog } from "@cronus-ui/ui/invite-dialog";
+import { JsonViewer } from "@cronus-ui/ui/json-viewer";
 import { Kbd } from "@cronus-ui/ui/kbd";
 import { Label } from "@cronus-ui/ui/label";
+import { Marquee } from "@cronus-ui/ui/marquee";
 import { Masonry } from "@cronus-ui/ui/masonry";
 import {
   Menubar,
@@ -106,6 +119,7 @@ import {
   SheetTitle,
 } from "@cronus-ui/ui/sheet";
 import { Shimmer } from "@cronus-ui/ui/shimmer";
+import { ShinyText } from "@cronus-ui/ui/shiny-text";
 import { SignaturePad } from "@cronus-ui/ui/signature-pad";
 import { Skeleton } from "@cronus-ui/ui/skeleton";
 import { Slider } from "@cronus-ui/ui/slider";
@@ -161,6 +175,7 @@ import { DatePickerFixture } from "./date-picker-fixture.js";
 import { DockFixture } from "./dock-fixture.js";
 import { ExpandableTabsFixture } from "./expandable-tabs-fixture.js";
 import { HeatmapFixture } from "./heatmap-fixture.js";
+import { KanbanFixture } from "./kanban-fixture.js";
 import { LightboxFixture } from "./lightbox-fixture.js";
 import { ModeToggleFixture } from "./mode-toggle-fixture.js";
 import { NotificationCenterFixture } from "./notification-center-fixture.js";
@@ -177,6 +192,17 @@ function stringList(value: unknown): string[] {
   return Array.isArray(value)
     ? value.filter((item): item is string => typeof item === "string")
     : [];
+}
+
+function stringPairs(value: unknown): Array<[string, string]> {
+  const list = stringList(value);
+  const pairs: Array<[string, string]> = [];
+  for (let index = 0; index + 1 < list.length; index += 2) {
+    const term = list[index];
+    const details = list[index + 1];
+    if (term && details) pairs.push([term, details]);
+  }
+  return pairs;
 }
 
 const FALLBACK_SCROLL_ITEMS = [
@@ -2258,6 +2284,229 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
   if (fixture.family === "toast") {
     const { children } = fixture.props as { children?: string };
     return <ToastFixture>{typeof children === "string" ? children : "Saved"}</ToastFixture>;
+  }
+  if (fixture.family === "carousel") {
+    const {
+      items,
+      options,
+      labels: _labels,
+      children: _children,
+      className,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      labels?: unknown;
+      children?: string;
+      className?: string;
+      "aria-label"?: string;
+    };
+    const slides = stringList(items ?? options);
+    const entries = slides.length > 0 ? slides : ["One", "Two"];
+    return (
+      <Carousel
+        className={typeof className === "string" ? className : "w-72"}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "audit-carousel"}
+        {...rest}
+      >
+        <CarouselContent>
+          {entries.map((item) => (
+            <CarouselItem key={item}>
+              <div className="rounded-lg border border-border bg-surface-raised p-6 text-sm">
+                {item}
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <div className="mt-3 flex items-center justify-center gap-2">
+          <CarouselPrevious />
+          <CarouselNext />
+        </div>
+      </Carousel>
+    );
+  }
+  if (fixture.family === "code-block") {
+    const {
+      code,
+      children,
+      language,
+      filename,
+      items: _items,
+      options: _options,
+      className,
+      ...rest
+    } = fixture.props as {
+      code?: string;
+      children?: string;
+      language?: string;
+      filename?: string;
+      items?: unknown;
+      options?: unknown;
+      className?: string;
+    };
+    const snippet =
+      typeof code === "string" ? code : typeof children === "string" ? children : "const n = 1;";
+    return (
+      <CodeBlock
+        code={snippet}
+        language={typeof language === "string" ? language : undefined}
+        filename={typeof filename === "string" ? filename : undefined}
+        className={typeof className === "string" ? className : "w-72"}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "description-list") {
+    const {
+      items,
+      options,
+      children: _children,
+      className,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      children?: string;
+      className?: string;
+      "aria-label"?: string;
+    };
+    const pairs = stringPairs(items ?? options);
+    const entries = pairs.length > 0 ? pairs : stringPairs(["Name", "Ada", "Status", "Paid"]);
+    return (
+      <DescriptionList
+        className={typeof className === "string" ? className : "w-72"}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "audit-description-list"}
+        {...rest}
+      >
+        {entries.map(([term, details]) => (
+          <DescriptionItem key={term} term={term}>
+            {details}
+          </DescriptionItem>
+        ))}
+      </DescriptionList>
+    );
+  }
+  if (fixture.family === "kanban") {
+    const {
+      items,
+      options,
+      onColumnsChange: _onColumnsChange,
+      renderItem: _renderItem,
+      "aria-label": ariaLabel,
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      onColumnsChange?: unknown;
+      renderItem?: unknown;
+      "aria-label"?: string;
+    };
+    return (
+      <KanbanFixture
+        items={stringList(items ?? options)}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+      />
+    );
+  }
+  if (fixture.family === "json-viewer") {
+    const {
+      data,
+      items: _items,
+      options: _options,
+      children: _children,
+      className,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      data?: unknown;
+      items?: unknown;
+      options?: unknown;
+      children?: string;
+      className?: string;
+      "aria-label"?: string;
+    };
+    const payload =
+      data !== undefined && data !== null && typeof data === "object" && !Array.isArray(data)
+        ? data
+        : { name: "Ada", ok: true };
+    return (
+      <JsonViewer
+        data={payload}
+        className={typeof className === "string" ? className : "w-72"}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "audit-json-viewer"}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "animated-number") {
+    const {
+      value,
+      format: _format,
+      locale: _locale,
+      reducedMotion: _reducedMotion,
+      items: _items,
+      options: _options,
+      children: _children,
+      ...rest
+    } = fixture.props as {
+      value?: number;
+      format?: unknown;
+      locale?: string;
+      reducedMotion?: unknown;
+      items?: unknown;
+      options?: unknown;
+      children?: string;
+    };
+    return (
+      <AnimatedNumber
+        value={typeof value === "number" ? value : 1234}
+        locale="en-US"
+        reducedMotion="always"
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "marquee") {
+    const {
+      items,
+      options,
+      children: _children,
+      className,
+      motionPreference: _motionPreference,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      children?: string;
+      className?: string;
+      motionPreference?: unknown;
+    };
+    const labels = stringList(items ?? options);
+    const entries = labels.length > 0 ? labels : ["Acme", "Globex"];
+    return (
+      <Marquee
+        className={typeof className === "string" ? className : "w-72"}
+        motionPreference="never"
+        {...rest}
+      >
+        {entries.map((item) => (
+          <span key={item} className="px-3 text-sm">
+            {item}
+          </span>
+        ))}
+      </Marquee>
+    );
+  }
+  if (fixture.family === "gradient-text") {
+    const { children, ...rest } = fixture.props as { children?: string };
+    return (
+      <GradientText {...rest}>{typeof children === "string" ? children : fixture.id}</GradientText>
+    );
+  }
+  if (fixture.family === "shiny-text") {
+    const { children, ...rest } = fixture.props as { children?: string };
+    return <ShinyText {...rest}>{typeof children === "string" ? children : fixture.id}</ShinyText>;
   }
   throw new Error(`renderReactFixture: unported family ${fixture.family}`);
 }

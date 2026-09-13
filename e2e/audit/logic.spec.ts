@@ -1563,6 +1563,116 @@ test.describe("logic parity", () => {
     await expect(cronusFrame(page).locator('[data-slot="animated-list-control"]')).toHaveCount(0);
   });
 
+  test("carousel is a div, not carousel-control", async ({ page }) => {
+    await page.goto("/audit/carousel?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="carousel"]');
+    const cronus = cronusFrame(page).locator('[data-slot="carousel"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="carousel-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="carousel-control"]')).toHaveCount(0);
+  });
+
+  test("code-block is a div, not code-block-control", async ({ page }) => {
+    await page.goto("/audit/code-block?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="code-block"]');
+    const cronus = cronusFrame(page).locator('[data-slot="code-block"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="code-block-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="code-block-control"]')).toHaveCount(0);
+  });
+
+  test("description-list is a dl, not description-list-control", async ({ page }) => {
+    await page.goto("/audit/description-list?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="description-list"]');
+    const cronus = cronusFrame(page).locator('[data-slot="description-list"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DL");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DL");
+    await expect(page.locator('[data-slot="description-list-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="description-list-control"]')).toHaveCount(0);
+  });
+
+  test("kanban exposes kanban or kanban-column, not kanban-control", async ({ page }) => {
+    await page.goto("/audit/kanban?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="kanban"]');
+    const reactColumn = page.locator('[data-audit-side="react"] [data-slot="kanban-column"]');
+    const cronus = cronusFrame(page).locator('[data-slot="kanban"]');
+    const cronusColumn = cronusFrame(page).locator('[data-slot="kanban-column"]');
+    await expect(react).toHaveCount(1);
+    expect(await reactColumn.count()).toBeGreaterThan(0);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect((await cronus.count()) + (await cronusColumn.count())).toBeGreaterThan(0);
+    await expect(page.locator('[data-slot="kanban-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="kanban-control"]')).toHaveCount(0);
+  });
+
+  test("json-viewer is a div, not json-viewer-control", async ({ page }) => {
+    await page.goto("/audit/json-viewer?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="json-viewer"]');
+    const cronus = cronusFrame(page).locator('[data-slot="json-viewer"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="json-viewer-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="json-viewer-control"]')).toHaveCount(0);
+  });
+
+  test("animated-number is a span, not animated-number-control", async ({ page }) => {
+    await page.goto("/audit/animated-number?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="animated-number"]');
+    const cronus = cronusFrame(page).locator('[data-slot="animated-number"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("SPAN");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("SPAN");
+    await expect(page.locator('[data-slot="animated-number-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="animated-number-control"]')).toHaveCount(0);
+  });
+
+  test("marquee is a div, not marquee-control", async ({ page }) => {
+    await page.goto("/audit/marquee?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="marquee"]');
+    const cronus = cronusFrame(page).locator('[data-slot="marquee"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="marquee-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="marquee-control"]')).toHaveCount(0);
+  });
+
+  test("gradient-text is a span, not gradient-text-control", async ({ page }) => {
+    await page.goto("/audit/gradient-text?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="gradient-text"]');
+    const cronus = cronusFrame(page).locator('[data-slot="gradient-text"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("SPAN");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("SPAN");
+    await expect(page.locator('[data-slot="gradient-text-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="gradient-text-control"]')).toHaveCount(0);
+  });
+
+  test("shiny-text is a span, not shiny-text-control", async ({ page }) => {
+    await page.goto("/audit/shiny-text?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="shiny-text"]');
+    const cronus = cronusFrame(page).locator('[data-slot="shiny-text"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("SPAN");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("SPAN");
+    await expect(page.locator('[data-slot="shiny-text-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="shiny-text-control"]')).toHaveCount(0);
+  });
+
   test("toast is a visible div with data-slot toast, not toaster-only empty", async ({ page }) => {
     await page.goto("/audit/toast?fixture=default&preset=aurora&mode=dark");
     const react = page.locator('[data-audit-side="react"] [data-slot="toast"]');

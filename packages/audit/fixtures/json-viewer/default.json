@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "json-viewer",
+  "props": {
+    "aria-label": "Payload",
+    "data": { "name": "Ada", "ok": true },
+    "className": "w-72"
+  },
+  "expect": {
+    "slot": "json-viewer",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "json-viewer"
+    }
+  }
+}
