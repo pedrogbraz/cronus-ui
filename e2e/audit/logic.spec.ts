@@ -1229,6 +1229,130 @@ test.describe("logic parity", () => {
     await expect(cronusFrame(page).locator('[data-slot="sunburst-chart-control"]')).toHaveCount(0);
   });
 
+  test("choropleth-chart is a div with data-slot, not a figure", async ({ page }) => {
+    await page.goto("/audit/choropleth-chart?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="choropleth-chart"]');
+    const cronus = cronusFrame(page).locator('[data-slot="choropleth-chart"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] figure')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("figure")).toHaveCount(0);
+    await expect(page.locator('[data-slot="choropleth-chart-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="choropleth-chart-control"]')).toHaveCount(0);
+  });
+
+  test("profit-loss-chart is a div with data-slot, not a figure", async ({ page }) => {
+    await page.goto("/audit/profit-loss-chart?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="profit-loss-chart"]');
+    const cronus = cronusFrame(page).locator('[data-slot="profit-loss-chart"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] figure')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("figure")).toHaveCount(0);
+    await expect(page.locator('[data-slot="profit-loss-chart-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="profit-loss-chart-control"]')).toHaveCount(
+      0,
+    );
+  });
+
+  test("scroll-progress is a div, not scroll-progress-control", async ({ page }) => {
+    await page.goto("/audit/scroll-progress?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="scroll-progress"]');
+    const cronus = cronusFrame(page).locator('[data-slot="scroll-progress"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="scroll-progress-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="scroll-progress-control"]')).toHaveCount(0);
+  });
+
+  test("rich-text-editor is a div, not textarea-control", async ({ page }) => {
+    await page.goto("/audit/rich-text-editor?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="rich-text-editor"]');
+    const cronus = cronusFrame(page).locator('[data-slot="rich-text-editor"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] textarea')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("textarea")).toHaveCount(0);
+    await expect(page.locator('[data-slot="textarea-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="textarea-control"]')).toHaveCount(0);
+    await expect(page.locator('[data-slot="rich-text-editor-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="rich-text-editor-control"]')).toHaveCount(0);
+  });
+
+  test("confirmation-dialog is a div, not a native dialog", async ({ page }) => {
+    await page.goto("/audit/confirmation-dialog?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-slot="confirmation-dialog"]');
+    const cronus = cronusFrame(page).locator('[data-slot="confirmation-dialog"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] dialog')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("dialog")).toHaveCount(0);
+    await expect(page.locator('[data-slot="confirmation-dialog-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="confirmation-dialog-control"]')).toHaveCount(
+      0,
+    );
+  });
+
+  test("invite-dialog is a div, not a native dialog", async ({ page }) => {
+    await page.goto("/audit/invite-dialog?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-slot="invite-dialog"]');
+    const cronus = cronusFrame(page).locator('[data-slot="invite-dialog"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] dialog')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("dialog")).toHaveCount(0);
+    await expect(page.locator('[data-slot="invite-dialog-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="invite-dialog-control"]')).toHaveCount(0);
+  });
+
+  test("shimmer is a div, not shimmer-control", async ({ page }) => {
+    await page.goto("/audit/shimmer?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="shimmer"]');
+    const cronus = cronusFrame(page).locator('[data-slot="shimmer"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="shimmer-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="shimmer-control"]')).toHaveCount(0);
+  });
+
+  test("reveal is a div, not reveal-control", async ({ page }) => {
+    await page.goto("/audit/reveal?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="reveal"]');
+    const cronus = cronusFrame(page).locator('[data-slot="reveal"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="reveal-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="reveal-control"]')).toHaveCount(0);
+  });
+
+  test("text-shimmer is a p, not text-shimmer-control", async ({ page }) => {
+    await page.goto("/audit/text-shimmer?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="text-shimmer"]');
+    const cronus = cronusFrame(page).locator('[data-slot="text-shimmer"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("P");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("P");
+    await expect(page.locator('[data-slot="text-shimmer-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="text-shimmer-control"]')).toHaveCount(0);
+  });
+
   test("workspace-switcher is a button, not workspace-switcher-control", async ({ page }) => {
     await page.goto("/audit/workspace-switcher?fixture=default&preset=aurora&mode=dark");
     const react = page.locator('[data-audit-side="react"] [data-slot="workspace-switcher"]');

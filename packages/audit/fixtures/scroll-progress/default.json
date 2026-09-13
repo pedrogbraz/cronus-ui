@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "scroll-progress",
+  "props": {
+    "value": 40,
+    "aria-label": "Scroll progress"
+  },
+  "expect": {
+    "slot": "scroll-progress",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "scroll-progress"
+    }
+  }
+}

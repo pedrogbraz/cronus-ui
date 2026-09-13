@@ -2,9 +2,11 @@
 
 import { AreaChart } from "@cronus-ui/ui/area-chart";
 import { BarChart } from "@cronus-ui/ui/bar-chart";
+import { ChoroplethChart } from "@cronus-ui/ui/choropleth-chart";
 import { LineChart } from "@cronus-ui/ui/line-chart";
 import { LiveLineChart } from "@cronus-ui/ui/live-line-chart";
 import { PieChart } from "@cronus-ui/ui/pie-chart";
+import { ProfitLossChart } from "@cronus-ui/ui/profit-loss-chart";
 import { RadarChart } from "@cronus-ui/ui/radar-chart";
 import { RingChart } from "@cronus-ui/ui/ring-chart";
 import { ScatterChart } from "@cronus-ui/ui/scatter-chart";
@@ -88,6 +90,21 @@ const SUNBURST_DATA = [
   },
 ];
 
+/** Nested `{id, name, value}` cannot round-trip through emit. */
+const CHOROPLETH_DATA = [
+  { id: "nw", name: "Northwest", value: 42 },
+  { id: "ne", name: "Northeast", value: 78 },
+  { id: "c", name: "Central", value: 95 },
+  { id: "se", name: "Southeast", value: 67 },
+];
+
+/** Nested `{month, pnl}` cannot round-trip through emit. */
+const PNL_DATA = [
+  { month: "Jan", pnl: -4 },
+  { month: "Feb", pnl: 8 },
+  { month: "Mar", pnl: 2 },
+];
+
 function numberList(value: unknown): number[] {
   return Array.isArray(value)
     ? value.filter((item): item is number => typeof item === "number" && Number.isFinite(item))
@@ -143,4 +160,14 @@ export function LiveLineChartFixture() {
 /** Nested `{name, value, children}` cannot round-trip through emit. */
 export function SunburstChartFixture() {
   return <SunburstChart data={SUNBURST_DATA} />;
+}
+
+/** Nested `{id, name, value}` cannot round-trip through emit. */
+export function ChoroplethChartFixture() {
+  return <ChoroplethChart data={CHOROPLETH_DATA} />;
+}
+
+/** Nested `{month, pnl}` cannot round-trip through emit. */
+export function ProfitLossChartFixture() {
+  return <ProfitLossChart data={PNL_DATA} />;
 }

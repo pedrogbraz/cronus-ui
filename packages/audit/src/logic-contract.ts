@@ -93,6 +93,15 @@ const FAMILY_TAGS: Record<string, string> = {
   "expandable-tabs": "div",
   "live-line-chart": "div",
   "sunburst-chart": "div",
+  "choropleth-chart": "div",
+  "profit-loss-chart": "div",
+  "scroll-progress": "div",
+  "rich-text-editor": "div",
+  "confirmation-dialog": "div",
+  "invite-dialog": "div",
+  shimmer: "div",
+  reveal: "div",
+  "text-shimmer": "p",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */

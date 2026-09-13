@@ -612,6 +612,81 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("sunburst-chart", "default"))).toBe("div");
   });
 
+  it("emits wave 1k labels, items, and values without source", () => {
+    const src = emitCronusApp([
+      getFixture("choropleth-chart", "default"),
+      getFixture("profit-loss-chart", "default"),
+      getFixture("scroll-progress", "default"),
+      getFixture("rich-text-editor", "default"),
+      getFixture("confirmation-dialog", "default"),
+      getFixture("invite-dialog", "default"),
+      getFixture("shimmer", "default"),
+      getFixture("reveal", "default"),
+      getFixture("text-shimmer", "default"),
+    ]);
+    expect(src).toContain("component ChoroplethChartDefault layout:inline style:choropleth-chart {");
+    expect(src).toContain('label "Regions"');
+    expect(src).toContain('  text "Northwest"');
+    expect(src).toContain('  text "Southeast"');
+    expect(src).toContain("component ProfitLossChartDefault layout:inline style:profit-loss-chart {");
+    expect(src).toContain('label "P/L"');
+    expect(src).toContain('  text "Jan"');
+    expect(src).toContain('  text "Mar"');
+    expect(src).toContain("component ScrollProgressDefault layout:inline style:scroll-progress {");
+    expect(src).toContain("  value:40");
+    expect(src).toContain('  aria-label:"Scroll progress"');
+    expect(src).toContain(
+      "component RichTextEditorDefault layout:inline style:rich-text-editor {",
+    );
+    expect(src).toContain('label "Write something…"');
+    expect(src).toContain('  text "Write something…"');
+    expect(src).toContain('  aria-label:"Post body"');
+    expect(src).toContain(
+      "component ConfirmationDialogDefault layout:inline style:confirmation-dialog {",
+    );
+    expect(src).toContain('label "Delete project"');
+    expect(src).toContain("component InviteDialogDefault layout:inline style:invite-dialog {");
+    expect(src).toContain('label "Invite member"');
+    expect(src).toContain("component ShimmerDefault layout:inline style:shimmer {");
+    expect(src).toContain("component RevealDefault layout:inline style:reveal {");
+    expect(src).toContain('label "Revealed"');
+    expect(src).toContain("component TextShimmerDefault layout:inline style:text-shimmer {");
+    expect(src).toContain('label "Loading"');
+    expect(src).toContain("use ChoroplethChartDefault");
+    expect(src).toContain("use ProfitLossChartDefault");
+    expect(src).toContain("use ScrollProgressDefault");
+    expect(src).toContain("use RichTextEditorDefault");
+    expect(src).toContain("use ConfirmationDialogDefault");
+    expect(src).toContain("use InviteDialogDefault");
+    expect(src).toContain("use ShimmerDefault");
+    expect(src).toContain("use RevealDefault");
+    expect(src).toContain("use TextShimmerDefault");
+    expect(src).toContain('page "/audit/choropleth-chart/default" type:custom');
+    expect(src).toContain('page "/audit/profit-loss-chart/default" type:custom');
+    expect(src).toContain('page "/audit/scroll-progress/default" type:custom');
+    expect(src).toContain('page "/audit/rich-text-editor/default" type:custom');
+    expect(src).toContain('page "/audit/confirmation-dialog/default" type:custom');
+    expect(src).toContain('page "/audit/invite-dialog/default" type:custom');
+    expect(src).toContain('page "/audit/shimmer/default" type:custom');
+    expect(src).toContain('page "/audit/reveal/default" type:custom');
+    expect(src).toContain('page "/audit/text-shimmer/default" type:custom');
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for wave 1k families", () => {
+    expect(expectedTag(getFixture("choropleth-chart", "default"))).toBe("div");
+    expect(expectedTag(getFixture("profit-loss-chart", "default"))).toBe("div");
+    expect(expectedTag(getFixture("scroll-progress", "default"))).toBe("div");
+    expect(expectedTag(getFixture("rich-text-editor", "default"))).toBe("div");
+    expect(expectedTag(getFixture("confirmation-dialog", "default"))).toBe("div");
+    expect(expectedTag(getFixture("invite-dialog", "default"))).toBe("div");
+    expect(expectedTag(getFixture("shimmer", "default"))).toBe("div");
+    expect(expectedTag(getFixture("reveal", "default"))).toBe("div");
+    expect(expectedTag(getFixture("text-shimmer", "default"))).toBe("p");
+  });
+
   it("drops data-size from expect.attrs", () => {
     const parsed = parseParityFixture({
       id: "x",

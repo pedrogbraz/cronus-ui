@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "rich-text-editor",
+  "props": {
+    "placeholder": "Write something…",
+    "aria-label": "Post body"
+  },
+  "expect": {
+    "slot": "rich-text-editor",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "rich-text-editor"
+    }
+  }
+}

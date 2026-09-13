@@ -1,4 +1,5 @@
 import {
+  ConfirmationDialog,
   CreditCardInput,
   CurrencyInput,
   FloatingLabelInput,
@@ -56,6 +57,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@cronus-ui/ui/hov
 import { Input } from "@cronus-ui/ui/input";
 import { InputGroup, InputGroupAddon } from "@cronus-ui/ui/input-group";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@cronus-ui/ui/input-otp";
+import { InviteDialog } from "@cronus-ui/ui/invite-dialog";
 import { Kbd } from "@cronus-ui/ui/kbd";
 import { Label } from "@cronus-ui/ui/label";
 import { Masonry } from "@cronus-ui/ui/masonry";
@@ -80,6 +82,8 @@ import { Progress } from "@cronus-ui/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@cronus-ui/ui/radio-group";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@cronus-ui/ui/resizable";
 import { Rating } from "@cronus-ui/ui/rating";
+import { Reveal } from "@cronus-ui/ui/reveal";
+import { RichTextEditor } from "@cronus-ui/ui/rich-text-editor";
 import { ScrollArea } from "@cronus-ui/ui/scroll-area";
 import { SegmentedControl, SegmentedControlItem } from "@cronus-ui/ui/segmented-control";
 import { Separator } from "@cronus-ui/ui/separator";
@@ -91,6 +95,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@cronus-ui/ui/sheet";
+import { Shimmer } from "@cronus-ui/ui/shimmer";
 import { Skeleton } from "@cronus-ui/ui/skeleton";
 import { Slider } from "@cronus-ui/ui/slider";
 import { Toaster } from "@cronus-ui/ui/sonner";
@@ -107,6 +112,7 @@ import { Switch } from "@cronus-ui/ui/switch";
 import { TableOfContents } from "@cronus-ui/ui/table-of-contents";
 import { TagsInput } from "@cronus-ui/ui/tags-input";
 import { Textarea } from "@cronus-ui/ui/textarea";
+import { TextShimmer } from "@cronus-ui/ui/text-shimmer";
 import { Toggle } from "@cronus-ui/ui/toggle";
 import { ToggleGroup, ToggleGroupItem } from "@cronus-ui/ui/toggle-group";
 import { Toolbar, ToolbarButton } from "@cronus-ui/ui/toolbar";
@@ -118,9 +124,11 @@ import { CalendarFixture } from "./calendar-fixture.js";
 import {
   AreaChartFixture,
   BarChartFixture,
+  ChoroplethChartFixture,
   LineChartFixture,
   LiveLineChartFixture,
   PieChartFixture,
+  ProfitLossChartFixture,
   RadarChartFixture,
   RingChartFixture,
   ScatterChartFixture,
@@ -139,6 +147,7 @@ import { ModeToggleFixture } from "./mode-toggle-fixture.js";
 import { NotificationCenterFixture } from "./notification-center-fixture.js";
 import type { ParityFixture } from "./parity-fixture.js";
 import { SchedulerFixture } from "./scheduler-fixture.js";
+import { ScrollProgressFixture } from "./scroll-progress-fixture.js";
 import { SidebarFixture } from "./sidebar-fixture.js";
 import { WorkspaceSwitcherFixture } from "./workspace-switcher-fixture.js";
 
@@ -1823,6 +1832,124 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
   }
   if (fixture.family === "sunburst-chart") {
     return <SunburstChartFixture />;
+  }
+  if (fixture.family === "choropleth-chart") {
+    return <ChoroplethChartFixture />;
+  }
+  if (fixture.family === "profit-loss-chart") {
+    return <ProfitLossChartFixture />;
+  }
+  if (fixture.family === "scroll-progress") {
+    const { value, "aria-label": ariaLabel } = fixture.props as {
+      value?: number;
+      "aria-label"?: string;
+    };
+    return (
+      <ScrollProgressFixture
+        value={typeof value === "number" ? value : undefined}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+      />
+    );
+  }
+  if (fixture.family === "rich-text-editor") {
+    const {
+      onChange: _onChange,
+      placeholder,
+      defaultValue,
+      value,
+      "aria-label": ariaLabel,
+      items: _items,
+      options: _options,
+      ...rest
+    } = fixture.props as {
+      onChange?: unknown;
+      placeholder?: string;
+      defaultValue?: string;
+      value?: string;
+      "aria-label"?: string;
+      items?: unknown;
+      options?: unknown;
+    };
+    return (
+      <RichTextEditor
+        placeholder={placeholder}
+        defaultValue={typeof defaultValue === "string" ? defaultValue : undefined}
+        value={typeof value === "string" ? value : undefined}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "Post body"}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "confirmation-dialog") {
+    const {
+      title,
+      children,
+      onConfirm: _onConfirm,
+      onOpenChange: _onOpenChange,
+      defaultOpen: _defaultOpen,
+      open: _open,
+      trigger: _trigger,
+      items: _items,
+      options: _options,
+      ...rest
+    } = fixture.props as {
+      title?: string;
+      children?: string;
+      onConfirm?: unknown;
+      onOpenChange?: unknown;
+      defaultOpen?: boolean;
+      open?: boolean;
+      trigger?: unknown;
+      items?: unknown;
+      options?: unknown;
+    };
+    const heading =
+      typeof title === "string" ? title : typeof children === "string" ? children : fixture.id;
+    return <ConfirmationDialog {...rest} defaultOpen title={heading} />;
+  }
+  if (fixture.family === "invite-dialog") {
+    const {
+      onInvite: _onInvite,
+      onOpenChange: _onOpenChange,
+      open: _open,
+      defaultOpen: _defaultOpen,
+      trigger: _trigger,
+      label: _label,
+      items: _items,
+      options: _options,
+      ...rest
+    } = fixture.props as {
+      onInvite?: unknown;
+      onOpenChange?: unknown;
+      open?: boolean;
+      defaultOpen?: boolean;
+      trigger?: unknown;
+      label?: string;
+      items?: unknown;
+      options?: unknown;
+    };
+    return <InviteDialog {...rest} open />;
+  }
+  if (fixture.family === "shimmer") {
+    const { className, children, ...rest } = fixture.props as {
+      className?: string;
+      children?: string;
+    };
+    return (
+      <Shimmer className={typeof className === "string" ? className : "h-8 w-48"} {...rest}>
+        {typeof children === "string" ? children : null}
+      </Shimmer>
+    );
+  }
+  if (fixture.family === "reveal") {
+    const { children, ...rest } = fixture.props as { children?: string };
+    return <Reveal {...rest}>{typeof children === "string" ? children : fixture.id}</Reveal>;
+  }
+  if (fixture.family === "text-shimmer") {
+    const { children, ...rest } = fixture.props as { children?: string };
+    return (
+      <TextShimmer {...rest}>{typeof children === "string" ? children : fixture.id}</TextShimmer>
+    );
   }
   throw new Error(`renderReactFixture: unported family ${fixture.family}`);
 }

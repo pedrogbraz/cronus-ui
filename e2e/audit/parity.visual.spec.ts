@@ -833,4 +833,76 @@ test.describe("visual parity", () => {
       SCREENSHOT_OPTIONS,
     );
   });
+
+  test("choropleth-chart default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "choropleth-chart", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "choropleth-chart-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("profit-loss-chart default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "profit-loss-chart", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "profit-loss-chart-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("scroll-progress default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "scroll-progress", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "scroll-progress-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("rich-text-editor default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "rich-text-editor", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "rich-text-editor-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("confirmation-dialog default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "confirmation-dialog", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "confirmation-dialog-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("invite-dialog default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "invite-dialog", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "invite-dialog-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("shimmer default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "shimmer", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "shimmer-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("reveal default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "reveal", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "reveal-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("text-shimmer default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "text-shimmer", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "text-shimmer-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
 });

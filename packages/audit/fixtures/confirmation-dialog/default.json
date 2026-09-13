@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "confirmation-dialog",
+  "props": {
+    "defaultOpen": true,
+    "title": "Delete project"
+  },
+  "expect": {
+    "slot": "confirmation-dialog",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "confirmation-dialog"
+    }
+  }
+}

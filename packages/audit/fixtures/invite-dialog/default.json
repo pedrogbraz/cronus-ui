@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "invite-dialog",
+  "props": {
+    "open": true,
+    "label": "Invite member"
+  },
+  "expect": {
+    "slot": "invite-dialog",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "invite-dialog"
+    }
+  }
+}
