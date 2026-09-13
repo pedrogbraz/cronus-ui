@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "bar-chart",
+  "props": {
+    "label": "Sessions",
+    "items": ["Jan", "Feb", "Mar"]
+  },
+  "expect": {
+    "slot": "bar-chart",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "bar-chart"
+    }
+  }
+}

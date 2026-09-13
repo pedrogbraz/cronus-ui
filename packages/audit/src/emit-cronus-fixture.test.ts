@@ -247,6 +247,71 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("date-range-picker", "default"))).toBe("button");
   });
 
+  it("emits wave 1f labels and items as extra text without source", () => {
+    const src = emitCronusApp([
+      getFixture("area-chart", "default"),
+      getFixture("bar-chart", "default"),
+      getFixture("line-chart", "default"),
+      getFixture("sparkline", "default"),
+      getFixture("pie-chart", "default"),
+      getFixture("data-table", "default"),
+      getFixture("sidebar", "default"),
+      getFixture("sonner", "default"),
+      getFixture("navigation-menu", "default"),
+    ]);
+    expect(src).toContain("component AreaChartDefault layout:inline style:area-chart {");
+    expect(src).toContain('label "Sessions"');
+    expect(src).toContain('  text "Jan"');
+    expect(src).toContain('  text "Feb"');
+    expect(src).toContain("component BarChartDefault layout:inline style:bar-chart {");
+    expect(src).toContain("component LineChartDefault layout:inline style:line-chart {");
+    expect(src).toContain("component SparklineDefault layout:inline style:sparkline {");
+    expect(src).toContain('label "Trend"');
+    expect(src).toContain('  aria-label:"Trend"');
+    expect(src).toContain("component PieChartDefault layout:inline style:pie-chart {");
+    expect(src).toContain('  text "Desktop"');
+    expect(src).toContain('  text "Mobile"');
+    expect(src).toContain("component DataTableDefault layout:inline style:data-table {");
+    expect(src).toContain('  text "Ada"');
+    expect(src).toContain('  text "Linus"');
+    expect(src).toContain("component SidebarDefault layout:inline style:sidebar {");
+    expect(src).toContain('  text "Home"');
+    expect(src).toContain('  text "Inbox"');
+    expect(src).toContain("component SonnerDefault layout:inline style:sonner {");
+    expect(src).toContain('  aria-label:"Notifications"');
+    expect(src).toContain("component NavigationMenuDefault layout:inline style:navigation-menu {");
+    expect(src).toContain('label "Products"');
+    expect(src).toContain('  text "Analytics"');
+    expect(src).toContain('  text "Docs"');
+    expect(src).toContain("use AreaChartDefault");
+    expect(src).toContain("use BarChartDefault");
+    expect(src).toContain("use LineChartDefault");
+    expect(src).toContain("use SparklineDefault");
+    expect(src).toContain("use PieChartDefault");
+    expect(src).toContain("use DataTableDefault");
+    expect(src).toContain("use SidebarDefault");
+    expect(src).toContain("use SonnerDefault");
+    expect(src).toContain("use NavigationMenuDefault");
+    expect(src).toContain('page "/audit/area-chart/default" type:custom');
+    expect(src).toContain('page "/audit/sparkline/default" type:custom');
+    expect(src).toContain('page "/audit/sonner/default" type:custom');
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for wave 1f families", () => {
+    expect(expectedTag(getFixture("area-chart", "default"))).toBe("div");
+    expect(expectedTag(getFixture("bar-chart", "default"))).toBe("div");
+    expect(expectedTag(getFixture("line-chart", "default"))).toBe("div");
+    expect(expectedTag(getFixture("sparkline", "default"))).toBe("svg");
+    expect(expectedTag(getFixture("pie-chart", "default"))).toBe("div");
+    expect(expectedTag(getFixture("data-table", "default"))).toBe("div");
+    expect(expectedTag(getFixture("sidebar", "default"))).toBe("aside");
+    expect(expectedTag(getFixture("sonner", "default"))).toBe("div");
+    expect(expectedTag(getFixture("navigation-menu", "default"))).toBe("nav");
+  });
+
   it("drops data-size from expect.attrs", () => {
     const parsed = parseParityFixture({
       id: "x",

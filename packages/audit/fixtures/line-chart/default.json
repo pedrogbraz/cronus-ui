@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "line-chart",
+  "props": {
+    "label": "Sessions",
+    "items": ["Jan", "Feb", "Mar"]
+  },
+  "expect": {
+    "slot": "line-chart",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "line-chart"
+    }
+  }
+}

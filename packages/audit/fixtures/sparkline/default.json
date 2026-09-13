@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "sparkline",
+  "props": {
+    "data": [4, 8, 6, 10, 7],
+    "aria-label": "Trend"
+  },
+  "expect": {
+    "slot": "sparkline",
+    "tag": "svg",
+    "attrs": {
+      "data-slot": "sparkline"
+    }
+  }
+}

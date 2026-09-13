@@ -51,6 +51,12 @@ import {
   MenubarTrigger,
 } from "@cronus-ui/ui/menubar";
 import { Metric, MetricLabel, MetricValue } from "@cronus-ui/ui/metric";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@cronus-ui/ui/navigation-menu";
 import { Popover, PopoverContent, PopoverTrigger } from "@cronus-ui/ui/popover";
 import { Progress } from "@cronus-ui/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@cronus-ui/ui/radio-group";
@@ -65,6 +71,7 @@ import {
 } from "@cronus-ui/ui/sheet";
 import { Skeleton } from "@cronus-ui/ui/skeleton";
 import { Slider } from "@cronus-ui/ui/slider";
+import { Toaster } from "@cronus-ui/ui/sonner";
 import { Spinner } from "@cronus-ui/ui/spinner";
 import {
   Stepper,
@@ -79,9 +86,18 @@ import { Toggle } from "@cronus-ui/ui/toggle";
 import { ToggleGroup, ToggleGroupItem } from "@cronus-ui/ui/toggle-group";
 import type { ReactElement } from "react";
 import { CalendarFixture } from "./calendar-fixture.js";
+import {
+  AreaChartFixture,
+  BarChartFixture,
+  LineChartFixture,
+  PieChartFixture,
+  SparklineFixture,
+} from "./chart-fixtures.js";
+import { DataTableFixture } from "./data-table-fixture.js";
 import { DatePickerFixture } from "./date-picker-fixture.js";
 import { ModeToggleFixture } from "./mode-toggle-fixture.js";
 import type { ParityFixture } from "./parity-fixture.js";
+import { SidebarFixture } from "./sidebar-fixture.js";
 
 function stringList(value: unknown): string[] {
   return Array.isArray(value)
@@ -1007,6 +1023,73 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
         aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
         {...rest}
       />
+    );
+  }
+  if (fixture.family === "area-chart") {
+    return <AreaChartFixture />;
+  }
+  if (fixture.family === "bar-chart") {
+    return <BarChartFixture />;
+  }
+  if (fixture.family === "line-chart") {
+    return <LineChartFixture />;
+  }
+  if (fixture.family === "sparkline") {
+    const { data, "aria-label": ariaLabel } = fixture.props as {
+      data?: unknown;
+      "aria-label"?: string;
+    };
+    return (
+      <SparklineFixture
+        data={data}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+      />
+    );
+  }
+  if (fixture.family === "pie-chart") {
+    return <PieChartFixture />;
+  }
+  if (fixture.family === "data-table") {
+    return <DataTableFixture />;
+  }
+  if (fixture.family === "sidebar") {
+    const { items, options } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+    };
+    return <SidebarFixture items={stringList(items ?? options)} />;
+  }
+  if (fixture.family === "sonner") {
+    return <Toaster />;
+  }
+  if (fixture.family === "navigation-menu") {
+    const {
+      children,
+      items,
+      options,
+      defaultOpen: _defaultOpen,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      items?: unknown;
+      options?: unknown;
+      defaultOpen?: boolean;
+    };
+    const trigger = typeof children === "string" ? children : "Products";
+    const entries = stringList(items ?? options);
+    return (
+      <NavigationMenu {...rest}>
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>{trigger}</NavigationMenuTrigger>
+          </NavigationMenuItem>
+          {entries.map((item) => (
+            <NavigationMenuItem key={item}>
+              <NavigationMenuTrigger>{item}</NavigationMenuTrigger>
+            </NavigationMenuItem>
+          ))}
+        </NavigationMenuList>
+      </NavigationMenu>
     );
   }
   throw new Error(`renderReactFixture: unported family ${fixture.family}`);

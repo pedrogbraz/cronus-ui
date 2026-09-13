@@ -630,6 +630,126 @@ test.describe("logic parity", () => {
     await expect(cronusFrame(page).locator('[data-slot="mode-toggle-control"]')).toHaveCount(0);
   });
 
+  test("area-chart is a div with data-slot, not a figure", async ({ page }) => {
+    await page.goto("/audit/area-chart?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="area-chart"]');
+    const cronus = cronusFrame(page).locator('[data-slot="area-chart"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] figure')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("figure")).toHaveCount(0);
+    await expect(page.locator('[data-slot="area-chart-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="area-chart-control"]')).toHaveCount(0);
+  });
+
+  test("bar-chart is a div with data-slot, not a figure", async ({ page }) => {
+    await page.goto("/audit/bar-chart?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="bar-chart"]');
+    const cronus = cronusFrame(page).locator('[data-slot="bar-chart"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] figure')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("figure")).toHaveCount(0);
+    await expect(page.locator('[data-slot="bar-chart-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="bar-chart-control"]')).toHaveCount(0);
+  });
+
+  test("line-chart is a div with data-slot, not a figure", async ({ page }) => {
+    await page.goto("/audit/line-chart?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="line-chart"]');
+    const cronus = cronusFrame(page).locator('[data-slot="line-chart"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] figure')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("figure")).toHaveCount(0);
+    await expect(page.locator('[data-slot="line-chart-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="line-chart-control"]')).toHaveCount(0);
+  });
+
+  test("sparkline is an svg with data-slot, not a figure", async ({ page }) => {
+    await page.goto("/audit/sparkline?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="sparkline"]');
+    const cronus = cronusFrame(page).locator('[data-slot="sparkline"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("svg");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("svg");
+    await expect(page.locator('[data-audit-side="react"] figure')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("figure")).toHaveCount(0);
+    await expect(page.locator('[data-slot="sparkline-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="sparkline-control"]')).toHaveCount(0);
+  });
+
+  test("pie-chart is a div with data-slot, not a figure", async ({ page }) => {
+    await page.goto("/audit/pie-chart?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="pie-chart"]');
+    const cronus = cronusFrame(page).locator('[data-slot="pie-chart"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-audit-side="react"] figure')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("figure")).toHaveCount(0);
+    await expect(page.locator('[data-slot="pie-chart-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="pie-chart-control"]')).toHaveCount(0);
+  });
+
+  test("data-table is a div, not data-table-control", async ({ page }) => {
+    await page.goto("/audit/data-table?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="data-table"]');
+    const cronus = cronusFrame(page).locator('[data-slot="data-table"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="data-table-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="data-table-control"]')).toHaveCount(0);
+  });
+
+  test("sidebar is an aside, not sidebar-control", async ({ page }) => {
+    await page.goto("/audit/sidebar?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="sidebar"]');
+    const cronus = cronusFrame(page).locator('[data-slot="sidebar"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("ASIDE");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("ASIDE");
+    await expect(page.locator('[data-slot="sidebar-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="sidebar-control"]')).toHaveCount(0);
+  });
+
+  test("sonner toaster is a div, not sonner-control", async ({ page }) => {
+    await page.goto("/audit/sonner?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="toaster"]');
+    const cronus = cronusFrame(page).locator('[data-slot="toaster"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="sonner-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="sonner-control"]')).toHaveCount(0);
+    await expect(page.locator('[data-slot="toaster-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="toaster-control"]')).toHaveCount(0);
+  });
+
+  test("navigation-menu is a nav, not navigation-menu-control", async ({ page }) => {
+    await page.goto("/audit/navigation-menu?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="navigation-menu"]');
+    const cronus = cronusFrame(page).locator('[data-slot="navigation-menu"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("NAV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("NAV");
+    await expect(page.locator('[data-slot="navigation-menu-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="navigation-menu-control"]')).toHaveCount(0);
+  });
+
   test("button-group is a div group, not button-group-control", async ({ page }) => {
     await page.goto("/audit/button-group?fixture=default&preset=aurora&mode=dark");
     const react = page.locator('[data-audit-side="react"] [data-slot="button-group"]');

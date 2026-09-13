@@ -48,6 +48,15 @@ const FAMILY_TAGS: Record<string, string> = {
   "date-picker": "button",
   "time-picker": "button",
   "date-range-picker": "button",
+  "area-chart": "div",
+  "bar-chart": "div",
+  "line-chart": "div",
+  sparkline: "svg",
+  "pie-chart": "div",
+  "data-table": "div",
+  sidebar: "aside",
+  sonner: "div",
+  "navigation-menu": "nav",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */

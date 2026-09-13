@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "sonner",
+  "props": {
+    "aria-label": "Notifications"
+  },
+  "expect": {
+    "slot": "toaster",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "toaster"
+    }
+  }
+}
