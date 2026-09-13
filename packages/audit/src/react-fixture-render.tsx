@@ -22,6 +22,7 @@ import { ButtonGroup } from "@cronus-ui/ui/button-group";
 import { Card, CardDescription, CardHeader, CardTitle } from "@cronus-ui/ui/card";
 import { Checkbox } from "@cronus-ui/ui/checkbox";
 import { Chip } from "@cronus-ui/ui/chip";
+import { CodeTabs } from "@cronus-ui/ui/code-tabs";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@cronus-ui/ui/collapsible";
 import { Combobox } from "@cronus-ui/ui/combobox";
 import { Command, CommandInput, CommandItem, CommandList } from "@cronus-ui/ui/command";
@@ -57,6 +58,7 @@ import { InputGroup, InputGroupAddon } from "@cronus-ui/ui/input-group";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@cronus-ui/ui/input-otp";
 import { Kbd } from "@cronus-ui/ui/kbd";
 import { Label } from "@cronus-ui/ui/label";
+import { Masonry } from "@cronus-ui/ui/masonry";
 import {
   Menubar,
   MenubarContent,
@@ -79,6 +81,7 @@ import { RadioGroup, RadioGroupItem } from "@cronus-ui/ui/radio-group";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@cronus-ui/ui/resizable";
 import { Rating } from "@cronus-ui/ui/rating";
 import { ScrollArea } from "@cronus-ui/ui/scroll-area";
+import { SegmentedControl, SegmentedControlItem } from "@cronus-ui/ui/segmented-control";
 import { Separator } from "@cronus-ui/ui/separator";
 import { SignaturePad } from "@cronus-ui/ui/signature-pad";
 import {
@@ -107,6 +110,7 @@ import { Textarea } from "@cronus-ui/ui/textarea";
 import { Toggle } from "@cronus-ui/ui/toggle";
 import { ToggleGroup, ToggleGroupItem } from "@cronus-ui/ui/toggle-group";
 import { Toolbar, ToolbarButton } from "@cronus-ui/ui/toolbar";
+import { UsageMeter } from "@cronus-ui/ui/usage-meter";
 import type { ReactElement } from "react";
 import { AppShellFixture } from "./app-shell-fixture.js";
 import { AutocompleteFixture } from "./autocomplete-fixture.js";
@@ -115,16 +119,21 @@ import {
   AreaChartFixture,
   BarChartFixture,
   LineChartFixture,
+  LiveLineChartFixture,
   PieChartFixture,
   RadarChartFixture,
   RingChartFixture,
   ScatterChartFixture,
   SparklineFixture,
+  SunburstChartFixture,
 } from "./chart-fixtures.js";
 import { ColorPickerFixture } from "./color-picker-fixture.js";
+import { ComparisonSliderFixture } from "./comparison-slider-fixture.js";
 import { DataTableFixture } from "./data-table-fixture.js";
 import { DatePickerFixture } from "./date-picker-fixture.js";
 import { DockFixture } from "./dock-fixture.js";
+import { ExpandableTabsFixture } from "./expandable-tabs-fixture.js";
+import { HeatmapFixture } from "./heatmap-fixture.js";
 import { LightboxFixture } from "./lightbox-fixture.js";
 import { ModeToggleFixture } from "./mode-toggle-fixture.js";
 import { NotificationCenterFixture } from "./notification-center-fixture.js";
@@ -1628,6 +1637,192 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
         title={typeof title === "string" ? title : undefined}
       />
     );
+  }
+  if (fixture.family === "segmented-control") {
+    const {
+      items,
+      options,
+      value,
+      defaultValue,
+      onValueChange: _onValueChange,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      value?: string;
+      defaultValue?: string;
+      onValueChange?: unknown;
+      "aria-label"?: string;
+    };
+    const labels = stringList(items ?? options);
+    const entries = labels.length > 0 ? labels : ["Day", "Week"];
+    const selected =
+      typeof value === "string"
+        ? value
+        : typeof defaultValue === "string"
+          ? defaultValue
+          : entries[0];
+    return (
+      <SegmentedControl
+        defaultValue={selected}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "audit-segmented-control"}
+        {...rest}
+      >
+        {entries.map((item) => (
+          <SegmentedControlItem key={item} value={item}>
+            {item}
+          </SegmentedControlItem>
+        ))}
+      </SegmentedControl>
+    );
+  }
+  if (fixture.family === "usage-meter") {
+    const {
+      value,
+      max,
+      label,
+      formatValue: _formatValue,
+      items: _items,
+      options: _options,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      value?: number;
+      max?: number;
+      label?: string;
+      formatValue?: unknown;
+      items?: unknown;
+      options?: unknown;
+      "aria-label"?: string;
+    };
+    return (
+      <UsageMeter
+        value={typeof value === "number" ? value : 40}
+        max={typeof max === "number" ? max : 100}
+        label={typeof label === "string" ? label : undefined}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "audit-usage-meter"}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "masonry") {
+    const {
+      items,
+      options,
+      columns,
+      className,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      columns?: number;
+      className?: string;
+      "aria-label"?: string;
+    };
+    const labels = stringList(items ?? options);
+    const cards = labels.length > 0 ? labels : ["Alpha", "Beta", "Gamma", "Delta"];
+    return (
+      <Masonry
+        columns={typeof columns === "number" ? columns : 2}
+        className={typeof className === "string" ? className : "w-72"}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "audit-masonry"}
+        {...rest}
+      >
+        {cards.map((item) => (
+          <div key={item} className="rounded-lg border border-border bg-surface-raised p-3 text-sm">
+            {item}
+          </div>
+        ))}
+      </Masonry>
+    );
+  }
+  if (fixture.family === "heatmap") {
+    const { data, "aria-label": ariaLabel } = fixture.props as {
+      data?: unknown;
+      "aria-label"?: string;
+    };
+    return (
+      <HeatmapFixture
+        data={data}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+      />
+    );
+  }
+  if (fixture.family === "comparison-slider") {
+    const {
+      items,
+      options,
+      onPositionChange: _onPositionChange,
+      "aria-label": ariaLabel,
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      onPositionChange?: unknown;
+      "aria-label"?: string;
+    };
+    return (
+      <ComparisonSliderFixture
+        items={stringList(items ?? options)}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+      />
+    );
+  }
+  if (fixture.family === "code-tabs") {
+    const {
+      items,
+      options,
+      defaultLabel,
+      onLabelChange: _onLabelChange,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      defaultLabel?: string;
+      onLabelChange?: unknown;
+      "aria-label"?: string;
+    };
+    const labels = stringList(items ?? options);
+    const tabs = labels.length > 0 ? labels : ["bun", "npm"];
+    return (
+      <CodeTabs
+        defaultLabel={typeof defaultLabel === "string" ? defaultLabel : tabs[0]}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "audit-code-tabs"}
+        items={tabs.map((label) => ({
+          label,
+          code: `${label} install`,
+          language: "bash",
+        }))}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "expandable-tabs") {
+    const {
+      items,
+      options,
+      onValueChange: _onValueChange,
+      "aria-label": ariaLabel,
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      onValueChange?: unknown;
+      "aria-label"?: string;
+    };
+    return (
+      <ExpandableTabsFixture
+        items={stringList(items ?? options)}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+      />
+    );
+  }
+  if (fixture.family === "live-line-chart") {
+    return <LiveLineChartFixture />;
+  }
+  if (fixture.family === "sunburst-chart") {
+    return <SunburstChartFixture />;
   }
   throw new Error(`renderReactFixture: unported family ${fixture.family}`);
 }

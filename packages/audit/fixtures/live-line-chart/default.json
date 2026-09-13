@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "live-line-chart",
+  "props": {
+    "label": "Live",
+    "items": ["0", "1", "2"]
+  },
+  "expect": {
+    "slot": "live-line-chart",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "live-line-chart"
+    }
+  }
+}

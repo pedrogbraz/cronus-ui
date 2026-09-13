@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "comparison-slider",
+  "props": {
+    "aria-label": "Comparison",
+    "items": ["Before", "After"]
+  },
+  "expect": {
+    "slot": "comparison-slider",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "comparison-slider"
+    }
+  }
+}

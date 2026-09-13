@@ -761,4 +761,76 @@ test.describe("visual parity", () => {
       SCREENSHOT_OPTIONS,
     );
   });
+
+  test("segmented-control default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "segmented-control", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "segmented-control-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("usage-meter default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "usage-meter", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "usage-meter-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("masonry default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "masonry", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "masonry-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("heatmap default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "heatmap", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "heatmap-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("comparison-slider default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "comparison-slider", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "comparison-slider-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("code-tabs default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "code-tabs", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "code-tabs-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("expandable-tabs default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "expandable-tabs", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "expandable-tabs-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("live-line-chart default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "live-line-chart", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "live-line-chart-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("sunburst-chart default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "sunburst-chart", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "sunburst-chart-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
 });
