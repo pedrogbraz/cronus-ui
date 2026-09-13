@@ -12,13 +12,7 @@ import {
 const FALLBACK_ITEMS = ["Home", "Inbox"];
 
 /** Sidebar nodes cannot round-trip through emit — labels come from `items`. */
-export function AppShellFixture({
-  items,
-  title,
-}: {
-  items?: string[];
-  title?: string;
-}) {
+export function AppShellFixture({ items, title }: { items?: string[]; title?: string }) {
   const labels = items && items.length > 0 ? items : FALLBACK_ITEMS;
   const heading = typeof title === "string" ? title : "Acme";
   return (

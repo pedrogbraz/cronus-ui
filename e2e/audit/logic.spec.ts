@@ -949,9 +949,9 @@ test.describe("logic parity", () => {
     expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
     expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
     await expect(page.locator('[data-slot="floating-label-input-control"]')).toHaveCount(0);
-    await expect(cronusFrame(page).locator('[data-slot="floating-label-input-control"]')).toHaveCount(
-      0,
-    );
+    await expect(
+      cronusFrame(page).locator('[data-slot="floating-label-input-control"]'),
+    ).toHaveCount(0);
   });
 
   test("split-button is a div group, not split-button-control", async ({ page }) => {
@@ -1104,9 +1104,9 @@ test.describe("logic parity", () => {
     expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
     expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
     await expect(page.locator('[data-slot="notification-center-control"]')).toHaveCount(0);
-    await expect(cronusFrame(page).locator('[data-slot="notification-center-control"]')).toHaveCount(
-      0,
-    );
+    await expect(
+      cronusFrame(page).locator('[data-slot="notification-center-control"]'),
+    ).toHaveCount(0);
   });
 
   test("segmented-control is a div radiogroup, not radio inputs", async ({ page }) => {
@@ -1240,7 +1240,9 @@ test.describe("logic parity", () => {
     await expect(page.locator('[data-audit-side="react"] figure')).toHaveCount(0);
     await expect(cronusFrame(page).locator("figure")).toHaveCount(0);
     await expect(page.locator('[data-slot="choropleth-chart-control"]')).toHaveCount(0);
-    await expect(cronusFrame(page).locator('[data-slot="choropleth-chart-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="choropleth-chart-control"]')).toHaveCount(
+      0,
+    );
   });
 
   test("profit-loss-chart is a div with data-slot, not a figure", async ({ page }) => {
@@ -1284,7 +1286,9 @@ test.describe("logic parity", () => {
     await expect(page.locator('[data-slot="textarea-control"]')).toHaveCount(0);
     await expect(cronusFrame(page).locator('[data-slot="textarea-control"]')).toHaveCount(0);
     await expect(page.locator('[data-slot="rich-text-editor-control"]')).toHaveCount(0);
-    await expect(cronusFrame(page).locator('[data-slot="rich-text-editor-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="rich-text-editor-control"]')).toHaveCount(
+      0,
+    );
   });
 
   test("confirmation-dialog is a div, not a native dialog", async ({ page }) => {
@@ -1298,9 +1302,9 @@ test.describe("logic parity", () => {
     await expect(page.locator('[data-audit-side="react"] dialog')).toHaveCount(0);
     await expect(cronusFrame(page).locator("dialog")).toHaveCount(0);
     await expect(page.locator('[data-slot="confirmation-dialog-control"]')).toHaveCount(0);
-    await expect(cronusFrame(page).locator('[data-slot="confirmation-dialog-control"]')).toHaveCount(
-      0,
-    );
+    await expect(
+      cronusFrame(page).locator('[data-slot="confirmation-dialog-control"]'),
+    ).toHaveCount(0);
   });
 
   test("invite-dialog is a div, not a native dialog", async ({ page }) => {
@@ -1402,7 +1406,9 @@ test.describe("logic parity", () => {
     await expect(page.locator('[data-audit-side="react"] details')).toHaveCount(0);
     await expect(cronusFrame(page).locator("details")).toHaveCount(0);
     await expect(page.locator('[data-slot="morphing-popover-control"]')).toHaveCount(0);
-    await expect(cronusFrame(page).locator('[data-slot="morphing-popover-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="morphing-popover-control"]')).toHaveCount(
+      0,
+    );
   });
 
   test("bouncy-accordion is a div, not bouncy-accordion-control", async ({ page }) => {
@@ -1414,7 +1420,9 @@ test.describe("logic parity", () => {
     expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
     expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
     await expect(page.locator('[data-slot="bouncy-accordion-control"]')).toHaveCount(0);
-    await expect(cronusFrame(page).locator('[data-slot="bouncy-accordion-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="bouncy-accordion-control"]')).toHaveCount(
+      0,
+    );
   });
 
   test("typing-text is a span, not typing-text-control", async ({ page }) => {
@@ -1596,7 +1604,9 @@ test.describe("logic parity", () => {
     expect(await react.evaluate((el) => el.tagName)).toBe("DL");
     expect(await cronus.evaluate((el) => el.tagName)).toBe("DL");
     await expect(page.locator('[data-slot="description-list-control"]')).toHaveCount(0);
-    await expect(cronusFrame(page).locator('[data-slot="description-list-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="description-list-control"]')).toHaveCount(
+      0,
+    );
   });
 
   test("kanban exposes kanban or kanban-column, not kanban-control", async ({ page }) => {
