@@ -1,6 +1,5 @@
 "use client";
 
-import type { ParityFixture } from "@cronus-ui/audit";
 import { type Mode, modes, type ThemeName, themeNames } from "@cronus-ui/tokens";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -11,7 +10,7 @@ export function AuditToolbar({
   mode,
   dir,
 }: {
-  fixtures: ParityFixture[];
+  fixtures: { id: string }[];
   fixtureId: string;
   preset: ThemeName;
   mode: Mode;
