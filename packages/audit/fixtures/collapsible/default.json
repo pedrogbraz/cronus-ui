@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "collapsible",
+  "props": {
+    "children": "Toggle",
+    "defaultOpen": true,
+    "options": ["Hidden body"]
+  },
+  "expect": {
+    "slot": "collapsible-content",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "collapsible-content"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "stepper",
+  "props": {
+    "label": "Onboarding",
+    "items": ["Account", "Shipping"]
+  },
+  "expect": {
+    "slot": "stepper",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "stepper"
+    }
+  }
+}

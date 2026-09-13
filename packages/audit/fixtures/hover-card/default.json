@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "hover-card",
+  "props": {
+    "children": "@cronus",
+    "open": true,
+    "options": ["Cronus UI"]
+  },
+  "expect": {
+    "slot": "hover-card-content",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "hover-card-content"
+    }
+  }
+}

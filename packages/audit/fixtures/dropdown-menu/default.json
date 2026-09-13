@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "dropdown-menu",
+  "props": {
+    "children": "Actions",
+    "defaultOpen": true,
+    "items": ["Edit", "Delete"]
+  },
+  "expect": {
+    "slot": "dropdown-menu-content",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "dropdown-menu-content"
+    }
+  }
+}

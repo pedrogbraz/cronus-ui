@@ -146,6 +146,55 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("button-group", "default"))).toBe("div");
   });
 
+  it("emits combobox options and overlay content as extra text without source", () => {
+    const src = emitCronusApp([
+      getFixture("combobox", "default"),
+      getFixture("stepper", "default"),
+      getFixture("input-otp", "default"),
+      getFixture("file-dropzone", "default"),
+      getFixture("popover", "default"),
+      getFixture("hover-card", "default"),
+      getFixture("dropdown-menu", "default"),
+      getFixture("collapsible", "default"),
+      getFixture("mode-toggle", "default"),
+    ]);
+    expect(src).toContain("component ComboboxDefault layout:inline style:combobox {");
+    expect(src).toContain('  text "Apple"');
+    expect(src).toContain('  text "Banana"');
+    expect(src).toContain('label "Onboarding"');
+    expect(src).toContain('  text "Account"');
+    expect(src).toContain('  text "Shipping"');
+    expect(src).toContain('  text "Popover body"');
+    expect(src).toContain('  text "Cronus UI"');
+    expect(src).toContain('  text "Edit"');
+    expect(src).toContain('  text "Delete"');
+    expect(src).toContain('  text "Hidden body"');
+    expect(src).toContain("use ComboboxDefault");
+    expect(src).toContain("use StepperDefault");
+    expect(src).toContain("use InputOtpDefault");
+    expect(src).toContain("use FileDropzoneDefault");
+    expect(src).toContain("use PopoverDefault");
+    expect(src).toContain("use HoverCardDefault");
+    expect(src).toContain("use DropdownMenuDefault");
+    expect(src).toContain("use CollapsibleDefault");
+    expect(src).toContain("use ModeToggleDefault");
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for wave 1d families", () => {
+    expect(expectedTag(getFixture("combobox", "default"))).toBe("button");
+    expect(expectedTag(getFixture("stepper", "default"))).toBe("div");
+    expect(expectedTag(getFixture("input-otp", "default"))).toBe("input");
+    expect(expectedTag(getFixture("file-dropzone", "default"))).toBe("label");
+    expect(expectedTag(getFixture("popover", "default"))).toBe("div");
+    expect(expectedTag(getFixture("hover-card", "default"))).toBe("div");
+    expect(expectedTag(getFixture("dropdown-menu", "default"))).toBe("div");
+    expect(expectedTag(getFixture("collapsible", "default"))).toBe("div");
+    expect(expectedTag(getFixture("mode-toggle", "default"))).toBe("button");
+  });
+
   it("drops data-size from expect.attrs", () => {
     const parsed = parseParityFixture({
       id: "x",

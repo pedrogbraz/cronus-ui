@@ -8,15 +8,28 @@ import { ButtonGroup } from "@cronus-ui/ui/button-group";
 import { Card, CardDescription, CardHeader, CardTitle } from "@cronus-ui/ui/card";
 import { Checkbox } from "@cronus-ui/ui/checkbox";
 import { Chip } from "@cronus-ui/ui/chip";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@cronus-ui/ui/collapsible";
+import { Combobox } from "@cronus-ui/ui/combobox";
 import { CopyButton } from "@cronus-ui/ui/copy-button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@cronus-ui/ui/dropdown-menu";
 import { Empty, EmptyTitle } from "@cronus-ui/ui/empty";
 import { Fab } from "@cronus-ui/ui/fab";
 import { Field, FieldDescription, FieldLabel } from "@cronus-ui/ui/field";
+import { FileDropzone } from "@cronus-ui/ui/file-dropzone";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@cronus-ui/ui/hover-card";
 import { Input } from "@cronus-ui/ui/input";
 import { InputGroup, InputGroupAddon } from "@cronus-ui/ui/input-group";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@cronus-ui/ui/input-otp";
 import { Kbd } from "@cronus-ui/ui/kbd";
 import { Label } from "@cronus-ui/ui/label";
 import { Metric, MetricLabel, MetricValue } from "@cronus-ui/ui/metric";
+import { ModeToggle } from "@cronus-ui/ui/mode-toggle";
+import { Popover, PopoverContent, PopoverTrigger } from "@cronus-ui/ui/popover";
 import { Progress } from "@cronus-ui/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@cronus-ui/ui/radio-group";
 import { Rating } from "@cronus-ui/ui/rating";
@@ -24,6 +37,13 @@ import { Separator } from "@cronus-ui/ui/separator";
 import { Skeleton } from "@cronus-ui/ui/skeleton";
 import { Slider } from "@cronus-ui/ui/slider";
 import { Spinner } from "@cronus-ui/ui/spinner";
+import {
+  Stepper,
+  StepperIndicator,
+  StepperItem,
+  StepperList,
+  StepperTitle,
+} from "@cronus-ui/ui/stepper";
 import { Switch } from "@cronus-ui/ui/switch";
 import { Textarea } from "@cronus-ui/ui/textarea";
 import { Toggle } from "@cronus-ui/ui/toggle";
@@ -514,6 +534,226 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
           <Button key={item}>{item}</Button>
         ))}
       </ButtonGroup>
+    );
+  }
+  if (fixture.family === "combobox") {
+    const {
+      options,
+      placeholder,
+      open: _open,
+      defaultOpen: _defaultOpen,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      options?: unknown;
+      placeholder?: string;
+      open?: boolean;
+      defaultOpen?: boolean;
+      "aria-label"?: string;
+    };
+    const labels = stringList(options);
+    return (
+      <Combobox
+        options={labels.map((item) => ({ label: item, value: item }))}
+        placeholder={placeholder}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "audit-combobox"}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "stepper") {
+    const {
+      items,
+      options,
+      label: _label,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      label?: string;
+    };
+    const titles = stringList(items ?? options);
+    const steps = titles.length > 0 ? titles : [fixture.id];
+    return (
+      <Stepper {...rest}>
+        <StepperList>
+          {steps.map((title, index) => (
+            <StepperItem key={title} step={index}>
+              <StepperIndicator />
+              <StepperTitle>{title}</StepperTitle>
+            </StepperItem>
+          ))}
+        </StepperList>
+      </Stepper>
+    );
+  }
+  if (fixture.family === "input-otp") {
+    const {
+      maxLength,
+      "aria-label": ariaLabel,
+      children: _children,
+      items: _items,
+      options: _options,
+      ...rest
+    } = fixture.props as {
+      maxLength?: number;
+      "aria-label"?: string;
+      children?: string;
+      items?: unknown;
+      options?: unknown;
+    };
+    const length = typeof maxLength === "number" && maxLength > 0 ? maxLength : 6;
+    return (
+      <InputOTP
+        maxLength={length}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "One-time passcode"}
+        {...rest}
+      >
+        <InputOTPGroup>
+          {["s0", "s1", "s2", "s3", "s4", "s5"].slice(0, length).map((key, index) => (
+            <InputOTPSlot key={key} index={index} />
+          ))}
+        </InputOTPGroup>
+      </InputOTP>
+    );
+  }
+  if (fixture.family === "file-dropzone") {
+    const {
+      onFiles: _onFiles,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      onFiles?: unknown;
+      "aria-label"?: string;
+    };
+    return (
+      <FileDropzone
+        onFiles={() => {}}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "Upload files"}
+        {...rest}
+      />
+    );
+  }
+  if (fixture.family === "popover") {
+    const {
+      children,
+      options,
+      items,
+      defaultOpen: _defaultOpen,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      options?: unknown;
+      items?: unknown;
+      defaultOpen?: boolean;
+      "aria-label"?: string;
+    };
+    const trigger = typeof children === "string" ? children : "Open";
+    const body = stringList(options ?? items)[0] ?? trigger;
+    return (
+      <Popover {...rest} defaultOpen>
+        <PopoverTrigger asChild>
+          <Button>{trigger}</Button>
+        </PopoverTrigger>
+        <PopoverContent aria-label={typeof ariaLabel === "string" ? ariaLabel : "Details"}>
+          {body}
+        </PopoverContent>
+      </Popover>
+    );
+  }
+  if (fixture.family === "hover-card") {
+    const {
+      children,
+      options,
+      items,
+      open: _open,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      options?: unknown;
+      items?: unknown;
+      open?: boolean;
+    };
+    const trigger = typeof children === "string" ? children : fixture.id;
+    const body = stringList(options ?? items)[0] ?? trigger;
+    return (
+      <HoverCard {...rest} open>
+        <HoverCardTrigger asChild>
+          <Button variant="link">{trigger}</Button>
+        </HoverCardTrigger>
+        <HoverCardContent>{body}</HoverCardContent>
+      </HoverCard>
+    );
+  }
+  if (fixture.family === "dropdown-menu") {
+    const {
+      children,
+      items,
+      options,
+      defaultOpen: _defaultOpen,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      items?: unknown;
+      options?: unknown;
+      defaultOpen?: boolean;
+    };
+    const trigger = typeof children === "string" ? children : "Actions";
+    const entries = stringList(items ?? options);
+    return (
+      <DropdownMenu {...rest} defaultOpen>
+        <DropdownMenuTrigger asChild>
+          <Button>{trigger}</Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          {entries.map((item) => (
+            <DropdownMenuItem key={item}>{item}</DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+  }
+  if (fixture.family === "collapsible") {
+    const {
+      children,
+      options,
+      items,
+      defaultOpen: _defaultOpen,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      options?: unknown;
+      items?: unknown;
+      defaultOpen?: boolean;
+    };
+    const trigger = typeof children === "string" ? children : "Toggle";
+    const body = stringList(options ?? items)[0] ?? trigger;
+    return (
+      <Collapsible {...rest} defaultOpen>
+        <CollapsibleTrigger>{trigger}</CollapsibleTrigger>
+        <CollapsibleContent>{body}</CollapsibleContent>
+      </Collapsible>
+    );
+  }
+  if (fixture.family === "mode-toggle") {
+    const {
+      mode,
+      onModeChange: _onModeChange,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      mode?: string;
+      onModeChange?: unknown;
+      "aria-label"?: string;
+    };
+    return (
+      <ModeToggle
+        mode={mode === "dark" ? "dark" : "light"}
+        onModeChange={() => {}}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+        {...rest}
+      />
     );
   }
   throw new Error(`renderReactFixture: unported family ${fixture.family}`);

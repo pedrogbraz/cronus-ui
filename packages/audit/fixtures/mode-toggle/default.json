@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "mode-toggle",
+  "props": {
+    "mode": "light",
+    "aria-label": "Switch to dark mode"
+  },
+  "expect": {
+    "slot": "mode-toggle",
+    "tag": "button",
+    "attrs": {
+      "data-slot": "mode-toggle"
+    }
+  }
+}

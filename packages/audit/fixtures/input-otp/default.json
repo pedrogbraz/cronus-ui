@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "input-otp",
+  "props": {
+    "maxLength": 6,
+    "aria-label": "One-time passcode"
+  },
+  "expect": {
+    "slot": "input-otp",
+    "tag": "input",
+    "attrs": {
+      "data-slot": "input-otp"
+    }
+  }
+}

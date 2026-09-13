@@ -402,6 +402,116 @@ test.describe("logic parity", () => {
     await expect(cronusFrame(page).locator('[data-slot="avatar-group-control"]')).toHaveCount(0);
   });
 
+  test("combobox trigger is a button, not a select", async ({ page }) => {
+    await page.goto("/audit/combobox?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="combobox-trigger"]');
+    const cronus = cronusFrame(page).locator('[data-slot="combobox-trigger"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("BUTTON");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("BUTTON");
+    await expect(page.locator('[data-audit-side="react"] select')).toHaveCount(0);
+    await expect(cronusFrame(page).locator("select")).toHaveCount(0);
+    await expect(page.locator('[data-slot="combobox-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="combobox-control"]')).toHaveCount(0);
+  });
+
+  test("stepper is a div, not stepper-control", async ({ page }) => {
+    await page.goto("/audit/stepper?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="stepper"]');
+    const cronus = cronusFrame(page).locator('[data-slot="stepper"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="stepper-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="stepper-control"]')).toHaveCount(0);
+  });
+
+  test("input-otp is a hidden input, not input-otp-control", async ({ page }) => {
+    await page.goto("/audit/input-otp?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="input-otp"]');
+    const cronus = cronusFrame(page).locator('[data-slot="input-otp"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("INPUT");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("INPUT");
+    await expect(page.locator('[data-slot="input-otp-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="input-otp-control"]')).toHaveCount(0);
+  });
+
+  test("file-dropzone is a label, not file-dropzone-control", async ({ page }) => {
+    await page.goto("/audit/file-dropzone?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="file-dropzone"]');
+    const cronus = cronusFrame(page).locator('[data-slot="file-dropzone"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("LABEL");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("LABEL");
+    await expect(page.locator('[data-slot="file-dropzone-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="file-dropzone-control"]')).toHaveCount(0);
+  });
+
+  test("popover content is a div, not popover-control", async ({ page }) => {
+    await page.goto("/audit/popover?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-slot="popover-content"]');
+    const cronus = cronusFrame(page).locator('[data-slot="popover-content"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="popover-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="popover-control"]')).toHaveCount(0);
+  });
+
+  test("hover-card content is a div, not hover-card-control", async ({ page }) => {
+    await page.goto("/audit/hover-card?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-slot="hover-card-content"]');
+    const cronus = cronusFrame(page).locator('[data-slot="hover-card-content"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="hover-card-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="hover-card-control"]')).toHaveCount(0);
+  });
+
+  test("dropdown-menu content is a div, not dropdown-menu-control", async ({ page }) => {
+    await page.goto("/audit/dropdown-menu?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-slot="dropdown-menu-content"]');
+    const cronus = cronusFrame(page).locator('[data-slot="dropdown-menu-content"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="dropdown-menu-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="dropdown-menu-control"]')).toHaveCount(0);
+  });
+
+  test("collapsible content is a div, not collapsible-control", async ({ page }) => {
+    await page.goto("/audit/collapsible?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="collapsible-content"]');
+    const cronus = cronusFrame(page).locator('[data-slot="collapsible-content"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="collapsible-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="collapsible-control"]')).toHaveCount(0);
+  });
+
+  test("mode-toggle is a button, not mode-toggle-control", async ({ page }) => {
+    await page.goto("/audit/mode-toggle?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="mode-toggle"]');
+    const cronus = cronusFrame(page).locator('[data-slot="mode-toggle"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("BUTTON");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("BUTTON");
+    await expect(page.locator('[data-slot="mode-toggle-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="mode-toggle-control"]')).toHaveCount(0);
+  });
+
   test("button-group is a div group, not button-group-control", async ({ page }) => {
     await page.goto("/audit/button-group?fixture=default&preset=aurora&mode=dark");
     const react = page.locator('[data-audit-side="react"] [data-slot="button-group"]');

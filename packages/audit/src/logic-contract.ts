@@ -30,6 +30,15 @@ const FAMILY_TAGS: Record<string, string> = {
   metric: "div",
   "avatar-group": "div",
   "button-group": "div",
+  combobox: "button",
+  stepper: "div",
+  "input-otp": "input",
+  "file-dropzone": "label",
+  popover: "div",
+  "hover-card": "div",
+  "dropdown-menu": "div",
+  collapsible: "div",
+  "mode-toggle": "button",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */
