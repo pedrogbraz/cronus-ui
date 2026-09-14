@@ -1188,6 +1188,13 @@ describe("emitCronusApp", () => {
     expect(src).not.toContain("<");
   });
 
+  it("keeps the gradient-border ring at p-px (padding goes on innerClassName)", () => {
+    const fixture = getFixture("gradient-border", "default");
+    expect(fixture.props.className).toBe("w-72");
+    expect(fixture.props.className).not.toMatch(/\bp-/);
+    expect(fixture.props.innerClassName).toBe("p-6");
+  });
+
   it("maps expected tags for wave 1r families", () => {
     expect(expectedTag(getFixture("gradient-border", "default"))).toBe("div");
     expect(expectedTag(getFixture("light-rays", "default"))).toBe("div");

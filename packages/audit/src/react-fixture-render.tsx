@@ -2979,12 +2979,17 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
     );
   }
   if (fixture.family === "gradient-border") {
-    const { children, className, ...rest } = fixture.props as {
+    const { children, className, innerClassName, ...rest } = fixture.props as {
       children?: string;
       className?: string;
+      innerClassName?: string;
     };
     return (
-      <GradientBorder className={typeof className === "string" ? className : "w-72 p-6"} {...rest}>
+      <GradientBorder
+        className={typeof className === "string" ? className : "w-72"}
+        innerClassName={typeof innerClassName === "string" ? innerClassName : "p-6"}
+        {...rest}
+      >
         {typeof children === "string" ? children : fixture.id}
       </GradientBorder>
     );
