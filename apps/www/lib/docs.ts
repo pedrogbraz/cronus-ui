@@ -50,7 +50,7 @@ export const DOC_NAV_SECTIONS: { heading: string; items: DocNavItem[] }[] = [
       {
         label: "Language",
         href: "/language",
-        description: "Native .cronus catalog — kernel HTML, tokens, and motion. No JSX in source.",
+        description: "How .cronus works, how to run the kernel catalog, and the live kit.",
         status: "new",
       },
       {

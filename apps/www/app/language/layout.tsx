@@ -6,7 +6,7 @@ import { SiteNav } from "../../components/site-nav";
 export const metadata: Metadata = {
   title: "Language",
   description:
-    "Native .cronus catalog — the kernel emits HTML, tokens, and motion. No JSX in source.",
+    "How .cronus works and how to run the native catalog. The kernel emits HTML, tokens, and motion. No JSX in source.",
 };
 
 export default function LanguageLayout({ children }: { children: ReactNode }) {
