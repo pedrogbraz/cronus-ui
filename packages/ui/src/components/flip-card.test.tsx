@@ -57,6 +57,23 @@ describe("FlipCard", () => {
     expect(back).not.toHaveAttribute("inert");
   });
 
+  // Regression: the stage was `size-full` inside a card that only sets
+  // `min-h-[16rem]`, so its percentage height resolved to 0 and both absolute
+  // faces collapsed to their 2px borders. The stage must fill the card itself.
+  it("stretches the 3D stage over the card so faces fill a min-height card", () => {
+    const { container } = render(
+      <FlipCard aria-label="Plan" className="w-72">
+        <FlipCardFront>Front</FlipCardFront>
+        <FlipCardBack>Back</FlipCardBack>
+      </FlipCard>,
+    );
+    const card = container.querySelector('[data-slot="flip-card"]') as HTMLElement;
+    const stage = card.firstElementChild as HTMLElement;
+    expect(stage).toContainElement(container.querySelector('[data-slot="flip-card-front"]'));
+    expect(stage).toHaveClass("absolute", "inset-0");
+    expect(stage).not.toHaveClass("size-full");
+  });
+
   it("has no axe violations", async () => {
     const { container } = render(
       <FlipCard trigger="click" aria-label="Flip the card">
