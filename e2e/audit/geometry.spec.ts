@@ -1,6 +1,13 @@
 import { readdirSync } from "node:fs";
 import { join } from "node:path";
-import { expect, type FrameLocator, type Locator, type Page, test } from "@playwright/test";
+import {
+  type Browser,
+  expect,
+  type FrameLocator,
+  type Locator,
+  type Page,
+  test,
+} from "@playwright/test";
 import { cronusFrame, FREEZE_CSS, freezeFrame } from "./audit-freeze";
 
 /**
@@ -101,7 +108,63 @@ const PORTAL: Partial<Record<Family, PortalSpec>> = {
     // cmdk CommandItem is role=option inside the Radix popover portal.
     ready: '[role="option"]',
   },
+  "context-menu": {
+    // Radix ContextMenu opens at the pointer: with the fixture's `open` prop and
+    // no contextmenu event the virtual anchor is the viewport origin, so its
+    // page position says nothing about the component. The content is portaled
+    // to <body>, and ContextMenuTrigger (a bare Radix span) carries no
+    // data-slot. So the content root is its own anchor: its size, colours,
+    // radius and border, and every item's rect inside it, are compared exactly;
+    // only the root's x/y (the pointer position) is 0,0 on both sides by construction.
+    anchor: "context-menu-content",
+    root: "context-menu-content",
+    prefix: "context-menu-",
+    containers: [],
+    containerAnchor: "context-menu-content",
+    ready: '[role="menu"]',
+  },
 };
+
+interface OverlaySpec {
+  /**
+   * Viewport-fixed slots React portals to <body> (overlay scrim + content).
+   * Their whole [data-slot] subtree is measured against the viewport origin.
+   */
+  roots: string[];
+}
+
+/**
+ * Modal families: React renders `position: fixed` overlays (inset-0 scrim, a
+ * centred / edge-pinned content panel) portaled out of the canvas. Their
+ * geometry is a function of the viewport only, not of the canvas, and the two
+ * panes do not share a viewport: the React page is 1280x900, the kernel
+ * document lives in a (640x777) iframe. So the kernel is measured as usual and
+ * React is measured in a second page whose viewport is exactly the kernel
+ * iframe's window size. Both sides then report these subtrees against the
+ * same-sized viewport origin, and every rect/typography/colour check applies
+ * unchanged (no tolerance or field exemption). Same window width also means
+ * the same `sm:` breakpoint state on both sides.
+ *
+ * Every fixture here is open by default (`defaultOpen` / `open` forced in
+ * react-fixture-render.tsx), none renders a trigger, so the canvas is empty in
+ * React; a kernel slot rendered in-flow in its canvas and not under a root
+ * surfaces as "missing in React", which is the real difference.
+ */
+const OVERLAY: Partial<Record<Family, OverlaySpec>> = {
+  "alert-dialog": { roots: ["alert-dialog-overlay", "alert-dialog-content"] },
+  // ConfirmationDialog is AlertDialogContent with data-slot="confirmation-dialog".
+  "confirmation-dialog": { roots: ["alert-dialog-overlay", "confirmation-dialog"] },
+  // vaul Drawer: overlay + bottom-pinned content (shouldScaleBackground=false).
+  drawer: { roots: ["drawer-overlay", "drawer-content"] },
+  // InviteDialog is DialogContent with data-slot="invite-dialog".
+  "invite-dialog": { roots: ["dialog-overlay", "invite-dialog"] },
+  // Lightbox is a full-viewport DialogContent wrapping [data-slot=lightbox].
+  lightbox: { roots: ["dialog-overlay", "dialog-content"] },
+  sheet: { roots: ["sheet-overlay", "sheet-content"] },
+};
+
+/** Proves a React modal has mounted (Radix Dialog / AlertDialog / vaul). */
+const OVERLAY_READY = '[role="dialog"], [role="alertdialog"]';
 
 interface Measured {
   slot: string;
@@ -128,7 +191,10 @@ async function freezeReact(page: Page): Promise<void> {
 }
 
 /** Runs inside the page/frame. Must be self-contained (serialized by Playwright). */
-function measureInPage(canvas: Element, opts: { portal: PortalSpec | null }): Measured[] {
+function measureInPage(
+  canvas: Element,
+  opts: { portal: PortalSpec | null; overlay: OverlaySpec | null },
+): Measured[] {
   const doc = canvas.ownerDocument;
   const paint = doc.createElement("canvas");
   paint.width = 1;
@@ -147,9 +213,27 @@ function measureInPage(canvas: Element, opts: { portal: PortalSpec | null }): Me
   const text = (el: Element) =>
     ((el as HTMLElement).innerText ?? el.textContent ?? "").replace(/\s+/g, " ").trim();
 
-  const describe = (el: Element, origin: DOMRect, originName: string): Measured => {
-    const r = el.getBoundingClientRect();
-    const cs = getComputedStyle(el);
+  // A `display: contents` slot generates no box of its own: what paints is its
+  // content. When exactly one element child has a box (e.g. ShinyText's
+  // <span data-slot="shiny-text" class="contents"><style/><span>…</span></span>),
+  // that child IS the slot's rendered box, so rect and computed style come from
+  // it while slot/tag/text stay the slot's. Zero or several boxed children stay
+  // unmeasured (no invented union box).
+  const boxOf = (el: Element): Element | null => {
+    if (el.getClientRects().length > 0) return el;
+    if (getComputedStyle(el).display !== "contents") return null;
+    const boxed = Array.from(el.children).filter((child) => child.getClientRects().length > 0);
+    return boxed.length === 1 ? (boxed[0] ?? null) : null;
+  };
+
+  const describe = (
+    el: Element,
+    origin: { left: number; top: number },
+    originName: string,
+  ): Measured => {
+    const box = boxOf(el) ?? el;
+    const r = box.getBoundingClientRect();
+    const cs = getComputedStyle(box);
     // Used radius, not the specified one: `rounded-full` computes to 3.35544e+07px
     // in React and `9999px` in the kernel, but both clamp to half the short side.
     const cap = Math.min(r.width, r.height) / 2;
@@ -210,12 +294,28 @@ function measureInPage(canvas: Element, opts: { portal: PortalSpec | null }): Me
   // Geometry parity is about rendered boxes: an element with no layout box
   // (display:none, closed popover markup) has nothing to measure on either side.
   // DOM presence of closed content is the logic spec's job, not this one.
-  const rendered = (el: Element) => el.getClientRects().length > 0;
+  const rendered = (el: Element) => boxOf(el) !== null;
+
+  const overlayRoots = opts.overlay
+    ? opts.overlay.roots.flatMap((slot) =>
+        Array.from(doc.querySelectorAll(`[data-slot="${slot}"]`)),
+      )
+    : [];
+  const inOverlay = (el: Element) => overlayRoots.some((root) => root.contains(el));
 
   const out: Measured[] = [];
   for (const el of Array.from(canvas.querySelectorAll("[data-slot]"))) {
-    if (inPortal(el) || !rendered(el)) continue;
+    if (inPortal(el) || inOverlay(el) || !rendered(el)) continue;
     out.push(describe(el, canvasRect, "canvas"));
+  }
+  if (opts.overlay) {
+    // Viewport-fixed modal content (see OVERLAY): React portals it to <body>,
+    // the kernel may keep it in the canvas. Either way it is measured against
+    // the viewport origin of a same-sized window.
+    for (const el of Array.from(doc.querySelectorAll("[data-slot]"))) {
+      if (!inOverlay(el) || !rendered(el)) continue;
+      out.push(describe(el, { left: 0, top: 0 }, "viewport"));
+    }
   }
   if (portal) {
     // Floating content: React portals it to <body>, the kernel keeps it in the
@@ -252,13 +352,17 @@ async function nextFrames(locator: Locator): Promise<void> {
  * Measure until two consecutive reads are identical, so JS-driven motion
  * (not stopped by FREEZE_CSS) has settled. Bounded, frame-based — no sleeps.
  */
-async function measureSettled(canvas: Locator, portal: PortalSpec | null): Promise<Measured[]> {
+async function measureSettled(
+  canvas: Locator,
+  portal: PortalSpec | null,
+  overlay: OverlaySpec | null,
+): Promise<Measured[]> {
   await canvas.evaluate((el) => el.ownerDocument.fonts.ready.then(() => undefined));
   let previous = "";
   let last: Measured[] = [];
   for (let i = 0; i < SETTLE_ATTEMPTS; i++) {
     await nextFrames(canvas);
-    last = await canvas.evaluate(measureInPage, { portal });
+    last = await canvas.evaluate(measureInPage, { portal, overlay });
     const key = JSON.stringify(last);
     if (key === previous) return last;
     previous = key;
@@ -354,11 +458,44 @@ function round1(n: number): number {
   return Math.round(n * 10) / 10;
 }
 
+const auditPath = (family: Family) =>
+  `/audit/${family}?fixture=${fixtureFor(family)}&preset=aurora&mode=dark`;
+
+/**
+ * OVERLAY families: open the same audit page in a window of the kernel
+ * iframe's size and measure the React modal there (see OVERLAY).
+ */
+async function measureReactOverlay(
+  browser: Browser,
+  baseURL: string | undefined,
+  family: Family,
+  overlay: OverlaySpec,
+  viewport: { width: number; height: number },
+): Promise<Measured[]> {
+  const context = await browser.newContext({
+    baseURL,
+    viewport,
+    deviceScaleFactor: 1,
+    colorScheme: "dark",
+  });
+  try {
+    const page = await context.newPage();
+    await page.goto(auditPath(family));
+    const react = page.locator('[data-audit-side="react"] [data-audit-canvas]');
+    await expect(react).toBeAttached();
+    await expect(page.locator(OVERLAY_READY).first()).toBeVisible();
+    await freezeReact(page);
+    return await measureSettled(react, null, overlay);
+  } finally {
+    await context.close();
+  }
+}
+
 async function openBothPanes(
   page: Page,
   family: Family,
 ): Promise<{ react: Locator; frame: FrameLocator; cronus: Locator }> {
-  await page.goto(`/audit/${family}?fixture=${fixtureFor(family)}&preset=aurora&mode=dark`);
+  await page.goto(auditPath(family));
   const react = page.locator('[data-audit-side="react"] [data-audit-canvas]');
   const frame = cronusFrame(page);
   const cronus = frame.locator("[data-audit-canvas]");
@@ -377,11 +514,23 @@ async function openBothPanes(
 
 test.describe("geometry parity (React vs Cronus)", () => {
   for (const family of FAMILIES) {
-    test(`${family} ${fixtureFor(family)} aurora/dark`, async ({ page }) => {
+    test(`${family} ${fixtureFor(family)} aurora/dark`, async ({ page, browser, baseURL }) => {
       const { react, cronus } = await openBothPanes(page, family);
       const portal = PORTAL[family] ?? null;
-      const reactMeasured = await measureSettled(react, portal);
-      const cronusMeasured = await measureSettled(cronus, portal);
+      const overlay = OVERLAY[family] ?? null;
+      const cronusMeasured = await measureSettled(cronus, portal, overlay);
+      const reactMeasured = overlay
+        ? await measureReactOverlay(
+            browser,
+            baseURL,
+            family,
+            overlay,
+            await cronus.evaluate((el) => {
+              const win = el.ownerDocument.defaultView ?? window;
+              return { width: win.innerWidth, height: win.innerHeight };
+            }),
+          )
+        : await measureSettled(react, portal, null);
       expect(reactMeasured.length, "React canvas has no [data-slot] elements").toBeGreaterThan(0);
       const problems = compareFamily(family, reactMeasured, cronusMeasured);
       expect(problems, problems[0] ?? "").toEqual([]);
