@@ -11,7 +11,7 @@ import {
   writeAiKit,
 } from "@cronus-ui/ai-kit";
 import { hasConfig, readConfig } from "../config.js";
-import { log } from "../utils.js";
+import { log } from "../log.js";
 
 interface AiOptions {
   cwd: string;

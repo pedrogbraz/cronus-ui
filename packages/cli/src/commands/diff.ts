@@ -2,8 +2,9 @@ import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import pc from "picocolors";
 import { hasConfig, readConfig } from "../config.js";
+import { log } from "../log.js";
 import { Registry } from "../registry.js";
-import { log, resolveSafeDest, rewriteImports, targetDir } from "../utils.js";
+import { resolveSafeDest, rewriteImports, targetDir } from "../registry-files.js";
 
 interface DiffOptions {
   cwd: string;

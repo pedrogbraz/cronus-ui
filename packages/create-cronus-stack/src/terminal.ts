@@ -1,8 +1,4 @@
-import { spawnSync } from "node:child_process";
-import type { StackConfig } from "@cronus-ui/stack";
-
-export const PACKAGE_MANAGERS = ["bun", "npm", "pnpm", "yarn"] as const;
-export type PackageManager = (typeof PACKAGE_MANAGERS)[number];
+import type { PackageManager } from "./package-manager.js";
 
 const useColor = Boolean(process.stdout.isTTY) && !process.env.NO_COLOR;
 const wrap = (open: number, close: number) => (s: string) =>
@@ -52,26 +48,3 @@ export const log = {
     process.stdout.write(`${lines.join("\n")}\n`);
   },
 };
-
-export function packageManagerFromConfig(config: StackConfig): PackageManager {
-  switch (config.packageManager) {
-    case "pm-npm":
-      return "npm";
-    case "pm-pnpm":
-      return "pnpm";
-    default:
-      return "bun";
-  }
-}
-
-export function runCommand(command: string, args: string[], cwd: string): void {
-  const result = spawnSync(command, args, {
-    cwd,
-    stdio: "inherit",
-    shell: process.platform === "win32",
-  });
-  if (result.error) throw result.error;
-  if (typeof result.status === "number" && result.status !== 0) {
-    throw new Error(`${command} ${args.join(" ")} exited with code ${result.status}`);
-  }
-}

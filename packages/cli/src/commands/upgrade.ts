@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createInterface } from "node:readline/promises";
 import pc from "picocolors";
+import { closestName } from "../closest-name.js";
 import {
   GOLD_PATH_AUTH_SPLIT_FILES,
   goldPatchAppShellChrome,
@@ -35,6 +36,7 @@ import {
   readConfig,
   writeConfig,
 } from "../config.js";
+import { log } from "../log.js";
 import {
   Registry,
   type RegistryItem,
@@ -42,14 +44,12 @@ import {
   registrySourceVersion,
 } from "../registry.js";
 import {
-  closestName,
-  log,
   resolveSafeDest,
   rewriteImports,
   targetDir,
   writeFileEnsured,
   writeItemFiles,
-} from "../utils.js";
+} from "../registry-files.js";
 import { readChromeSources, readComposeMeta, readProjectName } from "./compose.js";
 
 /** Where the human/agent-readable conflict report is written (project root). */

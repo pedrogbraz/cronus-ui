@@ -28,18 +28,16 @@ import {
   readConfig,
   writeConfig,
 } from "../config.js";
+import { collectDependencies, recordDependencies } from "../dependencies.js";
+import { log } from "../log.js";
+import { detectPackageManager, runInstall } from "../package-manager.js";
 import { Registry, type RegistryItem, registrySourceVersion } from "../registry.js";
 import {
-  collectDependencies,
-  detectPackageManager,
-  log,
-  recordDependencies,
   resolveSafeDest,
   rewriteImports,
-  runInstall,
   writeFileEnsured,
   writeItemFiles,
-} from "../utils.js";
+} from "../registry-files.js";
 
 export { listTemplates, loadManifestFile, loadTemplate } from "../compose/templates.js";
 

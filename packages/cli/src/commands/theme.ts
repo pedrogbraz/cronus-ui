@@ -2,7 +2,8 @@ import { existsSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
 import { isAbsolute, join } from "node:path";
 import { CONFIG_FILE, hasConfig, readConfig, writeConfig } from "../config.js";
-import { log, writeFileEnsured } from "../utils.js";
+import { log } from "../log.js";
+import { writeFileEnsured } from "../registry-files.js";
 
 /** The theme presets shipped by @cronus-ui/theme. */
 export const THEME_PRESETS = ["aurora", "neutral", "midnight", "sunset", "emerald"] as const;
