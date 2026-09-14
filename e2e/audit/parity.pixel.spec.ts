@@ -202,6 +202,17 @@ const PIXEL_CLIP: Partial<Record<string, ClipSpec>> = {
     hideInSplitPage: ["dialog-overlay", "invite-dialog"],
     reason: "viewport-centred modal panel",
   },
+  dialog: {
+    slots: ["dialog-content"],
+    react: "viewport",
+    hideInSplitPage: ["dialog-overlay", "dialog-content"],
+    reason: "viewport-centred modal panel",
+  },
+  tooltip: {
+    slots: ["button"],
+    react: "canvas",
+    reason: CLOSED_BY_DESIGN("tooltip-content"),
+  },
   sheet: {
     slots: ["sheet-content"],
     react: "viewport",
