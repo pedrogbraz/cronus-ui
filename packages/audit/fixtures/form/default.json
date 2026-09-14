@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "form",
+  "props": {
+    "label": "Email",
+    "placeholder": "ada@cronus.dev"
+  },
+  "expect": {
+    "slot": "form-item",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "form-item"
+    }
+  }
+}

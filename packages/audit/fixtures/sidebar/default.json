@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "sidebar",
+  "props": {
+    "aria-label": "Sidebar",
+    "items": ["Home", "Inbox"]
+  },
+  "expect": {
+    "slot": "sidebar",
+    "tag": "aside",
+    "attrs": {
+      "data-slot": "sidebar"
+    }
+  }
+}

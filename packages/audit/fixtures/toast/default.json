@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "toast",
+  "props": {
+    "children": "Saved"
+  },
+  "expect": {
+    "slot": "toast",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "toast"
+    }
+  }
+}

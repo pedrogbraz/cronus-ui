@@ -1,0 +1,17 @@
+{
+  "id": "primary-md",
+  "family": "button",
+  "props": {
+    "variant": "primary",
+    "size": "md",
+    "children": "Save profile"
+  },
+  "expect": {
+    "slot": "button",
+    "tag": "button",
+    "attrs": {
+      "data-slot": "button",
+      "data-variant": "primary"
+    }
+  }
+}

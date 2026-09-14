@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "usage-meter",
+  "props": {
+    "value": 40,
+    "label": "Tokens",
+    "aria-label": "Token usage"
+  },
+  "expect": {
+    "slot": "usage-meter",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "usage-meter"
+    }
+  }
+}

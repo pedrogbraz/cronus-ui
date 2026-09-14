@@ -1,0 +1,17 @@
+{
+  "id": "default",
+  "family": "combobox",
+  "props": {
+    "placeholder": "Select fruit",
+    "aria-label": "Fruit",
+    "options": ["Apple", "Banana"]
+  },
+  "expect": {
+    "slot": "combobox-trigger",
+    "tag": "button",
+    "attrs": {
+      "data-slot": "combobox-trigger",
+      "role": "combobox"
+    }
+  }
+}

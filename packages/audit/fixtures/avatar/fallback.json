@@ -1,0 +1,14 @@
+{
+  "id": "fallback",
+  "family": "avatar",
+  "props": {
+    "children": "AL"
+  },
+  "expect": {
+    "slot": "avatar",
+    "tag": "span",
+    "attrs": {
+      "data-slot": "avatar"
+    }
+  }
+}

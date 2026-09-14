@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "orbit",
+  "props": {
+    "items": ["A", "B", "C"],
+    "aria-label": "Orbit",
+    "className": "size-72"
+  },
+  "expect": {
+    "slot": "orbit",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "orbit"
+    }
+  }
+}

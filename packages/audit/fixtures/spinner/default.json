@@ -1,0 +1,13 @@
+{
+  "id": "default",
+  "family": "spinner",
+  "props": {},
+  "expect": {
+    "slot": "spinner",
+    "tag": "svg",
+    "attrs": {
+      "data-slot": "spinner",
+      "role": "status"
+    }
+  }
+}

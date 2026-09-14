@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "marquee",
+  "props": {
+    "items": ["Acme", "Globex"],
+    "className": "w-72",
+    "aria-label": "Logos"
+  },
+  "expect": {
+    "slot": "marquee",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "marquee"
+    }
+  }
+}

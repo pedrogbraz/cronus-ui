@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "date-range-picker",
+  "props": {
+    "placeholder": "Pick a date range",
+    "aria-label": "Report period"
+  },
+  "expect": {
+    "slot": "date-range-picker-trigger",
+    "tag": "button",
+    "attrs": {
+      "data-slot": "date-range-picker-trigger"
+    }
+  }
+}

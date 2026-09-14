@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "dynamic-island",
+  "props": {
+    "items": ["Idle", "Active"]
+  },
+  "expect": {
+    "slot": "dynamic-island",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "dynamic-island"
+    }
+  }
+}

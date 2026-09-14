@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "credit-card-input",
+  "props": {
+    "label": "Credit card",
+    "value": "4242424242424242"
+  },
+  "expect": {
+    "slot": "credit-card-input",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "credit-card-input"
+    }
+  }
+}

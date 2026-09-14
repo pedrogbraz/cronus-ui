@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "signature-pad",
+  "props": {
+    "aria-label": "Signature pad"
+  },
+  "expect": {
+    "slot": "signature-pad",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "signature-pad"
+    }
+  }
+}

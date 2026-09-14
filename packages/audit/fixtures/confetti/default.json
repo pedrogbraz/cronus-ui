@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "confetti",
+  "props": {
+    "children": "Celebrate",
+    "className": "w-72 min-h-32"
+  },
+  "expect": {
+    "slot": "confetti",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "confetti"
+    }
+  }
+}

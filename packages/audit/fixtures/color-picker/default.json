@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "color-picker",
+  "props": {
+    "value": "oklch(0.62 0.21 256)",
+    "aria-label": "Color"
+  },
+  "expect": {
+    "slot": "color-picker-trigger",
+    "tag": "button",
+    "attrs": {
+      "data-slot": "color-picker-trigger"
+    }
+  }
+}

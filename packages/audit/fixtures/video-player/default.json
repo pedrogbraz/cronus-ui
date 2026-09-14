@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "video-player",
+  "props": {
+    "src": "/audit-video.mp4",
+    "aria-label": "Launch video"
+  },
+  "expect": {
+    "slot": "video-player",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "video-player"
+    }
+  }
+}

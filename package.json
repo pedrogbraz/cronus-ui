@@ -31,10 +31,12 @@
     "check:example-sections": "node scripts/check-example-sections.mjs",
     "a11y:routes": "node scripts/build-a11y-routes.mjs",
     "a11y:routes:check": "node scripts/build-a11y-routes.mjs --check",
-    "audit": "bun audit",
+    "security:audit": "bun audit",
+    "audit:dev": "bun packages/audit/src/audit-dev.ts",
     "test:a11y": "playwright test --project=a11y --workers=4",
     "test:contrast": "playwright test e2e/a11y/contrast-themes.spec.ts --project=a11y --workers=4",
-    "test:e2e": "playwright test --project=e2e"
+    "test:e2e": "playwright test --project=e2e",
+    "test:audit": "playwright test -c playwright.audit.config.ts"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.3",

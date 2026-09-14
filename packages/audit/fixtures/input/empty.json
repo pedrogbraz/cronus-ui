@@ -1,0 +1,15 @@
+{
+  "id": "empty",
+  "family": "input",
+  "props": {
+    "placeholder": "Your name",
+    "aria-label": "Name"
+  },
+  "expect": {
+    "slot": "input",
+    "tag": "input",
+    "attrs": {
+      "data-slot": "input"
+    }
+  }
+}

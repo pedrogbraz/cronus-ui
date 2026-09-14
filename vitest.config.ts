@@ -127,6 +127,23 @@ export default defineConfig({
           include: ["lib/**/*.test.{ts,tsx}"],
         },
       },
+      {
+        test: {
+          name: "audit",
+          root: "./packages/audit",
+          environment: "node",
+          include: ["src/**/*.test.ts"],
+        },
+      },
+      {
+        test: {
+          name: "audit-dom",
+          root: "./packages/audit",
+          environment: "jsdom",
+          include: ["src/**/*.test.tsx"],
+          setupFiles: ["../ui/vitest.setup.ts"],
+        },
+      },
     ],
     coverage: {
       provider: "v8",

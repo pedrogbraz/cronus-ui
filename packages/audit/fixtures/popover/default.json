@@ -1,0 +1,17 @@
+{
+  "id": "default",
+  "family": "popover",
+  "props": {
+    "children": "Open",
+    "defaultOpen": true,
+    "aria-label": "Details",
+    "options": ["Popover body"]
+  },
+  "expect": {
+    "slot": "popover-content",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "popover-content"
+    }
+  }
+}

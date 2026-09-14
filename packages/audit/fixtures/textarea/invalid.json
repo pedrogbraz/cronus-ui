@@ -1,0 +1,17 @@
+{
+  "id": "invalid",
+  "family": "textarea",
+  "props": {
+    "placeholder": "Write a bio",
+    "aria-label": "Bio",
+    "invalid": true
+  },
+  "expect": {
+    "slot": "textarea",
+    "tag": "textarea",
+    "attrs": {
+      "data-slot": "textarea",
+      "aria-invalid": "true"
+    }
+  }
+}

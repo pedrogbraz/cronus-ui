@@ -1,0 +1,12 @@
+app "cheat-stack" {
+  stack react + tailwind
+  port 5176
+}
+
+component CheatStack layout:inline style:button+primary+md {
+  label "Save"
+}
+
+page "/audit/button/cheat-stack" type:custom {
+  use CheatStack
+}

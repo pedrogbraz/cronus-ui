@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "ring-chart",
+  "props": {
+    "label": "Traffic",
+    "items": ["Desktop", "Mobile"]
+  },
+  "expect": {
+    "slot": "ring-chart",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "ring-chart"
+    }
+  }
+}

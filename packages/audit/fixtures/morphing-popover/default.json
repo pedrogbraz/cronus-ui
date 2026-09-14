@@ -1,0 +1,17 @@
+{
+  "id": "default",
+  "family": "morphing-popover",
+  "props": {
+    "children": "Open",
+    "open": true,
+    "aria-label": "Details",
+    "options": ["Popover body"]
+  },
+  "expect": {
+    "slot": "morphing-popover-content",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "morphing-popover-content"
+    }
+  }
+}

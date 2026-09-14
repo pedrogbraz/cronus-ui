@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "menubar",
+  "props": {
+    "children": "File",
+    "defaultOpen": true,
+    "items": ["New Tab", "Open"]
+  },
+  "expect": {
+    "slot": "menubar",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "menubar"
+    }
+  }
+}

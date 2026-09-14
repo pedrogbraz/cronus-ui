@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "fab",
+  "props": {
+    "label": "Create"
+  },
+  "expect": {
+    "slot": "fab",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "fab"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "currency-input",
+  "props": {
+    "value": 12345,
+    "aria-label": "Amount"
+  },
+  "expect": {
+    "slot": "currency-input",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "currency-input"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "destructive",
+  "family": "alert",
+  "props": {
+    "variant": "destructive",
+    "title": "Payment failed",
+    "description": "Check your card and try again."
+  },
+  "expect": {
+    "slot": "alert",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "alert",
+      "role": "alert"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "code-tabs",
+  "props": {
+    "aria-label": "Install",
+    "items": ["bun", "npm"]
+  },
+  "expect": {
+    "slot": "code-tabs",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "code-tabs"
+    }
+  }
+}

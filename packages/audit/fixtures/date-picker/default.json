@@ -1,0 +1,17 @@
+{
+  "id": "default",
+  "family": "date-picker",
+  "props": {
+    "placeholder": "Pick a date",
+    "defaultOpen": true,
+    "value": "2026-06-15",
+    "aria-label": "Due date"
+  },
+  "expect": {
+    "slot": "date-picker-trigger",
+    "tag": "button",
+    "attrs": {
+      "data-slot": "date-picker-trigger"
+    }
+  }
+}

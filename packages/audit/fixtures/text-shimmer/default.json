@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "text-shimmer",
+  "props": {
+    "children": "Loading"
+  },
+  "expect": {
+    "slot": "text-shimmer",
+    "tag": "p",
+    "attrs": {
+      "data-slot": "text-shimmer"
+    }
+  }
+}

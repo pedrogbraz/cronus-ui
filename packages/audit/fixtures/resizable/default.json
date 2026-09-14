@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "resizable",
+  "props": {
+    "aria-label": "Panels",
+    "items": ["One", "Two"]
+  },
+  "expect": {
+    "slot": "resizable-panel-group",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "resizable-panel-group"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "profit-loss-chart",
+  "props": {
+    "label": "P/L",
+    "items": ["Jan", "Feb", "Mar"]
+  },
+  "expect": {
+    "slot": "profit-loss-chart",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "profit-loss-chart"
+    }
+  }
+}

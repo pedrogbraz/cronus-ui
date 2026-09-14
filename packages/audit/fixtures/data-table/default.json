@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "data-table",
+  "props": {
+    "label": "Members",
+    "items": ["Ada", "Linus"]
+  },
+  "expect": {
+    "slot": "data-table",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "data-table"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "workspace-switcher",
+  "props": {
+    "aria-label": "Switch workspace",
+    "items": ["Cronus", "Northwind"]
+  },
+  "expect": {
+    "slot": "workspace-switcher",
+    "tag": "button",
+    "attrs": {
+      "data-slot": "workspace-switcher"
+    }
+  }
+}

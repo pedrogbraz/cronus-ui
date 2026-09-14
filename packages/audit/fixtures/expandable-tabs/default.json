@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "expandable-tabs",
+  "props": {
+    "aria-label": "Sections",
+    "items": ["Home", "Search"]
+  },
+  "expect": {
+    "slot": "expandable-tabs",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "expandable-tabs"
+    }
+  }
+}

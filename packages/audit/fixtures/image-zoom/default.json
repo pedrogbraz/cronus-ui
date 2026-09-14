@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "image-zoom",
+  "props": {
+    "children": "Zoom",
+    "className": "w-72"
+  },
+  "expect": {
+    "slot": "image-zoom",
+    "tag": "button",
+    "attrs": {
+      "data-slot": "image-zoom"
+    }
+  }
+}

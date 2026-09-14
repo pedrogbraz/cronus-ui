@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "skeleton",
+  "props": {
+    "className": "h-4 w-32"
+  },
+  "expect": {
+    "slot": "skeleton",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "skeleton",
+      "aria-hidden": "true"
+    }
+  }
+}

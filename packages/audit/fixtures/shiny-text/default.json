@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "shiny-text",
+  "props": {
+    "children": "Sheen"
+  },
+  "expect": {
+    "slot": "shiny-text",
+    "tag": "span",
+    "attrs": {
+      "data-slot": "shiny-text"
+    }
+  }
+}

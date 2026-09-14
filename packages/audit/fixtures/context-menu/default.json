@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "context-menu",
+  "props": {
+    "children": "Right click",
+    "open": true,
+    "items": ["Back", "Reload"]
+  },
+  "expect": {
+    "slot": "context-menu-content",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "context-menu-content"
+    }
+  }
+}

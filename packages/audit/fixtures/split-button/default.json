@@ -1,0 +1,18 @@
+{
+  "id": "default",
+  "family": "split-button",
+  "props": {
+    "children": "Save",
+    "aria-label": "Save actions",
+    "defaultOpen": true,
+    "items": ["Duplicate", "Archive"]
+  },
+  "expect": {
+    "slot": "split-button",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "split-button",
+      "role": "group"
+    }
+  }
+}

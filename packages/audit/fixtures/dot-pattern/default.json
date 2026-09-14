@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "dot-pattern",
+  "props": {
+    "children": "Dots",
+    "className": "w-72 min-h-32"
+  },
+  "expect": {
+    "slot": "dot-pattern",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "dot-pattern"
+    }
+  }
+}

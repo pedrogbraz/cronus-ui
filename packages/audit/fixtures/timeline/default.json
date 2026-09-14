@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "timeline",
+  "props": {
+    "items": ["Order placed", "Order shipped"],
+    "aria-label": "Order history"
+  },
+  "expect": {
+    "slot": "timeline",
+    "tag": "ol",
+    "attrs": {
+      "data-slot": "timeline"
+    }
+  }
+}

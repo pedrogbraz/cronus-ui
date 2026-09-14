@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "copy-button",
+  "props": {
+    "value": "cronus-ui",
+    "aria-label": "Copy"
+  },
+  "expect": {
+    "slot": "copy-button",
+    "tag": "button",
+    "attrs": {
+      "data-slot": "copy-button"
+    }
+  }
+}

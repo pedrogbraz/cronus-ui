@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "word-rotate",
+  "props": {
+    "words": ["Design", "System"]
+  },
+  "expect": {
+    "slot": "word-rotate",
+    "tag": "span",
+    "attrs": {
+      "data-slot": "word-rotate"
+    }
+  }
+}

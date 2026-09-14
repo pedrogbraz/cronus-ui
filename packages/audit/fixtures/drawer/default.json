@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "drawer",
+  "props": {
+    "defaultOpen": true,
+    "title": "Filters",
+    "description": "Narrow the list."
+  },
+  "expect": {
+    "slot": "drawer-content",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "drawer-content"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "alert",
+  "props": {
+    "title": "Heads up",
+    "description": "Your trial ends soon."
+  },
+  "expect": {
+    "slot": "alert",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "alert",
+      "role": "status"
+    }
+  }
+}

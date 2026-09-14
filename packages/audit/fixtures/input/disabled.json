@@ -1,0 +1,16 @@
+{
+  "id": "disabled",
+  "family": "input",
+  "props": {
+    "placeholder": "Your name",
+    "aria-label": "Name",
+    "disabled": true
+  },
+  "expect": {
+    "slot": "input",
+    "tag": "input",
+    "attrs": {
+      "data-slot": "input"
+    }
+  }
+}

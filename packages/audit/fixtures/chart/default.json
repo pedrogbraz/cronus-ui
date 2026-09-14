@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "chart",
+  "props": {
+    "label": "Series",
+    "items": ["4", "8", "6"]
+  },
+  "expect": {
+    "slot": "chart",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "chart"
+    }
+  }
+}

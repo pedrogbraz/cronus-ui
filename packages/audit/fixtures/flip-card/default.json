@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "flip-card",
+  "props": {
+    "items": ["Front", "Back"],
+    "aria-label": "Plan",
+    "className": "w-72"
+  },
+  "expect": {
+    "slot": "flip-card",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "flip-card"
+    }
+  }
+}

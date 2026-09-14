@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "status-dot",
+  "props": {
+    "status": "online"
+  },
+  "expect": {
+    "slot": "status-dot",
+    "tag": "span",
+    "attrs": {
+      "data-slot": "status-dot",
+      "role": "status"
+    }
+  }
+}

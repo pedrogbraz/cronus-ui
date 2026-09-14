@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "area-chart",
+  "props": {
+    "label": "Sessions",
+    "items": ["Jan", "Feb", "Mar"]
+  },
+  "expect": {
+    "slot": "area-chart",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "area-chart"
+    }
+  }
+}

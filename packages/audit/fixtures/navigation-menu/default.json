@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "navigation-menu",
+  "props": {
+    "children": "Products",
+    "items": ["Analytics", "Docs"]
+  },
+  "expect": {
+    "slot": "navigation-menu",
+    "tag": "nav",
+    "attrs": {
+      "data-slot": "navigation-menu"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "star-border",
+  "props": {
+    "children": "Twinkle",
+    "className": "w-72"
+  },
+  "expect": {
+    "slot": "star-border",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "star-border"
+    }
+  }
+}

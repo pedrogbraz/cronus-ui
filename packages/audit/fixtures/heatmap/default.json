@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "heatmap",
+  "props": {
+    "aria-label": "Activity",
+    "data": [0, 1, 4, 2, 8, 3, 1, 0, 2, 6, 4, 1, 3, 5]
+  },
+  "expect": {
+    "slot": "heatmap",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "heatmap"
+    }
+  }
+}

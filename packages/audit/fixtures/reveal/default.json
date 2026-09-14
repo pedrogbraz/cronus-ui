@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "reveal",
+  "props": {
+    "children": "Revealed"
+  },
+  "expect": {
+    "slot": "reveal",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "reveal"
+    }
+  }
+}

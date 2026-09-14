@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "field",
+  "props": {
+    "label": "Email",
+    "description": "We'll never share it."
+  },
+  "expect": {
+    "slot": "field",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "field"
+    }
+  }
+}

@@ -12,6 +12,7 @@
     "props:check": "bun run scripts/check-props.ts"
   },
   "dependencies": {
+    "@cronus-ui/audit": "workspace:*",
     "@cronus-ui/stack": "workspace:*",
     "@cronus-ui/theme": "workspace:*",
     "@cronus-ui/tokens": "workspace:*",

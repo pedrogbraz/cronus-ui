@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "table-of-contents",
+  "props": {
+    "aria-label": "On this page",
+    "items": ["Overview", "Usage"]
+  },
+  "expect": {
+    "slot": "table-of-contents",
+    "tag": "nav",
+    "attrs": {
+      "data-slot": "table-of-contents"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "grid-pattern",
+  "props": {
+    "children": "Grid",
+    "className": "w-72 min-h-32"
+  },
+  "expect": {
+    "slot": "grid-pattern",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "grid-pattern"
+    }
+  }
+}

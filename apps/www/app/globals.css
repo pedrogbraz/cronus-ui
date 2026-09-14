@@ -32,6 +32,7 @@
 
 /* Scan the UI package source + this app so utilities used in components emit. */
 @source "../../../packages/ui/src/**/*.{ts,tsx}";
+@source "../../../packages/audit/src/**/*.{ts,tsx}";
 @source "../app/**/*.{ts,tsx}";
 @source "../components/**/*.{ts,tsx}";
 @source "../lib/templates/**/*.{ts,tsx}";

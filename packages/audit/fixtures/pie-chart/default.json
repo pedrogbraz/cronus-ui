@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "pie-chart",
+  "props": {
+    "label": "Traffic",
+    "items": ["Desktop", "Mobile"]
+  },
+  "expect": {
+    "slot": "pie-chart",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "pie-chart"
+    }
+  }
+}

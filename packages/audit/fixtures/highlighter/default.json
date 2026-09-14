@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "highlighter",
+  "props": {
+    "children": "Marked"
+  },
+  "expect": {
+    "slot": "highlighter",
+    "tag": "span",
+    "attrs": {
+      "data-slot": "highlighter"
+    }
+  }
+}

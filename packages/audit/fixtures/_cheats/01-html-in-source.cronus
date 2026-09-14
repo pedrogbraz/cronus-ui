@@ -1,0 +1,11 @@
+app "cheat-html" {
+  port 5176
+}
+
+component CheatHtml layout:inline style:button+primary+md {
+  label "<div>"
+}
+
+page "/audit/button/cheat-html" type:custom {
+  use CheatHtml
+}

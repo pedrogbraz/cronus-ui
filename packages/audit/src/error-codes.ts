@@ -1,0 +1,28 @@
+/** Stable codes, byte-compared with cronus-kernel `src/cli/audit_codes.rs`. */
+
+export const HTML_IN_SOURCE = "CRONUS_AUDIT_HTML_IN_SOURCE";
+export const JSX = "CRONUS_AUDIT_JSX";
+export const TEMPLATE = "CRONUS_AUDIT_TEMPLATE";
+export const SIDECAR_SOURCE = "CRONUS_AUDIT_SIDECAR_SOURCE";
+export const SIDECAR_RENDERER = "CRONUS_AUDIT_SIDECAR_RENDERER";
+export const STACK_REACT = "CRONUS_AUDIT_STACK_REACT";
+export const STACK_VOODOO = "CRONUS_AUDIT_STACK_VOODOO";
+export const TW_CSS = "CRONUS_AUDIT_TW_CSS";
+export const VOODOO = "CRONUS_AUDIT_VOODOO";
+export const STUB_RENDERER = "CRONUS_AUDIT_STUB_RENDERER";
+export const REACT_DUMP = "CRONUS_AUDIT_REACT_DUMP";
+export const IFRAME_DOCS = "CRONUS_AUDIT_IFRAME_DOCS";
+export const SRCDOC = "CRONUS_AUDIT_SRCDOC";
+export const UI_IMPORT = "CRONUS_AUDIT_UI_IMPORT";
+
+export const SOURCE_CODES = [
+  HTML_IN_SOURCE,
+  JSX,
+  TEMPLATE,
+  SIDECAR_SOURCE,
+  SIDECAR_RENDERER,
+  STACK_REACT,
+  STACK_VOODOO,
+  TW_CSS,
+  VOODOO,
+] as const;

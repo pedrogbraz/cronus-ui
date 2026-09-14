@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "shimmer",
+  "props": {
+    "className": "h-8 w-48"
+  },
+  "expect": {
+    "slot": "shimmer",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "shimmer"
+    }
+  }
+}

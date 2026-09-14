@@ -1,0 +1,16 @@
+app "cheat-tw" {
+  port 5176
+}
+
+style {
+  preset aurora
+  accent zinc-900
+}
+
+component CheatTw layout:inline style:button+primary+md {
+  label "Save"
+}
+
+page "/audit/button/cheat-tw" type:custom {
+  use CheatTw
+}

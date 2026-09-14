@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "metric",
+  "props": {
+    "label": "Users",
+    "value": "1,240"
+  },
+  "expect": {
+    "slot": "metric",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "metric"
+    }
+  }
+}

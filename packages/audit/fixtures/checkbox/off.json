@@ -1,0 +1,14 @@
+{
+  "id": "off",
+  "family": "checkbox",
+  "props": {
+    "aria-label": "Accept"
+  },
+  "expect": {
+    "slot": "checkbox",
+    "tag": "button",
+    "attrs": {
+      "data-slot": "checkbox"
+    }
+  }
+}

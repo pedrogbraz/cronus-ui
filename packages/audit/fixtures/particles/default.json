@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "particles",
+  "props": {
+    "children": "Field",
+    "className": "h-32 w-72"
+  },
+  "expect": {
+    "slot": "particles",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "particles"
+    }
+  }
+}

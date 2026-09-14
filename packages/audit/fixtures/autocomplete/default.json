@@ -1,0 +1,17 @@
+{
+  "id": "default",
+  "family": "autocomplete",
+  "props": {
+    "placeholder": "Type a city",
+    "aria-label": "City",
+    "value": "L",
+    "options": ["Lisbon", "Lima", "London"]
+  },
+  "expect": {
+    "slot": "autocomplete",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "autocomplete"
+    }
+  }
+}

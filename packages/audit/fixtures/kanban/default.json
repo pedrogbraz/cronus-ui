@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "kanban",
+  "props": {
+    "items": ["Todo", "Ship", "Doing", "Review"],
+    "aria-label": "Board"
+  },
+  "expect": {
+    "slot": "kanban",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "kanban"
+    }
+  }
+}

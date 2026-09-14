@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "frame",
+  "props": {
+    "children": "Checkout",
+    "url": "cronus.dev",
+    "className": "w-72"
+  },
+  "expect": {
+    "slot": "frame",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "frame"
+    }
+  }
+}

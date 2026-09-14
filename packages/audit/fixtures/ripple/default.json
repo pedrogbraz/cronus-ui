@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "ripple",
+  "props": {
+    "children": "Pulse",
+    "className": "w-72 min-h-32"
+  },
+  "expect": {
+    "slot": "ripple",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "ripple"
+    }
+  }
+}

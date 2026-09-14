@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "avatar-group",
+  "props": {
+    "aria-label": "Team",
+    "items": ["AL", "JB"]
+  },
+  "expect": {
+    "slot": "avatar-group",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "avatar-group",
+      "role": "group"
+    }
+  }
+}

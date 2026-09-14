@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "calendar",
+  "props": {
+    "label": "June 2026",
+    "defaultMonth": "2026-06-01"
+  },
+  "expect": {
+    "slot": "calendar",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "calendar"
+    }
+  }
+}

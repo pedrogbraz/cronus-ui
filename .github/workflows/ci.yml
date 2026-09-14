@@ -1,6 +1,6 @@
 # Cronus UI CI — every gate the release script runs locally, on every PR.
 #
-# Three parallel jobs:
+# Four parallel jobs:
 #   gates   — build + lint + typecheck + unit tests + the drift gates
 #             (registry / tokens / props / example-sections) + bundle budgets
 #             (strict: a missing tracked route also fails).
@@ -13,15 +13,14 @@
 #             promoted into the repo, and passes with a notice (see the
 #             "Visual regression" section of CONTRIBUTING.md).
 #
-# GitHub-hosted runners on the public repo (no billable minutes).
+# Auto-run is off (workflow_dispatch only). Re-enable push/pull_request
+# when you want the gates again.
 # `npx cronus-ui add` hits raw.githubusercontent.com only after a public
 # tag (release preflight). Local: `-r ./registry`.
 name: CI
 
 on:
-  push:
-    branches: [main]
-  pull_request:
+  workflow_dispatch:
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -132,5 +131,68 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: visual-diff-report
+          path: test-results
+          if-no-files-found: ignore
+
+  audit:
+    # First PR that adds this job is non-blocking. The next PR that touches
+    # the job must drop continue-on-error so it becomes a merge gate.
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      CRONUS_KERNEL_REPO: pedrogbraz/cronus-kernel
+      CRONUS_KERNEL_REF: feat/cronus-ui-tokens-button
+      CRONUS_AUDIT_ORIGIN: http://127.0.0.1:5176
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: cronus-kernel
+      - name: Install
+        run: bun install --frozen-lockfile || bun install --frozen-lockfile
+      - name: Clone cronus-kernel
+        run: |
+          git clone --depth 1 --branch "$CRONUS_KERNEL_REF" \
+            "https://github.com/${CRONUS_KERNEL_REPO}.git" cronus-kernel
+      - name: Build kernel
+        working-directory: cronus-kernel
+        run: cargo build
+      - name: Build www
+        run: bunx turbo build --filter=@cronus-ui/www
+      - name: Install Playwright Chromium
+        run: bunx playwright install --with-deps chromium
+      - name: Cronus Audit
+        id: audit
+        env:
+          CRONUS_BIN: ${{ github.workspace }}/cronus-kernel/target/debug/cronus
+          CRONUS_KERNEL_ROOT: ${{ github.workspace }}/cronus-kernel
+        shell: bash
+        run: |
+          SNAP_DIR="e2e/audit/__screenshots__/linux"
+          if [ -d "$SNAP_DIR" ] && [ -n "$(ls -A "$SNAP_DIR" 2>/dev/null)" ]; then
+            echo "mode=compare" >> "$GITHUB_OUTPUT"
+            bunx playwright test -c playwright.audit.config.ts
+          else
+            echo "mode=bootstrap" >> "$GITHUB_OUTPUT"
+            echo "::notice title=Audit baselines bootstrapped::No linux audit baselines yet. This run generated them as the 'audit-baselines-linux' artifact."
+            bunx playwright test -c playwright.audit.config.ts --update-snapshots
+          fi
+      - name: Upload bootstrapped linux audit baselines
+        if: steps.audit.outputs.mode == 'bootstrap'
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-baselines-linux
+          path: e2e/audit/__screenshots__/linux
+          if-no-files-found: ignore
+      - name: Upload audit report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-diff-report
           path: test-results
           if-no-files-found: ignore

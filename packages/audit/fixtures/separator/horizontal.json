@@ -1,0 +1,14 @@
+{
+  "id": "horizontal",
+  "family": "separator",
+  "props": {
+    "orientation": "horizontal"
+  },
+  "expect": {
+    "slot": "separator",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "separator"
+    }
+  }
+}

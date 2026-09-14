@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "sheet",
+  "props": {
+    "defaultOpen": true,
+    "title": "Edit profile",
+    "description": "Make changes to your profile here."
+  },
+  "expect": {
+    "slot": "sheet-content",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "sheet-content"
+    }
+  }
+}

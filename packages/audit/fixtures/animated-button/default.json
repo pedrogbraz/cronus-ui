@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "animated-button",
+  "props": {
+    "children": "Get started"
+  },
+  "expect": {
+    "slot": "animated-button",
+    "tag": "button",
+    "attrs": {
+      "data-slot": "animated-button"
+    }
+  }
+}

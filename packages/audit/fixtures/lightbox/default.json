@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "lightbox",
+  "props": {
+    "open": true,
+    "aria-label": "Image gallery",
+    "items": ["First image", "Second image"]
+  },
+  "expect": {
+    "slot": "lightbox",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "lightbox"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "file-dropzone",
+  "props": {
+    "aria-label": "Upload files"
+  },
+  "expect": {
+    "slot": "file-dropzone",
+    "tag": "label",
+    "attrs": {
+      "data-slot": "file-dropzone"
+    }
+  }
+}

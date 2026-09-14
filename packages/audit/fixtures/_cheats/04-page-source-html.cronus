@@ -1,0 +1,12 @@
+app "cheat-source" {
+  port 5176
+}
+
+component ButtonPrimaryMd layout:inline style:button+primary+md {
+  label "Save profile"
+}
+
+page "/audit/button/primary-md" type:custom {
+  source:"./stolen.html"
+  use ButtonPrimaryMd
+}

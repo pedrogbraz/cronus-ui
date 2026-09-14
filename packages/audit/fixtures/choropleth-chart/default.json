@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "choropleth-chart",
+  "props": {
+    "label": "Regions",
+    "items": ["Northwest", "Northeast", "Central", "Southeast"]
+  },
+  "expect": {
+    "slot": "choropleth-chart",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "choropleth-chart"
+    }
+  }
+}
