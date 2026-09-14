@@ -35,7 +35,9 @@ import { defineConfig } from "@playwright/test";
 
 const PORT = Number(process.env.PLAYWRIGHT_PORT ?? 4747);
 const BASE_URL = `http://localhost:${PORT}`;
-const KERNEL_ORIGIN = "http://127.0.0.1:5176";
+// Both ports are overridable so parallel runs (agents, worktrees) don't collide.
+const KERNEL_PORT = Number(process.env.AUDIT_KERNEL_PORT ?? 5176);
+const KERNEL_ORIGIN = `http://127.0.0.1:${KERNEL_PORT}`;
 const isCI = !!process.env.CI;
 const workers = Number(process.env.AUDIT_WORKERS ?? 1);
 
@@ -87,14 +89,15 @@ export default defineConfig({
   },
   webServer: [
     {
-      command: "bun run --filter @cronus-ui/www start",
+      command: `bunx next start --port ${PORT}`,
+      cwd: "apps/www",
       url: BASE_URL,
       reuseExistingServer: false,
       timeout: 120_000,
       env: { CRONUS_AUDIT_ORIGIN: KERNEL_ORIGIN },
     },
     {
-      command: `bun ../src/cli.ts emit && ${cronusBin()} run --audit-canvas 5176`,
+      command: `${process.env.AUDIT_SKIP_EMIT ? "true" : "bun ../src/cli.ts emit"} && ${cronusBin()} run --audit-canvas ${KERNEL_PORT}`,
       cwd: "packages/audit/cronus-fixtures",
       url: `${KERNEL_ORIGIN}/audit/button/primary-md`,
       reuseExistingServer: false,
