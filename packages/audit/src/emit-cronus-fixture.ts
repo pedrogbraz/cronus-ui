@@ -103,6 +103,12 @@ export function emitCronusComponent(fixture: ParityFixture): string {
   if (typeof fixture.props.language === "string") {
     lines.push(`  language:"${cronusEscape(fixture.props.language)}"`);
   }
+  if (typeof fixture.props.description === "string") {
+    lines.push(`  description:"${cronusEscape(fixture.props.description)}"`);
+  }
+  if (typeof fixture.props.url === "string") {
+    lines.push(`  url:"${cronusEscape(fixture.props.url)}"`);
+  }
   if (typeof fixture.props["aria-label"] === "string") {
     lines.push(`  aria-label:"${cronusEscape(fixture.props["aria-label"])}"`);
   }

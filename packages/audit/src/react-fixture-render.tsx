@@ -1206,7 +1206,8 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
     return <PieChartFixture />;
   }
   if (fixture.family === "data-table") {
-    return <DataTableFixture />;
+    const { items, options } = fixture.props as { items?: unknown; options?: unknown };
+    return <DataTableFixture items={stringList(items ?? options)} />;
   }
   if (fixture.family === "sidebar") {
     const { items, options } = fixture.props as {
@@ -1576,15 +1577,17 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
     return <WorkspaceSwitcherFixture items={stringList(items ?? options)} />;
   }
   if (fixture.family === "app-shell") {
-    const { items, options, title } = fixture.props as {
+    const { items, options, title, description } = fixture.props as {
       items?: unknown;
       options?: unknown;
       title?: string;
+      description?: string;
     };
     return (
       <AppShellFixture
         items={stringList(items ?? options)}
         title={typeof title === "string" ? title : undefined}
+        description={typeof description === "string" ? description : undefined}
       />
     );
   }
@@ -3042,7 +3045,9 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
     return (
       <div
         className={
-          typeof className === "string" ? `relative min-h-32 ${className}` : "relative min-h-32 w-72"
+          typeof className === "string"
+            ? `relative min-h-32 ${className}`
+            : "relative min-h-32 w-72"
         }
       >
         {typeof children === "string" ? children : fixture.id}

@@ -53,14 +53,9 @@ function fixtureFor(family: Family): string {
  * check skips these; everything that both sides render is still compared.
  */
 const REACT_ONLY_SLOTS: Partial<Record<Family, Record<string, string>>> = {
-  "code-block": {
-    // CopyButton writes to navigator.clipboard on click. The audit kernel document
-    // is zero-JS by contract (src/ui/audit_layout.rs), and cronus_ui_code_block.rs
-    // documents "No copy button: it would need JS" (asserted by its tests).
-    // Only the slot is exempt: the header it sits in is still measured, so the
-    // missing 32px button still shows up through filename/language placement.
-    "copy-button": "clipboard copy needs a JS runtime; kernel audit document ships zero JS",
-  },
+  // Intentionally empty. Controls whose behaviour needs JS (copy, open/close,
+  // navigation, playback) are emitted by the kernel as the same native element
+  // with `disabled`, so every React slot is compared.
 };
 
 /**
@@ -123,6 +118,27 @@ const PORTAL: Partial<Record<Family, PortalSpec>> = {
     containerAnchor: "context-menu-content",
     ready: '[role="menu"]',
   },
+  autocomplete: {
+    // Radix popover + cmdk portal the list to <body>; the kernel keeps it in the
+    // canvas, absolutely positioned 4px under the input. There is no cmdk search
+    // row (the input is autocomplete-input itself), so no height-exempt
+    // containers: everything is compared exactly against the input.
+    anchor: "autocomplete-input",
+    root: "autocomplete-content",
+    prefix: "autocomplete-",
+    containers: [],
+    containerAnchor: "autocomplete-input",
+    ready: '[role="option"]',
+  },
+};
+
+/**
+ * Families whose React content mounts after an entrance animation: wait for this
+ * selector before freezing, otherwise the spec measures a mid-animation frame.
+ */
+const READY: Partial<Record<Family, string>> = {
+  // recharts Funnel mounts its LabelList only once isAnimationActive finishes.
+  "funnel-chart": ".recharts-label-list text",
 };
 
 interface OverlaySpec {
@@ -506,6 +522,10 @@ async function openBothPanes(
     // Gate on the React popover having mounted, not on a specific slot name:
     // a missing content slot must surface as a parity mismatch, not a timeout.
     await expect(page.locator(portal.ready).first()).toBeVisible();
+  }
+  const ready = READY[family];
+  if (ready) {
+    await expect(page.locator(`[data-audit-side="react"] ${ready}`).first()).toBeVisible();
   }
   await freezeReact(page);
   await freezeFrame(frame);

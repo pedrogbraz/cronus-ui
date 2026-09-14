@@ -1228,6 +1228,25 @@ describe("emitCronusApp", () => {
     expect(src).not.toContain("language:");
   });
 
+  it("emits description and url before aria-label (wave 1t)", () => {
+    const field = emitCronusApp([getFixture("field", "default")]);
+    expect(field).toMatch(/\n {2}description:"[^"]+"\n/);
+    const frame = emitCronusApp([getFixture("frame", "default")]);
+    expect(frame).toContain('  url:"cronus.dev"\n}');
+    const parsed = parseParityFixture({
+      id: "x",
+      family: "card",
+      props: { description: 'a"b', url: "x\\y", "aria-label": "C" },
+      expect: { slot: "card", attrs: { "data-slot": "card" } },
+    });
+    expect(emitCronusApp([parsed])).toContain(
+      '  description:"a\\"b"\n  url:"x\\\\y"\n  aria-label:"C"',
+    );
+    const plain = emitCronusApp([getFixture("button", "primary-md")]);
+    expect(plain).not.toContain("description:");
+    expect(plain).not.toContain("url:");
+  });
+
   it("drops data-size from expect.attrs", () => {
     const parsed = parseParityFixture({
       id: "x",

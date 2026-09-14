@@ -4,7 +4,8 @@
   "props": {
     "title": "Acme",
     "aria-label": "App",
-    "items": ["Home", "Inbox"]
+    "items": ["Home", "Inbox"],
+    "description": "Inbox"
   },
   "expect": {
     "slot": "app-shell-content",
