@@ -86,7 +86,7 @@ describe("TimePicker", () => {
   it("supports controlled usage", async () => {
     function Controlled() {
       const [value, setValue] = useState<TimeValue | undefined>(undefined);
-      return <TimePicker aria-label="Slot" hourCycle={24} value={value} onChange={setValue} />;
+      return <TimePicker aria-label="Slot" hourCycle={24} value={value} onValueChange={setValue} />;
     }
     render(<Controlled />);
     await userEvent.click(screen.getByRole("button", { name: /slot/i }));
@@ -95,6 +95,26 @@ describe("TimePicker", () => {
     await userEvent.click(within(hours).getByRole("option", { name: "14" }));
     // Trigger reflects the controlled update round-trip.
     expect(screen.getByRole("button", { name: /slot/i })).toHaveTextContent("14:00");
+  });
+
+  it("prefers onValueChange over the deprecated onChange alias when both are set", async () => {
+    const onValueChange = vi.fn();
+    const onChange = vi.fn();
+    render(
+      <TimePicker
+        aria-label="Standup"
+        hourCycle={24}
+        onValueChange={onValueChange}
+        onChange={onChange}
+      />,
+    );
+    await userEvent.click(screen.getByRole("button", { name: /standup/i }));
+
+    const hours = await screen.findByRole("listbox", { name: "Hour" });
+    await userEvent.click(within(hours).getByRole("option", { name: "07" }));
+
+    expect(onValueChange).toHaveBeenLastCalledWith(expect.objectContaining({ hours: 7 }));
+    expect(onChange).not.toHaveBeenCalled();
   });
 
   it("has no axe violations on the open panel", async () => {

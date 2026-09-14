@@ -18,7 +18,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./popover.js";
  * a `Popover` holding scrollable hour / minute (and optional second) columns.
  *
  * - **Value model**: controlled or uncontrolled via a `{ hours, minutes, seconds }`
- *   object (24-hour `hours`) or a `"HH:mm"` / `"HH:mm:ss"` string; `onChange`
+ *   object (24-hour `hours`) or a `"HH:mm"` / `"HH:mm:ss"` string; `onValueChange`
  *   always emits the normalized object.
  * - **12h / 24h**: `hourCycle` swaps a 0–23 hour column for a 1–12 column plus an
  *   AM/PM column. `minuteStep` / `secondStep` set each column's granularity.
@@ -46,6 +46,11 @@ export interface TimePickerProps {
   /** Initial value for uncontrolled usage. */
   defaultValue?: TimeValue | string;
   /** Fired with the normalized `{ hours, minutes, seconds }` whenever the time changes. */
+  onValueChange?: (value: TimeValue) => void;
+  /**
+   * @deprecated Use `onValueChange`. Kept as an alias for one minor release;
+   * ignored when `onValueChange` is also provided.
+   */
   onChange?: (value: TimeValue) => void;
   /** `12` renders a 1–12 hour column plus an AM/PM column; `24` renders a 0–23 column. @default 12 */
   hourCycle?: 12 | 24;
@@ -318,6 +323,7 @@ export const TimePicker = forwardRef<HTMLButtonElement, TimePickerProps>(
     {
       value: valueProp,
       defaultValue,
+      onValueChange,
       onChange,
       hourCycle = 12,
       minuteStep = 1,
@@ -346,7 +352,8 @@ export const TimePicker = forwardRef<HTMLButtonElement, TimePickerProps>(
     const commit = (next: TimeValue) => {
       const normalized = normalize(next) ?? { hours: 0, minutes: 0, seconds: 0 };
       if (!isControlled) setUncontrolled(normalized);
-      onChange?.(normalized);
+      // `onValueChange` wins; the deprecated `onChange` alias is the fallback.
+      (onValueChange ?? onChange)?.(normalized);
     };
 
     const period: "AM" | "PM" = time.hours < 12 ? "AM" : "PM";

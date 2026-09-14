@@ -161,7 +161,7 @@ function TimePickerDemo() {
   const [time, setTime] = useState<TimeValue | undefined>(() => ({ hours: 9, minutes: 30 }));
   return (
     <div className="flex flex-col gap-3">
-      <TimePicker value={time} onChange={setTime} aria-label="Meeting time" />
+      <TimePicker value={time} onValueChange={setTime} aria-label="Meeting time" />
       <span className="text-sm text-fg-tertiary">
         {time
           ? `Selected ${String(time.hours).padStart(2, "0")}:${String(time.minutes).padStart(2, "0")}`
@@ -180,7 +180,7 @@ function TimePicker24Demo() {
   return (
     <TimePicker
       value={time}
-      onChange={setTime}
+      onValueChange={setTime}
       hourCycle={24}
       minuteStep={5}
       showSeconds
@@ -355,13 +355,13 @@ return (
       id: "twelve-hour",
       title: "12-hour clock",
       description:
-        "A controlled picker with a `Clock` trigger and scrollable hour / minute / AM–PM wheels. Pass `value` and `onChange`; the callback always emits a normalized `{ hours, minutes, seconds }` (24-hour `hours`).",
+        "A controlled picker with a `Clock` trigger and scrollable hour / minute / AM–PM wheels. Pass `value` and `onValueChange`; the callback always emits a normalized `{ hours, minutes, seconds }` (24-hour `hours`).",
       code: `// Fixed initial value keeps SSR + client identical (avoids hydration drift).
 const [time, setTime] = useState<TimeValue | undefined>(() => ({ hours: 9, minutes: 30 }));
 
 return (
   <div className="flex flex-col gap-3">
-    <TimePicker value={time} onChange={setTime} aria-label="Meeting time" />
+    <TimePicker value={time} onValueChange={setTime} aria-label="Meeting time" />
     <span className="text-sm text-fg-tertiary">
       {time
         ? \`Selected \${String(time.hours).padStart(2, "0")}:\${String(time.minutes).padStart(2, "0")}\`
@@ -385,7 +385,7 @@ return (
 return (
   <TimePicker
     value={time}
-    onChange={setTime}
+    onValueChange={setTime}
     hourCycle={24}
     minuteStep={5}
     showSeconds
