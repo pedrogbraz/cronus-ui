@@ -95,7 +95,7 @@ function getStep(viewport: HTMLDivElement): number {
   const first = viewport.firstElementChild as HTMLElement | null;
   if (!first) return viewport.clientWidth || 1;
   const second = first.nextElementSibling as HTMLElement | null;
-  // Distance between two adjacent item left-edges captures width + flex gap.
+  // Distance between two adjacent item left edges captures width + flex gap.
   // `Math.abs` keeps the step positive in RTL, where the delta is negative.
   if (second) return Math.max(1, Math.abs(second.offsetLeft - first.offsetLeft));
   return Math.max(1, first.offsetWidth);
@@ -305,8 +305,8 @@ export interface CarouselContentProps extends HTMLAttributes<HTMLDivElement> {
  * {@link CarouselItem}s, owns the rAF-throttled `scroll` listener and a
  * {@link ResizeObserver} that keep the root's `selectedIndex` /
  * `canScrollPrev` / `canScrollNext` / item count in sync. The scrollbar is
- * visually hidden (drag/touch still work). Uses the shadcn `-ml-4` gutter trick
- * paired with `pl-4` on each item to produce an even inter-item gap.
+ * visually hidden (drag/touch still work). Uses the shadcn `-ms-4` gutter trick
+ * paired with `ps-4` on each item to produce an even inter-item gap.
  */
 export const CarouselContent = forwardRef<HTMLDivElement, CarouselContentProps>(
   ({ className, children, ...props }, forwardedRef) => {
@@ -412,7 +412,7 @@ export const CarouselContent = forwardRef<HTMLDivElement, CarouselContentProps>(
         // biome-ignore lint/a11y/noNoninteractiveTabindex: the slides viewport is intentionally focusable so keyboard users can scroll/arrow through the slides.
         tabIndex={0}
         className={cn(
-          "-ml-4 flex overflow-x-auto scroll-smooth snap-x snap-mandatory outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base",
+          "-ms-4 flex overflow-x-auto scroll-smooth snap-x snap-mandatory outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base",
           // Hide the scrollbar across engines; drag + touch still work.
           "[scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden",
           className,
@@ -433,7 +433,7 @@ export interface CarouselItemProps extends HTMLAttributes<HTMLDivElement> {
 /**
  * A single slide. Defaults to full-width (`basis-full`); override `basis-*` via
  * `className` for multi-item views (e.g. `md:basis-1/2`, `lg:basis-1/3`). The
- * `pl-4` left padding pairs with the viewport's `-ml-4` to make an even gap.
+ * `ps-4` start padding pairs with the viewport's `-ms-4` to make an even gap.
  */
 export const CarouselItem = forwardRef<HTMLDivElement, CarouselItemProps>(
   ({ className, ...props }, ref) => {
@@ -446,7 +446,7 @@ export const CarouselItem = forwardRef<HTMLDivElement, CarouselItemProps>(
         role="group"
         aria-roledescription="slide"
         className={cn(
-          "min-w-0 shrink-0 grow-0 basis-full pl-4",
+          "min-w-0 shrink-0 grow-0 basis-full ps-4",
           opts.align === "center" ? "snap-center" : "snap-start",
           className,
         )}
@@ -462,7 +462,7 @@ export interface CarouselPreviousProps extends ButtonHTMLAttributes<HTMLButtonEl
 /**
  * Outline icon button that scrolls to the previous slide. Disabled at the start
  * (unless `opts.loop`). Renders inline by default; absolutely position it from
- * the consumer via `className` (e.g. `absolute left-2 top-1/2 -translate-y-1/2`).
+ * the consumer via `className` (e.g. `absolute start-2 top-1/2 -translate-y-1/2`).
  */
 export const CarouselPrevious = forwardRef<HTMLButtonElement, CarouselPreviousProps>(
   ({ className, onClick, disabled, children, ...props }, ref) => {
@@ -495,7 +495,7 @@ export interface CarouselNextProps extends ButtonHTMLAttributes<HTMLButtonElemen
 /**
  * Outline icon button that scrolls to the next slide. Disabled at the end
  * (unless `opts.loop`). Renders inline by default; absolutely position it from
- * the consumer via `className` (e.g. `absolute right-2 top-1/2 -translate-y-1/2`).
+ * the consumer via `className` (e.g. `absolute end-2 top-1/2 -translate-y-1/2`).
  */
 export const CarouselNext = forwardRef<HTMLButtonElement, CarouselNextProps>(
   ({ className, onClick, disabled, children, ...props }, ref) => {

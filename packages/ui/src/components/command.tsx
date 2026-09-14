@@ -151,7 +151,7 @@ export const CommandShortcut = ({ className, ...props }: ComponentProps<"span">)
   return (
     <span
       data-slot="command-shortcut"
-      className={cn("ml-auto text-xs tracking-widest text-fg-tertiary", className)}
+      className={cn("ms-auto text-xs tracking-widest text-fg-tertiary", className)}
       {...props}
     />
   );

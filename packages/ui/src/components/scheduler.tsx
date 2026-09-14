@@ -232,7 +232,7 @@ export const Scheduler = forwardRef<HTMLDivElement, SchedulerProps>(
                         }
                       }}
                       className={cn(
-                        "h-24 min-w-0 cursor-pointer border-r border-b border-border p-1.5 align-top outline-none transition-colors last:border-r-0",
+                        "h-24 min-w-0 cursor-pointer border-e border-b border-border p-1.5 align-top outline-none transition-colors last:border-e-0",
                         "hover:bg-surface-overlay focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
                         inMonth ? "text-fg" : "text-fg-tertiary",
                       )}
@@ -260,7 +260,7 @@ export const Scheduler = forwardRef<HTMLDivElement, SchedulerProps>(
                               onEventClick?.(event);
                             }}
                             className={cn(
-                              "truncate rounded px-1.5 py-0.5 text-left text-xs font-medium outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
+                              "truncate rounded px-1.5 py-0.5 text-start text-xs font-medium outline-none transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
                               EVENT_CHIP_CLASSES[event.color ?? "primary"],
                             )}
                           >

@@ -458,7 +458,7 @@ function JsonBranch({
       {expanded && (
         <>
           {/* Indent guide: the left border sits under the chevron's center. */}
-          <div data-slot="json-viewer-children" className="ml-2.5 border-border border-l pl-3.5">
+          <div data-slot="json-viewer-children" className="ms-2.5 border-border border-s ps-3.5">
             {entries.map(([childName, childValue], index) => (
               <JsonNode
                 key={childName}

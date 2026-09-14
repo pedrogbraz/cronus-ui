@@ -414,7 +414,7 @@ export const SignaturePad = forwardRef<SignaturePadHandle, SignaturePadProps>(
           <div className="border-t border-dashed border-border-strong" />
           <span className="mt-1.5 block text-xs text-fg-muted">Sign here</span>
         </div>
-        <div className="absolute right-1.5 bottom-1.5 flex gap-1">
+        <div className="absolute end-1.5 bottom-1.5 flex gap-1">
           <Button
             type="button"
             variant="ghost"

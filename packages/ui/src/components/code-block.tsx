@@ -70,7 +70,7 @@ export const CodeBlock = forwardRef<HTMLDivElement, CodeBlockProps>(
             <CopyButton
               value={code}
               size="icon-sm"
-              className="absolute right-2 top-2 z-10 shrink-0 bg-surface-overlay/80 backdrop-blur-sm"
+              className="absolute end-2 top-2 z-10 shrink-0 bg-surface-overlay/80 backdrop-blur-sm"
             />
           ) : null}
           {/*
@@ -96,7 +96,7 @@ export const CodeBlock = forwardRef<HTMLDivElement, CodeBlockProps>(
                       <span
                         aria-hidden="true"
                         data-slot="code-block-line-number"
-                        className="table-cell select-none pr-4 text-right text-fg-muted tabular-nums"
+                        className="table-cell select-none pe-4 text-end text-fg-muted tabular-nums"
                       >
                         {index + 1}
                       </span>

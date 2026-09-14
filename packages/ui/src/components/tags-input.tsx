@@ -177,7 +177,7 @@ export const TagsInput = forwardRef<HTMLInputElement, TagsInputProps>(
       >
         {tags.map((tag, index) => (
           // biome-ignore lint/suspicious/noArrayIndexKey: tags can repeat when allowDuplicates is on, so the index disambiguates an otherwise non-unique value.
-          <Badge key={`${tag}-${index}`} variant="secondary" className="gap-1 pr-1">
+          <Badge key={`${tag}-${index}`} variant="secondary" className="gap-1 pe-1">
             <span className="truncate">{tag}</span>
             {disabled ? null : (
               <button

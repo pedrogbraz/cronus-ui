@@ -107,7 +107,7 @@ export const NavigationMenuContent = forwardRef<
       ref={ref}
       data-slot="navigation-menu-content"
       className={cn(
-        "left-0 top-0 w-full p-1 transition-[transform,opacity] duration-200 ease-[var(--ease-out-quart)] md:absolute md:w-auto",
+        "start-0 top-0 w-full p-1 transition-[transform,opacity] duration-200 ease-[var(--ease-out-quart)] md:absolute md:w-auto",
         "data-[motion=from-start]:-translate-x-12 data-[motion=from-start]:opacity-0",
         "data-[motion=from-end]:translate-x-12 data-[motion=from-end]:opacity-0",
         "data-[motion=to-start]:-translate-x-12 data-[motion=to-start]:opacity-0",
@@ -160,7 +160,7 @@ export const NavigationMenuIndicator = forwardRef<
       )}
       {...props}
     >
-      <div className="relative top-[60%] size-2 rotate-45 rounded-tl-sm border-l border-t border-border bg-surface-floating shadow-md" />
+      <div className="relative top-[60%] size-2 rotate-45 rounded-ss-sm border-s border-t border-border bg-surface-floating shadow-md rtl:-rotate-45" />
     </NavigationMenuPrimitive.Indicator>
   );
 });
@@ -176,7 +176,7 @@ export const NavigationMenuViewport = forwardRef<
   NavigationMenuViewportProps
 >(({ className, ...props }, ref) => {
   return (
-    <div className="absolute left-0 top-full flex w-max justify-center">
+    <div className="absolute start-0 top-full flex w-max justify-center">
       <NavigationMenuPrimitive.Viewport
         ref={ref}
         data-slot="navigation-menu-viewport"

@@ -442,7 +442,7 @@ export const MorphingPopoverButton = forwardRef<HTMLButtonElement, MorphingPopov
       type={type ?? "button"}
       data-slot="morphing-popover-button"
       className={cn(
-        "flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm text-fg transition-colors",
+        "flex w-full items-center gap-2 rounded-md px-3 py-2 text-start text-sm text-fg transition-colors",
         "hover:bg-surface-overlay outline-none focus-visible:bg-surface-overlay focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-floating disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4",
         className,
       )}

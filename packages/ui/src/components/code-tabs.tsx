@@ -198,7 +198,7 @@ export const CodeTabs = forwardRef<HTMLDivElement, CodeTabsProps>(
       >
         <div
           data-slot="code-tabs-header"
-          className="flex items-center justify-between gap-3 border-b border-border bg-surface-overlay pr-3"
+          className="flex items-center justify-between gap-3 border-b border-border bg-surface-overlay pe-3"
         >
           <TabsList
             ref={listRef}
@@ -218,7 +218,7 @@ export const CodeTabs = forwardRef<HTMLDivElement, CodeTabsProps>(
             <span
               aria-hidden="true"
               data-slot="code-tabs-indicator"
-              className="pointer-events-none absolute bottom-0 left-0 h-0.5 rounded-full bg-primary transition-[transform,width] duration-300 ease-out motion-reduce:transition-none"
+              className="pointer-events-none absolute bottom-0 left-0 h-0.5 rounded-full bg-primary transition-[transform,width] duration-300 ease-out motion-reduce:transition-none" // contract-ok: translateX(--code-tabs-x) is measured from the trigger's offsetLeft
               style={{
                 opacity: "var(--code-tabs-ready, 0)",
                 width: "var(--code-tabs-w, 0px)",
@@ -248,7 +248,7 @@ export const CodeTabs = forwardRef<HTMLDivElement, CodeTabsProps>(
               value={activeItem.code}
               size="icon-sm"
               aria-label={`Copy ${activeItem.label} snippet`}
-              className="absolute top-2 right-2 z-10 shrink-0 bg-surface-overlay/80 backdrop-blur-sm"
+              className="absolute top-2 end-2 z-10 shrink-0 bg-surface-overlay/80 backdrop-blur-sm"
             />
           ) : null}
           {items.map((item) => (
@@ -262,7 +262,7 @@ export const CodeTabs = forwardRef<HTMLDivElement, CodeTabsProps>(
               data-slot="code-tabs-panel"
               className="overflow-x-auto outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
             >
-              <pre data-slot="code-tabs-pre" className="p-4 pr-14 text-sm leading-relaxed">
+              <pre data-slot="code-tabs-pre" className="p-4 pe-14 text-sm leading-relaxed">
                 <code data-slot="code-tabs-code" className="block whitespace-pre font-mono">
                   {item.code}
                 </code>

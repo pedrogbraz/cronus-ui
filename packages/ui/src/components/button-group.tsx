@@ -18,7 +18,7 @@ export const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
         className={cn(
           "inline-flex",
           orientation === "horizontal"
-            ? "flex-row [&>*:not(:first-child)]:rounded-l-none [&>*:not(:last-child)]:rounded-r-none [&>*:not(:first-child)]:-ml-px"
+            ? "flex-row [&>*:not(:first-child)]:rounded-s-none [&>*:not(:last-child)]:rounded-e-none [&>*:not(:first-child)]:-ms-px"
             : "flex-col [&>*:not(:first-child)]:rounded-t-none [&>*:not(:last-child)]:rounded-b-none [&>*:not(:first-child)]:-mt-px",
           "[&>*:focus-visible]:relative [&>*:focus-visible]:z-10",
           className,
