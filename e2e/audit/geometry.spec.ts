@@ -562,7 +562,7 @@ const SIDES = ["top", "right", "bottom", "left"] as const;
  * variables that default to transparent zero-size layers, while the kernel
  * writes `none`; both paint nothing, so invisible layers are dropped.
  */
-export function visibleShadow(shadow: string): string {
+function visibleShadow(shadow: string): string {
   if (shadow === "none") return "none";
   const layers: string[] = [];
   let depth = 0;
