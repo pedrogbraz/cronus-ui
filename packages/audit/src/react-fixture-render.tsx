@@ -42,6 +42,7 @@ import {
 } from "@cronus-ui/ui/carousel";
 import { Checkbox } from "@cronus-ui/ui/checkbox";
 import { Chip } from "@cronus-ui/ui/chip";
+import { ClickSpark } from "@cronus-ui/ui/click-spark";
 import { CodeBlock } from "@cronus-ui/ui/code-block";
 import { CodeTabs } from "@cronus-ui/ui/code-tabs";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@cronus-ui/ui/collapsible";
@@ -58,6 +59,7 @@ import { CopyButton } from "@cronus-ui/ui/copy-button";
 import { Countdown } from "@cronus-ui/ui/countdown";
 import { DateRangePicker } from "@cronus-ui/ui/date-range-picker";
 import { DescriptionItem, DescriptionList } from "@cronus-ui/ui/description-list";
+import { DotPattern } from "@cronus-ui/ui/dot-pattern";
 import {
   Drawer,
   DrawerContent,
@@ -76,10 +78,14 @@ import { Empty, EmptyTitle } from "@cronus-ui/ui/empty";
 import { Fab } from "@cronus-ui/ui/fab";
 import { Field, FieldDescription, FieldLabel } from "@cronus-ui/ui/field";
 import { FileDropzone } from "@cronus-ui/ui/file-dropzone";
+import { FlickeringGrid } from "@cronus-ui/ui/flickering-grid";
 import { FormItem } from "@cronus-ui/ui/form";
 import { Frame } from "@cronus-ui/ui/frame";
+import { GlareHover } from "@cronus-ui/ui/glare-hover";
 import { GlassCard } from "@cronus-ui/ui/glass-card";
 import { GradientText } from "@cronus-ui/ui/gradient-text";
+import { GridPattern } from "@cronus-ui/ui/grid-pattern";
+import { Highlighter } from "@cronus-ui/ui/highlighter";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@cronus-ui/ui/hover-card";
 import { ImageZoom } from "@cronus-ui/ui/image-zoom";
 import { Input } from "@cronus-ui/ui/input";
@@ -90,6 +96,7 @@ import { JsonViewer } from "@cronus-ui/ui/json-viewer";
 import { Kbd } from "@cronus-ui/ui/kbd";
 import { Label } from "@cronus-ui/ui/label";
 import { LogoCarousel } from "@cronus-ui/ui/logo-carousel";
+import { Magnetic } from "@cronus-ui/ui/magnetic";
 import { Marquee } from "@cronus-ui/ui/marquee";
 import { Masonry } from "@cronus-ui/ui/masonry";
 import {
@@ -122,6 +129,7 @@ import { Rating } from "@cronus-ui/ui/rating";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@cronus-ui/ui/resizable";
 import { Reveal } from "@cronus-ui/ui/reveal";
 import { RichTextEditor } from "@cronus-ui/ui/rich-text-editor";
+import { ScrambleText } from "@cronus-ui/ui/scramble-text";
 import { ScrollArea } from "@cronus-ui/ui/scroll-area";
 import { SegmentedControl, SegmentedControlItem } from "@cronus-ui/ui/segmented-control";
 import { Separator } from "@cronus-ui/ui/separator";
@@ -140,6 +148,7 @@ import { Slider } from "@cronus-ui/ui/slider";
 import { Toaster } from "@cronus-ui/ui/sonner";
 import { SparklesText } from "@cronus-ui/ui/sparkles-text";
 import { Spinner } from "@cronus-ui/ui/spinner";
+import { SpinningText } from "@cronus-ui/ui/spinning-text";
 import { SpotlightCard } from "@cronus-ui/ui/spotlight-card";
 import { StarBorder } from "@cronus-ui/ui/star-border";
 import { StatusDot } from "@cronus-ui/ui/status-dot";
@@ -2827,6 +2836,132 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
       options?: unknown;
     };
     return <ChartFixture items={stringList(items ?? options)} />;
+  }
+  if (fixture.family === "click-spark") {
+    const {
+      children,
+      className,
+      onPointerDown: _onPointerDown,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      className?: string;
+      onPointerDown?: unknown;
+    };
+    return (
+      <ClickSpark className={typeof className === "string" ? className : "w-72"} {...rest}>
+        {typeof children === "string" ? children : fixture.id}
+      </ClickSpark>
+    );
+  }
+  if (fixture.family === "glare-hover") {
+    const {
+      children,
+      className,
+      onMouseMove: _onMouseMove,
+      onMouseEnter: _onMouseEnter,
+      onMouseLeave: _onMouseLeave,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      className?: string;
+      onMouseMove?: unknown;
+      onMouseEnter?: unknown;
+      onMouseLeave?: unknown;
+    };
+    return (
+      <GlareHover className={typeof className === "string" ? className : "w-72"} {...rest}>
+        {typeof children === "string" ? children : fixture.id}
+      </GlareHover>
+    );
+  }
+  if (fixture.family === "magnetic") {
+    const {
+      children,
+      className,
+      onPointerEnter: _onPointerEnter,
+      onPointerMove: _onPointerMove,
+      onPointerLeave: _onPointerLeave,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      className?: string;
+      onPointerEnter?: unknown;
+      onPointerMove?: unknown;
+      onPointerLeave?: unknown;
+    };
+    return (
+      <Magnetic className={typeof className === "string" ? className : "w-72"} {...rest}>
+        {typeof children === "string" ? children : fixture.id}
+      </Magnetic>
+    );
+  }
+  if (fixture.family === "dot-pattern") {
+    const { children, className, ...rest } = fixture.props as {
+      children?: string;
+      className?: string;
+    };
+    return (
+      <DotPattern className={typeof className === "string" ? className : "w-72 min-h-32"} {...rest}>
+        {typeof children === "string" ? children : fixture.id}
+      </DotPattern>
+    );
+  }
+  if (fixture.family === "flickering-grid") {
+    const { children, className, ...rest } = fixture.props as {
+      children?: string;
+      className?: string;
+    };
+    return (
+      <FlickeringGrid
+        className={typeof className === "string" ? className : "w-72 min-h-32"}
+        {...rest}
+      >
+        {typeof children === "string" ? children : fixture.id}
+      </FlickeringGrid>
+    );
+  }
+  if (fixture.family === "grid-pattern") {
+    const { children, className, ...rest } = fixture.props as {
+      children?: string;
+      className?: string;
+    };
+    return (
+      <GridPattern
+        className={typeof className === "string" ? className : "w-72 min-h-32"}
+        {...rest}
+      >
+        {typeof children === "string" ? children : fixture.id}
+      </GridPattern>
+    );
+  }
+  if (fixture.family === "highlighter") {
+    const { children, ...rest } = fixture.props as { children?: string };
+    return (
+      <Highlighter {...rest}>{typeof children === "string" ? children : fixture.id}</Highlighter>
+    );
+  }
+  if (fixture.family === "scramble-text") {
+    const {
+      children,
+      reducedMotion: _reducedMotion,
+      ...rest
+    } = fixture.props as {
+      children?: string;
+      reducedMotion?: unknown;
+    };
+    const phrase = typeof children === "string" ? children : fixture.id;
+    return (
+      <ScrambleText {...rest} reducedMotion="never">
+        {phrase}
+      </ScrambleText>
+    );
+  }
+  if (fixture.family === "spinning-text") {
+    const { children, ...rest } = fixture.props as { children?: string };
+    return (
+      <SpinningText {...rest}>{typeof children === "string" ? children : fixture.id}</SpinningText>
+    );
   }
   throw new Error(`renderReactFixture: unported family ${fixture.family}`);
 }

@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "glare-hover",
+  "props": {
+    "children": "Glare",
+    "className": "w-72"
+  },
+  "expect": {
+    "slot": "glare-hover",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "glare-hover"
+    }
+  }
+}

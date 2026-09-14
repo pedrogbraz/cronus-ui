@@ -1073,6 +1073,71 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("chart", "default"))).toBe("div");
   });
 
+  it("emits wave 1q labels without source", () => {
+    const src = emitCronusApp([
+      getFixture("click-spark", "default"),
+      getFixture("glare-hover", "default"),
+      getFixture("magnetic", "default"),
+      getFixture("dot-pattern", "default"),
+      getFixture("flickering-grid", "default"),
+      getFixture("grid-pattern", "default"),
+      getFixture("highlighter", "default"),
+      getFixture("scramble-text", "default"),
+      getFixture("spinning-text", "default"),
+    ]);
+    expect(src).toContain("component ClickSparkDefault layout:inline style:click-spark {");
+    expect(src).toContain('label "Spark"');
+    expect(src).toContain("component GlareHoverDefault layout:inline style:glare-hover {");
+    expect(src).toContain('label "Glare"');
+    expect(src).toContain("component MagneticDefault layout:inline style:magnetic {");
+    expect(src).toContain('label "Pull"');
+    expect(src).toContain("component DotPatternDefault layout:inline style:dot-pattern {");
+    expect(src).toContain('label "Dots"');
+    expect(src).toContain("component FlickeringGridDefault layout:inline style:flickering-grid {");
+    expect(src).toContain('label "Flicker"');
+    expect(src).toContain("component GridPatternDefault layout:inline style:grid-pattern {");
+    expect(src).toContain('label "Grid"');
+    expect(src).toContain("component HighlighterDefault layout:inline style:highlighter {");
+    expect(src).toContain('label "Marked"');
+    expect(src).toContain("component ScrambleTextDefault layout:inline style:scramble-text {");
+    expect(src).toContain('label "Decode"');
+    expect(src).toContain("component SpinningTextDefault layout:inline style:spinning-text {");
+    expect(src).toContain('label "SPIN"');
+    expect(src).toContain("use ClickSparkDefault");
+    expect(src).toContain("use GlareHoverDefault");
+    expect(src).toContain("use MagneticDefault");
+    expect(src).toContain("use DotPatternDefault");
+    expect(src).toContain("use FlickeringGridDefault");
+    expect(src).toContain("use GridPatternDefault");
+    expect(src).toContain("use HighlighterDefault");
+    expect(src).toContain("use ScrambleTextDefault");
+    expect(src).toContain("use SpinningTextDefault");
+    expect(src).toContain('page "/audit/click-spark/default" type:custom');
+    expect(src).toContain('page "/audit/glare-hover/default" type:custom');
+    expect(src).toContain('page "/audit/magnetic/default" type:custom');
+    expect(src).toContain('page "/audit/dot-pattern/default" type:custom');
+    expect(src).toContain('page "/audit/flickering-grid/default" type:custom');
+    expect(src).toContain('page "/audit/grid-pattern/default" type:custom');
+    expect(src).toContain('page "/audit/highlighter/default" type:custom');
+    expect(src).toContain('page "/audit/scramble-text/default" type:custom');
+    expect(src).toContain('page "/audit/spinning-text/default" type:custom');
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for wave 1q families", () => {
+    expect(expectedTag(getFixture("click-spark", "default"))).toBe("div");
+    expect(expectedTag(getFixture("glare-hover", "default"))).toBe("div");
+    expect(expectedTag(getFixture("magnetic", "default"))).toBe("div");
+    expect(expectedTag(getFixture("dot-pattern", "default"))).toBe("div");
+    expect(expectedTag(getFixture("flickering-grid", "default"))).toBe("div");
+    expect(expectedTag(getFixture("grid-pattern", "default"))).toBe("div");
+    expect(expectedTag(getFixture("highlighter", "default"))).toBe("span");
+    expect(expectedTag(getFixture("scramble-text", "default"))).toBe("span");
+    expect(expectedTag(getFixture("spinning-text", "default"))).toBe("div");
+  });
+
   it("drops data-size from expect.attrs", () => {
     const parsed = parseParityFixture({
       id: "x",

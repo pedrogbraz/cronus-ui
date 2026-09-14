@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "flickering-grid",
+  "props": {
+    "children": "Flicker",
+    "className": "w-72 min-h-32"
+  },
+  "expect": {
+    "slot": "flickering-grid",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "flickering-grid"
+    }
+  }
+}

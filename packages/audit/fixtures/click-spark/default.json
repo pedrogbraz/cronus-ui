@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "click-spark",
+  "props": {
+    "children": "Spark",
+    "className": "w-72"
+  },
+  "expect": {
+    "slot": "click-spark",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "click-spark"
+    }
+  }
+}

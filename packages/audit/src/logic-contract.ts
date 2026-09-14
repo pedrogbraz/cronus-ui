@@ -147,6 +147,15 @@ const FAMILY_TAGS: Record<string, string> = {
   "composed-chart": "div",
   "heatmap-chart": "div",
   chart: "div",
+  "click-spark": "div",
+  "glare-hover": "div",
+  magnetic: "div",
+  "dot-pattern": "div",
+  "flickering-grid": "div",
+  "grid-pattern": "div",
+  highlighter: "span",
+  "scramble-text": "span",
+  "spinning-text": "div",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */

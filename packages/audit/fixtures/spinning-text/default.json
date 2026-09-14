@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "spinning-text",
+  "props": {
+    "children": "SPIN"
+  },
+  "expect": {
+    "slot": "spinning-text",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "spinning-text"
+    }
+  }
+}

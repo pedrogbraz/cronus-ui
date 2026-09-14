@@ -1915,6 +1915,114 @@ test.describe("logic parity", () => {
     await expect(cronusFrame(page).locator('[data-slot="chart-control"]')).toHaveCount(0);
   });
 
+  test("click-spark is a div, not click-spark-control", async ({ page }) => {
+    await page.goto("/audit/click-spark?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="click-spark"]');
+    const cronus = cronusFrame(page).locator('[data-slot="click-spark"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="click-spark-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="click-spark-control"]')).toHaveCount(0);
+  });
+
+  test("glare-hover is a div, not glare-hover-control", async ({ page }) => {
+    await page.goto("/audit/glare-hover?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="glare-hover"]');
+    const cronus = cronusFrame(page).locator('[data-slot="glare-hover"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="glare-hover-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="glare-hover-control"]')).toHaveCount(0);
+  });
+
+  test("magnetic is a div, not magnetic-control", async ({ page }) => {
+    await page.goto("/audit/magnetic?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="magnetic"]');
+    const cronus = cronusFrame(page).locator('[data-slot="magnetic"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="magnetic-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="magnetic-control"]')).toHaveCount(0);
+  });
+
+  test("dot-pattern is a div, not dot-pattern-control", async ({ page }) => {
+    await page.goto("/audit/dot-pattern?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="dot-pattern"]');
+    const cronus = cronusFrame(page).locator('[data-slot="dot-pattern"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="dot-pattern-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="dot-pattern-control"]')).toHaveCount(0);
+  });
+
+  test("flickering-grid is a div, not flickering-grid-control", async ({ page }) => {
+    await page.goto("/audit/flickering-grid?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="flickering-grid"]');
+    const cronus = cronusFrame(page).locator('[data-slot="flickering-grid"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="flickering-grid-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="flickering-grid-control"]')).toHaveCount(0);
+  });
+
+  test("grid-pattern is a div, not grid-pattern-control", async ({ page }) => {
+    await page.goto("/audit/grid-pattern?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="grid-pattern"]');
+    const cronus = cronusFrame(page).locator('[data-slot="grid-pattern"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="grid-pattern-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="grid-pattern-control"]')).toHaveCount(0);
+  });
+
+  test("highlighter is a span, not highlighter-control", async ({ page }) => {
+    await page.goto("/audit/highlighter?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="highlighter"]');
+    const cronus = cronusFrame(page).locator('[data-slot="highlighter"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("SPAN");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("SPAN");
+    await expect(page.locator('[data-slot="highlighter-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="highlighter-control"]')).toHaveCount(0);
+  });
+
+  test("scramble-text is a span, not scramble-text-control", async ({ page }) => {
+    await page.goto("/audit/scramble-text?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="scramble-text"]');
+    const cronus = cronusFrame(page).locator('[data-slot="scramble-text"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("SPAN");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("SPAN");
+    await expect(page.locator('[data-slot="scramble-text-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="scramble-text-control"]')).toHaveCount(0);
+  });
+
+  test("spinning-text is a div, not spinning-text-control", async ({ page }) => {
+    await page.goto("/audit/spinning-text?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="spinning-text"]');
+    const cronus = cronusFrame(page).locator('[data-slot="spinning-text"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="spinning-text-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="spinning-text-control"]')).toHaveCount(0);
+  });
+
   test("toast is a visible div with data-slot toast, not toaster-only empty", async ({ page }) => {
     await page.goto("/audit/toast?fixture=default&preset=aurora&mode=dark");
     const react = page.locator('[data-audit-side="react"] [data-slot="toast"]');

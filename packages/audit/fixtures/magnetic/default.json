@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "magnetic",
+  "props": {
+    "children": "Pull",
+    "className": "w-72"
+  },
+  "expect": {
+    "slot": "magnetic",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "magnetic"
+    }
+  }
+}
