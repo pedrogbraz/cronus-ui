@@ -111,6 +111,8 @@ interface PortalSpec {
   /** Ancestor containers of `root`, measured against `containerAnchor`; height exempt (see PORTAL). */
   containers: string[];
   containerAnchor: string;
+  /** Containers' heights are exempt unless this is false. */
+  exemptContainerHeight?: boolean;
   /** Selector that proves the React popover has mounted (React side only). */
   ready: string;
 }
@@ -118,17 +120,16 @@ interface PortalSpec {
 /** Families whose floating content is portaled out of the React canvas. */
 const PORTAL: Partial<Record<Family, PortalSpec>> = {
   "multi-select": {
-    // Above the listbox React renders cmdk's search row (command-input-wrapper,
-    // 41px). It filters with JS and is deliberately absent from the zero-JS
-    // kernel (a non-filtering input would be a dead control). So the listbox,
-    // options and indicators are measured against command-list and compared
-    // exactly; popover-content / command are measured against the trigger and
-    // compared for position (4px below the trigger), width, colours, radius and
-    // border — only their height is exempt, because in React it includes that row.
-    anchor: "command-list",
-    root: "command-list",
+    // The kernel renders cmdk's search row as the same native input, disabled
+    // (filtering needs JS), so the whole command subtree — search row, listbox,
+    // options and indicators — is measured against `command` and compared
+    // exactly. popover-content is measured against the trigger for position
+    // (4px below it), width, colours, radius and border.
+    anchor: "command",
+    root: "command",
     prefix: "multi-select-",
-    containers: ["popover-content", "command"],
+    containers: ["popover-content"],
+    exemptContainerHeight: false,
     containerAnchor: "multi-select-trigger",
     // cmdk CommandItem is role=option inside the Radix popover portal.
     ready: '[role="option"]',
@@ -667,7 +668,10 @@ function compareCase(c: AuditCase, react: Measured[], cronus: Measured[]): Compa
   const { family } = c;
   const allow = REACT_ONLY_SLOTS[family] ?? {};
   const cronusAllow = CRONUS_ONLY_SLOTS[family] ?? {};
-  const heightExempt = new Set(PORTAL[family]?.containers ?? []);
+  const portalSpec = PORTAL[family];
+  const heightExempt = new Set(
+    portalSpec && portalSpec.exemptContainerHeight !== false ? portalSpec.containers : [],
+  );
   const problems: string[] = [];
   const rows: Row[] = [];
   const propRows: Row[] = [];
