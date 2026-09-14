@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "progressive-blur",
+  "props": {
+    "children": "Blur",
+    "className": "w-72"
+  },
+  "expect": {
+    "slot": "progressive-blur",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "progressive-blur"
+    }
+  }
+}

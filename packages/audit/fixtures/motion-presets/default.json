@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "motion-presets",
+  "props": {
+    "items": ["fade-in", "fade-in-up", "scale-in"]
+  },
+  "expect": {
+    "slot": "motion-presets",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "motion-presets"
+    }
+  }
+}

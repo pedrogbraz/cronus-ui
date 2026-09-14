@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "retro-grid",
+  "props": {
+    "children": "Grid",
+    "className": "w-72 min-h-32"
+  },
+  "expect": {
+    "slot": "retro-grid",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "retro-grid"
+    }
+  }
+}

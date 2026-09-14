@@ -1138,6 +1138,64 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("spinning-text", "default"))).toBe("div");
   });
 
+  it("emits wave 1r labels without source", () => {
+    const src = emitCronusApp([
+      getFixture("gradient-border", "default"),
+      getFixture("light-rays", "default"),
+      getFixture("orbit", "default"),
+      getFixture("progressive-blur", "default"),
+      getFixture("retro-grid", "default"),
+      getFixture("ripple", "default"),
+      getFixture("motion-presets", "default"),
+    ]);
+    expect(src).toContain("component GradientBorderDefault layout:inline style:gradient-border {");
+    expect(src).toContain('label "Border"');
+    expect(src).toContain("component LightRaysDefault layout:inline style:light-rays {");
+    expect(src).toContain('label "Rays"');
+    expect(src).toContain("component OrbitDefault layout:inline style:orbit {");
+    expect(src).toContain('label "Orbit"');
+    expect(src).toContain('  text "A"');
+    expect(src).toContain('  text "B"');
+    expect(src).toContain('  text "C"');
+    expect(src).toContain("component ProgressiveBlurDefault layout:inline style:progressive-blur {");
+    expect(src).toContain('label "Blur"');
+    expect(src).toContain("component RetroGridDefault layout:inline style:retro-grid {");
+    expect(src).toContain('label "Grid"');
+    expect(src).toContain("component RippleDefault layout:inline style:ripple {");
+    expect(src).toContain('label "Pulse"');
+    expect(src).toContain("component MotionPresetsDefault layout:inline style:motion-presets {");
+    expect(src).toContain('  text "fade-in"');
+    expect(src).toContain('  text "fade-in-up"');
+    expect(src).toContain('  text "scale-in"');
+    expect(src).toContain("use GradientBorderDefault");
+    expect(src).toContain("use LightRaysDefault");
+    expect(src).toContain("use OrbitDefault");
+    expect(src).toContain("use ProgressiveBlurDefault");
+    expect(src).toContain("use RetroGridDefault");
+    expect(src).toContain("use RippleDefault");
+    expect(src).toContain("use MotionPresetsDefault");
+    expect(src).toContain('page "/audit/gradient-border/default" type:custom');
+    expect(src).toContain('page "/audit/light-rays/default" type:custom');
+    expect(src).toContain('page "/audit/orbit/default" type:custom');
+    expect(src).toContain('page "/audit/progressive-blur/default" type:custom');
+    expect(src).toContain('page "/audit/retro-grid/default" type:custom');
+    expect(src).toContain('page "/audit/ripple/default" type:custom');
+    expect(src).toContain('page "/audit/motion-presets/default" type:custom');
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("stack react");
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for wave 1r families", () => {
+    expect(expectedTag(getFixture("gradient-border", "default"))).toBe("div");
+    expect(expectedTag(getFixture("light-rays", "default"))).toBe("div");
+    expect(expectedTag(getFixture("orbit", "default"))).toBe("div");
+    expect(expectedTag(getFixture("progressive-blur", "default"))).toBe("div");
+    expect(expectedTag(getFixture("retro-grid", "default"))).toBe("div");
+    expect(expectedTag(getFixture("ripple", "default"))).toBe("div");
+    expect(expectedTag(getFixture("motion-presets", "default"))).toBe("div");
+  });
+
   it("drops data-size from expect.attrs", () => {
     const parsed = parseParityFixture({
       id: "x",

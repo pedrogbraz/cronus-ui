@@ -2023,6 +2023,90 @@ test.describe("logic parity", () => {
     await expect(cronusFrame(page).locator('[data-slot="spinning-text-control"]')).toHaveCount(0);
   });
 
+  test("gradient-border is a div, not gradient-border-control", async ({ page }) => {
+    await page.goto("/audit/gradient-border?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="gradient-border"]');
+    const cronus = cronusFrame(page).locator('[data-slot="gradient-border"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="gradient-border-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="gradient-border-control"]')).toHaveCount(0);
+  });
+
+  test("light-rays is a div, not light-rays-control", async ({ page }) => {
+    await page.goto("/audit/light-rays?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="light-rays"]');
+    const cronus = cronusFrame(page).locator('[data-slot="light-rays"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="light-rays-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="light-rays-control"]')).toHaveCount(0);
+  });
+
+  test("orbit is a div, not orbit-control", async ({ page }) => {
+    await page.goto("/audit/orbit?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="orbit"]');
+    const cronus = cronusFrame(page).locator('[data-slot="orbit"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="orbit-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="orbit-control"]')).toHaveCount(0);
+  });
+
+  test("progressive-blur is a div, not progressive-blur-control", async ({ page }) => {
+    await page.goto("/audit/progressive-blur?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="progressive-blur"]');
+    const cronus = cronusFrame(page).locator('[data-slot="progressive-blur"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="progressive-blur-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="progressive-blur-control"]')).toHaveCount(0);
+  });
+
+  test("retro-grid is a div, not retro-grid-control", async ({ page }) => {
+    await page.goto("/audit/retro-grid?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="retro-grid"]');
+    const cronus = cronusFrame(page).locator('[data-slot="retro-grid"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="retro-grid-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="retro-grid-control"]')).toHaveCount(0);
+  });
+
+  test("ripple is a div, not ripple-control", async ({ page }) => {
+    await page.goto("/audit/ripple?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="ripple"]');
+    const cronus = cronusFrame(page).locator('[data-slot="ripple"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="ripple-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="ripple-control"]')).toHaveCount(0);
+  });
+
+  test("motion-presets is a div, not motion-presets-control", async ({ page }) => {
+    await page.goto("/audit/motion-presets?fixture=default&preset=aurora&mode=dark");
+    const react = page.locator('[data-audit-side="react"] [data-slot="motion-presets"]');
+    const cronus = cronusFrame(page).locator('[data-slot="motion-presets"]');
+    await expect(react).toHaveCount(1);
+    await expect(cronus).toHaveCount(1);
+    expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
+    expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
+    await expect(page.locator('[data-slot="motion-presets-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="motion-presets-control"]')).toHaveCount(0);
+  });
+
   test("toast is a visible div with data-slot toast, not toaster-only empty", async ({ page }) => {
     await page.goto("/audit/toast?fixture=default&preset=aurora&mode=dark");
     const react = page.locator('[data-audit-side="react"] [data-slot="toast"]');

@@ -1337,4 +1337,60 @@ test.describe("visual parity", () => {
       SCREENSHOT_OPTIONS,
     );
   });
+
+  test("gradient-border default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "gradient-border", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "gradient-border-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("light-rays default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "light-rays", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "light-rays-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("orbit default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "orbit", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "orbit-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("progressive-blur default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "progressive-blur", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "progressive-blur-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("retro-grid default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "retro-grid", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "retro-grid-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("ripple default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "ripple", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "ripple-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
+
+  test("motion-presets default aurora/dark", async ({ page }) => {
+    const frame = await openAudit(page, "motion-presets", "default", "aurora", "dark");
+    await expect(frame.locator("[data-audit-canvas]")).toHaveScreenshot(
+      "motion-presets-default-aurora-dark.png",
+      SCREENSHOT_OPTIONS,
+    );
+  });
 });

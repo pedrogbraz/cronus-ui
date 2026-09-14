@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "gradient-border",
+  "props": {
+    "children": "Border",
+    "className": "w-72 p-6"
+  },
+  "expect": {
+    "slot": "gradient-border",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "gradient-border"
+    }
+  }
+}

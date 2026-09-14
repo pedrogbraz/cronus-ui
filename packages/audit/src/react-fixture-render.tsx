@@ -83,6 +83,7 @@ import { FormItem } from "@cronus-ui/ui/form";
 import { Frame } from "@cronus-ui/ui/frame";
 import { GlareHover } from "@cronus-ui/ui/glare-hover";
 import { GlassCard } from "@cronus-ui/ui/glass-card";
+import { GradientBorder } from "@cronus-ui/ui/gradient-border";
 import { GradientText } from "@cronus-ui/ui/gradient-text";
 import { GridPattern } from "@cronus-ui/ui/grid-pattern";
 import { Highlighter } from "@cronus-ui/ui/highlighter";
@@ -95,6 +96,7 @@ import { InviteDialog } from "@cronus-ui/ui/invite-dialog";
 import { JsonViewer } from "@cronus-ui/ui/json-viewer";
 import { Kbd } from "@cronus-ui/ui/kbd";
 import { Label } from "@cronus-ui/ui/label";
+import { LightRays } from "@cronus-ui/ui/light-rays";
 import { LogoCarousel } from "@cronus-ui/ui/logo-carousel";
 import { Magnetic } from "@cronus-ui/ui/magnetic";
 import { Marquee } from "@cronus-ui/ui/marquee";
@@ -120,15 +122,19 @@ import {
   NavigationMenuTrigger,
 } from "@cronus-ui/ui/navigation-menu";
 import { Noise } from "@cronus-ui/ui/noise";
+import { Orbit, OrbitItem, OrbitRing } from "@cronus-ui/ui/orbit";
 import { Particles } from "@cronus-ui/ui/particles";
 import { PillNav } from "@cronus-ui/ui/pill-nav";
 import { Popover, PopoverContent, PopoverTrigger } from "@cronus-ui/ui/popover";
 import { Progress } from "@cronus-ui/ui/progress";
+import { ProgressiveBlur } from "@cronus-ui/ui/progressive-blur";
 import { RadioGroup, RadioGroupItem } from "@cronus-ui/ui/radio-group";
 import { Rating } from "@cronus-ui/ui/rating";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@cronus-ui/ui/resizable";
+import { RetroGrid } from "@cronus-ui/ui/retro-grid";
 import { Reveal } from "@cronus-ui/ui/reveal";
 import { RichTextEditor } from "@cronus-ui/ui/rich-text-editor";
+import { Ripple } from "@cronus-ui/ui/ripple";
 import { ScrambleText } from "@cronus-ui/ui/scramble-text";
 import { ScrollArea } from "@cronus-ui/ui/scroll-area";
 import { SegmentedControl, SegmentedControlItem } from "@cronus-ui/ui/segmented-control";
@@ -2961,6 +2967,120 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
     const { children, ...rest } = fixture.props as { children?: string };
     return (
       <SpinningText {...rest}>{typeof children === "string" ? children : fixture.id}</SpinningText>
+    );
+  }
+  if (fixture.family === "gradient-border") {
+    const { children, className, ...rest } = fixture.props as {
+      children?: string;
+      className?: string;
+    };
+    return (
+      <GradientBorder className={typeof className === "string" ? className : "w-72 p-6"} {...rest}>
+        {typeof children === "string" ? children : fixture.id}
+      </GradientBorder>
+    );
+  }
+  if (fixture.family === "light-rays") {
+    const { children, className, ...rest } = fixture.props as {
+      children?: string;
+      className?: string;
+    };
+    return (
+      <LightRays className={typeof className === "string" ? className : "w-72 min-h-32"} {...rest}>
+        {typeof children === "string" ? children : fixture.id}
+      </LightRays>
+    );
+  }
+  if (fixture.family === "orbit") {
+    const {
+      items,
+      options,
+      children,
+      className,
+      "aria-label": ariaLabel,
+      ...rest
+    } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      children?: string;
+      className?: string;
+      "aria-label"?: string;
+    };
+    const labels = stringList(items ?? options);
+    const nucleus =
+      typeof children === "string"
+        ? children
+        : typeof ariaLabel === "string"
+          ? ariaLabel
+          : fixture.id;
+    return (
+      <Orbit
+        className={typeof className === "string" ? className : "size-72"}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "Orbit"}
+        {...rest}
+      >
+        {nucleus}
+        <OrbitRing radius={128}>
+          {labels.map((item) => (
+            <OrbitItem key={item}>{item}</OrbitItem>
+          ))}
+        </OrbitRing>
+      </Orbit>
+    );
+  }
+  if (fixture.family === "progressive-blur") {
+    const { children, className, ...rest } = fixture.props as {
+      children?: string;
+      className?: string;
+    };
+    return (
+      <div
+        className={
+          typeof className === "string" ? `relative min-h-32 ${className}` : "relative min-h-32 w-72"
+        }
+      >
+        {typeof children === "string" ? children : fixture.id}
+        <ProgressiveBlur {...rest} />
+      </div>
+    );
+  }
+  if (fixture.family === "retro-grid") {
+    const { children, className, ...rest } = fixture.props as {
+      children?: string;
+      className?: string;
+    };
+    return (
+      <RetroGrid className={typeof className === "string" ? className : "w-72 min-h-32"} {...rest}>
+        {typeof children === "string" ? children : fixture.id}
+      </RetroGrid>
+    );
+  }
+  if (fixture.family === "ripple") {
+    const { children, className, ...rest } = fixture.props as {
+      children?: string;
+      className?: string;
+    };
+    return (
+      <Ripple className={typeof className === "string" ? className : "w-72 min-h-32"} {...rest}>
+        {typeof children === "string" ? children : fixture.id}
+      </Ripple>
+    );
+  }
+  if (fixture.family === "motion-presets") {
+    const { items, options } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+    };
+    const presets = stringList(items ?? options);
+    const shown = presets.length > 0 ? presets : ["fade-in", "fade-in-up", "scale-in"];
+    return (
+      <div data-slot="motion-presets">
+        {shown.map((preset) => (
+          <div key={preset} data-slot="motion-preset" data-preset={preset}>
+            {preset}
+          </div>
+        ))}
+      </div>
     );
   }
   throw new Error(`renderReactFixture: unported family ${fixture.family}`);

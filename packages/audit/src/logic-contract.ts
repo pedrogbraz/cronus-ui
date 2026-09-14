@@ -156,6 +156,13 @@ const FAMILY_TAGS: Record<string, string> = {
   highlighter: "span",
   "scramble-text": "span",
   "spinning-text": "div",
+  "gradient-border": "div",
+  "light-rays": "div",
+  orbit: "div",
+  "progressive-blur": "div",
+  "retro-grid": "div",
+  ripple: "div",
+  "motion-presets": "div",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */
