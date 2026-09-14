@@ -13,11 +13,14 @@
 #             promoted into the repo, and passes with a notice (see the
 #             "Visual regression" section of CONTRIBUTING.md).
 #
-#   audit   — Cronus Audit against a kernel checkout.
+#   audit   — Cronus Audit against the kernel commit pinned in cronus-kernel.ref.
+#   visual-baselines-linux — regenerates e2e/audit/__screenshots__/linux inside
+#             the Playwright docker image and uploads them as an artifact.
 #
 # Triggers: pull_request and push to main run `gates` and `browser`.
-# `visual` and `audit` are manual-only (workflow_dispatch) for now — they
-# become PR gates in Sprint 2 (linux baselines committed + kernel pinned by SHA).
+# `visual`, `audit` and `visual-baselines-linux` are manual-only
+# (workflow_dispatch) for now — `visual`/`audit` become PR gates once the
+# linux baselines are committed.
 # `npx cronus-ui add` hits raw.githubusercontent.com only after a public
 # tag (release preflight). Local: `-r ./registry`.
 name: CI
@@ -146,18 +149,33 @@ jobs:
 
   audit:
     # Manual-only until Sprint 2: becomes a PR gate (and drops
-    # continue-on-error) once linux audit baselines are committed and the
-    # kernel is pinned by SHA instead of a branch name.
+    # continue-on-error) once linux audit baselines are committed. The kernel
+    # is pinned by the SHA in cronus-kernel.ref (repo root).
     if: github.event_name == 'workflow_dispatch'
     continue-on-error: true
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
       CRONUS_KERNEL_REPO: pedrogbraz/cronus-kernel
-      CRONUS_KERNEL_REF: feat/cronus-ui-tokens-button
       CRONUS_AUDIT_ORIGIN: http://127.0.0.1:5176
     steps:
       - uses: actions/checkout@v4
+      - name: Read pinned kernel SHA
+        id: kernel
+        shell: bash
+        run: |
+          SHA="$(tr -d '[:space:]' < cronus-kernel.ref)"
+          if ! [[ "$SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error title=cronus-kernel.ref::expected a 40-char commit SHA, got '$SHA'"
+            exit 1
+          fi
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+      - name: Checkout cronus-kernel at pinned SHA
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.CRONUS_KERNEL_REPO }}
+          ref: ${{ steps.kernel.outputs.sha }}
+          path: cronus-kernel
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.3.14
@@ -167,10 +185,6 @@ jobs:
           workspaces: cronus-kernel
       - name: Install
         run: bun install --frozen-lockfile || bun install --frozen-lockfile
-      - name: Clone cronus-kernel
-        run: |
-          git clone --depth 1 --branch "$CRONUS_KERNEL_REF" \
-            "https://github.com/${CRONUS_KERNEL_REPO}.git" cronus-kernel
       - name: Build kernel
         working-directory: cronus-kernel
         run: cargo build
@@ -206,5 +220,75 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: audit-diff-report
-          path: test-results
+          path: |
+            test-results
+            playwright-report/audit
+          if-no-files-found: ignore
+
+  visual-baselines-linux:
+    # Manual-only. Regenerates the Cronus Audit visual baselines inside the
+    # official Playwright image (version = @playwright/test in bun.lock) so
+    # linux PNGs are byte-stable, and uploads them for a later commit under
+    # e2e/audit/__screenshots__/linux. Bump the image tag with @playwright/test.
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    container:
+      image: mcr.microsoft.com/playwright:v1.61.0-noble
+      options: --user root
+    env:
+      HOME: /root
+      CRONUS_KERNEL_REPO: pedrogbraz/cronus-kernel
+      CRONUS_AUDIT_ORIGIN: http://127.0.0.1:5176
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read pinned kernel SHA
+        id: kernel
+        shell: bash
+        run: |
+          SHA="$(tr -d '[:space:]' < cronus-kernel.ref)"
+          if ! [[ "$SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error title=cronus-kernel.ref::expected a 40-char commit SHA, got '$SHA'"
+            exit 1
+          fi
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+      - name: Checkout cronus-kernel at pinned SHA
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.CRONUS_KERNEL_REPO }}
+          ref: ${{ steps.kernel.outputs.sha }}
+          path: cronus-kernel
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.14
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: cronus-kernel
+      - name: Install
+        run: bun install --frozen-lockfile || bun install --frozen-lockfile
+      - name: Build kernel
+        working-directory: cronus-kernel
+        run: cargo build
+      - name: Build www (+ audit/ui/tokens deps)
+        run: bunx turbo build --filter=@cronus-ui/www
+      - name: Regenerate audit visual baselines
+        env:
+          CRONUS_BIN: ${{ github.workspace }}/cronus-kernel/target/debug/cronus
+          CRONUS_KERNEL_ROOT: ${{ github.workspace }}/cronus-kernel
+        run: bunx playwright test -c playwright.audit.config.ts e2e/audit/parity.visual.spec.ts --update-snapshots
+      - name: Upload linux audit baselines
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-visual-baselines-linux
+          path: e2e/audit/__screenshots__/linux
+          if-no-files-found: error
+      - name: Upload report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-visual-baselines-linux-report
+          path: |
+            test-results
+            playwright-report/audit
           if-no-files-found: ignore
