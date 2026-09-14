@@ -507,6 +507,40 @@ async function measureReactOverlay(
   }
 }
 
+/**
+ * Families whose React layout depends on viewport units (AppShell content is
+ * `min-h-svh`). The kernel canvas lives in the audit iframe, so React is measured
+ * in a second page whose viewport height equals the iframe window (width stays
+ * the page's, keeping both panes on the desktop breakpoint), canvas-relative.
+ * All checks stay unchanged.
+ */
+const VIEWPORT_MATCHED = new Set<Family>(["app-shell"]);
+
+async function measureReactInViewport(
+  browser: Browser,
+  baseURL: string | undefined,
+  family: Family,
+  portal: PortalSpec | null,
+  viewport: { width: number; height: number },
+): Promise<Measured[]> {
+  const context = await browser.newContext({
+    baseURL,
+    viewport,
+    deviceScaleFactor: 1,
+    colorScheme: "dark",
+  });
+  try {
+    const page = await context.newPage();
+    await page.goto(auditPath(family));
+    const react = page.locator('[data-audit-side="react"] [data-audit-canvas]');
+    await expect(react).toBeVisible();
+    await freezeReact(page);
+    return await measureSettled(react, portal, null);
+  } finally {
+    await context.close();
+  }
+}
+
 async function openBothPanes(
   page: Page,
   family: Family,
@@ -550,7 +584,17 @@ test.describe("geometry parity (React vs Cronus)", () => {
               return { width: win.innerWidth, height: win.innerHeight };
             }),
           )
-        : await measureSettled(react, portal, null);
+        : VIEWPORT_MATCHED.has(family)
+          ? await measureReactInViewport(browser, baseURL, family, portal, {
+              // Keep the page width: React's sidebar switches to its mobile sheet
+              // below 768px (JS useIsMobile) while the zero-JS kernel stays
+              // desktop. Only the height drives `svh`, so match that one.
+              width: page.viewportSize()?.width ?? 1280,
+              height: await cronus.evaluate(
+                (el) => (el.ownerDocument.defaultView ?? window).innerHeight,
+              ),
+            })
+          : await measureSettled(react, portal, null);
       expect(reactMeasured.length, "React canvas has no [data-slot] elements").toBeGreaterThan(0);
       const problems = compareFamily(family, reactMeasured, cronusMeasured);
       expect(problems, problems[0] ?? "").toEqual([]);
