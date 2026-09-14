@@ -77,7 +77,6 @@ import { DynamicIsland } from "@cronus-ui/ui/dynamic-island";
 import { Empty, EmptyTitle } from "@cronus-ui/ui/empty";
 import { Fab } from "@cronus-ui/ui/fab";
 import { Field, FieldDescription, FieldLabel } from "@cronus-ui/ui/field";
-import { FileDropzone } from "@cronus-ui/ui/file-dropzone";
 import { FlickeringGrid } from "@cronus-ui/ui/flickering-grid";
 import { FormItem } from "@cronus-ui/ui/form";
 import { Frame } from "@cronus-ui/ui/frame";
@@ -209,6 +208,7 @@ import { DataTableFixture } from "./data-table-fixture.js";
 import { DatePickerFixture } from "./date-picker-fixture.js";
 import { DockFixture } from "./dock-fixture.js";
 import { ExpandableTabsFixture } from "./expandable-tabs-fixture.js";
+import { FileDropzoneFixture } from "./file-dropzone-fixture.js";
 import { HeatmapFixture } from "./heatmap-fixture.js";
 import { KanbanFixture } from "./kanban-fixture.js";
 import { LightboxFixture } from "./lightbox-fixture.js";
@@ -816,19 +816,25 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
     );
   }
   if (fixture.family === "file-dropzone") {
+    // Function props cannot cross the server → client boundary; the no-op
+    // `onFiles` lives in the client wrapper.
     const {
-      onFiles: _onFiles,
       "aria-label": ariaLabel,
-      ...rest
+      accept,
+      multiple,
+      disabled,
     } = fixture.props as {
-      onFiles?: unknown;
       "aria-label"?: string;
+      accept?: string;
+      multiple?: boolean;
+      disabled?: boolean;
     };
     return (
-      <FileDropzone
-        onFiles={() => {}}
-        aria-label={typeof ariaLabel === "string" ? ariaLabel : "Upload files"}
-        {...rest}
+      <FileDropzoneFixture
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+        accept={typeof accept === "string" ? accept : undefined}
+        multiple={multiple === true}
+        disabled={disabled === true}
       />
     );
   }
