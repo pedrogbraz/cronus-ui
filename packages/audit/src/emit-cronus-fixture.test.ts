@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { emitCronusApp } from "./emit-cronus-fixture.js";
+import { emitCronusApp, emitsSourceBlock } from "./emit-cronus-fixture.js";
 import { componentNameOf, getFixture, listFixtures } from "./fixture-catalog.js";
 import { expectedTag } from "./logic-contract.js";
 import { parseParityFixture } from "./parity-fixture.js";
@@ -1209,7 +1209,7 @@ describe("emitCronusApp", () => {
     const timePicker = emitCronusApp([getFixture("time-picker", "default")]);
     expect(timePicker).toContain('  value:"09:30"\n  hourCycle:24\n  aria-label:"Meeting time"');
     const codeBlock = emitCronusApp([getFixture("code-block", "default")]);
-    expect(codeBlock).toContain('  filename:"index.ts"\n  language:"ts"\n}');
+    expect(codeBlock).toContain('  filename:"index.ts"\n  language:"ts"\n  label ');
     expect(codeBlock).not.toContain("hourCycle");
     expect(timePicker).not.toContain("filename:");
     expect(timePicker).not.toContain("language:");
@@ -1239,7 +1239,7 @@ describe("emitCronusApp", () => {
     const field = emitCronusApp([getFixture("field", "default")]);
     expect(field).toMatch(/\n {2}description:"[^"]+"\n/);
     const frame = emitCronusApp([getFixture("frame", "default")]);
-    expect(frame).toContain('  url:"cronus.dev"\n}');
+    expect(frame).toContain('  url:"cronus.dev"\n  label ');
     const parsed = parseParityFixture({
       id: "x",
       family: "card",
@@ -1252,6 +1252,59 @@ describe("emitCronusApp", () => {
     const plain = emitCronusApp([getFixture("button", "primary-md")]);
     expect(plain).not.toContain("description:");
     expect(plain).not.toContain("url:");
+  });
+
+  it("emits every component-level key:value before the first item line", () => {
+    // The kernel parser attaches a key:value written after `label`/`text` to that
+    // item's config; only lines right after `{` land in the component's props.
+    const componentBlocks = (src: string) =>
+      src
+        .split("\n\n")
+        .filter((block) => block.startsWith("component "))
+        .map((block) => block.split("\n").slice(1, -1));
+    const assertPropsFirst = (src: string) => {
+      const blocks = componentBlocks(src);
+      expect(blocks.length).toBeGreaterThan(0);
+      for (const body of blocks) {
+        let sawItem = false;
+        for (const line of body) {
+          if (/^ {2}(label|text) "/.test(line)) {
+            sawItem = true;
+          } else if (/^ {2}[\w-]+:/.test(line)) {
+            expect(sawItem, `attr after item: ${line}\n${body.join("\n")}`).toBe(false);
+          }
+        }
+      }
+    };
+
+    const tags = emitCronusApp([getFixture("tags-input", "default")]);
+    expect(tags).toContain(
+      'component TagsInputDefault layout:inline style:tags-input {\n  aria-label:"Tags"\n  label "Add a tag"\n  text "Add a tag"\n  text "Design"\n  text "System"\n}',
+    );
+    const multi = emitCronusApp([getFixture("multi-select", "default")]);
+    expect(multi).toContain(
+      'component MultiSelectDefault layout:inline style:multi-select {\n  aria-label:"Stack"\n  label "Select frameworks"',
+    );
+    const radio = emitCronusApp([getFixture("radio-group", "default")]);
+    expect(radio).toMatch(/style:radio-group \{\n {2}value:"Pro"\n(?: {2}[\w-]+:.*\n)* {2}label "/);
+    for (const src of [tags, multi, radio]) assertPropsFirst(src);
+    assertPropsFirst(emitCronusApp(listFixtures()));
+  });
+
+  it("guards against a source block without tripping on labels", () => {
+    const parsed = parseParityFixture({
+      id: "x",
+      family: "button",
+      props: { children: "Resources", "aria-label": "Open source" },
+      expect: { slot: "button", attrs: { "data-slot": "button" } },
+    });
+    const src = emitCronusApp([parsed]);
+    expect(src).toContain('label "Resources"');
+    expect(src).toContain('aria-label:"Open source"');
+    expect(emitsSourceBlock(src)).toBe(false);
+    expect(emitsSourceBlock(emitCronusApp(listFixtures()))).toBe(false);
+    expect(emitsSourceBlock(`${src}\nsource "x.tsx"`)).toBe(true);
+    expect(emitsSourceBlock('page "/" {\n  source react "./a.tsx"\n}')).toBe(true);
   });
 
   it("drops data-size from expect.attrs", () => {

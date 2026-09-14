@@ -33,12 +33,60 @@ export function emitCronusPage(fixture: ParityFixture): string {
   return `page "/audit/${fixture.family}/${fixture.id}" type:custom {\n  use ${name}\n}`;
 }
 
+/**
+ * Component-level `key:value` lines. The kernel parser attaches a `key:value`
+ * written after an item line (`label` / `text`) to that item's config, so these
+ * are emitted right after the opening `{`, where they land in `props`.
+ */
+function propLines(fixture: ParityFixture): string[] {
+  const props = fixture.props;
+  const lines: string[] = [];
+  if (props.disabled === true) lines.push("  disabled:true");
+  if (props.invalid === true) lines.push("  invalid:true");
+  if (props.checked === true) lines.push("  checked:true");
+  if (props.pressed === true) lines.push("  pressed:true");
+  if (typeof props.value === "number") {
+    lines.push(`  value:${props.value}`);
+  } else if (typeof props.value === "string") {
+    lines.push(`  value:"${cronusEscape(props.value)}"`);
+  }
+  const hourCycle = props.hourCycle;
+  if (typeof hourCycle === "number") {
+    lines.push(`  hourCycle:${hourCycle}`);
+  } else if (typeof hourCycle === "string") {
+    lines.push(`  hourCycle:"${cronusEscape(hourCycle)}"`);
+  }
+  if (typeof props.filename === "string") {
+    lines.push(`  filename:"${cronusEscape(props.filename)}"`);
+  }
+  if (typeof props.language === "string") {
+    lines.push(`  language:"${cronusEscape(props.language)}"`);
+  }
+  if (typeof props.description === "string") {
+    lines.push(`  description:"${cronusEscape(props.description)}"`);
+  }
+  if (typeof props.url === "string") {
+    lines.push(`  url:"${cronusEscape(props.url)}"`);
+  }
+  if (typeof props["aria-label"] === "string") {
+    lines.push(`  aria-label:"${cronusEscape(props["aria-label"])}"`);
+  }
+  return lines;
+}
+
+function stringLines(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return value
+    .filter((entry): entry is string => typeof entry === "string")
+    .map((entry) => `  text "${cronusEscape(entry)}"`);
+}
+
 export function emitCronusComponent(fixture: ParityFixture): string {
   const name = componentNameOf(fixture);
   const style = styleOf(fixture);
   const label = cronusEscape(labelOf(fixture));
   const href = typeof fixture.props.href === "string" ? fixture.props.href : undefined;
-  const lines = [`component ${name} layout:inline style:${style} {`];
+  const lines = [`component ${name} layout:inline style:${style} {`, ...propLines(fixture)];
   if (href) {
     lines.push(`  label "${label}" -> "${cronusEscape(href)}"`);
   } else {
@@ -50,68 +98,9 @@ export function emitCronusComponent(fixture: ParityFixture): string {
   if (typeof fixture.props.code === "string") {
     lines.push(`  text "${cronusEscape(fixture.props.code)}"`);
   }
-  const options = fixture.props.options;
-  if (Array.isArray(options)) {
-    for (const option of options) {
-      if (typeof option === "string") {
-        lines.push(`  text "${cronusEscape(option)}"`);
-      }
-    }
-  }
-  const items = fixture.props.items;
-  if (Array.isArray(items)) {
-    for (const item of items) {
-      if (typeof item === "string") {
-        lines.push(`  text "${cronusEscape(item)}"`);
-      }
-    }
-  }
-  const words = fixture.props.words;
-  if (Array.isArray(words)) {
-    for (const word of words) {
-      if (typeof word === "string") {
-        lines.push(`  text "${cronusEscape(word)}"`);
-      }
-    }
-  }
-  if (fixture.props.disabled === true) {
-    lines.push("  disabled:true");
-  }
-  if (fixture.props.invalid === true) {
-    lines.push("  invalid:true");
-  }
-  if (fixture.props.checked === true) {
-    lines.push("  checked:true");
-  }
-  if (fixture.props.pressed === true) {
-    lines.push("  pressed:true");
-  }
-  if (typeof fixture.props.value === "number") {
-    lines.push(`  value:${fixture.props.value}`);
-  } else if (typeof fixture.props.value === "string") {
-    lines.push(`  value:"${cronusEscape(fixture.props.value)}"`);
-  }
-  const hourCycle = fixture.props.hourCycle;
-  if (typeof hourCycle === "number") {
-    lines.push(`  hourCycle:${hourCycle}`);
-  } else if (typeof hourCycle === "string") {
-    lines.push(`  hourCycle:"${cronusEscape(hourCycle)}"`);
-  }
-  if (typeof fixture.props.filename === "string") {
-    lines.push(`  filename:"${cronusEscape(fixture.props.filename)}"`);
-  }
-  if (typeof fixture.props.language === "string") {
-    lines.push(`  language:"${cronusEscape(fixture.props.language)}"`);
-  }
-  if (typeof fixture.props.description === "string") {
-    lines.push(`  description:"${cronusEscape(fixture.props.description)}"`);
-  }
-  if (typeof fixture.props.url === "string") {
-    lines.push(`  url:"${cronusEscape(fixture.props.url)}"`);
-  }
-  if (typeof fixture.props["aria-label"] === "string") {
-    lines.push(`  aria-label:"${cronusEscape(fixture.props["aria-label"])}"`);
-  }
+  lines.push(...stringLines(fixture.props.options));
+  lines.push(...stringLines(fixture.props.items));
+  lines.push(...stringLines(fixture.props.words));
   lines.push("}");
   return lines.join("\n");
 }
@@ -145,4 +134,12 @@ export function emitCronusApp(fixtures: ParityFixture[]): string {
     pages.join("\n\n"),
     ``,
   ].join("\n");
+}
+
+/**
+ * Line-anchored guard: true only when a line of emitted `.cronus` starts with
+ * the `source` keyword. A label such as "Resources" or "Open source" is fine.
+ */
+export function emitsSourceBlock(src: string): boolean {
+  return /^\s*source\b/m.test(src);
 }
