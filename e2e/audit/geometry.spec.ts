@@ -79,6 +79,16 @@ const REACT_ONLY_SLOTS: Partial<Record<Family, Record<string, string>>> = {
 };
 
 /**
+ * Slots whose element differs by rule, not by accident: [react tag, cronus tag].
+ * Each entry must say why; geometry and style are still compared.
+ */
+const TAG_EQUIVALENT: Record<string, readonly [string, string]> = {
+  // Zero-JS renderers never emit <canvas> (drawing needs script); the kernel's
+  // signature surface is a <div> with the same box.
+  "signature-pad-canvas": ["canvas", "div"],
+};
+
+/**
  * Cronus-only slots that exist because the zero-JS kernel keeps floating content
  * in the canvas instead of portaling it. Each entry must say why.
  */
@@ -498,6 +508,16 @@ async function measureSettled(
   side: string,
 ): Promise<Measured[]> {
   await canvas.evaluate((el) => el.ownerDocument.fonts.ready.then(() => undefined));
+  // Measure the idle state: React overlays auto-focus an element (Radix
+  // FocusScope) and paint its focus ring; the zero-JS kernel cannot focus.
+  // Portal families keep focus: their open content depends on it
+  // (autocomplete's popover closes when its input blurs).
+  if (!portal) {
+    await canvas.evaluate((el) => {
+      const active = el.ownerDocument.activeElement;
+      if (active instanceof HTMLElement && active !== el.ownerDocument.body) active.blur();
+    });
+  }
   const reads: Measured[][] = [];
   let previous = "";
   for (let i = 0; i < SETTLE_ATTEMPTS; i++) {
@@ -675,7 +695,9 @@ function compareCase(c: AuditCase, react: Measured[], cronus: Measured[]): Compa
       problems.push(`${key}.${field}`);
       rows.push([key, field, rv, cv]);
     };
-    if (r.tag !== cr.tag) diff("tag", r.tag, cr.tag);
+    if (r.tag !== cr.tag && TAG_EQUIVALENT[r.slot]?.join() !== `${r.tag},${cr.tag}`) {
+      diff("tag", r.tag, cr.tag);
+    }
     if (r.origin !== cr.origin) diff("origin", r.origin, cr.origin);
     const dx = Math.abs(r.x - cr.x);
     const dy = Math.abs(r.y - cr.y);
