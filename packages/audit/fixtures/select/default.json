@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "select",
+  "state": "closed, placeholder",
+  "props": {
+    "placeholder": "Select a plan",
+    "options": ["Free", "Pro", "Team"]
+  },
+  "expect": {
+    "slot": "select-trigger",
+    "tag": "button",
+    "attrs": { "data-slot": "select-trigger", "role": "combobox" }
+  }
+}

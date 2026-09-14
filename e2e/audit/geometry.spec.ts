@@ -216,6 +216,8 @@ const OVERLAY: Partial<Record<Family, OverlaySpec>> = {
   "alert-dialog": { roots: ["alert-dialog-overlay", "alert-dialog-content"] },
   // ConfirmationDialog is AlertDialogContent with data-slot="confirmation-dialog".
   "confirmation-dialog": { roots: ["alert-dialog-overlay", "confirmation-dialog"] },
+  // Radix Dialog (fixture forces defaultOpen, no trigger): overlay + centred content.
+  dialog: { roots: ["dialog-overlay", "dialog-content"] },
   // vaul Drawer: overlay + bottom-pinned content (shouldScaleBackground=false).
   drawer: { roots: ["drawer-overlay", "drawer-content"] },
   // InviteDialog is DialogContent with data-slot="invite-dialog".

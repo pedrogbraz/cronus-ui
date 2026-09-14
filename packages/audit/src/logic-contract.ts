@@ -163,6 +163,16 @@ const FAMILY_TAGS: Record<string, string> = {
   "retro-grid": "div",
   ripple: "div",
   "motion-presets": "div",
+  accordion: "div",
+  breadcrumb: "nav",
+  dialog: "div",
+  "number-input": "div",
+  pagination: "nav",
+  "password-input": "div",
+  select: "button",
+  table: "table",
+  tabs: "div",
+  tooltip: "div",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */

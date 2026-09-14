@@ -12,6 +12,12 @@ import {
   TiltCard,
   TimePicker,
 } from "@cronus-ui/ui";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@cronus-ui/ui/accordion";
 import { Alert, AlertDescription, AlertTitle } from "@cronus-ui/ui/alert";
 import {
   AlertDialog,
@@ -29,6 +35,14 @@ import { AvatarGroup } from "@cronus-ui/ui/avatar-group";
 import { Badge } from "@cronus-ui/ui/badge";
 import { Banner } from "@cronus-ui/ui/banner";
 import { BouncyAccordion } from "@cronus-ui/ui/bouncy-accordion";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@cronus-ui/ui/breadcrumb";
 import { Button } from "@cronus-ui/ui/button";
 import { ButtonGroup } from "@cronus-ui/ui/button-group";
 import { Card, CardDescription, CardHeader, CardTitle } from "@cronus-ui/ui/card";
@@ -121,8 +135,19 @@ import {
   NavigationMenuTrigger,
 } from "@cronus-ui/ui/navigation-menu";
 import { Noise } from "@cronus-ui/ui/noise";
+import { NumberInput } from "@cronus-ui/ui/number-input";
 import { Orbit, OrbitItem, OrbitRing } from "@cronus-ui/ui/orbit";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@cronus-ui/ui/pagination";
 import { Particles } from "@cronus-ui/ui/particles";
+import { PasswordInput } from "@cronus-ui/ui/password-input";
 import { PillNav } from "@cronus-ui/ui/pill-nav";
 import { Popover, PopoverContent, PopoverTrigger } from "@cronus-ui/ui/popover";
 import { Progress } from "@cronus-ui/ui/progress";
@@ -137,6 +162,13 @@ import { Ripple } from "@cronus-ui/ui/ripple";
 import { ScrambleText } from "@cronus-ui/ui/scramble-text";
 import { ScrollArea } from "@cronus-ui/ui/scroll-area";
 import { SegmentedControl, SegmentedControlItem } from "@cronus-ui/ui/segmented-control";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@cronus-ui/ui/select";
 import { Separator } from "@cronus-ui/ui/separator";
 import {
   Sheet,
@@ -165,7 +197,9 @@ import {
   StepperTitle,
 } from "@cronus-ui/ui/stepper";
 import { Switch } from "@cronus-ui/ui/switch";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@cronus-ui/ui/table";
 import { TableOfContents } from "@cronus-ui/ui/table-of-contents";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@cronus-ui/ui/tabs";
 import { TagsInput } from "@cronus-ui/ui/tags-input";
 import { TextEffect } from "@cronus-ui/ui/text-effect";
 import { TextShimmer } from "@cronus-ui/ui/text-shimmer";
@@ -174,6 +208,7 @@ import { Timeline, TimelineContent, TimelineItem, TimelineTitle } from "@cronus-
 import { Toggle } from "@cronus-ui/ui/toggle";
 import { ToggleGroup, ToggleGroupItem } from "@cronus-ui/ui/toggle-group";
 import { Toolbar, ToolbarButton } from "@cronus-ui/ui/toolbar";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@cronus-ui/ui/tooltip";
 import { TypingText } from "@cronus-ui/ui/typing-text";
 import { UsageMeter } from "@cronus-ui/ui/usage-meter";
 import { VideoPlayer } from "@cronus-ui/ui/video-player";
@@ -206,6 +241,7 @@ import { ColorPickerFixture } from "./color-picker-fixture.js";
 import { ComparisonSliderFixture } from "./comparison-slider-fixture.js";
 import { DataTableFixture } from "./data-table-fixture.js";
 import { DatePickerFixture } from "./date-picker-fixture.js";
+import { DialogFixture } from "./dialog-fixture.js";
 import { DockFixture } from "./dock-fixture.js";
 import { ExpandableTabsFixture } from "./expandable-tabs-fixture.js";
 import { FileDropzoneFixture } from "./file-dropzone-fixture.js";
@@ -239,6 +275,27 @@ function stringPairs(value: unknown): Array<[string, string]> {
   }
   return pairs;
 }
+
+/**
+ * Pages shown for `current` of `total` — mirrors the kernel's
+ * `cronus_ui_pagination::page_window`: every page up to 7, else first, last,
+ * current +/- 1 and an ellipsis for each gap.
+ */
+export function paginationWindow(total: number, current: number): Array<number | "ellipsis"> {
+  const count = Math.max(1, Math.floor(total));
+  const page = Math.min(Math.max(1, Math.floor(current)), count);
+  if (count <= 7) return Array.from({ length: count }, (_, i) => i + 1);
+  const out: Array<number | "ellipsis"> = [1];
+  const start = Math.max(2, page - 1);
+  const end = Math.min(count - 1, page + 1);
+  if (start > 2) out.push("ellipsis");
+  for (let n = start; n <= end; n++) out.push(n);
+  if (end < count - 1) out.push("ellipsis");
+  out.push(count);
+  return out;
+}
+
+const pageHref = (n: number) => `?page=${n}`;
 
 const FALLBACK_SCROLL_ITEMS = [
   "v1.2.0-beta.12",
@@ -3102,6 +3159,205 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
           </div>
         ))}
       </div>
+    );
+  }
+  if (fixture.family === "accordion") {
+    const { items, options, value } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      value?: string;
+    };
+    const pairs = stringPairs(items ?? options);
+    const open = Math.max(
+      0,
+      pairs.findIndex(([trigger]) => trigger === value),
+    );
+    return (
+      <Accordion type="single" collapsible defaultValue={`item-${open}`}>
+        {pairs.map(([trigger, body], index) => (
+          <AccordionItem key={trigger} value={`item-${index}`}>
+            <AccordionTrigger>{trigger}</AccordionTrigger>
+            <AccordionContent>{body}</AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    );
+  }
+  if (fixture.family === "breadcrumb") {
+    const crumbs = stringList((fixture.props as { items?: unknown }).items);
+    return (
+      <Breadcrumb>
+        <BreadcrumbList>
+          {crumbs.flatMap((crumb, index) => {
+            const last = index === crumbs.length - 1;
+            const node = (
+              <BreadcrumbItem key={crumb}>
+                {last ? (
+                  <BreadcrumbPage>{crumb}</BreadcrumbPage>
+                ) : (
+                  <BreadcrumbLink href="#">{crumb}</BreadcrumbLink>
+                )}
+              </BreadcrumbItem>
+            );
+            return last ? [node] : [node, <BreadcrumbSeparator key={`${crumb}-sep`} />];
+          })}
+        </BreadcrumbList>
+      </Breadcrumb>
+    );
+  }
+  if (fixture.family === "dialog") {
+    const { title, description, items, options } = fixture.props as {
+      title?: string;
+      description?: string;
+      items?: unknown;
+      options?: unknown;
+    };
+    return (
+      <DialogFixture
+        title={typeof title === "string" ? title : fixture.id}
+        description={typeof description === "string" ? description : undefined}
+        action={stringList(items ?? options)[0] ?? "Continue"}
+      />
+    );
+  }
+  if (fixture.family === "number-input") {
+    const { value, "aria-label": ariaLabel } = fixture.props as {
+      value?: number;
+      "aria-label"?: string;
+    };
+    return (
+      <NumberInput
+        defaultValue={typeof value === "number" ? value : null}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "Quantity"}
+      />
+    );
+  }
+  if (fixture.family === "pagination") {
+    const { total, current } = fixture.props as { total?: number; current?: number };
+    const count = typeof total === "number" ? total : 1;
+    const page = Math.min(Math.max(1, typeof current === "number" ? current : 1), count);
+    return (
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious href={pageHref(Math.max(1, page - 1))} />
+          </PaginationItem>
+          {paginationWindow(count, page).map((entry, index) => (
+            <PaginationItem key={entry === "ellipsis" ? `ellipsis-${index}` : entry}>
+              {entry === "ellipsis" ? (
+                <PaginationEllipsis />
+              ) : (
+                <PaginationLink href={pageHref(entry)} isActive={entry === page}>
+                  {entry}
+                </PaginationLink>
+              )}
+            </PaginationItem>
+          ))}
+          <PaginationItem>
+            <PaginationNext href={pageHref(Math.min(count, page + 1))} />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+    );
+  }
+  if (fixture.family === "password-input") {
+    const { placeholder } = fixture.props as { placeholder?: string };
+    return (
+      <PasswordInput placeholder={typeof placeholder === "string" ? placeholder : undefined} />
+    );
+  }
+  if (fixture.family === "select") {
+    const { placeholder, options, items } = fixture.props as {
+      placeholder?: string;
+      options?: unknown;
+      items?: unknown;
+    };
+    const text = typeof placeholder === "string" ? placeholder : "Select";
+    return (
+      <Select>
+        <SelectTrigger aria-label={text}>
+          <SelectValue placeholder={text} />
+        </SelectTrigger>
+        <SelectContent>
+          {stringList(options ?? items).map((option) => (
+            <SelectItem key={option} value={option}>
+              {option}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    );
+  }
+  if (fixture.family === "table") {
+    const { columns, items } = fixture.props as { columns?: number; items?: unknown };
+    const cells = stringList(items);
+    const width = typeof columns === "number" && columns > 0 ? columns : cells.length;
+    const head = cells.slice(0, width);
+    const rows: string[][] = [];
+    for (let index = width; index < cells.length; index += width) {
+      rows.push(cells.slice(index, index + width));
+    }
+    return (
+      <Table>
+        <TableHeader>
+          <TableRow>
+            {head.map((cell) => (
+              <TableHead key={cell}>{cell}</TableHead>
+            ))}
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow key={row.join("|")}>
+              {head.map((column, index) => (
+                <TableCell key={column}>{row[index] ?? ""}</TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    );
+  }
+  if (fixture.family === "tabs") {
+    const { items, options, value } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      value?: string;
+    };
+    const pairs = stringPairs(items ?? options);
+    const selected = pairs.find(([label]) => label === value)?.[0] ?? pairs[0]?.[0] ?? "tab";
+    return (
+      <Tabs defaultValue={selected}>
+        <TabsList>
+          {pairs.map(([label]) => (
+            <TabsTrigger key={label} value={label}>
+              {label}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        {pairs.map(([label, body]) => (
+          <TabsContent key={label} value={label}>
+            {body}
+          </TabsContent>
+        ))}
+      </Tabs>
+    );
+  }
+  if (fixture.family === "tooltip") {
+    const { children, items, options } = fixture.props as {
+      children?: string;
+      items?: unknown;
+      options?: unknown;
+    };
+    const trigger = typeof children === "string" ? children : "Hover";
+    const body = stringList(items ?? options)[0] ?? trigger;
+    return (
+      <Tooltip open>
+        <TooltipTrigger asChild>
+          <Button variant="outline">{trigger}</Button>
+        </TooltipTrigger>
+        <TooltipContent>{body}</TooltipContent>
+      </Tooltip>
     );
   }
   throw new Error(`renderReactFixture: unported family ${fixture.family}`);

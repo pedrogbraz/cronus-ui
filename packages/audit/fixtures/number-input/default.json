@@ -1,0 +1,13 @@
+{
+  "id": "default",
+  "family": "number-input",
+  "props": {
+    "value": 5,
+    "aria-label": "Quantity"
+  },
+  "expect": {
+    "slot": "number-input",
+    "tag": "div",
+    "attrs": { "data-slot": "number-input" }
+  }
+}

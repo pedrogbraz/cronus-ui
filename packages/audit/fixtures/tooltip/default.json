@@ -1,0 +1,13 @@
+{
+  "id": "default",
+  "family": "tooltip",
+  "props": {
+    "children": "Need help?",
+    "items": ["We usually reply within minutes."]
+  },
+  "expect": {
+    "slot": "tooltip-content",
+    "tag": "div",
+    "attrs": { "data-slot": "tooltip-content" }
+  }
+}

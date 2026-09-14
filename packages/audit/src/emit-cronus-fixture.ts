@@ -41,6 +41,11 @@ export function emitCronusPage(fixture: ParityFixture): string {
 function propLines(fixture: ParityFixture): string[] {
   const props = fixture.props;
   const lines: string[] = [];
+  // Numeric structure props: pagination `total` / `current`, table `columns`.
+  for (const key of ["total", "current", "columns"] as const) {
+    const n = props[key];
+    if (typeof n === "number" && Number.isInteger(n)) lines.push(`  ${key}:${n}`);
+  }
   if (props.disabled === true) lines.push("  disabled:true");
   if (props.invalid === true) lines.push("  invalid:true");
   if (props.checked === true) lines.push("  checked:true");
