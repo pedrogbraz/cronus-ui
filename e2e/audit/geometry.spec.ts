@@ -557,6 +557,37 @@ function formatTable(rows: Row[]): string {
 
 const SIDES = ["top", "right", "bottom", "left"] as const;
 
+/**
+ * Visible shadow layers only. Tailwind composes `box-shadow` from ring/shadow
+ * variables that default to transparent zero-size layers, while the kernel
+ * writes `none`; both paint nothing, so invisible layers are dropped.
+ */
+export function visibleShadow(shadow: string): string {
+  if (shadow === "none") return "none";
+  const layers: string[] = [];
+  let depth = 0;
+  let start = 0;
+  for (let i = 0; i < shadow.length; i++) {
+    const ch = shadow[i];
+    if (ch === "(") depth++;
+    else if (ch === ")") depth--;
+    else if (ch === "," && depth === 0) {
+      layers.push(shadow.slice(start, i).trim());
+      start = i + 1;
+    }
+  }
+  layers.push(shadow.slice(start).trim());
+  const visible = layers.filter((layer) => {
+    const alpha = /rgba?\([^)]*?,\s*([\d.]+)\s*\)/.exec(layer)?.[1];
+    if (alpha !== undefined && Number.parseFloat(alpha) === 0) return false;
+    const lengths = (layer.replace(/rgba?\([^)]*\)/g, "").match(/-?[\d.]+px/g) ?? []).map((v) =>
+      Number.parseFloat(v),
+    );
+    return lengths.some((v) => v !== 0);
+  });
+  return visible.length > 0 ? visible.join(", ") : "none";
+}
+
 /** Report-only style props for one matched pair. */
 function compareStyleProps(key: string, r: Measured, c: Measured): Row[] {
   const rows: Row[] = [];
@@ -578,7 +609,9 @@ function compareStyleProps(key: string, r: Measured, c: Measured): Row[] {
       diff(`borderColor.${side}`, fmtColor(rc), fmtColor(cc));
     }
   });
-  if (r.boxShadow !== c.boxShadow) diff("boxShadow", r.boxShadow, c.boxShadow);
+  const rShadow = visibleShadow(r.boxShadow);
+  const cShadow = visibleShadow(c.boxShadow);
+  if (rShadow !== cShadow) diff("boxShadow", rShadow, cShadow);
   if (r.backgroundImage !== c.backgroundImage) {
     diff("backgroundImage", r.backgroundImage, c.backgroundImage);
   }
