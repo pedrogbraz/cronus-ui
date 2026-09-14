@@ -1,3 +1,5 @@
+import { readdirSync } from "node:fs";
+import { join } from "node:path";
 import { expect, type FrameLocator, type Locator, type Page, test } from "@playwright/test";
 import { cronusFrame, FREEZE_CSS, freezeFrame } from "./audit-freeze";
 
@@ -19,26 +21,24 @@ const RECT_TOLERANCE_PX = 1;
 const COLOR_TOLERANCE = 2;
 const SETTLE_ATTEMPTS = 20;
 
-const FAMILIES = [
-  "logo-carousel",
-  "flip-card",
-  "orbit",
-  "motion-presets",
-  "progressive-blur",
-  "input-otp",
-  "time-picker",
-  "multi-select",
-  "dock",
-  "form",
-  "segmented-control",
-  "text-shimmer",
-  "text-effect",
-  "timeline",
-  "code-block",
-  "card-stack",
-] as const;
+const FIXTURES_ROOT = join(__dirname, "..", "..", "packages", "audit", "fixtures");
 
-type Family = (typeof FAMILIES)[number];
+/** Every audited family: one directory per family under packages/audit/fixtures. */
+const FAMILIES: string[] = readdirSync(FIXTURES_ROOT, { withFileTypes: true })
+  .filter((entry) => entry.isDirectory() && !entry.name.startsWith("_"))
+  .map((entry) => entry.name)
+  .sort();
+
+type Family = string;
+
+/** Same fixture the audit page opens by default (apps/www/app/audit/[slug]/page.tsx). */
+function fixtureFor(family: Family): string {
+  const ids = readdirSync(join(FIXTURES_ROOT, family))
+    .filter((file) => file.endsWith(".json"))
+    .map((file) => file.slice(0, -".json".length))
+    .sort();
+  return ["primary-md", "default", "empty"].find((id) => ids.includes(id)) ?? ids[0] ?? "default";
+}
 
 /**
  * React-only slots that need a JS runtime the zero-JS audit kernel document
@@ -358,7 +358,7 @@ async function openBothPanes(
   page: Page,
   family: Family,
 ): Promise<{ react: Locator; frame: FrameLocator; cronus: Locator }> {
-  await page.goto(`/audit/${family}?fixture=default&preset=aurora&mode=dark`);
+  await page.goto(`/audit/${family}?fixture=${fixtureFor(family)}&preset=aurora&mode=dark`);
   const react = page.locator('[data-audit-side="react"] [data-audit-canvas]');
   const frame = cronusFrame(page);
   const cronus = frame.locator("[data-audit-canvas]");
@@ -377,7 +377,7 @@ async function openBothPanes(
 
 test.describe("geometry parity (React vs Cronus)", () => {
   for (const family of FAMILIES) {
-    test(`${family} default aurora/dark`, async ({ page }) => {
+    test(`${family} ${fixtureFor(family)} aurora/dark`, async ({ page }) => {
       const { react, cronus } = await openBothPanes(page, family);
       const portal = PORTAL[family] ?? null;
       const reactMeasured = await measureSettled(react, portal);
