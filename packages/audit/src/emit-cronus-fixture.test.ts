@@ -1235,6 +1235,34 @@ describe("emitCronusApp", () => {
     expect(src).not.toContain("language:");
   });
 
+  it("emits calendar/scheduler ISO dates as props before label (no kernel defaults)", () => {
+    const calendar = emitCronusApp([getFixture("calendar", "default")]);
+    expect(calendar).toContain(
+      'component CalendarDefault layout:inline style:calendar {\n  defaultMonth:"2026-06-01"\n  selected:"2026-06-01"\n  label "June 2026"\n}',
+    );
+    expect(calendar).not.toContain("today:");
+    const scheduler = emitCronusApp([getFixture("scheduler", "default")]);
+    expect(scheduler).toContain(
+      '  defaultMonth:"2026-06-01"\n  today:"2026-06-15"\n  label "June 2026"\n  text "Launch call"',
+    );
+    expect(scheduler).not.toContain("selected:");
+    const other = emitCronusApp([
+      getFixture("button", "primary-md"),
+      getFixture("date-picker", "default"),
+    ]);
+    expect(other).not.toMatch(/\n {2}(defaultMonth|selected|today):/);
+  });
+
+  it("escapes emitted date props", () => {
+    const parsed = parseParityFixture({
+      id: "x",
+      family: "calendar",
+      props: { label: "L", selected: '2026"-01-02' },
+      expect: { slot: "calendar", attrs: { "data-slot": "calendar" } },
+    });
+    expect(emitCronusApp([parsed])).toContain('  selected:"2026\\"-01-02"\n  label "L"');
+  });
+
   it("emits description and url before aria-label (wave 1t)", () => {
     const field = emitCronusApp([getFixture("field", "default")]);
     expect(field).toMatch(/\n {2}description:"[^"]+"\n/);

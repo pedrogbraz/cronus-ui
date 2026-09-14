@@ -68,6 +68,12 @@ function propLines(fixture: ParityFixture): string[] {
   if (typeof props.url === "string") {
     lines.push(`  url:"${cronusEscape(props.url)}"`);
   }
+  // ISO dates (calendar / scheduler): the kernel has no clock and no fixture
+  // defaults, so the shown month, selected day and "today" travel as props.
+  for (const key of ["defaultMonth", "selected", "today"] as const) {
+    const date = props[key];
+    if (typeof date === "string") lines.push(`  ${key}:"${cronusEscape(date)}"`);
+  }
   if (typeof props["aria-label"] === "string") {
     lines.push(`  aria-label:"${cronusEscape(props["aria-label"])}"`);
   }

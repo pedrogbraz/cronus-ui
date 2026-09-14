@@ -1108,8 +1108,11 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
     );
   }
   if (fixture.family === "calendar") {
-    const { defaultMonth } = fixture.props as { defaultMonth?: string };
-    return <CalendarFixture defaultMonth={defaultMonth} />;
+    const { defaultMonth, selected } = fixture.props as {
+      defaultMonth?: string;
+      selected?: string;
+    };
+    return <CalendarFixture defaultMonth={defaultMonth} selected={selected} />;
   }
   if (fixture.family === "date-picker") {
     const {
@@ -1684,15 +1687,17 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
     );
   }
   if (fixture.family === "scheduler") {
-    const { items, options, defaultMonth } = fixture.props as {
+    const { items, options, defaultMonth, today } = fixture.props as {
       items?: unknown;
       options?: unknown;
       defaultMonth?: string;
+      today?: string;
     };
     return (
       <SchedulerFixture
         items={stringList(items ?? options)}
         defaultMonth={typeof defaultMonth === "string" ? defaultMonth : undefined}
+        today={typeof today === "string" ? today : undefined}
       />
     );
   }
