@@ -13,15 +13,14 @@
 #             promoted into the repo, and passes with a notice (see the
 #             "Visual regression" section of CONTRIBUTING.md).
 #
-# GitHub-hosted runners on the public repo (no billable minutes).
+# Auto-run is off (workflow_dispatch only). Re-enable push/pull_request
+# when you want the gates again.
 # `npx cronus-ui add` hits raw.githubusercontent.com only after a public
 # tag (release preflight). Local: `-r ./registry`.
 name: CI
 
 on:
-  push:
-    branches: [main]
-  pull_request:
+  workflow_dispatch:
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -142,7 +141,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
-      CRONUS_KERNEL_REF: 5e7e8d715800c4bdd4bf176570465cc3d6380e26
+      CRONUS_KERNEL_REPO: pedrogbraz/cronus-kernel
+      CRONUS_KERNEL_REF: feat/cronus-ui-tokens-button
       CRONUS_AUDIT_ORIGIN: http://127.0.0.1:5176
     steps:
       - uses: actions/checkout@v4
@@ -156,16 +156,9 @@ jobs:
       - name: Install
         run: bun install --frozen-lockfile || bun install --frozen-lockfile
       - name: Clone cronus-kernel
-        env:
-          TOKEN: ${{ secrets.CRONUS_KERNEL_CLONE_TOKEN }}
         run: |
-          if [ -n "$TOKEN" ]; then
-            git clone --depth 1 https://x-access-token:${TOKEN}@github.com/cronusmaster/cronus-kernel.git cronus-kernel
-          else
-            git clone --depth 1 https://github.com/cronusmaster/cronus-kernel.git cronus-kernel
-          fi
-          git -C cronus-kernel fetch --depth 1 origin "$CRONUS_KERNEL_REF"
-          git -C cronus-kernel checkout "$CRONUS_KERNEL_REF"
+          git clone --depth 1 --branch "$CRONUS_KERNEL_REF" \
+            "https://github.com/${CRONUS_KERNEL_REPO}.git" cronus-kernel
       - name: Build kernel
         working-directory: cronus-kernel
         run: cargo build
