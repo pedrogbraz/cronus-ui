@@ -20,12 +20,24 @@ import { defineConfig } from "@playwright/test";
  *
  * To run against an already-running `bun run audit:dev`, use
  * `bun run test:audit:live` (playwright.audit.live.config.ts — no webServer).
+ *
+ * Env flags:
+ *   AUDIT_WORKERS=<n>        Playwright workers (default 1). Both servers are
+ *                            stateless (next start + read-only kernel canvas), so
+ *                            4 is expected to work; the default stays 1 until verified.
+ *   AUDIT_STRICT_PROPS=1     geometry.spec: fail on the report-only style props.
+ *   AUDIT_STRICT_PIXELS=1    parity.pixel.spec: fail on React-vs-Cronus pixel diffs.
+ *   AUDIT_PIXEL_MAX_DIFF=<n> parity.pixel.spec absolute maxDiffPixels (default 50).
+ *
+ * Diagnostics: trace + screenshot kept on failure; HTML report in
+ * playwright-report/audit, JSON in test-results/audit-report.json.
  */
 
 const PORT = Number(process.env.PLAYWRIGHT_PORT ?? 4747);
 const BASE_URL = `http://localhost:${PORT}`;
 const KERNEL_ORIGIN = "http://127.0.0.1:5176";
 const isCI = !!process.env.CI;
+const workers = Number(process.env.AUDIT_WORKERS ?? 1);
 
 function cronusBin(): string {
   if (process.env.CRONUS_BIN) return process.env.CRONUS_BIN;
@@ -46,18 +58,32 @@ export default defineConfig({
   fullyParallel: false,
   forbidOnly: isCI,
   retries: 0,
-  workers: 1,
-  reporter: isCI ? [["github"], ["list"]] : [["list"]],
+  workers: Number.isInteger(workers) && workers > 0 ? workers : 1,
+  reporter: [
+    ...(isCI ? [["github"] as const] : []),
+    ["list"],
+    ["html", { open: "never", outputFolder: "playwright-report/audit" }],
+    ["json", { outputFile: "test-results/audit-report.json" }],
+  ],
   timeout: 60_000,
-  expect: { timeout: 15_000, toHaveScreenshot: { maxDiffPixelRatio: 0.02 } },
-  snapshotPathTemplate: "{testDir}/__screenshots__/{platform}/{arg}{ext}",
+  expect: {
+    timeout: 15_000,
+    toHaveScreenshot: {
+      maxDiffPixelRatio: 0.02,
+      pathTemplate: "{testDir}/__screenshots__/{platform}/{arg}{ext}",
+    },
+  },
+  // Only `toMatchSnapshot` uses this: parity.pixel.spec.ts writes the React
+  // canvas PNG here per run and compares the Cronus canvas against it.
+  snapshotPathTemplate: "{testDir}/../../test-results/audit-pixel-baseline/{arg}{ext}",
   use: {
     baseURL: BASE_URL,
     viewport: { width: 1280, height: 900 },
     deviceScaleFactor: 1,
     colorScheme: "dark",
     launchOptions: { args: ["--force-color-profile=srgb"] },
-    trace: "on-first-retry",
+    trace: "retain-on-failure",
+    screenshot: "only-on-failure",
   },
   webServer: [
     {
