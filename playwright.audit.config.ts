@@ -10,6 +10,16 @@ import { defineConfig } from "@playwright/test";
  *
  * Pixel SoT: `next start` + `cronus run --audit-canvas`. Always
  * `reuseExistingServer: false`. Viewport is explicit 1280×900 (not Desktop Chrome 720p).
+ *
+ * Prebuild requirement: `next start` serves the last `apps/www` build, and www
+ * imports `@cronus-ui/audit` from `packages/audit/dist`. `bun run --filter
+ * @cronus-ui/www build` does NOT rebuild the audit package, so a stale dist
+ * silently renders an old React fixture. Always go through `bun run test:audit`
+ * (`turbo run build --filter=@cronus-ui/www` — turbo `build` dependsOn `^build`,
+ * so audit/ui/tokens rebuild first) instead of invoking this config directly.
+ *
+ * To run against an already-running `bun run audit:dev`, use
+ * `bun run test:audit:live` (playwright.audit.live.config.ts — no webServer).
  */
 
 const PORT = Number(process.env.PLAYWRIGHT_PORT ?? 4747);

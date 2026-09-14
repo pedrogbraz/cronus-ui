@@ -36,7 +36,8 @@
     "test:a11y": "playwright test --project=a11y --workers=4",
     "test:contrast": "playwright test e2e/a11y/contrast-themes.spec.ts --project=a11y --workers=4",
     "test:e2e": "playwright test --project=e2e",
-    "test:audit": "playwright test -c playwright.audit.config.ts"
+    "test:audit": "turbo run build --filter=@cronus-ui/www && playwright test -c playwright.audit.config.ts",
+    "test:audit:live": "playwright test -c playwright.audit.live.config.ts"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.3",

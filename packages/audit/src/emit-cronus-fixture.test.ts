@@ -1157,7 +1157,9 @@ describe("emitCronusApp", () => {
     expect(src).toContain('  text "A"');
     expect(src).toContain('  text "B"');
     expect(src).toContain('  text "C"');
-    expect(src).toContain("component ProgressiveBlurDefault layout:inline style:progressive-blur {");
+    expect(src).toContain(
+      "component ProgressiveBlurDefault layout:inline style:progressive-blur {",
+    );
     expect(src).toContain('label "Blur"');
     expect(src).toContain("component RetroGridDefault layout:inline style:retro-grid {");
     expect(src).toContain('label "Grid"');
@@ -1194,6 +1196,36 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("retro-grid", "default"))).toBe("div");
     expect(expectedTag(getFixture("ripple", "default"))).toBe("div");
     expect(expectedTag(getFixture("motion-presets", "default"))).toBe("div");
+  });
+
+  it("emits hourCycle, filename, and language before aria-label (wave 1s)", () => {
+    const timePicker = emitCronusApp([getFixture("time-picker", "default")]);
+    expect(timePicker).toContain('  value:"09:30"\n  hourCycle:24\n  aria-label:"Meeting time"');
+    const codeBlock = emitCronusApp([getFixture("code-block", "default")]);
+    expect(codeBlock).toContain('  filename:"index.ts"\n  language:"ts"\n}');
+    expect(codeBlock).not.toContain("hourCycle");
+    expect(timePicker).not.toContain("filename:");
+    expect(timePicker).not.toContain("language:");
+  });
+
+  it("emits string hourCycle quoted and escapes filename/language", () => {
+    const parsed = parseParityFixture({
+      id: "x",
+      family: "time-picker",
+      props: { hourCycle: "h12", filename: 'a"b\\c.ts', language: 't"s', "aria-label": "T" },
+      expect: { slot: "time-picker", attrs: { "data-slot": "time-picker" } },
+    });
+    const src = emitCronusApp([parsed]);
+    expect(src).toContain(
+      '  hourCycle:"h12"\n  filename:"a\\"b\\\\c.ts"\n  language:"t\\"s"\n  aria-label:"T"',
+    );
+  });
+
+  it("omits hourCycle, filename, and language when absent", () => {
+    const src = emitCronusApp([getFixture("button", "primary-md"), getFixture("dock", "default")]);
+    expect(src).not.toContain("hourCycle:");
+    expect(src).not.toContain("filename:");
+    expect(src).not.toContain("language:");
   });
 
   it("drops data-size from expect.attrs", () => {

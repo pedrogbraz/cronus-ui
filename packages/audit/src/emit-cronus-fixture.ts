@@ -91,6 +91,18 @@ export function emitCronusComponent(fixture: ParityFixture): string {
   } else if (typeof fixture.props.value === "string") {
     lines.push(`  value:"${cronusEscape(fixture.props.value)}"`);
   }
+  const hourCycle = fixture.props.hourCycle;
+  if (typeof hourCycle === "number") {
+    lines.push(`  hourCycle:${hourCycle}`);
+  } else if (typeof hourCycle === "string") {
+    lines.push(`  hourCycle:"${cronusEscape(hourCycle)}"`);
+  }
+  if (typeof fixture.props.filename === "string") {
+    lines.push(`  filename:"${cronusEscape(fixture.props.filename)}"`);
+  }
+  if (typeof fixture.props.language === "string") {
+    lines.push(`  language:"${cronusEscape(fixture.props.language)}"`);
+  }
   if (typeof fixture.props["aria-label"] === "string") {
     lines.push(`  aria-label:"${cronusEscape(fixture.props["aria-label"])}"`);
   }
