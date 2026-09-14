@@ -13,13 +13,20 @@
 #             promoted into the repo, and passes with a notice (see the
 #             "Visual regression" section of CONTRIBUTING.md).
 #
-# Auto-run is off (workflow_dispatch only). Re-enable push/pull_request
-# when you want the gates again.
+#   audit   — Cronus Audit against a kernel checkout.
+#
+# Triggers: pull_request and push to main run `gates` and `browser`.
+# `visual` and `audit` are manual-only (workflow_dispatch) for now — they
+# become PR gates in Sprint 2 (linux baselines committed + kernel pinned by SHA).
 # `npx cronus-ui add` hits raw.githubusercontent.com only after a public
 # tag (release preflight). Local: `-r ./registry`.
 name: CI
 
 on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
   workflow_dispatch:
 
 concurrency:
@@ -89,6 +96,9 @@ jobs:
         run: bun run test:e2e
 
   visual:
+    # Manual-only until Sprint 2: becomes a PR gate once linux baselines are
+    # committed under e2e/visual/__screenshots__/linux.
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -135,8 +145,10 @@ jobs:
           if-no-files-found: ignore
 
   audit:
-    # First PR that adds this job is non-blocking. The next PR that touches
-    # the job must drop continue-on-error so it becomes a merge gate.
+    # Manual-only until Sprint 2: becomes a PR gate (and drops
+    # continue-on-error) once linux audit baselines are committed and the
+    # kernel is pinned by SHA instead of a branch name.
+    if: github.event_name == 'workflow_dispatch'
     continue-on-error: true
     runs-on: ubuntu-latest
     timeout-minutes: 25

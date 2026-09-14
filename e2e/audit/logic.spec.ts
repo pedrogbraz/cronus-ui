@@ -2068,7 +2068,9 @@ test.describe("logic parity", () => {
     expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
     expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
     await expect(page.locator('[data-slot="progressive-blur-control"]')).toHaveCount(0);
-    await expect(cronusFrame(page).locator('[data-slot="progressive-blur-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="progressive-blur-control"]')).toHaveCount(
+      0,
+    );
   });
 
   test("retro-grid is a div, not retro-grid-control", async ({ page }) => {
