@@ -1,0 +1,19 @@
+{
+  "id": "second-open",
+  "family": "accordion",
+  "state": "second item open",
+  "props": {
+    "value": "Is it themeable?",
+    "items": [
+      "Is it accessible?",
+      "Yes. It follows the WAI-ARIA disclosure pattern.",
+      "Is it themeable?",
+      "Every color, radius and shadow flows from tokens."
+    ]
+  },
+  "expect": {
+    "slot": "accordion-item",
+    "tag": "div",
+    "attrs": { "data-slot": "accordion-item" }
+  }
+}

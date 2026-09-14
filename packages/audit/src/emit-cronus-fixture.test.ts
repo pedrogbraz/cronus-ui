@@ -1319,4 +1319,32 @@ describe("emitCronusApp", () => {
     });
     expect(parsed.expect.attrs).not.toHaveProperty("data-size");
   });
+  it("emits sprint-2 FD numeric props (pagination total/current, table columns)", () => {
+    const src = emitCronusApp([
+      getFixture("pagination", "default"),
+      getFixture("table", "default"),
+      getFixture("tabs", "second"),
+      getFixture("number-input", "default"),
+    ]);
+    expect(src).toContain(
+      "component PaginationDefault layout:inline style:pagination {\n  total:5\n  current:2",
+    );
+    expect(src).toContain("component TableDefault layout:inline style:table {\n  columns:3");
+    expect(src).toContain('  value:"Password"');
+    expect(src).toContain("  value:5");
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for sprint-2 FD families", () => {
+    expect(expectedTag(getFixture("accordion", "default"))).toBe("div");
+    expect(expectedTag(getFixture("breadcrumb", "default"))).toBe("nav");
+    expect(expectedTag(getFixture("dialog", "default"))).toBe("div");
+    expect(expectedTag(getFixture("number-input", "default"))).toBe("div");
+    expect(expectedTag(getFixture("pagination", "default"))).toBe("nav");
+    expect(expectedTag(getFixture("password-input", "default"))).toBe("div");
+    expect(expectedTag(getFixture("select", "default"))).toBe("button");
+    expect(expectedTag(getFixture("table", "default"))).toBe("table");
+    expect(expectedTag(getFixture("tabs", "default"))).toBe("div");
+    expect(expectedTag(getFixture("tooltip", "default"))).toBe("div");
+  });
 });

@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "pagination",
+  "state": "page 2 of 5",
+  "props": {
+    "total": 5,
+    "current": 2
+  },
+  "expect": {
+    "slot": "pagination",
+    "tag": "nav",
+    "attrs": { "data-slot": "pagination", "aria-label": "Pagination" }
+  }
+}

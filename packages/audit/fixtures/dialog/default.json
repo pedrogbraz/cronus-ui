@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "dialog",
+  "props": {
+    "defaultOpen": true,
+    "title": "Edit profile",
+    "description": "Update your display name.",
+    "items": ["Save changes"]
+  },
+  "expect": {
+    "slot": "dialog-content",
+    "tag": "div",
+    "attrs": { "data-slot": "dialog-content", "role": "dialog" }
+  }
+}
