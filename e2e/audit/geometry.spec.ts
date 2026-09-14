@@ -56,13 +56,29 @@ const REACT_ONLY_SLOTS: Partial<Record<Family, Record<string, string>>> = {
   },
 };
 
+/**
+ * Cronus-only slots that exist because the zero-JS kernel keeps floating content
+ * in the canvas instead of portaling it. Each entry must say why.
+ */
+const CRONUS_ONLY_SLOTS: Partial<Record<Family, Record<string, string>>> = {
+  "multi-select": {
+    // React portals the popover to <body> and Radix positions it with JS. The
+    // kernel has no popper, so a position:relative wrapper (same rect as the
+    // trigger) anchors the absolutely positioned content under the trigger.
+    "multi-select": "kernel-only anchor for in-canvas popover content (no JS popper)",
+  },
+};
+
 interface PortalSpec {
-  /** Slot the floating rects are measured against, on both sides. */
+  /** Slot the floating content rects are measured against, on both sides. */
   anchor: string;
   /** Content root slot; its whole [data-slot] subtree is anchor-relative. */
   root: string;
   /** Family slot prefix: matching slots outside the canvas (React portal) are anchor-relative too. */
   prefix: string;
+  /** Ancestor containers of `root`, measured against `containerAnchor`; height exempt (see PORTAL). */
+  containers: string[];
+  containerAnchor: string;
   /** Selector that proves the React popover has mounted (React side only). */
   ready: string;
 }
@@ -70,11 +86,20 @@ interface PortalSpec {
 /** Families whose floating content is portaled out of the React canvas. */
 const PORTAL: Partial<Record<Family, PortalSpec>> = {
   "multi-select": {
-    anchor: "multi-select-trigger",
-    root: "multi-select-content",
+    // Above the listbox React renders cmdk's search row (command-input-wrapper,
+    // 41px). It filters with JS and is deliberately absent from the zero-JS
+    // kernel (a non-filtering input would be a dead control). So the listbox,
+    // options and indicators are measured against command-list and compared
+    // exactly; popover-content / command are measured against the trigger and
+    // compared for position (4px below the trigger), width, colours, radius and
+    // border — only their height is exempt, because in React it includes that row.
+    anchor: "command-list",
+    root: "command-list",
     prefix: "multi-select-",
+    containers: ["popover-content", "command"],
+    containerAnchor: "multi-select-trigger",
     // cmdk CommandItem is role=option inside the Radix popover portal.
-    ready: '[role="option"], [data-slot="multi-select-content"]',
+    ready: '[role="option"]',
   },
 };
 
@@ -167,7 +192,15 @@ function measureInPage(canvas: Element, opts: { portal: PortalSpec | null }): Me
   const portalRoots = portal
     ? Array.from(doc.querySelectorAll(`[data-slot="${portal.root}"]`))
     : [];
-  const inPortal = (el: Element) => portalRoots.some((root) => root.contains(el));
+  const containerEls = portal
+    ? portal.containers.flatMap((slot) =>
+        Array.from(doc.querySelectorAll(`[data-slot="${slot}"]`)).filter((el) =>
+          portalRoots.some((root) => el.contains(root)),
+        ),
+      )
+    : [];
+  const inPortal = (el: Element) =>
+    portalRoots.some((root) => root.contains(el)) || containerEls.includes(el);
   const isFloating = (el: Element) =>
     inPortal(el) ||
     (!!portal &&
@@ -186,13 +219,20 @@ function measureInPage(canvas: Element, opts: { portal: PortalSpec | null }): Me
   }
   if (portal) {
     // Floating content: React portals it to <body>, the kernel keeps it in the
-    // canvas. Measure both against the trigger so placement is comparable.
-    const anchor = canvas.querySelector(`[data-slot="${portal.anchor}"]`);
-    const anchorRect = anchor ? anchor.getBoundingClientRect() : canvasRect;
-    const anchorName = anchor ? portal.anchor : "canvas(no-anchor)";
+    // canvas. Measure both sides against the same anchors so placement is comparable.
+    const originOf = (slot: string) => {
+      const el =
+        canvas.querySelector(`[data-slot="${slot}"]`) ?? doc.querySelector(`[data-slot="${slot}"]`);
+      return el
+        ? { rect: el.getBoundingClientRect(), name: slot }
+        : { rect: canvasRect, name: `canvas(no-${slot})` };
+    };
+    const contentOrigin = originOf(portal.anchor);
+    const containerOrigin = originOf(portal.containerAnchor);
     for (const el of Array.from(doc.querySelectorAll("[data-slot]"))) {
       if (!isFloating(el) || !rendered(el)) continue;
-      out.push(describe(el, anchorRect, anchorName));
+      const origin = containerEls.includes(el) ? containerOrigin : contentOrigin;
+      out.push(describe(el, origin.rect, origin.name));
     }
   }
   return out;
@@ -246,6 +286,8 @@ const fmtColor = (c: number[]) => `rgba(${c.join(",")})`;
 
 function compareFamily(family: Family, react: Measured[], cronus: Measured[]): string[] {
   const allow = REACT_ONLY_SLOTS[family] ?? {};
+  const cronusAllow = CRONUS_ONLY_SLOTS[family] ?? {};
+  const heightExempt = new Set(PORTAL[family]?.containers ?? []);
   const problems: string[] = [];
   const rows: string[][] = [];
   const reactKeys = occurrenceKeys(react);
@@ -258,6 +300,7 @@ function compareFamily(family: Family, react: Measured[], cronus: Measured[]): s
     if (!r || !c) {
       const slot = (r ?? c)?.slot ?? key;
       if (r && !c && slot in allow) continue;
+      if (c && !r && slot in cronusAllow) continue;
       problems.push(`${key}: ${r ? "missing in Cronus" : "missing in React"}`);
       rows.push([
         key,
@@ -276,7 +319,7 @@ function compareFamily(family: Family, react: Measured[], cronus: Measured[]): s
     const dx = Math.abs(r.x - c.x);
     const dy = Math.abs(r.y - c.y);
     const dw = Math.abs(r.w - c.w);
-    const dh = Math.abs(r.h - c.h);
+    const dh = heightExempt.has(r.slot) ? 0 : Math.abs(r.h - c.h);
     if (Math.max(dx, dy, dw, dh) > RECT_TOLERANCE_PX) {
       diff(`rect Δ${round1(dx)},${round1(dy)},${round1(dw)},${round1(dh)}`, fmtRect(r), fmtRect(c));
     }
