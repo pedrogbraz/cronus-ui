@@ -46,6 +46,11 @@ function propLines(fixture: ParityFixture): string[] {
     const n = props[key];
     if (typeof n === "number" && Number.isInteger(n)) lines.push(`  ${key}:${n}`);
   }
+  // Numeric series (sparkline `data: [4, 8, 6]`) travel as a comma list.
+  const data = props.data;
+  if (Array.isArray(data) && data.length > 0 && data.every((v) => typeof v === "number")) {
+    lines.push(`  data:"${data.join(",")}"`);
+  }
   if (props.disabled === true) lines.push("  disabled:true");
   if (props.invalid === true) lines.push("  invalid:true");
   if (props.checked === true) lines.push("  checked:true");

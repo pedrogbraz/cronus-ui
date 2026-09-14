@@ -96,6 +96,13 @@ const REACT_MOTION: Partial<Record<string, MotionSpec>> = {
   "radar-chart": RECHARTS,
   "ring-chart": RECHARTS,
   "scatter-chart": RECHARTS,
+  "card-stack": {
+    reason: "motion layout projection + spring run in JS (React PNG differs run to run)",
+  },
+  "morphing-popover": {
+    ready: '[data-slot="morphing-popover-content"] > div[style*="opacity: 1"]',
+    reason: "motion content reveal (y 6→0 after a .12s delay) runs in JS",
+  },
   reveal: {
     // motion/react ignores prefers-reduced-motion without MotionConfig, so wait
     // for the end of the fadeInUp variant: motion writes `transform: none` last.

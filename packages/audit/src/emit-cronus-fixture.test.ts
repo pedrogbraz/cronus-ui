@@ -1253,6 +1253,13 @@ describe("emitCronusApp", () => {
     expect(other).not.toMatch(/\n {2}(defaultMonth|selected|today):/);
   });
 
+  it("emits numeric data series as a comma list prop", () => {
+    const sparkline = emitCronusApp([getFixture("sparkline", "default")]);
+    expect(sparkline).toContain('  data:"4,8,6,10,7"');
+    const other = emitCronusApp([getFixture("button", "primary-md")]);
+    expect(other).not.toContain("data:");
+  });
+
   it("escapes emitted date props", () => {
     const parsed = parseParityFixture({
       id: "x",
