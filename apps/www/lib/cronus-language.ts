@@ -1,9 +1,10 @@
 /** Native `.cronus` catalog — kernel emits HTML; this site documents how to run it. */
+import { SCOREBOARD } from "./audit/scoreboard";
 
 export const CRONUS_CATALOG_ORIGIN =
   process.env.NEXT_PUBLIC_CRONUS_CATALOG_ORIGIN ?? "http://127.0.0.1:5311";
 
-export type CronusCatalogKind = "dedicated" | "interact";
+export type CronusCatalogKind = "dedicated" | "stub";
 
 export interface CronusCatalogFamily {
   family: string;
@@ -32,54 +33,23 @@ export const CRONUS_RULES = [
   "Never paste JSX, HTML, CSS, template, or style_block into .cronus.",
   "Always write style:<family>+<variant> (button+primary). style:primary alone hijacks Obsidian.",
   "Open the kit at 127.0.0.1, not localhost — the kernel binds IPv4 only.",
-  "Charts and FX stay off the shelf until they have a dedicated renderer.",
+  "Stub families parse and render a placeholder until they get a dedicated renderer.",
 ] as const;
 
-/** Families declared in `cronus-kernel/demos/cronus-ui-catalog/app.cronus`. */
-export const CRONUS_CATALOG_FAMILIES: CronusCatalogFamily[] = [
-  { family: "button", kind: "dedicated" },
-  { family: "badge", kind: "dedicated" },
-  { family: "input", kind: "dedicated" },
-  { family: "label", kind: "dedicated" },
-  { family: "textarea", kind: "dedicated" },
-  { family: "checkbox", kind: "dedicated" },
-  { family: "switch", kind: "dedicated" },
-  { family: "spinner", kind: "dedicated" },
-  { family: "separator", kind: "dedicated" },
-  { family: "kbd", kind: "dedicated" },
-  { family: "toggle", kind: "dedicated" },
-  { family: "progress", kind: "dedicated" },
-  { family: "alert", kind: "dedicated" },
-  { family: "skeleton", kind: "dedicated" },
-  { family: "banner", kind: "dedicated" },
-  { family: "slider", kind: "dedicated" },
-  { family: "radio-group", kind: "dedicated" },
-  { family: "chip", kind: "dedicated" },
-  { family: "avatar", kind: "dedicated" },
-  { family: "card", kind: "dedicated" },
-  { family: "empty", kind: "dedicated" },
-  { family: "select", kind: "dedicated" },
-  { family: "dialog", kind: "dedicated" },
-  { family: "tabs", kind: "dedicated" },
-  { family: "accordion", kind: "dedicated" },
-  { family: "table", kind: "dedicated" },
-  { family: "pagination", kind: "dedicated" },
-  { family: "breadcrumb", kind: "dedicated" },
-  { family: "tooltip", kind: "dedicated" },
-  { family: "password-input", kind: "dedicated" },
-  { family: "number-input", kind: "dedicated" },
-  { family: "hover-card", kind: "dedicated" },
-  { family: "dropdown-menu", kind: "dedicated" },
-  { family: "toast", kind: "interact" },
-  { family: "metric", kind: "dedicated" },
-  { family: "sheet", kind: "dedicated" },
-  { family: "popover", kind: "dedicated" },
-  { family: "date-picker", kind: "dedicated" },
-  { family: "time-picker", kind: "dedicated" },
-  { family: "rating", kind: "dedicated" },
-  { family: "copy-button", kind: "dedicated" },
-  { family: "combobox", kind: "dedicated" },
-];
+/**
+ * Families in the kernel registry (`FAMILY_TABLE` in cronus_ui_widgets.rs at
+ * the pinned `cronus-kernel.ref`), read from the committed parity scoreboard.
+ * Regenerate with `bun run audit:scoreboard -- --date <day>`.
+ */
+export const CRONUS_CATALOG_FAMILIES: CronusCatalogFamily[] = SCOREBOARD.families.flatMap(
+  (item): CronusCatalogFamily[] => {
+    if (item.status === "ported") return [{ family: item.family, kind: "dedicated" }];
+    if (item.status === "stub") return [{ family: item.family, kind: "stub" }];
+    return [];
+  },
+);
+
+export const CRONUS_KERNEL_REF = SCOREBOARD.kernelRef;
 
 export const CRONUS_CATALOG_SOURCE = `app "CronusUICatalog" {
   port 5311
