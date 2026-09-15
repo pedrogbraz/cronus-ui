@@ -39,6 +39,7 @@
     "test:audit": "turbo run build --filter=@cronus-ui/www && playwright test -c playwright.audit.config.ts",
     "test:audit:live": "playwright test -c playwright.audit.live.config.ts",
     "test:audit:pixel": "playwright test -c playwright.audit.live.config.ts e2e/audit/parity.pixel.spec.ts",
+    "audit:scoreboard": "bun packages/audit/src/scoreboard-cli.ts",
     "audit:inventory:strict": "bun packages/audit/src/catalog-inventory.ts --strict"
   },
   "devDependencies": {

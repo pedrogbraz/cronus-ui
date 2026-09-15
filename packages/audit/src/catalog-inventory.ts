@@ -11,6 +11,7 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { parseKernelFamilies, portedFamilyNames } from "./kernel-families.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
 
@@ -48,10 +49,8 @@ function templateSlugs(file: string): string[] {
 function portedFromKernel(kernelRoot: string): string[] | null {
   const file = join(kernelRoot, "src/cronus_ui_widgets.rs");
   if (!existsSync(file)) return null;
-  const src = readFileSync(file, "utf8");
-  const m = src.match(/pub const PORTED_FAMILIES: &\[&str\] = &\[([\s\S]*?)\];/);
-  if (!m?.[1]) return null;
-  return [...m[1].matchAll(/"([^"]+)"/g)].map((x) => x[1] ?? "").filter(Boolean);
+  const families = parseKernelFamilies(readFileSync(file, "utf8"));
+  return families ? portedFamilyNames(families) : null;
 }
 
 /** Families with at least one fixture JSON (same rule as fixture-catalog.ts). */

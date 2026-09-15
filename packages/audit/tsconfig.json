@@ -10,6 +10,7 @@
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
     "src/catalog-inventory.ts",
+    "src/scoreboard-cli.ts",
     "src/audit-dev.ts"
   ]
 }
