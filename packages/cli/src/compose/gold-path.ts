@@ -8,7 +8,7 @@ import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import type { CronusUIConfig } from "../config.js";
-import { resolveSafeDest, writeFileEnsured } from "../utils.js";
+import { resolveSafeDest, writeFileEnsured } from "../registry-files.js";
 import { baseSnapshotDir } from "./reload.js";
 
 export const GOLD_PATH_TEMPLATES = new Set(["saas", "admin"]);

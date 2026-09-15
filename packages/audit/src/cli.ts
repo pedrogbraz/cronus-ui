@@ -1,7 +1,7 @@
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { emitCronusApp } from "./emit-cronus-fixture.js";
+import { emitCronusApp, emitsSourceBlock } from "./emit-cronus-fixture.js";
 import { listFixtures } from "./fixture-catalog.js";
 import { codesOf, scanSourceLanguage } from "./source-language-scan.js";
 
@@ -13,7 +13,7 @@ function main(args: string[]): number {
   if (cmd === "emit") {
     const fixtures = listFixtures();
     const cronus = emitCronusApp(fixtures);
-    if (cronus.includes("source")) {
+    if (emitsSourceBlock(cronus)) {
       console.error("emitCronusApp must never emit source");
       return 1;
     }

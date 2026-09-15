@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "message",
+  "props": {
+    "from": "user",
+    "children": "Can you summarize the release notes?"
+  },
+  "expect": {
+    "slot": "message",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "message",
+      "data-from": "user"
+    }
+  }
+}

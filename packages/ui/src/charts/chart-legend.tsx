@@ -182,7 +182,6 @@ export function ChartLegend({
         // Allow custom rendering
         if (renderItem) {
           return (
-            // biome-ignore lint/a11y/noNoninteractiveElementInteractions: Legend item hover interaction
             // biome-ignore lint/a11y/noStaticElementInteractions: Legend item hover interaction
             <div
               data-hovered={isHovered ? "" : undefined}
@@ -196,7 +195,6 @@ export function ChartLegend({
         }
 
         return (
-          // biome-ignore lint/a11y/noNoninteractiveElementInteractions: Legend item hover interaction
           // biome-ignore lint/a11y/noStaticElementInteractions: Legend item hover interaction
           <div
             className={cn(

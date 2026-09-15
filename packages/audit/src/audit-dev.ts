@@ -7,7 +7,7 @@ import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { emitCronusApp } from "./emit-cronus-fixture.js";
+import { emitCronusApp, emitsSourceBlock } from "./emit-cronus-fixture.js";
 import { listFixtures } from "./fixture-catalog.js";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -28,7 +28,7 @@ function emitFixtures(): string {
   const outDir = join(pkgRoot, "cronus-fixtures");
   mkdirSync(outDir, { recursive: true });
   const src = emitCronusApp(listFixtures());
-  if (src.includes("source")) {
+  if (emitsSourceBlock(src)) {
     throw new Error("emitCronusApp emitted source");
   }
   const file = join(outDir, "app.cronus");
@@ -68,8 +68,16 @@ process.on("SIGTERM", () => {
   process.exit(0);
 });
 
-const built = spawnSync("bun", ["run", "build"], { cwd: pkgRoot, stdio: "inherit" });
+// www imports @cronus-ui/audit and @cronus-ui/ui from their `dist`, so building
+// only packages/audit would leave a stale ui/tokens dist and render old React.
+// `@cronus-ui/audit...` = audit plus every workspace dependency (ui, tokens, …).
+console.log("  audit:dev: turbo run build --filter=@cronus-ui/audit... (audit + ui/tokens deps)");
+const built = spawnSync("bunx", ["turbo", "run", "build", "--filter=@cronus-ui/audit..."], {
+  cwd: monorepo,
+  stdio: "inherit",
+});
 if (built.status !== 0) {
+  console.error("audit:dev: dependency build failed; not starting www/kernel");
   process.exit(built.status ?? 1);
 }
 

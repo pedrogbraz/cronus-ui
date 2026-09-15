@@ -1,0 +1,26 @@
+{
+  "id": "default",
+  "family": "scroll-nav",
+  "props": {
+    "title": "Terms & Conditions",
+    "terms": [
+      {
+        "id": "acceptance",
+        "title": "Acceptance",
+        "content": "By using the service you agree to these terms."
+      },
+      {
+        "id": "privacy",
+        "title": "Privacy",
+        "content": "We store only what the product needs."
+      }
+    ]
+  },
+  "expect": {
+    "slot": "scroll-nav",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "scroll-nav"
+    }
+  }
+}

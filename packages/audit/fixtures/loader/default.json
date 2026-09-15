@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "loader",
+  "props": {},
+  "expect": {
+    "slot": "loader",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "loader",
+      "role": "status",
+      "aria-busy": "true",
+      "aria-label": "Loading"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "vitest/config";
+import { rscClientBoundaryPlugin } from "./packages/ui/test/rsc-client-boundary.mjs";
 
 /**
  * Root Vitest config (Vitest 4 `projects`). One project per package, plus a
@@ -99,6 +100,31 @@ export default defineConfig({
           root: "./packages/ui",
           environment: "node",
           include: ["src/**/*.test.ts"],
+          exclude: ["**/node_modules/**", "src/**/*.rsc.test.ts"],
+        },
+      },
+      {
+        // React Server Components render of the server-safe primitives. Runs the
+        // react-server build of React (export condition) through the Flight
+        // server, with "use client" modules turned into client references —
+        // see packages/ui/test/rsc-client-boundary.mjs.
+        plugins: [rscClientBoundaryPlugin()],
+        ssr: {
+          resolve: {
+            conditions: ["react-server", "module", "node", "development|production"],
+            externalConditions: ["react-server"],
+          },
+        },
+        test: {
+          name: "ui-rsc",
+          root: "./packages/ui",
+          environment: "node",
+          include: ["src/**/*.rsc.test.ts"],
+          execArgv: [
+            "--conditions=react-server",
+            "--import",
+            src("./packages/ui/test/rsc-register-hooks.mjs"),
+          ],
         },
       },
       {

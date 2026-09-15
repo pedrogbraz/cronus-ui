@@ -33,7 +33,7 @@ describe("PhoneInput", () => {
   it("groups typed digits and emits the composed E.164 string", async () => {
     const user = userEvent.setup();
     const handleChange = vi.fn();
-    render(<PhoneInput onChange={handleChange} />);
+    render(<PhoneInput onValueChange={handleChange} />);
 
     const field = screen.getByRole("textbox", { name: "Phone number" }) as HTMLInputElement;
     await user.type(field, "11987654321");
@@ -44,7 +44,19 @@ describe("PhoneInput", () => {
     expect(handleChange).toHaveBeenLastCalledWith("+5511987654321");
   });
 
-  it("re-composes the number under the newly selected country's dial code", async () => {
+  it("prefers onValueChange over the deprecated onChange alias when both are set", async () => {
+    const user = userEvent.setup();
+    const onValueChange = vi.fn();
+    const onChange = vi.fn();
+    render(<PhoneInput onValueChange={onValueChange} onChange={onChange} />);
+
+    await user.type(screen.getByRole("textbox", { name: "Phone number" }), "11987654321");
+
+    expect(onValueChange).toHaveBeenLastCalledWith("+5511987654321");
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it("re-composes the number under the newly selected country's dial code (deprecated onChange alias)", async () => {
     const user = userEvent.setup();
     const handleChange = vi.fn();
     render(<PhoneInput onChange={handleChange} />);

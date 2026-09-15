@@ -1,0 +1,18 @@
+{
+  "id": "default",
+  "family": "prompt-input",
+  "props": {
+    "placeholder": "What would you like to know?",
+    "action": "/chat",
+    "method": "post"
+  },
+  "expect": {
+    "slot": "prompt-input",
+    "tag": "form",
+    "attrs": {
+      "data-slot": "prompt-input",
+      "action": "/chat",
+      "method": "post"
+    }
+  }
+}

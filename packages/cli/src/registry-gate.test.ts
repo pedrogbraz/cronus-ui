@@ -40,7 +40,7 @@ import {
   validateNoInlineMocks,
   validateVariantItems,
 } from "../scripts/check-registry.js";
-import { rewriteImports } from "./utils.js";
+import { rewriteImports } from "./registry-files.js";
 
 // The real generator inputs, built once. Deterministic + fast (already run by
 // the `registry:check` gate). Each mutation test clones the source map so no

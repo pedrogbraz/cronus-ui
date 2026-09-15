@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { SCOREBOARD } from "./audit/scoreboard";
 import {
   CRONUS_CATALOG_FAMILIES,
   CRONUS_CATALOG_RUN,
@@ -8,15 +9,18 @@ import {
 } from "./cronus-language";
 
 describe("cronus language catalog", () => {
-  it("lists dedicated and interact families with unique names", () => {
+  it("derives kernel registry families from the scoreboard", () => {
     const names = CRONUS_CATALOG_FAMILIES.map((item) => item.family);
     expect(new Set(names).size).toBe(names.length);
     expect(names).toContain("button");
     expect(names).toContain("select");
     expect(names).toContain("combobox");
-    expect(
-      CRONUS_CATALOG_FAMILIES.filter((item) => item.kind === "dedicated").length,
-    ).toBeGreaterThan(30);
+    expect(CRONUS_CATALOG_FAMILIES.filter((item) => item.kind === "dedicated")).toHaveLength(
+      SCOREBOARD.totals.ported,
+    );
+    expect(CRONUS_CATALOG_FAMILIES.filter((item) => item.kind === "stub")).toHaveLength(
+      SCOREBOARD.totals.stub,
+    );
     expect(CRONUS_CATALOG_FAMILIES.find((item) => item.family === "date-picker")?.kind).toBe(
       "dedicated",
     );

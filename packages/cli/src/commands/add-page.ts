@@ -21,6 +21,7 @@
 
 import { existsSync } from "node:fs";
 import { readFile, rm } from "node:fs/promises";
+import { closestName } from "../closest-name.js";
 import {
   GOLD_PATH_AUTH_SPLIT_FILES,
   goldPatchAppShellChrome,
@@ -58,19 +59,16 @@ import {
   readConfig,
   writeConfig,
 } from "../config.js";
+import { collectDependencies, recordDependencies } from "../dependencies.js";
+import { log } from "../log.js";
+import { detectPackageManager, runInstall } from "../package-manager.js";
 import { Registry, registrySourceVersion } from "../registry.js";
 import {
-  closestName,
-  collectDependencies,
-  detectPackageManager,
-  log,
-  recordDependencies,
   resolveSafeDest,
   rewriteImports,
-  runInstall,
   writeFileEnsured,
   writeItemFiles,
-} from "../utils.js";
+} from "../registry-files.js";
 import { readChromeSources, readComposeMeta } from "./compose.js";
 
 /** Options accepted by the addPage library entry + the CLI command. */

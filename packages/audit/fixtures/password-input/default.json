@@ -1,0 +1,12 @@
+{
+  "id": "default",
+  "family": "password-input",
+  "props": {
+    "placeholder": "Enter your password"
+  },
+  "expect": {
+    "slot": "password-input",
+    "tag": "div",
+    "attrs": { "data-slot": "password-input" }
+  }
+}

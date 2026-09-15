@@ -11,7 +11,7 @@ import { existsSync } from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import type { ComposedRecord } from "../config.js";
-import { resolveSafeDest } from "../utils.js";
+import { resolveSafeDest } from "../registry-files.js";
 import { type AppManifest, manifestFingerprint } from "./manifest.js";
 import { loadManifestFile, loadTemplate } from "./templates.js";
 

@@ -73,8 +73,9 @@ export interface FlipCardProps extends Omit<HTMLAttributes<HTMLDivElement>, "onC
 /**
  * A 3D flip card composed from `FlipCard` + `FlipCardFront` + `FlipCardBack`
  * (wired through context). Both faces are always in the DOM, stacked with
- * `position: absolute`; the inner wrapper is a `transform-style: preserve-3d`
- * stage that rotates 180° on a spring-eased `transition-transform`, and each
+ * `position: absolute`; the inner wrapper is an `absolute inset-0`
+ * `transform-style: preserve-3d` stage (so it fills a min-height-only card)
+ * that rotates 180° on a spring-eased `transition-transform`, and each
  * face uses `backface-visibility: hidden` so only the forward-facing side shows.
  *
  * Triggers: `"hover"` flips on pointer hover or keyboard focus, `"click"`
@@ -201,7 +202,10 @@ export const FlipCard = forwardRef<HTMLDivElement, FlipCardProps>(
         >
           <div
             className={cn(
-              "relative size-full transition-transform duration-[600ms] ease-[var(--ease-spring)] [transform-style:preserve-3d] will-change-transform",
+              // `absolute inset-0`, not `size-full`: the card usually sets only
+              // `min-h-[16rem]`, and a percentage height against min-height
+              // resolves to 0, collapsing both absolute faces to their borders.
+              "absolute inset-0 transition-transform duration-[600ms] ease-[var(--ease-spring)] [transform-style:preserve-3d] will-change-transform",
               "motion-reduce:transition-none motion-reduce:!transform-none",
             )}
             style={{ transform: flipped ? rotation : undefined }}

@@ -40,7 +40,7 @@ export const InputGroupAddon = forwardRef<HTMLDivElement, InputGroupAddonProps>(
         className={cn(
           "flex shrink-0 select-none items-center gap-1.5 whitespace-nowrap px-3 text-fg-tertiary",
           "[&_svg]:size-4 [&_svg]:shrink-0",
-          align === "start" ? "border-r border-border" : "border-l border-border",
+          align === "start" ? "border-e border-border" : "border-s border-border",
           className,
         )}
         {...props}

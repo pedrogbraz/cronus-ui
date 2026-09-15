@@ -16,7 +16,6 @@ export function LegendItem({ className = "", children }: LegendItemProps) {
   const { index, isHovered, isFaded } = useLegendItem();
 
   return (
-    // biome-ignore lint/a11y/noNoninteractiveElementInteractions: Legend item hover interaction
     // biome-ignore lint/a11y/noStaticElementInteractions: Legend item hover interaction
     <div
       className={cn(

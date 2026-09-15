@@ -12,8 +12,9 @@ import {
   type StackFlagValues,
   sanitizeProjectName,
 } from "@cronus-ui/stack";
+import { packageManagerFromConfig } from "./package-manager.js";
 import { assertWritableTarget, initGit, runInstall, scaffoldStack } from "./scaffold.js";
-import { c, log, packageManagerFromConfig } from "./utils.js";
+import { c, log } from "./terminal.js";
 import { CREATE_STACK_VERSION } from "./version.js";
 
 const STACK_FLAG_OPTIONS = Object.fromEntries(

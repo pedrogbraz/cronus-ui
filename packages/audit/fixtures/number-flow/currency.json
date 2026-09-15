@@ -1,0 +1,18 @@
+{
+  "id": "currency",
+  "family": "number-flow",
+  "props": {
+    "value": 1234.5,
+    "prefix": "$",
+    "format": "currency"
+  },
+  "expect": {
+    "slot": "number-flow",
+    "tag": "span",
+    "attrs": {
+      "data-slot": "number-flow",
+      "role": "img",
+      "aria-label": "$1,234.50"
+    }
+  }
+}

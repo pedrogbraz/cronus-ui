@@ -16,24 +16,19 @@ import {
   writeAiKit,
   writeDesignDocuments,
 } from "@cronus-ui/ai-kit";
+import { c } from "./ansi.js";
 import { composeTemplate } from "./compose.js";
+import { PACKAGE_MANAGERS, type PackageManager } from "./package-manager.js";
+import { dirNameFromProjectName, isValidProjectName } from "./project-name.js";
 import { runDbPush, runInstall, scaffold } from "./scaffold.js";
 import {
-  c,
   DEFAULT_MODE,
   DEFAULT_TEMPLATE,
   DEFAULT_THEME,
-  dirNameFromProjectName,
   isComposedTemplate,
   isGoldPathTemplate,
-  isValidProjectName,
-  log,
   MODES,
   type ModeName,
-  PACKAGE_MANAGERS,
-  type PackageManager,
-  promptConfirm,
-  promptSelect,
   TEMPLATE_APPEARANCE,
   TEMPLATE_HINTS,
   TEMPLATES,
@@ -41,7 +36,8 @@ import {
   THEME_HINTS,
   THEMES,
   type Theme,
-} from "./utils.js";
+} from "./scaffold-options.js";
+import { log, promptConfirm, promptSelect } from "./terminal.js";
 import { CREATE_VERSION } from "./version.js";
 
 export const HELP = `${c.bold("create-cronus-app")} — scaffold a Next.js + Cronus UI app.

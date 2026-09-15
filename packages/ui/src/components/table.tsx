@@ -113,7 +113,7 @@ export const TableHead = forwardRef<HTMLTableCellElement, TableHeadProps>(
         ref={ref}
         data-slot="table-head"
         className={cn(
-          "h-10 px-3 text-left align-middle font-medium text-fg-secondary whitespace-nowrap",
+          "h-10 px-3 text-start align-middle font-medium text-fg-secondary whitespace-nowrap",
           className,
         )}
         {...props}

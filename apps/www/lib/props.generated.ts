@@ -3227,7 +3227,7 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           type: "string",
           required: false,
           description:
-            'Controlled value as an E.164 string (e.g. `"+5511987654321"`). Pair with `onChange`.',
+            'Controlled value as an E.164 string (e.g. `"+5511987654321"`). Pair with `onValueChange`.',
         },
         {
           name: "defaultValue",
@@ -3236,11 +3236,17 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           description: "Initial E.164 (or bare national) value for uncontrolled usage.",
         },
         {
-          name: "onChange",
+          name: "onValueChange",
           type: "(value: string) => void",
           required: false,
           description:
             "Called with the full E.164 string on every edit; empty string when no number is entered.",
+        },
+        {
+          name: "onChange",
+          type: "(value: string) => void",
+          required: false,
+          description: "Called when the value changes.",
         },
         {
           name: "defaultCountry",
@@ -3352,11 +3358,17 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           description: "Uncontrolled initial card number (digits or already-spaced).",
         },
         {
-          name: "onChange",
+          name: "onValueChange",
           type: "(value: CreditCardValue) => void",
           required: false,
           description:
             "Fires on every keystroke with the parsed, validated card value. Display-side only — do not persist, log, or transmit the raw PAN/CVC.",
+        },
+        {
+          name: "onChange",
+          type: "(value: CreditCardValue) => void",
+          required: false,
+          description: "Called when the value changes.",
         },
         {
           name: "invalid",
@@ -13377,11 +13389,17 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           description: "Initial value for uncontrolled usage.",
         },
         {
-          name: "onChange",
+          name: "onValueChange",
           type: "(value: TimeValue) => void",
           required: false,
           description:
             "Fired with the normalized `{ hours, minutes, seconds }` whenever the time changes.",
+        },
+        {
+          name: "onChange",
+          type: "(value: TimeValue) => void",
+          required: false,
+          description: "Called when the value changes.",
         },
         {
           name: "hourCycle",

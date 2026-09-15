@@ -8,7 +8,7 @@ import { existsSync } from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { closestName } from "../utils.js";
+import { closestName } from "../closest-name.js";
 import { type AppManifest, parseManifest } from "./manifest.js";
 
 /** Directory holding the bundled app-template manifests (dist/ or src/ layout). */

@@ -3,7 +3,7 @@
   "family": "data-table",
   "props": {
     "label": "Members",
-    "items": ["Ada", "Linus"]
+    "items": ["Name", "Role", "Ada", "Admin", "Linus", "Editor"]
   },
   "expect": {
     "slot": "data-table",

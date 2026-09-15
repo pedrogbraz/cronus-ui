@@ -291,7 +291,6 @@ export function MarkerGroup({
       {containerRef?.current &&
         createPortal(
           // biome-ignore lint/a11y/noStaticElementInteractions: Marker hover portal
-          // biome-ignore lint/a11y/noNoninteractiveElementInteractions: Marker hover portal
           <div
             className="absolute"
             onMouseEnter={handleMouseEnter}

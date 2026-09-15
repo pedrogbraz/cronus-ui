@@ -1,0 +1,17 @@
+{
+  "id": "characters",
+  "family": "slide-up-text",
+  "props": {
+    "children": "Hello world",
+    "split": "characters",
+    "from": "center",
+    "stagger": 0.05
+  },
+  "expect": {
+    "slot": "slide-up-text",
+    "tag": "span",
+    "attrs": {
+      "data-slot": "slide-up-text"
+    }
+  }
+}

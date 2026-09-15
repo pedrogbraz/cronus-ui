@@ -10,11 +10,21 @@ function parseLocalDate(value: unknown): Date | undefined {
   return new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
 }
 
-export function CalendarFixture({ defaultMonth }: { defaultMonth?: string }) {
+/**
+ * `defaultMonth` / `selected` are ISO `YYYY-MM-DD` fixture props, emitted to
+ * the kernel as the same attrs. No `selected` → no selected day.
+ */
+export function CalendarFixture({
+  defaultMonth,
+  selected,
+}: {
+  defaultMonth?: string;
+  selected?: string;
+}) {
   const month = parseLocalDate(defaultMonth) ?? new Date(2026, 5, 1);
   return (
     <div data-slot="calendar">
-      <Calendar mode="single" defaultMonth={month} selected={month} />
+      <Calendar mode="single" defaultMonth={month} selected={parseLocalDate(selected)} />
     </div>
   );
 }

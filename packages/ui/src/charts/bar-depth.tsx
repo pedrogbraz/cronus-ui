@@ -379,7 +379,6 @@ export function useBarDepthEntries(dataKey: string, activeIndex?: number): BarDe
     const step = (barScale as unknown as { step?: () => number }).step?.() ?? bandWidth;
     const maxDepth = barDepthMaxDepth(step, bandWidth);
 
-    // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: per-bar 3D geometry (direction, perspective trim, segment scaling) reads clearest as one pass
     return data.flatMap((d, dataIndex): BarDepthEntry[] => {
       // Stacked bars: the bar's value is the SUM of its segments (so the depth
       // height matches the host BarChart's stacked total). Single bars: the

@@ -1402,7 +1402,7 @@ function PhoneInputDemo() {
   return (
     <div className="flex w-full max-w-xs flex-col gap-2">
       <FieldLabel htmlFor="phone">Phone number</FieldLabel>
-      <PhoneInput id="phone" value={phone} onChange={setPhone} />
+      <PhoneInput id="phone" value={phone} onValueChange={setPhone} />
       <FieldDescription>
         {phone ? (
           <span className="font-mono text-xs tabular-nums text-fg-secondary">{phone}</span>
@@ -1420,7 +1420,7 @@ const phoneInputDemoCode = `function PhoneInputDemo() {
   return (
     <div className="flex w-full max-w-xs flex-col gap-2">
       <FieldLabel htmlFor="phone">Phone number</FieldLabel>
-      <PhoneInput id="phone" value={phone} onChange={setPhone} />
+      <PhoneInput id="phone" value={phone} onValueChange={setPhone} />
       <FieldDescription>
         {phone ? (
           <span className="font-mono text-xs tabular-nums text-fg-secondary">{phone}</span>
@@ -1438,7 +1438,7 @@ function CreditCardDemo() {
 
   return (
     <div className="flex w-full max-w-sm flex-col gap-3">
-      <CreditCardInput label="Card details" onChange={setCard} />
+      <CreditCardInput label="Card details" onValueChange={setCard} />
       <div className="flex min-h-6 items-center text-xs text-fg-tertiary">
         {card?.valid ? (
           <Badge variant="success">
@@ -1462,7 +1462,7 @@ const creditCardDemoCode = `function CreditCardDemo() {
 
   return (
     <div className="flex w-full max-w-sm flex-col gap-3">
-      <CreditCardInput label="Card details" onChange={setCard} />
+      <CreditCardInput label="Card details" onValueChange={setCard} />
       <div className="flex min-h-6 items-center text-xs text-fg-tertiary">
         {card?.valid ? (
           <Badge variant="success">

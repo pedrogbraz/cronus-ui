@@ -1,3 +1,4 @@
+import { closestName } from "../closest-name.js";
 import {
   CLI_VERSION,
   hasConfig,
@@ -5,16 +6,11 @@ import {
   readConfig,
   writeConfig,
 } from "../config.js";
+import { collectDependencies, recordDependencies } from "../dependencies.js";
+import { log } from "../log.js";
+import { detectPackageManager, runInstall } from "../package-manager.js";
 import { Registry, registrySourceVersion } from "../registry.js";
-import {
-  closestName,
-  collectDependencies,
-  detectPackageManager,
-  log,
-  recordDependencies,
-  runInstall,
-  writeItemFiles,
-} from "../utils.js";
+import { writeItemFiles } from "../registry-files.js";
 
 interface AddOptions {
   cwd: string;

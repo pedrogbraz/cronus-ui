@@ -12,6 +12,12 @@ import {
   TiltCard,
   TimePicker,
 } from "@cronus-ui/ui";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@cronus-ui/ui/accordion";
 import { Alert, AlertDescription, AlertTitle } from "@cronus-ui/ui/alert";
 import {
   AlertDialog,
@@ -20,6 +26,7 @@ import {
   AlertDialogTitle,
 } from "@cronus-ui/ui/alert-dialog";
 import { AnimatedButton } from "@cronus-ui/ui/animated-button";
+import { AnimatedCheckbox } from "@cronus-ui/ui/animated-checkbox";
 import { AnimatedList } from "@cronus-ui/ui/animated-list";
 import { AnimatedNumber } from "@cronus-ui/ui/animated-number";
 import { AspectRatio } from "@cronus-ui/ui/aspect-ratio";
@@ -29,6 +36,14 @@ import { AvatarGroup } from "@cronus-ui/ui/avatar-group";
 import { Badge } from "@cronus-ui/ui/badge";
 import { Banner } from "@cronus-ui/ui/banner";
 import { BouncyAccordion } from "@cronus-ui/ui/bouncy-accordion";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@cronus-ui/ui/breadcrumb";
 import { Button } from "@cronus-ui/ui/button";
 import { ButtonGroup } from "@cronus-ui/ui/button-group";
 import { Card, CardDescription, CardHeader, CardTitle } from "@cronus-ui/ui/card";
@@ -55,6 +70,7 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from "@cronus-ui/ui/context-menu";
+import { Conversation, ConversationContent } from "@cronus-ui/ui/conversation";
 import { CopyButton } from "@cronus-ui/ui/copy-button";
 import { Countdown } from "@cronus-ui/ui/countdown";
 import { DateRangePicker } from "@cronus-ui/ui/date-range-picker";
@@ -77,7 +93,6 @@ import { DynamicIsland } from "@cronus-ui/ui/dynamic-island";
 import { Empty, EmptyTitle } from "@cronus-ui/ui/empty";
 import { Fab } from "@cronus-ui/ui/fab";
 import { Field, FieldDescription, FieldLabel } from "@cronus-ui/ui/field";
-import { FileDropzone } from "@cronus-ui/ui/file-dropzone";
 import { FlickeringGrid } from "@cronus-ui/ui/flickering-grid";
 import { FormItem } from "@cronus-ui/ui/form";
 import { Frame } from "@cronus-ui/ui/frame";
@@ -89,6 +104,14 @@ import { GridPattern } from "@cronus-ui/ui/grid-pattern";
 import { Highlighter } from "@cronus-ui/ui/highlighter";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@cronus-ui/ui/hover-card";
 import { ImageZoom } from "@cronus-ui/ui/image-zoom";
+import {
+  InlineCitation,
+  InlineCitationCard,
+  InlineCitationCardBody,
+  InlineCitationCardTrigger,
+  InlineCitationSource,
+  InlineCitationText,
+} from "@cronus-ui/ui/inline-citation";
 import { Input } from "@cronus-ui/ui/input";
 import { InputGroup, InputGroupAddon } from "@cronus-ui/ui/input-group";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@cronus-ui/ui/input-otp";
@@ -97,6 +120,7 @@ import { JsonViewer } from "@cronus-ui/ui/json-viewer";
 import { Kbd } from "@cronus-ui/ui/kbd";
 import { Label } from "@cronus-ui/ui/label";
 import { LightRays } from "@cronus-ui/ui/light-rays";
+import { Loader } from "@cronus-ui/ui/loader";
 import { LogoCarousel } from "@cronus-ui/ui/logo-carousel";
 import { Magnetic } from "@cronus-ui/ui/magnetic";
 import { Marquee } from "@cronus-ui/ui/marquee";
@@ -108,6 +132,7 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from "@cronus-ui/ui/menubar";
+import { Message, MessageContent } from "@cronus-ui/ui/message";
 import { Metric, MetricLabel, MetricValue } from "@cronus-ui/ui/metric";
 import {
   MorphingPopover,
@@ -122,14 +147,27 @@ import {
   NavigationMenuTrigger,
 } from "@cronus-ui/ui/navigation-menu";
 import { Noise } from "@cronus-ui/ui/noise";
+import { NumberFlow, type NumberFlowFormat } from "@cronus-ui/ui/number-flow";
+import { NumberInput } from "@cronus-ui/ui/number-input";
 import { Orbit, OrbitItem, OrbitRing } from "@cronus-ui/ui/orbit";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@cronus-ui/ui/pagination";
 import { Particles } from "@cronus-ui/ui/particles";
+import { PasswordInput } from "@cronus-ui/ui/password-input";
 import { PillNav } from "@cronus-ui/ui/pill-nav";
 import { Popover, PopoverContent, PopoverTrigger } from "@cronus-ui/ui/popover";
 import { Progress } from "@cronus-ui/ui/progress";
 import { ProgressiveBlur } from "@cronus-ui/ui/progressive-blur";
 import { RadioGroup, RadioGroupItem } from "@cronus-ui/ui/radio-group";
 import { Rating } from "@cronus-ui/ui/rating";
+import { Reasoning, ReasoningContent, ReasoningTrigger } from "@cronus-ui/ui/reasoning";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@cronus-ui/ui/resizable";
 import { RetroGrid } from "@cronus-ui/ui/retro-grid";
 import { Reveal } from "@cronus-ui/ui/reveal";
@@ -137,7 +175,15 @@ import { RichTextEditor } from "@cronus-ui/ui/rich-text-editor";
 import { Ripple } from "@cronus-ui/ui/ripple";
 import { ScrambleText } from "@cronus-ui/ui/scramble-text";
 import { ScrollArea } from "@cronus-ui/ui/scroll-area";
+import { ScrollNav } from "@cronus-ui/ui/scroll-nav";
 import { SegmentedControl, SegmentedControlItem } from "@cronus-ui/ui/segmented-control";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@cronus-ui/ui/select";
 import { Separator } from "@cronus-ui/ui/separator";
 import {
   Sheet,
@@ -150,8 +196,14 @@ import { Shimmer } from "@cronus-ui/ui/shimmer";
 import { ShinyText } from "@cronus-ui/ui/shiny-text";
 import { SignaturePad } from "@cronus-ui/ui/signature-pad";
 import { Skeleton } from "@cronus-ui/ui/skeleton";
+import {
+  SlideUpText,
+  type SlideUpTextFrom,
+  type SlideUpTextSplit,
+} from "@cronus-ui/ui/slide-up-text";
 import { Slider } from "@cronus-ui/ui/slider";
 import { Toaster } from "@cronus-ui/ui/sonner";
+import { Source, Sources, SourcesContent, SourcesTrigger } from "@cronus-ui/ui/sources";
 import { SparklesText } from "@cronus-ui/ui/sparkles-text";
 import { Spinner } from "@cronus-ui/ui/spinner";
 import { SpinningText } from "@cronus-ui/ui/spinning-text";
@@ -165,8 +217,11 @@ import {
   StepperList,
   StepperTitle,
 } from "@cronus-ui/ui/stepper";
+import { Suggestion, Suggestions } from "@cronus-ui/ui/suggestion";
 import { Switch } from "@cronus-ui/ui/switch";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@cronus-ui/ui/table";
 import { TableOfContents } from "@cronus-ui/ui/table-of-contents";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@cronus-ui/ui/tabs";
 import { TagsInput } from "@cronus-ui/ui/tags-input";
 import { TextEffect } from "@cronus-ui/ui/text-effect";
 import { TextShimmer } from "@cronus-ui/ui/text-shimmer";
@@ -174,7 +229,9 @@ import { Textarea } from "@cronus-ui/ui/textarea";
 import { Timeline, TimelineContent, TimelineItem, TimelineTitle } from "@cronus-ui/ui/timeline";
 import { Toggle } from "@cronus-ui/ui/toggle";
 import { ToggleGroup, ToggleGroupItem } from "@cronus-ui/ui/toggle-group";
+import { Tool, ToolContent, ToolHeader, ToolOutput, type ToolUIPart } from "@cronus-ui/ui/tool";
 import { Toolbar, ToolbarButton } from "@cronus-ui/ui/toolbar";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@cronus-ui/ui/tooltip";
 import { TypingText } from "@cronus-ui/ui/typing-text";
 import { UsageMeter } from "@cronus-ui/ui/usage-meter";
 import { VideoPlayer } from "@cronus-ui/ui/video-player";
@@ -207,14 +264,17 @@ import { ColorPickerFixture } from "./color-picker-fixture.js";
 import { ComparisonSliderFixture } from "./comparison-slider-fixture.js";
 import { DataTableFixture } from "./data-table-fixture.js";
 import { DatePickerFixture } from "./date-picker-fixture.js";
+import { DialogFixture } from "./dialog-fixture.js";
 import { DockFixture } from "./dock-fixture.js";
 import { ExpandableTabsFixture } from "./expandable-tabs-fixture.js";
+import { FileDropzoneFixture } from "./file-dropzone-fixture.js";
 import { HeatmapFixture } from "./heatmap-fixture.js";
 import { KanbanFixture } from "./kanban-fixture.js";
 import { LightboxFixture } from "./lightbox-fixture.js";
 import { ModeToggleFixture } from "./mode-toggle-fixture.js";
 import { NotificationCenterFixture } from "./notification-center-fixture.js";
 import type { ParityFixture } from "./parity-fixture.js";
+import { PromptInputFixture } from "./prompt-input-fixture.js";
 import { SchedulerFixture } from "./scheduler-fixture.js";
 import { ScrollProgressFixture } from "./scroll-progress-fixture.js";
 import { SidebarFixture } from "./sidebar-fixture.js";
@@ -239,6 +299,27 @@ function stringPairs(value: unknown): Array<[string, string]> {
   }
   return pairs;
 }
+
+/**
+ * Pages shown for `current` of `total` — mirrors the kernel's
+ * `cronus_ui_pagination::page_window`: every page up to 7, else first, last,
+ * current +/- 1 and an ellipsis for each gap.
+ */
+export function paginationWindow(total: number, current: number): Array<number | "ellipsis"> {
+  const count = Math.max(1, Math.floor(total));
+  const page = Math.min(Math.max(1, Math.floor(current)), count);
+  if (count <= 7) return Array.from({ length: count }, (_, i) => i + 1);
+  const out: Array<number | "ellipsis"> = [1];
+  const start = Math.max(2, page - 1);
+  const end = Math.min(count - 1, page + 1);
+  if (start > 2) out.push("ellipsis");
+  for (let n = start; n <= end; n++) out.push(n);
+  if (end < count - 1) out.push("ellipsis");
+  out.push(count);
+  return out;
+}
+
+const pageHref = (n: number) => `?page=${n}`;
 
 const FALLBACK_SCROLL_ITEMS = [
   "v1.2.0-beta.12",
@@ -816,19 +897,25 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
     );
   }
   if (fixture.family === "file-dropzone") {
+    // Function props cannot cross the server → client boundary; the no-op
+    // `onFiles` lives in the client wrapper.
     const {
-      onFiles: _onFiles,
       "aria-label": ariaLabel,
-      ...rest
+      accept,
+      multiple,
+      disabled,
     } = fixture.props as {
-      onFiles?: unknown;
       "aria-label"?: string;
+      accept?: string;
+      multiple?: boolean;
+      disabled?: boolean;
     };
     return (
-      <FileDropzone
-        onFiles={() => {}}
-        aria-label={typeof ariaLabel === "string" ? ariaLabel : "Upload files"}
-        {...rest}
+      <FileDropzoneFixture
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+        accept={typeof accept === "string" ? accept : undefined}
+        multiple={multiple === true}
+        disabled={disabled === true}
       />
     );
   }
@@ -1102,8 +1189,11 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
     );
   }
   if (fixture.family === "calendar") {
-    const { defaultMonth } = fixture.props as { defaultMonth?: string };
-    return <CalendarFixture defaultMonth={defaultMonth} />;
+    const { defaultMonth, selected } = fixture.props as {
+      defaultMonth?: string;
+      selected?: string;
+    };
+    return <CalendarFixture defaultMonth={defaultMonth} selected={selected} />;
   }
   if (fixture.family === "date-picker") {
     const {
@@ -1200,7 +1290,8 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
     return <PieChartFixture />;
   }
   if (fixture.family === "data-table") {
-    return <DataTableFixture />;
+    const { items, options } = fixture.props as { items?: unknown; options?: unknown };
+    return <DataTableFixture items={stringList(items ?? options)} />;
   }
   if (fixture.family === "sidebar") {
     const { items, options } = fixture.props as {
@@ -1570,15 +1661,17 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
     return <WorkspaceSwitcherFixture items={stringList(items ?? options)} />;
   }
   if (fixture.family === "app-shell") {
-    const { items, options, title } = fixture.props as {
+    const { items, options, title, description } = fixture.props as {
       items?: unknown;
       options?: unknown;
       title?: string;
+      description?: string;
     };
     return (
       <AppShellFixture
         items={stringList(items ?? options)}
         title={typeof title === "string" ? title : undefined}
+        description={typeof description === "string" ? description : undefined}
       />
     );
   }
@@ -1675,15 +1768,17 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
     );
   }
   if (fixture.family === "scheduler") {
-    const { items, options, defaultMonth } = fixture.props as {
+    const { items, options, defaultMonth, today } = fixture.props as {
       items?: unknown;
       options?: unknown;
       defaultMonth?: string;
+      today?: string;
     };
     return (
       <SchedulerFixture
         items={stringList(items ?? options)}
         defaultMonth={typeof defaultMonth === "string" ? defaultMonth : undefined}
+        today={typeof today === "string" ? today : undefined}
       />
     );
   }
@@ -2970,12 +3065,17 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
     );
   }
   if (fixture.family === "gradient-border") {
-    const { children, className, ...rest } = fixture.props as {
+    const { children, className, innerClassName, ...rest } = fixture.props as {
       children?: string;
       className?: string;
+      innerClassName?: string;
     };
     return (
-      <GradientBorder className={typeof className === "string" ? className : "w-72 p-6"} {...rest}>
+      <GradientBorder
+        className={typeof className === "string" ? className : "w-72"}
+        innerClassName={typeof innerClassName === "string" ? innerClassName : "p-6"}
+        {...rest}
+      >
         {typeof children === "string" ? children : fixture.id}
       </GradientBorder>
     );
@@ -3036,7 +3136,9 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
     return (
       <div
         className={
-          typeof className === "string" ? `relative min-h-32 ${className}` : "relative min-h-32 w-72"
+          typeof className === "string"
+            ? `relative min-h-32 ${className}`
+            : "relative min-h-32 w-72"
         }
       >
         {typeof children === "string" ? children : fixture.id}
@@ -3081,6 +3183,393 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
           </div>
         ))}
       </div>
+    );
+  }
+  if (fixture.family === "accordion") {
+    const { items, options, value } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      value?: string;
+    };
+    const pairs = stringPairs(items ?? options);
+    const open = Math.max(
+      0,
+      pairs.findIndex(([trigger]) => trigger === value),
+    );
+    return (
+      <Accordion type="single" collapsible defaultValue={`item-${open}`}>
+        {pairs.map(([trigger, body], index) => (
+          <AccordionItem key={trigger} value={`item-${index}`}>
+            <AccordionTrigger>{trigger}</AccordionTrigger>
+            <AccordionContent>{body}</AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    );
+  }
+  if (fixture.family === "breadcrumb") {
+    const crumbs = stringList((fixture.props as { items?: unknown }).items);
+    return (
+      <Breadcrumb>
+        <BreadcrumbList>
+          {crumbs.flatMap((crumb, index) => {
+            const last = index === crumbs.length - 1;
+            const node = (
+              <BreadcrumbItem key={crumb}>
+                {last ? (
+                  <BreadcrumbPage>{crumb}</BreadcrumbPage>
+                ) : (
+                  <BreadcrumbLink href="#">{crumb}</BreadcrumbLink>
+                )}
+              </BreadcrumbItem>
+            );
+            return last ? [node] : [node, <BreadcrumbSeparator key={`${crumb}-sep`} />];
+          })}
+        </BreadcrumbList>
+      </Breadcrumb>
+    );
+  }
+  if (fixture.family === "dialog") {
+    const { title, description, items, options } = fixture.props as {
+      title?: string;
+      description?: string;
+      items?: unknown;
+      options?: unknown;
+    };
+    return (
+      <DialogFixture
+        title={typeof title === "string" ? title : fixture.id}
+        description={typeof description === "string" ? description : undefined}
+        action={stringList(items ?? options)[0] ?? "Continue"}
+      />
+    );
+  }
+  if (fixture.family === "number-input") {
+    const { value, "aria-label": ariaLabel } = fixture.props as {
+      value?: number;
+      "aria-label"?: string;
+    };
+    return (
+      <NumberInput
+        defaultValue={typeof value === "number" ? value : null}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : "Quantity"}
+      />
+    );
+  }
+  if (fixture.family === "pagination") {
+    const { total, current } = fixture.props as { total?: number; current?: number };
+    const count = typeof total === "number" ? total : 1;
+    const page = Math.min(Math.max(1, typeof current === "number" ? current : 1), count);
+    return (
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious href={pageHref(Math.max(1, page - 1))} />
+          </PaginationItem>
+          {paginationWindow(count, page).map((entry, index) => (
+            <PaginationItem key={entry === "ellipsis" ? `ellipsis-${index}` : entry}>
+              {entry === "ellipsis" ? (
+                <PaginationEllipsis />
+              ) : (
+                <PaginationLink href={pageHref(entry)} isActive={entry === page}>
+                  {entry}
+                </PaginationLink>
+              )}
+            </PaginationItem>
+          ))}
+          <PaginationItem>
+            <PaginationNext href={pageHref(Math.min(count, page + 1))} />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+    );
+  }
+  if (fixture.family === "password-input") {
+    const { placeholder } = fixture.props as { placeholder?: string };
+    return (
+      <PasswordInput placeholder={typeof placeholder === "string" ? placeholder : undefined} />
+    );
+  }
+  if (fixture.family === "select") {
+    const { placeholder, options, items } = fixture.props as {
+      placeholder?: string;
+      options?: unknown;
+      items?: unknown;
+    };
+    const text = typeof placeholder === "string" ? placeholder : "Select";
+    return (
+      <Select>
+        <SelectTrigger aria-label={text}>
+          <SelectValue placeholder={text} />
+        </SelectTrigger>
+        <SelectContent>
+          {stringList(options ?? items).map((option) => (
+            <SelectItem key={option} value={option}>
+              {option}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    );
+  }
+  if (fixture.family === "table") {
+    const { columns, items } = fixture.props as { columns?: number; items?: unknown };
+    const cells = stringList(items);
+    const width = typeof columns === "number" && columns > 0 ? columns : cells.length;
+    const head = cells.slice(0, width);
+    const rows: string[][] = [];
+    for (let index = width; index < cells.length; index += width) {
+      rows.push(cells.slice(index, index + width));
+    }
+    return (
+      <Table>
+        <TableHeader>
+          <TableRow>
+            {head.map((cell) => (
+              <TableHead key={cell}>{cell}</TableHead>
+            ))}
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow key={row.join("|")}>
+              {head.map((column, index) => (
+                <TableCell key={column}>{row[index] ?? ""}</TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    );
+  }
+  if (fixture.family === "tabs") {
+    const { items, options, value } = fixture.props as {
+      items?: unknown;
+      options?: unknown;
+      value?: string;
+    };
+    const pairs = stringPairs(items ?? options);
+    const selected = pairs.find(([label]) => label === value)?.[0] ?? pairs[0]?.[0] ?? "tab";
+    return (
+      <Tabs defaultValue={selected}>
+        <TabsList>
+          {pairs.map(([label]) => (
+            <TabsTrigger key={label} value={label}>
+              {label}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+        {pairs.map(([label, body]) => (
+          <TabsContent key={label} value={label}>
+            {body}
+          </TabsContent>
+        ))}
+      </Tabs>
+    );
+  }
+  if (fixture.family === "tooltip") {
+    const { children, items, options } = fixture.props as {
+      children?: string;
+      items?: unknown;
+      options?: unknown;
+    };
+    const trigger = typeof children === "string" ? children : "Hover";
+    const body = stringList(items ?? options)[0] ?? trigger;
+    return (
+      <Tooltip open>
+        <TooltipTrigger asChild>
+          <Button variant="outline">{trigger}</Button>
+        </TooltipTrigger>
+        <TooltipContent>{body}</TooltipContent>
+      </Tooltip>
+    );
+  }
+  // Sprint 5 C1: animated-checkbox, loader, number-flow, scroll-nav, slide-up-text.
+  if (fixture.family === "animated-checkbox") {
+    const { title, checked, disabled } = fixture.props as {
+      title?: string;
+      checked?: boolean;
+      disabled?: boolean;
+    };
+    // Uncontrolled: the logic spec toggles it, like the kernel's native input.
+    return (
+      <AnimatedCheckbox
+        title={typeof title === "string" ? title : undefined}
+        defaultChecked={checked === true}
+        disabled={disabled === true}
+      />
+    );
+  }
+  if (fixture.family === "loader") {
+    const { size, "aria-label": ariaLabel } = fixture.props as {
+      size?: number;
+      "aria-label"?: string;
+    };
+    return (
+      <Loader
+        size={typeof size === "number" ? size : undefined}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+      />
+    );
+  }
+  if (fixture.family === "number-flow") {
+    const { value, prefix, suffix, format, locale, minimumFractionDigits, maximumFractionDigits } =
+      fixture.props as {
+        value?: number;
+        prefix?: string;
+        suffix?: string;
+        format?: string;
+        locale?: string;
+        minimumFractionDigits?: number;
+        maximumFractionDigits?: number;
+      };
+    return (
+      <NumberFlow
+        value={typeof value === "number" ? value : 0}
+        prefix={typeof prefix === "string" ? prefix : undefined}
+        suffix={typeof suffix === "string" ? suffix : undefined}
+        format={typeof format === "string" ? (format as NumberFlowFormat) : undefined}
+        locale={typeof locale === "string" ? locale : undefined}
+        minimumFractionDigits={
+          typeof minimumFractionDigits === "number" ? minimumFractionDigits : undefined
+        }
+        maximumFractionDigits={
+          typeof maximumFractionDigits === "number" ? maximumFractionDigits : undefined
+        }
+      />
+    );
+  }
+  if (fixture.family === "scroll-nav") {
+    const { title, terms } = fixture.props as { title?: string; terms?: unknown };
+    const list = Array.isArray(terms)
+      ? terms.flatMap((term) => {
+          const { id, title: heading, content } = (term ?? {}) as Record<string, unknown>;
+          return typeof id === "string" && typeof heading === "string"
+            ? [{ id, title: heading, content: typeof content === "string" ? content : "" }]
+            : [];
+        })
+      : [];
+    return <ScrollNav title={typeof title === "string" ? title : undefined} terms={list} />;
+  }
+  if (fixture.family === "slide-up-text") {
+    const { children, split, from, stagger, delay } = fixture.props as {
+      children?: string;
+      split?: string;
+      from?: string;
+      stagger?: number;
+      delay?: number;
+    };
+    return (
+      <SlideUpText
+        split={typeof split === "string" ? (split as SlideUpTextSplit) : undefined}
+        from={typeof from === "string" ? (from as SlideUpTextFrom) : undefined}
+        stagger={typeof stagger === "number" ? stagger : undefined}
+        delay={typeof delay === "number" ? delay : undefined}
+      >
+        {typeof children === "string" ? children : fixture.id}
+      </SlideUpText>
+    );
+  }
+  // Sprint 5 C2 — AI suite (alphabetical).
+  if (fixture.family === "conversation") {
+    const { options, items } = fixture.props as { options?: unknown; items?: unknown };
+    return (
+      <Conversation>
+        <ConversationContent>
+          {stringList(options ?? items).map((text, index) => (
+            <Message key={text} from={index % 2 === 0 ? "user" : "assistant"}>
+              <MessageContent>{text}</MessageContent>
+            </Message>
+          ))}
+        </ConversationContent>
+      </Conversation>
+    );
+  }
+  if (fixture.family === "inline-citation") {
+    const { children, options } = fixture.props as { children?: string; options?: unknown };
+    const sources = stringList(options);
+    return (
+      <InlineCitation>
+        <InlineCitationText>{typeof children === "string" ? children : ""}</InlineCitationText>
+        <InlineCitationCard>
+          <InlineCitationCardTrigger sources={sources} />
+          <InlineCitationCardBody>
+            {sources.map((url) => (
+              <InlineCitationSource key={url} url={url} />
+            ))}
+          </InlineCitationCardBody>
+        </InlineCitationCard>
+      </InlineCitation>
+    );
+  }
+  if (fixture.family === "message") {
+    const { from, children } = fixture.props as {
+      from?: "user" | "assistant" | "system";
+      children?: string;
+    };
+    return (
+      <Message from={from ?? "user"}>
+        <MessageContent>{children}</MessageContent>
+      </Message>
+    );
+  }
+  if (fixture.family === "prompt-input") {
+    const { placeholder, action, method } = fixture.props as {
+      placeholder?: string;
+      action?: string;
+      method?: string;
+    };
+    return <PromptInputFixture placeholder={placeholder} action={action} method={method} />;
+  }
+  if (fixture.family === "reasoning") {
+    const { children, duration } = fixture.props as { children?: string; duration?: number };
+    return (
+      <Reasoning duration={duration} defaultOpen>
+        <ReasoningTrigger />
+        <ReasoningContent>{children}</ReasoningContent>
+      </Reasoning>
+    );
+  }
+  if (fixture.family === "sources") {
+    const { count, sources } = fixture.props as { count?: number; sources?: unknown };
+    const list = (Array.isArray(sources) ? sources : []).filter(
+      (entry): entry is { title: string; href: string } =>
+        typeof entry?.title === "string" && typeof entry?.href === "string",
+    );
+    return (
+      <Sources defaultOpen>
+        <SourcesTrigger count={count ?? list.length} />
+        <SourcesContent>
+          {list.map((source) => (
+            <Source key={source.href} href={source.href} title={source.title} />
+          ))}
+        </SourcesContent>
+      </Sources>
+    );
+  }
+  if (fixture.family === "suggestion") {
+    const { options, items } = fixture.props as { options?: unknown; items?: unknown };
+    return (
+      <Suggestions>
+        {stringList(options ?? items).map((text) => (
+          <Suggestion key={text} suggestion={text} />
+        ))}
+      </Suggestions>
+    );
+  }
+  if (fixture.family === "tool") {
+    const { type, state, errorText } = fixture.props as {
+      type?: string;
+      state?: ToolUIPart["state"];
+      errorText?: string;
+    };
+    return (
+      <Tool defaultOpen>
+        <ToolHeader type={type ?? "tool-call"} state={state ?? "input-streaming"} />
+        <ToolContent>
+          <ToolOutput output={undefined} errorText={errorText} />
+        </ToolContent>
+      </Tool>
     );
   }
   throw new Error(`renderReactFixture: unported family ${fixture.family}`);

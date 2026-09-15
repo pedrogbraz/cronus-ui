@@ -1,0 +1,14 @@
+{
+  "id": "many",
+  "family": "pagination",
+  "state": "page 5 of 10 (both ellipses)",
+  "props": {
+    "total": 10,
+    "current": 5
+  },
+  "expect": {
+    "slot": "pagination",
+    "tag": "nav",
+    "attrs": { "data-slot": "pagination", "aria-label": "Pagination" }
+  }
+}

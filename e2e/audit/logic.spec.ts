@@ -1,7 +1,28 @@
-import { expect, test } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
 import { cssColorToHex } from "../../packages/audit/src/css-color-to-hex";
 import { compareLayoutBox } from "../../packages/audit/src/layout-box";
 import { cronusFrame } from "./audit-freeze";
+
+/** Kernel canvas must be zero-JS: no script/style/canvas elements, no inline style or on* handlers. */
+async function expectZeroJs(page: Page): Promise<void> {
+  const offenders = await cronusFrame(page)
+    .locator("[data-audit-canvas]")
+    .evaluate((canvas) => {
+      const out: string[] = [];
+      for (const el of Array.from(canvas.querySelectorAll("*"))) {
+        const tag = el.tagName.toLowerCase();
+        if (tag === "script" || tag === "style" || tag === "canvas") out.push(tag);
+        for (const attr of Array.from(el.attributes)) {
+          if (attr.name.startsWith("on") || attr.name === "style") out.push(`${tag}[${attr.name}]`);
+        }
+      }
+      return out;
+    });
+  expect(offenders).toEqual([]);
+}
+
+const auditUrl = (family: string, fixture: string) =>
+  `/audit/${family}?fixture=${fixture}&preset=aurora&mode=dark`;
 
 test.describe("logic parity", () => {
   test("button data-slot and data-variant; no data-size required", async ({ page }) => {
@@ -1109,7 +1130,9 @@ test.describe("logic parity", () => {
     ).toHaveCount(0);
   });
 
-  test("segmented-control is a div radiogroup, not radio inputs", async ({ page }) => {
+  test("segmented-control is a div radiogroup; kernel radios are unstyled native state", async ({
+    page,
+  }) => {
     await page.goto("/audit/segmented-control?fixture=default&preset=aurora&mode=dark");
     const react = page.locator('[data-audit-side="react"] [data-slot="segmented-control"]');
     const cronus = cronusFrame(page).locator('[data-slot="segmented-control"]');
@@ -1120,7 +1143,13 @@ test.describe("logic parity", () => {
     await expect(react).toHaveAttribute("role", "radiogroup");
     await expect(cronus).toHaveAttribute("role", "radiogroup");
     await expect(page.locator('[data-audit-side="react"] input[type="radio"]')).toHaveCount(0);
-    await expect(cronusFrame(page).locator('input[type="radio"]')).toHaveCount(0);
+    // Kernel keeps selection in visually hidden native radios (zero JS); they
+    // carry no inline styling and never replace React's slotted buttons.
+    const kernelRadios = cronusFrame(page).locator('input[type="radio"]');
+    for (const radio of await kernelRadios.all()) {
+      expect(await radio.getAttribute("style")).toBeNull();
+      expect(await radio.getAttribute("data-slot")).toBeNull();
+    }
     await expect(page.locator('[data-slot="segmented-control-control"]')).toHaveCount(0);
     await expect(cronusFrame(page).locator('[data-slot="segmented-control-control"]')).toHaveCount(
       0,
@@ -2068,7 +2097,9 @@ test.describe("logic parity", () => {
     expect(await react.evaluate((el) => el.tagName)).toBe("DIV");
     expect(await cronus.evaluate((el) => el.tagName)).toBe("DIV");
     await expect(page.locator('[data-slot="progressive-blur-control"]')).toHaveCount(0);
-    await expect(cronusFrame(page).locator('[data-slot="progressive-blur-control"]')).toHaveCount(0);
+    await expect(cronusFrame(page).locator('[data-slot="progressive-blur-control"]')).toHaveCount(
+      0,
+    );
   });
 
   test("retro-grid is a div, not retro-grid-control", async ({ page }) => {
@@ -2107,6 +2138,127 @@ test.describe("logic parity", () => {
     await expect(cronusFrame(page).locator('[data-slot="motion-presets-control"]')).toHaveCount(0);
   });
 
+  // Sprint 5 C1: animated-checkbox, loader, number-flow, scroll-nav, slide-up-text.
+  test("animated-checkbox is a label toggling a native checkbox", async ({ page }) => {
+    for (const [fixture, title, initially] of [
+      ["default", "Implement Checkbox", false],
+      ["checked", "Ship the release", true],
+    ] as const) {
+      await page.goto(auditUrl("animated-checkbox", fixture));
+      const react = page.locator('[data-audit-side="react"] [data-slot="animated-checkbox"]');
+      const cronus = cronusFrame(page).locator('[data-slot="animated-checkbox"]');
+      await expectZeroJs(page);
+      for (const side of [react, cronus]) {
+        await expect(side).toHaveCount(1);
+        expect(await side.evaluate((el) => el.tagName)).toBe("LABEL");
+        await expect(side).toHaveText(title);
+        const input = side.locator('input[type="checkbox"]');
+        await expect(input).toHaveCount(1);
+        expect(await input.isChecked()).toBe(initially);
+        await side.click();
+        expect(await input.isChecked()).toBe(!initially);
+      }
+    }
+  });
+
+  test("loader is a busy status div around the ten-tick glyph", async ({ page }) => {
+    for (const [fixture, name, size] of [
+      ["default", "Loading", "16"],
+      ["large", "Saving", "32"],
+    ] as const) {
+      await page.goto(auditUrl("loader", fixture));
+      const react = page.locator('[data-audit-side="react"] [data-slot="loader"]');
+      const cronus = cronusFrame(page).locator('[data-slot="loader"]');
+      for (const side of [react, cronus]) {
+        await expect(side).toHaveCount(1);
+        expect(await side.evaluate((el) => el.tagName)).toBe("DIV");
+        await expect(side).toHaveAttribute("role", "status");
+        await expect(side).toHaveAttribute("aria-busy", "true");
+        await expect(side).toHaveAttribute("aria-label", name);
+        const svg = side.locator("svg");
+        await expect(svg).toHaveAttribute("width", size);
+        await expect(svg).toHaveAttribute("height", size);
+        await expect(svg).toHaveAttribute("aria-hidden", "true");
+        await expect(svg.locator("path")).toHaveCount(10);
+      }
+      await expectZeroJs(page);
+    }
+  });
+
+  test("number-flow names the formatted value and renders the same glyph cells", async ({
+    page,
+  }) => {
+    const cells = ':scope > [aria-hidden="true"] > span';
+    for (const [fixture, label] of [
+      ["default", "1,234"],
+      ["currency", "$1,234.50"],
+      ["percentage", "43 %"],
+    ] as const) {
+      await page.goto(auditUrl("number-flow", fixture));
+      const react = page.locator('[data-audit-side="react"] [data-slot="number-flow"]');
+      const cronus = cronusFrame(page).locator('[data-slot="number-flow"]');
+      for (const side of [react, cronus]) {
+        await expect(side).toHaveCount(1);
+        expect(await side.evaluate((el) => el.tagName)).toBe("SPAN");
+        await expect(side).toHaveAttribute("role", "img");
+        await expect(side).toHaveAttribute("aria-label", label);
+        await expect(side.locator(':scope > [aria-hidden="true"]')).toHaveAttribute("dir", "ltr");
+      }
+      expect(await cronus.locator(cells).allTextContents()).toEqual(
+        await react.locator(cells).allTextContents(),
+      );
+      await expectZeroJs(page);
+    }
+  });
+
+  test("scroll-nav links jump to section ids and the first term is current", async ({ page }) => {
+    await page.goto(auditUrl("scroll-nav", "default"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="scroll-nav"]');
+    const cronus = cronusFrame(page).locator('[data-slot="scroll-nav"]');
+    for (const side of [react, cronus]) {
+      await expect(side).toHaveCount(1);
+      expect(await side.evaluate((el) => el.tagName)).toBe("DIV");
+      await expect(side.locator("h1")).toHaveText("Terms & Conditions");
+      const links = side.locator('nav[aria-label="Sections"] a');
+      await expect(links).toHaveText(["Acceptance", "Privacy"]);
+      expect(await links.evaluateAll((els) => els.map((el) => el.getAttribute("href")))).toEqual([
+        "#acceptance",
+        "#privacy",
+      ]);
+      await expect(links.first()).toHaveAttribute("aria-current", "location");
+      expect(await links.nth(1).getAttribute("aria-current")).toBeNull();
+      await expect(side.locator("section#acceptance > h2")).toHaveText("Acceptance");
+      await expect(side.locator("section#privacy > div")).toHaveText(
+        "We store only what the product needs.",
+      );
+    }
+    await expectZeroJs(page);
+  });
+
+  test("slide-up-text keeps the phrase for screen readers and splits the same units", async ({
+    page,
+  }) => {
+    const pieces = ':scope > [aria-hidden="true"] > span';
+    for (const [fixture, phrase, units] of [
+      ["default", "Ship faster with Cronus", 4],
+      ["characters", "Hello world", 2],
+    ] as const) {
+      await page.goto(auditUrl("slide-up-text", fixture));
+      const react = page.locator('[data-audit-side="react"] [data-slot="slide-up-text"]');
+      const cronus = cronusFrame(page).locator('[data-slot="slide-up-text"]');
+      for (const side of [react, cronus]) {
+        await expect(side).toHaveCount(1);
+        expect(await side.evaluate((el) => el.tagName)).toBe("SPAN");
+        await expect(side.locator(":scope > span").first()).toHaveText(phrase);
+        await expect(side.locator(':scope > [aria-hidden="true"]')).toHaveCount(units);
+      }
+      expect(await cronus.locator(pieces).allTextContents()).toEqual(
+        await react.locator(pieces).allTextContents(),
+      );
+      await expectZeroJs(page);
+    }
+  });
+
   test("toast is a visible div with data-slot toast, not toaster-only empty", async ({ page }) => {
     await page.goto("/audit/toast?fixture=default&preset=aurora&mode=dark");
     const react = page.locator('[data-audit-side="react"] [data-slot="toast"]');
@@ -2133,6 +2285,266 @@ test.describe("logic parity", () => {
     await expect(cronusFrame(page).locator('[data-slot="workspace-switcher-control"]')).toHaveCount(
       0,
     );
+  });
+
+  test("tabs/default: radio labels switch panels without JS", async ({ page }) => {
+    await page.goto(auditUrl("tabs", "default"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="tabs"]');
+    const cronus = cronusFrame(page).locator('[data-slot="tabs"]');
+    for (const side of [react, cronus]) {
+      await expect(side.locator('[data-slot="tabs-trigger"]')).toHaveCount(3);
+      expect(
+        await side
+          .locator('[data-slot="tabs-trigger"]')
+          .first()
+          .evaluate((el) => el.tagName),
+      ).toBe("BUTTON");
+      await expect(side.locator('[data-slot="tabs-content"]:visible')).toHaveText(
+        "Manage your account details.",
+      );
+    }
+    await expect(react.locator('[data-slot="tabs-trigger"]').first()).toHaveAttribute(
+      "data-state",
+      "active",
+    );
+    await expect(cronus.locator('[data-slot="tabs-list"] input[type="radio"]:checked')).toHaveCount(
+      1,
+    );
+    await cronus.locator('[data-slot="tabs-list"] > label').nth(2).click();
+    await expect(cronus.locator('[data-slot="tabs-content"]:visible')).toHaveText(
+      "Invite teammates.",
+    );
+    await expect(cronus.locator('[data-slot="tabs-list"] input').nth(2)).toBeChecked();
+    await cronus.locator('[data-slot="tabs-list"] input').nth(2).press("ArrowLeft");
+    await expect(cronus.locator('[data-slot="tabs-content"]:visible')).toHaveText(
+      "Change your password.",
+    );
+    await expectZeroJs(page);
+  });
+
+  test("tabs/second: value selects the second tab on both sides", async ({ page }) => {
+    await page.goto(auditUrl("tabs", "second"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="tabs"]');
+    const cronus = cronusFrame(page).locator('[data-slot="tabs"]');
+    await expect(react.locator('[data-slot="tabs-content"]:visible')).toHaveText(
+      "Change your password.",
+    );
+    await expect(cronus.locator('[data-slot="tabs-content"]:visible')).toHaveText(
+      "Change your password.",
+    );
+    await expect(cronus.locator('[data-slot="tabs-list"] input').nth(1)).toBeChecked();
+  });
+
+  test("accordion/default: first item open; single-mode labels switch items without JS", async ({
+    page,
+  }) => {
+    await page.goto(auditUrl("accordion", "default"));
+    const react = page.locator('[data-audit-side="react"] [data-audit-canvas]');
+    const cronus = cronusFrame(page).locator("[data-audit-canvas]");
+    for (const side of [react, cronus]) {
+      await expect(side.locator('[data-slot="accordion-item"]')).toHaveCount(2);
+      expect(
+        await side
+          .locator('[data-slot="accordion-trigger"]')
+          .first()
+          .evaluate((el) => el.tagName),
+      ).toBe("BUTTON");
+      await expect(side.locator('[data-slot="accordion-content"]:visible')).toHaveText(
+        "Yes. It follows the WAI-ARIA disclosure pattern.",
+      );
+    }
+    const first = cronus.locator('[data-slot="accordion-item"]').nth(0);
+    const second = cronus.locator('[data-slot="accordion-item"]').nth(1);
+    await second.locator("h3 > label:not([for])").click();
+    await expect(second.locator('[data-slot="accordion-content"]')).toBeVisible();
+    await expect(second.locator("h3 input")).toBeChecked();
+    // Single mode: opening the second item closes the first.
+    await expect(first.locator('[data-slot="accordion-content"]')).toBeHidden();
+    await expectZeroJs(page);
+  });
+
+  test("accordion/second-open: value opens the matching item on both sides", async ({ page }) => {
+    await page.goto(auditUrl("accordion", "second-open"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="accordion-content"]:visible');
+    const cronus = cronusFrame(page).locator('[data-slot="accordion-content"]:visible');
+    await expect(react).toHaveText("Every color, radius and shadow flows from tokens.");
+    await expect(cronus).toHaveText("Every color, radius and shadow flows from tokens.");
+  });
+
+  test("dialog/default: open content is a div role=dialog, not a native dialog", async ({
+    page,
+  }) => {
+    await page.goto(auditUrl("dialog", "default"));
+    const react = page.locator('[data-slot="dialog-content"]');
+    const cronus = cronusFrame(page).locator('[data-slot="dialog-content"]');
+    for (const side of [react, cronus]) {
+      await expect(side).toHaveCount(1);
+      expect(await side.evaluate((el) => el.tagName)).toBe("DIV");
+      await expect(side).toHaveAttribute("role", "dialog");
+      await expect(side.locator('[data-slot="dialog-title"]')).toHaveText("Edit profile");
+      await expect(side.locator('[data-slot="dialog-description"]')).toHaveText(
+        "Update your display name.",
+      );
+      await expect(side.locator('[data-slot="dialog-close"]')).toHaveCount(1);
+    }
+    await expect(cronusFrame(page).locator("dialog")).toHaveCount(0);
+    await expect(cronus.locator('[data-slot="dialog-footer"] [data-slot="button"]')).toBeDisabled();
+    await expectZeroJs(page);
+  });
+
+  test("tooltip/default: outline button trigger describes a role=tooltip hint", async ({
+    page,
+  }) => {
+    await page.goto(auditUrl("tooltip", "default"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="button"]');
+    const cronus = cronusFrame(page).locator('[data-slot="button"]');
+    for (const side of [react, cronus]) {
+      await expect(side).toHaveText("Need help?");
+      await expect(side).toHaveAttribute("data-variant", "outline");
+    }
+    await expect(page.locator('[data-slot="tooltip-content"]')).toBeVisible();
+    const content = cronusFrame(page).locator('[data-slot="tooltip-content"]');
+    await expect(content).toHaveAttribute("role", "tooltip");
+    await expect(content).toHaveText("We usually reply within minutes.");
+    await expect(content).toBeHidden();
+    const id = await content.getAttribute("id");
+    await expect(cronus).toHaveAttribute("aria-describedby", id ?? "missing");
+    await expectZeroJs(page);
+  });
+
+  test("select/default: closed combobox trigger shows the placeholder", async ({ page }) => {
+    await page.goto(auditUrl("select", "default"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="select-trigger"]');
+    const cronus = cronusFrame(page).locator('[data-slot="select-trigger"]');
+    for (const side of [react, cronus]) {
+      expect(await side.evaluate((el) => el.tagName)).toBe("BUTTON");
+      await expect(side).toHaveAttribute("role", "combobox");
+      await expect(side).toHaveAttribute("aria-expanded", "false");
+      await expect(side).toHaveAttribute("data-placeholder", "");
+      await expect(side).toHaveText("Select a plan");
+    }
+    // Zero-JS kernel: the trigger opens a native popover listbox.
+    await expect(cronus).toBeEnabled();
+    await expect(cronus).toHaveAttribute("popovertarget", /.+/);
+    await expectZeroJs(page);
+  });
+
+  test("number-input/default: spinbutton field between stepper buttons", async ({ page }) => {
+    await page.goto(auditUrl("number-input", "default"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="number-input"]');
+    const cronus = cronusFrame(page).locator('[data-slot="number-input"]');
+    for (const side of [react, cronus]) {
+      const field = side.locator('[data-slot="number-input-field"]');
+      await expect(field).toHaveAttribute("role", "spinbutton");
+      await expect(field).toHaveValue("5");
+      await expect(field).toHaveAttribute("aria-label", "Quantity");
+      for (const slot of ["number-input-decrement", "number-input-increment"]) {
+        expect(await side.locator(`[data-slot="${slot}"]`).evaluate((el) => el.tagName)).toBe(
+          "BUTTON",
+        );
+      }
+    }
+    await expect(cronus.locator('[data-slot="number-input-increment"]')).toBeDisabled();
+    await cronus.locator('[data-slot="number-input-field"]').fill("7");
+    await expect(cronus.locator('[data-slot="number-input-field"]')).toHaveValue("7");
+    await expectZeroJs(page);
+  });
+
+  test("password-input/default: password field with an eye toggle", async ({ page }) => {
+    await page.goto(auditUrl("password-input", "default"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="password-input"]');
+    const cronus = cronusFrame(page).locator('[data-slot="password-input"]');
+    for (const side of [react, cronus]) {
+      const input = side.locator('[data-slot="input"]');
+      await expect(input).toHaveAttribute("type", "password");
+      await expect(input).toHaveAttribute("placeholder", "Enter your password");
+      const toggle = side.locator('[data-slot="password-input-toggle"]');
+      await expect(toggle).toHaveAttribute("aria-pressed", "false");
+      await expect(toggle).toHaveAttribute("aria-label", "Show password");
+    }
+    await expect(cronus.locator('[data-slot="password-input-toggle"]')).toBeDisabled();
+    await expectZeroJs(page);
+  });
+
+  test("pagination/default: data-driven page links with equal hrefs", async ({ page }) => {
+    await page.goto(auditUrl("pagination", "default"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="pagination"]');
+    const cronus = cronusFrame(page).locator('[data-slot="pagination"]');
+    const hrefs = (side: typeof react) =>
+      side
+        .locator("a")
+        .evaluateAll((links) =>
+          links.map((a) => `${a.getAttribute("data-slot")} ${a.getAttribute("href")}`),
+        );
+    expect(await hrefs(cronus)).toEqual(await hrefs(react));
+    for (const side of [react, cronus]) {
+      expect(await side.evaluate((el) => el.tagName)).toBe("NAV");
+      await expect(side.locator('[data-slot="pagination-link"]')).toHaveCount(5);
+      await expect(side.locator('[aria-current="page"]')).toHaveText("2");
+      await expect(side.locator('[data-slot="pagination-previous"]')).toHaveAttribute(
+        "href",
+        "?page=1",
+      );
+      await expect(side.locator('[data-slot="pagination-next"]')).toHaveAttribute(
+        "href",
+        "?page=3",
+      );
+    }
+    await expectZeroJs(page);
+  });
+
+  test("pagination/many: first, window and last pages with two ellipses", async ({ page }) => {
+    await page.goto(auditUrl("pagination", "many"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="pagination"]');
+    const cronus = cronusFrame(page).locator('[data-slot="pagination"]');
+    for (const side of [react, cronus]) {
+      await expect(side.locator('[data-slot="pagination-link"]')).toHaveText([
+        "1",
+        "4",
+        "5",
+        "6",
+        "10",
+      ]);
+      await expect(side.locator('[data-slot="pagination-ellipsis"]')).toHaveCount(2);
+    }
+  });
+
+  test("breadcrumb/default: nav > ol with the last crumb as the page", async ({ page }) => {
+    await page.goto(auditUrl("breadcrumb", "default"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="breadcrumb"]');
+    const cronus = cronusFrame(page).locator('[data-slot="breadcrumb"]');
+    for (const side of [react, cronus]) {
+      expect(await side.evaluate((el) => el.tagName)).toBe("NAV");
+      await expect(side).toHaveAttribute("aria-label", "breadcrumb");
+      await expect(side.locator('[data-slot="breadcrumb-link"]')).toHaveText([
+        "Home",
+        "Components",
+      ]);
+      await expect(side.locator('[data-slot="breadcrumb-page"]')).toHaveAttribute(
+        "aria-current",
+        "page",
+      );
+      await expect(side.locator('[data-slot="breadcrumb-separator"]')).toHaveCount(2);
+    }
+    await expectZeroJs(page);
+  });
+
+  test("table/default: focusable region with header and body rows", async ({ page }) => {
+    await page.goto(auditUrl("table", "default"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="table-container"]');
+    const cronus = cronusFrame(page).locator('[data-slot="table-container"]');
+    for (const side of [react, cronus]) {
+      expect(await side.locator('[data-slot="table"]').evaluate((el) => el.tagName)).toBe("TABLE");
+      await expect(side).toHaveAttribute("tabindex", "0");
+      await expect(side.locator('[data-slot="table-head"]')).toHaveText([
+        "Invoice",
+        "Status",
+        "Amount",
+      ]);
+      await expect(side.locator('[data-slot="table-body"] [data-slot="table-row"]')).toHaveCount(2);
+      await expect(side.locator('[data-slot="table-cell"]')).toHaveCount(6);
+    }
+    await expectZeroJs(page);
   });
 
   test("root data-slot boxes match within 2px", async ({ page }) => {
@@ -2192,5 +2604,183 @@ test.describe("logic parity", () => {
     });
     expect(reactRing).not.toMatch(/none none|none rgb\(0, 0, 0\) 0px 0px 0px 0px/);
     expect(cronusRing.includes("none") && !cronusRing.match(/\d+px/)).toBeFalsy();
+  });
+
+  // Sprint 5 C2 — AI suite (alphabetical).
+  test("conversation/default: role=log with alternating user/assistant turns", async ({ page }) => {
+    await page.goto(auditUrl("conversation", "default"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="conversation"]');
+    const cronus = cronusFrame(page).locator('[data-slot="conversation"]');
+    for (const side of [react, cronus]) {
+      const log = side.locator('[data-slot="conversation-content"]');
+      await expect(log).toHaveAttribute("role", "log");
+      await expect(log).toHaveAttribute("aria-live", "polite");
+      await expect(log).toHaveAttribute("aria-relevant", "additions");
+      const turns = side.locator('[data-slot="message"]');
+      await expect(turns).toHaveCount(2);
+      await expect(turns.nth(0)).toHaveAttribute("data-from", "user");
+      await expect(turns.nth(1)).toHaveAttribute("data-from", "assistant");
+      await expect(turns.nth(0)).toHaveText("What is Cronus?");
+      await expect(side.locator('[data-slot="conversation-scroll-button"]')).toHaveCount(0);
+    }
+    await expectZeroJs(page);
+  });
+
+  test("inline-citation/default: closed badge trigger; card body shows on hover without JS", async ({
+    page,
+  }) => {
+    await page.goto(auditUrl("inline-citation", "default"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="inline-citation"]');
+    const cronus = cronusFrame(page).locator('[data-slot="inline-citation"]');
+    for (const side of [react, cronus]) {
+      expect(await side.evaluate((el) => el.tagName)).toBe("SPAN");
+      await expect(side.locator('[data-slot="inline-citation-text"]')).toHaveText(
+        "Cronus compiles to a single binary.",
+      );
+      const trigger = side.locator('[data-slot="inline-citation-card-trigger"]');
+      await expect(trigger).toHaveText("cronus.dev +1");
+      await expect(trigger).toHaveAttribute("role", "button");
+      await expect(trigger).toHaveAttribute("tabindex", "0");
+      await expect(trigger).toHaveAttribute("data-variant", "secondary");
+      await expect(trigger).toHaveAttribute("data-state", "closed");
+    }
+    await expect(page.locator('[data-slot="inline-citation-card-body"]')).toHaveCount(0);
+    const body = cronus.locator('[data-slot="inline-citation-card-body"]');
+    await expect(body).toBeHidden();
+    await cronus.locator('[data-slot="inline-citation-card-trigger"]').hover();
+    await expect(body).toBeVisible();
+    await expect(body.locator('[data-slot="inline-citation-source"]')).toHaveCount(2);
+    await expectZeroJs(page);
+  });
+
+  test("message/default: data-from on a div with the content text", async ({ page }) => {
+    await page.goto(auditUrl("message", "default"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="message"]');
+    const cronus = cronusFrame(page).locator('[data-slot="message"]');
+    for (const side of [react, cronus]) {
+      expect(await side.evaluate((el) => el.tagName)).toBe("DIV");
+      await expect(side).toHaveAttribute("data-from", "user");
+      await expect(side.locator('[data-slot="message-content"]')).toHaveText(
+        "Can you summarize the release notes?",
+      );
+    }
+    await expectZeroJs(page);
+  });
+
+  test("prompt-input/default: real form posts the message without JS", async ({
+    page,
+    browser,
+  }) => {
+    await page.goto(auditUrl("prompt-input", "default"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="prompt-input"]');
+    const frame = cronusFrame(page);
+    const cronus = frame.locator('[data-slot="prompt-input"]');
+    for (const side of [react, cronus]) {
+      expect(await side.evaluate((el) => el.tagName)).toBe("FORM");
+      await expect(side).toHaveAttribute("action", "/chat");
+      await expect(side).toHaveAttribute("method", "post");
+      const textarea = side.locator('[data-slot="prompt-input-textarea"]');
+      await expect(textarea).toHaveAttribute("name", "message");
+      await expect(textarea).toHaveAttribute("placeholder", "What would you like to know?");
+      const submit = side.locator('[data-slot="prompt-input-submit"]');
+      await expect(submit).toHaveAttribute("type", "submit");
+      await expect(submit).toHaveAttribute("aria-label", "Submit");
+      await expect(submit).toBeEnabled();
+    }
+    await expectZeroJs(page);
+    // The audit iframe is sandbox="allow-scripts" (no allow-forms), which blocks
+    // any form submission. Open the kernel page top-level with JavaScript
+    // disabled instead: the form must still post the typed message.
+    const src = await page.locator('[data-audit-side="cronus"] iframe').getAttribute("src");
+    expect(src).toBeTruthy();
+    const noJs = await browser.newContext({ javaScriptEnabled: false });
+    try {
+      const kernel = await noJs.newPage();
+      await kernel.goto(src ?? "");
+      await kernel.locator('[data-slot="prompt-input-textarea"]').fill("hello");
+      const posted = kernel.waitForRequest(
+        (req) => req.method() === "POST" && new URL(req.url()).pathname === "/chat",
+      );
+      await kernel.locator('[data-slot="prompt-input-submit"]').click();
+      expect((await posted).postData()).toBe("message=hello");
+    } finally {
+      await noJs.close();
+    }
+  });
+
+  test("reasoning/default: open state, duration label, trigger disabled in the kernel", async ({
+    page,
+  }) => {
+    await page.goto(auditUrl("reasoning", "default"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="reasoning"]');
+    const cronus = cronusFrame(page).locator('[data-slot="reasoning"]');
+    for (const side of [react, cronus]) {
+      await expect(side).toHaveAttribute("data-state", "open");
+      const trigger = side.locator('[data-slot="reasoning-trigger"]');
+      expect(await trigger.evaluate((el) => el.tagName)).toBe("BUTTON");
+      await expect(trigger).toHaveAttribute("aria-expanded", "true");
+      await expect(trigger).toHaveText("Thought for 3 seconds");
+      await expect(
+        side.locator('[data-slot="reasoning-content"] [data-slot="response"]'),
+      ).toHaveText("The user wants a summary, so list the three biggest changes first.");
+    }
+    await expect(cronus.locator('[data-slot="reasoning-trigger"]')).toBeDisabled();
+    await expectZeroJs(page);
+  });
+
+  test("sources/default: trigger count and real new-tab links", async ({ page }) => {
+    await page.goto(auditUrl("sources", "default"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="sources"]');
+    const cronus = cronusFrame(page).locator('[data-slot="sources"]');
+    for (const side of [react, cronus]) {
+      await expect(side).toHaveAttribute("data-state", "open");
+      await expect(side.locator('[data-slot="sources-trigger"]')).toHaveText("Used 2 sources");
+      const links = side.locator('[data-slot="source"]');
+      await expect(links).toHaveCount(2);
+      await expect(links.nth(0)).toHaveAttribute("href", "https://cronus.dev/docs");
+      await expect(links.nth(0)).toHaveAttribute("target", "_blank");
+      await expect(links.nth(0)).toHaveAttribute("rel", "noreferrer");
+      await expect(links.nth(1)).toHaveText("Release notes");
+    }
+    await expectZeroJs(page);
+  });
+
+  test("suggestion/default: labelled scroll region of outline buttons", async ({ page }) => {
+    await page.goto(auditUrl("suggestion", "default"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="suggestions"]');
+    const cronus = cronusFrame(page).locator('[data-slot="suggestions"]');
+    for (const side of [react, cronus]) {
+      expect(await side.evaluate((el) => el.tagName)).toBe("SECTION");
+      await expect(side).toHaveAttribute("aria-label", "Suggestions");
+      await expect(side).toHaveAttribute("tabindex", "0");
+      const buttons = side.locator('[data-slot="suggestion"]');
+      await expect(buttons).toHaveText(["What is Cronus?", "How do I deploy?", "Show an example"]);
+      await expect(buttons.first()).toHaveAttribute("data-variant", "outline");
+      await expect(buttons.first()).toHaveAttribute("type", "button");
+    }
+    // Picking a suggestion is a JS callback: native disabled button in the kernel.
+    await expect(cronus.locator('[data-slot="suggestion"]').first()).toBeDisabled();
+    await expectZeroJs(page);
+  });
+
+  test("tool/default: header name, error badge and error output", async ({ page }) => {
+    await page.goto(auditUrl("tool", "default"));
+    const react = page.locator('[data-audit-side="react"] [data-slot="tool"]');
+    const cronus = cronusFrame(page).locator('[data-slot="tool"]');
+    for (const side of [react, cronus]) {
+      await expect(side).toHaveAttribute("data-state", "open");
+      const header = side.locator('[data-slot="tool-header"]');
+      await expect(header).toHaveAttribute("aria-expanded", "true");
+      await expect(header).toHaveText("web-searchError");
+      await expect(header.locator('[data-slot="badge"]')).toHaveAttribute(
+        "data-variant",
+        "secondary",
+      );
+      await expect(side.locator('[data-slot="tool-output"]')).toHaveText(
+        "ErrorRequest timed out after 30s",
+      );
+    }
+    await expect(cronus.locator('[data-slot="tool-header"]')).toBeDisabled();
+    await expectZeroJs(page);
   });
 });

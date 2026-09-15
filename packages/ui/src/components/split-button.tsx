@@ -121,7 +121,7 @@ export const SplitButton = forwardRef<HTMLDivElement, SplitButtonProps>(
           size={size}
           disabled={isDisabled}
           onClick={onClick}
-          className="relative rounded-r-none border-r-0 focus-visible:z-10"
+          className="relative rounded-e-none border-e-0 focus-visible:z-10"
         >
           {loading ? <Spinner size="sm" aria-hidden /> : icon}
           {children}
@@ -141,9 +141,9 @@ export const SplitButton = forwardRef<HTMLDivElement, SplitButtonProps>(
               disabled={isDisabled}
               aria-label={menuLabel}
               className={cn(
-                "relative aspect-square rounded-l-none border-l-0 px-0 focus-visible:z-10",
+                "relative aspect-square rounded-s-none border-s-0 px-0 focus-visible:z-10",
                 // hairline seam between the two segments (currentColor, tint-agnostic)
-                "before:pointer-events-none before:absolute before:inset-y-2 before:left-0 before:w-px before:bg-current/15 before:content-['']",
+                "before:pointer-events-none before:absolute before:inset-y-2 before:start-0 before:w-px before:bg-current/15 before:content-['']",
                 // chevron flips open; motion-reduce keeps it static
                 "[&>svg]:transition-transform [&>svg]:duration-200 [&>svg]:ease-[var(--ease-out-quart)] data-[state=open]:[&>svg]:rotate-180 motion-reduce:[&>svg]:transition-none",
               )}

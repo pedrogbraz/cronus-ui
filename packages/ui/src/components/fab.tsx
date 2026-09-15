@@ -31,7 +31,7 @@ export interface FabProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  * A floating action button: a prominent, round, solid-primary button that
  * surfaces the primary action of a view. Positioning is left to the consumer —
  * the component renders a `relative inline-flex` wrapper, so add e.g.
- * `className="fixed bottom-6 right-6"` to pin it.
+ * `className="fixed bottom-6 end-6"` to pin it.
  *
  * When {@link FabProps.actions} are supplied it becomes a speed-dial: clicking
  * the FAB toggles a vertical stack of smaller round action buttons above it,
@@ -52,7 +52,7 @@ export const Fab = forwardRef<HTMLButtonElement, FabProps>(
             {open && (
               <motion.ul
                 data-slot="fab-actions"
-                className="absolute bottom-full right-0 mb-3 flex list-none flex-col items-end gap-3"
+                className="absolute bottom-full end-0 mb-3 flex list-none flex-col items-end gap-3"
                 initial={reducedMotion ? false : "hidden"}
                 animate="visible"
                 exit={reducedMotion ? undefined : "hidden"}

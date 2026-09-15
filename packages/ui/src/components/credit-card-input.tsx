@@ -19,7 +19,7 @@ import { cn } from "../lib/cn.js";
  * brand detection from the IIN/prefix), expiry (MM/YY auto-slash), and CVC
  * (3–4 digits depending on brand). Values are validated with the Luhn algorithm,
  * a not-in-the-past expiry check, and a brand-correct CVC length, then surfaced
- * through a single `onChange({ number, expiry, cvc, brand, complete, valid })`.
+ * through a single `onValueChange({ number, expiry, cvc, brand, complete, valid })`.
  *
  * Behaviour:
  * - Brand is detected as the user types and rendered as a monochrome glyph; the
@@ -37,13 +37,13 @@ import { cn } from "../lib/cn.js";
  * NOT a PCI vault. It never stores, logs, autofill-persists, or transmits the
  * PAN/CVC. Autocomplete is disabled and no `name` attributes are emitted. Send
  * card data straight to a compliant tokenizer (e.g. a payment iframe/SDK); do
- * not read it back out of `onChange` into your own persistence or telemetry.
+ * not read it back out of `onValueChange` into your own persistence or telemetry.
  */
 
 /** A payment network detected from the card's IIN/prefix. */
 export type CardBrand = "visa" | "mastercard" | "amex" | "elo" | "discover" | "unknown";
 
-/** The parsed, validated snapshot emitted by {@link CreditCardInput} `onChange`. */
+/** The parsed, validated snapshot emitted by {@link CreditCardInput} `onValueChange`. */
 export interface CreditCardValue {
   /** Digits only, no spaces (the raw PAN — treat as sensitive). */
   number: string;
@@ -258,6 +258,11 @@ export interface CreditCardInputProps extends Omit<HTMLAttributes<HTMLDivElement
    * Fires on every keystroke with the parsed, validated card value.
    * Display-side only — do not persist, log, or transmit the raw PAN/CVC.
    */
+  onValueChange?: (value: CreditCardValue) => void;
+  /**
+   * @deprecated Use `onValueChange`. Kept as an alias for one minor release;
+   * ignored when `onValueChange` is also provided.
+   */
   onChange?: (value: CreditCardValue) => void;
   /** Forces the invalid styling and sets `aria-invalid` on every field. */
   invalid?: boolean;
@@ -288,6 +293,7 @@ export const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
       className,
       label = "Credit card",
       defaultNumber,
+      onValueChange,
       onChange,
       invalid = false,
       disabled = false,
@@ -308,9 +314,10 @@ export const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
     const cvcInputRef = useRef<HTMLInputElement>(null);
     const numberInputRef = useRef<HTMLInputElement>(null);
     const prevExpiry = useRef("");
-    const onChangeRef = useRef(onChange);
+    // `onValueChange` wins; the deprecated `onChange` alias is the fallback.
+    const onValueChangeRef = useRef(onValueChange ?? onChange);
     useEffect(() => {
-      onChangeRef.current = onChange;
+      onValueChangeRef.current = onValueChange ?? onChange;
     });
 
     const errorId = useId();
@@ -342,7 +349,7 @@ export const CreditCardInput = forwardRef<HTMLDivElement, CreditCardInputProps>(
     }, [numberDigits, expiryDigits, cvcDigits, cardType]);
 
     useEffect(() => {
-      onChangeRef.current?.(value);
+      onValueChangeRef.current?.(value);
     }, [value]);
 
     const handleNumberChange = (event: ChangeEvent<HTMLInputElement>) => {

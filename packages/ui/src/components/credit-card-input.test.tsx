@@ -30,9 +30,9 @@ describe("CreditCardInput", () => {
     expect(screen.getByRole("textbox", { name: /CVC/ })).toBeInTheDocument();
   });
 
-  it("formats, detects the brand, and validates a full card via onChange", async () => {
+  it("formats, detects the brand, and validates a full card via onValueChange", async () => {
     const onChange = vi.fn<(value: CreditCardValue) => void>();
-    render(<CreditCardInput onChange={onChange} />);
+    render(<CreditCardInput onValueChange={onChange} />);
 
     const number = screen.getByRole("textbox", { name: "Card number" });
     await userEvent.type(number, "4242424242424242");
@@ -57,7 +57,7 @@ describe("CreditCardInput", () => {
     });
   });
 
-  it("rejects a number that fails the Luhn checksum", async () => {
+  it("rejects a number that fails the Luhn checksum (deprecated onChange alias)", async () => {
     const onChange = vi.fn<(value: CreditCardValue) => void>();
     render(<CreditCardInput onChange={onChange} />);
 
@@ -69,6 +69,17 @@ describe("CreditCardInput", () => {
     expect(last?.brand).toBe("visa");
     expect(last?.complete).toBe(true);
     expect(last?.valid).toBe(false);
+  });
+
+  it("prefers onValueChange over the deprecated onChange alias when both are set", async () => {
+    const onValueChange = vi.fn<(value: CreditCardValue) => void>();
+    const onChange = vi.fn<(value: CreditCardValue) => void>();
+    render(<CreditCardInput onValueChange={onValueChange} onChange={onChange} />);
+
+    await userEvent.type(screen.getByRole("textbox", { name: "Card number" }), "4242");
+
+    expect(onValueChange.mock.calls.at(-1)?.[0]).toMatchObject({ number: "4242", brand: "visa" });
+    expect(onChange).not.toHaveBeenCalled();
   });
 
   it("surfaces an error message via role=alert", () => {

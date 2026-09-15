@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "suggestion",
+  "props": {
+    "options": ["What is Cronus?", "How do I deploy?", "Show an example"]
+  },
+  "expect": {
+    "slot": "suggestions",
+    "tag": "section",
+    "attrs": {
+      "data-slot": "suggestions",
+      "aria-label": "Suggestions"
+    }
+  }
+}

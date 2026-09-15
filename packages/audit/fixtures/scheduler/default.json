@@ -4,6 +4,7 @@
   "props": {
     "label": "June 2026",
     "defaultMonth": "2026-06-01",
+    "today": "2026-06-15",
     "items": ["Launch call", "Webinar"]
   },
   "expect": {

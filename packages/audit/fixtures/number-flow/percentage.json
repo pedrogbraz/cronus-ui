@@ -1,0 +1,17 @@
+{
+  "id": "percentage",
+  "family": "number-flow",
+  "props": {
+    "value": 0.425,
+    "format": "percentage",
+    "locale": "de-DE"
+  },
+  "expect": {
+    "slot": "number-flow",
+    "tag": "span",
+    "attrs": {
+      "data-slot": "number-flow",
+      "role": "img"
+    }
+  }
+}

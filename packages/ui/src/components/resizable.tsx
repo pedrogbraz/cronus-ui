@@ -94,14 +94,14 @@ export function ResizableHandle({
         "relative flex w-px items-center justify-center bg-border",
         "transition-colors duration-150 ease-[var(--ease-out-quart)]",
         // The actual interactive band straddles the line so it is easy to grab.
-        "after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2",
+        "after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2", // contract-ok: centred with -translate-x-1/2, a physical pair with no logical equivalent
         // Highlight on hover + keyboard focus with the focus-ring colour.
         "hover:bg-ring focus-visible:bg-ring",
         "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
         "data-[resize-handle-state=drag]:bg-ring",
         // Vertical groups: rotate the geometry (full width, 1px tall, grip turned).
         "data-[panel-group-direction=vertical]:h-px data-[panel-group-direction=vertical]:w-full",
-        "data-[panel-group-direction=vertical]:after:inset-x-0 data-[panel-group-direction=vertical]:after:left-0 data-[panel-group-direction=vertical]:after:top-1/2 data-[panel-group-direction=vertical]:after:h-1 data-[panel-group-direction=vertical]:after:w-full data-[panel-group-direction=vertical]:after:-translate-y-1/2 data-[panel-group-direction=vertical]:after:translate-x-0",
+        "data-[panel-group-direction=vertical]:after:inset-x-0 data-[panel-group-direction=vertical]:after:left-0 data-[panel-group-direction=vertical]:after:top-1/2 data-[panel-group-direction=vertical]:after:h-1 data-[panel-group-direction=vertical]:after:w-full data-[panel-group-direction=vertical]:after:-translate-y-1/2 data-[panel-group-direction=vertical]:after:translate-x-0", // contract-ok: resets the physical left-1/2 centring above
         "[&[data-panel-group-direction=vertical]>div]:rotate-90",
         className,
       )}

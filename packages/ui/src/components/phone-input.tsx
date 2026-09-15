@@ -166,11 +166,16 @@ export interface PhoneInputProps
     InputHTMLAttributes<HTMLInputElement>,
     "value" | "defaultValue" | "onChange" | "type"
   > {
-  /** Controlled value as an E.164 string (e.g. `"+5511987654321"`). Pair with `onChange`. */
+  /** Controlled value as an E.164 string (e.g. `"+5511987654321"`). Pair with `onValueChange`. */
   value?: string;
   /** Initial E.164 (or bare national) value for uncontrolled usage. */
   defaultValue?: string;
   /** Called with the full E.164 string on every edit; empty string when no number is entered. */
+  onValueChange?: (value: string) => void;
+  /**
+   * @deprecated Use `onValueChange`. Kept as an alias for one minor release;
+   * ignored when `onValueChange` is also provided.
+   */
   onChange?: (value: string) => void;
   /** ISO 3166-1 alpha-2 code selected on first render. Defaults to `"BR"`. */
   defaultCountry?: string;
@@ -195,13 +200,13 @@ export interface PhoneInputProps
 /**
  * An international phone input: a searchable country selector (flag + dial code)
  * fused to a national-number field that auto-groups digits for the selected
- * country and emits the composed E.164 string via `onChange`.
+ * country and emits the composed E.164 string via `onValueChange`.
  *
  * Behavior & performance: digit grouping is computed with a lightweight
  * per-country pattern (no libphonenumber). The caret is preserved across
  * reformatting via a `useLayoutEffect` that reads a ref set during `onChange` —
  * no timers, intervals, or RAF are scheduled. Country selection and typing both
- * flow through `onChange`, so controlled and uncontrolled usage both work; a
+ * flow through `onValueChange`, so controlled and uncontrolled usage both work; a
  * synchronising effect keeps controlled state aligned without loops.
  *
  * Accessibility: the root is a labelled `role="group"`; the trigger is a
@@ -214,6 +219,7 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
     {
       value,
       defaultValue,
+      onValueChange,
       onChange,
       defaultCountry = "BR",
       countries = DEFAULT_PHONE_COUNTRIES,
@@ -304,9 +310,10 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
     const emit = useCallback(
       (code: string, nationalDigits: string) => {
         const dialCode = countryMap.get(code)?.dialCode ?? "";
-        onChange?.(nationalDigits ? `+${dialCode}${nationalDigits}` : "");
+        // `onValueChange` wins; the deprecated `onChange` alias is the fallback.
+        (onValueChange ?? onChange)?.(nationalDigits ? `+${dialCode}${nationalDigits}` : "");
       },
-      [countryMap, onChange],
+      [countryMap, onValueChange, onChange],
     );
 
     const handleNationalChange = useCallback(

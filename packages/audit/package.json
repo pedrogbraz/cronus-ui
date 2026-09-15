@@ -8,6 +8,22 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./emit": {
+      "types": "./dist/emit-cronus-fixture.d.ts",
+      "import": "./dist/emit-cronus-fixture.js"
+    },
+    "./fixtures": {
+      "types": "./dist/fixture-catalog.d.ts",
+      "import": "./dist/fixture-catalog.js"
+    },
+    "./preview-url": {
+      "types": "./dist/dual-preview-url.d.ts",
+      "import": "./dist/dual-preview-url.js"
+    },
+    "./scoreboard": {
+      "types": "./dist/scoreboard.d.ts",
+      "import": "./dist/scoreboard.js"
     }
   },
   "main": "./dist/index.js",
@@ -20,6 +36,7 @@
     "cli": "bun src/cli.ts",
     "inventory": "bun src/catalog-inventory.ts",
     "emit": "bun src/cli.ts emit",
+    "audit:scoreboard": "bun src/scoreboard-cli.ts",
     "audit:dev": "bun src/audit-dev.ts"
   },
   "dependencies": {

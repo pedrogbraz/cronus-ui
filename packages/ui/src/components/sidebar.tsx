@@ -286,7 +286,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
           data-side={side}
           className={cn(
             "flex h-svh w-(--sidebar-width) flex-col bg-surface-base text-fg",
-            side === "left" ? "border-r border-border" : "border-l border-border",
+            side === "left" ? "border-r border-border" : "border-l border-border", // contract-ok: keyed on the physical `side` prop
             className,
           )}
           {...props}
@@ -325,7 +325,7 @@ export const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
               ? "m-2 rounded-xl bg-surface-base"
               : cn(
                   "bg-surface-base",
-                  side === "left" ? "border-r border-border" : "border-l border-border",
+                  side === "left" ? "border-r border-border" : "border-l border-border", // contract-ok: keyed on the physical `side` prop
                 ),
           // Offcanvas collapse hides content while preserving layout flow.
           "data-[collapsible=offcanvas]:overflow-hidden data-[collapsible=offcanvas]:border-0",
@@ -415,7 +415,7 @@ export const SidebarRail = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HT
         tabIndex={-1}
         className={cn(
           "absolute inset-y-0 z-20 hidden w-3 -translate-x-1/2 cursor-col-resize transition-colors sm:flex",
-          "after:absolute after:inset-y-0 after:left-1/2 after:w-px after:bg-transparent hover:after:bg-border",
+          "after:absolute after:inset-y-0 after:left-1/2 after:w-px after:bg-transparent hover:after:bg-border", // contract-ok: centred with -translate-x-1/2, a physical pair with no logical equivalent
           "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
           "group-data-[side=left]/sidebar:right-0 group-data-[side=right]/sidebar:left-0",
           className,
@@ -446,7 +446,7 @@ export const SidebarInset = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEle
         data-slot="sidebar-inset"
         className={cn(
           "relative flex min-h-svh flex-1 flex-col bg-surface-base",
-          "md:m-2 md:ml-0 md:rounded-xl md:border md:border-border md:shadow-sm",
+          "md:m-2 md:ml-0 md:rounded-xl md:border md:border-border md:shadow-sm", // contract-ok: the sidebar is anchored physically (data-side), so the inset drops its physical left gap
           className,
         )}
         {...props}
@@ -623,7 +623,7 @@ SidebarMenuItem.displayName = "SidebarMenuItem";
 
 const sidebarMenuButtonVariants = cva(
   cn(
-    "group/menu-button peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md text-left text-sm",
+    "group/menu-button peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md text-start text-sm",
     "transition-[background,color,box-shadow] duration-150 ease-[var(--ease-out-quart)] motion-reduce:transition-none",
     "text-fg-secondary hover:bg-surface-inset hover:text-fg",
     "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base",
@@ -713,7 +713,7 @@ export const SidebarMenuSub = forwardRef<HTMLUListElement, HTMLAttributes<HTMLUL
         ref={ref}
         data-slot="sidebar-menu-sub"
         className={cn(
-          "ml-3.5 flex min-w-0 flex-col gap-1 border-l border-border pl-2.5 py-0.5",
+          "ms-3.5 flex min-w-0 flex-col gap-1 border-s border-border ps-2.5 py-0.5",
           "group-data-[collapsible=icon]/sidebar:hidden",
           className,
         )}

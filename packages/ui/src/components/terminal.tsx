@@ -167,7 +167,7 @@ function TerminalRow({
         {showCursor ? (
           <span
             data-slot="terminal-cursor"
-            className="ml-px inline-block h-[1.1em] w-[0.55em] translate-y-[0.18em] rounded-[1px] bg-fg animate-caret-blink"
+            className="ms-px inline-block h-[1.1em] w-[0.55em] translate-y-[0.18em] rounded-[1px] bg-fg animate-caret-blink"
           />
         ) : null}
       </span>
@@ -387,7 +387,7 @@ export const Terminal = forwardRef<HTMLDivElement, TerminalProps>(
               value={copyValue}
               size="icon-sm"
               aria-label="Copy commands"
-              className="absolute right-2 top-2 z-10 shrink-0 bg-surface-overlay/80 backdrop-blur-sm"
+              className="absolute end-2 top-2 z-10 shrink-0 bg-surface-overlay/80 backdrop-blur-sm"
             />
           ) : null}
           {/*

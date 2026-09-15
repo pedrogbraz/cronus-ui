@@ -1,0 +1,15 @@
+{
+  "id": "default",
+  "family": "inline-citation",
+  "props": {
+    "children": "Cronus compiles to a single binary.",
+    "options": ["https://cronus.dev/docs", "https://github.com/cooud/cronus"]
+  },
+  "expect": {
+    "slot": "inline-citation",
+    "tag": "span",
+    "attrs": {
+      "data-slot": "inline-citation"
+    }
+  }
+}
