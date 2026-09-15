@@ -1,0 +1,16 @@
+{
+  "id": "default",
+  "family": "number-flow",
+  "props": {
+    "value": 1234
+  },
+  "expect": {
+    "slot": "number-flow",
+    "tag": "span",
+    "attrs": {
+      "data-slot": "number-flow",
+      "role": "img",
+      "aria-label": "1,234"
+    }
+  }
+}

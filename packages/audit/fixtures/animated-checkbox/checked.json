@@ -1,0 +1,15 @@
+{
+  "id": "checked",
+  "family": "animated-checkbox",
+  "props": {
+    "title": "Ship the release",
+    "checked": true
+  },
+  "expect": {
+    "slot": "animated-checkbox",
+    "tag": "label",
+    "attrs": {
+      "data-slot": "animated-checkbox"
+    }
+  }
+}

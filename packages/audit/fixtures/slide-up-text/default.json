@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "slide-up-text",
+  "props": {
+    "children": "Ship faster with Cronus"
+  },
+  "expect": {
+    "slot": "slide-up-text",
+    "tag": "span",
+    "attrs": {
+      "data-slot": "slide-up-text"
+    }
+  }
+}

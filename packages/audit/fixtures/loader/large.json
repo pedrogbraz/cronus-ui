@@ -1,0 +1,17 @@
+{
+  "id": "large",
+  "family": "loader",
+  "props": {
+    "size": 32,
+    "aria-label": "Saving"
+  },
+  "expect": {
+    "slot": "loader",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "loader",
+      "role": "status",
+      "aria-label": "Saving"
+    }
+  }
+}
