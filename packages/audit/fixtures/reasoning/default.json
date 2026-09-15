@@ -1,0 +1,17 @@
+{
+  "id": "default",
+  "family": "reasoning",
+  "props": {
+    "children": "The user wants a summary, so list the three biggest changes first.",
+    "duration": 3,
+    "defaultOpen": true
+  },
+  "expect": {
+    "slot": "reasoning",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "reasoning",
+      "data-state": "open"
+    }
+  }
+}

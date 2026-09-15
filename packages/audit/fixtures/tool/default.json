@@ -1,0 +1,18 @@
+{
+  "id": "default",
+  "family": "tool",
+  "props": {
+    "type": "tool-web-search",
+    "state": "output-error",
+    "errorText": "Request timed out after 30s",
+    "defaultOpen": true
+  },
+  "expect": {
+    "slot": "tool",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "tool",
+      "data-state": "open"
+    }
+  }
+}
