@@ -109,6 +109,11 @@ const REACT_MOTION: Partial<Record<string, MotionSpec>> = {
     ready: '[data-slot="reveal"][style*="opacity: 1"][style*="transform: none"]',
     reason: "motion fadeInUp entrance runs in JS after useInView fires",
   },
+  "slide-up-text": {
+    // motion writes translateY(100%) on mount and `transform: none` when a piece lands.
+    ready: '[data-slot="slide-up-text"]:not(:has(span[style*="translateY"]))',
+    reason: "motion slides every word/character up on mount with a JS stagger",
+  },
 };
 
 type ReactScope =

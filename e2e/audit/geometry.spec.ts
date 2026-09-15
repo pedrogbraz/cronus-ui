@@ -185,6 +185,11 @@ const READY: Partial<Record<string, ReadySpec>> = {
     selector: ".recharts-label-list text",
     reason: "recharts Funnel mounts its LabelList only once isAnimationActive finishes",
   },
+  "slide-up-text": {
+    // motion writes translateY(100%) on mount and `transform: none` when a piece lands.
+    selector: '[data-slot="slide-up-text"]:not(:has(span[style*="translateY"]))',
+    reason: "motion slides every word/character up on mount with a JS stagger",
+  },
 };
 
 interface OverlaySpec {
