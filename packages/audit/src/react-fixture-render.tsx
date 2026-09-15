@@ -26,6 +26,7 @@ import {
   AlertDialogTitle,
 } from "@cronus-ui/ui/alert-dialog";
 import { AnimatedButton } from "@cronus-ui/ui/animated-button";
+import { AnimatedCheckbox } from "@cronus-ui/ui/animated-checkbox";
 import { AnimatedList } from "@cronus-ui/ui/animated-list";
 import { AnimatedNumber } from "@cronus-ui/ui/animated-number";
 import { AspectRatio } from "@cronus-ui/ui/aspect-ratio";
@@ -69,6 +70,7 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from "@cronus-ui/ui/context-menu";
+import { Conversation, ConversationContent } from "@cronus-ui/ui/conversation";
 import { CopyButton } from "@cronus-ui/ui/copy-button";
 import { Countdown } from "@cronus-ui/ui/countdown";
 import { DateRangePicker } from "@cronus-ui/ui/date-range-picker";
@@ -102,6 +104,14 @@ import { GridPattern } from "@cronus-ui/ui/grid-pattern";
 import { Highlighter } from "@cronus-ui/ui/highlighter";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@cronus-ui/ui/hover-card";
 import { ImageZoom } from "@cronus-ui/ui/image-zoom";
+import {
+  InlineCitation,
+  InlineCitationCard,
+  InlineCitationCardBody,
+  InlineCitationCardTrigger,
+  InlineCitationSource,
+  InlineCitationText,
+} from "@cronus-ui/ui/inline-citation";
 import { Input } from "@cronus-ui/ui/input";
 import { InputGroup, InputGroupAddon } from "@cronus-ui/ui/input-group";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@cronus-ui/ui/input-otp";
@@ -110,6 +120,7 @@ import { JsonViewer } from "@cronus-ui/ui/json-viewer";
 import { Kbd } from "@cronus-ui/ui/kbd";
 import { Label } from "@cronus-ui/ui/label";
 import { LightRays } from "@cronus-ui/ui/light-rays";
+import { Loader } from "@cronus-ui/ui/loader";
 import { LogoCarousel } from "@cronus-ui/ui/logo-carousel";
 import { Magnetic } from "@cronus-ui/ui/magnetic";
 import { Marquee } from "@cronus-ui/ui/marquee";
@@ -121,6 +132,7 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from "@cronus-ui/ui/menubar";
+import { Message, MessageContent } from "@cronus-ui/ui/message";
 import { Metric, MetricLabel, MetricValue } from "@cronus-ui/ui/metric";
 import {
   MorphingPopover,
@@ -135,6 +147,7 @@ import {
   NavigationMenuTrigger,
 } from "@cronus-ui/ui/navigation-menu";
 import { Noise } from "@cronus-ui/ui/noise";
+import { NumberFlow, type NumberFlowFormat } from "@cronus-ui/ui/number-flow";
 import { NumberInput } from "@cronus-ui/ui/number-input";
 import { Orbit, OrbitItem, OrbitRing } from "@cronus-ui/ui/orbit";
 import {
@@ -154,6 +167,7 @@ import { Progress } from "@cronus-ui/ui/progress";
 import { ProgressiveBlur } from "@cronus-ui/ui/progressive-blur";
 import { RadioGroup, RadioGroupItem } from "@cronus-ui/ui/radio-group";
 import { Rating } from "@cronus-ui/ui/rating";
+import { Reasoning, ReasoningContent, ReasoningTrigger } from "@cronus-ui/ui/reasoning";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@cronus-ui/ui/resizable";
 import { RetroGrid } from "@cronus-ui/ui/retro-grid";
 import { Reveal } from "@cronus-ui/ui/reveal";
@@ -161,6 +175,7 @@ import { RichTextEditor } from "@cronus-ui/ui/rich-text-editor";
 import { Ripple } from "@cronus-ui/ui/ripple";
 import { ScrambleText } from "@cronus-ui/ui/scramble-text";
 import { ScrollArea } from "@cronus-ui/ui/scroll-area";
+import { ScrollNav } from "@cronus-ui/ui/scroll-nav";
 import { SegmentedControl, SegmentedControlItem } from "@cronus-ui/ui/segmented-control";
 import {
   Select,
@@ -181,8 +196,14 @@ import { Shimmer } from "@cronus-ui/ui/shimmer";
 import { ShinyText } from "@cronus-ui/ui/shiny-text";
 import { SignaturePad } from "@cronus-ui/ui/signature-pad";
 import { Skeleton } from "@cronus-ui/ui/skeleton";
+import {
+  SlideUpText,
+  type SlideUpTextFrom,
+  type SlideUpTextSplit,
+} from "@cronus-ui/ui/slide-up-text";
 import { Slider } from "@cronus-ui/ui/slider";
 import { Toaster } from "@cronus-ui/ui/sonner";
+import { Source, Sources, SourcesContent, SourcesTrigger } from "@cronus-ui/ui/sources";
 import { SparklesText } from "@cronus-ui/ui/sparkles-text";
 import { Spinner } from "@cronus-ui/ui/spinner";
 import { SpinningText } from "@cronus-ui/ui/spinning-text";
@@ -196,6 +217,7 @@ import {
   StepperList,
   StepperTitle,
 } from "@cronus-ui/ui/stepper";
+import { Suggestion, Suggestions } from "@cronus-ui/ui/suggestion";
 import { Switch } from "@cronus-ui/ui/switch";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@cronus-ui/ui/table";
 import { TableOfContents } from "@cronus-ui/ui/table-of-contents";
@@ -207,6 +229,7 @@ import { Textarea } from "@cronus-ui/ui/textarea";
 import { Timeline, TimelineContent, TimelineItem, TimelineTitle } from "@cronus-ui/ui/timeline";
 import { Toggle } from "@cronus-ui/ui/toggle";
 import { ToggleGroup, ToggleGroupItem } from "@cronus-ui/ui/toggle-group";
+import { Tool, ToolContent, ToolHeader, ToolOutput, type ToolUIPart } from "@cronus-ui/ui/tool";
 import { Toolbar, ToolbarButton } from "@cronus-ui/ui/toolbar";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@cronus-ui/ui/tooltip";
 import { TypingText } from "@cronus-ui/ui/typing-text";
@@ -251,6 +274,7 @@ import { LightboxFixture } from "./lightbox-fixture.js";
 import { ModeToggleFixture } from "./mode-toggle-fixture.js";
 import { NotificationCenterFixture } from "./notification-center-fixture.js";
 import type { ParityFixture } from "./parity-fixture.js";
+import { PromptInputFixture } from "./prompt-input-fixture.js";
 import { SchedulerFixture } from "./scheduler-fixture.js";
 import { ScrollProgressFixture } from "./scroll-progress-fixture.js";
 import { SidebarFixture } from "./sidebar-fixture.js";
@@ -3358,6 +3382,194 @@ export function renderReactFixture(fixture: ParityFixture): ReactElement {
         </TooltipTrigger>
         <TooltipContent>{body}</TooltipContent>
       </Tooltip>
+    );
+  }
+  // Sprint 5 C1: animated-checkbox, loader, number-flow, scroll-nav, slide-up-text.
+  if (fixture.family === "animated-checkbox") {
+    const { title, checked, disabled } = fixture.props as {
+      title?: string;
+      checked?: boolean;
+      disabled?: boolean;
+    };
+    // Uncontrolled: the logic spec toggles it, like the kernel's native input.
+    return (
+      <AnimatedCheckbox
+        title={typeof title === "string" ? title : undefined}
+        defaultChecked={checked === true}
+        disabled={disabled === true}
+      />
+    );
+  }
+  if (fixture.family === "loader") {
+    const { size, "aria-label": ariaLabel } = fixture.props as {
+      size?: number;
+      "aria-label"?: string;
+    };
+    return (
+      <Loader
+        size={typeof size === "number" ? size : undefined}
+        aria-label={typeof ariaLabel === "string" ? ariaLabel : undefined}
+      />
+    );
+  }
+  if (fixture.family === "number-flow") {
+    const { value, prefix, suffix, format, locale, minimumFractionDigits, maximumFractionDigits } =
+      fixture.props as {
+        value?: number;
+        prefix?: string;
+        suffix?: string;
+        format?: string;
+        locale?: string;
+        minimumFractionDigits?: number;
+        maximumFractionDigits?: number;
+      };
+    return (
+      <NumberFlow
+        value={typeof value === "number" ? value : 0}
+        prefix={typeof prefix === "string" ? prefix : undefined}
+        suffix={typeof suffix === "string" ? suffix : undefined}
+        format={typeof format === "string" ? (format as NumberFlowFormat) : undefined}
+        locale={typeof locale === "string" ? locale : undefined}
+        minimumFractionDigits={
+          typeof minimumFractionDigits === "number" ? minimumFractionDigits : undefined
+        }
+        maximumFractionDigits={
+          typeof maximumFractionDigits === "number" ? maximumFractionDigits : undefined
+        }
+      />
+    );
+  }
+  if (fixture.family === "scroll-nav") {
+    const { title, terms } = fixture.props as { title?: string; terms?: unknown };
+    const list = Array.isArray(terms)
+      ? terms.flatMap((term) => {
+          const { id, title: heading, content } = (term ?? {}) as Record<string, unknown>;
+          return typeof id === "string" && typeof heading === "string"
+            ? [{ id, title: heading, content: typeof content === "string" ? content : "" }]
+            : [];
+        })
+      : [];
+    return <ScrollNav title={typeof title === "string" ? title : undefined} terms={list} />;
+  }
+  if (fixture.family === "slide-up-text") {
+    const { children, split, from, stagger, delay } = fixture.props as {
+      children?: string;
+      split?: string;
+      from?: string;
+      stagger?: number;
+      delay?: number;
+    };
+    return (
+      <SlideUpText
+        split={typeof split === "string" ? (split as SlideUpTextSplit) : undefined}
+        from={typeof from === "string" ? (from as SlideUpTextFrom) : undefined}
+        stagger={typeof stagger === "number" ? stagger : undefined}
+        delay={typeof delay === "number" ? delay : undefined}
+      >
+        {typeof children === "string" ? children : fixture.id}
+      </SlideUpText>
+    );
+  }
+  // Sprint 5 C2 — AI suite (alphabetical).
+  if (fixture.family === "conversation") {
+    const { options, items } = fixture.props as { options?: unknown; items?: unknown };
+    return (
+      <Conversation>
+        <ConversationContent>
+          {stringList(options ?? items).map((text, index) => (
+            <Message key={text} from={index % 2 === 0 ? "user" : "assistant"}>
+              <MessageContent>{text}</MessageContent>
+            </Message>
+          ))}
+        </ConversationContent>
+      </Conversation>
+    );
+  }
+  if (fixture.family === "inline-citation") {
+    const { children, options } = fixture.props as { children?: string; options?: unknown };
+    const sources = stringList(options);
+    return (
+      <InlineCitation>
+        <InlineCitationText>{typeof children === "string" ? children : ""}</InlineCitationText>
+        <InlineCitationCard>
+          <InlineCitationCardTrigger sources={sources} />
+          <InlineCitationCardBody>
+            {sources.map((url) => (
+              <InlineCitationSource key={url} url={url} />
+            ))}
+          </InlineCitationCardBody>
+        </InlineCitationCard>
+      </InlineCitation>
+    );
+  }
+  if (fixture.family === "message") {
+    const { from, children } = fixture.props as {
+      from?: "user" | "assistant" | "system";
+      children?: string;
+    };
+    return (
+      <Message from={from ?? "user"}>
+        <MessageContent>{children}</MessageContent>
+      </Message>
+    );
+  }
+  if (fixture.family === "prompt-input") {
+    const { placeholder, action, method } = fixture.props as {
+      placeholder?: string;
+      action?: string;
+      method?: string;
+    };
+    return <PromptInputFixture placeholder={placeholder} action={action} method={method} />;
+  }
+  if (fixture.family === "reasoning") {
+    const { children, duration } = fixture.props as { children?: string; duration?: number };
+    return (
+      <Reasoning duration={duration} defaultOpen>
+        <ReasoningTrigger />
+        <ReasoningContent>{children}</ReasoningContent>
+      </Reasoning>
+    );
+  }
+  if (fixture.family === "sources") {
+    const { count, sources } = fixture.props as { count?: number; sources?: unknown };
+    const list = (Array.isArray(sources) ? sources : []).filter(
+      (entry): entry is { title: string; href: string } =>
+        typeof entry?.title === "string" && typeof entry?.href === "string",
+    );
+    return (
+      <Sources defaultOpen>
+        <SourcesTrigger count={count ?? list.length} />
+        <SourcesContent>
+          {list.map((source) => (
+            <Source key={source.href} href={source.href} title={source.title} />
+          ))}
+        </SourcesContent>
+      </Sources>
+    );
+  }
+  if (fixture.family === "suggestion") {
+    const { options, items } = fixture.props as { options?: unknown; items?: unknown };
+    return (
+      <Suggestions>
+        {stringList(options ?? items).map((text) => (
+          <Suggestion key={text} suggestion={text} />
+        ))}
+      </Suggestions>
+    );
+  }
+  if (fixture.family === "tool") {
+    const { type, state, errorText } = fixture.props as {
+      type?: string;
+      state?: ToolUIPart["state"];
+      errorText?: string;
+    };
+    return (
+      <Tool defaultOpen>
+        <ToolHeader type={type ?? "tool-call"} state={state ?? "input-streaming"} />
+        <ToolContent>
+          <ToolOutput output={undefined} errorText={errorText} />
+        </ToolContent>
+      </Tool>
     );
   }
   throw new Error(`renderReactFixture: unported family ${fixture.family}`);

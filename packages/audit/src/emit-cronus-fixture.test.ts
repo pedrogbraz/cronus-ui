@@ -1205,6 +1205,44 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("motion-presets", "default"))).toBe("div");
   });
 
+  it("emits sprint-5 C1 props: checked, size, number format, stagger, and scroll-nav terms", () => {
+    const src = emitCronusApp([
+      getFixture("animated-checkbox", "checked"),
+      getFixture("loader", "large"),
+      getFixture("number-flow", "currency"),
+      getFixture("number-flow", "percentage"),
+      getFixture("scroll-nav", "default"),
+      getFixture("slide-up-text", "characters"),
+    ]);
+    expect(src).toContain(
+      'component AnimatedCheckboxChecked layout:inline style:animated-checkbox {\n  checked:true\n  label "Ship the release"\n}',
+    );
+    expect(src).toContain(
+      'component LoaderLarge layout:inline style:loader {\n  size:32\n  aria-label:"Saving"\n  label "Saving"\n}',
+    );
+    expect(src).toContain(
+      'style:number-flow {\n  value:1234.5\n  prefix:"$"\n  format:"currency"\n  label "currency"\n}',
+    );
+    expect(src).toContain('  value:0.425\n  format:"percentage"\n  locale:"de-DE"\n');
+    expect(src).toContain(
+      'style:slide-up-text {\n  split:"characters"\n  from:"center"\n  stagger:0.05\n  label "Hello world"\n}',
+    );
+    expect(src).toContain(
+      '  label "Terms & Conditions"\n  text "Acceptance" -> "#acceptance"\n  text "By using the service you agree to these terms."\n  text "Privacy" -> "#privacy"\n  text "We store only what the product needs."\n}',
+    );
+    expect(src).toContain('page "/audit/scroll-nav/default" type:custom');
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for sprint-5 C1 families", () => {
+    expect(expectedTag(getFixture("animated-checkbox", "default"))).toBe("label");
+    expect(expectedTag(getFixture("loader", "default"))).toBe("div");
+    expect(expectedTag(getFixture("number-flow", "default"))).toBe("span");
+    expect(expectedTag(getFixture("scroll-nav", "default"))).toBe("div");
+    expect(expectedTag(getFixture("slide-up-text", "default"))).toBe("span");
+  });
+
   it("emits hourCycle, filename, and language before aria-label (wave 1s)", () => {
     const timePicker = emitCronusApp([getFixture("time-picker", "default")]);
     expect(timePicker).toContain('  value:"09:30"\n  hourCycle:24\n  aria-label:"Meeting time"');
@@ -1381,5 +1419,41 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("table", "default"))).toBe("table");
     expect(expectedTag(getFixture("tabs", "default"))).toBe("div");
     expect(expectedTag(getFixture("tooltip", "default"))).toBe("div");
+  });
+
+  it("emits sprint-5 AI suite props and source links", () => {
+    const src = emitCronusApp([
+      getFixture("conversation", "default"),
+      getFixture("inline-citation", "default"),
+      getFixture("message", "default"),
+      getFixture("prompt-input", "default"),
+      getFixture("reasoning", "default"),
+      getFixture("sources", "default"),
+      getFixture("suggestion", "default"),
+      getFixture("tool", "default"),
+    ]);
+    expect(src).toContain('component MessageDefault layout:inline style:message {\n  from:"user"');
+    expect(src).toContain(
+      "component ReasoningDefault layout:inline style:reasoning {\n  duration:3",
+    );
+    expect(src).toContain(
+      'component PromptInputDefault layout:inline style:prompt-input {\n  action:"/chat"\n  method:"post"',
+    );
+    expect(src).toContain("component SourcesDefault layout:inline style:sources {\n  count:2");
+    expect(src).toContain('  link "Cronus docs" -> "https://cronus.dev/docs"');
+    expect(src).toContain('  text "https://cronus.dev/docs"');
+    expect(src).toContain('  text "How do I deploy?"');
+    expect(src).toContain(
+      'component ToolDefault layout:inline style:tool {\n  type:"tool-web-search"\n  state:"output-error"\n  errorText:"Request timed out after 30s"',
+    );
+    expect(emitsSourceBlock(src)).toBe(false);
+    expect(expectedTag(getFixture("conversation", "default"))).toBe("div");
+    expect(expectedTag(getFixture("inline-citation", "default"))).toBe("span");
+    expect(expectedTag(getFixture("message", "default"))).toBe("div");
+    expect(expectedTag(getFixture("prompt-input", "default"))).toBe("form");
+    expect(expectedTag(getFixture("reasoning", "default"))).toBe("div");
+    expect(expectedTag(getFixture("sources", "default"))).toBe("div");
+    expect(expectedTag(getFixture("suggestion", "default"))).toBe("section");
+    expect(expectedTag(getFixture("tool", "default"))).toBe("div");
   });
 });

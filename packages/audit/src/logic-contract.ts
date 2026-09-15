@@ -163,6 +163,11 @@ const FAMILY_TAGS: Record<string, string> = {
   "retro-grid": "div",
   ripple: "div",
   "motion-presets": "div",
+  "animated-checkbox": "label",
+  loader: "div",
+  "number-flow": "span",
+  "scroll-nav": "div",
+  "slide-up-text": "span",
   accordion: "div",
   breadcrumb: "nav",
   dialog: "div",
@@ -173,6 +178,15 @@ const FAMILY_TAGS: Record<string, string> = {
   table: "table",
   tabs: "div",
   tooltip: "div",
+  // Sprint 5 C2 — AI suite (alphabetical).
+  conversation: "div",
+  "inline-citation": "span",
+  message: "div",
+  "prompt-input": "form",
+  reasoning: "div",
+  sources: "div",
+  suggestion: "section",
+  tool: "div",
 };
 
 /** Attrs the React component actually emits. Never require `data-size`. */

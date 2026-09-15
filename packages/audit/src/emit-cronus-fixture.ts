@@ -78,6 +78,21 @@ function propLines(fixture: ParityFixture): string[] {
   if (typeof props.url === "string") {
     lines.push(`  url:"${cronusEscape(props.url)}"`);
   }
+  // Loader `size`, NumberFlow formatting, SlideUpText split/stagger: by prop name.
+  for (const key of ["prefix", "suffix", "format", "locale", "split", "from"] as const) {
+    const text = props[key];
+    if (typeof text === "string") lines.push(`  ${key}:"${cronusEscape(text)}"`);
+  }
+  for (const key of [
+    "size",
+    "minimumFractionDigits",
+    "maximumFractionDigits",
+    "stagger",
+    "delay",
+  ] as const) {
+    const n = props[key];
+    if (typeof n === "number" && Number.isFinite(n)) lines.push(`  ${key}:${n}`);
+  }
   // ISO dates (calendar / scheduler): the kernel has no clock and no fixture
   // defaults, so the shown month, selected day and "today" travel as props.
   for (const key of ["defaultMonth", "selected", "today"] as const) {
@@ -87,6 +102,29 @@ function propLines(fixture: ParityFixture): string[] {
   if (typeof props["aria-label"] === "string") {
     lines.push(`  aria-label:"${cronusEscape(props["aria-label"])}"`);
   }
+  // Sprint 5 C2 — AI suite: message `from`, reasoning `duration`, sources
+  // `count`, prompt-input form `action` / `method`, tool `type` / `state` /
+  // `errorText`. Same names as the React props.
+  for (const key of ["duration", "count"] as const) {
+    const n = props[key];
+    if (typeof n === "number" && Number.isInteger(n)) lines.push(`  ${key}:${n}`);
+  }
+  // `from` is emitted with the C1 string props above.
+  for (const key of ["action", "method", "type", "state", "errorText"] as const) {
+    const value = props[key];
+    if (typeof value === "string") lines.push(`  ${key}:"${cronusEscape(value)}"`);
+  }
+  return lines;
+}
+
+/** `sources: [{ title, href }]` (Sources) as `link "title" -> "href"` items. */
+function sourceLines(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  const lines: string[] = [];
+  for (const entry of value) {
+    if (typeof entry?.title !== "string" || typeof entry?.href !== "string") continue;
+    lines.push(`  link "${cronusEscape(entry.title)}" -> "${cronusEscape(entry.href)}"`);
+  }
   return lines;
 }
 
@@ -95,6 +133,24 @@ function stringLines(value: unknown): string[] {
   return value
     .filter((entry): entry is string => typeof entry === "string")
     .map((entry) => `  text "${cronusEscape(entry)}"`);
+}
+
+/**
+ * ScrollNav `terms`: a pair of `text` items per term — the title, linked to
+ * `#id`, then the body. Items only (no `key:value` after an item: props-first).
+ */
+function termLines(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  const lines: string[] = [];
+  for (const term of value) {
+    if (!term || typeof term !== "object") continue;
+    const { id, title, content } = term as Record<string, unknown>;
+    if (typeof title !== "string") continue;
+    const link = typeof id === "string" ? ` -> "#${cronusEscape(id)}"` : "";
+    lines.push(`  text "${cronusEscape(title)}"${link}`);
+    lines.push(`  text "${cronusEscape(typeof content === "string" ? content : "")}"`);
+  }
+  return lines;
 }
 
 export function emitCronusComponent(fixture: ParityFixture): string {
@@ -117,6 +173,8 @@ export function emitCronusComponent(fixture: ParityFixture): string {
   lines.push(...stringLines(fixture.props.options));
   lines.push(...stringLines(fixture.props.items));
   lines.push(...stringLines(fixture.props.words));
+  lines.push(...termLines(fixture.props.terms));
+  lines.push(...sourceLines(fixture.props.sources));
   lines.push("}");
   return lines.join("\n");
 }
