@@ -17,10 +17,9 @@
 #   visual-baselines-linux — regenerates e2e/audit/__screenshots__/linux inside
 #             the Playwright docker image and uploads them as an artifact.
 #
-# Triggers: pull_request and push to main run `gates`, `browser` and `visual`.
-# `audit` and `visual-baselines-linux` are manual (workflow_dispatch).
-# `audit` is not a gate yet: 10 geometry-parity families fail on Linux while
-# passing on macOS at the same kernel SHA — see the note on that job.
+# Triggers: pull_request and push to main run `gates`, `browser`, `visual` and
+# `audit`. `visual-baselines-linux` stays manual (workflow_dispatch): it
+# rewrites committed baselines, which is never something a PR should do.
 # `npx cronus-ui add` hits raw.githubusercontent.com only after a public
 # tag (release preflight). Local: `-r ./registry`.
 name: CI
@@ -147,20 +146,15 @@ jobs:
           if-no-files-found: ignore
 
   audit:
-    # Manual until the platform gap closes. Run 35127021335 was the first real
-    # execution: geometry.spec.ts reported 10 failed / 774 passed on Linux —
-    # alert-dialog, card, confirmation-dialog, dialog, drawer, invite-dialog,
-    # lightbox, logo-carousel, sheet, video-player. All ten are recorded as
-    # geometry "pass" in apps/www/lib/audit/scoreboard.json at the SAME kernel
-    # SHA, generated on macOS. Same code, different platform. The deltas are
-    # overwhelmingly a 10px width difference and the 5px offset that centring
-    # derives from it, which is what a scrollbar that takes layout width on
-    # Linux and none on macOS would produce — a hypothesis, not a diagnosis.
-    # Promoting this to a gate before that is understood would either paint
-    # every PR red or need continue-on-error, which is a gate that stops
-    # nothing. No continue-on-error here: a manual run must report its own red.
+    # A PR gate. It was manual while geometry.spec.ts reported 10 failed / 774
+    # passed on Linux against 0 failures on macOS at the same kernel SHA. The
+    # cause was the Cronus canvas being a separate document: its media queries
+    # read the iframe width, and the iframe sat 0.02px from the kernel's
+    # `max-width: 639.98px` breakpoint, so the 10px a classic scrollbar gutter
+    # costs on Linux flipped the kernel to its mobile layout while React stayed
+    # desktop. The iframe now has a fixed 1152px width and the audit route no
+    # longer reserves a gutter; run 35135620195 reported 784 passed, 0 failed.
     # The kernel is pinned by the SHA in cronus-kernel.ref (repo root).
-    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
