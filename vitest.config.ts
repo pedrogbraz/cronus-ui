@@ -30,6 +30,17 @@ const workspaceAliases = {
   "@cronus-ui/stack/types": stackSubpath("types"),
 };
 
+// Node 26 defines its own `localStorage`/`sessionStorage` on globalThis, inert
+// unless the process gets `--localstorage-file`. Vitest only copies a jsdom
+// property onto the test global when the key is absent there or on its own
+// allow-list, and neither storage key is on that list — so jsdom's working
+// implementation loses to Node's inert one and reads back as `undefined`.
+// Turning the Node globals off hands the names back to jsdom.
+const jsdomEnvironment = {
+  environment: "jsdom" as const,
+  execArgv: ["--no-experimental-webstorage"],
+};
+
 export default defineConfig({
   resolve: {
     alias: workspaceAliases,
@@ -131,7 +142,7 @@ export default defineConfig({
         test: {
           name: "ui-dom",
           root: "./packages/ui",
-          environment: "jsdom",
+          ...jsdomEnvironment,
           include: ["src/**/*.test.tsx"],
           setupFiles: ["./vitest.setup.ts"],
         },
@@ -140,7 +151,7 @@ export default defineConfig({
         test: {
           name: "theme-dom",
           root: "./packages/theme",
-          environment: "jsdom",
+          ...jsdomEnvironment,
           include: ["src/**/*.test.tsx"],
           setupFiles: ["./vitest.setup.ts"],
         },
@@ -165,7 +176,7 @@ export default defineConfig({
         test: {
           name: "audit-dom",
           root: "./packages/audit",
-          environment: "jsdom",
+          ...jsdomEnvironment,
           include: ["src/**/*.test.tsx"],
           setupFiles: ["../ui/vitest.setup.ts"],
         },
