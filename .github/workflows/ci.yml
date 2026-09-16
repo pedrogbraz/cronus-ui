@@ -17,10 +17,10 @@
 #   visual-baselines-linux — regenerates e2e/audit/__screenshots__/linux inside
 #             the Playwright docker image and uploads them as an artifact.
 #
-# Triggers: pull_request and push to main run `gates` and `browser`.
-# `visual`, `audit` and `visual-baselines-linux` are manual-only
-# (workflow_dispatch) for now — `visual`/`audit` become PR gates once the
-# linux baselines are committed.
+# Triggers: pull_request and push to main run `gates`, `browser` and `visual`.
+# `audit` and `visual-baselines-linux` are manual (workflow_dispatch).
+# `audit` is not a gate yet: 10 geometry-parity families fail on Linux while
+# passing on macOS at the same kernel SHA — see the note on that job.
 # `npx cronus-ui add` hits raw.githubusercontent.com only after a public
 # tag (release preflight). Local: `-r ./registry`.
 name: CI
@@ -99,9 +99,8 @@ jobs:
         run: bun run test:e2e
 
   visual:
-    # Manual-only until Sprint 2: becomes a PR gate once linux baselines are
-    # committed under e2e/visual/__screenshots__/linux.
-    if: github.event_name == 'workflow_dispatch'
+    # A PR gate: the linux baselines under e2e/visual/__screenshots__/linux are
+    # committed (31 PNGs) and the job compares against them.
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -148,11 +147,20 @@ jobs:
           if-no-files-found: ignore
 
   audit:
-    # Manual-only until Sprint 2: becomes a PR gate (and drops
-    # continue-on-error) once linux audit baselines are committed. The kernel
-    # is pinned by the SHA in cronus-kernel.ref (repo root).
+    # Manual until the platform gap closes. Run 35127021335 was the first real
+    # execution: geometry.spec.ts reported 10 failed / 774 passed on Linux —
+    # alert-dialog, card, confirmation-dialog, dialog, drawer, invite-dialog,
+    # lightbox, logo-carousel, sheet, video-player. All ten are recorded as
+    # geometry "pass" in apps/www/lib/audit/scoreboard.json at the SAME kernel
+    # SHA, generated on macOS. Same code, different platform. The deltas are
+    # overwhelmingly a 10px width difference and the 5px offset that centring
+    # derives from it, which is what a scrollbar that takes layout width on
+    # Linux and none on macOS would produce — a hypothesis, not a diagnosis.
+    # Promoting this to a gate before that is understood would either paint
+    # every PR red or need continue-on-error, which is a gate that stops
+    # nothing. No continue-on-error here: a manual run must report its own red.
+    # The kernel is pinned by the SHA in cronus-kernel.ref (repo root).
     if: github.event_name == 'workflow_dispatch'
-    continue-on-error: true
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
@@ -226,18 +234,22 @@ jobs:
           if-no-files-found: ignore
 
   visual-baselines-linux:
-    # Manual-only. Regenerates the Cronus Audit visual baselines inside the
-    # official Playwright image (version = @playwright/test in bun.lock) so
-    # linux PNGs are byte-stable, and uploads them for a later commit under
-    # e2e/audit/__screenshots__/linux. Bump the image tag with @playwright/test.
+    # Manual-only. Regenerates the Cronus Audit visual baselines and uploads
+    # them for a later commit under e2e/audit/__screenshots__/linux.
+    #
+    # Runs on the plain runner, NOT in the Playwright container, on purpose.
+    # A baseline is only useful to the environment that compares it, and the
+    # `audit` job compares on ubuntu-latest — a container with its own font
+    # and graphics stack would produce PNGs that fail the very gate they feed.
+    # The container also could not work as written: the noble image ships no
+    # `unzip`, so oven-sh/setup-bun@v2 failed and every later step was skipped
+    # (run 35127021335). Pinning the graphics stack on BOTH sides is a
+    # defensible future change; it needs an ADR and it needs `audit` to move
+    # too, not just this job.
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 40
-    container:
-      image: mcr.microsoft.com/playwright:v1.61.0-noble
-      options: --user root
     env:
-      HOME: /root
       CRONUS_KERNEL_REPO: pedrogbraz/cronus-kernel
       CRONUS_AUDIT_ORIGIN: http://127.0.0.1:5176
     steps:
@@ -272,6 +284,8 @@ jobs:
         run: cargo build
       - name: Build www (+ audit/ui/tokens deps)
         run: bunx turbo build --filter=@cronus-ui/www
+      - name: Install Playwright Chromium
+        run: bunx playwright install --with-deps chromium
       - name: Regenerate audit visual baselines
         env:
           CRONUS_BIN: ${{ github.workspace }}/cronus-kernel/target/debug/cronus
