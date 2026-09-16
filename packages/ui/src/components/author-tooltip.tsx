@@ -1,5 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { Github, Linkedin } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { isValidElement, type ReactNode } from "react";
 import { cn } from "../lib/cn.js";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar.js";
@@ -25,6 +25,20 @@ const DEFAULT_LABELS: AuthorTooltipLabels = {
   twitter: "X",
   linkedin: "LinkedIn",
 };
+
+/**
+ * Glyph rendered next to each social link.
+ *
+ * Injected, not baked in. A published library should not decide which
+ * trademarked mark ends up in the consumer's bundle, and lucide dropped its
+ * brand icons in 1.x for the same reason. The defaults are neutral; pass the
+ * real marks through `icons` when you have the rights to ship them.
+ */
+export interface AuthorTooltipIcons {
+  github: ReactNode;
+  twitter: ReactNode;
+  linkedin: ReactNode;
+}
 
 export const authorTooltipAvatarVariants = cva("cursor-help border-2 border-border", {
   variants: {
@@ -57,8 +71,17 @@ function XIcon({ className }: { className?: string }) {
   );
 }
 
+const DEFAULT_ICONS: AuthorTooltipIcons = {
+  // X keeps its glyph: it was already vendored here, and removing it would be a
+  // regression unrelated to this change.
+  twitter: <XIcon className="size-5" />,
+  github: <ExternalLink aria-hidden className="size-5" />,
+  linkedin: <ExternalLink aria-hidden className="size-5" />,
+};
+
 export interface AuthorTooltipProps extends VariantProps<typeof authorTooltipAvatarVariants> {
   author: Author;
+  icons?: Partial<AuthorTooltipIcons>;
   avatarSize?: "sm" | "md" | "lg" | "xl";
   avatarClassName?: string;
   trigger?: ReactNode;
@@ -74,8 +97,10 @@ export function AuthorTooltip({
   trigger,
   children,
   labels: labelsProp,
+  icons: iconsProp,
 }: AuthorTooltipProps) {
   const labels = { ...DEFAULT_LABELS, ...labelsProp };
+  const icons: AuthorTooltipIcons = { ...DEFAULT_ICONS, ...iconsProp };
   const resolvedSize = avatarSize ?? size ?? "sm";
   const defaultTrigger = (
     <Avatar
@@ -119,7 +144,7 @@ export function AuthorTooltip({
                     aria-label={labels.linkedin}
                     className="text-fg-secondary outline-none transition-colors hover:text-fg focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-floating"
                   >
-                    <Linkedin aria-hidden className="size-5" />
+                    {icons.linkedin}
                   </a>
                 ) : null}
                 {author.twitter ? (
@@ -130,7 +155,7 @@ export function AuthorTooltip({
                     aria-label={labels.twitter}
                     className="text-fg-secondary outline-none transition-colors hover:text-fg focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-floating"
                   >
-                    <XIcon className="size-5" />
+                    {icons.twitter}
                   </a>
                 ) : null}
                 {author.github ? (
@@ -141,7 +166,7 @@ export function AuthorTooltip({
                     aria-label={labels.github}
                     className="text-fg-secondary outline-none transition-colors hover:text-fg focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-floating"
                   >
-                    <Github aria-hidden className="size-5" />
+                    {icons.github}
                   </a>
                 ) : null}
               </div>

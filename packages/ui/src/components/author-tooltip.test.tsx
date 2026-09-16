@@ -54,6 +54,31 @@ describe("AuthorTooltip", () => {
     expect(await screen.findByRole("tooltip")).toHaveTextContent("Commits: 150");
   });
 
+  it("renders a default glyph for each social link", async () => {
+    const user = userEvent.setup();
+    render(<AuthorTooltip author={author} />);
+    await user.hover(screen.getByLabelText("Aryan"));
+    const tooltip = await screen.findByRole("tooltip");
+    for (const label of ["GitHub", "X", "LinkedIn"]) {
+      expect(tooltip.querySelector(`a[aria-label="${label}"] svg`)).not.toBeNull();
+    }
+  });
+
+  it("renders the injected icon instead of the default", async () => {
+    const user = userEvent.setup();
+    render(
+      <AuthorTooltip
+        author={author}
+        icons={{ github: <span data-testid="brand-github">GH</span> }}
+      />,
+    );
+    await user.hover(screen.getByLabelText("Aryan"));
+    const tooltip = await screen.findByRole("tooltip");
+    expect(tooltip.querySelector('[data-testid="brand-github"]')).not.toBeNull();
+    // Only the injected slot is replaced; the others keep their defaults.
+    expect(tooltip.querySelector('a[aria-label="LinkedIn"] svg')).not.toBeNull();
+  });
+
   it("has no axe violations while open", async () => {
     const user = userEvent.setup();
     const { baseElement } = render(<AuthorTooltip author={author} />);

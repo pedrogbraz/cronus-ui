@@ -18,6 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **`AuthorTooltip` takes its social glyphs through a new `icons` prop.**
+  `AuthorTooltipIcons` is exported alongside it. The X glyph is unchanged, but
+  the GitHub and LinkedIn defaults are now a neutral `ExternalLink` instead of
+  the brand marks: a published library should not decide which trademarked mark
+  lands in a consumer's bundle, and lucide removed its brand icons in 1.x for
+  the same reason. Pass `icons={{ github: <GithubMark /> }}` to restore them.
 - **`bun run release --publish` publishes the official MCP Registry listing**
   after npm (`mcp-publisher publish packages/mcp/server.json`). Preflight
   checks `server.json` lockstep, `mcpName`, and login. `--skip-mcp-registry`

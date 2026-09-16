@@ -8512,6 +8512,11 @@ export const COMPONENT_PROPS: Record<string, PropsDoc[]> = {
           required: true,
         },
         {
+          name: "icons",
+          type: "Partial<AuthorTooltipIcons>",
+          required: false,
+        },
+        {
           name: "avatarSize",
           type: '"sm" | "md" | "lg" | "xl"',
           required: false,

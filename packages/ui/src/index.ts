@@ -122,6 +122,7 @@ export type { AuroraBackgroundProps } from "./components/aurora-background.js";
 export { AuroraBackground } from "./components/aurora-background.js";
 export type {
   Author,
+  AuthorTooltipIcons,
   AuthorTooltipLabels,
   AuthorTooltipProps,
 } from "./components/author-tooltip.js";
