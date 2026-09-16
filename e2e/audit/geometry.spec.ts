@@ -185,6 +185,17 @@ const READY: Partial<Record<string, ReadySpec>> = {
     selector: ".recharts-label-list text",
     reason: "recharts Funnel mounts its LabelList only once isAnimationActive finishes",
   },
+  reveal: {
+    // Same selector parity.pixel.spec.ts already gates on: motion writes
+    // `transform: none` last, so this matches only once the entrance ended.
+    // Without it the test is flaky — FREEZE_CSS cannot stop a JS animation, and
+    // the fadeInUp easing tail keeps moving y by hundredths of a pixel
+    // (24.05 -> 24.03 -> 24.02), which measureSettled's exact equality never
+    // accepts inside SETTLE_ATTEMPTS. It only shows up under full-suite load,
+    // where the measurement starts later relative to the animation.
+    selector: '[data-slot="reveal"][style*="opacity: 1"][style*="transform: none"]',
+    reason: "motion fadeInUp entrance runs in JS after useInView fires",
+  },
   "slide-up-text": {
     // motion writes translateY(100%) on mount and `transform: none` when a piece lands.
     selector: '[data-slot="slide-up-text"]:not(:has(span[style*="translateY"]))',
