@@ -1,0 +1,20 @@
+{
+  "id": "default",
+  "family": "sources",
+  "props": {
+    "count": 2,
+    "defaultOpen": true,
+    "sources": [
+      { "title": "Cronus docs", "href": "https://cronus.dev/docs" },
+      { "title": "Release notes", "href": "https://cronus.dev/changelog" }
+    ]
+  },
+  "expect": {
+    "slot": "sources",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "sources",
+      "data-state": "open"
+    }
+  }
+}

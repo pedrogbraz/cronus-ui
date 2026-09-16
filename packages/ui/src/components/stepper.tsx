@@ -387,7 +387,7 @@ export const StepperTrigger = forwardRef<HTMLButtonElement, StepperTriggerProps>
         data-slot="stepper-trigger"
         disabled={isDisabled}
         className={cn(
-          "inline-flex items-center gap-3 rounded-lg text-left",
+          "inline-flex items-center gap-3 rounded-lg text-start",
           "transition-opacity duration-150 ease-[var(--ease-out-quart)]",
           "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface-base",
           "disabled:pointer-events-none disabled:opacity-50",

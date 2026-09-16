@@ -15,12 +15,14 @@ import {
   CRONUS_CATALOG_RUN,
   CRONUS_CATALOG_SOURCE,
   CRONUS_HOW_IT_WORKS,
+  CRONUS_KERNEL_REF,
   CRONUS_RULES,
 } from "../../lib/cronus-language";
 
 export default function LanguagePage() {
   const dedicated = CRONUS_CATALOG_FAMILIES.filter((item) => item.kind === "dedicated").length;
-  const interact = CRONUS_CATALOG_FAMILIES.filter((item) => item.kind === "interact").length;
+  const stub = CRONUS_CATALOG_FAMILIES.filter((item) => item.kind === "stub").length;
+  const ref = CRONUS_KERNEL_REF ? ` at kernel ${CRONUS_KERNEL_REF.slice(0, 7)}` : "";
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6">
@@ -29,9 +31,7 @@ export default function LanguagePage() {
         title=".cronus is the product"
         description="You declare app, theme, pages, and widgets in a .cronus file. The Rust kernel parses it and serves HTML, semantic tokens, and motion. There is no React in the running catalog — the React catalog on this site is the visual spec the kernel ports toward."
       >
-        <PrimaryLink href={`${CRONUS_CATALOG_ORIGIN}/kit`} native>
-          Open live kit
-        </PrimaryLink>
+        <PrimaryLink href="/audit">Parity scoreboard</PrimaryLink>
         <DocsTextLink href="/components">React catalog</DocsTextLink>
       </DocsHeader>
 
@@ -88,15 +88,15 @@ export default function LanguagePage() {
       <DocsSection
         id="kit"
         title="Live kernel"
-        description={`${CRONUS_CATALOG_FAMILIES.length} families on this shelf — ${dedicated} dedicated CONTRACT ports, ${interact} native interact. Charts and FX stay off this page until they have their own renderer.`}
+        description={`${CRONUS_CATALOG_FAMILIES.length} families in the kernel registry${ref} — ${dedicated} dedicated CONTRACT renderers, ${stub} stubs. The live kit shows up here when a local kernel catalog is running.`}
       >
-        <KernelPreview />
+        <KernelPreview origin={CRONUS_CATALOG_ORIGIN} />
       </DocsSection>
 
       <DocsSection
         id="families"
-        title="Families on the shelf"
-        description="Dedicated is a CONTRACT HTML module in the kernel. Interact is native HTML without a dedicated module yet — still not a data-slot stub."
+        title="Families in the kernel"
+        description="Dedicated is a CONTRACT HTML module in the kernel, audited against the React component. Stub parses and renders a placeholder until it gets a dedicated renderer. See the parity scoreboard for audit results."
       >
         <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {CRONUS_CATALOG_FAMILIES.map((item) => (
@@ -106,7 +106,7 @@ export default function LanguagePage() {
             >
               <span className="font-mono text-fg">{item.family}</span>
               <span className="text-xs text-fg-tertiary">
-                {item.kind === "dedicated" ? "Dedicated" : "Interact"}
+                {item.kind === "dedicated" ? "Dedicated" : "Stub"}
               </span>
             </li>
           ))}

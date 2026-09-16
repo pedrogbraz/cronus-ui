@@ -1,0 +1,8658 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-15",
+  "kernelRef": "1b465a2ecbac617561d07f4aaeba79eefb84fc5b",
+  "sources": {
+    "auditReport": true,
+    "geometryReports": 203,
+    "pixelReports": 203,
+    "kernelRegistry": true
+  },
+  "totals": {
+    "families": 214,
+    "components": 212,
+    "ported": 186,
+    "stub": 2,
+    "reactOnly": 26,
+    "fixtures": 203,
+    "parity": {
+      "match": 185,
+      "diff": 1,
+      "notRun": 0,
+      "notPorted": 28
+    },
+    "geometry": {
+      "pass": 203,
+      "fail": 0,
+      "notRun": 0,
+      "propMismatches": 1
+    },
+    "pixel": {
+      "pass": 202,
+      "diff": 1,
+      "fail": 0,
+      "notRun": 0,
+      "diffPixels": 1836
+    },
+    "logic": {
+      "pass": 195,
+      "fail": 0
+    }
+  },
+  "families": [
+    {
+      "family": "accordion",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        },
+        {
+          "id": "second-open",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 2,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 2,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 2,
+        "fail": 0
+      }
+    },
+    {
+      "family": "actions",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "ai-code-block",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "ai-image",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "alert",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        },
+        {
+          "id": "destructive",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 2,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 2,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "alert-dialog",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "animated-button",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "animated-checkbox",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "checked",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        },
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 2,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 2,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "animated-list",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "animated-number",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "app-shell",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "area-chart",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "artifact",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "aspect-ratio",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "aurora-background",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "author-tooltip",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "autocomplete",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "diff",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 1
+          },
+          "pixel": {
+            "status": "diff",
+            "diffPixels": 1836
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 1
+      },
+      "pixel": {
+        "status": "diff",
+        "pass": 0,
+        "diff": 1,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 1836
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "avatar",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "fallback",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "avatar-group",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "badge",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "banner",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "bar-chart",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "border-beam",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "bouncy-accordion",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "branch",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "breadcrumb",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "button",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "as-link",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        },
+        {
+          "id": "disabled",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        },
+        {
+          "id": "primary-md",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 3,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 3,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 6,
+        "fail": 0
+      }
+    },
+    {
+      "family": "button-group",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "calendar",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "candlestick-chart",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "card",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "card-stack",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "carousel",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "chain-of-thought",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "chart",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "checkbox",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "off",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        },
+        {
+          "id": "on",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 2,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 2,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "chip",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "choropleth-chart",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "click-spark",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "code-block",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "code-tabs",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "collapsible",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "color-picker",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "combobox",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "command",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "comparison-slider",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "component-preview-tooltip",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "composed-chart",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "confetti",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "confirmation-dialog",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "context",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "context-menu",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "conversation",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "copy-button",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "countdown",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "credit-card-input",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "currency-input",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "data-table",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "date-picker",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "date-range-picker",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "description-list",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "dialog",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "dock",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "dot-pattern",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "drawer",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "dropdown-menu",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "dynamic-island",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "empty",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "expandable-tabs",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "explore-nav",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "fab",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "family-wallet",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "field",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "file-dropzone",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "flickering-grid",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "flip-card",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "floating-label-input",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "form",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "frame",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "funnel-chart",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "gauge-chart",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "glare-hover",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "glass-card",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "globe-3d",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "globe-wireframe",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "goal-card",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "gradient-border",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "gradient-text",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "grid-pattern",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "heatmap",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "heatmap-chart",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "highlighter",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "hover-card",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "image-zoom",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "images-badge",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "inline-citation",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "input",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "disabled",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        },
+        {
+          "id": "empty",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        },
+        {
+          "id": "invalid",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 3,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 3,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 2,
+        "fail": 0
+      }
+    },
+    {
+      "family": "input-group",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "input-otp",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "invite-dialog",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "json-viewer",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "kanban",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "kbd",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "label",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "light-rays",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "lightbox",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "line-chart",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "link-preview",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "live-line-chart",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "loader",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        },
+        {
+          "id": "large",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 2,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 2,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "logo-carousel",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "magnetic",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "marquee",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "masonry",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "menubar",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "message",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "meteors",
+      "status": "stub",
+      "stubKind": "fx",
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "metric",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "mode-toggle",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "morphing-popover",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "motion-presets",
+      "status": "ported",
+      "stubKind": null,
+      "component": false,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "multi-select",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "navigation-menu",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "noise",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "notification-center",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "number-flow",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "currency",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        },
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        },
+        {
+          "id": "percentage",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 3,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 3,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "number-input",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "open-in-chat",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "orbit",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "pagination",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        },
+        {
+          "id": "many",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 2,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 2,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 2,
+        "fail": 0
+      }
+    },
+    {
+      "family": "particles",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "password-input",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "phone-input",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "pie-chart",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "pill-nav",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "plan",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "popover",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "profit-loss-chart",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "progress",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "half",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "progressive-blur",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "prompt-input",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "queue",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "radar-chart",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "radio-group",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "rating",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "reasoning",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "receive-button",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "resizable",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "response",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "retro-grid",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "reveal",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "rich-text-editor",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "ring-chart",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "ripple",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "sankey-chart",
+      "status": "stub",
+      "stubKind": "chart",
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "scatter-chart",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "scheduler",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "scramble-text",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "scroll-area",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "scroll-nav",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "scroll-progress",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "segmented-control",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "select",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "separator",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "horizontal",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "sheet",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "shimmer",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "shiny-text",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "sidebar",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "signature-pad",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "skeleton",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "slide-up-text",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "characters",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        },
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 2,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 2,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "slider",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "half",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "sonner",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "sources",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "sparkles-text",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "sparkline",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "spinner",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "spinning-text",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "split-button",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "spotlight-card",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "star-border",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "status-dot",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "stepper",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "suggestion",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "sunburst-chart",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "switch",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "off",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        },
+        {
+          "id": "on",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 2,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 2,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "table",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "table-of-contents",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "tabs",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        },
+        {
+          "id": "second",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 2,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 2,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 2,
+        "fail": 0
+      }
+    },
+    {
+      "family": "tags-input",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "task",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "terminal",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "text-effect",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "text-shimmer",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "textarea",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "empty",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        },
+        {
+          "id": "invalid",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 2,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 2,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "tilt-card",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "time-picker",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "timeline",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "toast",
+      "status": "ported",
+      "stubKind": null,
+      "component": false,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "todo-item",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "toggle",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "off",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        },
+        {
+          "id": "on",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 2,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 2,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "toggle-group",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "token-swap",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "tool",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "toolbar",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "tooltip",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "tree-view",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "typing-text",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "usage-meter",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "video-player",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "web-preview",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "word-rotate",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    },
+    {
+      "family": "words-preloader",
+      "status": "react-only",
+      "stubKind": null,
+      "component": true,
+      "parity": "not-ported",
+      "fixtures": [],
+      "geometry": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "not-run",
+        "pass": 0,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "not-run",
+        "pass": 0,
+        "fail": 0
+      }
+    },
+    {
+      "family": "workspace-switcher",
+      "status": "ported",
+      "stubKind": null,
+      "component": true,
+      "parity": "match",
+      "fixtures": [
+        {
+          "id": "default",
+          "geometry": {
+            "status": "pass",
+            "mismatches": 0,
+            "propMismatches": 0
+          },
+          "pixel": {
+            "status": "pass",
+            "diffPixels": 0
+          }
+        }
+      ],
+      "geometry": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0,
+        "notRun": 0,
+        "propMismatches": 0
+      },
+      "pixel": {
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
+        "fail": 0,
+        "notRun": 0,
+        "diffPixels": 0
+      },
+      "logic": {
+        "status": "pass",
+        "pass": 1,
+        "fail": 0
+      }
+    }
+  ]
+}

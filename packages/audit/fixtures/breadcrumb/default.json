@@ -1,0 +1,12 @@
+{
+  "id": "default",
+  "family": "breadcrumb",
+  "props": {
+    "items": ["Home", "Components", "Button"]
+  },
+  "expect": {
+    "slot": "breadcrumb",
+    "tag": "nav",
+    "attrs": { "data-slot": "breadcrumb", "aria-label": "breadcrumb" }
+  }
+}

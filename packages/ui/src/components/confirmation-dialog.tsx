@@ -206,7 +206,7 @@ export const ConfirmationDialog = forwardRef<
             <div
               role="alert"
               data-slot="confirmation-dialog-error"
-              className="flex items-start gap-2 rounded-lg border border-error/30 bg-error/10 px-3 py-2 text-left text-sm text-error-strong"
+              className="flex items-start gap-2 rounded-lg border border-error/30 bg-error/10 px-3 py-2 text-start text-sm text-error-strong"
             >
               <CircleAlert aria-hidden className="mt-0.5 size-4 shrink-0" />
               <span>{error}</span>

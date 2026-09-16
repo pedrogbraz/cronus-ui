@@ -1,7 +1,7 @@
 import pc from "picocolors";
 import { DEFAULT_CONFIG, hasConfig, readConfig } from "../config.js";
+import { log } from "../log.js";
 import { Registry } from "../registry.js";
-import { log } from "../utils.js";
 
 interface ListOptions {
   cwd: string;

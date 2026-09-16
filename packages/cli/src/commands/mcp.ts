@@ -1,5 +1,5 @@
 import { MCP_EDITORS, parseList, writeMcpConfigs } from "@cronus-ui/ai-kit";
-import { log } from "../utils.js";
+import { log } from "../log.js";
 
 export interface McpInitOptions {
   cwd: string;

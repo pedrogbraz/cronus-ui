@@ -10,16 +10,16 @@ import {
 } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import type { PackageManager } from "./package-manager.js";
 import {
   DEFAULT_MODE,
   DEFAULT_TEMPLATE,
   DEFAULT_THEME,
   type ModeName,
-  type PackageManager,
   type TemplateName,
   type Theme,
   templateBaseDir,
-} from "./utils.js";
+} from "./scaffold-options.js";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 

@@ -325,7 +325,7 @@ interface ChipProps {
 
 function Chip({ label, disabled, onRemove }: ChipProps) {
   return (
-    <Badge variant="secondary" className="gap-1 pr-1">
+    <Badge variant="secondary" className="gap-1 pe-1">
       <span className="truncate">{label}</span>
       {disabled ? null : (
         <button

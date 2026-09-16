@@ -65,7 +65,10 @@ export function Suggestion({
       variant={variant}
       size={size}
       className={cn(suggestionVariants(), className)}
-      onClick={() => onClick?.(suggestion)}
+      // Attach a handler only when there is a callback: a function prop cannot
+      // cross the Server → Client boundary, so a display-only Suggestion must
+      // stay renderable from a React Server Component.
+      onClick={onClick ? () => onClick(suggestion) : undefined}
       {...props}
     >
       {children ?? suggestion}

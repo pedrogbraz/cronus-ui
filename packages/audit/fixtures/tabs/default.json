@@ -1,0 +1,19 @@
+{
+  "id": "default",
+  "family": "tabs",
+  "props": {
+    "items": [
+      "Account",
+      "Manage your account details.",
+      "Password",
+      "Change your password.",
+      "Team",
+      "Invite teammates."
+    ]
+  },
+  "expect": {
+    "slot": "tabs",
+    "tag": "div",
+    "attrs": { "data-slot": "tabs" }
+  }
+}

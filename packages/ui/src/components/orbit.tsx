@@ -157,7 +157,7 @@ export const OrbitRing = forwardRef<HTMLDivElement, OrbitRingProps>(
           // pointer-events-none keeps the (potentially large) circle from
           // blocking the nucleus; OrbitItem restores pointer-events for its
           // own content.
-          "pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full",
+          "pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full", // contract-ok: centred with -translate-x-1/2, a physical pair with no logical equivalent
           guide && "border border-border/40",
           className,
         )}
@@ -192,7 +192,7 @@ export const OrbitRing = forwardRef<HTMLDivElement, OrbitRingProps>(
                   the positioner's rotation carries it around the track. */}
               <div
                 data-slot="orbit-holder"
-                className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2"
+                className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2" // contract-ok: centred with -translate-x-1/2, a physical pair with no logical equivalent
               >
                 {child}
               </div>

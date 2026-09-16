@@ -1,8 +1,10 @@
 import { mkdir } from "node:fs/promises";
 import { join } from "node:path";
 import { type CronusUIConfig, DEFAULT_CONFIG, hasConfig, writeConfig } from "../config.js";
+import { log } from "../log.js";
+import { detectPackageManager, runInstall } from "../package-manager.js";
 import { Registry } from "../registry.js";
-import { detectPackageManager, log, runInstall, writeItemFiles } from "../utils.js";
+import { writeItemFiles } from "../registry-files.js";
 
 interface InitOptions {
   cwd: string;

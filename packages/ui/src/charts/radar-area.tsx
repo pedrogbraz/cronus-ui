@@ -81,7 +81,6 @@ const RadarPoint = memo(function RadarPoint({
   );
 });
 
-// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: radar area enter/hover branches mirror pie slice
 export const RadarArea = memo(function RadarArea({
   index,
   color: colorProp,

@@ -64,7 +64,7 @@ export const FloatingLabelInput = forwardRef<HTMLInputElement, FloatingLabelInpu
             <span
               aria-hidden="true"
               data-slot="floating-label-input-start"
-              className="pointer-events-none absolute inset-y-0 left-0 z-10 flex items-center pl-3 text-fg-tertiary [&_svg]:size-4"
+              className="pointer-events-none absolute inset-y-0 start-0 z-10 flex items-center ps-3 text-fg-tertiary [&_svg]:size-4"
             >
               {startAdornment}
             </span>
@@ -79,8 +79,8 @@ export const FloatingLabelInput = forwardRef<HTMLInputElement, FloatingLabelInpu
             aria-describedby={describedBy}
             className={cn(
               "peer h-14 pt-4 placeholder:text-transparent",
-              startAdornment && "pl-10",
-              endAdornment && "pr-10",
+              startAdornment && "ps-10",
+              endAdornment && "pe-10",
             )}
             {...props}
           />
@@ -90,7 +90,7 @@ export const FloatingLabelInput = forwardRef<HTMLInputElement, FloatingLabelInpu
             data-slot="floating-label-input-label"
             className={cn(
               "pointer-events-none absolute top-1/2 z-10 origin-left select-none text-sm",
-              startAdornment ? "left-10" : "left-3",
+              startAdornment ? "start-10" : "start-3",
               // Smooth spring float — transform + color only (GPU-composited).
               "transition-[transform,color] duration-300 ease-[var(--ease-spring)]",
               "motion-reduce:transition-none motion-reduce:duration-0",
@@ -115,7 +115,7 @@ export const FloatingLabelInput = forwardRef<HTMLInputElement, FloatingLabelInpu
           {endAdornment ? (
             <span
               data-slot="floating-label-input-end"
-              className="absolute inset-y-0 right-0 z-10 flex items-center pr-3 text-fg-tertiary [&_svg]:size-4"
+              className="absolute inset-y-0 end-0 z-10 flex items-center pe-3 text-fg-tertiary [&_svg]:size-4"
             >
               {endAdornment}
             </span>

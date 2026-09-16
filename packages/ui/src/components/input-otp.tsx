@@ -89,7 +89,7 @@ export const InputOTPSlot = forwardRef<HTMLDivElement, InputOTPSlotProps>(
         data-slot="input-otp-slot"
         data-active={isActive}
         className={cn(
-          "relative flex h-10 w-10 items-center justify-center border-y border-r border-border text-sm transition-all first:rounded-l-lg first:border-l last:rounded-r-lg data-[active=true]:border-ring data-[active=true]:ring-2 data-[active=true]:ring-ring",
+          "relative flex h-10 w-10 items-center justify-center border-y border-e border-border text-sm transition-all first:rounded-s-lg first:border-s last:rounded-e-lg data-[active=true]:border-ring data-[active=true]:ring-2 data-[active=true]:ring-ring",
           className,
         )}
         {...props}

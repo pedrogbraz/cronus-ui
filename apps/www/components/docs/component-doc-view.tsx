@@ -1,4 +1,5 @@
 import { Badge } from "@cronus-ui/ui";
+import { getFamilyScore } from "../../lib/audit/scoreboard";
 import { chartDocsTocItems, isNamedChartSlug } from "../../lib/charts-docs";
 import { getComponentDisplayName, getComponentMeta } from "../../lib/components-index";
 import { getExampleSections } from "../../lib/examples/sections";
@@ -7,6 +8,7 @@ import { Eyebrow } from "../showcase-ui";
 import { ChartInstallation, ChartReference } from "./chart-docs";
 import { CodeBlock } from "./code-block";
 import { ComponentExamples } from "./component-examples";
+import { CronusParitySection } from "./cronus-parity-section";
 import { PropsTable } from "./props-table";
 import { Toc } from "./toc";
 
@@ -28,15 +30,19 @@ export function ComponentDocView({ slug }: { slug: string }) {
   const propsDocs = COMPONENT_PROPS[slug];
   const hasProps = (propsDocs?.length ?? 0) > 0;
   const namedChart = isNamedChartSlug(slug);
+  const score = getFamilyScore(slug);
+  const cronusToc = score ? [{ id: "cronus", title: ".cronus" }] : [];
   const toc = namedChart
     ? [
         ...sections,
         ...chartDocsTocItems(slug),
+        ...cronusToc,
         ...(hasProps ? [{ id: "props", title: "Default API" }] : []),
       ]
     : [
         { id: "import", title: "Import" },
         ...sections,
+        ...cronusToc,
         ...(hasProps ? [{ id: "props", title: "Props" }] : []),
       ];
 
@@ -82,6 +88,8 @@ export function ComponentDocView({ slug }: { slug: string }) {
             <ChartReference slug={slug} />
           </>
         ) : null}
+
+        {score ? <CronusParitySection score={score} /> : null}
 
         {hasProps && propsDocs ? (
           <section id="props" className="mt-16 scroll-mt-24">

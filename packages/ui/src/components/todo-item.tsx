@@ -166,7 +166,11 @@ export function TodoItem({
     >
       <Checkbox
         checked={completed}
-        onCheckedChange={(value) => onToggleComplete?.(id, value === true)}
+        // Only hand Checkbox (a client component) a handler when there is a
+        // callback, so a read-only TodoItem still renders from a Server Component.
+        onCheckedChange={
+          onToggleComplete ? (value) => onToggleComplete(id, value === true) : undefined
+        }
         aria-label={copy.complete}
         className="mt-1"
       />

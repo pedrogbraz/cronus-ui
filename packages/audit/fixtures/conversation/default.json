@@ -1,0 +1,14 @@
+{
+  "id": "default",
+  "family": "conversation",
+  "props": {
+    "options": ["What is Cronus?", "A declarative full-stack language that compiles to one binary."]
+  },
+  "expect": {
+    "slot": "conversation",
+    "tag": "div",
+    "attrs": {
+      "data-slot": "conversation"
+    }
+  }
+}

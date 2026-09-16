@@ -1,7 +1,7 @@
 {
   "$comment": "Dívida conhecida do CONTRACT.md. O gate barra qualquer violação acima destes números; quando cair, rode `bun run contract:check --baseline` para travar o ganho. Nunca suba um número à mão.",
-  "generated": "2026-09-11",
-  "total": 111,
+  "generated": "2026-09-14",
+  "total": 30,
   "accepted": {
     "accordion.tsx": {
       "9": 1
@@ -9,20 +9,11 @@
     "alert-dialog.tsx": {
       "9": 1
     },
-    "autocomplete.tsx": {
-      "10": 2
-    },
     "border-beam.tsx": {
       "1b": 2
     },
-    "button-group.tsx": {
-      "10": 2
-    },
     "calendar.tsx": {
       "9": 1
-    },
-    "carousel.tsx": {
-      "10": 6
     },
     "chart.tsx": {
       "1b": 1
@@ -30,24 +21,11 @@
     "checkbox.tsx": {
       "9": 1
     },
-    "code-block.tsx": {
-      "10": 3
-    },
-    "code-tabs.tsx": {
-      "10": 4
-    },
     "collapsible.tsx": {
       "9": 1
     },
-    "combobox.tsx": {
-      "10": 1
-    },
     "command.tsx": {
-      "9": 1,
-      "10": 1
-    },
-    "confirmation-dialog.tsx": {
-      "10": 1
+      "9": 1
     },
     "context-menu.tsx": {
       "9": 1
@@ -61,23 +39,8 @@
     "dropdown-menu.tsx": {
       "9": 1
     },
-    "fab.tsx": {
-      "10": 2
-    },
-    "floating-label-input.tsx": {
-      "10": 8
-    },
     "hover-card.tsx": {
       "9": 1
-    },
-    "input-group.tsx": {
-      "10": 2
-    },
-    "input-otp.tsx": {
-      "10": 4
-    },
-    "json-viewer.tsx": {
-      "10": 3
     },
     "marquee.tsx": {
       "1b": 4
@@ -85,22 +48,11 @@
     "menubar.tsx": {
       "9": 1
     },
-    "morphing-popover.tsx": {
-      "10": 1
-    },
-    "multi-select.tsx": {
-      "10": 1
-    },
     "navigation-menu.tsx": {
-      "9": 1,
-      "10": 4
+      "9": 1
     },
     "notification-center.tsx": {
-      "9": 1,
-      "10": 1
-    },
-    "orbit.tsx": {
-      "10": 2
+      "9": 1
     },
     "popover.tsx": {
       "9": 1
@@ -108,57 +60,23 @@
     "radio-group.tsx": {
       "9": 1
     },
-    "resizable.tsx": {
-      "10": 2
-    },
-    "rich-text-editor.tsx": {
-      "10": 4
-    },
-    "scheduler.tsx": {
-      "10": 3
-    },
     "scroll-area.tsx": {
-      "9": 1,
-      "10": 2
+      "9": 1
     },
     "select.tsx": {
       "9": 1
     },
-    "sidebar.tsx": {
-      "10": 10
-    },
-    "signature-pad.tsx": {
-      "10": 1
-    },
     "slider.tsx": {
       "9": 1
-    },
-    "split-button.tsx": {
-      "10": 5
-    },
-    "stepper.tsx": {
-      "10": 1
     },
     "switch.tsx": {
       "9": 1
     },
-    "table.tsx": {
-      "10": 1
-    },
     "tabs.tsx": {
       "9": 1
     },
-    "tags-input.tsx": {
-      "10": 1
-    },
-    "terminal.tsx": {
-      "10": 2
-    },
     "time-picker.tsx": {
       "1b": 2
-    },
-    "tree-view.tsx": {
-      "10": 1
     }
   }
 }

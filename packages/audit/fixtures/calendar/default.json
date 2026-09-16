@@ -3,7 +3,8 @@
   "family": "calendar",
   "props": {
     "label": "June 2026",
-    "defaultMonth": "2026-06-01"
+    "defaultMonth": "2026-06-01",
+    "selected": "2026-06-01"
   },
   "expect": {
     "slot": "calendar",

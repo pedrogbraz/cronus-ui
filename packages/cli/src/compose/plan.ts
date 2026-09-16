@@ -8,9 +8,10 @@
  * index, meta, and shipped chrome sources.
  */
 
+import { closestName } from "../closest-name.js";
 import type { ComposedChoices } from "../config.js";
+import { assertValidDependency } from "../dependencies.js";
 import type { RegistryIndex } from "../registry.js";
-import { assertValidDependency, closestName } from "../utils.js";
 import { type AppManifest, type BlockRef, blockRefParts, type Page } from "./manifest.js";
 
 /** Semantic kind of a block (mirrors build-registry's BlockKind, read from meta). */

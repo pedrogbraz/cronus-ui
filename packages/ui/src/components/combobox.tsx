@@ -105,7 +105,7 @@ export const Combobox = forwardRef<HTMLButtonElement, ComboboxProps>(
             {...props}
           >
             <span className="truncate">{selectedOption?.label ?? placeholder}</span>
-            <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-60" aria-hidden="true" />
+            <ChevronsUpDown className="ms-2 size-4 shrink-0 opacity-60" aria-hidden="true" />
           </Button>
         </PopoverTrigger>
         <PopoverContent

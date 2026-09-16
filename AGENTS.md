@@ -122,6 +122,7 @@ uma na outra, isso é um sinal de que a peça pertence a um terceiro lugar.
   framework: não importe `next/image`, `next/link` nem nada de `next/` ali.
 - **Componente novo entra no `packages/ui/src/index.ts`** com o nome exato
   que o `CONTRACT.md` define. O barrel é a API pública da biblioteca.
+- **`lib/utils.ts` só existe em template voltado ao usuário** (templates do `apps/www` e do `create-cronus-app`): é a convenção do shadcn que quem instala espera; no código do monorepo o nome continua proibido — nomeie pelo que faz.
 
 ---
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { emitCronusApp } from "./emit-cronus-fixture.js";
+import { emitCronusApp, emitsSourceBlock } from "./emit-cronus-fixture.js";
 import { componentNameOf, getFixture, listFixtures } from "./fixture-catalog.js";
 import { expectedTag } from "./logic-contract.js";
 import { parseParityFixture } from "./parity-fixture.js";
@@ -1157,7 +1157,9 @@ describe("emitCronusApp", () => {
     expect(src).toContain('  text "A"');
     expect(src).toContain('  text "B"');
     expect(src).toContain('  text "C"');
-    expect(src).toContain("component ProgressiveBlurDefault layout:inline style:progressive-blur {");
+    expect(src).toContain(
+      "component ProgressiveBlurDefault layout:inline style:progressive-blur {",
+    );
     expect(src).toContain('label "Blur"');
     expect(src).toContain("component RetroGridDefault layout:inline style:retro-grid {");
     expect(src).toContain('label "Grid"');
@@ -1186,6 +1188,13 @@ describe("emitCronusApp", () => {
     expect(src).not.toContain("<");
   });
 
+  it("keeps the gradient-border ring at p-px (padding goes on innerClassName)", () => {
+    const fixture = getFixture("gradient-border", "default");
+    expect(fixture.props.className).toBe("w-72");
+    expect(fixture.props.className).not.toMatch(/\bp-/);
+    expect(fixture.props.innerClassName).toBe("p-6");
+  });
+
   it("maps expected tags for wave 1r families", () => {
     expect(expectedTag(getFixture("gradient-border", "default"))).toBe("div");
     expect(expectedTag(getFixture("light-rays", "default"))).toBe("div");
@@ -1194,6 +1203,181 @@ describe("emitCronusApp", () => {
     expect(expectedTag(getFixture("retro-grid", "default"))).toBe("div");
     expect(expectedTag(getFixture("ripple", "default"))).toBe("div");
     expect(expectedTag(getFixture("motion-presets", "default"))).toBe("div");
+  });
+
+  it("emits sprint-5 C1 props: checked, size, number format, stagger, and scroll-nav terms", () => {
+    const src = emitCronusApp([
+      getFixture("animated-checkbox", "checked"),
+      getFixture("loader", "large"),
+      getFixture("number-flow", "currency"),
+      getFixture("number-flow", "percentage"),
+      getFixture("scroll-nav", "default"),
+      getFixture("slide-up-text", "characters"),
+    ]);
+    expect(src).toContain(
+      'component AnimatedCheckboxChecked layout:inline style:animated-checkbox {\n  checked:true\n  label "Ship the release"\n}',
+    );
+    expect(src).toContain(
+      'component LoaderLarge layout:inline style:loader {\n  size:32\n  aria-label:"Saving"\n  label "Saving"\n}',
+    );
+    expect(src).toContain(
+      'style:number-flow {\n  value:1234.5\n  prefix:"$"\n  format:"currency"\n  label "currency"\n}',
+    );
+    expect(src).toContain('  value:0.425\n  format:"percentage"\n  locale:"de-DE"\n');
+    expect(src).toContain(
+      'style:slide-up-text {\n  split:"characters"\n  from:"center"\n  stagger:0.05\n  label "Hello world"\n}',
+    );
+    expect(src).toContain(
+      '  label "Terms & Conditions"\n  text "Acceptance" -> "#acceptance"\n  text "By using the service you agree to these terms."\n  text "Privacy" -> "#privacy"\n  text "We store only what the product needs."\n}',
+    );
+    expect(src).toContain('page "/audit/scroll-nav/default" type:custom');
+    expect(src).not.toMatch(/\bsource\b/);
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for sprint-5 C1 families", () => {
+    expect(expectedTag(getFixture("animated-checkbox", "default"))).toBe("label");
+    expect(expectedTag(getFixture("loader", "default"))).toBe("div");
+    expect(expectedTag(getFixture("number-flow", "default"))).toBe("span");
+    expect(expectedTag(getFixture("scroll-nav", "default"))).toBe("div");
+    expect(expectedTag(getFixture("slide-up-text", "default"))).toBe("span");
+  });
+
+  it("emits hourCycle, filename, and language before aria-label (wave 1s)", () => {
+    const timePicker = emitCronusApp([getFixture("time-picker", "default")]);
+    expect(timePicker).toContain('  value:"09:30"\n  hourCycle:24\n  aria-label:"Meeting time"');
+    const codeBlock = emitCronusApp([getFixture("code-block", "default")]);
+    expect(codeBlock).toContain('  filename:"index.ts"\n  language:"ts"\n  label ');
+    expect(codeBlock).not.toContain("hourCycle");
+    expect(timePicker).not.toContain("filename:");
+    expect(timePicker).not.toContain("language:");
+  });
+
+  it("emits string hourCycle quoted and escapes filename/language", () => {
+    const parsed = parseParityFixture({
+      id: "x",
+      family: "time-picker",
+      props: { hourCycle: "h12", filename: 'a"b\\c.ts', language: 't"s', "aria-label": "T" },
+      expect: { slot: "time-picker", attrs: { "data-slot": "time-picker" } },
+    });
+    const src = emitCronusApp([parsed]);
+    expect(src).toContain(
+      '  hourCycle:"h12"\n  filename:"a\\"b\\\\c.ts"\n  language:"t\\"s"\n  aria-label:"T"',
+    );
+  });
+
+  it("omits hourCycle, filename, and language when absent", () => {
+    const src = emitCronusApp([getFixture("button", "primary-md"), getFixture("dock", "default")]);
+    expect(src).not.toContain("hourCycle:");
+    expect(src).not.toContain("filename:");
+    expect(src).not.toContain("language:");
+  });
+
+  it("emits calendar/scheduler ISO dates as props before label (no kernel defaults)", () => {
+    const calendar = emitCronusApp([getFixture("calendar", "default")]);
+    expect(calendar).toContain(
+      'component CalendarDefault layout:inline style:calendar {\n  defaultMonth:"2026-06-01"\n  selected:"2026-06-01"\n  label "June 2026"\n}',
+    );
+    expect(calendar).not.toContain("today:");
+    const scheduler = emitCronusApp([getFixture("scheduler", "default")]);
+    expect(scheduler).toContain(
+      '  defaultMonth:"2026-06-01"\n  today:"2026-06-15"\n  label "June 2026"\n  text "Launch call"',
+    );
+    expect(scheduler).not.toContain("selected:");
+    const other = emitCronusApp([
+      getFixture("button", "primary-md"),
+      getFixture("date-picker", "default"),
+    ]);
+    expect(other).not.toMatch(/\n {2}(defaultMonth|selected|today):/);
+  });
+
+  it("emits numeric data series as a comma list prop", () => {
+    const sparkline = emitCronusApp([getFixture("sparkline", "default")]);
+    expect(sparkline).toContain('  data:"4,8,6,10,7"');
+    const other = emitCronusApp([getFixture("button", "primary-md")]);
+    expect(other).not.toContain("data:");
+  });
+
+  it("escapes emitted date props", () => {
+    const parsed = parseParityFixture({
+      id: "x",
+      family: "calendar",
+      props: { label: "L", selected: '2026"-01-02' },
+      expect: { slot: "calendar", attrs: { "data-slot": "calendar" } },
+    });
+    expect(emitCronusApp([parsed])).toContain('  selected:"2026\\"-01-02"\n  label "L"');
+  });
+
+  it("emits description and url before aria-label (wave 1t)", () => {
+    const field = emitCronusApp([getFixture("field", "default")]);
+    expect(field).toMatch(/\n {2}description:"[^"]+"\n/);
+    const frame = emitCronusApp([getFixture("frame", "default")]);
+    expect(frame).toContain('  url:"cronus.dev"\n  label ');
+    const parsed = parseParityFixture({
+      id: "x",
+      family: "card",
+      props: { description: 'a"b', url: "x\\y", "aria-label": "C" },
+      expect: { slot: "card", attrs: { "data-slot": "card" } },
+    });
+    expect(emitCronusApp([parsed])).toContain(
+      '  description:"a\\"b"\n  url:"x\\\\y"\n  aria-label:"C"',
+    );
+    const plain = emitCronusApp([getFixture("button", "primary-md")]);
+    expect(plain).not.toContain("description:");
+    expect(plain).not.toContain("url:");
+  });
+
+  it("emits every component-level key:value before the first item line", () => {
+    // The kernel parser attaches a key:value written after `label`/`text` to that
+    // item's config; only lines right after `{` land in the component's props.
+    const componentBlocks = (src: string) =>
+      src
+        .split("\n\n")
+        .filter((block) => block.startsWith("component "))
+        .map((block) => block.split("\n").slice(1, -1));
+    const assertPropsFirst = (src: string) => {
+      const blocks = componentBlocks(src);
+      expect(blocks.length).toBeGreaterThan(0);
+      for (const body of blocks) {
+        let sawItem = false;
+        for (const line of body) {
+          if (/^ {2}(label|text) "/.test(line)) {
+            sawItem = true;
+          } else if (/^ {2}[\w-]+:/.test(line)) {
+            expect(sawItem, `attr after item: ${line}\n${body.join("\n")}`).toBe(false);
+          }
+        }
+      }
+    };
+
+    const tags = emitCronusApp([getFixture("tags-input", "default")]);
+    expect(tags).toContain(
+      'component TagsInputDefault layout:inline style:tags-input {\n  aria-label:"Tags"\n  label "Add a tag"\n  text "Add a tag"\n  text "Design"\n  text "System"\n}',
+    );
+    const multi = emitCronusApp([getFixture("multi-select", "default")]);
+    expect(multi).toContain(
+      'component MultiSelectDefault layout:inline style:multi-select {\n  aria-label:"Stack"\n  label "Select frameworks"',
+    );
+    const radio = emitCronusApp([getFixture("radio-group", "default")]);
+    expect(radio).toMatch(/style:radio-group \{\n {2}value:"Pro"\n(?: {2}[\w-]+:.*\n)* {2}label "/);
+    for (const src of [tags, multi, radio]) assertPropsFirst(src);
+    assertPropsFirst(emitCronusApp(listFixtures()));
+  });
+
+  it("guards against a source block without tripping on labels", () => {
+    const parsed = parseParityFixture({
+      id: "x",
+      family: "button",
+      props: { children: "Resources", "aria-label": "Open source" },
+      expect: { slot: "button", attrs: { "data-slot": "button" } },
+    });
+    const src = emitCronusApp([parsed]);
+    expect(src).toContain('label "Resources"');
+    expect(src).toContain('aria-label:"Open source"');
+    expect(emitsSourceBlock(src)).toBe(false);
+    expect(emitsSourceBlock(emitCronusApp(listFixtures()))).toBe(false);
+    expect(emitsSourceBlock(`${src}\nsource "x.tsx"`)).toBe(true);
+    expect(emitsSourceBlock('page "/" {\n  source react "./a.tsx"\n}')).toBe(true);
   });
 
   it("drops data-size from expect.attrs", () => {
@@ -1207,5 +1391,69 @@ describe("emitCronusApp", () => {
       },
     });
     expect(parsed.expect.attrs).not.toHaveProperty("data-size");
+  });
+  it("emits sprint-2 FD numeric props (pagination total/current, table columns)", () => {
+    const src = emitCronusApp([
+      getFixture("pagination", "default"),
+      getFixture("table", "default"),
+      getFixture("tabs", "second"),
+      getFixture("number-input", "default"),
+    ]);
+    expect(src).toContain(
+      "component PaginationDefault layout:inline style:pagination {\n  total:5\n  current:2",
+    );
+    expect(src).toContain("component TableDefault layout:inline style:table {\n  columns:3");
+    expect(src).toContain('  value:"Password"');
+    expect(src).toContain("  value:5");
+    expect(src).not.toContain("<");
+  });
+
+  it("maps expected tags for sprint-2 FD families", () => {
+    expect(expectedTag(getFixture("accordion", "default"))).toBe("div");
+    expect(expectedTag(getFixture("breadcrumb", "default"))).toBe("nav");
+    expect(expectedTag(getFixture("dialog", "default"))).toBe("div");
+    expect(expectedTag(getFixture("number-input", "default"))).toBe("div");
+    expect(expectedTag(getFixture("pagination", "default"))).toBe("nav");
+    expect(expectedTag(getFixture("password-input", "default"))).toBe("div");
+    expect(expectedTag(getFixture("select", "default"))).toBe("button");
+    expect(expectedTag(getFixture("table", "default"))).toBe("table");
+    expect(expectedTag(getFixture("tabs", "default"))).toBe("div");
+    expect(expectedTag(getFixture("tooltip", "default"))).toBe("div");
+  });
+
+  it("emits sprint-5 AI suite props and source links", () => {
+    const src = emitCronusApp([
+      getFixture("conversation", "default"),
+      getFixture("inline-citation", "default"),
+      getFixture("message", "default"),
+      getFixture("prompt-input", "default"),
+      getFixture("reasoning", "default"),
+      getFixture("sources", "default"),
+      getFixture("suggestion", "default"),
+      getFixture("tool", "default"),
+    ]);
+    expect(src).toContain('component MessageDefault layout:inline style:message {\n  from:"user"');
+    expect(src).toContain(
+      "component ReasoningDefault layout:inline style:reasoning {\n  duration:3",
+    );
+    expect(src).toContain(
+      'component PromptInputDefault layout:inline style:prompt-input {\n  action:"/chat"\n  method:"post"',
+    );
+    expect(src).toContain("component SourcesDefault layout:inline style:sources {\n  count:2");
+    expect(src).toContain('  link "Cronus docs" -> "https://cronus.dev/docs"');
+    expect(src).toContain('  text "https://cronus.dev/docs"');
+    expect(src).toContain('  text "How do I deploy?"');
+    expect(src).toContain(
+      'component ToolDefault layout:inline style:tool {\n  type:"tool-web-search"\n  state:"output-error"\n  errorText:"Request timed out after 30s"',
+    );
+    expect(emitsSourceBlock(src)).toBe(false);
+    expect(expectedTag(getFixture("conversation", "default"))).toBe("div");
+    expect(expectedTag(getFixture("inline-citation", "default"))).toBe("span");
+    expect(expectedTag(getFixture("message", "default"))).toBe("div");
+    expect(expectedTag(getFixture("prompt-input", "default"))).toBe("form");
+    expect(expectedTag(getFixture("reasoning", "default"))).toBe("div");
+    expect(expectedTag(getFixture("sources", "default"))).toBe("div");
+    expect(expectedTag(getFixture("suggestion", "default"))).toBe("section");
+    expect(expectedTag(getFixture("tool", "default"))).toBe("div");
   });
 });

@@ -3,7 +3,8 @@
   "family": "gradient-border",
   "props": {
     "children": "Border",
-    "className": "w-72 p-6"
+    "className": "w-72",
+    "innerClassName": "p-6"
   },
   "expect": {
     "slot": "gradient-border",

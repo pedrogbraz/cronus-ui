@@ -146,7 +146,8 @@ function run(cmd, args, opts = {}) {
 const DIST = {
   scaffold: join(ROOT, "packages/create-cronus-app/dist/scaffold.js"),
   registry: join(ROOT, "packages/cli/dist/registry.js"),
-  utils: join(ROOT, "packages/cli/dist/utils.js"),
+  registryFiles: join(ROOT, "packages/cli/dist/registry-files.js"),
+  dependencies: join(ROOT, "packages/cli/dist/dependencies.js"),
   config: join(ROOT, "packages/cli/dist/config.js"),
 };
 const WORKSPACE_REGISTRY = join(ROOT, "registry");
@@ -171,7 +172,8 @@ function ensureBuilt() {
 async function loadDist() {
   const { scaffold } = await import(pathToFileURL(DIST.scaffold).href);
   const { Registry } = await import(pathToFileURL(DIST.registry).href);
-  const { writeItemFiles, collectDependencies } = await import(pathToFileURL(DIST.utils).href);
+  const { writeItemFiles } = await import(pathToFileURL(DIST.registryFiles).href);
+  const { collectDependencies } = await import(pathToFileURL(DIST.dependencies).href);
   const { DEFAULT_CONFIG } = await import(pathToFileURL(DIST.config).href);
   return { scaffold, Registry, writeItemFiles, collectDependencies, DEFAULT_CONFIG };
 }

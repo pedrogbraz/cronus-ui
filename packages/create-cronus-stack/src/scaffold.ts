@@ -8,7 +8,8 @@ import {
   generateStackJson,
   sanitizeProjectName,
 } from "@cronus-ui/stack";
-import { type PackageManager, packageManagerFromConfig, runCommand } from "./utils.js";
+import { type PackageManager, packageManagerFromConfig } from "./package-manager.js";
+import { runCommand } from "./run-command.js";
 import { CREATE_STACK_VERSION } from "./version.js";
 
 export interface ScaffoldStackOptions {

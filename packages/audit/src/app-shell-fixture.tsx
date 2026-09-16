@@ -11,10 +11,23 @@ import {
 
 const FALLBACK_ITEMS = ["Home", "Inbox"];
 
-/** Sidebar nodes cannot round-trip through emit — labels come from `items`. */
-export function AppShellFixture({ items, title }: { items?: string[]; title?: string }) {
+/**
+ * Sidebar nodes cannot round-trip through emit — labels come from `items`, the
+ * header from `title` and the body copy from `description` (emitted to the kernel
+ * as `description:`), so both panes render the same content.
+ */
+export function AppShellFixture({
+  items,
+  title,
+  description,
+}: {
+  items?: string[];
+  title?: string;
+  description?: string;
+}) {
   const labels = items && items.length > 0 ? items : FALLBACK_ITEMS;
   const heading = typeof title === "string" ? title : "Acme";
+  const body = typeof description === "string" ? description : "Inbox";
   return (
     <div className="h-56 w-80 overflow-hidden">
       <AppShell
@@ -35,7 +48,7 @@ export function AppShellFixture({ items, title }: { items?: string[]; title?: st
         }
         header={<span>{heading}</span>}
       >
-        <div className="p-3 text-sm">Inbox</div>
+        <div className="p-3 text-sm">{body}</div>
       </AppShell>
     </div>
   );

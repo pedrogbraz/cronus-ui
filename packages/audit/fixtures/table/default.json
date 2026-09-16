@@ -1,0 +1,23 @@
+{
+  "id": "default",
+  "family": "table",
+  "props": {
+    "columns": 3,
+    "items": [
+      "Invoice",
+      "Status",
+      "Amount",
+      "INV-001",
+      "Paid",
+      "$250.00",
+      "INV-002",
+      "Pending",
+      "$150.00"
+    ]
+  },
+  "expect": {
+    "slot": "table",
+    "tag": "table",
+    "attrs": { "data-slot": "table" }
+  }
+}
