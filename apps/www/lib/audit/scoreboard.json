@@ -16,8 +16,8 @@
     "reactOnly": 26,
     "fixtures": 203,
     "parity": {
-      "match": 183,
-      "diff": 3,
+      "match": 185,
+      "diff": 1,
       "notRun": 0,
       "notPorted": 28
     },
@@ -28,11 +28,11 @@
       "propMismatches": 1
     },
     "pixel": {
-      "pass": 200,
-      "diff": 3,
+      "pass": 202,
+      "diff": 1,
       "fail": 0,
       "notRun": 0,
-      "diffPixels": 27572
+      "diffPixels": 1836
     },
     "logic": {
       "pass": 195,
@@ -6409,7 +6409,7 @@
       "status": "ported",
       "stubKind": null,
       "component": true,
-      "parity": "diff",
+      "parity": "match",
       "fixtures": [
         {
           "id": "default",
@@ -6419,8 +6419,8 @@
             "propMismatches": 0
           },
           "pixel": {
-            "status": "diff",
-            "diffPixels": 11520
+            "status": "pass",
+            "diffPixels": 0
           }
         }
       ],
@@ -6432,12 +6432,12 @@
         "propMismatches": 0
       },
       "pixel": {
-        "status": "diff",
-        "pass": 0,
-        "diff": 1,
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
         "fail": 0,
         "notRun": 0,
-        "diffPixels": 11520
+        "diffPixels": 0
       },
       "logic": {
         "status": "pass",
@@ -6614,7 +6614,7 @@
       "status": "ported",
       "stubKind": null,
       "component": true,
-      "parity": "diff",
+      "parity": "match",
       "fixtures": [
         {
           "id": "default",
@@ -6624,8 +6624,8 @@
             "propMismatches": 0
           },
           "pixel": {
-            "status": "diff",
-            "diffPixels": 14216
+            "status": "pass",
+            "diffPixels": 0
           }
         }
       ],
@@ -6637,12 +6637,12 @@
         "propMismatches": 0
       },
       "pixel": {
-        "status": "diff",
-        "pass": 0,
-        "diff": 1,
+        "status": "pass",
+        "pass": 1,
+        "diff": 0,
         "fail": 0,
         "notRun": 0,
-        "diffPixels": 14216
+        "diffPixels": 0
       },
       "logic": {
         "status": "pass",
