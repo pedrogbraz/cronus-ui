@@ -22,7 +22,7 @@ export function AuditSplit({
   kernelSrc: string | null;
 }) {
   return (
-    <div className="flex min-h-screen flex-col bg-surface-base text-fg">
+    <div className="flex h-screen flex-col overflow-hidden bg-surface-base text-fg">
       <header className="border-b border-border px-4 py-3">
         <p className="text-xs uppercase tracking-[0.14em] text-fg-tertiary">Cronus Audit</p>
         <h1 className="text-xl text-fg">{slug}</h1>
@@ -34,10 +34,10 @@ export function AuditSplit({
         mode={mode}
         dir={dir}
       />
-      <div className="grid flex-1 grid-cols-1 md:grid-cols-2">
+      <div className="grid min-h-0 flex-1 grid-cols-1 md:grid-cols-2">
         <section
           data-audit-side="react"
-          className="border-b border-border md:border-b-0 md:border-e"
+          className="overflow-auto border-b border-border md:border-b-0 md:border-e"
         >
           <h2 className="border-b border-border px-4 py-2 text-sm text-fg-secondary">React</h2>
           <div className="p-6">
@@ -46,7 +46,7 @@ export function AuditSplit({
             </AuditReactCanvas>
           </div>
         </section>
-        <section data-audit-side="cronus">
+        <section data-audit-side="cronus" className="overflow-auto">
           <h2 className="border-b border-border px-4 py-2 text-sm text-fg-secondary">Cronus</h2>
           {kernelSrc ? (
             <CronusPane src={kernelSrc} />

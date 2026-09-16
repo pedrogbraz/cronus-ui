@@ -80,7 +80,7 @@ export default defineConfig({
   snapshotPathTemplate: "{testDir}/../../test-results/audit-pixel-baseline/{arg}{ext}",
   use: {
     baseURL: BASE_URL,
-    viewport: { width: 1280, height: 900 },
+    viewport: { width: 2560, height: 900 },
     deviceScaleFactor: 1,
     colorScheme: "dark",
     launchOptions: { args: ["--force-color-profile=srgb"] },
