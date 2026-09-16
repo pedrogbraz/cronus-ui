@@ -40,7 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.3.14
@@ -77,7 +77,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.3.14
@@ -103,7 +103,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.3.14
@@ -131,7 +131,7 @@ jobs:
           fi
       - name: Upload bootstrapped linux baselines
         if: steps.visual.outputs.mode == 'bootstrap'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: visual-baselines-linux
           path: e2e/visual/__screenshots__/linux
@@ -139,7 +139,7 @@ jobs:
       # On a red compare run, ship the expected/actual/diff triplets for review.
       - name: Upload visual diff report
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: visual-diff-report
           path: test-results
@@ -161,7 +161,7 @@ jobs:
       CRONUS_KERNEL_REPO: pedrogbraz/cronus-kernel
       CRONUS_AUDIT_ORIGIN: http://127.0.0.1:5176
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Read pinned kernel SHA
         id: kernel
         shell: bash
@@ -173,7 +173,7 @@ jobs:
           fi
           echo "sha=$SHA" >> "$GITHUB_OUTPUT"
       - name: Checkout cronus-kernel at pinned SHA
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: ${{ env.CRONUS_KERNEL_REPO }}
           ref: ${{ steps.kernel.outputs.sha }}
@@ -212,14 +212,14 @@ jobs:
           fi
       - name: Upload bootstrapped linux audit baselines
         if: steps.audit.outputs.mode == 'bootstrap'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: audit-baselines-linux
           path: e2e/audit/__screenshots__/linux
           if-no-files-found: ignore
       - name: Upload audit report
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: audit-diff-report
           path: |
@@ -247,7 +247,7 @@ jobs:
       CRONUS_KERNEL_REPO: pedrogbraz/cronus-kernel
       CRONUS_AUDIT_ORIGIN: http://127.0.0.1:5176
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Read pinned kernel SHA
         id: kernel
         shell: bash
@@ -259,7 +259,7 @@ jobs:
           fi
           echo "sha=$SHA" >> "$GITHUB_OUTPUT"
       - name: Checkout cronus-kernel at pinned SHA
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: ${{ env.CRONUS_KERNEL_REPO }}
           ref: ${{ steps.kernel.outputs.sha }}
@@ -286,14 +286,14 @@ jobs:
           CRONUS_KERNEL_ROOT: ${{ github.workspace }}/cronus-kernel
         run: bunx playwright test -c playwright.audit.config.ts e2e/audit/parity.visual.spec.ts --update-snapshots
       - name: Upload linux audit baselines
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: audit-visual-baselines-linux
           path: e2e/audit/__screenshots__/linux
           if-no-files-found: error
       - name: Upload report
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: audit-visual-baselines-linux-report
           path: |

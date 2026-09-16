@@ -17,12 +17,12 @@ Estado verificado:
 
 - `actions/checkout` release mais recente: **v7.0.1**
 - `actions/upload-artifact` release mais recente: **v7.0.1**
-- `ci.yml` usa `actions/checkout@v4` em 6 lugares e
-  `actions/upload-artifact@v4` em 6 lugares.
+- `ci.yml` usa `actions/checkout@v4` em 7 lugares e
+  `actions/upload-artifact@v4` em 6 lugares — 13 no total.
 
 Os dois PRs estão com `mergeable: UNKNOWN` e as branches são de julho, contra um
 trunk que andou mais de 55 commits desde então. Mesclar branch velha aqui é pior
-que refazer a mudança: o diff é uma troca de tag em 12 linhas.
+que refazer a mudança: o diff é uma troca de tag em 13 linhas.
 
 O Dependabot fecha o próprio PR quando detecta a dependência já na versão alvo,
 então não é preciso fechá-los à mão.
@@ -40,7 +40,7 @@ falha, que um run verde **não exercita**.
 
 ## Plano
 
-1. Trocar as 12 ocorrências de `@v4` por `@v7` em `ci.yml`.
+1. Trocar as 13 ocorrências de `@v4` por `@v7` em `ci.yml`.
 2. `quick`, revisão, `full`, `integrate`, push.
 3. Confirmar num run de push que os cinco jobs seguem verdes.
 4. Registrar em `evidence.md` que os passos de upload condicionais não foram
@@ -69,8 +69,9 @@ ali. O critério de aceitação precisa ser lido com essa limitação, e ela vai
 Premissa "v7 existe nas duas actions": verificada via
 `gh api repos/<action>/releases/latest` — `v7.0.1` nas duas.
 
-Premissa "são 12 ocorrências": verificada por `grep -n 'uses: actions/'` em
-`ci.yml` — 6 de `checkout`, 6 de `upload-artifact`.
+Premissa "são 13 ocorrências": contei 12 na primeira leitura e estava errado.
+Verificado por `grep -c` depois da troca: **7** de `checkout` e **6** de
+`upload-artifact`.
 
 Premissa "os PRs estão parados e não mesclam limpo": verificada em
 `gh pr list` — #80 e #81 de 2026-07-14, ambos `mergeable: UNKNOWN`.
