@@ -202,7 +202,15 @@ function quick(plan) {
   // repeated by the `full` group the harness runs right after this one.
   const gates = plan.forceFull ? DRIFT_GATES.map((g) => g.script) : plan.gates;
   for (const script of gates) bun(script, { timeout: 600_000 });
-  if (plan.typescript || plan.forceFull) bun("typecheck", { timeout: 900_000 });
+
+  // `typecheck` is also the build step here: turbo declares
+  // `"typecheck": {"dependsOn": ["^build"]}`, so it produces the workspace
+  // `dist` output that the package-boundary tests import. Without it Vitest
+  // fails on `Failed to resolve entry for package "@cronus-ui/…"` — a red that
+  // says nothing about the change. `plan.typescript` alone is not enough:
+  // a CSS-only diff still selects Vitest projects.
+  const willTest = plan.forceFull || plan.projects.length > 0;
+  if (plan.typescript || willTest) bun("typecheck", { timeout: 900_000 });
 
   if (plan.forceFull) {
     bun("test", { timeout: 1_800_000 });
@@ -256,6 +264,12 @@ function selfTest() {
   assert(ui.gates.includes("contract:check"), "ui contract gate");
   assert(ui.gates.includes("registry:check"), "ui registry gate");
   assert(!ui.gates.includes("tokens:check"), "ui must not pull the tokens gate");
+
+  // A CSS-only diff selects Vitest projects without touching TypeScript — the
+  // case that made `quick` run Vitest against unbuilt packages.
+  const styles = classify(["packages/ui/src/components/button.css"]);
+  assert(styles.projects.length > 0, `styles projects: ${styles.projects}`);
+  assert(!styles.typescript, "styles must not report typescript");
 
   const docs = classify(["README.md"]);
   assert(docs.projects.length === 0, `docs projects: ${docs.projects}`);
