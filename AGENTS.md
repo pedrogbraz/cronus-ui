@@ -7,6 +7,10 @@ automaticamente. **Este arquivo é o que vale especificamente aqui**, e onde
 houver conflito, ele vence — este repositório é uma biblioteca publicada, não
 um app de produto, e várias regras genéricas não se aplicam.
 
+Sessão nova começa em `.harness/SESSION.md` (ritual de abertura e ciclo de
+tarefa) e usa `.harness/CONTEXT.md` para decidir **o que abrir** antes de ler
+código. Quem executa verificação é o harness, não um `bun run` solto.
+
 ---
 
 ## O que é
@@ -164,3 +168,21 @@ visual paralela.
 ## Decisões já tomadas
 
 Estão em `docs/adr/`. Não reabra sem ADR novo.
+
+<!-- dev-harness:begin -->
+## Desenvolvimento com o harness
+
+- Comece por `.harness/project.json` e pela tarefa em `docs/tasks/<id>/`.
+- Planejamento: pedido → análise → plano → revisão → validação → ajustes → entrega.
+- Código: contexto → plano → distribuição → construção → revisão → testes → entrega.
+- Execute `harness doctor` e confira o Git real antes de confiar em um resumo antigo.
+- Use uma worktree por tarefa e um executor de escrita por projeto. O harness serializa seus próprios comandos; isso não bloqueia editores externos.
+- Preserve alterações existentes. Código novo segue a arquitetura e as instruções específicas deste repositório.
+- Registre critérios de aceitação, revisão e validação no plano. Confirmações humanas seguem o escopo já autorizado; etapas não são pedidos automáticos de permissão.
+- Use os comandos reais configurados no projeto. `quick` é retorno parcial; entrega requer `full` e revisão da versão atual. Mudanças críticas exigem verificações adicionais.
+- Não reduza testes, gates ou critérios para obter resultado verde. Ausência de ferramenta e teste não executado são pendências.
+- Worktrees separam arquivos; serviços, dados e credenciais precisam de isolamento próprio. Até ele existir, serialize operações sobre recursos compartilhados.
+- Atualize `state.md` em marcos: estado, decisões, evidências, pendências e próximo passo. Carregue referências adicionais sob demanda.
+- `harness integrate` altera apenas a branch base local. Push, deploy e mudanças externas seguem a autorização da tarefa.
+- Consulte `harness --help` e a documentação do kit quando necessário. Regras do projeto e decisões explícitas do usuário continuam aplicáveis.
+<!-- dev-harness:end -->

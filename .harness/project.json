@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "harness_version": "1.0.0",
+  "profile": "generic",
+  "base_branch": "main",
+  "max_active": 1,
+  "checks": {
+    "quick": [
+      {
+        "name": "cronus-ui-quick",
+        "argv": ["node", "scripts/harness/check.mjs", "quick"],
+        "timeout_seconds": 3600
+      }
+    ],
+    "full": [
+      {
+        "name": "cronus-ui-full",
+        "argv": ["node", "scripts/harness/check.mjs", "full"],
+        "timeout_seconds": 7200
+      }
+    ],
+    "critical": [
+      {
+        "name": "cronus-ui-browser",
+        "argv": ["node", "scripts/harness/check.mjs", "browser"],
+        "timeout_seconds": 7200
+      }
+    ]
+  }
+}
