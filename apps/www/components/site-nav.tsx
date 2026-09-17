@@ -4,11 +4,12 @@ import { useTheme } from "@cronus-ui/theme";
 import { Badge } from "@cronus-ui/ui/badge";
 import { cn } from "@cronus-ui/ui/cn";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@cronus-ui/ui/sheet";
-import { Github, Menu, Moon, Sun } from "lucide-react";
+import { Menu, Moon, Sun } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { CronusMark } from "./brand/cronus-mark";
+import { GithubGlyph } from "./brand-glyphs";
 import { CommandSearch } from "./docs/command-search";
 import { ComponentNavList } from "./docs/docs-sidebar";
 import { DocumentationNavList } from "./docs/documentation-nav";
@@ -127,7 +128,7 @@ export function SiteNav() {
               aria-label="View Cronus UI on GitHub"
               className="grid size-9 place-items-center rounded-lg text-fg-secondary outline-none transition-colors hover:bg-surface-overlay hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
             >
-              <Github className="size-[18px]" aria-hidden="true" />
+              <GithubGlyph className="size-[18px]" aria-hidden="true" />
             </a>
 
             {/* Light / dark mode toggle — chrome stays Neutral. */}

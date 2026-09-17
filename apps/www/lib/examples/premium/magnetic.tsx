@@ -1,7 +1,8 @@
 "use client";
 
 import { Button, Magnetic } from "@cronus-ui/ui";
-import { ArrowRight, Github, Linkedin, Share2 } from "lucide-react";
+import { ArrowRight, Share2 } from "lucide-react";
+import { GithubGlyph, LinkedinGlyph } from "../../../components/brand-glyphs";
 import { ExampleList } from "../../../components/docs/example-list";
 import type { Example } from "../types";
 
@@ -34,8 +35,8 @@ export const examples: Example[] = [
       "A row of independently magnetic icon buttons — each has its own small field, so only the nearest icon drifts toward the pointer while its neighbours stay at rest. Keep `strength` low for chrome that should feel alive but not needy.",
     code: `<div className="flex items-center gap-1">
   {[
-    { label: "GitHub", icon: Github },
-    { label: "LinkedIn", icon: Linkedin },
+    { label: "GitHub", icon: GithubGlyph },
+    { label: "LinkedIn", icon: LinkedinGlyph },
     { label: "Compartilhar", icon: Share2 },
   ].map(({ label, icon: Icon }) => (
     <Magnetic key={label} strength={0.25} radius={60} className="p-3">
@@ -48,8 +49,8 @@ export const examples: Example[] = [
     preview: (
       <div className="flex items-center gap-1">
         {[
-          { label: "GitHub", icon: Github },
-          { label: "LinkedIn", icon: Linkedin },
+          { label: "GitHub", icon: GithubGlyph },
+          { label: "LinkedIn", icon: LinkedinGlyph },
           { label: "Compartilhar", icon: Share2 },
         ].map(({ label, icon: Icon }) => (
           <Magnetic key={label} strength={0.25} radius={60} className="p-3">

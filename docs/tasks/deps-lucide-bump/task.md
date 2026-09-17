@@ -4,7 +4,8 @@ Risco: normal
 
 ## Pedido
 
-Subir `lucide-react` para 1.46.0, migrando os últimos consumidores de marca.
+Migrar os últimos consumidores de marca e avaliar o bump de `lucide-react`
+para 1.x.
 
 Escopo inicial: `apps/www` (`site-nav`, `site-footer`, `option-icon`, três
 exemplos premium), `apps/pro/components/pro-footer`, `package.json` dos três
@@ -117,11 +118,31 @@ completude.
 Escopo mantido fora: mover `lucide-react` para `peerDependencies` em
 `packages/ui`.
 
+## Resultado do bump
+
+**Não aplicado.** `lucide-react` 1.x **não é RSC-safe**.
+
+Com 1.47.0 instalado, o project `ui-rsc` do Vitest deu **54 de 172 testes
+falhando**, todos com `react.createContext is not a function`.
+
+Causa: a 1.x introduziu `dist/esm/context.mjs`, e o barril
+`lucide-react.mjs` faz `export { LucideProvider, useLucideContext } from
+'./context.mjs'`. Sob a condição de export `react-server`, o React não fornece
+`createContext`. O pacote **não declara campo `exports`**, então não há entrada
+condicional nem caminho alternativo para RSC.
+
+Consequência: qualquer componente de `packages/ui` que importe um ícone deixaria
+de renderizar como Server Component. O registry marca esses componentes com
+`rsc: true` e o project `ui-rsc` existe para provar isso.
+
+A migração dos sete arquivos **fica**, porque é independente da versão e deixa o
+repositório pronto para o bump no dia em que ele for possível.
+
 ## Entrega
 
 Critérios de aceitação:
 - Nenhum arquivo-fonte importa marca de lucide-react
 - typecheck, full, visual e audit passam sem regenerar baseline
-- lucide-react resolve 1.46.0 no bun.lock
+- O bump é aplicado, ou a tarefa para e reporta o bloqueio com número
 
 Demonstrar cada critério e registrar limitações em evidence.md. Etapas não exigem aprovações humanas adicionais quando a autorização já existe.

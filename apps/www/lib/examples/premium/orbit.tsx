@@ -3,7 +3,6 @@
 import { Orbit, OrbitItem, OrbitRing } from "@cronus-ui/ui";
 import {
   Bell,
-  Github,
   MessageSquarePlus,
   Search,
   Settings,
@@ -12,6 +11,7 @@ import {
   Wifi,
   Zap,
 } from "lucide-react";
+import { GithubGlyph } from "../../../components/brand-glyphs";
 import { ExampleList } from "../../../components/docs/example-list";
 import type { Example } from "../types";
 
@@ -22,7 +22,7 @@ const orbitInnerTools = [
 ];
 
 const orbitOuterTools = [
-  { label: "GitHub", icon: Github },
+  { label: "GitHub", icon: GithubGlyph },
   { label: "Security", icon: ShieldCheck },
   { label: "Chat", icon: MessageSquarePlus },
   { label: "Uptime", icon: Wifi },

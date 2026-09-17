@@ -1,5 +1,6 @@
-import { ArrowUpRight, Github } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { CronusMark } from "../brand/cronus-mark";
+import { GithubGlyph } from "../brand-glyphs";
 import { SectionGlow } from "../showcase-ui";
 
 interface FooterLink {
@@ -97,7 +98,7 @@ export function SiteFooter() {
             href="https://github.com/pedrogbraz/cronus-ui"
             className="inline-flex items-center gap-1.5 rounded-md text-fg-secondary outline-none transition-colors duration-150 ease-[cubic-bezier(.22,1,.36,1)] hover:text-fg focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <Github className="size-4" aria-hidden="true" /> pedrogbraz/cronus-ui
+            <GithubGlyph className="size-4" aria-hidden="true" /> pedrogbraz/cronus-ui
             <ArrowUpRight className="size-3.5" aria-hidden="true" />
           </a>
         </div>

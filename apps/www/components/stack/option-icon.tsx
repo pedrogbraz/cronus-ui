@@ -24,14 +24,12 @@ import {
   FolderTree,
   GitCommitHorizontal,
   GitFork,
-  Github,
   GitMerge,
   Globe,
   Hexagon,
   Layers,
   Layout,
   Leaf,
-  type LucideIcon,
   Mountain,
   MousePointer2,
   Package,
@@ -58,6 +56,8 @@ import {
   Wind,
   Zap,
 } from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
+import { GithubGlyph } from "../brand-glyphs";
 
 /**
  * Static map from the catalog's `icon` string (a lucide-react kebab name) to the
@@ -66,7 +66,14 @@ import {
  * fully tree-shakeable. Every name used in `lib/stack/catalog.ts` is covered;
  * unknown names fall back to {@link Puzzle}.
  */
-const ICONS: Record<string, LucideIcon> = {
+/**
+ * `LucideIcon` is lucide's `ForwardRefExoticComponent`. The vendored brand
+ * glyphs are plain function components, so the map widens to any component that
+ * takes SVG props — both shapes render identically here.
+ */
+export type OptionIcon = ComponentType<SVGProps<SVGSVGElement>>;
+
+const ICONS: Record<string, OptionIcon> = {
   accessibility: Accessibility,
   "app-window": AppWindow,
   atom: Atom,
@@ -92,7 +99,7 @@ const ICONS: Record<string, LucideIcon> = {
   "flask-conical": FlaskConical,
   "git-fork": GitFork,
   "git-merge": GitMerge,
-  github: Github,
+  github: GithubGlyph,
   globe: Globe,
   hexagon: Hexagon,
   layers: Layers,
@@ -124,8 +131,8 @@ const ICONS: Record<string, LucideIcon> = {
   zap: Zap,
 };
 
-/** Resolve a catalog icon name to its lucide component (defaults to {@link Puzzle}). */
-export function optionIcon(name: string | undefined): LucideIcon {
+/** Resolve a catalog icon name to its icon component (defaults to {@link Puzzle}). */
+export function optionIcon(name: string | undefined): OptionIcon {
   return (name && ICONS[name]) || Puzzle;
 }
 

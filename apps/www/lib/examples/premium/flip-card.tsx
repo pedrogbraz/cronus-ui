@@ -1,8 +1,9 @@
 "use client";
 
 import { Button, FlipCard, FlipCardBack, FlipCardFront } from "@cronus-ui/ui";
-import { ArrowRight, Check, Github, Linkedin, RotateCw, Sparkles, Star } from "lucide-react";
+import { ArrowRight, Check, RotateCw, Sparkles, Star } from "lucide-react";
 import { useState } from "react";
+import { GithubGlyph, LinkedinGlyph } from "../../../components/brand-glyphs";
 import { ExampleList } from "../../../components/docs/example-list";
 import type { Example } from "../types";
 
@@ -170,8 +171,8 @@ export const examples: Example[] = [
       “Shipped a polished, on-brand UI in a weekend. The theming alone paid for itself.”
     </p>
     <div className="flex items-center gap-3 text-fg-tertiary">
-      <Github className="size-4" aria-hidden="true" />
-      <Linkedin className="size-4" aria-hidden="true" />
+      <GithubGlyph className="size-4" aria-hidden="true" />
+      <LinkedinGlyph className="size-4" aria-hidden="true" />
     </div>
   </FlipCardBack>
 </FlipCard>`,
@@ -201,8 +202,8 @@ export const examples: Example[] = [
             “Shipped a polished, on-brand UI in a weekend. The theming alone paid for itself.”
           </p>
           <div className="flex items-center gap-3 text-fg-tertiary">
-            <Github className="size-4" aria-hidden="true" />
-            <Linkedin className="size-4" aria-hidden="true" />
+            <GithubGlyph className="size-4" aria-hidden="true" />
+            <LinkedinGlyph className="size-4" aria-hidden="true" />
           </div>
         </FlipCardBack>
       </FlipCard>
