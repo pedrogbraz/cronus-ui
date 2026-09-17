@@ -915,7 +915,6 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "input-otp": "^1.4.2",
-    "lucide-react": "^0.577.0",
     "motion": "^12.23.0",
     "react-resizable-panels": "^2.1.9",
     "sonner": "^2.0.7",
@@ -928,19 +927,13 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@hookform/resolvers": "^3.10.0 || ^4.0.0 || ^5.0.0",
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
     "@tanstack/react-table": "^8.21.3",
     "@testing-library/react": "^16.3.2",
     "@tiptap/pm": "^3.27.1",
     "@tiptap/react": "^3.27.1",
     "@tiptap/starter-kit": "^3.27.1",
-    "date-fns": "^4.4.0",
-    "react": "^18.3.0 || ^19.0.0",
-    "react-day-picker": "^10.0.1",
-    "react-dom": "^18.3.0 || ^19.0.0",
-    "react-hook-form": "^7.54.0",
-    "recharts": "^3.9.2",
-    "vitest-axe": "^0.1.0",
-    "zod": "^3.24.0 || ^4.0.0",
     "@visx/brush": "3.12.0",
     "@visx/curve": "4.0.1-alpha.0",
     "@visx/event": "4.0.1-alpha.0",
@@ -960,10 +953,17 @@
     "d3-sankey": "0.12.3",
     "d3-scale": "4.0.2",
     "d3-shape": "3.2.0",
+    "date-fns": "^4.4.0",
+    "lucide-react": "^0.577.0",
+    "react": "^18.3.0 || ^19.0.0",
+    "react-day-picker": "^10.0.1",
+    "react-dom": "^18.3.0 || ^19.0.0",
+    "react-hook-form": "^7.54.0",
     "react-use-measure": "2.1.7",
+    "recharts": "^3.9.2",
     "three": "^0.186.0",
-    "@react-three/fiber": "^9.7.0",
-    "@react-three/drei": "^10.7.8"
+    "vitest-axe": "^0.1.0",
+    "zod": "^3.24.0 || ^4.0.0"
   },
   "peerDependenciesMeta": {
     "@dnd-kit/core": {
@@ -976,6 +976,12 @@
       "optional": true
     },
     "@hookform/resolvers": {
+      "optional": true
+    },
+    "@react-three/drei": {
+      "optional": true
+    },
+    "@react-three/fiber": {
       "optional": true
     },
     "@tanstack/react-table": {
@@ -991,21 +997,6 @@
       "optional": true
     },
     "@tiptap/starter-kit": {
-      "optional": true
-    },
-    "date-fns": {
-      "optional": true
-    },
-    "react-day-picker": {
-      "optional": true
-    },
-    "recharts": {
-      "optional": true
-    },
-    "vitest-axe": {
-      "optional": true
-    },
-    "zod": {
       "optional": true
     },
     "@visx/brush": {
@@ -1065,16 +1056,28 @@
     "d3-shape": {
       "optional": true
     },
+    "date-fns": {
+      "optional": true
+    },
+    "lucide-react": {
+      "optional": true
+    },
+    "react-day-picker": {
+      "optional": true
+    },
     "react-use-measure": {
+      "optional": true
+    },
+    "recharts": {
       "optional": true
     },
     "three": {
       "optional": true
     },
-    "@react-three/fiber": {
+    "vitest-axe": {
       "optional": true
     },
-    "@react-three/drei": {
+    "zod": {
       "optional": true
     }
   },
@@ -1084,6 +1087,8 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@hookform/resolvers": "^5.4.0",
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
     "@tanstack/react-table": "^8.21.3",
     "@tiptap/pm": "^3.27.1",
     "@tiptap/react": "^3.27.1",
@@ -1096,6 +1101,7 @@
     "@types/geojson": "7946.0.16",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.185.4",
     "@visx/brush": "3.12.0",
     "@visx/curve": "4.0.1-alpha.0",
     "@visx/event": "4.0.1-alpha.0",
@@ -1116,16 +1122,14 @@
     "d3-scale": "4.0.2",
     "d3-shape": "3.2.0",
     "date-fns": "^4.4.0",
+    "lucide-react": "^0.577.0",
     "react": "^19.2.0",
     "react-day-picker": "^10.0.1",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.54.2",
     "react-use-measure": "2.1.7",
-    "three": "^0.186.0",
-    "@react-three/fiber": "^9.7.0",
-    "@react-three/drei": "^10.7.8",
-    "@types/three": "^0.185.4",
     "recharts": "^3.9.2",
+    "three": "^0.186.0",
     "typescript": "^6.0.3",
     "vitest": "^4.1.9",
     "zod": "^4.4.3"

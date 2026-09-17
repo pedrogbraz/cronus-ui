@@ -18,6 +18,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **BREAKING: `lucide-react` moved from `dependencies` to an optional
+  `peerDependencies` in `@cronus-ui/ui`.** Install it yourself if you use a
+  component that renders an icon — 77 of the components do; the core ones
+  (`Button`, `Badge`, `Input`, `Card`, `Label`, `Separator`) do not. The library
+  no longer forces a version on you, so an app already on `lucide-react` stops
+  getting a second copy in its bundle. The declared range is `^0.577.0`, which
+  is what this library is tested against; `lucide-react` 1.x is **not**
+  RSC-safe — its barrel re-exports `LucideProvider` from `context.mjs`, and
+  `createContext` does not exist under the `react-server` condition.
 - **`AuthorTooltip` takes its social glyphs through a new `icons` prop.**
   `AuthorTooltipIcons` is exported alongside it. The X glyph is unchanged, but
   the GitHub and LinkedIn defaults are now a neutral `ExternalLink` instead of

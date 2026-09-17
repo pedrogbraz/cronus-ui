@@ -86,11 +86,23 @@ as duas razões desta mudança são independentes do bug da 1.x. A duplicação
 existe hoje, com 0.577.
 
 Problema encontrado no plano: o passo 2 fala em "faixa larga o bastante", o que
-é vago. Concretamente, a faixa precisa admitir a 0.577 que usamos e a 1.x que o
-consumidor pode querer — e isso significa declarar compatibilidade com uma
-major que **sabemos** quebrar em RSC. A faixa deve incluir as duas, e o
-`CHANGELOG` deve dizer que 1.x não é RSC-safe, para o consumidor escolher
-informado em vez de descobrir em produção.
+é vago. A primeira tentativa usou `^0.577.0 || ^1.0.0`, e **o repositório
+recusou** — corretamente.
+
+`assertValidDependency` (`packages/cli/src/dependencies.ts:25`) valida cada
+spec que o registry manda instalar, contra `VALID_DEPENDENCY_RE`, que não
+admite espaço. É guarda contra injeção de argumento: um spec com espaço vira
+mais de um argumento na linha de comando do gerenciador de pacotes, e o
+comentário da função cita `--registry=http://evil` e `-g` como o ataque. Faixa
+composta não passa, e não deve passar.
+
+Isso forçou uma escolha melhor. Declarar compatibilidade com 1.x seria
+desonesto: `deps-lucide-bump` mediu que ela quebra 54 de 172 testes RSC. A
+faixa honesta é `^0.577.0` — o que de fato testamos.
+
+E ela não custa o objetivo. O ganho principal do peer não vem da largura da
+faixa: vem de **parar de instalar uma segunda cópia**. Com `dependencies`, quem
+usa lucide 1.x recebe as duas. Com peer opcional, recebe só a sua.
 
 ## Validação
 
@@ -116,9 +128,10 @@ Premissa "1.x não é RSC-safe": medida em `deps-lucide-bump` — 54 de 172 test
 Incorporado: peer **opcional** em vez de obrigatório, depois da contagem dos
 componentes core.
 
-Incorporado: a faixa precisa incluir a 1.x, e o `CHANGELOG` precisa avisar que
-ela não é RSC-safe. Declarar compatibilidade sem o aviso empurraria para o
-consumidor um problema que já medimos.
+Incorporado: faixa `^0.577.0`, não `^0.577.0 || ^1.0.0`. A composta é recusada
+pelo guarda de injeção de argumento do próprio repositório, e declarar 1.x
+compatível contradiz o que medimos. Alargar a faixa fica para quando o RSC da
+1.x estiver resolvido.
 
 ## Entrega
 
