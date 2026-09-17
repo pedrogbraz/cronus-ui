@@ -1,6 +1,6 @@
 # ADR 0008 — Ícones de marca: injetáveis na biblioteca, inline nos blocos
 
-- **Status:** proposta
+- **Status:** aceita
 - **Data:** 2026-09-17
 - **Decisor:** pedrogbraz
 - **Relacionada:** ADR 0003 (product UI system)
