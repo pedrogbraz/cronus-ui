@@ -33,8 +33,6 @@ import {
   ArrowLeft,
   ChartColumnIncreasing,
   Check,
-  Chrome,
-  Github,
   KeyRound,
   MailCheck,
   Quote,
@@ -47,6 +45,56 @@ import { BlockViewBody } from "../../components/blocks/block-view-body";
 import { getBlockMeta } from "../blocks-index";
 import { getBlockContentVariantsFrom, resolveBlockVariationFrom } from "./resolve";
 import type { BlockContentMap } from "./types";
+
+/* ──────────────────────────────────────────────────────────────────────────
+ * Inline brand glyphs — same geometry as the lucide brand marks, kept local
+ * so the blocks never import brand icons from `lucide-react`.
+ * ────────────────────────────────────────────────────────────────────────── */
+
+function GithubGlyph(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+      <path d="M9 18c-4.51 2-5-2-7-2" />
+    </svg>
+  );
+}
+
+function ChromeGlyph(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M10.88 21.94 15.46 14" />
+      <path d="M21.17 8H12" />
+      <path d="M3.95 6.06 8.54 14" />
+      <circle cx="12" cy="12" r="10" />
+      <circle cx="12" cy="12" r="4" />
+    </svg>
+  );
+}
 
 /* ──────────────────────────────────────────────────────────────────────────
  * 1. Login — centered auth card
@@ -181,11 +229,11 @@ export function LoginBlock() {
 
           <div className="grid grid-cols-2 gap-3">
             <Button type="button" variant="outline">
-              <Github className="size-4" aria-hidden="true" />
+              <GithubGlyph className="size-4" aria-hidden="true" />
               GitHub
             </Button>
             <Button type="button" variant="outline">
-              <Chrome className="size-4" aria-hidden="true" />
+              <ChromeGlyph className="size-4" aria-hidden="true" />
               Google
             </Button>
           </div>
@@ -222,8 +270,53 @@ import {
   Separator,
 } from "@cronus-ui/ui";
 import { signInEmail } from "../lib/auth-adapter.js";
-import { ChartColumnIncreasing, Chrome, Github } from "lucide-react";
+import { ChartColumnIncreasing } from "lucide-react";
 import { type FormEvent, useEffect, useState } from "react";
+
+function GithubGlyph(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+      <path d="M9 18c-4.51 2-5-2-7-2" />
+    </svg>
+  );
+}
+
+function ChromeGlyph(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M10.88 21.94 15.46 14" />
+      <path d="M21.17 8H12" />
+      <path d="M3.95 6.06 8.54 14" />
+      <circle cx="12" cy="12" r="10" />
+      <circle cx="12" cy="12" r="4" />
+    </svg>
+  );
+}
 
 const INVITE_STORAGE_KEY = "cronus-invitation";
 
@@ -356,11 +449,11 @@ export function LoginBlock() {
 
           <div className="grid grid-cols-2 gap-3">
             <Button type="button" variant="outline">
-              <Github className="size-4" aria-hidden="true" />
+              <GithubGlyph className="size-4" aria-hidden="true" />
               GitHub
             </Button>
             <Button type="button" variant="outline">
-              <Chrome className="size-4" aria-hidden="true" />
+              <ChromeGlyph className="size-4" aria-hidden="true" />
               Google
             </Button>
           </div>
@@ -739,11 +832,11 @@ export function LoginSocialFirstBlock() {
         <CardContent className="flex flex-col gap-4">
           <div className="flex flex-col gap-3">
             <Button type="button" variant="outline" size="lg" className="w-full">
-              <Chrome className="size-4" aria-hidden="true" />
+              <ChromeGlyph className="size-4" aria-hidden="true" />
               Continue with Google
             </Button>
             <Button type="button" variant="outline" size="lg" className="w-full">
-              <Github className="size-4" aria-hidden="true" />
+              <GithubGlyph className="size-4" aria-hidden="true" />
               Continue with GitHub
             </Button>
             <Button type="button" variant="outline" size="lg" className="w-full">
@@ -838,8 +931,53 @@ import {
   Separator,
 } from "@cronus-ui/ui";
 import { signInEmail } from "../lib/auth-adapter.js";
-import { Apple, ChartColumnIncreasing, Chrome, Github } from "lucide-react";
+import { Apple, ChartColumnIncreasing } from "lucide-react";
 import { type FormEvent, useState } from "react";
+
+function GithubGlyph(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+      <path d="M9 18c-4.51 2-5-2-7-2" />
+    </svg>
+  );
+}
+
+function ChromeGlyph(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M10.88 21.94 15.46 14" />
+      <path d="M21.17 8H12" />
+      <path d="M3.95 6.06 8.54 14" />
+      <circle cx="12" cy="12" r="10" />
+      <circle cx="12" cy="12" r="4" />
+    </svg>
+  );
+}
 
 export function LoginSocialFirstBlock() {
   const [pending, setPending] = useState(false);
@@ -877,11 +1015,11 @@ export function LoginSocialFirstBlock() {
         <CardContent className="flex flex-col gap-4">
           <div className="flex flex-col gap-3">
             <Button type="button" variant="outline" size="lg" className="w-full">
-              <Chrome className="size-4" aria-hidden="true" />
+              <ChromeGlyph className="size-4" aria-hidden="true" />
               Continue with Google
             </Button>
             <Button type="button" variant="outline" size="lg" className="w-full">
-              <Github className="size-4" aria-hidden="true" />
+              <GithubGlyph className="size-4" aria-hidden="true" />
               Continue with GitHub
             </Button>
             <Button type="button" variant="outline" size="lg" className="w-full">
@@ -1274,11 +1412,11 @@ export function SignupBlock() {
 
           <div className="grid grid-cols-2 gap-3">
             <Button type="button" variant="outline">
-              <Github className="size-4" aria-hidden="true" />
+              <GithubGlyph className="size-4" aria-hidden="true" />
               GitHub
             </Button>
             <Button type="button" variant="outline">
-              <Chrome className="size-4" aria-hidden="true" />
+              <ChromeGlyph className="size-4" aria-hidden="true" />
               Google
             </Button>
           </div>
@@ -1316,8 +1454,53 @@ import {
 } from "@cronus-ui/ui";
 import { signUpEmail } from "../lib/auth-adapter.js";
 import { USER } from "../lib/demo-saas.js";
-import { ChartColumnIncreasing, Chrome, Github } from "lucide-react";
+import { ChartColumnIncreasing } from "lucide-react";
 import { type FormEvent, useEffect, useState } from "react";
+
+function GithubGlyph(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+      <path d="M9 18c-4.51 2-5-2-7-2" />
+    </svg>
+  );
+}
+
+function ChromeGlyph(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M10.88 21.94 15.46 14" />
+      <path d="M21.17 8H12" />
+      <path d="M3.95 6.06 8.54 14" />
+      <circle cx="12" cy="12" r="10" />
+      <circle cx="12" cy="12" r="4" />
+    </svg>
+  );
+}
 
 const INVITE_STORAGE_KEY = "cronus-invitation";
 
@@ -1448,11 +1631,11 @@ export function SignupBlock() {
 
           <div className="grid grid-cols-2 gap-3">
             <Button type="button" variant="outline">
-              <Github className="size-4" aria-hidden="true" />
+              <GithubGlyph className="size-4" aria-hidden="true" />
               GitHub
             </Button>
             <Button type="button" variant="outline">
-              <Chrome className="size-4" aria-hidden="true" />
+              <ChromeGlyph className="size-4" aria-hidden="true" />
               Google
             </Button>
           </div>
@@ -3912,11 +4095,11 @@ export function MagicLinkBlock() {
 
           <div className="grid grid-cols-2 gap-3">
             <Button variant="outline">
-              <Github className="size-4" aria-hidden="true" />
+              <GithubGlyph className="size-4" aria-hidden="true" />
               GitHub
             </Button>
             <Button variant="outline">
-              <Chrome className="size-4" aria-hidden="true" />
+              <ChromeGlyph className="size-4" aria-hidden="true" />
               Google
             </Button>
           </div>
@@ -3949,7 +4132,52 @@ const magicLinkCode = `import {
   Label,
   Separator,
 } from "@cronus-ui/ui";
-import { Chrome, Github, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
+
+function GithubGlyph(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+      <path d="M9 18c-4.51 2-5-2-7-2" />
+    </svg>
+  );
+}
+
+function ChromeGlyph(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      {...props}
+    >
+      <path d="M10.88 21.94 15.46 14" />
+      <path d="M21.17 8H12" />
+      <path d="M3.95 6.06 8.54 14" />
+      <circle cx="12" cy="12" r="10" />
+      <circle cx="12" cy="12" r="4" />
+    </svg>
+  );
+}
 
 export function MagicLinkBlock() {
   return (
@@ -3985,11 +4213,11 @@ export function MagicLinkBlock() {
 
           <div className="grid grid-cols-2 gap-3">
             <Button variant="outline">
-              <Github className="size-4" aria-hidden="true" />
+              <GithubGlyph className="size-4" aria-hidden="true" />
               GitHub
             </Button>
             <Button variant="outline">
-              <Chrome className="size-4" aria-hidden="true" />
+              <ChromeGlyph className="size-4" aria-hidden="true" />
               Google
             </Button>
           </div>
